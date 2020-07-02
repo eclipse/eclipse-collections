@@ -28,4 +28,25 @@ public class SynchronizedShortDoubleMapSerializationTest
                         + "AQwAAHhwdwQAAAAAeA==",
                 new SynchronizedShortDoubleMap(new ShortDoubleHashMap()));
     }
+
+    @Test
+    public void keySetSerializedForm()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAEdvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLnNldC5tdXRhYmxlLnByaW1pdGl2\n"
+                        + "ZS5TeW5jaHJvbml6ZWRTaG9ydFNldAAAAAAAAAABAgAAeHIAXW9yZy5lY2xpcHNlLmNvbGxlY3Rp\n"
+                        + "b25zLmltcGwuY29sbGVjdGlvbi5tdXRhYmxlLnByaW1pdGl2ZS5BYnN0cmFjdFN5bmNocm9uaXpl\n"
+                        + "ZFNob3J0Q29sbGVjdGlvbgAAAAAAAAABAgACTAAKY29sbGVjdGlvbnQASUxvcmcvZWNsaXBzZS9j\n"
+                        + "b2xsZWN0aW9ucy9hcGkvY29sbGVjdGlvbi9wcmltaXRpdmUvTXV0YWJsZVNob3J0Q29sbGVjdGlv\n"
+                        + "bjtMAARsb2NrdAASTGphdmEvbGFuZy9PYmplY3Q7eHBzcgBUb3JnLmVjbGlwc2UuY29sbGVjdGlv\n"
+                        + "bnMuaW1wbC5tYXAubXV0YWJsZS5wcmltaXRpdmUuQWJzdHJhY3RNdXRhYmxlU2hvcnRLZXlTZXQk\n"
+                        + "U2VyUmVwAAAAAAAAAAEMAAB4cHcEAAAAAHhzcgBNb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1w\n"
+                        + "bC5tYXAubXV0YWJsZS5wcmltaXRpdmUuU3luY2hyb25pemVkU2hvcnREb3VibGVNYXAAAAAAAAAA\n"
+                        + "AQIAAkwABGxvY2txAH4AA0wAA21hcHQAQUxvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvbWFw\n"
+                        + "L3ByaW1pdGl2ZS9NdXRhYmxlU2hvcnREb3VibGVNYXA7eHBxAH4ACXNyAEVvcmcuZWNsaXBzZS5j\n"
+                        + "b2xsZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLnByaW1pdGl2ZS5TaG9ydERvdWJsZUhhc2hNYXAA\n"
+                        + "AAAAAAAAAQwAAHhwdwQAAAAAeA==",
+                new SynchronizedShortDoubleMap(new ShortDoubleHashMap()).keySet());
+    }
 }

@@ -39,6 +39,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 import org.eclipse.collections.impl.map.primitive.Abstract<name1><name2>MapTestCase;
 import org.eclipse.collections.impl.set.mutable.primitive.<name1>HashSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
@@ -834,6 +835,22 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Verify.assertThrows(
                 IllegalStateException.class,
                 () -> this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("1")>).flipUniqueValues());
+    }
+
+    @Test
+    public void serialize()
+    {
+        Mutable<name1><name2>Map map = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("4")>, <(literal.(type2))("5")>);
+        Mutable<name1><name2>Map map2 = SerializeTestHelper.serializeDeserialize(map);
+        Assert.assertEquals(map, map2);
+    }
+
+    @Test
+    public void serializeKeySet()
+    {
+        Mutable<name1><name2>Map map = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("4")>, <(literal.(type2))("5")>);
+        <name1>Set set = SerializeTestHelper.serializeDeserialize(map.keySet());
+        Assert.assertEquals(map.keySet(), set);
     }
 }
 

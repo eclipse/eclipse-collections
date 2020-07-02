@@ -24,4 +24,14 @@ public class ShortDoubleHashMapSerializationTest
                         + "ZS5TaG9ydERvdWJsZUhhc2hNYXAAAAAAAAAAAQwAAHhwdwQAAAAAeA==",
                 new ShortDoubleHashMap());
     }
+
+    @Test
+    public void keySetSerializedForm()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAFRvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLnByaW1pdGl2\n"
+                        + "ZS5BYnN0cmFjdE11dGFibGVTaG9ydEtleVNldCRTZXJSZXAAAAAAAAAAAQwAAHhwdwQAAAAAeA==\n",
+                new ShortDoubleHashMap().keySet());
+    }
 }

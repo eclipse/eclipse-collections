@@ -27,4 +27,19 @@ public class UnmodifiableByteLongMapSerializationTest
                         + "Z0hhc2hNYXAAAAAAAAAAAQwAAHhwdwQAAAAAeA==",
                 new UnmodifiableByteLongMap(new ByteLongHashMap()));
     }
+
+    @Test
+    public void keySetSerializedForm()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAEZvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLnNldC5tdXRhYmxlLnByaW1pdGl2\n"
+                        + "ZS5Vbm1vZGlmaWFibGVCeXRlU2V0AAAAAAAAAAECAAB4cgBcb3JnLmVjbGlwc2UuY29sbGVjdGlv\n"
+                        + "bnMuaW1wbC5jb2xsZWN0aW9uLm11dGFibGUucHJpbWl0aXZlLkFic3RyYWN0VW5tb2RpZmlhYmxl\n"
+                        + "Qnl0ZUNvbGxlY3Rpb24AAAAAAAAAAQIAAUwACmNvbGxlY3Rpb250AEhMb3JnL2VjbGlwc2UvY29s\n"
+                        + "bGVjdGlvbnMvYXBpL2NvbGxlY3Rpb24vcHJpbWl0aXZlL011dGFibGVCeXRlQ29sbGVjdGlvbjt4\n"
+                        + "cHNyAFNvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLnByaW1pdGl2ZS5B\n"
+                        + "YnN0cmFjdE11dGFibGVCeXRlS2V5U2V0JFNlclJlcAAAAAAAAAABDAAAeHB3BAAAAAB4",
+                new UnmodifiableByteLongMap(new ByteLongHashMap()).keySet());
+    }
 }

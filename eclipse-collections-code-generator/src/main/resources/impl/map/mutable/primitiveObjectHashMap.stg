@@ -64,7 +64,6 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
-import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
 import org.eclipse.collections.api.block.function.primitive.CharFunction;
@@ -80,7 +79,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredicate;
-import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.<name>ObjectProcedure;
@@ -97,7 +95,6 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
@@ -111,7 +108,6 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
@@ -151,8 +147,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProced
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
-import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 <if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;<endif><endif>
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
@@ -160,17 +154,13 @@ import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.primitive.AbstractLazy<name>Iterable;
-import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.Synchronized<name>Set;
-import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name>Set;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -2825,10 +2815,8 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         this.copyKeysOnWrite = false;
     }
 
-    private static final class SentinelValues\<V>
+    private static final class SentinelValues\<V> extends AbstractSentinelValues
     {
-        private boolean containsZeroKey;
-        private boolean containsOneKey;
         private V zeroValue;
         private V oneValue;
 
@@ -3021,8 +3009,79 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return Math.min(capacity - 1, capacity >\> 1);
     }
 
-    private class KeySet implements Mutable<name>Set
+    private class KeysMapWrapper implements Mutable<name>KeysMap
     {
+        @Override
+        public int size()
+        {
+            return <name>ObjectHashMap.this.size();
+        }
+
+        @Override
+        public boolean containsKey(<type> key)
+        {
+            return <name>ObjectHashMap.this.containsKey(key);
+        }
+
+        @Override
+        public void forEachKey(<name>Procedure procedure)
+        {
+            <name>ObjectHashMap.this.forEachKey(procedure);
+        }
+
+        @Override
+        public boolean isEmpty()
+        {
+            return <name>ObjectHashMap.this.isEmpty();
+        }
+
+        @Override
+        public boolean notEmpty()
+        {
+            return <name>ObjectHashMap.this.notEmpty();
+        }
+
+        @Override
+        public void removeKey(<type> key)
+        {
+            <name>ObjectHashMap.this.removeKey(key);
+        }
+
+        @Override
+        public void clear()
+        {
+            <name>ObjectHashMap.this.clear();
+        }
+    }
+
+    private class KeySet extends AbstractMutable<name>KeySet
+    {
+        private KeysMapWrapper outer = new KeysMapWrapper();
+
+        @Override
+        protected Mutable<name>KeysMap getOuter()
+        {
+            return outer;
+        }
+
+        @Override
+        protected SentinelValues getSentinelValues()
+        {
+            return <name>ObjectHashMap.this.sentinelValues;
+        }
+
+        @Override
+        protected <type> getKeyAtIndex(int index)
+        {
+            return <name>ObjectHashMap.this.keys[index];
+        }
+
+        @Override
+        protected int getTableSize()
+        {
+            return <name>ObjectHashMap.this.keys.length;
+        }
+
         @Override
         public Mutable<name>Iterator <type>Iterator()
         {
@@ -3030,203 +3089,9 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
 
         @Override
-        public void forEach(<name>Procedure procedure)
-        {
-            this.each(procedure);
-        }
-
-        /**
-         * @since 7.0.
-         */
-        @Override
-        public void each(<name>Procedure procedure)
-        {
-            <name>ObjectHashMap.this.forEachKey(procedure);
-        }
-
-        @Override
-        public int count(<name>Predicate predicate)
-        {
-            int count = 0;
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey && predicate.accept(EMPTY_KEY))
-                {
-                    count++;
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey && predicate.accept(REMOVED_KEY))
-                {
-                    count++;
-                }
-            }
-            for (<type> key : <name>ObjectHashMap.this.keys)
-            {
-                if (isNonSentinel(key) && predicate.accept(key))
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-
-        @Override
-        public boolean anySatisfy(<name>Predicate predicate)
-        {
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey && predicate.accept(EMPTY_KEY))
-                {
-                    return true;
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey && predicate.accept(REMOVED_KEY))
-                {
-                    return true;
-                }
-            }
-            for (<type> key : <name>ObjectHashMap.this.keys)
-            {
-                if (isNonSentinel(key) && predicate.accept(key))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
-        {
-            T result = injectedValue;
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey)
-                {
-                    result = function.valueOf(result, EMPTY_KEY);
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey)
-                {
-                    result = function.valueOf(result, REMOVED_KEY);
-                }
-            }
-            for (<type> key : <name>ObjectHashMap.this.keys)
-            {
-                if (isNonSentinel(key))
-                {
-                    result = function.valueOf(result, key);
-                }
-            }
-            return result;
-        }
-
-        @Override
-        public RichIterable\<<name>Iterable> chunk(int size)
-        {
-            if (size \<= 0)
-            {
-                throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
-            }
-            if (this.isEmpty())
-            {
-                return Lists.mutable.empty();
-            }
-
-            <name>Iterator iterator = this.<type>Iterator();
-            MutableList\<<name>Iterable> result = Lists.mutable.empty();
-            while (iterator.hasNext())
-            {
-                Mutable<name>Set batch =  <name>Sets.mutable.empty();
-                for (int i = 0; i \< size && iterator.hasNext(); i++)
-                {
-                    batch.add(iterator.next());
-                }
-                result.add(batch);
-            }
-            return result;
-        }
-
-        @Override
-        public boolean allSatisfy(<name>Predicate predicate)
-        {
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey && !predicate.accept(EMPTY_KEY))
-                {
-                    return false;
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey && !predicate.accept(REMOVED_KEY))
-                {
-                    return false;
-                }
-            }
-            for (<type> key : <name>ObjectHashMap.this.keys)
-            {
-                if (isNonSentinel(key) && !predicate.accept(key))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        @Override
-        public boolean noneSatisfy(<name>Predicate predicate)
-        {
-            return !this.anySatisfy(predicate);
-        }
-
-        @Override
-        public boolean add(<type> element)
-        {
-            throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
-        }
-
-        @Override
-        public boolean addAll(<type>... source)
-        {
-            throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
-        }
-
-        @Override
-        public boolean addAll(<name>Iterable source)
-        {
-            throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
-        }
-
-        @Override
-        public boolean remove(<type> key)
-        {
-            int oldSize = <name>ObjectHashMap.this.size();
-            <name>ObjectHashMap.this.removeKey(key);
-            return oldSize != <name>ObjectHashMap.this.size();
-        }
-
-        @Override
-        public boolean removeAll(<name>Iterable source)
-        {
-            int oldSize = <name>ObjectHashMap.this.size();
-            <name>Iterator iterator = source.<type>Iterator();
-            while (iterator.hasNext())
-            {
-                <name>ObjectHashMap.this.removeKey(iterator.next());
-            }
-            return oldSize != <name>ObjectHashMap.this.size();
-        }
-
-        @Override
-        public boolean removeAll(<type>... source)
-        {
-            int oldSize = <name>ObjectHashMap.this.size();
-            for (<type> item : source)
-            {
-                <name>ObjectHashMap.this.removeKey(item);
-            }
-            return oldSize != <name>ObjectHashMap.this.size();
-        }
-
-        @Override
         public boolean retainAll(<name>Iterable source)
         {
-            int oldSize = this.size();
+            int oldSize = <name>ObjectHashMap.this.size();
             final <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
             <name>ObjectHashMap\<V> retained = <name>ObjectHashMap.this.select((<type> key, V value) -> sourceSet.contains(key));
             if (retained.size() != oldSize)
@@ -3248,449 +3113,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
 
         @Override
-        public void clear()
-        {
-            <name>ObjectHashMap.this.clear();
-        }
-
-        @Override
-        public Mutable<name>Set select(<name>Predicate predicate)
-        {
-            Mutable<name>Set result = new <name>HashSet();
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey && predicate.accept(EMPTY_KEY))
-                {
-                    result.add(EMPTY_KEY);
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey && predicate.accept(REMOVED_KEY))
-                {
-                    result.add(REMOVED_KEY);
-                }
-            }
-            for (<type> key : <name>ObjectHashMap.this.keys)
-            {
-                if (isNonSentinel(key) && predicate.accept(key))
-                {
-                    result.add(key);
-                }
-            }
-            return result;
-        }
-
-        @Override
-        public Mutable<name>Set reject(<name>Predicate predicate)
-        {
-            Mutable<name>Set result = new <name>HashSet();
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey && !predicate.accept(EMPTY_KEY))
-                {
-                    result.add(EMPTY_KEY);
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey && !predicate.accept(REMOVED_KEY))
-                {
-                    result.add(REMOVED_KEY);
-                }
-            }
-            for (<type> key : <name>ObjectHashMap.this.keys)
-            {
-                if (isNonSentinel(key) && !predicate.accept(key))
-                {
-                    result.add(key);
-                }
-            }
-            return result;
-        }
-
-        @Override
-        public Mutable<name>Set with(<type> element)
-        {
-            throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
-        }
-
-        @Override
-        public Mutable<name>Set without(<type> element)
-        {
-            throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
-        }
-
-        @Override
-        public Mutable<name>Set withAll(<name>Iterable elements)
-        {
-            throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
-        }
-
-        @Override
-        public Mutable<name>Set withoutAll(<name>Iterable elements)
-        {
-            throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
-        }
-
-        @Override
-        public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
-        {
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey && predicate.accept(EMPTY_KEY))
-                {
-                    return EMPTY_KEY;
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey && predicate.accept(REMOVED_KEY))
-                {
-                    return REMOVED_KEY;
-                }
-            }
-            for (<type> key : <name>ObjectHashMap.this.keys)
-            {
-                if (isNonSentinel(key) && predicate.accept(key))
-                {
-                    return key;
-                }
-            }
-            return ifNone;
-        }
-
-        @Override
-        public \<V> MutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
-        {
-            MutableSet\<V> result = Sets.mutable.with();
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey)
-                {
-                    result.add(function.valueOf(EMPTY_KEY));
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey)
-                {
-                    result.add(function.valueOf(REMOVED_KEY));
-                }
-            }
-            for (<type> key : <name>ObjectHashMap.this.keys)
-            {
-                if (isNonSentinel(key))
-                {
-                    result.add(function.valueOf(key));
-                }
-            }
-            return result;
-        }
-
-        @Override
-        public Mutable<name>Set asUnmodifiable()
-        {
-            return Unmodifiable<name>Set.of(this);
-        }
-
-        @Override
-        public Mutable<name>Set asSynchronized()
-        {
-            return Synchronized<name>Set.of(this);
-        }
-
-        /**
-         * @since 9.2.
-         */
-        @Override
-        public Mutable<name>Set newEmpty()
-        {
-            return new <name>HashSet();
-        }
-
-        @Override
-        <if(primitive.floatingPoint)>public <wideType.(type)> sum()
-{
-    <wideType.(type)> result = <wideZero.(type)>;
-    <wideType.(type)> compensation = <wideZero.(type)>;
-    if (<name>ObjectHashMap.this.sentinelValues != null)
-    {
-        if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey)
-        {
-            <wideType.(type)> adjustedValue = EMPTY_KEY - compensation;
-            <wideType.(type)> nextSum = result + adjustedValue;
-            compensation = nextSum - result - adjustedValue;
-            result = nextSum;
-        }
-        if (<name>ObjectHashMap.this.sentinelValues.containsOneKey)
-        {
-            <wideType.(type)> adjustedValue = REMOVED_KEY - compensation;
-            <wideType.(type)> nextSum = result + adjustedValue;
-            compensation = nextSum - result - adjustedValue;
-            result = nextSum;
-        }
-    }
-    for (<type> key : <name>ObjectHashMap.this.keys)
-    {
-        if (isNonSentinel(key))
-        {
-            <wideType.(type)> adjustedValue = key - compensation;
-            <wideType.(type)> nextSum = result + adjustedValue;
-            compensation = nextSum - result - adjustedValue;
-            result = nextSum;
-        }
-    }
-    return result;
-}
-
-        <else>public <wideType.(type)> sum()
-{
-    <wideType.(type)> result = <wideZero.(type)>;
-    if (<name>ObjectHashMap.this.sentinelValues != null)
-    {
-        if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey)
-        {
-            result += EMPTY_KEY;
-        }
-        if (<name>ObjectHashMap.this.sentinelValues.containsOneKey)
-        {
-            result += REMOVED_KEY;
-        }
-    }
-    for (<type> key : <name>ObjectHashMap.this.keys)
-    {
-        if (isNonSentinel(key))
-        {
-            result += key;
-        }
-    }
-    return result;
-}
-
-        <endif>
-        @Override
-        public <type> max()
-        {
-            if (<name>ObjectHashMap.this.isEmpty())
-            {
-                throw new NoSuchElementException();
-            }
-
-            <type> max = <zero.(type)>;
-            boolean isMaxSet = false;
-
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey)
-                {
-                    max = EMPTY_KEY;
-                    isMaxSet = true;
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey)
-                {
-                    max = REMOVED_KEY;
-                    isMaxSet = true;
-                }
-            }
-            for (int i = 0; i \< <name>ObjectHashMap.this.keys.length; i++)
-            {
-                if (isNonSentinel(<name>ObjectHashMap.this.keys[i]) && (!isMaxSet || <(lessThan.(type))({max}, {<name>ObjectHashMap.this.keys[i]})>))
-                {
-                    max = <name>ObjectHashMap.this.keys[i];
-                    isMaxSet = true;
-                }
-            }
-            return max;
-        }
-
-        @Override
-        public <type> maxIfEmpty(<type> defaultValue)
-        {
-            if (<name>ObjectHashMap.this.isEmpty())
-            {
-                return defaultValue;
-            }
-
-            return this.max();
-        }
-
-        @Override
-        public <type> min()
-        {
-            if (<name>ObjectHashMap.this.isEmpty())
-            {
-                throw new NoSuchElementException();
-            }
-
-            <type> min = <zero.(type)>;
-            boolean isMinSet = false;
-
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey)
-                {
-                    min = EMPTY_KEY;
-                    isMinSet = true;
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey && !isMinSet)
-                {
-                    min = REMOVED_KEY;
-                    isMinSet = true;
-                }
-            }
-            for (int i = 0; i \< <name>ObjectHashMap.this.keys.length; i++)
-            {
-                if (isNonSentinel(<name>ObjectHashMap.this.keys[i]) && (!isMinSet || <(lessThan.(type))({<name>ObjectHashMap.this.keys[i]}, {min})>))
-                {
-                    min = <name>ObjectHashMap.this.keys[i];
-                    isMinSet = true;
-                }
-            }
-            return min;
-        }
-
-        @Override
-        public <type> minIfEmpty(<type> defaultValue)
-        {
-            if (<name>ObjectHashMap.this.isEmpty())
-            {
-                return defaultValue;
-            }
-
-            return this.min();
-        }
-
-        @Override
-        public double average()
-        {
-            if (<name>ObjectHashMap.this.isEmpty())
-            {
-                throw new ArithmeticException();
-            }
-            return (double) this.sum() / (double) this.size();
-        }
-
-        @Override
-        public double median()
-        {
-            if (<name>ObjectHashMap.this.isEmpty())
-            {
-                throw new ArithmeticException();
-            }
-            <type>[] sortedArray = this.toSortedArray();
-            int middleIndex = sortedArray.length >\> 1;
-            if (sortedArray.length > 1 && (sortedArray.length & 1) == 0)
-            {
-                <type> first = sortedArray[middleIndex];
-                <type> second = sortedArray[middleIndex - 1];
-                return ((double) first + (double) second) / 2.0;
-            }
-            return (double) sortedArray[middleIndex];
-        }
-
-        @Override
-        public <type>[] toSortedArray()
-        {
-            <type>[] array = this.toArray();
-            Arrays.sort(array);
-            return array;
-        }
-
-        @Override
-        public Mutable<name>List toSortedList()
-        {
-            return <name>ArrayList.newList(this).sortThis();
-        }
-
-        @Override
-        public <type>[] toArray()
-        {
-            int size = <name>ObjectHashMap.this.size();
-            final <type>[] result = new <type>[size];
-            <name>ObjectHashMap.this.forEachKey(new <name>Procedure()
-            {
-                private int index;
-
-                @Override
-                public void value(<type> each)
-                {
-                    result[this.index] = each;
-                    this.index++;
-                }
-            });
-            return result;
-        }
-
-        @Override
-        public <type>[] toArray(<type>[] result)
-        {
-            int size = <name>ObjectHashMap.this.size();
-            if (result.length \< size)
-            {
-                result = new <type>[size];
-            }
-            final <type>[] finalBypass = result;
-            <name>ObjectHashMap.this.forEachKey(new <name>Procedure()
-            {
-                private int index;
-
-                @Override
-                public void value(<type> each)
-                {
-                    finalBypass[this.index] = each;
-                    this.index++;
-                }
-            });
-            return result;
-        }
-
-        @Override
-        public boolean contains(<type> value)
-        {
-            return <name>ObjectHashMap.this.containsKey(value);
-        }
-
-        @Override
-        public boolean containsAll(<type>... source)
-        {
-            for (<type> item : source)
-            {
-                if (!<name>ObjectHashMap.this.containsKey(item))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        @Override
-        public boolean containsAll(<name>Iterable source)
-        {
-            <name>Iterator iterator = source.<type>Iterator();
-            while (iterator.hasNext())
-            {
-                if (!<name>ObjectHashMap.this.containsKey(iterator.next()))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        @Override
-        public Mutable<name>List toList()
-        {
-            return <name>ArrayList.newList(this);
-        }
-
-        @Override
-        public Mutable<name>Set toSet()
-        {
-            return <name>HashSet.newSet(this);
-        }
-
-        @Override
-        public Mutable<name>Bag toBag()
-        {
-            return <name>HashBag.newBag(this);
-        }
-
-        @Override
-        public Lazy<name>Iterable asLazy()
-        {
-            return new Lazy<name>IterableAdapter(this);
-        }
-
-        @Override
         public <name>Set freeze()
         {
             <name>ObjectHashMap.this.copyKeysOnWrite = true;
@@ -3704,154 +3126,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return new Immutable<name>MapKeySet(<name>ObjectHashMap.this.keys, <name>ObjectHashMap.this.occupiedWithData, containsZeroKey, containsOneKey);
         }
 
+        /**
+         * @since 9.2.
+         */
         @Override
-        public Immutable<name>Set toImmutable()
+        public Mutable<name>Set newEmpty()
         {
-            return <name>Sets.immutable.withAll(this);
-        }
-
-        @Override
-        public int size()
-        {
-            return <name>ObjectHashMap.this.size();
-        }
-
-        @Override
-        public boolean isEmpty()
-        {
-            return <name>ObjectHashMap.this.isEmpty();
-        }
-
-        @Override
-        public boolean notEmpty()
-        {
-            return <name>ObjectHashMap.this.notEmpty();
-        }
-
-        @Override
-        public boolean equals(Object obj)
-        {
-            if (this == obj)
-            {
-                return true;
-            }
-
-            if (!(obj instanceof <name>Set))
-            {
-                return false;
-            }
-
-            <name>Set other = (<name>Set) obj;
-            return this.size() == other.size() && this.containsAll(other.toArray());
-        }
-
-        @Override
-        public int hashCode()
-        {
-            int result = 0;
-
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey)
-                {
-                    result += <(hashCode.(type))("EMPTY_KEY")>;
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey)
-                {
-                    result += <(hashCode.(type))("REMOVED_KEY")>;
-                }
-            }
-            for (int i = 0; i \< <name>ObjectHashMap.this.keys.length; i++)
-            {
-                if (isNonSentinel(<name>ObjectHashMap.this.keys[i]))
-                {
-                    result += <(hashCode.(type))({<name>ObjectHashMap.this.keys[i]})>;
-                }
-            }
-
-            return result;
-        }
-
-        @Override
-        public String toString()
-        {
-            return this.makeString("[", ", ", "]");
-        }
-
-        @Override
-        public String makeString()
-        {
-            return this.makeString(", ");
-        }
-
-        @Override
-        public String makeString(String separator)
-        {
-            return this.makeString("", separator, "");
-        }
-
-        @Override
-        public String makeString(String start, String separator, String end)
-        {
-            Appendable stringBuilder = new StringBuilder();
-            this.appendString(stringBuilder, start, separator, end);
-            return stringBuilder.toString();
-        }
-
-        @Override
-        public void appendString(Appendable appendable)
-        {
-            this.appendString(appendable, ", ");
-        }
-
-        @Override
-        public void appendString(Appendable appendable, String separator)
-        {
-            this.appendString(appendable, "", separator, "");
-        }
-
-        @Override
-        public void appendString(Appendable appendable, String start, String separator, String end)
-        {
-            try
-            {
-                appendable.append(start);
-                boolean first = true;
-                if (<name>ObjectHashMap.this.sentinelValues != null)
-                {
-                    if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey)
-                    {
-                        appendable.append(String.valueOf(EMPTY_KEY));
-                        first = false;
-                    }
-                    if (<name>ObjectHashMap.this.sentinelValues.containsOneKey)
-                    {
-                        if (!first)
-                        {
-                            appendable.append(separator);
-                        }
-                        appendable.append(String.valueOf(REMOVED_KEY));
-                        first = false;
-                    }
-                }
-                for (<type> key : <name>ObjectHashMap.this.keys)
-                {
-                    if (isNonSentinel(key))
-                    {
-                        if (!first)
-                        {
-                            appendable.append(separator);
-                        }
-                        appendable.append(String.valueOf(key));
-                        first = false;
-                    }
-                }
-                appendable.append(end);
-            }
-            catch (IOException e)
-            {
-                throw new RuntimeException(e);
-            }
+            return new <name>HashSet();
         }
     }
 

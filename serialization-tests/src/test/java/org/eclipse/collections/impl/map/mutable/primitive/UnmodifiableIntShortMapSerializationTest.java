@@ -27,4 +27,19 @@ public class UnmodifiableIntShortMapSerializationTest
                         + "dEhhc2hNYXAAAAAAAAAAAQwAAHhwdwQAAAAAeA==",
                 new UnmodifiableIntShortMap(new IntShortHashMap()));
     }
+
+    @Test
+    public void keySetSerializedForm()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAEVvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLnNldC5tdXRhYmxlLnByaW1pdGl2\n"
+                        + "ZS5Vbm1vZGlmaWFibGVJbnRTZXQAAAAAAAAAAQIAAHhyAFtvcmcuZWNsaXBzZS5jb2xsZWN0aW9u\n"
+                        + "cy5pbXBsLmNvbGxlY3Rpb24ubXV0YWJsZS5wcmltaXRpdmUuQWJzdHJhY3RVbm1vZGlmaWFibGVJ\n"
+                        + "bnRDb2xsZWN0aW9uAAAAAAAAAAECAAFMAApjb2xsZWN0aW9udABHTG9yZy9lY2xpcHNlL2NvbGxl\n"
+                        + "Y3Rpb25zL2FwaS9jb2xsZWN0aW9uL3ByaW1pdGl2ZS9NdXRhYmxlSW50Q29sbGVjdGlvbjt4cHNy\n"
+                        + "AFJvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLnByaW1pdGl2ZS5BYnN0\n"
+                        + "cmFjdE11dGFibGVJbnRLZXlTZXQkU2VyUmVwAAAAAAAAAAEMAAB4cHcEAAAAAHg=",
+                new UnmodifiableIntShortMap(new IntShortHashMap()).keySet());
+    }
 }

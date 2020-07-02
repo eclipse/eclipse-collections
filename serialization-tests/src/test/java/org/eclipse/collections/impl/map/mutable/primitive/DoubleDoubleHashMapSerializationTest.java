@@ -24,4 +24,14 @@ public class DoubleDoubleHashMapSerializationTest
                         + "ZS5Eb3VibGVEb3VibGVIYXNoTWFwAAAAAAAAAAEMAAB4cHcEAAAAAHg=",
                 new DoubleDoubleHashMap());
     }
+
+    @Test
+    public void keySetSerializedForm()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAFVvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLnByaW1pdGl2\n"
+                        + "ZS5BYnN0cmFjdE11dGFibGVEb3VibGVLZXlTZXQkU2VyUmVwAAAAAAAAAAEMAAB4cHcEAAAAAHg=\n",
+                new DoubleDoubleHashMap().keySet());
+    }
 }

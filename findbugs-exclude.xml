@@ -400,4 +400,72 @@
             <Class name="org.eclipse.collections.impl.utility.ArrayListIterate" />
         </Or>
     </Match>
+    <Match>
+        <Bug pattern="SE_NO_SUITABLE_CONSTRUCTOR_FOR_EXTERNALIZATION" />
+        <Or>
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ByteBooleanHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ByteByteHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ByteCharHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ByteDoubleHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ByteFloatHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ByteIntHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ByteLongHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ByteObjectHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ByteShortHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.CharBooleanHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.CharByteHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.CharCharHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.CharDoubleHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.CharFloatHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.CharIntHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.CharLongHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.CharObjectHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.CharShortHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.DoubleBooleanHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.DoubleByteHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.DoubleCharHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.DoubleDoubleHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.DoubleFloatHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.DoubleIntHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.DoubleLongHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.DoubleObjectHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.DoubleShortHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.FloatBooleanHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.FloatByteHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.FloatCharHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.FloatDoubleHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.FloatFloatHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.FloatIntHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.FloatLongHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.FloatObjectHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.FloatShortHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.IntByteHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.IntCharHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.IntFloatHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.IntShortHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.LongBooleanHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.LongByteHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.LongCharHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.LongDoubleHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.LongFloatHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.LongLongHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.LongShortHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ShortBooleanHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ShortByteHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ShortCharHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ShortDoubleHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ShortFloatHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ShortIntHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ShortLongHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ShortObjectHashMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ShortShortHashMap$KeySet" />
+        </Or>
+    </Match>
 </FindBugsFilter>
