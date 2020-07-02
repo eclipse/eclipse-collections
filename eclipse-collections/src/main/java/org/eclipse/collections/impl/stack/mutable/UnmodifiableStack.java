@@ -651,12 +651,6 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
-    public MutableStack<T> toStack()
-    {
-        return this.mutableStack.toStack();
-    }
-
-    @Override
     public ImmutableStack<T> toImmutable()
     {
         return this.mutableStack.toImmutable();

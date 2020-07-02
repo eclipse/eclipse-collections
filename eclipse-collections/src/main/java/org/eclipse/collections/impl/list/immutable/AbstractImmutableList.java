@@ -843,12 +843,6 @@ abstract class AbstractImmutableList<T>
     }
 
     @Override
-    public MutableStack<T> toStack()
-    {
-        return ArrayStack.newStack(this);
-    }
-
-    @Override
     public ReverseIterable<T> asReversed()
     {
         return ReverseIterable.adapt(this);

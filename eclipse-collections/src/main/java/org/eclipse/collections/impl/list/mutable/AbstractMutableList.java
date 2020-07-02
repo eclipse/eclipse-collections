@@ -45,7 +45,6 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
-import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
@@ -502,12 +501,6 @@ public abstract class AbstractMutableList<T>
     public MutableSet<T> toSet()
     {
         return UnifiedSet.newSet(this);
-    }
-
-    @Override
-    public MutableStack<T> toStack()
-    {
-        return Stacks.mutable.withAll(this);
     }
 
     @Override

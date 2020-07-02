@@ -30,10 +30,8 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
-import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.lazy.parallel.list.NonParallelListIterable;
-import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.OrderedIterate;
@@ -340,12 +338,6 @@ public final class ListAdapter<T>
     public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
         return ListIterate.partitionWhile(this.delegate, predicate);
-    }
-
-    @Override
-    public MutableStack<T> toStack()
-    {
-        return ArrayStack.newStack(this.delegate);
     }
 
     @Override

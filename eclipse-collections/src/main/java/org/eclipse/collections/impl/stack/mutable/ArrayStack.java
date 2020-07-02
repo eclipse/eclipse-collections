@@ -999,12 +999,6 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     }
 
     @Override
-    public MutableStack<T> toStack()
-    {
-        return ArrayStack.newStackFromTopToBottom(this);
-    }
-
-    @Override
     public ImmutableStack<T> toImmutable()
     {
         return Stacks.immutable.withAll(this.delegate);
