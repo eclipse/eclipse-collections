@@ -11,12 +11,17 @@
 package org.eclipse.collections.api.bag;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagIterableMultimap;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBagIterable;
@@ -81,4 +86,22 @@ public interface ImmutableBagIterable<T> extends Bag<T>, ImmutableCollection<T>
 
     @Override
     <V> ImmutableCollection<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
+
+    @Override
+    default <K, V> ImmutableMap<K, V> aggregateBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
+    {
+        MutableMap<K, V> result = Maps.mutable.empty();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            K key = groupBy.valueOf(each);
+            for (int i = 0; i < occurrences; i++)
+            {
+                result.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+            }
+        });
+        return result.toImmutable();
+    }
 }
