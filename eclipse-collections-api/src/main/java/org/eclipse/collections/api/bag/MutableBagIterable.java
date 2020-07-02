@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -148,6 +148,9 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
     @Override
     <V> RichIterable<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
 
+    /**
+     * @since 10.3
+     */
     @Override
     default <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,

@@ -47,13 +47,4 @@ public final class NonMutatingAggregationProcedure<T, K, V> implements Procedure
         K key = this.groupBy.valueOf(each);
         this.map.updateValueWith(key, this.zeroValueFactory, this.nonMutatingAggregator, each);
     }
-
-    public void repeatForOccurrences(T each, int occurrences)
-    {
-        K key = this.groupBy.valueOf(each);
-        for (int i = 0; i < occurrences; i++)
-        {
-            this.map.updateValueWith(key, this.zeroValueFactory, this.nonMutatingAggregator, each);
-        }
-    }
 }
