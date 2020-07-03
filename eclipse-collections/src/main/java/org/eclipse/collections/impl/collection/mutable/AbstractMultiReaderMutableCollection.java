@@ -76,7 +76,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -1348,17 +1347,6 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         return map;
     }
 
-    @Override
-    public <K, V> MutableMap<K, V> aggregateBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
-        return map;
-    }
-
     protected abstract static class UntouchableMutableCollection<T>
             implements MutableCollection<T>
     {
@@ -2048,21 +2036,6 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                 K key = groupBy.valueOf(each);
                 V value = map.getIfAbsentPut(key, zeroValueFactory);
                 mutatingAggregator.value(value, each);
-            });
-            return map;
-        }
-
-        @Override
-        public <K, V> MutableMap<K, V> aggregateBy(
-                Function<? super T, ? extends K> groupBy,
-                Function0<? extends V> zeroValueFactory,
-                Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
-        {
-            MutableMap<K, V> map = UnifiedMap.newMap();
-            this.each(each -> {
-                K key = groupBy.valueOf(each);
-                V value = map.getIfAbsentPut(key, zeroValueFactory);
-                map.put(key, nonMutatingAggregator.value(value, each));
             });
             return map;
         }

@@ -2422,13 +2422,32 @@ public interface RichIterable<T>
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
-        MutableMap<K, V> map = Maps.mutable.empty();
+        return this.aggregateBy(
+                groupBy,
+                zeroValueFactory,
+                nonMutatingAggregator,
+                Maps.mutable.empty());
+    }
+
+    /**
+     * Applies an aggregate function over the iterable grouping results into the target map based on the specific
+     * groupBy function. Aggregate results are allowed to be immutable as they will be replaced in place in the map. A
+     * second function specifies the initial "zero" aggregate value to work with (i.e. Integer.valueOf(0)).
+     *
+     * @since 10.3
+     */
+    default <K, V, R extends MutableMapIterable<K, V>> R aggregateBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator,
+            R target)
+    {
         this.forEach(each ->
         {
             K key = groupBy.valueOf(each);
-            map.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+            target.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
         });
-        return map;
+        return target;
     }
 
     /**

@@ -45,7 +45,6 @@ import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -66,17 +65,6 @@ public abstract class AbstractImmutableCollection<T>
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
         this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map.toImmutable();
-    }
-
-    @Override
-    public <K, V> ImmutableMap<K, V> aggregateBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map.toImmutable();
     }
 
