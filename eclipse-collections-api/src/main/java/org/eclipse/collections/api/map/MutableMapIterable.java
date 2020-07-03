@@ -395,12 +395,10 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
             Function0<? extends VV> zeroValueFactory,
             Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
     {
-        MutableMap<KK, VV> map = Maps.mutable.empty();
-        this.forEach(each ->
-        {
-            KK key = groupBy.valueOf(each);
-            map.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
-        });
-        return map;
+        return this.aggregateBy(
+                groupBy,
+                zeroValueFactory,
+                nonMutatingAggregator,
+                Maps.mutable.empty());
     }
 }
