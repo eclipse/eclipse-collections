@@ -1,0 +1,7 @@
+package-version=${version;===;${Bundle-Version}}
+
+Automatic-Module-Name: org.eclipse.collections.impl
+Bundle-SymbolicName: org.eclipse.collections.impl
+
+Export-Package: \
+	org.eclipse.collections.impl.*;version="${package-version}"
