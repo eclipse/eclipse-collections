@@ -17,6 +17,7 @@ import java.util.IntSummaryStatistics;
 import java.util.LongSummaryStatistics;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
@@ -178,6 +179,23 @@ public interface RichIterable<T>
      * @since 1.0
      */
     boolean contains(Object object);
+
+    /**
+     * Returns true if the iterable has an element which responds true to element.equals(value)
+     * after applying the specified function to the element.
+     *
+     * @since 10.3
+     */
+    default <V> boolean containsBy(
+            Function<? super T, ? extends V> function,
+            V value)
+    {
+        Objects.requireNonNull(function);
+        Predicate<? super T> predicate = null == value
+                ? each -> null == function.valueOf(each)
+                : each -> value.equals(function.valueOf(each));
+        return this.anySatisfy(predicate);
+    }
 
     /**
      * Returns true if all elements in source are contained in this collection.
