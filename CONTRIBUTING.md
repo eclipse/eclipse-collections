@@ -38,7 +38,7 @@ The Eclipse Collections build requires below as dependencies.
 The Eclipse Collections build performs code generation to create primitive collections. Run the full build once before opening your IDE.
 
 ```bash
-$ ./mvnw -DskipTests=true
+$ mvn install -DskipTests=true
 ```
 
 Now you can open the project in your IDE and it won't complain about missing files. You'll be able to use the IDE to perform incremental builds and run tests. You should rarely need to run the maven build, except when:
@@ -67,7 +67,7 @@ Coding Style
 Eclipse Collections follows a coding style that is similar to [Google's Style Guide for Java][style-guide], but with curly braces on their own lines. Many aspects of the style guide are enforced by CheckStyle, but not all, so please take care.
 
 ```bash
-$ ./mvnw
+$ mvn clean install checkstyle:check findbugs:check --projects "!scala-unit-tests,!jmh-scala-tests,!jmh-tests" -DskipTests=true
 ```
 
 Avoid changing whitespace on lines that are unrelated to your pull request. This helps preserve the accuracy of the git blame view, and makes code reviews easier.
