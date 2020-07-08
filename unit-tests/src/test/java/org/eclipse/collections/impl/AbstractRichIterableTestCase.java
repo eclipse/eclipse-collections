@@ -160,6 +160,7 @@ import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.ShortHashSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
@@ -190,6 +191,31 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertTrue(collection.contains(1));
         Assert.assertTrue(collection.contains(4));
         Assert.assertFalse(collection.contains(5));
+    }
+
+    @Test
+    public void containsBy()
+    {
+        MutableList<Pair<Integer, String>> list =
+                Lists.mutable.with(
+                        Tuples.pair(1, "1"),
+                        Tuples.pair(2, "2"),
+                        Tuples.pair(3, null));
+
+        Assert.assertTrue(
+                list.containsBy(Pair::getTwo, "2"));
+        Assert.assertFalse(
+                list.containsBy(Pair::getTwo, "3"));
+        Assert.assertTrue(
+                list.containsBy(Pair::getTwo, null));
+        Assert.assertFalse(
+                list.containsBy(Pair::getOne, null));
+        Assert.assertFalse(
+                list.newEmpty().containsBy(Pair::getOne, null));
+        Assert.assertFalse(
+                list.newEmpty().containsBy(Pair::getOne, "2"));
+        Verify.assertThrows(NullPointerException.class, () ->
+                list.newEmpty().containsBy(null, "2"));
     }
 
     @Test
