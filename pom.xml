@@ -339,7 +339,7 @@
 
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.2.0</version>
                 </plugin>
 
                 <plugin>
@@ -562,10 +562,11 @@
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
+                    <source>${maven.compiler.source}</source>
                     <doctitle>Eclipse Collections - ${project.version}</doctitle>
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
-                    <detectJavaApiLink>true</detectJavaApiLink>
+                    <detectJavaApiLink>false</detectJavaApiLink>
                     <links>
                         <link>http://junit.sourceforge.net/javadoc/</link>
                     </links>
