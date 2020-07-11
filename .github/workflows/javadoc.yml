@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
       - name: JavaDoc
-        run: ./mvnw install javadoc:jar --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin,eclipse-collections-api,eclipse-collections,eclipse-collections-testutils,eclipse-collections-forkjoin' --activate-profiles all -DskipTests=true --no-transfer-progress
+        run: ./mvnw install javadoc:jar --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin,eclipse-collections-api,eclipse-collections,eclipse-collections-testutils,eclipse-collections-forkjoin' --activate-profiles all -DskipTests=true
         env:
           MAVEN_OPTS: "-Xmx1g"
 

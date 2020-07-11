@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
       - name: Acceptance Tests
-        run: ./mvnw install --projects acceptance-tests --also-make --activate-profiles all --no-transfer-progress
+        run: ./mvnw install --projects acceptance-tests --also-make --activate-profiles all
         env:
           MAVEN_OPTS: "-Xmx1g"
 

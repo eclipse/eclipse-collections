@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
       - name: Checkstyle
-        run: ./mvnw install checkstyle:check --activate-profiles all -DskipTests=true --no-transfer-progress
+        run: ./mvnw install checkstyle:check --activate-profiles all -DskipTests=true
         env:
           MAVEN_OPTS: "-Xmx1g"
 

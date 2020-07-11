@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
       - name: Performance Tests
-        run: ./mvnw install --projects performance-tests --also-make --activate-profiles all -DskipTests=true --no-transfer-progress
+        run: ./mvnw install --projects performance-tests --also-make --activate-profiles all -DskipTests=true
         env:
           MAVEN_OPTS: "-Xmx1g"
 

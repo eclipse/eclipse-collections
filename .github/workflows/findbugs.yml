@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
       - name: Findbugs
-        run: ./mvnw install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true --no-transfer-progress
+        run: ./mvnw install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true
         env:
           MAVEN_OPTS: "-Xmx1g"
 
