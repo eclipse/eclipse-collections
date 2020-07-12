@@ -28,7 +28,7 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
       - name: Unit-Test
-        run: ./mvnw verify
+        run: ./mvnw verify --no-transfer-progress
         env:
           MAVEN_OPTS: "-Xmx1g"
 
