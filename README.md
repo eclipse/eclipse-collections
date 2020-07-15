@@ -7,7 +7,6 @@
   ~ and the Eclipse Distribution License is available at
   ~ http://www.eclipse.org/org/documents/edl-v10.php.
   -->
-[![][travis img]][travis]
 [![][maven img]][maven]
 [![][release img]][release]
 [![][license-epl img]][license-epl]
@@ -108,9 +107,6 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 
 [actions javadoc]:https://github.com/eclipse/eclipse-collections/actions?query=workflow%3A%22JavaDoc%22
 [actions javadoc img]:https://github.com/eclipse/eclipse-collections/workflows/JavaDoc/badge.svg?branch=master
-
-[travis]:https://travis-ci.org/eclipse/eclipse-collections
-[travis img]:https://travis-ci.org/eclipse/eclipse-collections.svg?branch=master
 
 [maven]:http://search.maven.org/#search|gav|1|g:"org.eclipse.collections"%20AND%20a:"eclipse-collections"
 [maven img]:https://maven-badges.herokuapp.com/maven-central/org.eclipse.collections/eclipse-collections/badge.svg
