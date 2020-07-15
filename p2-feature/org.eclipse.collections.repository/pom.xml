@@ -19,9 +19,6 @@
     </parent>
     <artifactId>p2-repository</artifactId>
     <packaging>eclipse-repository</packaging>
-    <properties>
-       <collections.repository.url>file://${project.basedir}/../../p2-repository/org.eclipse.collections/target/repository</collections.repository.url>
-    </properties>
     <build>
         <plugins>
             <plugin>
