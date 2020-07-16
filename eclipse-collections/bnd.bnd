@@ -5,3 +5,7 @@ Bundle-SymbolicName: org.eclipse.collections.impl
 
 Export-Package: \
 	org.eclipse.collections.impl.*;version="${package-version}"
+
+Import-Package: \
+ sun.misc.*;resolution:=optional, \
+ *
