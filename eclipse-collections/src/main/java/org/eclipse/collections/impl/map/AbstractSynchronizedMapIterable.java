@@ -338,6 +338,19 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
     }
 
     @Override
+    public <K1, V1, V2> MutableMap<K1, V2> aggregateBy(
+            Function<? super K, ? extends K1> keyFunction,
+            Function<? super V, ? extends V1> valueFunction,
+            Function0<? extends V2> zeroValueFactory,
+            Function2<? super V2, ? super V1, ? extends V2> nonMutatingAggregator)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().aggregateBy(keyFunction, valueFunction, zeroValueFactory, nonMutatingAggregator);
+        }
+    }
+
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         synchronized (this.lock)

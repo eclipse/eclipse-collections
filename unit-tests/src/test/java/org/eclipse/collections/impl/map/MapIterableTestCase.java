@@ -1286,6 +1286,35 @@ public abstract class MapIterableTestCase
     }
 
     @Test
+    public void testAggregateBy()
+    {
+        String oneToFive = "oneToFive";
+        String sixToNine = "sixToNine";
+        String tenToFifteen = "tenToFifteen";
+        String sixteenToTwenty = "sixteenToTwenty";
+
+        MapIterable<String, Interval> map = Maps.mutable.with(oneToFive, Interval.fromTo(1, 5),
+                sixToNine, Interval.fromTo(6, 9), tenToFifteen, Interval.fromTo(10, 15),
+                sixteenToTwenty, Interval.fromTo(16, 20));
+
+        String lessThanTen = "lessThanTen";
+        String greaterOrEqualsToTen = "greaterOrEqualsToTen";
+
+        MapIterable<String, Long> result = map.aggregateBy(
+                eachKey -> {
+                    return eachKey.equals(oneToFive) || eachKey.equals(sixToNine) ? lessThanTen : greaterOrEqualsToTen;
+                },
+                each -> each.sumOfInt(Integer::intValue),
+                () -> 0L,
+                (argument1, argument2) -> argument1 + argument2);
+
+        MapIterable<String, Long> expected =
+                Maps.mutable.with(lessThanTen, Interval.fromTo(1, 9).sumOfInt(Integer::intValue),
+                        greaterOrEqualsToTen, Interval.fromTo(10, 20).sumOfInt(Integer::intValue));
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
     public void sumOfFloat()
     {
         MapIterable<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
