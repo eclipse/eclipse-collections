@@ -191,10 +191,7 @@ public interface RichIterable<T>
             V value)
     {
         Objects.requireNonNull(function);
-        Predicate<? super T> predicate = null == value
-                ? each -> null == function.valueOf(each)
-                : each -> value.equals(function.valueOf(each));
-        return this.anySatisfy(predicate);
+        return this.anySatisfy(each -> Objects.equals(value, function.valueOf(each)));
     }
 
     /**
