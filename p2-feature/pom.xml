@@ -28,8 +28,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- versions used for plug-ins below -->
-        <tycho-version>1.2.0</tycho-version>
-        <tycho-extras-version>1.2.0</tycho-extras-version>
+        <tycho-version>1.7.0</tycho-version>
+        <tycho-extras-version>1.7.0</tycho-extras-version>
 
         <!-- pattern/format used for the qualifier -->
         <qualifier.format>'v'yyyyMMdd-HHmm</qualifier.format>
