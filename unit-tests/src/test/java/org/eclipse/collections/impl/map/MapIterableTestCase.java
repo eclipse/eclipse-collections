@@ -189,6 +189,7 @@ public abstract class MapIterableTestCase
     {
         MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
         Assert.assertNull(map.get(4));
+        Assert.assertEquals("1", map.getIfAbsent(1, new PassThruFunction0<>("4")));
         Assert.assertEquals("4", map.getIfAbsent(4, new PassThruFunction0<>("4")));
         Assert.assertEquals("3", map.getIfAbsent(3, new PassThruFunction0<>("3")));
         Assert.assertNull(map.get(4));
@@ -210,6 +211,7 @@ public abstract class MapIterableTestCase
     {
         MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
         Assert.assertNull(map.get(4));
+        Assert.assertEquals("1", map.getIfAbsentValue(1, "4"));
         Assert.assertEquals("4", map.getIfAbsentValue(4, "4"));
         Assert.assertEquals("3", map.getIfAbsentValue(3, "3"));
         Assert.assertNull(map.get(4));
@@ -220,6 +222,7 @@ public abstract class MapIterableTestCase
     {
         MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
         Assert.assertNull(map.get(4));
+        Assert.assertEquals("1", map.getIfAbsentWith(1, String::valueOf, 4));
         Assert.assertEquals("4", map.getIfAbsentWith(4, String::valueOf, 4));
         Assert.assertEquals("3", map.getIfAbsentWith(3, String::valueOf, 3));
         Assert.assertNull(map.get(4));
