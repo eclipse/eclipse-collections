@@ -83,6 +83,18 @@ public class ImmutableQuadrupletonMapTest extends ImmutableMemoryEfficientMapTes
 
     @Override
     @Test
+    public void getOrDefault()
+    {
+        super.getOrDefault();
+
+        ImmutableMap<Integer, String> map = this.classUnderTest();
+        Assert.assertNull(map.get(5));
+        Assert.assertEquals("5", map.getOrDefault(5, "5"));
+        Assert.assertNull(map.get(5));
+    }
+
+    @Override
+    @Test
     public void getIfAbsent()
     {
         super.getIfAbsent();

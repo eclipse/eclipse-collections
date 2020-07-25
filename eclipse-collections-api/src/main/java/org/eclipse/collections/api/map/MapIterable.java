@@ -109,6 +109,11 @@ public interface MapIterable<K, V> extends RichIterable<V>
      */
     MapIterable<V, K> flipUniqueValues();
 
+    default V getOrDefault(Object key, V defaultValue)
+    {
+        return this.getIfAbsentValue((K) key, defaultValue);
+    }
+
     /**
      * Return the value in the Map that corresponds to the specified key, or if there is no value at the key, return the
      * result of evaluating the specified Function0.
@@ -287,7 +292,6 @@ public interface MapIterable<K, V> extends RichIterable<V>
     }
 
     /**
-     *
      * Applies an aggregate function over the map grouping results into a map based on the specific key and value groupBy functions.
      * Aggregate results are allowed to be immutable as they will be replaced in place in the map. A second function
      * specifies the initial "zero" aggregate value to work with.
@@ -319,7 +323,11 @@ public interface MapIterable<K, V> extends RichIterable<V>
     {
         MutableMap<K1, V2> map = Maps.mutable.empty();
         this.forEachKeyValue((key, value) -> {
-            map.updateValueWith(keyFunction.valueOf(key), zeroValueFactory, nonMutatingAggregator, valueFunction.valueOf(value));
+            map.updateValueWith(
+                    keyFunction.valueOf(key),
+                    zeroValueFactory,
+                    nonMutatingAggregator,
+                    valueFunction.valueOf(value));
         });
         return map;
     }

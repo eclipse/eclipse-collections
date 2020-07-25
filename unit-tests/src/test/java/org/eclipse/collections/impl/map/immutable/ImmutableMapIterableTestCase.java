@@ -171,6 +171,23 @@ public abstract class ImmutableMapIterableTestCase
     }
 
     @Test
+    public void getOrDefault()
+    {
+        Integer absentKey = this.size() + 1;
+        String absentValue = String.valueOf(absentKey);
+
+        // Absent key behavior
+        ImmutableMapIterable<Integer, String> classUnderTest = this.classUnderTest();
+        Assert.assertEquals(absentValue, classUnderTest.getOrDefault(absentKey, absentValue));
+
+        // Present key behavior
+        Assert.assertEquals("1", classUnderTest.getOrDefault(1, absentValue));
+
+        // Still unchanged
+        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+    }
+
+    @Test
     public void getIfAbsent()
     {
         Integer absentKey = this.size() + 1;

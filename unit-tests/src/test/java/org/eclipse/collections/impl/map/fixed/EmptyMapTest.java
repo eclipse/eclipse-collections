@@ -363,6 +363,16 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
 
     @Override
     @Test
+    public void getOrDefault()
+    {
+        MutableMap<Integer, String> map = new EmptyMap<>();
+        Assert.assertNull(map.get(4));
+        Assert.assertEquals("4", map.getOrDefault(4, "4"));
+        Assert.assertNull(map.get(4));
+    }
+
+    @Override
+    @Test
     public void getIfAbsent()
     {
         MutableMap<Integer, String> map = new EmptyMap<>();

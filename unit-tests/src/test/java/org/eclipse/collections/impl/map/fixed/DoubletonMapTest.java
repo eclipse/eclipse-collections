@@ -203,6 +203,17 @@ public class DoubletonMapTest extends AbstractMemoryEfficientMutableMapTest
 
     @Override
     @Test
+    public void getOrDefault()
+    {
+        MutableMap<Integer, String> map = new DoubletonMap<>(1, "1", 2, "2");
+        Assert.assertNull(map.get(4));
+        Assert.assertEquals("1", map.getOrDefault(1, "4"));
+        Assert.assertEquals("4", map.getOrDefault(4, "4"));
+        Assert.assertNull(map.get(4));
+    }
+
+    @Override
+    @Test
     public void getIfAbsent()
     {
         MutableMap<Integer, String> map = new DoubletonMap<>(1, "1", 2, "2");
