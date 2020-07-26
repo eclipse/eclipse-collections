@@ -119,6 +119,19 @@ public class ImmutableSingletonMapTest extends ImmutableMemoryEfficientMapTestCa
 
     @Override
     @Test
+    public void getOrDefault()
+    {
+        super.getOrDefault();
+
+        ImmutableMap<Integer, String> map = this.classUnderTest();
+        Assert.assertNull(map.get(4));
+        Assert.assertEquals("4", map.getOrDefault(4, "4"));
+        Assert.assertEquals("1", map.getOrDefault(1, "1"));
+        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "1"), map);
+    }
+
+    @Override
+    @Test
     public void getIfAbsent()
     {
         super.getIfAbsent();

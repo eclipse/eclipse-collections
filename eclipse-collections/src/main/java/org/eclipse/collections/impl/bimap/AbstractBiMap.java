@@ -133,6 +133,12 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     }
 
     @Override
+    public V getOrDefault(Object key, V defaultValue)
+    {
+        return this.getIfAbsentValue((K) key, defaultValue);
+    }
+
+    @Override
     public V getIfAbsentValue(K key, V value)
     {
         return this.getDelegate().getIfAbsentValue(key, value);

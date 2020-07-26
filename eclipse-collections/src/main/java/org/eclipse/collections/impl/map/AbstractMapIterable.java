@@ -56,6 +56,12 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
     }
 
     @Override
+    public V getOrDefault(Object key, V defaultValue)
+    {
+        return this.getIfAbsentValue((K) key, defaultValue);
+    }
+
+    @Override
     public V getIfAbsent(K key, Function0<? extends V> function)
     {
         V result = this.get(key);

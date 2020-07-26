@@ -25,6 +25,12 @@ public interface ConcurrentMutableMap<K, V>
     ConcurrentMutableMap<K, V> tap(Procedure<? super V> procedure);
 
     @Override
+    default V getOrDefault(Object key, V defaultValue)
+    {
+        return this.getIfAbsentValue((K) key, defaultValue);
+    }
+
+    @Override
     default ConcurrentMutableMap<K, V> withMap(Map<? extends K, ? extends V> map)
     {
         this.putAll(map);

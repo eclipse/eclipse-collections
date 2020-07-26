@@ -202,12 +202,23 @@ public class SingletonMapTest extends AbstractMemoryEfficientMutableMapTest
 
     @Override
     @Test
+    public void getOrDefault()
+    {
+        MutableMap<Integer, String> map = new SingletonMap<>(1, "1");
+        Assert.assertNull(map.get(4));
+        Assert.assertEquals("1", map.getOrDefault(1, "1"));
+        Assert.assertEquals("4", map.getOrDefault(4, "4"));
+        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "1"), map);
+    }
+
+    @Override
+    @Test
     public void getIfAbsent()
     {
         MutableMap<Integer, String> map = new SingletonMap<>(1, "1");
         Assert.assertNull(map.get(4));
-        Assert.assertEquals("4", map.getIfAbsentValue(4, "4"));
         Assert.assertEquals("1", map.getIfAbsentValue(1, "1"));
+        Assert.assertEquals("4", map.getIfAbsentValue(4, "4"));
         Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "1"), map);
     }
 

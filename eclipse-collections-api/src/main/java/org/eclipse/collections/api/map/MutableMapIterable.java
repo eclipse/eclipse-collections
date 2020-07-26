@@ -94,6 +94,12 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
         return this.entrySet().removeIf(entry -> predicate.accept(entry.getKey(), entry.getValue()));
     }
 
+    @Override
+    default V getOrDefault(Object key, V defaultValue)
+    {
+        return this.getIfAbsentValue((K) key, defaultValue);
+    }
+
     /**
      * Get and return the value in the Map at the specified key. Alternatively, if there is no value in the map at the key,
      * return the result of evaluating the specified Function0, and put that value in the map at the specified key.
