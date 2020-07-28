@@ -104,9 +104,7 @@ public class HashBagWithHashingStrategy<T>
     @Override
     public MutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        MutableObjectIntMap<T> map = this.items.select((each, occurrences) -> {
-            return predicate.accept(occurrences);
-        });
+        MutableObjectIntMap<T> map = this.items.select((each, occurrences) -> predicate.accept(occurrences));
         return new HashBagWithHashingStrategy<>(this.hashingStrategy, map);
     }
 

@@ -182,9 +182,8 @@ public class TreeBag<T>
     @Override
     public MutableSortedBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        MutableSortedMap<T, Counter> map = this.items.select((each, occurrences) -> {
-            return predicate.accept(occurrences.getCount());
-        });
+        MutableSortedMap<T, Counter> map =
+                this.items.select((each, occurrences) -> predicate.accept(occurrences.getCount()));
         return new TreeBag<>(map);
     }
 
