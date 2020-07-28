@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.map.sorted.immutable;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
-import java.util.AbstractSet;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -24,17 +23,22 @@ import java.util.Set;
 import java.util.SortedMap;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.set.sorted.immutable.AbstractImmutableSortedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.utility.ArrayIterate;
@@ -231,7 +235,7 @@ public class ImmutableTreeMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public AbstractImmutableSortedSet<K> keySet()
     {
         return new ImmutableSortedMapKeySet();
     }
@@ -335,7 +339,7 @@ public class ImmutableTreeMap<K, V>
         }
     }
 
-    protected class ImmutableSortedMapKeySet extends AbstractSet<K> implements Serializable
+    protected class ImmutableSortedMapKeySet extends AbstractImmutableSortedSet<K> implements Serializable
     {
         private static final long serialVersionUID = 1L;
 
@@ -352,9 +356,55 @@ public class ImmutableTreeMap<K, V>
         }
 
         @Override
+        public void each(Procedure<? super K> procedure)
+        {
+            ArrayIterate.forEach(ImmutableTreeMap.this.keys, procedure);
+        }
+
+        @Override
         public int size()
         {
             return ImmutableTreeMap.this.keys.length;
+        }
+
+        @Override
+        public int indexOf(Object object)
+        {
+            return 0;
+        }
+
+        @Override
+        public K getFirst()
+        {
+            if (this.size() > 0)
+            {
+                return (K) this.toArray()[0];
+            }
+            return null;
+        }
+
+        @Override
+        public K getLast()
+        {
+            if (this.size() > 0)
+            {
+                return (K) this.toArray()[0];
+            }
+            return null;
+        }
+
+        @Override
+        public void forEach(
+                int startIndex, int endIndex, Procedure<? super K> procedure)
+        {
+            ArrayIterate.forEach(ImmutableTreeMap.this.keys, startIndex, endIndex, procedure);
+        }
+
+        @Override
+        public void forEachWithIndex(
+                int fromIndex, int toIndex, ObjectIntProcedure<? super K> objectIntProcedure)
+        {
+            ArrayIterate.forEachWithIndex(ImmutableTreeMap.this.keys, fromIndex, toIndex, objectIntProcedure);
         }
 
         @Override
@@ -427,6 +477,44 @@ public class ImmutableTreeMap<K, V>
         protected Object writeReplace()
         {
             return TreeSortedSet.newSetWith(ImmutableTreeMap.this.comparator, ImmutableTreeMap.this.keys).toImmutable();
+        }
+
+        @Override
+        public K first()
+        {
+            return this.getFirst();
+        }
+
+        @Override
+        public K last()
+        {
+            return this.getLast();
+        }
+
+        @Override
+        public Comparator<? super K> comparator()
+        {
+            return ImmutableTreeMap.this.comparator();
+        }
+
+        @Override
+        public ImmutableSortedSet<K> take(int count)
+        {
+            return ImmutableTreeMap.this.take(count).keySet();
+        }
+
+        @Override
+        public ImmutableSortedSet<K> drop(int count)
+        {
+            return ImmutableTreeMap.this.drop(count).keySet();
+        }
+
+        @Override
+        public int compareTo(SortedSetIterable<K> o)
+        {
+            return SortedSets.immutable
+                    .of(ImmutableTreeMap.this.comparator(), ImmutableTreeMap.this.keys)
+                    .compareTo(o);
         }
     }
 }

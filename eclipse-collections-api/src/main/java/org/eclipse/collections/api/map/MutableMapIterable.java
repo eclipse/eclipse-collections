@@ -32,6 +32,7 @@ import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
+import org.eclipse.collections.api.set.MutableSetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -281,8 +282,8 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     @Override
     ImmutableMapIterable<K, V> toImmutable();
 
-    // TODO
-    // MutableSetIterable<K> keySet();
+    @Override
+    MutableSetIterable<K> keySet();
 
     @Override
     MutableMapIterable<K, V> tap(Procedure<? super V> procedure);

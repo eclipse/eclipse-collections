@@ -17,7 +17,6 @@ import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -30,6 +29,7 @@ import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Predicates2;
@@ -148,7 +148,7 @@ final class DoubletonMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public FixedSizeSet<K> keySet()
     {
         return Sets.fixedSize.of(this.key1, this.key2);
     }

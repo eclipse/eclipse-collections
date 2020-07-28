@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.map.immutable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -26,7 +25,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollection;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.parallel.BatchIterable;
-import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 
 /**
  * @see ImmutableMap
@@ -120,9 +118,9 @@ public class ImmutableUnifiedMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public ImmutableKeySet<K> keySet()
     {
-        return UnmodifiableMutableSet.of(this.delegate.keySet());
+        return new ImmutableKeySet<>(this.delegate.keySet());
     }
 
     @Override

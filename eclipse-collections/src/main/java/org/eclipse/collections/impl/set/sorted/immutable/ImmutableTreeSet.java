@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.ExecutorService;
 
@@ -140,45 +139,6 @@ final class ImmutableTreeSet<T>
     private Object writeReplace()
     {
         return new ImmutableSortedSetSerializationProxy<>(this);
-    }
-
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (obj == this)
-        {
-            return true;
-        }
-
-        if (!(obj instanceof Set))
-        {
-            return false;
-        }
-        Set<?> otherSet = (Set<?>) obj;
-        if (otherSet.size() != this.size())
-        {
-            return false;
-        }
-        try
-        {
-            return this.containsAll(otherSet);
-        }
-        catch (ClassCastException ignored)
-        {
-            return false;
-        }
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int result = 0;
-        for (T each : this.delegate)
-        {
-            result += each.hashCode();
-        }
-
-        return result;
     }
 
     @Override

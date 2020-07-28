@@ -420,7 +420,7 @@ public class SynchronizedMutableMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public MutableSet<K> keySet()
     {
         synchronized (this.lock)
         {

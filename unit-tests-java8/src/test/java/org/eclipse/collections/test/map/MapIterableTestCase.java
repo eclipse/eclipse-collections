@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.Interval;
@@ -191,7 +192,8 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     default void MapIterable_collectValues()
     {
         MapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
-        MapIterable<Integer, String> actual = map.collectValues((argument1, argument2) -> new StringBuilder(argument2).reverse().toString());
+        MapIterable<Integer, String> actual =
+                map.collectValues((argument1, argument2) -> new StringBuilder(argument2).reverse().toString());
         assertEquals(
                 this.newWithKeysValues(3, "eerhT", 2, "owT", 1, "enO"),
                 actual);
@@ -282,6 +284,31 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         {
             MapIterable<String, Integer> map2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", null, null);
             assertTrue(map2.containsValue(null));
+        }
+    }
+
+    @Test
+    default void MapIterable_keySet()
+    {
+        MapIterable<Integer, String> map = this.newWithKeysValues(1, "One", 2, "Two");
+        SetIterable<Integer> set = map.keySet();
+        assertTrue(set.contains(1));
+        assertTrue(set.contains(2));
+
+        if (this.supportsNullKeys())
+        {
+            assertFalse(set.contains(null));
+            MapIterable<Integer, String> map2 = this.newWithKeysValues(1, "One", 2, "Two", null, "null");
+            SetIterable<Integer> set2 = map2.keySet();
+            assertTrue(set2.contains(null));
+        }
+
+        if (this.supportsNullKeys() && this.supportsNullValues())
+        {
+            assertFalse(set.contains(null));
+            MapIterable<Integer, String> map2 = this.newWithKeysValues(1, "One", 2, "Two", null, null);
+            SetIterable<Integer> set2 = map2.keySet();
+            assertTrue(set2.contains(null));
         }
     }
 }

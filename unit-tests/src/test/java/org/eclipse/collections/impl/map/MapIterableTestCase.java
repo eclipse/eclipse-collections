@@ -1712,6 +1712,13 @@ public abstract class MapIterableTestCase
     }
 
     @Test
+    public void keySet()
+    {
+        MapIterable<String, Integer> map = this.newMapWithKeysValues("one", 1, "two", 2);
+        Assert.assertEquals(Sets.mutable.of("one", "two"), map.keySet());
+    }
+
+    @Test
     public void valuesView()
     {
         MutableList<Integer> values = this.newMapWithKeysValues(1, 1, 2, 2).valuesView().toSortedList();

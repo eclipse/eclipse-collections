@@ -16,6 +16,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.NoIteratorTestCase;
@@ -129,7 +130,7 @@ public class UnifiedMapNoIteratorTest implements MutableMapTestCase, NoIteratorT
         }
 
         @Override
-        public Set<K> keySet()
+        public MutableSet<K> keySet()
         {
             return new KeySetNoIterator();
         }

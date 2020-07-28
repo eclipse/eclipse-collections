@@ -24,6 +24,7 @@ import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.partition.PartitionImmutableCollection;
+import org.eclipse.collections.api.set.ImmutableSetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 
 public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>
@@ -40,8 +41,8 @@ public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>
 
     ImmutableMapIterable<K, V> newWithoutAllKeys(Iterable<? extends K> keys);
 
-    // TODO
-    // ImmutableSetIterable<K> keySet();
+    @Override
+    ImmutableSetIterable<K> keySet();
 
     @Override
     ImmutableMapIterable<K, V> tap(Procedure<? super V> procedure);

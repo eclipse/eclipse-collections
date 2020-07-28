@@ -44,6 +44,7 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -76,6 +77,9 @@ public interface ImmutableSortedMap<K, V>
 
     @Override
     ImmutableSortedMap<K, V> newWithoutAllKeys(Iterable<? extends K> keys);
+
+    @Override
+    ImmutableSortedSet<K> keySet();
 
     MutableSortedMap<K, V> toSortedMap();
 

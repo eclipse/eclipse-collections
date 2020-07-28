@@ -25,6 +25,7 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedMaps;
+import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
@@ -141,7 +142,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     public void keySet()
     {
         ImmutableTreeMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
-        Verify.assertSetsEqual(Sets.mutable.of(1, 2, 3, 4), immutableSortedMap.keySet());
+        Assert.assertEquals(Sets.immutable.of(1, 2, 3, 4), immutableSortedMap.keySet());
     }
 
     @Test
@@ -192,7 +193,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     public void keySetEqualsAndHashCode()
     {
         ImmutableTreeMap<Integer, String> map = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3"));
-        Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith(1, 2, 3), map.keySet());
+        Verify.assertEqualsAndHashCode(SortedSets.immutable.of(1, 2, 3), map.keySet().toSortedSet().toImmutable());
     }
 
     @Test

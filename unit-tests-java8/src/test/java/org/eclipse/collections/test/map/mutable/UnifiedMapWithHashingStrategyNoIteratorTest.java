@@ -16,6 +16,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
@@ -223,7 +224,7 @@ public class UnifiedMapWithHashingStrategyNoIteratorTest implements MutableMapTe
         }
 
         @Override
-        public Set<K> keySet()
+        public MutableSet<K> keySet()
         {
             return new KeySetNoIterator();
         }

@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.sorted.immutable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -32,7 +33,11 @@ import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
+import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.impl.set.sorted.immutable.AbstractImmutableSortedSet;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
@@ -247,9 +252,9 @@ final class ImmutableEmptySortedMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public ImmutableEmptySet<K> keySet()
     {
-        return Sets.immutable.<K>of().castToSet();
+        return new ImmutableEmptySet<>(Sets.immutable.<K>of());
     }
 
     @Override
@@ -301,5 +306,112 @@ final class ImmutableEmptySortedMap<K, V>
     public V getOnly()
     {
         throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    protected class ImmutableEmptySet<K> extends AbstractImmutableSortedSet<K>
+    {
+        private final ImmutableSet<K> original;
+
+        protected ImmutableEmptySet(ImmutableSet<K> keySet)
+        {
+            this.original = keySet;
+        }
+
+        @Override
+        public int size()
+        {
+            return 0;
+        }
+
+        @Override
+        public int indexOf(Object object)
+        {
+            return -1;
+        }
+
+        @Override
+        public K getFirst()
+        {
+            return null;
+        }
+
+        @Override
+        public K getLast()
+        {
+            return null;
+        }
+
+        @Override
+        public void forEach(int startIndex, int endIndex, Procedure<? super K> procedure)
+        {
+        }
+
+        @Override
+        public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super K> objectIntProcedure)
+        {
+        }
+
+        @Override
+        public void each(Procedure<? super K> procedure)
+        {
+        }
+
+        @Override
+        public Iterator<K> iterator()
+        {
+            return this.original.iterator();
+        }
+
+        @Override
+        public K first()
+        {
+            return null;
+        }
+
+        @Override
+        public K last()
+        {
+            return null;
+        }
+
+        @Override
+        public Comparator<? super K> comparator()
+        {
+            return (Comparator<? super K>) ImmutableEmptySortedMap.this.comparator();
+        }
+
+        @Override
+        public ImmutableSortedSet<K> take(int count)
+        {
+            return this;
+        }
+
+        @Override
+        public ImmutableSortedSet<K> drop(int count)
+        {
+            return this;
+        }
+
+        @Override
+        public int compareTo(SortedSetIterable<K> o)
+        {
+            return o.iterator().hasNext() ? -1 : 0;
+        }
+
+        @Override
+        public boolean equals(Object other)
+        {
+            if (other == this)
+            {
+                return true;
+            }
+            return other instanceof Set && ((Collection<?>) other).isEmpty();
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return 0;
+        }
     }
 }

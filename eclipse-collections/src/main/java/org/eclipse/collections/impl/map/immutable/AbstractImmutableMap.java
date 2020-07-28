@@ -63,6 +63,7 @@ import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
@@ -94,6 +95,7 @@ import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
+import org.eclipse.collections.impl.set.immutable.AbstractImmutableSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.utility.MapIterate;
@@ -200,6 +202,9 @@ public abstract class AbstractImmutableMap<K, V>
         }
         return map.toImmutable();
     }
+
+    @Override
+    public abstract AbstractImmutableSet<K> keySet();
 
     @Override
     public V put(K key, V value)
@@ -518,5 +523,45 @@ public abstract class AbstractImmutableMap<K, V>
     public <V1> ImmutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
     {
         return this.countByEach(function, Bags.mutable.empty()).toImmutable();
+    }
+
+    public static class ImmutableKeySet<K> extends AbstractImmutableSet<K>
+    {
+        final SetIterable<K> original;
+
+        protected ImmutableKeySet(SetIterable<K> keySet)
+        {
+            this.original = keySet;
+        }
+
+        @Override
+        public int size()
+        {
+            return this.original.size();
+        }
+
+        @Override
+        public K getFirst()
+        {
+            return this.original.getFirst();
+        }
+
+        @Override
+        public K getLast()
+        {
+            return this.original.getLast();
+        }
+
+        @Override
+        public void each(Procedure<? super K> procedure)
+        {
+            this.original.each(procedure);
+        }
+
+        @Override
+        public Iterator<K> iterator()
+        {
+            return this.original.iterator();
+        }
     }
 }

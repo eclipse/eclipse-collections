@@ -26,6 +26,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.multimap.Multimap;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -141,6 +142,11 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * Returns an unmodifiable lazy iterable wrapped around the keySet for the map.
      */
     RichIterable<K> keysView();
+
+    /**
+     * Returns a keySet for the map.
+     */
+    SetIterable<K> keySet();
 
     /**
      * Returns an unmodifiable lazy iterable wrapped around the values for the map.

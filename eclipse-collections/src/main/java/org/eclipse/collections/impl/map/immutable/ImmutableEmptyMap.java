@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.map.immutable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -84,9 +83,9 @@ final class ImmutableEmptyMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public ImmutableKeySet<K> keySet()
     {
-        return Sets.immutable.<K>of().castToSet();
+        return new ImmutableKeySet<>(Sets.immutable.of());
     }
 
     @Override

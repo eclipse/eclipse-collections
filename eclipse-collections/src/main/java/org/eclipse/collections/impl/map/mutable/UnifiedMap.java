@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -39,17 +40,21 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.UnsortedMapIterable;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.parallel.BatchIterable;
+import org.eclipse.collections.impl.set.mutable.AbstractMutableSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
+import org.eclipse.collections.impl.utility.internal.IterableIterate;
 
 /**
  * UnifiedMap stores key/value pairs in a single array, where alternate slots are keys and values. This is nicer to CPU caches as
@@ -1334,7 +1339,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public MutableSet<K> keySet()
     {
         return new KeySet();
     }
@@ -2098,7 +2103,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         return this.shortCircuitWith(predicate, parameter, true, false, true);
     }
 
-    protected class KeySet implements Set<K>, Serializable, BatchIterable<K>
+    protected class KeySet extends AbstractMutableSet<K> implements Serializable, BatchIterable<K>
     {
         private static final long serialVersionUID = 1L;
 
@@ -2143,6 +2148,26 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         public boolean isEmpty()
         {
             return UnifiedMap.this.isEmpty();
+        }
+
+        @Override
+        public K getFirst()
+        {
+            if (UnifiedMap.this.size() > 0)
+            {
+                return (K) this.toArray()[0];
+            }
+            return null;
+        }
+
+        @Override
+        public K getLast()
+        {
+            if (UnifiedMap.this.size() > 0)
+            {
+                return IterableIterate.getLast(this);
+            }
+            return null;
         }
 
         @Override
@@ -2231,7 +2256,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         }
 
         @Override
-        public void forEach(Procedure<? super K> procedure)
+        public void each(Procedure<? super K> procedure)
         {
             UnifiedMap.this.forEachKey(procedure);
         }
@@ -2403,6 +2428,13 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
                 }
                 replace.add(UnifiedMap.this.nonSentinel(cur));
             }
+        }
+
+        @Override
+        public ParallelUnsortedSetIterable<K> asParallel(
+                ExecutorService executorService, int batchSize)
+        {
+            return UnifiedMap.this.keySet().asParallel(executorService, batchSize);
         }
     }
 

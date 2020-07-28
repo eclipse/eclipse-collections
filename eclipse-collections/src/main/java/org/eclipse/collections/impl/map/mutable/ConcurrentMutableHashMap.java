@@ -28,8 +28,10 @@ import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ConcurrentMutableMap;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.procedure.MapEntryToProcedure2;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 
@@ -164,9 +166,9 @@ public final class ConcurrentMutableHashMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public MutableSet<K> keySet()
     {
-        return this.delegate.keySet();
+        return Sets.adapt(this.delegate.keySet());
     }
 
     @Override

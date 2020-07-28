@@ -74,6 +74,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 
 public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
 {
@@ -171,9 +172,9 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     }
 
     @Override
-    public Set<K> keySet()
+    public UnmodifiableMutableSet<K> keySet()
     {
-        return Collections.unmodifiableSet(this.delegate.keySet());
+        return UnmodifiableMutableSet.of(this.delegate.keySet());
     }
 
     @Override

@@ -345,7 +345,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     }
 
     @Override
-    public Set<K> keySet()
+    public SynchronizedMutableSet<K> keySet()
     {
         synchronized (this.lock)
         {

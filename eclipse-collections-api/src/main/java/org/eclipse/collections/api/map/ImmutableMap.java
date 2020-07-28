@@ -64,6 +64,9 @@ public interface ImmutableMap<K, V>
     @Override
     ImmutableMap<K, V> newWithoutAllKeys(Iterable<? extends K> keys);
 
+    @Override
+    ImmutableSet<K> keySet();
+
     MutableMap<K, V> toMap();
 
     @Override

@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
@@ -36,6 +37,8 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.UnsortedMapIterable;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -44,10 +47,12 @@ import org.eclipse.collections.impl.factory.HashingStrategyMaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.AbstractMutableMap;
 import org.eclipse.collections.impl.parallel.BatchIterable;
+import org.eclipse.collections.impl.set.mutable.AbstractMutableSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
+import org.eclipse.collections.impl.utility.internal.IterableIterate;
 
 /**
  * UnifiedMapWithHashingStrategy stores key/value pairs in a single array, where alternate slots are keys and values.
@@ -1330,7 +1335,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
     }
 
     @Override
-    public Set<K> keySet()
+    public MutableSet<K> keySet()
     {
         return new KeySet();
     }
@@ -1710,15 +1715,9 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         return target;
     }
 
-    protected class KeySet implements Set<K>, Serializable, BatchIterable<K>
+    protected class KeySet extends AbstractMutableSet<K> implements Serializable, BatchIterable<K>
     {
         private static final long serialVersionUID = 1L;
-
-        @Override
-        public boolean add(K key)
-        {
-            throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
-        }
 
         @Override
         public boolean addAll(Collection<? extends K> collection)
@@ -1752,9 +1751,35 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         }
 
         @Override
+        public void each(Procedure<? super K> procedure)
+        {
+            UnifiedMapWithHashingStrategy.this.forEachKey(procedure);
+        }
+
+        @Override
         public boolean isEmpty()
         {
             return UnifiedMapWithHashingStrategy.this.isEmpty();
+        }
+
+        @Override
+        public K getFirst()
+        {
+            if (UnifiedMapWithHashingStrategy.this.size() > 0)
+            {
+                return (K) this.toArray()[0];
+            }
+            return null;
+        }
+
+        @Override
+        public K getLast()
+        {
+            if (UnifiedMapWithHashingStrategy.this.size() > 0)
+            {
+                return IterableIterate.getLast(this);
+            }
+            return null;
         }
 
         @Override
@@ -1841,12 +1866,6 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         public int size()
         {
             return UnifiedMapWithHashingStrategy.this.size();
-        }
-
-        @Override
-        public void forEach(Procedure<? super K> procedure)
-        {
-            UnifiedMapWithHashingStrategy.this.forEachKey(procedure);
         }
 
         @Override
@@ -2017,6 +2036,13 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                 }
                 replace.add(UnifiedMapWithHashingStrategy.this.nonSentinel(cur));
             }
+        }
+
+        @Override
+        public ParallelUnsortedSetIterable<K> asParallel(
+                ExecutorService executorService, int batchSize)
+        {
+            return org.eclipse.collections.impl.factory.Sets.adapt(this).asParallel(executorService, batchSize);
         }
     }
 

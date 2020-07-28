@@ -95,6 +95,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.tuple.AbstractImmutableEntry;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
@@ -149,9 +150,9 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public UnmodifiableMutableSet<K> keySet()
     {
-        return Collections.unmodifiableSet(this.delegate.keySet());
+        return UnmodifiableMutableSet.of(this.delegate.keySet());
     }
 
     @Override

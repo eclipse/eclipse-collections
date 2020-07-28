@@ -250,4 +250,7 @@ public interface MutableMap<K, V>
 
     @Override
     MutableMap<K, V> withoutAllKeys(Iterable<? extends K> keys);
+
+    @Override
+    MutableSet<K> keySet();
 }

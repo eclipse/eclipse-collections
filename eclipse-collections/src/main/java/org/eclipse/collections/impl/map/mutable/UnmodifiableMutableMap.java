@@ -391,6 +391,12 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
+    public MutableSet<K> keySet()
+    {
+        return this.getMutableMap().keySet().asUnmodifiable();
+    }
+
+    @Override
     public RichIterable<K> keysView()
     {
         return LazyIterate.adapt(this.keySet());

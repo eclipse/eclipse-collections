@@ -21,6 +21,8 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.MapIterate;
 
@@ -94,9 +96,9 @@ public class MapAdapter<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public MutableSet<K> keySet()
     {
-        return this.delegate.keySet();
+        return Sets.adapt(this.delegate.keySet());
     }
 
     @Override

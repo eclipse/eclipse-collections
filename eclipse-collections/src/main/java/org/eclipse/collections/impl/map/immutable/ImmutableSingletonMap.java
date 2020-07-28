@@ -14,7 +14,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function2;
@@ -92,9 +91,9 @@ final class ImmutableSingletonMap<K, V>
     }
 
     @Override
-    public Set<K> keySet()
+    public ImmutableKeySet<K> keySet()
     {
-        return Sets.immutable.with(this.key1).castToSet();
+        return new ImmutableKeySet<>(Sets.immutable.with(this.key1));
     }
 
     @Override

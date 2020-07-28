@@ -65,6 +65,7 @@ import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
+import org.eclipse.collections.impl.set.immutable.AbstractImmutableSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.MapIterate;
@@ -186,9 +187,9 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     }
 
     @Override
-    public Set<K> keySet()
+    public ImmutableKeySet<K> keySet()
     {
-        return this.delegate.castToMap().keySet();
+        return new ImmutableKeySet<>(this.delegate.keySet());
     }
 
     @Override
@@ -481,6 +482,75 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
         protected Object writeReplace()
         {
             return new ImmutableBiMapSerializationProxy<>(this);
+        }
+    }
+
+    protected static class ImmutableKeySet<K> extends AbstractImmutableSet<K>
+    {
+        private final ImmutableSet<K> original;
+
+        protected ImmutableKeySet(ImmutableSet<K> keySet)
+        {
+            this.original = keySet;
+        }
+
+        @Override
+        public int size()
+        {
+            return this.original.size();
+        }
+
+        @Override
+        public K getFirst()
+        {
+            return this.original.getFirst();
+        }
+
+        @Override
+        public K getLast()
+        {
+            return this.original.getLast();
+        }
+
+        @Override
+        public void each(Procedure<? super K> procedure)
+        {
+            this.original.each(procedure);
+        }
+
+        @Override
+        public boolean contains(Object object)
+        {
+            return this.original.contains(object);
+        }
+
+        @Override
+        public Iterator<K> iterator()
+        {
+            return this.original.iterator();
+        }
+
+        @Override
+        public boolean equals(Object object)
+        {
+            if (this.original == object)
+            {
+                return true;
+            }
+
+            if (!(object instanceof Set))
+            {
+                return false;
+            }
+
+            Set<?> other = (Set<?>) object;
+            return this.original.size() == other.size() && this.original.containsAll(other);
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return this.original.hashCode();
         }
     }
 }
