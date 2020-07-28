@@ -32,7 +32,9 @@ public final class ObjectIntProcedureFJTaskRunner<T, BT extends ObjectIntProcedu
 
     public ObjectIntProcedureFJTaskRunner(Combiner<BT> newCombiner, int taskCount)
     {
-        this(newCombiner, taskCount,
+        this(
+                newCombiner,
+                taskCount,
                 ObjectIntProcedureFJTaskRunner.buildQueue(newCombiner, taskCount),
                 ObjectIntProcedureFJTaskRunner.buildCountDownLatch(newCombiner, taskCount));
     }

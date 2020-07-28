@@ -230,7 +230,9 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     @Override
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        MutableMap<K, R> result = MapIterate.collectValues(this, function,
+        MutableMap<K, R> result = MapIterate.collectValues(
+                this,
+                function,
                 UnifiedMapWithHashingStrategy.newMap(this.delegate.hashingStrategy(), this.delegate.size()));
         return result.toImmutable();
     }

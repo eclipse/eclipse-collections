@@ -49,7 +49,7 @@ public interface Reversible<name>Iterable extends Ordered<name>Iterable
     @Override
     default \<V> ReversibleIterable\<V> collectWithIndex(<name>IntToObjectFunction\<? extends V> function)
     {
-        int[] index = { 0 };
+        int[] index = {0};
         return this.collect(each -> function.value(each, index[0]++));
     }
 

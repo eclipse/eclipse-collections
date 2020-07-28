@@ -27,7 +27,13 @@ public interface CollisionsTestCase
     Integer COLLISION_10 = 152;
 
     ImmutableList<Integer> COLLISIONS = Lists.immutable.with(
-            COLLISION_1, COLLISION_2, COLLISION_3,
-            COLLISION_4, COLLISION_5, COLLISION_6,
-            COLLISION_7, COLLISION_8, COLLISION_9);
+            COLLISION_1,
+            COLLISION_2,
+            COLLISION_3,
+            COLLISION_4,
+            COLLISION_5,
+            COLLISION_6,
+            COLLISION_7,
+            COLLISION_8,
+            COLLISION_9);
 }

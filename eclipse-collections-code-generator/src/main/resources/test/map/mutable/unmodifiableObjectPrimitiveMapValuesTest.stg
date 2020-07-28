@@ -167,7 +167,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     }
 
     @Override
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void removeAll_iterable()
     {
         this.newWith().removeAll(new <name>ArrayList());
@@ -181,14 +181,14 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     }
 
     @Override
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void retainAll_iterable()
     {
         this.newWith().retainAll(new <name>ArrayList());
     }
 
     @Override
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void clear()
     {
         Mutable<name>Collection emptyCollection = this.newWith();

@@ -55,7 +55,7 @@ public interface Immutable<name>List extends Immutable<name>Collection, <name>Li
     @Override
     default \<V> ImmutableList\<V> collectWithIndex(<name>IntToObjectFunction\<? extends V> function)
     {
-        int[] index = { 0 };
+        int[] index = {0};
         return this.collect(each -> function.value(each, index[0]++));
     }
 

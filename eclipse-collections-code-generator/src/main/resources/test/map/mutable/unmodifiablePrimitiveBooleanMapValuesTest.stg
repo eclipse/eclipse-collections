@@ -197,35 +197,35 @@ public class Unmodifiable<name>BooleanMapValuesTest extends AbstractMutableBoole
     }
 
     @Override
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void removeAll()
     {
         this.newWith().removeAll();
     }
 
     @Override
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void removeAll_iterable()
     {
         this.newWith().removeAll(BooleanArrayList.newListWith(false, true));
     }
 
     @Override
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void retainAll()
     {
         this.newWith().retainAll();
     }
 
     @Override
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void retainAll_iterable()
     {
         this.newWith().retainAll(BooleanArrayList.newListWith(false, true));
     }
 
     @Override
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void clear()
     {
         MutableBooleanCollection emptyCollection = this.newWith();

@@ -41,8 +41,14 @@ import org.junit.Test;
  */
 public class <name>BooleanHashMapKeysViewTest
 {
-    private final Lazy<name>Iterable iterable = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("31")>, true,
-            generateCollisions1().getFirst(), false).withKeyValue(generateCollisions1().get(1), true).keysView();
+    private final Lazy<name>Iterable iterable = <name>BooleanHashMap
+            .newWithKeysValues(
+                    <(literal.(type))("0")>, true,
+                    <(literal.(type))("1")>, false,
+                    <(literal.(type))("31")>, true,
+                    generateCollisions1().getFirst(), false)
+            .withKeyValue(generateCollisions1().get(1), true)
+            .keysView();
 
     private static <name>ArrayList generateCollisions1()
     {

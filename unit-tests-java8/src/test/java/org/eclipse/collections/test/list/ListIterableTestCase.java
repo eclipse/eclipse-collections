@@ -66,7 +66,8 @@ public interface ListIterableTestCase extends OrderedIterableWithDuplicatesTestC
         MutableList<Pair<Integer, String>> result = Lists.mutable.empty();
         ListIterable<Integer> integers = this.newWith(1, 2, 3);
         ImmutableList<String> strings = this.newWith("1", "2", "3").toImmutable();
-        integers.forEachInBoth(strings,
+        integers.forEachInBoth(
+                strings,
                 (integer, string) -> result.add(Tuples.pair(integer, string)));
         assertEquals(
                 Lists.immutable.with(Tuples.pair(1, "1"), Tuples.pair(2, "2"), Tuples.pair(3, "3")),

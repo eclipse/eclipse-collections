@@ -52,7 +52,12 @@ public final class ProcedureFJTaskRunner<T, BT extends Procedure<? super T>>
         int sectionSize = list.size() / this.taskCount;
         for (int index = 0; index < this.taskCount; index++)
         {
-            ProcedureFJTask<T, BT> procedureFJTask = new ProcedureFJTask<>(this, procedureFactory, list, index, sectionSize,
+            ProcedureFJTask<T, BT> procedureFJTask = new ProcedureFJTask<>(
+                    this,
+                    procedureFactory,
+                    list,
+                    index,
+                    sectionSize,
                     index == this.taskCount - 1);
             this.procedures[index] = procedureFJTask;
             executor.execute(procedureFJTask);

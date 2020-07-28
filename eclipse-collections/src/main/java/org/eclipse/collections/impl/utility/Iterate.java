@@ -1035,14 +1035,16 @@ public final class Iterate
      * Example using anonymous inner class:
      * <pre>
      * MutableList&lt;Person&gt; rejected =
-     *      Iterate.<b>reject</b>(people,
+     *      Iterate.<b>reject</b>(
+     *          people,
      *          new Predicate&lt;Person&gt;()
      *          {
      *              public boolean accept(Person person)
      *              {
      *                  return person.person.getLastName().equals("Smith");
      *              }
-     *          }, FastList.newList());
+     *          },
+     *          FastList.newList());
      * </pre>
      * <p>
      * Example using Predicates factory:
@@ -1173,7 +1175,8 @@ public final class Iterate
      * Example using an anonymous inner class:
      * <pre>
      * Collection&lt;String&gt; names =
-     *      Iterate.<b>collect</b>(people,
+     *      Iterate.<b>collect</b>(
+     *          people,
      *          new Function&lt;Person, String&gt;()
      *          {
      *              public String valueOf(Person person)
@@ -1228,14 +1231,16 @@ public final class Iterate
      * Example using an anonymous inner class:
      * <pre>
      * MutableList&lt;String&gt; names =
-     *      Iterate.<b>collect</b>(people,
+     *      Iterate.<b>collect</b>(
+     *          people,
      *          new Function&lt;Person, String&gt;()
      *          {
      *              public String valueOf(Person person)
      *              {
      *                  return person.getFirstName() + " " + person.getLastName();
      *              }
-     *          }, FastList.newList());
+     *          },
+     *          FastList.newList());
      * </pre>
      */
     public static <T, A, R extends Collection<A>> R collect(
@@ -1274,7 +1279,8 @@ public final class Iterate
      * Example using anonymous inner class:
      * <pre>
      * MutableBooleanCollection voters =
-     *      Iterate.<b>collectBoolean</b>(people,
+     *      Iterate.<b>collectBoolean</b>(
+     *          people,
      *          new BooleanFunction&lt;Person&gt;()
      *          {
      *              public boolean booleanValueOf(Person person)
@@ -1320,14 +1326,16 @@ public final class Iterate
      * Example using an anonymous inner class:
      * <pre>
      * BooleanArrayList voters =
-     *      Iterate.<b>collectBoolean</b>(people,
+     *      Iterate.<b>collectBoolean</b>(
+     *          people,
      *          new BooleanFunction&lt;Person&gt;()
      *          {
      *              public boolean booleanValueOf(Person person)
      *              {
      *                  return person.canVote();
      *              }
-     *          }, new BooleanArrayList());
+     *          },
+     *          new BooleanArrayList());
      * </pre>
      */
     public static <T, R extends MutableBooleanCollection> R collectBoolean(
@@ -1366,7 +1374,8 @@ public final class Iterate
      * Example using anonymous inner class:
      * <pre>
      * MutableByteCollection bytes =
-     *      Iterate.<b>collectByte</b>(people,
+     *      Iterate.<b>collectByte</b>(
+     *          people,
      *          new ByteFunction&lt;Person&gt;()
      *          {
      *              public byte byteValueOf(Person person)
@@ -1412,14 +1421,16 @@ public final class Iterate
      * Example using an anonymous inner class:
      * <pre>
      * ByteArrayList bytes =
-     *      Iterate.<b>collectByte</b>(people,
+     *      Iterate.<b>collectByte</b>(
+     *          people,
      *          new ByteFunction&lt;Person&gt;()
      *          {
      *              public byte byteValueOf(Person person)
      *              {
      *                  return person.getCode();
      *              }
-     *          }, new ByteArrayList());
+     *          },
+     *          new ByteArrayList());
      * </pre>
      */
     public static <T, R extends MutableByteCollection> R collectByte(
@@ -1458,7 +1469,8 @@ public final class Iterate
      * Example using anonymous inner class:
      * <pre>
      * MutableCharCollection chars =
-     *      Iterate.<b>collectChar</b>(people,
+     *      Iterate.<b>collectChar</b>(
+     *          people,
      *          new CharFunction&lt;Person&gt;()
      *          {
      *              public char charValueOf(Person person)
@@ -1503,14 +1515,16 @@ public final class Iterate
      * Example using anonymous inner class:
      * <pre>
      * CharArrayList chars =
-     *      Iterate.<b>collectChar</b>(people,
+     *      Iterate.<b>collectChar</b>(
+     *          people,
      *          new CharFunction&lt;Person&gt;()
      *          {
      *              public char charValueOf(Person person)
      *              {
      *                  return person.getMiddleInitial();
      *              }
-     *          }, new CharArrayList());
+     *          },
+     *          new CharArrayList());
      * </pre>
      */
     public static <T, R extends MutableCharCollection> R collectChar(

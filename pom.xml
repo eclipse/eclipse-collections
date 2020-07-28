@@ -123,7 +123,7 @@
         <scala.version>2.12.6</scala.version>
         <guava.version>28.2-jre</guava.version>
         <trove4j.version>3.0.3</trove4j.version>
-        <checkstyle.version>8.29</checkstyle.version>
+        <checkstyle.version>8.34</checkstyle.version>
         <checkstyle.plugin.version>3.1.1</checkstyle.plugin.version>
         <findbugs.plugin.version>3.0.5</findbugs.plugin.version>
         <jacoco.plugin.version>0.8.5</jacoco.plugin.version>

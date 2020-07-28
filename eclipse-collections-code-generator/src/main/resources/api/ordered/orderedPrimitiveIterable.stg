@@ -51,7 +51,7 @@ public interface Ordered<name>Iterable extends <name>Iterable
      */
     default \<V> OrderedIterable\<V> collectWithIndex(<name>IntToObjectFunction\<? extends V> function)
     {
-        int[] index = { 0 };
+        int[] index = {0};
         return this.collect(each -> function.value(each, index[0]++));
     }
 
@@ -63,7 +63,7 @@ public interface Ordered<name>Iterable extends <name>Iterable
      */
     default \<V, R extends Collection\<V\>> R collectWithIndex(<name>IntToObjectFunction\<? extends V> function, R target)
     {
-        int[] index = { 0 };
+        int[] index = {0};
         return this.collect(each -> function.value(each, index[0]++), target);
     }
 
