@@ -926,12 +926,6 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
     }
 
     @Override
-    public \<K, VV> ImmutableMap\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
-    {
-        return Maps.immutable.empty();
-    }
-
-    @Override
     public \<VV extends Comparable\<? super VV>\> V maxBy(Function\<? super V, ? extends VV> function)
     {
         throw new NoSuchElementException();

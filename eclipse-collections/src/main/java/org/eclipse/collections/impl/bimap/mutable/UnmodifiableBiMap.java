@@ -1058,12 +1058,6 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     }
 
     @Override
-    public <K, V1> MutableMap<K, V1> aggregateInPlaceBy(Function<? super V, ? extends K> groupBy, Function0<? extends V1> zeroValueFactory, Procedure2<? super V1, ? super V> mutatingAggregator)
-    {
-        return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
-    }
-
-    @Override
     public <K, V1> MutableMap<K, V1> aggregateBy(Function<? super V, ? extends K> groupBy, Function0<? extends V1> zeroValueFactory, Function2<? super V1, ? super V, ? extends V1> nonMutatingAggregator)
     {
         return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);

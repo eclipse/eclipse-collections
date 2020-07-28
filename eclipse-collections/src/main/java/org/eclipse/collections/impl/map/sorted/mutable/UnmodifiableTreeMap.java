@@ -89,7 +89,6 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollection;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
@@ -1306,17 +1305,6 @@ public class UnmodifiableTreeMap<K, V>
     public MutableSet<Entry<K, V>> entrySet()
     {
         return UnmodifiableMutableSet.of(super.entrySet());
-    }
-
-    @Override
-    public <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Procedure2<? super V2, ? super V> mutatingAggregator)
-    {
-        MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
     }
 
     @Override

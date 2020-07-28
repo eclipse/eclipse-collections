@@ -63,7 +63,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
@@ -704,17 +703,6 @@ public class OrderedMapAdapter<K, V>
         V newValue = function.value(oldValue, parameter);
         this.put(key, newValue);
         return newValue;
-    }
-
-    @Override
-    public <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Procedure2<? super V2, ? super V> mutatingAggregator)
-    {
-        MutableMap<K2, V2> map = Maps.mutable.empty();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
     }
 
     @Override
