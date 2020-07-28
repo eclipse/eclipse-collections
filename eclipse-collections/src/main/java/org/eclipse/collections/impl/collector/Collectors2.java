@@ -1121,10 +1121,7 @@ public final class Collectors2
     {
         return Collector.of(
                 supplier,
-                (map, each) ->
-                {
-                    map.updateValueWith(groupBy.valueOf(each), zeroValueFactory, aggregator, each);
-                },
+                (map, each) -> map.updateValueWith(groupBy.valueOf(each), zeroValueFactory, aggregator, each),
                 (r1, r2) ->
                 {
                     r2.forEachKeyValue((key, value) -> r1.updateValueWith(key, zeroValueFactory, aggregator, value));

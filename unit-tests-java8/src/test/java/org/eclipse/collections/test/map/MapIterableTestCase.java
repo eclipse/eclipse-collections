@@ -85,9 +85,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         String greaterOrEqualsToTen = "greaterOrEqualsToTen";
 
         MapIterable<String, Long> result = map.aggregateBy(
-                eachKey -> {
-                    return eachKey.equals(oneToFive) || eachKey.equals(sixToNine) ? lessThanTen : greaterOrEqualsToTen;
-                },
+                eachKey -> eachKey.equals(oneToFive) || eachKey.equals(sixToNine) ? lessThanTen : greaterOrEqualsToTen,
                 each -> each.sumOfInt(Integer::intValue),
                 () -> 0L,
                 (argument1, argument2) -> argument1 + argument2);
