@@ -9,7 +9,8 @@
  */
 
 /**
- * This package contains implementations of {@link org.eclipse.collections.api.tuple.Pair} and {@link org.eclipse.collections.api.tuple.Twin}.
+ * This package contains implementations of {@link org.eclipse.collections.api.tuple.Pair}, {@link org.eclipse.collections.api.tuple.Twin},
+ * {@link org.eclipse.collections.api.tuple.Triple} and {@link org.eclipse.collections.api.tuple.Triplet} interfaces.
  * <p>
  *     A tuple is a container that holds two related objects.
  * <p>

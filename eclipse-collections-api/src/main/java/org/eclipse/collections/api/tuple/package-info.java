@@ -13,13 +13,19 @@
  * <p>
  *      A tuple is a container used to hold two related objects.
  * <p>
- *      This package contains 2 interfaces:
+ *      This package contains 4 interfaces:
  * <ul>
  *   <li>
  *       {@link org.eclipse.collections.api.tuple.Pair} - a container that holds two related objects.
  *   </li>
  *   <li>
  *       {@link org.eclipse.collections.api.tuple.Twin} - a Pair that has the same type for both items.
+ *   </li>
+ *   <li>
+ *       {@link org.eclipse.collections.api.tuple.Triple} - a container that holds three related objects.
+ *   </li>
+ *   <li>
+ *       {@link org.eclipse.collections.api.tuple.Triplet} - a Triple that has the same type for all three items.
  *   </li>
  * </ul>
  */
