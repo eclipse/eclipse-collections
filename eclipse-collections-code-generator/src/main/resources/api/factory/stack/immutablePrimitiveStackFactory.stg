@@ -62,7 +62,7 @@ public interface Immutable<name>StackFactory
     Immutable<name>Stack withAll(<name>Iterable items);
 
     /**
-     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     * Same as {@link #withAll(Iterable)}.
      */
     Immutable<name>Stack ofAll(Iterable\<<wrapperName>\> iterable);
 
