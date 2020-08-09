@@ -62,7 +62,7 @@ public interface Immutable<name>SetFactory
     Immutable<name>Set withAll(<name>Iterable items);
 
     /**
-     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     * Same as {@link #withAll(Iterable)}.
      */
     Immutable<name>Set ofAll(Iterable\<<wrapperName>\> iterable);
 
