@@ -15,7 +15,7 @@
     <parent>
         <groupId>org.eclipse.collections</groupId>
         <artifactId>p2-feature</artifactId>
-        <version>10.3.0-SNAPSHOT</version>
+        <version>11.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>org.eclipse.collections.feature</artifactId>
     <packaging>eclipse-feature</packaging>

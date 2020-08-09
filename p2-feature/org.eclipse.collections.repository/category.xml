@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.eclipse.collections.feature_10.3.0.qualifier.jar" id="org.eclipse.collections.feature" version="10.3.0.qualifier">
+   <feature url="features/org.eclipse.collections.feature_11.0.0.qualifier.jar" id="org.eclipse.collections.feature" version="11.0.0.qualifier">
       <category name="category_org.eclipse.collections"/>
    </feature>
-   <feature url="features/org.eclipse.collections.feature.source_10.3.0.qualifier.jar" id="org.eclipse.collections.feature.source" version="10.3.0.qualifier">
+   <feature url="features/org.eclipse.collections.feature.source_11.0.0.qualifier.jar" id="org.eclipse.collections.feature.source" version="11.0.0.qualifier">
       <category name="category_org.eclipse.collections"/>
    </feature>
    <category-def name="category_org.eclipse.collections" label="Eclipse Collections">
