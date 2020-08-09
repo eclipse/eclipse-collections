@@ -62,7 +62,7 @@ public interface Immutable<name>BagFactory
     Immutable<name>Bag withAll(<name>Iterable items);
 
     /**
-     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     * Same as {@link #withAll(Iterable)}.
      */
     Immutable<name>Bag ofAll(Iterable\<<wrapperName>\> iterable);
 
