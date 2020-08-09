@@ -54,7 +54,7 @@ public final class Multimaps
         public final ImmutableBagMultimapFactory bag = new ImmutableBagMultimapFactory();
         public final ImmutableSortedBagMultimapFactory sortedBag = new ImmutableSortedBagMultimapFactory();
         /**
-         * @deprecated Use {@link Multimaps.immutable.sortedBag} instead
+         * @deprecated Use {@link #sortedBag} instead.
          */
         @Deprecated
         public final ImmutableSortedBagMultimapFactory multimap = this.sortedBag;
