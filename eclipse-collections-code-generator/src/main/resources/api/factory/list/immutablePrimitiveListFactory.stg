@@ -62,7 +62,7 @@ public interface Immutable<name>ListFactory
     Immutable<name>List withAll(<name>Iterable items);
 
     /**
-     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     * Same as {@link #withAll(Iterable)}.
      */
     Immutable<name>List ofAll(Iterable\<<wrapperName>\> iterable);
 
