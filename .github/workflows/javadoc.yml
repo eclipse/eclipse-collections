@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        java-version: [11]
+        java-version: [14]
 
     runs-on: ${{ matrix.os }}
 
@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
       - name: JavaDoc
-        run: ./mvnw install javadoc:jar --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin,eclipse-collections-api,eclipse-collections,eclipse-collections-testutils,eclipse-collections-forkjoin' --activate-profiles all -DskipTests=true --no-transfer-progress
+        run: ./mvnw -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:aggregate -pl '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository' --no-transfer-progress
         env:
           MAVEN_OPTS: "-Xmx1g"
 
