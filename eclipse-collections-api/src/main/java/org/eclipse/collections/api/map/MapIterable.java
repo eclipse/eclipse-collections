@@ -300,12 +300,12 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * MapIterable&lt;String, Interval&gt; map = Maps.mutable.with("oneToFive", Interval.fromTo(1, 5), "sixToNine", Interval.fromTo(6, 9));
      *
      * MapIterable&lt;String, Long&gt; result = map.aggregateBy(
-     *         eachKey -> {
+     *         eachKey -&gt; {
      *             return eachKey.equals("oneToFive")  ? "lessThanSix" : "greaterOrEqualsToSix";
      *         },
-     *         each -> each.sumOfInt(Integer::intValue),
-     *         () -> 0L,
-     *         (argument1, argument2) -> argument1 + argument2);
+     *         each -&gt; each.sumOfInt(Integer::intValue),
+     *         () -&gt; 0L,
+     *         (argument1, argument2) -&gt; argument1 + argument2);
      *
      * MapIterable&lt;String, Long&gt; expected =
      *         Maps.mutable.with("lessThanSix", Interval.fromTo(1, 5).sumOfInt(Integer::intValue),
