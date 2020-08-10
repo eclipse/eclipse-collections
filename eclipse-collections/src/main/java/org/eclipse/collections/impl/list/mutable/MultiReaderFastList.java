@@ -472,7 +472,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableList<T> sortThisBy(
+    public <V extends Comparable<? super V>> MultiReaderList<T> sortThisBy(
             Function<? super T, ? extends V> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
@@ -483,7 +483,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThisByInt(IntFunction<? super T> function)
+    public MultiReaderList<T> sortThisByInt(IntFunction<? super T> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -493,7 +493,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThisByBoolean(BooleanFunction<? super T> function)
+    public MultiReaderList<T> sortThisByBoolean(BooleanFunction<? super T> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -503,7 +503,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThisByChar(CharFunction<? super T> function)
+    public MultiReaderList<T> sortThisByChar(CharFunction<? super T> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -513,7 +513,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThisByByte(ByteFunction<? super T> function)
+    public MultiReaderList<T> sortThisByByte(ByteFunction<? super T> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -523,7 +523,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThisByShort(ShortFunction<? super T> function)
+    public MultiReaderList<T> sortThisByShort(ShortFunction<? super T> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -533,7 +533,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThisByFloat(FloatFunction<? super T> function)
+    public MultiReaderList<T> sortThisByFloat(FloatFunction<? super T> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -543,7 +543,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThisByLong(LongFunction<? super T> function)
+    public MultiReaderList<T> sortThisByLong(LongFunction<? super T> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -553,7 +553,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThisByDouble(DoubleFunction<? super T> function)
+    public MultiReaderList<T> sortThisByDouble(DoubleFunction<? super T> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -1623,7 +1623,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> reverseThis()
+    public MultiReaderList<T> reverseThis()
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -1633,7 +1633,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> shuffleThis()
+    public MultiReaderList<T> shuffleThis()
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -1643,7 +1643,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> shuffleThis(Random rnd)
+    public MultiReaderList<T> shuffleThis(Random rnd)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
