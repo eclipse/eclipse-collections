@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.list;
 
+import java.util.Comparator;
+
 import org.eclipse.collections.api.block.procedure.Procedure;
 
 /**
@@ -23,4 +25,17 @@ public interface MultiReaderList<T>
     void withReadLockAndDelegate(Procedure<? super MutableList<T>> procedure);
 
     void withWriteLockAndDelegate(Procedure<? super MutableList<T>> procedure);
+
+    @Override
+    default MultiReaderList<T> sortThis(Comparator<? super T> comparator)
+    {
+        this.sort(comparator);
+        return this;
+    }
+
+    @Override
+    default MultiReaderList<T> sortThis()
+    {
+        return this.sortThis(null);
+    }
 }
