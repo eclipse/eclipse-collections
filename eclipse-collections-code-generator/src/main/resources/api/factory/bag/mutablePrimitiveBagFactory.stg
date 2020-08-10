@@ -52,7 +52,7 @@ public interface Mutable<name>BagFactory
     Mutable<name>Bag withAll(<name>Iterable items);
 
     /**
-     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     * Same as {@link #withAll(Iterable)}.
      */
     Mutable<name>Bag ofAll(Iterable\<<wrapperName>\> iterable);
 

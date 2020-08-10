@@ -77,7 +77,7 @@ public interface Mutable<name>ListFactory
     Mutable<name>List withAll(<name>Iterable items);
 
     /**
-     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     * Same as {@link #withAll(Iterable)}.
      */
     Mutable<name>List ofAll(Iterable\<<wrapperName>\> iterable);
 
