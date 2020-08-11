@@ -11,6 +11,7 @@
 [![][release img]][release]
 [![][license-epl img]][license-epl]
 [![][license-edl img]][license-edl]
+[![][snyk-badge img]][snyk-badge]
 
 [![][actions unit-tests img]][actions unit-tests]
 [![][actions acceptance-tests img]][actions acceptance-tests]
@@ -120,6 +121,9 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 
 [license-edl]:LICENSE-EDL-1.0.txt
 [license-edl img]:https://img.shields.io/badge/License-EDL-blue.svg
+
+[snyk-badge]:https://snyk.io/vuln/maven:org.eclipse.collections:eclipse-collections@10.3.0?utm_medium=referral&utm_source=badge&utm_campaign=snyk-widget
+[snyk-badge img]:https://snyk-widget.herokuapp.com/badge/mvn/org.eclipse.collections/eclipse-collections/10.3.0/badge.svg
 
 [RichIterable]: https://www.eclipse.org/collections/javadoc/10.3.0/org/eclipse/collections/api/RichIterable.html
 [ListIterable]: https://www.eclipse.org/collections/javadoc/10.3.0/org/eclipse/collections/api/list/ListIterable.html
