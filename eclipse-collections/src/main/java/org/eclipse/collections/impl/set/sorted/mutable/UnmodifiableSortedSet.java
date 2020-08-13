@@ -51,7 +51,6 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.set.sorted.ParallelSortedSetIterable;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
-import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableCollectionSerializationProxy;
@@ -450,12 +449,6 @@ public class UnmodifiableSortedSet<T>
     public int compareTo(SortedSetIterable<T> o)
     {
         return this.getSortedSet().compareTo(o);
-    }
-
-    @Override
-    public MutableStack<T> toStack()
-    {
-        return this.getSortedSet().toStack();
     }
 
     @Override

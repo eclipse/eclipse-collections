@@ -81,7 +81,6 @@ import org.eclipse.collections.api.partition.stack.PartitionImmutableStack;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.stack.ImmutableStack;
-import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.api.stack.primitive.ImmutableBooleanStack;
 import org.eclipse.collections.api.stack.primitive.ImmutableByteStack;
@@ -100,7 +99,6 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack;
-import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.BooleanArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.ByteArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.CharArrayStack;
@@ -297,12 +295,6 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     public boolean containsAllArguments(Object... elements)
     {
         return this.delegate.asReversed().containsAllArguments(elements);
-    }
-
-    @Override
-    public MutableStack<T> toStack()
-    {
-        return ArrayStack.newStackFromTopToBottom(this);
     }
 
     @Override

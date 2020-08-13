@@ -45,7 +45,6 @@ import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.stack.PartitionImmutableStack;
 import org.eclipse.collections.api.stack.ImmutableStack;
-import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.api.stack.primitive.ImmutableBooleanStack;
 import org.eclipse.collections.api.stack.primitive.ImmutableByteStack;
@@ -74,7 +73,6 @@ import org.eclipse.collections.impl.factory.primitive.ShortStacks;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack.PartitionProcedure;
-import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 
 final class ImmutableNotEmptyStack<T>
         extends AbstractRichIterable<T>
@@ -187,12 +185,6 @@ final class ImmutableNotEmptyStack<T>
     public T getLast()
     {
         throw new UnsupportedOperationException("Cannot call getLast() on " + this.getClass().getSimpleName());
-    }
-
-    @Override
-    public MutableStack<T> toStack()
-    {
-        return ArrayStack.newStackFromTopToBottom(this);
     }
 
     @Override
