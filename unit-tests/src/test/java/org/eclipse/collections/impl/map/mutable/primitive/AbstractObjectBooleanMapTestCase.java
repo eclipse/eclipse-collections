@@ -429,6 +429,23 @@ public abstract class AbstractObjectBooleanMapTestCase
     }
 
     @Test
+    public void toArrayWithTargetArray()
+    {
+        ObjectBooleanMap<String> map1 = this.newWithKeysValues(null, true, "1", false);
+        ObjectBooleanMap<String> map2 = this.newWithKeysValues("0", true);
+        ObjectBooleanMap<String> map3 = this.newWithKeysValues("0", false);
+
+        Assert.assertTrue(Arrays.equals(new boolean[]{true, false}, map1.toArray(new boolean[]{}))
+                || Arrays.equals(new boolean[]{false, true}, map1.toArray(new boolean[]{})));
+        Assert.assertTrue(Arrays.equals(new boolean[]{true, false}, map1.toArray(new boolean[map1.size()]))
+                || Arrays.equals(new boolean[]{false, true}, map1.toArray(new boolean[map1.size()])));
+        Assert.assertTrue(Arrays.equals(new boolean[]{true}, map2.toArray(new boolean[]{})));
+        Assert.assertTrue(Arrays.equals(new boolean[]{true}, map2.toArray(new boolean[map2.size()])));
+        Assert.assertTrue(Arrays.equals(new boolean[]{false}, map3.toArray(new boolean[]{})));
+        Assert.assertTrue(Arrays.equals(new boolean[]{false}, map3.toArray(new boolean[map3.size()])));
+    }
+
+    @Test
     public void contains()
     {
         Assert.assertTrue(this.classUnderTest().contains(true));
