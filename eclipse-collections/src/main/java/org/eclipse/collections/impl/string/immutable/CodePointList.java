@@ -143,6 +143,12 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
     }
 
     @Override
+    public boolean isEmpty()
+    {
+        return this.length() == 0;
+    }
+
+    @Override
     public String subSequence(int start, int end)
     {
         StringBuilder builder = this.toStringBuilder();

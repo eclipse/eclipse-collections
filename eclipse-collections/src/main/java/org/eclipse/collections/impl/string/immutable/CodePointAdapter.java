@@ -105,6 +105,12 @@ public class CodePointAdapter
     }
 
     @Override
+    public boolean isEmpty()
+    {
+        return this.length() == 0;
+    }
+
+    @Override
     public String subSequence(int start, int end)
     {
         return this.adapted.substring(start, end);
