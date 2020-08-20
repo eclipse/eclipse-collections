@@ -52,7 +52,7 @@ public interface Mutable<name>StackFactory
     Mutable<name>Stack withAll(<name>Iterable items);
 
     /**
-     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     * Same as {@link #withAll(Iterable)}.
      */
     Mutable<name>Stack ofAll(Iterable\<<wrapperName>\> iterable);
 

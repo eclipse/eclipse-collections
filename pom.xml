@@ -18,7 +18,7 @@
 
     <groupId>org.eclipse.collections</groupId>
     <artifactId>eclipse-collections-parent</artifactId>
-    <version>10.3.0</version>
+    <version>10.4.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -579,16 +579,27 @@
                     <doctitle>Eclipse Collections - ${project.version}</doctitle>
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
-                    <detectJavaApiLink>false</detectJavaApiLink>
+                    <detectJavaApiLink>true</detectJavaApiLink>
                     <links>
                         <link>http://junit.sourceforge.net/javadoc/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
                     </links>
                     <destDir>${project.version}</destDir>
                     <doclint>html,syntax,accessibility</doclint>
                     <excludePackageNames>
-                        org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator
+                        org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator,org.eclipse.collections.codegenerator.maven
                     </excludePackageNames>
+                    <additionalOptions>-html5</additionalOptions>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>aggregate</id>
+                        <inherited>false</inherited>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -629,13 +640,24 @@
                     <detectJavaApiLink>true</detectJavaApiLink>
                     <links>
                         <link>http://junit.sourceforge.net/javadoc/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
                     </links>
                     <destDir>${project.version}</destDir>
                     <doclint>html,syntax,accessibility</doclint>
                     <excludePackageNames>
-                        org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator
+                        org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator,org.eclipse.collections.codegenerator.maven
                     </excludePackageNames>
+                    <additionalOptions>-html5</additionalOptions>
                 </configuration>
+                <reportSets>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <inherited>false</inherited>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
 
             <plugin>
