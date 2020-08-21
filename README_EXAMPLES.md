@@ -109,7 +109,7 @@ Assert.assertFalse(people.noneSatisfyWith(Person::lastNameEquals, "Smith"));
 
 ## [Back to README](./README.md)
 
-[MutableCollection]: https://www.eclipse.org/collections/javadoc/10.3.0/org/eclipse/collections/api/collection/MutableCollection.html
-[ImmutableCollection]: https://www.eclipse.org/collections/javadoc/10.3.0/org/eclipse/collections/api/collection/ImmutableCollection.html
-[LazyIterable]: https://www.eclipse.org/collections/javadoc/10.3.0/org/eclipse/collections/api/LazyIterable.html
-[Lists]: https://www.eclipse.org/collections/javadoc/10.3.0/org/eclipse/collections/api/factory/Lists.html
+[MutableCollection]: https://www.eclipse.org/collections/javadoc/10.4.0/org/eclipse/collections/api/collection/MutableCollection.html
+[ImmutableCollection]: https://www.eclipse.org/collections/javadoc/10.4.0/org/eclipse/collections/api/collection/ImmutableCollection.html
+[LazyIterable]: https://www.eclipse.org/collections/javadoc/10.4.0/org/eclipse/collections/api/LazyIterable.html
+[Lists]: https://www.eclipse.org/collections/javadoc/10.4.0/org/eclipse/collections/api/factory/Lists.html

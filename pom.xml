@@ -595,7 +595,6 @@
                     <excludePackageNames>
                         org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator,org.eclipse.collections.codegenerator.maven
                     </excludePackageNames>
-                    <additionalOptions>-html5</additionalOptions>
                 </configuration>
                 <executions>
                     <execution>
