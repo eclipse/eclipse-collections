@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -51,6 +52,7 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.set.immutable.ImmutableSetFromBagAdapter;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
@@ -676,5 +678,17 @@ public class ImmutableHashBag<T>
     protected Object writeReplace()
     {
         return new ImmutableBagSerializationProxy<>(this);
+    }
+
+    @Override
+    public ImmutableSet<T> asSet()
+    {
+        return new ImmutableSetFromBagAdapter<>(this.delegate);
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.delegate.distinctView();
     }
 }

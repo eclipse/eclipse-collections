@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.sorted.immutable;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.ExecutorService;
@@ -98,7 +99,7 @@ import org.eclipse.collections.impl.utility.internal.SortedSetIterables;
  * This class is the parent class for all ImmutableSortedSets. All implementations of ImmutableSortedSet must implement the SortedSet
  * interface so an TreeSet.equals(anImmutableSortedSet) can return true when the contents are the same.
  */
-abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection<T>
+public abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection<T>
         implements ImmutableSortedSet<T>, SortedSet<T>
 {
     @Override
@@ -496,13 +497,10 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     @Override
     public ParallelSortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        if (executorService == null)
-        {
-            throw new NullPointerException();
-        }
+        Objects.requireNonNull(executorService);
         if (batchSize < 1)
         {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("batchSize must be greater than zero, but was: " + batchSize);
         }
         return new NonParallelSortedSetIterable<>(this);
     }

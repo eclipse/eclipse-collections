@@ -219,4 +219,7 @@ public interface ImmutableBag<T> extends UnsortedBag<T>, ImmutableBagIterable<T>
      */
     @Override
     ImmutableList<ObjectIntPair<T>> bottomOccurrences(int count);
+
+    @Override
+    ImmutableSet<T> asSet();
 }

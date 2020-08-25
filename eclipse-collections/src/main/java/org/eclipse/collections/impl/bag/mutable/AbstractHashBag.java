@@ -22,10 +22,12 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.block.factory.primitive.IntToIntFunctions;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 
 public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
 {
@@ -325,6 +327,18 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     public <V> HashBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, HashBagMultimap.newMultimap());
+    }
+
+    @Override
+    public MutableSet<T> asSet()
+    {
+        return UnmodifiableMutableSet.of(this.items.keySet());
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.asSet();
     }
 
     private class InternalIterator implements Iterator<T>

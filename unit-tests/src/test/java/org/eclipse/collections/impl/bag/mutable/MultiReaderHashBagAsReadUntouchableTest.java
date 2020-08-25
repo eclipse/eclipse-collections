@@ -15,6 +15,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -90,5 +91,10 @@ public class MultiReaderHashBagAsReadUntouchableTest extends UnmodifiableMutable
         MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
+    }
+
+    public void asSet()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.getCollection().asSet());
     }
 }

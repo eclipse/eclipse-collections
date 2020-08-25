@@ -17,6 +17,7 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Collection;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -53,6 +54,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 
 /**
  * An unmodifiable view of a bag.
@@ -437,5 +439,17 @@ public class UnmodifiableBag<T>
     public MutableSet<T> selectUnique()
     {
         return this.getMutableBag().selectUnique();
+    }
+
+    @Override
+    public MutableSet<T> asSet()
+    {
+        return UnmodifiableMutableSet.of(this.getMutableBag().asSet());
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.asSet();
     }
 }

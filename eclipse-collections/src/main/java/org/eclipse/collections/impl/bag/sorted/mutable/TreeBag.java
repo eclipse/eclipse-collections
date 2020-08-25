@@ -33,6 +33,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
@@ -41,6 +42,7 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure2;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.sorted.mutable.TreeBagMultimap;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -754,5 +756,17 @@ public class TreeBag<T>
             }
             this.canRemove = false;
         }
+    }
+
+    @Override
+    public MutableSet<T> asSet()
+    {
+        return UnmodifiableMutableSet.of(this.items.keySet());
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.asSet();
     }
 }

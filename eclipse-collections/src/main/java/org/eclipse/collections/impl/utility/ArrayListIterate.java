@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
@@ -1336,6 +1337,27 @@ public final class ArrayListIterate
             return partitionFastList;
         }
         return RandomAccessListIterate.partitionWith(list, predicate, parameter);
+    }
+
+    /**
+     * @see Iterate#indexOf(Iterable, Object)
+     */
+    public static <T> int indexOf(ArrayList<T> list, Object object)
+    {
+        int size = list.size();
+        if (ArrayListIterate.isOptimizableArrayList(list, size))
+        {
+            T[] elements = ArrayListIterate.getInternalArray(list);
+            for (int i = 0; i < size; i++)
+            {
+                if (Objects.equals(elements[i], object))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        return RandomAccessListIterate.indexOf(list, object);
     }
 
     /**

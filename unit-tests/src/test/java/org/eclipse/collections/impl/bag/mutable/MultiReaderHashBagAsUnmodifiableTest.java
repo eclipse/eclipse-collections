@@ -13,8 +13,12 @@ package org.eclipse.collections.impl.bag.mutable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
+import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,5 +37,22 @@ public class MultiReaderHashBagAsUnmodifiableTest extends UnmodifiableMutableCol
         MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void asSet()
+    {
+        MutableBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2, 3, 4, 4).asUnmodifiable();
+        SetIterable<Integer> expected = UnifiedSet.newSetWith(1, 2, 3, 4);
+        MutableSet<Integer> actual = bag.asSet();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void asSetUnmodifiable()
+    {
+        MutableBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2, 3, 4, 4).asUnmodifiable();
+        MutableSet<Integer> actual = bag.asSet();
+        Verify.assertInstanceOf(UnmodifiableMutableSet.class, actual);
     }
 }

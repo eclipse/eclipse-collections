@@ -1271,6 +1271,18 @@ public final class ListIterate
     }
 
     /**
+     * @see Iterate#indexOf(Iterable, Object)
+     */
+    public static <T> int indexOf(List<T> list, Object object)
+    {
+        if (list instanceof RandomAccess)
+        {
+            return RandomAccessListIterate.indexOf(list, object);
+        }
+        return IterableIterate.indexOf(list, object);
+    }
+
+    /**
      * Searches for the first index where the predicate evaluates to true.
      */
     public static <T> int detectIndex(List<T> list, Predicate<? super T> predicate)

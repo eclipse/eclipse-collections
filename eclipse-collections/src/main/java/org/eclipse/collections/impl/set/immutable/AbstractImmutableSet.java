@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.immutable;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
@@ -81,6 +82,7 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedur
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.immutable.AbstractImmutableCollection;
+import org.eclipse.collections.impl.lazy.parallel.set.NonParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
@@ -472,6 +474,11 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return this.toSet().asParallel(executorService, batchSize);
+        Objects.requireNonNull(executorService);
+        if (batchSize < 1)
+        {
+            throw new IllegalArgumentException("batchSize must be greater than zero, but was: " + batchSize);
+        }
+        return new NonParallelUnsortedSetIterable<>(this);
     }
 }

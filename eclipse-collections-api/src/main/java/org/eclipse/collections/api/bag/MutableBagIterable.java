@@ -143,4 +143,7 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
 
     @Override
     <V> RichIterable<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
+
+    @Override
+    MutableSetIterable<T> asSet();
 }

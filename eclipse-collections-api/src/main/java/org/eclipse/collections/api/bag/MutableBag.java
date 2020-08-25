@@ -244,4 +244,7 @@ public interface MutableBag<T>
      */
     @Override
     ImmutableBag<T> toImmutable();
+
+    @Override
+    MutableSet<T> asSet();
 }
