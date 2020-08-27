@@ -112,7 +112,11 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
  * The immutable equivalent of ArrayStack. Wraps a FastList.
+ *
+ * @deprecated Replaced by {@link ImmutableNotEmptyStack}.
+ * Use {@link org.eclipse.collections.api.factory.Stacks#immutable}.{@link ImmutableStackFactoryImpl#with(Object[]) with()}
  */
+@Deprecated
 final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 {
     private static final long serialVersionUID = 1L;
