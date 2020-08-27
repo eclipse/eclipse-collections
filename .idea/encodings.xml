@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+  <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/acceptance-tests" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eclipse-collections" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eclipse-collections-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eclipse-collections-code-generator" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eclipse-collections-code-generator-maven-plugin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-code-generator-maven-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-code-generator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-code-generator/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eclipse-collections-forkjoin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-forkjoin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-forkjoin/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eclipse-collections-testutils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-testutils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-testutils/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jcstress-tests" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jcstress-tests/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jmh-scala-tests" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jmh-tests" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/junit-trait-runner" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/junit-trait-runner/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/p2-repository" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/p2-repository/org.eclipse.collections" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/p2-repository/org.eclipse.collections/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/performance-tests" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/scala-unit-tests" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/serialization-tests" charset="UTF-8" />

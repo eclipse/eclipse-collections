@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/acceptance-tests/acceptance-tests.iml" filepath="$PROJECT_DIR$/acceptance-tests/acceptance-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/eclipse-collections/eclipse-collections.iml" filepath="$PROJECT_DIR$/eclipse-collections/eclipse-collections.iml" />
       <module fileurl="file://$PROJECT_DIR$/eclipse-collections-api/eclipse-collections-api.iml" filepath="$PROJECT_DIR$/eclipse-collections-api/eclipse-collections-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/eclipse-collections-code-generator/eclipse-collections-code-generator.iml" filepath="$PROJECT_DIR$/eclipse-collections-code-generator/eclipse-collections-code-generator.iml" />
@@ -11,13 +10,9 @@
       <module fileurl="file://$PROJECT_DIR$/eclipse-collections-parent.iml" filepath="$PROJECT_DIR$/eclipse-collections-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/eclipse-collections-testutils/eclipse-collections-testutils.iml" filepath="$PROJECT_DIR$/eclipse-collections-testutils/eclipse-collections-testutils.iml" />
       <module fileurl="file://$PROJECT_DIR$/jcstress-tests/jcstress-tests.iml" filepath="$PROJECT_DIR$/jcstress-tests/jcstress-tests.iml" />
-      <module fileurl="file://$PROJECT_DIR$/jmh-scala-tests/jmh-scala-tests.iml" filepath="$PROJECT_DIR$/jmh-scala-tests/jmh-scala-tests.iml" />
-      <module fileurl="file://$PROJECT_DIR$/jmh-tests/jmh-tests.iml" filepath="$PROJECT_DIR$/jmh-tests/jmh-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/junit-trait-runner/junit-trait-runner.iml" filepath="$PROJECT_DIR$/junit-trait-runner/junit-trait-runner.iml" />
       <module fileurl="file://$PROJECT_DIR$/p2-repository/org.eclipse.collections/org.eclipse.collections.iml" filepath="$PROJECT_DIR$/p2-repository/org.eclipse.collections/org.eclipse.collections.iml" />
       <module fileurl="file://$PROJECT_DIR$/p2-repository/p2-repository.iml" filepath="$PROJECT_DIR$/p2-repository/p2-repository.iml" />
-      <module fileurl="file://$PROJECT_DIR$/performance-tests/performance-tests.iml" filepath="$PROJECT_DIR$/performance-tests/performance-tests.iml" />
-      <module fileurl="file://$PROJECT_DIR$/scala-unit-tests/scala-unit-tests.iml" filepath="$PROJECT_DIR$/scala-unit-tests/scala-unit-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/serialization-tests/serialization-tests.iml" filepath="$PROJECT_DIR$/serialization-tests/serialization-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-coverage/test-coverage.iml" filepath="$PROJECT_DIR$/test-coverage/test-coverage.iml" />
       <module fileurl="file://$PROJECT_DIR$/unit-tests/unit-tests.iml" filepath="$PROJECT_DIR$/unit-tests/unit-tests.iml" />
