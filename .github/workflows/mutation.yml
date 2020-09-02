@@ -10,6 +10,7 @@ on:
 jobs:
   applications:
     name: Mutation Test ${{ matrix.java-version }}
+    if: github.repository == 'eclipse/eclipse-collections'
     strategy:
       matrix:
         os: [ubuntu-latest]
