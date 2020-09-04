@@ -81,6 +81,42 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         Verify.assertInstanceOf(ImmutableEmptyBag.class, Bags.immutable.of());
     }
 
+    @Override
+    @Test
+    public void anySatisfyWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> true));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> false));
+    }
+
+    @Override
+    @Test
+    public void allSatisfyWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> true));
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> false));
+    }
+
+    @Override
+    @Test
+    public void noneSatisfyWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> true));
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> false));
+    }
+
+    @Override
+    @Test
+    public void detectWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> true));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> false));
+    }
+
     @Test
     @Override
     public void newWith()

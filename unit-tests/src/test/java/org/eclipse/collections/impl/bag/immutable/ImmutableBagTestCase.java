@@ -122,6 +122,41 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     }
 
     @Test
+    public void anySatisfyWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals("2")));
+        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals("2") && value == 2));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals("2") && value == 6));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals("20")));
+    }
+
+    @Test
+    public void allSatisfyWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> Integer.parseInt(object) > 0));
+        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals("1") && value == 1));
+    }
+
+    @Test
+    public void noneSatisfyWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> Integer.parseInt(object) > 100));
+        Assert.assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals("1") && value == 1));
+    }
+
+    @Test
+    public void detectWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertEquals("1", bag.detectWithOccurrences((object, value) -> object.equals("1") && value == 1));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals("100")));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals("1") && value == 100));
+    }
+
+    @Test
     public void newWith()
     {
         ImmutableBag<String> bag = this.newBag();

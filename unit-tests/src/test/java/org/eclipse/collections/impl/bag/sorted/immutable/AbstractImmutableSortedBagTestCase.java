@@ -123,6 +123,41 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     }
 
     @Test
+    public void anySatisfyWithOccurrences()
+    {
+        ImmutableSortedBag<Integer> bag = this.newWith(1, 2, 2);
+        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(1)));
+        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(2) && value == 2));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(2) && value == 6));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(20)));
+    }
+
+    @Test
+    public void allSatisfyWithOccurrences()
+    {
+        ImmutableSortedBag<Integer> bag = this.newWith(1, 2, 2);
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> object > 0));
+        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(1) && value == 1));
+    }
+
+    @Test
+    public void noneSatisfyWithOccurrences()
+    {
+        ImmutableSortedBag<Integer> bag = this.newWith(1, 2, 2);
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> object > 100));
+        Assert.assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(1) && value == 1));
+    }
+
+    @Test
+    public void detectWithOccurrences()
+    {
+        ImmutableSortedBag<Integer> bag = this.newWith(1, 2, 2);
+        Assert.assertEquals((Integer) 1, bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 1));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals(100)));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 100));
+    }
+
+    @Test
     public void compareTo()
     {
         Assert.assertEquals(-1, SortedBags.immutable.of(1, 1, 2, 2).compareTo(SortedBags.immutable.of(1, 1, 2, 2, 2)));

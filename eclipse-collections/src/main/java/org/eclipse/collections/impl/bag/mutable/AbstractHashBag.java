@@ -17,11 +17,13 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.block.factory.primitive.IntToIntFunctions;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -100,6 +102,31 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.items.forEachKeyValue(objectIntProcedure);
+    }
+
+    @Override
+    public boolean anySatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.items.keyValuesView().anySatisfy(each -> predicate.accept(each.getOne(), each.getTwo()));
+    }
+
+    @Override
+    public boolean allSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.items.keyValuesView().allSatisfy(each -> predicate.accept(each.getOne(), each.getTwo()));
+    }
+
+    @Override
+    public boolean noneSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.items.keyValuesView().noneSatisfy(each -> predicate.accept(each.getOne(), each.getTwo()));
+    }
+
+    @Override
+    public T detectWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        ObjectIntPair<T> pair = this.items.keyValuesView().detect(each -> predicate.accept(each.getOne(), each.getTwo()));
+        return pair == null ? null : pair.getOne();
     }
 
     @Override

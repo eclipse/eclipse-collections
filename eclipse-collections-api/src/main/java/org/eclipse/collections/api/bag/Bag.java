@@ -32,6 +32,7 @@ import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFun
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ListIterable;
@@ -106,6 +107,37 @@ public interface Bag<T>
      * For each distinct item, with the number of occurrences, execute the specified procedure.
      */
     void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure);
+
+    /**
+     * Returns true if the predicate evaluates to true for any element of the Bag.
+     * Returns false if the Bag is empty or if no element returns true for the predicate.
+     *
+     * @since 11.0
+     */
+    boolean anySatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate);
+
+    /**
+     * Returns true if the predicate evaluates to true for all elements of the Bag.
+     * Returns false if the Bag is empty or if not all elements return true for the predicate.
+     *
+     * @since 11.0
+     */
+    boolean allSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate);
+
+    /**
+     * Returns true if the Bag is empty or if the predicate evaluates to false for all elements of the Bag.
+     * Returns false if the predicate evaluates to true for at least one element of the Bag.
+     *
+     * @since 11.0
+     */
+    boolean noneSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate);
+
+    /**
+     * Returns an element of the Bag that satisfies the predicate or null if such an element does not exist
+     *
+     * @since 11.0
+     */
+    T detectWithOccurrences(ObjectIntPredicate<? super T> predicate);
 
     /**
      * The occurrences of a distinct item in the bag.

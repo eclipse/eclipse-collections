@@ -33,6 +33,7 @@ import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunc
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Bags;
@@ -284,6 +285,30 @@ public class ImmutableHashBag<T>
     public ImmutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
         return this.delegate.selectByOccurrences(predicate).toImmutable();
+    }
+
+    @Override
+    public boolean anySatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.delegate.anySatisfyWithOccurrences(predicate);
+    }
+
+    @Override
+    public boolean allSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.delegate.allSatisfyWithOccurrences(predicate);
+    }
+
+    @Override
+    public boolean noneSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.delegate.noneSatisfyWithOccurrences(predicate);
+    }
+
+    @Override
+    public T detectWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.delegate.detectWithOccurrences(predicate);
     }
 
     @Override
