@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -112,15 +112,17 @@ public class CollectIterable<T, V>
     @Override
     public V detect(Predicate<? super V> predicate)
     {
-        T resultItem = Iterate.detect(this.adapted, Predicates.attributePredicate(this.function, predicate));
-        return resultItem == null ? null : this.function.valueOf(resultItem);
+        AttributePredicate<T, V> attributePredicate = new AttributePredicate<>(this.function, predicate);
+        T resultItem = Iterate.detect(this.adapted, attributePredicate);
+        return resultItem == null ? null : attributePredicate.functionResult();
     }
 
     @Override
     public Optional<V> detectOptional(Predicate<? super V> predicate)
     {
-        Optional<T> resultItem = Iterate.detectOptional(this.adapted, Predicates.attributePredicate(this.function, predicate));
-        return resultItem.map(this.function::valueOf);
+        AttributePredicate<T, V> attributePredicate = new AttributePredicate<>(this.function, predicate);
+        Optional<T> resultItem = Iterate.detectOptional(this.adapted, attributePredicate);
+        return resultItem.isPresent() ? Optional.of(attributePredicate.functionResult()) : Optional.empty();
     }
 
     @Override
@@ -171,5 +173,48 @@ public class CollectIterable<T, V>
             return null;
         }
         return this.function.valueOf(Iterate.getLast(this.adapted));
+    }
+
+    private static final class AttributePredicate<T, V> implements Predicate<T>
+    {
+        private static final long serialVersionUID = 1L;
+        private final Function<? super T, ? extends V> function;
+        private final Predicate<? super V> predicate;
+        private transient V functionResult;
+
+        private AttributePredicate(
+                Function<? super T, ? extends V> newFunction,
+                Predicate<? super V> newPredicate)
+        {
+            this.function = newFunction;
+            this.predicate = newPredicate;
+        }
+
+        @Override
+        public boolean accept(T anObject)
+        {
+            V functionValue = this.function.valueOf(anObject);
+            boolean result = this.predicate.accept(functionValue);
+            if (result)
+            {
+                this.functionResult = functionValue;
+            }
+            return result;
+        }
+
+        public V functionResult()
+        {
+            return this.functionResult;
+        }
+
+        @Override
+        public String toString()
+        {
+            return "AttributePredicate("
+                    + this.function
+                    + ", "
+                    + this.predicate
+                    + ')';
+        }
     }
 }
