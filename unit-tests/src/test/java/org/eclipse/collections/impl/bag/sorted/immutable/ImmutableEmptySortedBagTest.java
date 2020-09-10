@@ -201,6 +201,42 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
 
     @Override
     @Test
+    public void anySatisfyWithOccurrences()
+    {
+        ImmutableSortedBag<Integer> bag = this.classUnderTest();
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> true));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> false));
+    }
+
+    @Override
+    @Test
+    public void allSatisfyWithOccurrences()
+    {
+        ImmutableSortedBag<Integer> bag = this.classUnderTest();
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> true));
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> false));
+    }
+
+    @Override
+    @Test
+    public void noneSatisfyWithOccurrences()
+    {
+        ImmutableSortedBag<Integer> bag = this.classUnderTest();
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> true));
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> false));
+    }
+
+    @Override
+    @Test
+    public void detectWithOccurrences()
+    {
+        ImmutableSortedBag<Integer> bag = this.classUnderTest();
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> true));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> false));
+    }
+
+    @Override
+    @Test
     public void chunk_large_size()
     {
         Assert.assertEquals(Lists.immutable.empty(), this.classUnderTest().chunk(10));

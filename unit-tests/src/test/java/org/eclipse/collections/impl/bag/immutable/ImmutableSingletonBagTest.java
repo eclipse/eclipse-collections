@@ -96,6 +96,52 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
 
     @Override
     @Test
+    public void anySatisfyWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(VAL)));
+        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(VAL) && value == 1));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(VAL) && value == 10));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(NOT_VAL) && value == 10));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(NOT_VAL)));
+    }
+
+    @Override
+    @Test
+    public void allSatisfyWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> object.equals(VAL)));
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> object.equals(VAL) && value == 1));
+        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(VAL) && value == 10));
+        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(NOT_VAL) && value == 10));
+        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(NOT_VAL)));
+    }
+
+    @Override
+    @Test
+    public void noneSatisfyWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(VAL)));
+        Assert.assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(VAL) && value == 1));
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(NOT_VAL)));
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(NOT_VAL) && value == 1));
+    }
+
+    @Override
+    @Test
+    public void detectWithOccurrences()
+    {
+        ImmutableBag<String> bag = this.newBag();
+        Assert.assertEquals(VAL, bag.detectWithOccurrences((object, value) -> object.equals(VAL)));
+        Assert.assertEquals(VAL, bag.detectWithOccurrences((object, value) -> object.equals(VAL) && value == 1));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals(NOT_VAL)));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals(NOT_VAL) && value == 1));
+    }
+
+    @Override
+    @Test
     public void allSatisfy()
     {
         super.allSatisfy();

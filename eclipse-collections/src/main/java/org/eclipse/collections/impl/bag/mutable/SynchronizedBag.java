@@ -38,6 +38,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Bags;
@@ -172,6 +173,42 @@ public class SynchronizedBag<T>
         synchronized (this.getLock())
         {
             return this.getDelegate().bottomOccurrences(count);
+        }
+    }
+
+    @Override
+    public boolean anySatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().anySatisfyWithOccurrences(predicate);
+        }
+    }
+
+    @Override
+    public boolean allSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().allSatisfyWithOccurrences(predicate);
+        }
+    }
+
+    @Override
+    public boolean noneSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().noneSatisfyWithOccurrences(predicate);
+        }
+    }
+
+    @Override
+    public T detectWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().detectWithOccurrences(predicate);
         }
     }
 

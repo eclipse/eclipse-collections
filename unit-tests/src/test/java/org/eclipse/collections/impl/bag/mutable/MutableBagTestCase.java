@@ -483,6 +483,57 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
     }
 
     @Test
+    public void anySatisfyWithOccurrences()
+    {
+        Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
+        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(2) && value == 2));
+        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(3)));
+
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(2) && value == 5));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(1) && value == 7));
+        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(10)));
+    }
+
+    @Test
+    public void noneSatisfyWithOccurrences()
+    {
+        Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(3) && value == 1));
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(30)));
+        Assert.assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(1) && value == 0));
+        Assert.assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(1) && value == 1));
+        Assert.assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(2)));
+    }
+
+    @Test
+    public void allSatisfyWithOccurrences()
+    {
+        Bag<Integer> bag = this.newWith(3, 3, 3);
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> object.equals(3)));
+        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(4) && value == 3));
+        bag = this.newWith(3, 3, 3, 1);
+        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(1) && value == 3));
+        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> object.equals(3) || object == 1));
+        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(300) || object == 1));
+    }
+
+    @Test
+    public void detectWithOccurrences()
+    {
+        Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
+        Assert.assertEquals((Integer) 3, bag.detectWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        Assert.assertEquals((Integer) 3, bag.detectWithOccurrences((object, value) -> object.equals(3)));
+        Assert.assertEquals((Integer) 1, bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 1));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 10));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals(10) && value == 5));
+        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals(100)));
+    }
+
+    @Test
     public void bottomOccurrences()
     {
         MutableBagIterable<String> strings = Bags.mutable.ofOccurrences(

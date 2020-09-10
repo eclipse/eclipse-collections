@@ -41,6 +41,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Bags;
@@ -321,6 +322,30 @@ public class UnmodifiableBag<T>
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.getMutableBag().forEachWithOccurrences(objectIntProcedure);
+    }
+
+    @Override
+    public boolean anySatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.getMutableBag().anySatisfyWithOccurrences(predicate);
+    }
+
+    @Override
+    public boolean allSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.getMutableBag().allSatisfyWithOccurrences(predicate);
+    }
+
+    @Override
+    public boolean noneSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.getMutableBag().noneSatisfyWithOccurrences(predicate);
+    }
+
+    @Override
+    public T detectWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.getMutableBag().detectWithOccurrences(predicate);
     }
 
     /**

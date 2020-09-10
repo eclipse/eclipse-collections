@@ -42,7 +42,10 @@ import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.hamcrest.Matchers.isOneOf;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public interface BagTestCase extends RichIterableWithDuplicatesTestCase
 {
@@ -148,6 +151,57 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
         MutableCollection<Integer> forEachWithIndexIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().forEachWithIndex((each, index) -> forEachWithIndexIterationOrder.add(each));
         assertEquals(RichIterableWithDuplicatesTestCase.super.expectedIterationOrder(), forEachWithIndexIterationOrder);
+    }
+
+    @Test
+    default void Bag_anySatisfyWithOccurrences()
+    {
+        Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
+        assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(2) && value == 2));
+        assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals(3)));
+
+        assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(2) && value == 5));
+        assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(1) && value == 7));
+        assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals(10)));
+    }
+
+    @Test
+    default void Bag_noneSatisfyWithOccurrences()
+    {
+        Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
+        assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(3) && value == 1));
+        assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(30)));
+        assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(1) && value == 0));
+        assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(1) && value == 1));
+        assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals(2)));
+    }
+
+    @Test
+    default void Bag_allSatisfyWithOccurrences()
+    {
+        Bag<Integer> bag = this.newWith(3, 3, 3);
+        assertTrue(bag.allSatisfyWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        assertTrue(bag.allSatisfyWithOccurrences((object, value) -> object.equals(3)));
+        assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(4) && value == 3));
+        bag = this.newWith(3, 3, 3, 1);
+        assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(1) && value == 3));
+        assertTrue(bag.allSatisfyWithOccurrences((object, value) -> object.equals(3) || object.equals(1)));
+        assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals(300) || object.equals(1)));
+    }
+
+    @Test
+    default void Bag_detectWithOccurrences()
+    {
+        Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
+        assertEquals(3, bag.detectWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        assertEquals(3, bag.detectWithOccurrences((object, value) -> object.equals(3)));
+        assertEquals(1, bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 1));
+        assertNull(bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 10));
+        assertNull(bag.detectWithOccurrences((object, value) -> object.equals(10) && value == 5));
+        assertNull(bag.detectWithOccurrences((object, value) -> object.equals(100)));
     }
 
     @Test

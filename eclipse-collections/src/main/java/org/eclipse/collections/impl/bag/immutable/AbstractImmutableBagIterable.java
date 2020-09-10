@@ -27,6 +27,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
@@ -208,5 +209,24 @@ public abstract class AbstractImmutableBagIterable<T>
     public Collection<T> castToCollection()
     {
         return this;
+    }
+
+    protected boolean shortCircuit(
+            T[] elements,
+            int[] occurrences,
+            ObjectIntPredicate<? super T> predicate,
+            boolean expected,
+            boolean onShortCircuit,
+            boolean atEnd)
+    {
+        for (int i = 0; i < elements.length; i++)
+        {
+            T each = elements[i];
+            if (predicate.accept(each, occurrences[i]) == expected)
+            {
+                return onShortCircuit;
+            }
+        }
+        return atEnd;
     }
 }

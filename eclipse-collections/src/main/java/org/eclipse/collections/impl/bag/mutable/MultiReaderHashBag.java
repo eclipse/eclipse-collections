@@ -54,6 +54,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
@@ -570,6 +571,42 @@ public final class MultiReaderHashBag<T>
     }
 
     @Override
+    public boolean anySatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.anySatisfyWithOccurrences(predicate);
+        }
+    }
+
+    @Override
+    public boolean allSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.allSatisfyWithOccurrences(predicate);
+        }
+    }
+
+    @Override
+    public boolean noneSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.noneSatisfyWithOccurrences(predicate);
+        }
+    }
+
+    @Override
+    public T detectWithOccurrences(ObjectIntPredicate<? super T> predicate)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.detectWithOccurrences(predicate);
+        }
+    }
+
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
@@ -738,6 +775,30 @@ public final class MultiReaderHashBag<T>
         public MutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction)
         {
             return this.getDelegate().collectBoolean(booleanFunction);
+        }
+
+        @Override
+        public boolean anySatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+        {
+            return this.getDelegate().anySatisfyWithOccurrences(predicate);
+        }
+
+        @Override
+        public boolean allSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+        {
+            return this.getDelegate().allSatisfyWithOccurrences(predicate);
+        }
+
+        @Override
+        public boolean noneSatisfyWithOccurrences(ObjectIntPredicate<? super T> predicate)
+        {
+            return this.getDelegate().noneSatisfyWithOccurrences(predicate);
+        }
+
+        @Override
+        public T detectWithOccurrences(ObjectIntPredicate<? super T> predicate)
+        {
+            return this.getDelegate().detectWithOccurrences(predicate);
         }
 
         @Override
