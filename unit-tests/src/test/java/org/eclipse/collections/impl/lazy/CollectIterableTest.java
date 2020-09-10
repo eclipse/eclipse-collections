@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,9 +10,12 @@
 
 package org.eclipse.collections.impl.lazy;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.eclipse.collections.api.InternalIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.list.MultiReaderList;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.factory.Lists;
@@ -138,6 +141,78 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         LazyIterable<String> stringNums = Interval.fromTo(0, 3).collect(Functions.getToString());
         stringNums.toArray();
         Assert.assertEquals(Lists.immutable.of("0", "1", "2", "3"), Lists.immutable.ofAll(stringNums));
+    }
+
+    @Override
+    @Test
+    public void detect()
+    {
+        super.detect();
+        AtomicInteger functionCount = new AtomicInteger(0);
+        MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
+        CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
+        Assert.assertEquals(3L, collect.detect(each -> each.equals(3)).longValue());
+        Assert.assertNull(collect.detect(each -> each.equals(100)));
+    }
+
+    @Override
+    @Test
+    public void detectIfNone()
+    {
+        super.detectIfNone();
+        AtomicInteger functionCount = new AtomicInteger(0);
+        MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
+        CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
+        Assert.assertEquals(3L, collect.detectIfNone(each -> each.equals(3), () -> Integer.valueOf(0)).longValue());
+        Assert.assertNull(collect.detectIfNone(each -> each.equals(100), () -> null));
+    }
+
+    @Override
+    @Test
+    public void detectWith()
+    {
+        super.detectWith();
+        AtomicInteger functionCount = new AtomicInteger(0);
+        MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
+        CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
+        Assert.assertEquals(3L, collect.detectWith((each, ignore) -> each.equals(3), null).longValue());
+        Assert.assertNull(collect.detectWith((each, ignore) -> each.equals(100), null));
+    }
+
+    @Override
+    @Test
+    public void detectWithIfNone()
+    {
+        super.detectWithIfNone();
+        AtomicInteger functionCount = new AtomicInteger(0);
+        MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
+        CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
+        Assert.assertEquals(3L, collect.detectWithIfNone((each, ignore) -> each.equals(3), null, () -> Integer.valueOf(0)).longValue());
+        Assert.assertNull(collect.detectWithIfNone((each, ignore) -> each.equals(100), null, () -> null));
+    }
+
+    @Override
+    @Test
+    public void detectOptional()
+    {
+        super.detectOptional();
+        AtomicInteger functionCount = new AtomicInteger(0);
+        MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
+        CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
+        Assert.assertEquals(3L, collect.detectOptional(each -> each.equals(3)).get().longValue());
+        Assert.assertNull(collect.detectOptional(each -> each.equals(100)).orElse(null));
+    }
+
+    @Override
+    @Test
+    public void detectWithOptional()
+    {
+        super.detectWithOptional();
+        AtomicInteger functionCount = new AtomicInteger(0);
+        MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
+        CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
+        Assert.assertEquals(3L, collect.detectWithOptional((each, ignore) -> each.equals(3), null).get().longValue());
+        Assert.assertNull(collect.detectWithOptional((each, ignore) -> each.equals(100), null).orElse(null));
     }
 }
 
