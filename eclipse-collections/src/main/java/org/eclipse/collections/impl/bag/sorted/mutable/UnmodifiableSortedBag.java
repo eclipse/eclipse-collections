@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -45,6 +45,7 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -55,6 +56,7 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableCollectionSerializationProxy;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 
 /**
  * An unmodifiable view of a SortedBag.
@@ -559,5 +561,23 @@ public class UnmodifiableSortedBag<T>
     public MutableSortedSet<T> selectUnique()
     {
         return this.getSortedBag().selectUnique();
+    }
+
+    @Override
+    public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
+    {
+        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
+        this.forEachWithOccurrences((each, occurrences) -> result.addToValue(groupBy.valueOf(each), function.intValueOf(each) * (long) occurrences));
+        return result;
+    }
+
+    @Override
+    public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
+    {
+        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
+        this.forEachWithOccurrences((each, occurrences) -> result.addToValue(
+                groupBy.valueOf(each),
+                function.longValueOf(each) * (long) occurrences));
+        return result;
     }
 }

@@ -64,7 +64,10 @@ public abstract class AbstractImmutableBagIterable<T>
     public <V> ImmutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function)).toImmutable();
+        this.forEachWithOccurrences((each, occurrences) -> result.addToValue(
+                groupBy.valueOf(each),
+                function.intValueOf(each) * (long) occurrences));
+        return result.toImmutable();
     }
 
     @Override
@@ -78,7 +81,10 @@ public abstract class AbstractImmutableBagIterable<T>
     public <V> ImmutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function)).toImmutable();
+        this.forEachWithOccurrences((each, occurrences) -> result.addToValue(
+                groupBy.valueOf(each),
+                function.longValueOf(each) * (long) occurrences));
+        return result.toImmutable();
     }
 
     @Override
