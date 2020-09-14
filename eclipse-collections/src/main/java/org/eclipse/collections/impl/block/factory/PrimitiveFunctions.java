@@ -142,8 +142,9 @@ public final class PrimitiveFunctions
                 V groupKey = groupBy.valueOf(each);
                 double compensation = this.compensation.getIfAbsent(groupKey, 0.0d);
                 double adjustedValue = function.floatValueOf(each) - compensation;
-                double nextSum = map.get(groupKey) + adjustedValue;
-                this.compensation.put(groupKey, nextSum - map.get(groupKey) - adjustedValue);
+                double currentSum = map.get(groupKey);
+                double nextSum = currentSum + adjustedValue;
+                this.compensation.put(groupKey, nextSum - currentSum - adjustedValue);
                 map.put(groupKey, nextSum);
                 return map;
             }
@@ -176,8 +177,9 @@ public final class PrimitiveFunctions
                 V groupKey = groupBy.valueOf(each);
                 double compensation = this.compensation.getIfAbsent(groupKey, 0.0d);
                 double adjustedValue = function.doubleValueOf(each) - compensation;
-                double nextSum = map.get(groupKey) + adjustedValue;
-                this.compensation.put(groupKey, nextSum - map.get(groupKey) - adjustedValue);
+                double currentSum = map.get(groupKey);
+                double nextSum = currentSum + adjustedValue;
+                this.compensation.put(groupKey, nextSum - currentSum - adjustedValue);
                 map.put(groupKey, nextSum);
                 return map;
             }
