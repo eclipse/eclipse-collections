@@ -15,7 +15,7 @@ In this article we will cover the basics of Eclipse Collections, Jackson and tha
 
 ## Eclipse Collections
 
-As explained above, Eclipse Collections replaces many of the familiar container types from the standard library with new and improved versions. For this article, we will look at three variants of the `List` type:
+Eclipse Collections replaces many of the familiar container types from the standard library with new and improved versions. For this article, we will look at three variants of the `List` type:
 
 ```java
 import org.eclipse.collections.api.list.ImmutableList;
@@ -39,49 +39,13 @@ Eclipse Collections is hardly the first library to provide primitive collections
 
 For all the primitive collection types there also exist mutable and immutable versions (`MutableIntList`, `ImmutableIntList`). They behave much the same as their object-based counterparts so we will not cover them here.
 
-Eclipse Collections is split into two parts: The API and the implementation of that API. Since the implementation depends on the API, we will only have to add that as a dependency to our Maven project:
-
-```xml
-<dependency>
-    <groupId>org.eclipse.collections</groupId>
-    <artifactId>eclipse-collections</artifactId>
-    <version>10.4.0</version>
-</dependency>
-```
-
-Or with Gradle:
-
-```
-compile 'org.eclipse.collections:eclipse-collections:10.4.0'
-```
-
-9.2.0 is the current Eclipse Collections version at time of writing. Check out [the maven repo](https://search.maven.org/search?q=g:org.eclipse.collections%20AND%20a:eclipse-collections&core=gav) for newer versions.
+Eclipse Collections is split into two parts: The API and the implementation of that API. Since the implementation depends on the API, we will only have to add that as a dependency to our Maven project. See the [latest release](https://github.com/eclipse/eclipse-collections/releases) for the details on the Maven or Gradle coordinates. 
 
 ## Jackson
 
 Jackson is a library for transforming your data structures from and to JSON and other serialized forms. According to [mvnrepository.com](https://mvnrepository.com/popular) it is the most popular framework for this purpose.
 
-Jackson's architecture consists of three parts: A *core* that is responsible for writing streams of data (typically JSON), *databind* which is responsible for the basic object serialization API, and various Jackson modules that each handle serialization of some special types. Adding Jackson to our project is simple:
-
-```xml
-<dependency>
-  <groupId>com.fasterxml.jackson.core</groupId>
-  <artifactId>jackson-databind</artifactId>
-  <version>2.11.2</version>
-</dependency>
-<dependency>
-  <groupId>com.fasterxml.jackson.datatype</groupId>
-  <artifactId>jackson-datatype-eclipse-collections</artifactId>
-  <version>2.11.2</version>
-</dependency>
-```
-
-Or with Gradle:
-
-```
-compile 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
-compile 'com.fasterxml.jackson.datatype:jackson-datatype-eclipse-collections:2.11.2'
-```
+Jackson's architecture consists of three parts: A *core* that is responsible for writing streams of data (typically JSON), *databind* which is responsible for the basic object serialization API, and various Jackson modules that each handle serialization of some special types. Adding Jackson to our project is simple by using the Maven or Gradle coordinates for the latest release of [jackson-databind](https://search.maven.org/search?q=a:jackson-databind) and [jackson-datatype-eclipse-collections](https://search.maven.org/search?q=a:jackson-datatype-eclipse-collections).
 
 To start out with Jackson we create an `ObjectMapper`:
 
