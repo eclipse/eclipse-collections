@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  ~ Copyright (c) 2020 Daniel Dias and others.
+  ~ Copyright (c) 2020 Rustam Mehmandarov
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -9,7 +9,7 @@
   ~ http://www.eclipse.org/org/documents/edl-v10.php.
   -->
 
-<html lang="pt-br">
+<html lang="nb">
 
 <head>
 
@@ -20,7 +20,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
 
-    <title>Eclipse Collections - Recursos que você deseja com as coleções que você precisa. </title>
+    <title>Eclipse Collections - Funksjoner du ønsker med samlingene du trenger. </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
@@ -62,43 +62,43 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#start">Comece já</a>
+                        <a href="#start">Kom i gang</a>
                     </li>
                     <li>
-                        <a href="#concept">Conceito</a>
+                        <a href="#concept">Konsepter</a>
                     </li>
                     <li>
-                        <a href="#learn">Aprenda</a>
+                        <a href="#learn">Lær</a>
                     </li>
                     <li>
-                        <a href="#history">Histórico</a>
+                        <a href="#history">Historikk</a>
                     </li>
                     <li>
-                        <a href="#refGuide">Guia de referência</a>
+                        <a href="#refGuide">Veiledning</a>
                     </li>
                     <li>
-                        <a href="#sourceCode">Código Fonte</a>
+                        <a href="#sourceCode">Kildekode</a>
                     </li>
                     <li>
-                        <a href="#contribute">Contribua</a>
+                        <a href="#contribute">Bidra</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Javadoc<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="../javadoc/10.4.0">10.4.0</a></li>
-                            <li><a href="../javadoc/10.3.0">10.3.0</a></li>
-                            <li><a href="../javadoc/10.2.0">10.2.0</a></li>
-                            <li><a href="../javadoc/10.1.0">10.1.0</a></li>
                             <li><a href="../javadoc/10.0.0">10.0.0</a></li>
                             <li><a href="../javadoc/9.2.0">9.2.0</a></li>
+                            <li><a href="../javadoc/9.1.0">9.1.0</a></li>
+                            <li><a href="../javadoc/9.0.0">9.0.0</a></li>
                             <li><a href="../javadoc/8.2.0">8.2.0</a></li>
+                            <li><a href="../javadoc/8.1.0">8.1.0</a></li>
+                            <li><a href="../javadoc/8.0.0">8.0.0</a></li>
                             <li><a href="../javadoc/7.1.0">7.1.0</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Idiomas<span class="caret"></span></a>
+                           aria-expanded="false">Språk<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="../index.html">English</a></li>
                             <li><a href="../de/index.html">Deutsch</a></li>
@@ -107,8 +107,8 @@
                             <li><a href="../cn/index.html">中文</a></li>
                             <li><a href="../fr/index.html">Français</a></li>
                             <li><a href="../ja/index.html">日本語</a></li>
-                            <li><a href="../no-nb/index.html">Norsk (bokmål)</a></li>
-                            <li><a href="">Português-Brasil</a></li>
+                            <li><a href="">Norsk (bokmål)</a></li>
+                            <li><a href="../pt-br/index.html">Português-Brasil</a></li>
                             <li><a href="../ru/index.html">Русский</a></li>
                             <li><a href="../hi/index.html">हिंदी</a></li>
                         </ul>
@@ -130,7 +130,7 @@
                 <div class="col-lg-push-2 col-lg-8">
                     <div class="intro-message">
                         <h1>Eclipse <span style="font-weight: 400">Collections</span></h1>
-                        <h3>- Recursos que você deseja com as coleções que você precisa -</h3>
+                        <h3>- Funksjoner du ønsker med samlingene du trenger -</h3>
                     </div>
                 </div>
             </div>
@@ -151,22 +151,22 @@
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Começando com <br>Eclipse Collections</h2>
-                    <p class="lead">Eclipse Collections é a melhor biblioteca de coleções de Java
-                        que traz felicidade ao seu desenvolvimento Java.
-                        <br><br>Integre-o em sua base de código hoje com suas ferramentas de build favoritas!</p>
-                    <object id="badge" data="https://snyk-widget.herokuapp.com/badge/mvn/org.eclipse.collections/eclipse-collections/badge.svg" type="image/svg+xml" style="vertical-align:middle"></object>
-                    <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg:%22org.eclipse.collections%22%20AND%20a:%22eclipse-collections%22"><img src="https://maven-badges.herokuapp.com/maven-central/org.eclipse.collections/eclipse-collections/badge.svg"></a>
-                    <a href="https://github.com/eclipse/eclipse-collections/releases"><img src="https://img.shields.io/github/release/eclipse/eclipse-collections.svg"></a>
-                    <a href="https://github.com/eclipse/eclipse-collections/blob/master/LICENSE-EPL-1.0.txt"><img src="https://img.shields.io/badge/License-EPL-blue.svg"></a>
-                    <a href="https://github.com/eclipse/eclipse-collections/blob/master/LICENSE-EDL-1.0.txt"><img src="https://img.shields.io/badge/License-EDL-blue.svg"></a>
+                    <h2 class="section-heading">Kom i gang med <br>Eclipse Collections</h2>
+                    <p class="lead">Eclipse Collections er det beste rammeverket for Java-samlinger 
+                        noensinne – det passer perfekt når du skal utvikle Java-koden din.
+                        <br><br>Integrer den i kodebasen din i dag med dine favorittbyggverktøy!</p>
+                        <object id="badge" data="https://snyk-widget.herokuapp.com/badge/mvn/org.eclipse.collections/eclipse-collections/badge.svg" type="image/svg+xml" style="vertical-align:middle"></object>
+                        <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg:%22org.eclipse.collections%22%20AND%20a:%22eclipse-collections%22"><img src="https://maven-badges.herokuapp.com/maven-central/org.eclipse.collections/eclipse-collections/badge.svg"></a>
+                        <a href="https://github.com/eclipse/eclipse-collections/releases"><img src="https://img.shields.io/github/release/eclipse/eclipse-collections.svg"></a>
+                        <a href="https://github.com/eclipse/eclipse-collections/blob/master/LICENSE-EPL-1.0.txt"><img src="https://img.shields.io/badge/License-EPL-blue.svg"></a>
+                        <a href="https://github.com/eclipse/eclipse-collections/blob/master/LICENSE-EDL-1.0.txt"><img src="https://img.shields.io/badge/License-EDL-blue.svg"></a>
                 </div>
                 <div class="col-lg-7 col-sm-6">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#maven" data-toggle="tab">Maven</a></li>
                         <li><a href="#gradle" data-toggle="tab">Gradle</a></li>
                         <li><a href="#ivy" data-toggle="tab">Ivy</a></li>
-                        <li><a href="#download" data-toggle="tab">Download</a></li>
+                        <li><a href="#download" data-toggle="tab">Last ned</a></li>
                     </ul>
                     <div id="dependencies" class="tab-content">
                         <div class="tab-pane fade in active" id="maven">
@@ -218,15 +218,15 @@ implementation 'org.eclipse.collections:eclipse-collections:10.4.0'</pre>
                 <div class="col-lg-push-7 col-lg-5 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">APIs ricas, concisas e legíveis</h2>
-                    <p class="lead">Maximize o poder das expressões Lambda e referências de métodos do Java 8
-                        com APIs ricas diretamente disponíveis em suas coleções.
+                    <h2 class="section-heading">Omfangsrike, konsise og lesbare API-er</h2>
+                    <p class="lead">Maksimer kraften til lambda-uttrykk og metodereferanser i Java 8 med omfangsrike API-er 
+                        som er direkte tilgjengelige i samlingene dine.
                     </p>
                 </div>
                 <div class="col-lg-pull-5 col-lg-7 col-sm-pull-6  col-sm-6">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#method" data-toggle="tab">Exemplo com referências de métodos</a></li>
-                        <li><a href="#ec" data-toggle="tab">Exemplo com expressões Lambda</a></li>
+                        <li class="active"><a href="#method" data-toggle="tab">Eclipse Collections m/metodereferanser</a></li>
+                        <li><a href="#ec" data-toggle="tab">Eclipse Collections m/lambda-uttrykk</a></li>
                         <li><a href="#streams" data-toggle="tab">Java 8 Streams</a></li>
                     </ul>
                     <div id="ec-vs-streams" class="tab-content">
@@ -298,19 +298,21 @@ List&lt;Person&gt; peopleWithCats =
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Muitos tipos de recipientes, incluindo coleções imutáveis, coleções primitivas, Bimaps, MutableMap e Bags</h2>
-                    <p class="lead">Você pode usar vários tipos de recipientes, aproveitando métodos de fábrica úteis para instanciação.</p>
+                    <h2 class="section-heading">Mange containertyper, inkludert <br>uforanderlige samlinger, primitive samlinger, Bimap, Multimap og Bag</h2>
+                    <p class="lead">Uforanderlige (immutable) samlinger, samlinger av primitive typer, Bimap (omvendt ordbok hvor du kan finne en nøkkel etter verdi), 
+                        Multimap (multi-ordbøker – ordbøker med ikke-unike nøkler) og Bag (flersett – et sett med gjentagende elementer) – du kan bruke alle 
+                        disse typene containere ved bruk av praktiske og lett tilgjengelige factory-metoder.</p>
                 </div>
                 <div class="col-lg-7 col-sm-6">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#mutable" data-toggle="tab">Coleções mutáveis</a></li>
-                        <li><a href="#immutable" data-toggle="tab">Coleções imutáveis</a></li>
-                        <li><a href="#primitives" data-toggle="tab">Coleções de tipo primitivos</a></li>
+                        <li class="active"><a href="#mutable" data-toggle="tab">Muterbare samlinger</a></li>
+                        <li><a href="#immutable" data-toggle="tab">Uforanderlige samlinger</a></li>
+                        <li><a href="#primitives" data-toggle="tab">Primitive samlinger</a></li>
                     </ul>
                     <div id="container-types" class="tab-content">
                         <div class="tab-pane fade in active" id="mutable">
                             <pre  class="prettyprint lang-java">
-//Inicializando a lista mutável com método empty(), of(), with()
+//Instansierer muterbar liste with empty()-, of()-, with()-metoder
 MutableList&lt;String&gt; mutableListEmpty =
   Lists.mutable.empty();
 MutableList&lt;String&gt; mutableListOf =
@@ -318,7 +320,7 @@ MutableList&lt;String&gt; mutableListOf =
 MutableList&lt;String&gt; mutableListWith =
   Lists.mutable.with("One", "One", "Two", "Three");
 
-//Vários tipos de recipientes disponíveis
+//Forskjellige container-typer som er tilgjengelige
 MutableSet&lt;String&gt; mutableSet =
   Sets.mutable.with("One", "One", "Two", "Three");
 MutableBag&lt;String&gt; mutableBag =
@@ -334,7 +336,7 @@ MutableBiMap&lt;String, String&gt; mutableBiMap =
                         </div>
                         <div class="tab-pane fade" id="immutable">
                             <pre  class="prettyprint lang-java">
-//Inicializando lista imutável com método empty(), of(), with()
+//Instansierer muterbar liste with empty()-, of()-, with()-metoder
 ImmutableList&lt;String&gt; immutableListEmpty =
   Lists.immutable.empty();
 ImmutableList&lt;String&gt; immutableListOf =
@@ -342,7 +344,7 @@ ImmutableList&lt;String&gt; immutableListOf =
 ImmutableList&lt;String&gt; immutableListWith =
   Lists.immutable.with("One", "One", "Two", "Three");
 
-//Vários tipos de recipientes disponíveis
+//Forskjellige container-typer som er tilgjengelige
 ImmutableSet&lt;String&gt; immutableSet =
   Sets.immutable.with("One", "One", "Two", "Three");
 ImmutableBag&lt;String&gt; immutableBag =
@@ -358,7 +360,7 @@ ImmutableBiMap&lt;String, String&gt; immutableBiMap =
                         </div>
                         <div class="tab-pane fade" id="primitives">
                             <pre  class="prettyprint lang-java">
-//Listas (List) mutáveis e imutáveis, Conjuntos (Sets), Sacos (Bags), Pilhas (Stacks) e Mapas (Maps) estão disponíveis para todos os 8 tipos primitivos
+//Muterbare og uforanderlige lister, sett, Bags, Stacks og Maps er tilgjengelige for alle 8 primitive typer
 MutableIntList intList =
   IntLists.mutable.of(1, 2, 3);
 MutableLongList longList =
@@ -376,18 +378,18 @@ MutableFloatList floatList =
 MutableDoubleList doubleList =
   DoubleLists.mutable.of(1.0, 2.0, 3.0);
 
-//Você pode criar uma entrada variada com IntInterval
+//Du kan lage heltallslister med intervaller vha. IntInterval
 IntInterval oneTo10 =
-  IntInterval.fromTo(1, 10); // ints de 1 a 10
+  IntInterval.fromTo(1, 10); // heltall fra 1 til 10
 // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 IntInterval oneTo10By3 =
-  IntInterval.fromToBy(1, 10, 3); // ints de 1 a 10 passo por 3
+  IntInterval.fromToBy(1, 10, 3); // heltall fra 1 til 10 med steg 3
 // [1, 4, 7, 10]
 IntInterval oddsFrom1To10 =
-  IntInterval.oddsFromTo(1, 10); // odd ints de 1 a 10
+  IntInterval.oddsFromTo(1, 10); // oddetall fra 1 til 10
 // [1, 3, 5, 7, 9]
 IntInterval evensFrom1To10 =
-  IntInterval.evensFromTo(1, 10); // even ints de i a 10
+  IntInterval.evensFromTo(1, 10); // partall fra 1 til 10
 // [2, 4, 6, 8, 10]</pre>
                         </div>
                     </div>
@@ -412,14 +414,14 @@ IntInterval evensFrom1To10 =
                 <div class="col-lg-push-6 col-lg-6 col-sm-push-6 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Reduzir o uso de memória <br>com recipientes eficientes em memória</h2>
-                    <p class="lead">Eclipse Collections fornece implementação eficiente de memória de Conjuntos e Mapas bem como coleções de primitivas. </p>
+                    <h2 class="section-heading">Reduser minnefotavtrykket <br>med minneeffektive containere</h2>
+                    <p class="lead">Eclipse Collections gir minneeffektiv implementasjon av Sets og Maps, samt primitive samlinger. </p>
                 </div>
                 <div class="col-lg-pull-6 col-lg-6 col-sm-pull-6 col-sm-6">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#set" data-toggle="tab">Conjuntos</a></li>
-                        <li><a href="#map" data-toggle="tab">Mapas</a></li>
-                        <li><a href="#ints" data-toggle="tab">Coleções de Primitivas</a></li>
+                        <li class="active"><a href="#set" data-toggle="tab">Sets</a></li>
+                        <li><a href="#map" data-toggle="tab">Maps</a></li>
+                        <li><a href="#ints" data-toggle="tab">Primitive samlinger</a></li>
                     </ul>
                     <div id="memory" class="tab-content">
                         <div class="tab-pane fade in active" id="set">
@@ -450,17 +452,17 @@ IntInterval evensFrom1To10 =
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Aprenda Eclipse Collections com Kata</h2>
+                    <h2 class="section-heading">Lær Eclipse Collections med kodekata</h2>
                     <p class="lead">
-                        Confira o  <a href="https://github.com/eclipse/eclipse-collections-kata">Eclipse Collections Kata</a>, uma maneira divertida de ajudá-lo a aprender o uso idiomático da Eclipse Collections.
-                        Este kata em particular é configurado como uma série de testes unitários que falham.
-                        Sua tarefa é fazê-los passar, usando as coleções da Eclipse Collections.
+                        Ta en titt på <a href="https://github.com/eclipse/eclipse-collections-kata">Eclipse Collections Kata</a> – en gøy måte å hjelpe deg å lære 
+                        den idiomatiske bruken av Eclipse Collections. Denne spesielle kataen er satt opp som en serie enhetstester som feiler. Din oppgave er å få dem til 
+                        å passere ved hjelp av Eclipse Collections.
                     </p>
                 </div>
                 <div class="col-lg-7 col-sm-6">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#exercise" data-toggle="tab">Exemplo de exercício</a></li>
-                        <li><a href="#solution" data-toggle="tab">Exemplo de Solução</a></li>
+                        <li class="active"><a href="#exercise" data-toggle="tab">Oppgaveeksempel</a></li>
+                        <li><a href="#solution" data-toggle="tab">Løsningsforslag</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="exercise">
@@ -469,7 +471,7 @@ IntInterval evensFrom1To10 =
 public void getFirstNamesOfAllPeople()
 {
   MutableList&lt;Person&gt; people = this.people;
-  MutableList&lt;String&gt; firstNames = null; //Substitua null, com um método de transformação no MutableList.
+  MutableList&lt;String&gt; firstNames = null; //Replace null, with a transformation method on MutableList.
   MutableList&lt;String&gt; expectedFirstNames =
     Lists.mutable.with("Mary", "Bob", "Ted", "Jake", "Barry", "Terry", "Harry", "John");
   Assert.assertEquals(expectedFirstNames, firstNames);
@@ -505,30 +507,31 @@ public void getFirstNamesOfAllPeople()
 
         <div class="container-fluid">
 
-            <h2 class="section-heading">Histórico da Eclipse Collections</h2>
+            <h2 class="section-heading">Historien til Eclipse Collections</h2>
             <p class="lead">
-                A Eclipse Collections foi iniciada como uma biblioteca de coleções chamada Caramel em Goldman Sachs em 2004.
-
-                Desde então, a biblioteca evoluiu e, em 2012, teve seu código fonte aberto no GitHub como um projeto chamado
+                Opprinnelig startet Eclipse Collections som et samlingsrammeverk kalt Caramel på Goldman Sachs i 2004. 
+                
+                Siden den gang har rammeverket utviklet seg, og i 2012 ble det lagt ut som åpen kiledekode på GitHub som et prosjekt kalt 
                 <a href="https://github.com/goldmansachs/gs-collections">GS Collections</a>.
                 <br><br>
-                GS Collections foi apresentado em inúmeras
-                <a href="https://github.com/eclipse/eclipse-collections/wiki/Conference-talks-and-meetups">conferências</a>
-                incluindo JVM Summit em 2012 e JavaOne em 2014.
-                Uma comparação de desempenho entre as implementações preguiçosas paralelas das coleções Java 8, Scala e GS foi apresentada em
-                <a href="http://www.infoq.com/presentations/java-streams-scala-parallel-collections">QCon New York</a> em 2014.
-                Além disso <a href="https://github.com/eclipse/eclipse-collections/wiki/Articles">artigos</a> sobre GS Collections
-                (<a href="http://www.infoq.com/articles/GS-Collections-by-Example-1">Parte 1</a> /
-                <a href="http://www.infoq.com/articles/GS-Collections-by-Example-2">Parte 2</a>)
-                foram publicados em InfoQ.com
-                mostrando algumas das capacidades da biblioteca de coleções através de exemplos, e também entrevistas com o criador do GS Collections.
+                GS Collections har blitt presentert på en rekke
+                <a href="https://github.com/eclipse/eclipse-collections/wiki/Conference-talks-and-meetups">konferanser</a>,
+                inkludert JVM Summit i 2012 og JavaOne i 2014.
+                En sammenligning av ytelse mellom parallelle lazy implementasjoner i Java 8, Scala og GS Collections ble presentert på
+                <a href="http://www.infoq.com/presentations/java-streams-scala-parallel-collections">QCon New York</a> i 2014.
+                Videre ble <a href="https://github.com/eclipse/eclipse-collections/wiki/Articles">artikler</a> om GS Collections
+                (<a href="http://www.infoq.com/articles/GS-Collections-by-Example-1">Del 1</a> /
+                <a href="http://www.infoq.com/articles/GS-Collections-by-Example-2">Del 2</a>)
+                publisert på InfoQ.com.
+                Disse artiklene viser noen av funksjonene i rammeverket gjennom eksempler, samt et intervju med skaperen av GS Collections.
                 <br><br>
 
-                Ao longo dos anos, cerca de 40 ou mais desenvolvedores da mesma empresa contribuíram para a biblioteca de coleções.
+                Gjennom årene har rundt 40 utviklere fra det samme selskapet bidratt til rammeverket.
                 <br><br>
 
-                Para maximizar a melhor natureza do projeto de código aberto, a GS Collection foi migrada para Fundação Eclipse, renomeada como Eclipse Collections em 2015.
-                Agora, a biblioteca está totalmente aberto à comunidade, aceitando contribuições!
+                For å utnytte fullt ut prosjektets potensiale som et åpen kildekode-prosjekt, ble GS Collections migrert til 
+                Eclipse Foundation og endret navn til Eclipse Collections i 2015. 
+                Nå er rammeverket helt åpent og aksepterer bidrag fra alle!
             </p>
         </div>
     </div>
@@ -537,10 +540,10 @@ public void getFirstNamesOfAllPeople()
     <a class="anchor" name="refGuide"></a>
     <div class="content-section-a">
         <div class="container-fluid">
-            <h2 class="section-heading">Guia de referência</h2>
+            <h2 class="section-heading">Veiledning</h2>
             <p class="lead">
-                Um guia de referência abrangente da biblioteca está disponível no GitHub:
-                <a href="https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md#eclipse-collections-reference-guide">Guia de referência (em Inglês)</a>.
+                En omfattende referansehåndbok for biblioteket er tilgjengelig på GitHub:
+                <a href="https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md#eclipse-collections-reference-guide">Reference Guide</a>.
             </p>
         </div>
         <!-- /.container -->
@@ -551,9 +554,9 @@ public void getFirstNamesOfAllPeople()
     <a class="anchor" name="sourceCode"></a>
     <div class="content-section-b">
         <div class="container-fluid">
-            <h2 class="section-heading">Código Fonte</h2>
+            <h2 class="section-heading">Kildekode</h2>
             <p class="lead">
-                O código fonte pode ser encontrado no GitHub: <a href="https://github.com/eclipse/eclipse-collections">Eclipse Collections</a>.
+                Kildekoden er tilgjengelig på GitHub: <a href="https://github.com/eclipse/eclipse-collections">Eclipse Collections</a>.
             </p>
         </div>
         <!-- /.container -->
@@ -567,33 +570,33 @@ public void getFirstNamesOfAllPeople()
 
             <div class="row">
                 <div class="col-lg-4 col-sm-4">
-                    <h3>Contribua</h3>
+                    <h3>Bidra</h3>
                     <p class="regular">
-                        Contribuições são bem vindas!
+                        Vi tar med glede imot bidrag!
                         <br><br>
-                         O Roadmap do projeto Eclipse Collections pode ser encontrado <a href="https://github.com/eclipse/eclipse-collections/wiki/Roadmap">aqui</a>.
+                        Eclipse Collections Project Roadmap finner du <a href="https://github.com/eclipse/eclipse-collections/wiki/Roadmap">her</a>.
                         <br><br>
-                        Aceitamos contribuições através de pull requests no GitHub.
-                        Por favor, veja <a href="https://github.com/eclipse/eclipse-collections/blob/master/CONTRIBUTING.md">Como contribuir </a> para começar.
+                        Vi godtar bidrag via pull-forespørsler på GitHub. 
+                        Se <a href="https://github.com/eclipse/eclipse-collections/blob/master/CONTRIBUTING.md">denne artikkelen om hvordan du kan bidra</a> for å komme i gang.
                     </p>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-                    <h3>Últimas notícias</h3>
-                    <p class="regular">Eclipse Collections 10.4.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.4.0">liberado</a> <a class="light">(Aug 20 2020)</a></p>
-                    <p class="regular">Eclipse Collections 10.3.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.3.0">liberado</a> <a class="light">(Aug 8 2020)</a></p>
-                    <p class="regular">Eclipse Collections 10.2.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.2.0">liberado</a> <a class="light">(Feb 11 2020)</a></p>
-                    <p class="regular">Eclipse Collections 10.1.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.1.0">liberado</a> <a class="light">(Dec 4 2019)</a></p>
-                    <p class="regular">Eclipse Collections 10.0.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.0.0">liberado</a> <a class="light">(Jul 10 2019)</a></p>
+                    <h3>Siste nytt</h3>
+                    <p class="regular">Eclipse Collections 10.4.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.4.0">released</a> <a class="light">(Aug 20th 2020)</a></p>
+                    <p class="regular">Eclipse Collections 10.3.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.3.0">released</a> <a class="light">(Aug 8th 2020)</a></p>
+                    <p class="regular">Eclipse Collections 10.2.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.2.0">released</a> <a class="light">(Feb 11th 2020)</a></p>
+                    <p class="regular">Eclipse Collections 10.1.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.1.0">released</a> <a class="light">(Dec 4th 2019)</a></p>
+                    <p class="regular">Eclipse Collections 10.0.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/10.0.0">released</a> <a class="light">(Jul 10th 2019)</a></p>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-                    <h3>Links da comunidade</h3>
-                        <p class="regular">Eclipse PMI: <a href="https://projects.eclipse.org/projects/technology.collections">Infraestrutura de gerenciamento de projetos Eclipse</a></p>
+                    <h3>Nyttige lenker</h3>
+                        <p class="regular">Eclipse PMI: <a href="https://projects.eclipse.org/projects/technology.collections">eclipse project management infrastructure</a></p>
                         <p class="regular">GitHub: <a href="https://github.com/eclipse/eclipse-collections">eclipse-collections</a></p>
-                        <p class="regular">Issues: <a href="https://github.com/eclipse/eclipse-collections/issues">GitHub issues</a></p>
-                        <p class="regular">lista de discussão: <a href="https://dev.eclipse.org/mailman/listinfo/collections-dev">collections-dev</a> </p>
+                        <p class="regular">Feilmeldinger og andre saker: <a href="https://github.com/eclipse/eclipse-collections/issues">GitHub issues</a></p>
+                        <p class="regular">Mailinglister: <a href="https://dev.eclipse.org/mailman/listinfo/collections-dev">collections-dev</a>-mailinglisten</p>
                         <p class="regular">Wiki: <a href="https://github.com/eclipse/eclipse-collections/wiki">GitHub wiki</a></p>
                         <p class="regular">Forum: <a href="https://www.eclipse.org/forums/index.php?t=thread&amp;frm_id=329">Eclipse Collections Forum</a></p>
-                        <p class="regular">StackOverflow: tag com <a href="http://stackoverflow.com/questions/tagged/eclipse-collections">eclipse-collections</a></p>
+                        <p class="regular">StackOverflow: tagget med <a href="http://stackoverflow.com/questions/tagged/eclipse-collections">eclipse-collections</a></p>
                 </div>
                 <!-- /.col -->
             </div>
@@ -612,7 +615,7 @@ public void getFirstNamesOfAllPeople()
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>- Mais recursos, menos desperdício -</h3>
+                    <h3>- Flere funksjoner, mindre søppel -</h3>
                 </div>
             </div>
 
