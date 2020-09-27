@@ -24,6 +24,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -204,6 +205,50 @@ public interface RichIterable<T>
     {
         Objects.requireNonNull(function);
         return this.anySatisfy(each -> Objects.equals(value, function.valueOf(each)));
+    }
+
+    /**
+     * Returns true if any of the elements in source is contained in this collection.
+     *
+     * @since 11.0
+     */
+    default boolean containsAny(Collection<?> source)
+    {
+        return source instanceof RichIterable ? ((RichIterable<?>) source).anySatisfy(this::contains)
+                : source.stream().anyMatch(this::contains);
+    }
+
+    /**
+     * Returns true if none of the elements in source are contained in this collection.
+     *
+     * @since 11.0
+     */
+    default boolean containsNone(Collection<?> source)
+    {
+        return source instanceof RichIterable ? ((RichIterable<?>) source).noneSatisfy(this::contains)
+                : source.stream().noneMatch(this::contains);
+    }
+
+    /**
+     * Returns true if any of the elements in source is contained in this collection.
+     *
+     * @since 11.0
+     */
+    default boolean containsAnyIterable(Iterable<?> source)
+    {
+        return source instanceof RichIterable ? ((RichIterable<?>) source).anySatisfy(this::contains)
+                : StreamSupport.stream(source.spliterator(), false).anyMatch(this::contains);
+    }
+
+    /**
+     * Returns true if none of the elements in source are contained in this collection.
+     *
+     * @since 11.0
+     */
+    default boolean containsNoneIterable(Iterable<?> source)
+    {
+        return source instanceof RichIterable ? ((RichIterable<?>) source).noneSatisfy(this::contains)
+                : StreamSupport.stream(source.spliterator(), false).noneMatch(this::contains);
     }
 
     /**
