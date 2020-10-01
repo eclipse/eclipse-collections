@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Goldman Sachs and others.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -998,7 +998,7 @@ public interface RichIterableTestCase extends IterableTestCase
         assertEquals(expectedIterationOrder, sumOfLongIterationOrder);
 
         /*
-         * TODO: Fix sumByPrimitive methods for bags, to only iterate once per item, not per occurrence.
+         * TODO: Fix sumByDouble and sumByFloat methods for bags, to only iterate once per item, not per occurrence.
         MutableCollection<Integer> sumByDoubleIterationOrder1 = this.newMutableForFilter();
         MutableCollection<Integer> sumByDoubleIterationOrder2 = this.newMutableForFilter();
         this.getInstanceUnderTest().sumByDouble(
@@ -1026,6 +1026,7 @@ public interface RichIterableTestCase extends IterableTestCase
                 });
         assertEquals(expectedIterationOrder, sumByFloatIterationOrder1);
         assertEquals(expectedIterationOrder, sumByFloatIterationOrder2);
+        */
 
         MutableCollection<Integer> sumByIntIterationOrder1 = this.newMutableForFilter();
         MutableCollection<Integer> sumByIntIterationOrder2 = this.newMutableForFilter();
@@ -1054,7 +1055,6 @@ public interface RichIterableTestCase extends IterableTestCase
                 });
         assertEquals(expectedIterationOrder, sumByLongIterationOrder1);
         assertEquals(expectedIterationOrder, sumByLongIterationOrder2);
-        */
 
         MutableCollection<Integer> expectedInjectIntoIterationOrder = this.allowsDuplicates()
                 ? this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1)
