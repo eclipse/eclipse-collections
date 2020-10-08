@@ -43,6 +43,22 @@ public interface Immutable<name>Set extends Immutable<name>Collection, <name>Set
     @Override
     \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
+    /**
+     * @since 11.0.
+     */
+    @Override
+    default Immutable<name>Set union(<name>Set set)
+    {
+        if (this.size() > set.size())
+        {
+            return this.toSet().withAll(set).toImmutable();
+        }
+        else
+        {
+            return set.toSet().withAll(this).toImmutable();
+        }
+    }
+
     <immutableAPI(fileName(primitive), type, name)>
 }
 

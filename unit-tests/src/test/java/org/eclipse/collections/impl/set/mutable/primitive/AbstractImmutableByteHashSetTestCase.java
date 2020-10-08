@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -227,5 +227,45 @@ public abstract class AbstractImmutableByteHashSetTestCase extends AbstractImmut
         Assert.assertEquals(0, this.newWith().toImmutable().size());
         Assert.assertEquals(1, this.newWith((byte) 1).toImmutable().size());
         Assert.assertEquals(3, this.newWith((byte) 1, (byte) 2, (byte) 3).toImmutable().size());
+    }
+
+    @Test
+    public void union()
+    {
+        this.assertUnion(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                this.newWith((byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5));
+
+        this.assertUnion(
+                this.newWith((byte) 1, (byte) 2, (byte) 3, (byte) 6),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                this.newWith((byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5, (byte) 6));
+
+        this.assertUnion(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 3, (byte) 4, (byte) 5, (byte) 6),
+                this.newWith((byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5, (byte) 6));
+
+        this.assertUnion(
+                this.newWith(),
+                this.newWith(),
+                this.newWith());
+
+        this.assertUnion(
+                this.newWith(),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                this.newWith((byte) 3, (byte) 4, (byte) 5));
+
+        this.assertUnion(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith(),
+                this.newWith((byte) 1, (byte) 2, (byte) 3));
+    }
+
+    private void assertUnion(ImmutableByteSet set1, ImmutableByteSet set2, ImmutableByteSet expected)
+    {
+        ImmutableByteSet actual = set1.union(set2);
+        Assert.assertEquals(expected, actual);
     }
 }

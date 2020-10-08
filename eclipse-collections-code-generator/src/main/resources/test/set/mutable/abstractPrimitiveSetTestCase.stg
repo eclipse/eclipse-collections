@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 
 isTest() ::= "true"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, wrapperName, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.set.mutable.primitive;
 
@@ -456,6 +456,46 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
         Verify.assertInstanceOf(Unmodifiable<name>Set.class, set.asUnmodifiable());
         Assert.assertEquals(new Unmodifiable<name>Set(set), set.asUnmodifiable());
+    }
+
+    @Test
+    public void union()
+    {
+        this.assertUnion(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+
+        this.assertUnion(
+                this.newWith(<["1", "2", "3", "6"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+
+        this.assertUnion(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5" , "6"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+
+        this.assertUnion(
+                this.newWith(),
+                this.newWith(),
+                this.newWith());
+
+        this.assertUnion(
+                this.newWith(),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">));
+
+        this.assertUnion(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    private void assertUnion(Mutable<name>Set set1, Mutable<name>Set set2, Mutable<name>Set expected)
+    {
+        Mutable<name>Set actual = set1.union(set2);
+        Assert.assertEquals(expected, actual);
     }
 }
 

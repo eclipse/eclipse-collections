@@ -72,6 +72,22 @@ public interface Mutable<name>Set extends Mutable<name>Collection, <name>Set
     {
         throw new UnsupportedOperationException("Implement in concrete classes.");
     }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    default Mutable<name>Set union(<name>Set set)
+    {
+        if (this.size() > set.size())
+        {
+            return this.toSet().withAll(set);
+        }
+        else
+        {
+            return set.toSet().withAll(this);
+        }
+    }
 }
 
 >>
