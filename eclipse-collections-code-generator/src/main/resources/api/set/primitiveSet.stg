@@ -40,6 +40,11 @@ public interface <name>Set extends <name>Iterable
     }
 
     /**
+     * @since 11.0.
+     */
+    <name>Set union(<name>Set set);
+
+    /**
      * Follows the same general contract as {@link Set#equals(Object)}.
      */
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -566,5 +566,34 @@ public class ImmutableBooleanHashSetTest extends AbstractImmutableBooleanCollect
         this.assertSizeAndContains(collection0);
         this.assertSizeAndContains(collection1, true);
         this.assertSizeAndContains(collection2, false);
+    }
+
+    @Test
+    public void union()
+    {
+        ImmutableBooleanSet set11 = this.newWith(true);
+        ImmutableBooleanSet set21 = this.newWith(false);
+        ImmutableBooleanSet actual = set11.union(set21);
+        Assert.assertEquals(this.trueFalseSet, actual);
+
+        ImmutableBooleanSet set12 = this.newWith(false);
+        ImmutableBooleanSet set22 = this.newWith(false);
+        ImmutableBooleanSet actual2 = set12.union(set22);
+        Assert.assertEquals(this.falseSet, actual2);
+
+        ImmutableBooleanSet set13 = this.newWith(true);
+        ImmutableBooleanSet set23 = this.newWith(true);
+        ImmutableBooleanSet actual3 = set13.union(set23);
+        Assert.assertEquals(this.trueSet, actual3);
+
+        ImmutableBooleanSet set14 = this.trueFalseSet;
+        ImmutableBooleanSet set24 = this.newWith();
+        ImmutableBooleanSet actual4 = set14.union(set24);
+        Assert.assertEquals(this.trueFalseSet, actual4);
+
+        ImmutableBooleanSet set15 = this.newWith();
+        ImmutableBooleanSet set25 = this.newWith();
+        ImmutableBooleanSet actual5 = set15.union(set25);
+        Assert.assertEquals(this.emptySet, actual5);
     }
 }

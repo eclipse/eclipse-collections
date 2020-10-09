@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -834,5 +834,34 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
         Assert.assertEquals(new UnmodifiableBooleanSet(this.setWithFalse), this.setWithFalse.asUnmodifiable());
         Assert.assertEquals(new UnmodifiableBooleanSet(this.setWithTrue), this.setWithTrue.asUnmodifiable());
         Assert.assertEquals(new UnmodifiableBooleanSet(this.setWithTrueFalse), this.setWithTrueFalse.asUnmodifiable());
+    }
+
+    @Test
+    public void union()
+    {
+        MutableBooleanSet set11 = this.newWith(true);
+        MutableBooleanSet set21 = this.newWith(false);
+        MutableBooleanSet actual = set11.union(set21);
+        Assert.assertEquals(this.setWithTrueFalse, actual);
+
+        MutableBooleanSet set12 = this.newWith(false);
+        MutableBooleanSet set22 = this.newWith(false);
+        MutableBooleanSet actual2 = set12.union(set22);
+        Assert.assertEquals(this.setWithFalse, actual2);
+
+        MutableBooleanSet set13 = this.newWith(true);
+        MutableBooleanSet set23 = this.newWith(true);
+        MutableBooleanSet actual3 = set13.union(set23);
+        Assert.assertEquals(this.setWithTrue, actual3);
+
+        MutableBooleanSet set14 = this.setWithTrueFalse;
+        MutableBooleanSet set24 = this.newWith();
+        MutableBooleanSet actual4 = set14.union(set24);
+        Assert.assertEquals(this.setWithTrueFalse, actual4);
+
+        MutableBooleanSet set15 = this.newWith();
+        MutableBooleanSet set25 = this.newWith();
+        MutableBooleanSet actual5 = set15.union(set25);
+        Assert.assertEquals(this.emptySet, actual5);
     }
 }
