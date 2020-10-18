@@ -120,6 +120,42 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
     }
 
     @Override
+    public boolean containsAny(<type>... source)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.containsAny(source);
+        }
+    }
+
+    @Override
+    public boolean containsAny(<name>Iterable source)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.containsAny(source);
+        }
+    }
+
+    @Override
+    public boolean containsNone(<type>... source)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.containsNone(source);
+        }
+    }
+
+    @Override
+    public boolean containsNone(<name>Iterable source)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.containsNone(source);
+        }
+    }
+
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);

@@ -19,6 +19,8 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
+import org.eclipse.collections.impl.factory.primitive.BooleanLists;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.math.MutableInteger;
@@ -145,6 +147,94 @@ public abstract class AbstractBooleanIterableTestCase
         Assert.assertFalse(trueCollection.containsAll(BooleanArrayList.newListWith(true, false)));
         BooleanIterable falseCollection = this.newWith(false, false, false, false);
         Assert.assertFalse(falseCollection.containsAll(BooleanArrayList.newListWith(true, false)));
+    }
+
+    @Test
+    public void containsAnyArray()
+    {
+        BooleanIterable iterable = this.newWith(true);
+        Assert.assertTrue(iterable.containsAny(true, false));
+        Assert.assertFalse(iterable.containsAny());
+        Assert.assertTrue(iterable.containsAny(true));
+        Assert.assertFalse(iterable.containsAny(false, false, false));
+
+        BooleanIterable iterable2 = this.newWith(true, false);
+        Assert.assertTrue(iterable2.containsAny(true));
+        Assert.assertFalse(iterable2.containsAny());
+        Assert.assertTrue(iterable2.containsAny(false, false));
+        Assert.assertTrue(iterable2.containsAny(true, false, true, false));
+
+        BooleanIterable emptyIterable = this.newWith();
+        Assert.assertFalse(emptyIterable.containsAny(true, true));
+        Assert.assertFalse(emptyIterable.containsAny());
+        Assert.assertFalse(emptyIterable.containsAny(false, true, true));
+        Assert.assertFalse(emptyIterable.containsAny(false));
+    }
+
+    @Test
+    public void containsAnyIterable()
+    {
+        BooleanIterable iterable = this.newWith(true);
+        Assert.assertTrue(iterable.containsAny(BooleanLists.immutable.with(true, false)));
+        Assert.assertFalse(iterable.containsAny(BooleanLists.mutable.empty()));
+        Assert.assertTrue(iterable.containsAny(BooleanLists.immutable.with(true)));
+        Assert.assertFalse(iterable.containsAny(BooleanLists.immutable.with(false, false, false)));
+
+        BooleanIterable iterable2 = this.newWith(true, false);
+        Assert.assertTrue(iterable2.containsAny(BooleanSets.immutable.with(true)));
+        Assert.assertFalse(iterable2.containsAny(BooleanSets.mutable.empty()));
+        Assert.assertTrue(iterable2.containsAny(BooleanSets.immutable.with(false, false)));
+        Assert.assertTrue(iterable2.containsAny(BooleanSets.mutable.with(true, false, true, false)));
+
+        BooleanIterable emptyIterable = this.newWith();
+        Assert.assertFalse(emptyIterable.containsAny(BooleanLists.immutable.with(true, true)));
+        Assert.assertFalse(emptyIterable.containsAny(BooleanLists.mutable.empty()));
+        Assert.assertFalse(emptyIterable.containsAny(BooleanLists.immutable.with(false, true, true)));
+        Assert.assertFalse(emptyIterable.containsAny(BooleanLists.mutable.with(false)));
+    }
+
+    @Test
+    public void containsNoneArray()
+    {
+        BooleanIterable iterable = this.newWith(false);
+        Assert.assertTrue(iterable.containsNone(true, true));
+        Assert.assertTrue(iterable.containsNone());
+        Assert.assertFalse(iterable.containsNone(true, false));
+        Assert.assertFalse(iterable.containsNone(false));
+
+        BooleanIterable iterable2 = this.newWith(true, false, false);
+        Assert.assertFalse(iterable2.containsNone(true, false));
+        Assert.assertTrue(iterable2.containsNone());
+        Assert.assertFalse(iterable2.containsNone(false, false, false));
+        Assert.assertFalse(iterable2.containsNone(false));
+
+        BooleanIterable emptyIterable = this.newWith();
+        Assert.assertTrue(emptyIterable.containsNone(true, true));
+        Assert.assertTrue(emptyIterable.containsNone());
+        Assert.assertTrue(emptyIterable.containsNone(true, false));
+        Assert.assertTrue(emptyIterable.containsNone(false));
+    }
+
+    @Test
+    public void containsNoneIterable()
+    {
+        BooleanIterable iterable = this.newWith(false);
+        Assert.assertTrue(iterable.containsNone(BooleanLists.immutable.with(true, true)));
+        Assert.assertTrue(iterable.containsNone(BooleanLists.mutable.empty()));
+        Assert.assertFalse(iterable.containsNone(BooleanLists.immutable.with(true, false)));
+        Assert.assertFalse(iterable.containsNone(BooleanLists.mutable.with(false)));
+
+        BooleanIterable iterable2 = this.newWith(true, false, false);
+        Assert.assertFalse(iterable2.containsNone(BooleanSets.immutable.with(true, false)));
+        Assert.assertTrue(iterable2.containsNone(BooleanSets.mutable.empty()));
+        Assert.assertFalse(iterable2.containsNone(BooleanSets.immutable.with(false, false, false)));
+        Assert.assertFalse(iterable2.containsNone(BooleanSets.mutable.with(false)));
+
+        BooleanIterable emptyIterable = this.newWith();
+        Assert.assertTrue(emptyIterable.containsNone(BooleanLists.immutable.with(true, true)));
+        Assert.assertTrue(emptyIterable.containsNone(BooleanLists.mutable.empty()));
+        Assert.assertTrue(emptyIterable.containsNone(BooleanLists.immutable.with(true, false)));
+        Assert.assertTrue(emptyIterable.containsNone(BooleanLists.mutable.with(false)));
     }
 
     @Test(expected = NoSuchElementException.class)

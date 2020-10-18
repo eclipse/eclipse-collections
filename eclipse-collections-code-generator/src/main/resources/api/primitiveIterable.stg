@@ -128,6 +128,108 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Returns true if any of the values specified in the source array are contained
+     * in the <name>Iterable, and false if they are not.
+     *
+     * @since 11.0
+     */
+    default boolean containsAny(<type>... source)
+    {
+        <name>Iterable inside = this;
+        if (this.size() > 32 && source.length > 32 && !(this instanceof <name>Set))
+        {
+            inside = this.toSet();
+        }
+        for (int i = 0; i \< source.length; i++)
+        {
+            if (inside.contains(source[i]))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if any of the values specified in the source <name>Iterable are contained
+     * in the <name>Iterable, and false if they are not.
+     *
+     * @since 11.0
+     */
+    default boolean containsAny(<name>Iterable source)
+    {
+        <name>Iterable outside = this;
+        <name>Iterable inside = source;
+        if (this.size() \< source.size())
+        {
+            outside = source;
+            inside = this;
+        }
+        if (outside instanceof <name>Set)
+        {
+            <name>Iterable temp = outside;
+            outside = inside;
+            inside = temp;
+        }
+        else if (inside.size() > 32 && !(inside instanceof <name>Set))
+        {
+            inside = inside.toSet();
+        }
+        return outside.anySatisfy(inside::contains);
+    }
+
+    /**
+     * Returns true if none of the values specified in the source array are contained
+     * in the <name>Iterable, and false if they are.
+     *
+     * @since 11.0
+     */
+    default boolean containsNone(<type>... source)
+    {
+        <name>Iterable inside = this;
+        if (this.size() > 32 && source.length > 32 && !(this instanceof <name>Set))
+        {
+            inside = this.toSet();
+        }
+        for (int i = 0; i \< source.length; i++)
+        {
+            if (inside.contains(source[i]))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if none of the values specified in the source <name>Iterable are contained
+     * in the <name>Iterable, and false if they are.
+     *
+     * @since 11.0
+     */
+    default boolean containsNone(<name>Iterable source)
+    {
+        <name>Iterable outside = this;
+        <name>Iterable inside = source;
+        if (this.size() \< source.size())
+        {
+            outside = source;
+            inside = this;
+        }
+        if (outside instanceof <name>Set)
+        {
+            <name>Iterable temp = outside;
+            outside = inside;
+            inside = temp;
+        }
+        else if (inside.size() > 32 && !(inside instanceof <name>Set))
+        {
+            inside = inside.toSet();
+        }
+        return outside.noneSatisfy(inside::contains);
+    }
+
+    /**
      * Applies the <name>Procedure to each element in the <name>Iterable.
      */
     void forEach(<name>Procedure procedure);

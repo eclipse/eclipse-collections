@@ -275,6 +275,174 @@ public abstract class Abstract<name>IterableTestCase
     }
 
     @Test
+    public void containsAnyArray()
+    {
+        <name>Iterable iterable = this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(iterable.containsAny(<["1", "1", "1"]:(literal.(type))(); separator=", ">));
+        Assert.assertFalse(iterable.containsAny());
+        Assert.assertTrue(iterable.containsAny(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertFalse(iterable.containsAny(<["6", "7", "8"]:(literal.(type))(); separator=", ">));
+
+        <name>Iterable iterable2 = this.newWith(<["0", "1", "3", "7"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(iterable2.containsAny(<["3", "3", "1", "9"]:(literal.(type))(); separator=", ">));
+        Assert.assertFalse(iterable2.containsAny());
+        Assert.assertTrue(iterable2.containsAny(<["-1", "3", "5"]:(literal.(type))(); separator=", ">));
+        Assert.assertFalse(iterable2.containsAny(<["2", "4", "6"]:(literal.(type))(); separator=", ">));
+
+        int size = 33;
+        <type>[] array = new <type>[size];
+        <type>[] unmatched = new <type>[size];
+        for (int i = 0; i \< size; i++)
+        {
+            array[i] = <(castIntToNarrowTypeWithParens.(type))("i + 1")>;
+            unmatched[i] = <(castIntToNarrowTypeWithParens.(type))("i + 34")>;
+        }
+        <name>Iterable iterable3 = this.newWith(array);
+        Assert.assertTrue(iterable3.containsAny(array));
+        Assert.assertFalse(iterable3.containsAny(unmatched));
+
+        <name>Iterable iterable4 = <name>Sets.mutable.with(array);
+        Assert.assertTrue(iterable4.containsAny(array));
+        Assert.assertFalse(iterable4.containsAny(unmatched));
+
+        <name>Iterable emptyIterable = this.newWith();
+        Assert.assertFalse(emptyIterable.containsAny());
+        Assert.assertFalse(emptyIterable.containsAny(<["0", "0"]:(literal.(type))(); separator=", ">));
+        Assert.assertFalse(emptyIterable.containsAny(<(literal.(type))("-1")>));
+        Assert.assertFalse(emptyIterable.containsAny(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Test
+    public void containsAnyIterable()
+    {
+        <name>Iterable iterable = this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(iterable.containsAny(<name>Lists.immutable.with(<["1", "1", "1"]:(literal.(type))(); separator=", ">)));
+        Assert.assertFalse(iterable.containsAny(<name>Lists.mutable.empty()));
+        Assert.assertTrue(iterable.containsAny(<name>Lists.immutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        Assert.assertFalse(iterable.containsAny(<name>Lists.mutable.with(<["6", "7", "8"]:(literal.(type))(); separator=", ">)));
+
+        <name>Iterable iterable2 = this.newWith(<["0", "1", "3", "7"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(iterable2.containsAny(<name>Sets.immutable.with(<["3", "3", "1", "9"]:(literal.(type))(); separator=", ">)));
+        Assert.assertFalse(iterable2.containsAny(<name>Sets.mutable.empty()));
+        Assert.assertTrue(iterable2.containsAny(<name>Sets.immutable.with(<["-1", "3", "5"]:(literal.(type))(); separator=", ">)));
+        Assert.assertFalse(iterable2.containsAny(<name>Sets.mutable.with(<["2", "4", "6"]:(literal.(type))(); separator=", ">)));
+
+        <name>Iterable emptyIterable = this.newWith();
+        Assert.assertFalse(emptyIterable.containsAny(<name>Lists.mutable.empty()));
+        Assert.assertFalse(emptyIterable.containsAny(<name>Lists.immutable.with(<["0", "0"]:(literal.(type))(); separator=", ">)));
+        Assert.assertFalse(emptyIterable.containsAny(<name>Lists.mutable.with(<(literal.(type))("-1")>)));
+        Assert.assertFalse(emptyIterable.containsAny(<name>Lists.immutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+
+        int size = 33;
+        <type>[] array = new <type>[size];
+        <type>[] unmatched = new <type>[size];
+        <type>[] bigger = new <type>[size + 1];
+        for (int i = 0; i \< size; i++)
+        {
+            array[i] = <(castIntToNarrowTypeWithParens.(type))("i + 1")>;
+            bigger[i] = <(castIntToNarrowTypeWithParens.(type))("i + 1")>;
+            unmatched[i] = <(castIntToNarrowTypeWithParens.(type))("i + 34")>;
+        }
+        bigger[size - 1] = <(literal.(type))("33")>;
+
+        <name>Iterable iterable3 = this.newWith(array);
+        Assert.assertTrue(iterable3.containsAny(<name>Lists.immutable.with(array)));
+        Assert.assertFalse(iterable3.containsAny(<name>Lists.mutable.with(unmatched)));
+        Assert.assertFalse(iterable3.containsAny(<name>Sets.mutable.with(unmatched)));
+        Assert.assertTrue(iterable3.containsAny(<name>Sets.mutable.with(bigger)));
+
+        <name>Iterable iterable4 = <name>Sets.mutable.with(array);
+        Assert.assertTrue(iterable4.containsAny(<name>Lists.immutable.with(array)));
+        Assert.assertFalse(iterable4.containsAny(<name>Lists.mutable.with(unmatched)));
+        Assert.assertTrue(iterable4.containsAny(<name>Sets.immutable.with(array)));
+        Assert.assertTrue(iterable4.containsAny(<name>Sets.immutable.with(bigger)));
+    }
+
+    @Test
+    public void containsNoneArray()
+    {
+        <name>Iterable iterable = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertFalse(iterable.containsNone(<["1", "1"]:(literal.(type))(); separator=", ">));
+        Assert.assertTrue(iterable.containsNone());
+        Assert.assertFalse(iterable.containsNone(<["3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertTrue(iterable.containsNone(<["7", "8", "11"]:(literal.(type))(); separator=", ">));
+
+        <name>Iterable iterable2 = this.newWith(<["0", "1", "3", "7"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(iterable2.containsNone(<["2", "4", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertTrue(iterable2.containsNone());
+        Assert.assertFalse(iterable2.containsNone(<["-1", "1", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertFalse(iterable2.containsNone(<["7", "3", "1", "0"]:(literal.(type))(); separator=", ">));
+
+        int size = 33;
+        <type>[] array = new <type>[size];
+        <type>[] unmatched = new <type>[size];
+        for (int i = 0; i \< size; i++)
+        {
+            array[i] = <(castIntToNarrowTypeWithParens.(type))("i + 1")>;
+            unmatched[i] = <(castIntToNarrowTypeWithParens.(type))("i + 34")>;
+        }
+        <name>Iterable iterable3 = this.newWith(array);
+        Assert.assertFalse(iterable3.containsNone(array));
+        Assert.assertTrue(iterable3.containsNone(unmatched));
+
+        <name>Iterable iterable4 = <name>Sets.mutable.with(array);
+        Assert.assertFalse(iterable4.containsNone(array));
+        Assert.assertTrue(iterable4.containsNone(unmatched));
+
+        <name>Iterable emptyIterable = this.newWith();
+        Assert.assertTrue(emptyIterable.containsNone(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertTrue(emptyIterable.containsNone());
+        Assert.assertTrue(emptyIterable.containsNone(<["-1", "5"]:(literal.(type))(); separator=", ">));
+        Assert.assertTrue(emptyIterable.containsNone(<(literal.(type))("0")>));
+    }
+
+    @Test
+    public void containsNoneIterable()
+    {
+        <name>Iterable iterable = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertFalse(iterable.containsNone(<name>Lists.immutable.with(<["1", "1"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(iterable.containsNone(<name>Lists.mutable.empty()));
+        Assert.assertFalse(iterable.containsNone(<name>Lists.mutable.with(<["3", "4", "5", "6"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(iterable.containsNone(<name>Lists.immutable.with(<["7", "8", "11"]:(literal.(type))(); separator=", ">)));
+
+        <name>Iterable iterable2 = this.newWith(<["0", "1", "3", "7"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(iterable2.containsNone(<name>Sets.immutable.with(<["2", "4", "6"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(iterable2.containsNone(<name>Sets.mutable.empty()));
+        Assert.assertFalse(iterable2.containsNone(<name>Sets.immutable.with(<["-1", "1", "3"]:(literal.(type))(); separator=", ">)));
+        Assert.assertFalse(iterable2.containsNone(<name>Sets.mutable.with(<["7", "3", "1", "0"]:(literal.(type))(); separator=", ">)));
+
+        <name>Iterable emptyIterable = this.newWith();
+        Assert.assertTrue(emptyIterable.containsNone(<name>Lists.immutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(emptyIterable.containsNone(<name>Lists.mutable.empty()));
+        Assert.assertTrue(emptyIterable.containsNone(<name>Lists.immutable.with(<["-1", "5"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(emptyIterable.containsNone(<name>Lists.mutable.with(<(literal.(type))("0")>)));
+
+        int size = 33;
+        <type>[] array = new <type>[size];
+        <type>[] unmatched = new <type>[size];
+        <type>[] bigger = new <type>[size + 1];
+        for (int i = 0; i \< size; i++)
+        {
+            array[i] = <(castIntToNarrowTypeWithParens.(type))("i + 1")>;
+            bigger[i] = <(castIntToNarrowTypeWithParens.(type))("i + 1")>;
+            unmatched[i] = <(castIntToNarrowTypeWithParens.(type))("i + 34")>;
+        }
+        bigger[size - 1] = <(literal.(type))("33")>;
+
+        <name>Iterable iterable3 = this.newWith(array);
+        Assert.assertFalse(iterable3.containsNone(<name>Lists.immutable.with(array)));
+        Assert.assertTrue(iterable3.containsNone(<name>Lists.mutable.with(unmatched)));
+        Assert.assertTrue(iterable3.containsNone(<name>Sets.mutable.with(unmatched)));
+        Assert.assertFalse(iterable3.containsNone(<name>Sets.mutable.with(bigger)));
+
+        <name>Iterable iterable4 = <name>Sets.mutable.with(array);
+        Assert.assertFalse(iterable4.containsNone(<name>Lists.immutable.with(array)));
+        Assert.assertTrue(iterable4.containsNone(<name>Lists.mutable.with(unmatched)));
+        Assert.assertFalse(iterable4.containsNone(<name>Sets.immutable.with(array)));
+        Assert.assertFalse(iterable4.containsNone(<name>Sets.immutable.with(bigger)));
+    }
+
+    @Test
     public abstract void <type>Iterator();
 
     @Test(expected = NoSuchElementException.class)
