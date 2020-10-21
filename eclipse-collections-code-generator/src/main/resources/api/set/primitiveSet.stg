@@ -45,6 +45,14 @@ public interface <name>Set extends <name>Iterable
     <name>Set union(<name>Set set);
 
     /**
+     * Returns the set of all objects that are members of both {@code this} and {@code set}. The intersection of
+     * [1, 2, 3] and [2, 3, 4] is the set [2, 3].
+     *
+     * @since 11.0.
+     */
+    <name>Set intersect(<name>Set set);
+
+    /**
      * Follows the same general contract as {@link Set#equals(Object)}.
      */
     @Override

@@ -220,6 +220,15 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return BooleanHashSet.newSetWith(source.toArray());
     }
 
+    /**
+     * @since 11.0.
+     */
+    @Override
+    public BooleanHashSet newEmpty()
+    {
+        return new BooleanHashSet();
+    }
+
     @Override
     public boolean add(boolean element)
     {

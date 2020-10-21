@@ -88,6 +88,25 @@ public interface Mutable<name>Set extends Mutable<name>Collection, <name>Set
             return set.toSet().withAll(this);
         }
     }
+
+    /**
+     * Returns the set of all objects that are members of both {@code this} and {@code set}. The intersection of
+     * [1, 2, 3] and [2, 3, 4] is the set [2, 3].
+     *
+     * @since 11.0.
+     */
+    @Override
+    default Mutable<name>Set intersect(<name>Set set)
+    {
+        if (this.size() \< set.size())
+        {
+            return this.select(set::contains);
+        }
+        else
+        {
+            return set.select(this::contains, this.newEmpty());
+        }
+    }
 }
 
 >>
