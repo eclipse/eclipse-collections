@@ -864,4 +864,33 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
         MutableBooleanSet actual5 = set15.union(set25);
         Assert.assertEquals(this.emptySet, actual5);
     }
+
+    @Test
+    public void intersect()
+    {
+        MutableBooleanSet set11 = this.newWith(true);
+        MutableBooleanSet set21 = this.newWith(false);
+        MutableBooleanSet actual = set11.intersect(set21);
+        Assert.assertEquals(this.emptySet, actual);
+
+        MutableBooleanSet set12 = this.newWith(false);
+        MutableBooleanSet set22 = this.newWith(false);
+        MutableBooleanSet actual2 = set12.intersect(set22);
+        Assert.assertEquals(this.setWithFalse, actual2);
+
+        MutableBooleanSet set13 = this.newWith(true);
+        MutableBooleanSet set23 = this.newWith(true);
+        MutableBooleanSet actual3 = set13.intersect(set23);
+        Assert.assertEquals(this.setWithTrue, actual3);
+
+        MutableBooleanSet set14 = this.setWithTrueFalse;
+        MutableBooleanSet set24 = this.newWith();
+        MutableBooleanSet actual4 = set14.intersect(set24);
+        Assert.assertEquals(this.emptySet, actual4);
+
+        MutableBooleanSet set15 = this.newWith();
+        MutableBooleanSet set25 = this.newWith();
+        MutableBooleanSet actual5 = set15.intersect(set25);
+        Assert.assertEquals(this.emptySet, actual5);
+    }
 }

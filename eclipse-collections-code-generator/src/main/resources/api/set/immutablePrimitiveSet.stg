@@ -59,6 +59,25 @@ public interface Immutable<name>Set extends Immutable<name>Collection, <name>Set
         }
     }
 
+    /**
+     * Returns the set of all objects that are members of both {@code this} and {@code set}. The intersection of
+     * [1, 2, 3] and [2, 3, 4] is the set [2, 3].
+     *
+     * @since 11.0.
+     */
+    @Override
+    default Immutable<name>Set intersect(<name>Set set)
+    {
+        if (this.size() \< set.size())
+        {
+            return this.select(set::contains);
+        }
+        else
+        {
+            return set.select(this::contains).toImmutable();
+        }
+    }
+
     <immutableAPI(fileName(primitive), type, name)>
 }
 

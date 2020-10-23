@@ -268,4 +268,44 @@ public abstract class AbstractImmutableByteHashSetTestCase extends AbstractImmut
         ImmutableByteSet actual = set1.union(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void intersect()
+    {
+        this.assertIntersect(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                this.newWith((byte) 3));
+
+        this.assertIntersect(
+                this.newWith((byte) 1, (byte) 2, (byte) 3, (byte) 6),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                this.newWith((byte) 3));
+
+        this.assertIntersect(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 3, (byte) 4, (byte) 5, (byte) 6),
+                this.newWith((byte) 3));
+
+        this.assertIntersect(
+                this.newWith(),
+                this.newWith(),
+                this.newWith());
+
+        this.assertIntersect(
+                this.newWith(),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                this.newWith());
+
+        this.assertIntersect(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith(),
+                this.newWith());
+    }
+
+    private void assertIntersect(ImmutableByteSet set1, ImmutableByteSet set2, ImmutableByteSet expected)
+    {
+        ImmutableByteSet actual = set1.intersect(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }

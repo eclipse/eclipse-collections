@@ -596,4 +596,33 @@ public class ImmutableBooleanHashSetTest extends AbstractImmutableBooleanCollect
         ImmutableBooleanSet actual5 = set15.union(set25);
         Assert.assertEquals(this.emptySet, actual5);
     }
+
+    @Test
+    public void intersect()
+    {
+        ImmutableBooleanSet set11 = this.newWith(true);
+        ImmutableBooleanSet set21 = this.newWith(false);
+        ImmutableBooleanSet actual = set11.intersect(set21);
+        Assert.assertEquals(this.emptySet, actual);
+
+        ImmutableBooleanSet set12 = this.newWith(false);
+        ImmutableBooleanSet set22 = this.newWith(false);
+        ImmutableBooleanSet actual2 = set12.intersect(set22);
+        Assert.assertEquals(this.falseSet, actual2);
+
+        ImmutableBooleanSet set13 = this.newWith(true);
+        ImmutableBooleanSet set23 = this.newWith(true);
+        ImmutableBooleanSet actual3 = set13.intersect(set23);
+        Assert.assertEquals(this.trueSet, actual3);
+
+        ImmutableBooleanSet set14 = this.trueFalseSet;
+        ImmutableBooleanSet set24 = this.newWith();
+        ImmutableBooleanSet actual4 = set14.intersect(set24);
+        Assert.assertEquals(this.emptySet, actual4);
+
+        ImmutableBooleanSet set15 = this.newWith();
+        ImmutableBooleanSet set25 = this.newWith();
+        ImmutableBooleanSet actual5 = set15.intersect(set25);
+        Assert.assertEquals(this.emptySet, actual5);
+    }
 }

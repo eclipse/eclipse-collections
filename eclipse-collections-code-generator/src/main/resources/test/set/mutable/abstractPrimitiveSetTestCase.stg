@@ -497,6 +497,46 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         Mutable<name>Set actual = set1.union(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void intersect()
+    {
+        this.assertIntersect(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3"]:(literal.(type))(); separator=", ">));
+
+        this.assertIntersect(
+                this.newWith(<["1", "2", "3", "6"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3"]:(literal.(type))(); separator=", ">));
+
+        this.assertIntersect(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5" , "6"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3"]:(literal.(type))(); separator=", ">));
+
+        this.assertIntersect(
+                this.newWith(),
+                this.newWith(),
+                this.newWith());
+
+        this.assertIntersect(
+                this.newWith(),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith());
+
+        this.assertIntersect(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(),
+                this.newWith());
+    }
+
+    private void assertIntersect(Mutable<name>Set set1, Mutable<name>Set set2, Mutable<name>Set expected)
+    {
+        Mutable<name>Set actual = set1.intersect(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }
 
 >>
