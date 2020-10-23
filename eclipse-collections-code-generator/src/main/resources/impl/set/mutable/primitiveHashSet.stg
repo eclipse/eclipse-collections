@@ -463,7 +463,17 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         {
             return <name>Sets.immutable.with(this.<type>Iterator().next());
         }
-        <name>HashSet mutableSet = <name>HashSet.newSetWith(this.toArray());
+        <name>HashSet mutableSet;
+        if (this.table.length == smallestPowerOfTwoGreaterThan(this.size() \<\< 1)) // table is not too big
+        {
+            mutableSet = this;
+            this.copyOnWrite = true;
+        }
+        else
+        {
+            mutableSet = new <name>HashSet(this.size());
+            mutableSet.addAll(this);
+        }
         return new Immutable<name>HashSet(mutableSet.table, mutableSet.occupiedWithData, mutableSet.zeroToThirtyOne, mutableSet.zeroToThirtyOneOccupied);
     }
 
