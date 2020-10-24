@@ -55,5 +55,13 @@
         <developer>
             <name>Hiroshi Ito</name>
         </developer>
+
+        <developer>
+            <name>Nikhil J. Nanivadekar</name>
+        </developer>
+
+        <developer>
+            <name>Sirisha Pratha</name>
+        </developer>
     </developers>
 </project>
