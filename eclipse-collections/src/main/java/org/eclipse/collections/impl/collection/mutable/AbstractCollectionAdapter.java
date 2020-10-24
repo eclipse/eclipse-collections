@@ -134,6 +134,25 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        Iterator<T> iterator = this.getDelegate().iterator();
+
+        if (!iterator.hasNext())
+        {
+            return Optional.empty();
+        }
+
+        T result = iterator.next();
+        if (iterator.hasNext())
+        {
+            return Optional.empty();
+        }
+
+        return Optional.of(result);
+    }
+
+    @Override
     public MutableCollection<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);

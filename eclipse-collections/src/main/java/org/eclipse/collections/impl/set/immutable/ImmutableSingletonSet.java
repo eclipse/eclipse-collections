@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -124,6 +125,12 @@ final class ImmutableSingletonSet<T>
     public T getOnly()
     {
         return this.element1;
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.of(this.element1);
     }
 
     @Override

@@ -346,6 +346,12 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     }
 
     @Override
+    public Optional\<V> getOnlyOptional()
+    {
+        return Optional.of(this.value1);
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return this.containsValue(object);

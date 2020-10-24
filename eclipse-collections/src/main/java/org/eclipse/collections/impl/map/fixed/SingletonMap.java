@@ -17,6 +17,7 @@ import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.function.Function2;
@@ -263,5 +264,11 @@ final class SingletonMap<K, V>
     public V getOnly()
     {
         return this.value1;
+    }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return Optional.of(this.value1);
     }
 }

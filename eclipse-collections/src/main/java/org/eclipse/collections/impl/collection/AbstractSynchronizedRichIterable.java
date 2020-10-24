@@ -1296,6 +1296,15 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.getOnlyOptional();
+        }
+    }
+
+    @Override
     public ByteIterable collectByte(ByteFunction<? super T> byteFunction)
     {
         synchronized (this.lock)

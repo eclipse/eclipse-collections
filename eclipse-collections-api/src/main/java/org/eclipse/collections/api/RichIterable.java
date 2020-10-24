@@ -174,6 +174,20 @@ public interface RichIterable<T>
     }
 
     /**
+     * Returns the element if the iterable has exactly one element as an Optional. Otherwise, {@link Optional#empty()} is returned.
+     *
+     * @since 11.0
+     */
+    default Optional<T> getOnlyOptional()
+    {
+        if (this.size() == 1)
+        {
+            return Optional.of(this.getFirst());
+        }
+        return Optional.empty();
+    }
+
+    /**
      * Returns true if the iterable has an element which responds true to element.equals(object).
      *
      * @since 1.0

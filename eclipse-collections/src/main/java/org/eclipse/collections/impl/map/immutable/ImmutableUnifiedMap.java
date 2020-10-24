@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.immutable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
@@ -191,5 +192,11 @@ public class ImmutableUnifiedMap<K, V>
             P parameter)
     {
         return this.delegate.getIfAbsentWith(key, function, parameter);
+    }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return this.delegate.getOnlyOptional();
     }
 }

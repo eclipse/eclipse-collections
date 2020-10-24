@@ -52,4 +52,10 @@ public class ImmutableQuadrupletonSetTest
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.classUnderTest().getOnlyOptional().isPresent());
+    }
 }

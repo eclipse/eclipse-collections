@@ -766,6 +766,12 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return this.getMutableMap().getOnlyOptional();
+    }
+
+    @Override
     public <R> MutableBagMultimap<R, V> groupBy(Function<? super V, ? extends R> function)
     {
         return this.getMutableMap().groupBy(function);

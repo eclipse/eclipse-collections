@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.set.mutable;
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -364,5 +365,11 @@ public abstract class AbstractMutableSet<T>
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         return SetIterables.cartesianProduct(this, set);
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.empty();
     }
 }

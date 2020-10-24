@@ -710,6 +710,12 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return this.delegate.getOnlyOptional();
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return this.delegate.contains(object);

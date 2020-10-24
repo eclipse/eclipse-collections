@@ -328,4 +328,10 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.emptySet.getOnly());
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.emptySet.getOnlyOptional().isPresent());
+    }
 }

@@ -152,6 +152,25 @@ public abstract class AbstractLazyIterable<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        Iterator<T> iterator = this.iterator();
+
+        if (!iterator.hasNext())
+        {
+            return Optional.empty();
+        }
+
+        T result = iterator.next();
+        if (iterator.hasNext())
+        {
+            return Optional.empty();
+        }
+
+        return Optional.of(result);
+    }
+
+    @Override
     public LazyIterable<T> select(Predicate<? super T> predicate)
     {
         return LazyIterate.select(this, predicate);

@@ -60,4 +60,11 @@ public class ImmutableSingletonListTest extends AbstractImmutableListTestCase
         ImmutableList<Integer> list = new ImmutableSingletonList<>(3);
         Assert.assertEquals(Integer.valueOf(3), list.getOnly());
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableList<Integer> list = new ImmutableSingletonList<>(3);
+        Assert.assertEquals(Integer.valueOf(3), list.getOnlyOptional().get());
+    }
 }

@@ -75,6 +75,12 @@ public class EmptyListTest
     }
 
     @Test
+    public void testGetOnlyOptional()
+    {
+        Assert.assertFalse(new EmptyList<>().getOnlyOptional().isPresent());
+    }
+
+    @Test
     public void readResolve()
     {
         Verify.assertInstanceOf(EmptyList.class, Lists.fixedSize.of());

@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.strategy.immutable;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
@@ -254,5 +255,11 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     protected Object writeReplace()
     {
         return new ImmutableMapWithHashingStrategySerializationProxy<>(this, this.delegate.hashingStrategy());
+    }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return this.delegate.getOnlyOptional();
     }
 }

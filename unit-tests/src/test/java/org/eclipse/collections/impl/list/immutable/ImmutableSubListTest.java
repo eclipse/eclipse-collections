@@ -85,4 +85,25 @@ public class ImmutableSubListTest extends AbstractImmutableListTestCase
         ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 3);
         list.getOnly();
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 2);
+        Assert.assertEquals(Integer.valueOf(2), list.getOnlyOptional().get());
+    }
+
+    @Test
+    public void getOnlyOptional_returns_empty_when_empty()
+    {
+        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 1);
+        Assert.assertFalse(list.getOnlyOptional().isPresent());
+    }
+
+    @Test
+    public void getOnlyOptional_returns_empty_when_multiple_items()
+    {
+        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 3);
+        Assert.assertFalse(list.getOnlyOptional().isPresent());
+    }
 }

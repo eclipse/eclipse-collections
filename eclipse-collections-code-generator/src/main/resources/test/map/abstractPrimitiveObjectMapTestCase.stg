@@ -1234,6 +1234,26 @@ public abstract class Abstract<name>ObjectMapTestCase
     }
 
     @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals("zero", this.newWithKeysValues(<(literal.(type))("0")>, "zero").getOnlyOptional().get());
+        Assert.assertEquals("one", this.newWithKeysValues(<(literal.(type))("1")>, "one").getOnlyOptional().get());
+        Assert.assertEquals("two", this.newWithKeysValues(<(literal.(type))("2")>, "two").getOnlyOptional().get());
+    }
+
+    @Test
+    public void getOnlyOptional_empty_returns_empty()
+    {
+        Assert.assertFalse(this.getEmptyMap().getOnlyOptional().isPresent());
+    }
+
+    @Test
+    public void getOnlyOptional_not_only_one_returns_empty()
+    {
+        Assert.assertFalse(this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five").getOnlyOptional().isPresent());
+    }
+
+    @Test
     public void contains()
     {
         Assert.assertFalse(this.classUnderTest().contains(null));

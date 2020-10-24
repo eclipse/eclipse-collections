@@ -625,6 +625,12 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.classUnderTest().getOnlyOptional().isPresent());
+    }
+
     @Override
     public void detectIndex()
     {

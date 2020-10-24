@@ -378,4 +378,10 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
                 () -> subList.retainAllIterable(Lists.fixedSize.empty()));
         Verify.assertThrows(UnsupportedOperationException.class, subList::clear);
     }
+
+    @Test
+    public void testGetOnlyOptional()
+    {
+        Assert.assertFalse(this.list.getOnlyOptional().isPresent());
+    }
 }

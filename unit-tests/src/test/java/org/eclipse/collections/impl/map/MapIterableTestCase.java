@@ -970,6 +970,25 @@ public abstract class MapIterableTestCase
     }
 
     @Test
+    public void getOnlyOptional()
+    {
+        MapIterable<String, String> map = this.newMapWithKeyValue("1", "One");
+        Assert.assertEquals("One", map.getOnlyOptional().get());
+    }
+
+    @Test
+    public void getOnlyOptional_returns_empty_when_empty()
+    {
+        Assert.assertFalse(this.newMap().getOnlyOptional().isPresent());
+    }
+
+    @Test
+    public void getOnlyOptional_returns_empty_when_multiple_items()
+    {
+        Assert.assertFalse(this.newMapWithKeysValues("1", "One", "2", "Two").getOnlyOptional().isPresent());
+    }
+
+    @Test
     public void containsAllIterable()
     {
         MapIterable<String, String> map = this.newMapWithKeysValues("1", "One", "2", "Two", "3", "Three");

@@ -251,6 +251,24 @@ public abstract class AbstractImmutableUnifiedSetTestCase
     }
 
     @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(1), this.newSetWith(1).getOnlyOptional().get());
+    }
+
+    @Test
+    public void getOnlyOptional_returns_empty_when_empty()
+    {
+        Assert.assertFalse(this.newSet().getOnlyOptional().isPresent());
+    }
+
+    @Test
+    public void getOnlyOptional_throws_when_multiple_values()
+    {
+        Assert.assertFalse(this.newSet(1, 2, 3).getOnlyOptional().isPresent());
+    }
+
+    @Test
     public void isEmpty()
     {
         Assert.assertTrue(this.newSet().isEmpty());

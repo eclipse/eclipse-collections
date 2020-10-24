@@ -1713,6 +1713,36 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     }
 
     @Override
+    public Optional\<V> getOnlyOptional()
+    {
+        if (this.size() != 1)
+        {
+            return Optional.empty();
+        }
+
+        if (this.sentinelValues != null)
+        {
+            if (this.sentinelValues.containsZeroKey)
+            {
+                return Optional.of(this.sentinelValues.zeroValue);
+            }
+            if (this.sentinelValues.containsOneKey)
+            {
+                return Optional.of(this.sentinelValues.oneValue);
+            }
+        }
+        for (int i = 0; i \< this.keys.length; i++)
+        {
+            if (isNonSentinel(this.keys[i]))
+            {
+                return Optional.of(this.values[i]);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
     public MutableList\<V> toList()
     {
         MutableList\<V> list = Lists.mutable.of();

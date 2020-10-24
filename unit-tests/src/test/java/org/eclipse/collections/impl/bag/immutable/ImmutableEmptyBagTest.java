@@ -329,6 +329,13 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
 
     @Override
     @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.newBag().getOnlyOptional().isPresent());
+    }
+
+    @Override
+    @Test
     public void isEmpty()
     {
         ImmutableBag<String> bag = this.newBag();

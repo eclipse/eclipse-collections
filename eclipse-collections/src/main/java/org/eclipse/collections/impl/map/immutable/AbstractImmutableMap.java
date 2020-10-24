@@ -519,4 +519,10 @@ public abstract class AbstractImmutableMap<K, V>
     {
         return this.countByEach(function, Bags.mutable.empty()).toImmutable();
     }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return Optional.empty();
+    }
 }

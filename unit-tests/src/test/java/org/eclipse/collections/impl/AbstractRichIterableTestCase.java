@@ -1147,6 +1147,25 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(2), this.newWith(2).getOnlyOptional().get());
+        Assert.assertNotEquals(Integer.valueOf(2), this.newWith(1).getOnlyOptional().get());
+    }
+
+    @Test
+    public void getOnlyOptional_not_only_one_returns_empty()
+    {
+        Assert.assertFalse(this.newWith(1, 2).getOnlyOptional().isPresent());
+    }
+
+    @Test
+    public void getOnlyOptional_empty_returns_empty()
+    {
+        Assert.assertFalse(this.newWith().getOnlyOptional().isPresent());
+    }
+
+    @Test
     public void isEmpty()
     {
         Verify.assertIterableEmpty(this.newWith());

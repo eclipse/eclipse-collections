@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.immutable;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
@@ -473,5 +474,11 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         return this.toSet().asParallel(executorService, batchSize);
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.empty();
     }
 }

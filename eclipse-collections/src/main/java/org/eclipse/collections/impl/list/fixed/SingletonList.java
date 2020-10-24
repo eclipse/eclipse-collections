@@ -16,6 +16,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -199,6 +200,12 @@ final class SingletonList<T>
     public T getOnly()
     {
         return this.element1;
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.of(this.element1);
     }
 
     @Override

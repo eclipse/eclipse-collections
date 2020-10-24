@@ -425,4 +425,10 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.classUnderTest().getOnlyOptional().isPresent());
+    }
 }

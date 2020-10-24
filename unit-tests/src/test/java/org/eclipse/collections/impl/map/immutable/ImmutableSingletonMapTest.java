@@ -268,6 +268,13 @@ public class ImmutableSingletonMapTest extends ImmutableMemoryEfficientMapTestCa
         Assert.assertEquals("One", singletonMap.getOnly());
     }
 
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableSingletonMap<Integer, String> singletonMap = new ImmutableSingletonMap<>(1, "One");
+        Assert.assertEquals("One", singletonMap.getOnlyOptional().get());
+    }
+
     @Override
     public void select()
     {

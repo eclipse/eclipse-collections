@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ListIterator;
+import java.util.Optional;
 import java.util.RandomAccess;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -274,5 +275,11 @@ public abstract class AbstractMemoryEfficientMutableList<T>
     public ListIterator<T> listIterator()
     {
         return new FixedSizeListIteratorAdapter<>(super.listIterator());
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.empty();
     }
 }

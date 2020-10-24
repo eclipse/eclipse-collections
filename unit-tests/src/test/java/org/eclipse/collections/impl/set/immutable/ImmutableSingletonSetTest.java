@@ -62,4 +62,11 @@ public class ImmutableSingletonSetTest
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Assert.assertEquals(Integer.valueOf(1), integers.getOnly());
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Assert.assertEquals(Integer.valueOf(1), integers.getOnlyOptional().get());
+    }
 }

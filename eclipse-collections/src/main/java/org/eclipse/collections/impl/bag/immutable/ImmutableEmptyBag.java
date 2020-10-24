@@ -258,6 +258,12 @@ final class ImmutableEmptyBag<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.empty();
+    }
+
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();

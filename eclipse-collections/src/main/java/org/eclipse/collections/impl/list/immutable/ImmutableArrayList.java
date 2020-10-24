@@ -139,6 +139,16 @@ final class ImmutableArrayList<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        if (this.items.length == 1)
+        {
+            return Optional.of(this.items[0]);
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (T each : this.items)

@@ -185,6 +185,12 @@ final class ImmutableSingletonBag<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.of(this.value);
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return Objects.equals(this.value, object);

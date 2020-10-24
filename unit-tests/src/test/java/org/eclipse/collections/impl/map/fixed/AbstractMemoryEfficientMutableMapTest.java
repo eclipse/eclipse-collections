@@ -1333,4 +1333,10 @@ public abstract class AbstractMemoryEfficientMutableMapTest
 
     @Test
     public abstract void asLazyValues();
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.classUnderTest().getOnlyOptional().isPresent());
+    }
 }

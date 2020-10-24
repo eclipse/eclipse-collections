@@ -118,6 +118,12 @@ public class LazyIterableTestHelper<T> implements LazyIterable<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.empty();
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return false;

@@ -236,6 +236,12 @@ public class ImmutableEmptyMapWithHashingStrategyTest extends ImmutableMemoryEff
         this.classUnderTest().getOnly();
     }
 
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.classUnderTest().getOnlyOptional().isPresent());
+    }
+
     @Override
     public void select()
     {

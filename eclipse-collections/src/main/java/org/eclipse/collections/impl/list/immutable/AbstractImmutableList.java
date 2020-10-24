@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
 import java.util.function.UnaryOperator;
@@ -897,6 +898,12 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.empty();
+    }
+
     protected static class ImmutableSubList<T>
             extends AbstractImmutableList<T>
             implements Serializable, RandomAccess
@@ -1022,6 +1029,16 @@ abstract class AbstractImmutableList<T>
         public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
         {
             ListIterate.forEachWith(this, procedure, parameter);
+        }
+
+        @Override
+        public Optional<T> getOnlyOptional()
+        {
+            if (this.size == 1)
+            {
+                return Optional.of(this.get(0));
+            }
+            return Optional.empty();
         }
     }
 }

@@ -400,6 +400,13 @@ public class SingletonMapTest extends AbstractMemoryEfficientMutableMapTest
         Assert.assertEquals("One", only);
     }
 
+    @Test
+    public void getOnlyOptional()
+    {
+        String only = this.classUnderTest().getOnlyOptional().get();
+        Assert.assertEquals("One", only);
+    }
+
     @Override
     protected <K, V> FixedSizeMap<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2)
     {

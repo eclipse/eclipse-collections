@@ -205,6 +205,12 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
         Verify.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
     }
 
+    @Test
+    public void testGetOnlyOptional()
+    {
+        Assert.assertFalse(this.list.getOnlyOptional().isPresent());
+    }
+
     @Override
     @Test
     public void sort()

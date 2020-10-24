@@ -213,6 +213,12 @@ public class Immutable<name>ObjectEmptyMapTest extends AbstractImmutable<name>Ob
     }
 
     @Override
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.classUnderTest().getOnlyOptional().isPresent());
+    }
+
+    @Override
     @Test
     public void tap()
     {

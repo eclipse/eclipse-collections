@@ -404,6 +404,15 @@ public class Synchronized<name>ObjectMap\<V>
     }
 
     @Override
+    public Optional\<V> getOnlyOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.getOnlyOptional();
+        }
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         synchronized (this.lock)

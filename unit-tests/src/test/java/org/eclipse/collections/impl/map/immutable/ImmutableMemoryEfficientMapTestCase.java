@@ -1143,4 +1143,10 @@ public abstract class ImmutableMemoryEfficientMapTestCase extends ImmutableMapTe
                 map.zipWithIndex().toSet(),
                 map.zipWithIndex(UnifiedSet.newSet()));
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.classUnderTest().getOnlyOptional().isPresent());
+    }
 }

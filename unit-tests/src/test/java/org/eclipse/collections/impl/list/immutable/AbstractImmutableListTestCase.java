@@ -726,4 +726,11 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         Assert.assertEquals(integers, actual);
         Assert.assertSame(integers, actual);
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableList<Integer> list = this.classUnderTest();
+        Assert.assertFalse(list.getOnlyOptional().isPresent());
+    }
 }

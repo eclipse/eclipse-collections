@@ -643,6 +643,24 @@ public abstract class AbstractLazyIterableTestCase
     }
 
     @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(1), this.newWith(1).getOnlyOptional().get());
+    }
+
+    @Test
+    public void getOnlyOptional_returns_empty_when_empty()
+    {
+        Assert.assertFalse(this.newWith().getOnlyOptional().isPresent());
+    }
+
+    @Test
+    public void getOnlyOptional_returns_empty_when_multiple_values()
+    {
+        Assert.assertFalse(this.newWith(1, 2, 3).getOnlyOptional().isPresent());
+    }
+
+    @Test
     public void isEmpty()
     {
         Assert.assertTrue(this.newWith().isEmpty());

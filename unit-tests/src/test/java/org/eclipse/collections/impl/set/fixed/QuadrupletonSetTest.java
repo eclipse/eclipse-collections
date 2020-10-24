@@ -219,4 +219,10 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.set.getOnly());
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.set.getOnlyOptional().isPresent());
+    }
 }

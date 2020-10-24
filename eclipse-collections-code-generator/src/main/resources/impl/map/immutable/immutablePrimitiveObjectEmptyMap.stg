@@ -261,6 +261,12 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
     }
 
     @Override
+    public Optional\<V> getOnlyOptional()
+    {
+        return Optional.empty();
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return false;

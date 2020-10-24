@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.immutable;
 
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -80,6 +81,12 @@ final class ImmutableUnifiedSet<T>
     public T getOnly()
     {
         return this.delegate.getOnly();
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return this.delegate.getOnlyOptional();
     }
 
     public static <T> ImmutableSet<T> newSetWith(T... elements)

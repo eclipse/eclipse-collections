@@ -246,4 +246,25 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
         ImmutableList<Integer> list = this.newList(1, 2, 3);
         list.getOnly();
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableList<Integer> list = this.newList(2);
+        Assert.assertEquals(Integer.valueOf(2), list.getOnlyOptional().get());
+    }
+
+    @Test
+    public void getOnlyOptional_returns_empty_when_empty()
+    {
+        ImmutableList<Integer> list = this.newList();
+        Assert.assertFalse(list.getOnlyOptional().isPresent());
+    }
+
+    @Test
+    public void getOnlyOptional_returns_empty_when_multiple_items()
+    {
+        ImmutableList<Integer> list = this.newList(1, 2, 3);
+        Assert.assertFalse(list.getOnlyOptional().isPresent());
+    }
 }

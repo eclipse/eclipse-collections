@@ -184,6 +184,11 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
         this.classUnderTest().getOnly();
     }
 
+    public void getOnlyOptional()
+    {
+        Assert.assertFalse(this.classUnderTest().getOnlyOptional().isPresent());
+    }
+
     @Override
     @Test
     public void isEmpty()

@@ -298,6 +298,17 @@ public class ImmutableArrayBag<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        if (this.counts.length != 1 || this.counts[0] > 1)
+        {
+            return Optional.empty();
+        }
+
+        return Optional.of(this.getFirst());
+    }
+
+    @Override
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
         return this.select(predicate, HashBag.newBag()).toImmutable();

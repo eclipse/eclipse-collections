@@ -340,6 +340,14 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
 
     @Override
     @Test
+    public void getOnlyOptional()
+    {
+        super.getOnlyOptional();
+        Assert.assertEquals(VAL, this.newBag().getOnlyOptional().get());
+    }
+
+    @Override
+    @Test
     public void contains()
     {
         super.contains();
