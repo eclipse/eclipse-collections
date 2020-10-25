@@ -60,25 +60,6 @@ public abstract class Abstract<name>Iterable implements <name>Iterable
     {
         return <name>HashBag.newBag(this);
     }
-
-    @Override
-    public boolean containsAll(<type>... source)
-    {
-        for (<type> item : source)
-        {
-            if (!this.contains(item))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean containsAll(<name>Iterable source)
-    {
-        return source.allSatisfy(this::contains);
-    }
 }
 
 >>

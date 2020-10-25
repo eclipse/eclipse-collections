@@ -199,6 +199,25 @@ public abstract class Abstract<name>IterableTestCase
         Assert.assertTrue(iterable2.containsAll(<["0", "1", "2"]:(literal.(type))(); separator=", ">));
         Assert.assertFalse(iterable2.containsAll(<["0", "1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
         Assert.assertFalse(iterable2.containsAll(<["3", "4"]:(literal.(type))(); separator=", ">));
+
+        int size = 33;
+        <type>[] array = new <type>[size];
+        for (int i = 0; i \< size; i++)
+        {
+            array[i] = <(castIntToNarrowTypeWithParens.(type))("i + 1")>;
+        }
+
+        <name>Iterable iterable3 = this.newWith(array);
+        Assert.assertTrue(iterable3.containsAll(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertTrue(iterable3.containsAll());
+        Assert.assertFalse(iterable3.containsAll(<["3", "4", "5", "33", "34"]:(literal.(type))(); separator=", ">));
+        Assert.assertTrue(iterable3.containsAll(array));
+
+        <name>Iterable iterable4 = <name>Sets.mutable.with(array);
+        Assert.assertTrue(iterable4.containsAll(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertTrue(iterable4.containsAll());
+        Assert.assertFalse(iterable4.containsAll(<["3", "4", "5", "33", "34"]:(literal.(type))(); separator=", ">));
+        Assert.assertTrue(iterable4.containsAll(array));
     }
 
     @Test
@@ -234,6 +253,25 @@ public abstract class Abstract<name>IterableTestCase
         Assert.assertTrue(iterable2.containsAll(<name>ArrayList.newListWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">)));
         Assert.assertFalse(iterable2.containsAll(<name>ArrayList.newListWith(<["0", "1", "2", "3", "4"]:(literal.(type))(); separator=", ">)));
         Assert.assertFalse(iterable2.containsAll(<name>ArrayList.newListWith(<["3", "4"]:(literal.(type))(); separator=", ">)));
+
+        int size = 33;
+        <type>[] array = new <type>[size];
+        for (int i = 0; i \< size; i++)
+        {
+            array[i] = <(castIntToNarrowTypeWithParens.(type))("i + 1")>;
+        }
+
+        <name>Iterable iterable3 = this.newWith(array);
+        Assert.assertTrue(iterable3.containsAll(<name>Lists.immutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(iterable3.containsAll(<name>Lists.mutable.empty()));
+        Assert.assertFalse(iterable3.containsAll(<name>Lists.mutable.with(<["3", "4", "5", "33", "34"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(iterable3.containsAll(<name>Lists.immutable.with(array)));
+
+        <name>Iterable iterable4 = <name>Sets.mutable.with(array);
+        Assert.assertTrue(iterable4.containsAll(<name>Lists.immutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(iterable4.containsAll(<name>Lists.mutable.empty()));
+        Assert.assertFalse(iterable4.containsAll(<name>Lists.mutable.with(<["3", "4", "5", "33", "34"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(iterable4.containsAll(<name>Lists.immutable.with(array)));
     }
 
     @Test

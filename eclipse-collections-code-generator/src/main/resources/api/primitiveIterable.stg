@@ -42,6 +42,7 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 
 /**
@@ -79,16 +80,52 @@ public interface <name>Iterable extends PrimitiveIterable
     boolean contains(<type> value);
 
     /**
-     * Returns true if the all of the values specified in the source array are contained
+     * Returns true if all of the values specified in the source array are contained
      * in the <name>Iterable, and false if they are not.
      */
-    boolean containsAll(<type>... source);
+    default boolean containsAll(<type>... source)
+    {
+        if (this.size() \<= 32 || source.length \< 4)
+        {
+            for (<type> item : source)
+            {
+                if (!this.contains(item))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else
+        {
+            <name>Set set = this instanceof <name>Set ? (<name>Set) this : this.toSet();
+            for (<type> item : source)
+            {
+                if (!set.contains(item))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
 
     /**
-     * Returns true if the all of the values specified in the source <name>Iterable are contained
+     * Returns true if all of the values specified in the source <name>Iterable are contained
      * in the <name>Iterable, and false if they are not.
      */
-    boolean containsAll(<name>Iterable source);
+    default boolean containsAll(<name>Iterable source)
+    {
+        if (this.size() \<= 32 || source.size() \< 4)
+        {
+            return source.allSatisfy(this::contains);
+        }
+        else
+        {
+            <name>Set set = this instanceof <name>Set ? (<name>Set) this : this.toSet();
+            return source.allSatisfy(set::contains);
+        }
+    }
 
     /**
      * Applies the <name>Procedure to each element in the <name>Iterable.
