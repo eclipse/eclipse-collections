@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2018 Goldman Sachs and others.
+  ~ Copyright (c) 2020 Goldman Sachs and others.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -75,27 +75,26 @@
     <developers>
         <developer>
             <name>Craig P. Motlin</name>
-            <email>craig.motlin@gs.com</email>
         </developer>
 
         <developer>
             <name>Donald Raab</name>
-            <email>donraab@gmail.com</email>
         </developer>
 
         <developer>
             <name>Mohammad A. Rezaei</name>
-            <email>mohammad.rezaei@gs.com</email>
         </developer>
 
         <developer>
             <name>Hiroshi Ito</name>
-            <email>itohro@gmail.com</email>
         </developer>
 
         <developer>
             <name>Nikhil J. Nanivadekar</name>
-            <email>nikhil.nanivadekar@gs.com</email>
+        </developer>
+
+        <developer>
+            <name>Sirisha Pratha</name>
         </developer>
     </developers>
 

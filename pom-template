@@ -42,22 +42,26 @@
     <developers>
         <developer>
             <name>Craig P. Motlin</name>
-            <email>craig.motlin@gs.com</email>
         </developer>
 
         <developer>
             <name>Donald Raab</name>
-            <email>donald.raab@gs.com</email>
         </developer>
 
         <developer>
             <name>Mohammad A. Rezaei</name>
-            <email>mohammad.rezaei@gs.com</email>
         </developer>
 
         <developer>
             <name>Hiroshi Ito</name>
-            <email>hiroshi.ito@gs.com</email>
+        </developer>
+
+        <developer>
+            <name>Nikhil J. Nanivadekar</name>
+        </developer>
+
+        <developer>
+            <name>Sirisha Pratha</name>
         </developer>
     </developers>
 </project>
