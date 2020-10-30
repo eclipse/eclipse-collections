@@ -57,6 +57,8 @@ import org.junit.Test;
  */
 public class VerifyTest
 {
+    private static final String ASSERT_FAIL = "org.junit.Assert.fail";
+
     @Test
     public void assertThrowsWithCause()
     {
@@ -475,7 +477,7 @@ public class VerifyTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(VerifyTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains(ASSERT_FAIL, e.getStackTrace()[0].toString());
         }
     }
 
@@ -493,7 +495,7 @@ public class VerifyTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(VerifyTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains(ASSERT_FAIL, e.getStackTrace()[0].toString());
         }
     }
 
@@ -854,7 +856,7 @@ public class VerifyTest
         }
         catch (AssertionError ex)
         {
-            Verify.assertContains("items should not be equal", ex.getMessage());
+            Verify.assertContains("items", ex.getMessage());
             Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
         }
     }
