@@ -14,7 +14,7 @@ import org.eclipse.collections.test.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.test.bag.mutable.sorted.MutableBagIterableTestCase;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 public interface UnmodifiableBagIterableTestCase extends UnmodifiableMutableCollectionTestCase, MutableBagIterableTestCase
 {

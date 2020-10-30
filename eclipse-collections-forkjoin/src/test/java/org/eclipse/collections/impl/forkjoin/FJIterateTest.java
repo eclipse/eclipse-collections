@@ -265,7 +265,7 @@ public class FJIterateTest
     @Test
     public void testForEachWithException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> FJIterate.forEach(
+        Assert.assertThrows(RuntimeException.class, () -> FJIterate.forEach(
                 FJIterateTest.createIntegerList(5),
                 new PassThruProcedureFactory<>(EXCEPTION_PROCEDURE),
                 new PassThruCombiner<>(),
@@ -326,7 +326,7 @@ public class FJIterateTest
     @Test
     public void testForEachWithIndexException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> FJIterate.forEachWithIndex(
+        Assert.assertThrows(RuntimeException.class, () -> FJIterate.forEachWithIndex(
                 FJIterateTest.createIntegerList(5),
                 new PassThruObjectIntProcedureFactory<>(EXCEPTION_OBJECT_INT_PROCEDURE),
                 new PassThruCombiner<>(),
@@ -490,7 +490,7 @@ public class FJIterateTest
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result7));
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result8));
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result9));
-        Verify.assertThrows(IllegalArgumentException.class, () -> FJIterate.groupBy(null, null, 1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> FJIterate.groupBy(null, null, 1));
     }
 
     @Test

@@ -37,13 +37,13 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertThrows;
 
 public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
 {

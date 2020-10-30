@@ -16,12 +16,12 @@ import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.test.RichIterableTestCase;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertThrows;
 
 public interface ImmutableCollectionTestCase extends RichIterableTestCase
 {

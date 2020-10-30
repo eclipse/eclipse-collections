@@ -18,8 +18,8 @@ import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.test.stack.StackIterableTestCase;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public interface MutableStackTestCase extends StackIterableTestCase
 {
@@ -53,6 +53,6 @@ public interface MutableStackTestCase extends StackIterableTestCase
         assertEquals(Integer.valueOf(4), mutableStack.pop());
         assertEquals(Integer.valueOf(2), mutableStack.pop());
         assertEquals(Integer.valueOf(3), mutableStack.pop());
-        assertThrows(EmptyStackException.class, (Runnable) mutableStack::pop);
+        assertThrows(EmptyStackException.class, mutableStack::pop);
     }
 }

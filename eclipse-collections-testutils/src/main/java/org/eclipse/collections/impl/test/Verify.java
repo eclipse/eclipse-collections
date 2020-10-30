@@ -3610,7 +3610,7 @@ public final class Verify extends Assert
      * <p>
      * {@code Callable} is most appropriate when a checked exception will be thrown.
      * If a subclass of {@link RuntimeException} will be thrown, the form
-     * {@link #assertThrows(Class, Runnable)} may be more convenient.
+     * {@link Assert#assertThrows(Class, org.junit.function.ThrowingRunnable)} may be more convenient.
      * <p>
      * e.g.
      * <pre>
@@ -3623,7 +3623,7 @@ public final class Verify extends Assert
      * });
      * </pre>
      *
-     * @see #assertThrows(Class, Runnable)
+     * @see Assert#assertThrows(Class, org.junit.function.ThrowingRunnable)
      */
     public static void assertThrows(
             Class<? extends Exception> expectedExceptionClass,
@@ -3634,69 +3634,6 @@ public final class Verify extends Assert
             code.call();
         }
         catch (Exception ex)
-        {
-            try
-            {
-                Assert.assertSame(
-                        "Caught exception of type <"
-                                + ex.getClass().getName()
-                                + ">, expected one of type <"
-                                + expectedExceptionClass.getName()
-                                + '>'
-                                + '\n'
-                                + "Exception Message: " + ex.getMessage()
-                                + '\n',
-                        expectedExceptionClass,
-                        ex.getClass());
-                return;
-            }
-            catch (AssertionError e)
-            {
-                Verify.throwMangledException(e);
-            }
-        }
-
-        try
-        {
-            Assert.fail("Block did not throw an exception of type " + expectedExceptionClass.getName());
-        }
-        catch (AssertionError e)
-        {
-            Verify.throwMangledException(e);
-        }
-    }
-
-    /**
-     * Runs the {@link Runnable} {@code code} and asserts that it throws an {@code Exception} of the type
-     * {@code expectedExceptionClass}.
-     * <p>
-     * {@code Runnable} is most appropriate when a subclass of {@link RuntimeException} will be thrown.
-     * If a checked exception will be thrown, the form {@link #assertThrows(Class, Callable)} may be more
-     * convenient.
-     * <p>
-     * e.g.
-     * <pre>
-     * Verify.<b>assertThrows</b>(NullPointerException.class, new Runnable()
-     * {
-     *    public void run()
-     *    {
-     *        final Integer integer = null;
-     *        LOGGER.info(integer.toString());
-     *    }
-     * });
-     * </pre>
-     *
-     * @see #assertThrows(Class, Callable)
-     */
-    public static void assertThrows(
-            Class<? extends Exception> expectedExceptionClass,
-            Runnable code)
-    {
-        try
-        {
-            code.run();
-        }
-        catch (RuntimeException ex)
         {
             try
             {

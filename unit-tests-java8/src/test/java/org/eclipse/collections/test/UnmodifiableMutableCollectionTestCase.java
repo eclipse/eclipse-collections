@@ -17,8 +17,8 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public interface UnmodifiableMutableCollectionTestCase extends UnmodifiableCollectionTestCase, MutableCollectionTestCase
 {

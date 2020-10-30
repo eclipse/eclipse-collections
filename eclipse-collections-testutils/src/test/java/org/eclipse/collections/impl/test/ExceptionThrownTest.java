@@ -14,9 +14,10 @@ import java.util.concurrent.Callable;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.function.ThrowingRunnable;
 
 /**
- * JUnit test to make sure that methods like {@link Verify#assertThrows(Class, Runnable)} really throw when
+ * JUnit test to make sure that methods like {@link Assert#assertThrows(Class, ThrowingRunnable)} really throw when
  * they ought to.
  */
 public class ExceptionThrownTest
@@ -31,7 +32,7 @@ public class ExceptionThrownTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(ExceptionThrownTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.assertThrows", e.getStackTrace()[0].toString());
         }
     }
 
@@ -57,7 +58,8 @@ public class ExceptionThrownTest
             Verify.assertThrowsWithCause(
                     IllegalStateException.class,
                     IllegalArgumentException.class,
-                    (Runnable) () -> {
+                    () ->
+                    {
                         throw new IllegalStateException();
                     });
             Assert.fail("AssertionError expected");
@@ -68,7 +70,7 @@ public class ExceptionThrownTest
         }
     }
 
-    private static final class EmptyRunnable implements Runnable
+    private static final class EmptyRunnable implements Runnable, ThrowingRunnable
     {
         @Override
         public void run()

@@ -22,9 +22,9 @@ import org.eclipse.collections.test.collection.mutable.MultiReaderMutableCollect
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Java8Runner.class)
@@ -130,7 +130,7 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
             assertTrue(iterator.hasNext());
             iterator.next();
             assertFalse(iterator.hasNext());
-            assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+            assertThrows(NoSuchElementException.class, iterator::next);
         });
     }
 

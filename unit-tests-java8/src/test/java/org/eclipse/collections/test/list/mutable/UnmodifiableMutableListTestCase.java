@@ -15,9 +15,8 @@ import java.util.Random;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.test.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.test.list.UnmodifiableListTestCase;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 
 public interface UnmodifiableMutableListTestCase extends UnmodifiableMutableCollectionTestCase, UnmodifiableListTestCase, MutableListTestCase
 {
@@ -54,6 +53,6 @@ public interface UnmodifiableMutableListTestCase extends UnmodifiableMutableColl
     @Test
     default void MutableList_subList_subList_remove()
     {
-        assertThrows(UnsupportedOperationException.class, () -> this.newWith().subList(0, 0).remove(new Object()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().subList(0, 0).remove(new Object()));
     }
 }
