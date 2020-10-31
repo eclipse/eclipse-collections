@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.bimap.mutable;
 
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
@@ -69,14 +68,14 @@ public class HashBiMapTest extends AbstractMutableBiMapTestCase
     @Test
     public void newMap_throws()
     {
-        Verify.assertThrows(IllegalArgumentException.class, () -> new HashBiMap<>(UnifiedMap.newMap(), null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new HashBiMap<>(UnifiedMap.newMap(), null));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> new HashBiMap<>(null, null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new HashBiMap<>(null, null));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> new HashBiMap<>(null, UnifiedMap.newMap()));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new HashBiMap<>(null, UnifiedMap.newMap()));
 
         UnifiedMap<Object, Object> map = UnifiedMap.newMap();
-        Verify.assertThrows(IllegalArgumentException.class, () -> new HashBiMap<>(map, map));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new HashBiMap<>(map, map));
     }
 
     @Test

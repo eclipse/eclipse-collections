@@ -45,7 +45,7 @@ public abstract class ObjectBooleanHashMapValuesTestCase extends AbstractMutable
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator1.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator1::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator1::next);
 
         ObjectBooleanHashMap<String> map2 = new ObjectBooleanHashMap<>();
         for (int each = 2; each < 100; each++)
@@ -412,8 +412,8 @@ public abstract class ObjectBooleanHashMapValuesTestCase extends AbstractMutable
                 Lists.mutable.with(BooleanBags.mutable.with(false, true)),
                 iterable3.chunk(3));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
     }
 
     @Test

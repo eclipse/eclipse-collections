@@ -784,7 +784,7 @@ public class SetsTest
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.with());
         Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.ofInitialCapacity(1));
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.ofInitialCapacity(1));
-        Verify.assertThrows(IllegalArgumentException.class, () -> setFactory.ofInitialCapacity(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> setFactory.ofInitialCapacity(-1));
         Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1), setFactory.of(1));
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.of(1));
         Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
@@ -1048,7 +1048,7 @@ public class SetsTest
         MutableSet<String> set6 = Sets.mutable.ofInitialCapacity(65);
         this.assertPresizedSetSizeEquals(65, (UnifiedSet<String>) set6);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.ofInitialCapacity(-12));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.ofInitialCapacity(-12));
     }
 
     @Test
@@ -1069,7 +1069,7 @@ public class SetsTest
         MutableSet<String> set5 = Sets.mutable.withInitialCapacity(32);
         this.assertPresizedSetSizeEquals(32, (UnifiedSet<String>) set5);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.withInitialCapacity(-6));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.withInitialCapacity(-6));
     }
 
     private void assertPresizedSetSizeEquals(int initialCapacity, UnifiedSet<String> set)

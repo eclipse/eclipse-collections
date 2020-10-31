@@ -194,43 +194,43 @@ public class UnmodifiableMutableCollectionTest
     @Test
     public void nullCollection()
     {
-        Verify.assertThrows(NullPointerException.class, () -> new UnmodifiableMutableCollection<>(null));
+        Assert.assertThrows(NullPointerException.class, () -> new UnmodifiableMutableCollection<>(null));
     }
 
     @Test
     public void add()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.add("Madonna"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.add("Madonna"));
     }
 
     @Test
     public void remove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.remove(METALLICA));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.remove(METALLICA));
     }
 
     @Test
     public void addAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.addAll(FastList.<String>newList().with("Madonna")));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.addAll(FastList.<String>newList().with("Madonna")));
     }
 
     @Test
     public void removeAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeAll(FastList.<String>newList().with(METALLICA)));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeAll(FastList.<String>newList().with(METALLICA)));
     }
 
     @Test
     public void retainAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.retainAll(FastList.<String>newList().with(METALLICA)));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.retainAll(FastList.<String>newList().with(METALLICA)));
     }
 
     @Test
     public void clear()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, this.unmodifiableCollection::clear);
+        Assert.assertThrows(UnsupportedOperationException.class, this.unmodifiableCollection::clear);
     }
 
     @Test
@@ -268,13 +268,13 @@ public class UnmodifiableMutableCollectionTest
     @Test
     public void removeIf()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeIf(Predicates.notNull()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeIf(Predicates.notNull()));
     }
 
     @Test
     public void removeIfWith()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeIfWith((ignored1, ignored2) -> true, METALLICA));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeIfWith((ignored1, ignored2) -> true, METALLICA));
     }
 
     @Test(expected = UnsupportedOperationException.class)

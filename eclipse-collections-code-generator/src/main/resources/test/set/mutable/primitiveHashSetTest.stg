@@ -206,7 +206,7 @@ public class <name>HashSetTest extends Abstract<name>SetTestCase
     {
         Verify.assertSize(max, set);
         Mutable<name>Iterator iterator = set.<type>Iterator();
-        Verify.assertThrows(IllegalStateException.class, () -> iterator.remove());
+        Assert.assertThrows(IllegalStateException.class, () -> iterator.remove());
 
         while (iterator.hasNext())
         {

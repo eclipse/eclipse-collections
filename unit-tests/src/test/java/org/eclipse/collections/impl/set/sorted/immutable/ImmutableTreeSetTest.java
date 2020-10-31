@@ -53,13 +53,13 @@ public class ImmutableTreeSetTest
     @Test
     public void constructWithNull()
     {
-        Verify.assertThrows(ClassCastException.class, () -> new TreeSet<>(Arrays.asList(new Object())));
-        Verify.assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList(null, null)));
-        Verify.assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList((Object) null)));
+        Assert.assertThrows(ClassCastException.class, () -> new TreeSet<>(Arrays.asList(new Object())));
+        Assert.assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList(null, null)));
+        Assert.assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList((Object) null)));
 
-        Verify.assertThrows(ClassCastException.class, () -> SortedSets.immutable.of(new Object()));
-        Verify.assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null, null));
-        Verify.assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null));
+        Assert.assertThrows(ClassCastException.class, () -> SortedSets.immutable.of(new Object()));
+        Assert.assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null, null));
+        Assert.assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null));
     }
 
     @Override

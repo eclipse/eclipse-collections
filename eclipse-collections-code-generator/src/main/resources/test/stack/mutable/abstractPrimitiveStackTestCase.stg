@@ -299,9 +299,9 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
 
         Verify.assertIterablesEqual(Lists.mutable.with(), this.newWith().chunk(1));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(-1));
     }
 
     @Test(expected = UnsupportedOperationException.class)

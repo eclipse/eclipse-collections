@@ -58,7 +58,7 @@ public class ComparatorsTest
         Assert.assertEquals(
                 FastList.newListWith("1", "2", "3", "4"),
                 list.sortThis(Comparators.naturalOrder()));
-        Verify.assertThrows(NullPointerException.class, () -> FastList.newListWith("1", "2", null, "4").sortThis(Comparators.naturalOrder()));
+        Assert.assertThrows(NullPointerException.class, () -> FastList.newListWith("1", "2", null, "4").sortThis(Comparators.naturalOrder()));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class ComparatorsTest
         Assert.assertEquals(
                 FastList.newListWith("4", "3", "2", "1"),
                 list.sortThis(Comparators.reverse(String::compareTo)));
-        Verify.assertThrows(NullPointerException.class, () -> Comparators.reverse(null));
+        Assert.assertThrows(NullPointerException.class, () -> Comparators.reverse(null));
     }
 
     @Test
@@ -166,7 +166,7 @@ public class ComparatorsTest
     @Test
     public void chainedComparator()
     {
-        Verify.assertThrows(IllegalArgumentException.class, (Runnable) Comparators::chain);
+        Assert.assertThrows(IllegalArgumentException.class, Comparators::chain);
 
         Comparator<Person> byName = Comparators.byFunction(Person.TO_FIRST);
         Comparator<Person> byAge = Comparators.byFunction(Person.TO_AGE);

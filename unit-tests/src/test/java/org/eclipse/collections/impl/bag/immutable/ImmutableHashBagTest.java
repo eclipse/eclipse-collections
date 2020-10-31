@@ -99,7 +99,8 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
 
         MutableMultimap<Integer, Integer> expected = HashBagMultimap.newMultimap();
         int keys = this.numKeys();
-        immutableBag.forEachWithOccurrences((each, parameter) -> {
+        immutableBag.forEachWithOccurrences((each, parameter) ->
+        {
             HashBag<Integer> bag = HashBag.newBag();
             Interval.fromTo(each, keys).forEach((int eachInt) -> bag.addOccurrences(eachInt, eachInt));
             expected.putAll(-each, bag);
@@ -161,7 +162,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         Verify.assertIterableSize(3, this.newWith("one", "one", "two", "two", "three", "three").topOccurrences(1));
         Verify.assertIterableSize(0, this.newWith("one").newWithout("one").topOccurrences(0));
         Verify.assertIterableSize(0, this.newWith("one").topOccurrences(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith("one").topOccurrences(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith("one").topOccurrences(-1));
     }
 
     @Test
@@ -196,7 +197,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         Verify.assertIterableSize(3, this.newWith("one", "one", "two", "two", "three", "three").bottomOccurrences(1));
         Verify.assertIterableSize(0, this.newWith("one").newWithout("one").bottomOccurrences(0));
         Verify.assertIterableSize(0, this.newWith("one").bottomOccurrences(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith("one").bottomOccurrences(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith("one").bottomOccurrences(-1));
     }
 
     @Override

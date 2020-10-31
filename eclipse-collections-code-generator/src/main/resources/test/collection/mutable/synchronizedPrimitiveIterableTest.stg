@@ -83,7 +83,7 @@ public class Synchronized<name>IterableTest extends Abstract<name>IterableTestCa
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override

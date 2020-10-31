@@ -222,7 +222,7 @@ public class IterableIterateTest
         MutableList<Integer> objects = mList(1, null, 3);
         Iterable<Integer> iterable = new IterableAdapter<>(objects);
 
-        Verify.assertThrows(NullPointerException.class, () -> Iterate.detectOptional(iterable, Objects::isNull));
+        Assert.assertThrows(NullPointerException.class, () -> Iterate.detectOptional(iterable, Objects::isNull));
     }
 
     @Test
@@ -248,7 +248,7 @@ public class IterableIterateTest
         MutableList<Integer> objects = mList(1, null, 3);
         Iterable<Integer> iterable = new IterableAdapter<>(objects);
 
-        Verify.assertThrows(NullPointerException.class, () -> Iterate.detectWithOptional(iterable, (i, object) -> i == object, null));
+        Assert.assertThrows(NullPointerException.class, () -> Iterate.detectWithOptional(iterable, (i, object) -> i == object, null));
     }
 
     @Test
@@ -753,8 +753,8 @@ public class IterableIterateTest
         Assert.assertEquals(integers, results);
         MutableList<Integer> reverseResults = Lists.mutable.of();
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEach(integers, 4, -1, reverseResults::add));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEach(integers, -1, 4, reverseResults::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEach(integers, 4, -1, reverseResults::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEach(integers, -1, 4, reverseResults::add));
     }
 
     @Test
@@ -772,8 +772,8 @@ public class IterableIterateTest
         Assert.assertEquals(integers, results);
         MutableList<Integer> reverseResults = Lists.mutable.of();
         ObjectIntProcedure<Integer> objectIntProcedure = ObjectIntProcedures.fromProcedure(reverseResults::add);
-        Verify.assertThrows(IllegalArgumentException.class, () -> IterableIterate.forEachWithIndex(integers, 4, -1, objectIntProcedure));
-        Verify.assertThrows(IllegalArgumentException.class, () -> IterableIterate.forEachWithIndex(integers, -1, 4, objectIntProcedure));
+        Assert.assertThrows(IllegalArgumentException.class, () -> IterableIterate.forEachWithIndex(integers, 4, -1, objectIntProcedure));
+        Assert.assertThrows(IllegalArgumentException.class, () -> IterableIterate.forEachWithIndex(integers, -1, 4, objectIntProcedure));
     }
 
     @Test

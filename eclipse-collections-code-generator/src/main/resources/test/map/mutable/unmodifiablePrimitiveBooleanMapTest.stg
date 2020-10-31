@@ -186,7 +186,7 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
         Assert.assertFalse(this.classUnderTest().getOrThrow(<(literal.(type))("31")>));
         Assert.assertTrue(this.classUnderTest().getOrThrow(<(literal.(type))("32")>));
 
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("33")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("33")>));
     }
 
     @Override
@@ -337,7 +337,7 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
     {
         MutableBooleanIterator iterator = this.classUnderTest().booleanIterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -346,7 +346,7 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
     {
         MutableBooleanIterator iterator = this.classUnderTest().booleanIterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override

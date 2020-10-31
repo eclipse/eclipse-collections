@@ -289,8 +289,8 @@ public abstract class AbstractMultimapTestCase
         Multimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "One", 1, "Two", 2, "Three", 3);
         Set<String> keySet = (Set<String>) multimap.keySet();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> keySet.add("Four"));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> keySet.remove("Four"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> keySet.add("Four"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> keySet.remove("Four"));
         Assert.assertEquals(Sets.mutable.of("One", "Two", "Three"), keySet);
     }
 

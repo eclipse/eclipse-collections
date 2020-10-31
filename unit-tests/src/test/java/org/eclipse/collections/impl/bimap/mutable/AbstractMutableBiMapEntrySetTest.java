@@ -116,7 +116,7 @@ public abstract class AbstractMutableBiMapEntrySetTest
         MutableBiMap<Integer, Character> biMap = this.newMapWithKeysValues(1, 'a', 2, 'b', 3, 'c');
         Map.Entry<Integer, Character> entry = Iterate.getFirst(biMap.entrySet());
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> entry.setValue('b'));
+        Assert.assertThrows(IllegalArgumentException.class, () -> entry.setValue('b'));
         Verify.assertContainsKeyValue(2, 'b', biMap);
     }
 

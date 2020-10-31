@@ -21,8 +21,6 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.eclipse.collections.impl.test.Verify;
-
 /**
  * Provides a set of common tests of checked procedures for <type> values.
  * This file was automatically generated from template file checkedPrimitiveProcedureTest.stg.
@@ -49,7 +47,7 @@ public final class Checked<name>ProcedureTest
     @Test
     public void runtimeException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> {
+        Assert.assertThrows(RuntimeException.class, () -> {
             new Checked<name>Procedure()
             {
                 @Override
@@ -64,7 +62,7 @@ public final class Checked<name>ProcedureTest
     @Test
     public void checkedException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> {
+        Assert.assertThrows(RuntimeException.class, () -> {
             new Checked<name>Procedure()
             {
                 @Override

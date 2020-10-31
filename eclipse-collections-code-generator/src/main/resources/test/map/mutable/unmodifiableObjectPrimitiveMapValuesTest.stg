@@ -91,7 +91,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -408,7 +408,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -416,7 +416,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     {
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -457,8 +457,8 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
                 Lists.mutable.with(<name>Bags.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 

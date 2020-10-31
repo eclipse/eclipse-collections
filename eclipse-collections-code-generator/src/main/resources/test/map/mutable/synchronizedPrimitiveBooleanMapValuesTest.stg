@@ -423,8 +423,8 @@ public class Synchronized<name>BooleanMapValuesTest extends AbstractMutableBoole
                 Lists.mutable.with(BooleanBags.mutable.with(false, true)),
                 iterable3.chunk(3));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
     }
 
     @Override

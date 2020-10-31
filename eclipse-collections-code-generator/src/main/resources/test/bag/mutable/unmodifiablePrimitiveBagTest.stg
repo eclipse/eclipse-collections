@@ -25,7 +25,6 @@ import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
-import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -242,7 +241,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
         Mutable<name>Iterator iterator = unmodifiable<name>Bag.<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -252,7 +251,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
         Unmodifiable<name>Bag unmodifiable<name>Bag = this.classUnderTest();
         Mutable<name>Iterator iterator = unmodifiable<name>Bag.<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override

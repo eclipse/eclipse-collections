@@ -253,7 +253,8 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
 
         MutableList<String> list = Lists.mutable.empty();
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", 4, "Four");
-        map.forEachWithIndex((value, index) -> {
+        map.forEachWithIndex((value, index) ->
+        {
             list.add(value);
             list.add(String.valueOf(index));
         });
@@ -265,7 +266,8 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     {
         MutableList<String> list2 = Lists.mutable.empty();
         MutableSortedMap<Integer, String> revMap = this.newMapWithKeysValues(REV_INT_ORDER, 1, "One", 2, "Two", 3, "Three", 4, "Four");
-        revMap.forEachWithIndex((value, index) -> {
+        revMap.forEachWithIndex((value, index) ->
+        {
             list2.add(value);
             list2.add(String.valueOf(index));
         });
@@ -438,7 +440,8 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         super.flatten_value();
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(REV_INT_ORDER, 1, "cd", 2, "ab");
 
-        Function<String, Iterable<Character>> function = object -> {
+        Function<String, Iterable<Character>> function = object ->
+        {
             MutableList<Character> result = Lists.mutable.empty();
             char[] chars = object.toCharArray();
             for (char aChar : chars)
@@ -734,7 +737,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     {
         super.asUnmodifiable();
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, 1, 2, 2).asUnmodifiable().put(3, 3));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, 1, 2, 2).asUnmodifiable().put(3, 3));
 
         Verify.assertInstanceOf(UnmodifiableTreeMap.class, this.newMapWithKeysValues(1, "1", 2, "2").asUnmodifiable());
     }
@@ -761,7 +764,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         Assert.assertEquals("Two", revMap.firstKey());
 
         MutableSortedMap<Object, Object> emptyMap = this.newMap();
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) emptyMap::firstKey);
+        Assert.assertThrows(NoSuchElementException.class, emptyMap::firstKey);
     }
 
     @Test
@@ -775,7 +778,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         Assert.assertEquals("Four", revMap.lastKey());
 
         MutableSortedMap<Object, Object> emptyMap = this.newMap();
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) emptyMap::lastKey);
+        Assert.assertThrows(NoSuchElementException.class, emptyMap::lastKey);
     }
 
     @Test
@@ -796,7 +799,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         map.clear();
         Verify.assertEmpty(subMap);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> subMap.put(4, "Illegal"));
+        Assert.assertThrows(IllegalArgumentException.class, () -> subMap.put(4, "Illegal"));
     }
 
     @Test
@@ -817,7 +820,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         map.clear();
         Verify.assertEmpty(subMap);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> subMap.put(1, "Illegal"));
+        Assert.assertThrows(IllegalArgumentException.class, () -> subMap.put(1, "Illegal"));
     }
 
     @Test
@@ -841,9 +844,9 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         subMap.removeKey(2);
         Verify.assertNotContainsKey(2, map);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> subMap.put(4, "Illegal"));
+        Assert.assertThrows(IllegalArgumentException.class, () -> subMap.put(4, "Illegal"));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> subMap.put(1, "Illegal"));
+        Assert.assertThrows(IllegalArgumentException.class, () -> subMap.put(1, "Illegal"));
     }
 
     @Test

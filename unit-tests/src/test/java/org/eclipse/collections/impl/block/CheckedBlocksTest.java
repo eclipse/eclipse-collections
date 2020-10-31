@@ -43,7 +43,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedFunction2CheckedException()
     {
-        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () -> {
+        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () ->
+        {
             CheckedFunction2<String, String, String> block =
                     new CheckedFunction2<String, String, String>()
                     {
@@ -60,7 +61,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedFunction2RuntimeException()
     {
-        Verify.assertThrows(LocalException.class, () -> {
+        Assert.assertThrows(LocalException.class, () ->
+        {
             CheckedFunction2<String, String, String> block =
                     new CheckedFunction2<String, String, String>()
                     {
@@ -77,7 +79,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedCodeBlockCheckedException()
     {
-        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () -> {
+        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () ->
+        {
             CheckedFunction0<String> function = new CheckedFunction0<String>()
             {
                 @Override
@@ -93,7 +96,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedCodeBlockRuntimeException()
     {
-        Verify.assertThrows(LocalException.class, () -> {
+        Assert.assertThrows(LocalException.class, () ->
+        {
             CheckedFunction0<String> function = new CheckedFunction0<String>()
             {
                 @Override
@@ -109,7 +113,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedProcedureCheckedException()
     {
-        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () -> {
+        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () ->
+        {
             CheckedProcedure<String> block = new CheckedProcedure<String>()
             {
                 @Override
@@ -125,7 +130,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedProcedureRuntimeException()
     {
-        Verify.assertThrows(LocalException.class, () -> {
+        Assert.assertThrows(LocalException.class, () ->
+        {
             CheckedProcedure<String> block = new CheckedProcedure<String>()
             {
                 @Override
@@ -141,7 +147,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedObjectIntProcedureCheckedException()
     {
-        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () -> {
+        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () ->
+        {
             CheckedObjectIntProcedure<String> block = new CheckedObjectIntProcedure<String>()
             {
                 @Override
@@ -157,7 +164,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedObjectIntProcedureRuntimeException()
     {
-        Verify.assertThrows(LocalException.class, () -> {
+        Assert.assertThrows(LocalException.class, () ->
+        {
             CheckedObjectIntProcedure<String> block = new CheckedObjectIntProcedure<String>()
             {
                 @Override
@@ -173,7 +181,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedFunctionCheckedException()
     {
-        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () -> {
+        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () ->
+        {
             CheckedFunction<String, String> block =
                     new CheckedFunction<String, String>()
                     {
@@ -190,7 +199,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedFunctionRuntimeException()
     {
-        Verify.assertThrows(LocalException.class, () -> {
+        Assert.assertThrows(LocalException.class, () ->
+        {
             CheckedFunction<String, String> block =
                     new CheckedFunction<String, String>()
                     {
@@ -207,7 +217,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedPredicateCheckedException()
     {
-        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () -> {
+        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () ->
+        {
             CheckedPredicate<String> block = new CheckedPredicate<String>()
             {
                 @Override
@@ -223,7 +234,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedPredicateRuntimeException()
     {
-        Verify.assertThrows(LocalException.class, () -> {
+        Assert.assertThrows(LocalException.class, () ->
+        {
             CheckedPredicate<String> block = new CheckedPredicate<String>()
             {
                 @Override
@@ -239,7 +251,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedPredicate2CheckedException()
     {
-        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () -> {
+        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () ->
+        {
             CheckedPredicate2<String, String> block =
                     new CheckedPredicate2<String, String>()
                     {
@@ -256,7 +269,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedPredicate2RuntimeException()
     {
-        Verify.assertThrows(LocalException.class, () -> {
+        Assert.assertThrows(LocalException.class, () ->
+        {
             CheckedPredicate2<String, String> block =
                     new CheckedPredicate2<String, String>()
                     {
@@ -273,7 +287,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedProcedure2CheckedException()
     {
-        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () -> {
+        Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, () ->
+        {
             CheckedProcedure2<String, String> block = new CheckedProcedure2<String, String>()
             {
                 @Override
@@ -289,7 +304,8 @@ public class CheckedBlocksTest
     @Test
     public void checkedProcedure2RuntimeException()
     {
-        Verify.assertThrows(LocalException.class, () -> {
+        Assert.assertThrows(LocalException.class, () ->
+        {
             CheckedProcedure2<String, String> block = new CheckedProcedure2<String, String>()
             {
                 @Override

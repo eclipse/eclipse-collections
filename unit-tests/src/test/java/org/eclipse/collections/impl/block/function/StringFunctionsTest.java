@@ -88,10 +88,10 @@ public final class StringFunctionsTest
         Assert.assertEquals(testString, function2.valueOf(testString));
 
         Function<String, String> function3 = StringFunctions.subString(0, testString.length() + 1);
-        Verify.assertThrows(StringIndexOutOfBoundsException.class, () -> function3.valueOf(testString));
+        Assert.assertThrows(StringIndexOutOfBoundsException.class, () -> function3.valueOf(testString));
 
         Function<String, String> function4 = StringFunctions.subString(-1, 1);
-        Verify.assertThrows(StringIndexOutOfBoundsException.class, () -> function4.valueOf(testString));
+        Assert.assertThrows(StringIndexOutOfBoundsException.class, () -> function4.valueOf(testString));
     }
 
     @Test(expected = StringIndexOutOfBoundsException.class)

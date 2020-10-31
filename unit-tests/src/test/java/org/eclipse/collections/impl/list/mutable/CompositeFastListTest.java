@@ -44,7 +44,7 @@ public class CompositeFastListTest extends AbstractListTestCase
     @Test
     public void testClone()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newWith().clone());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().clone());
     }
 
     @Test
@@ -155,7 +155,7 @@ public class CompositeFastListTest extends AbstractListTestCase
         Assert.assertEquals("4", list.get(3));
         Assert.assertEquals("Cat", list.get(8));
         Assert.assertEquals("Bird", list.get(11));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.get(12));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.get(12));
     }
 
     @Test
@@ -194,7 +194,7 @@ public class CompositeFastListTest extends AbstractListTestCase
     @Test
     public void addAllAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, super::addAllAtIndex);
+        Assert.assertThrows(UnsupportedOperationException.class, super::addAllAtIndex);
     }
 
     @Override

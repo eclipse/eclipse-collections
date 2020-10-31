@@ -104,7 +104,7 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
 
         MutableList<Integer> collection = this.newWith(1, 2, 3);
         Verify.assertContainsAll(collection, 1, 2, 3);
-        Verify.assertThrows(IllegalArgumentException.class, () -> new RandomAccessListAdapter<>(new LinkedList<>()));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new RandomAccessListAdapter<>(new LinkedList<>()));
     }
 
     @Override
@@ -232,8 +232,8 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
     @Test
     public void adaptNull()
     {
-        Verify.assertThrows(NullPointerException.class, () -> new RandomAccessListAdapter<>(null));
-        Verify.assertThrows(NullPointerException.class, () -> RandomAccessListAdapter.adapt(null));
+        Assert.assertThrows(NullPointerException.class, () -> new RandomAccessListAdapter<>(null));
+        Assert.assertThrows(NullPointerException.class, () -> RandomAccessListAdapter.adapt(null));
     }
 
     @Test

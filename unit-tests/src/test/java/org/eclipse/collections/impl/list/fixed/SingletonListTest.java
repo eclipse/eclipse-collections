@@ -92,8 +92,8 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     public void get()
     {
         Verify.assertItemAtIndex("1", 0, this.list);
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(1));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(-1));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(1));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(-1));
     }
 
     @Test
@@ -142,7 +142,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     {
         Assert.assertEquals("1", this.list.set(0, "2"));
         Assert.assertEquals(FastList.newListWith("2"), this.list);
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.list.set(1, "2"));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.set(1, "2"));
     }
 
     @Test
@@ -381,14 +381,14 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     public void removeIf()
     {
         MutableList<Integer> objects = SingletonListTest.newWith(1);
-        Verify.assertThrows(UnsupportedOperationException.class, () -> objects.removeIf(Predicates.isNull()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> objects.removeIf(Predicates.isNull()));
     }
 
     @Test
     public void removeIfWith()
     {
         MutableList<Integer> objects = SingletonListTest.newWith(1);
-        Verify.assertThrows(UnsupportedOperationException.class, () -> objects.removeIfWith(Predicates2.isNull(), null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> objects.removeIfWith(Predicates2.isNull(), null));
     }
 
     @Test

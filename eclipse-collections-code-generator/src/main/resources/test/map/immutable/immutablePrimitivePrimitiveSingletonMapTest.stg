@@ -36,7 +36,6 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;<endif>
 import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
 import org.eclipse.collections.impl.math.Mutable<primitive2.wrapperName>;
-import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -130,7 +129,7 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
         Assert.assertTrue(iterator.hasNext());
         Assert.assertEquals(<(wideLiteral.(type2))("0")>, iterator.next()<wideDelta.(type2)>);
         Assert.assertFalse(iterator.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -139,8 +138,8 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     {
         Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.getOrThrow(<(literal.(type1))("0")>)<wideDelta.(type2)>);
 
-        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("31")>));
-        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("32")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("31")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("32")>));
     }
 
     @Override

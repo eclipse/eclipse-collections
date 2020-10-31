@@ -171,8 +171,8 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     public void get()
     {
         ImmutableList<Integer> list = this.classUnderTest();
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.get(list.size() + 1));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.get(-1));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.get(list.size() + 1));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.get(-1));
     }
 
     @Test
@@ -433,32 +433,32 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void removeAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToList().remove(1));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToList().remove(1));
     }
 
     @Test
     public void set()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToList().set(0, 1));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToList().set(0, 1));
     }
 
     @Test
     public void addAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToList().add(0, 1));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToList().add(0, 1));
     }
 
     @Test
     public void addAllAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> this.classUnderTest().castToList().addAll(0, Lists.fixedSize.of()));
     }
 
     @Test
     public void sort()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> this.classUnderTest().castToList().sort(Comparator.naturalOrder()));
     }
 
@@ -480,21 +480,21 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void subListFromNegative()
     {
-        Verify.assertThrows(IndexOutOfBoundsException.class,
+        Assert.assertThrows(IndexOutOfBoundsException.class,
                 () -> this.classUnderTest().castToList().subList(-1, 1));
     }
 
     @Test
     public void subListFromGreaterThanTO()
     {
-        Verify.assertThrows(IllegalArgumentException.class,
+        Assert.assertThrows(IllegalArgumentException.class,
                 () -> this.classUnderTest().castToList().subList(1, 0));
     }
 
     @Test
     public void subListToGreaterThanSize()
     {
-        Verify.assertThrows(IndexOutOfBoundsException.class,
+        Assert.assertThrows(IndexOutOfBoundsException.class,
                 () -> this.classUnderTest().castToList().subList(0, 100));
     }
 
@@ -504,7 +504,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         ListIterator<Integer> it = this.classUnderTest().listIterator();
         Assert.assertFalse(it.hasPrevious());
 
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) it::previous);
+        Assert.assertThrows(NoSuchElementException.class, it::previous);
 
         Assert.assertEquals(-1, it.previousIndex());
         Assert.assertEquals(0, it.nextIndex());
@@ -521,14 +521,14 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void listIterator_throwsNegative()
     {
-        Verify.assertThrows(IndexOutOfBoundsException.class,
+        Assert.assertThrows(IndexOutOfBoundsException.class,
                 () -> this.classUnderTest().listIterator(-1));
     }
 
     @Test
     public void listIterator_throwsGreaterThanSize()
     {
-        Verify.assertThrows(IndexOutOfBoundsException.class,
+        Assert.assertThrows(IndexOutOfBoundsException.class,
                 () -> this.classUnderTest().listIterator(100));
     }
 
@@ -558,7 +558,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void take_throws()
     {
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().take(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().take(-1));
     }
 
     @Test
@@ -591,7 +591,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void drop_throws()
     {
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().drop(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().drop(-1));
     }
 
     @Test

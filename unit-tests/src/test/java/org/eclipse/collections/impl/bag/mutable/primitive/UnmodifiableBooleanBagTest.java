@@ -15,7 +15,6 @@ import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -218,7 +217,7 @@ public class UnmodifiableBooleanBagTest extends AbstractMutableBooleanBagTestCas
         MutableBooleanIterator booleanIterator = this.classUnderTest().booleanIterator();
         Assert.assertTrue(booleanIterator.hasNext());
         booleanIterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 
     @Override
@@ -227,7 +226,7 @@ public class UnmodifiableBooleanBagTest extends AbstractMutableBooleanBagTestCas
     {
         MutableBooleanIterator booleanIterator = this.classUnderTest().booleanIterator();
         Assert.assertTrue(booleanIterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 
     @Override

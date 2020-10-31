@@ -134,9 +134,9 @@ public abstract class StackIterableTestCase
     public void peek_illegal_arguments()
     {
         StackIterable<Integer> stack = this.newStackFromTopToBottom(1, 2, 3);
-        Verify.assertThrows(IllegalArgumentException.class, () -> stack.peek(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> stack.peek(-1));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> stack.peek(4));
+        Assert.assertThrows(IllegalArgumentException.class, () -> stack.peek(4));
 
         Assert.assertEquals(Lists.mutable.with(1, 2, 3), stack.peek(3));
     }
@@ -161,7 +161,7 @@ public abstract class StackIterableTestCase
     public void peekAt_illegal_arguments()
     {
         StackIterable<String> stack = this.newStackWith("1", "2", "3");
-        Verify.assertThrows(IllegalArgumentException.class, () -> stack.peekAt(stack.size()));
+        Assert.assertThrows(IllegalArgumentException.class, () -> stack.peekAt(stack.size()));
     }
 
     @Test
@@ -181,7 +181,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackWith(1, 2, 3);
         Assert.assertEquals(Integer.valueOf(3), stack.getFirst());
         Assert.assertEquals(stack.peek(), stack.getFirst());
-        Verify.assertThrows(EmptyStackException.class, () -> this.newStackWith().getFirst());
+        Assert.assertThrows(EmptyStackException.class, () -> this.newStackWith().getFirst());
         StackIterable<Integer> stack2 = this.newStackFromTopToBottom(1, 2, 3);
         Assert.assertEquals(Integer.valueOf(1), stack2.getFirst());
     }
@@ -458,7 +458,8 @@ public abstract class StackIterableTestCase
     {
         StackIterable<String> stack = this.newStackFromTopToBottom("1", "One", "2", "Two");
 
-        CountingFunction<String, Iterable<Character>> function = CountingFunction.of(object -> {
+        CountingFunction<String, Iterable<Character>> function = CountingFunction.of(object ->
+        {
             MutableList<Character> result = Lists.mutable.of();
             char[] chars = object.toCharArray();
             for (char aChar : chars)
@@ -819,7 +820,8 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> values = this.newStackWith(integers.toArray(new Integer[]{}));
         ObjectDoubleMap<Integer> result = values.sumByFloat(
                 integer -> integer > 100_000 ? 2 : 1,
-                integer -> {
+                integer ->
+                {
                     Integer i = integer > 100_000 ? integer - 100_000 : integer;
                     return 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue());
                 });
@@ -848,7 +850,8 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> values = this.newStackWith(integers.toArray(new Integer[]{}));
         ObjectDoubleMap<Integer> result = values.sumByDouble(
                 integer -> integer > 100_000 ? 2 : 1,
-                integer -> {
+                integer ->
+                {
                     Integer i = integer > 100_000 ? integer - 100_000 : integer;
                     return 1.0d / (i.doubleValue() * i.doubleValue() * i.doubleValue() * i.doubleValue());
                 });

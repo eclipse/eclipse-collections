@@ -120,14 +120,14 @@ public abstract class ObjectBooleanHashMapKeySetTestCase
 
         HashBag<String> expected = HashBag.newBagWith("One", "Two", "Three", null);
         HashBag<String> actual = HashBag.newBag();
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
         for (int i = 0; i < 4; i++)
         {
             Assert.assertTrue(iterator.hasNext());
             actual.add(iterator.next());
         }
         Assert.assertFalse(iterator.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
         Assert.assertEquals(expected, actual);
 
         Iterator<String> iterator1 = keySet.iterator();
@@ -136,7 +136,7 @@ public abstract class ObjectBooleanHashMapKeySetTestCase
             Assert.assertTrue(iterator1.hasNext());
             iterator1.next();
             iterator1.remove();
-            Verify.assertThrows(IllegalStateException.class, iterator1::remove);
+            Assert.assertThrows(IllegalStateException.class, iterator1::remove);
             Verify.assertSize(i - 1, keySet);
             Verify.assertSize(i - 1, map);
         }

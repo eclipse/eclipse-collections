@@ -90,9 +90,9 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
     @Test
     public void newSet_throws()
     {
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<>(INTEGER_HASHING_STRATEGY, -1, 0.5f));
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<>(INTEGER_HASHING_STRATEGY, 1, -0.5f));
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<>(INTEGER_HASHING_STRATEGY, 1, 1.5f));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<>(INTEGER_HASHING_STRATEGY, -1, 0.5f));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<>(INTEGER_HASHING_STRATEGY, 1, -0.5f));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<>(INTEGER_HASHING_STRATEGY, 1, 1.5f));
     }
 
     @Override
@@ -216,7 +216,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
         Assert.assertEquals(UnifiedSetWithHashingStrategy.newSetWith(INTEGER_HASHING_STRATEGY, 1, 2, 3), set1);
 
         //testing null
-        Verify.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(INTEGER_HASHING_STRATEGY, null));
+        Assert.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(INTEGER_HASHING_STRATEGY, null));
     }
 
     @Override
@@ -311,7 +311,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
         Verify.assertSetsEqual(UnifiedSet.newSetWith(null, 1, 2, 3), caseB);
 
         //Testing add throws NullPointerException if the hashingStrategy is not null safe
-        Verify.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).add(null));
+        Assert.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).add(null));
     }
 
     @Test
@@ -461,7 +461,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
         Verify.assertSetsEqual(UnifiedSet.newSet(LAST_NAME_HASHED_SET).with(notInSet, null), people);
 
         //Testing addAllIterable throws NullPointerException if the hashingStrategy is not null safe
-        Verify.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).addAllIterable(UnifiedSet.newSetWith((Person) null)));
+        Assert.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).addAllIterable(UnifiedSet.newSetWith((Person) null)));
     }
 
     @Test
@@ -513,7 +513,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
         Assert.assertNull(people.get(new Person("John", "NotHere")));
 
         //Testing get throws NullPointerException if the hashingStrategy is not null safe
-        Verify.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).get(null));
+        Assert.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).get(null));
     }
 
     @Test
@@ -594,7 +594,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
         Verify.assertSize(4, people);
 
         //Testing put throws NullPointerException if the hashingStrategy is not null safe
-        Verify.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).put(null));
+        Assert.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).put(null));
     }
 
     @Test
@@ -648,7 +648,8 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
     {
         Pool<Integer> unifiedSet = UnifiedSetWithHashingStrategy.newSet(
                 INTEGER_HASHING_STRATEGY, 8).withAll(COLLISIONS);
-        COLLISIONS.reverseForEach(each -> {
+        COLLISIONS.reverseForEach(each ->
+        {
             Assert.assertNull(unifiedSet.removeFromPool(null));
             Assert.assertSame(each, unifiedSet.removeFromPool(each));
             Assert.assertNull(unifiedSet.removeFromPool(each));
@@ -658,7 +659,8 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
 
         Assert.assertEquals(UnifiedSetWithHashingStrategy.newSet(INTEGER_HASHING_STRATEGY), unifiedSet);
 
-        COLLISIONS.forEach(Procedures.cast(each -> {
+        COLLISIONS.forEach(Procedures.cast(each ->
+        {
             Pool<Integer> unifiedSet2 = UnifiedSetWithHashingStrategy.newSet(
                     INTEGER_HASHING_STRATEGY, 8).withAll(COLLISIONS);
 
@@ -760,7 +762,8 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
     {
         UnifiedSetWithHashingStrategy<Integer> unifiedSet = UnifiedSetWithHashingStrategy.newSet(
                 INTEGER_HASHING_STRATEGY, 8).withAll(MORE_COLLISIONS);
-        MORE_COLLISIONS.clone().reverseForEach(each -> {
+        MORE_COLLISIONS.clone().reverseForEach(each ->
+        {
             Assert.assertTrue(unifiedSet.add(null));
             Assert.assertFalse(unifiedSet.add(null));
             Verify.assertContains(null, unifiedSet);

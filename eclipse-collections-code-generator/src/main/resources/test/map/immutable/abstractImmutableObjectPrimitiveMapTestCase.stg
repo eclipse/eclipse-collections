@@ -83,14 +83,14 @@ public abstract class AbstractImmutableObject<name>MapTestCase extends AbstractO
     public void keySet()
     {
         super.keySet();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().keySet().remove("0"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().keySet().remove("0"));
     }
 
     @Override
     public void values()
     {
         super.values();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().values().remove(<(literal.(type))("0")>));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().values().remove(<(literal.(type))("0")>));
     }
 
     @Test
@@ -105,7 +105,7 @@ public abstract class AbstractImmutableObject<name>MapTestCase extends AbstractO
                 <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, "1", <(literal.(type))("3")>, "2").toImmutable(),
                 this.newWithKeysValues("1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>).flipUniqueValues());
 
-        Verify.assertThrows(IllegalStateException.class, () -> this.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("1")>).flipUniqueValues());
+        Assert.assertThrows(IllegalStateException.class, () -> this.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("1")>).flipUniqueValues());
     }
 }
 

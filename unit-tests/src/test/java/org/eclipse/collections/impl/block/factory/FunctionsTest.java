@@ -54,7 +54,13 @@ public class FunctionsTest
         Verify.assertThrowsWithCause(
                 RuntimeException.class,
                 IOException.class,
-                () -> { Functions.throwing(a -> { throw new IOException(); }).valueOf(null); });
+                () ->
+                {
+                    Functions.throwing(a ->
+                    {
+                        throw new IOException();
+                    }).valueOf(null);
+                });
     }
 
     @Test
@@ -63,24 +69,36 @@ public class FunctionsTest
         Verify.assertThrowsWithCause(
                 RuntimeException.class,
                 IOException.class,
-                () -> {
+                () ->
+                {
                     Functions.throwing(
-                            a -> { throw new IOException(); },
+                            a ->
+                            {
+                                throw new IOException();
+                            },
                             (each, ce) -> new RuntimeException(ce)).valueOf(null);
                 });
         Verify.assertThrowsWithCause(
                 MyRuntimeException.class,
                 IOException.class,
-                () -> {
+                () ->
+                {
                     Functions.throwing(
-                            a -> { throw new IOException(); },
+                            a ->
+                            {
+                                throw new IOException();
+                            },
                             this::throwMyException).valueOf(null);
                 });
-        Verify.assertThrows(
+        Assert.assertThrows(
                 NullPointerException.class,
-                () -> {
+                () ->
+                {
                     Functions.throwing(
-                            a -> { throw new NullPointerException(); },
+                            a ->
+                            {
+                                throw new NullPointerException();
+                            },
                             this::throwMyException).valueOf(null);
                 });
     }

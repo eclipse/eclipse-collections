@@ -159,7 +159,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
             Assert.assertEquals(size, Integer.parseInt(integerString) + i);
         }
 
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test(expected = UnsupportedOperationException.class)

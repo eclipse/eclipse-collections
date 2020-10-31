@@ -521,7 +521,7 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
         }
 
         Assert.assertFalse(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
         Assert.assertEquals(objects.toBag(), actual);
     }
 

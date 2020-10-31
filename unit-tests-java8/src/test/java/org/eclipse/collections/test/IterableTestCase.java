@@ -141,7 +141,8 @@ public interface IterableTestCase
                     assertSame(comparator1.getClass(), comparator2.getClass());
                 }
             }
-        } else if (o1 instanceof SortedMap<?, ?> || o2 instanceof SortedMap<?, ?>)
+        }
+        else if (o1 instanceof SortedMap<?, ?> || o2 instanceof SortedMap<?, ?>)
         {
             IterableTestCase.assertEquals(((SortedMap<?, ?>) o1).keySet(), ((SortedMap<?, ?>) o2).keySet());
         }

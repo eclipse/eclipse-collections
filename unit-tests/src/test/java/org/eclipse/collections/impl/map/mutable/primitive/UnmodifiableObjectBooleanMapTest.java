@@ -195,8 +195,8 @@ public class UnmodifiableObjectBooleanMapTest extends AbstractMutableObjectBoole
         Assert.assertTrue(this.map.getOrThrow("1"));
         Assert.assertFalse(this.map.getOrThrow("2"));
 
-        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow("5"));
-        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(null));
+        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow("5"));
+        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(null));
     }
 
     @Override
@@ -282,7 +282,7 @@ public class UnmodifiableObjectBooleanMapTest extends AbstractMutableObjectBoole
         MutableBooleanIterator booleanIterator = map.booleanIterator();
         Assert.assertTrue(booleanIterator.hasNext());
         booleanIterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 
     @Override
@@ -292,7 +292,7 @@ public class UnmodifiableObjectBooleanMapTest extends AbstractMutableObjectBoole
         UnmodifiableObjectBooleanMap<String> map = this.classUnderTest();
         MutableBooleanIterator booleanIterator = map.booleanIterator();
         Assert.assertTrue(booleanIterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 
     @Override

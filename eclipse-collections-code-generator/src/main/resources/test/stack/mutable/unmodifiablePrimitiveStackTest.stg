@@ -99,7 +99,7 @@ public class Unmodifiable<name>StackTest extends Abstract<name>StackTestCase
         Mutable<name>Iterator iterator = (Mutable<name>Iterator) <type>Iterable.<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class Unmodifiable<name>StackTest extends Abstract<name>StackTestCase
         Unmodifiable<name>Stack <type>Iterable = (Unmodifiable<name>Stack) this.classUnderTest();
         Mutable<name>Iterator iterator = (Mutable<name>Iterator) <type>Iterable.<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 }
 

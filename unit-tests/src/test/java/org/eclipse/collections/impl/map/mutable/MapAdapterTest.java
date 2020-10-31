@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -70,8 +69,8 @@ public class MapAdapterTest extends MutableMapTestCase
     @Test
     public void adaptNull()
     {
-        Verify.assertThrows(NullPointerException.class, () -> new MapAdapter<>(null));
+        Assert.assertThrows(NullPointerException.class, () -> new MapAdapter<>(null));
 
-        Verify.assertThrows(NullPointerException.class, () -> MapAdapter.adapt(null));
+        Assert.assertThrows(NullPointerException.class, () -> MapAdapter.adapt(null));
     }
 }

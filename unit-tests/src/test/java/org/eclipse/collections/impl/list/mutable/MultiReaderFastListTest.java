@@ -732,7 +732,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         MutableList<Integer> midList = FastList.<Integer>newList(2).with(1, 3);
         midList.add(1, 2);
         Verify.assertStartsWith(midList, 1, 2, 3);
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> midList.add(-1, -1));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> midList.add(-1, -1));
     }
 
     @Override
@@ -825,7 +825,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     public void outOfBoundsCondition()
     {
         MutableList<Integer> integers = this.newWith(1, 2, 3, 4);
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.get(4));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.get(4));
     }
 
     @Override
@@ -987,7 +987,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     public void iterator()
     {
         MultiReaderFastList<Integer> integers = this.newWith(1, 2, 3, 4);
-        Verify.assertThrows(UnsupportedOperationException.class, (Runnable) integers::iterator);
+        Assert.assertThrows(UnsupportedOperationException.class, integers::iterator);
     }
 
     @Override
@@ -1028,7 +1028,8 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         AtomicReference<Iterator<?>> iterator = new AtomicReference<>();
         AtomicReference<Iterator<?>> listIterator = new AtomicReference<>();
         AtomicReference<Iterator<?>> listIteratorWithPosition = new AtomicReference<>();
-        list.withWriteLockAndDelegate(delegate -> {
+        list.withWriteLockAndDelegate(delegate ->
+        {
             delegate.add(1);
             delegate.add(2);
             delegate.add(3);
@@ -1050,12 +1051,12 @@ public class MultiReaderFastListTest extends AbstractListTestCase
 
     private void assertIteratorThrows(Iterator<?> iterator)
     {
-        Verify.assertThrows(NullPointerException.class, (Runnable) iterator::hasNext);
+        Assert.assertThrows(NullPointerException.class, iterator::hasNext);
     }
 
     private void assertIteratorThrows(MutableList<?> list)
     {
-        Verify.assertThrows(NullPointerException.class, (Runnable) list::iterator);
+        Assert.assertThrows(NullPointerException.class, list::iterator);
     }
 
     @Test
@@ -1063,7 +1064,8 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     {
         MultiReaderFastList<Integer> list = this.newWith(1);
         Object[] result = new Object[1];
-        list.withReadLockAndDelegate(delegate -> {
+        list.withReadLockAndDelegate(delegate ->
+        {
             result[0] = delegate.getFirst();
             this.verifyDelegateIsUnmodifiable(delegate);
         });
@@ -1072,8 +1074,8 @@ public class MultiReaderFastListTest extends AbstractListTestCase
 
     private void verifyDelegateIsUnmodifiable(MutableList<Integer> delegate)
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> delegate.add(2));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> delegate.remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> delegate.add(2));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> delegate.remove(0));
     }
 
     @Override

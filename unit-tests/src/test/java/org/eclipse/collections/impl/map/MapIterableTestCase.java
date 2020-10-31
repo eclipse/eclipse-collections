@@ -261,7 +261,8 @@ public abstract class MapIterableTestCase
     {
         MutableList<String> result = Lists.mutable.of();
         MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", 4, "Four");
-        map.forEachWithIndex((value, index) -> {
+        map.forEachWithIndex((value, index) ->
+        {
             result.add(value);
             result.add(String.valueOf(index));
         });
@@ -311,7 +312,7 @@ public abstract class MapIterableTestCase
         MapIterable<String, Integer> result = map.flipUniqueValues();
         Assert.assertEquals(UnifiedMap.newWithKeysValues("1", 1, "2", 2, "3", 3), result);
 
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IllegalStateException.class,
                 () -> this.newMapWithKeysValues(1, "2", 2, "2").flipUniqueValues());
     }
@@ -1083,7 +1084,8 @@ public abstract class MapIterableTestCase
     {
         MapIterable<String, String> map = this.newMapWithKeysValues("1", "One", "2", "Two");
 
-        Function<String, Iterable<Character>> function = object -> {
+        Function<String, Iterable<Character>> function = object ->
+        {
             MutableList<Character> result = Lists.mutable.of();
             char[] chars = object.toCharArray();
             for (char aChar : chars)
@@ -1177,7 +1179,8 @@ public abstract class MapIterableTestCase
                 Tuples.pair(Boolean.FALSE, 2), Tuples.pair(Boolean.FALSE, 4));
 
         Multimap<Boolean, Integer> actual = map.groupBy(isOddFunction);
-        expected.forEachKey(each -> {
+        expected.forEachKey(each ->
+        {
             Assert.assertTrue(actual.containsKey(each));
             MutableList<Integer> values = actual.get(each).toList();
             Verify.assertNotEmpty(values);
@@ -1185,7 +1188,8 @@ public abstract class MapIterableTestCase
         });
 
         Multimap<Boolean, Integer> actualFromTarget = map.groupBy(isOddFunction, FastListMultimap.newMultimap());
-        expected.forEachKey(each -> {
+        expected.forEachKey(each ->
+        {
             Assert.assertTrue(actualFromTarget.containsKey(each));
             MutableList<Integer> values = actualFromTarget.get(each).toList();
             Verify.assertNotEmpty(values);
@@ -1206,7 +1210,8 @@ public abstract class MapIterableTestCase
 
         NegativeIntervalFunction function = new NegativeIntervalFunction();
         Multimap<Integer, Integer> actual = map.groupByEach(function);
-        expected.forEachKey(each -> {
+        expected.forEachKey(each ->
+        {
             Assert.assertTrue(actual.containsKey(each));
             MutableList<Integer> values = actual.get(each).toList();
             Verify.assertNotEmpty(values);
@@ -1214,7 +1219,8 @@ public abstract class MapIterableTestCase
         });
 
         Multimap<Integer, Integer> actualFromTarget = map.groupByEach(function, FastListMultimap.newMultimap());
-        expected.forEachKey(each -> {
+        expected.forEachKey(each ->
+        {
             Assert.assertTrue(actualFromTarget.containsKey(each));
             MutableList<Integer> values = actualFromTarget.get(each).toList();
             Verify.assertNotEmpty(values);
@@ -1331,7 +1337,8 @@ public abstract class MapIterableTestCase
         String greaterOrEqualsToTen = "greaterOrEqualsToTen";
 
         MapIterable<String, Long> result = map.aggregateBy(
-                eachKey -> {
+                eachKey ->
+                {
                     return eachKey.equals(oneToFive) || eachKey.equals(sixToNine) ? lessThanTen : greaterOrEqualsToTen;
                 },
                 each -> each.sumOfInt(Integer::intValue),

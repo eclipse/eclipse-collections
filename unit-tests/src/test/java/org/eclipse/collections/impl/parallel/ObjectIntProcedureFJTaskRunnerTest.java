@@ -17,7 +17,7 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.block.factory.ObjectIntProcedures;
 import org.eclipse.collections.impl.block.procedure.DoNothingProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,13 +38,13 @@ public class ObjectIntProcedureFJTaskRunnerTest
     @Test
     public void taskCompletedUsingNonCombineOne()
     {
-        Verify.assertThrows(CountDownCalledException.class, () -> this.undertest.taskCompleted(null));
+        Assert.assertThrows(CountDownCalledException.class, () -> this.undertest.taskCompleted(null));
     }
 
     @Test
     public void joinUsingNonCombineOne()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 AwaitDownCalledException.class,
                 () -> this.undertest.executeAndCombine(
                         new DoNothingExecutor(),

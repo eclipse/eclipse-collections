@@ -451,7 +451,7 @@ public abstract class AbstractMutableBooleanCollectionTestCase extends AbstractB
         }
         Verify.assertEmpty(booleanIterable);
         Assert.assertFalse(iterator.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -460,7 +460,7 @@ public abstract class AbstractMutableBooleanCollectionTestCase extends AbstractB
         MutableBooleanCollection booleanIterable = this.newWith(true, false);
         MutableBooleanIterator iterator = booleanIterable.booleanIterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     @Test
@@ -470,7 +470,7 @@ public abstract class AbstractMutableBooleanCollectionTestCase extends AbstractB
         MutableBooleanIterator iterator = booleanIterable.booleanIterator();
         iterator.next();
         iterator.remove();
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     @Test
@@ -498,7 +498,7 @@ public abstract class AbstractMutableBooleanCollectionTestCase extends AbstractB
                 Lists.mutable.with(this.newMutableCollectionWith(false, true)),
                 iterable3.chunk(3));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
     }
 }

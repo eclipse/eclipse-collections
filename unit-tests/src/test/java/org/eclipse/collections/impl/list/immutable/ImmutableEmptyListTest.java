@@ -102,8 +102,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         MutableList<Integer> result = Lists.mutable.empty();
         MutableList<Integer> reverseResult = Lists.mutable.empty();
         ImmutableList<Integer> list = this.classUnderTest();
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(0, list.size() - 1, CollectionAddProcedure.on(result)));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(list.size() - 1, 0, CollectionAddProcedure.on(reverseResult)));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(0, list.size() - 1, CollectionAddProcedure.on(result)));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(list.size() - 1, 0, CollectionAddProcedure.on(reverseResult)));
     }
 
     @Override
@@ -113,8 +113,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         MutableList<Integer> result = Lists.mutable.empty();
         MutableList<Integer> reverseResult = Lists.mutable.empty();
         ImmutableList<Integer> list = this.classUnderTest();
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(0, list.size() - 1, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(result))));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(list.size() - 1, 0, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(reverseResult))));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(0, list.size() - 1, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(result))));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(list.size() - 1, 0, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(reverseResult))));
     }
 
     @Override
@@ -447,11 +447,11 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         Assert.assertEquals(-1, it.previousIndex());
         Assert.assertEquals(0, it.nextIndex());
 
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) it::next);
+        Assert.assertThrows(NoSuchElementException.class, it::next);
 
-        Verify.assertThrows(UnsupportedOperationException.class, it::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, it::remove);
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> it.add(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> it.add(null));
     }
 
     @Override
@@ -459,7 +459,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void collect_target()
     {
         MutableList<Integer> targetCollection = FastList.newList();
-        MutableList<Integer> actual = this.classUnderTest().collect(object -> {
+        MutableList<Integer> actual = this.classUnderTest().collect(object ->
+        {
             throw new AssertionError();
         }, targetCollection);
         Assert.assertEquals(targetCollection, actual);
@@ -471,7 +472,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void collectWith_target()
     {
         MutableList<Integer> targetCollection = FastList.newList();
-        MutableList<Integer> actual = this.classUnderTest().collectWith((argument1, argument2) -> {
+        MutableList<Integer> actual = this.classUnderTest().collectWith((argument1, argument2) ->
+        {
             throw new AssertionError();
         }, 1, targetCollection);
         Assert.assertEquals(targetCollection, actual);

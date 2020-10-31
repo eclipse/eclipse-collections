@@ -209,8 +209,8 @@ public class SetAdapterTest extends AbstractMutableSetTestCase
     @Test
     public void adaptNull()
     {
-        Verify.assertThrows(NullPointerException.class, () -> new SetAdapter<>(null));
+        Assert.assertThrows(NullPointerException.class, () -> new SetAdapter<>(null));
 
-        Verify.assertThrows(NullPointerException.class, () -> SetAdapter.adapt(null));
+        Assert.assertThrows(NullPointerException.class, () -> SetAdapter.adapt(null));
     }
 }

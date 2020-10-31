@@ -85,7 +85,7 @@ public class Immutable<name>EmptyStackTest extends AbstractImmutable<name>StackT
     public void peekWithCount()
     {
         Assert.assertEquals(<name>ArrayList.newListWith(), this.classUnderTest().peek(0));
-        Verify.assertThrows(EmptyStackException.class, () -> { this.classUnderTest().peek(1); });
+        Assert.assertThrows(EmptyStackException.class, () -> { this.classUnderTest().peek(1); });
     }
 
     @Override

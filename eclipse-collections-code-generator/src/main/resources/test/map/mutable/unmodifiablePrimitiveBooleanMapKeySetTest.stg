@@ -218,7 +218,7 @@ public class Unmodifiable<name>BooleanMapKeySetTest extends Abstract<name>SetTes
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -227,7 +227,7 @@ public class Unmodifiable<name>BooleanMapKeySetTest extends Abstract<name>SetTes
     {
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -269,8 +269,8 @@ public class Unmodifiable<name>BooleanMapKeySetTest extends Abstract<name>SetTes
                 Lists.mutable.with(<name>Sets.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 

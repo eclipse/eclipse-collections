@@ -100,9 +100,9 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         Verify.assertInstanceOf(TripletonMap.class, flip);
         Assert.assertEquals(UnifiedMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3), flip);
 
-        Verify.assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "One", 3, "Three").flipUniqueValues());
-        Verify.assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "Three", 3, "Three").flipUniqueValues());
-        Verify.assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "Two", 3, "One").flipUniqueValues());
+        Assert.assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "One", 3, "Three").flipUniqueValues());
+        Assert.assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "Three", 3, "Three").flipUniqueValues());
+        Assert.assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "Two", 3, "One").flipUniqueValues());
     }
 
     @Override
@@ -215,7 +215,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsentPut()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, new PassThruFunction0<>("4")));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, new PassThruFunction0<>("4")));
         Assert.assertEquals("1", map.getIfAbsentPut(1, new PassThruFunction0<>("1")));
     }
 
@@ -224,7 +224,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsentPutWith()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, String::valueOf, 4));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, String::valueOf, 4));
         Assert.assertEquals("1", map.getIfAbsentPutWith(1, String::valueOf, 1));
     }
 
@@ -523,6 +523,6 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void getOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 }

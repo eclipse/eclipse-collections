@@ -74,10 +74,10 @@ public class UnifiedMapTest extends UnifiedMapTestCase
     @Test
     public void newMap_throws()
     {
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedMap<Integer, Integer>(-1, 0.5f));
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedMap<Integer, Integer>(1, 0.0f));
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedMap<Integer, Integer>(1, -0.5f));
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedMap<Integer, Integer>(1, 1.5f));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedMap<Integer, Integer>(-1, 0.5f));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedMap<Integer, Integer>(1, 0.0f));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedMap<Integer, Integer>(1, -0.5f));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedMap<Integer, Integer>(1, 1.5f));
     }
 
     @Test
@@ -509,7 +509,7 @@ public class UnifiedMapTest extends UnifiedMapTestCase
         // this map is deliberately small to force a rehash to occur from the put method, in a map with a chained bucket
         UnifiedMap<Integer, Integer> map = UnifiedMap.newMap(2, 0.75f);
         COLLISIONS.subList(0, 5).forEach(Procedures.cast(each -> {
-            Verify.assertThrows(RuntimeException.class, () -> map.getIfAbsentPut(each, () -> {
+            Assert.assertThrows(RuntimeException.class, () -> map.getIfAbsentPut(each, () -> {
                 throw new RuntimeException();
             }));
             map.put(each, each);

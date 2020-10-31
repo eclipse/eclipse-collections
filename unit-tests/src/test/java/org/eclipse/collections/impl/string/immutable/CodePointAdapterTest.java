@@ -438,9 +438,10 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     public void dotProduct()
     {
         CodePointAdapter adapter = Strings.asCodePoints("123");
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
-                () -> {
+                () ->
+                {
                     adapter.dotProduct(adapter);
                 });
     }
@@ -449,9 +450,10 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     public void binarySearch()
     {
         CodePointAdapter adapter = Strings.asCodePoints("123");
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
-                () -> {
+                () ->
+                {
                     adapter.binarySearch((int) '2');
                 });
     }

@@ -85,7 +85,7 @@ public class Immutable<name>SingletonStackTest extends AbstractImmutable<name>St
         Assert.assertEquals(<name>ArrayList.newListWith(), this.classUnderTest().peek(0));
         Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>),
                 this.classUnderTest().peek(1));
-        Verify.assertThrows(IllegalArgumentException.class, () -> { this.classUnderTest().peek(2); });
+        Assert.assertThrows(IllegalArgumentException.class, () -> { this.classUnderTest().peek(2); });
     }
 
     @Override

@@ -16,7 +16,6 @@ import org.eclipse.collections.api.list.primitive.ImmutableCharList;
 import org.eclipse.collections.impl.factory.Strings;
 import org.eclipse.collections.impl.factory.primitive.CharBags;
 import org.eclipse.collections.impl.list.immutable.primitive.AbstractImmutableCharListTestCase;
-import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -148,9 +147,10 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
     public void dotProduct()
     {
         CharAdapter adapter = Strings.asChars("123");
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
-                () -> {
+                () ->
+                {
                     adapter.dotProduct(adapter);
                 });
     }
@@ -159,9 +159,10 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
     public void binarySearch()
     {
         CharAdapter adapter = Strings.asChars("123");
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
-                () -> {
+                () ->
+                {
                     adapter.binarySearch('2');
                 });
     }

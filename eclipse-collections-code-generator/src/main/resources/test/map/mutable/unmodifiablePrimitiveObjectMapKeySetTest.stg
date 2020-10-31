@@ -206,7 +206,7 @@ public class Unmodifiable<name>ObjectMapKeySetTest extends Abstract<name>SetTest
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -214,7 +214,7 @@ public class Unmodifiable<name>ObjectMapKeySetTest extends Abstract<name>SetTest
     {
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override

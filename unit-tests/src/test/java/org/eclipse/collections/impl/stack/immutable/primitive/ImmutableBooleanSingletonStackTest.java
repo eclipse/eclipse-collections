@@ -62,7 +62,7 @@ public class ImmutableBooleanSingletonStackTest extends AbstractImmutableBoolean
         Assert.assertTrue(this.classUnderTest().peek());
         Assert.assertEquals(BooleanArrayList.newListWith(), this.classUnderTest().peek(0));
         Assert.assertEquals(BooleanArrayList.newListWith(true), this.classUnderTest().peek(1));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().peek(2));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().peek(2));
     }
 
     @Override

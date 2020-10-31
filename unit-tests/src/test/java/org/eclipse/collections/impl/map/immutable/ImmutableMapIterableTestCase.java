@@ -60,7 +60,8 @@ public abstract class ImmutableMapIterableTestCase
         MutableSet<Integer> actualKeys = UnifiedSet.newSet();
         MutableSet<String> actualValues = UnifiedSet.newSet();
 
-        this.classUnderTest().forEachKeyValue((key, value) -> {
+        this.classUnderTest().forEachKeyValue((key, value) ->
+        {
             actualKeys.add(key);
             actualValues.add(value);
         });
@@ -120,7 +121,8 @@ public abstract class ImmutableMapIterableTestCase
     @Test
     public void iteratorThrows()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> {
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        {
             Iterator<String> iterator = this.classUnderTest().iterator();
             iterator.remove();
         });
@@ -245,7 +247,8 @@ public abstract class ImmutableMapIterableTestCase
         MutableSet<String> actualValues = UnifiedSet.newSet();
         MutableList<Object> actualParameters = Lists.mutable.of();
 
-        this.classUnderTest().forEachWith((eachValue, parameter) -> {
+        this.classUnderTest().forEachWith((eachValue, parameter) ->
+        {
             actualValues.add(eachValue);
             actualParameters.add(parameter);
         }, actualParameter);
@@ -260,7 +263,8 @@ public abstract class ImmutableMapIterableTestCase
         MutableSet<String> actualValues = UnifiedSet.newSet();
         MutableList<Integer> actualIndices = Lists.mutable.of();
 
-        this.classUnderTest().forEachWithIndex((eachValue, index) -> {
+        this.classUnderTest().forEachWithIndex((eachValue, index) ->
+        {
             actualValues.add(eachValue);
             actualIndices.add(index);
         });
@@ -314,25 +318,25 @@ public abstract class ImmutableMapIterableTestCase
     @Test
     public void putAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Map<Integer, String>) this.classUnderTest()).putAll(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Map<Integer, String>) this.classUnderTest()).putAll(null));
     }
 
     @Test
     public void clear()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Map<Integer, String>) this.classUnderTest()).clear());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Map<Integer, String>) this.classUnderTest()).clear());
     }
 
     @Test
     public void put()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Map<Integer, String>) this.classUnderTest()).put(null, null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Map<Integer, String>) this.classUnderTest()).put(null, null));
     }
 
     @Test
     public void remove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Map<Integer, String>) this.classUnderTest()).remove(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Map<Integer, String>) this.classUnderTest()).remove(null));
     }
 
     @Test

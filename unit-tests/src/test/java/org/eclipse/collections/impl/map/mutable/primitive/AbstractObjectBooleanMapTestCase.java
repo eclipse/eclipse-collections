@@ -71,8 +71,8 @@ public abstract class AbstractObjectBooleanMapTestCase
         Assert.assertTrue(this.classUnderTest().getOrThrow("1"));
         Assert.assertFalse(this.classUnderTest().getOrThrow("2"));
 
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("5"));
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(null));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("5"));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(null));
     }
 
     @Test
@@ -252,7 +252,8 @@ public abstract class AbstractObjectBooleanMapTestCase
         String[] sumValue01 = new String[1];
         sumValue01[0] = "";
         int[] sumKey01 = new int[1];
-        map01.forEachKeyValue((eachKey, eachValue) -> {
+        map01.forEachKeyValue((eachKey, eachValue) ->
+        {
             sumKey01[0] += eachKey;
             sumValue01[0] += eachValue;
         });
@@ -264,7 +265,8 @@ public abstract class AbstractObjectBooleanMapTestCase
         sumKey[0] = "";
         String[] sumValue = new String[1];
         sumValue[0] = "";
-        map.forEachKeyValue((eachKey, eachValue) -> {
+        map.forEachKeyValue((eachKey, eachValue) ->
+        {
             sumKey[0] += String.valueOf(eachKey);
             sumValue[0] += eachValue;
         });
@@ -530,19 +532,19 @@ public abstract class AbstractObjectBooleanMapTestCase
         boolean second = iterator1.next();
         Assert.assertEquals(first, !second);
         Assert.assertFalse(iterator1.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator1::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator1::next);
 
         BooleanIterator iterator2 = map2.booleanIterator();
         Assert.assertTrue(iterator2.hasNext());
         Assert.assertTrue(iterator2.next());
         Assert.assertFalse(iterator2.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator2::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator2::next);
 
         BooleanIterator iterator3 = map3.booleanIterator();
         Assert.assertTrue(iterator3.hasNext());
         Assert.assertFalse(iterator3.next());
         Assert.assertFalse(iterator3.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator3::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator3::next);
     }
 
     @Test
