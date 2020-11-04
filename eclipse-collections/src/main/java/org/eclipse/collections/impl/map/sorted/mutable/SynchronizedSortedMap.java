@@ -135,6 +135,13 @@ public class SynchronizedSortedMap<K, V>
     }
 
     @Override
+    public MutableSortedMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        this.putAllMapIterable(mapIterable);
+        return this;
+    }
+
+    @Override
     public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
     {
         synchronized (this.lock)

@@ -43,6 +43,7 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ConcurrentMutableMap;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.procedure.MapEntryToProcedure2;
@@ -1983,6 +1984,12 @@ public final class ConcurrentHashMap<K, V>
     public ConcurrentHashMap<K, V> withMap(Map<? extends  K, ? extends V> map)
     {
         return (ConcurrentHashMap<K, V>) super.withMap(map);
+    }
+
+    @Override
+    public ConcurrentHashMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        return (ConcurrentHashMap<K, V>) super.withMapIterable(mapIterable);
     }
 
     @Override

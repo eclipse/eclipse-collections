@@ -339,6 +339,13 @@ public class OrderedMapAdapter<K, V>
     }
 
     @Override
+    public MutableOrderedMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        this.putAllMapIterable(mapIterable);
+        return this;
+    }
+
+    @Override
     public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
     {
         mapIterable.forEachKeyValue(this::put);

@@ -174,6 +174,13 @@ public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIte
     }
 
     @Override
+    default MutableOrderedMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        this.putAllMapIterable(mapIterable);
+        return this;
+    }
+
+    @Override
     MutableOrderedMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);
 
     @Override

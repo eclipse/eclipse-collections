@@ -74,6 +74,12 @@ public interface FixedSizeMap<K, V>
     }
 
     @Override
+    default FixedSizeMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        throw new UnsupportedOperationException("Cannot call withMapIterable() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
     default void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
     {
         throw new UnsupportedOperationException("Cannot call putAllMapIterable() on " + this.getClass().getSimpleName());

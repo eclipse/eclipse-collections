@@ -304,6 +304,13 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     }
 
     @Override
+    public MutableBiMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        this.putAllMapIterable(mapIterable);
+        return this;
+    }
+
+    @Override
     public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
     {
         synchronized (this.lock)

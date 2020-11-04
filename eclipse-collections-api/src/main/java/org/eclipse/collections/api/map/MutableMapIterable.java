@@ -172,6 +172,12 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
         return this;
     }
 
+    default MutableMapIterable<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        this.putAllMapIterable(mapIterable);
+        return this;
+    }
+
     default void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
     {
         mapIterable.forEachKeyValue(this::put);
