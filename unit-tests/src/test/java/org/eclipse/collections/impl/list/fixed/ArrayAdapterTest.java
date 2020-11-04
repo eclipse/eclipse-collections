@@ -152,7 +152,7 @@ public class ArrayAdapterTest extends AbstractListTestCase
     public void add()
     {
         MutableList<String> collection = ArrayAdapter.newArray();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> collection.add(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> collection.add(null));
     }
 
     @Override
@@ -301,21 +301,21 @@ public class ArrayAdapterTest extends AbstractListTestCase
     @Test
     public void removeIf()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ArrayAdapter.newArrayWith(1, 2, 3, null).removeIf(Predicates.isNull()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ArrayAdapter.newArrayWith(1, 2, 3, null).removeIf(Predicates.isNull()));
     }
 
     @Override
     @Test
     public void removeIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ArrayAdapter.newArrayWith(1, 2, 3, null).remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ArrayAdapter.newArrayWith(1, 2, 3, null).remove(0));
     }
 
     @Override
     @Test
     public void removeIfWith()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ArrayAdapter.newArrayWith(1, 2, 3, null).removeIfWith((each, ignored) -> each == null, null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ArrayAdapter.newArrayWith(1, 2, 3, null).removeIfWith((each, ignored) -> each == null, null));
     }
 
     @Override
@@ -655,7 +655,7 @@ public class ArrayAdapterTest extends AbstractListTestCase
         this.validateForEachOnRange(list, 9, 9, FastList.newListWith(9));
         this.validateForEachOnRange(list, 0, 9, FastList.newListWith(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.validateForEachOnRange(list, 10, 10, FastList.newList()));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.validateForEachOnRange(list, 10, 10, FastList.newList()));
     }
 
     @Override
@@ -669,7 +669,7 @@ public class ArrayAdapterTest extends AbstractListTestCase
         this.validateForEachWithIndexOnRange(list, 4, 6, FastList.newListWith(4, 5, 6));
         this.validateForEachWithIndexOnRange(list, 9, 9, FastList.newListWith(9));
         this.validateForEachWithIndexOnRange(list, 0, 9, FastList.newListWith(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.validateForEachWithIndexOnRange(list, 10, 10, FastList.newList()));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.validateForEachWithIndexOnRange(list, 10, 10, FastList.newList()));
     }
 
     @Override

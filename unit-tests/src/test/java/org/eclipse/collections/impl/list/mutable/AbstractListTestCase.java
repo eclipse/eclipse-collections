@@ -83,7 +83,7 @@ public abstract class AbstractListTestCase
     @Test
     public void randomAccess_throws()
     {
-        Verify.assertThrows(IllegalArgumentException.class, () -> new ListAdapter<>(FastList.newListWith(1, 2, 3)));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new ListAdapter<>(FastList.newListWith(1, 2, 3)));
     }
 
     @Test
@@ -365,8 +365,8 @@ public abstract class AbstractListTestCase
         collection.forEach(3, 0, CollectionAddProcedure.on(result4));
         Assert.assertEquals(this.newWith(4, 3, 2, 1), result4);
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> collection.forEach(-1, 0, result::add));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> collection.forEach(0, -1, result::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> collection.forEach(-1, 0, result::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> collection.forEach(0, -1, result::add));
     }
 
     @Test
@@ -770,10 +770,10 @@ public abstract class AbstractListTestCase
         Assert.assertEquals("19282736353443424140", builder5.toString());
 
         MutableList<Integer> result = Lists.mutable.empty();
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IndexOutOfBoundsException.class,
                 () -> integers.forEachWithIndex(-1, 0, new AddToList(result)));
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IndexOutOfBoundsException.class,
                 () -> integers.forEachWithIndex(0, -1, new AddToList(result)));
     }
@@ -830,7 +830,7 @@ public abstract class AbstractListTestCase
         this.validateForEachOnRange(list, 9, 9, FastList.newListWith(9));
         this.validateForEachOnRange(list, 0, 9, FastList.newListWith(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IndexOutOfBoundsException.class,
                 () -> this.validateForEachOnRange(list, 10, 10, FastList.newList()));
     }
@@ -858,7 +858,7 @@ public abstract class AbstractListTestCase
         this.validateForEachWithIndexOnRange(list, 4, 6, FastList.newListWith(4, 5, 6));
         this.validateForEachWithIndexOnRange(list, 9, 9, FastList.newListWith(9));
         this.validateForEachWithIndexOnRange(list, 0, 9, FastList.newListWith(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IndexOutOfBoundsException.class,
                 () -> this.validateForEachWithIndexOnRange(list, 10, 10, FastList.newList()));
     }
@@ -927,7 +927,7 @@ public abstract class AbstractListTestCase
     {
         Object item = new Object();
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(item).get(1));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(item).get(1));
     }
 
     @Test
@@ -942,7 +942,8 @@ public abstract class AbstractListTestCase
         }
         catch (Exception e)
         {
-            Assert.assertTrue((e instanceof ArrayIndexOutOfBoundsException) || (e instanceof IndexOutOfBoundsException));
+            Assert.assertTrue((e instanceof ArrayIndexOutOfBoundsException)
+                    || (e instanceof IndexOutOfBoundsException));
         }
     }
 
@@ -1165,7 +1166,7 @@ public abstract class AbstractListTestCase
                 (integer, string) -> result.add(Tuples.pair(integer, string)));
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void forEachInBothThrowsOnNullList()
     {
         MutableList<Object> result = Lists.mutable.empty();

@@ -88,7 +88,8 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
         Assert.assertEquals(FastList.newList(Interval.fromTo(11, 20)), largeWithoutAll);
         ImmutableList<Integer> largeWithoutAll2 = largeWithoutAll.newWithoutAll(Interval.fromTo(11, 15));
         Assert.assertEquals(FastList.newList(Interval.fromTo(16, 20)), largeWithoutAll2);
-        ImmutableList<Integer> largeWithoutAll3 = largeWithoutAll2.newWithoutAll(UnifiedSet.newSet(Interval.fromTo(16, 19)));
+        ImmutableList<Integer> largeWithoutAll3 =
+                largeWithoutAll2.newWithoutAll(UnifiedSet.newSet(Interval.fromTo(16, 19)));
         Assert.assertEquals(FastList.newListWith(20), largeWithoutAll3);
     }
 
@@ -182,8 +183,8 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
     public void get()
     {
         ImmutableList<Integer> list = this.classUnderTest();
-        Verify.assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.get(list.size() + 1));
-        Verify.assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.get(-1));
+        Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.get(list.size() + 1));
+        Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.get(-1));
     }
 
     @Test
@@ -204,7 +205,9 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
     @Test
     public void groupByUniqueKey()
     {
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), this.classUnderTest().groupByUniqueKey(id -> id));
+        Assert.assertEquals(
+                UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3),
+                this.classUnderTest().groupByUniqueKey(id -> id));
     }
 
     @Test(expected = IllegalStateException.class)
@@ -216,7 +219,8 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
     @Test
     public void groupByUniqueKey_target()
     {
-        MutableMap<Integer, Integer> integers = this.classUnderTest().groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0));
+        MutableMap<Integer, Integer> integers =
+                this.classUnderTest().groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0));
         Assert.assertEquals(UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3), integers);
     }
 

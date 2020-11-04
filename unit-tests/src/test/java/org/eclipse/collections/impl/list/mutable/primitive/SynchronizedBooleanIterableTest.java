@@ -72,7 +72,7 @@ public class SynchronizedBooleanIterableTest extends AbstractBooleanIterableTest
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override

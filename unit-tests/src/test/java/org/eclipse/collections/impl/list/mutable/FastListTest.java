@@ -701,7 +701,7 @@ public class FastListTest extends AbstractListTestCase
         Assert.assertTrue(integers2.addAll(mSet(5)));
         Verify.assertListsEqual(FastList.newListWith(0, 1, 2, 3, 4, 1, 2, 3, 4, 5), integers2);
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> FastList.newList().addAll(1, null));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> FastList.newList().addAll(1, null));
     }
 
     @Override
@@ -795,7 +795,7 @@ public class FastListTest extends AbstractListTestCase
         FastList<Integer> midList = FastList.<Integer>newList(2).with(1, 3);
         midList.add(1, 2);
         Verify.assertStartsWith(midList, 1, 2, 3);
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> midList.add(-1, -1));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> midList.add(-1, -1));
     }
 
     @Test
@@ -881,7 +881,7 @@ public class FastListTest extends AbstractListTestCase
     public void testOutOfBoundsCondition()
     {
         MutableList<Integer> integers = this.newWith(1, 2, 3, 4);
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.get(4));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.get(4));
     }
 
     @Override

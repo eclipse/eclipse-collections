@@ -300,7 +300,7 @@ public abstract class AbstractMutable<name>BooleanMapTestCase extends Abstract<n
         super.getOrThrow();
 
         this.map.removeKey(<(literal.(type))("0")>);
-        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type))("0")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type))("0")>));
 
         this.map.put(<(literal.(type))("0")>, false);
         Assert.assertFalse(this.map.getOrThrow(<(literal.(type))("0")>));
@@ -672,7 +672,7 @@ public abstract class AbstractMutable<name>BooleanMapTestCase extends Abstract<n
         }
         Assert.assertFalse(iterator.hasNext());
         Verify.assertEmpty(map);
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -680,7 +680,7 @@ public abstract class AbstractMutable<name>BooleanMapTestCase extends Abstract<n
     {
         MutableBooleanIterator iterator = this.classUnderTest().booleanIterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     @Test
@@ -690,7 +690,7 @@ public abstract class AbstractMutable<name>BooleanMapTestCase extends Abstract<n
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
         iterator.remove();
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
     }
 }
 

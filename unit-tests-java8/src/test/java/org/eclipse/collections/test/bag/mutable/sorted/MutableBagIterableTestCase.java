@@ -12,8 +12,8 @@ package org.eclipse.collections.test.bag.mutable.sorted;
 
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
@@ -28,7 +28,7 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     @Test
     default void MutableBagIterable_addOccurrences_throws()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IllegalArgumentException.class,
                 () -> this.newWith(1, 2, 2, 3, 3, 3).addOccurrences(4, -1));
     }
@@ -36,7 +36,7 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     @Test
     default void MutableBagIterable_removeOccurrences_throws()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IllegalArgumentException.class,
                 () -> this.newWith(1, 2, 2, 3, 3, 3).removeOccurrences(4, -1));
     }

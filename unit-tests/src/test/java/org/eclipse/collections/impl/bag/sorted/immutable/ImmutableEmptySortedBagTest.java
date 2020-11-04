@@ -622,7 +622,7 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
     @Test
     public void getOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 
     @Override

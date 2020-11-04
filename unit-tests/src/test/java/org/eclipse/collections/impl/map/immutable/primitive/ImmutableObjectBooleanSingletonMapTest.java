@@ -162,7 +162,7 @@ public class ImmutableObjectBooleanSingletonMapTest extends AbstractImmutableObj
         Assert.assertTrue(iterator.hasNext());
         Assert.assertTrue(iterator.next());
         Assert.assertFalse(iterator.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -188,9 +188,9 @@ public class ImmutableObjectBooleanSingletonMapTest extends AbstractImmutableObj
     public void getOrThrow()
     {
         Assert.assertTrue(this.classUnderTest().getOrThrow("1"));
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("5"));
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("0"));
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(null));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("5"));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("0"));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(null));
     }
 
     @Override

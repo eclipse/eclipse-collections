@@ -209,7 +209,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         Assert.assertEquals(0, multimap.size());
 
         Assert.assertEquals(this.createCollection(1), multimap.getIfAbsentPutAll(1, Lists.mutable.with(1)));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(1, Lists.mutable.with(1)).add(1));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(1, Lists.mutable.with(1)).add(1));
 
         multimap.putAll(2, Lists.mutable.with(2, 2));
         multimap.putAll(3, Lists.mutable.with(3, 3, 3));
@@ -221,7 +221,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         int multimapSize = this.createCollection(1).size() + this.createCollection(2, 2).size() + this.createCollection(3, 3, 3).size() + this.createCollection(4, 4, 4, 4).size();
         Assert.assertEquals(multimapSize, multimap.size());
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(5, Lists.mutable.with(5)).add(5));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(5, Lists.mutable.with(5)).add(5));
     }
 
     @Test

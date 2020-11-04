@@ -132,7 +132,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Verify.assertSize(2, this.newWith(<["1", "1", "2", "2", "3"]:(literal.(type))(); separator=", ">).topOccurrences(1));
         Verify.assertSize(3, this.newWith(<["1", "1", "2", "2", "3", "3"]:(literal.(type))(); separator=", ">).topOccurrences(1));
         Verify.assertSize(0, this.newWith().topOccurrences(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().topOccurrences(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith().topOccurrences(-1));
     }
 
     @Test
@@ -162,7 +162,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Verify.assertSize(3, this.newWith(<["1", "1", "2", "2", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(2));
         Verify.assertSize(3, this.newWith(<["1", "1", "2", "2", "3", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(1));
         Verify.assertSize(0, this.newWith().bottomOccurrences(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().bottomOccurrences(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith().bottomOccurrences(-1));
     }
 
     @Test
@@ -276,7 +276,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -295,7 +295,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         }
 
         Verify.assertEmpty(bag);
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test

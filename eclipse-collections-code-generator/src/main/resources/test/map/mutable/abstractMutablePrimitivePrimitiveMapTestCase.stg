@@ -93,7 +93,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         super.getOrThrow();
         Mutable<name1><name2>Map map1 = this.classUnderTest();
         map1.removeKey(<(literal.(type1))("0")>);
-        Verify.assertThrows(IllegalStateException.class, () -> map1.getOrThrow(<(literal.(type1))("0")>));
+        Assert.assertThrows(IllegalStateException.class, () -> map1.getOrThrow(<(literal.(type1))("0")>));
         map1.put(<(literal.(type1))("0")>, <(literal.(type2))("1")>);
         Assert.assertEquals(<(literal.(type2))("1")>, map1.getOrThrow(<(literal.(type1))("0")>)<wideDelta.(type2)>);
 
@@ -804,7 +804,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         }
         Assert.assertFalse(iterator.hasNext());
         Verify.assertEmpty(mutableMap);
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -812,7 +812,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     {
         Mutable<name2>Iterator iterator = this.classUnderTest().<type2>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     @Test
@@ -822,7 +822,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
         iterator.remove();
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     @Test
@@ -832,7 +832,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Assert.assertEquals(
                 <name2><name1>HashMap.newWithKeysValues(<(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("3")>, <(literal.(type1))("2")>, <(literal.(type2))("4")>, <(literal.(type1))("3")>, <(literal.(type2))("5")>, <(literal.(type1))("4")>),
                 map.flipUniqueValues());
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IllegalStateException.class,
                 () -> this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("1")>).flipUniqueValues());
     }

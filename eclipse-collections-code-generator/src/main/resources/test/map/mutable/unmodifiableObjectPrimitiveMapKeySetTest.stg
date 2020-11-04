@@ -119,7 +119,7 @@ public class UnmodifiableObject<name>MapKeySetTest
             actual.add(iterator.next());
         }
         Assert.assertFalse(iterator.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
         Assert.assertEquals(expected, actual);
     }
 

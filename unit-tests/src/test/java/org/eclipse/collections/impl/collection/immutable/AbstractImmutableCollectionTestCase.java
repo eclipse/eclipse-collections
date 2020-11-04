@@ -752,7 +752,7 @@ public abstract class AbstractImmutableCollectionTestCase
             Integer integer = iterator.next();
             Assert.assertEquals(i + 1, integer.intValue());
         }
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -878,43 +878,43 @@ public abstract class AbstractImmutableCollectionTestCase
     @Test
     public void iteratorRemove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().iterator().remove());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().iterator().remove());
     }
 
     @Test
     public void add()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).add(1));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).add(1));
     }
 
     @Test
     public void remove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).remove(Integer.valueOf(1)));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).remove(Integer.valueOf(1)));
     }
 
     @Test
     public void clear()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).clear());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).clear());
     }
 
     @Test
     public void removeAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).removeAll(Lists.fixedSize.of()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).removeAll(Lists.fixedSize.of()));
     }
 
     @Test
     public void retainAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).retainAll(Lists.fixedSize.of()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).retainAll(Lists.fixedSize.of()));
     }
 
     @Test
     public void addAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).addAll(Lists.fixedSize.of()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).addAll(Lists.fixedSize.of()));
     }
 
     @Test

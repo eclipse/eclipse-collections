@@ -263,8 +263,8 @@ public class RandomAccessListIterateTest
         RandomAccessListIterate.forEach(integers, 7, 5, result4::add);
         Assert.assertEquals(Lists.immutable.with(2, 3, 3), result4);
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(integers, -1, 0, result::add));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(integers, 0, -1, result::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(integers, -1, 0, result::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(integers, 0, -1, result::add));
     }
 
     @Test
@@ -289,8 +289,8 @@ public class RandomAccessListIterateTest
         Assert.assertEquals("273635", builder4.toString());
 
         MutableList<Integer> result = Lists.mutable.of();
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEachWithIndex(integers, -1, 0, new AddToList(result)));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEachWithIndex(integers, 0, -1, new AddToList(result)));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEachWithIndex(integers, -1, 0, new AddToList(result)));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEachWithIndex(integers, 0, -1, new AddToList(result)));
     }
 
     @Test

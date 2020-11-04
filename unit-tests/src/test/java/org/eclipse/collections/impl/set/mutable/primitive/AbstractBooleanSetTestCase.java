@@ -548,19 +548,19 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
     {
         BooleanIterator booleanIterator0 = this.emptySet.booleanIterator();
         Assert.assertFalse(booleanIterator0.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) booleanIterator0::next);
+        Assert.assertThrows(NoSuchElementException.class, booleanIterator0::next);
 
         BooleanIterator booleanIterator1 = this.setWithFalse.booleanIterator();
         Assert.assertTrue(booleanIterator1.hasNext());
         Assert.assertFalse(booleanIterator1.next());
         Assert.assertFalse(booleanIterator1.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) booleanIterator1::next);
+        Assert.assertThrows(NoSuchElementException.class, booleanIterator1::next);
 
         BooleanIterator booleanIterator2 = this.setWithTrue.booleanIterator();
         Assert.assertTrue(booleanIterator2.hasNext());
         Assert.assertTrue(booleanIterator2.next());
         Assert.assertFalse(booleanIterator2.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) booleanIterator2::next);
+        Assert.assertThrows(NoSuchElementException.class, booleanIterator2::next);
 
         BooleanIterator booleanIterator3 = this.setWithTrueFalse.booleanIterator();
         BooleanHashSet actual = new BooleanHashSet();
@@ -570,7 +570,7 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
         actual.add(booleanIterator3.next());
         Assert.assertEquals(BooleanHashSet.newSetWith(true, false), actual);
         Assert.assertFalse(booleanIterator3.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) booleanIterator3::next);
+        Assert.assertThrows(NoSuchElementException.class, booleanIterator3::next);
     }
 
     @Override

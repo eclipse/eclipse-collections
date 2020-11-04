@@ -13,6 +13,10 @@ package org.eclipse.collections.impl.test;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * @deprecated This class is merely to verify that the assertNotEquals functionality is not broken. This should be removed in a future commit.
+ */
+@Deprecated
 public class AssertNotEqualsThrowsTest
 {
     private static final Object OBJECT = new Object();
@@ -38,7 +42,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -52,7 +56,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -66,7 +70,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
         try
         {
@@ -75,7 +79,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -89,7 +93,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -103,7 +107,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
 
         try
@@ -113,7 +117,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -127,7 +131,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -141,7 +145,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
 
         try
@@ -151,7 +155,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -165,7 +169,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -179,7 +183,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -193,7 +197,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -207,7 +211,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -221,7 +225,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -235,7 +239,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -249,7 +253,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -263,7 +267,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -277,7 +281,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -291,7 +295,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -305,7 +309,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -319,7 +323,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 
@@ -333,7 +337,7 @@ public class AssertNotEqualsThrowsTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(AssertNotEqualsThrowsTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains("org.junit.Assert.fail", e.getStackTrace()[0].toString());
         }
     }
 }

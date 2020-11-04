@@ -214,7 +214,7 @@ public abstract class AbstractRichIterableTestCase
                 list.newEmpty().containsBy(Pair::getOne, null));
         Assert.assertFalse(
                 list.newEmpty().containsBy(Pair::getOne, "2"));
-        Verify.assertThrows(NullPointerException.class, () ->
+        Assert.assertThrows(NullPointerException.class, () ->
                 list.newEmpty().containsBy(null, "2"));
     }
 
@@ -812,7 +812,7 @@ public abstract class AbstractRichIterableTestCase
     {
         Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3, 4, 5).detectOptional(Integer.valueOf(3)::equals).get());
         Assert.assertNotNull(this.newWith(1, 2, 3, 4, 5).detectOptional(Integer.valueOf(6)::equals));
-        Verify.assertThrows(NoSuchElementException.class, () -> this.newWith(1, 2, 3, 4, 5).detectOptional(Integer.valueOf(6)::equals).get());
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith(1, 2, 3, 4, 5).detectOptional(Integer.valueOf(6)::equals).get());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -971,7 +971,7 @@ public abstract class AbstractRichIterableTestCase
     {
         Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3, 4, 5).detectWithOptional(Object::equals, 3).get());
         Assert.assertNotNull(this.newWith(1, 2, 3, 4, 5).detectWithOptional(Object::equals, 6));
-        Verify.assertThrows(NoSuchElementException.class, () -> this.newWith(1, 2, 3, 4, 5).detectWithOptional(Object::equals, 6).get());
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith(1, 2, 3, 4, 5).detectWithOptional(Object::equals, 6).get());
     }
 
     @Test
@@ -1647,13 +1647,13 @@ public abstract class AbstractRichIterableTestCase
                 Maps.mutable.with("1", "1", "2", "2", "3", "3"),
                 integers.toBiMap(Object::toString, Object::toString));
 
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IllegalArgumentException.class,
                 () -> integers.toBiMap(i -> "Constant Key", Objects::toString));
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IllegalArgumentException.class,
                 () -> integers.toBiMap(Object::toString, i -> "Constant Value"));
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IllegalArgumentException.class,
                 () -> integers.toBiMap(i -> "Constant Key", i -> "Constant Value"));
     }

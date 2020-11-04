@@ -63,9 +63,9 @@ public class IntIntervalTest
         Verify.assertSize(Integer.MAX_VALUE, IntInterval.fromTo(Integer.MIN_VALUE + 1, -1));
         Verify.assertSize(Integer.MAX_VALUE, IntInterval.fromTo(1, Integer.MAX_VALUE));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> IntInterval.fromTo(Integer.MIN_VALUE, Integer.MAX_VALUE));
-        Verify.assertThrows(IllegalArgumentException.class, () -> IntInterval.fromTo(-1, Integer.MAX_VALUE));
-        Verify.assertThrows(IllegalArgumentException.class, () -> IntInterval.fromToBy(Integer.MIN_VALUE, Integer.MAX_VALUE, 2));
+        Assert.assertThrows(IllegalArgumentException.class, () -> IntInterval.fromTo(Integer.MIN_VALUE, Integer.MAX_VALUE));
+        Assert.assertThrows(IllegalArgumentException.class, () -> IntInterval.fromTo(-1, Integer.MAX_VALUE));
+        Assert.assertThrows(IllegalArgumentException.class, () -> IntInterval.fromToBy(Integer.MIN_VALUE, Integer.MAX_VALUE, 2));
         Assert.assertEquals(IntInterval.fromTo(Integer.MIN_VALUE + 1, -1).size(), IntInterval.oneTo(Integer.MAX_VALUE).size());
 
         Assert.assertEquals(IntLists.mutable.with(0), IntInterval.fromToBy(0, 2, 3));
@@ -319,8 +319,8 @@ public class IntIntervalTest
         MutableList<IntIterable> expected12 = Lists.mutable.with(IntLists.mutable.with(0, -3));
         Assert.assertEquals(expected12, interval12.chunk(3));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> interval12.chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> interval12.chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> interval12.chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> interval12.chunk(-1));
     }
 
     @Test
@@ -693,14 +693,14 @@ public class IntIntervalTest
     @Test
     public void appendStringThrows()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 RuntimeException.class,
                 () -> this.intInterval.appendString(new ThrowingAppendable()));
-        Verify.assertThrows(
+        Assert.assertThrows(
                 RuntimeException.class,
                 () -> this.intInterval
                         .appendString(new ThrowingAppendable(), ", "));
-        Verify.assertThrows(
+        Assert.assertThrows(
                 RuntimeException.class,
                 () -> this.intInterval
                         .appendString(new ThrowingAppendable(), "[", ", ", "]"));
@@ -940,7 +940,7 @@ public class IntIntervalTest
             Assert.assertTrue(oneToFiveIterator.hasNext());
             Assert.assertEquals(i, oneToFiveIterator.next());
         }
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) oneToFiveIterator::next);
+        Assert.assertThrows(NoSuchElementException.class, oneToFiveIterator::next);
         IntInterval threeToNegativeThree = IntInterval.fromTo(3, -3);
         IntIterator threeToNegativeThreeIterator = threeToNegativeThree.intIterator();
         for (int i = 3; i > -4; i--)
@@ -948,7 +948,7 @@ public class IntIntervalTest
             Assert.assertTrue(threeToNegativeThreeIterator.hasNext());
             Assert.assertEquals(i, threeToNegativeThreeIterator.next());
         }
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) threeToNegativeThreeIterator::next);
+        Assert.assertThrows(NoSuchElementException.class, threeToNegativeThreeIterator::next);
     }
 
     @Test
@@ -1061,8 +1061,8 @@ public class IntIntervalTest
         Assert.assertEquals(5, interval.get(3));
         Assert.assertEquals(10, interval.get(4));
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> interval.get(-1));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> interval.get(5));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> interval.get(-1));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> interval.get(5));
     }
 
     @Test

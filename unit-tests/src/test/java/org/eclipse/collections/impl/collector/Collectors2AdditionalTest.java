@@ -80,8 +80,8 @@ public class Collectors2AdditionalTest
         Assert.assertEquals(SMALL_INTERVAL.toList().chunk(SMALL_INTERVAL.size()), chunked3);
         MutableList<MutableList<Integer>> chunked4 = this.smallData.stream().collect(Collectors2.chunk(SMALL_INTERVAL.size() - 1));
         Assert.assertEquals(SMALL_INTERVAL.toList().chunk(SMALL_INTERVAL.size() - 1), chunked4);
-        Verify.assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(-10));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(-10));
     }
 
     @Test
@@ -115,7 +115,7 @@ public class Collectors2AdditionalTest
         MutableList<Integer> integers1 = Interval.oneTo(10).toList();
         MutableList<Integer> integers2 = Interval.oneTo(10).toList().toReversed();
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zip(integers2)));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zip(integers2)));
     }
 
     @Test
@@ -131,7 +131,7 @@ public class Collectors2AdditionalTest
     public void zipWithIndexParallel()
     {
         MutableList<Integer> integers1 = Interval.oneTo(10).toList();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zipWithIndex()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zipWithIndex()));
     }
 
     @Test

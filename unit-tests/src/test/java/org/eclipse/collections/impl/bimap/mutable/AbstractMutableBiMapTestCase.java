@@ -121,10 +121,10 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
         Assert.assertNull(biMap.put(1, 'e'));
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, 'e', null, 'b', 3, 'c', 4, 'd'), biMap);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> biMap.put(5, 'e'));
+        Assert.assertThrows(IllegalArgumentException.class, () -> biMap.put(5, 'e'));
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, 'e', null, 'b', 3, 'c', 4, 'd'), biMap);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> biMap.put(4, 'e'));
+        Assert.assertThrows(IllegalArgumentException.class, () -> biMap.put(4, 'e'));
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, 'e', null, 'b', 3, 'c', 4, 'd'), biMap);
 
         HashBiMap<Integer, Character> actual = HashBiMap.newMap();
@@ -397,7 +397,7 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
         MutableBiMap<Integer, Character> biMap = this.classUnderTest();
         Iterator<Character> iterator = biMap.iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
         Verify.assertSize(3, biMap);
         Verify.assertSize(3, biMap.inverse());
         for (int i = 0; i < 3; i++)
@@ -407,7 +407,7 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
         }
         Assert.assertEquals(expected, actual);
         Assert.assertFalse(iterator.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
 
         Iterator<Character> iteratorRemove = biMap.iterator();
 
@@ -440,14 +440,14 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
         Verify.assertEmpty(biMap.inverse());
 
         Assert.assertFalse(iteratorRemove.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iteratorRemove::next);
+        Assert.assertThrows(NoSuchElementException.class, iteratorRemove::next);
     }
 
     @Override
     @Test
     public void withMapNull()
     {
-        Verify.assertThrows(NullPointerException.class, () -> this.newMap().withMap(null));
+        Assert.assertThrows(NullPointerException.class, () -> this.newMap().withMap(null));
     }
 
     @Override

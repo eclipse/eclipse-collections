@@ -783,7 +783,7 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
 
         Mutable<name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
         Iterator\<String> iterator1 = map1.iterator();
-        Verify.assertThrows(IllegalStateException.class, iterator1::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator1::remove);
         iterator1.next();
         iterator1.remove();
         Assert.assertTrue(map1.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map1)
@@ -791,11 +791,11 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         iterator1.next();
         iterator1.remove();
         Assert.assertEquals(<name>ObjectHashMap.newMap(), map1);
-        Verify.assertThrows(IllegalStateException.class, iterator1::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator1::remove);
 
         Mutable<name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("9")>, "nine");
         Iterator\<String> iterator2 = map2.iterator();
-        Verify.assertThrows(IllegalStateException.class, iterator2::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator2::remove);
         iterator2.next();
         iterator2.remove();
         Assert.assertTrue(map2.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map2)
@@ -806,7 +806,7 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
 
         Mutable<name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("8")>, "eight", <(literal.(type))("9")>, "nine");
         Iterator\<String> iterator3 = map3.iterator();
-        Verify.assertThrows(IllegalStateException.class, iterator3::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator3::remove);
         iterator3.next();
         iterator3.remove();
         Assert.assertTrue(map3.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("8")>, "eight").equals(map3)
@@ -837,7 +837,7 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         Assert.assertEquals(
                 Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "3", <(literal.(type))("2")>),
                 map.flipUniqueValues());
-        Verify.assertThrows(
+        Assert.assertThrows(
                 IllegalStateException.class,
                 () -> this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "1").flipUniqueValues());
     }

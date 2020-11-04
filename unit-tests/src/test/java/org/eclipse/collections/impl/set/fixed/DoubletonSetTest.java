@@ -238,6 +238,6 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void getOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.set.getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.set.getOnly());
     }
 }

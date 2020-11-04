@@ -93,7 +93,7 @@ public class <name1><name2>HashMapValuesTest extends AbstractMutable<name2>Colle
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -640,8 +640,8 @@ public class <name1><name2>HashMapValuesTest extends AbstractMutable<name2>Colle
                 Lists.mutable.with(<name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 

@@ -89,7 +89,7 @@ public class <name>BooleanHashMapValuesTest extends AbstractMutableBooleanCollec
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -473,8 +473,8 @@ public class <name>BooleanHashMapValuesTest extends AbstractMutableBooleanCollec
                 Lists.mutable.with(BooleanBags.mutable.with(false, true)),
                 iterable3.chunk(3));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
     }
 
     @Override

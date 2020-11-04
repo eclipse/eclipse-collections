@@ -98,13 +98,13 @@ public class ListAdapterTest extends AbstractListTestCase
     {
         Object item = new Object();
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(item).get(-1));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(item).get(-1));
     }
 
     @Test
     public void adaptNull()
     {
-        Verify.assertThrows(NullPointerException.class, () -> new ListAdapter<>(null));
-        Verify.assertThrows(NullPointerException.class, () -> ListAdapter.adapt(null));
+        Assert.assertThrows(NullPointerException.class, () -> new ListAdapter<>(null));
+        Assert.assertThrows(NullPointerException.class, () -> ListAdapter.adapt(null));
     }
 }

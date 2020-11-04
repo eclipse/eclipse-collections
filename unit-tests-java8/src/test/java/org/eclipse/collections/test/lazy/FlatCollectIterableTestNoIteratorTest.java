@@ -21,7 +21,7 @@ import org.eclipse.collections.test.LazyNoIteratorTestCase;
 import org.eclipse.collections.test.list.mutable.FastListNoIterator;
 import org.junit.runner.RunWith;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 @RunWith(Java8Runner.class)
 public class FlatCollectIterableTestNoIteratorTest implements LazyNoIteratorTestCase

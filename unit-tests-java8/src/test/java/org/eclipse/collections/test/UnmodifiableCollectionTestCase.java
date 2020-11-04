@@ -12,7 +12,7 @@ package org.eclipse.collections.test;
 
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 public interface UnmodifiableCollectionTestCase extends CollectionTestCase, UnmodifiableIterableTestCase
 {

@@ -276,106 +276,106 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
     @Test
     public void add()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(""));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(""));
     }
 
     @Test
     public void addAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(0, ""));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(0, ""));
     }
 
     @Test
     public void addAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> this.classUnderTest().addAll(Lists.mutable.empty()));
     }
 
     @Test
     public void addAllAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> this.classUnderTest().addAll(0, Lists.mutable.empty()));
     }
 
     @Test
     public void addAllIterable()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> this.classUnderTest().addAllIterable(Lists.mutable.empty()));
     }
 
     @Test
     public void removeIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(0));
     }
 
     @Test
     public void remove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(null));
     }
 
     @Test
     public void removeAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> this.classUnderTest().removeAll(Lists.fixedSize.empty()));
     }
 
     @Test
     public void removeAllIterable()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> this.classUnderTest().removeAllIterable(Lists.fixedSize.empty()));
     }
 
     @Test
     public void retainAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> this.classUnderTest().retainAll(Lists.fixedSize.empty()));
     }
 
     @Test
     public void retainAllIterable()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> this.classUnderTest().retainAllIterable(Lists.fixedSize.empty()));
     }
 
     @Test
     public void clear()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, this.classUnderTest()::clear);
+        Assert.assertThrows(UnsupportedOperationException.class, this.classUnderTest()::clear);
     }
 
     @Test
     public void subList_methodsThrow()
     {
         MutableList<String> subList = this.classUnderTest().subList(0, this.getSize());
-        Verify.assertThrows(UnsupportedOperationException.class, () -> subList.add(""));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> subList.add(0, ""));
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class, () -> subList.add(""));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> subList.add(0, ""));
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> subList.addAll(Lists.mutable.empty()));
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> subList.addAllIterable(Lists.mutable.empty()));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> subList.remove(0));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> subList.remove(null));
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class, () -> subList.remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> subList.remove(null));
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> subList.removeAll(Lists.fixedSize.empty()));
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> subList.removeAllIterable(Lists.fixedSize.empty()));
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> subList.removeIf(each -> true));
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> subList.removeIfWith((argument1, argument2) -> true, null));
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> subList.retainAll(Lists.fixedSize.empty()));
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Assert.assertThrows(UnsupportedOperationException.class,
                 () -> subList.retainAllIterable(Lists.fixedSize.empty()));
-        Verify.assertThrows(UnsupportedOperationException.class, subList::clear);
+        Assert.assertThrows(UnsupportedOperationException.class, subList::clear);
     }
 }

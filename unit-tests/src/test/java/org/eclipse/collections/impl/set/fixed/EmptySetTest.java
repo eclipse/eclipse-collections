@@ -117,9 +117,9 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
         Iterator<Object> it = this.emptySet.iterator();
         Assert.assertFalse(it.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) it::next);
+        Assert.assertThrows(NoSuchElementException.class, it::next);
 
-        Verify.assertThrows(UnsupportedOperationException.class, it::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, it::remove);
     }
 
     @Test
@@ -326,6 +326,6 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void getOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.emptySet.getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.emptySet.getOnly());
     }
 }

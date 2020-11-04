@@ -32,7 +32,6 @@ import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>BooleanHashMap;
-import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -124,7 +123,7 @@ public class Immutable<name>BooleanSingletonMapTest extends AbstractImmutable<na
         Assert.assertTrue(iterator.hasNext());
         Assert.assertTrue(iterator.next());
         Assert.assertFalse(iterator.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -133,8 +132,8 @@ public class Immutable<name>BooleanSingletonMapTest extends AbstractImmutable<na
     {
         Assert.assertTrue(this.classUnderTest().getOrThrow(<(literal.(type))("0")>));
 
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("31")>));
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("32")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("31")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("32")>));
     }
 
     @Override

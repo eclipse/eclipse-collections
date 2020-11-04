@@ -86,7 +86,7 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         super.getOrThrow();
         MutableObjectBooleanMap<String> map1 = this.classUnderTest();
         map1.removeKey("0");
-        Verify.assertThrows(IllegalStateException.class, () -> map1.getOrThrow("0"));
+        Assert.assertThrows(IllegalStateException.class, () -> map1.getOrThrow("0"));
         map1.put("0", false);
         Assert.assertFalse(map1.getOrThrow("0"));
 
@@ -364,7 +364,10 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
     {
         MutableObjectBooleanMap<Integer> map1 = this.getEmptyMap();
         Assert.assertTrue(map1.getIfAbsentPut(0, () -> true));
-        BooleanFunction0 factoryThrows = () -> { throw new AssertionError(); };
+        BooleanFunction0 factoryThrows = () ->
+        {
+            throw new AssertionError();
+        };
         Assert.assertTrue(map1.getIfAbsentPut(0, factoryThrows));
         Assert.assertEquals(this.newWithKeysValues(0, true), map1);
         Assert.assertTrue(map1.getIfAbsentPut(1, () -> true));
@@ -392,7 +395,10 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
 
         MutableObjectBooleanMap<Integer> map1 = this.getEmptyMap();
         Assert.assertFalse(map1.getIfAbsentPutWith(0, functionLengthEven, "123456789"));
-        BooleanFunction<String> functionThrows = string -> { throw new AssertionError(); };
+        BooleanFunction<String> functionThrows = string ->
+        {
+            throw new AssertionError();
+        };
         Assert.assertFalse(map1.getIfAbsentPutWith(0, functionThrows, "unused"));
         Assert.assertEquals(this.newWithKeysValues(0, false), map1);
         Assert.assertFalse(map1.getIfAbsentPutWith(1, functionLengthEven, "123456789"));
@@ -420,7 +426,10 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
 
         MutableObjectBooleanMap<Integer> map1 = this.getEmptyMap();
         Assert.assertTrue(map1.getIfAbsentPutWithKey(0, function));
-        BooleanFunction<Integer> functionThrows = anObject -> { throw new AssertionError(); };
+        BooleanFunction<Integer> functionThrows = anObject ->
+        {
+            throw new AssertionError();
+        };
         Assert.assertTrue(map1.getIfAbsentPutWithKey(0, functionThrows));
         Assert.assertEquals(this.newWithKeysValues(0, true), map1);
         Assert.assertFalse(map1.getIfAbsentPutWithKey(1, function));
@@ -538,7 +547,7 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         Assert.assertTrue(booleanIterator.hasNext());
         booleanIterator.next();
         booleanIterator.remove();
-        Verify.assertThrows(IllegalStateException.class, booleanIterator::remove);
+        Assert.assertThrows(IllegalStateException.class, booleanIterator::remove);
     }
 
     @Test
@@ -547,6 +556,6 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         MutableObjectBooleanMap<String> map = this.classUnderTest();
         MutableBooleanIterator booleanIterator = map.booleanIterator();
         Assert.assertTrue(booleanIterator.hasNext());
-        Verify.assertThrows(IllegalStateException.class, booleanIterator::remove);
+        Assert.assertThrows(IllegalStateException.class, booleanIterator::remove);
     }
 }

@@ -158,6 +158,6 @@ public class ArrayListAdapterTest extends AbstractListTestCase
     @Test
     public void adapt_null()
     {
-        Verify.assertThrows(NullPointerException.class, () -> ArrayListAdapter.adapt(null));
+        Assert.assertThrows(NullPointerException.class, () -> ArrayListAdapter.adapt(null));
     }
 }

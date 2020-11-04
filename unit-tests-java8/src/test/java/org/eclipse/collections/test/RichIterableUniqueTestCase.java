@@ -59,11 +59,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertPostSerializedEqualsAndHashCode;
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.eclipse.collections.test.IterableTestCase.assertNotEquals;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 public interface RichIterableUniqueTestCase extends RichIterableTestCase

@@ -22,7 +22,6 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
-import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -197,7 +196,7 @@ public class Unmodifiable<name>SetTest extends Abstract<name>SetTestCase
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -205,7 +204,7 @@ public class Unmodifiable<name>SetTest extends Abstract<name>SetTestCase
     {
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override

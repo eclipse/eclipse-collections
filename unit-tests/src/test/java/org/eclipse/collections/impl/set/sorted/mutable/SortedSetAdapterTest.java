@@ -196,7 +196,7 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
         super.getFirst();
         Assert.assertEquals(Integer.valueOf(1), this.newWith(1, 2, 3).getFirst());
         Assert.assertEquals(Integer.valueOf(3), this.newWith(Collections.reverseOrder(), 1, 2, 3).getFirst());
-        Verify.assertThrows(NoSuchElementException.class, () -> new SortedSetAdapter<>(new TreeSet<>()).getFirst());
+        Assert.assertThrows(NoSuchElementException.class, () -> new SortedSetAdapter<>(new TreeSet<>()).getFirst());
     }
 
     @Override
@@ -207,7 +207,7 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
         Assert.assertNotNull(this.newWith(1, 2, 3).getLast());
         Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3).getLast());
         Assert.assertEquals(Integer.valueOf(1), this.newWith(Collections.reverseOrder(), 1, 2, 3).getLast());
-        Verify.assertThrows(NoSuchElementException.class, () -> new SortedSetAdapter<>(new TreeSet<>()).getLast());
+        Assert.assertThrows(NoSuchElementException.class, () -> new SortedSetAdapter<>(new TreeSet<>()).getLast());
     }
 
     @Override
@@ -247,7 +247,7 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
     @Test
     public void adaptNull()
     {
-        Verify.assertThrows(NullPointerException.class, () -> new SortedSetAdapter<>(null));
-        Verify.assertThrows(NullPointerException.class, () -> SortedSetAdapter.adapt(null));
+        Assert.assertThrows(NullPointerException.class, () -> new SortedSetAdapter<>(null));
+        Assert.assertThrows(NullPointerException.class, () -> SortedSetAdapter.adapt(null));
     }
 }

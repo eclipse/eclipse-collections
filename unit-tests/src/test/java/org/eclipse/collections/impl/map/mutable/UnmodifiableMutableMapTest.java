@@ -16,7 +16,6 @@ import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -66,7 +65,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeObject()
     {
         MutableMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.remove("One"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.remove("One"));
     }
 
     @Override
@@ -74,14 +73,14 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeKey()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.removeKey(1));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.removeKey(1));
     }
 
     @Override
     @Test
     public void removeAllKeys()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeAllKeys(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeAllKeys(null));
     }
 
     @Override
@@ -89,7 +88,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeIf()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.removeIf(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.removeIf(null));
     }
 
     @Override
@@ -97,7 +96,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeFromEntrySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().remove(ImmutableEntry.of(2, "Two")));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().remove(ImmutableEntry.of(2, "Two")));
     }
 
     @Override
@@ -105,7 +104,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeAllFromEntrySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().removeAll(FastList.newListWith(ImmutableEntry.of(2, "Two"))));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().removeAll(FastList.newListWith(ImmutableEntry.of(2, "Two"))));
     }
 
     @Override
@@ -113,7 +112,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void retainAllFromEntrySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().retainAll(FastList.newListWith(ImmutableEntry.of(2, "Two"))));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().retainAll(FastList.newListWith(ImmutableEntry.of(2, "Two"))));
     }
 
     @Override
@@ -121,7 +120,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void clearEntrySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().clear());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().clear());
     }
 
     @Override
@@ -129,7 +128,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeFromKeySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.keySet().remove(2));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.keySet().remove(2));
     }
 
     @Override
@@ -137,7 +136,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeNullFromKeySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.keySet().remove(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.keySet().remove(null));
     }
 
     @Override
@@ -145,7 +144,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeAllFromKeySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.keySet().removeAll(FastList.newListWith(1, 2)));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.keySet().removeAll(FastList.newListWith(1, 2)));
     }
 
     @Override
@@ -153,7 +152,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void retainAllFromKeySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.keySet().retainAll(Lists.mutable.of()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.keySet().retainAll(Lists.mutable.of()));
     }
 
     @Override
@@ -161,7 +160,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void clearKeySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.keySet().clear());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.keySet().clear());
     }
 
     @Override
@@ -169,7 +168,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeFromValues()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.values().remove("Two"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.values().remove("Two"));
     }
 
     @Override
@@ -177,7 +176,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeAllFromValues()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.values().removeAll(FastList.newListWith("One", "Two")));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.values().removeAll(FastList.newListWith("One", "Two")));
     }
 
     @Override
@@ -185,7 +184,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void removeNullFromValues()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.values().remove(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.values().remove(null));
     }
 
     @Override
@@ -193,7 +192,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void retainAllFromValues()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.values().retainAll(Lists.mutable.of()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.values().retainAll(Lists.mutable.of()));
     }
 
     @Override
@@ -201,7 +200,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void getIfAbsentPut()
     {
         Assert.assertEquals("3", this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(3, (Function0<String>) () -> ""));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(4, (Function0<String>) () -> ""));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(4, (Function0<String>) () -> ""));
     }
 
     @Override
@@ -209,7 +208,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void getIfAbsentPutValue()
     {
         Assert.assertEquals("3", this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(3, ""));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(4, ""));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(4, ""));
     }
 
     @Override
@@ -245,7 +244,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void putAll()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "2");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.putAll(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.putAll(null));
     }
 
     @Override
@@ -253,7 +252,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void collectKeysAndValues()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "2");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.collectKeysAndValues(null, null, null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.collectKeysAndValues(null, null, null));
     }
 
     @Override
@@ -261,7 +260,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void clear()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "2");
-        Verify.assertThrows(UnsupportedOperationException.class, map::clear);
+        Assert.assertThrows(UnsupportedOperationException.class, map::clear);
     }
 
     @Override
@@ -289,35 +288,35 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     @Test
     public void withMap()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapEmpty()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.empty()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapTargetEmpty()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapEmptyAndTargetEmpty()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.empty()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapNull()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(null));
     }
 
     @Override
@@ -362,9 +361,9 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "2").asUnmodifiable();
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().remove(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().remove(null));
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> Iterate.getFirst(map.entrySet()).setValue("Three"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> Iterate.getFirst(map.entrySet()).setValue("Three"));
 
         Assert.assertEquals(this.newMapWithKeysValues(1, "One", 2, "2"), map);
     }
@@ -389,7 +388,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     @Test
     public void put()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, super::put);
+        Assert.assertThrows(UnsupportedOperationException.class, super::put);
     }
 
     @Override

@@ -38,14 +38,14 @@ public class MultiReaderFastListAsWriteUntouchableTest extends AbstractListTestC
     @Test
     public void asSynchronized()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newWith().asSynchronized());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().asSynchronized());
     }
 
     @Override
     @Test
     public void asUnmodifiable()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newWith().asUnmodifiable());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().asUnmodifiable());
     }
 
     @Override

@@ -724,7 +724,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
 
         Iterator<Integer> sortedBagIterator = sortedBag.iterator();
         MutableSortedBag<Integer> expected = this.newWith(Collections.reverseOrder(), 1, 1, 1, 1, 2);
-        Verify.assertThrows(IllegalStateException.class, sortedBagIterator::remove);
+        Assert.assertThrows(IllegalStateException.class, sortedBagIterator::remove);
 
         this.assertIteratorRemove(sortedBag, sortedBagIterator, expected);
         this.assertIteratorRemove(sortedBag, sortedBagIterator, expected);
@@ -733,7 +733,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         this.assertIteratorRemove(sortedBag, sortedBagIterator, expected);
         Verify.assertEmpty(sortedBag);
         Assert.assertFalse(sortedBagIterator.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) sortedBagIterator::next);
+        Assert.assertThrows(NoSuchElementException.class, sortedBagIterator::next);
     }
 
     private void assertIteratorRemove(MutableSortedBag<Integer> bag, Iterator<Integer> iterator, MutableSortedBag<Integer> expected)
@@ -743,7 +743,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         iterator.remove();
         expected.remove(first);
         Verify.assertSortedBagsEqual(expected, bag);
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     @Override
@@ -809,9 +809,9 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         integers.forEach(0, 9, result3::add);
         Assert.assertEquals(Lists.immutable.with(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), result3);
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(-1, 0, result::add));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(0, -1, result::add));
-        Verify.assertThrows(IllegalArgumentException.class, () -> integers.forEach(7, 5, result::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(-1, 0, result::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(0, -1, result::add));
+        Assert.assertThrows(IllegalArgumentException.class, () -> integers.forEach(7, 5, result::add));
     }
 
     @Test
@@ -831,9 +831,9 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         Assert.assertEquals("40414243343536272819", builder3.toString());
 
         MutableList<Integer> result = Lists.mutable.empty();
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(-1, 0, new AddToList(result)));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(0, -1, new AddToList(result)));
-        Verify.assertThrows(IllegalArgumentException.class, () -> integers.forEachWithIndex(7, 5, new AddToList(result)));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(-1, 0, new AddToList(result)));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(0, -1, new AddToList(result)));
+        Assert.assertThrows(IllegalArgumentException.class, () -> integers.forEachWithIndex(7, 5, new AddToList(result)));
     }
 
     @Override
@@ -845,7 +845,8 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         MutableSortedBag<Integer> bag = this.newWith(Collections.reverseOrder(), 3, 3, 3, 2, 2, 1);
         MutableList<Integer> actualItems = FastList.newList();
         MutableList<Integer> actualIndexes = FastList.newList();
-        bag.forEachWithOccurrences((each, index) -> {
+        bag.forEachWithOccurrences((each, index) ->
+        {
             actualItems.add(each);
             actualIndexes.add(index);
         });
@@ -858,7 +859,8 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         bag2.addOccurrences(3, 10);
         IntegerSum sum = new IntegerSum(0);
         Counter counter = new Counter();
-        bag2.forEachWithOccurrences((each, occurrences) -> {
+        bag2.forEachWithOccurrences((each, occurrences) ->
+        {
             counter.increment();
             sum.add(each * occurrences * counter.getCount());
         });
@@ -1827,7 +1829,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         Verify.assertSize(3, this.newWith("one", "one", "two", "two", "three", "three").topOccurrences(1));
         Verify.assertSize(0, this.newWith().topOccurrences(0));
         Verify.assertSize(0, this.newWith("one").topOccurrences(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().topOccurrences(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith().topOccurrences(-1));
     }
 
     @Override
@@ -1862,7 +1864,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         Verify.assertSize(3, this.newWith("one", "one", "two", "two", "three", "three").bottomOccurrences(1));
         Verify.assertSize(0, this.newWith().bottomOccurrences(0));
         Verify.assertSize(0, this.newWith("one").bottomOccurrences(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().bottomOccurrences(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith().bottomOccurrences(-1));
     }
 
     @Override

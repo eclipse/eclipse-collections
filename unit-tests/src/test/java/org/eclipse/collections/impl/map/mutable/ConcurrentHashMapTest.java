@@ -240,7 +240,7 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
     @Test
     public void withMapNull()
     {
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newMap().withMap(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newMap().withMap(null));
     }
 
     @Test
@@ -296,7 +296,8 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
     {
         ConcurrentHashMap<Integer, Integer> map1 = ConcurrentHashMap.newMap();
         ConcurrentHashMap<Integer, Integer> map2 = ConcurrentHashMap.newMap();
-        ParallelIterate.forEach(Interval.oneTo(100), each -> {
+        ParallelIterate.forEach(Interval.oneTo(100), each ->
+        {
             map1.put(each, each);
             Assert.assertEquals(each, map1.get(each));
             map2.putAll(Maps.mutable.of(each, each));
@@ -324,7 +325,8 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
     {
         ConcurrentHashMap<Integer, Integer> map1 = ConcurrentHashMap.newMap();
         ConcurrentHashMap<Integer, Integer> map2 = ConcurrentHashMap.newMap();
-        ParallelIterate.forEach(Interval.oneTo(100), each -> {
+        ParallelIterate.forEach(Interval.oneTo(100), each ->
+        {
             map1.put(each, each);
             map1.put(each, each);
             Assert.assertEquals(each, map1.get(each));
@@ -341,7 +343,8 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
     public void concurrentClear()
     {
         ConcurrentHashMap<Integer, Integer> map = ConcurrentHashMap.newMap();
-        ParallelIterate.forEach(Interval.oneTo(100), each -> {
+        ParallelIterate.forEach(Interval.oneTo(100), each ->
+        {
             for (int i = 0; i < 10; i++)
             {
                 map.put(each + i * 1000, each);
@@ -355,7 +358,8 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
     public void concurrentRemoveAndPutIfAbsent()
     {
         ConcurrentHashMap<Integer, Integer> map1 = ConcurrentHashMap.newMap();
-        ParallelIterate.forEach(Interval.oneTo(100), each -> {
+        ParallelIterate.forEach(Interval.oneTo(100), each ->
+        {
             Assert.assertNull(map1.put(each, each));
             map1.remove(each);
             Assert.assertNull(map1.get(each));

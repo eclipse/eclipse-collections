@@ -60,19 +60,19 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void testRemove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
     }
 
     @Test
     public void testAddAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
     }
 
     @Test
     public void testAdd()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
     }
 
     @Test
@@ -87,7 +87,7 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
     public void testGet()
     {
         Verify.assertStartsWith(this.list, "1", "2");
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(2));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(2));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
         Assert.assertEquals("1", this.list.set(0, "2"));
         Assert.assertEquals("2", this.list.set(1, "1"));
         Assert.assertEquals(FastList.newListWith("2", "1"), this.list);
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.list.set(2, "0"));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.set(2, "0"));
     }
 
     @Test
@@ -135,7 +135,8 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
         int[] indexSum = new int[1];
         MutableList<String> result = Lists.mutable.of();
         MutableList<String> source = this.classUnderTest();
-        source.forEachWithIndex((each, index) -> {
+        source.forEachWithIndex((each, index) ->
+        {
             result.add(each);
             indexSum[0] += index;
         });
@@ -202,7 +203,7 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void testGetOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
     }
 
     @Override

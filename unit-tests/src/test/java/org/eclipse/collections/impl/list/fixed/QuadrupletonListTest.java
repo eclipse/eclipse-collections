@@ -70,21 +70,21 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testRemove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
         this.assertUnchanged();
     }
 
     @Test
     public void testAddAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
         this.assertUnchanged();
     }
 
     @Test
     public void testAdd()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
         this.assertUnchanged();
     }
 
@@ -100,7 +100,7 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
     public void testGet()
     {
         Verify.assertStartsWith(this.list, "1", "2", "3", "4");
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(4));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(4));
     }
 
     @Test
@@ -112,7 +112,7 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
         Assert.assertEquals("3", list.set(2, "2"));
         Assert.assertEquals("4", list.set(3, "1"));
         Assert.assertEquals(FastList.newListWith("4", "3", "2", "1"), list);
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.set(4, "0"));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.set(4, "0"));
     }
 
     private void assertUnchanged()
@@ -153,7 +153,8 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
         int[] indexSum = new int[1];
         MutableList<String> result = Lists.mutable.of();
         MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4");
-        source.forEachWithIndex((each, index) -> {
+        source.forEachWithIndex((each, index) ->
+        {
             result.add(each);
             indexSum[0] += index;
         });
@@ -206,6 +207,6 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testGetOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
     }
 }

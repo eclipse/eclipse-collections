@@ -14,8 +14,8 @@ import org.eclipse.collections.api.ordered.SortedIterable;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 public interface SortedIterableTestCase extends OrderedIterableTestCase, NoDetectOptionalNullTestCase
 {

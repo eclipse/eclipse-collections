@@ -133,11 +133,11 @@ public abstract class AbstractMutableBiMapValuesTestCase
         Assert.assertFalse(iterator.hasNext());
 
         Assert.assertEquals(expected, actual);
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
 
         MutableBiMap<Float, String> map1 = this.newMapWithKeysValues(0.0f, "zero", 1.0f, null);
         Iterator<String> iterator1 = map1.iterator();
-        Verify.assertThrows(IllegalStateException.class, iterator1::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator1::remove);
         iterator1.next();
         iterator1.remove();
         Assert.assertTrue(map1.toString(), HashBiMap.newWithKeysValues(0.0f, "zero").equals(map1)
@@ -147,11 +147,11 @@ public abstract class AbstractMutableBiMapValuesTestCase
         iterator1.next();
         iterator1.remove();
         Assert.assertEquals(HashBiMap.newMap(), map1);
-        Verify.assertThrows(IllegalStateException.class, iterator1::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator1::remove);
 
         MutableBiMap<Float, String> map2 = this.newMapWithKeysValues(0.0f, null, 9.0f, "nine");
         Iterator<String> iterator2 = map2.iterator();
-        Verify.assertThrows(IllegalStateException.class, iterator2::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator2::remove);
         iterator2.next();
         iterator2.remove();
         Assert.assertTrue(map2.toString(), HashBiMap.newWithKeysValues(0.0f, null).equals(map2)
@@ -164,7 +164,7 @@ public abstract class AbstractMutableBiMapValuesTestCase
 
         MutableBiMap<Float, String> map3 = this.newMapWithKeysValues(8.0f, "eight", 9.0f, null);
         Iterator<String> iterator3 = map3.iterator();
-        Verify.assertThrows(IllegalStateException.class, iterator3::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator3::remove);
         iterator3.next();
         iterator3.remove();
         Assert.assertTrue(map3.toString(), HashBiMap.newWithKeysValues(8.0f, "eight").equals(map3)

@@ -125,7 +125,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     @Test
     public void getOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 
     @Override
@@ -355,7 +355,8 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     public void collect_target()
     {
         MutableList<Integer> targetCollection = FastList.newList();
-        MutableList<Integer> actual = this.classUnderTest().collect(object -> {
+        MutableList<Integer> actual = this.classUnderTest().collect(object ->
+        {
             throw new AssertionError();
         }, targetCollection);
         Assert.assertEquals(targetCollection, actual);
@@ -367,7 +368,8 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     public void collectWith_target()
     {
         MutableList<Integer> targetCollection = FastList.newList();
-        MutableList<Integer> actual = this.classUnderTest().collectWith((argument1, argument2) -> {
+        MutableList<Integer> actual = this.classUnderTest().collectWith((argument1, argument2) ->
+        {
             throw new AssertionError();
         }, 1, targetCollection);
         Assert.assertEquals(targetCollection, actual);

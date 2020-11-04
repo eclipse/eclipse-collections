@@ -426,7 +426,7 @@ public abstract class AbstractMutable<name>CollectionTestCase extends Abstract<n
             iterator.remove();
         }
         Verify.assertEmpty(<type>Iterable);
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -435,7 +435,7 @@ public abstract class AbstractMutable<name>CollectionTestCase extends Abstract<n
         Mutable<name>Collection <type>Iterable = this.classUnderTest();
         Mutable<name>Iterator iterator = <type>Iterable.<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     @Test
@@ -446,7 +446,7 @@ public abstract class AbstractMutable<name>CollectionTestCase extends Abstract<n
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
         iterator.remove();
-        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        Assert.assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     /**

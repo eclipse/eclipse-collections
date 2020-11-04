@@ -91,8 +91,8 @@ public abstract class Abstract<name>BooleanMapTestCase
         Assert.assertFalse(this.classUnderTest().getOrThrow(<(literal.(type))("31")>));
         Assert.assertTrue(this.classUnderTest().getOrThrow(<(literal.(type))("32")>));
 
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("1")>));
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("33")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("1")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("33")>));
     }
 
     @Test
@@ -582,8 +582,8 @@ public abstract class Abstract<name>BooleanMapTestCase
         Assert.assertFalse(iterator.hasNext());
 
         Assert.assertEquals(expected, actual);
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
-        Verify.assertThrows(NoSuchElementException.class, () -> this.getEmptyMap().booleanIterator().next());
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, () -> this.getEmptyMap().booleanIterator().next());
     }
 
     @Test

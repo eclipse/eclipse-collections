@@ -86,11 +86,11 @@ public class UnmodifiableMutableListTest
         Assert.assertTrue(it.hasNext());
         Assert.assertEquals(1, it.nextIndex());
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> it.set("Rick Astley"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> it.set("Rick Astley"));
 
-        Verify.assertThrows(UnsupportedOperationException.class, it::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, it::remove);
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> it.add("Gloria Gaynor"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> it.add("Gloria Gaynor"));
 
         Assert.assertEquals(METALLICA, it.previous());
     }
@@ -98,13 +98,13 @@ public class UnmodifiableMutableListTest
     @Test
     public void sortThis()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThis());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThis());
     }
 
     @Test
     public void sortThisWithComparator()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
                 () -> this.unmodifiableList.sortThis(String::compareTo));
     }
@@ -112,7 +112,7 @@ public class UnmodifiableMutableListTest
     @Test
     public void sortThisBy()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
                 () -> this.unmodifiableList.sortThisBy(Functions.getStringToInteger()));
     }
@@ -120,62 +120,62 @@ public class UnmodifiableMutableListTest
     @Test
     public void sortThisByBoolean()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByBoolean(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByBoolean(null));
     }
 
     @Test
     public void sortThisByChar()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByChar(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByChar(null));
     }
 
     @Test
     public void sortThisByByte()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByByte(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByByte(null));
     }
 
     @Test
     public void sortThisByShort()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByShort(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByShort(null));
     }
 
     @Test
     public void sortThisByInt()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByInt(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByInt(null));
     }
 
     @Test
     public void sortThisByFloat()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByFloat(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByFloat(null));
     }
 
     @Test
     public void sortThisByLong()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByLong(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByLong(null));
     }
 
     @Test
     public void sortThisByDouble()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByDouble(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sortThisByDouble(null));
     }
 
     @Test
     public void shuffleThis()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.shuffleThis(null));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.shuffleThis(new Random(4)));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.shuffleThis(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.shuffleThis(new Random(4)));
     }
 
     @Test
     public void reverseThis()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
                 () -> this.unmodifiableList.reverseThis());
     }
@@ -183,7 +183,7 @@ public class UnmodifiableMutableListTest
     @Test
     public void addAllAtIndex()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
                 () -> this.unmodifiableList.addAll(0, Lists.mutable.of("Madonna")));
     }
@@ -191,31 +191,31 @@ public class UnmodifiableMutableListTest
     @Test
     public void set()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.set(0, "Madonna"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.set(0, "Madonna"));
     }
 
     @Test
     public void addAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.add(0, "Madonna"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.add(0, "Madonna"));
     }
 
     @Test
     public void removeFromIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.remove(0));
     }
 
     @Test
     public void replaceAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.replaceAll(e -> e));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.replaceAll(e -> e));
     }
 
     @Test
     public void sort()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sort(Comparator.naturalOrder()));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sort(Comparator.naturalOrder()));
     }
 
     @Test
@@ -223,7 +223,7 @@ public class UnmodifiableMutableListTest
     {
         MutableList<String> subList = this.unmodifiableList.subList(1, 3);
         Assert.assertEquals(Lists.immutable.of("Bon Jovi", "Europe"), subList);
-        Verify.assertThrows(UnsupportedOperationException.class, subList::clear);
+        Assert.assertThrows(UnsupportedOperationException.class, subList::clear);
     }
 
     @Test
@@ -252,7 +252,8 @@ public class UnmodifiableMutableListTest
     {
         MutableList<String> synchronizedList = this.unmodifiableList.asSynchronized();
         Verify.assertInstanceOf(SynchronizedMutableList.class, synchronizedList);
-        Verify.assertThrows(UnsupportedOperationException.class, () -> {
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        {
             Iterator<String> iterator = synchronizedList.iterator();
             iterator.next();
             iterator.remove();
@@ -263,7 +264,8 @@ public class UnmodifiableMutableListTest
     public void asReversed()
     {
         LazyIterable<String> lazyIterable = this.unmodifiableList.asReversed();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> {
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        {
             Iterator<String> iterator = lazyIterable.iterator();
             iterator.next();
             iterator.remove();

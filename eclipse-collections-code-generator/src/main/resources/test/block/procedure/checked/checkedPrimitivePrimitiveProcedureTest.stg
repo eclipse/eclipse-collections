@@ -25,8 +25,6 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.eclipse.collections.impl.test.Verify;
-
 /**
  * Provides a set of common tests of checked procedures for <type1> and <type2> values.
  * This file was automatically generated from template file checkedPrimitivePrimitiveProcedureTest.stg.
@@ -53,7 +51,7 @@ public final class Checked<name1><name2>ProcedureTest
     @Test
     public void runtimeException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> new Checked<name1><name2>Procedure()
+        Assert.assertThrows(RuntimeException.class, () -> new Checked<name1><name2>Procedure()
         {
             @Override
             public void safeValue(<type1> item1, <type2> item2) throws Exception
@@ -66,7 +64,7 @@ public final class Checked<name1><name2>ProcedureTest
     @Test
     public void checkedException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> new Checked<name1><name2>Procedure()
+        Assert.assertThrows(RuntimeException.class, () -> new Checked<name1><name2>Procedure()
         {
             @Override
             public void safeValue(<type1> item1, <type2> item2) throws Exception

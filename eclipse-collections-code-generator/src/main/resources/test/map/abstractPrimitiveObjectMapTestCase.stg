@@ -818,7 +818,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals(<name>ObjectHashMapTest.class, map2.maxBy(classNameLength));
         Assert.assertEquals(<name>ObjectHashMapTest.class, map3.maxBy(classNameLength));
 
-        Verify.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.\<Class\<?>\>newMap().maxBy(classNameLength));
+        Assert.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.\<Class\<?>\>newMap().maxBy(classNameLength));
     }
 
     @Test
@@ -852,7 +852,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals(<name>ObjectHashMap.class, map2.minBy(classNameLength));
         Assert.assertEquals(<name>ObjectHashMap.class, map3.minBy(classNameLength));
 
-        Verify.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.\<Class\<?>\>newMap().minBy(classNameLength));
+        Assert.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.\<Class\<?>\>newMap().minBy(classNameLength));
     }
 
     @Test
@@ -1772,7 +1772,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertFalse(iterator.hasNext());
 
         Assert.assertEquals(expected, actual);
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test

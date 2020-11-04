@@ -195,7 +195,7 @@ public class MapsTest
         MutableMap<String, String> map3 = Maps.mutable.ofInitialCapacity(20);
         this.assertPresizedMapSizeEquals(20, (UnifiedMap<String, String>) map3);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Maps.mutable.ofInitialCapacity(-12));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Maps.mutable.ofInitialCapacity(-12));
     }
 
     @Test
@@ -216,7 +216,7 @@ public class MapsTest
         MutableMap<String, String> map5 = Maps.mutable.withInitialCapacity(17);
         this.assertPresizedMapSizeEquals(17, (UnifiedMap<String, String>) map5);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Maps.mutable.ofInitialCapacity(-6));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Maps.mutable.ofInitialCapacity(-6));
     }
 
     private void assertPresizedMapSizeEquals(int initialCapacity, UnifiedMap<String, String> map)

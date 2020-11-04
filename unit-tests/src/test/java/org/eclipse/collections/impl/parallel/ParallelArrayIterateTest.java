@@ -66,11 +66,12 @@ public class ParallelArrayIterateTest
     @Test
     public void parallelForEachException()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 RuntimeException.class,
                 () -> ParallelArrayIterate.forEach(
                         Interval.zeroTo(5).toArray(),
-                        new PassThruProcedureFactory<Procedure<Object>>(object -> {
+                        new PassThruProcedureFactory<Procedure<Object>>(object ->
+                        {
                             throw new RuntimeException("Thread death on its way!");
                         }),
                         new PassThruCombiner<>(),

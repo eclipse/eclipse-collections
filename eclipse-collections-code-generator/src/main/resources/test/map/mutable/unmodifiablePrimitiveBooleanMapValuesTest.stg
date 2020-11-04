@@ -90,7 +90,7 @@ public class Unmodifiable<name>BooleanMapValuesTest extends AbstractMutableBoole
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -325,8 +325,8 @@ public class Unmodifiable<name>BooleanMapValuesTest extends AbstractMutableBoole
                 Lists.mutable.with(BooleanBags.mutable.with(false, true)),
                 iterable3.chunk(3));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
     }
 
     @Override
@@ -369,7 +369,7 @@ public class Unmodifiable<name>BooleanMapValuesTest extends AbstractMutableBoole
         MutableBooleanIterator booleanIterator = this.classUnderTest().booleanIterator();
         Assert.assertTrue(booleanIterator.hasNext());
         booleanIterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 
     @Override
@@ -378,7 +378,7 @@ public class Unmodifiable<name>BooleanMapValuesTest extends AbstractMutableBoole
     {
         MutableBooleanIterator booleanIterator = this.classUnderTest().booleanIterator();
         Assert.assertTrue(booleanIterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 
     @Override

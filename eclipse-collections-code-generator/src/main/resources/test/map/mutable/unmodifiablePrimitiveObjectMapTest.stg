@@ -350,13 +350,13 @@ public class Unmodifiable<name>ObjectMapTest extends AbstractMutable<name>Object
         Assert.assertFalse(iterator.hasNext());
 
         Assert.assertEquals(expected, actual);
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
 
         Unmodifiable<name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
         Iterator\<String> iterator1 = map1.iterator();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator1::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator1::remove);
         iterator1.next();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator1::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator1::remove);
     }
 
     @Override

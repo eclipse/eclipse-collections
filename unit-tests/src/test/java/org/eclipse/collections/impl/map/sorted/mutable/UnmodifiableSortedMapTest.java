@@ -70,12 +70,12 @@ public class UnmodifiableSortedMapTest
 
     private void checkMutability(Map<Integer, String> map)
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.put(3, "1"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.put(3, "1"));
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.putAll(SortedMaps.mutable.of(1, "1", 2, "2")));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.putAll(SortedMaps.mutable.of(1, "1", 2, "2")));
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.remove(2));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.remove(2));
 
-        Verify.assertThrows(UnsupportedOperationException.class, map::clear);
+        Assert.assertThrows(UnsupportedOperationException.class, map::clear);
     }
 }

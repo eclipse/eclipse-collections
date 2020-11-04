@@ -69,11 +69,13 @@ import org.junit.Test;
 
 public class ParallelIterateTest
 {
-    private static final Procedure<Integer> EXCEPTION_PROCEDURE = value -> {
+    private static final Procedure<Integer> EXCEPTION_PROCEDURE = value ->
+    {
         throw new RuntimeException("Thread death on its way!");
     };
 
-    private static final ObjectIntProcedure<Integer> EXCEPTION_OBJECT_INT_PROCEDURE = (object, index) -> {
+    private static final ObjectIntProcedure<Integer> EXCEPTION_OBJECT_INT_PROCEDURE = (object, index) ->
+    {
         throw new RuntimeException("Thread death on its way!");
     };
 
@@ -264,7 +266,7 @@ public class ParallelIterateTest
     @Test
     public void testForEachWithException()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 RuntimeException.class,
                 () -> ParallelIterate.forEach(
                         ParallelIterateTest.createIntegerList(5),
@@ -327,7 +329,7 @@ public class ParallelIterateTest
     @Test
     public void testForEachWithIndexException()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 RuntimeException.class,
                 () -> ParallelIterate.forEachWithIndex(
                         ParallelIterateTest.createIntegerList(5),
@@ -493,7 +495,7 @@ public class ParallelIterateTest
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result7));
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result8));
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result9));
-        Verify.assertThrows(IllegalArgumentException.class, () -> ParallelIterate.groupBy(null, null, 1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> ParallelIterate.groupBy(null, null, 1));
     }
 
     @Test
@@ -571,7 +573,8 @@ public class ParallelIterateTest
         ObjectDoubleMap<Integer> result = ParallelIterate.sumByDouble(
                 integers,
                 integer -> integer > 100_000 ? 2 : 1,
-                integer -> {
+                integer ->
+                {
                     Integer i = integer > 100_000 ? integer - 100_000 : integer;
                     return 1.0d / (i.doubleValue() * i.doubleValue() * i.doubleValue() * i.doubleValue());
                 });
@@ -619,7 +622,8 @@ public class ParallelIterateTest
         ObjectDoubleMap<Integer> result = ParallelIterate.sumByFloat(
                 integers,
                 integer -> integer > 100_000 ? 2 : 1,
-                integer -> {
+                integer ->
+                {
                     Integer i = integer > 100_000 ? integer - 100_000 : integer;
                     return 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue());
                 });

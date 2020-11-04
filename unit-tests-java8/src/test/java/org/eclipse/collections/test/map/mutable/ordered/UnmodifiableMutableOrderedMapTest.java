@@ -23,9 +23,9 @@ import org.eclipse.collections.test.UnmodifiableIterableTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 @RunWith(Java8Runner.class)

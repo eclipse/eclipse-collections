@@ -173,9 +173,9 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
         Iterator\<String> iterator = this.classUnderTest().iterator();
         Assert.assertTrue(iterator.hasNext());
         Assert.assertEquals("zero", iterator.next());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
         Assert.assertFalse(iterator.hasNext());
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override

@@ -242,7 +242,7 @@ public void sumConsistentRounding()
         Mutable<name1>Iterator iterator = this.classUnderTest().<type1>Iterator();
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -250,7 +250,7 @@ public void sumConsistentRounding()
     {
         Mutable<name1>Iterator iterator = this.classUnderTest().<type1>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override

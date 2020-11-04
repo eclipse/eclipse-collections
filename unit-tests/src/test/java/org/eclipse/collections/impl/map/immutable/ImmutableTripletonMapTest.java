@@ -142,7 +142,8 @@ public class ImmutableTripletonMapTest extends ImmutableMemoryEfficientMapTestCa
         super.forEachWithIndex();
         MutableList<String> result = Lists.mutable.of();
         ImmutableMap<Integer, String> map = new ImmutableTripletonMap<>(1, "One", 2, "Two", 3, "Three");
-        map.forEachWithIndex((value, index) -> {
+        map.forEachWithIndex((value, index) ->
+        {
             result.add(value);
             result.add(String.valueOf(index));
         });
@@ -202,7 +203,7 @@ public class ImmutableTripletonMapTest extends ImmutableMemoryEfficientMapTestCa
     @Test
     public void getOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 
     @Override

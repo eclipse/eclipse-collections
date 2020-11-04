@@ -304,7 +304,8 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     {
         MutableList<String> result = Lists.mutable.of();
         MutableMap<Integer, String> map = new EmptyMap<>();
-        map.forEachWithIndex((value, index) -> {
+        map.forEachWithIndex((value, index) ->
+        {
             result.add(value);
             result.add(String.valueOf(index));
         });
@@ -340,7 +341,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsentPut()
     {
         MutableMap<Integer, String> map = new EmptyMap<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, new PassThruFunction0<>("4")));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, new PassThruFunction0<>("4")));
     }
 
     @Override
@@ -348,7 +349,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsentPutWith()
     {
         MutableMap<Integer, String> map = new EmptyMap<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, String::valueOf, 4));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, String::valueOf, 4));
     }
 
     @Override
@@ -486,6 +487,6 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void getOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> new EmptyMap<>().getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> new EmptyMap<>().getOnly());
     }
 }

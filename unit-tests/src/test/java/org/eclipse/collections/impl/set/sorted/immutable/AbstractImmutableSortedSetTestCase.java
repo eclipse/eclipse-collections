@@ -143,14 +143,14 @@ public abstract class AbstractImmutableSortedSetTestCase
 
         SortedSet<Integer> set2 = new TreeSet<>(set1.castToSortedSet());
 
-        Verify.assertThrows(ClassCastException.class, () -> set1.contains(new Object()));
-        Verify.assertThrows(ClassCastException.class, () -> set2.contains(new Object()));
+        Assert.assertThrows(ClassCastException.class, () -> set1.contains(new Object()));
+        Assert.assertThrows(ClassCastException.class, () -> set2.contains(new Object()));
 
-        Verify.assertThrows(ClassCastException.class, () -> set1.contains("1"));
-        Verify.assertThrows(ClassCastException.class, () -> set2.contains("1"));
+        Assert.assertThrows(ClassCastException.class, () -> set1.contains("1"));
+        Assert.assertThrows(ClassCastException.class, () -> set2.contains("1"));
 
-        Verify.assertThrows(NullPointerException.class, () -> set1.contains(null));
-        Verify.assertThrows(NullPointerException.class, () -> set2.contains(null));
+        Assert.assertThrows(NullPointerException.class, () -> set1.contains(null));
+        Assert.assertThrows(NullPointerException.class, () -> set2.contains(null));
     }
 
     @Test
@@ -161,8 +161,8 @@ public abstract class AbstractImmutableSortedSetTestCase
 
         Assert.assertTrue(set1.containsAllArguments(set1.toArray()));
 
-        Verify.assertThrows(NullPointerException.class, () -> set1.containsAllArguments(null, null));
-        Verify.assertThrows(NullPointerException.class, () -> set2.containsAll(FastList.newListWith(null, null)));
+        Assert.assertThrows(NullPointerException.class, () -> set1.containsAllArguments(null, null));
+        Assert.assertThrows(NullPointerException.class, () -> set2.containsAll(FastList.newListWith(null, null)));
     }
 
     @Test
@@ -173,8 +173,8 @@ public abstract class AbstractImmutableSortedSetTestCase
 
         Assert.assertTrue(set1.containsAllIterable(Interval.oneTo(set1.size())));
 
-        Verify.assertThrows(NullPointerException.class, () -> set1.containsAllIterable(FastList.newListWith(null, null)));
-        Verify.assertThrows(NullPointerException.class, () -> set2.containsAll(FastList.newListWith(null, null)));
+        Assert.assertThrows(NullPointerException.class, () -> set1.containsAllIterable(FastList.newListWith(null, null)));
+        Assert.assertThrows(NullPointerException.class, () -> set2.containsAll(FastList.newListWith(null, null)));
     }
 
     @Test
@@ -626,10 +626,10 @@ public abstract class AbstractImmutableSortedSetTestCase
             Integer integer = iterator.next();
             Assert.assertEquals(i + 1, integer.intValue());
         }
-        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
         Iterator<Integer> intItr = integers.iterator();
         intItr.next();
-        Verify.assertThrows(UnsupportedOperationException.class, intItr::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, intItr::remove);
     }
 
     @Test
@@ -1049,10 +1049,10 @@ public abstract class AbstractImmutableSortedSetTestCase
         integers.forEach(0, 3, result2::add);
         Assert.assertEquals(Lists.immutable.with(4, 3, 2, 1), result2);
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(-1, 0, result::add));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(0, -1, result::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(-1, 0, result::add));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(0, -1, result::add));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> integers.forEach(2, 1, result::add));
+        Assert.assertThrows(IllegalArgumentException.class, () -> integers.forEach(2, 1, result::add));
     }
 
     @Test
@@ -1067,10 +1067,10 @@ public abstract class AbstractImmutableSortedSetTestCase
         integers.forEachWithIndex(0, 3, new AddToList(result2));
         Assert.assertEquals(Lists.immutable.with(4, 3, 2, 1), result2);
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(-1, 0, new AddToList(result2)));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(0, -1, new AddToList(result2)));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(-1, 0, new AddToList(result2)));
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(0, -1, new AddToList(result2)));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> integers.forEachWithIndex(2, 1, new AddToList(result2)));
+        Assert.assertThrows(IllegalArgumentException.class, () -> integers.forEachWithIndex(2, 1, new AddToList(result2)));
     }
 
     @Test

@@ -121,8 +121,8 @@ public abstract class Abstract<name1><name2>MapTestCase
         Assert.assertEquals(<(wideLiteral.(type2))("31")>, this.map.getOrThrow(<(literal.(type1))("31")>)<wideDelta.(type2)>);
         Assert.assertEquals(<(wideLiteral.(type2))("32")>, this.map.getOrThrow(<(literal.(type1))("32")>)<wideDelta.(type2)>);
 
-        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("1")>));
-        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("33")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("1")>));
+        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("33")>));
     }
 
     @Test
@@ -812,8 +812,8 @@ public abstract class Abstract<name1><name2>MapTestCase
         Assert.assertFalse(iterator.hasNext());
 
         Assert.assertEquals(expected, actual);
-        Verify.assertThrows(NoSuchElementException.class, iterator::next);
-        Verify.assertThrows(NoSuchElementException.class, () -> this.getEmptyMap().<type2>Iterator().next());
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertThrows(NoSuchElementException.class, () -> this.getEmptyMap().<type2>Iterator().next());
     }
 
     @Test
@@ -894,9 +894,9 @@ public abstract class Abstract<name1><name2>MapTestCase
 
         Verify.assertIterablesEqual(Lists.mutable.empty(), this.getEmptyMap().chunk(1));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWithKeysValues(<["1"]:keyValue(); separator=", ">).chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWithKeysValues(<["1"]:keyValue(); separator=", ">).chunk(-1));
     }
 }
 

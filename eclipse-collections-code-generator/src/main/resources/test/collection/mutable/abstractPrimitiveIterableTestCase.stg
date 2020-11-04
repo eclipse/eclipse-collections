@@ -1155,9 +1155,9 @@ public void sumConsistentRounding()
         Assert.assertEquals(Lists.mutable.with(this.newMutableCollectionWith(<["0"]:(literal.(type))(); separator=", ">)), this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(1));
         Assert.assertEquals(Lists.mutable.with(), this.newWith().chunk(1));
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
-        Verify.assertThrows(IllegalArgumentException.class, () -> this.newMutableCollectionWith().chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newMutableCollectionWith().chunk(-1));
     }
 }
 

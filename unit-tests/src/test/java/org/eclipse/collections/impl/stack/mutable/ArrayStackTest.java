@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.stack.mutable;
 
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.factory.Stacks;
-import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -48,69 +48,69 @@ public class ArrayStackTest extends MutableStackTestCase
     public void takeWhile()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.takeWhile(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.takeWhile(null));
     }
 
     @Test
     public void dropWhile()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.dropWhile(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.dropWhile(null));
     }
 
     @Test
     public void partitionWhile()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.partitionWhile(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.partitionWhile(null));
     }
 
     @Test
     public void distinct()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, arrayStack::distinct);
+        Assert.assertThrows(UnsupportedOperationException.class, arrayStack::distinct);
     }
 
     @Test
     public void indexOf()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.indexOf(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.indexOf(null));
     }
 
     @Test
     public void corresponds()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.corresponds(null, null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.corresponds(null, null));
     }
 
     @Test
     public void hasSameElements()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.hasSameElements(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.hasSameElements(null));
     }
 
     @Test
     public void forEach_exception()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.forEach(0, 1, null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.forEach(0, 1, null));
     }
 
     @Test
     public void forEachWithIndex_exception()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.forEachWithIndex(0, 1, null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.forEachWithIndex(0, 1, null));
     }
 
     @Test
     public void detectIndex()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
-        Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.detectIndex(null));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.detectIndex(null));
     }
 }

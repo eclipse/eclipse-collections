@@ -96,7 +96,7 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
     @Test
     public void iterator()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> MultiReaderUnifiedSet.newSet().iterator());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> MultiReaderUnifiedSet.newSet().iterator());
     }
 
     @Test
@@ -336,7 +336,8 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
     {
         MultiReaderUnifiedSet<Integer> set = MultiReaderUnifiedSet.newSetWith(1);
         Object[] result = new Object[1];
-        set.withReadLockAndDelegate(delegate -> {
+        set.withReadLockAndDelegate(delegate ->
+        {
             result[0] = delegate.getFirst();
             this.verifyDelegateIsUnmodifiable(delegate);
         });
@@ -349,7 +350,8 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
         MultiReaderUnifiedSet<Integer> set = MultiReaderUnifiedSet.newSetWith(2);
         AtomicReference<MutableSet<?>> delegateList = new AtomicReference<>();
         AtomicReference<Iterator<?>> iterator = new AtomicReference<>();
-        set.withWriteLockAndDelegate(delegate -> {
+        set.withWriteLockAndDelegate(delegate ->
+        {
             delegate.add(1);
             delegate.add(2);
             delegate.add(3);
@@ -359,15 +361,15 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
         });
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), set);
 
-        Verify.assertThrows(NullPointerException.class, () -> iterator.get().hasNext());
+        Assert.assertThrows(NullPointerException.class, () -> iterator.get().hasNext());
 
-        Verify.assertThrows(NullPointerException.class, () -> delegateList.get().iterator());
+        Assert.assertThrows(NullPointerException.class, () -> delegateList.get().iterator());
     }
 
     private void verifyDelegateIsUnmodifiable(MutableSet<Integer> delegate)
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> delegate.add(2));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> delegate.remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> delegate.add(2));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> delegate.remove(0));
     }
 
     @Override

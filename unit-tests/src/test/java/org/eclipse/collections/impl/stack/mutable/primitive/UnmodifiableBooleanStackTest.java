@@ -93,7 +93,7 @@ public class UnmodifiableBooleanStackTest extends AbstractBooleanStackTestCase
         MutableBooleanIterator booleanIterator = (MutableBooleanIterator) this.classUnderTest().booleanIterator();
         Assert.assertTrue(booleanIterator.hasNext());
         booleanIterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 
     @Test
@@ -101,6 +101,6 @@ public class UnmodifiableBooleanStackTest extends AbstractBooleanStackTestCase
     {
         MutableBooleanIterator booleanIterator = (MutableBooleanIterator) this.classUnderTest().booleanIterator();
         Assert.assertTrue(booleanIterator.hasNext());
-        Verify.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 }

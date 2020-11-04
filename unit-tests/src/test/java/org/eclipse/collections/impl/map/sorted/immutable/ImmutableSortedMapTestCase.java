@@ -117,7 +117,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         MutableList<Integer> actualKeys = Lists.mutable.empty();
         MutableList<String> actualValues = Lists.mutable.empty();
 
-        this.classUnderTest().forEachKeyValue((key, value) -> {
+        this.classUnderTest().forEachKeyValue((key, value) ->
+        {
             actualKeys.add(key);
             actualValues.add(value);
         });
@@ -131,7 +132,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         MutableList<Integer> revActualKeys = Lists.mutable.empty();
         MutableList<String> revActualValues = Lists.mutable.empty();
 
-        this.classUnderTest(REV_INT_COMPARATOR).forEachKeyValue((key, value) -> {
+        this.classUnderTest(REV_INT_COMPARATOR).forEachKeyValue((key, value) ->
+        {
             revActualKeys.add(key);
             revActualValues.add(value);
         });
@@ -214,7 +216,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     @Test
     public void iteratorThrows()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> {
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        {
             Iterator<String> iterator = this.classUnderTest().iterator();
             iterator.remove();
         });
@@ -342,7 +345,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         MutableList<String> actualValues = Lists.mutable.empty();
         MutableList<Object> actualParameters = Lists.mutable.empty();
 
-        this.classUnderTest().forEachWith((eachValue, parameter) -> {
+        this.classUnderTest().forEachWith((eachValue, parameter) ->
+        {
             actualValues.add(eachValue);
             actualParameters.add(parameter);
         }, actualParameter);
@@ -353,7 +357,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         MutableList<String> revActualValues = Lists.mutable.empty();
         MutableList<Object> revActualParameters = Lists.mutable.empty();
 
-        this.classUnderTest(REV_INT_COMPARATOR).forEachWith((eachValue, parameter) -> {
+        this.classUnderTest(REV_INT_COMPARATOR).forEachWith((eachValue, parameter) ->
+        {
             revActualValues.add(eachValue);
             revActualParameters.add(parameter);
         }, actualParameter);
@@ -371,7 +376,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         MutableList<String> actualValues = Lists.mutable.empty();
         MutableList<Integer> actualIndices = Lists.mutable.empty();
 
-        this.classUnderTest().forEachWithIndex((eachValue, index) -> {
+        this.classUnderTest().forEachWithIndex((eachValue, index) ->
+        {
             actualValues.add(eachValue);
             actualIndices.add(index);
         });
@@ -382,7 +388,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         MutableList<String> revActualValues = Lists.mutable.empty();
         MutableList<Integer> revActualIndices = Lists.mutable.empty();
 
-        this.classUnderTest(REV_INT_COMPARATOR).forEachWithIndex((eachValue, index) -> {
+        this.classUnderTest(REV_INT_COMPARATOR).forEachWithIndex((eachValue, index) ->
+        {
             revActualValues.add(eachValue);
             revActualIndices.add(index);
         });
@@ -437,7 +444,7 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     @Test
     public void putAll()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
                 () -> ((Map<Integer, String>) this.classUnderTest()).putAll(null));
     }
@@ -445,7 +452,7 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     @Test
     public void clear()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
                 () -> ((Map<Integer, String>) this.classUnderTest()).clear());
     }
@@ -635,7 +642,7 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     @Test
     public void put()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
                 () -> ((Map<Integer, String>) this.classUnderTest()).put(null, null));
     }
@@ -643,7 +650,7 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     @Test
     public void remove()
     {
-        Verify.assertThrows(
+        Assert.assertThrows(
                 UnsupportedOperationException.class,
                 () -> ((Map<Integer, String>) this.classUnderTest()).remove(null));
     }

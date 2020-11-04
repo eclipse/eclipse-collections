@@ -101,7 +101,7 @@ public abstract class Object<name>HashMapValuesTestCase extends AbstractMutable<
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator1.hasNext());
 
-        Verify.assertThrows(NoSuchElementException.class, iterator1::next);
+        Assert.assertThrows(NoSuchElementException.class, iterator1::next);
 
         MutableObject<name>Map\<String> map2 = new Object<name>HashMap\<>();
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
@@ -593,8 +593,8 @@ public abstract class Object<name>HashMapValuesTestCase extends AbstractMutable<
                 Lists.mutable.with(<name>Bags.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 

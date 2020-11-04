@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.immutable;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ImmutableDoubletonSetTest
@@ -36,6 +37,6 @@ public class ImmutableDoubletonSetTest
     @Test
     public void getOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 }

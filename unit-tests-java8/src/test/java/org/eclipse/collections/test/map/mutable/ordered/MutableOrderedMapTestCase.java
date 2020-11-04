@@ -33,7 +33,7 @@ public interface MutableOrderedMapTestCase extends OrderedMapIterableTestCase, M
     {
         MutableOrderedMap<Integer, String> map = this.newWithKeysValues(1, "1", 2, "Two", 3, "Three");
 
-        Verify.assertThrows(NullPointerException.class, () -> map.removeAllKeys(null));
+        Assert.assertThrows(NullPointerException.class, () -> map.removeAllKeys(null));
         Assert.assertFalse(map.removeAllKeys(Sets.mutable.empty()));
         Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4)));
         Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4, 5, 6)));

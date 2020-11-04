@@ -896,8 +896,8 @@ public class StringIterateTest
 
         Assert.assertEquals(Tuples.twin("", ""), StringIterate.splitAtIndex("", 0));
 
-        Verify.assertThrows(StringIndexOutOfBoundsException.class, () -> StringIterate.splitAtIndex(oompaLoompa, 17));
-        Verify.assertThrows(StringIndexOutOfBoundsException.class, () -> StringIterate.splitAtIndex(oompaLoompa, -8));
+        Assert.assertThrows(StringIndexOutOfBoundsException.class, () -> StringIterate.splitAtIndex(oompaLoompa, 17));
+        Assert.assertThrows(StringIndexOutOfBoundsException.class, () -> StringIterate.splitAtIndex(oompaLoompa, -8));
     }
 
     @Test

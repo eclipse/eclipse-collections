@@ -48,10 +48,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertIterablesEqual;
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public interface IterableTestCase
@@ -252,14 +252,14 @@ public interface IterableTestCase
         assertTrue(iterator.hasNext());
         iterator.next();
         assertFalse(iterator.hasNext());
-        assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::next);
 
         Iterator<Integer> iterator2 = iterable.iterator();
         iterator2.next();
         iterator2.next();
         iterator2.next();
-        assertThrows(NoSuchElementException.class, (Runnable) iterator2::next);
-        assertThrows(NoSuchElementException.class, (Runnable) iterator2::next);
+        assertThrows(NoSuchElementException.class, iterator2::next);
+        assertThrows(NoSuchElementException.class, iterator2::next);
     }
 
     void Iterable_remove();

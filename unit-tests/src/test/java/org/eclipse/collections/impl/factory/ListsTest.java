@@ -263,7 +263,7 @@ public class ListsTest
         MutableList<String> list6 = Lists.mutable.ofInitialCapacity(65);
         this.assertPresizedListEquals(65, (FastList<String>) list6);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Lists.mutable.ofInitialCapacity(-12));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Lists.mutable.ofInitialCapacity(-12));
     }
 
     @Test
@@ -284,7 +284,7 @@ public class ListsTest
         MutableList<String> list5 = Lists.mutable.withInitialCapacity(32);
         this.assertPresizedListEquals(32, (FastList<String>) list5);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Lists.mutable.withInitialCapacity(-6));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Lists.mutable.withInitialCapacity(-6));
     }
 
     private void assertPresizedListEquals(int initialCapacity, FastList<String> list)
@@ -331,7 +331,7 @@ public class ListsTest
         MutableList<String> list6 = Lists.multiReader.ofInitialCapacity(65);
         ListsTest.assertPresizedMultiReaderListEquals(65, (MultiReaderFastList<String>) list6);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Lists.multiReader.ofInitialCapacity(-12));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Lists.multiReader.ofInitialCapacity(-12));
     }
 
     @Test
@@ -352,7 +352,7 @@ public class ListsTest
         MutableList<String> list5 = Lists.multiReader.withInitialCapacity(32);
         ListsTest.assertPresizedMultiReaderListEquals(32, (MultiReaderFastList<String>) list5);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Lists.multiReader.withInitialCapacity(-6));
+        Assert.assertThrows(IllegalArgumentException.class, () -> Lists.multiReader.withInitialCapacity(-6));
     }
 
     @Test

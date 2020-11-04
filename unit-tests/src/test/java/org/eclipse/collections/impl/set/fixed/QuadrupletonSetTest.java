@@ -79,7 +79,7 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
     @Test
     public void remove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.set.remove("1"));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.set.remove("1"));
     }
 
     @Test
@@ -217,6 +217,6 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
     @Test
     public void getOnly()
     {
-        Verify.assertThrows(IllegalStateException.class, () -> this.set.getOnly());
+        Assert.assertThrows(IllegalStateException.class, () -> this.set.getOnly());
     }
 }
