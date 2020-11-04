@@ -70,7 +70,6 @@ public interface FixedSizeMap<K, V>
     @Override
     default FixedSizeMap<K, V> withMap(Map<? extends K, ? extends V> map)
     {
-        this.putAll(map);
-        return this;
+        throw new UnsupportedOperationException("Cannot call withMap() on " + this.getClass().getSimpleName());
     }
 }
