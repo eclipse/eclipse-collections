@@ -45,6 +45,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.BiMaps;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
@@ -114,6 +115,22 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
         {
             map.put(keyValuePair.getOne(), keyValuePair.getTwo());
         }
+        return map.toImmutable();
+    }
+
+    @Override
+    public ImmutableBiMap<K, V> newWithMap(Map<? extends K, ? extends V> map)
+    {
+        HashBiMap<K, V> result = new HashBiMap<>(this.delegate.castToMap());
+        result.putAll(map);
+        return result.toImmutable();
+    }
+
+    @Override
+    public ImmutableBiMap<K, V> newWithMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        HashBiMap<K, V> map = new HashBiMap<>(this.delegate.castToMap());
+        mapIterable.forEachKeyValue(map::put);
         return map.toImmutable();
     }
 

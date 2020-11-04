@@ -384,6 +384,103 @@ public abstract class ImmutableMapIterableTestCase
     }
 
     @Test
+    public void newWithMap1()
+    {
+        ImmutableMapIterable<Integer, String> immutable = this.classUnderTest();
+        ImmutableMapIterable<Integer, String> immutable2 =
+                immutable.newWithMap(UnifiedMap.newMapWith(
+                        Tuples.pair(
+                                Integer.MAX_VALUE,
+                                Integer.toString(Integer.MAX_VALUE)),
+                        Tuples.pair(
+                                Integer.MIN_VALUE,
+                                Integer.toString(Integer.MIN_VALUE))));
+        MutableMap<Integer, String> mutableMap = Maps.mutable.withMap(immutable.castToMap());
+        MutableMap<Integer, String> mutableMap2 = Maps.mutable.withMap(immutable2.castToMap());
+        mutableMap.putAll(mutableMap2);
+        Verify.assertMapsEqual(mutableMap, mutableMap2);
+        Verify.assertSize(immutable.size() + 2, immutable2);
+    }
+
+    @Test
+    public void newWithMapTargetEmpty()
+    {
+        ImmutableMapIterable<Integer, String> immutable = this.classUnderTest();
+        ImmutableMapIterable<Integer, String> immutable2 = immutable.newWithMap(Maps.mutable.empty());
+        MutableMap<Integer, String> mutableMap = Maps.mutable.withMap(immutable.castToMap());
+        MutableMap<Integer, String> mutableMap2 = Maps.mutable.withMap(immutable2.castToMap());
+        mutableMap.putAll(mutableMap2);
+        Verify.assertMapsEqual(mutableMap, mutableMap2);
+        Verify.assertSize(immutable.size(), immutable2);
+    }
+
+    @Test
+    public void newWithMapEmptyAndTargetEmpty()
+    {
+        ImmutableMapIterable<Integer, String> immutable = Maps.immutable.empty();
+        ImmutableMapIterable<Integer, String> immutable2 = immutable.newWithMap(Maps.mutable.empty());
+        MutableMap<Integer, String> mutableMap = Maps.mutable.withMap(immutable.castToMap());
+        MutableMap<Integer, String> mutableMap2 = Maps.mutable.withMap(immutable2.castToMap());
+        mutableMap.putAll(mutableMap2);
+        Verify.assertMapsEqual(mutableMap, mutableMap2);
+        Verify.assertSize(immutable.size(), immutable2);
+    }
+
+    @Test
+    public void withMapNull()
+    {
+        Assert.assertThrows(NullPointerException.class, () -> this.classUnderTest().newWithMap(null));
+    }
+
+    @Test
+    public void newWithMapIterable()
+    {
+        ImmutableMapIterable<Integer, String> immutable = this.classUnderTest();
+        ImmutableMapIterable<Integer, String> immutable2 =
+                immutable.newWithMapIterable(Maps.immutable.of(
+                        Integer.MAX_VALUE,
+                        Integer.toString(Integer.MAX_VALUE),
+                        Integer.MIN_VALUE,
+                        Integer.toString(Integer.MIN_VALUE)));
+        MutableMap<Integer, String> mutableMap = Maps.mutable.withMap(immutable.castToMap());
+        MutableMap<Integer, String> mutableMap2 = Maps.mutable.withMap(immutable2.castToMap());
+        mutableMap.putAll(mutableMap2);
+        Verify.assertMapsEqual(mutableMap, mutableMap2);
+        Verify.assertSize(immutable.size() + 2, immutable2);
+    }
+
+    @Test
+    public void newWithMapIterableTargetEmpty()
+    {
+        ImmutableMapIterable<Integer, String> immutable = this.classUnderTest();
+        ImmutableMapIterable<Integer, String> immutable2 =
+                immutable.newWithMapIterable(Maps.immutable.empty());
+        MutableMap<Integer, String> mutableMap = Maps.mutable.withMap(immutable.castToMap());
+        MutableMap<Integer, String> mutableMap2 = Maps.mutable.withMap(immutable2.castToMap());
+        mutableMap.putAll(mutableMap2);
+        Verify.assertMapsEqual(mutableMap, mutableMap2);
+        Verify.assertSize(immutable.size(), immutable2);
+    }
+
+    @Test
+    public void withMapIterableEmptyAndTargetEmpty()
+    {
+        ImmutableMapIterable<Integer, String> immutable = this.classUnderTest();
+        ImmutableMapIterable<Integer, String> immutable2 = immutable.newWithMapIterable(Maps.immutable.empty());
+        MutableMap<Integer, String> mutableMap = Maps.mutable.withMap(immutable.castToMap());
+        MutableMap<Integer, String> mutableMap2 = Maps.mutable.withMap(immutable2.castToMap());
+        mutableMap.putAll(mutableMap2);
+        Verify.assertMapsEqual(mutableMap, mutableMap2);
+        Verify.assertSize(immutable.size(), immutable2);
+    }
+
+    @Test
+    public void withMapIterableNull()
+    {
+        Assert.assertThrows(NullPointerException.class, () -> this.classUnderTest().newWithMapIterable(null));
+    }
+
+    @Test
     public void newWithAllKeyValuePairs()
     {
         ImmutableMapIterable<Integer, String> immutable = this.classUnderTest();

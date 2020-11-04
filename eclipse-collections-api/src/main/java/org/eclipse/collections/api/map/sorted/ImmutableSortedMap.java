@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.map.sorted;
 
+import java.util.Map;
 import java.util.SortedMap;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -40,6 +41,7 @@ import org.eclipse.collections.api.list.primitive.ImmutableLongList;
 import org.eclipse.collections.api.list.primitive.ImmutableShortList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.ImmutableMapIterable;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
@@ -64,6 +66,12 @@ public interface ImmutableSortedMap<K, V>
 
     @Override
     ImmutableSortedMap<K, V> newWithKeyValue(K key, V value);
+
+    @Override
+    ImmutableSortedMap<K, V> newWithMap(Map<? extends K, ? extends V> map);
+
+    @Override
+    ImmutableSortedMap<K, V> newWithMapIterable(MapIterable<? extends K, ? extends V> mapIterable);
 
     @Override
     ImmutableSortedMap<K, V> newWithAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);
