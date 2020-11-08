@@ -385,18 +385,12 @@
     <Match>
         <Bug pattern="REC_CATCH_EXCEPTION" />
         <Or>
-            <Class name="org.eclipse.collections.impl.collector.SerializableDoubleSummaryStatistics" />
-            <Class name="org.eclipse.collections.impl.collector.SerializableIntSummaryStatistics" />
-            <Class name="org.eclipse.collections.impl.collector.SerializableLongSummaryStatistics" />
             <Class name="org.eclipse.collections.impl.utility.ArrayListIterate" />
         </Or>
     </Match>
     <Match>
         <Bug pattern="DE_MIGHT_IGNORE" />
         <Or>
-            <Class name="org.eclipse.collections.impl.collector.SerializableDoubleSummaryStatistics" />
-            <Class name="org.eclipse.collections.impl.collector.SerializableIntSummaryStatistics" />
-            <Class name="org.eclipse.collections.impl.collector.SerializableLongSummaryStatistics" />
             <Class name="org.eclipse.collections.impl.utility.ArrayListIterate" />
         </Or>
     </Match>
