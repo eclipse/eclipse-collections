@@ -52,7 +52,7 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 
 ## Eclipse Collections and JDK Compatibility Matrix
 
-|EC     | 7.x.x | 8.x.x | 9.x.x |10.0.0 |10.0.1 |10.0.2 |10.0.3 |10.0.4 |
+|EC     | 7.x.x | 8.x.x | 9.x.x |[10.0.0][10-0-Release] |[10.1.0][10-1-Release] |[10.2.0][10-2-Release] |[10.3.0][10-3-Release] |[10.4.0][10-4-Release] |
 |-------|-------|-------|-------|-------|-------|-------|-------|-------|
 |JDK 5  |&check;|       |       |       |       |       |       |       |
 |JDK 6  |&check;|       |       |       |       |       |       |       |
@@ -159,3 +159,8 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 [Adapters]: https://www.eclipse.org/collections/javadoc/10.4.0/org/eclipse/collections/impl/collection/mutable/AbstractCollectionAdapter.html
 
 [Factories]: https://www.eclipse.org/collections/javadoc/10.4.0/org/eclipse/collections/impl/factory/package-summary.html
+[10-0-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.0.0
+[10-1-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.1.0 
+[10-2-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.2.0
+[10-3-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.3.0
+[10-4-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.4.0
