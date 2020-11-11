@@ -537,6 +537,41 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         Mutable<name>Set actual = set1.intersect(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void difference()
+    {
+        this.assertDifference(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">));
+
+        this.assertDifference(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith());
+
+        this.assertDifference(
+                this.newWith(),
+                this.newWith(),
+                this.newWith());
+
+        this.assertDifference(
+                this.newWith(),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith());
+
+        this.assertDifference(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    private void assertDifference(Mutable<name>Set set1, Mutable<name>Set set2, Mutable<name>Set expected)
+    {
+        Mutable<name>Set actual = set1.difference(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }
 
 >>

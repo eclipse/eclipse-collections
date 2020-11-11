@@ -53,6 +53,14 @@ public interface <name>Set extends <name>Iterable
     <name>Set intersect(<name>Set set);
 
     /**
+     * Returns the set of all members of {@code this} that are not members of {@code set}. The difference of
+     * [1, 2, 3] and [2, 3, 4] is the set [1].
+     *
+     * @since 11.0.
+     */
+    <name>Set difference(<name>Set set);
+
+    /**
      * Follows the same general contract as {@link Set#equals(Object)}.
      */
     @Override

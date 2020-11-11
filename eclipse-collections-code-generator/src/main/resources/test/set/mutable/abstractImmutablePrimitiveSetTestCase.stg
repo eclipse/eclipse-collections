@@ -343,6 +343,41 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
         Immutable<name>Set actual = set1.intersect(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void difference()
+    {
+        this.assertDifference(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">));
+
+        this.assertDifference(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith());
+
+        this.assertDifference(
+                this.newWith(),
+                this.newWith(),
+                this.newWith());
+
+        this.assertDifference(
+                this.newWith(),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith());
+
+        this.assertDifference(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    private void assertDifference(Immutable<name>Set set1, Immutable<name>Set set2, Immutable<name>Set expected)
+    {
+        Immutable<name>Set actual = set1.difference(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }
 
 >>
