@@ -468,4 +468,39 @@ public abstract class AbstractByteSetTestCase extends AbstractMutableByteCollect
         MutableByteSet actual = set1.intersect(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void difference()
+    {
+        this.assertDifference(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                this.newWith((byte) 1, (byte) 2));
+
+        this.assertDifference(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith());
+
+        this.assertDifference(
+                this.newWith(),
+                this.newWith(),
+                this.newWith());
+
+        this.assertDifference(
+                this.newWith(),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                this.newWith());
+
+        this.assertDifference(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith(),
+                this.newWith((byte) 1, (byte) 2, (byte) 3));
+    }
+
+    private void assertDifference(MutableByteSet set1, MutableByteSet set2, MutableByteSet expected)
+    {
+        MutableByteSet actual = set1.difference(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }

@@ -78,6 +78,18 @@ public interface Immutable<name>Set extends Immutable<name>Collection, <name>Set
         }
     }
 
+    /**
+     * Returns the set of all members of {@code this} that are not members of {@code set}. The difference of
+     * [1, 2, 3] and [2, 3, 4] is [1].
+     *
+     * @since 11.0.
+     */
+    @Override
+    default Immutable<name>Set difference(<name>Set set)
+    {
+        return this.reject(set::contains);
+    }
+
     <immutableAPI(fileName(primitive), type, name)>
 }
 

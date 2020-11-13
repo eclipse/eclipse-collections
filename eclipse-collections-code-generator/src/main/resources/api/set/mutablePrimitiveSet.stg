@@ -107,6 +107,18 @@ public interface Mutable<name>Set extends Mutable<name>Collection, <name>Set
             return set.select(this::contains, this.newEmpty());
         }
     }
+
+    /**
+     * Returns the set of all members of {@code this} that are not members of {@code set}. The difference of
+     * [1, 2, 3] and [2, 3, 4] is [1].
+     *
+     * @since 11.0.
+     */
+    @Override
+    default Mutable<name>Set difference(<name>Set set)
+    {
+        return this.reject(set::contains);
+    }
 }
 
 >>
