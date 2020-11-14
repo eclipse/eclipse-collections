@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,7 +18,6 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.set.mutable.SetAdapter;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -43,7 +42,13 @@ public final class SetIterables
             SetIterable<? extends E> setA,
             SetIterable<? extends E> setB)
     {
-        return SetIterables.unionInto(setA, setB, UnifiedSet.newSet());
+        if (setB.size() > setA.size())
+        {
+            SetIterable<? extends E> tmp = setA;
+            setA = setB;
+            setB = tmp;
+        }
+        return UnifiedSet.<E>newSet(setA).withAll(setB);
     }
 
     public static <E, R extends Set<E>> R unionInto(
@@ -68,10 +73,14 @@ public final class SetIterables
             SetIterable<? extends E> setB,
             R targetSet)
     {
-        MutableSet<E> adapted = SetAdapter.adapt(targetSet);
-        adapted.addAllIterable(setA);
-        adapted.retainAllIterable(setB);
-        return targetSet;
+        if (setB.size() < setA.size())
+        {
+            SetIterable<? extends E> tmp = setA;
+            setA = setB;
+            setB = tmp;
+        }
+        SetIterable<E> one = (SetIterable<E>) setA;
+        return one.select(setB::contains, targetSet);
     }
 
     public static <E> MutableSet<E> difference(
@@ -86,10 +95,8 @@ public final class SetIterables
             SetIterable<? extends E> subtrahendSet,
             R targetSet)
     {
-        MutableSet<E> adapted = SetAdapter.adapt(targetSet);
-        adapted.addAllIterable(minuendSet);
-        adapted.removeAllIterable(subtrahendSet);
-        return targetSet;
+        SetIterable<E> one = (SetIterable<E>) minuendSet;
+        return one.reject(subtrahendSet::contains, targetSet);
     }
 
     public static <E> MutableSet<E> symmetricDifference(
