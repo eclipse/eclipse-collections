@@ -172,6 +172,11 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
         return this;
     }
 
+    default void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        mapIterable.forEachKeyValue(this::put);
+    }
+
     /**
      * This method allows mutable, fixed size, and immutable maps the ability to add elements to their existing
      * elements. In order to support fixed size maps, a new instance of a map would have to be returned including the

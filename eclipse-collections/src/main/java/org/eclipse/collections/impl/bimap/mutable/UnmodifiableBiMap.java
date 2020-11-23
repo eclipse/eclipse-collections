@@ -62,6 +62,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
@@ -1220,6 +1221,12 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     public MutableBiMap<K, V> withMap(Map<? extends K, ? extends V> map)
     {
         throw new UnsupportedOperationException("Cannot call withMap() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        throw new UnsupportedOperationException("Cannot call putAllMapIterable() on " + this.getClass().getSimpleName());
     }
 
     @Override

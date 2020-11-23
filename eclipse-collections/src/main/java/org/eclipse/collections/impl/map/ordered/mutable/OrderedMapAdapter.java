@@ -49,6 +49,7 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.ImmutableOrderedMap;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
@@ -335,6 +336,12 @@ public class OrderedMapAdapter<K, V>
     {
         this.putAll(map);
         return this;
+    }
+
+    @Override
+    public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        mapIterable.forEachKeyValue(this::put);
     }
 
     @Override

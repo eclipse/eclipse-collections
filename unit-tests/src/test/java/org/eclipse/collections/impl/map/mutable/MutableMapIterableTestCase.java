@@ -609,6 +609,45 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
     }
 
     @Test
+    public void putAllMapIterable()
+    {
+        MutableMapIterable<String, Integer> map = this.newMapWithKeysValues("A", 1, "B", 2);
+        MutableMapIterable<String, Integer> simpleMap = Maps.mutable.with("B", 22, "C", 3);
+        map.putAllMapIterable(simpleMap);
+        Verify.assertMapsEqual(Maps.mutable.with("A", 1, "B", 22, "C", 3), map);
+    }
+
+    @Test
+    public void putAllMapIterableEmpty()
+    {
+        MutableMapIterable<String, Integer> map = this.newMapWithKeysValues("A", 1, "B", 2);
+        map.putAllMapIterable(Maps.mutable.empty());
+        Verify.assertMapsEqual(Maps.mutable.with("A", 1, "B", 2), map);.
+    }
+
+    @Test
+    public void putAllMapIterableTargetEmpty()
+    {
+        MutableMapIterable<String, Integer> map = this.newMap();
+        map.putAllMapIterable(Maps.mutable.with("A", 1, "B", 2));
+        Verify.assertMapsEqual(Maps.mutable.with("A", 1, "B", 2), map);
+    }
+
+    @Test
+    public void putAllMapIterableEmptyAndTargetEmpty()
+    {
+        MutableMapIterable<String, Integer> map = this.newMap();
+        map.putAllMapIterable(Maps.mutable.empty());
+        Verify.assertMapsEqual(Maps.mutable.withMapIterable(map), map);
+    }
+
+    @Test
+    public void putAllMapIterableNull()
+    {
+        Assert.assertThrows(NullPointerException.class, () -> this.newMap().putAllMapIterable(null));
+    }
+
+    @Test
     public void withAllKeyValues()
     {
         MutableMapIterable<String, Integer> map = this.newMapWithKeysValues("A", 1, "B", 2);

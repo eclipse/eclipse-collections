@@ -45,6 +45,7 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
@@ -130,6 +131,15 @@ public class SynchronizedSortedMap<K, V>
         {
             this.putAll(map);
             return this;
+        }
+    }
+
+    @Override
+    public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        synchronized (this.lock)
+        {
+            mapIterable.forEachKeyValue(this.getDelegate()::put);
         }
     }
 

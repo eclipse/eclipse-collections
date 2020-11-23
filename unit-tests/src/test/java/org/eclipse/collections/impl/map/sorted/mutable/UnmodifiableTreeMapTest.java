@@ -385,6 +385,41 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     }
 
     @Override
+    @Test
+    public void putAllMapIterable()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void putAllMapIterableEmpty()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void putAllMapIterableTargetEmpty()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void putAllMapIterableEmptyAndTargetEmpty()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void putAllMapIterableNull()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(null));
+    }
+
+    @Override
     @Test(expected = UnsupportedOperationException.class)
     public void withAllKeyValues()
     {
