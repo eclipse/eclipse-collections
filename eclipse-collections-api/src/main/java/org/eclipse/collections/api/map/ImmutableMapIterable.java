@@ -34,6 +34,10 @@ public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>
 
     ImmutableMapIterable<K, V> newWithAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);
 
+    ImmutableMapIterable<K, V> newWithMap(Map<? extends K, ? extends V> map);
+
+    ImmutableMapIterable<K, V> newWithMapIterable(MapIterable<? extends K, ? extends V> mapIterable);
+
     ImmutableMapIterable<K, V> newWithAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs);
 
     ImmutableMapIterable<K, V> newWithoutKey(K key);

@@ -198,6 +198,76 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
 
     @Override
     @Test
+    public void withMapIterable()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void withMapIterableEmpty()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void withMapIterableTargetEmpty()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void withMapIterableEmptyAndTargetEmpty()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withMapIterable(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void withMapIterableNull()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMapIterable(null));
+    }
+
+    @Override
+    @Test
+    public void putAllMapIterable()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void putAllMapIterableEmpty()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void putAllMapIterableTargetEmpty()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void putAllMapIterableEmptyAndTargetEmpty()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().putAllMapIterable(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void putAllMapIterableNull()
+    {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(null));
+    }
+
+    @Override
+    @Test
     public void withAllKeyValueArguments()
     {
         Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValueArguments(Tuples.pair("B", 22), Tuples.pair("C", 3)));

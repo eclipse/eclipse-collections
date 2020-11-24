@@ -69,6 +69,7 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
@@ -292,6 +293,18 @@ public class UnmodifiableMutableMap<K, V>
     public MutableMap<K, V> withMap(Map<? extends K, ? extends V> map)
     {
         throw new UnsupportedOperationException("Cannot call withMap() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public MutableMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        throw new UnsupportedOperationException("Cannot call withMapIterable() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        throw new UnsupportedOperationException("Cannot call putAllMapIterable() on " + this.getClass().getSimpleName());
     }
 
     @Override

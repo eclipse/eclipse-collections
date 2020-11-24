@@ -115,4 +115,12 @@ public class FixedSizeMapFactoryTest
         Verify.assertContainsAllKeyValues(map3, key, 3, new Key("not a dupe"), 2);
         Assert.assertSame(key, map3.keysView().detect(key::equals));
     }
+
+    @Test
+    public void testWithMap()
+
+    {
+        MutableMap<String, String> map = Maps.fixedSize.of("key1", "value1", "key2", "value2", "key3", "value3");
+        Assert.assertThrows(UnsupportedOperationException.class, () -> map.withMap(Maps.fixedSize.of("key4", "value4")));
+    }
 }

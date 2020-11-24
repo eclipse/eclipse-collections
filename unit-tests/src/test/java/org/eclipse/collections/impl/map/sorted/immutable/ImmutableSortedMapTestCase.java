@@ -615,6 +615,31 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     }
 
     @Test
+    public void newWithMap()
+    {
+        ImmutableSortedMap<Integer, String> immutable = this.classUnderTest();
+        ImmutableSortedMap<Integer, String> immutable2 = immutable.newWithMap(UnifiedMap.newMapWith(Tuples.pair(
+                Integer.MAX_VALUE,
+                Integer.toString(Integer.MAX_VALUE)),
+                Tuples.pair(
+                        Integer.MIN_VALUE,
+                        Integer.toString(Integer.MIN_VALUE))));
+        Verify.assertSize(immutable.size() + 2, immutable2.castToSortedMap());
+    }
+
+    @Test
+    public void newWithMapIterable()
+    {
+        ImmutableSortedMap<Integer, String> immutable = this.classUnderTest();
+        ImmutableSortedMap<Integer, String> immutable2 = immutable.newWithMapIterable(Maps.immutable.of(
+                Integer.MAX_VALUE,
+                Integer.toString(Integer.MAX_VALUE),
+                Integer.MIN_VALUE,
+                Integer.toString(Integer.MIN_VALUE)));
+        Verify.assertSize(immutable.size() + 2, immutable2.castToSortedMap());
+    }
+
+    @Test
     public void newWithoutKey()
     {
         ImmutableSortedMap<Integer, String> immutable = this.classUnderTest();

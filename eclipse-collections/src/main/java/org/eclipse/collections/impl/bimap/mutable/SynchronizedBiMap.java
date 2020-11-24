@@ -23,6 +23,7 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
@@ -299,6 +300,22 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         {
             this.putAll(map);
             return this;
+        }
+    }
+
+    @Override
+    public MutableBiMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        this.putAllMapIterable(mapIterable);
+        return this;
+    }
+
+    @Override
+    public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        synchronized (this.lock)
+        {
+            mapIterable.forEachKeyValue(this.getDelegate()::put);
         }
     }
 

@@ -41,6 +41,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
@@ -121,6 +122,22 @@ public class SynchronizedMutableMap<K, V>
         {
             this.putAll(map);
             return this;
+        }
+    }
+
+    @Override
+    public MutableMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        this.putAllMapIterable(mapIterable);
+        return this;
+    }
+
+    @Override
+    public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        synchronized (this.lock)
+        {
+            mapIterable.forEachKeyValue(this.getDelegate()::put);
         }
     }
 

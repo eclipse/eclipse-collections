@@ -46,6 +46,7 @@ import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.ImmutableLongList;
 import org.eclipse.collections.api.list.primitive.ImmutableShortList;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
@@ -155,6 +156,22 @@ public abstract class AbstractImmutableSortedMap<K, V>
         {
             sortedMap.put(keyValuePair.getOne(), keyValuePair.getTwo());
         }
+        return sortedMap.toImmutable();
+    }
+
+    @Override
+    public ImmutableSortedMap<K, V> newWithMap(Map<? extends K, ? extends V> map)
+    {
+        TreeSortedMap<K, V> sortedMap = TreeSortedMap.newMap(this);
+        sortedMap.putAll(map);
+        return sortedMap.toImmutable();
+    }
+
+    @Override
+    public ImmutableSortedMap<K, V> newWithMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        TreeSortedMap<K, V> sortedMap = TreeSortedMap.newMap(this);
+        mapIterable.forEachKeyValue(sortedMap::put);
         return sortedMap.toImmutable();
     }
 

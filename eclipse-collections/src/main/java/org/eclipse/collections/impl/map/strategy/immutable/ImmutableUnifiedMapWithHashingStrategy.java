@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.strategy.immutable;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
@@ -22,6 +23,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
@@ -195,6 +197,22 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
             result.put(pair.getOne(), pair.getTwo());
         }
         return result.toImmutable();
+    }
+
+    @Override
+    public ImmutableMap<K, V> newWithMap(Map<? extends K, ? extends V> map)
+    {
+        UnifiedMapWithHashingStrategy<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
+        result.putAll(map);
+        return result.toImmutable();
+    }
+
+    @Override
+    public ImmutableMap<K, V> newWithMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        UnifiedMapWithHashingStrategy<K, V> map = UnifiedMapWithHashingStrategy.newMap(this.delegate);
+        mapIterable.forEachKeyValue(map::put);
+        return map.toImmutable();
     }
 
     @Override

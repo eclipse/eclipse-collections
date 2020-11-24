@@ -36,4 +36,11 @@ public interface ConcurrentMutableMap<K, V>
         this.putAll(map);
         return this;
     }
+
+    @Override
+    default ConcurrentMutableMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        this.putAllMapIterable(mapIterable);
+        return this;
+    }
 }

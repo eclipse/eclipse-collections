@@ -51,6 +51,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
@@ -169,6 +170,22 @@ public abstract class AbstractImmutableMap<K, V>
             map.put(keyValuePair.getOne(), keyValuePair.getTwo());
         }
         return map.toImmutable();
+    }
+
+    @Override
+    public ImmutableMap<K, V> newWithMap(Map<? extends K, ? extends V> map)
+    {
+        MutableMap<K, V> mutableMap = Maps.mutable.ofMapIterable(this);
+        mutableMap.putAll(map);
+        return mutableMap.toImmutable();
+    }
+
+    @Override
+    public ImmutableMap<K, V> newWithMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        MutableMap<K, V> mutableMap = Maps.mutable.ofMapIterable(this);
+        mapIterable.forEachKeyValue(mutableMap::put);
+        return mutableMap.toImmutable();
     }
 
     @Override

@@ -80,6 +80,7 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.ImmutableOrderedMap;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.MutableOrderedMap;
@@ -176,6 +177,18 @@ public class UnmodifiableMutableOrderedMap<K, V>
     public MutableOrderedMap<K, V> withMap(Map<? extends K, ? extends V> map)
     {
         throw new UnsupportedOperationException("Cannot call withMap() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public MutableOrderedMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        throw new UnsupportedOperationException("Cannot call withMapIterable() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        throw new UnsupportedOperationException("Cannot call putAllMapIterable() on " + this.getClass().getSimpleName());
     }
 
     @Override

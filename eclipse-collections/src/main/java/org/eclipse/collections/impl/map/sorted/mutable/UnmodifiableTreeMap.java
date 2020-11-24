@@ -71,6 +71,7 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
@@ -174,6 +175,18 @@ public class UnmodifiableTreeMap<K, V>
     public MutableSortedMap<K, V> withMap(Map<? extends K, ? extends V> map)
     {
         throw new UnsupportedOperationException("Cannot call withMap() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public MutableSortedMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        throw new UnsupportedOperationException("Cannot call withMapIterable() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void putAllMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        throw new UnsupportedOperationException("Cannot call putAllMapIterable() on " + this.getClass().getSimpleName());
     }
 
     @Override

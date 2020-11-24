@@ -18,6 +18,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.BiMaps;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -135,6 +136,13 @@ public interface MutableBiMap<K, V> extends BiMap<K, V>, MutableMapIterable<K, V
     default MutableBiMap<K, V> withMap(Map<? extends K, ? extends V> map)
     {
         this.putAll(map);
+        return this;
+    }
+
+    @Override
+    default MutableBiMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        this.putAllMapIterable(mapIterable);
         return this;
     }
 
