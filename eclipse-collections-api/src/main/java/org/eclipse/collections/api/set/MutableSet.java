@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -195,4 +195,15 @@ public interface MutableSet<T>
 
     @Override
     MutableSet<UnsortedSetIterable<T>> powerSet();
+
+    /**
+     * Converts the MutableSet to the default ImmutableSet implementation.
+     *
+     * @since 11.0
+     */
+    @Override
+    default ImmutableSet<T> toImmutableSet()
+    {
+        return this.toImmutable();
+    }
 }
