@@ -503,4 +503,39 @@ public abstract class AbstractByteSetTestCase extends AbstractMutableByteCollect
         MutableByteSet actual = set1.difference(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void symmetricDifference()
+    {
+        this.assertSymmetricDifference(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 2, (byte) 3, (byte) 4),
+                this.newWith((byte) 1, (byte) 4));
+
+        this.assertSymmetricDifference(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith());
+
+        this.assertSymmetricDifference(
+                this.newWith(),
+                this.newWith(),
+                this.newWith());
+
+        this.assertSymmetricDifference(
+                this.newWith(),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                this.newWith((byte) 3, (byte) 4, (byte) 5));
+
+        this.assertSymmetricDifference(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith(),
+                this.newWith((byte) 1, (byte) 2, (byte) 3));
+    }
+
+    private void assertSymmetricDifference(MutableByteSet set1, MutableByteSet set2, MutableByteSet expected)
+    {
+        MutableByteSet actual = set1.symmetricDifference(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }

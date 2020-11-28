@@ -927,4 +927,38 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
         MutableBooleanSet actual6 = set16.difference(set26);
         Assert.assertEquals(this.emptySet, actual6);
     }
+
+    @Test
+    public void symmetricDifference()
+    {
+        MutableBooleanSet set11 = this.newWith(true);
+        MutableBooleanSet set21 = this.newWith(false);
+        MutableBooleanSet actual = set11.symmetricDifference(set21);
+        Assert.assertEquals(this.setWithTrueFalse, actual);
+
+        MutableBooleanSet set12 = this.newWith(false);
+        MutableBooleanSet set22 = this.newWith(false);
+        MutableBooleanSet actual2 = set12.symmetricDifference(set22);
+        Assert.assertEquals(this.emptySet, actual2);
+
+        MutableBooleanSet set13 = this.setWithTrueFalse;
+        MutableBooleanSet set23 = this.setWithTrueFalse;
+        MutableBooleanSet actual3 = set13.symmetricDifference(set23);
+        Assert.assertEquals(this.emptySet, actual3);
+
+        MutableBooleanSet set14 = this.setWithTrueFalse;
+        MutableBooleanSet set24 = this.newWith();
+        MutableBooleanSet actual4 = set14.symmetricDifference(set24);
+        Assert.assertEquals(this.setWithTrueFalse, actual4);
+
+        MutableBooleanSet set15 = this.newWith();
+        MutableBooleanSet set25 = this.setWithTrueFalse;
+        MutableBooleanSet actual5 = set15.symmetricDifference(set25);
+        Assert.assertEquals(this.setWithTrueFalse, actual5);
+
+        MutableBooleanSet set16 = this.newWith();
+        MutableBooleanSet set26 = this.newWith();
+        MutableBooleanSet actual6 = set16.symmetricDifference(set26);
+        Assert.assertEquals(this.emptySet, actual6);
+    }
 }
