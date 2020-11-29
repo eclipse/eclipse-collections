@@ -572,6 +572,41 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         Mutable<name>Set actual = set1.difference(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void symmetricDifference()
+    {
+        this.assertSymmetricDifference(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["2", "3", "4"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "4"]:(literal.(type))(); separator=", ">));
+
+        this.assertSymmetricDifference(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith());
+
+        this.assertSymmetricDifference(
+                this.newWith(),
+                this.newWith(),
+                this.newWith());
+
+        this.assertSymmetricDifference(
+                this.newWith(),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">));
+
+        this.assertSymmetricDifference(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    private void assertSymmetricDifference(Mutable<name>Set set1, Mutable<name>Set set2, Mutable<name>Set expected)
+    {
+        Mutable<name>Set actual = set1.symmetricDifference(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }
 
 >>

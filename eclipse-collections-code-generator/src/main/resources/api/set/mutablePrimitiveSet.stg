@@ -119,6 +119,19 @@ public interface Mutable<name>Set extends Mutable<name>Collection, <name>Set
     {
         return this.reject(set::contains);
     }
+
+    /**
+     * Returns the set of all objects that are a member of exactly one of {@code this} and {@code set} (elements which
+     * are in one of the sets, but not in both). For instance, for the sets [1, 2, 3] and [2, 3, 4], the symmetric
+     * difference set is [1, 4] . It is the set difference of the union and the intersection.
+     *
+     * @since 11.0.
+     */
+    @Override
+    default Mutable<name>Set symmetricDifference(<name>Set set)
+    {
+        return set.reject(this::contains, this.difference(set));
+    }
 }
 
 >>
