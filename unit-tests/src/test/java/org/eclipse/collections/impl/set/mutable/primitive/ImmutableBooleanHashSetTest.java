@@ -357,7 +357,7 @@ public class ImmutableBooleanHashSetTest extends AbstractImmutableBooleanCollect
     @Test
     public void noneSatisfy()
     {
-        Assert.assertFalse(this.emptySet.noneSatisfy(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.isFalse())));
+        Assert.assertTrue(this.emptySet.noneSatisfy(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.isFalse())));
         Assert.assertFalse(this.falseSet.noneSatisfy(BooleanPredicates.isFalse()));
         Assert.assertTrue(this.falseSet.noneSatisfy(BooleanPredicates.isTrue()));
         Assert.assertFalse(this.trueSet.noneSatisfy(BooleanPredicates.isTrue()));
