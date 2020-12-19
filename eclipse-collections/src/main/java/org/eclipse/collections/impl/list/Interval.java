@@ -424,7 +424,7 @@ public final class Interval
         }
     }
 
-    public boolean goForward()
+    private boolean goForward()
     {
         return this.from <= this.to && this.step > 0;
     }
