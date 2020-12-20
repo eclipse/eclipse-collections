@@ -413,6 +413,46 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
         Immutable<name>Set actual = set1.symmetricDifference(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void isSubsetOf()
+    {
+        this.assertIsSubsetOf(
+                this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                true);
+
+        this.assertIsSubsetOf(
+                this.newWith(<["1", "4"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                false);
+
+        this.assertIsSubsetOf(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                true);
+
+        this.assertIsSubsetOf(
+                this.newWith(),
+                this.newWith(),
+                true);
+
+        this.assertIsSubsetOf(
+                this.newWith(),
+                this.newWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                true);
+
+        this.assertIsSubsetOf(
+                this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">),
+                this.newWith(),
+                false);
+    }
+
+    private void assertIsSubsetOf(Immutable<name>Set set1, Immutable<name>Set set2, boolean expected)
+    {
+        boolean actual = set1.isSubsetOf(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }
 
 >>

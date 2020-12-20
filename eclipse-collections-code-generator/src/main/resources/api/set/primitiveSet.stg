@@ -70,6 +70,17 @@ public interface <name>Set extends <name>Iterable
     <name>Set symmetricDifference(<name>Set set);
 
     /**
+     * Returns {@literal true} if all the members of {@code this} are also members of {@code set}.
+     * For example, [1, 2] is a subset of [1, 2, 3], but [1, 4] is not.
+     *
+     * @since 11.0.
+     */
+    default boolean isSubsetOf(<name>Set set)
+    {
+        return this.size() \<= set.size() && set.containsAll(this);
+    }
+
+    /**
      * Follows the same general contract as {@link Set#equals(Object)}.
      */
     @Override

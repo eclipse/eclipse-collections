@@ -961,4 +961,32 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
         MutableBooleanSet actual6 = set16.symmetricDifference(set26);
         Assert.assertEquals(this.emptySet, actual6);
     }
+
+    @Test
+    public void isSubsetOf()
+    {
+        MutableBooleanSet set11 = this.newWith(true);
+        MutableBooleanSet set21 = this.newWith(false);
+        Assert.assertFalse(set11.isSubsetOf(set21));
+
+        MutableBooleanSet set12 = this.newWith(false);
+        MutableBooleanSet set22 = this.newWith(false);
+        Assert.assertTrue(set12.isSubsetOf(set22));
+
+        MutableBooleanSet set13 = this.setWithTrueFalse;
+        MutableBooleanSet set23 = this.setWithTrueFalse;
+        Assert.assertTrue(set13.isSubsetOf(set23));
+
+        MutableBooleanSet set14 = this.setWithTrueFalse;
+        MutableBooleanSet set24 = this.newWith();
+        Assert.assertFalse(set14.isSubsetOf(set24));
+
+        MutableBooleanSet set15 = this.newWith();
+        MutableBooleanSet set25 = this.setWithTrueFalse;
+        Assert.assertTrue(set15.isSubsetOf(set25));
+
+        MutableBooleanSet set16 = this.newWith();
+        MutableBooleanSet set26 = this.newWith();
+        Assert.assertTrue(set16.isSubsetOf(set26));
+    }
 }

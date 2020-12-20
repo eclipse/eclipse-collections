@@ -693,4 +693,32 @@ public class ImmutableBooleanHashSetTest extends AbstractImmutableBooleanCollect
         ImmutableBooleanSet actual6 = set16.symmetricDifference(set26);
         Assert.assertEquals(this.emptySet, actual6);
     }
+
+    @Test
+    public void isSubsetOf()
+    {
+        ImmutableBooleanSet set11 = this.newWith(true);
+        ImmutableBooleanSet set21 = this.newWith(false);
+        Assert.assertFalse(set11.isSubsetOf(set21));
+
+        ImmutableBooleanSet set12 = this.newWith(false);
+        ImmutableBooleanSet set22 = this.newWith(false);
+        Assert.assertTrue(set12.isSubsetOf(set22));
+
+        ImmutableBooleanSet set13 = this.trueFalseSet;
+        ImmutableBooleanSet set23 = this.trueFalseSet;
+        Assert.assertTrue(set13.isSubsetOf(set23));
+
+        ImmutableBooleanSet set14 = this.trueFalseSet;
+        ImmutableBooleanSet set24 = this.newWith();
+        Assert.assertFalse(set14.isSubsetOf(set24));
+
+        ImmutableBooleanSet set15 = this.newWith();
+        ImmutableBooleanSet set25 = this.trueFalseSet;
+        Assert.assertTrue(set15.isSubsetOf(set25));
+
+        ImmutableBooleanSet set16 = this.newWith();
+        ImmutableBooleanSet set26 = this.newWith();
+        Assert.assertTrue(set16.isSubsetOf(set26));
+    }
 }

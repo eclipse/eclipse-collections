@@ -378,4 +378,44 @@ public abstract class AbstractImmutableByteHashSetTestCase extends AbstractImmut
         ImmutableByteSet actual = set1.symmetricDifference(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void isSubsetOf()
+    {
+        this.assertIsSubsetOf(
+                this.newWith((byte) 1, (byte) 2),
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                true);
+
+        this.assertIsSubsetOf(
+                this.newWith((byte) 1, (byte) 4),
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                false);
+
+        this.assertIsSubsetOf(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                true);
+
+        this.assertIsSubsetOf(
+                this.newWith(),
+                this.newWith(),
+                true);
+
+        this.assertIsSubsetOf(
+                this.newWith(),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                true);
+
+        this.assertIsSubsetOf(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith(),
+                false);
+    }
+
+    private void assertIsSubsetOf(ImmutableByteSet set1, ImmutableByteSet set2, boolean expected)
+    {
+        boolean actual = set1.isSubsetOf(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }
