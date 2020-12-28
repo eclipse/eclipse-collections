@@ -721,4 +721,36 @@ public class ImmutableBooleanHashSetTest extends AbstractImmutableBooleanCollect
         ImmutableBooleanSet set26 = this.newWith();
         Assert.assertTrue(set16.isSubsetOf(set26));
     }
+
+    @Test
+    public void isProperSubsetOf()
+    {
+        ImmutableBooleanSet set11 = this.newWith(true);
+        ImmutableBooleanSet set21 = this.newWith(false);
+        Assert.assertFalse(set11.isProperSubsetOf(set21));
+
+        ImmutableBooleanSet set12 = this.newWith(false);
+        ImmutableBooleanSet set22 = this.newWith(false);
+        Assert.assertFalse(set12.isProperSubsetOf(set22));
+
+        ImmutableBooleanSet set13 = this.trueSet;
+        ImmutableBooleanSet set23 = this.trueFalseSet;
+        Assert.assertTrue(set13.isProperSubsetOf(set23));
+
+        ImmutableBooleanSet set14 = this.falseSet;
+        ImmutableBooleanSet set24 = this.trueFalseSet;
+        Assert.assertTrue(set14.isProperSubsetOf(set24));
+
+        ImmutableBooleanSet set15 = this.trueFalseSet;
+        ImmutableBooleanSet set25 = this.newWith();
+        Assert.assertFalse(set15.isProperSubsetOf(set25));
+
+        ImmutableBooleanSet set16 = this.newWith();
+        ImmutableBooleanSet set26 = this.trueFalseSet;
+        Assert.assertTrue(set16.isProperSubsetOf(set26));
+
+        ImmutableBooleanSet set17 = this.newWith();
+        ImmutableBooleanSet set27 = this.newWith();
+        Assert.assertFalse(set17.isProperSubsetOf(set27));
+    }
 }

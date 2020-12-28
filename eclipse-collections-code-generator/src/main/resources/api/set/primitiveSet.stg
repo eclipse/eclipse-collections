@@ -81,6 +81,17 @@ public interface <name>Set extends <name>Iterable
     }
 
     /**
+     * Returns {@literal true} if all the members of {@code this} are also members of {@code set} and the
+     * two sets are not equal. For example, [1, 2] is a proper subset of [1, 2, 3], but [1, 2, 3] is not.
+     *
+     * @since 11.0.
+     */
+    default boolean isProperSubsetOf(<name>Set set)
+    {
+        return this.size() \< set.size() && set.containsAll(this);
+    }
+
+    /**
      * Follows the same general contract as {@link Set#equals(Object)}.
      */
     @Override
