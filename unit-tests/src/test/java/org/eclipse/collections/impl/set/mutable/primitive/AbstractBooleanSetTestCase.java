@@ -989,4 +989,36 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
         MutableBooleanSet set26 = this.newWith();
         Assert.assertTrue(set16.isSubsetOf(set26));
     }
+
+    @Test
+    public void isProperSubsetOf()
+    {
+        MutableBooleanSet set11 = this.newWith(true);
+        MutableBooleanSet set21 = this.newWith(false);
+        Assert.assertFalse(set11.isProperSubsetOf(set21));
+
+        MutableBooleanSet set12 = this.newWith(false);
+        MutableBooleanSet set22 = this.newWith(false);
+        Assert.assertFalse(set12.isProperSubsetOf(set22));
+
+        MutableBooleanSet set13 = this.setWithTrue;
+        MutableBooleanSet set23 = this.setWithTrueFalse;
+        Assert.assertTrue(set13.isProperSubsetOf(set23));
+
+        MutableBooleanSet set14 = this.setWithFalse;
+        MutableBooleanSet set24 = this.setWithTrueFalse;
+        Assert.assertTrue(set14.isProperSubsetOf(set24));
+
+        MutableBooleanSet set15 = this.setWithTrueFalse;
+        MutableBooleanSet set25 = this.newWith();
+        Assert.assertFalse(set15.isProperSubsetOf(set25));
+
+        MutableBooleanSet set16 = this.newWith();
+        MutableBooleanSet set26 = this.setWithTrueFalse;
+        Assert.assertTrue(set16.isProperSubsetOf(set26));
+
+        MutableBooleanSet set17 = this.newWith();
+        MutableBooleanSet set27 = this.newWith();
+        Assert.assertFalse(set17.isProperSubsetOf(set27));
+    }
 }

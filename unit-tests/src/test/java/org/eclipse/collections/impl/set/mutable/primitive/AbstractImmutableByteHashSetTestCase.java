@@ -418,4 +418,44 @@ public abstract class AbstractImmutableByteHashSetTestCase extends AbstractImmut
         boolean actual = set1.isSubsetOf(set2);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void isProperSubsetOf()
+    {
+        this.assertIsProperSubsetOf(
+                this.newWith((byte) 1, (byte) 2),
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                true);
+
+        this.assertIsProperSubsetOf(
+                this.newWith((byte) 1, (byte) 4),
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                false);
+
+        this.assertIsProperSubsetOf(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                false);
+
+        this.assertIsProperSubsetOf(
+                this.newWith(),
+                this.newWith(),
+                false);
+
+        this.assertIsProperSubsetOf(
+                this.newWith(),
+                this.newWith((byte) 3, (byte) 4, (byte) 5),
+                true);
+
+        this.assertIsProperSubsetOf(
+                this.newWith((byte) 1, (byte) 2, (byte) 3),
+                this.newWith(),
+                false);
+    }
+
+    private void assertIsProperSubsetOf(ImmutableByteSet set1, ImmutableByteSet set2, boolean expected)
+    {
+        boolean actual = set1.isProperSubsetOf(set2);
+        Assert.assertEquals(expected, actual);
+    }
 }
