@@ -10,13 +10,8 @@
 
 package org.eclipse.collections.impl.utility.internal;
 
-import org.eclipse.collections.api.block.function.Function0;
-import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.SetIterable;
-import org.eclipse.collections.api.tuple.primitive.LongObjectPair;
 import org.eclipse.collections.impl.factory.Sets;
-import org.eclipse.collections.impl.list.Interval;
-import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -168,38 +163,5 @@ public class SetIterablesTest
     {
         SetIterable<? extends Number> actual = SetIterables.difference(set1, set2);
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void unionPerformance()
-    {
-        MutableSet<Integer> setA = Interval.oneTo(1000).toSet();
-        MutableSet<Integer> setB = Interval.fromTo(900, 1100).toSet();
-        LongObjectPair<MutableSet<Integer>> union1 =
-                this.timeCalls(() -> SetIterables.union(setA, setB), 1000);
-        LongObjectPair<MutableSet<Integer>> union2 =
-                this.timeCalls(() -> SetIterables.union(setB, setA), 1000);
-        LongObjectPair<MutableSet<Integer>> unionInto1 =
-                this.timeCalls(() -> SetIterables.unionInto(setA, setB, Sets.mutable.empty()), 1000);
-        LongObjectPair<MutableSet<Integer>> unionInto2 =
-                this.timeCalls(() -> SetIterables.unionInto(setB, setA, Sets.mutable.empty()), 1000);
-        MutableSet<Integer> expected = Interval.oneTo(1100).toSet();
-        Assert.assertEquals(expected, union1.getTwo());
-        Assert.assertEquals(expected, union2.getTwo());
-        Assert.assertEquals(expected, unionInto1.getTwo());
-        Assert.assertEquals(expected, unionInto2.getTwo());
-        Assert.assertTrue(union1.getOne() + union2.getOne() < unionInto1.getOne() + unionInto2.getOne());
-    }
-
-    public LongObjectPair<MutableSet<Integer>> timeCalls(Function0<MutableSet<Integer>> call, int times)
-    {
-        MutableSet<Integer> result = null;
-        long start = System.currentTimeMillis();
-        for (int i = 0; i < times; i++)
-        {
-            result = call.value();
-        }
-        long end = System.currentTimeMillis();
-        return PrimitiveTuples.pair(end - start, result);
     }
 }
