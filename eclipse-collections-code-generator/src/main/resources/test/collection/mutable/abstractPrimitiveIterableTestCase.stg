@@ -29,8 +29,10 @@ import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
@@ -1178,6 +1180,44 @@ public void sumConsistentRounding()
         Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), this.newWith(<(literal.(type))("1")>).toSortedList());
         Assert.assertEquals(<name>ArrayList.newListWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "31", "1"]:(literal.(type))(); separator=", ">).toSortedList());
         Assert.assertEquals(<name>ArrayList.newListWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "31", "32", "1"]:(literal.(type))(); separator=", ">).toSortedList());
+    }
+
+    @Test
+    public void toSortedListByComparator()
+    {
+        <name>Iterable iterable = this.newWith(<["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">);
+
+        Mutable<name>List result = iterable.toSortedList((a, b) -> (int) ((int) ((int) a & 1) - ((int) b & 1))); // odd/even comparator
+
+        Assert.assertNotSame(iterable, result);
+
+        result
+                .collectBoolean(e -> e % 2 == 0, BooleanLists.mutable.of())
+                .forEachWithIndex((e, i) -> Assert.assertEquals("index " + i, i \< 5, e));
+    }
+
+    @Test
+    public void toSortedListByFunctionNaturalOrder()
+    {
+        MutableList\<String> list = Lists.mutable.of("Foo", "Bar", "Baz", "Waldo", "Qux");
+        <name>Iterable index = this.newMutableCollectionWith(<["0", "1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
+
+        Mutable<name>List result = index.toSortedListBy(i -> list.get((int) i));
+
+        Assert.assertNotSame(index, result);
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "0", "4", "3"]:(literal.(type))(); separator=", ">), result);
+    }
+
+    @Test
+    public void toSortedListByFunctionWithComparator()
+    {
+        MutableList\<String> list = Lists.mutable.of("Foo", "Bar", "Baz", "Waldo", "Qux");
+        <name>Iterable index = this.newMutableCollectionWith(<["0", "1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
+
+        Mutable<name>List result = index.toSortedListBy(i -> list.get((int) i), Comparators.naturalOrder().reversed());
+
+        Assert.assertNotSame(index, result);
+        Assert.assertEquals(<name>ArrayList.newListWith(<["3", "4", "0", "2", "1"]:(literal.(type))(); separator=", ">), result);
     }
 
     @Test

@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.NoSuchElementException;
 <(wideStatisticsImport.(type))>
 
+<(comparatorImports.(type))(type)>
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<(wideName.(type))><name>To<(wideName.(type))>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
@@ -613,6 +614,32 @@ default double medianIfEmpty(double defaultValue)
 <type>[] toSortedArray();
 
 Mutable<name>List toSortedList();
+
+/**
+ * Converts the collection to a Mutable<name>List implementation sorted using the provided comparator.
+ */
+default Mutable<name>List toSortedList(<name>Comparator comparator)
+{
+    return this.toList().sortThis(comparator);
+}
+
+/**
+ * Converts the collection to a Mutable<name>ListImplementation sorted based on the natural order of the key returned
+ * by {@code function}.
+ */
+default \<T> Mutable<name>List toSortedListBy(<name>ToObjectFunction\<T> function)
+{
+    return this.toList().sortThisBy(function);
+}
+
+/**
+ * Converts the collection to a Mutable<name>List implementation, which is sorted based on the key returned by
+ * {@code function} using the provided {@code comparator}.
+ */
+default \<T> Mutable<name>List toSortedListBy(<name>ToObjectFunction\<T> function, Comparator\<? super T> comparator)
+{
+    return this.toList().sortThisBy(function, comparator);
+}
 >>
 
 noMethods() ::= ""
@@ -639,3 +666,22 @@ wideStatisticsImport ::= [
     "double": "import java.util.DoubleSummaryStatistics;",
     default: "no matching wide type"
 ]
+
+comparatorImports ::= [
+    "byte": "allComparatorImports",
+    "short": "allComparatorImports",
+    "char": "allComparatorImports",
+    "int": "allComparatorImports",
+    "long": "allComparatorImports",
+    "float": "allComparatorImports",
+    "double": "allComparatorImports",
+    "boolean": "noComparatorImports"
+]
+
+allComparatorImports(type) ::= <<
+import java.util.Comparator;
+import org.eclipse.collections.api.block.comparator.primitive.<name>Comparator;
+
+>>
+
+noComparatorImports(type) ::= ""
