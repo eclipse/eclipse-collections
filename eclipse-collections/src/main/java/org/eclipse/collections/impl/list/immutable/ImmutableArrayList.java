@@ -62,7 +62,7 @@ final class ImmutableArrayList<T>
     private static final long serialVersionUID = 1L;
     private final T[] items;
 
-    private ImmutableArrayList(T[] newElements)
+    ImmutableArrayList(T[] newElements)
     {
         if (newElements == null)
         {
