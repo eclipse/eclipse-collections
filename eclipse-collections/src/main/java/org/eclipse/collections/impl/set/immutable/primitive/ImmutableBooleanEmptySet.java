@@ -128,7 +128,7 @@ final class ImmutableBooleanEmptySet implements ImmutableBooleanSet, Serializabl
     @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
-        return false;
+        return true;
     }
 
     @Override

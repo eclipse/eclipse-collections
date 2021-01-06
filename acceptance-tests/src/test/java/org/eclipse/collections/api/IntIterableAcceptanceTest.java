@@ -35,4 +35,40 @@ public class IntIterableAcceptanceTest
         list1.add(1_000_000);
         Assert.assertTrue(list1.containsAll(list2));
     }
+
+    @Test
+    public void testContainsAnyWithMillionElementIterable()
+    {
+        MutableIntList list = IntLists.mutable.withInitialCapacity(1_000_000);
+        int[] source = new int[32];
+
+        for (int i = 0; i < 1_000_000; i++)
+        {
+            if (i < source.length)
+            {
+                source[i] = 1_000_030 - i;
+            }
+            list.add(i);
+        }
+
+        Assert.assertTrue(list.containsAny(source));
+    }
+
+    @Test
+    public void testContainsNoneWithMillionElementIterable()
+    {
+        MutableIntList list = IntLists.mutable.withInitialCapacity(1_000_000);
+        int[] source = new int[32];
+
+        for (int i = 0; i < 1_000_000; i++)
+        {
+            if (i < source.length)
+            {
+                source[i] = 1_000_030 - i;
+            }
+            list.add(i);
+        }
+
+        Assert.assertFalse(list.containsNone(source));
+    }
 }

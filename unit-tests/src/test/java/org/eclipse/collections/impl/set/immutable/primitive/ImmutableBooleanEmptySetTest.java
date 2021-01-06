@@ -157,7 +157,7 @@ public class ImmutableBooleanEmptySetTest extends AbstractImmutableBooleanCollec
     @Test
     public void noneSatisfy()
     {
-        Assert.assertFalse(this.classUnderTest().noneSatisfy(BooleanPredicates.alwaysTrue()));
-        Assert.assertFalse(this.classUnderTest().noneSatisfy(BooleanPredicates.alwaysFalse()));
+        Assert.assertTrue(this.classUnderTest().noneSatisfy(BooleanPredicates.alwaysTrue()));
+        Assert.assertTrue(this.classUnderTest().noneSatisfy(BooleanPredicates.alwaysFalse()));
     }
 }

@@ -106,6 +106,30 @@ public abstract class AbstractUnmodifiable<name>Collection
     }
 
     @Override
+    public boolean containsAny(<type>... source)
+    {
+        return this.collection.containsAny(source);
+    }
+
+    @Override
+    public boolean containsAny(<name>Iterable source)
+    {
+        return this.collection.containsAny(source);
+    }
+
+    @Override
+    public boolean containsNone(<type>... source)
+    {
+        return this.collection.containsNone(source);
+    }
+
+    @Override
+    public boolean containsNone(<name>Iterable source)
+    {
+        return this.collection.containsNone(source);
+    }
+
+    @Override
     public boolean add(<type> newItem)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
