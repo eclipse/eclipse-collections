@@ -25,7 +25,7 @@ import java.io.Serializable;
  *
  */
 @FunctionalInterface
-public interface <name>Comparator\<T>
+public interface <name>Comparator
         extends Serializable
 {
     int compare(<type> value1, <type> value2);
