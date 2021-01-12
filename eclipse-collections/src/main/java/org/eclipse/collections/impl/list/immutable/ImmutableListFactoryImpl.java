@@ -254,6 +254,6 @@ public class ImmutableListFactoryImpl implements ImmutableListFactory
         {
             return this.empty();
         }
-        return this.of((T[]) Iterate.toArray(items));
+        return new ImmutableArrayList<T>((T[]) Iterate.toArray(items));
     }
 }
