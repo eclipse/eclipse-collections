@@ -446,9 +446,9 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
                 else
                 {
                     char[] chars = Character.toChars(codePoint);
-                    for (int j = 0; j < chars.length; j++)
+                    for (char aChar : chars)
                     {
-                        appendable.append(chars[j]);
+                        appendable.append(aChar);
                     }
                 }
             }

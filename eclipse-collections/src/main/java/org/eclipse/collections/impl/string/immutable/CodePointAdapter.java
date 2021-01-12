@@ -74,9 +74,8 @@ public class CodePointAdapter
     public static CodePointAdapter from(int... codePoints)
     {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < codePoints.length; i++)
+        for (int codePoint : codePoints)
         {
-            int codePoint = codePoints[i];
             builder.appendCodePoint(codePoint);
         }
         return new CodePointAdapter(builder.toString());
@@ -676,9 +675,9 @@ public class CodePointAdapter
                 else
                 {
                     char[] chars = Character.toChars(codePoint);
-                    for (int j = 0; j < chars.length; j++)
+                    for (char aChar : chars)
                     {
-                        appendable.append(chars[j]);
+                        appendable.append(aChar);
                     }
                 }
                 i += Character.charCount(codePoint);

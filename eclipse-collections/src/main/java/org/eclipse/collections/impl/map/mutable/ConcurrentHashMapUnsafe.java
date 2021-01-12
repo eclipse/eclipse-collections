@@ -1845,9 +1845,9 @@ public class ConcurrentHashMapUnsafe<K, V>
 
             if (this.size() > col.size())
             {
-                for (Iterator<?> itr = col.iterator(); itr.hasNext(); )
+                for (Object o : col)
                 {
-                    removed |= this.remove(itr.next());
+                    removed |= this.remove(o);
                 }
             }
             else
