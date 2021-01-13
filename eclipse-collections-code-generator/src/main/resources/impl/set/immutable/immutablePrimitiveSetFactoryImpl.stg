@@ -77,7 +77,7 @@ public enum Immutable<name>SetFactoryImpl implements Immutable<name>SetFactory
         {
             return this.with(items[0]);
         }
-        return <name>HashSet.newSetWith(items).toImmutable();
+        return <name>HashSet.newSetWith(items).freeze();
     }
 
     @Override
@@ -111,7 +111,7 @@ public enum Immutable<name>SetFactoryImpl implements Immutable<name>SetFactory
     @Override
     public Immutable<name>Set withAll(Iterable\<<wrapperName>\> iterable)
     {
-        return <name>Sets.mutable.withAll(iterable).toImmutable();
+        return <name>Sets.mutable.withAll(iterable).freeze();
     }
     <(streamMethods.(type))()>
 }
