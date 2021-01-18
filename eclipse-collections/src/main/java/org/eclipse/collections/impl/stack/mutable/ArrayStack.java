@@ -90,7 +90,6 @@ import org.eclipse.collections.api.stack.primitive.MutableLongStack;
 import org.eclipse.collections.api.stack.primitive.MutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -1198,14 +1197,6 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
         {
             throw new IllegalArgumentException("Count must be positive but was " + count);
         }
-    }
-
-    @Override
-    public <K, V> MutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
     }
 
     @Override

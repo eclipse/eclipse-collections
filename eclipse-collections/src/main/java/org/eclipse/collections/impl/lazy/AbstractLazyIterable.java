@@ -26,7 +26,6 @@ import org.eclipse.collections.api.LazyLongIterable;
 import org.eclipse.collections.api.LazyShortIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -39,9 +38,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MapIterable;
-import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
@@ -61,7 +58,6 @@ import org.eclipse.collections.impl.block.procedure.MaxProcedure;
 import org.eclipse.collections.impl.block.procedure.MinByProcedure;
 import org.eclipse.collections.impl.block.procedure.MinComparatorProcedure;
 import org.eclipse.collections.impl.block.procedure.MinProcedure;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.lazy.primitive.CollectBooleanIterable;
 import org.eclipse.collections.impl.lazy.primitive.CollectByteIterable;
@@ -348,17 +344,6 @@ public abstract class AbstractLazyIterable<T>
     public LazyIterable<T> tap(Procedure<? super T> procedure)
     {
         return LazyIterate.tap(this, procedure);
-    }
-
-    @Override
-    public <K, V> MapIterable<K, V> aggregateInPlaceBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Procedure2<? super V, ? super T> mutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
     }
 
     @Override

@@ -2024,21 +2024,6 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         {
             return this.delegate.chunk(size);
         }
-
-        @Override
-        public <K, V> MutableMap<K, V> aggregateInPlaceBy(
-                Function<? super T, ? extends K> groupBy,
-                Function0<? extends V> zeroValueFactory,
-                Procedure2<? super V, ? super T> mutatingAggregator)
-        {
-            MutableMap<K, V> map = UnifiedMap.newMap();
-            this.each(each -> {
-                K key = groupBy.valueOf(each);
-                V value = map.getIfAbsentPut(key, zeroValueFactory);
-                mutatingAggregator.value(value, each);
-            });
-            return map;
-        }
     }
 
     public static class ReadWriteLockWrapper

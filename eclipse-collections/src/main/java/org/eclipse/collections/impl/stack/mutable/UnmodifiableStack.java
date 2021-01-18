@@ -1010,15 +1010,6 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
-    public <K, V> MutableMap<K, V> aggregateInPlaceBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Procedure2<? super V, ? super T> mutatingAggregator)
-    {
-        return this.mutableStack.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
-    }
-
-    @Override
     public <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,

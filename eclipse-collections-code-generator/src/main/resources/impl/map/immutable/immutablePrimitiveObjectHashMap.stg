@@ -745,13 +745,6 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     }
 
     @Override
-    public \<K, VV> ImmutableMap\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
-    {
-        MutableMap\<K, VV> map = this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
-        return map.toImmutable();
-    }
-
-    @Override
     public \<K, VV> ImmutableMap\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
     {
         MutableMap\<K, VV> map = this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);

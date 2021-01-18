@@ -1227,15 +1227,6 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
-    public <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Procedure2<? super V2, ? super V> mutatingAggregator)
-    {
-        return this.getMutableMap().aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
-    }
-
-    @Override
     public <K2, V2> MutableMap<K2, V2> aggregateBy(
             Function<? super V, ? extends K2> groupBy,
             Function0<? extends V2> zeroValueFactory,

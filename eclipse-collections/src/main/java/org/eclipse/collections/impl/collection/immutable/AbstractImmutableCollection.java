@@ -24,13 +24,11 @@ import java.util.stream.StreamSupport;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
@@ -44,10 +42,8 @@ import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -56,17 +52,6 @@ public abstract class AbstractImmutableCollection<T>
         implements ImmutableCollection<T>, Collection<T>
 {
     protected abstract MutableCollection<T> newMutable(int size);
-
-    @Override
-    public <K, V> ImmutableMap<K, V> aggregateInPlaceBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Procedure2<? super V, ? super T> mutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map.toImmutable();
-    }
 
     @Override
     public Optional<T> reduce(BinaryOperator<T> accumulator)

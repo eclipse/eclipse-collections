@@ -31,7 +31,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Maps;
@@ -64,7 +63,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
@@ -468,17 +466,6 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public <V1> ImmutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.<V1, V>newMap(this.size())).toImmutable();
-    }
-
-    @Override
-    public <K2, V2> ImmutableMap<K2, V2> aggregateInPlaceBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Procedure2<? super V2, ? super V> mutatingAggregator)
-    {
-        MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map.toImmutable();
     }
 
     @Override

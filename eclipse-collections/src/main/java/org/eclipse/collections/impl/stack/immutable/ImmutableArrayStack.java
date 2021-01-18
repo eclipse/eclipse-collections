@@ -92,7 +92,6 @@ import org.eclipse.collections.api.stack.primitive.ImmutableLongStack;
 import org.eclipse.collections.api.stack.primitive.ImmutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -1014,14 +1013,6 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         return this.delegate.asReversed().chunk(size);
-    }
-
-    @Override
-    public <K, V> ImmutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map.toImmutable();
     }
 
     @Override

@@ -75,10 +75,8 @@ import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
 public class AbstractUnmodifiableMutableCollection<T> implements MutableCollection<T>
@@ -1063,16 +1061,5 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
     public MutableCollection<T> withoutAll(Iterable<? extends T> elements)
     {
         throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
-    }
-
-    @Override
-    public <K, V> MutableMap<K, V> aggregateInPlaceBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Procedure2<? super V, ? super T> mutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
     }
 }

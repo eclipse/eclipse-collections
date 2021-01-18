@@ -110,7 +110,6 @@ import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
@@ -898,14 +897,6 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         MutableList\<RichIterable\<V>\> result = Lists.mutable.of();
         result.add(FastList.newListWith(this.value1));
         return result;
-    }
-
-    @Override
-    public \<K, VV> ImmutableMap\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
-    {
-        MutableMap\<K, VV> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure\<V, K, VV>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map.toImmutable();
     }
 
     @Override
