@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Two Sigma and others.
+ * Copyright (c) 2021 Two Sigma and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1486,7 +1486,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public <KK, VV> MutableMap<KK, VV> aggregateBy(
+    public <KK, VV> MutableMapIterable<KK, VV> aggregateBy(
             Function<? super V, ? extends KK> groupBy,
             Function0<? extends VV> zeroValueFactory,
             Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
@@ -1495,7 +1495,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public <K1, V1, V2> MutableMap<K1, V2> aggregateBy(
+    public <K1, V1, V2> MutableMapIterable<K1, V2> aggregateBy(
             Function<? super K, ? extends K1> keyFunction,
             Function<? super V, ? extends V1> valueFunction,
             Function0<? extends V2> zeroValueFactory,

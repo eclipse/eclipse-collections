@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Goldman Sachs and others.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -405,9 +405,8 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
         return map;
     }
 
-    // TODO: Return MutableMapIterable
     @Override
-    default <KK, VV> MutableMap<KK, VV> aggregateBy(
+    default <KK, VV> MutableMapIterable<KK, VV> aggregateBy(
             Function<? super V, ? extends KK> groupBy,
             Function0<? extends VV> zeroValueFactory,
             Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
@@ -419,18 +418,19 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
                 Maps.mutable.empty());
     }
 
-    // TODO: Return MutableMapIterable
     @Override
-    default <K1, V1, V2> MutableMap<K1, V2> aggregateBy(
+    default <K1, V1, V2> MutableMapIterable<K1, V2> aggregateBy(
             Function<? super K, ? extends K1> keyFunction,
             Function<? super V, ? extends V1> valueFunction,
             Function0<? extends V2> zeroValueFactory,
             Function2<? super V2, ? super V1, ? extends V2> nonMutatingAggregator)
     {
         MutableMap<K1, V2> map = Maps.mutable.empty();
-        this.forEachKeyValue((key, value) -> {
-            map.updateValueWith(keyFunction.valueOf(key), zeroValueFactory, nonMutatingAggregator, valueFunction.valueOf(value));
-        });
+        this.forEachKeyValue((key, value) -> map.updateValueWith(
+                keyFunction.valueOf(key),
+                zeroValueFactory,
+                nonMutatingAggregator,
+                valueFunction.valueOf(value)));
         return map;
     }
 }
