@@ -389,9 +389,8 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     @Override
     MutableCollection<Pair<V, Integer>> zipWithIndex();
 
-    // TODO: Return MutableMapIterable
     @Override
-    default <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(
+    default <KK, VV> MutableMapIterable<KK, VV> aggregateInPlaceBy(
             Function<? super V, ? extends KK> groupBy,
             Function0<? extends VV> zeroValueFactory,
             Procedure2<? super VV, ? super V> mutatingAggregator)

@@ -39,6 +39,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
@@ -424,6 +425,18 @@ public class SynchronizedMutableMap<K, V>
             Function2<? super V2, ? super V1, ? extends V2> nonMutatingAggregator)
     {
         return (MutableMap<K1, V2>) super.aggregateBy(keyFunction, valueFunction, zeroValueFactory, nonMutatingAggregator);
+    }
+
+    /**
+     * @since 12.0
+     */
+    @Override
+    public <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Procedure2<? super VV, ? super V> mutatingAggregator)
+    {
+        return (MutableMap<KK, VV>) super.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
     }
 
     @Override
