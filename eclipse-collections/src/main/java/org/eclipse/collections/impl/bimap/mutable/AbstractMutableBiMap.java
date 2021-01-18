@@ -48,7 +48,6 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.BiMaps;
-import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
@@ -654,22 +653,6 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     public <VV> MutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
         return new HashBiMap<>(this.delegate.groupByUniqueKey(function));
-    }
-
-    @Override
-    public <K2, V2> MutableMap<K2, V2> aggregateBy(Function<? super V, ? extends K2> groupBy, Function0<? extends V2> zeroValueFactory, Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
-    {
-        return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
-    }
-
-    @Override
-    public <K1, V1, V2> MutableMap<K1, V2> aggregateBy(
-            Function<? super K, ? extends K1> keyFunction,
-            Function<? super V, ? extends V1> valueFunction,
-            Function0<? extends V2> zeroValueFactory,
-            Function2<? super V2, ? super V1, ? extends V2> nonMutatingAggregator)
-    {
-        return this.delegate.aggregateBy(keyFunction, valueFunction, zeroValueFactory, nonMutatingAggregator);
     }
 
     @Override

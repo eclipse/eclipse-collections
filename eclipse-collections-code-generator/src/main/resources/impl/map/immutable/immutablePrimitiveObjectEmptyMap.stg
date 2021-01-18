@@ -962,12 +962,6 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
     }
 
     @Override
-    public \<K, VV> ImmutableMap\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
-    {
-        return Maps.immutable.empty();
-    }
-
-    @Override
     public \<P, VV, R extends Collection\<VV>\> R collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter, R targetCollection)
     {
         return targetCollection;

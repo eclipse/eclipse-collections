@@ -1010,15 +1010,6 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
-    public <K, V> MutableMap<K, V> aggregateBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
-    {
-        return this.mutableStack.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
-    }
-
-    @Override
     public int indexOf(Object object)
     {
         return this.mutableStack.indexOf(object);

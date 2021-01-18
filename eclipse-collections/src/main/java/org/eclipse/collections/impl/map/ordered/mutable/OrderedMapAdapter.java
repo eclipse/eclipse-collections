@@ -38,7 +38,6 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
-import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -50,7 +49,6 @@ import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.ImmutableOrderedMap;
 import org.eclipse.collections.api.map.MapIterable;
-import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
@@ -63,7 +61,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
@@ -703,17 +700,6 @@ public class OrderedMapAdapter<K, V>
         V newValue = function.value(oldValue, parameter);
         this.put(key, newValue);
         return newValue;
-    }
-
-    @Override
-    public <K2, V2> MutableMap<K2, V2> aggregateBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
-    {
-        MutableMap<K2, V2> map = Maps.mutable.empty();
-        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
-        return map;
     }
 
     @Override
