@@ -14,14 +14,18 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.LazyByteIterable;
 import org.eclipse.collections.api.iterator.ByteIterator;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.ImmutableByteSet;
 import org.eclipse.collections.api.set.primitive.MutableByteSet;
+import org.eclipse.collections.api.tuple.primitive.ByteBytePair;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BytePredicates;
 import org.eclipse.collections.impl.collection.immutable.primitive.AbstractImmutableByteCollectionTestCase;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -456,6 +460,49 @@ public abstract class AbstractImmutableByteHashSetTestCase extends AbstractImmut
     private void assertIsProperSubsetOf(ImmutableByteSet set1, ImmutableByteSet set2, boolean expected)
     {
         boolean actual = set1.isProperSubsetOf(set2);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void isCartesianProduct()
+    {
+        this.assertCartesianProduct(
+                this.newWith((byte) 1, (byte) 2),
+                this.newWith((byte) 3, (byte) 4),
+                Sets.immutable.with(
+                        PrimitiveTuples.pair((byte) 1, (byte) 3),
+                        PrimitiveTuples.pair((byte) 1, (byte) 4),
+                        PrimitiveTuples.pair((byte) 2, (byte) 3),
+                        PrimitiveTuples.pair((byte) 2, (byte) 4)));
+
+        this.assertCartesianProduct(
+                this.newWith((byte) 1, (byte) 2),
+                this.newWith((byte) 1, (byte) 2),
+                Sets.immutable.with(
+                        PrimitiveTuples.pair((byte) 1, (byte) 1),
+                        PrimitiveTuples.pair((byte) 1, (byte) 2),
+                        PrimitiveTuples.pair((byte) 2, (byte) 1),
+                        PrimitiveTuples.pair((byte) 2, (byte) 2)));
+
+        this.assertCartesianProduct(
+                this.newWith((byte) 1, (byte) 2),
+                this.newWith(),
+                Sets.immutable.empty());
+
+        this.assertCartesianProduct(
+                this.newWith(),
+                this.newWith((byte) 1, (byte) 2),
+                Sets.immutable.empty());
+
+        this.assertCartesianProduct(
+                this.newWith(),
+                this.newWith(),
+                Sets.immutable.empty());
+    }
+
+    private void assertCartesianProduct(ImmutableByteSet set1, ImmutableByteSet set2, ImmutableSet<ByteBytePair> expected)
+    {
+        ImmutableSet<ByteBytePair> actual = set1.cartesianProduct(set2).toSet().toImmutable();
         Assert.assertEquals(expected, actual);
     }
 }

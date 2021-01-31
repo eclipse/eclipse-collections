@@ -31,6 +31,9 @@ import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
+import org.eclipse.collections.impl.factory.Sets;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -685,6 +688,44 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     private void assertIsProperSubsetOf(Mutable<name>Set set1, Mutable<name>Set set2, boolean expected)
     {
         boolean actual = set1.isProperSubsetOf(set2);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void cartesianProduct()
+    {
+        this.assertCartesianProduct(
+                this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["3", "4"]:(literal.(type))(); separator=", ">),
+                Sets.mutable.with(
+                        PrimitiveTuples.pair(<(literal.(type))("1")>, <(literal.(type))("3")>),
+                        PrimitiveTuples.pair(<(literal.(type))("1")>, <(literal.(type))("4")>),
+                        PrimitiveTuples.pair(<(literal.(type))("2")>, <(literal.(type))("3")>),
+                        PrimitiveTuples.pair(<(literal.(type))("2")>, <(literal.(type))("4")>)));
+
+        this.assertCartesianProduct(
+                this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">),
+                this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">),
+                Sets.mutable.with(
+                        PrimitiveTuples.pair(<(literal.(type))("1")>, <(literal.(type))("1")>),
+                        PrimitiveTuples.pair(<(literal.(type))("1")>, <(literal.(type))("2")>),
+                        PrimitiveTuples.pair(<(literal.(type))("2")>, <(literal.(type))("1")>),
+                        PrimitiveTuples.pair(<(literal.(type))("2")>, <(literal.(type))("2")>)));
+
+        this.assertCartesianProduct(
+                this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">),
+                this.newWith(),
+                Sets.mutable.empty());
+
+        this.assertCartesianProduct(
+                this.newWith(),
+                this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">),
+                Sets.mutable.empty());
+    }
+
+    private void assertCartesianProduct(Mutable<name>Set set1, Mutable<name>Set set2, MutableSet\<<name><name>Pair> expected)
+    {
+        MutableSet\<<name><name>Pair> actual = set1.cartesianProduct(set2).toSet();
         Assert.assertEquals(expected, actual);
     }
 }

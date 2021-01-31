@@ -16,13 +16,16 @@ import org.eclipse.collections.api.LazyByteIterable;
 import org.eclipse.collections.api.iterator.ByteIterator;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.MutableByteSet;
+import org.eclipse.collections.api.tuple.primitive.ByteBytePair;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BytePredicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableByteCollectionTestCase;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.ByteSets;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -616,6 +619,49 @@ public abstract class AbstractByteSetTestCase extends AbstractMutableByteCollect
     private void assertIsProperSubsetOf(MutableByteSet set1, MutableByteSet set2, boolean expected)
     {
         boolean actual = set1.isProperSubsetOf(set2);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void isCartesianProduct()
+    {
+        this.assertCartesianProduct(
+                this.newWith((byte) 1, (byte) 2),
+                this.newWith((byte) 3, (byte) 4),
+                Sets.mutable.with(
+                        PrimitiveTuples.pair((byte) 1, (byte) 3),
+                        PrimitiveTuples.pair((byte) 1, (byte) 4),
+                        PrimitiveTuples.pair((byte) 2, (byte) 3),
+                        PrimitiveTuples.pair((byte) 2, (byte) 4)));
+
+        this.assertCartesianProduct(
+                this.newWith((byte) 1, (byte) 2),
+                this.newWith((byte) 1, (byte) 2),
+                Sets.mutable.with(
+                        PrimitiveTuples.pair((byte) 1, (byte) 1),
+                        PrimitiveTuples.pair((byte) 1, (byte) 2),
+                        PrimitiveTuples.pair((byte) 2, (byte) 1),
+                        PrimitiveTuples.pair((byte) 2, (byte) 2)));
+
+        this.assertCartesianProduct(
+                this.newWith((byte) 1, (byte) 2),
+                this.newWith(),
+                Sets.mutable.empty());
+
+        this.assertCartesianProduct(
+                this.newWith(),
+                this.newWith((byte) 1, (byte) 2),
+                Sets.mutable.empty());
+
+        this.assertCartesianProduct(
+                this.newWith(),
+                this.newWith(),
+                Sets.mutable.empty());
+    }
+
+    private void assertCartesianProduct(MutableByteSet set1, MutableByteSet set2, MutableSet<ByteBytePair> expected)
+    {
+        MutableSet<ByteBytePair> actual = set1.cartesianProduct(set2).toSet();
         Assert.assertEquals(expected, actual);
     }
 }

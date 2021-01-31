@@ -18,6 +18,9 @@ package org.eclipse.collections.impl.set.primitive;
 
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 
 /**
  * This file was automatically generated from template file abstractPrimitiveSet.stg.
@@ -26,6 +29,12 @@ import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
  */
 public abstract class Abstract<name>Set extends Abstract<name>Iterable implements <name>Set
 {
+    @Override
+    public LazyIterable\<<name><name>Pair> cartesianProduct(<name>Set set)
+    {
+        return <name>Sets.cartesianProduct(this, set);
+    }
+
     @Override
     public boolean equals(Object obj)
     {
