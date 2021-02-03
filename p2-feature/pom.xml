@@ -19,6 +19,7 @@
     <name>Eclipse Collections p2 Repository with Feature Build</name>
 
     <modules>
+        <module>org.eclipse.collections.target</module>
         <module>org.eclipse.collections.feature</module>
         <module>org.eclipse.collections.repository</module>
     </modules>
@@ -28,16 +29,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- versions used for plug-ins below -->
-        <tycho-version>1.7.0</tycho-version>
-        <tycho-extras-version>1.7.0</tycho-extras-version>
+        <tycho-version>2.2.0</tycho-version>
+        <tycho-extras-version>2.2.0</tycho-extras-version>
 
         <!-- pattern/format used for the qualifier -->
         <qualifier.format>'v'yyyyMMdd-HHmm</qualifier.format>
 
         <!-- by default complain if working tree is dirty (error|warning|ignore) -->
         <dirtyWorkingTree>warning</dirtyWorkingTree>
-
-        <collections.repository.url>file:///${project.basedir}/../../p2-repository/org.eclipse.collections/target/repository</collections.repository.url>
     </properties>
 
     <build>
@@ -68,6 +67,13 @@
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>target-platform-configuration</artifactId>
                 <configuration>
+                    <target>
+                        <artifact>
+                            <groupId>org.eclipse.collections</groupId>
+                            <artifactId>org.eclipse.collections.target</artifactId>
+                            <version>11.0.0-SNAPSHOT</version>
+                        </artifact>
+                    </target>
                     <environments>
                         <environment>
                             <os>*</os>
@@ -172,19 +178,6 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <repositories>
-        <repository>
-            <id>eclipse.license</id>
-            <url>https://download.eclipse.org/cbi/updates/license/</url>
-            <layout>p2</layout>
-        </repository>
-        <repository>
-            <id>collections.plugin.repository</id>
-            <url>${collections.repository.url}</url>
-            <layout>p2</layout>
-        </repository>
-    </repositories>
 
     <pluginRepositories>
         <pluginRepository>
