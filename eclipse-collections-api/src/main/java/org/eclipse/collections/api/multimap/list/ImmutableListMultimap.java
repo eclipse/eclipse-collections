@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.multimap.list;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -52,10 +53,10 @@ public interface ImmutableListMultimap<K, V>
     ImmutableListMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate);
 
     @Override
-    ImmutableListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    ImmutableListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 
     @Override
-    ImmutableListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    ImmutableListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 
     @Override
     <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function);

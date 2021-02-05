@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.multimap.set.sorted;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -168,7 +169,7 @@ public class SynchronizedSortedSetMultimap<K, V>
     }
 
     @Override
-    public MutableSortedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public MutableSortedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         synchronized (this.getLock())
         {
@@ -177,7 +178,7 @@ public class SynchronizedSortedSetMultimap<K, V>
     }
 
     @Override
-    public MutableSortedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public MutableSortedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         synchronized (this.getLock())
         {

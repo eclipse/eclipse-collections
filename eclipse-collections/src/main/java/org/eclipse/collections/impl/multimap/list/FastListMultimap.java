@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.multimap.list;
 import java.io.Externalizable;
 import java.util.Collection;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -140,13 +141,13 @@ public final class FastListMultimap<K, V>
     }
 
     @Override
-    public FastListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public FastListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, this.newEmpty());
     }
 
     @Override
-    public FastListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public FastListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, this.newEmpty());
     }

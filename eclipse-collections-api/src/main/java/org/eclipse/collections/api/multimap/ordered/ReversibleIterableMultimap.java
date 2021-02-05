@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.multimap.ordered;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.ordered.ReversibleIterable;
@@ -30,10 +31,10 @@ public interface ReversibleIterableMultimap<K, V>
     ReversibleIterableMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate);
 
     @Override
-    ReversibleIterableMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    ReversibleIterableMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 
     @Override
-    ReversibleIterableMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    ReversibleIterableMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 
     @Override
     <V2> ReversibleIterableMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function);

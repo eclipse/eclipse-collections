@@ -28,7 +28,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableRichIterable;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.eclipse.collections.impl.utility.Iterate;
 
 public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         implements Multimap<K, V>
@@ -184,7 +183,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
     }
 
     @Override
-    public void forEachKeyMultiValues(Procedure2<? super K, ? super Iterable<V>> procedure)
+    public void forEachKeyMultiValues(Procedure2<? super K, ? super RichIterable<V>> procedure)
     {
         this.getMap().forEachKeyValue(procedure);
     }
@@ -210,7 +209,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
     }
 
     @Override
-    public <R extends MutableMultimap<K, V>> R selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target)
+    public <R extends MutableMultimap<K, V>> R selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate, R target)
     {
         this.forEachKeyMultiValues((key, collection) -> {
             if (predicate.accept(key, collection))
@@ -222,7 +221,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
     }
 
     @Override
-    public <R extends MutableMultimap<K, V>> R rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target)
+    public <R extends MutableMultimap<K, V>> R rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate, R target)
     {
         this.forEachKeyMultiValues((key, collection) -> {
             if (!predicate.accept(key, collection))
@@ -264,14 +263,17 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         this.forEachKeyMultiValues((key, values) ->
                 target.putAll(
                         keyFunction.valueOf(key),
-                        Iterate.collect(values, valueFunction)));
+                        values.collect(valueFunction)));
         return target;
     }
 
     @Override
     public <V2, R extends MutableMultimap<K, V2>> R collectValues(Function<? super V, ? extends V2> function, R target)
     {
-        this.getMap().forEachKeyValue((key, collection) -> target.putAll(key, collection.collect(function)));
+        this.forEachKeyMultiValues((key, values) ->
+                target.putAll(
+                        key,
+                        values.collect(function)));
         return target;
     }
 }

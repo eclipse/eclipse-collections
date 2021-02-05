@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.multimap.set;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.set.SetIterable;
@@ -33,8 +34,8 @@ public interface SetMultimap<K, V>
     SetMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate);
 
     @Override
-    SetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    SetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 
     @Override
-    SetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    SetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 }

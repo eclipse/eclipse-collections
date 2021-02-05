@@ -212,7 +212,7 @@ public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMulti
     }
 
     @Override
-    public void forEachKeyMultiValues(Procedure2<? super K, ? super Iterable<V>> procedure)
+    public void forEachKeyMultiValues(Procedure2<? super K, ? super RichIterable<V>> procedure)
     {
         synchronized (this.lock)
         {
@@ -362,7 +362,7 @@ public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMulti
     }
 
     @Override
-    public <R extends MutableMultimap<K, V>> R selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target)
+    public <R extends MutableMultimap<K, V>> R selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate, R target)
     {
         synchronized (this.lock)
         {
@@ -371,7 +371,7 @@ public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMulti
     }
 
     @Override
-    public <R extends MutableMultimap<K, V>> R rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target)
+    public <R extends MutableMultimap<K, V>> R rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate, R target)
     {
         synchronized (this.lock)
         {

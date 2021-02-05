@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.multimap.set;
 
 import java.io.Externalizable;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
@@ -110,13 +111,13 @@ public final class MultiReaderUnifiedSetMultimap<K, V>
     }
 
     @Override
-    public UnifiedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public UnifiedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap());
     }
 
     @Override
-    public UnifiedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public UnifiedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap());
     }
