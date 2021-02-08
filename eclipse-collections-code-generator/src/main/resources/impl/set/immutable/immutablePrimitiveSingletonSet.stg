@@ -44,6 +44,8 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 
 /**
  * Immutable<name>SingletonSet is an optimization for {@link Immutable<name>Set} of size 1.
@@ -429,6 +431,12 @@ public double average()
 public double median()
 {
     return this.element;
+}
+
+@Override
+public LazyIterable\<<name><name>Pair> cartesianProduct(<name>Set set)
+{
+    return <name>Sets.cartesianProduct(this, set);
 }
 
 @Override

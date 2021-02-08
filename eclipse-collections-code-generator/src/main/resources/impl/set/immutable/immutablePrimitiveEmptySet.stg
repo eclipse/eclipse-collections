@@ -22,6 +22,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.set.ImmutableSet;
@@ -34,6 +35,7 @@ import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.factory.Lists;
@@ -384,6 +386,12 @@ public <type>[] toSortedArray()
 public Mutable<name>List toSortedList()
 {
     return new <name>ArrayList();
+}
+
+@Override
+public LazyIterable\<<name><name>Pair> cartesianProduct(<name>Set set)
+{
+    return <name>Sets.cartesianProduct(this, set);
 }
 
 >>

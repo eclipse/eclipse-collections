@@ -20,13 +20,16 @@ import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
+import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.math.MutableInteger;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -1020,5 +1023,47 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
         MutableBooleanSet set17 = this.newWith();
         MutableBooleanSet set27 = this.newWith();
         Assert.assertFalse(set17.isProperSubsetOf(set27));
+    }
+
+    @Test
+    public void cartesianProduct()
+    {
+        MutableBooleanSet set11 = this.setWithTrue;
+        MutableBooleanSet set21 = this.setWithFalse;
+        MutableSet<BooleanBooleanPair> expected1 = Sets.mutable.with(
+                PrimitiveTuples.pair(true, false));
+        Assert.assertEquals(expected1, set11.cartesianProduct(set21).toSet());
+
+        MutableBooleanSet set12 = this.newWith(false);
+        MutableBooleanSet set22 = this.newWith(false);
+        MutableSet<BooleanBooleanPair> expected2 = Sets.mutable.with(
+                PrimitiveTuples.pair(false, false));
+        Assert.assertEquals(expected2, set12.cartesianProduct(set22).toSet());
+
+        MutableBooleanSet set13 = this.setWithTrue;
+        MutableBooleanSet set23 = this.setWithTrueFalse;
+        MutableSet<BooleanBooleanPair> expected3 = Sets.mutable.with(
+                PrimitiveTuples.pair(true, true),
+                PrimitiveTuples.pair(true, false));
+        Assert.assertEquals(expected3, set13.cartesianProduct(set23).toSet());
+
+        MutableBooleanSet set14 = this.setWithFalse;
+        MutableBooleanSet set24 = this.setWithTrueFalse;
+        MutableSet<BooleanBooleanPair> expected4 = Sets.mutable.with(
+                PrimitiveTuples.pair(false, true),
+                PrimitiveTuples.pair(false, false));
+        Assert.assertEquals(expected4, set14.cartesianProduct(set24).toSet());
+
+        MutableBooleanSet set15 = this.setWithTrueFalse;
+        MutableBooleanSet set25 = this.newWith();
+        Assert.assertEquals(Sets.mutable.empty(), set15.cartesianProduct(set25).toSet());
+
+        MutableBooleanSet set16 = this.newWith();
+        MutableBooleanSet set26 = this.setWithTrueFalse;
+        Assert.assertEquals(Sets.mutable.empty(), set16.cartesianProduct(set26).toSet());
+
+        MutableBooleanSet set17 = this.newWith();
+        MutableBooleanSet set27 = this.newWith();
+        Assert.assertEquals(Sets.mutable.empty(), set17.cartesianProduct(set27).toSet());
     }
 }

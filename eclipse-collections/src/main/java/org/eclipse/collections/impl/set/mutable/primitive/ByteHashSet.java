@@ -20,6 +20,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.ByteIterable;
 import org.eclipse.collections.api.LazyByteIterable;
+import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
 import org.eclipse.collections.api.block.function.primitive.ByteToObjectFunction;
@@ -36,6 +37,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.ByteSet;
 import org.eclipse.collections.api.set.primitive.ImmutableByteSet;
 import org.eclipse.collections.api.set.primitive.MutableByteSet;
+import org.eclipse.collections.api.tuple.primitive.ByteBytePair;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
 import org.eclipse.collections.impl.block.procedure.checked.primitive.CheckedByteProcedure;
 import org.eclipse.collections.impl.factory.primitive.ByteSets;
@@ -224,6 +226,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         }
 
         return ((this.bitGroup4 >>> value) & 1L) != 0;
+    }
+
+    @Override
+    public LazyIterable<ByteBytePair> cartesianProduct(
+            ByteSet set)
+    {
+        return ByteSets.cartesianProduct(this, set);
     }
 
     @Override
@@ -1044,6 +1053,12 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             this.bitGroup1 = bitGroup1;
             this.bitGroup2 = bitGroup2;
             this.size = size;
+        }
+
+        @Override
+        public LazyIterable<ByteBytePair> cartesianProduct(ByteSet set)
+        {
+            return ByteSets.cartesianProduct(this, set);
         }
 
         @Override

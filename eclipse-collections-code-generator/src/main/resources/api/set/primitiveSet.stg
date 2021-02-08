@@ -17,10 +17,12 @@ package org.eclipse.collections.api.set.primitive;
 import java.util.Set;
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.set.SetIterable;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 
 /**
  * This file was automatically generated from template file primitiveSet.stg.
@@ -90,6 +92,14 @@ public interface <name>Set extends <name>Iterable
     {
         return this.size() \< set.size() && set.containsAll(this);
     }
+
+    /**
+     * Returns the set whose members are all possible ordered pairs (a, b) where a is a member of {@code this} and b is a
+     * member of {@code set}.
+     *
+     * @since 11.0.
+     */
+    LazyIterable\<<name><name>Pair> cartesianProduct(<name>Set set);
 
     /**
      * Follows the same general contract as {@link Set#equals(Object)}.
