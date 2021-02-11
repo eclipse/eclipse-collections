@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.multimap.bag;
 
 import java.io.Externalizable;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -117,13 +118,13 @@ public final class MultiReaderHashBagMultimap<K, V>
     }
 
     @Override
-    public MultiReaderHashBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public MultiReaderHashBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, this.newEmpty());
     }
 
     @Override
-    public MultiReaderHashBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public MultiReaderHashBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, this.newEmpty());
     }

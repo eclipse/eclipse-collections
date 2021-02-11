@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.multimap.bag;
 
 import java.io.Externalizable;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -127,13 +128,13 @@ public final class SynchronizedPutHashBagMultimap<K, V>
     }
 
     @Override
-    public HashBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public HashBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, HashBagMultimap.newMultimap());
     }
 
     @Override
-    public HashBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public HashBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, HashBagMultimap.newMultimap());
     }

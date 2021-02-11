@@ -17,6 +17,7 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -193,13 +194,13 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
     }
 
     @Override
-    public ImmutableSortedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public ImmutableSortedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator())).toImmutable();
     }
 
     @Override
-    public ImmutableSortedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public ImmutableSortedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator())).toImmutable();
     }

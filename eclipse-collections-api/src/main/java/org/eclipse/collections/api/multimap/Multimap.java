@@ -121,7 +121,7 @@ public interface Multimap<K, V>
      *
      * @since 6.0
      */
-    void forEachKeyMultiValues(Procedure2<? super K, ? super Iterable<V>> procedure);
+    void forEachKeyMultiValues(Procedure2<? super K, ? super RichIterable<V>> procedure);
 
     /**
      * Returns the number of key-value entry pairs.
@@ -351,7 +351,7 @@ public interface Multimap<K, V>
      * @return {@code Multimap}, which contains elements as a result of the select criteria
      * @since 6.0
      */
-    Multimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    Multimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 
     /**
      * Same as the select method but uses the specified target multimap for the results.
@@ -372,7 +372,7 @@ public interface Multimap<K, V>
      * @return {@code target}, which contains appended elements as a result of the select criteria
      * @since 6.0
      */
-    <R extends MutableMultimap<K, V>> R selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target);
+    <R extends MutableMultimap<K, V>> R selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate, R target);
 
     /**
      * Returns all elements of the source multimap that don't satisfy the predicate.
@@ -392,7 +392,7 @@ public interface Multimap<K, V>
      * @return {@code Multimap}, which contains elements that don't satisfy the {@code predicate}
      * @since 6.0
      */
-    Multimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    Multimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 
     /**
      * Same as the reject method but uses the specified target multimap for the results.
@@ -413,7 +413,7 @@ public interface Multimap<K, V>
      * @return {@code target}, which contains appended elements that don't satisfy the {@code predicate}
      * @since 6.0
      */
-    <R extends MutableMultimap<K, V>> R rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target);
+    <R extends MutableMultimap<K, V>> R rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate, R target);
 
     /**
      * Returns a new multimap with the results of applying the specified function on each key and value of the source

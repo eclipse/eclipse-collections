@@ -3817,7 +3817,7 @@ public final class Iterate
     public static <K, V> HashBagMultimap<V, K> flip(BagMultimap<K, V> bagMultimap)
     {
         HashBagMultimap<V, K> result = new HashBagMultimap<>();
-        bagMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
+        bagMultimap.forEachKeyMultiValues((key, values) -> values.forEach(value -> result.put(value, key)));
         return result;
     }
 
@@ -3827,7 +3827,7 @@ public final class Iterate
     public static <K, V> HashBagMultimap<V, K> flip(ListMultimap<K, V> listMultimap)
     {
         HashBagMultimap<V, K> result = new HashBagMultimap<>();
-        listMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
+        listMultimap.forEachKeyMultiValues((key, values) -> values.forEach(value -> result.put(value, key)));
         return result;
     }
 
@@ -3837,7 +3837,7 @@ public final class Iterate
     public static <K, V> UnifiedSetMultimap<V, K> flip(SetMultimap<K, V> setMultimap)
     {
         UnifiedSetMultimap<V, K> result = new UnifiedSetMultimap<>();
-        setMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
+        setMultimap.forEachKeyMultiValues((key, values) -> values.forEach(value -> result.put(value, key)));
         return result;
     }
 }

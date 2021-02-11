@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.multimap.bag;
 
 import java.io.Serializable;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -164,7 +165,7 @@ public class SynchronizedBagMultimap<K, V>
     }
 
     @Override
-    public MutableBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public MutableBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         synchronized (this.getLock())
         {
@@ -173,7 +174,7 @@ public class SynchronizedBagMultimap<K, V>
     }
 
     @Override
-    public MutableBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
+    public MutableBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate)
     {
         synchronized (this.getLock())
         {

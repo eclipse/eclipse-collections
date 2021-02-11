@@ -12,6 +12,7 @@ package org.eclipse.collections.api.multimap.ordered;
 
 import java.util.Comparator;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
@@ -38,10 +39,10 @@ public interface SortedIterableMultimap<K, V>
     SortedIterableMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate);
 
     @Override
-    SortedIterableMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    SortedIterableMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 
     @Override
-    SortedIterableMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate);
+    SortedIterableMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super RichIterable<V>> predicate);
 
     @Override
     <V2> ListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function);
