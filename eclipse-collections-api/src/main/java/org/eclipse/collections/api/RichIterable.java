@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,6 +26,7 @@ import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -58,7 +59,10 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -70,6 +74,7 @@ import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -1742,6 +1747,36 @@ public interface RichIterable<T>
     <NK, NV> MutableBiMap<NK, NV> toBiMap(
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction);
+
+    /**
+     * Converts the RichIterable to the default ImmutableList implementation.
+     *
+     * @since 11.0
+     */
+    default ImmutableList<T> toImmutableList()
+    {
+        return Lists.immutable.withAll(this);
+    }
+
+    /**
+     * Converts the RichIterable to the default ImmutableSet implementation.
+     *
+     * @since 11.0
+     */
+    default ImmutableSet<T> toImmutableSet()
+    {
+        return Sets.immutable.withAll(this);
+    }
+
+    /**
+     * Converts the RichIterable to the default ImmutableBag implementation.
+     *
+     * @since 11.0
+     */
+    default ImmutableBag<T> toImmutableBag()
+    {
+        return Bags.immutable.withAll(this);
+    }
 
     /**
      * Returns a lazy (deferred) iterable, most likely implemented by calling LazyIterate.adapt(this).

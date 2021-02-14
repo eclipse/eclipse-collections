@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -40,6 +40,7 @@ import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.BooleanBag;
 import org.eclipse.collections.api.bag.primitive.ByteBag;
@@ -70,6 +71,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -79,6 +81,7 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableByteSet;
@@ -1474,6 +1477,13 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void toImmutableList()
+    {
+        ImmutableList<Integer> list = this.newWith(1, 2, 3, 4).toImmutableList();
+        Verify.assertContainsAll(list, 1, 2, 3, 4);
+    }
+
+    @Test
     public void toCollection()
     {
         MutableList<Integer> list = this.newWith(1, 2, 3, 4).into(Lists.mutable.with(0));
@@ -1484,6 +1494,13 @@ public abstract class AbstractRichIterableTestCase
     public void toBag()
     {
         MutableBag<Integer> bag = this.newWith(1, 2, 3, 4).toBag();
+        Verify.assertContainsAll(bag, 1, 2, 3, 4);
+    }
+
+    @Test
+    public void toImmutableBag()
+    {
+        ImmutableBag<Integer> bag = this.newWith(1, 2, 3, 4).toImmutableBag();
         Verify.assertContainsAll(bag, 1, 2, 3, 4);
     }
 
@@ -1582,6 +1599,13 @@ public abstract class AbstractRichIterableTestCase
     {
         RichIterable<Integer> integers = this.newWith(1, 2, 3, 4);
         MutableSet<Integer> set = integers.toSet();
+        Verify.assertContainsAll(set, 1, 2, 3, 4);
+    }
+
+    @Test
+    public void toImmutableSet()
+    {
+        ImmutableSet<Integer> set = this.newWith(1, 2, 3, 4).toImmutableSet();
         Verify.assertContainsAll(set, 1, 2, 3, 4);
     }
 
