@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Goldman Sachs and others.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,7 @@ import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -59,6 +60,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -69,6 +71,7 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -756,6 +759,15 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public ImmutableList<T> toImmutableList()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableList();
+        }
+    }
+
+    @Override
     public MutableList<T> toSortedList()
     {
         synchronized (this.lock)
@@ -792,6 +804,15 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public ImmutableSet<T> toImmutableSet()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSet();
+        }
+    }
+
+    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         synchronized (this.lock)
@@ -824,6 +845,15 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         synchronized (this.lock)
         {
             return this.delegate.toBag();
+        }
+    }
+
+    @Override
+    public ImmutableBag<T> toImmutableBag()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableBag();
         }
     }
 
