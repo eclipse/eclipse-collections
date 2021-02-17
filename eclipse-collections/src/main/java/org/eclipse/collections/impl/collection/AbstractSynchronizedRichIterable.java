@@ -30,6 +30,7 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
+import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
@@ -73,6 +74,7 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -777,6 +779,15 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public ImmutableList<T> toImmutableSortedList()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSortedList();
+        }
+    }
+
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -822,6 +833,15 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public ImmutableSortedSet<T> toImmutableSortedSet()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSortedSet();
+        }
+    }
+
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -863,6 +883,15 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         synchronized (this.lock)
         {
             return this.delegate.toSortedBag();
+        }
+    }
+
+    @Override
+    public ImmutableSortedBag<T> toImmutableSortedBag()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSortedBag();
         }
     }
 

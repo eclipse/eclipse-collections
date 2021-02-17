@@ -29,6 +29,7 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
+import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
@@ -62,6 +63,8 @@ import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.factory.SortedBags;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
@@ -76,6 +79,7 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 
@@ -1776,6 +1780,36 @@ public interface RichIterable<T>
     default ImmutableBag<T> toImmutableBag()
     {
         return Bags.immutable.withAll(this);
+    }
+
+    /**
+     * Converts the RichIterable to the default sorted ImmutableList implementation.
+     *
+     * @since 11.0
+     */
+    default ImmutableList<T> toImmutableSortedList()
+    {
+        return Lists.immutable.withAllSorted(this);
+    }
+
+    /**
+     * Converts the RichIterable to the default ImmutableSortedSet implementation.
+     *
+     * @since 11.0
+     */
+    default ImmutableSortedSet<T> toImmutableSortedSet()
+    {
+        return SortedSets.immutable.withAll(this);
+    }
+
+    /**
+     * Converts the RichIterable to the default ImmutableSortedBag implementation.
+     *
+     * @since 11.0
+     */
+    default ImmutableSortedBag<T> toImmutableSortedBag()
+    {
+        return SortedBags.immutable.withAll(this);
     }
 
     /**

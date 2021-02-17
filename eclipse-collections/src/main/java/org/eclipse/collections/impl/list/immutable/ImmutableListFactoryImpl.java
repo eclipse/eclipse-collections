@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,9 +10,11 @@
 
 package org.eclipse.collections.impl.list.immutable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.RandomAccess;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.factory.list.ImmutableListFactory;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -246,14 +248,30 @@ public class ImmutableListFactoryImpl implements ImmutableListFactory
         {
             return (ImmutableList<T>) items;
         }
-        if (items instanceof List && items instanceof RandomAccess)
-        {
-            return this.withList((List<T>) items);
-        }
         if (Iterate.isEmpty(items))
         {
             return this.empty();
         }
-        return new ImmutableArrayList<T>((T[]) Iterate.toArray(items));
+        if (items instanceof List && items instanceof RandomAccess)
+        {
+            return this.withList((List<T>) items);
+        }
+        return new ImmutableArrayList<>((T[]) Iterate.toArray(items));
+    }
+
+    @Override
+    public <T> ImmutableList<T> withAllSorted(RichIterable<T> items)
+    {
+        if (items.isEmpty())
+        {
+            return this.empty();
+        }
+        if (items.size() == 1)
+        {
+            return this.with(items.getOnly());
+        }
+        T[] array = (T[]) items.toArray();
+        Arrays.sort(array);
+        return new ImmutableArrayList<>(array);
     }
 }

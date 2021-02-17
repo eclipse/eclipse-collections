@@ -58,6 +58,7 @@ import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.bag.primitive.MutableLongBag;
 import org.eclipse.collections.api.bag.primitive.MutableShortBag;
 import org.eclipse.collections.api.bag.primitive.ShortBag;
+import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -71,6 +72,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
@@ -91,6 +93,7 @@ import org.eclipse.collections.api.set.primitive.MutableFloatSet;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
 import org.eclipse.collections.api.set.primitive.MutableLongSet;
 import org.eclipse.collections.api.set.primitive.MutableShortSet;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
@@ -124,6 +127,7 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ByteBags;
@@ -1473,7 +1477,7 @@ public abstract class AbstractRichIterableTestCase
     public void toList()
     {
         MutableList<Integer> list = this.newWith(1, 2, 3, 4).toList();
-        Verify.assertContainsAll(list, 1, 2, 3, 4);
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4), list);
     }
 
     @Test
@@ -1481,6 +1485,10 @@ public abstract class AbstractRichIterableTestCase
     {
         ImmutableList<Integer> list = this.newWith(1, 2, 3, 4).toImmutableList();
         Verify.assertContainsAll(list, 1, 2, 3, 4);
+        ImmutableList<Integer> singletonList = this.newWith(1).toImmutableList();
+        Assert.assertEquals(Lists.mutable.with(1), singletonList);
+        ImmutableList<Integer> emptyList = this.<Integer>newWith().toImmutableList();
+        Assert.assertEquals(Lists.immutable.empty(), emptyList);
     }
 
     @Test
@@ -1494,14 +1502,18 @@ public abstract class AbstractRichIterableTestCase
     public void toBag()
     {
         MutableBag<Integer> bag = this.newWith(1, 2, 3, 4).toBag();
-        Verify.assertContainsAll(bag, 1, 2, 3, 4);
+        Assert.assertEquals(Bags.immutable.with(1, 2, 3, 4), bag);
     }
 
     @Test
     public void toImmutableBag()
     {
         ImmutableBag<Integer> bag = this.newWith(1, 2, 3, 4).toImmutableBag();
-        Verify.assertContainsAll(bag, 1, 2, 3, 4);
+        Assert.assertEquals(Bags.mutable.with(1, 2, 3, 4), bag);
+        ImmutableBag<Integer> singletonBag = this.newWith(1).toImmutableBag();
+        Assert.assertEquals(Bags.mutable.with(1), singletonBag);
+        ImmutableBag<Integer> emptyBag = this.<Integer>newWith().toImmutableBag();
+        Assert.assertEquals(Bags.immutable.empty(), emptyBag);
     }
 
     @Test
@@ -1510,6 +1522,17 @@ public abstract class AbstractRichIterableTestCase
         RichIterable<Integer> integers = this.newWith(2, 1, 5, 3, 4);
         MutableList<Integer> list = integers.toSortedList();
         Verify.assertStartsWith(list, 1, 2, 3, 4, 5);
+    }
+
+    @Test
+    public void toImmutableSortedList_natural_ordering()
+    {
+        ImmutableList<Integer> list = this.newWith(4, 2, 1, 3).toImmutableSortedList();
+        Assert.assertEquals(Lists.mutable.with(1, 2, 3, 4), list);
+        ImmutableList<Integer> singletonList = this.newWith(1).toImmutableSortedList();
+        Assert.assertEquals(Lists.mutable.with(1), singletonList);
+        ImmutableList<Integer> emptyList = this.<Integer>newWith().toImmutableSortedList();
+        Assert.assertEquals(Lists.immutable.empty(), emptyList);
     }
 
     @Test
@@ -1532,6 +1555,17 @@ public abstract class AbstractRichIterableTestCase
         RichIterable<Integer> integers = this.newWith(2, 2, 5, 3, 4);
         MutableSortedBag<Integer> bag = integers.toSortedBag();
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(2, 2, 3, 4, 5), bag);
+    }
+
+    @Test
+    public void toImmutableSortedBag_natural_ordering()
+    {
+        ImmutableSortedBag<Integer> bag = this.newWith(4, 1, 2, 3).toImmutableSortedBag();
+        Assert.assertEquals(SortedBags.mutable.with(1, 2, 3, 4), bag);
+        ImmutableSortedBag<Integer> singletonBag = this.newWith(1).toImmutableSortedBag();
+        Assert.assertEquals(SortedBags.mutable.with(1), singletonBag);
+        ImmutableSortedBag<Integer> emptyBag = this.<Integer>newWith().toImmutableSortedBag();
+        Assert.assertEquals(SortedBags.immutable.empty(), emptyBag);
     }
 
     @Test
@@ -1573,6 +1607,17 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void toImmutableSortSet_natural_ordering()
+    {
+        ImmutableSortedSet<Integer> set = this.newWith(2, 1, 4, 3).toImmutableSortedSet();
+        Assert.assertEquals(SortedSets.mutable.with(1, 2, 3, 4), set);
+        ImmutableSortedSet<Integer> singletonSet = this.newWith(1).toImmutableSortedSet();
+        Assert.assertEquals(SortedSets.mutable.with(1), singletonSet);
+        ImmutableSortedSet<Integer> emptySet = this.<Integer>newWith().toImmutableSortedSet();
+        Assert.assertEquals(SortedSets.immutable.empty(), emptySet);
+    }
+
+    @Test
     public void toSortedSet_with_comparator()
     {
         RichIterable<Integer> integers = this.newWith(2, 4, 4, 2, 1, 4, 1, 3);
@@ -1599,14 +1644,18 @@ public abstract class AbstractRichIterableTestCase
     {
         RichIterable<Integer> integers = this.newWith(1, 2, 3, 4);
         MutableSet<Integer> set = integers.toSet();
-        Verify.assertContainsAll(set, 1, 2, 3, 4);
+        Assert.assertEquals(Sets.immutable.with(1, 2, 3, 4), set);
     }
 
     @Test
     public void toImmutableSet()
     {
         ImmutableSet<Integer> set = this.newWith(1, 2, 3, 4).toImmutableSet();
-        Verify.assertContainsAll(set, 1, 2, 3, 4);
+        Assert.assertEquals(Sets.mutable.with(1, 2, 3, 4), set);
+        ImmutableSet<Integer> singletonSet = this.newWith(1).toImmutableSet();
+        Assert.assertEquals(Sets.mutable.with(1), singletonSet);
+        ImmutableSet<Integer> emptySet = this.<Integer>newWith().toImmutableSet();
+        Assert.assertEquals(Sets.immutable.empty(), emptySet);
     }
 
     @Test

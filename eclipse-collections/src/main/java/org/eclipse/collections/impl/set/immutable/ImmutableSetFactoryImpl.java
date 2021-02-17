@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -137,7 +137,7 @@ public class ImmutableSetFactoryImpl implements ImmutableSetFactory
     {
         if (items == null || items.length == 0)
         {
-            return this.of();
+            return this.empty();
         }
 
         switch (items.length)
@@ -168,10 +168,9 @@ public class ImmutableSetFactoryImpl implements ImmutableSetFactory
         {
             return (ImmutableSet<T>) items;
         }
-
         if (Iterate.isEmpty(items))
         {
-            return this.with();
+            return this.empty();
         }
         return this.with((T[]) Iterate.toArray(items));
     }
