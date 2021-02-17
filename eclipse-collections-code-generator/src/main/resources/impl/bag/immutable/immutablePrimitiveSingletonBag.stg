@@ -39,7 +39,7 @@ import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
-import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.impl.iterator.Singleton<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
@@ -416,7 +416,7 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
     @Override
     public <name>Iterator <type>Iterator()
     {
-        return new Unmodifiable<name>Iterator(<name>HashBag.newBagWith(this.element1).<type>Iterator());
+        return new Singleton<name>Iterator(element1);
     }
 }
 

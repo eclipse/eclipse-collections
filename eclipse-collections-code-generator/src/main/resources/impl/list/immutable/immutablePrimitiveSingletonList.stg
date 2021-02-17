@@ -40,7 +40,7 @@ import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
-import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.impl.iterator.Singleton<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
@@ -103,7 +103,7 @@ final class Immutable<name>SingletonList implements Immutable<name>List, Seriali
     @Override
     public <name>Iterator <type>Iterator()
     {
-        return new Unmodifiable<name>Iterator(<name>ArrayList.newListWith(this.element1).<type>Iterator());
+        return new Singleton<name>Iterator(element1);
     }
 
     @Override

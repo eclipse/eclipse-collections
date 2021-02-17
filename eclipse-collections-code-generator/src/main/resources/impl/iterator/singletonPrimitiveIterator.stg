@@ -1,0 +1,52 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/iterator"
+
+fileName(primitive) ::= "Singleton<primitive.name>Iterator"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.iterator;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.iterator.<name>Iterator;
+
+/**
+ * This file was automatically generated from template file singletonPrimitiveIterator.stg.
+ */
+public final class Singleton<name>Iterator implements <name>Iterator
+{
+    private final <type> value;
+    private boolean next = true;
+
+    public Singleton<name>Iterator(<type> value)
+    {
+        this.value = value;
+    }
+
+    @Override
+    public boolean hasNext()
+    {
+        return this.next;
+    }
+
+    @Override
+    public <type> next()
+    {
+        if (this.next)
+        {
+            this.next = false;
+            return this.value;
+        }
+        throw new NoSuchElementException("i=" + this.next);
+    }
+}
+
+>>
