@@ -34,9 +34,11 @@ import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.IntList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
+import org.eclipse.collections.api.stack.primitive.MutableIntStack;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.IntStacks;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.primitive.AbstractIntIterable;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -510,5 +512,11 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
     public Spliterator.OfInt spliterator()
     {
         return this.codePoints.spliterator();
+    }
+
+    @Override
+    public MutableIntStack toStack()
+    {
+        return IntStacks.mutable.withAll(this);
     }
 }

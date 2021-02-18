@@ -543,6 +543,12 @@ public class Synchronized<name>Stack
             return this.stack.collectWithIndex(function, target);
         }
     }
+
+    @Override
+    public Mutable<name>Stack toStack()
+    {
+        return <name>Stacks.mutable.withAll(this);
+    }
 }
 
 >>

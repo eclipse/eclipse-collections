@@ -36,6 +36,7 @@ import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.stack.primitive.<name>Stack;
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Stacks;
@@ -415,6 +416,12 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Mutable<name>Stack toStack()
+    {
+        return <name>Stacks.mutable.withAll(this);
     }
 }
 

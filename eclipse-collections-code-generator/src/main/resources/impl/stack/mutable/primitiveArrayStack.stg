@@ -242,6 +242,12 @@ public class <name>ArrayStack extends Abstract<name>Stack
         }
         this.delegate = <name>ArrayList.newListWith(array);
     }
+
+    @Override
+    public Mutable<name>Stack toStack()
+    {
+        return <name>Stacks.mutable.withAll(this);
+    }
 }
 
 >>

@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.stack.primitive.<name>Stack;
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.block.procedure.checked.primitive.Checked<name>Procedure;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
@@ -178,6 +179,12 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
     private Object writeReplace()
     {
         return new Immutable<name>StackSerializationProxy(this);
+    }
+
+    @Override
+    public Mutable<name>Stack toStack()
+    {
+        return <name>Stacks.mutable.withAll(this);
     }
 
     private static class Immutable<name>StackSerializationProxy implements Externalizable
