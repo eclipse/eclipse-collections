@@ -9,6 +9,9 @@
   -->
 [![][maven img]][maven]
 [![][release img]][release]
+[![][javadoc api img]][javadoc api]
+[![][javadoc impl img]][javadoc impl]
+
 [![][license-epl img]][license-epl]
 [![][license-edl img]][license-edl]
 [![][snyk-badge img]][snyk-badge]
@@ -25,26 +28,26 @@
 #### [English](https://www.eclipse.org/collections/) | [中文](https://www.eclipse.org/collections/cn/index.html) | [Deutsch](https://www.eclipse.org/collections/de/index.html) | [Español](https://www.eclipse.org/collections/es/index.html) | [Ελληνικά](https://www.eclipse.org/collections/el/index.html) | [Français](https://www.eclipse.org/collections/fr/index.html) | [日本語](https://www.eclipse.org/collections/ja/index.html) | [Norsk (bokmål)](https://www.eclipse.org/collections/no-nb/index.html) | [Português-Brasil](https://www.eclipse.org/collections/pt-br/index.html) | [Русский](https://www.eclipse.org/collections/ru/index.html) | [हिंदी](https://www.eclipse.org/collections/hi/index.html)
 Eclipse Collections is a comprehensive collections library for Java. The library enables productivity and performance by delivering an expressive and efficient set of APIs and types. The iteration protocol was inspired by the Smalltalk collection framework, and the collections are compatible with the Java Collection Framework types.
 
-Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of the OpenJDK [Quality Outreach](https://wiki.openjdk.java.net/display/quality/Quality+Outreach) program, and it is validated for different versions of the OpenJDK.   
+Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of the OpenJDK [Quality Outreach](https://wiki.openjdk.java.net/display/quality/Quality+Outreach) program, and it is validated for different versions of the OpenJDK.
 
 ## Why Eclipse Collections?
 
 * Productivity
-    * [Rich][RichIterable], functional, and fluent APIs with great symmetry 
-    * [`List`][ListIterable], [`Set`][SetIterable], [`Bag`][Bag], [`Stack`][StackIterable], [`Map`][MapIterable], [`Multimap`][Multimap], [`BiMap`][BiMap], [`Interval`][Interval] Types 
+    * [Rich][RichIterable], functional, and fluent APIs with great symmetry
+    * [`List`][ListIterable], [`Set`][SetIterable], [`Bag`][Bag], [`Stack`][StackIterable], [`Map`][MapIterable], [`Multimap`][Multimap], [`BiMap`][BiMap], [`Interval`][Interval] Types
     * [Readable][RichIterable], [`Mutable`][MutableCollection], and [`Immutable`][ImmutableCollection] Types
     * Mutable and Immutable Collection [Factories][Factories]
     * [Adapters][Adapters] and [Utility][Utilities] classes for JCF Types
 * Performance
-    * Memory Efficient Containers 
+    * Memory Efficient Containers
     * Optimized Eager, [`Lazy`][LazyIterable] and [`Parallel`][ParallelIterable] APIs
-    * [Primitive][PrimitiveIterable] Collections for all primitive types 
+    * [Primitive][PrimitiveIterable] Collections for all primitive types
 
 ## Learn Eclipse Collections
 
 * [Some Quick Code Examples](./README_EXAMPLES.md)
 * [Eclipse Collections Katas](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
-    * Start Here - [Pet Kata](http://eclipse.github.io/eclipse-collections-kata/pet-kata/#/) 
+    * Start Here - [Pet Kata](http://eclipse.github.io/eclipse-collections-kata/pet-kata/#/)
     * Continue Here - [Company Kata](http://eclipse.github.io/eclipse-collections-kata/company-kata/#/)
 * [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md) and [Javadoc](https://www.eclipse.org/collections/javadoc/10.4.0/overview-summary.html)
 * [Serializing Eclipse Collections with Jackson](./docs/jackson.md)
@@ -132,6 +135,12 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 [release]:https://github.com/eclipse/eclipse-collections/releases
 [release img]:https://img.shields.io/github/release/eclipse/eclipse-collections.svg
 
+[javadoc api]:https://javadoc.io/doc/org.eclipse.collections/eclipse-collections-api
+[javadoc api img]:https://javadoc.io/badge2/org.eclipse.collections/eclipse-collections-api/javadoc_eclipse_collections_api.svg
+
+[javadoc impl]:https://javadoc.io/doc/org.eclipse.collections/eclipse-collections
+[javadoc impl img]:https://javadoc.io/badge2/org.eclipse.collections/eclipse-collections/javadoc_eclipse_collections.svg
+
 [license-epl]:LICENSE-EPL-1.0.txt
 [license-epl img]:https://img.shields.io/badge/License-EPL-blue.svg
 
@@ -160,7 +169,8 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 
 [Factories]: https://www.eclipse.org/collections/javadoc/10.4.0/org/eclipse/collections/impl/factory/package-summary.html
 [10-0-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.0.0
-[10-1-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.1.0 
+[10-1-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.1.0
 [10-2-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.2.0
 [10-3-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.3.0
 [10-4-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.4.0
+
