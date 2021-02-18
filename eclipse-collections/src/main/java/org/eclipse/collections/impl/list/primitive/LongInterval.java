@@ -41,8 +41,10 @@ import org.eclipse.collections.api.list.primitive.ImmutableLongList;
 import org.eclipse.collections.api.list.primitive.LongList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.set.primitive.MutableLongSet;
+import org.eclipse.collections.api.stack.primitive.MutableLongStack;
 import org.eclipse.collections.api.tuple.primitive.LongLongPair;
 import org.eclipse.collections.api.tuple.primitive.LongObjectPair;
+import org.eclipse.collections.impl.factory.primitive.LongStacks;
 import org.eclipse.collections.impl.lazy.primitive.CollectLongToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyLongIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseLongIterable;
@@ -975,6 +977,12 @@ public final class LongInterval
     public Spliterator.OfLong spliterator()
     {
         return new LongIntervalSpliterator(this.from, this.to, this.step);
+    }
+
+    @Override
+    public MutableLongStack toStack()
+    {
+        return LongStacks.mutable.withAll(this);
     }
 
     private class LongIntervalIterator implements LongIterator

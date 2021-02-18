@@ -37,8 +37,10 @@ import org.eclipse.collections.api.list.primitive.CharList;
 import org.eclipse.collections.api.list.primitive.ImmutableCharList;
 import org.eclipse.collections.api.list.primitive.MutableCharList;
 import org.eclipse.collections.api.set.primitive.MutableCharSet;
+import org.eclipse.collections.api.stack.primitive.MutableCharStack;
 import org.eclipse.collections.api.tuple.primitive.CharCharPair;
 import org.eclipse.collections.api.tuple.primitive.CharObjectPair;
+import org.eclipse.collections.impl.factory.primitive.CharStacks;
 import org.eclipse.collections.impl.lazy.primitive.ReverseCharIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.primitive.AbstractCharIterable;
@@ -603,6 +605,12 @@ public class CharAdapter
             target.add(PrimitiveTuples.pair(this.get(i), iterator.next()));
         }
         return target.toImmutable();
+    }
+
+    @Override
+    public MutableCharStack toStack()
+    {
+        return CharStacks.mutable.withAll(this);
     }
 
     private class InternalCharIterator implements CharIterator

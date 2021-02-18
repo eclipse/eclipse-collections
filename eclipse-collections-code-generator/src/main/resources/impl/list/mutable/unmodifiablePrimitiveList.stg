@@ -30,11 +30,13 @@ import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 <if(!primitive.booleanPrimitive)>import org.eclipse.collections.api.list.primitive.<name>List;<endif>
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 <if(primitive.specializedStream)>
 import java.util.Spliterator;<endif>
@@ -339,6 +341,12 @@ public class Unmodifiable<name>List
     public \<V, R extends Collection\<V\>> R collectWithIndex(<name>IntToObjectFunction\<? extends V> function, R target)
     {
         return this.getMutable<name>List().collectWithIndex(function, target);
+    }
+
+    @Override
+    public Mutable<name>Stack toStack()
+    {
+        return <name>Stacks.mutable.withAll(this);
     }
 <if(primitive.specializedStream)>
 

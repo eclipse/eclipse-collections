@@ -381,6 +381,12 @@ public class Unmodifiable<name>Stack
     {
         return this.stack.collectWithIndex(function, target);
     }
+
+    @Override
+    public Mutable<name>Stack toStack()
+    {
+        return this.stack.toStack();
+    }
 }
 
 >>
