@@ -37,10 +37,12 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchronized<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.SynchronizedMutableList;
@@ -487,6 +489,15 @@ public class Synchronized<name>List
         synchronized (this.getLock())
         {
             return this.getMutable<name>List().collectWithIndex(function, target);
+        }
+    }
+
+    @Override
+    public Mutable<name>Stack toStack()
+    {
+        synchronized (this.getLock())
+        {
+            return <name>Stacks.mutable.withAll(this);
         }
     }
 <if(primitive.specializedStream)>

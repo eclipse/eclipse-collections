@@ -28,6 +28,7 @@ import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.ordered.OrderedIterable;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 
 /**
  * This file was automatically generated from template file orderedPrimitiveIterable.stg.
@@ -116,6 +117,16 @@ public interface Ordered<name>Iterable extends <name>Iterable
     \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function);
 
     void forEachWithIndex(<name>IntProcedure procedure);
+
+    /**
+     * Converts the collection to a <name>Stack.
+     *
+     * @since 12.0.
+     */
+    default Mutable<name>Stack toStack()
+    {
+        throw new UnsupportedOperationException("Implement in concrete classes.");
+    }
 }
 
 >>

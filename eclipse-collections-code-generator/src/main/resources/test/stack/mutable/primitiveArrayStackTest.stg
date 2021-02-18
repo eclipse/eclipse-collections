@@ -118,6 +118,13 @@ public class <name>ArrayStackTest extends AbstractMutable<name>StackTestCase
     {
         Verify.assertClassNonInstantiable(<name>Stacks.class);
     }
+
+    @Test
+    public void toStack()
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(stack, this.classUnderTest().toStack());
+    }
 }
 
 >>
