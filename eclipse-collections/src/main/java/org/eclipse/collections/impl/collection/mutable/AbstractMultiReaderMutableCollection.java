@@ -32,6 +32,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
@@ -74,6 +75,7 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
@@ -342,6 +344,15 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public ImmutableSortedBag<T> toImmutableSortedBag()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().toImmutableSortedBag();
+        }
+    }
+
+    @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
@@ -370,6 +381,15 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public ImmutableList<T> toImmutableSortedList()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().toImmutableSortedList();
+        }
+    }
+
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
@@ -394,6 +414,15 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedSet();
+        }
+    }
+
+    @Override
+    public ImmutableSortedSet<T> toImmutableSortedSet()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().toImmutableSortedSet();
         }
     }
 

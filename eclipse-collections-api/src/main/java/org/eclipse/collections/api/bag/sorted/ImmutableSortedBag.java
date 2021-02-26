@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -236,4 +236,12 @@ public interface ImmutableSortedBag<T>
 
     @Override
     ImmutableSortedBag<T> drop(int count);
+
+    /**
+     * @since 11.0
+     */
+    default ImmutableSortedBag<T> toImmutableSortedBag()
+    {
+        return this;
+    }
 }
