@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Goldman Sachs and others.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1100,5 +1100,15 @@ public class SetsTest
         {
             Assert.fail("No access to the field 'table' in UnifiedSet");
         }
+    }
+
+    @Test
+    public void withAllEmptyImmutableSame()
+    {
+        ImmutableSet<Integer> empty = Sets.immutable.withAll(Collections.emptyList());
+        ImmutableSet<Integer> integers = Sets.immutable.<Integer>empty().newWithAll(Lists.immutable.empty());
+        ImmutableSet<Integer> empty2 = Sets.immutable.withAll(integers);
+        Assert.assertSame(Sets.immutable.empty(), empty);
+        Assert.assertSame(Sets.immutable.empty(), empty2);
     }
 }

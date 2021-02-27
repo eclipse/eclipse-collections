@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,7 +11,9 @@
 package org.eclipse.collections.impl.factory;
 
 import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.collections.api.factory.map.FixedSizeMapFactory;
 import org.eclipse.collections.api.factory.map.ImmutableMapFactory;
@@ -267,5 +269,16 @@ public class MapsTest
 
         Assert.assertEquals(UnifiedMap.newMapWith(Tuples.pair(1, 1)), factory.ofMapIterable(Maps.mutable.with(1, 1)));
         Verify.assertInstanceOf(UnifiedMap.class, factory.ofMapIterable(Maps.mutable.with(1, 1)));
+    }
+
+    @Test
+    public void withAllEmptyImmutableSame()
+    {
+        ImmutableMap<Integer, Integer> empty = Maps.immutable.withAll(Collections.emptyMap());
+        Map<Integer, Integer> integers =
+                Maps.immutable.<Integer, Integer>empty().newWithMap(Maps.mutable.empty()).castToMap();
+        ImmutableMap<Integer, Integer> empty2 = Maps.immutable.withAll(integers);
+        Assert.assertSame(Maps.immutable.empty(), empty);
+        Assert.assertSame(Maps.immutable.empty(), empty2);
     }
 }

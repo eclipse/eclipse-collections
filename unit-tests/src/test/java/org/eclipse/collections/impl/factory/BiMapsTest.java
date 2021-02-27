@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.factory;
 
+import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
@@ -68,6 +69,17 @@ public class BiMapsTest
         Verify.assertInstanceOf(MutableBiMap.class, factory.of(1, "2", 3, "4", 5, "6"));
         Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.of(1, "2", 3, "4", 5, "6", 7, "8"));
         Verify.assertInstanceOf(MutableBiMap.class, factory.of(1, "2", 3, "4", 5, "6", 7, "8"));
+    }
+
+    @Test
+    public void withAllEmptyImmutableSame()
+    {
+        ImmutableBiMap<Integer, Integer> empty = BiMaps.immutable.withAll(Collections.emptyMap());
+        Map<Integer, Integer> integers =
+                BiMaps.immutable.<Integer, Integer>empty().newWithMap(Maps.mutable.empty()).castToMap();
+        ImmutableBiMap<Integer, Integer> empty2 = BiMaps.immutable.withAll(integers);
+        Assert.assertSame(BiMaps.immutable.empty(), empty);
+        Assert.assertSame(BiMaps.immutable.empty(), empty2);
     }
 
     @Test

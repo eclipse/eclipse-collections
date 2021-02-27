@@ -164,13 +164,13 @@ public class ImmutableSetFactoryImpl implements ImmutableSetFactory
     @Override
     public <T> ImmutableSet<T> withAll(Iterable<? extends T> items)
     {
-        if (items instanceof ImmutableSet<?>)
-        {
-            return (ImmutableSet<T>) items;
-        }
         if (Iterate.isEmpty(items))
         {
             return this.empty();
+        }
+        if (items instanceof ImmutableSet<?>)
+        {
+            return (ImmutableSet<T>) items;
         }
         return this.with((T[]) Iterate.toArray(items));
     }
