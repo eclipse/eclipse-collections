@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Goldman Sachs and others.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.factory;
 
+import java.util.Collections;
 import java.util.stream.Stream;
 
 import org.eclipse.collections.api.bag.Bag;
@@ -194,5 +195,15 @@ public class BagsTest
     public void classIsNonInstantiable()
     {
         Verify.assertClassNonInstantiable(Bags.class);
+    }
+
+    @Test
+    public void withAllEmptyImmutableSame()
+    {
+        ImmutableBag<Integer> empty = Bags.immutable.withAll(Collections.emptyList());
+        ImmutableBag<Integer> integers = Bags.immutable.<Integer>empty().newWithAll(Lists.immutable.empty());
+        ImmutableBag<Integer> empty2 = Bags.immutable.withAll(integers);
+        Assert.assertSame(Bags.immutable.empty(), empty);
+        Assert.assertSame(Bags.immutable.empty(), empty2);
     }
 }

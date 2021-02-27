@@ -244,13 +244,13 @@ public class ImmutableListFactoryImpl implements ImmutableListFactory
     @Override
     public <T> ImmutableList<T> withAll(Iterable<? extends T> items)
     {
-        if (items instanceof ImmutableList<?>)
-        {
-            return (ImmutableList<T>) items;
-        }
         if (Iterate.isEmpty(items))
         {
             return this.empty();
+        }
+        if (items instanceof ImmutableList<?>)
+        {
+            return (ImmutableList<T>) items;
         }
         if (items instanceof List && items instanceof RandomAccess)
         {

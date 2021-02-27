@@ -82,13 +82,13 @@ public class ImmutableBagFactoryImpl implements ImmutableBagFactory
     @Override
     public <T> ImmutableBag<T> withAll(Iterable<? extends T> items)
     {
-        if (items instanceof ImmutableBag<?>)
-        {
-            return (ImmutableBag<T>) items;
-        }
         if (Iterate.isEmpty(items))
         {
             return this.empty();
+        }
+        if (items instanceof ImmutableBag<?>)
+        {
+            return (ImmutableBag<T>) items;
         }
         if (items instanceof Bag<?>)
         {
