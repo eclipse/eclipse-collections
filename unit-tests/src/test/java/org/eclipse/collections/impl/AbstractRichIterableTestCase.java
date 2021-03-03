@@ -1543,6 +1543,14 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertEquals(Lists.mutable.with(4, 3, 2, 1), list);
     }
 
+    @Test
+    public void toImmutableSortedList_with_comparator()
+    {
+        RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
+        ImmutableList<Integer> list = integers.toImmutableSortedList(Collections.reverseOrder());
+        Assert.assertEquals(Lists.mutable.with(4, 3, 2, 1), list);
+    }
+
     @Test(expected = NullPointerException.class)
     public void toSortedList_with_null()
     {
@@ -1576,6 +1584,14 @@ public abstract class AbstractRichIterableTestCase
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 4, 3, 2, 2), bag);
     }
 
+    @Test
+    public void toImmutableSortedBag_with_comparator()
+    {
+        RichIterable<Integer> integers = this.newWith(2, 4, 2, 3);
+        ImmutableSortedBag<Integer> bag = integers.toImmutableSortedBag(Collections.reverseOrder());
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 4, 3, 2, 2), bag);
+    }
+
     @Test(expected = NullPointerException.class)
     public void toSortedBag_with_null()
     {
@@ -1591,10 +1607,26 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void toImmutableSortedBagBy()
+    {
+        RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
+        ImmutableSortedBag<Integer> bag = integers.toImmutableSortedBagBy(String::valueOf);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(1, 2, 3, 4), bag);
+    }
+
+    @Test
     public void toSortedListBy()
     {
         RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
         MutableList<Integer> list = integers.toSortedListBy(String::valueOf);
+        Assert.assertEquals(Lists.mutable.with(1, 2, 3, 4), list);
+    }
+
+    @Test
+    public void toImmutableSortedListBy()
+    {
+        RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
+        ImmutableList<Integer> list = integers.toImmutableSortedListBy(String::valueOf);
         Assert.assertEquals(Lists.mutable.with(1, 2, 3, 4), list);
     }
 
@@ -1626,11 +1658,27 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void toImmutableSortedSet_with_comparator()
+    {
+        RichIterable<Integer> integers = this.newWith(2, 4, 4, 2, 1, 4, 1, 3);
+        ImmutableSortedSet<Integer> set = integers.toImmutableSortedSet(Collections.reverseOrder());
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 1, 2, 3, 4), set.castToSortedSet());
+    }
+
+    @Test
     public void toSortedSetBy()
     {
         RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
         MutableSortedSet<Integer> set = integers.toSortedSetBy(String::valueOf);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3, 4), set);
+    }
+
+    @Test
+    public void toImmutableSortedSetBy()
+    {
+        RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
+        ImmutableSortedSet<Integer> set = integers.toImmutableSortedSetBy(String::valueOf);
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3, 4), set.castToSortedSet());
     }
 
     @Test(expected = NullPointerException.class)

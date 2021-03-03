@@ -137,6 +137,11 @@ final class ImmutableTreeSet<T>
         return new ImmutableTreeSet<>((T[]) Iterate.toArray(iterable), null, false);
     }
 
+    public static <T> ImmutableSortedSet<T> newSetFromIterable(Comparator<? super T> comparator, Iterable<? extends T> iterable)
+    {
+        return new ImmutableTreeSet<>((T[]) Iterate.toArray(iterable), comparator, false);
+    }
+
     @Override
     public int size()
     {

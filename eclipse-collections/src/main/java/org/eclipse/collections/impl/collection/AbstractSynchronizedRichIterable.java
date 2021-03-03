@@ -797,11 +797,29 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public ImmutableList<T> toImmutableSortedList(Comparator<? super T> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSortedList(comparator);
+        }
+    }
+
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
         {
-            return this.delegate.toSortedList(Comparators.byFunction(function));
+            return this.delegate.toSortedListBy(function);
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> ImmutableList<T> toImmutableSortedListBy(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSortedListBy(function);
         }
     }
 
@@ -851,11 +869,29 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public ImmutableSortedSet<T> toImmutableSortedSet(Comparator<? super T> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSortedSet(comparator);
+        }
+    }
+
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
         {
             return this.delegate.toSortedSetBy(function);
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> ImmutableSortedSet<T> toImmutableSortedSetBy(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSortedSetBy(function);
         }
     }
 
@@ -905,11 +941,29 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public ImmutableSortedBag<T> toImmutableSortedBag(Comparator<? super T> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSortedBag(comparator);
+        }
+    }
+
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
         {
             return this.delegate.toSortedBag(Comparators.byFunction(function));
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> ImmutableSortedBag<T> toImmutableSortedBagBy(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toImmutableSortedBagBy(function);
         }
     }
 

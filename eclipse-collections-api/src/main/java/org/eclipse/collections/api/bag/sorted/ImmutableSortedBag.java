@@ -240,6 +240,7 @@ public interface ImmutableSortedBag<T>
     /**
      * @since 11.0
      */
+    @Override
     default ImmutableSortedBag<T> toImmutableSortedBag()
     {
         return this;

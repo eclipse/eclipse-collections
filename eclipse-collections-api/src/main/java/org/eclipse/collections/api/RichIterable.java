@@ -1793,6 +1793,27 @@ public interface RichIterable<T>
     }
 
     /**
+     * Converts the collection to an ImmutableList implementation and sorts it using the specified comparator.
+     *
+     * @since 11.0
+     */
+    default ImmutableList<T> toImmutableSortedList(Comparator<? super T> comparator)
+    {
+        return Lists.immutable.withAllSorted(comparator, this);
+    }
+
+    /**
+     * Converts the collection to an ImmutableList implementation and sorts it based on the natural order of the
+     * attribute returned by {@code function}.
+     *
+     * @since 11.0
+     */
+    default <V extends Comparable<? super V>> ImmutableList<T> toImmutableSortedListBy(Function<? super T, ? extends V> function)
+    {
+        return this.toImmutableSortedList(Comparator.comparing(function));
+    }
+
+    /**
      * Converts the RichIterable to the default ImmutableSortedSet implementation.
      *
      * @since 11.0
@@ -1803,6 +1824,27 @@ public interface RichIterable<T>
     }
 
     /**
+     * Converts the collection to an ImmutableSortedSet implementation and sorts it using the specified comparator.
+     *
+     * @since 11.0
+     */
+    default ImmutableSortedSet<T> toImmutableSortedSet(Comparator<? super T> comparator)
+    {
+        return SortedSets.immutable.withAll(comparator, this);
+    }
+
+    /**
+     * Converts the collection to an ImmutableSortedSet implementation and sorts it based on the natural order of the
+     * attribute returned by {@code function}.
+     *
+     * @since 11.0
+     */
+    default <V extends Comparable<? super V>> ImmutableSortedSet<T> toImmutableSortedSetBy(Function<? super T, ? extends V> function)
+    {
+        return this.toImmutableSortedSet(Comparator.comparing(function));
+    }
+
+    /**
      * Converts the RichIterable to the default ImmutableSortedBag implementation.
      *
      * @since 11.0
@@ -1810,6 +1852,27 @@ public interface RichIterable<T>
     default ImmutableSortedBag<T> toImmutableSortedBag()
     {
         return SortedBags.immutable.withAll(this);
+    }
+
+    /**
+     * Converts the collection to an ImmutableSortedBag implementation and sorts it using the specified comparator.
+     *
+     * @since 11.0
+     */
+    default ImmutableSortedBag<T> toImmutableSortedBag(Comparator<? super T> comparator)
+    {
+        return SortedBags.immutable.withAll(comparator, this);
+    }
+
+    /**
+     * Converts the collection to an ImmutableSortedBag implementation and sorts it based on the natural order of the
+     * attribute returned by {@code function}.
+     *
+     * @since 11.0
+     */
+    default <V extends Comparable<? super V>> ImmutableSortedBag<T> toImmutableSortedBagBy(Function<? super T, ? extends V> function)
+    {
+        return this.toImmutableSortedBag(Comparator.comparing(function));
     }
 
     /**
