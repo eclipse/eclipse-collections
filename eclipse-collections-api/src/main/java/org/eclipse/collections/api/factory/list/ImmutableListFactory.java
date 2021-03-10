@@ -10,11 +10,13 @@
 
 package org.eclipse.collections.api.factory.list;
 
+import java.util.Comparator;
 import java.util.stream.Stream;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 
 public interface ImmutableListFactory
 {
@@ -128,8 +130,18 @@ public interface ImmutableListFactory
     /**
      * @since 11.0.
      */
-    default <T> ImmutableList<T> withAllSorted(RichIterable<T> items)
+    default <T> ImmutableList<T> withAllSorted(RichIterable<? extends T> items)
     {
-        return items.toSortedList().toImmutable();
+        MutableList<T> list = (MutableList<T>) items.toSortedList();
+        return list.toImmutable();
+    }
+
+    /**
+     * @since 11.0.
+     */
+    default <T> ImmutableList<T> withAllSorted(Comparator<? super T> comparator, RichIterable<? extends T> items)
+    {
+        MutableList<T> list = (MutableList<T>) items.toSortedList(comparator);
+        return list.toImmutable();
     }
 }

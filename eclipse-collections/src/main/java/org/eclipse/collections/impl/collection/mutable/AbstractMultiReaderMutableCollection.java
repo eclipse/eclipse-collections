@@ -362,12 +362,30 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public ImmutableSortedBag<T> toImmutableSortedBag(Comparator<? super T> comparator)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().toImmutableSortedBag(comparator);
+        }
+    }
+
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(
             Function<? super T, ? extends V> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedBagBy(function);
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> ImmutableSortedBag<T> toImmutableSortedBagBy(Function<? super T, ? extends V> function)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().toImmutableSortedBagBy(function);
         }
     }
 
@@ -399,12 +417,30 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public ImmutableList<T> toImmutableSortedList(Comparator<? super T> comparator)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().toImmutableSortedList(comparator);
+        }
+    }
+
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(
             Function<? super T, ? extends V> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedListBy(function);
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> ImmutableList<T> toImmutableSortedListBy(Function<? super T, ? extends V> function)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().toImmutableSortedListBy(function);
         }
     }
 
@@ -436,12 +472,30 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public ImmutableSortedSet<T> toImmutableSortedSet(Comparator<? super T> comparator)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().toImmutableSortedSet(comparator);
+        }
+    }
+
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(
             Function<? super T, ? extends V> function)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedSetBy(function);
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> ImmutableSortedSet<T> toImmutableSortedSetBy(Function<? super T, ? extends V> function)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().toImmutableSortedSetBy(function);
         }
     }
 

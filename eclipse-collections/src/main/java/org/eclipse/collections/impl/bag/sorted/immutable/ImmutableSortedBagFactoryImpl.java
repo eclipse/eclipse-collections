@@ -123,7 +123,11 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
     @Override
     public <T> ImmutableSortedBag<T> withAll(Comparator<? super T> comparator, Iterable<? extends T> items)
     {
-        return this.of(comparator, (T[]) Iterate.toArray(items));
+        if (Iterate.isEmpty(items))
+        {
+            return this.of(comparator);
+        }
+        return new ImmutableSortedBagImpl<>(TreeBag.newBag(comparator, items));
     }
 
     @Override

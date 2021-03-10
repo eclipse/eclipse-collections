@@ -111,7 +111,6 @@ public class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFactory
         {
             return this.of(comparator);
         }
-
         return ImmutableTreeSet.newSetWith(comparator, items);
     }
 
@@ -122,9 +121,13 @@ public class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFactory
     }
 
     @Override
-    public <T> ImmutableSortedSet<T> withAll(Comparator<? super T> comparator, Iterable<? extends T> items)
+    public <T> ImmutableSortedSet<T> withAll(Comparator<? super T> comparator, Iterable<? extends T> iterable)
     {
-        return this.of(comparator, (T[]) Iterate.toArray(items));
+        if (Iterate.isEmpty(iterable))
+        {
+            return this.of(comparator);
+        }
+        return ImmutableTreeSet.newSetFromIterable(comparator, iterable);
     }
 
     @Override

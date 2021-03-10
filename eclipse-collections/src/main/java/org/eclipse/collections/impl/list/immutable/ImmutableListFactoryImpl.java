@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.list.immutable;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.RandomAccess;
 
@@ -260,7 +261,7 @@ public class ImmutableListFactoryImpl implements ImmutableListFactory
     }
 
     @Override
-    public <T> ImmutableList<T> withAllSorted(RichIterable<T> items)
+    public <T> ImmutableList<T> withAllSorted(RichIterable<? extends T> items)
     {
         if (items.isEmpty())
         {
@@ -272,6 +273,22 @@ public class ImmutableListFactoryImpl implements ImmutableListFactory
         }
         T[] array = (T[]) items.toArray();
         Arrays.sort(array);
+        return new ImmutableArrayList<>(array);
+    }
+
+    @Override
+    public <T> ImmutableList<T> withAllSorted(Comparator<? super T> comparator, RichIterable<? extends T> items)
+    {
+        if (items.isEmpty())
+        {
+            return this.empty();
+        }
+        if (items.size() == 1)
+        {
+            return this.with(items.getOnly());
+        }
+        T[] array = (T[]) items.toArray();
+        Arrays.sort(array, comparator);
         return new ImmutableArrayList<>(array);
     }
 }
