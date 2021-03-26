@@ -26,6 +26,7 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
+import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Multimaps;
@@ -570,6 +571,81 @@ public final class Collectors2Test
         Assert.assertEquals(
                 LARGE_INTERVAL.reduceInPlace(Collectors2.toMap(Object::toString, i -> i)),
                 this.bigData.parallelStream().collect(Collectors2.toImmutableMap(Object::toString, i -> i)));
+    }
+
+    @Test
+    public void toSortedMap()
+    {
+    Assert.assertEquals(
+            SMALL_INTERVAL.toSortedMap(Object::toString, i -> i),
+            this.smallData.stream().collect(Collectors2.toSortedMap(Object::toString, i -> i)));
+    Assert.assertEquals(
+            SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Object::toString, i -> i)),
+            this.smallData.stream().collect(Collectors2.toSortedMap(Object::toString, i -> i)));
+    Assert.assertEquals(
+            SMALL_INTERVAL.stream().collect(Collectors2.toSortedMap(Object::toString, i -> i)),
+            SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Object::toString, i -> i)));
+    }
+
+    @Test
+    public void toSortedMapParallel()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSortedMap(Object::toString, i -> i),
+                this.bigData.parallelStream().collect(Collectors2.toSortedMap(Object::toString, i -> i)));
+        Assert.assertEquals(
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Object::toString, i -> i)),
+                this.bigData.parallelStream().collect(Collectors2.toSortedMap(Object::toString, i -> i)));
+    }
+
+    @Test
+    public void toSortedMapWithComparator()
+    {
+        Assert.assertEquals(
+                SMALL_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i),
+                this.smallData.stream().collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
+        Assert.assertEquals(
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)),
+                this.smallData.stream().collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
+        Assert.assertEquals(
+                SMALL_INTERVAL.stream().collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)),
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
+    }
+
+    @Test
+    public void toSortedMapParallelWithComparator()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i),
+                this.bigData.parallelStream().collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
+        Assert.assertEquals(
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)),
+                this.bigData.parallelStream().collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
+    }
+
+    @Test
+    public void toSortedMapBy()
+    {
+        Assert.assertEquals(
+                SMALL_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i),
+                this.smallData.stream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)));
+        Assert.assertEquals(
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)),
+                this.smallData.stream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)));
+        Assert.assertEquals(
+                SMALL_INTERVAL.stream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)),
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)));
+    }
+
+    @Test
+    public void toSortedMapByParallel()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i),
+                this.bigData.parallelStream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)));
+        Assert.assertEquals(
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)),
+                this.bigData.parallelStream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)));
     }
 
     @Test
