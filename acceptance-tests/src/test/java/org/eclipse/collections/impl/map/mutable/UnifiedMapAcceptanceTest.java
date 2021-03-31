@@ -701,9 +701,9 @@ public class UnifiedMapAcceptanceTest
 
         CollidingInt[] keys = new CollidingInt[size];
         int count = 0;
-        for (Iterator<CollidingInt> it = keySet.iterator(); it.hasNext(); )
+        for (CollidingInt collidingInt : keySet)
         {
-            keys[count++] = it.next();
+            keys[count++] = collidingInt;
         }
         Arrays.sort(keys);
 
@@ -1003,9 +1003,9 @@ public class UnifiedMapAcceptanceTest
 
         Map.Entry<CollidingInt, String>[] entries = new Map.Entry[size];
         int count = 0;
-        for (Iterator<Map.Entry<CollidingInt, String>> it = entrySet.iterator(); it.hasNext(); )
+        for (Map.Entry<CollidingInt, String> collidingIntStringEntry : entrySet)
         {
-            entries[count++] = it.next();
+            entries[count++] = collidingIntStringEntry;
         }
         Arrays.sort(entries, UnifiedMapAcceptanceTest.ENTRY_COMPARATOR);
 
@@ -1043,9 +1043,9 @@ public class UnifiedMapAcceptanceTest
 
         Map.Entry<CollidingInt, String>[] entries = new Map.Entry[size];
         int count = 0;
-        for (Iterator<Map.Entry<CollidingInt, String>> it = entrySet.iterator(); it.hasNext(); )
+        for (Map.Entry<CollidingInt, String> collidingIntStringEntry : entrySet)
         {
-            entries[count++] = it.next();
+            entries[count++] = collidingIntStringEntry;
         }
         Arrays.sort(entries, UnifiedMapAcceptanceTest.ENTRY_COMPARATOR);
 
@@ -1345,9 +1345,9 @@ public class UnifiedMapAcceptanceTest
 
         String[] valuesArray = new String[size];
         int count = 0;
-        for (Iterator<String> it = values.iterator(); it.hasNext(); )
+        for (String value : values)
         {
-            valuesArray[count++] = it.next();
+            valuesArray[count++] = value;
         }
         Arrays.sort(valuesArray, UnifiedMapAcceptanceTest.VALUE_COMPARATOR);
 

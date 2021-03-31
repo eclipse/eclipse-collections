@@ -88,9 +88,8 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     protected <T> MutableSortedBag<T> newWithOccurrences(ObjectIntPair<T>... elementsWithOccurrences)
     {
         MutableSortedBag<T> bag = this.newWith();
-        for (int i = 0; i < elementsWithOccurrences.length; i++)
+        for (ObjectIntPair<T> itemToAdd : elementsWithOccurrences)
         {
-            ObjectIntPair<T> itemToAdd = elementsWithOccurrences[i];
             bag.addOccurrences(itemToAdd.getOne(), itemToAdd.getTwo());
         }
         return bag;

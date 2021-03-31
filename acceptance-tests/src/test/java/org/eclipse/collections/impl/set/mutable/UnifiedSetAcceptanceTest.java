@@ -520,9 +520,9 @@ public class UnifiedSetAcceptanceTest
 
         CollidingInt[] keys = new CollidingInt[size];
         int count = 0;
-        for (Iterator<CollidingInt> it = set.iterator(); it.hasNext(); )
+        for (CollidingInt collidingInt : set)
         {
-            keys[count++] = it.next();
+            keys[count++] = collidingInt;
         }
         Arrays.sort(keys);
 

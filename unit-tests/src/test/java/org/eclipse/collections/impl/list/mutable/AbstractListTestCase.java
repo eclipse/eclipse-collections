@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -952,9 +951,8 @@ public abstract class AbstractListTestCase
     {
         int sum = 0;
         MutableList<Integer> integers = this.newWith(1, 2, 3, 4);
-        for (Iterator<Integer> iterator = integers.listIterator(); iterator.hasNext(); )
+        for (Integer each : integers)
         {
-            Integer each = iterator.next();
             sum += each.intValue();
         }
         for (ListIterator<Integer> iterator = integers.listIterator(4); iterator.hasPrevious(); )
