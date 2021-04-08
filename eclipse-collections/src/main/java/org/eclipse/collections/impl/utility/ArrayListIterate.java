@@ -108,7 +108,7 @@ public final class ArrayListIterate
             data.setAccessible(true);
             size.setAccessible(true);
         }
-        catch (Exception ignored)
+        catch (Throwable ignored)
         {
             data = null;
             size = null;
