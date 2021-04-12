@@ -30,7 +30,7 @@ jobs:
       - name: Generate Coverage Report
         run: mvn clean verify
       - name: Archive Jacoco reports
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2.2.3
         with:
           name: jacoco-reports
           path: test-coverage/target/site/jacoco-aggregate
