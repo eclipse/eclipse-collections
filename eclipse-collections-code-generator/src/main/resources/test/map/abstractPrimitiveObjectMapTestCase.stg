@@ -766,6 +766,118 @@ public abstract class Abstract<name>ObjectMapTestCase
     }
 
     @Test
+    public void toImmutableList()
+    {
+        <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
+
+        Assert.assertTrue(map1.toList().toString(), FastList.newListWith("zero", "nine").equals(map1.toImmutableList())
+                || FastList.newListWith("nine", "zero").equals(map1.toList()));
+        Assert.assertTrue(map2.toList().toString(), FastList.newListWith("one", "nine").equals(map2.toImmutableList())
+                || FastList.newListWith("nine", "one").equals(map2.toList()));
+        Assert.assertTrue(map3.toList().toString(), FastList.newListWith("five", "nine").equals(map3.toImmutableList())
+                || FastList.newListWith("nine", "five").equals(map3.toList()));
+    }
+
+    @Test
+    public void toImmutableSortedList()
+    {
+        <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
+
+        Assert.assertEquals(map1.toSortedList().toString(),
+                FastList.newListWith("nine", "zero"), map1.toImmutableSortedList());
+        Assert.assertEquals(map2.toSortedList().toString(),
+                FastList.newListWith("nine", "one"), map2.toImmutableSortedList());
+        Assert.assertEquals(map3.toSortedList().toString(),
+                FastList.newListWith("five", "nine"), map3.toImmutableSortedList());
+
+        Comparator\<String> comparator = (String o1, String o2) -> o1.substring(1).compareTo(o2.substring(1));
+        Assert.assertEquals(map1.toSortedList(comparator).toString(),
+                FastList.newListWith("zero", "nine"), map1.toImmutableSortedList(comparator));
+        Assert.assertEquals(map2.toSortedList(comparator).toString(),
+                FastList.newListWith("nine", "one"), map2.toImmutableSortedList(comparator));
+        Assert.assertEquals(map3.toSortedList(comparator).toString(),
+                FastList.newListWith("nine", "five"), map3.toImmutableSortedList(comparator));
+
+        Function\<String, String> substring = (String object) -> object.substring(1);
+        Assert.assertEquals(map1.toSortedListBy(substring).toString(),
+                FastList.newListWith("zero", "nine"), map1.toImmutableSortedListBy(substring));
+        Assert.assertEquals(map2.toSortedListBy(substring).toString(),
+                FastList.newListWith("nine", "one"), map2.toImmutableSortedListBy(substring));
+        Assert.assertEquals(map3.toSortedListBy(substring).toString(),
+                FastList.newListWith("nine", "five"), map3.toImmutableSortedListBy(substring));
+    }
+
+    @Test
+    public void toImmutableSet()
+    {
+        <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "zero", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("6")>, "five", <(literal.(type))("9")>, "nine");
+
+        Assert.assertEquals(map1.toSet().toString(), UnifiedSet.newSetWith("zero", "nine"), map1.toImmutableSet());
+        Assert.assertEquals(map2.toSet().toString(), UnifiedSet.newSetWith("one", "nine"), map2.toImmutableSet());
+        Assert.assertEquals(map3.toSet().toString(), UnifiedSet.newSetWith("five", "nine"), map3.toImmutableSet());
+    }
+
+    @Test
+    public void toImmutableSortedSet()
+    {
+        <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "zero", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("6")>, "five", <(literal.(type))("9")>, "nine");
+
+        Assert.assertEquals(TreeSortedSet.newSetWith("nine", "zero"), map1.toImmutableSortedSet());
+        Assert.assertEquals(map2.toImmutableSortedSet().toString(),
+                TreeSortedSet.newSetWith("nine", "one"), map2.toImmutableSortedSet());
+        Assert.assertEquals(TreeSortedSet.newSetWith("five", "nine"), map3.toImmutableSortedSet());
+
+        Comparator\<String> comparator = (String o1, String o2) -> o1.substring(1).compareTo(o2.substring(1));
+        Assert.assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toImmutableSortedSet(comparator));
+        Assert.assertEquals(map2.toImmutableSortedSet(comparator).toString(),
+                TreeSortedSet.newSetWith("nine", "one"), map2.toImmutableSortedSet(comparator));
+        Assert.assertEquals(TreeSortedSet.newSetWith("nine", "five"), map3.toImmutableSortedSet(comparator));
+
+        Function\<String, String> substring = (String object) -> object.substring(1);
+        Assert.assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toImmutableSortedSetBy(substring));
+        Assert.assertEquals(TreeSortedSet.newSetWith("nine", "one"), map2.toImmutableSortedSetBy(substring));
+        Assert.assertEquals(map3.toImmutableSortedSetBy(substring).toString(), TreeSortedSet.newSetWith("nine", "five"), map3.toImmutableSortedSetBy(substring));
+    }
+
+    @Test
+    public void toImmutableBag()
+    {
+        <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "zero", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("6")>, "five", <(literal.(type))("9")>, "nine");
+
+        Assert.assertEquals(HashBag.newBagWith("zero", "zero", "nine"), map1.toImmutableBag());
+        Assert.assertEquals(HashBag.newBagWith("one", "one", "nine"), map2.toImmutableBag());
+        Assert.assertEquals(HashBag.newBagWith("five", "five", "nine"), map3.toImmutableBag());
+    }
+
+    @Test
+    public void toImmutableSortedBag()
+    {
+        <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "zero", <(literal.(type))("9")>, "nine");
+        <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
+
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith("zero", "zero", "nine"), map1.toImmutableSortedBag());
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparator.reverseOrder(), "one", "one", "nine"), map2.toImmutableSortedBag(Comparator.\<String>reverseOrder()));
+    }
+
+    @Test
+    public void toImmutableSortedBagBy()
+    {
+        <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "zero", <(literal.(type))("9")>, "nine");
+
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.byFunction(String::valueOf), "zero", "zero", "nine"), map1.toImmutableSortedBagBy(String::valueOf));
+    }
+
+    @Test
     public void toArray()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "z", <(literal.(type))("9")>, "abcd");

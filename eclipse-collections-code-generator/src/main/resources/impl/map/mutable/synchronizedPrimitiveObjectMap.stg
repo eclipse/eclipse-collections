@@ -57,6 +57,7 @@ import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
@@ -66,6 +67,7 @@ import org.eclipse.collections.api.bag.primitive.MutableFloatBag;
 import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.bag.primitive.MutableLongBag;
 import org.eclipse.collections.api.bag.primitive.MutableShortBag;
+import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
@@ -100,6 +102,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
@@ -114,8 +117,10 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
@@ -1103,6 +1108,114 @@ public class Synchronized<name>ObjectMap\<V>
         synchronized (this.lock)
         {
             return this.map.toBiMap(keyFunction, valueFunction);
+        }
+    }
+
+    @Override
+    public ImmutableList\<V> toImmutableList()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableList();
+        }
+    }
+
+    @Override
+    public ImmutableSet\<V> toImmutableSet()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSet();
+        }
+    }
+
+    @Override
+    public ImmutableBag\<V> toImmutableBag()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableBag();
+        }
+    }
+
+    @Override
+    public ImmutableList\<V> toImmutableSortedList()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSortedList();
+        }
+    }
+
+    @Override
+    public ImmutableList\<V> toImmutableSortedList(Comparator\<? super V> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSortedList(comparator);
+        }
+    }
+
+    @Override
+    public \<VV extends Comparable\<? super VV>\> ImmutableList\<V> toImmutableSortedListBy(Function\<? super V, ? extends VV> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSortedListBy(function);
+        }
+    }
+
+    @Override
+    public ImmutableSortedSet\<V> toImmutableSortedSet()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSortedSet();
+        }
+    }
+
+    @Override
+    public ImmutableSortedSet\<V> toImmutableSortedSet(Comparator\<? super V> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSortedSet(comparator);
+        }
+    }
+
+    @Override
+    public \<VV extends Comparable\<? super VV>\> ImmutableSortedSet\<V> toImmutableSortedSetBy(Function\<? super V, ? extends VV> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSortedSetBy(function);
+        }
+    }
+
+    @Override
+    public ImmutableSortedBag\<V> toImmutableSortedBag()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSortedBag();
+        }
+    }
+
+    @Override
+    public ImmutableSortedBag\<V> toImmutableSortedBag(Comparator\<? super V> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSortedBag(comparator);
+        }
+    }
+
+    @Override
+    public \<VV extends Comparable\<? super VV>\> ImmutableSortedBag\<V> toImmutableSortedBagBy(Function\<? super V, ? extends VV> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toImmutableSortedBagBy(function);
         }
     }
 
