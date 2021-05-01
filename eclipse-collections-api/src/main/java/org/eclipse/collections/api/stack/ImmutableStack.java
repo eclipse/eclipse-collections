@@ -28,6 +28,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
@@ -48,9 +49,9 @@ public interface ImmutableStack<T> extends StackIterable<T>
 {
     ImmutableStack<T> push(T item);
 
-    ImmutableStack<T> pop();
+    Pair<T, ImmutableStack<T>> pop();
 
-    ImmutableStack<T> pop(int count);
+    Pair<ListIterable<T>, ImmutableStack<T>> pop(int count);
 
     @Override
     ImmutableStack<T> takeWhile(Predicate<? super T> predicate);

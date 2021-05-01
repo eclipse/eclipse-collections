@@ -93,6 +93,7 @@ import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.factory.primitive.ShortStacks;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
+import org.eclipse.collections.impl.tuple.Tuples;
 
 final class ImmutableEmptyStack<T>
         extends AbstractRichIterable<T>
@@ -115,18 +116,18 @@ final class ImmutableEmptyStack<T>
     }
 
     @Override
-    public ImmutableStack<T> pop()
+    public Pair<T, ImmutableStack<T>> pop()
     {
         throw new EmptyStackException();
     }
 
     @Override
-    public ImmutableStack<T> pop(int count)
+    public Pair<ListIterable<T>, ImmutableStack<T>> pop(int count)
     {
         this.checkNegativeCount(count);
         if (this.checkZeroCount(count))
         {
-            return this;
+            return Tuples.pair(Lists.immutable.empty(),this);
         }
         throw new EmptyStackException();
     }

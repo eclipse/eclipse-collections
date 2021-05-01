@@ -39,7 +39,7 @@ class ImmutableStackIterator<T> implements Iterator<T>
         }
 
         T result = this.immutableStack.peek();
-        this.immutableStack = this.immutableStack.pop();
+        this.immutableStack = this.immutableStack.pop().getTwo();
         return result;
     }
 }

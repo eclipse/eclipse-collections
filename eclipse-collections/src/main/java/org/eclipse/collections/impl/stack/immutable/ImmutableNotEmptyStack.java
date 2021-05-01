@@ -66,9 +66,11 @@ import org.eclipse.collections.impl.factory.primitive.FloatStacks;
 import org.eclipse.collections.impl.factory.primitive.IntStacks;
 import org.eclipse.collections.impl.factory.primitive.LongStacks;
 import org.eclipse.collections.impl.factory.primitive.ShortStacks;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack.PartitionProcedure;
+import org.eclipse.collections.impl.tuple.Tuples;
 
 final class ImmutableNotEmptyStack<T>
         extends AbstractRichIterable<T>
@@ -93,27 +95,30 @@ final class ImmutableNotEmptyStack<T>
     }
 
     @Override
-    public ImmutableStack<T> pop()
+    public Pair<T, ImmutableStack<T>> pop()
     {
-        return this.next;
+        return Tuples.pair(this.element, this.next);
     }
 
     @Override
-    public ImmutableStack<T> pop(int count)
+    public Pair<ListIterable<T>, ImmutableStack<T>> pop(int count)
     {
         this.checkNegativeCount(count);
         if (this.checkZeroCount(count))
         {
-            return this;
+            return Tuples.pair(Lists.immutable.empty(), this);
         }
         this.checkSizeLessThanCount(count);
 
         ImmutableStack<T> pointer = this;
+        FastList<T> removedObjects = FastList.newList();
         for (int i = 0; i < count; i++)
         {
-            pointer = pointer.pop();
+            Pair<T, ImmutableStack<T>> poppedElement = pointer.pop();
+            removedObjects.add(poppedElement.getOne());
+            pointer = poppedElement.getTwo();
         }
-        return pointer;
+        return Tuples.pair(removedObjects, pointer);
     }
 
     @Override
@@ -168,7 +173,7 @@ final class ImmutableNotEmptyStack<T>
     {
         this.checkNegativeCount(index);
         this.checkSizeLessThanOrEqualToIndex(index);
-        return this.pop(index).peek();
+        return this.pop(index).getTwo().peek();
     }
 
     @Override
@@ -409,7 +414,7 @@ final class ImmutableNotEmptyStack<T>
         while (pointer.notEmpty())
         {
             procedure.accept(pointer.peek());
-            pointer = pointer.pop();
+            pointer = pointer.pop().getTwo();
         }
     }
 

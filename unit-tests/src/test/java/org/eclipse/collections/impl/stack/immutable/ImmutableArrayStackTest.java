@@ -12,9 +12,13 @@ package org.eclipse.collections.impl.stack.immutable;
 
 import java.util.EmptyStackException;
 
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.stack.ImmutableStack;
+import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
+import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -79,13 +83,19 @@ public class ImmutableArrayStackTest extends ImmutableStackTestCase
         Assert.assertThrows(EmptyStackException.class, () -> this.newStackWith().pop());
 
         ImmutableStack<Integer> stack = this.newStackWith(1, 2, 3);
-        ImmutableStack<Integer> modifiedStack = stack.pop();
+        Pair<Integer, ImmutableStack<Integer>> elementAndStack = stack.pop();
+        Integer poppedElement = elementAndStack.getOne();
+        ImmutableStack<Integer> modifiedStack = elementAndStack.getTwo();
+        Assert.assertEquals(3, poppedElement.intValue());
         Assert.assertEquals(this.newStackWith(1, 2), modifiedStack);
         Assert.assertNotSame(modifiedStack, stack);
         Assert.assertEquals(this.newStackWith(1, 2, 3), stack);
 
         ImmutableStack<Integer> stack1 = this.newStackWith(1);
-        ImmutableStack<Integer> modifiedStack1 = stack1.pop();
+        Pair<Integer, ImmutableStack<Integer>> elementAndStack1 = stack1.pop();
+        Integer poppedElement1 = elementAndStack1.getOne();
+        ImmutableStack<Integer> modifiedStack1 = elementAndStack1.getTwo();
+        Assert.assertEquals(1, poppedElement1.intValue());
         Assert.assertEquals(this.newStackWith(), modifiedStack1);
         Assert.assertNotSame(modifiedStack1, stack1);
         Assert.assertEquals(this.newStackWith(1), stack1);
@@ -96,17 +106,23 @@ public class ImmutableArrayStackTest extends ImmutableStackTestCase
     {
         Assert.assertThrows(EmptyStackException.class, () -> this.newStackWith().pop(1));
 
-        Assert.assertEquals(this.newStackWith(), this.newStackWith().pop(0));
+        Assert.assertEquals(this.newStackWith(), this.newStackWith().pop(0).getTwo());
 
         ImmutableStack<Integer> stack = this.newStackWith(1, 2, 3);
-        ImmutableStack<Integer> modifiedStack = stack.pop(1);
+        Pair<ListIterable<Integer>, ImmutableStack<Integer>> elementsAndStack = stack.pop(1);
+        ListIterable<Integer> poppedElements = elementsAndStack.getOne();
+        ImmutableStack<Integer> modifiedStack = elementsAndStack.getTwo();
+        Assert.assertEquals(Lists.fixedSize.of(3), poppedElements);
         Assert.assertEquals(this.newStackWith(1, 2), modifiedStack);
         Assert.assertNotSame(modifiedStack, stack);
         Assert.assertNotSame(this.newStackWith(1, 2, 3), stack);
 
         ImmutableStack<Integer> stack1 = this.newStackWith(1);
         Assert.assertThrows(IllegalArgumentException.class, () -> stack1.pop(2));
-        ImmutableStack<Integer> modifiedStack1 = stack1.pop(1);
+        Pair<ListIterable<Integer>, ImmutableStack<Integer>> elementsAndStack1 = stack1.pop(1);
+        ListIterable<Integer> poppedElements1 = elementsAndStack1.getOne();
+        ImmutableStack<Integer> modifiedStack1 = elementsAndStack1.getTwo();
+        Assert.assertEquals(Lists.fixedSize.of(1), poppedElements1);
         Assert.assertEquals(this.newStackWith(), modifiedStack1);
         Assert.assertNotSame(modifiedStack1, stack1);
         Assert.assertEquals(this.newStackWith(1), stack1);
