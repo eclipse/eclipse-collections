@@ -93,6 +93,7 @@ import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.EmptyIterator;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
+import org.eclipse.collections.impl.tuple.Tuples;
 
 final class ImmutableEmptyStack<T>
         extends AbstractRichIterable<T>
@@ -129,6 +130,18 @@ final class ImmutableEmptyStack<T>
             return this;
         }
         throw new EmptyStackException();
+    }
+
+    @Override
+    public Pair<T, ImmutableStack<T>> peekAndPop()
+    {
+        throw new EmptyStackException();
+    }
+
+    @Override
+    public Pair<ListIterable<T>, ImmutableStack<T>> peekAndPop(int count)
+    {
+        return Tuples.pair(this.peek(count), this.pop(count));
     }
 
     @Override

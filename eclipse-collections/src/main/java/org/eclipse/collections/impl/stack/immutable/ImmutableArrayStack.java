@@ -106,6 +106,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack;
+import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
@@ -190,6 +191,18 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
             count--;
         }
         return new ImmutableArrayStack<>(newDelegate);
+    }
+
+    @Override
+    public Pair<T, ImmutableStack<T>> peekAndPop()
+    {
+        return Tuples.pair(this.peek(), this.pop());
+    }
+
+    @Override
+    public Pair<ListIterable<T>, ImmutableStack<T>> peekAndPop(int count)
+    {
+        return Tuples.pair(this.peek(count), this.pop(count));
     }
 
     @Override
