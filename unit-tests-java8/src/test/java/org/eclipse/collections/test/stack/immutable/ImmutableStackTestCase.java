@@ -14,6 +14,7 @@ import java.util.EmptyStackException;
 import java.util.Iterator;
 
 import org.eclipse.collections.api.stack.ImmutableStack;
+import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.test.stack.StackIterableTestCase;
 import org.junit.Test;
@@ -41,7 +42,10 @@ public interface ImmutableStackTestCase extends StackIterableTestCase
     default void MutableStack_pop()
     {
         ImmutableStack<Integer> immutableStack = this.newWith(5, 1, 4, 2, 3);
-        ImmutableStack<Integer> poppedStack = immutableStack.pop();
+        Pair<Integer, ImmutableStack<Integer>> elementAndStack = immutableStack.pop();
+        Integer poppedElement = elementAndStack.getOne();
+        ImmutableStack<Integer> poppedStack = elementAndStack.getTwo();
+        assertEquals(5, poppedElement);
         assertEquals(Stacks.immutable.withReversed(1, 4, 2, 3), poppedStack);
         assertEquals(Stacks.immutable.withReversed(5, 1, 4, 2, 3), immutableStack);
     }
@@ -50,7 +54,11 @@ public interface ImmutableStackTestCase extends StackIterableTestCase
     default void ImmutableStack_pop_throws()
     {
         ImmutableStack<Integer> immutableStack = this.newWith(5, 1, 4, 2, 3);
-        ImmutableStack<Integer> emptyStack = immutableStack.pop().pop().pop().pop().pop();
+        ImmutableStack<Integer> emptyStack = immutableStack.pop().getTwo()
+                .pop().getTwo()
+                .pop().getTwo()
+                .pop().getTwo()
+                .pop().getTwo();
         assertSame(Stacks.immutable.with(), emptyStack);
         assertThrows(EmptyStackException.class, emptyStack::pop);
     }
