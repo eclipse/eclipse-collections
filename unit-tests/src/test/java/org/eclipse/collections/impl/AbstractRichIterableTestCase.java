@@ -75,6 +75,7 @@ import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
@@ -1713,6 +1714,19 @@ public abstract class AbstractRichIterableTestCase
         MutableMap<String, String> map =
                 integers.toMap(Object::toString, Object::toString);
         Assert.assertEquals(UnifiedMap.newWithKeysValues("1", "1", "2", "2", "3", "3", "4", "4"), map);
+    }
+
+    @Test
+    public void toImmutableMap()
+    {
+        RichIterable<Integer> integers = this.newWith(1, 2, 3, 4);
+        ImmutableMap<String, String> map =
+                integers.toImmutableMap(Object::toString, Object::toString);
+        Assert.assertEquals(UnifiedMap.newWithKeysValues("1", "1", "2", "2", "3", "3", "4", "4"), map);
+        RichIterable<Integer> empty = this.newWith();
+        ImmutableMap<String, String> emptyMap =
+                empty.toImmutableMap(Object::toString, Object::toString);
+        Assert.assertSame(Maps.immutable.empty(), emptyMap);
     }
 
     @Test
