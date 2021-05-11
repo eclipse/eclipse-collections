@@ -67,6 +67,7 @@ import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
@@ -1873,6 +1874,18 @@ public interface RichIterable<T>
     default <V extends Comparable<? super V>> ImmutableSortedBag<T> toImmutableSortedBagBy(Function<? super T, ? extends V> function)
     {
         return this.toImmutableSortedBag(Comparator.comparing(function));
+    }
+
+    /**
+     * Converts the collection to an ImmutableMap implementation using the specified key and value functions.
+     *
+     * @since 11.0
+     */
+    default <NK, NV> ImmutableMap<NK, NV> toImmutableMap(
+            Function<? super T, ? extends NK> keyFunction,
+            Function<? super T, ? extends NV> valueFunction)
+    {
+        return this.<NK, NV>toMap(keyFunction, valueFunction).toImmutable();
     }
 
     /**
