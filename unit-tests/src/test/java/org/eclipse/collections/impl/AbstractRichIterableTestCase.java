@@ -1794,6 +1794,26 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void toImmutableBiMap()
+    {
+        RichIterable<Integer> integers = this.newWith(1, 2, 3);
+
+        Assert.assertEquals(
+                Maps.mutable.with("1", "1", "2", "2", "3", "3"),
+                integers.toImmutableBiMap(Object::toString, Object::toString));
+
+        Assert.assertThrows(
+                IllegalArgumentException.class,
+                () -> integers.toImmutableBiMap(i -> "Constant Key", Objects::toString));
+        Assert.assertThrows(
+                IllegalArgumentException.class,
+                () -> integers.toImmutableBiMap(Object::toString, i -> "Constant Value"));
+        Assert.assertThrows(
+                IllegalArgumentException.class,
+                () -> integers.toImmutableBiMap(i -> "Constant Key", i -> "Constant Value"));
+    }
+
+    @Test
     public void testToString()
     {
         RichIterable<Object> collection = this.newWith(1, 2, 3);

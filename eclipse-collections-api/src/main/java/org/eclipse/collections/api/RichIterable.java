@@ -31,6 +31,7 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -1886,6 +1887,18 @@ public interface RichIterable<T>
             Function<? super T, ? extends NV> valueFunction)
     {
         return this.<NK, NV>toMap(keyFunction, valueFunction).toImmutable();
+    }
+
+    /**
+     * Converts the collection to an immutable BiMap implementation using the specified key and value functions.
+     *
+     * @since 11.0
+     */
+    default <NK, NV> ImmutableBiMap<NK, NV> toImmutableBiMap(
+            Function<? super T, ? extends NK> keyFunction,
+            Function<? super T, ? extends NV> valueFunction)
+    {
+        return this.<NK, NV>toBiMap(keyFunction, valueFunction).toImmutable();
     }
 
     /**
