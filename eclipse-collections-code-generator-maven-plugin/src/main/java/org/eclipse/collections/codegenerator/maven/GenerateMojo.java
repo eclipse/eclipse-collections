@@ -63,13 +63,9 @@ public class GenerateMojo extends AbstractMojo
         List<URL> urls = Arrays.asList(((URLClassLoader) GenerateMojo.class.getClassLoader()).getURLs());
 
         boolean[] error = new boolean[1];
-        EclipseCollectionsCodeGenerator.ErrorListener errorListener = new EclipseCollectionsCodeGenerator.ErrorListener()
-        {
-            public void error(String string)
-            {
-                GenerateMojo.this.getLog().error(string);
-                error[0] = true;
-            }
+        EclipseCollectionsCodeGenerator.ErrorListener errorListener = string -> {
+            this.getLog().error(string);
+            error[0] = true;
         };
         EclipseCollectionsCodeGenerator gsCollectionsCodeGenerator =
                 new EclipseCollectionsCodeGenerator(this.templateDirectory, this.project.getBasedir(), urls, errorListener);
