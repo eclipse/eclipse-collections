@@ -257,7 +257,6 @@ arithmeticMethods ::= [
     ]
 
 allMethods(type) ::= <<
-
 @Override
 public Mutable<name>List toSortedList()
 {

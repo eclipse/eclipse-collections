@@ -70,7 +70,6 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
-
 @Override
 public <type> minIfEmpty(<type> defaultValue)
 {

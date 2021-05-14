@@ -355,7 +355,6 @@ arithmeticMethods ::= [
 
 allMethods(type) ::= <<
 
-
 @Override
 public <wideType.(type)> sum()
 {

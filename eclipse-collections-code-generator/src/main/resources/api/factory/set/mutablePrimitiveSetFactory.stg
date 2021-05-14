@@ -76,7 +76,6 @@ capacityMethods ::= [
 
 capacityMethods() ::= <<
 
-
 /**
  * Same as {@link #empty()}. but takes in an initial capacity
  * @since 10.3
@@ -99,7 +98,6 @@ streamMethods ::= [
     ]
 
 allMethods() ::= <<
-
 
 /**
  * @since 9.0

@@ -97,7 +97,6 @@ noMethods(type) ::= ""
 
 flipUniqueValues(name) ::= <<
 
-
 @Override
 Immutable<name>ObjectMap\<K> flipUniqueValues();
 >>

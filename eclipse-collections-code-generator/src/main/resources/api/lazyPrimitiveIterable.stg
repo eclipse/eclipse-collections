@@ -10,7 +10,6 @@ class(primitive) ::= <<
 >>
 
 collectPrimitive(fromName, fromType, toName, toType) ::= <<
-
 /**
  * @since 7.0
  */
