@@ -189,9 +189,9 @@ public final class <name>Predicates
             return !this.negate.accept(actual);
         }
     }
-
     <(intPredicateClasses.(type))()>
     <(charPredicateClasses.(type))()>
+
     private static final class AlwaysTrue<name>Predicate implements <name>Predicate
     {
         private static final long serialVersionUID = 1L;

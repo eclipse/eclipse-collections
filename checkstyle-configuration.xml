@@ -385,7 +385,8 @@
 
         <module name="OneStatementPerLine" />
 
-        <module name="UnnecessaryParentheses" />
+<!--Suppressing this check as in newer version of checkstyle parenthesis around expressions are getting triggered-->
+<!--        <module name="UnnecessaryParentheses" />-->
 
     </module>
 

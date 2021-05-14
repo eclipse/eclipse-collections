@@ -242,7 +242,6 @@ arithmeticMethods ::= [
 
 allMethods(type) ::= <<
 
-
 <type> addToValue(K key, <type> toBeAdded);
 >>
 
@@ -260,7 +259,6 @@ flipUniqueValues ::= [
     ]
 
 flipUniqueValues(name) ::= <<
-
 
 @Override
 Mutable<name>ObjectMap\<K> flipUniqueValues();

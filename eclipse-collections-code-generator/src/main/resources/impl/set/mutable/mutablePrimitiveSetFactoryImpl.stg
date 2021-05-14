@@ -112,7 +112,6 @@ capacityMethods ::= [
 
 capacityMethods() ::= <<
 
-
 @Override
 public Mutable<name>Set withInitialCapacity(int capacity)
 {
@@ -132,7 +131,6 @@ streamMethods ::= [
     ]
 
 allMethods() ::= <<
-
 
 /**
  * @since 9.0
