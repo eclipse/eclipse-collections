@@ -24,10 +24,19 @@ jobs:
         id: download-jdk
         with:
           feature: ${{ matrix.java-version }}
+      - name: 'Print outputs'
+        shell: bash
+        run: |
+          echo 'Outputs'
+          echo "steps.download-jdk.outputs.file    = ${{ steps.download-jdk.outputs.file }}"
+          echo "steps.download-jdk.outputs.version = ${{ steps.download-jdk.outputs.version }}"
+          echo "env.JDK_FILE                       = ${{ env.JDK_FILE }}"
+          echo "env.JDK_VERSION                    = ${{ env.JDK_VERSION }}"
       - name: 'Set up JDK'
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
           java-version: ${{ steps.download-jdk.outputs.version }}
+          distribution: jdkfile
           jdkFile: "${{ steps.download-jdk.outputs.file }}"
       - name: Set Maven Wrapper
         run: mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.6.3

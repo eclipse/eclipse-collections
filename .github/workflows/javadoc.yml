@@ -21,8 +21,9 @@ jobs:
       - name: Set Maven Wrapper
         run: mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.6.3
       - name: Set JDK ${{ matrix.java-version }}
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: ${{ matrix.java-version }}
       - name: JavaDoc
         run: ./mvnw -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:aggregate -pl '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections' --no-transfer-progress
