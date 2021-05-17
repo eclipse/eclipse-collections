@@ -57,17 +57,10 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 
 |EC     | 7.x.x | 8.x.x | 9.x.x |[10.0.0][10-0-Release] |[10.1.0][10-1-Release] |[10.2.0][10-2-Release] |[10.3.0][10-3-Release] |[10.4.0][10-4-Release] |
 |-------|-------|-------|-------|-------|-------|-------|-------|-------|
-|JDK 5  |&check;|       |       |       |       |       |       |       |
-|JDK 6  |&check;|       |       |       |       |       |       |       |
-|JDK 7  |&check;|       |       |       |       |       |       |       |
+|JDK 5 - 7  |&check;|       |       |       |       |       |       |       |
 |JDK 8  |&check;|&check;|&check;|&check;|&check;|&check;|&check;|&check;|
-|JDK 9  |       |       |&check;|&check;|&check;|&check;|&check;|&check;|
-|JDK 10 |       |       |&check;|&check;|&check;|&check;|&check;|&check;|
-|JDK 11 |       |       |&check;|&check;|&check;|&check;|&check;|&check;|
-|JDK 12 |       |       |&check;|&check;|&check;|&check;|&check;|&check;|
-|JDK 13 |       |       |&check;|&check;|&check;|&check;|&check;|&check;|
-|JDK 14 |       |       |&check;|&check;|&check;|&check;|&check;|&check;|
-|JDK 15 |       |       |       |       |       |       |       |&check;|
+|JDK 9 - 14  |       |       |&check;|&check;|&check;|&check;|&check;|&check;|
+|JDK 15 - 16|       |       |       |       |       |       |       |&check;|
 
 ## Acquiring Eclipse Collections
 
