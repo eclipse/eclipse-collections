@@ -302,7 +302,7 @@ public final class HashingStrategies
         @Override
         public int computeHashCode(T object)
         {
-            return HashingStrategies.longHashCode(Double.doubleToLongBits(this.function.doubleValueOf(object)));
+            return Long.hashCode(Double.doubleToLongBits(this.function.doubleValueOf(object)));
         }
 
         @Override
@@ -374,7 +374,7 @@ public final class HashingStrategies
         @Override
         public int computeHashCode(T object)
         {
-            return HashingStrategies.longHashCode(this.function.longValueOf(object));
+            return Long.hashCode(this.function.longValueOf(object));
         }
 
         @Override
@@ -458,17 +458,5 @@ public final class HashingStrategies
             }
             return true;
         }
-    }
-
-    /**
-     * This implementation is equivalent to the JDK Long hashcode because there is no public static hashCode(long value) method on Long.
-     * This method will be introduced in Java 1.8, at which point this can be replaced.
-     *
-     * @param value the long value to hash
-     * @return hashcode for long, based on the {@link Long#hashCode()}
-     */
-    private static int longHashCode(long value)
-    {
-        return (int) (value ^ (value >>> 32));
     }
 }
