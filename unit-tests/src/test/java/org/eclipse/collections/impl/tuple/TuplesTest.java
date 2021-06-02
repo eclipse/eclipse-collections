@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -40,6 +40,8 @@ public class TuplesTest
         Pair<String, String> pair = Tuples.pair("1", "2");
         Assert.assertEquals("1", pair.getOne());
         Assert.assertEquals("2", pair.getTwo());
+        Assert.assertFalse(pair.isEqual());
+        Assert.assertFalse(pair.isSame());
     }
 
     @Test
@@ -48,6 +50,8 @@ public class TuplesTest
         Twin<String> twin = Tuples.twin("1", "2");
         Assert.assertEquals("1", twin.getOne());
         Assert.assertEquals("2", twin.getTwo());
+        Assert.assertFalse(twin.isEqual());
+        Assert.assertFalse(twin.isSame());
     }
 
     @Test
@@ -56,6 +60,8 @@ public class TuplesTest
         Twin<String> twin = Tuples.identicalTwin("1");
         Assert.assertEquals("1", twin.getOne());
         Assert.assertEquals("1", twin.getTwo());
+        Assert.assertTrue(twin.isEqual());
+        Assert.assertTrue(twin.isSame());
         Assert.assertEquals(twin.getOne(), twin.getTwo());
     }
 
@@ -66,6 +72,8 @@ public class TuplesTest
         Assert.assertEquals("1", triple.getOne());
         Assert.assertEquals("2", triple.getTwo());
         Assert.assertEquals("3", triple.getThree());
+        Assert.assertFalse(triple.isEqual());
+        Assert.assertFalse(triple.isSame());
     }
 
     @Test
@@ -75,6 +83,8 @@ public class TuplesTest
         Assert.assertEquals("1", triplet.getOne());
         Assert.assertEquals("2", triplet.getTwo());
         Assert.assertEquals("3", triplet.getThree());
+        Assert.assertFalse(triplet.isEqual());
+        Assert.assertFalse(triplet.isSame());
     }
 
     @Test
@@ -87,6 +97,8 @@ public class TuplesTest
         Assert.assertEquals(triplet.getOne(), triplet.getTwo());
         Assert.assertEquals(triplet.getTwo(), triplet.getThree());
         Assert.assertEquals(triplet.getThree(), triplet.getOne());
+        Assert.assertTrue(triplet.isEqual());
+        Assert.assertTrue(triplet.isSame());
     }
 
     @Test

@@ -12,6 +12,7 @@ package org.eclipse.collections.api.tuple;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A Pair is a container that holds two related objects. It is the equivalent of an Association in Smalltalk, or an
@@ -41,4 +42,24 @@ public interface Pair<T1, T2>
      * @since 6.0
      */
     Pair<T2, T1> swap();
+
+    /*
+     * Returns true if value of getOne() is equal to value of getTwo().
+     *
+     * @since 11.0
+     */
+    default boolean isEqual()
+    {
+        return Objects.equals(this.getOne(), this.getTwo());
+    }
+
+    /*
+     * Returns true if value of getOne() is the same instance as the value of getTwo().
+     *
+     * @since 11.0
+     */
+    default boolean isSame()
+    {
+        return this.getOne() == this.getTwo();
+    }
 }
