@@ -13,6 +13,10 @@ package org.eclipse.collections.impl.tuple;
 import java.util.Map;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Triple;
@@ -219,5 +223,47 @@ public class TuplesTest
         Assert.assertEquals("One", reversedIdenticalTriplet.getTwo());
         Assert.assertEquals("One", reversedIdenticalTriplet.getThree());
         Assert.assertEquals(expectedIdenticalTriplet, reversedIdenticalTriplet);
+    }
+
+    @Test
+    public void pairToList()
+    {
+        MutableList<Integer> integers = Tuples.pairToList(Tuples.pair(1, 2));
+        Assert.assertEquals(Lists.mutable.with(1, 2), integers);
+    }
+
+    @Test
+    public void pairToFixedSizeList()
+    {
+        FixedSizeList<Integer> integers = Tuples.pairToFixedSizeList(Tuples.pair(1, 2));
+        Assert.assertEquals(Lists.mutable.with(1, 2), integers);
+    }
+
+    @Test
+    public void pairToImmutableList()
+    {
+        ImmutableList<Integer> integers = Tuples.pairToImmutableList(Tuples.pair(1, 2));
+        Assert.assertEquals(Lists.mutable.with(1, 2), integers);
+    }
+
+    @Test
+    public void tripleToList()
+    {
+        MutableList<Integer> integers = Tuples.tripleToList(Tuples.triple(1, 2, 3));
+        Assert.assertEquals(Lists.mutable.with(1, 2, 3), integers);
+    }
+
+    @Test
+    public void tripleToFixedSizeList()
+    {
+        FixedSizeList<Integer> integers = Tuples.tripleToFixedSizeList(Tuples.triple(1, 2, 3));
+        Assert.assertEquals(Lists.mutable.with(1, 2, 3), integers);
+    }
+
+    @Test
+    public void tripleToImmutableList()
+    {
+        ImmutableList<Integer> integers = Tuples.tripleToImmutableList(Tuples.triple(1, 2, 3));
+        Assert.assertEquals(Lists.mutable.with(1, 2, 3), integers);
     }
 }
