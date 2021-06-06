@@ -12,10 +12,14 @@ package org.eclipse.collections.impl.tuple;
 
 import java.util.Map;
 
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Triple;
 import org.eclipse.collections.api.tuple.Triplet;
 import org.eclipse.collections.api.tuple.Twin;
+import org.eclipse.collections.impl.factory.Lists;
 
 /**
  * A Pair is a container that holds two related objects. It is the equivalent of an Association in Smalltalk, or an
@@ -36,6 +40,54 @@ public final class Tuples
     public static <K, V> Pair<K, V> pairFrom(Map.Entry<K, V> entry)
     {
         return Tuples.pair(entry.getKey(), entry.getValue());
+    }
+
+    /**
+     * @since 11.0
+     */
+    public static <T> MutableList<T> pairToList(Pair<T, T> pair)
+    {
+        return Lists.mutable.with(pair.getOne(), pair.getTwo());
+    }
+
+    /**
+     * @since 11.0
+     */
+    public static <T> FixedSizeList<T> pairToFixedSizeList(Pair<T, T> pair)
+    {
+        return Lists.fixedSize.with(pair.getOne(), pair.getTwo());
+    }
+
+    /**
+     * @since 11.0
+     */
+    public static <T> ImmutableList<T> pairToImmutableList(Pair<T, T> pair)
+    {
+        return Lists.immutable.with(pair.getOne(), pair.getTwo());
+    }
+
+    /**
+     * @since 11.0
+     */
+    public static <T> MutableList<T> tripleToList(Triple<T, T, T> triple)
+    {
+        return Lists.mutable.with(triple.getOne(), triple.getTwo(), triple.getThree());
+    }
+
+    /**
+     * @since 11.0
+     */
+    public static <T> FixedSizeList<T> tripleToFixedSizeList(Triple<T, T, T> triple)
+    {
+        return Lists.fixedSize.with(triple.getOne(), triple.getTwo(), triple.getThree());
+    }
+
+    /**
+     * @since 11.0
+     */
+    public static <T> ImmutableList<T> tripleToImmutableList(Triple<T, T, T> triple)
+    {
+        return Lists.immutable.with(triple.getOne(), triple.getTwo(), triple.getThree());
     }
 
     public static <T1, T2> Pair<T1, T2> pair(T1 one, T2 two)
