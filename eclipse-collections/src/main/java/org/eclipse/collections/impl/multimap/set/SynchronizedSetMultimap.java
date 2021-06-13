@@ -16,6 +16,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
@@ -64,6 +65,15 @@ public class SynchronizedSetMultimap<K, V>
         }
 
         return new SynchronizedSetMultimap<>(multimap, lock);
+    }
+
+    @Override
+    public void forEachKeyMutableSet(Procedure2<? super K, ? super MutableSet<V>> procedure)
+    {
+        synchronized (this.getLock())
+        {
+            this.getDelegate().forEachKeyMutableSet(procedure);
+        }
     }
 
     @Override

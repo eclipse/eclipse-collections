@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,7 @@ import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.factory.Sets;
@@ -59,7 +60,27 @@ public class ImmutableSetMultimapTest extends AbstractImmutableMultimapTestCase
         multimap.put("Three", 3);
         ImmutableSetMultimap<String, Integer> immutableMultimap = multimap.toImmutable();
         immutableMultimap.forEachKeyMultiValues((key, values) -> collection.add(Tuples.pair(key, values)));
-        Assert.assertEquals(UnifiedSet.newSetWith(Tuples.pair("Two", UnifiedSet.newSetWith(2, 1)), Tuples.pair("Three", UnifiedSet.newSetWith(3, 3))), collection);
+        MutableSet<Pair<String, MutableSet<Integer>>> expected = Sets.mutable.with(
+                Tuples.pair("Two", Sets.mutable.with(2, 1)),
+                Tuples.pair("Three", Sets.mutable.with(3, 3)));
+        Assert.assertEquals(expected, collection);
+    }
+
+    @Test
+    public void forEachKeyImmutableSet()
+    {
+        MutableSet<Pair<String, ImmutableSet<Integer>>> collection = UnifiedSet.newSet();
+        MutableSetMultimap<String, Integer> multimap = UnifiedSetMultimap.newMultimap();
+        multimap.put("Two", 2);
+        multimap.put("Two", 1);
+        multimap.put("Three", 3);
+        multimap.put("Three", 3);
+        ImmutableSetMultimap<String, Integer> immutableMultimap = multimap.toImmutable();
+        immutableMultimap.forEachKeyImmutableSet((key, values) -> collection.add(Tuples.pair(key, values)));
+        MutableSet<Pair<String, MutableSet<Integer>>> expected = Sets.mutable.with(
+                Tuples.pair("Two", Sets.mutable.with(2, 1)),
+                Tuples.pair("Three", Sets.mutable.with(3, 3)));
+        Assert.assertEquals(expected, collection);
     }
 
     @Override

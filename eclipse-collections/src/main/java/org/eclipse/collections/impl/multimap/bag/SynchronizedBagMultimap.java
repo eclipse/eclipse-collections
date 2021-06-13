@@ -17,6 +17,7 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Pair;
@@ -63,6 +64,15 @@ public class SynchronizedBagMultimap<K, V>
         }
 
         return new SynchronizedBagMultimap<>(multimap, lock);
+    }
+
+    @Override
+    public void forEachKeyMutableBag(Procedure2<? super K, ? super MutableBag<V>> procedure)
+    {
+        synchronized (this.getLock())
+        {
+            this.getDelegate().forEachKeyMutableBag(procedure);
+        }
     }
 
     @Override

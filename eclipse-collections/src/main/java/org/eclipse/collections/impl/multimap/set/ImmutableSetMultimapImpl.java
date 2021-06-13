@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -59,6 +60,12 @@ public final class ImmutableSetMultimapImpl<K, V>
     protected ImmutableSet<V> createCollection()
     {
         return Sets.immutable.empty();
+    }
+
+    @Override
+    public void forEachKeyImmutableSet(Procedure2<? super K, ? super ImmutableSet<V>> procedure)
+    {
+        this.getMap().forEachKeyValue(procedure);
     }
 
     @Override

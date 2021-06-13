@@ -18,6 +18,7 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -91,6 +92,12 @@ public final class SynchronizedPutHashBagMultimap<K, V>
     protected MutableBag<V> createCollection()
     {
         return HashBag.newBag(1);
+    }
+
+    @Override
+    public void forEachKeyMutableBag(Procedure2<? super K, ? super MutableBag<V>> procedure)
+    {
+        this.getMap().forEachKeyValue((key, value) -> procedure.value(key, value.asUnmodifiable()));
     }
 
     @Override

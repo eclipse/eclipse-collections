@@ -14,6 +14,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -24,6 +25,11 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableSetMultimap<K, V>
         extends UnsortedSetMultimap<K, V>, MutableSetIterableMultimap<K, V>
 {
+    /**
+     * @since 11.0
+     */
+    void forEachKeyMutableSet(Procedure2<? super K, ? super MutableSet<V>> procedure);
+
     @Override
     MutableSet<V> replaceValues(K key, Iterable<? extends V> values);
 

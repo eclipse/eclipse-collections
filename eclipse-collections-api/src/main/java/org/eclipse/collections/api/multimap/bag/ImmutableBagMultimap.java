@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,7 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -23,6 +24,11 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutableBagMultimap<K, V>
         extends UnsortedBagMultimap<K, V>, ImmutableBagIterableMultimap<K, V>
 {
+    /**
+     * @since 11.0
+     */
+    void forEachKeyImmutableBag(Procedure2<? super K, ? super ImmutableBag<V>> procedure);
+
     @Override
     ImmutableBagMultimap<K, V> newEmpty();
 

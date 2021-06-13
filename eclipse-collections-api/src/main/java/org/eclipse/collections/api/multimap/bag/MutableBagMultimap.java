@@ -15,6 +15,7 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -23,6 +24,11 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableBagMultimap<K, V>
         extends MutableBagIterableMultimap<K, V>, UnsortedBagMultimap<K, V>
 {
+    /**
+     * @since 11.0
+     */
+    void forEachKeyMutableBag(Procedure2<? super K, ? super MutableBag<V>> procedure);
+
     @Override
     MutableBag<V> replaceValues(K key, Iterable<? extends V> values);
 

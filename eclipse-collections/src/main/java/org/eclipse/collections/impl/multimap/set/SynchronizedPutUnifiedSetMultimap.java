@@ -16,6 +16,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -95,6 +96,12 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
     protected MutableSet<V> createCollection()
     {
         return UnifiedSet.newSet(1);
+    }
+
+    @Override
+    public void forEachKeyMutableSet(Procedure2<? super K, ? super MutableSet<V>> procedure)
+    {
+        this.getMap().forEachKeyValue((key, value) -> procedure.value(key, value.asUnmodifiable()));
     }
 
     @Override

@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.multimap.set;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
@@ -58,6 +59,12 @@ public abstract class AbstractMutableSetMultimap<K, V> extends AbstractMutableMu
         this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
 
         return new ImmutableSetMultimapImpl<>(map);
+    }
+
+    @Override
+    public void forEachKeyMutableSet(Procedure2<? super K, ? super MutableSet<V>> procedure)
+    {
+        this.getMap().forEachKeyValue((key, value) -> procedure.value(key, value.asUnmodifiable()));
     }
 
     @Override

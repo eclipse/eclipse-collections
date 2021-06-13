@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.multimap.bag;
 
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.multimap.bag.BagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Pair;
@@ -56,6 +57,19 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
 
     @Override
     protected abstract <V> MutableBag<V> createCollection(V... args);
+
+    @Test
+    public void forEachKeyMutableBag()
+    {
+        MutableBag<Pair<Integer, MutableBag<String>>> collection = Bags.mutable.empty();
+        MutableBagMultimap<Integer, String> multimap =
+                this.newMultimapWithKeysValues(2, "2", 2, "1", 3, "3", 3, "3");
+        multimap.forEachKeyMutableBag((key, values) -> collection.add(Tuples.pair(key, values)));
+        MutableBag<Pair<Integer, MutableCollection<String>>> expected = Bags.mutable.with(
+                Tuples.pair(2, this.createCollection("2", "1")),
+                Tuples.pair(3, this.createCollection("3", "3")));
+        Assert.assertEquals(expected, collection);
+    }
 
     @Override
     @Test

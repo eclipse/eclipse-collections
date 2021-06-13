@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.multimap.list;
 
+import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -19,6 +21,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimapTestCase;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -59,7 +62,26 @@ public class ImmutableListMultimapTest extends AbstractImmutableMultimapTestCase
         multimap.put("Three", 3);
         multimap.put("Three", 3);
         multimap.toImmutable().forEachKeyMultiValues((key, values) -> collection.add(Tuples.pair(key, values)));
-        Assert.assertEquals(UnifiedSet.newSetWith(Tuples.pair("Two", FastList.newListWith(2, 1)), Tuples.pair("Three", FastList.newListWith(3, 3))), collection);
+        MutableSet<Pair<String, MutableList<Integer>>> expected = Sets.mutable.with(
+                Tuples.pair("Two", Lists.mutable.with(2, 1)),
+                Tuples.pair("Three", Lists.mutable.with(3, 3)));
+        Assert.assertEquals(expected, collection);
+    }
+
+    @Test
+    public void forEachKeyImmutableList()
+    {
+        MutableSet<Pair<String, ImmutableList<Integer>>> collection = UnifiedSet.newSet();
+        MutableListMultimap<String, Integer> multimap = Multimaps.mutable.list.empty();
+        multimap.put("Two", 2);
+        multimap.put("Two", 1);
+        multimap.put("Three", 3);
+        multimap.put("Three", 3);
+        multimap.toImmutable().forEachKeyImmutableList((key, values) -> collection.add(Tuples.pair(key, values)));
+        MutableSet<Pair<String, ImmutableList<Integer>>> exptected = Sets.mutable.with(
+                Tuples.pair("Two", Lists.immutable.with(2, 1)),
+                Tuples.pair("Three", Lists.immutable.with(3, 3)));
+        Assert.assertEquals(exptected, collection);
     }
 
     @Override

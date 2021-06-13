@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.multimap.list;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -41,6 +42,12 @@ public abstract class AbstractMutableListMultimap<K, V> extends AbstractMutableM
     protected AbstractMutableListMultimap(int size)
     {
         super(size);
+    }
+
+    @Override
+    public void forEachKeyMutableList(Procedure2<? super K, ? super MutableList<V>> procedure)
+    {
+        this.getMap().forEachKeyValue((key, value) -> procedure.value(key, value.asUnmodifiable()));
     }
 
     @Override

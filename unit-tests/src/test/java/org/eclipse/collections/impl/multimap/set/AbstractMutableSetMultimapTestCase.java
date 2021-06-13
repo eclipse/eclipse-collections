@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,7 @@ import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimapTestCase;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -63,6 +64,19 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
 
     @Override
     protected abstract <V> MutableSet<V> createCollection(V... args);
+
+    @Test
+    public void forEachKeyMutableSet()
+    {
+        MutableSet<Pair<Integer, MutableSet<String>>> collection = UnifiedSet.newSet();
+        MutableSetMultimap<Integer, String> multimap =
+                this.newMultimapWithKeysValues(2, "2", 2, "1", 3, "3", 3, "3");
+        multimap.forEachKeyMutableSet((key, values) -> collection.add(Tuples.pair(key, values)));
+        MutableSet<Pair<Integer, MutableSet<String>>> expected = Sets.mutable.with(
+                Tuples.pair(2, this.createCollection("2", "1")),
+                Tuples.pair(3, this.createCollection("3", "3")));
+        Assert.assertEquals(expected, collection);
+    }
 
     @Test
     @Override
