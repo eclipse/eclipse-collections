@@ -27,7 +27,7 @@
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sonar.skip>true</sonar.skip>
-        <jcstress.version>0.4</jcstress.version>
+        <jcstress.version>0.13</jcstress.version>
     </properties>
 
     <dependencies>
