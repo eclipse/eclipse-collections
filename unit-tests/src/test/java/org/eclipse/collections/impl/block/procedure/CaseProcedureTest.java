@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -29,7 +29,7 @@ public class CaseProcedureTest
         CaseProcedure<String> procedure = new CaseProcedure<>();
         strings.each(procedure);
         Verify.assertEmpty(result);
-        procedure.setDefault(result::add);
+        Verify.assertSame(procedure, procedure.setDefault(result::add));
         strings.each(procedure);
         Assert.assertEquals(result, strings);
         Verify.assertContains("CaseProcedure", procedure.toString());

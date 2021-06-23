@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.block.procedure;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.impl.utility.StringIterate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -45,5 +46,15 @@ public class BagAddOccurrencesProcedureTest
         Assert.assertEquals(2, procedure.getResult().occurrencesOf("fred"));
         Assert.assertEquals(3, procedure.getResult().occurrencesOf("mary"));
         Assert.assertEquals(0, procedure.getResult().occurrencesOf("other"));
+    }
+
+    @Test
+    public void toStringTest()
+    {
+        MutableBag<String> targetCollection = Bags.mutable.empty();
+        BagAddOccurrencesProcedure<String> procedure = BagAddOccurrencesProcedure.on(targetCollection);
+        String toString = procedure.toString();
+        Assert.assertNotNull(toString);
+        Assert.assertTrue(StringIterate.notEmptyOrWhitespace(toString));
     }
 }
