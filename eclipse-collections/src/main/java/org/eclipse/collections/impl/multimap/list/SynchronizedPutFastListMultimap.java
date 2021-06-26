@@ -16,6 +16,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -96,6 +97,12 @@ public final class SynchronizedPutFastListMultimap<K, V>
     protected MutableList<V> createCollection()
     {
         return FastList.newList(1);
+    }
+
+    @Override
+    public void forEachKeyMutableList(Procedure2<? super K, ? super MutableList<V>> procedure)
+    {
+        this.getMap().forEachKeyValue((key, value) -> procedure.value(key, value.asUnmodifiable()));
     }
 
     @Override

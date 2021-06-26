@@ -18,6 +18,7 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -119,6 +120,12 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
             }
             this.putAll(key, bag);
         }
+    }
+
+    @Override
+    public void forEachKeyMutableBag(Procedure2<? super K, ? super MutableBag<V>> procedure)
+    {
+        this.getMap().forEachKeyValue((key, value) -> procedure.value(key, value.asUnmodifiable()));
     }
 
     @Override

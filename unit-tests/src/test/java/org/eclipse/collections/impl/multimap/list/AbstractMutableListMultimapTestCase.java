@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,11 +16,14 @@ import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.UnsortedBagMultimap;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimapTestCase;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -59,6 +62,19 @@ public abstract class AbstractMutableListMultimapTestCase extends AbstractMutabl
 
     @Override
     protected abstract <V> MutableList<V> createCollection(V... args);
+
+    @Test
+    public void forEachKeyMutableList()
+    {
+        MutableSet<Pair<Integer, MutableList<String>>> collection = UnifiedSet.newSet();
+        MutableListMultimap<Integer, String> multimap =
+                this.newMultimapWithKeysValues(2, "2", 2, "1", 3, "3", 3, "3");
+        multimap.forEachKeyMutableList((key, values) -> collection.add(Tuples.pair(key, values)));
+        MutableSet<Pair<Integer, MutableList<String>>> expected = Sets.mutable.with(
+                Tuples.pair(2, this.createCollection("2", "1")),
+                Tuples.pair(3, this.createCollection("3", "3")));
+        Assert.assertEquals(expected, collection);
+    }
 
     @Override
     @Test

@@ -16,6 +16,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
@@ -90,6 +91,15 @@ public class SynchronizedListMultimap<K, V>
         synchronized (this.getLock())
         {
             return this.getDelegate().toImmutable();
+        }
+    }
+
+    @Override
+    public void forEachKeyMutableList(Procedure2<? super K, ? super MutableList<V>> procedure)
+    {
+        synchronized (this.getLock())
+        {
+            this.getDelegate().forEachKeyMutableList(procedure);
         }
     }
 

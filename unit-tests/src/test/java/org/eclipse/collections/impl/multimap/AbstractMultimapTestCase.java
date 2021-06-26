@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -164,7 +164,10 @@ public abstract class AbstractMultimapTestCase
         Multimap<Integer, String> multimap =
                 this.newMultimapWithKeysValues(2, "2", 2, "1", 3, "3", 3, "3");
         multimap.forEachKeyMultiValues((key, values) -> collection.add(Tuples.pair(key, values)));
-        Assert.assertEquals(UnifiedSet.newSetWith(Tuples.pair(2, this.createCollection("2", "1")), Tuples.pair(3, this.createCollection("3", "3"))), collection);
+        MutableSet<Pair<Integer, MutableCollection<String>>> expected = Sets.mutable.with(
+                Tuples.pair(2, this.createCollection("2", "1")),
+                Tuples.pair(3, this.createCollection("3", "3")));
+        Assert.assertEquals(expected, collection);
     }
 
     @Test

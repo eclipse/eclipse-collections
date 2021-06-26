@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,16 +10,15 @@
 
 package org.eclipse.collections.impl.multimap.bag;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
-import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimapTestCase;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -49,14 +48,33 @@ public class ImmutableBagMultimapTest extends AbstractImmutableMultimapTestCase
     @Test
     public void forEachKeyMultiValue()
     {
-        MutableSet<Pair<String, Iterable<Integer>>> collection = UnifiedSet.newSet();
+        MutableBag<Pair<String, Iterable<Integer>>> collection = Bags.mutable.empty();
         HashBagMultimap<String, Integer> multimap = HashBagMultimap.newMultimap();
         multimap.put("Two", 2);
         multimap.put("Two", 1);
         multimap.put("Three", 3);
         multimap.put("Three", 3);
         multimap.toImmutable().forEachKeyMultiValues((key, values) -> collection.add(Tuples.pair(key, values)));
-        Assert.assertEquals(UnifiedSet.newSetWith(Tuples.pair("Two", HashBag.newBagWith(2, 1)), Tuples.pair("Three", HashBag.newBagWith(3, 3))), collection);
+        MutableBag<Pair<String, MutableBag<Integer>>> expected = Bags.mutable.with(
+                Tuples.pair("Two", Bags.mutable.with(2, 1)),
+                Tuples.pair("Three", Bags.mutable.with(3, 3)));
+        Assert.assertEquals(expected, collection);
+    }
+
+    @Test
+    public void forEachKeyImmutableBag()
+    {
+        MutableBag<Pair<String, ImmutableBag<Integer>>> collection = Bags.mutable.empty();
+        HashBagMultimap<String, Integer> multimap = HashBagMultimap.newMultimap();
+        multimap.put("Two", 2);
+        multimap.put("Two", 1);
+        multimap.put("Three", 3);
+        multimap.put("Three", 3);
+        multimap.toImmutable().forEachKeyImmutableBag((key, values) -> collection.add(Tuples.pair(key, values)));
+        ImmutableBag<Pair<String, ImmutableBag<Integer>>> expected = Bags.immutable.with(
+                Tuples.pair("Two", Bags.immutable.with(2, 1)),
+                Tuples.pair("Three", Bags.immutable.with(3, 3)));
+        Assert.assertEquals(expected, collection);
     }
 
     @Override
