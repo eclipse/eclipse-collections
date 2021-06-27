@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.DoubleSummaryStatistics;
@@ -235,11 +236,51 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void containsAnyIterable()
+    {
+        RichIterable<Integer> collection = this.newWith(1, 2, 3, 4);
+        Assert.assertTrue(collection.containsAnyIterable(Lists.mutable.with(0, 1)));
+        Assert.assertTrue(collection.containsAnyIterable(Arrays.asList(0, 1)));
+        Assert.assertFalse(collection.containsAnyIterable(Lists.mutable.with(5, 6)));
+        Assert.assertFalse(collection.containsAnyIterable(Arrays.asList(5, 6)));
+    }
+
+    @Test
+    public void containsNoneIterable()
+    {
+        RichIterable<Integer> collection = this.newWith(1, 2, 3, 4);
+        Assert.assertTrue(collection.containsNoneIterable(Lists.mutable.with(0, 5, 6, 7)));
+        Assert.assertTrue(collection.containsNoneIterable(Arrays.asList(0, 5, 6, 7)));
+        Assert.assertFalse(collection.containsNoneIterable(Lists.mutable.with(0, 1, 5, 6)));
+        Assert.assertFalse(collection.containsNoneIterable(Arrays.asList(0, 1, 5, 6)));
+    }
+
+    @Test
     public void containsAllArray()
     {
         RichIterable<Integer> collection = this.newWith(1, 2, 3, 4);
         Assert.assertTrue(collection.containsAllArguments(1, 2));
         Assert.assertFalse(collection.containsAllArguments(1, 5));
+    }
+
+    @Test
+    public void containsAnyCollection()
+    {
+        RichIterable<Integer> collection = this.newWith(1, 2, 3, 4);
+        Assert.assertTrue(collection.containsAny(Lists.mutable.with(0, 1)));
+        Assert.assertTrue(collection.containsAny(Arrays.asList(0, 1)));
+        Assert.assertFalse(collection.containsAny(Lists.mutable.with(5, 6)));
+        Assert.assertFalse(collection.containsAny(Arrays.asList(5, 6)));
+    }
+
+    @Test
+    public void containsNoneCollection()
+    {
+        RichIterable<Integer> collection = this.newWith(1, 2, 3, 4);
+        Assert.assertTrue(collection.containsNone(Lists.mutable.with(0, 5, 6, 7)));
+        Assert.assertTrue(collection.containsNone(Arrays.asList(0, 5, 6, 7)));
+        Assert.assertFalse(collection.containsNone(Lists.mutable.with(0, 1, 5, 6)));
+        Assert.assertFalse(collection.containsNone(Arrays.asList(0, 1, 5, 6)));
     }
 
     @Test
