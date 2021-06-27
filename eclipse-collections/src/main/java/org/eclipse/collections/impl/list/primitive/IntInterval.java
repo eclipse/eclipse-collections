@@ -38,11 +38,13 @@ import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.IntList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
+import org.eclipse.collections.api.stack.primitive.MutableIntStack;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.IntStacks;
 import org.eclipse.collections.impl.lazy.primitive.CollectIntToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyIntIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
@@ -949,6 +951,12 @@ public final class IntInterval
     public Spliterator.OfInt spliterator()
     {
         return new IntIntervalSpliterator(this.from, this.to, this.step);
+    }
+
+    @Override
+    public MutableIntStack toStack()
+    {
+        return IntStacks.mutable.withAll(this);
     }
 
     private class IntIntervalIterator implements IntIterator

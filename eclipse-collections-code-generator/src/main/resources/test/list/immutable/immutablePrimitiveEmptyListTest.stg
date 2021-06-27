@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
@@ -224,6 +225,13 @@ public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTes
         Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("0")>));
         Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("100")>));
         Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("-1")>));
+    }
+
+    @Test
+    public void toStack()
+    {
+        Mutable<name>Stack stack = new Immutable<name>EmptyList().toStack();
+        Assert.assertTrue(stack.isEmpty());
     }
 }
 

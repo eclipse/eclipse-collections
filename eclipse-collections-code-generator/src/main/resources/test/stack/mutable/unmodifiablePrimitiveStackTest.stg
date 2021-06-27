@@ -19,6 +19,7 @@ package org.eclipse.collections.impl.stack.mutable.primitive;
 
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.stack.primitive.Abstract<name>StackTestCase;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -109,6 +110,13 @@ public class Unmodifiable<name>StackTest extends Abstract<name>StackTestCase
         Mutable<name>Iterator iterator = (Mutable<name>Iterator) <type>Iterable.<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
         Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Test
+    public void toStack()
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 

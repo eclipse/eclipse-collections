@@ -20,6 +20,7 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.stack.immutable.primitive;
 
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
@@ -66,6 +67,13 @@ public class Immutable<name>ArrayStackTest extends AbstractImmutable<name>StackT
         Immutable<name>ArrayStack iterable = Immutable<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
         Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
+    }
+
+    @Test
+    public void toStack()
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.withAllReversed(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).toStack(), stack);
     }
 }
 

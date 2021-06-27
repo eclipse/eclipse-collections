@@ -19,7 +19,9 @@ package org.eclipse.collections.impl.list.mutable.primitive;
 
 import java.lang.reflect.Field;
 
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.internal.primitive.<name>IterableIterate;
 import org.eclipse.collections.impl.utility.internal.primitive.<name>IteratorIterate;
@@ -168,6 +170,13 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
         list.add(<(literal.(type))("5")>);
         list.removeAtIndex(0);
         Assert.assertEquals(list, list.toImmutable());
+    }
+
+    @Test
+    public void toStack()
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.withAll(this.classUnderTest());
+        Assert.assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 

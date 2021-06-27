@@ -18,7 +18,9 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.list.immutable.primitive;
 
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -95,6 +97,14 @@ public class Immutable<name>ArrayListTest extends AbstractImmutable<name>ListTes
         Assert.assertEquals(4, list.binarySearch(<(literal.(type))("9")>));
         Assert.assertEquals(-6, list.binarySearch(<(literal.(type))("10")>));
     }
+
+    @Test
+    public void toStack()
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.withAll(this.classUnderTest());
+        Assert.assertEquals(stack, this.classUnderTest().toStack());
+    }
+
 }
 
 >>

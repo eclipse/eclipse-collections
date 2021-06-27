@@ -36,8 +36,10 @@ import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.set.primitive.BooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
+import org.eclipse.collections.api.stack.primitive.MutableBooleanStack;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
+import org.eclipse.collections.impl.factory.primitive.BooleanStacks;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseBooleanIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -969,6 +971,12 @@ public final class BooleanArrayList
                 this.items.set(i, in.readBoolean());
             }
         }
+    }
+
+    @Override
+    public MutableBooleanStack toStack()
+    {
+        return BooleanStacks.mutable.withAll(this);
     }
 
     private class InternalBooleanIterator implements MutableBooleanIterator

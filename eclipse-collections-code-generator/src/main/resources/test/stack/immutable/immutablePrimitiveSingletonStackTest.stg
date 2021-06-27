@@ -21,7 +21,9 @@ package org.eclipse.collections.impl.stack.immutable.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
@@ -111,6 +113,13 @@ public class Immutable<name>SingletonStackTest extends AbstractImmutable<name>St
         Immutable<name>SingletonStack iterable = new Immutable<name>SingletonStack(<(literal.(type))("1")>);
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("1")>), Mutable<wrapperName>::add);
         Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("2")>), result);
+    }
+
+    @Test
+    public void toStack()
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.with(<(literal.(type))("1")>);
+        Assert.assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 

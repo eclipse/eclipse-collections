@@ -18,6 +18,8 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.list.mutable.primitive;
 
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -50,6 +52,13 @@ public class Synchronized<name>ListTest extends Abstract<name>ListTestCase
         Assert.assertSame(listWithLockObject, listWithLockObject.asSynchronized());
         Assert.assertSame(list, list.asSynchronized());
         Assert.assertEquals(list, list.asSynchronized());
+    }
+
+    @Test
+    public void toStack()
+    {
+       Mutable<name>Stack stack = <name>Stacks.mutable.withAll(this.classUnderTest());
+       Assert.assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 

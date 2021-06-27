@@ -35,10 +35,12 @@ import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.IntList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
+import org.eclipse.collections.api.stack.primitive.MutableIntStack;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.IntStacks;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
@@ -797,6 +799,12 @@ public class CodePointAdapter
     public Spliterator.OfInt spliterator()
     {
         return this.adapted.codePoints().spliterator();
+    }
+
+    @Override
+    public MutableIntStack toStack()
+    {
+        return IntStacks.mutable.withAll(this);
     }
 
     private class InternalIntIterator implements IntIterator

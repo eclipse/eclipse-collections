@@ -21,6 +21,8 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 <if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.block.factory.Comparators;<endif>
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.junit.Assert;
@@ -378,6 +380,13 @@ public class Unmodifiable<name>ListTest extends Abstract<name>ListTestCase
     public void <type>Iterator_throws_for_consecutive_remove()
     {
         // Not applicable for Unmodifiable*
+    }
+
+    @Test
+    public void toStack()
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.withAll(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 
