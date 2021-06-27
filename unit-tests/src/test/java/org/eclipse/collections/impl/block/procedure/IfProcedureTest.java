@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.Iterate;
+import org.eclipse.collections.impl.utility.StringIterate;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -38,5 +39,16 @@ public class IfProcedureTest
         Verify.assertContains("1", list1);
         Assert.assertEquals(1, list2.size());
         Verify.assertContains("2", list2);
+    }
+
+    @Test
+    public void toStringTest()
+    {
+        MutableList<String> list1 = Lists.mutable.of();
+        MutableList<String> list2 = Lists.mutable.of();
+        Procedure<String> ifProcedure = new IfProcedure<>("1"::equals, list1::add, list2::add);
+        String s = ifProcedure.toString();
+        Assert.assertNotNull(s);
+        Assert.assertTrue(StringIterate.notEmptyOrWhitespace(s));
     }
 }
