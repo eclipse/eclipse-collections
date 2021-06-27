@@ -521,7 +521,7 @@ public class SynchronizedMutableMap<K, V>
     {
         synchronized (this.lock)
         {
-            return Maps.immutable.withAll(this);
+            return Maps.immutable.withMap(this);
         }
     }
 }

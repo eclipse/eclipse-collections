@@ -2445,6 +2445,6 @@ public class ConcurrentHashMapUnsafe<K, V>
     @Override
     public ImmutableMap<K, V> toImmutable()
     {
-        return Maps.immutable.ofMap(this);
+        return Maps.immutable.withMap(this);
     }
 }
