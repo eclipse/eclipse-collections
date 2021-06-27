@@ -64,6 +64,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -106,6 +107,7 @@ import org.eclipse.collections.impl.stack.mutable.primitive.FloatArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.IntArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.LongArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.ShortArrayStack;
+import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
@@ -165,31 +167,32 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     }
 
     @Override
-    public ImmutableStack<T> pop()
+    public Pair<T, ImmutableStack<T>> pop()
     {
         this.checkEmptyStack();
         FastList<T> newDelegate = FastList.newList(this.delegate);
-        newDelegate.remove(this.delegate.size() - 1);
-        return new ImmutableArrayStack<>(newDelegate);
+        T removedElement = newDelegate.remove(this.delegate.size() - 1);
+        return Tuples.pair(removedElement, new ImmutableArrayStack<>(newDelegate));
     }
 
     @Override
-    public ImmutableStack<T> pop(int count)
+    public Pair<ListIterable<T>, ImmutableStack<T>> pop(int count)
     {
         this.checkNegativeCount(count);
         if (this.checkZeroCount(count))
         {
-            return this;
+            return Tuples.pair(Lists.immutable.empty(), this);
         }
         this.checkEmptyStack();
         this.checkSizeLessThanCount(count);
         FastList<T> newDelegate = this.delegate.clone();
+        FastList<T> removedObjects = FastList.newList();
         while (count > 0)
         {
-            newDelegate.remove(this.delegate.size() - 1);
+            removedObjects.add(newDelegate.remove(this.delegate.size() - 1));
             count--;
         }
-        return new ImmutableArrayStack<>(newDelegate);
+        return Tuples.pair(removedObjects, new ImmutableArrayStack<>(newDelegate));
     }
 
     @Override
