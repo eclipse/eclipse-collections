@@ -1,0 +1,8 @@
+org.eclipse.collections.beanvalidation.extractors.BooleanIterableValueExtractor
+org.eclipse.collections.beanvalidation.extractors.ByteIterableValueExtractor
+org.eclipse.collections.beanvalidation.extractors.CharIterableValueExtractor
+org.eclipse.collections.beanvalidation.extractors.DoubleIterableValueExtractor
+org.eclipse.collections.beanvalidation.extractors.FloatIterableValueExtractor
+org.eclipse.collections.beanvalidation.extractors.IntIterableValueExtractor
+org.eclipse.collections.beanvalidation.extractors.LongIterableValueExtractor
+org.eclipse.collections.beanvalidation.extractors.ShortIterableValueExtractor
