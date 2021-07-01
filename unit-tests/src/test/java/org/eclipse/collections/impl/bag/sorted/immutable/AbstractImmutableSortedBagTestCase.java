@@ -371,6 +371,7 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     }
 
     @Override
+    @Test
     public void toSortedSet()
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest();
@@ -379,6 +380,7 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     }
 
     @Override
+    @Test
     public void toSortedSetWithComparator()
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest(Comparators.reverseNaturalOrder());

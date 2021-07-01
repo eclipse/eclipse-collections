@@ -395,6 +395,30 @@ public abstract class AbstractImmutableSortedSetTestCase
                 integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        Assert.assertEquals(
+                Lists.mutable.with(4, 2),
+                integers.selectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        Assert.assertEquals(
+                Lists.mutable.with(3, 1),
+                integers.rejectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
     @Test
     public void collectToTarget()
     {

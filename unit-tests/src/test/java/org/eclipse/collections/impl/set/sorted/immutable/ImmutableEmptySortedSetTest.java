@@ -521,6 +521,32 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
                 integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
+    /**
+     * @since 11.0.
+     */
+    @Override
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        Assert.assertEquals(
+                Lists.mutable.empty(),
+                integers.selectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        Assert.assertEquals(
+                Lists.mutable.empty(),
+                integers.selectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
     @Override
     @Test
     public void collectWith()

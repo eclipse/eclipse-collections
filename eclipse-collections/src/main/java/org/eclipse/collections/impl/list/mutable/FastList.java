@@ -62,6 +62,7 @@ import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFun
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -1004,6 +1005,38 @@ public class FastList<T>
     public <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
     {
         return InternalArrayIterate.collectWithIndex(this.items, this.size, function, target);
+    }
+
+    /**
+     * @since 11.0
+     */
+    public MutableList<T> selectWithIndex(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.selectWithIndex(predicate, FastList.newList());
+    }
+
+    /**
+     * @since 11.0
+     */
+    public MutableList<T> rejectWithIndex(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.rejectWithIndex(predicate, FastList.newList());
+    }
+
+    /**
+     * @since 11.0
+     */
+    public <R extends Collection<T>> R selectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        return InternalArrayIterate.selectWithIndex(this.items, this.size, predicate, target);
+    }
+
+    /**
+     * @since 11.0
+     */
+    public <R extends Collection<T>> R rejectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        return InternalArrayIterate.rejectWithIndex(this.items, this.size, predicate, target);
     }
 
     @Override

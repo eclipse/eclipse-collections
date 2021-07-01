@@ -339,6 +339,32 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
                 integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        MutableSortedSet<Integer> integers = this.newWith(4, 5, 6);
+        MutableList<Integer> expected = Lists.mutable.with(4, 6);
+        Assert.assertEquals(
+                expected,
+                integers.selectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        MutableSortedSet<Integer> integers = this.newWith(4, 5, 6);
+        MutableList<Integer> expected = Lists.mutable.with(5);
+        Assert.assertEquals(
+                expected,
+                integers.rejectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
     @Override
     @Test
     public void collectWith()

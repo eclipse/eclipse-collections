@@ -36,6 +36,7 @@ import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFun
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -736,6 +737,54 @@ public class SynchronizedMutableList<T>
         synchronized (this.getLock())
         {
             return this.getDelegate().collectWithIndex(function, target);
+        }
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    public MutableList<T> selectWithIndex(ObjectIntPredicate<? super T> predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().selectWithIndex(predicate);
+        }
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    public MutableList<T> rejectWithIndex(ObjectIntPredicate<? super T> predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().rejectWithIndex(predicate);
+        }
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    public <R extends Collection<T>> R selectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().selectWithIndex(predicate, target);
+        }
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    public <R extends Collection<T>> R rejectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().rejectWithIndex(predicate, target);
         }
     }
 

@@ -37,6 +37,7 @@ import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ImmutableList;
@@ -260,6 +261,38 @@ final class ImmutableArrayList<T>
     public <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
     {
         return InternalArrayIterate.collectWithIndex(this.items, this.items.length, function, target);
+    }
+
+    /**
+     * @since 11.0
+     */
+    public ImmutableList<T> selectWithIndex(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.selectWithIndex(predicate, FastList.newList()).toImmutable();
+    }
+
+    /**
+     * @since 11.0
+     */
+    public ImmutableList<T> rejectWithIndex(ObjectIntPredicate<? super T> predicate)
+    {
+        return this.rejectWithIndex(predicate, FastList.newList()).toImmutable();
+    }
+
+    /**
+     * @since 11.0
+     */
+    public <R extends Collection<T>> R selectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        return InternalArrayIterate.selectWithIndex(this.items, this.items.length, predicate, target);
+    }
+
+    /**
+     * @since 11.0
+     */
+    public <R extends Collection<T>> R rejectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        return InternalArrayIterate.rejectWithIndex(this.items, this.items.length, predicate, target);
     }
 
     @Override

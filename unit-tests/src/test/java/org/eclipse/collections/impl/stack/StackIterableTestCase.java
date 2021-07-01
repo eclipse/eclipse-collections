@@ -256,6 +256,30 @@ public abstract class StackIterableTestCase
         Assert.assertEquals(expected, stack.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        StackIterable<String> stack = this.newStackFromTopToBottom("4", "3", "2", "1");
+
+        List<String> expected = Lists.mutable.with("4", "2");
+        Assert.assertEquals(expected, stack.selectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        StackIterable<String> stack = this.newStackFromTopToBottom("4", "3", "2", "1");
+
+        List<String> expected = Lists.mutable.with("3", "1");
+        Assert.assertEquals(expected, stack.rejectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
     @Override
     @Test
     public void collectBoolean()

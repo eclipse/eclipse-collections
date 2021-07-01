@@ -40,6 +40,7 @@ import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
@@ -1166,5 +1167,51 @@ public final class InternalArrayIterate
             T item = items[i];
             items[i] = operator.apply(item);
         }
+    }
+
+    /**
+     * Adds all array elements to the target Collection that return true when evaluating the specified predicate which is
+     * supplied each element and its relative index.
+     *
+     * @since 11.0
+     */
+    public static <R extends Collection<T>, T> R selectWithIndex(
+            T[] array,
+            int size,
+            ObjectIntPredicate<? super T> predicate,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            T item = array[i];
+            if (predicate.accept(item, i))
+            {
+                target.add(item);
+            }
+        }
+        return target;
+    }
+
+    /**
+     * Adds all array elements to the target Collection that return false when evaluating the specified predicate which is
+     * supplied each element and its relative index.
+     *
+     * @since 11.0
+     */
+    public static <R extends Collection<T>, T> R rejectWithIndex(
+            T[] array,
+            int size,
+            ObjectIntPredicate<? super T> predicate,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            T item = array[i];
+            if (!predicate.accept(item, i))
+            {
+                target.add(item);
+            }
+        }
+        return target;
     }
 }

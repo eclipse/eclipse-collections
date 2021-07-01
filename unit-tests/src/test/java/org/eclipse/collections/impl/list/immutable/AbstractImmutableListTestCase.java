@@ -31,6 +31,7 @@ import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
@@ -665,6 +666,58 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         Assert.assertEquals(
                 Sets.mutable.withAll(Interval.oneTo(pairs.size())),
                 setOfPairs.collect(ObjectIntPair::getOne, Sets.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndex()
+    {
+        ImmutableList<Integer> selected1 = this.classUnderTest().selectWithIndex((each, index) -> index < each);
+        ImmutableList<Integer> selected2 = this.classUnderTest().selectWithIndex((each, index) -> index > each);
+        Assert.assertEquals(this.classUnderTest(), selected1);
+        Assert.assertEquals(Lists.immutable.empty(), selected2);
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        MutableSet<Integer> selected1 = this.classUnderTest()
+                .selectWithIndex((each, index) -> index < each, Sets.mutable.empty());
+        MutableSet<Integer> selected2 = this.classUnderTest()
+                .selectWithIndex((each, index) -> index > each, Sets.mutable.empty());
+        Assert.assertEquals(this.classUnderTest().toSet(), selected1);
+        Assert.assertEquals(Sets.immutable.empty(), selected2);
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndex()
+    {
+        ImmutableList<Integer> rejected1 = this.classUnderTest().rejectWithIndex((each, index) -> index < each);
+        ImmutableList<Integer> rejected2 = this.classUnderTest().rejectWithIndex((each, index) -> index > each);
+        Assert.assertEquals(Lists.immutable.empty(), rejected1);
+        Assert.assertEquals(this.classUnderTest(), rejected2);
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        MutableSet<Integer> rejected1 = this.classUnderTest()
+                .rejectWithIndex((each, index) -> index < each, Sets.mutable.empty());
+        MutableSet<Integer> rejected2 = this.classUnderTest()
+                .rejectWithIndex((each, index) -> index > each, Sets.mutable.empty());
+        Assert.assertEquals(Sets.immutable.empty(), rejected1);
+        Assert.assertEquals(this.classUnderTest().toSet(), rejected2);
     }
 
     @Test
