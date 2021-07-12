@@ -33,6 +33,7 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
@@ -162,6 +163,62 @@ public abstract class AbstractListTestCase
         Assert.assertEquals(
                 Sets.mutable.with(3, 2, 1, 0),
                 setOfPairs.collect(ObjectIntPair::getOne, Sets.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndex()
+    {
+        MutableList<Integer> integers = this.newWith(0, 1, 2, 3);
+        MutableList<Integer> selected1 = integers.selectWithIndex((each, index) -> (each + index) % 2 == 0);
+        MutableList<Integer> selected2 = integers.selectWithIndex((each, index) -> index % 2 == 0);
+        Assert.assertEquals(this.newWith(0, 1, 2, 3), selected1);
+        Assert.assertEquals(this.newWith(0, 2), selected2);
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        MutableList<Integer> integers = this.newWith(0, 1, 2, 3);
+        MutableSet<Integer> selected1 =
+                integers.selectWithIndex((each, index) -> (each + index) % 2 == 0, Sets.mutable.empty());
+        MutableSet<Integer> selected2 =
+                integers.selectWithIndex((each, index) -> index % 2 == 0, Sets.mutable.empty());
+        Assert.assertEquals(Sets.mutable.with(0, 1, 2, 3), selected1);
+        Assert.assertEquals(Sets.mutable.with(0, 2), selected2);
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndex()
+    {
+        MutableList<Integer> integers = this.newWith(0, 1, 2, 3);
+        MutableList<Integer> rejected1 = integers.rejectWithIndex((each, index) -> (each + index) % 2 == 0);
+        MutableList<Integer> rejected2 = integers.rejectWithIndex((each, index) -> index % 2 == 0);
+        Assert.assertEquals(this.newWith(), rejected1);
+        Assert.assertEquals(this.newWith(1, 3), rejected2);
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        MutableList<Integer> integers = this.newWith(0, 1, 2, 3);
+        MutableSet<Integer> rejected1 =
+                integers.rejectWithIndex((each, index) -> (each + index) % 2 == 0, Sets.mutable.empty());
+        MutableSet<Integer> rejected2 =
+                integers.rejectWithIndex((each, index) -> index % 2 == 0, Sets.mutable.empty());
+        Assert.assertEquals(Sets.mutable.empty(), rejected1);
+        Assert.assertEquals(Sets.mutable.with(1, 3), rejected2);
     }
 
     @Override

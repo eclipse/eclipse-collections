@@ -528,6 +528,7 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
     }
 
     @Override
+    @Test
     public void toSortedSet()
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest();
@@ -536,6 +537,7 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
     }
 
     @Override
+    @Test
     public void toSortedSetWithComparator()
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest(Comparators.reverseNaturalOrder());

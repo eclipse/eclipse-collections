@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -340,6 +340,32 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         Assert.assertEquals(
                 Lists.mutable.empty(),
                 integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
+        Assert.assertEquals(
+                Lists.mutable.empty(),
+                integers.selectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
+        Assert.assertEquals(
+                Lists.mutable.empty(),
+                integers.rejectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
     }
 
     @Override

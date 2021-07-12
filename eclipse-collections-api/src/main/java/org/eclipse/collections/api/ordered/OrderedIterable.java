@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFun
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Stacks;
@@ -282,6 +283,30 @@ public interface OrderedIterable<T> extends RichIterable<T>
     {
         int[] index = {0};
         return this.collect(each -> function.valueOf(each, index[0]++), target);
+    }
+
+    /**
+     * Adds all elements to the target Collection that return true when evaluating the specified predicate which is
+     * supplied each element and its relative index.
+     *
+     * @since 11.0
+     */
+    default <R extends Collection<T>> R selectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        int[] index = {0};
+        return this.select(each -> predicate.accept(each, index[0]++), target);
+    }
+
+    /**
+     * Adds all elements to the target Collection that return false when evaluating the specified predicate which is
+     * supplied each element and its relative index.
+     *
+     * @since 11.0
+     */
+    default <R extends Collection<T>> R rejectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        int[] index = {0};
+        return this.reject(each -> predicate.accept(each, index[0]++), target);
     }
 
     @Override

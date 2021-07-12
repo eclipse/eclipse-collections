@@ -433,6 +433,30 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
                 integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        MutableSortedMap<Integer, String> integers = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4");
+        Assert.assertEquals(
+                Lists.mutable.with("1", "3"),
+                integers.selectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        MutableSortedMap<Integer, String> integers = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4");
+        Assert.assertEquals(
+                Lists.mutable.with("2", "4"),
+                integers.rejectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
+    }
+
     @Override
     @Test
     public void flatten_value()

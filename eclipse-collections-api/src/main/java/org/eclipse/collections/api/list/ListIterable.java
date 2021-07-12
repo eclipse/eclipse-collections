@@ -32,6 +32,7 @@ import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFun
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.primitive.BooleanList;
@@ -137,6 +138,30 @@ public interface ListIterable<T>
     {
         int[] index = {0};
         return this.collect(each -> function.valueOf(each, index[0]++));
+    }
+
+    /**
+     * Returns a new ListIterable with all elements of the collection that return true when evaluating the specified
+     * predicate which is supplied each element and its relative index.
+     *
+     * @since 11.0
+     */
+    default ListIterable<T> selectWithIndex(ObjectIntPredicate<? super T> predicate)
+    {
+        int[] index = {0};
+        return this.select(each -> predicate.accept(each, index[0]++));
+    }
+
+    /**
+     * Returns a new ListIterable with all elements of the collection that return false when evaluating the specified
+     * predicate which is supplied each element and its relative index.
+     *
+     * @since 11.0
+     */
+    default ListIterable<T> rejectWithIndex(ObjectIntPredicate<? super T> predicate)
+    {
+        int[] index = {0};
+        return this.select(each -> predicate.accept(each, index[0]++));
     }
 
     @Override

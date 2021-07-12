@@ -33,6 +33,7 @@ import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFun
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.SortedSets;
@@ -351,6 +352,30 @@ public class SynchronizedSortedSet<T>
         synchronized (this.getLock())
         {
             return this.getDelegate().collectWithIndex(function, target);
+        }
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    public <R extends Collection<T>> R selectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().selectWithIndex(predicate, target);
+        }
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Override
+    public <R extends Collection<T>> R rejectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().rejectWithIndex(predicate, target);
         }
     }
 
