@@ -1264,6 +1264,9 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
                 {
                     <name1><name2>HashMap.this.removeKey(EMPTY_KEY);
                 }
+            }
+            if (<name1><name2>HashMap.this.sentinelValues != null)
+            {
                 if (<name1><name2>HashMap.this.sentinelValues.containsOneKey && <(equals.(type2))({item}, {<name1><name2>HashMap.this.sentinelValues.oneValue})>)
                 {
                     <name1><name2>HashMap.this.removeKey(REMOVED_KEY);

@@ -226,6 +226,16 @@ public class <name1><name2>HashMapValuesTest extends AbstractMutable<name2>Colle
         Assert.assertFalse(map.contains(<(literal.(type2))("2")>));
         Assert.assertFalse(map.contains(<(literal.(type2))("3")>));
         Assert.assertTrue(map.isEmpty());
+
+        map = <name1><name2>HashMap.newWithKeysValues(<["0", "2", "3"]:keyValue(); separator=", ">);
+        collection = map.values();
+        Assert.assertTrue(collection.removeAll(<(literal.(type2))("0")>, <(literal.(type2))("5")>));
+        Assert.assertFalse(collection.contains(<(literal.(type2))("0")>));
+        Assert.assertTrue(collection.contains(<(literal.(type2))("2")>));
+        Assert.assertTrue(collection.contains(<(literal.(type2))("3")>));
+        Assert.assertFalse(map.contains(<(literal.(type2))("0")>));
+        Assert.assertTrue(map.contains(<(literal.(type2))("2")>));
+        Assert.assertTrue(map.contains(<(literal.(type2))("3")>));
     }
 
     @Override
