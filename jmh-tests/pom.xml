@@ -16,7 +16,7 @@
     <parent>
         <artifactId>eclipse-collections-parent</artifactId>
         <groupId>org.eclipse.collections</groupId>
-        <version>11.0.0-SNAPSHOT</version>
+        <version>11.0.0.M3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -27,7 +27,7 @@
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sonar.skip>true</sonar.skip>
-        <jmh.version>1.23</jmh.version>
+        <jmh.version>1.32</jmh.version>
     </properties>
 
     <dependencies>
