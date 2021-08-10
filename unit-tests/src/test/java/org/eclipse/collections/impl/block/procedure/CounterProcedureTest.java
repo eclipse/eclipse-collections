@@ -32,3 +32,4 @@ public class CounterProcedureTest
         Assert.assertEquals(1, counterProcedure.getCount());
     }
 }
+
