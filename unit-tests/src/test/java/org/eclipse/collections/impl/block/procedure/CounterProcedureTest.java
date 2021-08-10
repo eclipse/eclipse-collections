@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.impl.block.procedure;
 
-import org.eclipse.collections.api.block.procedure.Procedure;
 import org.junit.Assert;
 import org.junit.Test;
 
