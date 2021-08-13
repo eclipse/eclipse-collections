@@ -58,6 +58,7 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.SortedBags;
+import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.list.ImmutableList;
@@ -67,6 +68,7 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
+import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -693,6 +695,87 @@ public final class Collectors2
                     return r1;
                 },
                 EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * <p>Returns the elements as a MutableSortedMap that has been sorted after applying the keyFunction and valueFunction to each element.</p>
+     * <p>Examples:</p>
+     * {@code MutableSortedMap<Integer, String> map1 =
+     * Interval.oneTo(5).stream().collect(Collectors2.toSortedMap(Functions.identity(), Object::toString));}<br>
+     * {@code MutableSortedMap<Integer, String> map2 =
+     * Interval.oneTo(5).reduceInPlace(Collectors2.toSortedMap(Functions.identity(), Object::toString));}
+     * <p>
+     * Equivalent to using @{@link RichIterable#toSortedMap(Function, Function)}}
+     * </p>
+     * {@code MutableSortedMap<Integer, String> map = Interval.oneTo(5).toSortedMap(Functions.identity(), Object::toString);}
+     *
+     * @since 11.0
+     */
+    public static <T, K, V> Collector<T, ?, MutableSortedMap<K, V>> toSortedMap(
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction)
+    {
+        return Collector.of(
+                SortedMaps.mutable::empty,
+                (map, each) -> map.put(keyFunction.valueOf(each), valueFunction.valueOf(each)),
+                (r1, r2) ->
+                {
+                    r1.putAll(r2);
+                    return r1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * <p>Returns the elements as a MutableSortedMap that has been sorted using the specified comparator after applying the keyFunction and valueFunction to each element.</p>
+     * <p>Examples:</p>
+     * {@code MutableSortedMap<Integer, String> map1 =
+     * Interval.oneTo(5).stream().collect(Collectors2.toSortedMap(Comparators.naturalOrder(), Functions.identity(), Object::toString));}<br>
+     * {@code MutableSortedMap<Integer, String> map2 =
+     * Interval.oneTo(5).reduceInPlace(Collectors2.toSortedMap(Comparators.naturalOrder(), Functions.identity(), Object::toString));}
+     * <p>
+     * Equivalent to using @{@link RichIterable#toSortedMap(Comparator, Function, Function)} (Comparator)}}
+     * </p>
+     * {@code MutableSortedMap<Integer, String> map = Interval.oneTo(5).toMap(Comparators.naturalOrder(), Functions.identity(), Object::toString);}
+     *
+     * @since 11.0
+     */
+    public static <T, K, V> Collector<T, ?, MutableSortedMap<K, V>> toSortedMap(
+            Comparator<? super K> comparator,
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction)
+    {
+        return Collector.of(
+                () -> SortedMaps.mutable.with(comparator),
+                (map, each) -> map.put(keyFunction.valueOf(each), valueFunction.valueOf(each)),
+                (r1, r2) ->
+                {
+                    r1.putAll(r2);
+                    return r1;
+                },
+                Collector.Characteristics.UNORDERED);
+    }
+
+    /**
+     * <p>Returns the elements as a MutableSortedMap that has been sorted using the specified comparator after applying the keyFunction and valueFunction to each element.</p>
+     * <p>Examples:</p>
+     * {@code MutableSortedMap<Integer, String> map1 =
+     * Interval.oneTo(5).stream().collect(Collectors2.toSortedMap(Object::toString, Functions.identity(), Object::toString));}<br>
+     * {@code MutableSortedMap<Integer, String> map2 =
+     * Interval.oneTo(5).reduceInPlace(Collectors2.toSortedMap(Object::toString, Functions.identity(), Object::toString));}
+     * <p>
+     * Equivalent to using @{@link RichIterable#toSortedMapBy(Function, Function, Function)} (Comparator)}}
+     * </p>
+     * {@code MutableSortedMap<Integer, String> map = Interval.oneTo(5).toMap(Object::toString, Functions.identity(), Object::toString);}
+     *
+     * @since 11.0
+     */
+    public static <T, KK extends Comparable<? super KK>, K, V> Collector<T, ?, MutableSortedMap<K, V>> toSortedMapBy(
+            Function<? super K, KK> sortBy,
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction)
+    {
+        return Collectors2.toSortedMap(Comparators.byFunction(sortBy), keyFunction, valueFunction);
     }
 
     /**
