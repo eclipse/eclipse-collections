@@ -30,7 +30,7 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java-version }}
       - name: Enable Maven Cache
-        uses: actions/cache@v2.1.5
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -45,7 +45,7 @@ jobs:
         env:
           MAVEN_OPTS: "-Xmx1g"
       - name: Archive pitest reports
-        uses: actions/upload-artifact@v2.2.3
+        uses: actions/upload-artifact@v2.2.4
         with:
           name: pit-reports
           path: unit-tests/target/pit-reports
