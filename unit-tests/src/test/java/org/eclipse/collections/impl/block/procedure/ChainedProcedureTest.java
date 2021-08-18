@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.Iterate;
+import org.eclipse.collections.impl.utility.StringIterate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,5 +35,14 @@ public class ChainedProcedureTest
 
         Assert.assertEquals(list, list1);
         Assert.assertEquals(list, list2);
+    }
+
+    @Test
+    public void toStringTest()
+    {
+        Procedure<String> procedure = new CollectionAddProcedure<>(Lists.mutable.of());
+        String s = procedure.toString();
+        Assert.assertNotNull(s);
+        Assert.assertTrue(StringIterate.notEmptyOrWhitespace(s));
     }
 }
