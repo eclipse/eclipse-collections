@@ -14,9 +14,12 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.bag.primitive;
 
+import java.util.Collection;
+import java.util.Set;
 import java.util.StringJoiner;
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 <if(!primitive.intPrimitive)>import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;<endif>
@@ -107,6 +110,37 @@ public interface <name>Bag extends <name>Iterable
 
     @Override
     \<V> Bag\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * Same as {@link #collect(<name>ToObjectFunction)} , only the results are added to the target Collection.
+     *
+     * @since 8.1.
+     */
+    default \<V, R extends Collection\<V>\> R collect(<name>ToObjectFunction\<? extends V> function, R target)
+    {
+        if (target instanceof MutableBagIterable\<?>)
+        {
+            MutableBagIterable\<V> targetBag = (MutableBagIterable\<V>) target;
+
+            this.forEachWithOccurrences((each, occurrences) ->
+                    targetBag.addOccurrences(function.valueOf(each), occurrences));
+        }
+        else if (target instanceof Set\<?>)
+        {
+            this.forEachWithOccurrences((each, occurrences) -> target.add(function.valueOf(each)));
+        }
+        else
+        {
+            this.forEachWithOccurrences((each, occurrences) -> {
+                V value = function.valueOf(each);
+                for (int i = 0; i \< occurrences; i++)
+                {
+                    target.add(value);
+                }
+            });
+        }
+        return target;
+    }
 
     /**
      * Follows the same general contract as {@link Bag#equals(Object)}.
