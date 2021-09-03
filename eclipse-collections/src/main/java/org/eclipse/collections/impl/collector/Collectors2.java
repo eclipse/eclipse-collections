@@ -68,6 +68,7 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
+import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -736,7 +737,7 @@ public final class Collectors2
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedMap(Comparator, Function, Function)} (Comparator)}}
      * </p>
-     * {@code MutableSortedMap<Integer, String> map = Interval.oneTo(5).toMap(Comparators.naturalOrder(), Functions.identity(), Object::toString);}
+     * {@code MutableSortedMap<Integer, String> map = Interval.oneTo(5).toSortedMap(Comparators.naturalOrder(), Functions.identity(), Object::toString);}
      *
      * @since 11.0
      */
@@ -764,9 +765,9 @@ public final class Collectors2
      * {@code MutableSortedMap<Integer, String> map2 =
      * Interval.oneTo(5).reduceInPlace(Collectors2.toSortedMap(Object::toString, Functions.identity(), Object::toString));}
      * <p>
-     * Equivalent to using @{@link RichIterable#toSortedMapBy(Function, Function, Function)} (Comparator)}}
+     * Equivalent to using @{@link RichIterable#toSortedMapBy(Function, Function, Function)}
      * </p>
-     * {@code MutableSortedMap<Integer, String> map = Interval.oneTo(5).toMap(Object::toString, Functions.identity(), Object::toString);}
+     * {@code MutableSortedMap<Integer, String> map = Interval.oneTo(5).toSortedMapBy(Object::toString, Functions.identity(), Object::toString);}
      *
      * @since 11.0
      */
@@ -804,6 +805,89 @@ public final class Collectors2
                 },
                 MutableMap::toImmutable,
                 EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * <p>Returns the elements as a ImmutableSortedMap that has been sorted after applying the keyFunction and valueFunction to each element.</p>
+     * <p>Examples:</p>
+     * {@code ImmutableSortedMap<Integer, String> map1 =
+     * Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedMap(Functions.identity(), Object::toString));}<br>
+     * {@code ImmutableSortedMap<Integer, String> map2 =
+     * Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedMap(Functions.identity(), Object::toString));}
+     * <p>
+     * Equivalent to using @{@link RichIterable#toSortedMap(Function, Function)}} followed by: @{@link MutableSortedMap#toImmutable()}.
+     * </p>
+     * {@code ImmutableSortedMap<Integer, String> map = Interval.oneTo(5).toSortedMap(Functions.identity(), Object::toString).toImmutable();}
+     *
+     * @since 11.0
+     */
+    public static <T, K, V> Collector<T, ?, ImmutableSortedMap<K, V>> toImmutableSortedMap(
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction)
+    {
+        return Collector.<T, MutableSortedMap<K, V>, ImmutableSortedMap<K, V>>of(
+                SortedMaps.mutable::empty,
+                (map, each) -> map.put(keyFunction.valueOf(each), valueFunction.valueOf(each)),
+                (r1, r2) ->
+                {
+                    r1.putAll(r2);
+                    return r1;
+                },
+                MutableSortedMap::toImmutable,
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * <p>Returns the elements as a ImmutableSortedMap that has been sorted using the specified comparator after applying the keyFunction and valueFunction to each element.</p>
+     * <p>Examples:</p>
+     * {@code ImmutableSortedMap<Integer, String> map1 =
+     * Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedMap(Comparators.naturalOrder(), Functions.identity(), Object::toString));}<br>
+     * {@code ImmutableSortedMap<Integer, String> map2 =
+     * Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedMap(Comparators.naturalOrder(), Functions.identity(), Object::toString));}
+     * <p>
+     * Equivalent to using @{@link RichIterable#toSortedMap(Comparator, Function, Function)}} followed by: @{@link MutableSortedMap#toImmutable()}.
+     * </p>
+     * {@code ImmutableSortedMap<Integer, String> map = Interval.oneTo(5).toSortedMap(Comparators.naturalOrder(), Functions.identity(), Object::toString).toImmutable();}
+     *
+     * @since 11.0
+     */
+    public static <T, K, V> Collector<T, ?, ImmutableSortedMap<K, V>> toImmutableSortedMap(
+            Comparator<? super K> comparator,
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction)
+    {
+        return Collector.<T, MutableSortedMap<K, V>, ImmutableSortedMap<K, V>>of(
+                () -> SortedMaps.mutable.with(comparator),
+                (map, each) -> map.put(keyFunction.valueOf(each), valueFunction.valueOf(each)),
+                (r1, r2) ->
+                {
+                    r1.putAll(r2);
+                    return r1;
+                },
+                MutableSortedMap::toImmutable,
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * <p>Returns the elements as a ImmutableSortedMap that has been sorted using the specified comparator.</p>
+     * <p>Examples:</p>
+     * {@code ImmutableSortedMap<Integer, String> map1 =
+     * Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedMap(Object::toString, Functions.identity(), Object::toString));}<br>
+     * {@code ImmutableSortedMap<Integer, String> map2 =
+     * Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedMap(Object::toString, Functions.identity(), Object::toString));}
+     * <p>
+     * Equivalent to using @{@link RichIterable#toSortedMapBy(Function, Function, Function)} followed by: @{@link MutableSortedMap#toImmutable()}.
+     * </p>
+     * {@code ImmutableSortedMap<Integer, String> map = Interval.oneTo(5).toSortedMap(Object::toString, Functions.identity(), Object::toString).toImmutable();}
+     *
+     * @since 11.0
+     */
+    public static <T, KK extends Comparable<? super KK>, K, V> Collector<T, ?, ImmutableSortedMap<K, V>> toImmutableSortedMapBy(
+            Function<? super K, KK> sortBy,
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction)
+    {
+        return Collectors2.toImmutableSortedMap(Comparators.byFunction(sortBy), keyFunction, valueFunction);
     }
 
     /**
