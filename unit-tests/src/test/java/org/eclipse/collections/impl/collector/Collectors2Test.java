@@ -16,16 +16,35 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.bimap.ImmutableBiMap;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
+import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
+import org.eclipse.collections.api.multimap.Multimap;
+import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
+import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
+import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
+import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import org.eclipse.collections.api.stack.ImmutableStack;
+import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Multimaps;
@@ -152,265 +171,269 @@ public final class Collectors2Test
     @Test
     public void toList()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toList(),
-                this.smallData.stream().collect(Collectors2.toList()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toList()),
-                this.smallData.stream().collect(Collectors2.toList()));
+        MutableList<Integer> expected = SMALL_INTERVAL.toList();
+        MutableList<Integer> actual = this.smallData.stream().collect(Collectors2.toList());
+        Assert.assertEquals(expected, actual);
+        MutableList<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toList());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toListParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toList(),
-                this.bigData.parallelStream().collect(Collectors2.toList()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toList()),
-                this.bigData.parallelStream().collect(Collectors2.toList()));
+        MutableList<Integer> expected = LARGE_INTERVAL.toList();
+        MutableList<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toList());
+        Assert.assertEquals(expected, actual);
+        MutableList<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toList());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableList()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toList(),
-                this.smallData.stream().collect(Collectors2.toImmutableList()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toList()),
-                this.smallData.stream().collect(Collectors2.toImmutableList()));
+        MutableList<Integer> expected = SMALL_INTERVAL.toList();
+        ImmutableList<Integer> actual = this.smallData.stream().collect(Collectors2.toImmutableList());
+        Assert.assertEquals(expected, actual);
+        ImmutableList<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableList());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableListParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toList(),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableList()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toList()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableList()));
+        MutableList<Integer> expected = LARGE_INTERVAL.toList();
+        ImmutableList<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toImmutableList());
+        Assert.assertEquals(expected, actual);
+        ImmutableList<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableList());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSet()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSet(),
-                this.smallData.stream().collect(Collectors2.toSet()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSet()),
-                this.smallData.stream().collect(Collectors2.toSet()));
+        MutableSet<Integer> expected = SMALL_INTERVAL.toSet();
+        MutableSet<Integer> actual = this.smallData.stream().collect(Collectors2.toSet());
+        Assert.assertEquals(expected, actual);
+        MutableSet<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toSet());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSetParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSet(),
-                this.bigData.parallelStream().collect(Collectors2.toSet()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSet()),
-                this.bigData.parallelStream().collect(Collectors2.toSet()));
+        MutableSet<Integer> expected = LARGE_INTERVAL.toSet();
+        MutableSet<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toSet());
+        Assert.assertEquals(expected, actual);
+        MutableSet<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toSet());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSet()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSet(),
-                this.smallData.stream().collect(Collectors2.toImmutableSet()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSet()),
-                this.smallData.stream().collect(Collectors2.toImmutableSet()));
+        MutableSet<Integer> expected = SMALL_INTERVAL.toSet();
+        ImmutableSet<Integer> actual = this.smallData.stream().collect(Collectors2.toImmutableSet());
+        Assert.assertEquals(expected, actual);
+        ImmutableSet<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSet());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSetParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSet(),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSet()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSet()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSet()));
+        MutableSet<Integer> expected = LARGE_INTERVAL.toSet();
+        ImmutableSet<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toImmutableSet());
+        Assert.assertEquals(expected, actual);
+        ImmutableSet<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSet());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toBag()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toBag(),
-                this.smallData.stream().collect(Collectors2.toBag()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toBag()),
-                this.smallData.stream().collect(Collectors2.toBag()));
+        MutableBag<Integer> expected = SMALL_INTERVAL.toBag();
+        MutableBag<Integer> actual = this.smallData.stream().collect(Collectors2.toBag());
+        Assert.assertEquals(expected, actual);
+        MutableBag<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toBag());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toBagParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toBag(),
-                this.bigData.parallelStream().collect(Collectors2.toBag()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toBag()),
-                this.bigData.parallelStream().collect(Collectors2.toBag()));
+        MutableBag<Integer> expected = LARGE_INTERVAL.toBag();
+        MutableBag<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toBag());
+        Assert.assertEquals(expected, actual);
+        MutableBag<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toBag());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableBag()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toBag(),
-                this.smallData.stream().collect(Collectors2.toImmutableBag()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toBag()),
-                this.smallData.stream().collect(Collectors2.toImmutableBag()));
+        MutableBag<Integer> expected = SMALL_INTERVAL.toBag();
+        ImmutableBag<Integer> actual = this.smallData.stream().collect(Collectors2.toImmutableBag());
+        Assert.assertEquals(expected, actual);
+        ImmutableBag<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableBag());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableBagParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toBag(),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableBag()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toBag()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableBag()));
+        MutableBag<Integer> expected = LARGE_INTERVAL.toBag();
+        ImmutableBag<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toImmutableBag());
+        Assert.assertEquals(expected, actual);
+        ImmutableBag<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableBag());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toListMultimap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toListMultimap(Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toListMultimap(Object::toString)),
-                this.smallData.stream().collect(Collectors2.toListMultimap(Object::toString)));
+        Multimap<String, Integer> expected = SMALL_INTERVAL.groupBy(Object::toString);
+        MutableListMultimap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toListMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableListMultimap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toListMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toListMultimapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toListMultimap(Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toListMultimap(Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toListMultimap(Object::toString)));
+        Multimap<String, Integer> expected = LARGE_INTERVAL.groupBy(Object::toString);
+        MutableListMultimap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toListMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableListMultimap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toListMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toListMultimap2()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.collect(Object::toString).groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toListMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toListMultimap(Object::toString, Object::toString)),
-                this.smallData.stream().collect(Collectors2.toListMultimap(Object::toString, Object::toString)));
+        Multimap<String, String> expected = SMALL_INTERVAL.collect(Object::toString).groupBy(Object::toString);
+        MutableListMultimap<String, String> actual =
+                this.smallData.stream().collect(Collectors2.toListMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableListMultimap<String, String> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toListMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toListMultimap2Parallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.collect(Object::toString).groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toListMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toListMultimap(Object::toString, Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toListMultimap(Object::toString, Object::toString)));
+        Multimap<String, String> expected = LARGE_INTERVAL.collect(Object::toString).groupBy(Object::toString);
+        MutableListMultimap<String, String> actual =
+                this.bigData.parallelStream().collect(Collectors2.toListMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableListMultimap<String, String> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toListMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSetMultimap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSet().groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toSetMultimap(Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSetMultimap(Object::toString)),
-                this.smallData.stream().collect(Collectors2.toSetMultimap(Object::toString)));
+        MutableSetMultimap<String, Integer> expected = SMALL_INTERVAL.toSet().groupBy(Object::toString);
+        MutableSetMultimap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toSetMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableSetMultimap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSetMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSetMultimapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSet().groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toSetMultimap(Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSetMultimap(Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toSetMultimap(Object::toString)));
+        MutableSetMultimap<String, Integer> expected = LARGE_INTERVAL.toSet().groupBy(Object::toString);
+        MutableSetMultimap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toSetMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableSetMultimap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSetMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSetMultimap2()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSet().collect(Object::toString).groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toSetMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSetMultimap(Object::toString, Object::toString)),
-                this.smallData.stream().collect(Collectors2.toSetMultimap(Object::toString, Object::toString)));
+        MutableSetMultimap<String, String> expected =
+                SMALL_INTERVAL.toSet().collect(Object::toString).groupBy(Object::toString);
+        MutableSetMultimap<String, String> actual =
+                this.smallData.stream().collect(Collectors2.toSetMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableSetMultimap<String, String> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSetMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSetMultimap2Parallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSet().collect(Object::toString).groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toSetMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSetMultimap(Object::toString, Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toSetMultimap(Object::toString, Object::toString)));
+        MutableSetMultimap<String, String> expected =
+                LARGE_INTERVAL.toSet().collect(Object::toString).groupBy(Object::toString);
+        MutableSetMultimap<String, String> actual =
+                this.bigData.parallelStream().collect(Collectors2.toSetMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableSetMultimap<String, String> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSetMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toBagMultimap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toBag().groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toBagMultimap(Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString)),
-                this.smallData.stream().collect(Collectors2.toBagMultimap(Object::toString)));
+        MutableBagMultimap<String, Integer> expected = SMALL_INTERVAL.toBag().groupBy(Object::toString);
+        MutableBagMultimap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toBagMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableBagMultimap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toBagMultimapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toBag().groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toBagMultimap(Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toBagMultimap(Object::toString)));
+        MutableBagMultimap<String, Integer> expected = LARGE_INTERVAL.toBag().groupBy(Object::toString);
+        MutableBagMultimap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toBagMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableBagMultimap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toBagMultimap2()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toBag().collect(Object::toString).groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toBagMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString, Object::toString)),
-                this.smallData.stream().collect(Collectors2.toBagMultimap(Object::toString, Object::toString)));
+        MutableBagMultimap<String, String> expected =
+                SMALL_INTERVAL.toBag().collect(Object::toString).groupBy(Object::toString);
+        MutableBagMultimap<String, String> actual =
+                this.smallData.stream().collect(Collectors2.toBagMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableBagMultimap<String, String> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toBagMultimap2Parallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toBag().collect(Object::toString).groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toBagMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString, Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toBagMultimap(Object::toString, Object::toString)));
+        MutableBagMultimap<String, String> expected =
+                LARGE_INTERVAL.toBag().collect(Object::toString).groupBy(Object::toString);
+        MutableBagMultimap<String, String> actual =
+                this.bigData.parallelStream().collect(Collectors2.toBagMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableBagMultimap<String, String> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
@@ -475,755 +498,807 @@ public final class Collectors2Test
     @Test
     public void toStack()
     {
-        Assert.assertEquals(
-                Stacks.mutable.ofAll(SMALL_INTERVAL),
-                this.smallData.stream().collect(Collectors2.toStack()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toStack()),
-                this.smallData.stream().collect(Collectors2.toStack()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.toList().toStack(),
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toStack()));
+        MutableStack<Integer> expected = Stacks.mutable.ofAll(SMALL_INTERVAL);
+        MutableStack<Integer> actual = this.smallData.stream().collect(Collectors2.toStack());
+        Assert.assertEquals(expected, actual);
+        MutableStack<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toStack());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toStackParallel()
     {
-        Assert.assertEquals(
-                Stacks.mutable.ofAll(LARGE_INTERVAL),
-                this.bigData.parallelStream().collect(Collectors2.toStack()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toStack()),
-                this.bigData.parallelStream().collect(Collectors2.toStack()));
+        MutableStack<Integer> expected = Stacks.mutable.ofAll(LARGE_INTERVAL);
+        MutableStack<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toStack());
+        Assert.assertEquals(expected, actual);
+        MutableStack<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toStack());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableStack()
     {
-        Assert.assertEquals(
-                Stacks.mutable.ofAll(SMALL_INTERVAL),
-                this.smallData.stream().collect(Collectors2.toImmutableStack()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toStack()),
-                this.smallData.stream().collect(Collectors2.toImmutableStack()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.toList().toStack().toImmutable(),
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableStack()));
+        MutableStack<Integer> expected = Stacks.mutable.ofAll(SMALL_INTERVAL);
+        ImmutableStack<Integer> actual = this.smallData.stream().collect(Collectors2.toImmutableStack());
+        Assert.assertEquals(expected, actual);
+        ImmutableStack<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableStack());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableStackParallel()
     {
-        Assert.assertEquals(
-                Stacks.mutable.ofAll(LARGE_INTERVAL),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableStack()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toStack()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableStack()));
+        MutableStack<Integer> expected = Stacks.mutable.ofAll(LARGE_INTERVAL);
+        ImmutableStack<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toImmutableStack());
+        Assert.assertEquals(expected, actual);
+        ImmutableStack<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableStack());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toMap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toMap(Object::toString, i -> i),
-                this.smallData.stream().collect(Collectors2.toMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toMap(Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.stream().collect(Collectors.toMap(Object::toString, i -> i)),
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toMap(Object::toString, i -> i)));
+        MutableMap<String, Integer> expected = SMALL_INTERVAL.toMap(Object::toString, i -> i);
+        MutableMap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableMap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toMapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toMap(Object::toString, i -> i),
-                this.bigData.parallelStream().collect(Collectors2.toMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toMap(Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toMap(Object::toString, i -> i)));
+        MutableMap<String, Integer> expected = LARGE_INTERVAL.toMap(Object::toString, i -> i);
+        MutableMap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableMap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableMap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toMap(Object::toString, i -> i),
-                this.smallData.stream().collect(Collectors2.toImmutableMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toMap(Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toImmutableMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.stream().collect(Collectors.toMap(Object::toString, i -> i)),
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableMap(Object::toString, i -> i)));
+        MutableMap<String, Integer> expected = SMALL_INTERVAL.toMap(Object::toString, i -> i);
+        ImmutableMap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+
+        ImmutableMap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableMapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toMap(Object::toString, i -> i),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toMap(Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableMap(Object::toString, i -> i)));
+        MutableMap<String, Integer> expected = LARGE_INTERVAL.toMap(Object::toString, i -> i);
+        ImmutableMap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        ImmutableMap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toBiMap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
-                {
-                    mbm.put(e.toString(), e);
-                    return mbm;
-                }),
-                this.smallData.stream().collect(Collectors2.toBiMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toBiMap(Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toBiMap(Object::toString, i -> i)));
+        MutableBiMap<Object, Object> expected = SMALL_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
+        {
+            mbm.put(e.toString(), e);
+            return mbm;
+        });
+        MutableBiMap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toBiMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableBiMap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toBiMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toBiMapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
-                {
-                    mbm.put(e.toString(), e);
-                    return mbm;
-                }),
-                this.bigData.parallelStream().collect(Collectors2.toBiMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toBiMap(Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toBiMap(Object::toString, i -> i)));
+        MutableBiMap<Object, Object> expected = LARGE_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
+        {
+            mbm.put(e.toString(), e);
+            return mbm;
+        });
+        MutableBiMap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toBiMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableBiMap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toBiMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableBiMap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
-                {
-                    mbm.put(e.toString(), e);
-                    return mbm;
-                }),
-                this.smallData.stream().collect(Collectors2.toImmutableBiMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toBiMap(Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toImmutableBiMap(Object::toString, i -> i)));
+        MutableBiMap<Object, Object> expected = SMALL_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
+        {
+            mbm.put(e.toString(), e);
+            return mbm;
+        });
+        ImmutableBiMap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableBiMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        ImmutableBiMap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableBiMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableBiMapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
-                {
-                    mbm.put(e.toString(), e);
-                    return mbm;
-                }),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableBiMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toBiMap(Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableBiMap(Object::toString, i -> i)));
+        MutableBiMap<Object, Object> expected = LARGE_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
+        {
+            mbm.put(e.toString(), e);
+            return mbm;
+        });
+        ImmutableBiMap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableBiMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        ImmutableBiMap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableBiMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedSet()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedSet(),
-                this.smallData.stream().collect(Collectors2.toSortedSet()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedSet()),
-                this.smallData.stream().collect(Collectors2.toSortedSet()));
+        MutableSortedSet<Integer> expected = SMALL_INTERVAL.toSortedSet();
+        MutableSortedSet<Integer> actual = this.smallData.stream().collect(Collectors2.toSortedSet());
+        Assert.assertEquals(expected, actual);
+        MutableSortedSet<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedSet());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedSetParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedSet(),
-                this.bigData.parallelStream().collect(Collectors2.toSortedSet()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedSet()),
-                this.bigData.parallelStream().collect(Collectors2.toSortedSet()));
+        MutableSortedSet<Integer> expected = LARGE_INTERVAL.toSortedSet();
+        MutableSortedSet<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toSortedSet());
+        Assert.assertEquals(expected, actual);
+        MutableSortedSet<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedSet());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedSetBy()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedSetBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toSortedSetBy(Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedSetBy(Object::toString)),
-                this.smallData.stream().collect(Collectors2.toSortedSetBy(Object::toString)));
+        MutableSortedSet<Integer> expected = SMALL_INTERVAL.toSortedSetBy(Object::toString);
+        MutableSortedSet<Integer> actual = this.smallData.stream().collect(Collectors2.toSortedSetBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableSortedSet<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedSetBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedSetByParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedSetBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toSortedSetBy(Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedSetBy(Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toSortedSetBy(Object::toString)));
+        MutableSortedSet<Integer> expected = LARGE_INTERVAL.toSortedSetBy(Object::toString);
+        MutableSortedSet<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toSortedSetBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableSortedSet<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedSetBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedSet()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedSet(),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedSet()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSet()),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedSet()));
+        MutableSortedSet<Integer> expected = SMALL_INTERVAL.toSortedSet();
+        ImmutableSortedSet<Integer> actual = this.smallData.stream().collect(Collectors2.toImmutableSortedSet());
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedSet<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSet());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedSetParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedSet(),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedSet()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSet()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedSet()));
+        MutableSortedSet<Integer> expected = LARGE_INTERVAL.toSortedSet();
+        ImmutableSortedSet<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toImmutableSortedSet());
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedSet<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSet());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedBag()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedBag(),
-                this.smallData.stream().collect(Collectors2.toSortedBag()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedBag()),
-                this.smallData.stream().collect(Collectors2.toSortedBag()));
+        MutableSortedBag<Integer> expected = SMALL_INTERVAL.toSortedBag();
+        MutableSortedBag<Integer> actual = this.smallData.stream().collect(Collectors2.toSortedBag());
+        Assert.assertEquals(expected, actual);
+        MutableSortedBag<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedBag());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedBagParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedBag(),
-                this.bigData.parallelStream().collect(Collectors2.toSortedBag()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedBag()),
-                this.bigData.parallelStream().collect(Collectors2.toSortedBag()));
+        MutableSortedBag<Integer> expected = LARGE_INTERVAL.toSortedBag();
+        MutableSortedBag<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toSortedBag());
+        Assert.assertEquals(expected, actual);
+        MutableSortedBag<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedBag());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedBagBy()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedBagBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toSortedBagBy(Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedBagBy(Object::toString)),
-                this.smallData.stream().collect(Collectors2.toSortedBagBy(Object::toString)));
+        MutableSortedBag<Integer> expected = SMALL_INTERVAL.toSortedBagBy(Object::toString);
+        MutableSortedBag<Integer> actual =
+                this.smallData.stream().collect(Collectors2.toSortedBagBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableSortedBag<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedBagBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedBagByParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedBagBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toSortedBagBy(Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedBagBy(Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toSortedBagBy(Object::toString)));
+        MutableSortedBag<Integer> expected = LARGE_INTERVAL.toSortedBagBy(Object::toString);
+        MutableSortedBag<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toSortedBagBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableSortedBag<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedBagBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedBag()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedBag(),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedBag()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBag()),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedBag()));
+        MutableSortedBag<Integer> expected = SMALL_INTERVAL.toSortedBag();
+        ImmutableSortedBag<Integer> actual = this.smallData.stream().collect(Collectors2.toImmutableSortedBag());
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedBag<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBag());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedBagParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedBag(),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedBag()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBag()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedBag()));
+        MutableSortedBag<Integer> expected = LARGE_INTERVAL.toSortedBag();
+        ImmutableSortedBag<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toImmutableSortedBag());
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedBag<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBag());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedSetWithComparator()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedSet(Comparator.reverseOrder()),
-                this.smallData.stream().collect(Collectors2.toSortedSet(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedSet(Comparator.reverseOrder())),
-                this.smallData.stream().collect(Collectors2.toSortedSet(Comparator.reverseOrder())));
+        MutableSortedSet<Integer> expected = SMALL_INTERVAL.toSortedSet(Comparator.reverseOrder());
+        MutableSortedSet<Integer> actual =
+                this.smallData.stream().collect(Collectors2.toSortedSet(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        MutableSortedSet<Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedSet(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedSetParallelWithComparator()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedSet(Comparator.reverseOrder()),
-                this.bigData.parallelStream().collect(Collectors2.toSortedSet(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedSet(Comparator.reverseOrder())),
-                this.bigData.parallelStream().collect(Collectors2.toSortedSet(Comparator.reverseOrder())));
+        MutableSortedSet<Integer> expected = LARGE_INTERVAL.toSortedSet(Comparator.reverseOrder());
+        MutableSortedSet<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toSortedSet(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        MutableSortedSet<Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedSet(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedSetWithComparator()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedSet(Comparator.reverseOrder()),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedSet(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSet(Comparator.reverseOrder())),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedSet(Comparator.reverseOrder())));
+        MutableSortedSet<Integer> expected = SMALL_INTERVAL.toSortedSet(Comparator.reverseOrder());
+        ImmutableSortedSet<Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableSortedSet(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedSet<Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSet(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedSetParallelWithComparator()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedSet(Comparator.reverseOrder()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedSet(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSet(Comparator.reverseOrder())),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedSet(Comparator.reverseOrder())));
+        MutableSortedSet<Integer> expected = LARGE_INTERVAL.toSortedSet(Comparator.reverseOrder());
+        ImmutableSortedSet<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedSet(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedSet<Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSet(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedBagWithComparator()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedBag(Comparator.reverseOrder()),
-                this.smallData.stream().collect(Collectors2.toSortedBag(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedBag(Comparator.reverseOrder())),
-                this.smallData.stream().collect(Collectors2.toSortedBag()));
+        MutableSortedBag<Integer> expected = SMALL_INTERVAL.toSortedBag(Comparator.reverseOrder());
+        MutableSortedBag<Integer> actual =
+                this.smallData.stream().collect(Collectors2.toSortedBag(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        MutableSortedBag<Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedBag(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedBagParallelWithComparator()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedBag(Comparator.reverseOrder()),
-                this.bigData.parallelStream().collect(Collectors2.toSortedBag(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedBag(Comparator.reverseOrder())),
-                this.bigData.parallelStream().collect(Collectors2.toSortedBag(Comparator.reverseOrder())));
+        MutableSortedBag<Integer> expected = LARGE_INTERVAL.toSortedBag(Comparator.reverseOrder());
+        MutableSortedBag<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toSortedBag(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        MutableSortedBag<Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedBag(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedBagWithComparator()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedBag(Comparator.reverseOrder()),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedBag(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBag(Comparator.reverseOrder())),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedBag(Comparator.reverseOrder())));
+        MutableSortedBag<Integer> expected = SMALL_INTERVAL.toSortedBag(Comparator.reverseOrder());
+        ImmutableSortedBag<Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableSortedBag(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedBag<Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBag(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedBagParallelWithComparator()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedBag(Comparator.reverseOrder()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedBag(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBag(Comparator.reverseOrder())),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedBag(Comparator.reverseOrder())));
+        MutableSortedBag<Integer> expected = LARGE_INTERVAL.toSortedBag(Comparator.reverseOrder());
+        ImmutableSortedBag<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedBag(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedBag<Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBag(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedList()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedList(),
-                this.smallData.stream().collect(Collectors2.toSortedList()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedList()),
-                this.smallData.stream().collect(Collectors2.toSortedList()));
+        MutableList<Integer> expected = SMALL_INTERVAL.toSortedList();
+        MutableList<Integer> actual = this.smallData.stream().collect(Collectors2.toSortedList());
+        Assert.assertEquals(expected, actual);
+        MutableList<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedList());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedListParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedList(),
-                this.bigData.parallelStream().collect(Collectors2.toSortedList()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedList()),
-                this.bigData.parallelStream().collect(Collectors2.toSortedList()));
+        MutableList<Integer> expected = LARGE_INTERVAL.toSortedList();
+        MutableList<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toSortedList());
+        Assert.assertEquals(expected, actual);
+        MutableList<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedList());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedListBy()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedListBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toSortedListBy(Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedListBy(Object::toString)),
-                this.smallData.stream().collect(Collectors2.toSortedListBy(Object::toString)));
+        MutableList<Integer> expected = SMALL_INTERVAL.toSortedListBy(Object::toString);
+        MutableList<Integer> actual = this.smallData.stream().collect(Collectors2.toSortedListBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableList<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedListBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedListByParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedListBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toSortedListBy(Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedListBy(Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toSortedListBy(Object::toString)));
+        MutableList<Integer> expected = LARGE_INTERVAL.toSortedListBy(Object::toString);
+        MutableList<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toSortedListBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        MutableList<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedListBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedList()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedList(),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedList()));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedList()),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedList()));
+        MutableList<Integer> expected = SMALL_INTERVAL.toSortedList();
+        ImmutableList<Integer> actual = this.smallData.stream().collect(Collectors2.toImmutableSortedList());
+        Assert.assertEquals(expected, actual);
+        ImmutableList<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedList());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedListParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedList(),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedList()));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedList()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedList()));
+        MutableList<Integer> expected = LARGE_INTERVAL.toSortedList();
+        ImmutableList<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toImmutableSortedList());
+        Assert.assertEquals(expected, actual);
+        ImmutableList<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedList());
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedListWithComparator()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedList(Comparator.reverseOrder()),
-                this.smallData.stream().collect(Collectors2.toSortedList(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedList(Comparator.reverseOrder())),
-                this.smallData.stream().collect(Collectors2.toSortedList(Comparator.reverseOrder())));
+        MutableList<Integer> expected = SMALL_INTERVAL.toSortedList(Comparator.reverseOrder());
+        MutableList<Integer> actual =
+                this.smallData.stream().collect(Collectors2.toSortedList(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        MutableList<Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedList(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedListParallelWithComparator()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedList(Comparator.reverseOrder()),
-                this.bigData.parallelStream().collect(Collectors2.toSortedList(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedList(Comparator.reverseOrder())),
-                this.bigData.parallelStream().collect(Collectors2.toSortedList(Comparator.reverseOrder())));
+        MutableList<Integer> expected = LARGE_INTERVAL.toSortedList(Comparator.reverseOrder());
+        MutableList<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toSortedList(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        MutableList<Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedList(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedMap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedMap(Object::toString, i -> i),
-                this.smallData.stream().collect(Collectors2.toSortedMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toSortedMap(Object::toString, i -> i)));
+        MutableSortedMap<String, Integer> expected = SMALL_INTERVAL.toSortedMap(Object::toString, i -> i);
+        MutableSortedMap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toSortedMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableSortedMap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedMapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedMap(Object::toString, i -> i),
-                this.bigData.parallelStream().collect(Collectors2.toSortedMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toSortedMap(Object::toString, i -> i)));
+        MutableSortedMap<String, Integer> expected = LARGE_INTERVAL.toSortedMap(Object::toString, i -> i);
+        MutableSortedMap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toSortedMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableSortedMap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedMapWithComparator()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i),
-                this.smallData.stream().collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
+        MutableSortedMap<String, Integer> expected =
+                SMALL_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i);
+        MutableSortedMap<String, Integer> actual = this.smallData
+                .stream()
+                .collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableSortedMap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Comparator.reverseOrder(),
+                        Object::toString,
+                        i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedMapParallelWithComparator()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i),
-                this.bigData.parallelStream().collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
+        MutableSortedMap<String, Integer> expected =
+                LARGE_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i);
+        MutableSortedMap<String, Integer> actual = this.bigData
+                .parallelStream()
+                .collect(Collectors2.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableSortedMap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedMap(Comparator.reverseOrder(),
+                        Object::toString,
+                        i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedMapBy()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i),
-                this.smallData.stream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)));
+        MutableSortedMap<String, Integer> expected =
+                SMALL_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i);
+        MutableSortedMap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableSortedMap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toSortedMapByParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i),
-                this.bigData.parallelStream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i)));
+        MutableSortedMap<String, Integer> expected =
+                LARGE_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i);
+        MutableSortedMap<String, Integer> actual = this.bigData
+                .parallelStream()
+                .collect(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        MutableSortedMap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toSortedMapBy(Object::toString, Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedMap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedMap(Object::toString, i -> i).toImmutable(),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMap(Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedMap(Object::toString, i -> i)));
+        ImmutableSortedMap<String, Integer> expected =
+                SMALL_INTERVAL.toSortedMap(Object::toString, i -> i).toImmutable();
+        ImmutableSortedMap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableSortedMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedMap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedMapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedMap(Object::toString, i -> i).toImmutable(),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedMap(Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMap(Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedMap(Object::toString, i -> i)));
+        ImmutableSortedMap<String, Integer> expected =
+                LARGE_INTERVAL.toSortedMap(Object::toString, i -> i).toImmutable();
+        ImmutableSortedMap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedMap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMap(Object::toString, i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedMapWithComparator()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i).toImmutable(),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
+        ImmutableSortedMap<String, Integer> expected =
+                SMALL_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i).toImmutable();
+        ImmutableSortedMap<String, Integer> actual = this.smallData
+                .stream()
+                .collect(Collectors2.toImmutableSortedMap(Comparator.reverseOrder(), Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedMap<String, Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMap(
+                Comparator.reverseOrder(),
+                Object::toString,
+                i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedMapParallelWithComparator()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i).toImmutable(),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedMap(Comparator.reverseOrder(), Object::toString, i -> i)));
+        ImmutableSortedMap<String, Integer> expected =
+                LARGE_INTERVAL.toSortedMap(Comparator.reverseOrder(), Object::toString, i -> i).toImmutable();
+        ImmutableSortedMap<String, Integer> actual = this.bigData
+                .parallelStream()
+                .collect(Collectors2.toImmutableSortedMap(Comparator.reverseOrder(), Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedMap<String, Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMap(
+                Comparator.reverseOrder(),
+                Object::toString,
+                i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedMapBy()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i).toImmutable(),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedMapBy(Object::toString, Object::toString, i -> i)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMapBy(Object::toString, Object::toString, i -> i)),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedMapBy(Object::toString, Object::toString, i -> i)));
+        ImmutableSortedMap<String, Integer> expected =
+                SMALL_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i).toImmutable();
+        ImmutableSortedMap<String, Integer> actual = this.smallData
+                .stream()
+                .collect(Collectors2.toImmutableSortedMapBy(Object::toString, Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedMap<String, Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMapBy(
+                Object::toString,
+                Object::toString,
+                i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedMapByParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i).toImmutable(),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedMapBy(Object::toString, Object::toString, i -> i)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMapBy(Object::toString, Object::toString, i -> i)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedMapBy(Object::toString, Object::toString, i -> i)));
+        ImmutableSortedMap<String, Integer> expected =
+                LARGE_INTERVAL.toSortedMapBy(Object::toString, Object::toString, i -> i).toImmutable();
+        ImmutableSortedMap<String, Integer> actual = this.bigData
+                .parallelStream()
+                .collect(Collectors2.toImmutableSortedMapBy(Object::toString, Object::toString, i -> i));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedMap<String, Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedMapBy(
+                Object::toString,
+                Object::toString,
+                i -> i));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedListWithComparator()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSortedList(Comparator.reverseOrder()),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedList(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedList(Comparator.reverseOrder())),
-                this.smallData.stream().collect(Collectors2.toImmutableSortedList(Comparator.reverseOrder())));
+        MutableList<Integer> expected = SMALL_INTERVAL.toSortedList(Comparator.reverseOrder());
+        ImmutableList<Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableSortedList(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        ImmutableList<Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedList(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSortedListParallelWithComparator()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSortedList(Comparator.reverseOrder()),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedList(Comparator.reverseOrder())));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedList(Comparator.reverseOrder())),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedList(Comparator.reverseOrder())));
+        MutableList<Integer> expected = LARGE_INTERVAL.toSortedList(Comparator.reverseOrder());
+        ImmutableList<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedList(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual);
+        ImmutableList<Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedList(Comparator.reverseOrder()));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableListMultimap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toImmutableListMultimap(Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableListMultimap(Object::toString)),
-                this.smallData.stream().collect(Collectors2.toImmutableListMultimap(Object::toString)));
+        Multimap<String, Integer> expected = SMALL_INTERVAL.groupBy(Object::toString);
+        ImmutableListMultimap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableListMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableListMultimap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableListMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableListMultimapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableListMultimap(Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableListMultimap(Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableListMultimap(Object::toString)));
+        Multimap<String, Integer> expected = LARGE_INTERVAL.groupBy(Object::toString);
+        ImmutableListMultimap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableListMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableListMultimap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableListMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableListMultimap2()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.collect(Object::toString).groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toImmutableListMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableListMultimap(Object::toString, Object::toString)),
-                this.smallData.stream().collect(Collectors2.toImmutableListMultimap(Object::toString, Object::toString)));
+        Multimap<String, String> expected = SMALL_INTERVAL.collect(Object::toString).groupBy(Object::toString);
+        ImmutableListMultimap<String, String> actual = this.smallData
+                .stream()
+                .collect(Collectors2.toImmutableListMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableListMultimap<String, String> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableListMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableListMultimap2Parallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.collect(Object::toString).groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableListMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableListMultimap(Object::toString, Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableListMultimap(Object::toString, Object::toString)));
+        Multimap<String, String> expected = LARGE_INTERVAL.collect(Object::toString).groupBy(Object::toString);
+        ImmutableListMultimap<String, String> actual = this.bigData
+                .parallelStream()
+                .collect(Collectors2.toImmutableListMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableListMultimap<String, String> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableListMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSetMultimap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSet().groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toImmutableSetMultimap(Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSetMultimap(Object::toString)),
-                this.smallData.stream().collect(Collectors2.toImmutableSetMultimap(Object::toString)));
+        MutableSetMultimap<String, Integer> expected = SMALL_INTERVAL.toSet().groupBy(Object::toString);
+        ImmutableSetMultimap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableSetMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableSetMultimap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSetMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSetMultimapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSet().groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSetMultimap(Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSetMultimap(Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSetMultimap(Object::toString)));
+        MutableSetMultimap<String, Integer> expected = LARGE_INTERVAL.toSet().groupBy(Object::toString);
+        ImmutableSetMultimap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableSetMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableSetMultimap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSetMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSetMultimap2()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toSet().collect(Object::toString).groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString)),
-                this.smallData.stream().collect(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString)));
+        MutableSetMultimap<String, String> expected =
+                SMALL_INTERVAL.toSet().collect(Object::toString).groupBy(Object::toString);
+        ImmutableSetMultimap<String, String> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableSetMultimap<String, String> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableSetMultimap2Parallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toSet().collect(Object::toString).groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString)));
+        MutableSetMultimap<String, String> expected =
+                LARGE_INTERVAL.toSet().collect(Object::toString).groupBy(Object::toString);
+        ImmutableSetMultimap<String, String> actual = this.bigData
+                .parallelStream()
+                .collect(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableSetMultimap<String, String> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSetMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableBagMultimap()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toBag().groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toImmutableBagMultimap(Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString)),
-                this.smallData.stream().collect(Collectors2.toImmutableBagMultimap(Object::toString)));
+        MutableBagMultimap<String, Integer> expected = SMALL_INTERVAL.toBag().groupBy(Object::toString);
+        ImmutableBagMultimap<String, Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableBagMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableBagMultimap<String, Integer> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableBagMultimapParallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toBag().groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableBagMultimap(Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableBagMultimap(Object::toString)));
+        MutableBagMultimap<String, Integer> expected = LARGE_INTERVAL.toBag().groupBy(Object::toString);
+        ImmutableBagMultimap<String, Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableBagMultimap(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableBagMultimap<String, Integer> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableBagMultimap2()
     {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toBag().collect(Object::toString).groupBy(Object::toString),
-                this.smallData.stream().collect(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)),
-                this.smallData.stream().collect(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)));
+        MutableBagMultimap<String, String> expected =
+                SMALL_INTERVAL.toBag().collect(Object::toString).groupBy(Object::toString);
+        ImmutableBagMultimap<String, String> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableBagMultimap<String, String> actual2 =
+                SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
     public void toImmutableBagMultimap2Parallel()
     {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toBag().collect(Object::toString).groupBy(Object::toString),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)),
-                this.bigData.parallelStream().collect(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)));
+        MutableBagMultimap<String, String> expected =
+                LARGE_INTERVAL.toBag().collect(Object::toString).groupBy(Object::toString);
+        ImmutableBagMultimap<String, String> actual = this.bigData
+                .parallelStream()
+                .collect(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableBagMultimap<String, String> actual2 =
+                LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString));
+        Assert.assertEquals(expected, actual2);
     }
 
     @Test
