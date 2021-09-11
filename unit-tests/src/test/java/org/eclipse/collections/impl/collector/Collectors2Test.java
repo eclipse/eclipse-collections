@@ -772,6 +772,28 @@ public final class Collectors2Test
     }
 
     @Test
+    public void toImmutableSortedBagBy()
+    {
+        MutableSortedBag<Integer> expected = SMALL_INTERVAL.toSortedBagBy(Object::toString);
+        ImmutableSortedBag<Integer> actual =
+                this.smallData.stream().collect(Collectors2.toImmutableSortedBagBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedBag<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBagBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
+    }
+
+    @Test
+    public void toImmutableSortedBagByParallel()
+    {
+        MutableSortedBag<Integer> expected = LARGE_INTERVAL.toSortedBagBy(Object::toString);
+        ImmutableSortedBag<Integer> actual =
+                this.bigData.parallelStream().collect(Collectors2.toImmutableSortedBagBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedBag<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedBagBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
+    }
+
+    @Test
     public void toSortedSetWithComparator()
     {
         MutableSortedSet<Integer> expected = SMALL_INTERVAL.toSortedSet(Comparator.reverseOrder());

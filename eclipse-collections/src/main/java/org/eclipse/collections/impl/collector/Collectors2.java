@@ -585,6 +585,21 @@ public final class Collectors2
     }
 
     /**
+     * <p>Returns the elements as a ImmutableSortedBag using the specified function.</p>
+     * <p>Examples:</p>
+     * {@code ImmutableSortedBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedBagBy(Object::toString));}<br>
+     * {@code ImmutableSortedBag<Integer> bag2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedBagBy(Object::toString));}
+     * <p>
+     * Equivalent to using @{@link RichIterable#toImmutableSortedBagBy(Function)}}
+     * </p>
+     * {@code ImmutableSortedBag<Integer> bag = Interval.oneTo(5).toImmutableSortedBagBy(Object::toString);}
+     */
+    public static <T, V extends Comparable<? super V>> Collector<T, ?, ImmutableSortedBag<T>> toImmutableSortedBagBy(Function<? super T, ? extends V> function)
+    {
+        return Collectors2.toImmutableSortedBag(Comparators.byFunction(function));
+    }
+
+    /**
      * <p>Returns the elements as a MutableStack.</p>
      * <p>Examples:</p>
      * {@code MutableStack<Integer> stack1 = Interval.oneTo(5).stream().collect(Collectors2.toStack());}<br>
