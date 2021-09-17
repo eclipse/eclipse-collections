@@ -492,6 +492,21 @@ public final class Collectors2
     }
 
     /**
+     * <p>Returns the elements as a ImmutableList that has been sorted using the specified comparator.</p>
+     * <p>Examples:</p>
+     * {@code ImmutableList<Integer> list1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedListBy(Object::toString));}<br>
+     * {@code ImmutableList<Integer> list2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedListBy(Object::toString));}
+     * <p>
+     * Equivalent to using @{@link RichIterable#toImmutableSortedListBy(Function)}}
+     * </p>
+     * {@code ImmutableList<Integer> list = Interval.oneTo(5).toImmutableSortedListBy(Object::toString);}
+     */
+    public static <T, V extends Comparable<? super V>> Collector<T, ?, ImmutableList<T>> toImmutableSortedListBy(Function<? super T, ? extends V> function)
+    {
+        return Collectors2.toImmutableSortedList(Comparators.byFunction(function));
+    }
+
+    /**
      * <p>Returns the elements as a MutableSortedBag.</p>
      * <p>Examples:</p>
      * {@code MutableSortedBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedBag());}<br>
