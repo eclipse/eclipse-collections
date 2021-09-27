@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.bag.immutable;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -28,6 +29,61 @@ public class ImmutableBagFactoryTest
         ImmutableBag<Object> actual = Bags.immutable.ofAll(immutableBag);
         Assert.assertSame(immutableBag, actual);
         Assert.assertEquals(immutableBag, actual);
+    }
+
+    private static class StringIntPair implements ObjectIntPair<String>
+    {
+        private final String value;
+        private final int counter;
+
+        StringIntPair(String value, int counter)
+        {
+            this.value = value;
+            this.counter = counter;
+        }
+
+        @Override
+        public String getOne()
+        {
+            return this.value;
+        }
+
+        @Override
+        public int getTwo()
+        {
+            return this.counter;
+        }
+
+        @Override
+        public int compareTo(ObjectIntPair<String> o)
+        {
+            int result = this.getOne().compareTo(o.getOne());
+            return result == 0 ? Integer.compare(this.getTwo(), o.getTwo()) : result;
+        }
+    }
+
+    @Test
+    public void ofOccurrences()
+    {
+        ImmutableBag<String> immutableBag =
+                Bags.immutable.ofOccurrences(new StringIntPair("a", 5),
+                        new StringIntPair("b", 10));
+
+        Assert.assertTrue(immutableBag.contains("a"));
+        Assert.assertTrue(immutableBag.contains("b"));
+        Assert.assertFalse(immutableBag.contains("c"));
+    }
+
+    @Test
+    public void withOccurrences()
+    {
+        ImmutableBag<String> immutableBag =
+                Bags.immutable.withOccurrences(new StringIntPair("a", 5),
+                        new StringIntPair("b", 10));
+
+        Assert.assertTrue(immutableBag.contains("a"));
+        Assert.assertTrue(immutableBag.contains("b"));
+        Assert.assertFalse(immutableBag.contains("c"));
     }
 
     @Test
