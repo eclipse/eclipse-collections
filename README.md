@@ -60,7 +60,7 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 |JDK 5 - 7  |&check;|       |       |       |       |       |       |       |
 |JDK 8  |&check;|&check;|&check;|&check;|&check;|&check;|&check;|&check;|
 |JDK 9 - 14  |       |       |&check;|&check;|&check;|&check;|&check;|&check;|
-|JDK 15 - 16|       |       |       |       |       |       |       |&check;|
+|JDK 15 - 17|       |       |       |       |       |       |       |&check;|
 
 ## Acquiring Eclipse Collections
 
