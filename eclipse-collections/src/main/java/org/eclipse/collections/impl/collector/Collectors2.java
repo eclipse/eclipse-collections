@@ -358,6 +358,21 @@ public final class Collectors2
     }
 
     /**
+     * <p>Returns the elements as a ImmutableSortedSet using the specified function to compare each element.</p>
+     * <p>Examples:</p>
+     * {@code ImmutableSortedSet<Integer> set1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedSetBy(Object::toString));}<br>
+     * {@code ImmutableSortedSet<Integer> set2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedSetBy(Object::toString));}
+     * <p>
+     * Equivalent to using @{@link RichIterable#toImmutableSortedSetBy(Function)}.
+     * </p>
+     * {@code ImmutableSortedSet<Integer> set = Interval.oneTo(5).toImmutableSortedSetBy(Object::toString);}
+     */
+    public static <T, V extends Comparable<? super V>> Collector<T, ?, ImmutableSortedSet<T>> toImmutableSortedSetBy(Function<? super T, ? extends V> function)
+    {
+        return Collectors2.toImmutableSortedSet(Comparators.byFunction(function));
+    }
+
+    /**
      * <p>Returns the elements as a MutableBag.</p>
      * <p>Examples:</p>
      * {@code MutableBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toBag());}<br>

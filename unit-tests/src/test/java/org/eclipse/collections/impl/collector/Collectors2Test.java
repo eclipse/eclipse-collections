@@ -710,6 +710,26 @@ public final class Collectors2Test
     }
 
     @Test
+    public void toImmutableSortedSetBy()
+    {
+        MutableSortedSet<Integer> expected = SMALL_INTERVAL.toSortedSetBy(Object::toString);
+        ImmutableSortedSet<Integer> actual = this.smallData.stream().collect(Collectors2.toImmutableSortedSetBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedSet<Integer> actual2 = SMALL_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSetBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
+    }
+
+    @Test
+    public void toImmutableSortedSetByParallel()
+    {
+        MutableSortedSet<Integer> expected = LARGE_INTERVAL.toSortedSetBy(Object::toString);
+        ImmutableSortedSet<Integer> actual = this.bigData.parallelStream().collect(Collectors2.toImmutableSortedSetBy(Object::toString));
+        Assert.assertEquals(expected, actual);
+        ImmutableSortedSet<Integer> actual2 = LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableSortedSetBy(Object::toString));
+        Assert.assertEquals(expected, actual2);
+    }
+
+    @Test
     public void toSortedBag()
     {
         MutableSortedBag<Integer> expected = SMALL_INTERVAL.toSortedBag();
