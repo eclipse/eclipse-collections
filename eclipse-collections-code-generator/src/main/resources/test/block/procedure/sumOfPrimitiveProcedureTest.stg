@@ -1,0 +1,48 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure"
+
+fileName(primitive) ::= "SumOf<primitive.name>ProcedureTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure;
+
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link SumOf<name>Procedure}.
+ * This file was automatically generated from template file sumOfPrimitiveProcedureTest.stg.
+ */
+public class SumOf<name>ProcedureTest
+{
+    @Test
+    public void getResult()
+    {
+        <name>Function\<String> stringToLengthFunction = (String string) -> (<type>) string.length();
+        SumOf<name>Procedure\<String> procedure = new SumOf<name>Procedure\<>(stringToLengthFunction);
+        procedure.value("");
+        procedure.value("0");
+        procedure.value("00");
+        procedure.value("000");
+        <type> actual = (<type>) procedure.getResult();
+        <type> expected = (<type>) 6;
+
+        Assert.assertTrue(<(equals.(type))("actual", "expected")>);
+    }
+}
+
+>>
