@@ -21,6 +21,7 @@ import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
@@ -320,6 +321,69 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         Verify.assertListsEqual(
                 expected,
                 integers.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndex()
+    {
+        Assert.assertEquals(
+                Lists.mutable.of(5, 6),
+                this.newWith(6, 4, 5).selectWithIndex((object, value) -> value > 0, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void selectWithIndexAllRejected()
+    {
+        MutableSortedSet<Integer> integers = this.newWith(6, 4, 5);
+        Verify.assertEmpty(
+                integers.selectWithIndex(new ObjectIntPredicate<Integer>()
+                {
+                    int index = 0;
+                    @Override
+                    public boolean accept(Integer object, int value)
+                    {
+                        Assert.assertEquals(this.index++, value);
+                        return false;
+                    }
+                }, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndexNoneRejected()
+    {
+        MutableSortedSet<Integer> integers = this.newWith(6, 4, 5);
+        Verify.assertEquals(
+                Lists.mutable.of(4, 5, 6),
+                integers.rejectWithIndex(new ObjectIntPredicate<Integer>()
+                {
+                    int index = 0;
+                    @Override
+                    public boolean accept(Integer object, int value)
+                    {
+                        Assert.assertEquals(this.index++, value);
+                        return false;
+                    }
+                }, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 11.0.
+     */
+    @Test
+    public void rejectWithIndex()
+    {
+        MutableSortedSet<Integer> integers = this.newWith(6, 4, 5);
+        Verify.assertEquals(Lists.mutable.of(5, 6),
+                integers.rejectWithIndex((object, value) -> value < 1, Lists.mutable.empty()));
     }
 
     /**
