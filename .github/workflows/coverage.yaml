@@ -14,13 +14,13 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        java-version: [8]
+        java-version: [11]
 
     runs-on: ${{ matrix.os }}
 
     env:
       JAVA_VERSION: ${{ matrix.java-version }}
-      
+
     steps:
       - uses: actions/checkout@v2
       - name: Set JDK ${{ matrix.java-version }}
