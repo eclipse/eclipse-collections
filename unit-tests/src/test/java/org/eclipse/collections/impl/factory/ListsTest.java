@@ -24,6 +24,7 @@ import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MultiReaderList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
@@ -461,6 +462,20 @@ public class ListsTest
         ImmutableList<Integer> empty2 = Lists.immutable.withAll(integers);
         Assert.assertSame(Lists.immutable.empty(), empty);
         Assert.assertSame(Lists.immutable.empty(), empty2);
+    }
+
+    @Test
+    public void withAllSortedImmutable()
+    {
+        Assert.assertEquals(Lists.immutable.of(1, 5, 50, 100),
+                Lists.immutable.withAllSorted(Lists.mutable.of(50, 5, 100, 1)));
+    }
+
+    @Test
+    public void withAllSortedImmutableWithComparator()
+    {
+        Assert.assertEquals(Lists.immutable.of(100, 50, 5, 1),
+                Lists.immutable.withAllSorted(Comparators.reverseNaturalOrder(), Lists.mutable.of(50, 5, 100, 1)));
     }
 
     @Test

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -62,6 +62,43 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
         Verify.assertSortedBagsEqual(sortedBagA, sortedBagB);
         Assert.assertTrue(sortedBagA.getFirst().equals(sortedBagB.getFirst()) && sortedBagB.getFirst() == 6);
         Verify.assertSortedBagsEqual(sortedBagB, TreeBag.newBag(sortedBagB));
+    }
+
+    @Test
+    public void selectDuplicates()
+    {
+        TreeBag<Integer> sortedBagA = TreeBag.newBag(Collections.reverseOrder());
+        TreeBag<Integer> sortedBagB = TreeBag.newBag(sortedBagA.with(1).with(2, 3).with(4, 5, 6).with(1, 1, 1, 1));
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(1, 1, 1, 1, 1), sortedBagB.selectDuplicates());
+    }
+
+    @Test
+    public void collectWithIndex()
+    {
+        TreeBag<Integer> sortedBagA = TreeBag.newBag(Collections.reverseOrder());
+        TreeBag<Integer> sortedBagB = TreeBag.newBag(sortedBagA.with(1).with(2, 3).with(4, 5, 6).with(1, 1, 1, 1));
+
+        Assert.assertEquals(Lists.mutable.of(
+                PrimitiveTuples.pair((Integer) 6, 0),
+                PrimitiveTuples.pair((Integer) 5, 1),
+                PrimitiveTuples.pair((Integer) 4, 2),
+                PrimitiveTuples.pair((Integer) 3, 3),
+                PrimitiveTuples.pair((Integer) 2, 4),
+                PrimitiveTuples.pair((Integer) 1, 5),
+                PrimitiveTuples.pair((Integer) 1, 6),
+                PrimitiveTuples.pair((Integer) 1, 7),
+                PrimitiveTuples.pair((Integer) 1, 8),
+                PrimitiveTuples.pair((Integer) 1, 9)), sortedBagB.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    @Test
+    public void flatCollectWith()
+    {
+        TreeBag<String> sortedBagA = TreeBag.newBag(Collections.reverseOrder());
+        TreeBag<String> sortedBagB = TreeBag.newBag(sortedBagA.with("1").with("2", "3").with("1"));
+        String s = "Alex";
+        Assert.assertEquals(Lists.mutable.of("3", s, "2", s, "1", s, "1", s),
+                sortedBagB.flatCollectWith(Lists.mutable::of, s));
     }
 
     @Test
