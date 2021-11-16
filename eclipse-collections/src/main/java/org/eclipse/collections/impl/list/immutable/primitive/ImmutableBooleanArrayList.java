@@ -640,7 +640,7 @@ final class ImmutableBooleanArrayList
     @Override
     public ImmutableBooleanList subList(int fromIndex, int toIndex)
     {
-        throw new UnsupportedOperationException("subList not yet implemented!");
+        return new ImmutableSubList<>(this, fromIndex, toIndex);
     }
 
     private Object writeReplace()
@@ -717,5 +717,112 @@ final class ImmutableBooleanArrayList
             this.currentIndex++;
             return next;
         }
+    }
+
+    protected static class ImmutableBooleanArraySubList
+            extends ImmutableBooleanArrayList
+            implements Serializable, RandomAccess //?
+    {
+        private final ImmutableBooleanArrayList original;
+        private final int offset;
+        private final int size;
+
+        protected ImmutableBooleanArraySubList(ImmutableBooleanArrayList list, int fromIndex, int toIndex)
+        {
+            if (fromIndex < 0)
+            {
+                throw new IndexOutOfBoundsException("fromIndex = " + fromIndex);
+            }
+            if (toIndex > list.size())
+            {
+                throw new IndexOutOfBoundsException("toIndex = " + toIndex);
+            }
+            if (fromIndex > toIndex)
+            {
+                throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ')');
+            }
+            this.original = list;
+            this.offset = fromIndex;
+            this.size = toIndex - fromIndex;
+        }
+
+        @Override
+        public T get(int index)
+        {
+            this.checkIfOutOfBounds(index);
+            return this.original.get(index + this.offset);
+        }
+
+        @Override
+        public int size()
+        {
+            return this.size;
+        }
+
+        @Override
+        public ImmutableBooleanList newWith(boolean element)
+        {
+            BitSet newItems = (BitSet) this.original.items.clone();
+            if (element)
+            {
+                newItems.set(this.size);
+            }
+            return new ImmutableBooleanArrayList(newItems, this.size + 1);
+        }
+
+        protected Object writeReplace()
+        {
+            return Lists.immutable.withAll(this);
+        }
+
+        @Override
+        public Iterator<T> iterator()
+        {
+            return this.listIterator(0);
+        }
+
+        @Override
+        public ImmutableBooleanArraySubList subList(int fromIndex, int toIndex)
+        {
+            if (fromIndex < 0)
+            {
+                throw new IndexOutOfBoundsException("fromIndex = " + fromIndex);
+            }
+            if (toIndex > this.size())
+            {
+                throw new IndexOutOfBoundsException("toIndex = " + toIndex);
+            }
+            if (fromIndex > toIndex)
+            {
+                throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ')');
+            }
+
+            return new ImmutableBooleanArraySubList<>(this.original, this.offset + fromIndex, this.offset + toIndex);
+        }
+
+        @Override
+        public MutableStack<boolean> toStack()
+        {
+            return ArrayStack.newStack(this);
+        }
+
+        @Override
+        public void each(Procedure<boolean> procedure)
+        {
+            ListIterate.forEach(this, procedure);
+        }
+
+        @Override
+        public void forEachWithIndex(ObjectIntProcedure<boolean> objectIntProcedure)
+        {
+            ListIterate.forEachWithIndex(this, objectIntProcedure);
+        }°
+
+        @Override
+        public <P> void forEachWith(Procedure2<boolean, ? super P> procedure, P parameter)
+        {
+            ListIterate.forEachWith(this, procedure, parameter);
+        }
+
     }
 }
