@@ -48,6 +48,7 @@ public class ClassComparer
     private final boolean includeParameterTypesInMethods;
     private final boolean includeReturnTypes;
     private final boolean includePackageNames;
+    private boolean includeObjectMethods = false;
     private final Appendable appendable;
 
     public ClassComparer()
@@ -162,7 +163,17 @@ public class ClassComparer
 
     public MutableSortedSet<String> getMethodNames(Class<?> classOne)
     {
-        return ArrayIterate.collect(classOne.getMethods(), this::methodName, SortedSets.mutable.empty());
+        return ArrayIterate.collectIf(classOne.getMethods(), this::includeMethod, this::methodName, SortedSets.mutable.empty());
+    }
+
+    public void includeObjectMethods()
+    {
+        this.includeObjectMethods = true;
+    }
+
+    private boolean includeMethod(Method method)
+    {
+        return this.includeObjectMethods || !method.getDeclaringClass().equals(Object.class);
     }
 
     private String methodName(Method method)
