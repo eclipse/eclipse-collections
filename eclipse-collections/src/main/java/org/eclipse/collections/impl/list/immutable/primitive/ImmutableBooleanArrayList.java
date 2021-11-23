@@ -638,9 +638,9 @@ final class ImmutableBooleanArrayList
     }
 
     @Override
-    public ImmutableBooleanList subList(int fromIndex, int toIndex)
+    public ImmutableBooleanArrayList subList(int fromIndex, int toIndex)
     {
-        throw new UnsupportedOperationException("subList not yet implemented!");
+        return new ImmutableBooleanArrayList(this.BitSet.get(fromIndex, toIndex), toIndex - fromIndex)
     }
 
     private Object writeReplace()

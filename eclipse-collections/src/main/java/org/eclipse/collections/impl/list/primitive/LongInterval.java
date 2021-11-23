@@ -530,9 +530,9 @@ public final class LongInterval
     }
 
     @Override
-    public ImmutableLongList subList(int fromIndex, int toIndex)
+    public LongInterval subList(int fromIndex, int toIndex)
     {
-        throw new UnsupportedOperationException("subList not yet implemented!");
+        return new LongInterval(fromIndex, toIndex, this.step);
     }
 
     /**
