@@ -118,6 +118,30 @@ public class FastListTest extends AbstractListTestCase
     }
 
     @Test
+    public void getBatchCount()
+    {
+        FastList<String> strings = FastList.newList(0);
+        Assert.assertEquals(1, strings.getBatchCount(10));
+        strings.with("a", "b", "c");
+        Assert.assertEquals(3, strings.getBatchCount(1));
+        Assert.assertEquals(1, strings.getBatchCount(2));
+        Assert.assertEquals(1, strings.getBatchCount(200));
+    }
+
+    @Test
+    public void remove()
+    {
+        MutableList<String> strings = Lists.mutable.of("a", "b", "c");
+        Assert.assertTrue(strings.remove("a"));
+        Verify.assertSize(2, strings);
+        Assert.assertFalse(strings.remove("a"));
+        Assert.assertFalse(strings.remove("z"));
+        Verify.assertSize(2, strings);
+        Assert.assertTrue(strings.remove("c"));
+        Verify.assertSize(1, strings);
+    }
+
+    @Test
     public void wrapCopy()
     {
         Integer[] integers = {1, 2, 3, 4};

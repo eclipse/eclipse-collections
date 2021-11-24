@@ -14,6 +14,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.StringIterate;
 import org.junit.Assert;
@@ -44,5 +45,6 @@ public class ChainedProcedureTest
         String s = procedure.toString();
         Assert.assertNotNull(s);
         Assert.assertTrue(StringIterate.notEmptyOrWhitespace(s));
+        Verify.assertContains("ChainedProcedure.with", new ChainedProcedure<>().toString());
     }
 }
