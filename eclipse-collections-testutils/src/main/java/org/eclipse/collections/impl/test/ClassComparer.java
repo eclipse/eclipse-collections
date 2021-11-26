@@ -38,6 +38,8 @@ import org.eclipse.collections.impl.utility.StringIterate;
  * <li> Intersection
  * <li> Difference
  * <li> Symmetric difference
+ * <li> isProperSubsetOf
+ * <li> isProperSupersetOf
  * </ul>
  */
 public class ClassComparer
@@ -76,6 +78,17 @@ public class ClassComparer
         this.includeReturnTypes = includeReturnTypes;
         this.includePackageNames = includePackageNames;
         this.appendable = out;
+    }
+
+    public static boolean isProperSupersetOf(Class<?> supersetClass, Class<?> subsetClass)
+    {
+        return ClassComparer.isProperSubsetOf(subsetClass, supersetClass);
+    }
+
+    public static boolean isProperSubsetOf(Class<?> subsetClass, Class<?> supersetClass)
+    {
+        ClassComparer comparer = new ClassComparer(true, true, true);
+        return comparer.getMethodNames(subsetClass).isProperSubsetOf(comparer.getMethodNames(supersetClass));
     }
 
     public Triplet<MutableSortedSet<String>> compare(Class<?> leftClass, Class<?> rightClass)
