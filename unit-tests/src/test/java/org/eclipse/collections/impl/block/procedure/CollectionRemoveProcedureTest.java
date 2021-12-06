@@ -36,5 +36,6 @@ public class CollectionRemoveProcedureTest
         String s = procedure.toString();
         Assert.assertNotNull(s);
         Assert.assertTrue(StringIterate.notEmptyOrWhitespace(s));
+        Assert.assertEquals("Collection.remove()", s);
     }
 }
