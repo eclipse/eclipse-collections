@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.mutable;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,6 +32,7 @@ import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.math.SumProcedure;
 import org.eclipse.collections.impl.parallel.BatchIterable;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.test.ClassComparer;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.ArrayIterate;
@@ -155,6 +157,12 @@ public class UnifiedMapTest extends UnifiedMapTestCase
         Assert.assertEquals(
                 UnifiedMap.newMapWith(pair1, pair2, pair3, pair4),
                 UnifiedMap.newMapWith(UnifiedSet.newSetWith(pair1, pair2, pair3, pair4)));
+    }
+
+    @Test
+    public void unifiedMapProperSuperSetOfHashMap()
+    {
+        Assert.assertTrue(ClassComparer.isProperSupersetOf(UnifiedMap.class, HashMap.class));
     }
 
     @Test

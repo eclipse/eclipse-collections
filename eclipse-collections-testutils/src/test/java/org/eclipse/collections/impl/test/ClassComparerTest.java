@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.test;
 
+import java.util.Stack;
+import java.util.Vector;
 import java.util.concurrent.Callable;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -293,6 +295,20 @@ public class ClassComparerTest
         Assert.assertEquals(expected.printDifference(java.util.function.Function.class, Function.class), compare.getTwo());
         Assert.assertEquals(expected.printDifference(Function.class, java.util.function.Function.class), compare.getThree());
         Assert.assertEquals(expectedOut.getContents(), actualOut.getContents());
+    }
+
+    @Test
+    public void isProperSupersetOf()
+    {
+        Assert.assertTrue(ClassComparer.isProperSupersetOf(Stack.class, Vector.class));
+        Assert.assertFalse(ClassComparer.isProperSupersetOf(Vector.class, Stack.class));
+    }
+
+    @Test
+    public void isProperSubsetOf()
+    {
+        Assert.assertTrue(ClassComparer.isProperSubsetOf(Vector.class, Stack.class));
+        Assert.assertFalse(ClassComparer.isProperSubsetOf(Stack.class, Vector.class));
     }
 
     private static class CollectingAppendable implements Appendable

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.math.SumProcedure;
+import org.eclipse.collections.impl.test.ClassComparer;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
 import org.eclipse.collections.impl.utility.ArrayIterate;
@@ -82,6 +83,12 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
     {
         MutableSet<Integer> integers = UnifiedSet.newSet(Interval.oneTo(3));
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3), integers);
+    }
+
+    @Test
+    public void unifiedSetProperSuperSetOfHashSet()
+    {
+        Assert.assertTrue(ClassComparer.isProperSupersetOf(UnifiedSet.class, HashSet.class));
     }
 
     @Override

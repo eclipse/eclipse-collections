@@ -46,6 +46,7 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.math.SumProcedure;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.test.ClassComparer;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -124,6 +125,12 @@ public class FastListTest extends AbstractListTestCase
         FastList<Integer> expected = this.newWith(1, 2, 3, 4);
         integers[0] = Integer.valueOf(4);
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void fastListProperSuperSetOfArrayList()
+    {
+        Assert.assertTrue(ClassComparer.isProperSupersetOf(FastList.class, ArrayList.class));
     }
 
     @Override
