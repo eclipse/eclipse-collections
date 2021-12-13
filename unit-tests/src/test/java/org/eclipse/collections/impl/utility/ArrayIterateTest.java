@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -31,6 +32,7 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
+import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Functions2;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
@@ -42,6 +44,7 @@ import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.MaxSizeFunction;
 import org.eclipse.collections.impl.block.function.MinSizeFunction;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
+import org.eclipse.collections.impl.block.procedure.FastListCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.MapPutProcedure;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
@@ -58,6 +61,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -552,6 +556,9 @@ public class ArrayIterateTest
         MutableList<Integer> result = Lists.mutable.of();
         ArrayIterate.addAllTo(new Integer[]{1, 2, 3}, result);
         Assert.assertEquals(FastList.newListWith(1, 2, 3), result);
+
+        MutableList<Integer> returnedResult = ArrayIterate.addAllTo(new Integer[]{4, 5, 6}, result);
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6), returnedResult);
     }
 
     @Test
@@ -843,6 +850,19 @@ public class ArrayIterateTest
     }
 
     @Test
+    public void forEach()
+    {
+        FastList<String> target = FastList.newList();
+        ArrayIterate.forEach(new String[]{"0", "1", "2", "3"}, 1, 2,
+                new FastListCollectProcedure<String, String>(Functions.getPassThru(), target));
+        Assert.assertEquals(Lists.mutable.of("1", "2"), target);
+
+        Assert.assertThrows(IndexOutOfBoundsException.class,
+                () -> ArrayIterate.forEach(new String[]{"0", "1", "2", "3"}, 1, 5,
+                        new FastListCollectProcedure<String, String>(Functions.getPassThru(), target)));
+    }
+
+    @Test
     public void forEachInBoth()
     {
         MutableMap<String, String> map = UnifiedMap.newMap();
@@ -870,6 +890,15 @@ public class ArrayIterateTest
     {
         Integer[] objectArray = {1, 2, 3, 4};
         ArrayIterate.forEachWithIndex(objectArray, (i, index) -> Assert.assertEquals(index, i - 1));
+
+        MutableList<Twin<Integer>> list = Lists.mutable.empty();
+        ArrayIterate.forEachWithIndex(objectArray, (each, parameter) -> list.add(Tuples.twin(each, parameter)));
+        Assert.assertEquals(Lists.mutable.of(
+                Tuples.twin(1, 0),
+                Tuples.twin(2, 1),
+                Tuples.twin(3, 2),
+                Tuples.twin(4, 3)),
+                list);
     }
 
     @Test
@@ -909,6 +938,35 @@ public class ArrayIterateTest
             array[i] = 1;
         }
         return array;
+    }
+
+    @Test
+    public void detectOptional()
+    {
+        Assert.assertThrows(IllegalArgumentException.class,
+                () -> ArrayIterate.detectOptional(null, Predicates.alwaysTrue()));
+
+        Integer[] array = {1, 2, 3, 4, 5};
+        Assert.assertFalse(ArrayIterate.detectOptional(array, Predicates.alwaysFalse()).isPresent());
+
+        Optional<Integer> resultOptional = ArrayIterate.detectOptional(array, IntegerPredicates.isEven());
+        Assert.assertTrue(resultOptional.isPresent());
+        Assert.assertEquals((Integer) 2, resultOptional.get());
+    }
+
+    @Test
+    public void detectWithOptional()
+    {
+        Assert.assertThrows(IllegalArgumentException.class,
+                () -> ArrayIterate.detectWithOptional(null, Predicates2.alwaysTrue(), "param"));
+
+        Integer[] array = {1, 2, 3, 4, 5};
+        Assert.assertFalse(ArrayIterate.detectWithOptional(array, Predicates2.alwaysFalse(), "param")
+                .isPresent());
+
+        Optional<Integer> resultOptional = ArrayIterate.detectWithOptional(array, Predicates2.greaterThan(), 2);
+        Assert.assertTrue(resultOptional.isPresent());
+        Assert.assertEquals((Integer) 3, resultOptional.get());
     }
 
     @Test
@@ -1401,5 +1459,63 @@ public class ArrayIterateTest
     public void classIsNonInstantiable()
     {
         Verify.assertClassNonInstantiable(ArrayIterate.class);
+    }
+
+    @Test
+    public void minBy()
+    {
+        Twin<Integer>[] integerTwins =
+                new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
+
+        Assert.assertEquals(Tuples.twin(7, 3),  ArrayIterate.minBy(integerTwins, Functions.firstOfPair()));
+        Assert.assertEquals(Tuples.twin(9, 1),  ArrayIterate.minBy(integerTwins, Functions.secondOfPair()));
+    }
+
+    @Test
+    public void minWithComparator()
+    {
+        Twin<Integer>[] integerTwins =
+                new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
+
+        Assert.assertEquals(Tuples.twin(7, 3),
+                ArrayIterate.min(integerTwins, Comparators.byFunction(Functions.firstOfPair())));
+
+        Assert.assertEquals(Tuples.twin(9, 1),
+                ArrayIterate.min(integerTwins, Comparators.byFunction(Functions.secondOfPair())));
+    }
+
+    @Test
+    public void min()
+    {
+        Assert.assertEquals(Integer.valueOf(1), ArrayIterate.min(3, 1, 20));
+    }
+
+    @Test
+    public void max()
+    {
+        Assert.assertEquals(Integer.valueOf(20), ArrayIterate.max(3, 1, 20));
+    }
+
+    @Test
+    public void maxBy()
+    {
+        Twin<Integer>[] integerTwins =
+                new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
+
+        Assert.assertEquals(Tuples.twin(9, 1),  ArrayIterate.maxBy(integerTwins, Functions.firstOfPair()));
+        Assert.assertEquals(Tuples.twin(7, 3),  ArrayIterate.maxBy(integerTwins, Functions.secondOfPair()));
+    }
+
+    @Test
+    public void maxWithComparator()
+    {
+        Twin<Integer>[] integerTwins =
+                new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
+
+        Assert.assertEquals(Tuples.twin(9, 1),
+                ArrayIterate.max(integerTwins, Comparators.byFunction(Functions.firstOfPair())));
+
+        Assert.assertEquals(Tuples.twin(7, 3),
+                ArrayIterate.max(integerTwins, Comparators.byFunction(Functions.secondOfPair())));
     }
 }
