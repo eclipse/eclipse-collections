@@ -96,6 +96,12 @@ public class UnifiedMapWithHashingStrategyNoIteratorTest implements MutableMapTe
     }
 
     @Override
+    public void RichIterable_fused_collectMakeString()
+    {
+        // Not applicable
+    }
+
+    @Override
     public void RichIterable_anySatisfy_allSatisfy_noneSatisfy()
     {
         /**

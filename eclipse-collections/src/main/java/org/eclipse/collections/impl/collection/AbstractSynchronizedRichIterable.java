@@ -1232,6 +1232,15 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public String makeString(Function<? super T, Object> function, String start, String separator, String end)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.makeString(function, start, separator, end);
+        }
+    }
+
+    @Override
     public void appendString(Appendable appendable)
     {
         synchronized (this.lock)

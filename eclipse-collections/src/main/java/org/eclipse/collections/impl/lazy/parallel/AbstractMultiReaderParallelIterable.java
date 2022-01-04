@@ -681,6 +681,20 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
     }
 
     @Override
+    public String makeString(Function<? super T, Object> function, String start, String separator, String end)
+    {
+        this.lock.readLock().lock();
+        try
+        {
+            return this.delegate.makeString(function, start, separator, end);
+        }
+        finally
+        {
+            this.lock.readLock().unlock();
+        }
+    }
+
+    @Override
     public void appendString(Appendable appendable)
     {
         this.lock.readLock().lock();
