@@ -25,9 +25,9 @@ import org.eclipse.collections.impl.factory.primitive.<name>Lists;
  *
  * @since 3.2.
  */
-public enum Immutable<name>ListFactoryImpl implements Immutable<name>ListFactory
+public class Immutable<name>ListFactoryImpl implements Immutable<name>ListFactory
 {
-    INSTANCE;
+    public static final Immutable<name>ListFactory INSTANCE = new Immutable<name>ListFactoryImpl();
 
     @Override
     public Immutable<name>List empty()
