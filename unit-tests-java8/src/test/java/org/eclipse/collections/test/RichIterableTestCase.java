@@ -1998,6 +1998,16 @@ public interface RichIterableTestCase extends IterableTestCase
     }
 
     @Test
+    default void RichIterable_fused_collectMakeString()
+    {
+        RichIterable<Integer> iterable = this.newWith(0, 1, 8);
+
+        assertEquals(
+                iterable.asLazy().collect(Integer::toUnsignedString).makeString("[", ",", "]"),
+                iterable.makeString(Integer::toUnsignedString, "[", ",", "]"));
+    }
+
+    @Test
     default void RichIterable_makeString_appendString()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);

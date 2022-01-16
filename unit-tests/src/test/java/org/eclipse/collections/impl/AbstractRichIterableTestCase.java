@@ -1842,6 +1842,15 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void fusedCollectMakeString()
+    {
+        RichIterable<Integer> collection = this.newWith(1, 2, 3);
+        Assert.assertEquals(
+                collection.asLazy().collect(Integer::toUnsignedString).makeString("[", ", ", "]"),
+                collection.makeString(Integer::toUnsignedString, "[", ", ", "]"));
+    }
+
+    @Test
     public void appendString()
     {
         RichIterable<Object> collection = this.newWith(1, 2, 3);

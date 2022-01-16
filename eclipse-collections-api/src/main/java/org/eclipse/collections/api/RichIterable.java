@@ -2299,6 +2299,17 @@ public interface RichIterable<T>
     }
 
     /**
+     * Returns a string representation of the collection, created by applying the function supplied to each element,
+     * with the elements separated by the specified separator and enclosed between the start and end strings.
+     *
+     * @return a string representation of the mapped collection
+     */
+    default String makeString(Function<? super T, Object> function, String start, String separator, String end)
+    {
+        return this.asLazy().collect(function).makeString(start, separator, end);
+    }
+
+    /**
      * Prints a string representation of this collection onto the given {@code Appendable}. Prints the string returned
      * by {@link #makeString()}.
      *

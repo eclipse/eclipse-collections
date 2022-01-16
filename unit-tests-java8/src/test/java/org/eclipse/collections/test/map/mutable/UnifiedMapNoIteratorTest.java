@@ -95,6 +95,12 @@ public class UnifiedMapNoIteratorTest implements MutableMapTestCase, NoIteratorT
     }
 
     @Override
+    public void RichIterable_fused_collectMakeString()
+    {
+        // Not applicable
+    }
+
+    @Override
     public void MutableMapIterable_updateValue()
     {
         /**

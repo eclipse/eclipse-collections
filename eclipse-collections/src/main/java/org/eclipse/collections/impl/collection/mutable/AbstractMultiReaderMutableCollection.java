@@ -1372,6 +1372,15 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public String makeString(Function<? super T, Object> function, String start, String separator, String end)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().makeString(function, start, separator, end);
+        }
+    }
+
+    @Override
     public void appendString(Appendable appendable)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())

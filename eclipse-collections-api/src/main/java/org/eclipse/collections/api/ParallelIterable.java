@@ -248,6 +248,11 @@ public interface ParallelIterable<T>
         return stringBuilder.toString();
     }
 
+    default String makeString(Function<? super T, Object> function, String start, String separator, String end)
+    {
+        return this.collect(function).makeString(start, separator, end);
+    }
+
     default void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
