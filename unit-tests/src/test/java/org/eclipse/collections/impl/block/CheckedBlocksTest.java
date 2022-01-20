@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,6 +19,8 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.function.checked.CheckedFunction;
 import org.eclipse.collections.impl.block.function.checked.CheckedFunction0;
@@ -528,15 +530,26 @@ public class CheckedBlocksTest
     @Test
     public void predicateSuccess()
     {
-        Predicate<Object> block = new CheckedPredicate<Object>()
+        Predicate<String> alwaysTrueBlock = new CheckedPredicate<String>()
         {
             @Override
-            public boolean safeAccept(Object object)
+            public boolean safeAccept(String s)
             {
                 return true;
             }
         };
-        iList("test").select(block);
+        ImmutableList<String> list = iList("test");
+        Assert.assertEquals(list, list.select(alwaysTrueBlock));
+
+        Predicate<String> alwaysFalseBlock = new CheckedPredicate<String>()
+        {
+            @Override
+            public boolean safeAccept(String s)
+            {
+                return false;
+            }
+        };
+        Verify.assertEmpty(list.select(alwaysFalseBlock));
     }
 
     @Test(expected = RuntimeException.class)
@@ -612,15 +625,26 @@ public class CheckedBlocksTest
     @Test
     public void predicate2Success()
     {
-        Predicate2<Object, Object> block = new CheckedPredicate2<Object, Object>()
+        Predicate2<String, Object> alwaysTrueBlock = new CheckedPredicate2<String, Object>()
         {
             @Override
-            public boolean safeAccept(Object object, Object param)
+            public boolean safeAccept(String s, Object param)
             {
                 return true;
             }
         };
-        mList("test").selectWith(block, null);
+        MutableList<String> list = mList("test");
+        Assert.assertEquals(list, list.selectWith(alwaysTrueBlock, null));
+
+        Predicate2<String, Object> alwaysFalseBlock = new CheckedPredicate2<String, Object>()
+        {
+            @Override
+            public boolean safeAccept(String s, Object param)
+            {
+                return false;
+            }
+        };
+        Verify.assertEmpty(list.selectWith(alwaysFalseBlock, null));
     }
 
     @Test
