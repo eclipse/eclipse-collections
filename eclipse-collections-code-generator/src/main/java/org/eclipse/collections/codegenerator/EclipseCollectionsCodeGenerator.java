@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -30,10 +30,12 @@ public class EclipseCollectionsCodeGenerator
 {
     public static final String GENERATED_TEST_SOURCES_LOCATION = "target/generated-test-sources/java/";
     public static final String GENERATED_SOURCES_LOCATION = "target/generated-sources/java/";
+    public static final String GENERATED_SERVICES_LOCATION = "target/generated-sources/resources/META-INF/services";
     private final String templateDirectory;
     private final File moduleBaseDir;
     private final List<URL> classPathURLs;
     private boolean isTest;
+    private boolean isService;
     private STGroupFile templateFile;
     private final STErrorListener stErrorListener;
     private URL url;
@@ -64,6 +66,7 @@ public class EclipseCollectionsCodeGenerator
             if (this.templateFile.isDefined("fileName"))
             {
                 this.setTest();
+                this.setService();
                 File targetPath = this.constructTargetPath();
                 FileUtils.createDirectory(targetPath);
 
@@ -87,7 +90,7 @@ public class EclipseCollectionsCodeGenerator
                                 continue;
                             }
                             String sourceFileName = this.executeTemplate(primitive1, primitive2, "fileName");
-                            File outputFile = new File(targetPath, sourceFileName + ".java");
+                            File outputFile = new File(targetPath, sourceFileName + this.fileExtension());
 
                             if (!EclipseCollectionsCodeGenerator.sourceFileExists(outputFile))
                             {
@@ -110,7 +113,7 @@ public class EclipseCollectionsCodeGenerator
                             continue;
                         }
                         String sourceFileName = this.executeTemplate(primitive, "fileName");
-                        File outputFile = new File(targetPath, sourceFileName + ".java");
+                        File outputFile = new File(targetPath, sourceFileName + this.fileExtension());
 
                         if (!EclipseCollectionsCodeGenerator.sourceFileExists(outputFile))
                         {
@@ -125,12 +128,17 @@ public class EclipseCollectionsCodeGenerator
         return this.numFileWritten;
     }
 
+    private String fileExtension()
+    {
+        return this.isService() ? "" : ".java";
+    }
+
     private void checkSumClassContentsAndWrite(String classContents, File targetPath, String sourceFileName)
     {
         long checksumValue = EclipseCollectionsCodeGenerator.calculateChecksum(classContents);
 
-        File outputFile = new File(targetPath, sourceFileName + ".java");
-        Path outputChecksumPath = Paths.get(targetPath.getAbsolutePath(), sourceFileName + ".java.crc");
+        File outputFile = new File(targetPath, sourceFileName + this.fileExtension());
+        Path outputChecksumPath = Paths.get(targetPath.getAbsolutePath(), sourceFileName + this.fileExtension() + ".crc");
         if (!outputChecksumPath.toFile().exists())
         {
             this.writeFileAndChecksum(outputFile, classContents, checksumValue, outputChecksumPath, false);
@@ -188,16 +196,28 @@ public class EclipseCollectionsCodeGenerator
 
     private void setTest()
     {
-        this.isTest = this.templateFile.getInstanceOf("isTest") == null
-                ? false
-                : Boolean.valueOf(this.templateFile.getInstanceOf("isTest").render());
+        this.isTest =
+                this.templateFile.getInstanceOf("isTest") != null && Boolean.valueOf(this.templateFile.getInstanceOf("isTest").render());
+    }
+
+    private void setService()
+    {
+        this.isService =
+                this.templateFile.getInstanceOf("isService") != null && Boolean.valueOf(this.templateFile.getInstanceOf("isService").render());
     }
 
     private File constructTargetPath()
     {
         ST targetPath = this.findTemplate("targetPath");
-        return this.isTest ? new File(this.moduleBaseDir, GENERATED_TEST_SOURCES_LOCATION + targetPath.render())
-                : new File(this.moduleBaseDir, GENERATED_SOURCES_LOCATION + targetPath.render());
+        if (this.isTest)
+        {
+            return new File(this.moduleBaseDir, GENERATED_TEST_SOURCES_LOCATION + targetPath.render());
+        }
+        if (this.isService)
+        {
+            return new File(this.moduleBaseDir, GENERATED_SERVICES_LOCATION + targetPath.render());
+        }
+        return new File(this.moduleBaseDir, GENERATED_SOURCES_LOCATION + targetPath.render());
     }
 
     private static boolean sourceFileExists(File outputFile)
@@ -212,6 +232,11 @@ public class EclipseCollectionsCodeGenerator
     public boolean isTest()
     {
         return this.isTest;
+    }
+
+    public boolean isService()
+    {
+        return this.isService;
     }
 
     public interface ErrorListener

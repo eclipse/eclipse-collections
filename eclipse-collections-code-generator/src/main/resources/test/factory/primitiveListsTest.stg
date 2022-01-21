@@ -18,6 +18,7 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.factory.primitive;
 
 import org.eclipse.collections.api.factory.list.primitive.Immutable<name>ListFactory;
+import org.eclipse.collections.api.factory.list.primitive.Mutable<name>ListFactory;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.factory.Lists;
@@ -35,7 +36,12 @@ public class <name>ListsTest
     @Test
     public void immutables()
     {
-        Immutable<name>ListFactory listFactory = <name>Lists.immutable;
+        this.assertImmutableListFactory(<name>Lists.immutable);
+        this.assertImmutableListFactory(org.eclipse.collections.api.factory.primitive.<name>Lists.immutable);
+    }
+
+    private void assertImmutableListFactory(Immutable<name>ListFactory listFactory)
+    {
         Assert.assertEquals(new <name>ArrayList(), listFactory.of());
         Verify.assertInstanceOf(Immutable<name>List.class, listFactory.of());
         Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), listFactory.of(<(literal.(type))("1")>));
@@ -60,6 +66,41 @@ public class <name>ListsTest
         Verify.assertInstanceOf(Immutable<name>List.class, listFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
         Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), listFactory.ofAll(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
         Verify.assertInstanceOf(Immutable<name>List.class, listFactory.ofAll(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+    }
+
+    @Test
+    public void mutables()
+    {
+        this.assertMutableListFactory(<name>Lists.mutable);
+        this.assertMutableListFactory(org.eclipse.collections.api.factory.primitive.<name>Lists.mutable);
+    }
+
+    private void assertMutableListFactory(Mutable<name>ListFactory listFactory)
+    {
+        Assert.assertEquals(new <name>ArrayList(), listFactory.of());
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of());
+        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), listFactory.of(<(literal.(type))("1")>));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<(literal.(type))("1")>));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">), listFactory.of(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), listFactory.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), listFactory.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), listFactory.of(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">), listFactory.of(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">), listFactory.of(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">), listFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">), listFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">), listFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), listFactory.ofAll(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        Verify.assertInstanceOf(Mutable<name>List.class, listFactory.ofAll(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
     }
 
     @Test

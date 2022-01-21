@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2021 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -63,19 +63,15 @@ public class GenerateMojo extends AbstractMojo
         List<URL> urls = Arrays.asList(((URLClassLoader) GenerateMojo.class.getClassLoader()).getURLs());
 
         boolean[] error = new boolean[1];
-        EclipseCollectionsCodeGenerator.ErrorListener errorListener = new EclipseCollectionsCodeGenerator.ErrorListener()
-        {
-            public void error(String string)
-            {
-                GenerateMojo.this.getLog().error(string);
-                error[0] = true;
-            }
+        EclipseCollectionsCodeGenerator.ErrorListener errorListener = string -> {
+            this.getLog().error(string);
+            error[0] = true;
         };
-        EclipseCollectionsCodeGenerator gsCollectionsCodeGenerator =
+        EclipseCollectionsCodeGenerator codeGenerator =
                 new EclipseCollectionsCodeGenerator(this.templateDirectory, this.project.getBasedir(), urls, errorListener);
         if (!this.skipCodeGen)
         {
-            int numFilesWritten = gsCollectionsCodeGenerator.generateFiles();
+            int numFilesWritten = codeGenerator.generateFiles();
             this.getLog().info("Generated " + numFilesWritten + " files");
         }
         if (error[0])
@@ -83,7 +79,7 @@ public class GenerateMojo extends AbstractMojo
             throw new MojoExecutionException("Error(s) during code generation.");
         }
 
-        if (gsCollectionsCodeGenerator.isTest())
+        if (codeGenerator.isTest())
         {
             this.project.addTestCompileSourceRoot(EclipseCollectionsCodeGenerator.GENERATED_TEST_SOURCES_LOCATION);
         }

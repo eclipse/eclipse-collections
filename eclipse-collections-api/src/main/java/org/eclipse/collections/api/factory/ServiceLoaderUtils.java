@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.ServiceLoader;
 import java.util.stream.Collectors;
 
-final class ServiceLoaderUtils
+public final class ServiceLoaderUtils
 {
     private ServiceLoaderUtils()
     {
         throw new AssertionError("Suppress default constructor for noninstantiability");
     }
 
-    static <T> T loadServiceClass(Class<T> serviceClass)
+    public static <T> T loadServiceClass(Class<T> serviceClass)
     {
         List<T> factories = new ArrayList<>();
         for (T factory : ServiceLoader.load(serviceClass))
