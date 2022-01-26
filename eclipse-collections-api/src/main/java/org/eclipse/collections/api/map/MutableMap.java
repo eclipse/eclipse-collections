@@ -220,9 +220,11 @@ public interface MutableMap<K, V>
             Function2<? super V2, ? super V1, ? extends V2> nonMutatingAggregator)
     {
         MutableMap<K1, V2> map = Maps.mutable.empty();
-        this.forEachKeyValue((key, value) -> {
-            map.updateValueWith(keyFunction.valueOf(key), zeroValueFactory, nonMutatingAggregator, valueFunction.valueOf(value));
-        });
+        this.forEachKeyValue((key, value) -> map.updateValueWith(
+                keyFunction.valueOf(key),
+                zeroValueFactory,
+                nonMutatingAggregator,
+                valueFunction.valueOf(value)));
         return map;
     }
 
