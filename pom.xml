@@ -136,7 +136,7 @@
 
         <argLine></argLine>
 
-        <project.previous.version>9.2.0</project.previous.version>
+        <project.previous.version>11.0.0</project.previous.version>
     </properties>
 
     <pluginRepositories>
