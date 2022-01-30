@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.regex.Pattern;
 
-import org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator;
 import org.eclipse.collections.codegenerator.model.Primitive;
 
 /**
@@ -49,6 +48,8 @@ import org.eclipse.collections.codegenerator.model.Primitive;
  */
 public class JavadocUtil
 {
+    public static final String GENERATED_SOURCES_LOCATION = "target/generated-sources/java/";
+
     private static final Path TEMPLATE_ROOT = Paths.get("src", "main", "resources");
     private static final Path API_ROOT = Paths.get("..", "eclipse-collections-api");
 
@@ -79,7 +80,7 @@ public class JavadocUtil
             template  += ".stg";
         }
 
-        Path src = API_ROOT.resolve(EclipseCollectionsCodeGenerator.GENERATED_SOURCES_LOCATION.replace('/', File.separatorChar) + generatedClass);
+        Path src = API_ROOT.resolve(GENERATED_SOURCES_LOCATION.replace('/', File.separatorChar) + generatedClass);
         Path dest = TEMPLATE_ROOT.resolve(template.replace('/', File.separatorChar));
 
         if (!Files.isRegularFile(src) || !Files.isRegularFile(dest))

@@ -16,37 +16,36 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.zip.CRC32;
 
 import org.eclipse.collections.codegenerator.model.Primitive;
 import org.eclipse.collections.codegenerator.tools.FileUtils;
 import org.eclipse.collections.codegenerator.tools.IntegerOrStringRenderer;
 import org.stringtemplate.v4.ST;
-import org.stringtemplate.v4.STErrorListener;
 import org.stringtemplate.v4.STGroupFile;
-import org.stringtemplate.v4.misc.STMessage;
 
 public class EclipseCollectionsCodeGenerator
 {
-    public static final String GENERATED_TEST_SOURCES_LOCATION = "target/generated-test-sources/java/";
-    public static final String GENERATED_SOURCES_LOCATION = "target/generated-sources/java/";
-    public static final String GENERATED_SERVICES_LOCATION = "target/generated-sources/resources/META-INF/services";
     private final String templateDirectory;
-    private final File moduleBaseDir;
     private final List<URL> classPathURLs;
-    private boolean isTest;
-    private boolean isService;
-    private STGroupFile templateFile;
-    private final STErrorListener stErrorListener;
-    private URL url;
+    private final ErrorListener errorListener;
+    private final File outputDirectory;
+    private final String fileExtension;
+
     private int numFileWritten = 0;
 
-    public EclipseCollectionsCodeGenerator(String templateDirectory, File moduleBaseDir, List<URL> classPathURLs, ErrorListener errorListener)
+    public EclipseCollectionsCodeGenerator(
+            String templateDirectory,
+            List<URL> classPathURLs,
+            ErrorListener errorListener,
+            File outputDirectory, String fileExtension)
     {
-        this.templateDirectory = templateDirectory;
-        this.moduleBaseDir = moduleBaseDir;
-        this.classPathURLs = classPathURLs;
-        this.stErrorListener = new LoggingErrorListener(errorListener);
+        this.templateDirectory = Objects.requireNonNull(templateDirectory);
+        this.classPathURLs = Objects.requireNonNull(classPathURLs);
+        this.errorListener = Objects.requireNonNull(errorListener);
+        this.outputDirectory = Objects.requireNonNull(outputDirectory);
+        this.fileExtension = fileExtension;
     }
 
     /**
@@ -56,70 +55,74 @@ public class EclipseCollectionsCodeGenerator
      */
     public int generateFiles()
     {
-        List<URL> allTemplateFilesFromClassPath = FileUtils.getAllTemplateFilesFromClasspath(this.templateDirectory, this.classPathURLs);
+        List<URL> allTemplateFilesFromClassPath =
+                FileUtils.getAllTemplateFilesFromClasspath(this.templateDirectory, this.classPathURLs);
+
         for (URL url : allTemplateFilesFromClassPath)
         {
-            this.url = url;
-            this.templateFile = new STGroupFile(this.url, "UTF-8", '<', '>');
-            this.templateFile.setListener(this.stErrorListener);
-            this.templateFile.registerRenderer(String.class, new IntegerOrStringRenderer());
-            if (this.templateFile.isDefined("fileName"))
+            STGroupFile templateFile = new STGroupFile(url, "UTF-8", '<', '>');
+            if (!templateFile.isDefined("fileName"))
             {
-                this.setTest();
-                this.setService();
-                File targetPath = this.constructTargetPath();
-                FileUtils.createDirectory(targetPath);
+                continue;
+            }
 
-                boolean hasTwoPrimitives = this.templateFile.isDefined("hasTwoPrimitives") && Boolean.valueOf(this.templateFile.getInstanceOf("hasTwoPrimitives").render());
-                boolean skipBoolean = this.templateFile.isDefined("skipBoolean") && Boolean.valueOf(this.templateFile.getInstanceOf("skipBoolean").render());
-                boolean skipBooleanKeys = this.templateFile.isDefined("skipBooleanKeys") && Boolean.valueOf(this.templateFile.getInstanceOf("skipBooleanKeys").render());
-                boolean forSpecializedStream = this.templateFile.isDefined("forSpecializedStream") && Boolean.valueOf(this.templateFile.getInstanceOf("forSpecializedStream").render());
+            LoggingErrorListener stErrorListener = new LoggingErrorListener(this.errorListener, url);
 
-                if (hasTwoPrimitives)
+            templateFile.setListener(stErrorListener);
+            templateFile.registerRenderer(String.class, new IntegerOrStringRenderer());
+
+            File targetPath = this.constructTargetPath(templateFile);
+            FileUtils.createDirectory(targetPath);
+
+            boolean hasTwoPrimitives = this.renderBooleanTemplate(templateFile, "hasTwoPrimitives");
+            boolean skipBoolean = this.renderBooleanTemplate(templateFile, "skipBoolean");
+            boolean skipBooleanKeys = this.renderBooleanTemplate(templateFile, "skipBooleanKeys");
+            boolean forSpecializedStream = this.renderBooleanTemplate(templateFile, "forSpecializedStream");
+
+            if (hasTwoPrimitives)
+            {
+                for (Primitive primitive1 : Primitive.values())
                 {
-                    for (Primitive primitive1 : Primitive.values())
+                    if (primitive1 == Primitive.BOOLEAN && (skipBoolean || skipBooleanKeys))
                     {
-                        if (primitive1 == Primitive.BOOLEAN && (skipBoolean || skipBooleanKeys))
-                        {
-                            continue;
-                        }
-                        for (Primitive primitive2 : Primitive.values())
-                        {
-                            if (primitive2 == Primitive.BOOLEAN && skipBoolean)
-                            {
-                                continue;
-                            }
-                            String sourceFileName = this.executeTemplate(primitive1, primitive2, "fileName");
-                            File outputFile = new File(targetPath, sourceFileName + this.fileExtension());
-
-                            if (!EclipseCollectionsCodeGenerator.sourceFileExists(outputFile))
-                            {
-                                String classContents = this.executeTemplate(primitive1, primitive2, "class");
-                                this.checkSumClassContentsAndWrite(classContents, targetPath, sourceFileName);
-                            }
-                        }
+                        continue;
                     }
-                }
-                else
-                {
-                    for (Primitive primitive : Primitive.values())
+                    for (Primitive primitive2 : Primitive.values())
                     {
-                        if (primitive == Primitive.BOOLEAN && skipBoolean)
+                        if (primitive2 == Primitive.BOOLEAN && skipBoolean)
                         {
                             continue;
                         }
-                        if (forSpecializedStream && !primitive.hasSpecializedStream())
-                        {
-                            continue;
-                        }
-                        String sourceFileName = this.executeTemplate(primitive, "fileName");
-                        File outputFile = new File(targetPath, sourceFileName + this.fileExtension());
+                        String sourceFileName = this.executeTemplate(templateFile, "fileName", primitive1, primitive2);
+                        File outputFile = new File(targetPath, sourceFileName + this.fileExtension);
 
                         if (!EclipseCollectionsCodeGenerator.sourceFileExists(outputFile))
                         {
-                            String classContents = this.executeTemplate(primitive, "class");
-                            this.checkSumClassContentsAndWrite(classContents, targetPath, sourceFileName);
+                            String classContents = this.executeTemplate(templateFile, "class", primitive1, primitive2);
+                            this.checkSumClassContentsAndWrite(classContents, outputFile);
                         }
+                    }
+                }
+            }
+            else
+            {
+                for (Primitive primitive : Primitive.values())
+                {
+                    if (primitive == Primitive.BOOLEAN && skipBoolean)
+                    {
+                        continue;
+                    }
+                    if (forSpecializedStream && !primitive.hasSpecializedStream())
+                    {
+                        continue;
+                    }
+                    String sourceFileName = this.executeTemplate(templateFile, "fileName", primitive);
+                    File outputFile = new File(targetPath, sourceFileName + this.fileExtension);
+
+                    if (!EclipseCollectionsCodeGenerator.sourceFileExists(outputFile))
+                    {
+                        String classContents = this.executeTemplate(templateFile, "class", primitive);
+                        this.checkSumClassContentsAndWrite(classContents, outputFile);
                     }
                 }
             }
@@ -128,17 +131,11 @@ public class EclipseCollectionsCodeGenerator
         return this.numFileWritten;
     }
 
-    private String fileExtension()
-    {
-        return this.isService() ? "" : ".java";
-    }
-
-    private void checkSumClassContentsAndWrite(String classContents, File targetPath, String sourceFileName)
+    private void checkSumClassContentsAndWrite(String classContents, File outputFile)
     {
         long checksumValue = EclipseCollectionsCodeGenerator.calculateChecksum(classContents);
 
-        File outputFile = new File(targetPath, sourceFileName + this.fileExtension());
-        Path outputChecksumPath = Paths.get(targetPath.getAbsolutePath(), sourceFileName + this.fileExtension() + ".crc");
+        Path outputChecksumPath = Paths.get(outputFile.getAbsolutePath() + ".crc");
         if (!outputChecksumPath.toFile().exists())
         {
             this.writeFileAndChecksum(outputFile, classContents, checksumValue, outputChecksumPath, false);
@@ -161,63 +158,67 @@ public class EclipseCollectionsCodeGenerator
         return checksum.getValue();
     }
 
-    private void writeFileAndChecksum(File outputFile, String output, long checksumValue, Path outputChecksumPath, boolean outputFileMustExist)
+    private void writeFileAndChecksum(
+            File outputFile,
+            String output,
+            long checksumValue,
+            Path outputChecksumPath,
+            boolean outputFileMustExist)
     {
         this.numFileWritten++;
         FileUtils.writeToFile(output, outputFile, outputFileMustExist);
         FileUtils.writeToFile(String.valueOf(checksumValue), outputChecksumPath.toFile(), outputFileMustExist);
     }
 
-    private String executeTemplate(Primitive primitive, String templateName)
+    private String executeTemplate(
+            STGroupFile templateFile,
+            String templateName,
+            Primitive primitive)
     {
-        ST template = this.findTemplate(templateName);
+        ST template = this.findTemplate(templateFile, templateName);
         template.add("primitive", primitive);
         return template.render();
     }
 
-    private String executeTemplate(Primitive primitive1, Primitive primitive2, String templateName)
+    private String executeTemplate(
+            STGroupFile templateFile,
+            String templateName,
+            Primitive primitive1,
+            Primitive primitive2)
     {
-        ST template = this.findTemplate(templateName);
+        ST template = this.findTemplate(templateFile, templateName);
         template.add("primitive1", primitive1);
         template.add("primitive2", primitive2);
         template.add("sameTwoPrimitives", primitive1 == primitive2);
         return template.render();
     }
 
-    private ST findTemplate(String templateName)
+    private ST findTemplate(STGroupFile templateFile, String templateName)
     {
-        ST template = this.templateFile.getInstanceOf(templateName);
+        ST template = templateFile.getInstanceOf(templateName);
         if (template == null)
         {
-            throw new RuntimeException("Could not find template " + templateName + " in " + this.templateFile.getFileName());
+            throw new RuntimeException("Could not find template " + templateName + " in " + templateFile.getFileName());
         }
         return template;
     }
 
-    private void setTest()
+    private boolean renderBooleanTemplate(STGroupFile templateFile, String templateName)
     {
-        this.isTest =
-                this.templateFile.getInstanceOf("isTest") != null && Boolean.valueOf(this.templateFile.getInstanceOf("isTest").render());
+        if (!templateFile.isDefined(templateName))
+        {
+            return false;
+        }
+        ST template = templateFile.getInstanceOf(templateName);
+        String render = template.render();
+        return Boolean.valueOf(render);
     }
 
-    private void setService()
+    private File constructTargetPath(STGroupFile templateFile)
     {
-        this.isService =
-                this.templateFile.getInstanceOf("isService") != null && Boolean.valueOf(this.templateFile.getInstanceOf("isService").render());
-    }
-
-    private File constructTargetPath()
-    {
-        ST targetPath = this.findTemplate("targetPath");
-        if (this.isTest)
-        {
-            return new File(this.moduleBaseDir, GENERATED_TEST_SOURCES_LOCATION + targetPath.render());
-        }
-        if (this.isService)
-        {
-            return new File(this.moduleBaseDir, GENERATED_SERVICES_LOCATION + targetPath.render());
-        }
-        return new File(this.moduleBaseDir, GENERATED_SOURCES_LOCATION + targetPath.render());
+        ST targetPath = this.findTemplate(templateFile, "targetPath");
+        String renderedTargetPath = targetPath.render();
+        return new File(this.outputDirectory, renderedTargetPath);
     }
 
     private static boolean sourceFileExists(File outputFile)
@@ -227,61 +228,5 @@ public class EclipseCollectionsCodeGenerator
                 .replace("generated-sources", "main")
                 .replace("generated-test-sources", "test"));
         return newPath.exists();
-    }
-
-    public boolean isTest()
-    {
-        return this.isTest;
-    }
-
-    public boolean isService()
-    {
-        return this.isService;
-    }
-
-    public interface ErrorListener
-    {
-        void error(String string);
-    }
-
-    private final class LoggingErrorListener implements STErrorListener
-    {
-        private final ErrorListener errorListener;
-
-        private LoggingErrorListener(ErrorListener errorListener)
-        {
-            this.errorListener = errorListener;
-        }
-
-        private void logError(STMessage stMessage, String errorType)
-        {
-            String error = String.format("String template %s error while processing [%s]: %s", errorType, EclipseCollectionsCodeGenerator.this.url.getPath(), stMessage.toString());
-            this.errorListener.error(error);
-            throw new RuntimeException(error);
-        }
-
-        @Override
-        public void compileTimeError(STMessage stMessage)
-        {
-            this.logError(stMessage, "compile time");
-        }
-
-        @Override
-        public void runTimeError(STMessage stMessage)
-        {
-            this.logError(stMessage, "run time");
-        }
-
-        @Override
-        public void IOError(STMessage stMessage)
-        {
-            this.logError(stMessage, "IO");
-        }
-
-        @Override
-        public void internalError(STMessage stMessage)
-        {
-            this.logError(stMessage, "internal");
-        }
     }
 }
