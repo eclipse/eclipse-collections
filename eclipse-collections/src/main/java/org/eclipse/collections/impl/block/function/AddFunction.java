@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -35,6 +35,7 @@ public final class AddFunction
     public static final Function2<Long, Long, Long> LONG = new AddLongFunction();
     public static final Function2<String, String, String> STRING = new AddStringFunction();
     //noinspection rawtypes
+    @SuppressWarnings("unchecked")
     public static final Function2<Collection<?>, ?, Collection<?>> COLLECTION = new AddCollectionFunction();
 
     private AddFunction()
