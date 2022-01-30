@@ -46,7 +46,7 @@
                     <execution>
                         <phase>generate-sources</phase>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>generate-sources</goal>
                         </goals>
                         <configuration>
                             <templateDirectory>api</templateDirectory>

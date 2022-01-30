@@ -16,10 +16,10 @@ import org.stringtemplate.v4.AttributeRenderer;
 import org.stringtemplate.v4.NumberRenderer;
 import org.stringtemplate.v4.StringRenderer;
 
-public class IntegerOrStringRenderer implements AttributeRenderer
+public class IntegerOrStringRenderer implements AttributeRenderer<Object>
 {
-    private final AttributeRenderer numberRenderer = new NumberRenderer();
-    private final AttributeRenderer stringRenderer = new StringRenderer();
+    private final AttributeRenderer<Object> numberRenderer = new NumberRenderer();
+    private final AttributeRenderer<Object> stringRenderer = new StringRenderer();
 
     @Override
     public String toString(Object object, String formatString, Locale locale)
