@@ -11,36 +11,22 @@
 package org.eclipse.collections.codegenerator.maven;
 
 import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.maven.model.Resource;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
-import org.apache.maven.project.MavenProject;
-import org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator;
-import org.eclipse.collections.codegenerator.ErrorListener;
 
 @Mojo(
         name = "generate-services",
         defaultPhase = LifecyclePhase.GENERATE_RESOURCES,
         threadSafe = true,
         requiresDependencyResolution = ResolutionScope.COMPILE)
-public class GenerateServicesMojo extends AbstractMojo
+public class GenerateServicesMojo extends AbstractGenerateMojo
 {
-    @Parameter(defaultValue = "${project}", required = true, readonly = true)
-    private MavenProject mavenProject;
-
-    @Parameter(property = "skipCodeGen", defaultValue = "false")
-    private boolean skipCodeGen;
-
     @Parameter(property = "templateDirectory", required = true, defaultValue = "services")
     private String templateDirectory;
 
@@ -48,40 +34,26 @@ public class GenerateServicesMojo extends AbstractMojo
     private File outputDirectory;
 
     @Override
-    public void execute() throws MojoExecutionException
+    public String getTemplateDirectory()
     {
-        if (this.skipCodeGen)
-        {
-            this.getLog().info("Skipping code generation in " + this.mavenProject.getArtifactId());
-        }
-        else
-        {
-            this.getLog().info("Generating sources in " + this.mavenProject.getArtifactId() + " to " + outputDirectory);
-        }
+        return this.templateDirectory;
+    }
 
-        List<URL> urls = Arrays.asList(((URLClassLoader) GenerateServicesMojo.class.getClassLoader()).getURLs());
+    @Override
+    public File getOutputDirectory()
+    {
+        return this.outputDirectory;
+    }
 
-        boolean[] error = new boolean[1];
-        ErrorListener errorListener = string -> {
-            this.getLog().error(string);
-            error[0] = true;
-        };
-        EclipseCollectionsCodeGenerator codeGenerator = new EclipseCollectionsCodeGenerator(
-                this.templateDirectory,
-                urls,
-                errorListener,
-                this.outputDirectory,
-                "");
-        if (!this.skipCodeGen)
-        {
-            int numFilesWritten = codeGenerator.generateFiles();
-            this.getLog().info("Generated " + numFilesWritten + " files");
-        }
-        if (error[0])
-        {
-            throw new MojoExecutionException("Error(s) during code generation.");
-        }
+    @Override
+    protected String getFileExtension()
+    {
+        return "";
+    }
 
+    @Override
+    protected void addGeneratedDirectoryToMaven()
+    {
         List<String> excludes = new ArrayList<>();
         excludes.add("**/*.crc");
 
