@@ -11,34 +11,19 @@
 package org.eclipse.collections.codegenerator.maven;
 
 import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Arrays;
-import java.util.List;
 
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
-import org.apache.maven.project.MavenProject;
-import org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator;
-import org.eclipse.collections.codegenerator.ErrorListener;
 
 @Mojo(
         name = "generate-test-sources",
         defaultPhase = LifecyclePhase.GENERATE_TEST_SOURCES,
         threadSafe = true,
         requiresDependencyResolution = ResolutionScope.COMPILE)
-public class GenerateTestSourcesMojo extends AbstractMojo
+public class GenerateTestSourcesMojo extends AbstractGenerateMojo
 {
-    @Parameter(defaultValue = "${project}", required = true, readonly = true)
-    private MavenProject mavenProject;
-
-    @Parameter(property = "skipCodeGen", defaultValue = "false")
-    private boolean skipCodeGen;
-
     @Parameter(property = "templateDirectory", required = true, defaultValue = "test")
     private String templateDirectory;
 
@@ -46,40 +31,26 @@ public class GenerateTestSourcesMojo extends AbstractMojo
     private File outputDirectory;
 
     @Override
-    public void execute() throws MojoExecutionException
+    public String getTemplateDirectory()
     {
-        if (this.skipCodeGen)
-        {
-            this.getLog().info("Skipping code generation in " + this.mavenProject.getArtifactId());
-        }
-        else
-        {
-            this.getLog().info("Generating test sources in " + this.mavenProject.getArtifactId() + " to " + this.outputDirectory);
-        }
+        return this.templateDirectory;
+    }
 
-        List<URL> urls = Arrays.asList(((URLClassLoader) GenerateTestSourcesMojo.class.getClassLoader()).getURLs());
+    @Override
+    public File getOutputDirectory()
+    {
+        return this.outputDirectory;
+    }
 
-        boolean[] error = new boolean[1];
-        ErrorListener errorListener = string -> {
-            this.getLog().error(string);
-            error[0] = true;
-        };
-        EclipseCollectionsCodeGenerator codeGenerator = new EclipseCollectionsCodeGenerator(
-                this.templateDirectory,
-                urls,
-                errorListener,
-                this.outputDirectory,
-                ".java");
-        if (!this.skipCodeGen)
-        {
-            int numFilesWritten = codeGenerator.generateFiles();
-            this.getLog().info("Generated " + numFilesWritten + " files");
-        }
-        if (error[0])
-        {
-            throw new MojoExecutionException("Error(s) during code generation.");
-        }
+    @Override
+    protected String getFileExtension()
+    {
+        return ".java";
+    }
 
+    @Override
+    protected void addGeneratedDirectoryToMaven()
+    {
         String outputDirectoryPath = this.outputDirectory.getPath();
         this.mavenProject.addTestCompileSourceRoot(outputDirectoryPath);
     }
