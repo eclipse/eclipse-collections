@@ -80,14 +80,10 @@
                 <version>${project.version}</version>
                 <executions>
                     <execution>
-                        <id>list</id>
                         <phase>generate-test-sources</phase>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>generate-test-sources</goal>
                         </goals>
-                        <configuration>
-                            <templateDirectory>test</templateDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

@@ -1,5 +1,3 @@
-isService() ::= "true"
-
 targetPath() ::= ""
 
 fileName(primitive) ::= "org.eclipse.collections.api.factory.list.primitive.Mutable<primitive.name>ListFactory"

@@ -128,9 +128,10 @@ public final class FileUtils
         {
             if (file.getName().endsWith(".jar"))
             {
-                JarInputStream stream = new JarInputStream(new FileInputStream(file));
-                processJar(stream, files, templateDirectory);
-                stream.close();
+                try (JarInputStream stream = new JarInputStream(new FileInputStream(file)))
+                {
+                    processJar(stream, files, templateDirectory);
+                }
             }
             else
             {

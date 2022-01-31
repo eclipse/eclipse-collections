@@ -54,6 +54,7 @@
 
     <suppress checks="MethodName" files="EclipseCollectionsCodeGenerator.java" />
     <suppress files="[\\/]annotations[\\/]" checks="[a-zA-Z0-9]*"/>
+    <suppress files="[\\/]plugin[\\/]" checks="[a-zA-Z0-9]*"/>
 
     <suppress checks="MethodName" files="[\\/]unit-tests-java8[\\/]" />
 

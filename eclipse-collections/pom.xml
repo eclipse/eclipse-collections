@@ -46,18 +46,6 @@
 
     <build>
 
-        <resources>
-            <resource>
-                <directory>target/generated-sources/resources</directory>
-                <excludes>
-                    <exclude>**/*.crc</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-
         <plugins>
 
             <plugin>
@@ -66,10 +54,19 @@
                 <version>${project.version}</version>
                 <executions>
                     <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generate-services</goal>
+                        </goals>
+                        <id>generate-services</id>
+                    </execution>
+
+                    <execution>
                         <phase>generate-sources</phase>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>generate-sources</goal>
                         </goals>
+                        <id>generate-sources</id>
                         <configuration>
                             <templateDirectory>impl</templateDirectory>
                         </configuration>
