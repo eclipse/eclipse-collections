@@ -52,6 +52,9 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 * [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md) and [Javadoc](https://www.eclipse.org/collections/javadoc/11.0.0/overview-summary.html)
 * [Serializing Eclipse Collections with Jackson](./docs/jackson.md)
 * [Articles](https://github.com/eclipse/eclipse-collections/wiki/Articles) and [Blogs](https://medium.com/tag/eclipse-collections/latest)
+* Some OSS projects that use Eclipse Collections
+  * [Neo4J](https://github.com/neo4j/neo4j), [Legend](https://github.com/finos/legend-pure), [Reladomo](https://github.com/goldmansachs/reladomo), [Liftwizard](https://github.com/motlin/liftwizard), [Exchange Core](https://github.com/mzheravin/exchange-core), [Dataframe EC](https://github.com/vmzakharov/dataframe-ec), [MapDB](https://github.com/jankotek/mapdb), [Code Browser](https://github.com/yawkat/code-browser), [Obevo](https://github.com/goldmansachs/obevo), [BNY Mellon Code Katas](https://github.com/BNYMellon/CodeKatas), [Eclipse Nebula NatTable](https://www.eclipse.org/nattable/index.php), [VIATRA](https://github.com/viatra/org.eclipse.viatra), [Jackson Datatypes Collections](https://github.com/FasterXML/jackson-datatypes-collections)
+  * If you work on an open source project that uses Eclipse Collections, let us know!
 
 ## Eclipse Collections and JDK Compatibility Matrix
 
