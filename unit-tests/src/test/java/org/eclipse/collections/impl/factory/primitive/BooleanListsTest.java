@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,8 +10,11 @@
 
 package org.eclipse.collections.impl.factory.primitive;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.list.primitive.ImmutableBooleanListFactory;
+import org.eclipse.collections.api.factory.list.primitive.MutableBooleanListFactory;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
+import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -19,6 +22,34 @@ import org.junit.Test;
 
 public class BooleanListsTest
 {
+    @Test
+    public void mutables()
+    {
+        MutableBooleanListFactory listFactory = BooleanLists.mutable;
+        Assert.assertEquals(new BooleanArrayList(), listFactory.empty());
+        Verify.assertInstanceOf(MutableBooleanList.class, listFactory.empty());
+
+        Assert.assertEquals(new BooleanArrayList(), listFactory.of());
+        Verify.assertInstanceOf(MutableBooleanList.class, listFactory.of());
+
+        Assert.assertEquals(new BooleanArrayList(), listFactory.with());
+        Verify.assertInstanceOf(MutableBooleanList.class, listFactory.with());
+
+        Assert.assertEquals(new BooleanArrayList(true, true, false), listFactory.with(true, true, false));
+        Assert.assertEquals(new BooleanArrayList(false, true, false), listFactory.of(false, true, false));
+        Assert.assertEquals(new BooleanArrayList(false, true, false), listFactory.wrapCopy(false, true, false));
+
+        Assert.assertEquals(new BooleanArrayList(false, true, false),
+                listFactory.ofAll(new BooleanArrayList(false, true, false)));
+        Assert.assertEquals(new BooleanArrayList(false, true, false, true),
+                listFactory.withAll(new BooleanArrayList(false, true, false, true)));
+
+        Assert.assertEquals(new BooleanArrayList(false, true, false),
+                listFactory.ofAll(Lists.mutable.of(false, true, false)));
+        Assert.assertEquals(new BooleanArrayList(false, true, false, true),
+                listFactory.withAll(Lists.mutable.of(false, true, false, true)));
+    }
+
     @Test
     public void immutables()
     {
