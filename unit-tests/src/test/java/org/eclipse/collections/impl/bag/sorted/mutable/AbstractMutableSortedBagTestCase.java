@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1553,18 +1553,6 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         Assert.assertEquals(1, sortedBag.countWith(Predicates2.greaterThan(), 2));
         Assert.assertEquals(4, sortedBag.countWith(Predicates2.greaterThan(), 1));
         Assert.assertEquals(0, sortedBag.countWith(Predicates2.greaterThan(), 3));
-    }
-
-    @Override
-    @Test
-    public void removeAll()
-    {
-        super.removeAll();
-
-        MutableSortedBag<Integer> bag = this.newWith(Collections.reverseOrder(), 5, 5, 3, 2, 2, 2, 1);
-        Assert.assertTrue(bag.removeAll(FastList.newListWith(1, 2, 4)));
-        Assert.assertFalse(bag.removeAll(FastList.newListWith(1, 2, 4)));
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 5, 5, 3), bag);
     }
 
     @Override

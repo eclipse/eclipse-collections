@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -479,35 +479,6 @@ public class FastListTest extends AbstractListTestCase
         Assert.assertTrue(objects.removeIf(Predicates.isNull()));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
-    }
-
-    @Override
-    @Test
-    public void removeAll()
-    {
-        FastList<Integer> objects = FastList.newListWith(1, 2, 3);
-        objects.removeAll(mList(1, 2));
-        Verify.assertSize(1, objects);
-        Verify.assertContains(3, objects);
-        FastList<Integer> objects2 = FastList.newListWith(1, 2, 3);
-        objects2.removeAll(mList(1));
-        Verify.assertSize(2, objects2);
-        Verify.assertContainsAll(objects2, 2, 3);
-        FastList<Integer> objects3 = FastList.newListWith(1, 2, 3);
-        objects3.removeAll(mList(3));
-        Verify.assertSize(2, objects3);
-        Verify.assertContainsAll(objects3, 1, 2);
-        FastList<Integer> objects4 = FastList.newListWith(1, 2, 3);
-        objects4.removeAll(mList());
-        Verify.assertSize(3, objects4);
-        Verify.assertContainsAll(objects4, 1, 2, 3);
-        FastList<Integer> objects5 = FastList.newListWith(1, 2, 3);
-        objects5.removeAll(mList(1, 2, 3));
-        Verify.assertEmpty(objects5);
-        FastList<Integer> objects6 = FastList.newListWith(1, 2, 3);
-        objects6.removeAll(mList(2));
-        Verify.assertSize(2, objects6);
-        Verify.assertContainsAll(objects6, 1, 3);
     }
 
     @Override

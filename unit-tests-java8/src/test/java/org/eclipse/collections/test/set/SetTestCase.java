@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -64,6 +64,8 @@ public interface SetTestCase extends CollectionTestCase
     @Test
     default void Iterable_next()
     {
+        CollectionTestCase.super.Iterable_next();
+
         Set<Integer> iterable = this.newWith(3, 2, 1);
 
         MutableSet<Integer> mutableSet = Sets.mutable.with();
@@ -97,6 +99,7 @@ public interface SetTestCase extends CollectionTestCase
     @Test
     default void Collection_add()
     {
+        CollectionTestCase.super.Collection_add();
         Collection<Integer> collection = this.newWith(1, 2, 3);
         assertFalse(collection.add(3));
     }
@@ -105,6 +108,7 @@ public interface SetTestCase extends CollectionTestCase
     @Test
     default void Collection_size()
     {
+        CollectionTestCase.super.Collection_size();
         assertThat(this.newWith(3, 2, 1), hasSize(3));
         assertThat(this.newWith(), hasSize(0));
     }

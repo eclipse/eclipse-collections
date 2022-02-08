@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -314,18 +314,6 @@ public class CompositeFastListTest extends AbstractListTestCase
         list.addAll(FastList.newListWith("1", "2", "3", "4"));
         list.addAll(FastList.newListWith("3", "B", "3", "B"));
         Assert.assertTrue(list.containsAll(FastList.newList().with("2", "B")));
-    }
-
-    @Override
-    @Test
-    public void removeAll()
-    {
-        super.removeAll();
-        MutableList<String> list = new CompositeFastList<>();
-        list.addAll(FastList.newListWith("1", "2", "3", "4"));
-        list.addAll(FastList.newListWith("3", "B", "3", "B"));
-        list.removeAll(FastList.newList().with("2", "B"));
-        Verify.assertSize(5, list);
     }
 
     @Override

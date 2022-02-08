@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -435,37 +435,6 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         Assert.assertTrue(objects.removeIfWith((each, ignored) -> each == null, null));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
-    }
-
-    @Override
-    @Test
-    public void removeAll()
-    {
-        super.removeAll();
-
-        MutableList<Integer> objects = MultiReaderFastList.newListWith(1, 2, 3);
-        objects.removeAll(Lists.fixedSize.of(1, 2));
-        Verify.assertSize(1, objects);
-        Verify.assertContains(3, objects);
-        MutableList<Integer> objects2 = MultiReaderFastList.newListWith(1, 2, 3);
-        objects2.removeAll(Lists.fixedSize.of(1));
-        Verify.assertSize(2, objects2);
-        Verify.assertContainsAll(objects2, 2, 3);
-        MutableList<Integer> objects3 = MultiReaderFastList.newListWith(1, 2, 3);
-        objects3.removeAll(Lists.fixedSize.of(3));
-        Verify.assertSize(2, objects3);
-        Verify.assertContainsAll(objects3, 1, 2);
-        MutableList<Integer> objects4 = MultiReaderFastList.newListWith(1, 2, 3);
-        objects4.removeAll(Lists.fixedSize.of());
-        Verify.assertSize(3, objects4);
-        Verify.assertContainsAll(objects4, 1, 2, 3);
-        MutableList<Integer> objects5 = MultiReaderFastList.newListWith(1, 2, 3);
-        objects5.removeAll(Lists.fixedSize.of(1, 2, 3));
-        Verify.assertEmpty(objects5);
-        MutableList<Integer> objects6 = MultiReaderFastList.newListWith(1, 2, 3);
-        objects6.removeAll(Lists.fixedSize.of(2));
-        Verify.assertSize(2, objects6);
-        Verify.assertContainsAll(objects6, 1, 3);
     }
 
     @Override
