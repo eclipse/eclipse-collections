@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,34 +10,21 @@
 
 package org.eclipse.collections.test.list;
 
-import java.util.List;
-
-import org.eclipse.collections.test.UnmodifiableCollectionTestCase;
 import org.junit.Test;
 
-public interface UnmodifiableListTestCase extends UnmodifiableCollectionTestCase, ListTestCase
+import static org.junit.Assert.assertThrows;
+
+public interface UnmodifiableListTestCase extends FixedSizeListTestCase
 {
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     default void List_set()
     {
-        List<Integer> list = this.newWith(1, 2, 3);
-        list.set(1, 4);
-    }
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1).set(0, 4));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2).set(0, 4));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).set(0, 4));
 
-    @Override
-    @Test(expected = UnsupportedOperationException.class)
-    default void List_set_negative()
-    {
-        List<Integer> list = this.newWith(1, 2, 3);
-        list.set(-1, 4);
-    }
-
-    @Override
-    @Test(expected = UnsupportedOperationException.class)
-    default void List_set_out_of_bounds()
-    {
-        List<Integer> list = this.newWith(1, 2, 3);
-        list.set(4, 4);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().set(-1, 4));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).set(4, 4));
     }
 }

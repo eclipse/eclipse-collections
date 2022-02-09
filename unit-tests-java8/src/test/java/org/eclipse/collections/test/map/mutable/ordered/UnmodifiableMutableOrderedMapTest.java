@@ -19,7 +19,7 @@ import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.map.ordered.mutable.UnmodifiableMutableOrderedMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
-import org.eclipse.collections.test.UnmodifiableIterableTestCase;
+import org.eclipse.collections.test.FixedSizeIterableTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -29,7 +29,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 @RunWith(Java8Runner.class)
-public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestCase, UnmodifiableIterableTestCase
+public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestCase, FixedSizeIterableTestCase
 {
     @Override
     public <T> MutableOrderedMap<Object, T> newWith(T... elements)
@@ -107,7 +107,7 @@ public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestC
     @Override
     public void Iterable_remove()
     {
-        UnmodifiableIterableTestCase.super.Iterable_remove();
+        FixedSizeIterableTestCase.super.Iterable_remove();
     }
 
     @Override
