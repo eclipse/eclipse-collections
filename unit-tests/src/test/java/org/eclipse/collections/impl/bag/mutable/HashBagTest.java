@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,7 +14,6 @@ import java.util.Collections;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
@@ -82,26 +81,6 @@ public class HashBagTest extends MutableBagTestCase
         bag3.addAll(this.newWith(1));
 
         Verify.assertBagsEqual(this.newWith(1, 1, 2, 2, 3, 3, 3), bag3);
-    }
-
-    @Override
-    @Test
-    public void removeAll()
-    {
-        super.removeAll();
-        MutableBag<Integer> bag1 = this.newWith(1, 2, 3);
-        Assert.assertTrue(bag1.removeAll(this.newWith(1, 2, 4)));
-        Assert.assertEquals(Bags.mutable.of(3), bag1);
-
-        MutableBag<Integer> bag2 = this.newWith(1, 1, 1, 2, 2, 3, 4);
-        Verify.assertSize(7, bag2);
-        Assert.assertTrue(bag2.removeAll(this.newWith(1, 2, 2, 4)));
-        Verify.assertSize(1, bag2);
-        Assert.assertEquals(Bags.mutable.of(3), bag2);
-
-        MutableBag<Integer> bag3 = this.newWith(1, 2, 3);
-        Assert.assertFalse(bag3.removeAll(this.newWith(4, 5)));
-        Assert.assertEquals(Bags.mutable.of(1, 2, 3), bag3);
     }
 
     @Test

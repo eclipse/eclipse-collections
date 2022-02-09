@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.test;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertContains;
@@ -93,7 +94,7 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
     }
 
     @Test
-    default void Collection_remove()
+    default void Collection_remove_removeAll()
     {
         {
             Collection<Integer> collection = this.newWith(3, 2, 1);
@@ -158,6 +159,32 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
                 assertFalse(collection.remove(each));
                 assertNotContains(each, collection);
             }
+        }
+
+        {
+            Collection<Integer> collection = this.newWith(3, 2, 1);
+            assertTrue(collection.removeAll(Lists.mutable.with(1, 2, 4)));
+            assertEquals(this.newWith(3), collection);
+
+            Collection<Integer> collection2 = this.newWith(3, 2, 1);
+            assertFalse(collection2.removeAll(Lists.mutable.with(5, 4)));
+            assertEquals(this.newWith(3, 2, 1), collection2);
+
+            Collection<Integer> collection3 = this.newWith(3, 2, 1);
+            assertFalse(collection2.removeAll(Lists.mutable.with()));
+            assertEquals(this.newWith(3, 2, 1), collection3);
+
+            Collection<Integer> collection4 = this.newWith(5, 4, 3, 2, 1);
+            assertTrue(collection4.removeAll(Lists.mutable.with(4, 2)));
+            assertEquals(this.newWith(5, 3, 1), collection4);
+        }
+
+        if (this.allowsDuplicates())
+        {
+            Collection<Integer> collection = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
+            assertTrue(collection.removeAll(Lists.mutable.with(3, 1)));
+            assertFalse(collection.removeAll(Lists.mutable.with(3, 1)));
+            assertEquals(this.newWith(4, 4, 4, 4, 2, 2), collection);
         }
     }
 
