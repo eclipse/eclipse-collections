@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -20,13 +20,13 @@ import org.junit.Test;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertThrows;
 
-public interface UnmodifiableMutableCollectionTestCase extends UnmodifiableCollectionTestCase, MutableCollectionTestCase
+public interface UnmodifiableMutableCollectionTestCase extends FixedSizeCollectionTestCase, MutableCollectionTestCase
 {
     @Test
     @Override
     default void Iterable_remove()
     {
-        UnmodifiableCollectionTestCase.super.Iterable_remove();
+        FixedSizeCollectionTestCase.super.Iterable_remove();
     }
 
     @Override

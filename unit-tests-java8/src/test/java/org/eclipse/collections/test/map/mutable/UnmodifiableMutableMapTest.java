@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,7 +19,7 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.UnmodifiableMutableMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
-import org.eclipse.collections.test.UnmodifiableIterableTestCase;
+import org.eclipse.collections.test.FixedSizeIterableTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -29,7 +29,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 @RunWith(Java8Runner.class)
-public class UnmodifiableMutableMapTest implements MutableMapTestCase, UnmodifiableIterableTestCase
+public class UnmodifiableMutableMapTest implements MutableMapTestCase, FixedSizeIterableTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
 
@@ -99,7 +99,7 @@ public class UnmodifiableMutableMapTest implements MutableMapTestCase, Unmodifia
     @Override
     public void Iterable_remove()
     {
-        UnmodifiableIterableTestCase.super.Iterable_remove();
+        FixedSizeIterableTestCase.super.Iterable_remove();
     }
 
     @Override

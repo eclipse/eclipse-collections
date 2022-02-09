@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 
-public interface UnmodifiableIterableTestCase extends IterableTestCase
+public interface FixedSizeIterableTestCase extends IterableTestCase
 {
     @Override
     @Test

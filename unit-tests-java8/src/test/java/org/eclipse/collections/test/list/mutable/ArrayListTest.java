@@ -8,24 +8,23 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 
-package org.eclipse.collections.test.set.sorted;
+package org.eclipse.collections.test.list.mutable;
 
-import org.eclipse.collections.test.FixedSizeCollectionTestCase;
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public interface UnmodifiableSortedSetTestCase extends FixedSizeCollectionTestCase, SortedSetTestCase
+import org.eclipse.collections.impl.test.junit.Java8Runner;
+import org.eclipse.collections.test.list.ListTestCase;
+import org.junit.runner.RunWith;
+
+@RunWith(Java8Runner.class)
+public class ArrayListTest implements ListTestCase
 {
+    @SafeVarargs
     @Override
-    @Test
-    default void Iterable_remove()
+    public final <T> List<T> newWith(T... elements)
     {
-        FixedSizeCollectionTestCase.super.Iterable_remove();
-    }
-
-    @Override
-    @Test
-    default void Collection_add()
-    {
-        FixedSizeCollectionTestCase.super.Collection_add();
+        return new ArrayList<>(Arrays.asList(elements));
     }
 }

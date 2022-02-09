@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,14 +15,14 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.UnmodifiableTreeMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.eclipse.collections.test.UnmodifiableIterableTestCase;
+import org.eclipse.collections.test.FixedSizeIterableTestCase;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 @RunWith(Java8Runner.class)
-public class UnmodifiableTreeMapTest implements MutableSortedMapIterableTestCase, UnmodifiableIterableTestCase
+public class UnmodifiableTreeMapTest implements MutableSortedMapIterableTestCase, FixedSizeIterableTestCase
 {
     @Override
     public <T> MutableSortedMap<Object, T> newWith(T... elements)
@@ -56,6 +56,6 @@ public class UnmodifiableTreeMapTest implements MutableSortedMapIterableTestCase
     @Override
     public void Iterable_remove()
     {
-        UnmodifiableIterableTestCase.super.Iterable_remove();
+        FixedSizeIterableTestCase.super.Iterable_remove();
     }
 }

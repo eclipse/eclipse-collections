@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,15 +10,15 @@
 
 package org.eclipse.collections.test.bimap.mutable;
 
-import org.eclipse.collections.test.UnmodifiableIterableTestCase;
+import org.eclipse.collections.test.FixedSizeIterableTestCase;
 import org.junit.Test;
 
-public interface UnmodifiableBiMapTestCase extends MutableBiMapTestCase, UnmodifiableIterableTestCase
+public interface UnmodifiableBiMapTestCase extends MutableBiMapTestCase, FixedSizeIterableTestCase
 {
     @Override
     @Test
     default void Iterable_remove()
     {
-        UnmodifiableIterableTestCase.super.Iterable_remove();
+        FixedSizeIterableTestCase.super.Iterable_remove();
     }
 }

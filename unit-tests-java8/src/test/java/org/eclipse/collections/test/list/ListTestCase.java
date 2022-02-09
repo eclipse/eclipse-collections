@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,18 +10,36 @@
 
 package org.eclipse.collections.test.list;
 
+import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.CollectionTestCase;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public interface ListTestCase extends CollectionTestCase
 {
     @Override
     <T> List<T> newWith(T... elements);
+
+    @Override
+    default boolean allowsDuplicates()
+    {
+        return true;
+    }
+
+    @Test
+    @Override
+    default void Iterable_remove()
+    {
+        List<Integer> list = this.newWith(3, 3, 3, 2, 2, 1);
+        Iterator<Integer> iterator = list.iterator();
+        iterator.next();
+        iterator.remove();
+        assertEquals(this.newWith(3, 3, 2, 2, 1), list);
+    }
 
     @Test
     default void List_get()
@@ -47,24 +65,17 @@ public interface ListTestCase extends CollectionTestCase
     @Test
     default void List_set()
     {
-        List<Integer> list = this.newWith(1, 2, 3);
-        assertEquals(Integer.valueOf(2), list.set(1, 4));
-        assertEquals(Lists.immutable.with(1, 4, 3), list);
-    }
+        List<Integer> list = this.newWith(3, 2, 1);
+        assertEquals(3, list.set(0, 4));
+        assertEquals(this.newWith(4, 2, 1), list);
+        assertEquals(2, list.set(1, 4));
+        assertEquals(this.newWith(4, 4, 1), list);
+        assertEquals(1, list.set(2, 4));
+        assertEquals(this.newWith(4, 4, 4), list);
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    default void List_set_negative()
-    {
-        List<Integer> list = this.newWith(1, 2, 3);
-        assertEquals(Integer.valueOf(2), list.set(-1, 4));
-        assertEquals(Lists.immutable.with(1, 4, 3), list);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    default void List_set_out_of_bounds()
-    {
-        List<Integer> list = this.newWith(1, 2, 3);
-        assertEquals(Integer.valueOf(2), list.set(4, 4));
-        assertEquals(Lists.immutable.with(1, 4, 3), list);
+        assertThrows(IndexOutOfBoundsException.class, () -> list.set(-1, 4));
+        assertEquals(this.newWith(4, 4, 4), list);
+        assertThrows(IndexOutOfBoundsException.class, () -> list.set(3, 4));
+        assertEquals(this.newWith(4, 4, 4), list);
     }
 }

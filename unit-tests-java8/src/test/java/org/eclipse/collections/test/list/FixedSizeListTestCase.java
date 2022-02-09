@@ -8,14 +8,15 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 
-package org.eclipse.collections.test.map.immutable.sorted;
+package org.eclipse.collections.test.list;
 
-import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
-import org.eclipse.collections.test.FixedSizeIterableTestCase;
-import org.eclipse.collections.test.map.SortedMapIterableTestCase;
+import org.eclipse.collections.test.FixedSizeCollectionTestCase;
 
-public interface ImmutableSortedMapIterableTestCase extends SortedMapIterableTestCase, FixedSizeIterableTestCase
+public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, ListTestCase
 {
     @Override
-    <T> ImmutableSortedMap<Object, T> newWith(T... elements);
+    default void Iterable_remove()
+    {
+        FixedSizeCollectionTestCase.super.Iterable_remove();
+    }
 }
