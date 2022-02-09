@@ -36,6 +36,12 @@ public interface SetTestCase extends CollectionTestCase
     <T> Set<T> newWith(T... elements);
 
     @Override
+    default boolean allowsDuplicates()
+    {
+        return false;
+    }
+
+    @Override
     @Test
     default void Object_PostSerializedEqualsAndHashCode()
     {
