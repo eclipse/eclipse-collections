@@ -228,6 +228,7 @@
                             <avoidCallsTo>org.apache.commons.logging</avoidCallsTo>
                         </avoidCallsTo>
                         <maxMutationsPerClass>1</maxMutationsPerClass>
+                        <additionalClasspathElements>target/generated-sources/java/*</additionalClasspathElements>
                         <excludedClasses>
                             <param>org.eclipse.collections.impl.lazy.parallel*</param>
                             <param>org.eclipse.collections.impl.parallel*</param>
