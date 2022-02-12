@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -35,12 +35,12 @@ import org.eclipse.collections.codegenerator.model.Primitive;
  * <p>This assumes it is running in the same folder as the code generator and the
  * API folder with the templates is a sibling folder. You can specify any number
  * of pairs of arguments, for example:
- * <blockquote><code>
+ * <blockquote>{@code
  * org.eclipse.collections.api.map.primitive.IntValuesMap
  * api/map/primitiveValuesMap
  * org.eclipse.collections.api.map.primitive.CharIntMap
  * api/map/primitivePrimitiveMap
- * </code></blockquote>
+ * }</blockquote>
  * </p>
  *
  * @author <a href="dimeo@elderresearch.com">John Dimeo</a>
@@ -70,18 +70,18 @@ public class JavadocUtil
 
     public void process() throws IOException
     {
-        generatedClass = generatedClass.replace('.', File.separatorChar);
-        if (!generatedClass.endsWith(".java"))
+        this.generatedClass = this.generatedClass.replace('.', File.separatorChar);
+        if (!this.generatedClass.endsWith(".java"))
         {
-            generatedClass += ".java";
+            this.generatedClass += ".java";
         }
-        if (!template.endsWith(".stg"))
+        if (!this.template.endsWith(".stg"))
         {
-            template  += ".stg";
+            this.template += ".stg";
         }
 
-        Path src = API_ROOT.resolve(GENERATED_SOURCES_LOCATION.replace('/', File.separatorChar) + generatedClass);
-        Path dest = TEMPLATE_ROOT.resolve(template.replace('/', File.separatorChar));
+        Path src = API_ROOT.resolve(GENERATED_SOURCES_LOCATION.replace('/', File.separatorChar) + this.generatedClass);
+        Path dest = TEMPLATE_ROOT.resolve(this.template.replace('/', File.separatorChar));
 
         if (!Files.isRegularFile(src) || !Files.isRegularFile(dest))
         {
@@ -135,7 +135,7 @@ public class JavadocUtil
 
         Files.write(dest, destLines);
 
-        System.out.println("Copied Javadocs from " + generatedClass + " back to " + template);
+        System.out.println("Copied Javadocs from " + this.generatedClass + " back to " + this.template);
     }
 
     private static void findLineReplacingJavadoc(List<String> lines, String matchLine, Deque<String> javadoc)
@@ -168,7 +168,6 @@ public class JavadocUtil
             }
         }
         System.err.println("Could not match line " + matchLine);
-        return;
     }
 
     // Remove all types and type placeholders so lines will exactly match
