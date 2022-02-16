@@ -53,7 +53,9 @@ public class <name>CaseFunctionTest
 
         Assert.assertEquals("Yow!", function.valueOf(<(literal.(type))("1")>));
 
-        function.setDefault(i -> "Patience, young grasshopper");
+        <name>CaseFunction\<String> function1 = function.setDefault(i -> "Patience, young grasshopper");
+        Assert.assertSame(function, function1);
+
         Assert.assertEquals("Patience, grasshopper", function.valueOf(<(literal.(type))("0")>));
         Assert.assertEquals("Patience, young grasshopper", function.valueOf(<(literal.(type))("1")>));
 
