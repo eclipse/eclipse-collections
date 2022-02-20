@@ -2897,6 +2897,12 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         {
             return UnifiedMap.this.hashCode();
         }
+
+        @Override
+        public String toString()
+        {
+            return Iterate.makeString(this, "[", ", ", "]");
+        }
     }
 
     protected class EntrySetIterator extends PositionalIterator<Entry<K, V>>
