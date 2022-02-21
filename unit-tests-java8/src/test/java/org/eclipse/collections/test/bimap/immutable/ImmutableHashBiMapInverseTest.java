@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,6 +18,9 @@ import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.junit.runner.RunWith;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
 @RunWith(Java8Runner.class)
 public class ImmutableHashBiMapInverseTest implements ImmutableBiMapTestCase
 {
@@ -30,10 +33,23 @@ public class ImmutableHashBiMapInverseTest implements ImmutableBiMapTestCase
         MutableBiMap<T, Object> result = new HashBiMap<>();
         for (T each : elements)
         {
-            if (result.put(each, random.nextDouble()) != null)
-            {
-                throw new IllegalStateException();
-            }
+            assertNull(result.put(each, random.nextDouble()));
+        }
+        return result.toImmutable().inverse();
+    }
+
+    @Override
+    public <K, V> ImmutableBiMap<K, V> newWithKeysValues(Object... elements)
+    {
+        if (elements.length % 2 != 0)
+        {
+            fail(String.valueOf(elements.length));
+        }
+
+        MutableBiMap<V, K> result = new HashBiMap<>();
+        for (int i = 0; i < elements.length; i += 2)
+        {
+            assertNull(result.put((V) elements[i + 1], (K) elements[i]));
         }
         return result.toImmutable().inverse();
     }

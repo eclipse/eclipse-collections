@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
@@ -54,7 +53,6 @@ import org.eclipse.collections.impl.collection.mutable.SynchronizedMutableCollec
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.AbstractSynchronizedMapIterable;
 import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
-import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
  * A synchronized view of a {@link MutableMap}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -487,18 +485,6 @@ public class SynchronizedMutableMap<K, V>
         {
             return SynchronizedMutableSet.of(this.getDelegate().entrySet(), this.lock);
         }
-    }
-
-    @Override
-    public RichIterable<K> keysView()
-    {
-        return LazyIterate.adapt(this.keySet());
-    }
-
-    @Override
-    public RichIterable<V> valuesView()
-    {
-        return LazyIterate.adapt(this.values());
     }
 
     @Override

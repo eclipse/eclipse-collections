@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,11 +24,11 @@ import org.eclipse.collections.test.UnorderedIterableTestCase;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 
 public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, UnorderedIterableTestCase
 {
@@ -42,6 +42,13 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
     default <T> MutableSet<T> newMutableForFilter(T... elements)
     {
         return Sets.mutable.with(elements);
+    }
+
+    @Override
+    default void Iterable_toString()
+    {
+        assertThat(this.newWith(2, 1).toString(), isOneOf("[1, 2]", "[2, 1]"));
+        assertThat(this.newWith(2, 1).asLazy().toString(), isOneOf("[1, 2]", "[2, 1]"));
     }
 
     @Override

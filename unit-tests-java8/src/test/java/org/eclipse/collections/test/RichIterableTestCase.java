@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -2055,12 +2055,15 @@ public interface RichIterableTestCase extends IterableTestCase
     }
 
     @Test
-    default void RichIterable_toString()
+    default void Iterable_toString()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         assertEquals(
                 "[4, 4, 4, 4, 3, 3, 3, 2, 2, 1]",
                 iterable.toString());
+        assertEquals(
+                "[4, 4, 4, 4, 3, 3, 3, 2, 2, 1]",
+                iterable.asLazy().toString());
     }
 
     @Test

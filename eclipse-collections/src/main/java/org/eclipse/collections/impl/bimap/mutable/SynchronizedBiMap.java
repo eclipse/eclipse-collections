@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
@@ -36,7 +35,6 @@ import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.AbstractSynchronizedMapIterable;
 import org.eclipse.collections.impl.map.mutable.SynchronizedBiMapSerializationProxy;
 import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
-import org.eclipse.collections.impl.utility.LazyIterate;
 
 public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, V> implements MutableBiMap<K, V>, Serializable
 {
@@ -267,18 +265,6 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         {
             return this.getDelegate().flipUniqueValues();
         }
-    }
-
-    @Override
-    public RichIterable<K> keysView()
-    {
-        return LazyIterate.adapt(this.keySet());
-    }
-
-    @Override
-    public RichIterable<V> valuesView()
-    {
-        return LazyIterate.adapt(this.values());
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.collections.test.CollectionTestCase;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
@@ -39,6 +40,13 @@ public interface ListTestCase extends CollectionTestCase
         iterator.next();
         iterator.remove();
         assertEquals(this.newWith(3, 3, 2, 2, 1), list);
+    }
+
+    @Override
+    default void Iterable_toString()
+    {
+        Iterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
+        Assert.assertEquals("[3, 3, 3, 2, 2, 1]", iterable.toString());
     }
 
     @Test

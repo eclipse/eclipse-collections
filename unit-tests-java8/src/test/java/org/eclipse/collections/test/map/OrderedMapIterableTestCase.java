@@ -17,7 +17,6 @@ import org.eclipse.collections.api.map.OrderedMap;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.OrderedIterableTestCase;
 import org.eclipse.collections.test.list.TransformsToListTrait;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
@@ -41,15 +40,6 @@ public interface OrderedMapIterableTestCase extends MapIterableTestCase, Ordered
     default <T> MutableList<T> newMutableForFilter(T... elements)
     {
         return Lists.mutable.with(elements);
-    }
-
-    @Override
-    @Test
-    default void RichIterable_toString()
-    {
-        Assert.assertEquals(
-                "{10=4, 9=4, 8=4, 7=4, 6=3, 5=3, 4=3, 3=2, 2=2, 1=1}",
-                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toString());
     }
 
     @Test

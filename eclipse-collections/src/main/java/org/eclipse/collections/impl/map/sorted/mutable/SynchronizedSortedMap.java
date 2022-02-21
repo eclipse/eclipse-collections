@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,7 +18,6 @@ import java.util.Optional;
 import java.util.SortedMap;
 
 import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -63,7 +62,6 @@ import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.AbstractSynchronizedMapIterable;
 import org.eclipse.collections.impl.map.mutable.SynchronizedMapSerializationProxy;
 import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
-import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
  * A synchronized view of a SortedMap.
@@ -505,18 +503,6 @@ public class SynchronizedSortedMap<K, V>
         {
             return this.getDelegate().collectValues(function);
         }
-    }
-
-    @Override
-    public RichIterable<K> keysView()
-    {
-        return LazyIterate.adapt(this.keySet());
-    }
-
-    @Override
-    public RichIterable<V> valuesView()
-    {
-        return LazyIterate.adapt(this.values());
     }
 
     @Override

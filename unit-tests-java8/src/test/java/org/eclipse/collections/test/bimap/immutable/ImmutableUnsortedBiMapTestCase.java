@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,12 +23,6 @@ public interface ImmutableUnsortedBiMapTestCase extends UnsortedBiMapTestCase, I
     default void Iterable_remove()
     {
         ImmutableUnorderedIterableTestCase.super.Iterable_remove();
-    }
-
-    @Override
-    default void Iterable_next()
-    {
-        UnsortedBiMapTestCase.super.Iterable_next();
     }
 
     @Override

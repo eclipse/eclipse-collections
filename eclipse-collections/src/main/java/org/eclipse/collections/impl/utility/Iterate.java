@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -86,6 +86,7 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
+import org.eclipse.collections.impl.parallel.BatchIterable;
 import org.eclipse.collections.impl.utility.internal.DefaultSpeciesNewStrategy;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
@@ -129,6 +130,10 @@ public final class Iterate
         if (iterable instanceof InternalIterable)
         {
             ((InternalIterable<T>) iterable).forEach(procedure);
+        }
+        else if (iterable instanceof BatchIterable)
+        {
+            ((BatchIterable<T>) iterable).forEach(procedure);
         }
         else if (iterable instanceof ArrayList)
         {

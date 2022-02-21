@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,9 @@ import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.junit.runner.RunWith;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
 @RunWith(Java8Runner.class)
 public class HashBiMapTest implements MutableBiMapTestCase
 {
@@ -31,12 +34,28 @@ public class HashBiMapTest implements MutableBiMapTestCase
         {
             try
             {
-                result.put(random.nextDouble(), each);
+                assertNull(result.put(random.nextDouble(), each));
             }
             catch (IllegalArgumentException e)
             {
                 throw new IllegalStateException(e);
             }
+        }
+        return result;
+    }
+
+    @Override
+    public <K, V> MutableBiMap<K, V> newWithKeysValues(Object... elements)
+    {
+        if (elements.length % 2 != 0)
+        {
+            fail(String.valueOf(elements.length));
+        }
+
+        MutableBiMap<K, V> result = new HashBiMap<>();
+        for (int i = 0; i < elements.length; i += 2)
+        {
+            assertNull(result.put((K) elements[i], (V) elements[i + 1]));
         }
         return result;
     }
