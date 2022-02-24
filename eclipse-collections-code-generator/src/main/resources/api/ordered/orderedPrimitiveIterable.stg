@@ -23,8 +23,10 @@ import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 
 /**
@@ -39,6 +41,50 @@ public interface Ordered<name>Iterable extends <name>Iterable
     int indexOf(<type> value);
 
     <sharedAPI(fileName(primitive), name)>
+
+    /**
+     * Returns a new Ordered<name>Iterable including all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    default Ordered<name>Iterable selectWithIndex(<name>IntPredicate predicate)
+    {
+        int[] index = {0};
+        return this.select(each -> predicate.accept(each, index[0]++));
+    }
+
+    /**
+     * Returns a new Mutable<name>Collection including all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    default \<R extends Mutable<name>Collection> R selectWithIndex(<name>IntPredicate predicate, R target)
+    {
+        int[] index = {0};
+        return this.select(each -> predicate.accept(each, index[0]++), target);
+    }
+
+    /**
+     * Returns a new Ordered<name>Iterable excluding all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    default Ordered<name>Iterable rejectWithIndex(<name>IntPredicate predicate)
+    {
+        int[] index = {0};
+        return this.reject(each -> predicate.accept(each, index[0]++));
+    }
+
+    /**
+     * Returns a new Mutable<name>Collection excluding all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    default \<R extends Mutable<name>Collection> R rejectWithIndex(<name>IntPredicate predicate, R target)
+    {
+        int[] index = {0};
+        return this.reject(each -> predicate.accept(each, index[0]++), target);
+    }
 
     @Override
     \<V> OrderedIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);

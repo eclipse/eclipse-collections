@@ -193,6 +193,54 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
     }
 
     /**
+     * @since 11.1.
+     */
+    @Test
+    public void selectWithIndex()
+    {
+        Immutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Immutable<name>List selected = list.selectWithIndex((value, i) -> i % 2 == 0);
+
+        Assert.assertEquals(<name>Lists.immutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), selected);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        Immutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List selected = list.selectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
+
+        Assert.assertEquals(<name>Lists.immutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), selected);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void rejectWithIndex()
+    {
+        Immutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Immutable<name>List rejected = list.rejectWithIndex((value, i) -> i % 2 == 0);
+
+        Assert.assertEquals(<name>Lists.immutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), rejected);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        Immutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List rejected = list.rejectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
+
+        Assert.assertEquals(<name>Lists.immutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), rejected);
+    }
+
+    /**
      * @since 9.1.
      */
     @Test

@@ -21,6 +21,7 @@ import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.ordered.ReversibleIterable;
 
@@ -36,6 +37,30 @@ public interface Reversible<name>Iterable extends Ordered<name>Iterable
     Lazy<name>Iterable asReversed();
 
     <sharedAPI(fileName(primitive), name)>
+
+    /**
+     * Returns a new Reversible<name>Iterable including all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    @Override
+    default Reversible<name>Iterable selectWithIndex(<name>IntPredicate predicate)
+    {
+        int[] index = {0};
+        return this.select(each -> predicate.accept(each, index[0]++));
+    }
+
+    /**
+     * Returns a new Reversible<name>Iterable excluding all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    @Override
+    default Reversible<name>Iterable rejectWithIndex(<name>IntPredicate predicate)
+    {
+        int[] index = {0};
+        return this.reject(each -> predicate.accept(each, index[0]++));
+    }
 
     @Override
     \<V> ReversibleIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);

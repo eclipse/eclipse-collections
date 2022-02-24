@@ -23,6 +23,7 @@ import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.api.stack.primitive.<name>Stack;
@@ -208,6 +209,54 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
     {
         Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
         Verify.assertInstanceOf(Immutable<name>Stack.class, this.classUnderTest().toImmutable());
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void selectWithIndex()
+    {
+        <name>Stack stack = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        <name>Stack selected = stack.selectWithIndex((value, i) -> i % 2 == 0);
+
+        Assert.assertEquals(<name>Stacks.immutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), selected);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        <name>Stack stack = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List selected = stack.selectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
+
+        Assert.assertEquals(<name>Lists.immutable.with(<["7", "1"]:(literal.(type))(); separator=", ">), selected);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void rejectWithIndex()
+    {
+        <name>Stack stack = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        <name>Stack rejected = stack.rejectWithIndex((value, i) -> i % 2 == 0);
+
+        Assert.assertEquals(<name>Stacks.mutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), rejected);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        <name>Stack stack = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List rejected = stack.rejectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
+
+        Assert.assertEquals(<name>Lists.immutable.with(<["9", "3"]:(literal.(type))(); separator=", ">), rejected);
     }
 
     /**

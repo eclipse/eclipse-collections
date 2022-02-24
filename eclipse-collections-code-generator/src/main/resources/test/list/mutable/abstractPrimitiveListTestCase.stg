@@ -482,6 +482,54 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
     }
 
     /**
+     * @since 11.1.
+     */
+    @Test
+    public void selectWithIndex()
+    {
+        Mutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List selected = list.selectWithIndex((value, i) -> i % 2 == 0);
+
+        Assert.assertEquals(<name>Lists.mutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), selected);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void selectWithIndexWithTarget()
+    {
+        Mutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List selected = list.selectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
+
+        Assert.assertEquals(<name>Lists.mutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), selected);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void rejectWithIndex()
+    {
+        Mutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List selected = list.rejectWithIndex((value, i) -> i % 2 == 0);
+
+        Assert.assertEquals(<name>Lists.mutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), selected);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
+    public void rejectWithIndexWithTarget()
+    {
+        Mutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List selected = list.rejectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
+
+        Assert.assertEquals(<name>Lists.mutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), selected);
+    }
+
+    /**
      * @since 9.1.
      */
     @Test
