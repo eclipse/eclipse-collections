@@ -28,9 +28,11 @@ import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFun
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
@@ -512,6 +514,58 @@ public class Synchronized<name>Stack
         synchronized (this.lock)
         {
             this.stack.forEachWithIndex(procedure);
+        }
+    }
+
+    /**
+     * Returns a new Mutable<name>Stack including all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    public Mutable<name>Stack selectWithIndex(<name>IntPredicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.selectWithIndex(predicate);
+        }
+    }
+
+    /**
+     * Returns a new Mutable<name>Collection including all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    public \<R extends Mutable<name>Collection> R selectWithIndex(<name>IntPredicate predicate, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.selectWithIndex(predicate, target);
+        }
+    }
+
+    /**
+     * Returns a new Mutable<name>Stack excluding all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    public Mutable<name>Stack rejectWithIndex(<name>IntPredicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.rejectWithIndex(predicate);
+        }
+    }
+
+    /**
+     * Returns a new Mutable<name>Collection excluding all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    public \<R extends Mutable<name>Collection> R rejectWithIndex(<name>IntPredicate predicate, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.rejectWithIndex(predicate, target);
         }
     }
 

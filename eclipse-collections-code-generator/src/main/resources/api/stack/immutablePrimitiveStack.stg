@@ -16,6 +16,7 @@ package org.eclipse.collections.api.stack.primitive;
 
 import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.stack.ImmutableStack;
@@ -47,6 +48,30 @@ public interface Immutable<name>Stack extends <name>Stack
 
     @Override
     \<V> ImmutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * Returns a new Immutable<name>Stack including all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    @Override
+    default Immutable<name>Stack selectWithIndex(<name>IntPredicate predicate)
+    {
+        int[] index = {0};
+        return this.select(each -> predicate.accept(each, index[0]++));
+    }
+
+    /**
+     * Returns a new Immutable<name>Stack excluding all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    @Override
+    default Immutable<name>Stack rejectWithIndex(<name>IntPredicate predicate)
+    {
+        int[] index = {0};
+        return this.reject(each -> predicate.accept(each, index[0]++));
+    }
 
     /**
      * Returns a new ImmutableStack using results obtained by applying the specified function to each element

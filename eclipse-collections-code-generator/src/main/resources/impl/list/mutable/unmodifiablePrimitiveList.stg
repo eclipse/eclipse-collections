@@ -23,8 +23,10 @@ import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
@@ -268,6 +270,46 @@ public class Unmodifiable<name>List
     public \<T> MutableList\<<name>ObjectPair\<T\>> zip(Iterable\<T> iterable)
     {
         return this.getMutable<name>List().zip(iterable);
+    }
+
+    /**
+     * Returns a new Mutable<name>List including all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    public Mutable<name>List selectWithIndex(<name>IntPredicate predicate)
+    {
+        return this.getMutable<name>List().selectWithIndex(predicate);
+    }
+
+    /**
+     * Returns a new Mutable<name>Collection including all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    public \<R extends Mutable<name>Collection> R selectWithIndex(<name>IntPredicate predicate, R target)
+    {
+        return this.getMutable<name>List().selectWithIndex(predicate, target);
+    }
+
+    /**
+     * Returns a new Mutable<name>List excluding all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    public Mutable<name>List rejectWithIndex(<name>IntPredicate predicate)
+    {
+        return this.getMutable<name>List().rejectWithIndex(predicate);
+    }
+
+    /**
+     * Returns a new Mutable<name>Collection excluding all elements with corresponding indexes matching the specified predicate.
+     *
+     * @since 11.1.
+     */
+    public \<R extends Mutable<name>Collection> R rejectWithIndex(<name>IntPredicate predicate, R target)
+    {
+        return this.getMutable<name>List().rejectWithIndex(predicate, target);
     }
 
     /**

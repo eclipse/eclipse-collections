@@ -141,13 +141,13 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
     @Override
     public Immutable<name>Stack select(<name>Predicate predicate)
     {
-        return <name>Stacks.immutable.withAllReversed(this.delegate.asReversed().select(predicate));
+        return <name>Stacks.immutable.withAllReversed(this.delegate.toReversed().select(predicate));
     }
 
     @Override
     public Immutable<name>Stack reject(<name>Predicate predicate)
     {
-        return <name>Stacks.immutable.withAllReversed(this.delegate.asReversed().reject(predicate));
+        return <name>Stacks.immutable.withAllReversed(this.delegate.toReversed().reject(predicate));
     }
 
     @Override
