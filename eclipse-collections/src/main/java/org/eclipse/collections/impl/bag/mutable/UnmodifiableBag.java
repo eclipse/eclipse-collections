@@ -17,6 +17,7 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Collection;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -484,5 +485,11 @@ public class UnmodifiableBag<T>
                 groupBy.valueOf(each),
                 function.longValueOf(each) * (long) occurrences));
         return result;
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.getMutableBag().distinctView();
     }
 }

@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -1938,6 +1939,20 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         MutableSortedSet<Integer> actual = integers.selectUnique();
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(expected.comparator(), actual.comparator());
+    }
+
+    @Override
+    @Test
+    public void distinctView()
+    {
+        Comparator<String> comparator = Collections.reverseOrder();
+        MutableBagIterable<String> bag = this.newWith(comparator, "1", "2", "2", "3", "3", "3", "3", "4", "5", "5", "6");
+        RichIterable<String> expected = bag.toSortedSet(comparator);
+        RichIterable<String> actual = bag.distinctView();
+        // test content/type
+        Assert.assertEquals(expected, actual);
+        // test sorting
+        Verify.assertIterablesEqual(expected, actual);
     }
 
     // Like Integer, but not Comparable

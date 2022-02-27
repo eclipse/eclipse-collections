@@ -662,6 +662,14 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        throw new UnsupportedOperationException(
+                "distinctView is not supported directly on MultiReader collections.  "
+                        + "If you would like to use such as view, you must either use withReadLockAndDelegate() or withWriteLockAndDelegate().");
+    }
+
     //Exposed for testing
 
     static final class UntouchableMutableBag<T>
@@ -723,6 +731,12 @@ public final class MultiReaderHashBag<T>
 
         @Override
         public MutableBag<T> asUnmodifiable()
+        {
+            throw new UnsupportedOperationException("cannot wrap an UntouchableMutableBag");
+        }
+
+        @Override
+        public RichIterable<T> distinctView()
         {
             throw new UnsupportedOperationException("cannot wrap an UntouchableMutableBag");
         }

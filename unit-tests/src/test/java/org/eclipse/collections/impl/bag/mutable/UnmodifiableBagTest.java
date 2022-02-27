@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.bag.mutable;
 
 import java.util.Set;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -300,6 +301,15 @@ public class UnmodifiableBagTest
         MutableBag<String> bag = Bags.mutable.with("0", "1", "1", "1", "1", "2", "2", "2", "3", "3", "4", "5").asUnmodifiable();
         MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void distinctView()
+    {
+        MutableBag<String> bag = Bags.mutable.of("1", "2", "2", "3", "3", "3", "3", "4", "5", "5", "6");
+        RichIterable<String> expected = bag.toSet();
+        RichIterable<String> actual = bag.asUnmodifiable().distinctView();
         Assert.assertEquals(expected, actual);
     }
 }

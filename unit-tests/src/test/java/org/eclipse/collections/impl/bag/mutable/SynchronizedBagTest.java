@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,6 +22,7 @@ import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
+import org.eclipse.collections.impl.SynchronizedRichIterable;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
@@ -301,5 +302,16 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
         MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void distinctView()
+    {
+        MutableBag<Integer> bag = this.newWith(1, 1, 2, 3, 4, 4);
+        RichIterable<Integer> expected = bag.toSet();
+        RichIterable<Integer> actual = bag.distinctView();
+        Verify.assertInstanceOf(SynchronizedRichIterable.class, actual);
+        // not using Assert.assertEquals as actual is not a Set
+        Verify.assertIterablesEqual(expected, actual);
     }
 }
