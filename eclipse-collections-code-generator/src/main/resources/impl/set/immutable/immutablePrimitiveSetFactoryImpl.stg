@@ -26,9 +26,9 @@ import org.eclipse.collections.impl.factory.primitive.<name>Sets;
  *
  * @since 4.0.
  */
-public enum Immutable<name>SetFactoryImpl implements Immutable<name>SetFactory
+public class Immutable<name>SetFactoryImpl implements Immutable<name>SetFactory
 {
-    INSTANCE;
+    public static final Immutable<name>SetFactory INSTANCE = new Immutable<name>SetFactoryImpl();
 
     @Override
     public Immutable<name>Set empty()
