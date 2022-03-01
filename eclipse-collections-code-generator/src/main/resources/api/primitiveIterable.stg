@@ -20,7 +20,6 @@ import java.util.NoSuchElementException;
 
 <(comparatorImports.(type))(type)>
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
-import org.eclipse.collections.api.block.function.primitive.<(wideName.(type))><name>To<(wideName.(type))>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToByteFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToShortFunction;
@@ -29,8 +28,16 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToDoubleFuncti
 import org.eclipse.collections.api.block.function.primitive.<name>ToFloatFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToIntFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToLongFunction;
-import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Boolean<name>ToBooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.Byte<name>ToByteFunction;
+import org.eclipse.collections.api.block.function.primitive.Char<name>ToCharFunction;
+import org.eclipse.collections.api.block.function.primitive.Double<name>ToDoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.Float<name>ToFloatFunction;
+import org.eclipse.collections.api.block.function.primitive.Int<name>ToIntFunction;
+import org.eclipse.collections.api.block.function.primitive.Long<name>ToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Short<name>ToShortFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
@@ -338,101 +345,21 @@ public interface <name>Iterable extends PrimitiveIterable
         return target;
     }
 
-    /**
-     * Returns the target {@code MutableBooleanCollection} with the results of applying the specified function on each element
-     * of the source collection.
-     *
-     * @since 8.1.
-     */
-    default \<R extends MutableBooleanCollection> R collectBoolean(<name>ToBooleanFunction function, R target)
-    {
-        this.each(each ->  target.add(function.valueOf(each)));
-        return target;
-    }
+    <collectPrimitive("Boolean")>
 
-    /**
-     * Returns the target {@code MutableByteCollection} with the results of applying the specified function on each element
-     * of the source collection.
-     *
-     * @since 8.1.
-     */
-    default \<R extends MutableByteCollection> R collectByte(<name>ToByteFunction function, R target)
-    {
-        this.each(each ->  target.add(function.valueOf(each)));
-        return target;
-    }
+    <collectPrimitive("Byte")>
 
-    /**
-     * Returns the target {@code MutableCharCollection} with the results of applying the specified function on each element
-     * of the source collection.
-     *
-     * @since 8.1.
-     */
-    default \<R extends MutableCharCollection> R collectChar(<name>ToCharFunction function, R target)
-    {
-        this.each(each ->  target.add(function.valueOf(each)));
-        return target;
-    }
+    <collectPrimitive("Char")>
 
-    /**
-     * Returns the target {@code MutableShortCollection} with the results of applying the specified function on each element
-     * of the source collection.
-     *
-     * @since 8.1.
-     */
-    default \<R extends MutableShortCollection> R collectShort(<name>ToShortFunction function, R target)
-    {
-        this.each(each ->  target.add(function.valueOf(each)));
-        return target;
-    }
+    <collectPrimitive("Short")>
 
-    /**
-     * Returns the target {@code MutableIntCollection} with the results of applying the specified function on each element
-     * of the source collection.
-     *
-     * @since 8.1.
-     */
-    default \<R extends MutableIntCollection> R collectInt(<name>ToIntFunction function, R target)
-    {
-        this.each(each ->  target.add(function.valueOf(each)));
-        return target;
-    }
+    <collectPrimitive("Int")>
 
-    /**
-     * Returns the target {@code MutableFloatCollection} with the results of applying the specified function on each element
-     * of the source collection.
-     *
-     * @since 8.1.
-     */
-    default \<R extends MutableFloatCollection> R collectFloat(<name>ToFloatFunction function, R target)
-    {
-        this.each(each ->  target.add(function.valueOf(each)));
-        return target;
-    }
+    <collectPrimitive("Float")>
 
-    /**
-     * Returns the target {@code MutableLongCollection} with the results of applying the specified function on each element
-     * of the source collection.
-     *
-     * @since 8.1.
-     */
-    default \<R extends MutableLongCollection> R collectLong(<name>ToLongFunction function, R target)
-    {
-        this.each(each ->  target.add(function.valueOf(each)));
-        return target;
-    }
+    <collectPrimitive("Long")>
 
-    /**
-     * Returns the target {@code MutableDoubleCollection} with the results of applying the specified function on each element
-     * of the source collection.
-     *
-     * @since 8.1.
-     */
-    default \<R extends MutableDoubleCollection> R collectDouble(<name>ToDoubleFunction function, R target)
-    {
-        this.each(each ->  target.add(function.valueOf(each)));
-        return target;
-    }
+    <collectPrimitive("Double")>
 
     <type> detectIfNone(<name>Predicate predicate, <type> ifNone);
 
@@ -481,6 +408,22 @@ public interface <name>Iterable extends PrimitiveIterable
     Lazy<name>Iterable asLazy();
 
     \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function);
+
+    <injectIntoPrimitive("Boolean", "boolean")>
+
+    <injectIntoPrimitive("Byte", "byte")>
+
+    <injectIntoPrimitive("Char", "char")>
+
+    <injectIntoPrimitive("Short", "short")>
+
+    <injectIntoPrimitive("Int", "int")>
+
+    <injectIntoPrimitive("Float", "float")>
+
+    <injectIntoPrimitive("Long", "long")>
+
+    <injectIntoPrimitive("Double", "double")>
 
     /**
      * @see #reduce(<(wideName.(type))><name>To<(wideName.(type))>Function)
@@ -684,3 +627,37 @@ import org.eclipse.collections.api.block.comparator.primitive.<name>Comparator;
 >>
 
 noComparatorImports(type) ::= ""
+
+injectIntoPrimitive(toName, toType) ::= <<
+/**
+ * Returns the final <toType> result of evaluating function using each element of the iterable and the previous evaluation
+ * result as the parameters. The injected value is used for the first parameter of the first evaluation, and the current
+ * item in the iterable is used as the second parameter.
+ *
+ * @since 11.1
+ */
+default <toType> injectInto<toName>(<toType> injectedValue, <toName><name>To<toName>Function function)
+{
+    <toType>[] result = new <toType>[1];
+    result[0] = injectedValue;
+    this.each(each ->
+    {
+        result[0] = function.valueOf(result[0], each);
+    });
+    return result[0];
+}
+>>
+
+collectPrimitive(toName) ::= <<
+/**
+ * Returns the target {@code Mutable<toName>Collection} with the results of applying the specified function on each element
+ * of the source collection.
+ *
+ * @since 8.1.
+ */
+default \<R extends Mutable<toName>Collection> R collect<toName>(<name>To<toName>Function function, R target)
+{
+    this.each(each ->  target.add(function.valueOf(each)));
+    return target;
+}
+>>

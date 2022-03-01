@@ -1281,6 +1281,32 @@ public void sumConsistentRounding()
         Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("38")>), sum3);
     }
 
+    @Test
+    public void injectIntoBoolean()
+    {
+        <name>Iterable iterable1 = this.newWith(<["0", "2", "31"]:(literal.(type))(); separator=", ">);
+        boolean sum1 = iterable1.injectIntoBoolean(false, (boolean result, <type> value) -> (boolean) (result || value == <(literal.(type))("0")>));
+        Assert.assertEquals(true, sum1);
+
+        <name>Iterable iterable2 = this.newWith(<[ "1", "2", "31"]:(literal.(type))(); separator=", ">);
+        boolean sum2 = iterable2.injectIntoBoolean(false, (boolean result, <type> value) -> (boolean) (result || value == <(literal.(type))("0")>));
+        Assert.assertEquals(false, sum2);
+    }
+
+    <injectIntoPrimitiveTest("Byte", "byte", false)>
+
+    <injectIntoPrimitiveTest("Char", "char", false)>
+
+    <injectIntoPrimitiveTest("Short", "short", false)>
+
+    <injectIntoPrimitiveTest("Int", "int", false)>
+
+    <injectIntoPrimitiveTest("Float", "float", true)>
+
+    <injectIntoPrimitiveTest("Long", "long", false)>
+
+    <injectIntoPrimitiveTest("Double", "double", true)>
+
     @Test(expected = NoSuchElementException.class)
     public void reduceOnEmptyThrows()
     {
@@ -1554,3 +1580,21 @@ NaNBits2 ::= [
     "double": "0xfff0000000000001L",
     "default": "no matching bits"
 ]
+
+injectIntoPrimitiveTest(toName, toType, toFloatingPoint) ::= <<
+@Test
+public void injectInto<toName>()
+{
+    <name>Iterable iterable1 = this.newWith(<["0", "2", "31"]:(literal.(type))(); separator=", ">);
+    <toType> sum1 = iterable1.injectInto<toName>(<(literal.(toType))("0")>, (<toType> result, <type> value) -> (<toType>) (result + value + 1));
+    Assert.assertEquals(<(literal.(toType))("36")>, sum1<if(toFloatingPoint)>, 0.001<endif>);
+
+    <name>Iterable iterable2 = this.newWith(<[ "1", "2", "31"]:(literal.(type))(); separator=", ">);
+    <toType> sum2 = iterable2.injectInto<toName>(<(literal.(toType))("0")>, (<toType> result, <type> value) -> (<toType>) (result + value + 1));
+    Assert.assertEquals(<(literal.(toType))("37")>, sum2<if(toFloatingPoint)>, 0.001<endif>);
+
+    <name>Iterable iterable3 = this.newWith(<["0", "1", "2", "31"]:(literal.(type))(); separator=", ">);
+    <toType> sum3 = iterable3.injectInto<toName>(<(literal.(toType))("0")>, (<toType> result, <type> value) -> (<toType>) (result + value + 1));
+    Assert.assertEquals(<(literal.(toType))("38")>, sum3<if(toFloatingPoint)>, 0.001<endif>);
+}
+>>
