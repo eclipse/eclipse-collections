@@ -1,0 +1,11 @@
+targetPath() ::= ""
+
+fileName(primitive) ::= "org.eclipse.collections.api.factory.set.primitive.Immutable<primitive.name>SetFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+org.eclipse.collections.impl.set.immutable.primitive.Immutable<primitive.name>SetFactoryImpl
+>>

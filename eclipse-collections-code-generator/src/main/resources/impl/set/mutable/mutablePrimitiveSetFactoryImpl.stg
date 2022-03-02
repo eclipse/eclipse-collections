@@ -26,9 +26,9 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 6.0.
  */
-public enum Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
+public class Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
 {
-    INSTANCE;
+    public static final Mutable<name>SetFactory INSTANCE = new Mutable<name>SetFactoryImpl();
 
     @Override
     public Mutable<name>Set empty()
