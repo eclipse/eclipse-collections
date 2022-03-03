@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -39,7 +39,8 @@ public class BooleanCaseFunctionTest
 
         Assert.assertEquals("Yow!", function.valueOf(false));
 
-        function.setDefault(i -> "Patience, young grasshopper");
+        BooleanCaseFunction<String> function1 = function.setDefault(i -> "Patience, young grasshopper");
+        Assert.assertSame(function, function1);
         Assert.assertEquals("Patience, grasshopper", function.valueOf(true));
         Assert.assertEquals("Patience, young grasshopper", function.valueOf(false));
 

@@ -1,0 +1,61 @@
+import "copyrightAndOthers.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/iterator"
+
+fileName(primitive) ::= "Singleton<primitive.name>IteratorTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.impl.iterator;
+
+import java.util.NoSuchElementException;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file singletonPrimitiveIterator.stg.
+ */
+public final class Singleton<name>IteratorTest
+{
+    @Test
+    public void hasNext()
+    {
+        Singleton<name>Iterator iterator = new Singleton<name>Iterator(<(literal.(type))("5")>);
+        Assert.assertTrue(iterator.hasNext());
+        Assert.assertTrue(iterator.hasNext());
+        iterator.next();
+        Assert.assertFalse(iterator.hasNext());
+        Assert.assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void next()
+    {
+        Singleton<name>Iterator iterator = new Singleton<name>Iterator(<(literal.(type))("5")>);
+        Assert.assertTrue(iterator.hasNext());
+        Assert.assertEquals(<(wideLiteral.(type))("5")>, iterator.next()<(wideDelta.(type))>);
+
+        Assert.assertFalse(iterator.hasNext());
+        try
+        {
+            iterator.next();
+            Assert.fail("NoSuchElementException should have been thrown");
+        }
+        catch (NoSuchElementException e)
+        {
+            //Expected
+        }
+    }
+}
+
+>>

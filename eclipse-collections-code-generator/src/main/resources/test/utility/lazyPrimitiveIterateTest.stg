@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 
 isTest() ::= "true"
@@ -12,12 +12,16 @@ class(primitive) ::= <<
 >>
 
 body(type, name, wrapperName) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.utility.primitive;
 
+import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,6 +43,21 @@ public class Lazy<name>IterateTest
     public void collectIf()
     {
         Assert.assertEquals(this.iterable.collect(each -> each), Lazy<name>Iterate.collectIf(this.iterable, each -> true, each -> each).toList());
+    }
+
+    @Test
+    public void empty()
+    {
+        Assert.assertTrue(Lazy<name>Iterate.empty().isEmpty());
+    }
+
+    @Test
+    public void tap()
+    {
+        Mutable<name>List list = <name>Lists.mutable.empty();
+        Lazy<name>Iterable <type>Iterable = Lazy<name>Iterate.tap(this.iterable, (<name>Procedure) list::add);
+        Assert.assertEquals(this.iterable, <name>Lists.mutable.ofAll(<type>Iterable));
+        Assert.assertEquals(this.iterable, list);
     }
 }
 
