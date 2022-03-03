@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -47,7 +47,9 @@ public class CaseFunctionTest
 
         Assert.assertEquals("Yow!", function.valueOf(new Foo("", 1.0D)));
 
-        function.setDefault(Functions.getFixedValue("Patience, young grasshopper"));
+        CaseFunction<Foo, String> function1 =
+                function.setDefault(Functions.getFixedValue("Patience, young grasshopper"));
+        Assert.assertSame(function, function1);
         Assert.assertEquals("Patience, grasshopper", function.valueOf(new Foo("", 6.0D)));
         Assert.assertEquals("Patience, young grasshopper", function.valueOf(new Foo("", 1.0D)));
 
