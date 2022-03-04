@@ -26,9 +26,9 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 6.0.
  */
-public enum Mutable<name>StackFactoryImpl implements Mutable<name>StackFactory
+public class Mutable<name>StackFactoryImpl implements Mutable<name>StackFactory
 {
-    INSTANCE;
+    public static final Mutable<name>StackFactory INSTANCE = new Mutable<name>StackFactoryImpl();
 
     @Override
     public Mutable<name>Stack empty()
