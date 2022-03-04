@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -39,6 +39,7 @@ import org.eclipse.collections.api.map.UnsortedMapIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
+import org.eclipse.collections.impl.block.procedure.AppendStringProcedure;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.factory.HashingStrategyMaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -1959,7 +1960,12 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         @Override
         public String toString()
         {
-            return Iterate.makeString(this, "[", ", ", "]");
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append('[');
+            Procedure<K> appendStringProcedure = new AppendStringProcedure<>(stringBuilder, ", ");
+            this.forEach(appendStringProcedure);
+            stringBuilder.append(']');
+            return stringBuilder.toString();
         }
 
         @Override
@@ -2513,6 +2519,17 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         {
             return UnifiedMapWithHashingStrategy.this.hashCode();
         }
+
+        @Override
+        public String toString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append('[');
+            Procedure<Entry<K, V>> appendStringProcedure = new AppendStringProcedure<>(stringBuilder, ", ");
+            this.forEach(appendStringProcedure);
+            stringBuilder.append(']');
+            return stringBuilder.toString();
+        }
     }
 
     protected class EntrySetIterator extends PositionalIterator<Entry<K, V>>
@@ -2852,7 +2869,12 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         @Override
         public String toString()
         {
-            return Iterate.makeString(this, "[", ", ", "]");
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append('[');
+            Procedure<V> appendStringProcedure = new AppendStringProcedure<>(stringBuilder, ", ");
+            this.forEach(appendStringProcedure);
+            stringBuilder.append(']');
+            return stringBuilder.toString();
         }
     }
 

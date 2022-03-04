@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -104,6 +104,14 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     {
         String s = "";
         assertThrows(IllegalStateException.class, () -> this.newWith(s, s));
+    }
+
+    @Override
+    default void Iterable_toString()
+    {
+        RichIterable<Integer> iterable = this.newWith(3, 2, 1);
+        Assert.assertEquals("[3, 2, 1]", iterable.toString());
+        Assert.assertEquals("[3, 2, 1]", iterable.asLazy().toString());
     }
 
     @Override
@@ -903,13 +911,6 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
         StringBuilder stringBuilder3 = new StringBuilder();
         iterable.appendString(stringBuilder3, "[", "/", "]");
         assertEquals("[4/3/2/1]", stringBuilder3.toString());
-    }
-
-    @Override
-    @Test
-    default void RichIterable_toString()
-    {
-        assertEquals("[4, 3, 2, 1]", this.newWith(4, 3, 2, 1).toString());
     }
 
     @Override

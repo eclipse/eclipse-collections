@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -728,7 +728,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         }
     }
 
-    private class KeySet implements Set<K>, Serializable
+    protected class KeySet implements Set<K>, Serializable
     {
         @Override
         public boolean equals(Object obj)
@@ -847,7 +847,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         @Override
         public String toString()
         {
-            return Iterate.makeString(this, "[", ", ", "]");
+            return AbstractMutableBiMap.this.delegate.keySet().toString();
         }
 
         protected Object writeReplace()
@@ -858,7 +858,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         }
     }
 
-    private class ValuesCollection implements Collection<V>
+    protected class ValuesCollection implements Collection<V>
     {
         @Override
         public int size()
@@ -965,11 +965,11 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         @Override
         public String toString()
         {
-            return Iterate.makeString(this, "[", ", ", "]");
+            return AbstractMutableBiMap.this.delegate.values().toString();
         }
     }
 
-    private class EntrySet implements Set<Map.Entry<K, V>>
+    protected class EntrySet implements Set<Map.Entry<K, V>>
     {
         @Override
         public boolean equals(Object obj)
@@ -989,6 +989,12 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         public int hashCode()
         {
             return AbstractMutableBiMap.this.hashCode();
+        }
+
+        @Override
+        public String toString()
+        {
+            return AbstractMutableBiMap.this.delegate.entrySet().toString();
         }
 
         @Override

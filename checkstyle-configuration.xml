@@ -347,7 +347,7 @@
 
         <module name="AvoidStaticImport">
             <property name="excludes"
-                value="org.junit.Assert.*,org.junit.Assume.*,org.hamcrest.CoreMatchers.*,org.hamcrest.Matchers.*,org.eclipse.collections.impl.test.Verify.*,org.eclipse.collections.impl.factory.Iterables.*,org.eclipse.collections.test.IterableTestCase.*" />
+                value="org.junit.Assert.*,org.junit.Assume.*,org.hamcrest.CoreMatchers.*,org.hamcrest.Matchers.*,org.hamcrest.MatcherAssert.*,org.eclipse.collections.impl.test.Verify.*,org.eclipse.collections.impl.factory.Iterables.*,org.eclipse.collections.test.IterableTestCase.*" />
         </module>
 
         <module name="MissingDeprecated" />

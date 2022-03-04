@@ -23,6 +23,7 @@ import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.test.CollisionsTestCase;
 import org.eclipse.collections.test.map.MapIterableTestCase;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertIterablesEqual;
@@ -38,6 +39,17 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase
 
     @Override
     <K, V> MutableMapIterable<K, V> newWithKeysValues(Object... elements);
+
+    @Override
+    default void Iterable_toString()
+    {
+        MapIterableTestCase.super.Iterable_toString();
+
+        MutableMapIterable<String, Integer> map = this.newWithKeysValues("Two", 2, "One", 1);
+        Assert.assertEquals("[Two, One]", map.keySet().toString());
+        Assert.assertEquals("[2, 1]", map.values().toString());
+        Assert.assertEquals("[Two=2, One=1]", map.entrySet().toString());
+    }
 
     @Test
     default void Map_clear()

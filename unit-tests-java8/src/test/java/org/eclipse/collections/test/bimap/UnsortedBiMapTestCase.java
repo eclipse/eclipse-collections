@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,26 +11,34 @@
 package org.eclipse.collections.test.bimap;
 
 import java.util.Iterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.eclipse.collections.api.bimap.BiMap;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
 import org.eclipse.collections.test.set.UnsortedSetLikeTestTrait;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
-import static org.junit.Assert.assertThat;
 
 public interface UnsortedBiMapTestCase extends BiMapTestCase, TransformsToBagTrait, UnsortedSetLikeTestTrait
 {
     @Override
     <T> BiMap<Object, T> newWith(T... elements);
+
+    @Override
+    default void Iterable_toString()
+    {
+        BiMap<String, Integer> bimap = this.newWithKeysValues("Two", 2, "One", 1);
+
+        assertThat(bimap.toString(), isOneOf("{One=1, Two=2}", "{Two=2, One=1}"));
+        assertThat(bimap.keysView().toString(), isOneOf("[One, Two]", "[Two, One]"));
+        assertThat(bimap.valuesView().toString(), isOneOf("[1, 2]", "[2, 1]"));
+        assertThat(bimap.keyValuesView().toString(), isOneOf("[One:1, Two:2]", "[Two:2, One:1]"));
+        assertThat(bimap.asLazy().toString(), isOneOf("[1, 2]", "[2, 1]"));
+    }
 
     @Test
     @Override
@@ -48,24 +56,5 @@ public interface UnsortedBiMapTestCase extends BiMapTestCase, TransformsToBagTra
                         Sets.immutable.with(3, 2),
                         Sets.immutable.with(3, 1),
                         Sets.immutable.with(2, 1)));
-    }
-
-    @Override
-    @Test
-    default void RichIterable_toString()
-    {
-        String string = this.newWith(3, 2, 1).toString();
-        Pattern pattern = Pattern.compile("^\\{\\d\\.\\d+(E-\\d)?=(\\d),"
-                + " \\d\\.\\d+(E-\\d)?=(\\d),"
-                + " \\d\\.\\d+(E-\\d)?=(\\d)\\}$");
-        Matcher matcher = pattern.matcher(string);
-        Assert.assertTrue(string, matcher.matches());
-
-        assertEquals(
-                Bags.immutable.with("1", "2", "3"),
-                Bags.immutable.with(
-                        matcher.group(2),
-                        matcher.group(4),
-                        matcher.group(6)));
     }
 }

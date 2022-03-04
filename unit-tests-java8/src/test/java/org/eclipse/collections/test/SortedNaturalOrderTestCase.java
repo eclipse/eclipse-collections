@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -47,6 +47,18 @@ import static org.junit.Assert.assertThrows;
 
 public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
 {
+    @Test
+    default void Iterable_toString()
+    {
+        RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
+        assertEquals(
+                "[1, 2, 2, 3, 3, 3, 4, 4, 4, 4]",
+                iterable.toString());
+        assertEquals(
+                "[1, 2, 2, 3, 3, 3, 4, 4, 4, 4]",
+                iterable.asLazy().toString());
+    }
+
     @Override
     @Test
     default void RichIterable_collect()
@@ -327,16 +339,6 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
         assertEquals(
                 "[1/2/2/3/3/3/4/4/4/4]",
                 builder3.toString());
-    }
-
-    @Override
-    @Test
-    default void RichIterable_toString()
-    {
-        RichIterable<Integer> iterable = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
-        assertEquals(
-                "[1, 2, 2, 3, 3, 3, 4, 4, 4, 4]",
-                iterable.toString());
     }
 
     @Override

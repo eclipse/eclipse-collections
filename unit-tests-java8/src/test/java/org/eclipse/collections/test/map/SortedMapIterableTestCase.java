@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,8 +16,6 @@ import org.eclipse.collections.api.map.sorted.SortedMapIterable;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.OrderedIterableTestCase;
 import org.eclipse.collections.test.list.TransformsToListTrait;
-import org.junit.Assert;
-import org.junit.Test;
 
 public interface SortedMapIterableTestCase extends MapIterableTestCase, OrderedIterableTestCase, TransformsToListTrait
 {
@@ -40,14 +38,5 @@ public interface SortedMapIterableTestCase extends MapIterableTestCase, OrderedI
     default <T> MutableList<T> newMutableForFilter(T... elements)
     {
         return Lists.mutable.with(elements);
-    }
-
-    @Override
-    @Test
-    default void RichIterable_toString()
-    {
-        Assert.assertEquals(
-                "{10=4, 9=4, 8=4, 7=4, 6=3, 5=3, 4=3, 3=2, 2=2, 1=1}",
-                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toString());
     }
 }

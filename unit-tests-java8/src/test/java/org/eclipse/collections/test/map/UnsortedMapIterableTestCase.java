@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,26 +10,24 @@
 
 package org.eclipse.collections.test.map;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.UnsortedBag;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.UnsortedMapIterable;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.UnorderedIterableTestCase;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
-import static org.junit.Assert.assertThat;
 
-public interface UnsortedMapIterableTestCase extends MapIterableTestCase, UnorderedIterableTestCase, TransformsToBagTrait
+public interface UnsortedMapIterableTestCase
+        extends MapIterableTestCase, UnorderedIterableTestCase, TransformsToBagTrait
 {
     @Override
     <T> UnsortedMapIterable<Object, T> newWith(T... elements);
@@ -44,6 +42,18 @@ public interface UnsortedMapIterableTestCase extends MapIterableTestCase, Unorde
     default <T> MutableBag<T> newMutableForFilter(T... elements)
     {
         return Bags.mutable.with(elements);
+    }
+
+    @Override
+    default void Iterable_toString()
+    {
+        MapIterable<String, Integer> map = this.newWithKeysValues("Two", 2, "One", 1);
+
+        assertThat(map.toString(), isOneOf("{One=1, Two=2}", "{Two=2, One=1}"));
+        assertThat(map.keysView().toString(), isOneOf("[One, Two]", "[Two, One]"));
+        assertThat(map.valuesView().toString(), isOneOf("[1, 2]", "[2, 1]"));
+        assertThat(map.keyValuesView().toString(), isOneOf("[One:1, Two:2]", "[Two:2, One:1]"));
+        assertThat(map.asLazy().toString(), isOneOf("[1, 2]", "[2, 1]"));
     }
 
     @Override
@@ -66,25 +76,6 @@ public interface UnsortedMapIterableTestCase extends MapIterableTestCase, Unorde
         StringBuilder builder3 = new StringBuilder();
         iterable.appendString(builder3, "[", "/", "]");
         assertThat(builder3.toString(), isOneOf("[2/2/1]", "[1/2/2]", "[2/1/2]"));
-    }
-
-    @Override
-    @Test
-    default void RichIterable_toString()
-    {
-        String string = this.newWith(2, 2, 1).toString();
-        Pattern pattern = Pattern.compile("^\\{\\d\\.\\d+(E-\\d)?=(\\d),"
-                + " \\d\\.\\d+(E-\\d)?=(\\d),"
-                + " \\d\\.\\d+(E-\\d)?=(\\d)\\}$");
-        Matcher matcher = pattern.matcher(string);
-        Assert.assertTrue(string, matcher.matches());
-
-        assertEquals(
-                Bags.immutable.with("1", "2", "2"),
-                Bags.immutable.with(
-                        matcher.group(2),
-                        matcher.group(4),
-                        matcher.group(6)));
     }
 
     @Override

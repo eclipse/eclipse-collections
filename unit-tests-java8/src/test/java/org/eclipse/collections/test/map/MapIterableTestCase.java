@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -56,6 +56,30 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<Object, String> original = this.newWith("Three", "Two", "One");
         MapIterable<Object, String> copy = SerializeTestHelper.serializeDeserialize(original);
         assertEquals(copy, original);
+    }
+
+    @Override
+    default void Iterable_toString()
+    {
+        MapIterable<String, Integer> map = this.newWithKeysValues("Two", 2, "One", 1);
+        Assert.assertEquals("{Two=2, One=1}", map.toString());
+        Assert.assertEquals("[Two, One]", map.keysView().toString());
+        Assert.assertEquals("[2, 1]", map.valuesView().toString());
+        Assert.assertEquals("[Two:2, One:1]", map.keyValuesView().toString());
+        Assert.assertEquals("[2, 1]", map.asLazy().toString());
+
+        Assert.assertEquals(
+                "{10=4, 9=4, 8=4, 7=4, 6=3, 5=3, 4=3, 3=2, 2=2, 1=1}",
+                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toString());
+        Assert.assertEquals(
+                "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
+                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keysView().toString());
+        Assert.assertEquals(
+                "[4, 4, 4, 4, 3, 3, 3, 2, 2, 1]",
+                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).valuesView().toString());
+        Assert.assertEquals(
+                "[10:4, 9:4, 8:4, 7:4, 6:3, 5:3, 4:3, 3:2, 2:2, 1:1]",
+                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keyValuesView().toString());
     }
 
     @Test
@@ -165,8 +189,8 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
         MapIterable<Integer, String> result = map.flipUniqueValues();
 
-        // TODO: Use IterableTestCase.assertEquals instead, after setting up methods like getExpectedTransformed, but for maps.
-        Assert.assertEquals(
+        // TODO: Set up methods like getExpectedTransformed, but for maps.
+        assertEquals(
                 UnifiedMap.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 result);
 

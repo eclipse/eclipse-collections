@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,21 +14,32 @@ import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.test.MutableUnorderedIterableTestCase;
 import org.eclipse.collections.test.bimap.UnsortedBiMapTestCase;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.isOneOf;
+
 public interface MutableUnsortedBiMapTestCase extends UnsortedBiMapTestCase, MutableUnorderedIterableTestCase
 {
     @Override
     <T> MutableBiMap<Object, T> newWith(T... elements);
 
     @Override
-    default void Iterable_remove()
+    <K, V> MutableBiMap<K, V> newWithKeysValues(Object... elements);
+
+    @Override
+    default void Iterable_toString()
     {
-        UnsortedBiMapTestCase.super.Iterable_remove();
+        UnsortedBiMapTestCase.super.Iterable_toString();
+
+        MutableBiMap<String, Integer> bimap = this.newWithKeysValues("Two", 2, "One", 1);
+        assertThat(bimap.keySet().toString(), isOneOf("[One, Two]", "[Two, One]"));
+        assertThat(bimap.values().toString(), isOneOf("[1, 2]", "[2, 1]"));
+        assertThat(bimap.entrySet().toString(), isOneOf("[One=1, Two=2]", "[Two=2, One=1]"));
     }
 
     @Override
-    default void Iterable_next()
+    default void Iterable_remove()
     {
-        UnsortedBiMapTestCase.super.Iterable_next();
+        UnsortedBiMapTestCase.super.Iterable_remove();
     }
 
     @Override

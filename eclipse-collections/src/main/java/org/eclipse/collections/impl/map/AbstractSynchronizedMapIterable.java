@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -37,7 +37,6 @@ import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.AbstractSynchronizedRichIterable;
 import org.eclipse.collections.impl.tuple.AbstractImmutableEntry;
-import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
@@ -351,14 +350,21 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
     }
 
     @Override
+    public RichIterable<K> keysView()
+    {
+        return LazyIterate.adapt(this.keySet());
+    }
+
+    @Override
+    public RichIterable<V> valuesView()
+    {
+        return LazyIterate.adapt(this.values());
+    }
+
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
-        synchronized (this.lock)
-        {
-            Set<Entry<K, V>> entries = this.getDelegate().entrySet();
-            Iterable<Pair<K, V>> pairs = Iterate.collect(entries, AbstractImmutableEntry.getPairFunction());
-            return LazyIterate.adapt(pairs);
-        }
+        return LazyIterate.adapt(this.entrySet()).collect(AbstractImmutableEntry.getPairFunction());
     }
 
     @Override

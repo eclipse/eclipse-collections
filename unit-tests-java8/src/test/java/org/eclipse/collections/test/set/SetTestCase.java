@@ -23,11 +23,11 @@ import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertPostSerializedEqualsAndHashCode;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public interface SetTestCase extends CollectionTestCase
@@ -64,6 +64,12 @@ public interface SetTestCase extends CollectionTestCase
 
         assertNotEquals(this.newWith(4, 2, 1), this.newWith(3, 2, 1));
         assertNotEquals(this.newWith(3, 2, 1), this.newWith(4, 2, 1));
+    }
+
+    @Test
+    default void Iterable_toString()
+    {
+        assertThat(this.newWith(2, 1).toString(), isOneOf("[1, 2]", "[2, 1]"));
     }
 
     @Override
