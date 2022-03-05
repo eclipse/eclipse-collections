@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -74,6 +74,14 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -94,14 +102,6 @@ import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures2;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.parallel.BatchIterable;
@@ -770,7 +770,7 @@ public class FastList<T>
     @Override
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        return this.collectBoolean(booleanFunction, new BooleanArrayList(this.size));
+        return this.collectBoolean(booleanFunction, BooleanLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -797,7 +797,7 @@ public class FastList<T>
     @Override
     public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
-        return this.collectByte(byteFunction, new ByteArrayList(this.size));
+        return this.collectByte(byteFunction, ByteLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -824,7 +824,7 @@ public class FastList<T>
     @Override
     public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
-        return this.collectChar(charFunction, new CharArrayList(this.size));
+        return this.collectChar(charFunction, CharLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -851,7 +851,7 @@ public class FastList<T>
     @Override
     public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        return this.collectDouble(doubleFunction, new DoubleArrayList(this.size));
+        return this.collectDouble(doubleFunction, DoubleLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -878,7 +878,7 @@ public class FastList<T>
     @Override
     public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
-        return this.collectFloat(floatFunction, new FloatArrayList(this.size));
+        return this.collectFloat(floatFunction, FloatLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -905,7 +905,7 @@ public class FastList<T>
     @Override
     public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
-        return this.collectInt(intFunction, new IntArrayList(this.size));
+        return this.collectInt(intFunction, IntLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -932,7 +932,7 @@ public class FastList<T>
     @Override
     public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
-        return this.collectLong(longFunction, new LongArrayList(this.size));
+        return this.collectLong(longFunction, LongLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -959,7 +959,7 @@ public class FastList<T>
     @Override
     public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
-        return this.collectShort(shortFunction, new ShortArrayList(this.size));
+        return this.collectShort(shortFunction, ShortLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
