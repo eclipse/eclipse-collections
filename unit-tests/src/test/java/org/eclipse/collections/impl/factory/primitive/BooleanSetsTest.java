@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,7 +14,9 @@ import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.factory.set.primitive.ImmutableBooleanSetFactory;
+import org.eclipse.collections.api.factory.set.primitive.MutableBooleanSetFactory;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
+import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
@@ -29,7 +31,12 @@ public class BooleanSetsTest
     @Test
     public void immutables()
     {
-        ImmutableBooleanSetFactory setFactory = BooleanSets.immutable;
+        this.assertImmutableSetFactory(BooleanSets.immutable);
+        this.assertImmutableSetFactory(org.eclipse.collections.api.factory.primitive.BooleanSets.immutable);
+    }
+
+    private void assertImmutableSetFactory(ImmutableBooleanSetFactory setFactory)
+    {
         Assert.assertEquals(new BooleanHashSet(), setFactory.with());
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with());
         Assert.assertEquals(BooleanHashSet.newSetWith(true), setFactory.with(true));
@@ -54,6 +61,41 @@ public class BooleanSetsTest
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true, true, false));
         Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
+    }
+
+    @Test
+    public void mutables()
+    {
+        this.assertMutableSetFactory(BooleanSets.mutable);
+        this.assertMutableSetFactory(org.eclipse.collections.api.factory.primitive.BooleanSets.mutable);
+    }
+
+    private void assertMutableSetFactory(MutableBooleanSetFactory setFactory)
+    {
+        Assert.assertEquals(new BooleanHashSet(), setFactory.with());
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with());
+        Assert.assertEquals(BooleanHashSet.newSetWith(true), setFactory.with(true));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), setFactory.with(true, false));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.with(true, false, true));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false), setFactory.with(true, false, true, false));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true), setFactory.with(true, false, true, false, true));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false), setFactory.with(true, false, true, false, true, false));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true), setFactory.with(true, false, true, false, true, false, true));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true), setFactory.with(true, false, true, false, true, false, true, true));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true), setFactory.with(true, false, true, false, true, false, true, true, true));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true, true));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true, false), setFactory.with(true, false, true, false, true, false, true, true, true, false));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true, true, false));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
+        Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
     }
 
     @Test

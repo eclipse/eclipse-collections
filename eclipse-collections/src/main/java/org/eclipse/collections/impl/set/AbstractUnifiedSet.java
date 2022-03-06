@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -29,6 +29,14 @@ import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.factory.primitive.BooleanSets;
+import org.eclipse.collections.api.factory.primitive.ByteSets;
+import org.eclipse.collections.api.factory.primitive.CharSets;
+import org.eclipse.collections.api.factory.primitive.DoubleSets;
+import org.eclipse.collections.api.factory.primitive.FloatSets;
+import org.eclipse.collections.api.factory.primitive.IntSets;
+import org.eclipse.collections.api.factory.primitive.LongSets;
+import org.eclipse.collections.api.factory.primitive.ShortSets;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.set.MutableSet;
@@ -50,14 +58,6 @@ import org.eclipse.collections.impl.parallel.BatchIterable;
 import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
-import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.ByteHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.CharHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.DoubleHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.FloatHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.ShortHashSet;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.internal.MutableCollectionIterate;
 import org.eclipse.collections.impl.utility.internal.SetIterables;
@@ -159,49 +159,49 @@ public abstract class AbstractUnifiedSet<T>
     @Override
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        return this.collectBoolean(booleanFunction, new BooleanHashSet());
+        return this.collectBoolean(booleanFunction, BooleanSets.mutable.empty());
     }
 
     @Override
     public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
-        return this.collectByte(byteFunction, new ByteHashSet());
+        return this.collectByte(byteFunction, ByteSets.mutable.empty());
     }
 
     @Override
     public MutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
-        return this.collectChar(charFunction, new CharHashSet());
+        return this.collectChar(charFunction, CharSets.mutable.empty());
     }
 
     @Override
     public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        return this.collectDouble(doubleFunction, new DoubleHashSet());
+        return this.collectDouble(doubleFunction, DoubleSets.mutable.empty());
     }
 
     @Override
     public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
-        return this.collectFloat(floatFunction, new FloatHashSet());
+        return this.collectFloat(floatFunction, FloatSets.mutable.empty());
     }
 
     @Override
     public MutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
-        return this.collectInt(intFunction, new IntHashSet());
+        return this.collectInt(intFunction, IntSets.mutable.empty());
     }
 
     @Override
     public MutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
-        return this.collectLong(longFunction, new LongHashSet());
+        return this.collectLong(longFunction, LongSets.mutable.empty());
     }
 
     @Override
     public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
-        return this.collectShort(shortFunction, new ShortHashSet());
+        return this.collectShort(shortFunction, ShortSets.mutable.empty());
     }
 
     @Override
