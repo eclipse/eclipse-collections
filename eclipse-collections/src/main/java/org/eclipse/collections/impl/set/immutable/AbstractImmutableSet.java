@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,6 +32,14 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.factory.primitive.BooleanSets;
+import org.eclipse.collections.api.factory.primitive.ByteSets;
+import org.eclipse.collections.api.factory.primitive.CharSets;
+import org.eclipse.collections.api.factory.primitive.DoubleSets;
+import org.eclipse.collections.api.factory.primitive.FloatSets;
+import org.eclipse.collections.api.factory.primitive.IntSets;
+import org.eclipse.collections.api.factory.primitive.LongSets;
+import org.eclipse.collections.api.factory.primitive.ShortSets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
@@ -85,14 +93,6 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.ByteHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.CharHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.DoubleHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.FloatHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
-import org.eclipse.collections.impl.set.mutable.primitive.ShortHashSet;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.internal.SetIterables;
 
@@ -224,7 +224,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        MutableBooleanSet result = new BooleanHashSet();
+        MutableBooleanSet result = BooleanSets.mutable.empty();
         this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result.toImmutable();
     }
@@ -232,7 +232,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
-        MutableByteSet result = new ByteHashSet();
+        MutableByteSet result = ByteSets.mutable.empty();
         this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result.toImmutable();
     }
@@ -240,7 +240,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
-        MutableCharSet result = new CharHashSet(this.size());
+        MutableCharSet result = CharSets.mutable.empty();
         this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result.toImmutable();
     }
@@ -248,7 +248,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        MutableDoubleSet result = new DoubleHashSet(this.size());
+        MutableDoubleSet result = DoubleSets.mutable.empty();
         this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result.toImmutable();
     }
@@ -256,7 +256,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
-        MutableFloatSet result = new FloatHashSet(this.size());
+        MutableFloatSet result = FloatSets.mutable.empty();
         this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result.toImmutable();
     }
@@ -264,7 +264,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
-        MutableIntSet result = new IntHashSet(this.size());
+        MutableIntSet result = IntSets.mutable.empty();
         this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result.toImmutable();
     }
@@ -272,7 +272,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
-        MutableLongSet result = new LongHashSet(this.size());
+        MutableLongSet result = LongSets.mutable.empty();
         this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result.toImmutable();
     }
@@ -280,7 +280,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
-        MutableShortSet result = new ShortHashSet(this.size());
+        MutableShortSet result = ShortSets.mutable.empty();
         this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result.toImmutable();
     }
