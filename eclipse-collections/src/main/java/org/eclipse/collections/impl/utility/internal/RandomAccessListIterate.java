@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -54,6 +54,14 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -77,14 +85,6 @@ import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
@@ -378,7 +378,7 @@ public final class RandomAccessListIterate
             List<T> list,
             BooleanFunction<? super T> booleanFunction)
     {
-        return RandomAccessListIterate.collectBoolean(list, booleanFunction, new BooleanArrayList(list.size()));
+        return RandomAccessListIterate.collectBoolean(list, booleanFunction, BooleanLists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -404,7 +404,7 @@ public final class RandomAccessListIterate
             List<T> list,
             ByteFunction<? super T> byteFunction)
     {
-        return RandomAccessListIterate.collectByte(list, byteFunction, new ByteArrayList(list.size()));
+        return RandomAccessListIterate.collectByte(list, byteFunction, ByteLists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -430,7 +430,7 @@ public final class RandomAccessListIterate
             List<T> list,
             CharFunction<? super T> charFunction)
     {
-        return RandomAccessListIterate.collectChar(list, charFunction, new CharArrayList(list.size()));
+        return RandomAccessListIterate.collectChar(list, charFunction, CharLists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -456,7 +456,7 @@ public final class RandomAccessListIterate
             List<T> list,
             DoubleFunction<? super T> doubleFunction)
     {
-        return RandomAccessListIterate.collectDouble(list, doubleFunction, new DoubleArrayList(list.size()));
+        return RandomAccessListIterate.collectDouble(list, doubleFunction, DoubleLists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -482,7 +482,7 @@ public final class RandomAccessListIterate
             List<T> list,
             FloatFunction<? super T> floatFunction)
     {
-        return RandomAccessListIterate.collectFloat(list, floatFunction, new FloatArrayList(list.size()));
+        return RandomAccessListIterate.collectFloat(list, floatFunction, FloatLists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -508,7 +508,7 @@ public final class RandomAccessListIterate
             List<T> list,
             IntFunction<? super T> intFunction)
     {
-        return RandomAccessListIterate.collectInt(list, intFunction, new IntArrayList(list.size()));
+        return RandomAccessListIterate.collectInt(list, intFunction, IntLists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -534,7 +534,7 @@ public final class RandomAccessListIterate
             List<T> list,
             LongFunction<? super T> longFunction)
     {
-        return RandomAccessListIterate.collectLong(list, longFunction, new LongArrayList(list.size()));
+        return RandomAccessListIterate.collectLong(list, longFunction, LongLists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -560,7 +560,7 @@ public final class RandomAccessListIterate
             List<T> list,
             ShortFunction<? super T> shortFunction)
     {
-        return RandomAccessListIterate.collectShort(list, shortFunction, new ShortArrayList(list.size()));
+        return RandomAccessListIterate.collectShort(list, shortFunction, ShortLists.mutable.withInitialCapacity(list.size()));
     }
 
     /**

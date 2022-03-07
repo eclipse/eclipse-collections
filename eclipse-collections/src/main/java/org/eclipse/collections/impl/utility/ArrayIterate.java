@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,6 +50,14 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -71,14 +79,6 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
@@ -449,7 +449,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectBoolean on null");
         }
-        return ArrayIterate.collectBoolean(objectArray, booleanFunction, new BooleanArrayList(objectArray.length));
+        return ArrayIterate.collectBoolean(objectArray, booleanFunction, BooleanLists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -480,7 +480,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectByte on null");
         }
-        return ArrayIterate.collectByte(objectArray, byteFunction, new ByteArrayList(objectArray.length));
+        return ArrayIterate.collectByte(objectArray, byteFunction, ByteLists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -511,7 +511,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectChar on null");
         }
-        return ArrayIterate.collectChar(objectArray, charFunction, new CharArrayList(objectArray.length));
+        return ArrayIterate.collectChar(objectArray, charFunction, CharLists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -542,7 +542,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectDouble on null");
         }
-        return ArrayIterate.collectDouble(objectArray, doubleFunction, new DoubleArrayList(objectArray.length));
+        return ArrayIterate.collectDouble(objectArray, doubleFunction, DoubleLists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -573,7 +573,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectFloat on null");
         }
-        return ArrayIterate.collectFloat(objectArray, floatFunction, new FloatArrayList(objectArray.length));
+        return ArrayIterate.collectFloat(objectArray, floatFunction, FloatLists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -606,7 +606,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectInt on null");
         }
-        return ArrayIterate.collectInt(objectArray, intFunction, new IntArrayList(objectArray.length));
+        return ArrayIterate.collectInt(objectArray, intFunction, IntLists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -639,7 +639,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectLong on null");
         }
-        return ArrayIterate.collectLong(objectArray, longFunction, new LongArrayList(objectArray.length));
+        return ArrayIterate.collectLong(objectArray, longFunction, LongLists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -672,7 +672,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectShort on null");
         }
-        return ArrayIterate.collectShort(objectArray, shortFunction, new ShortArrayList(objectArray.length));
+        return ArrayIterate.collectShort(objectArray, shortFunction, ShortLists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
