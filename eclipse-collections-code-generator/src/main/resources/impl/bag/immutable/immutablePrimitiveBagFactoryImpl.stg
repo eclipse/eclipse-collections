@@ -25,9 +25,9 @@ import org.eclipse.collections.impl.factory.primitive.<name>Bags;
  *
  * @since 4.0.
  */
-public enum Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
+public class Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
 {
-    INSTANCE;
+    public static final Immutable<name>BagFactory INSTANCE = new Immutable<name>BagFactoryImpl();
 
     @Override
     public Immutable<name>Bag empty()

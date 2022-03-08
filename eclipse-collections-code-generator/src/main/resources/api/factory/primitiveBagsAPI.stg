@@ -1,0 +1,40 @@
+import "copyrightAndOthers.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/primitive"
+
+fileName(primitive) ::= "<primitive.name>Bags"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.api.factory.primitive;
+
+import org.eclipse.collections.api.factory.ServiceLoaderUtils;
+import org.eclipse.collections.api.factory.bag.primitive.Immutable<name>BagFactory;
+import org.eclipse.collections.api.factory.bag.primitive.Mutable<name>BagFactory;
+
+/**
+ * <name>Bags is a static utility for creating {@link Immutable<name>BagFactory} and {@link Mutable<name>BagFactory}.
+ * This file was automatically generated from template file primitiveBagsAPI.stg.
+ *
+ * @since 11.1.
+ */
+@SuppressWarnings("ConstantNamingConvention")
+public final class <name>Bags
+{
+    public static final Immutable<name>BagFactory immutable =
+            ServiceLoaderUtils.loadServiceClass(Immutable<name>BagFactory.class);
+    public static final Mutable<name>BagFactory mutable =
+            ServiceLoaderUtils.loadServiceClass(Mutable<name>BagFactory.class);
+
+    private <name>Bags()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+}
+
+>>
