@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -165,6 +165,15 @@ public class SynchronizedObject<name>Map\<K>
         synchronized (this.lock)
         {
             return this.map.getIfAbsentPut(key, value);
+        }
+    }
+
+    @Override
+    public <type> getAndPut(K key, <type> putValue, <type> defaultValue)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.getAndPut(key, putValue, defaultValue);
         }
     }
 

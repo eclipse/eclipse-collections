@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -95,6 +95,17 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
 
         map1.put(null, false);
         Assert.assertFalse(map1.getOrThrow(null));
+    }
+
+    @Test
+    public void getAndPut()
+    {
+        MutableObjectBooleanMap<Integer> map1 = this.getEmptyMap();
+        Assert.assertTrue(map1.getAndPut(Integer.valueOf(1), false, true));
+        Assert.assertFalse(map1.getAndPut(Integer.valueOf(2), false, false));
+        Assert.assertFalse(map1.getAndPut(Integer.valueOf(1), true, true));
+        map1.remove(Integer.valueOf(1));
+        Assert.assertFalse(map1.getAndPut(Integer.valueOf(1), true, false));
     }
 
     @Override

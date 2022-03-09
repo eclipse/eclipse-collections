@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
@@ -16,7 +16,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name, wrapperName) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -360,6 +360,21 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         Assert.assertEquals(<(literal.(type))("50")>, map3.getIfAbsentPut(null, <(literal.(type))("50")>)<delta.(type)>);
         Assert.assertEquals(<(literal.(type))("50")>, map3.getIfAbsentPut(null, <(literal.(type))("100")>)<delta.(type)>);
         Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("50")>), map3);
+    }
+
+    @Test
+    public void getAndPut()
+    {
+        MutableObject<name>Map\<Integer> map1 = this.getEmptyMap();
+        Assert.assertEquals(<(literal.(type))("20")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("100")>, <(literal.(type))("20")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("100")>, map1.get(Integer.valueOf(5))<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("100")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("70")>, <(literal.(type))("50")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("70")>, map1.get(Integer.valueOf(5))<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("70")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("77")>, <(literal.(type))("50")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("77")>, map1.get(Integer.valueOf(5))<delta.(type)>);
+        map1.removeKey(Integer.valueOf(5));
+        Assert.assertEquals(<(literal.(type))("20")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("100")>, <(literal.(type))("20")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("100")>, map1.get(Integer.valueOf(5))<delta.(type)>);
     }
 
     @Test
