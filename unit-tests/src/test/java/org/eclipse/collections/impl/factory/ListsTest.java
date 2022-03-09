@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -170,7 +170,12 @@ public class ListsTest
     @Test
     public void multiReader()
     {
-        MultiReaderListFactory listFactory = Lists.multiReader;
+        this.testMultiReaderApi(Lists.multiReader);
+        this.testMultiReaderApi(org.eclipse.collections.api.factory.Lists.multiReader);
+    }
+
+    private void testMultiReaderApi(MultiReaderListFactory listFactory)
+    {
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.of());
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.with());
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.empty());
