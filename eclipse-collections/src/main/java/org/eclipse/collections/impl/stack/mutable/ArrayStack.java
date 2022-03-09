@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -64,6 +64,14 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Stacks;
+import org.eclipse.collections.api.factory.primitive.BooleanStacks;
+import org.eclipse.collections.api.factory.primitive.ByteStacks;
+import org.eclipse.collections.api.factory.primitive.CharStacks;
+import org.eclipse.collections.api.factory.primitive.DoubleStacks;
+import org.eclipse.collections.api.factory.primitive.FloatStacks;
+import org.eclipse.collections.api.factory.primitive.IntStacks;
+import org.eclipse.collections.api.factory.primitive.LongStacks;
+import org.eclipse.collections.api.factory.primitive.ShortStacks;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -95,14 +103,6 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack;
-import org.eclipse.collections.impl.stack.mutable.primitive.BooleanArrayStack;
-import org.eclipse.collections.impl.stack.mutable.primitive.ByteArrayStack;
-import org.eclipse.collections.impl.stack.mutable.primitive.CharArrayStack;
-import org.eclipse.collections.impl.stack.mutable.primitive.DoubleArrayStack;
-import org.eclipse.collections.impl.stack.mutable.primitive.FloatArrayStack;
-import org.eclipse.collections.impl.stack.mutable.primitive.IntArrayStack;
-import org.eclipse.collections.impl.stack.mutable.primitive.LongArrayStack;
-import org.eclipse.collections.impl.stack.mutable.primitive.ShortArrayStack;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
@@ -360,7 +360,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public MutableBooleanStack collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        return BooleanArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectBoolean(booleanFunction));
+        return BooleanStacks.mutable.withAllReversed(this.delegate.asReversed().collectBoolean(booleanFunction));
     }
 
     @Override
@@ -379,7 +379,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public MutableByteStack collectByte(ByteFunction<? super T> byteFunction)
     {
-        return ByteArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectByte(byteFunction));
+        return ByteStacks.mutable.withAllReversed(this.delegate.asReversed().collectByte(byteFunction));
     }
 
     @Override
@@ -398,7 +398,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public MutableCharStack collectChar(CharFunction<? super T> charFunction)
     {
-        return CharArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectChar(charFunction));
+        return CharStacks.mutable.withAllReversed(this.delegate.asReversed().collectChar(charFunction));
     }
 
     @Override
@@ -417,7 +417,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public MutableDoubleStack collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        return DoubleArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectDouble(doubleFunction));
+        return DoubleStacks.mutable.withAllReversed(this.delegate.asReversed().collectDouble(doubleFunction));
     }
 
     @Override
@@ -436,7 +436,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public MutableFloatStack collectFloat(FloatFunction<? super T> floatFunction)
     {
-        return FloatArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectFloat(floatFunction));
+        return FloatStacks.mutable.withAllReversed(this.delegate.asReversed().collectFloat(floatFunction));
     }
 
     @Override
@@ -455,7 +455,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public MutableIntStack collectInt(IntFunction<? super T> intFunction)
     {
-        return IntArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectInt(intFunction));
+        return IntStacks.mutable.withAllReversed(this.delegate.asReversed().collectInt(intFunction));
     }
 
     @Override
@@ -474,7 +474,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public MutableLongStack collectLong(LongFunction<? super T> longFunction)
     {
-        return LongArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectLong(longFunction));
+        return LongStacks.mutable.withAllReversed(this.delegate.asReversed().collectLong(longFunction));
     }
 
     @Override
@@ -493,7 +493,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public MutableShortStack collectShort(ShortFunction<? super T> shortFunction)
     {
-        return ShortArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectShort(shortFunction));
+        return ShortStacks.mutable.withAllReversed(this.delegate.asReversed().collectShort(shortFunction));
     }
 
     @Override
