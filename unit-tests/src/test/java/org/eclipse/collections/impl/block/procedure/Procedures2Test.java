@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,10 +18,13 @@ import java.util.LongSummaryStatistics;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.impl.block.factory.Procedures2;
+import org.eclipse.collections.impl.block.procedure.checked.ThrowingProcedure2;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,6 +40,17 @@ public class Procedures2Test
                 {
                     throw new IOException();
                 }).value(null, null));
+    }
+
+    @Test
+    public void throwingWithSuccessfulCompletion()
+    {
+        MutableList<IntIntPair> list = Lists.mutable.empty();
+        ThrowingProcedure2<Integer, Integer> throwingProcedure2 = (object, parameter) -> list.add(
+                PrimitiveTuples.pair(object.intValue(), parameter.intValue()));
+
+        Procedures2.throwing(throwingProcedure2).value(2, 3);
+        Assert.assertEquals(Lists.mutable.of(PrimitiveTuples.pair(2, 3)), list);
     }
 
     @Test

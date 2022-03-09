@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,12 +22,14 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Procedures;
+import org.eclipse.collections.impl.block.procedure.checked.ThrowingProcedure;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,6 +42,15 @@ public class ProceduresTest
                 RuntimeException.class,
                 IOException.class,
                 () -> Procedures.throwing(a -> { throw new IOException(); }).value(null));
+    }
+
+    @Test
+    public void throwingWithSuccessfulCompletion()
+    {
+        StringBuilder builder = new StringBuilder("a");
+        ThrowingProcedure<StringBuilder> throwingProcedure = stringBuilder -> stringBuilder.append("Visited");
+        Procedures.throwing(throwingProcedure).value(builder);
+        Assert.assertEquals("aVisited", builder.toString());
     }
 
     @Test
@@ -75,12 +86,14 @@ public class ProceduresTest
     @Test
     public void println()
     {
-        try (TestPrintStream stream = new TestPrintStream(FastList.newListWith(1)))
+        MutableList<Integer> newAssertValues = Lists.mutable.of(1);
+        try (TestPrintStream stream = new TestPrintStream(newAssertValues))
         {
             Procedure<Integer> result = Procedures.println(stream);
             result.value(1);
             stream.shutdown();
         }
+        Verify.assertEmpty(newAssertValues);
     }
 
     @Test
@@ -93,6 +106,31 @@ public class ProceduresTest
         appender.value(3);
         Assert.assertEquals("init123", appendable.toString());
         Assert.assertEquals("init123", appender.toString());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void appendWithException()
+    {
+        Procedures.append(new Appendable()
+        {
+            @Override
+            public Appendable append(CharSequence csq) throws IOException
+            {
+                throw new IOException();
+            }
+
+            @Override
+            public Appendable append(CharSequence csq, int start, int end) throws IOException
+            {
+                throw new IOException();
+            }
+
+            @Override
+            public Appendable append(char c) throws IOException
+            {
+                throw new IOException();
+            }
+        }).value("abc");
     }
 
     @Test
@@ -108,6 +146,26 @@ public class ProceduresTest
         numberStrings.forEach(procedure);
 
         Assert.assertEquals(expectedResults, actualResults);
+    }
+
+    @Test
+    public void fromProcedureWithInt()
+    {
+        MutableList<ObjectIntPair> list = Lists.mutable.empty();
+        Procedure<String> procedure =
+                Procedures.fromObjectIntProcedure((each, parameter) -> list.add(PrimitiveTuples.pair(each, parameter)));
+        procedure.value("strOne");
+        procedure.value("strTwo");
+        Assert.assertEquals(Lists.mutable.of(PrimitiveTuples.pair("strOne", 0),
+                PrimitiveTuples.pair("strTwo", 1)), list);
+    }
+
+    @Test
+    public void noop()
+    {
+        Procedure<Object> noop = Procedures.noop();
+        noop.value("abc");
+        Assert.assertNotNull(noop);
     }
 
     @Test
