@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,6 +50,14 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -71,14 +79,6 @@ import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
@@ -387,7 +387,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableBooleanList result = new BooleanArrayList(size);
+            MutableBooleanList result = BooleanLists.mutable.withInitialCapacity(size);
             return ArrayListIterate.collectBooleanFromInternalArray(list, booleanFunction, size, result);
         }
         return RandomAccessListIterate.collectBoolean(list, booleanFunction);
@@ -426,7 +426,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableByteList result = new ByteArrayList(size);
+            MutableByteList result = ByteLists.mutable.withInitialCapacity(size);
             return ArrayListIterate.collectByteFromInternalArray(list, byteFunction, size, result);
         }
         return RandomAccessListIterate.collectByte(list, byteFunction);
@@ -469,7 +469,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableCharList result = new CharArrayList(size);
+            MutableCharList result = CharLists.mutable.withInitialCapacity(size);
             return ArrayListIterate.collectCharFromInternalArray(list, charFunction, size, result);
         }
         return RandomAccessListIterate.collectChar(list, charFunction);
@@ -512,7 +512,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableDoubleList result = new DoubleArrayList(size);
+            MutableDoubleList result = DoubleLists.mutable.withInitialCapacity(size);
             return ArrayListIterate.collectDoubleFromInternalArray(list, doubleFunction, size, result);
         }
         return RandomAccessListIterate.collectDouble(list, doubleFunction);
@@ -555,7 +555,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableFloatList result = new FloatArrayList(size);
+            MutableFloatList result = FloatLists.mutable.withInitialCapacity(size);
             return ArrayListIterate.collectFloatFromInternalArray(list, floatFunction, size, result);
         }
         return RandomAccessListIterate.collectFloat(list, floatFunction);
@@ -598,7 +598,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableIntList result = new IntArrayList(size);
+            MutableIntList result = IntLists.mutable.withInitialCapacity(size);
             return ArrayListIterate.collectIntFromInternalArray(list, intFunction, size, result);
         }
         return RandomAccessListIterate.collectInt(list, intFunction);
@@ -637,7 +637,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableLongList result = new LongArrayList(size);
+            MutableLongList result = LongLists.mutable.withInitialCapacity(size);
             return ArrayListIterate.collectLongFromInternalArray(list, longFunction, size, result);
         }
         return RandomAccessListIterate.collectLong(list, longFunction);
@@ -680,7 +680,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableShortList result = new ShortArrayList(size);
+            MutableShortList result = ShortLists.mutable.withInitialCapacity(size);
             return ArrayListIterate.collectShortFromInternalArray(list, shortFunction, size, result);
         }
         return RandomAccessListIterate.collectShort(list, shortFunction);

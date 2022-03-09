@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,6 +32,14 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.primitive.BooleanStacks;
+import org.eclipse.collections.api.factory.primitive.ByteStacks;
+import org.eclipse.collections.api.factory.primitive.CharStacks;
+import org.eclipse.collections.api.factory.primitive.DoubleStacks;
+import org.eclipse.collections.api.factory.primitive.FloatStacks;
+import org.eclipse.collections.api.factory.primitive.IntStacks;
+import org.eclipse.collections.api.factory.primitive.LongStacks;
+import org.eclipse.collections.api.factory.primitive.ShortStacks;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
@@ -58,14 +66,6 @@ import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Stacks;
-import org.eclipse.collections.impl.factory.primitive.BooleanStacks;
-import org.eclipse.collections.impl.factory.primitive.ByteStacks;
-import org.eclipse.collections.impl.factory.primitive.CharStacks;
-import org.eclipse.collections.impl.factory.primitive.DoubleStacks;
-import org.eclipse.collections.impl.factory.primitive.FloatStacks;
-import org.eclipse.collections.impl.factory.primitive.IntStacks;
-import org.eclipse.collections.impl.factory.primitive.LongStacks;
-import org.eclipse.collections.impl.factory.primitive.ShortStacks;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack.PartitionProcedure;

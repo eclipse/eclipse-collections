@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 The Bank of New York Mellon.
+ * Copyright (c) 2022 The Bank of New York Mellon.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -20,6 +20,15 @@ import org.eclipse.collections.api.bag.primitive.ImmutableLongBag;
 import org.eclipse.collections.api.bag.primitive.MutableDoubleBag;
 import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.bag.primitive.MutableLongBag;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.DoubleSets;
+import org.eclipse.collections.api.factory.primitive.DoubleStacks;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.IntSets;
+import org.eclipse.collections.api.factory.primitive.IntStacks;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.LongSets;
+import org.eclipse.collections.api.factory.primitive.LongStacks;
 import org.eclipse.collections.api.list.primitive.ImmutableDoubleList;
 import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.ImmutableLongList;
@@ -39,17 +48,8 @@ import org.eclipse.collections.api.stack.primitive.MutableDoubleStack;
 import org.eclipse.collections.api.stack.primitive.MutableIntStack;
 import org.eclipse.collections.api.stack.primitive.MutableLongStack;
 import org.eclipse.collections.impl.factory.primitive.DoubleBags;
-import org.eclipse.collections.impl.factory.primitive.DoubleLists;
-import org.eclipse.collections.impl.factory.primitive.DoubleSets;
-import org.eclipse.collections.impl.factory.primitive.DoubleStacks;
 import org.eclipse.collections.impl.factory.primitive.IntBags;
-import org.eclipse.collections.impl.factory.primitive.IntLists;
-import org.eclipse.collections.impl.factory.primitive.IntSets;
-import org.eclipse.collections.impl.factory.primitive.IntStacks;
 import org.eclipse.collections.impl.factory.primitive.LongBags;
-import org.eclipse.collections.impl.factory.primitive.LongLists;
-import org.eclipse.collections.impl.factory.primitive.LongSets;
-import org.eclipse.collections.impl.factory.primitive.LongStacks;
 
 /**
  * This class provides interop between primitive streams and primitive collections.
