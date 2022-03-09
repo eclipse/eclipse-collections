@@ -26,9 +26,9 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 6.0.
  */
-public enum Mutable<name>BagFactoryImpl implements Mutable<name>BagFactory
+public class Mutable<name>BagFactoryImpl implements Mutable<name>BagFactory
 {
-    INSTANCE;
+    public static final Mutable<name>BagFactory INSTANCE = new Mutable<name>BagFactoryImpl();
 
     @Override
     public Mutable<name>Bag empty()

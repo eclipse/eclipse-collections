@@ -20,6 +20,7 @@ package org.eclipse.collections.impl.factory.primitive;
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.factory.bag.primitive.Immutable<name>BagFactory;
+import org.eclipse.collections.api.factory.bag.primitive.Mutable<name>BagFactory;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
@@ -35,7 +36,12 @@ public class <name>BagsTest
     @Test
     public void immutables()
     {
-        Immutable<name>BagFactory bagFactory = <name>Bags.immutable;
+        this.assertImmutableBagFactory(<name>Bags.immutable);
+        this.assertImmutableBagFactory(org.eclipse.collections.api.factory.primitive.<name>Bags.immutable);
+    }
+
+    private void assertImmutableBagFactory(Immutable<name>BagFactory bagFactory)
+    {
         Assert.assertEquals(<name>HashBag.newBagWith(), bagFactory.of());
         Verify.assertInstanceOf(Immutable<name>Bag.class, bagFactory.of());
         Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("1")>), bagFactory.of(<(literal.(type))("1")>));
@@ -63,13 +69,49 @@ public class <name>BagsTest
     }
 
     @Test
-    public void emptyBag()
+    public void mutables()
     {
-        Assert.assertTrue(<name>Bags.immutable.of().isEmpty());
+        this.assertMutableBagFactory(<name>Bags.mutable);
+        this.assertMutableBagFactory(org.eclipse.collections.api.factory.primitive.<name>Bags.mutable);
+    }
+
+    private void assertMutableBagFactory(Mutable<name>BagFactory bagFactory)
+    {
+        Assert.assertEquals(<name>HashBag.newBagWith(), bagFactory.of());
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of());
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("1")>), bagFactory.of(<(literal.(type))("1")>));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<(literal.(type))("1")>));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2"]:(literal.(type))(); separator=", ">), bagFactory.of(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), bagFactory.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), bagFactory.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), bagFactory.of(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">), bagFactory.of(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">), bagFactory.of(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">), bagFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">), bagFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">), bagFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), bagFactory.ofAll(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        Verify.assertInstanceOf(Mutable<name>Bag.class, bagFactory.ofAll(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
     }
 
     @Test
-    public void newBagWith()
+    public void emptyBag()
+    {
+        Assert.assertTrue(<name>Bags.immutable.of().isEmpty());
+        Assert.assertTrue(<name>Bags.mutable.of().isEmpty());
+    }
+
+    @Test
+    public void newBagWith_immutable()
     {
         Immutable<name>Bag bag = <name>Bags.immutable.of();
         Assert.assertEquals(bag, <name>Bags.immutable.of(bag.toArray()));
@@ -83,6 +125,33 @@ public class <name>BagsTest
         Assert.assertEquals(bag = bag.newWith(<(literal.(type))("8")>), <name>Bags.immutable.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
         Assert.assertEquals(bag = bag.newWith(<(literal.(type))("9")>), <name>Bags.immutable.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
         Assert.assertEquals(bag = bag.newWith(<(literal.(type))("10")>), <name>Bags.immutable.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Test
+    public void newBagWith_mutable()
+    {
+        Mutable<name>Bag bag = <name>Bags.mutable.of();
+        Assert.assertEquals(bag, <name>Bags.mutable.of(bag.toArray()));
+        bag.add(<(literal.(type))("1")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<(literal.(type))("1")>));
+        bag.add(<(literal.(type))("2")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<["1", "2"]:(literal.(type))(); separator=", ">));
+        bag.add(<(literal.(type))("3")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        bag.add(<(literal.(type))("4")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        bag.add(<(literal.(type))("5")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        bag.add(<(literal.(type))("6")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        bag.add(<(literal.(type))("7")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        bag.add(<(literal.(type))("8")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        bag.add(<(literal.(type))("9")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        bag.add(<(literal.(type))("10")>);
+        Assert.assertEquals(bag, <name>Bags.mutable.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
     }
 
     @SuppressWarnings("RedundantArrayCreation")
