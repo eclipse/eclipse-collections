@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Git Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set Maven Wrapper
         run: mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.6.3
       - name: Set JDK ${{ matrix.java-version }}
