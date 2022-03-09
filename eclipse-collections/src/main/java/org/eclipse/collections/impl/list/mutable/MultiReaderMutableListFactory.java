@@ -17,9 +17,9 @@ import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.factory.list.MultiReaderListFactory;
 import org.eclipse.collections.api.list.MultiReaderList;
 
-public enum MultiReaderMutableListFactory implements MultiReaderListFactory
+public class MultiReaderMutableListFactory implements MultiReaderListFactory
 {
-    INSTANCE;
+    public static final MultiReaderListFactory INSTANCE = new MultiReaderMutableListFactory();
 
     @Override
     public <T> MultiReaderList<T> empty()

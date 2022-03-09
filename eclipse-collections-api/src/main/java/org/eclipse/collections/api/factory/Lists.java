@@ -12,6 +12,7 @@ package org.eclipse.collections.api.factory;
 
 import org.eclipse.collections.api.factory.list.FixedSizeListFactory;
 import org.eclipse.collections.api.factory.list.ImmutableListFactory;
+import org.eclipse.collections.api.factory.list.MultiReaderListFactory;
 import org.eclipse.collections.api.factory.list.MutableListFactory;
 
 /**
@@ -40,6 +41,14 @@ import org.eclipse.collections.api.factory.list.MutableListFactory;
  * FixedSizeList&lt;String&gt; listWith = Lists.fixedSize.with("a", "b", "c");
  * FixedSizeList&lt;String&gt; listOf = Lists.fixedSize.of("a", "b", "c");
  * </pre>
+ *
+ * MultiReader Examples:
+ *
+ * <pre>
+ * MultiReaderList&lt;String&gt; emptyList = Lists.multiReader.empty();
+ * MultiReaderList&lt;String&gt; listWith = Lists.multiReader.with("a", "b", "c");
+ * MultiReaderList&lt;String&gt; listOf = Lists.multiReader.of("a", "b", "c");
+ * </pre>
  */
 @SuppressWarnings("ConstantNamingConvention")
 public final class Lists
@@ -50,6 +59,8 @@ public final class Lists
             ServiceLoaderUtils.loadServiceClass(MutableListFactory.class);
     public static final FixedSizeListFactory fixedSize =
             ServiceLoaderUtils.loadServiceClass(FixedSizeListFactory.class);
+    public static final MultiReaderListFactory multiReader =
+            ServiceLoaderUtils.loadServiceClass(MultiReaderListFactory.class);
 
     private Lists()
     {

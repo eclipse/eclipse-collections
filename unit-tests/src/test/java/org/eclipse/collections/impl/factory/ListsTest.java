@@ -168,9 +168,27 @@ public class ListsTest
     }
 
     @Test
-    public void multiReader()
+    public void implMultiReader()
     {
         MultiReaderListFactory listFactory = Lists.multiReader;
+        Assert.assertEquals(MultiReaderFastList.newList(), listFactory.of());
+        Assert.assertEquals(MultiReaderFastList.newList(), listFactory.with());
+        Assert.assertEquals(MultiReaderFastList.newList(), listFactory.empty());
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.of());
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.with());
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.empty());
+        Assert.assertEquals(MultiReaderFastList.newListWith(1), listFactory.of(1));
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.of(1));
+        Assert.assertEquals(MultiReaderFastList.newListWith(1, 2, 3), listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+        Assert.assertEquals(MultiReaderFastList.newListWith(1, 2, 3), listFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.fromStream(Stream.of(1, 2, 3)));
+    }
+
+    @Test
+    public void apiMultiReader()
+    {
+        MultiReaderListFactory listFactory = org.eclipse.collections.api.factory.Lists.multiReader;
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.of());
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.with());
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.empty());
