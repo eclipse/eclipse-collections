@@ -19,25 +19,18 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@v2
-      - name: 'Download JDK'
-        uses: sormuras/download-jdk@v1
+      - name: Download JDK ${{ matrix.java-version }} from jdk.java.net
+        uses: oracle-actions/setup-java@v1
         id: download-jdk
         with:
-          feature: ${{ matrix.java-version }}
+          website: jdk.java.net
+          release: ${{ matrix.java-version }}
       - name: 'Print outputs'
         shell: bash
         run: |
           echo 'Outputs'
-          echo "steps.download-jdk.outputs.file    = ${{ steps.download-jdk.outputs.file }}"
+          echo "steps.download-jdk.outputs.archive = ${{ steps.download-jdk.outputs.archive }}"
           echo "steps.download-jdk.outputs.version = ${{ steps.download-jdk.outputs.version }}"
-          echo "env.JDK_FILE                       = ${{ env.JDK_FILE }}"
-          echo "env.JDK_VERSION                    = ${{ env.JDK_VERSION }}"
-      - name: 'Set up JDK'
-        uses: actions/setup-java@v2
-        with:
-          java-version: ${{ steps.download-jdk.outputs.version }}
-          distribution: jdkfile
-          jdkFile: "${{ steps.download-jdk.outputs.file }}"
       - name: Set Maven Wrapper
         run: mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.6.3
       - name: 'JDK Version'
