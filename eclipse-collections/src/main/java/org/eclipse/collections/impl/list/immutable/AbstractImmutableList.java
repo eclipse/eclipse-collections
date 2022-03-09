@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -44,6 +44,14 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
@@ -55,6 +63,14 @@ import org.eclipse.collections.api.list.primitive.ImmutableFloatList;
 import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.ImmutableLongList;
 import org.eclipse.collections.api.list.primitive.ImmutableShortList;
+import org.eclipse.collections.api.list.primitive.MutableBooleanList;
+import org.eclipse.collections.api.list.primitive.MutableByteList;
+import org.eclipse.collections.api.list.primitive.MutableCharList;
+import org.eclipse.collections.api.list.primitive.MutableDoubleList;
+import org.eclipse.collections.api.list.primitive.MutableFloatList;
+import org.eclipse.collections.api.list.primitive.MutableIntList;
+import org.eclipse.collections.api.list.primitive.MutableLongList;
+import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -81,14 +97,6 @@ import org.eclipse.collections.impl.collection.immutable.AbstractImmutableCollec
 import org.eclipse.collections.impl.lazy.ReverseIterable;
 import org.eclipse.collections.impl.lazy.parallel.list.ListIterableParallelIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -305,7 +313,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        BooleanArrayList result = new BooleanArrayList(this.size());
+        MutableBooleanList result = BooleanLists.mutable.withInitialCapacity(this.size());
         this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result.toImmutable();
     }
@@ -313,7 +321,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
-        ByteArrayList result = new ByteArrayList(this.size());
+        MutableByteList result = ByteLists.mutable.withInitialCapacity(this.size());
         this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result.toImmutable();
     }
@@ -321,7 +329,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableCharList collectChar(CharFunction<? super T> charFunction)
     {
-        CharArrayList result = new CharArrayList(this.size());
+        MutableCharList result = CharLists.mutable.withInitialCapacity(this.size());
         this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result.toImmutable();
     }
@@ -329,7 +337,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        DoubleArrayList result = new DoubleArrayList(this.size());
+        MutableDoubleList result = DoubleLists.mutable.withInitialCapacity(this.size());
         this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result.toImmutable();
     }
@@ -337,7 +345,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
-        FloatArrayList result = new FloatArrayList(this.size());
+        MutableFloatList result = FloatLists.mutable.withInitialCapacity(this.size());
         this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result.toImmutable();
     }
@@ -345,7 +353,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableIntList collectInt(IntFunction<? super T> intFunction)
     {
-        IntArrayList result = new IntArrayList(this.size());
+        MutableIntList result = IntLists.mutable.withInitialCapacity(this.size());
         this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result.toImmutable();
     }
@@ -353,7 +361,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableLongList collectLong(LongFunction<? super T> longFunction)
     {
-        LongArrayList result = new LongArrayList(this.size());
+        MutableLongList result = LongLists.mutable.withInitialCapacity(this.size());
         this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result.toImmutable();
     }
@@ -361,7 +369,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
-        ShortArrayList result = new ShortArrayList(this.size());
+        MutableShortList result = ShortLists.mutable.withInitialCapacity(this.size());
         this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result.toImmutable();
     }

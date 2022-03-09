@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -47,22 +47,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectByteProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectCharProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectDoubleProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.ListIterate;
@@ -350,65 +334,49 @@ public final class RandomAccessListAdapter<T>
     @Override
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        BooleanArrayList result = new BooleanArrayList(this.size());
-        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
-        return result;
+        return RandomAccessListIterate.collectBoolean(this.delegate, booleanFunction);
     }
 
     @Override
     public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
-        ByteArrayList result = new ByteArrayList(this.size());
-        this.forEach(new CollectByteProcedure<>(byteFunction, result));
-        return result;
+        return RandomAccessListIterate.collectByte(this.delegate, byteFunction);
     }
 
     @Override
     public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
-        CharArrayList result = new CharArrayList(this.size());
-        this.forEach(new CollectCharProcedure<>(charFunction, result));
-        return result;
+        return RandomAccessListIterate.collectChar(this.delegate, charFunction);
     }
 
     @Override
     public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        DoubleArrayList result = new DoubleArrayList(this.size());
-        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
-        return result;
+        return RandomAccessListIterate.collectDouble(this.delegate, doubleFunction);
     }
 
     @Override
     public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
-        FloatArrayList result = new FloatArrayList(this.size());
-        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
-        return result;
+        return RandomAccessListIterate.collectFloat(this.delegate, floatFunction);
     }
 
     @Override
     public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
-        IntArrayList result = new IntArrayList(this.size());
-        this.forEach(new CollectIntProcedure<>(intFunction, result));
-        return result;
+        return RandomAccessListIterate.collectInt(this.delegate, intFunction);
     }
 
     @Override
     public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
-        LongArrayList result = new LongArrayList(this.size());
-        this.forEach(new CollectLongProcedure<>(longFunction, result));
-        return result;
+        return RandomAccessListIterate.collectLong(this.delegate, longFunction);
     }
 
     @Override
     public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
-        ShortArrayList result = new ShortArrayList(this.size());
-        this.forEach(new CollectShortProcedure<>(shortFunction, result));
-        return result;
+        return RandomAccessListIterate.collectShort(this.delegate, shortFunction);
     }
 
     @Override
