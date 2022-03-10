@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -14,7 +14,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.lazy.primitive;
 
@@ -28,12 +28,12 @@ import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.factory.primitive.<name>Bags;
+import org.eclipse.collections.api.factory.primitive.<name>Lists;
+import org.eclipse.collections.api.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
-import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
-import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 
 /**
  * This file was automatically generated from template file collectPrimitiveIterable.stg.
@@ -149,19 +149,19 @@ public class Collect<name>Iterable\<T>
     @Override
     public Mutable<name>List toList()
     {
-        return <name>ArrayList.newList(this);
+        return <name>Lists.mutable.withAll(this);
     }
 
     @Override
     public Mutable<name>Set toSet()
     {
-        return <name>HashSet.newSet(this);
+        return <name>Sets.mutable.withAll(this);
     }
 
     @Override
     public Mutable<name>Bag toBag()
     {
-        return <name>HashBag.newBag(this);
+        return <name>Bags.mutable.withAll(this);
     }
 
     @Override

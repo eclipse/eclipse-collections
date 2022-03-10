@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -34,7 +34,16 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.primitive.BooleanBags;
+import org.eclipse.collections.api.factory.primitive.ByteBags;
+import org.eclipse.collections.api.factory.primitive.CharBags;
+import org.eclipse.collections.api.factory.primitive.DoubleBags;
+import org.eclipse.collections.api.factory.primitive.FloatBags;
+import org.eclipse.collections.api.factory.primitive.IntBags;
+import org.eclipse.collections.api.factory.primitive.LongBags;
+import org.eclipse.collections.api.factory.primitive.ShortBags;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -43,15 +52,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.CharHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.DoubleHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.FloatHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
@@ -128,13 +128,13 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public <R> MutableBag<R> collect(Function<? super V, ? extends R> function)
     {
-        return this.collect(function, HashBag.newBag());
+        return this.collect(function, Bags.mutable.empty());
     }
 
     @Override
     public MutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
-        MutableBooleanBag result = new BooleanHashBag();
+        MutableBooleanBag result = BooleanBags.mutable.empty();
         this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
@@ -142,7 +142,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public MutableByteBag collectByte(ByteFunction<? super V> byteFunction)
     {
-        MutableByteBag result = new ByteHashBag();
+        MutableByteBag result = ByteBags.mutable.empty();
         this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
@@ -150,7 +150,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public MutableCharBag collectChar(CharFunction<? super V> charFunction)
     {
-        MutableCharBag result = new CharHashBag();
+        MutableCharBag result = CharBags.mutable.empty();
         this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
@@ -158,7 +158,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public MutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction)
     {
-        MutableDoubleBag result = new DoubleHashBag();
+        MutableDoubleBag result = DoubleBags.mutable.empty();
         this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
@@ -166,7 +166,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public MutableFloatBag collectFloat(FloatFunction<? super V> floatFunction)
     {
-        MutableFloatBag result = new FloatHashBag();
+        MutableFloatBag result = FloatBags.mutable.empty();
         this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
@@ -174,7 +174,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public MutableIntBag collectInt(IntFunction<? super V> intFunction)
     {
-        MutableIntBag result = new IntHashBag();
+        MutableIntBag result = IntBags.mutable.empty();
         this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
@@ -182,7 +182,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public MutableLongBag collectLong(LongFunction<? super V> longFunction)
     {
-        MutableLongBag result = new LongHashBag();
+        MutableLongBag result = LongBags.mutable.empty();
         this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
@@ -190,7 +190,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public MutableShortBag collectShort(ShortFunction<? super V> shortFunction)
     {
-        MutableShortBag result = new ShortHashBag();
+        MutableShortBag result = ShortBags.mutable.empty();
         this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
@@ -204,19 +204,19 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public <R> MutableBag<R> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends R> function)
     {
-        return this.collectIf(predicate, function, new HashBag<>());
+        return this.collectIf(predicate, function, Bags.mutable.empty());
     }
 
     @Override
     public <R> MutableBag<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
-        return this.flatCollect(function, new HashBag<>());
+        return this.flatCollect(function, Bags.mutable.empty());
     }
 
     @Override
     public MutableBag<V> select(Predicate<? super V> predicate)
     {
-        return this.select(predicate, new HashBag<>());
+        return this.select(predicate, Bags.mutable.empty());
     }
 
     @Override
@@ -235,7 +235,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public MutableBag<V> reject(Predicate<? super V> predicate)
     {
-        return this.reject(predicate, new HashBag<>());
+        return this.reject(predicate, Bags.mutable.empty());
     }
 
     @Override
@@ -263,7 +263,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public <S> MutableBag<S> selectInstancesOf(Class<S> clazz)
     {
-        MutableBag<S> result = HashBag.newBag();
+        MutableBag<S> result = Bags.mutable.empty();
         this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
@@ -275,7 +275,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Deprecated
     public <S> MutableBag<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, new HashBag<>(this.size()));
+        return this.zip(that, Bags.mutable.empty());
     }
 
     /**
