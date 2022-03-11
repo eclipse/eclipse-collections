@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -39,6 +39,14 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
@@ -66,14 +74,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedu
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.MapAdapter;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.set.sorted.TreeSortedSetMultimap;
@@ -429,7 +429,7 @@ public final class MapIterate
             Map<K, V> map,
             BooleanFunction<? super V> booleanFunction)
     {
-        return collectBoolean(map, booleanFunction, new BooleanArrayList(map.size()));
+        return collectBoolean(map, booleanFunction, BooleanLists.mutable.withInitialCapacity(map.size()));
     }
 
     /**
@@ -451,7 +451,7 @@ public final class MapIterate
             Map<K, V> map,
             ByteFunction<? super V> byteFunction)
     {
-        return collectByte(map, byteFunction, new ByteArrayList(map.size()));
+        return collectByte(map, byteFunction, ByteLists.mutable.withInitialCapacity(map.size()));
     }
 
     /**
@@ -473,7 +473,7 @@ public final class MapIterate
             Map<K, V> map,
             CharFunction<? super V> charFunction)
     {
-        return collectChar(map, charFunction, new CharArrayList(map.size()));
+        return collectChar(map, charFunction, CharLists.mutable.withInitialCapacity(map.size()));
     }
 
     /**
@@ -495,7 +495,7 @@ public final class MapIterate
             Map<K, V> map,
             DoubleFunction<? super V> doubleFunction)
     {
-        return collectDouble(map, doubleFunction, new DoubleArrayList(map.size()));
+        return collectDouble(map, doubleFunction, DoubleLists.mutable.withInitialCapacity(map.size()));
     }
 
     /**
@@ -517,7 +517,7 @@ public final class MapIterate
             Map<K, V> map,
             FloatFunction<? super V> floatFunction)
     {
-        return collectFloat(map, floatFunction, new FloatArrayList(map.size()));
+        return collectFloat(map, floatFunction, FloatLists.mutable.withInitialCapacity(map.size()));
     }
 
     /**
@@ -539,7 +539,7 @@ public final class MapIterate
             Map<K, V> map,
             IntFunction<? super V> intFunction)
     {
-        return collectInt(map, intFunction, new IntArrayList(map.size()));
+        return collectInt(map, intFunction, IntLists.mutable.withInitialCapacity(map.size()));
     }
 
     /**
@@ -561,7 +561,7 @@ public final class MapIterate
             Map<K, V> map,
             LongFunction<? super V> longFunction)
     {
-        return collectLong(map, longFunction, new LongArrayList(map.size()));
+        return collectLong(map, longFunction, LongLists.mutable.withInitialCapacity(map.size()));
     }
 
     /**
@@ -583,7 +583,7 @@ public final class MapIterate
             Map<K, V> map,
             ShortFunction<? super V> shortFunction)
     {
-        return collectShort(map, shortFunction, new ShortArrayList(map.size()));
+        return collectShort(map, shortFunction, ShortLists.mutable.withInitialCapacity(map.size()));
     }
 
     /**
