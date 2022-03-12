@@ -23,4 +23,42 @@ public interface MultiReaderBag<T>
     void withReadLockAndDelegate(Procedure<? super MutableBag<T>> procedure);
 
     void withWriteLockAndDelegate(Procedure<? super MutableBag<T>> procedure);
+
+    @Override
+    MultiReaderBag<T> newEmpty();
+
+    @Override
+    default MultiReaderBag<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
+
+    @Override
+    default MultiReaderBag<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
+
+    @Override
+    default MultiReaderBag<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
+
+    @Override
+    default MultiReaderBag<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
+
+    @Override
+    default MultiReaderBag<T> tap(Procedure<? super T> procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
 }

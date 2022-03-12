@@ -37,6 +37,49 @@ public interface MultiReaderList<T>
     void withWriteLockAndDelegate(Procedure<? super MutableList<T>> procedure);
 
     @Override
+    MultiReaderList<T> newEmpty();
+
+    MultiReaderList<T> clone();
+
+    @Override
+    MultiReaderList<T> subList(int fromIndex, int toIndex);
+
+    @Override
+    default MultiReaderList<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
+
+    @Override
+    default MultiReaderList<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
+
+    @Override
+    default MultiReaderList<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
+
+    @Override
+    default MultiReaderList<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
+
+    @Override
+    default MultiReaderList<T> tap(Procedure<? super T> procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
+
+    @Override
     default MultiReaderList<T> sortThis(Comparator<? super T> comparator)
     {
         this.sort(comparator);

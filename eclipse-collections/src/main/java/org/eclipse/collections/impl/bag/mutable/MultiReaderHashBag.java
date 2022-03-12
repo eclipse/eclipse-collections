@@ -385,7 +385,7 @@ public final class MultiReaderHashBag<T>
     }
 
     @Override
-    public MutableBag<T> newEmpty()
+    public MultiReaderBag<T> newEmpty()
     {
         return MultiReaderHashBag.newBag();
     }
@@ -411,7 +411,7 @@ public final class MultiReaderHashBag<T>
     }
 
     @Override
-    public MutableBag<T> tap(Procedure<? super T> procedure)
+    public MultiReaderBag<T> tap(Procedure<? super T> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
