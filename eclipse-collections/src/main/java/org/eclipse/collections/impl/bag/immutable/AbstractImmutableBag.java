@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -40,20 +40,20 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.BooleanBags;
+import org.eclipse.collections.api.factory.primitive.ByteBags;
+import org.eclipse.collections.api.factory.primitive.CharBags;
+import org.eclipse.collections.api.factory.primitive.DoubleBags;
+import org.eclipse.collections.api.factory.primitive.FloatBags;
+import org.eclipse.collections.api.factory.primitive.IntBags;
+import org.eclipse.collections.api.factory.primitive.LongBags;
+import org.eclipse.collections.api.factory.primitive.ShortBags;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
-import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.CharHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.DoubleHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.FloatHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
-import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -165,49 +165,49 @@ public abstract class AbstractImmutableBag<T>
     @Override
     public ImmutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        return this.collectBoolean(booleanFunction, new BooleanHashBag()).toImmutable();
+        return this.collectBoolean(booleanFunction, BooleanBags.mutable.empty()).toImmutable();
     }
 
     @Override
     public ImmutableByteBag collectByte(ByteFunction<? super T> byteFunction)
     {
-        return this.collectByte(byteFunction, new ByteHashBag()).toImmutable();
+        return this.collectByte(byteFunction, ByteBags.mutable.empty()).toImmutable();
     }
 
     @Override
     public ImmutableCharBag collectChar(CharFunction<? super T> charFunction)
     {
-        return this.collectChar(charFunction, new CharHashBag()).toImmutable();
+        return this.collectChar(charFunction, CharBags.mutable.empty()).toImmutable();
     }
 
     @Override
     public ImmutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        return this.collectDouble(doubleFunction, new DoubleHashBag()).toImmutable();
+        return this.collectDouble(doubleFunction, DoubleBags.mutable.empty()).toImmutable();
     }
 
     @Override
     public ImmutableFloatBag collectFloat(FloatFunction<? super T> floatFunction)
     {
-        return this.collectFloat(floatFunction, new FloatHashBag()).toImmutable();
+        return this.collectFloat(floatFunction, FloatBags.mutable.empty()).toImmutable();
     }
 
     @Override
     public ImmutableIntBag collectInt(IntFunction<? super T> intFunction)
     {
-        return this.collectInt(intFunction, new IntHashBag()).toImmutable();
+        return this.collectInt(intFunction, IntBags.mutable.empty()).toImmutable();
     }
 
     @Override
     public ImmutableLongBag collectLong(LongFunction<? super T> longFunction)
     {
-        return this.collectLong(longFunction, new LongHashBag()).toImmutable();
+        return this.collectLong(longFunction, LongBags.mutable.empty()).toImmutable();
     }
 
     @Override
     public ImmutableShortBag collectShort(ShortFunction<? super T> shortFunction)
     {
-        return this.collectShort(shortFunction, new ShortHashBag()).toImmutable();
+        return this.collectShort(shortFunction, ShortBags.mutable.empty()).toImmutable();
     }
 
     @Override

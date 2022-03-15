@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -57,6 +57,14 @@ import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.factory.primitive.BooleanBags;
+import org.eclipse.collections.api.factory.primitive.ByteBags;
+import org.eclipse.collections.api.factory.primitive.CharBags;
+import org.eclipse.collections.api.factory.primitive.DoubleBags;
+import org.eclipse.collections.api.factory.primitive.FloatBags;
+import org.eclipse.collections.api.factory.primitive.IntBags;
+import org.eclipse.collections.api.factory.primitive.LongBags;
+import org.eclipse.collections.api.factory.primitive.ShortBags;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
@@ -71,14 +79,6 @@ import org.eclipse.collections.impl.EmptyIterator;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.primitive.BooleanBags;
-import org.eclipse.collections.impl.factory.primitive.ByteBags;
-import org.eclipse.collections.impl.factory.primitive.CharBags;
-import org.eclipse.collections.impl.factory.primitive.DoubleBags;
-import org.eclipse.collections.impl.factory.primitive.FloatBags;
-import org.eclipse.collections.impl.factory.primitive.IntBags;
-import org.eclipse.collections.impl.factory.primitive.LongBags;
-import org.eclipse.collections.impl.factory.primitive.ShortBags;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
