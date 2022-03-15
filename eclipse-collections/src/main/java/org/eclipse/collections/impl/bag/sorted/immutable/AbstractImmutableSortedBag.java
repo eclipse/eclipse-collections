@@ -39,6 +39,14 @@ import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Stacks;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
@@ -63,14 +71,6 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.sorted.mutable.TreeBagMultimap;
 import org.eclipse.collections.impl.partition.bag.sorted.PartitionTreeBag;
@@ -225,49 +225,49 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public ImmutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        return this.collectBoolean(booleanFunction, new BooleanArrayList(this.size())).toImmutable();
+        return this.collectBoolean(booleanFunction, BooleanLists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
     public ImmutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
-        return this.collectByte(byteFunction, new ByteArrayList(this.size())).toImmutable();
+        return this.collectByte(byteFunction, ByteLists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
     public ImmutableCharList collectChar(CharFunction<? super T> charFunction)
     {
-        return this.collectChar(charFunction, new CharArrayList(this.size())).toImmutable();
+        return this.collectChar(charFunction, CharLists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
     public ImmutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        return this.collectDouble(doubleFunction, new DoubleArrayList(this.size())).toImmutable();
+        return this.collectDouble(doubleFunction, DoubleLists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
     public ImmutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
-        return this.collectFloat(floatFunction, new FloatArrayList(this.size())).toImmutable();
+        return this.collectFloat(floatFunction, FloatLists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
     public ImmutableIntList collectInt(IntFunction<? super T> intFunction)
     {
-        return this.collectInt(intFunction, new IntArrayList(this.size())).toImmutable();
+        return this.collectInt(intFunction, IntLists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
     public ImmutableLongList collectLong(LongFunction<? super T> longFunction)
     {
-        return this.collectLong(longFunction, new LongArrayList(this.size())).toImmutable();
+        return this.collectLong(longFunction, LongLists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
     public ImmutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
-        return this.collectShort(shortFunction, new ShortArrayList(this.size())).toImmutable();
+        return this.collectShort(shortFunction, ShortLists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
