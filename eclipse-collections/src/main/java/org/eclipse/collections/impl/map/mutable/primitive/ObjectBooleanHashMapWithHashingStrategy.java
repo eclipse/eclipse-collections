@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -738,6 +738,20 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         }
         this.addKeyValueAtIndex(key, value, index);
         return value;
+    }
+
+    @Override
+    public boolean getAndPut(K key, boolean putValue, boolean defaultValue)
+    {
+        int index = this.probe(key);
+        if (ObjectBooleanHashMapWithHashingStrategy.isNonSentinel(this.keys[index]) && this.nullSafeEquals(this.toNonSentinel(this.keys[index]), key))
+        {
+            boolean existingValue = this.values.get(index);
+            this.values.set(index, putValue);
+            return existingValue;
+        }
+        this.addKeyValueAtIndex(key, putValue, index);
+        return defaultValue;
     }
 
     @Override

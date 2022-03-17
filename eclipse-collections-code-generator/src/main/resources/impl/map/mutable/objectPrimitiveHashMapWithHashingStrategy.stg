@@ -536,6 +536,20 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
     }
 
     @Override
+    public <type> getAndPut(K key, <type> putValue, <type> defaultValue)
+    {
+        int index = this.probe(key);
+        if (isNonSentinel(this.keys[index]) && nullSafeEquals(this.toNonSentinel(this.keys[index]), key))
+        {
+            <type> existingValue = this.values[index];
+            this.values[index] = putValue;
+            return existingValue;
+        }
+        this.addKeyValueAtIndex(key, putValue, index);
+        return defaultValue;
+    }
+
+    @Override
     public <type> getIfAbsentPut(K key, <name>Function0 function)
     {
         int index = this.probe(key);

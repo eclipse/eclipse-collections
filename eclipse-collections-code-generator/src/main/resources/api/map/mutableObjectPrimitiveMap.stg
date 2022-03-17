@@ -113,6 +113,27 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
 
     /**
      * Retrieves the value associated with the key if one exists; if it does not,
+     * associates a putValue with the key.
+     * @param key the key
+     * @param putValue the value to associate with {@code key} if no such mapping exists
+     * @param defaultValue the value to return if no mapping associated with {@code key} exists
+     * @return the value associated with key, if one exists, or {@code defaultValue} if not
+     * @since 11.1.
+     */
+    default <type> getAndPut(K key, <type> putValue, <type> defaultValue)
+    {
+        if (this.containsKey(key))
+        {
+            <type> existingValue = this.get(key);
+            this.put(key, putValue);
+            return existingValue;
+        }
+        this.put(key, putValue);
+        return defaultValue;
+    }
+
+    /**
+     * Retrieves the value associated with the key if one exists; if it does not,
      * invokes the supplier and associates the result with the key.
      * @param key the key
      * @param function the supplier that provides the value if no mapping exists for {@code key}
