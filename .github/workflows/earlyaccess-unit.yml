@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Git Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Download JDK ${{ matrix.java-version }} from jdk.java.net
         uses: oracle-actions/setup-java@v1
         id: download-jdk
