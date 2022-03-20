@@ -22,7 +22,7 @@ jobs:
       JAVA_VERSION: ${{ matrix.java-version }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v2
         with:
@@ -31,7 +31,7 @@ jobs:
       - name: Generate Coverage Report
         run: mvn clean verify
       - name: Archive Jacoco reports
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v3
         with:
           name: jacoco-reports
           path: test-coverage/target/site/jacoco-aggregate
