@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -180,7 +180,12 @@ public class BagsTest
     @Test
     public void multiReader()
     {
-        MultiReaderBagFactory bagFactory = Bags.multiReader;
+        this.testMultiReaderApi(Bags.multiReader);
+        this.testMultiReaderApi(org.eclipse.collections.api.factory.Bags.multiReader);
+    }
+
+    private void testMultiReaderApi(MultiReaderBagFactory bagFactory)
+    {
         Assert.assertEquals(MultiReaderHashBag.newBag(), bagFactory.of());
         Verify.assertInstanceOf(MultiReaderBag.class, bagFactory.of());
         Assert.assertEquals(MultiReaderHashBag.newBag(), bagFactory.with());

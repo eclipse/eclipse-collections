@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.factory;
 
 import org.eclipse.collections.api.factory.bag.ImmutableBagFactory;
+import org.eclipse.collections.api.factory.bag.MultiReaderBagFactory;
 import org.eclipse.collections.api.factory.bag.MutableBagFactory;
 
 /**
@@ -31,12 +32,22 @@ import org.eclipse.collections.api.factory.bag.MutableBagFactory;
  * ImmutableBag&lt;String&gt; bagWith = Bags.immutable.with("a", "b", "c");
  * ImmutableBag&lt;String&gt; bagOf = Bags.immutable.of("a", "b", "c");
  * </pre>
+ *
+ * MultiReader Examples:
+ *
+ * <pre>
+ * MultiReaderBag&lt;String&gt; emptyBag = Bags.multiReader.empty();
+ * MultiReaderBag&lt;String&gt; bagWith = Bags.multiReader.with("a", "b", "c");
+ * MultiReaderBag&lt;String&gt; bagOf = Bags.multiReader.of("a", "b", "c");
+ * </pre>
+ *
  */
 @SuppressWarnings("ConstantNamingConvention")
 public final class Bags
 {
     public static final ImmutableBagFactory immutable = ServiceLoaderUtils.loadServiceClass(ImmutableBagFactory.class);
     public static final MutableBagFactory mutable = ServiceLoaderUtils.loadServiceClass(MutableBagFactory.class);
+    public static final MultiReaderBagFactory multiReader = ServiceLoaderUtils.loadServiceClass(MultiReaderBagFactory.class);
 
     private Bags()
     {
