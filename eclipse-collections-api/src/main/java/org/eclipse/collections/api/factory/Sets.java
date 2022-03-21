@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,7 @@ package org.eclipse.collections.api.factory;
 
 import org.eclipse.collections.api.factory.set.FixedSizeSetFactory;
 import org.eclipse.collections.api.factory.set.ImmutableSetFactory;
+import org.eclipse.collections.api.factory.set.MultiReaderSetFactory;
 import org.eclipse.collections.api.factory.set.MutableSetFactory;
 
 /**
@@ -40,6 +41,14 @@ import org.eclipse.collections.api.factory.set.MutableSetFactory;
  * FixedSizeSet&lt;String&gt; setWith = Sets.fixedSize.with("a", "b", "c");
  * FixedSizeSet&lt;String&gt; setOf = Sets.fixedSize.of("a", "b", "c");
  * </pre>
+ *
+ * MultiReader Examples:
+ *
+ * <pre>
+ * MultiReaderSet&lt;String&gt; emptySet = Sets.multiReader.empty();
+ * MultiReaderSet&lt;String&gt; setWith = Sets.multiReader.with("a", "b", "c");
+ * MultiReaderSet&lt;String&gt; setOf = Sets.multiReader.of("a", "b", "c");
+ * </pre>
  */
 @SuppressWarnings("ConstantNamingConvention")
 public final class Sets
@@ -50,6 +59,8 @@ public final class Sets
             ServiceLoaderUtils.loadServiceClass(MutableSetFactory.class);
     public static final FixedSizeSetFactory fixedSize =
             ServiceLoaderUtils.loadServiceClass(FixedSizeSetFactory.class);
+    public static final MultiReaderSetFactory multiReader =
+            ServiceLoaderUtils.loadServiceClass(MultiReaderSetFactory.class);
 
     private Sets()
     {

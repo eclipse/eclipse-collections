@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -777,7 +777,12 @@ public class SetsTest
     @Test
     public void multiReader()
     {
-        MultiReaderSetFactory setFactory = Sets.multiReader;
+        this.testMultiReaderApi(Sets.multiReader);
+        this.testMultiReaderApi(org.eclipse.collections.api.factory.Sets.multiReader);
+    }
+
+    private void testMultiReaderApi(MultiReaderSetFactory setFactory)
+    {
         Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.of());
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.of());
         Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.with());
