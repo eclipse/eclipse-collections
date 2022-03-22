@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,8 +19,8 @@ import java.util.Arrays;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
+import org.eclipse.collections.api.factory.primitive.ObjectIntMaps;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -38,12 +38,12 @@ public class HashBag<T>
 
     public HashBag()
     {
-        this.items = ObjectIntHashMap.newMap();
+        this.items = ObjectIntMaps.mutable.empty();
     }
 
     public HashBag(int size)
     {
-        this.items = new ObjectIntHashMap<>(size);
+        this.items = ObjectIntMaps.mutable.withInitialCapacity(size);
     }
 
     private HashBag(MutableObjectIntMap<T> map)
@@ -107,7 +107,7 @@ public class HashBag<T>
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.items = new ObjectIntHashMap<>();
+        this.items = ObjectIntMaps.mutable.empty();
         ((Externalizable) this.items).readExternal(in);
         this.size = (int) this.items.sum();
     }
