@@ -27,9 +27,9 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 6.0.
  */
-public enum MutableObject<name>MapFactoryImpl implements MutableObject<name>MapFactory
+public class MutableObject<name>MapFactoryImpl implements MutableObject<name>MapFactory
 {
-    INSTANCE;
+    public static final MutableObject<name>MapFactory INSTANCE = new MutableObject<name>MapFactoryImpl();
 
     @Override
     public \<K> MutableObject<name>Map\<K> empty()

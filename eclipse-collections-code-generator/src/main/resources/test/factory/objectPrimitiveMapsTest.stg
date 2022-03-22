@@ -1,0 +1,158 @@
+import "copyrightAndOthers.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>MapsTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.factory.map.primitive.ImmutableObject<name>MapFactory;
+import org.eclipse.collections.api.factory.map.primitive.MutableObject<name>MapFactory;
+import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.impl.block.factory.StringFunctions;
+import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Junit test for {@link Object<name>Maps}
+ * This file was automatically generated from template file objectPrimitiveMapsTest.stg
+ */
+public class Object<name>MapsTest
+{
+    @Test
+    public void immutables()
+    {
+        this.assertImmutableMapFactory(Object<name>Maps.immutable);
+        this.assertImmutableMapFactory(org.eclipse.collections.api.factory.primitive.Object<name>Maps.immutable);
+    }
+
+    private void assertImmutableMapFactory(ImmutableObject<name>MapFactory mapFactory)
+    {
+        Assert.assertEquals(Object<name>HashMap.newMap(), mapFactory.of());
+        Verify.assertInstanceOf(ImmutableObject<name>Map.class, mapFactory.of());
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>), mapFactory.of("1", <(literal.(type))("1")>));
+    }
+
+    @Test
+    public void mutables()
+    {
+        this.assertMutableMapFactory(Object<name>Maps.mutable);
+        this.assertMutableMapFactory(org.eclipse.collections.api.factory.primitive.Object<name>Maps.mutable);
+    }
+
+    private void assertMutableMapFactory(MutableObject<name>MapFactory mapFactory)
+    {
+        Assert.assertEquals(Object<name>HashMap.newMap(), mapFactory.of());
+        Verify.assertInstanceOf(MutableObject<name>Map.class, mapFactory.of());
+    }
+
+    @Test
+    public void mapWith_immutable()
+    {
+        Assert.assertEquals(Object<name>HashMap.newMap(), Object<name>Maps.immutable.with());
+        Verify.assertInstanceOf(ImmutableObject<name>Map.class, Object<name>Maps.immutable.with());
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>), Object<name>Maps.immutable.with("1", <(literal.(type))("1")>));
+    }
+
+    @Test
+    public void mapWith_mutable()
+    {
+        Assert.assertEquals(Object<name>HashMap.newMap(), Object<name>Maps.mutable.with());
+        Verify.assertInstanceOf(MutableObject<name>Map.class, Object<name>Maps.mutable.with());
+    }
+
+    @Test
+    public void emptyMap_immutable()
+    {
+        Verify.assertEmpty(Object<name>Maps.immutable.of());
+        Verify.assertEmpty(Object<name>Maps.immutable.empty());
+        Assert.assertSame(Object<name>Maps.immutable.of(), Object<name>Maps.immutable.of());
+        Assert.assertSame(Object<name>Maps.immutable.empty(), Object<name>Maps.immutable.empty());
+        Verify.assertPostSerializedIdentity(Object<name>Maps.immutable.of());
+        Verify.assertPostSerializedIdentity(Object<name>Maps.immutable.empty());
+    }
+
+    @Test
+    public void emptyMap_mutable()
+    {
+        Verify.assertEmpty(Object<name>Maps.mutable.of());
+        Verify.assertEmpty(Object<name>Maps.mutable.empty());
+    }
+
+    @Test
+    public void newMapOfAll_immutable()
+    {
+        ImmutableObject<name>Map\<String> map = Object<name>Maps.immutable.of();
+        Assert.assertEquals(map, Object<name>Maps.immutable.ofAll(Object<name>HashMap.newMap()));
+        Assert.assertEquals(map = map.newWithKeyValue("1", <(literal.(type))("1")>), Object<name>Maps.immutable.ofAll(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>)));
+        Assert.assertEquals(map = map.newWithKeyValue("2", <(literal.(type))("2")>), Object<name>Maps.immutable.ofAll(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>)));
+        Assert.assertEquals(map = map.newWithKeyValue("3", <(literal.(type))("3")>), Object<name>Maps.immutable.ofAll(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3", <(literal.(type))("3")>)));
+        Assert.assertEquals(map = map.newWithKeyValue("4", <(literal.(type))("4")>), Object<name>Maps.immutable.ofAll(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3", <(literal.(type))("3")>, "4", <(literal.(type))("4")>)));
+    }
+
+    @Test
+    public void newMapOfAll_mutable()
+    {
+        MutableObject<name>Map\<String> map = Object<name>Maps.mutable.of();
+        Assert.assertEquals(map, Object<name>Maps.mutable.ofAll(Object<name>HashMap.newMap()));
+        map.put("1", <(literal.(type))("1")>);
+        Assert.assertEquals(map, Object<name>Maps.mutable.ofAll(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>)));
+        map.put("2", <(literal.(type))("2")>);
+        Assert.assertEquals(map, Object<name>Maps.mutable.ofAll(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>)));
+        map.put("3", <(literal.(type))("3")>);
+        Assert.assertEquals(map, Object<name>Maps.mutable.ofAll(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3", <(literal.(type))("3")>)));
+        map.put("4", <(literal.(type))("4")>);
+        Assert.assertEquals(map, Object<name>Maps.mutable.ofAll(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3", <(literal.(type))("3")>, "4", <(literal.(type))("4")>)));
+    }
+
+    @Test
+    public void newMapFrom_immutable()
+    {
+        ImmutableObject<name>Map\<String> map = Object<name>Maps.immutable.of();
+        Assert.assertEquals(map, Object<name>Maps.immutable.from(Lists.mutable.\<String>empty(), String::valueOf, StringFunctions.toPrimitive<name>()));
+        Assert.assertEquals(map = map.newWithKeyValue("1", <(literal.(type))("1")>), Object<name>Maps.immutable.from(Lists.mutable.of("1"), String::valueOf, StringFunctions.toPrimitive<name>()));
+        Assert.assertEquals(map = map.newWithKeyValue("2", <(literal.(type))("2")>), Object<name>Maps.immutable.from(Lists.mutable.of("1", "2"), String::valueOf, StringFunctions.toPrimitive<name>()));
+        Assert.assertEquals(map = map.newWithKeyValue("3", <(literal.(type))("3")>), Object<name>Maps.immutable.from(Lists.mutable.of("1", "2", "3"), String::valueOf, StringFunctions.toPrimitive<name>()));
+        Assert.assertEquals(map = map.newWithKeyValue("4", <(literal.(type))("4")>), Object<name>Maps.immutable.from(Lists.mutable.of("1", "2", "3", "4"), String::valueOf, StringFunctions.toPrimitive<name>()));
+    }
+
+    @Test
+    public void newMapFrom_mutable()
+    {
+        MutableObject<name>Map\<String> map = Object<name>Maps.mutable.of();
+        Assert.assertEquals(map, Object<name>Maps.mutable.from(Lists.mutable.\<String>empty(), String::valueOf, StringFunctions.toPrimitive<name>()));
+        map.put("1", <(literal.(type))("1")>);
+        Assert.assertEquals(map, Object<name>Maps.mutable.from(Lists.mutable.of("1"), String::valueOf, StringFunctions.toPrimitive<name>()));
+        map.put("2", <(literal.(type))("2")>);
+        Assert.assertEquals(map, Object<name>Maps.mutable.from(Lists.mutable.of("1", "2"), String::valueOf, StringFunctions.toPrimitive<name>()));
+        map.put("3", <(literal.(type))("3")>);
+        Assert.assertEquals(map, Object<name>Maps.mutable.from(Lists.mutable.of("1", "2", "3"), String::valueOf, StringFunctions.toPrimitive<name>()));
+        map.put("4", <(literal.(type))("4")>);
+        Assert.assertEquals(map, Object<name>Maps.mutable.from(Lists.mutable.of("1", "2", "3", "4"), String::valueOf, StringFunctions.toPrimitive<name>()));
+    }
+
+    @Test
+    public void classIsNonInstantiable()
+    {
+        Verify.assertClassNonInstantiable(Object<name>Maps.class);
+    }
+}
+
+>>
