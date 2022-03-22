@@ -28,9 +28,9 @@ import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
  *
  * @since 4.0.
  */
-public enum Immutable<name>ObjectMapFactoryImpl implements Immutable<name>ObjectMapFactory
+public class Immutable<name>ObjectMapFactoryImpl implements Immutable<name>ObjectMapFactory
 {
-    INSTANCE;
+    public static final Immutable<name>ObjectMapFactory INSTANCE = new Immutable<name>ObjectMapFactoryImpl();
 
     @Override
     public \<V> Immutable<name>ObjectMap\<V> empty()

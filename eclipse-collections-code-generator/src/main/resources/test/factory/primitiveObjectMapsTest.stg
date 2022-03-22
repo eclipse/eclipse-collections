@@ -1,0 +1,66 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "<primitive.name>ObjectMapFactoryTest"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName, primitive.charPrimitive)>
+>>
+
+body(type, name, wrapperName, charPrimitive) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.factory.map.primitive.Immutable<name>ObjectMapFactory;
+import org.eclipse.collections.api.factory.map.primitive.Mutable<name>ObjectMapFactory;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file primitiveObjectMapsTest.stg.
+ */
+public class <name>ObjectMapFactoryTest
+{
+    @Test
+    public void immutables()
+    {
+        this.assertImmutable<name>ObjectMapFactory(<name>ObjectMaps.immutable);
+        this.assertImmutable<name>ObjectMapFactory(org.eclipse.collections.api.factory.primitive.<name>ObjectMaps.immutable);
+    }
+
+    private void assertImmutable<name>ObjectMapFactory(Immutable<name>ObjectMapFactory mapFactory)
+    {
+        Assert.assertSame(<name>ObjectHashMap.newMap().toImmutable(), mapFactory.with());
+        Assert.assertSame(<name>ObjectHashMap.newMap().toImmutable(), mapFactory.of());
+        Assert.assertEquals(<name>ObjectMaps.immutable.of(<(literal.(type))("1")>, <(literal.(type))("1")>), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, <(literal.(type))("1")>).toImmutable());
+        <name>ObjectHashMap sourceMap = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("2")>);
+        Assert.assertEquals(sourceMap.toImmutable(), mapFactory.ofAll(sourceMap));
+        Assert.assertEquals(sourceMap.toImmutable(), mapFactory.withAll(sourceMap));
+    }
+
+    public void mutables()
+    {
+        this.assertMutable<name>ObjectMapFactory(<name>ObjectMaps.mutable);
+        this.assertMutable<name>ObjectMapFactory(org.eclipse.collections.api.factory.primitive.<name>ObjectMaps.mutable);
+    }
+
+    private void assertMutable<name>ObjectMapFactory(Mutable<name>ObjectMapFactory mapFactory)
+    {
+        Assert.assertEquals(<name>ObjectHashMap.newMap(), mapFactory.with());
+        Assert.assertEquals(<name>ObjectHashMap.newMap(), mapFactory.of());
+        <name>ObjectHashMap sourceMap = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("2")>);
+        Assert.assertEquals(sourceMap, mapFactory.ofAll(sourceMap));
+        Assert.assertEquals(sourceMap, mapFactory.withAll(sourceMap));
+    }
+}
+
+>>
