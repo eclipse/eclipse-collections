@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -18,7 +18,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -121,6 +121,13 @@ public class Unmodifiable<name1><name2>MapTest extends AbstractMutable<name1><na
     public void put()
     {
         this.map.put(<(literal.(type1))("0")>, <(literal.(type2))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void getAndPut()
+    {
+        this.map.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type2))("2")>);
     }
 
     @Override

@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -18,7 +18,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2, wrapperName1, wrapperName2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -415,6 +415,43 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
 
         hashMap.getIfAbsentPutWith(<(literal.(type1))("2")>, function, <wrapperName2>.valueOf(<(literal.(type2))("5")>)); //putting in a slot marked REMOVED
         Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsGetAndPut() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
+
+        Assert.assertEquals(2, hashMap.getAndPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        Assert.assertEquals(50, hashMap.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(5, hashMap.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("5")>, <(literal.(type2))("70")>)<wideDelta.(type2)>);
+
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        Assert.assertEquals(50, hashMap.getAndPut(<(literal.(type1))("1")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        Assert.assertEquals(5, hashMap.getAndPut(<(literal.(type1))("1")>, <(literal.(type2))("11")>, <(literal.(type2))("60")>)<wideDelta.(type2)>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.removeKey(<(literal.(type1))("2")>);
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(50, hashMap.getAndPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
         Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
