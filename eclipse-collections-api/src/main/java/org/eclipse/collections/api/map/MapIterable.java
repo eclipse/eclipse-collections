@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,6 +21,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.Function3;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -94,6 +95,25 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * </pre>
      */
     void forEachKeyValue(Procedure2<? super K, ? super V> procedure);
+
+    /**
+     * Implements the {@code injectInto} pattern with each <em>key-value</em> pair of the map.
+     * <pre>
+     *     MapIterable&lt;Integer, Integer&gt; map1 = Maps.immutable.with(3, 3, 2, 2, 1, 1);
+     *     Integer sum1 = map1.<b>injectIntoKeyValue</b>(0, (sum, key, value) -> sum + key + value);
+     *     assertEquals(12, sum1);
+     * </pre>
+     *
+     * @since 11.1
+     */
+    default <IV> IV injectIntoKeyValue(
+            IV injectedValue,
+            Function3<? super IV, ? super K, ? super V, ? extends IV> function)
+    {
+        IV[] result = (IV[]) new Object[]{injectedValue};
+        this.forEachKeyValue((key, value) -> result[0] = function.value(result[0], key, value));
+        return result[0];
+    }
 
     /**
      * Return the MapIterable that is obtained by flipping the direction of this map and making the associations

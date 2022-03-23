@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -303,6 +303,18 @@ public abstract class MapIterableTestCase
         MapIterable<Integer, String> map2 = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three");
         map2.forEachKeyValue((key, value) -> result2.add(key + value));
         Assert.assertEquals(Bags.mutable.of("1One", "2Two", "3Three"), result2);
+    }
+
+    @Test
+    public void injectIntoKeyValue()
+    {
+        MapIterable<Integer, Integer> map1 = this.newMapWithKeysValues(3, 3, 2, 2, 1, 1);
+        Integer sum1 = map1.injectIntoKeyValue(0, (sum, key, value) -> sum + key + value);
+        Assert.assertEquals(Integer.valueOf(12), sum1);
+
+        MutableMap<Integer, String> result = map1.injectIntoKeyValue(Maps.mutable.empty(),
+                (map, key, value) -> map.withKeyValue(key, value.toString()));
+        Assert.assertEquals(Maps.mutable.with(3, "3", 2, "2", 1, "1"), result);
     }
 
     @Test

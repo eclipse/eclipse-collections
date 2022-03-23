@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.Interval;
@@ -181,6 +182,18 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MutableCollection<Object> forEachKey = this.newMutableForFilter();
         map2.forEachKey(key -> forEachKey.add(key + 1));
         assertEquals(this.newMutableForFilter(4, 3, 2), forEachKey);
+    }
+
+    @Test
+    default void MapIterable_injectIntoKeyValue()
+    {
+        MapIterable<Integer, Integer> map1 = this.newWithKeysValues(3, 3, 2, 2, 1, 1);
+        Integer sum1 = map1.injectIntoKeyValue(0, (sum, key, value) -> sum + key + value);
+        assertEquals(12, sum1);
+
+        MutableMap<Integer, String> result = map1.injectIntoKeyValue(Maps.mutable.empty(),
+                (map, key, value) -> map.withKeyValue(key, value.toString()));
+        assertEquals(Maps.mutable.with(3, "3", 2, "2", 1, "1"), result);
     }
 
     @Test
