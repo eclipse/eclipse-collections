@@ -13,7 +13,7 @@ package org.eclipse.collections.impl.set.immutable.primitive;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.factory.set.primitive.ImmutableBooleanSetFactory;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
-import org.eclipse.collections.impl.factory.primitive.BooleanSets;
+import org.eclipse.collections.api.factory.primitive.BooleanSets;
 
 /**
  * ImmutableBooleanSetFactoryImpl is a factory implementation which creates instances of type {@link ImmutableBooleanSet}.

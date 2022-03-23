@@ -25,6 +25,10 @@ import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.factory.primitive.<name>Bags;
+import org.eclipse.collections.api.factory.primitive.<name>Lists;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.api.set.primitive.<name>Set;
@@ -36,14 +40,9 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
-import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
-import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.iterator.ImmutableEmpty<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 
 /**
  * Immutable<name>EmptySet is an optimization for {@link Immutable<name>Set} of size 0.
@@ -156,7 +155,7 @@ final class Immutable<name>EmptySet implements Immutable<name>Set, Serializable
     @Override
     public Mutable<name>List toList()
     {
-        return new <name>ArrayList();
+        return <name>Lists.mutable.empty();
     }
 
     @Override
@@ -226,13 +225,13 @@ final class Immutable<name>EmptySet implements Immutable<name>Set, Serializable
     @Override
     public Mutable<name>Set toSet()
     {
-        return new <name>HashSet();
+        return <name>Sets.mutable.empty();
     }
 
     @Override
     public Mutable<name>Bag toBag()
     {
-        return new <name>HashBag();
+        return <name>Bags.mutable.empty();
     }
 
     @Override
@@ -385,7 +384,7 @@ public <type>[] toSortedArray()
 @Override
 public Mutable<name>List toSortedList()
 {
-    return new <name>ArrayList();
+    return <name>Lists.mutable.empty();
 }
 
 @Override

@@ -41,6 +41,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.SortedSets;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.factory.primitive.CharLists;
 import org.eclipse.collections.api.factory.primitive.DoubleLists;
@@ -87,7 +88,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedur
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.mutable.AbstractMutableCollection;
-import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.lazy.parallel.set.sorted.NonParallelSortedSetIterable;
 import org.eclipse.collections.impl.multimap.set.sorted.TreeSortedSetMultimap;
 import org.eclipse.collections.impl.partition.set.sorted.PartitionTreeSortedSet;

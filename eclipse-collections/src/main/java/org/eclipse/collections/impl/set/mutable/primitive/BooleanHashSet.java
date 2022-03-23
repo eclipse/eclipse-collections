@@ -26,6 +26,8 @@ import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjec
 import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
 import org.eclipse.collections.api.block.procedure.primitive.BooleanProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.BooleanBags;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.api.list.MutableList;
@@ -35,11 +37,9 @@ import org.eclipse.collections.api.set.primitive.BooleanSet;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
-import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
 public class BooleanHashSet implements MutableBooleanSet, Externalizable
@@ -924,19 +924,19 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
     @Override
     public MutableBooleanList toList()
     {
-        return BooleanArrayList.newList(this);
+        return BooleanLists.mutable.withAll(this);
     }
 
     @Override
     public MutableBooleanSet toSet()
     {
-        return BooleanHashSet.newSet(this);
+        return BooleanSets.mutable.withAll(this);
     }
 
     @Override
     public MutableBooleanBag toBag()
     {
-        return BooleanHashBag.newBag(this);
+        return BooleanBags.mutable.withAll(this);
     }
 
     @Override

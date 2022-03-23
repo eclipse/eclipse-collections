@@ -17,6 +17,8 @@ package org.eclipse.collections.impl.set.immutable.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
@@ -24,8 +26,6 @@ import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.set.primitive.Abstract<name>Set;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 
 /**
  * This file was automatically generated from template file abstractImmutablePrimitiveSet.stg.
