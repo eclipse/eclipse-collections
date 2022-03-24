@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import org.eclipse.collections.api.factory.primitive.BooleanSets;
 import org.eclipse.collections.api.set.primitive.BooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.block.procedure.checked.primitive.CheckedBooleanProcedure;
-import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 
 /**
  * @since 4.0.
@@ -68,7 +68,7 @@ public final class ImmutableBooleanSetSerializationProxy implements Externalizab
     public void readExternal(ObjectInput in) throws IOException
     {
         int size = in.readInt();
-        MutableBooleanSet deserializedSet = new BooleanHashSet();
+        MutableBooleanSet deserializedSet = BooleanSets.mutable.empty();
 
         for (int i = 0; i < size; i++)
         {
