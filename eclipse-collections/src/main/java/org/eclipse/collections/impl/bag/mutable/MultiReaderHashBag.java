@@ -19,16 +19,7 @@ import java.util.Iterator;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.eclipse.collections.api.BooleanIterable;
-import org.eclipse.collections.api.ByteIterable;
-import org.eclipse.collections.api.CharIterable;
-import org.eclipse.collections.api.DoubleIterable;
-import org.eclipse.collections.api.FloatIterable;
-import org.eclipse.collections.api.IntIterable;
-import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
-import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MultiReaderBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -57,14 +48,6 @@ import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
-import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
-import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
-import org.eclipse.collections.api.collection.primitive.MutableDoubleCollection;
-import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
-import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
-import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
-import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.MutableList;
@@ -78,7 +61,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractMultiReaderMutableCollection;
 import org.eclipse.collections.impl.factory.Iterables;
-import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
  * MultiReaderHashBag provides a thread-safe wrapper around a HashBag, using a ReentrantReadWriteLock. In order to
@@ -156,6 +138,7 @@ public final class MultiReaderHashBag<T>
         return new UntouchableMutableBag<>(this.delegate);
     }
 
+    @Override
     public void withReadLockAndDelegate(Procedure<? super MutableBag<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
@@ -166,6 +149,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public void withWriteLockAndDelegate(Procedure<? super MutableBag<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
@@ -688,7 +672,13 @@ public final class MultiReaderHashBag<T>
 
         private UntouchableMutableBag(MutableBag<T> newDelegate)
         {
-            this.delegate = newDelegate;
+            super(newDelegate);
+        }
+
+        @Override
+        protected MutableBag<T> getDelegate()
+        {
+            return (MutableBag<T>) this.delegate;
         }
 
         public void becomeUseless()
@@ -741,12 +731,6 @@ public final class MultiReaderHashBag<T>
         public ImmutableBag<T> toImmutable()
         {
             return Bags.immutable.withAll(this.getDelegate());
-        }
-
-        @Override
-        public LazyIterable<T> asLazy()
-        {
-            return LazyIterate.adapt(this);
         }
 
         @Override
@@ -824,35 +808,9 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
-        public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
-        {
-            return this.getDelegate().collectBoolean(booleanFunction, target);
-        }
-
-        @Override
-        public <R extends MutableBooleanCollection> R flatCollectBoolean(
-                Function<? super T, ? extends BooleanIterable> function, R target)
-        {
-            return this.getDelegate().flatCollectBoolean(function, target);
-        }
-
-        @Override
         public MutableByteBag collectByte(ByteFunction<? super T> byteFunction)
         {
             return this.getDelegate().collectByte(byteFunction);
-        }
-
-        @Override
-        public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
-        {
-            return this.getDelegate().collectByte(byteFunction, target);
-        }
-
-        @Override
-        public <R extends MutableByteCollection> R flatCollectByte(
-                Function<? super T, ? extends ByteIterable> function, R target)
-        {
-            return this.getDelegate().flatCollectByte(function, target);
         }
 
         @Override
@@ -862,35 +820,9 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
-        public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
-        {
-            return this.getDelegate().collectChar(charFunction, target);
-        }
-
-        @Override
-        public <R extends MutableCharCollection> R flatCollectChar(
-                Function<? super T, ? extends CharIterable> function, R target)
-        {
-            return this.getDelegate().flatCollectChar(function, target);
-        }
-
-        @Override
         public MutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction)
         {
             return this.getDelegate().collectDouble(doubleFunction);
-        }
-
-        @Override
-        public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
-        {
-            return this.getDelegate().collectDouble(doubleFunction, target);
-        }
-
-        @Override
-        public <R extends MutableDoubleCollection> R flatCollectDouble(
-                Function<? super T, ? extends DoubleIterable> function, R target)
-        {
-            return this.getDelegate().flatCollectDouble(function, target);
         }
 
         @Override
@@ -900,35 +832,9 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
-        public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
-        {
-            return this.getDelegate().collectFloat(floatFunction, target);
-        }
-
-        @Override
-        public <R extends MutableFloatCollection> R flatCollectFloat(
-                Function<? super T, ? extends FloatIterable> function, R target)
-        {
-            return this.getDelegate().flatCollectFloat(function, target);
-        }
-
-        @Override
         public MutableIntBag collectInt(IntFunction<? super T> intFunction)
         {
             return this.getDelegate().collectInt(intFunction);
-        }
-
-        @Override
-        public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
-        {
-            return this.getDelegate().collectInt(intFunction, target);
-        }
-
-        @Override
-        public <R extends MutableIntCollection> R flatCollectInt(
-                Function<? super T, ? extends IntIterable> function, R target)
-        {
-            return this.getDelegate().flatCollectInt(function, target);
         }
 
         @Override
@@ -938,35 +844,9 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
-        public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
-        {
-            return this.getDelegate().collectLong(longFunction, target);
-        }
-
-        @Override
-        public <R extends MutableLongCollection> R flatCollectLong(
-                Function<? super T, ? extends LongIterable> function, R target)
-        {
-            return this.getDelegate().flatCollectLong(function, target);
-        }
-
-        @Override
         public MutableShortBag collectShort(ShortFunction<? super T> shortFunction)
         {
             return this.getDelegate().collectShort(shortFunction);
-        }
-
-        @Override
-        public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
-        {
-            return this.getDelegate().collectShort(shortFunction, target);
-        }
-
-        @Override
-        public <R extends MutableShortCollection> R flatCollectShort(
-                Function<? super T, ? extends ShortIterable> function, R target)
-        {
-            return this.getDelegate().flatCollectShort(function, target);
         }
 
         @Override
@@ -1027,12 +907,6 @@ public final class MultiReaderHashBag<T>
         public <V> MutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
         {
             return this.getDelegate().groupByEach(function);
-        }
-
-        @Override
-        public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
-        {
-            return this.getDelegate().groupByUniqueKey(function);
         }
 
         @Override
@@ -1136,11 +1010,6 @@ public final class MultiReaderHashBag<T>
         public String toStringOfItemToCount()
         {
             return this.getDelegate().toStringOfItemToCount();
-        }
-
-        private MutableBag<T> getDelegate()
-        {
-            return (MutableBag<T>) this.delegate;
         }
 
         @Override
