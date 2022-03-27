@@ -478,6 +478,50 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
     }
 
     @Override
+    public <type2> getAndPut(<type1> key, <type2> putValue, <type2> defaultValue)
+    {
+        if (isEmptyKey(key))
+        {
+            if (this.sentinelValues == null)
+            {
+                this.sentinelValues = new SentinelValues();
+            }
+            else if (this.sentinelValues.containsZeroKey)
+            {
+                <type2> existingValue = this.sentinelValues.zeroValue;
+                this.sentinelValues.zeroValue = putValue;
+                return existingValue;
+            }
+            this.addEmptyKeyValue(putValue);
+            return defaultValue;
+        }
+        if (isRemovedKey(key))
+        {
+            if (this.sentinelValues == null)
+            {
+                this.sentinelValues = new SentinelValues();
+            }
+            else if (this.sentinelValues.containsOneKey)
+            {
+                <type2> existingValue = this.sentinelValues.oneValue;
+                this.sentinelValues.oneValue = putValue;
+                return existingValue;
+            }
+            this.addRemovedKeyValue(putValue);
+            return defaultValue;
+        }
+        int index = this.probe(key);
+        if (<(equals.(type1))({this.<keyArray>[index]}, "key")>)
+        {
+            <type2> existingValue = this.<valueArray>[index<valueIndex>];
+            this.<valueArray>[index<valueIndex>] = putValue;
+            return existingValue;
+        }
+        this.addKeyValueAtIndex(key, putValue, index);
+        return defaultValue;
+    }
+
+    @Override
     public <type2> getIfAbsentPut(<type1> key, <name2>Function0 function)
     {
         <getIfAbsentPut({<type2> value = function.value();})>

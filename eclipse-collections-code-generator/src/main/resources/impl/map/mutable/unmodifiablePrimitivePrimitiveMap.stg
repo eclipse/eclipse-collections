@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -16,7 +16,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -133,6 +133,12 @@ public class Unmodifiable<name1><name2>Map
     public <type2> getIfAbsentPut(<type1> key, <type2> value)
     {
         return this.map.getIfAbsentPut(key, () -> { throw new UnsupportedOperationException(); });
+    }
+
+    @Override
+    public <type2> getAndPut(<type1> key, <type2> putValue, <type2> defaultValue)
+    {
+        throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
     @Override

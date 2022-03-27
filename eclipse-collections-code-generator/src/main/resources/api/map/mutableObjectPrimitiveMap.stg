@@ -122,14 +122,9 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
      */
     default <type> getAndPut(K key, <type> putValue, <type> defaultValue)
     {
-        if (this.containsKey(key))
-        {
-            <type> existingValue = this.get(key);
-            this.put(key, putValue);
-            return existingValue;
-        }
+        <type> returnValue = this.getIfAbsent(key, defaultValue);
         this.put(key, putValue);
-        return defaultValue;
+        return returnValue;
     }
 
     /**

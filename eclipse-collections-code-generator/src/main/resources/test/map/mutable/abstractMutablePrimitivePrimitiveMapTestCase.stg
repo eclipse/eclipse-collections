@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -18,7 +18,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -389,6 +389,20 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         map1.put(<(literal.(type1))("30")>, <(literal.(type2))("31")>);
         expected.put(<(literal.(type1))("30")>, <(literal.(type2))("31")>);
         Assert.assertEquals(expected, map1);
+    }
+
+    @Test
+    public void getAndPut()
+    {
+        Mutable<name1><name2>Map map1 = this.classUnderTest();
+        Assert.assertEquals(0, map1.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("25")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assert.assertEquals(25, map1.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("35")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assert.assertEquals(35, map1.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("45")>, <(literal.(type2))("55")>)<wideDelta.(type2)>);
+        Assert.assertEquals(100, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("25")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        Assert.assertEquals(25, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("25")>, <(literal.(type2))("30")>)<wideDelta.(type2)>);
+        map1.removeKey(<(literal.(type1))("10")>);
+        Assert.assertEquals(101, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("25")>, <(literal.(type2))("101")>)<wideDelta.(type2)>);
+        Assert.assertEquals(25, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("27")>, <(literal.(type2))("105")>)<wideDelta.(type2)>);
     }
 
     @Test
