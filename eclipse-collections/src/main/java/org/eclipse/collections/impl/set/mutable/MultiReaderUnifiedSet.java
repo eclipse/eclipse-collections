@@ -36,14 +36,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
-import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
-import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
-import org.eclipse.collections.api.collection.primitive.MutableDoubleCollection;
-import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
-import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
-import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
-import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -67,7 +59,6 @@ import org.eclipse.collections.api.set.primitive.MutableShortSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.AbstractMultiReaderMutableCollection;
 import org.eclipse.collections.impl.lazy.parallel.set.MultiReaderParallelUnsortedSetIterable;
-import org.eclipse.collections.impl.utility.LazyIterate;
 
 import static org.eclipse.collections.impl.factory.Iterables.mList;
 
@@ -151,6 +142,7 @@ public final class MultiReaderUnifiedSet<T>
         return new UntouchableMutableSet<>(this.delegate);
     }
 
+    @Override
     public void withReadLockAndDelegate(Procedure<? super MutableSet<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
@@ -161,6 +153,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public void withWriteLockAndDelegate(Procedure<? super MutableSet<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
@@ -472,7 +465,13 @@ public final class MultiReaderUnifiedSet<T>
 
         private UntouchableMutableSet(MutableSet<T> newDelegate)
         {
-            this.delegate = newDelegate;
+            super(newDelegate);
+        }
+
+        @Override
+        protected MutableSet<T> getDelegate()
+        {
+            return (MutableSet<T>) this.delegate;
         }
 
         public void becomeUseless()
@@ -531,12 +530,6 @@ public final class MultiReaderUnifiedSet<T>
         }
 
         @Override
-        public LazyIterable<T> asLazy()
-        {
-            return LazyIterate.adapt(this);
-        }
-
-        @Override
         public MutableSet<T> clone()
         {
             return this.getDelegate().clone();
@@ -555,21 +548,9 @@ public final class MultiReaderUnifiedSet<T>
         }
 
         @Override
-        public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
-        {
-            return this.getDelegate().collectBoolean(booleanFunction, target);
-        }
-
-        @Override
         public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
         {
             return this.getDelegate().collectByte(byteFunction);
-        }
-
-        @Override
-        public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
-        {
-            return this.getDelegate().collectByte(byteFunction, target);
         }
 
         @Override
@@ -579,21 +560,9 @@ public final class MultiReaderUnifiedSet<T>
         }
 
         @Override
-        public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
-        {
-            return this.getDelegate().collectChar(charFunction, target);
-        }
-
-        @Override
         public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
         {
             return this.getDelegate().collectDouble(doubleFunction);
-        }
-
-        @Override
-        public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
-        {
-            return this.getDelegate().collectDouble(doubleFunction, target);
         }
 
         @Override
@@ -603,21 +572,9 @@ public final class MultiReaderUnifiedSet<T>
         }
 
         @Override
-        public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
-        {
-            return this.getDelegate().collectFloat(floatFunction, target);
-        }
-
-        @Override
         public MutableIntSet collectInt(IntFunction<? super T> intFunction)
         {
             return this.getDelegate().collectInt(intFunction);
-        }
-
-        @Override
-        public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
-        {
-            return this.getDelegate().collectInt(intFunction, target);
         }
 
         @Override
@@ -627,21 +584,9 @@ public final class MultiReaderUnifiedSet<T>
         }
 
         @Override
-        public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
-        {
-            return this.getDelegate().collectLong(longFunction, target);
-        }
-
-        @Override
         public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
         {
             return this.getDelegate().collectShort(shortFunction);
-        }
-
-        @Override
-        public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
-        {
-            return this.getDelegate().collectShort(shortFunction, target);
         }
 
         @Override
@@ -678,12 +623,6 @@ public final class MultiReaderUnifiedSet<T>
                 Function<? super T, ? extends Iterable<V>> function)
         {
             return this.getDelegate().groupByEach(function);
-        }
-
-        @Override
-        public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
-        {
-            return this.getDelegate().groupByUniqueKey(function);
         }
 
         @Override
@@ -849,11 +788,6 @@ public final class MultiReaderUnifiedSet<T>
         public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
         {
             return this.getDelegate().asParallel(executorService, batchSize);
-        }
-
-        private MutableSet<T> getDelegate()
-        {
-            return (MutableSet<T>) this.delegate;
         }
     }
 

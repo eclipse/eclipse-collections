@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.concurrent.locks.Lock;
@@ -84,6 +85,7 @@ import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
  * AbstractMultiReaderMutableCollection is an abstraction that provides thread-safe collection behaviors.
@@ -1474,6 +1476,127 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     {
         protected MutableCollection<T> delegate;
 
+        protected UntouchableMutableCollection(MutableCollection<T> delegate)
+        {
+            this.delegate = Objects.requireNonNull(delegate);
+        }
+
+        protected abstract MutableCollection<T> getDelegate();
+
+        @Override
+        public LazyIterable<T> asLazy()
+        {
+            return LazyIterate.adapt(this);
+        }
+
+        @Override
+        public final <R extends MutableBooleanCollection> R collectBoolean(
+                BooleanFunction<? super T> booleanFunction,
+                R target)
+        {
+            return this.getDelegate().collectBoolean(booleanFunction, target);
+        }
+
+        @Override
+        public final <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
+        {
+            return this.getDelegate().collectByte(byteFunction, target);
+        }
+
+        @Override
+        public final <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
+        {
+            return this.getDelegate().collectChar(charFunction, target);
+        }
+
+        @Override
+        public final <R extends MutableDoubleCollection> R collectDouble(
+                DoubleFunction<? super T> doubleFunction,
+                R target)
+        {
+            return this.getDelegate().collectDouble(doubleFunction, target);
+        }
+
+        @Override
+        public final <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
+        {
+            return this.getDelegate().collectFloat(floatFunction, target);
+        }
+
+        @Override
+        public final <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
+        {
+            return this.getDelegate().collectInt(intFunction, target);
+        }
+
+        @Override
+        public final <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
+        {
+            return this.getDelegate().collectLong(longFunction, target);
+        }
+
+        @Override
+        public final <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
+        {
+            return this.getDelegate().collectShort(shortFunction, target);
+        }
+
+        @Override
+        public final <R extends MutableBooleanCollection> R flatCollectBoolean(
+                Function<? super T, ? extends BooleanIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectBoolean(function, target);
+        }
+
+        @Override
+        public final <R extends MutableByteCollection> R flatCollectByte(
+                Function<? super T, ? extends ByteIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectByte(function, target);
+        }
+
+        @Override
+        public final <R extends MutableCharCollection> R flatCollectChar(
+                Function<? super T, ? extends CharIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectChar(function, target);
+        }
+
+        @Override
+        public final <R extends MutableDoubleCollection> R flatCollectDouble(
+                Function<? super T, ? extends DoubleIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectDouble(function, target);
+        }
+
+        @Override
+        public final <R extends MutableFloatCollection> R flatCollectFloat(
+                Function<? super T, ? extends FloatIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectFloat(function, target);
+        }
+
+        @Override
+        public final <R extends MutableIntCollection> R flatCollectInt(
+                Function<? super T, ? extends IntIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectInt(function, target);
+        }
+
+        @Override
+        public final <R extends MutableLongCollection> R flatCollectLong(
+                Function<? super T, ? extends LongIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectLong(function, target);
+        }
+
+        @Override
+        public final <R extends MutableShortCollection> R flatCollectShort(
+                Function<? super T, ? extends ShortIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectShort(function, target);
+        }
+
         @Override
         public boolean allSatisfy(Predicate<? super T> predicate)
         {
@@ -1701,6 +1824,12 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                 R target)
         {
             return this.delegate.groupByUniqueKey(function, target);
+        }
+
+        @Override
+        public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+        {
+            return this.getDelegate().groupByUniqueKey(function);
         }
 
         @Override
