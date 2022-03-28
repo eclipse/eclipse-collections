@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,6 +31,9 @@ import org.eclipse.collections.api.block.procedure.primitive.LongIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.LongLongProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.LongProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.LongBags;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.LongSets;
 import org.eclipse.collections.api.iterator.LongIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -40,16 +43,12 @@ import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.set.primitive.MutableLongSet;
 import org.eclipse.collections.api.tuple.primitive.LongLongPair;
 import org.eclipse.collections.api.tuple.primitive.LongObjectPair;
-import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.LongPredicates;
-import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.lazy.primitive.CollectLongToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyLongIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseLongIterable;
 import org.eclipse.collections.impl.lazy.primitive.SelectLongIterable;
 import org.eclipse.collections.impl.list.IntervalUtils;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -794,13 +793,13 @@ public final class LongInterval
     @Override
     public ImmutableLongList select(LongPredicate predicate)
     {
-        return LongArrayList.newList(new SelectLongIterable(this, predicate)).toImmutable();
+        return LongLists.mutable.withAll(new SelectLongIterable(this, predicate)).toImmutable();
     }
 
     @Override
     public ImmutableLongList reject(LongPredicate predicate)
     {
-        return LongArrayList.newList(new SelectLongIterable(this, LongPredicates.not(predicate))).toImmutable();
+        return LongLists.mutable.withAll(new SelectLongIterable(this, LongPredicates.not(predicate))).toImmutable();
     }
 
     @Override
@@ -905,25 +904,25 @@ public final class LongInterval
     @Override
     public MutableLongList toList()
     {
-        return LongArrayList.newList(this);
+        return LongLists.mutable.withAll(this);
     }
 
     @Override
     public MutableLongList toSortedList()
     {
-        return LongArrayList.newList(this).sortThis();
+        return LongLists.mutable.withAll(this).sortThis();
     }
 
     @Override
     public MutableLongSet toSet()
     {
-        return LongHashSet.newSet(this);
+        return LongSets.mutable.withAll(this);
     }
 
     @Override
     public MutableLongBag toBag()
     {
-        return LongHashBag.newBag(this);
+        return LongBags.mutable.withAll(this);
     }
 
     @Override
@@ -941,25 +940,25 @@ public final class LongInterval
     @Override
     public ImmutableLongList newWith(long element)
     {
-        return LongArrayList.newList(this).with(element).toImmutable();
+        return LongLists.mutable.withAll(this).with(element).toImmutable();
     }
 
     @Override
     public ImmutableLongList newWithout(long element)
     {
-        return LongArrayList.newList(this).without(element).toImmutable();
+        return LongLists.mutable.withAll(this).without(element).toImmutable();
     }
 
     @Override
     public ImmutableLongList newWithAll(LongIterable elements)
     {
-        return LongArrayList.newList(this).withAll(elements).toImmutable();
+        return LongLists.mutable.withAll(this).withAll(elements).toImmutable();
     }
 
     @Override
     public ImmutableLongList newWithoutAll(LongIterable elements)
     {
-        return LongArrayList.newList(this).withoutAll(elements).toImmutable();
+        return LongLists.mutable.withAll(this).withoutAll(elements).toImmutable();
     }
 
     @Override

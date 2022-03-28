@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,7 @@ import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.primitive.IntIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
 import org.eclipse.collections.api.iterator.IntIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -36,8 +37,6 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
-import org.eclipse.collections.impl.factory.primitive.IntLists;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.primitive.AbstractIntIterable;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -57,7 +56,7 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
     public CodePointList(String value)
     {
         int stringSize = value.length();
-        IntArrayList list = new IntArrayList(stringSize);
+        MutableIntList list = IntLists.mutable.withInitialCapacity(stringSize);
         for (int i = 0; i < stringSize; )
         {
             int codePoint = value.codePointAt(i);
@@ -328,7 +327,7 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
 
     public CodePointList collectInt(IntToIntFunction function)
     {
-        IntArrayList collected = new IntArrayList(this.size());
+        MutableIntList collected = IntLists.mutable.withInitialCapacity(this.size());
         for (int i = 0; i < this.size(); i++)
         {
             int codePoint = this.get(i);

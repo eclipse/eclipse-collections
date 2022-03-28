@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,6 +31,9 @@ import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.primitive.IntIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.IntBags;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.IntSets;
 import org.eclipse.collections.api.iterator.IntIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -40,16 +43,12 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
-import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
-import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.lazy.primitive.CollectIntToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyIntIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
 import org.eclipse.collections.impl.lazy.primitive.SelectIntIterable;
 import org.eclipse.collections.impl.list.IntervalUtils;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -763,13 +762,13 @@ public final class IntInterval
     @Override
     public ImmutableIntList select(IntPredicate predicate)
     {
-        return IntArrayList.newList(new SelectIntIterable(this, predicate)).toImmutable();
+        return IntLists.mutable.withAll(new SelectIntIterable(this, predicate)).toImmutable();
     }
 
     @Override
     public ImmutableIntList reject(IntPredicate predicate)
     {
-        return IntArrayList.newList(new SelectIntIterable(this, IntPredicates.not(predicate))).toImmutable();
+        return IntLists.mutable.withAll(new SelectIntIterable(this, IntPredicates.not(predicate))).toImmutable();
     }
 
     @Override
@@ -858,25 +857,25 @@ public final class IntInterval
     @Override
     public MutableIntList toList()
     {
-        return IntArrayList.newList(this);
+        return IntLists.mutable.withAll(this);
     }
 
     @Override
     public MutableIntList toSortedList()
     {
-        return IntArrayList.newList(this).sortThis();
+        return IntLists.mutable.withAll(this).sortThis();
     }
 
     @Override
     public MutableIntSet toSet()
     {
-        return IntHashSet.newSet(this);
+        return IntSets.mutable.withAll(this);
     }
 
     @Override
     public MutableIntBag toBag()
     {
-        return IntHashBag.newBag(this);
+        return IntBags.mutable.withAll(this);
     }
 
     @Override
@@ -894,25 +893,25 @@ public final class IntInterval
     @Override
     public ImmutableIntList newWith(int element)
     {
-        return IntArrayList.newList(this).with(element).toImmutable();
+        return IntLists.mutable.withAll(this).with(element).toImmutable();
     }
 
     @Override
     public ImmutableIntList newWithout(int element)
     {
-        return IntArrayList.newList(this).without(element).toImmutable();
+        return IntLists.mutable.withAll(this).without(element).toImmutable();
     }
 
     @Override
     public ImmutableIntList newWithAll(IntIterable elements)
     {
-        return IntArrayList.newList(this).withAll(elements).toImmutable();
+        return IntLists.mutable.withAll(this).withAll(elements).toImmutable();
     }
 
     @Override
     public ImmutableIntList newWithoutAll(IntIterable elements)
     {
-        return IntArrayList.newList(this).withoutAll(elements).toImmutable();
+        return IntLists.mutable.withAll(this).withoutAll(elements).toImmutable();
     }
 
     @Override

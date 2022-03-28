@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,6 +28,7 @@ import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.primitive.IntIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.IntSets;
 import org.eclipse.collections.api.iterator.IntIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -37,13 +38,11 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
-import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
+import org.eclipse.collections.impl.factory.primitive.IntBags;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.primitive.AbstractIntIterable;
-import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -182,7 +181,7 @@ public class CodePointAdapter
     public CodePointAdapter distinct()
     {
         StringBuilder builder = new StringBuilder();
-        IntHashSet seenSoFar = new IntHashSet();
+        MutableIntSet seenSoFar = IntSets.mutable.empty();
 
         int length = this.adapted.length();
         for (int i = 0; i < length; )
@@ -505,7 +504,7 @@ public class CodePointAdapter
     @Override
     public MutableIntList toList()
     {
-        IntArrayList list = new IntArrayList(this.adapted.length());
+        MutableIntList list = IntLists.mutable.withInitialCapacity(this.adapted.length());
         for (int i = 0; i < this.adapted.length(); )
         {
             int codePoint = this.adapted.codePointAt(i);
@@ -518,7 +517,7 @@ public class CodePointAdapter
     @Override
     public MutableIntSet toSet()
     {
-        IntHashSet set = new IntHashSet(this.adapted.length());
+        MutableIntSet set = IntSets.mutable.empty();
         for (int i = 0; i < this.adapted.length(); )
         {
             int codePoint = this.adapted.codePointAt(i);
@@ -531,7 +530,7 @@ public class CodePointAdapter
     @Override
     public MutableIntBag toBag()
     {
-        IntHashBag bag = new IntHashBag(this.adapted.length());
+        MutableIntBag bag = IntBags.mutable.empty();
         for (int i = 0; i < this.adapted.length(); )
         {
             int codePoint = this.adapted.codePointAt(i);

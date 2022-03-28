@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,9 @@ import org.eclipse.collections.api.block.predicate.primitive.CharPredicate;
 import org.eclipse.collections.api.block.procedure.primitive.CharIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.CharProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.CharBags;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.CharSets;
 import org.eclipse.collections.api.iterator.CharIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -36,13 +39,9 @@ import org.eclipse.collections.api.list.primitive.MutableCharList;
 import org.eclipse.collections.api.set.primitive.MutableCharSet;
 import org.eclipse.collections.api.tuple.primitive.CharCharPair;
 import org.eclipse.collections.api.tuple.primitive.CharObjectPair;
-import org.eclipse.collections.impl.bag.mutable.primitive.CharHashBag;
-import org.eclipse.collections.impl.factory.primitive.CharLists;
 import org.eclipse.collections.impl.lazy.primitive.ReverseCharIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
 import org.eclipse.collections.impl.primitive.AbstractCharIterable;
-import org.eclipse.collections.impl.set.mutable.primitive.CharHashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.StringIterate;
@@ -174,7 +173,7 @@ public class CharAdapter
     public CharAdapter distinct()
     {
         StringBuilder builder = new StringBuilder();
-        CharHashSet seenSoFar = new CharHashSet();
+        MutableCharSet seenSoFar = CharSets.mutable.empty();
 
         int size = this.size();
         for (int i = 0; i < size; i++)
@@ -401,7 +400,7 @@ public class CharAdapter
     public MutableCharList toList()
     {
         int size = this.size();
-        CharArrayList list = new CharArrayList(size);
+        MutableCharList list = CharLists.mutable.withInitialCapacity(size);
         for (int i = 0; i < size; i++)
         {
             list.add(this.get(i));
@@ -413,7 +412,7 @@ public class CharAdapter
     public MutableCharSet toSet()
     {
         int size = this.size();
-        CharHashSet set = new CharHashSet(size);
+        MutableCharSet set = CharSets.mutable.empty();
         for (int i = 0; i < size; i++)
         {
             set.add(this.get(i));
@@ -425,7 +424,7 @@ public class CharAdapter
     public MutableCharBag toBag()
     {
         int size = this.size();
-        CharHashBag bag = new CharHashBag(size);
+        MutableCharBag bag = CharBags.mutable.empty();
         for (int i = 0; i < size; i++)
         {
             bag.add(this.get(i));
