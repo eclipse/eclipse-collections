@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 hasTwoPrimitives() ::= "true"
 
@@ -13,7 +13,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
@@ -30,9 +30,9 @@ import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
  *
  * @since 4.0.
  */
-public enum Immutable<name1><name2>MapFactoryImpl implements Immutable<name1><name2>MapFactory
+public class Immutable<name1><name2>MapFactoryImpl implements Immutable<name1><name2>MapFactory
 {
-    INSTANCE;
+    public static final Immutable<name1><name2>MapFactory INSTANCE = new Immutable<name1><name2>MapFactoryImpl();
 
     @Override
     public Immutable<name1><name2>Map empty()
