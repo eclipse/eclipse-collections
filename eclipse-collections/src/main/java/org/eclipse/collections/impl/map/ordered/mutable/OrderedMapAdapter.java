@@ -45,6 +45,8 @@ import org.eclipse.collections.api.factory.primitive.DoubleLists;
 import org.eclipse.collections.api.factory.primitive.FloatLists;
 import org.eclipse.collections.api.factory.primitive.IntLists;
 import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
@@ -83,8 +85,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProced
 import org.eclipse.collections.impl.collection.mutable.CollectionAdapter;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.AbstractMapIterable;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.set.mutable.SetAdapter;
@@ -747,28 +747,28 @@ public class OrderedMapAdapter<K, V>
     @Override
     public <V1> MutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
     {
-        MutableObjectLongMap<V1> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V1> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
     @Override
     public <V1> MutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
     {
-        MutableObjectDoubleMap<V1> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V1> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
     @Override
     public <V1> MutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
     {
-        MutableObjectLongMap<V1> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V1> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
     @Override
     public <V1> MutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
     {
-        MutableObjectDoubleMap<V1> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V1> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
