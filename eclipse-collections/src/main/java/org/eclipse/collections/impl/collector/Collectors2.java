@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -61,6 +61,8 @@ import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.factory.Stacks;
+import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -91,8 +93,6 @@ import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.factory.Multimaps;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -1416,7 +1416,7 @@ public final class Collectors2
         Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> accumulator =
                 PrimitiveFunctions.sumByIntFunction(groupBy, function);
         return Collector.of(
-                ObjectLongHashMap::newMap,
+                ObjectLongMaps.mutable::empty,
                 accumulator::value,
                 (map1, map2) ->
                 {
@@ -1446,7 +1446,7 @@ public final class Collectors2
         Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> accumulator =
                 PrimitiveFunctions.sumByLongFunction(groupBy, function);
         return Collector.of(
-                ObjectLongHashMap::newMap,
+                ObjectLongMaps.mutable::empty,
                 accumulator::value,
                 (map1, map2) ->
                 {
@@ -1476,7 +1476,7 @@ public final class Collectors2
         Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> accumulator =
                 PrimitiveFunctions.sumByFloatFunction(groupBy, function);
         return Collector.of(
-                ObjectDoubleHashMap::newMap,
+                ObjectDoubleMaps.mutable::empty,
                 accumulator::value,
                 (map1, map2) ->
                 {
@@ -1506,7 +1506,7 @@ public final class Collectors2
         Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> accumulator =
                 PrimitiveFunctions.sumByDoubleFunction(groupBy, function);
         return Collector.of(
-                ObjectDoubleHashMap::newMap,
+                ObjectDoubleMaps.mutable::empty,
                 accumulator::value,
                 (map1, map2) ->
                 {

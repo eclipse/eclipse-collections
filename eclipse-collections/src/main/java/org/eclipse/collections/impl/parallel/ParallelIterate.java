@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,9 +33,13 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -47,8 +51,6 @@ import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProced
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.multimap.list.SynchronizedPutFastListMultimap;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -1242,7 +1244,7 @@ public final class ParallelIterate
             Function<? super T, ? extends V> groupBy,
             DoubleFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         ParallelIterate.forEach(
                 iterable,
                 new SumByDoubleProcedure<>(groupBy, function),
@@ -1257,7 +1259,7 @@ public final class ParallelIterate
             Function<? super T, ? extends V> groupBy,
             FloatFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         ParallelIterate.forEach(
                 iterable,
                 new SumByFloatProcedure<>(groupBy, function),
@@ -1272,7 +1274,7 @@ public final class ParallelIterate
             Function<? super T, ? extends V> groupBy,
             LongFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         ParallelIterate.forEach(
                 iterable,
                 new SumByLongProcedure<>(groupBy, function),
@@ -1287,7 +1289,7 @@ public final class ParallelIterate
             Function<? super T, ? extends V> groupBy,
             IntFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         ParallelIterate.forEach(
                 iterable,
                 new SumByIntProcedure<>(groupBy, function),
@@ -1417,10 +1419,10 @@ public final class ParallelIterate
 
     private static final class SumByDoubleCombiner<T, V> extends AbstractProcedureCombiner<SumByDoubleProcedure<T, V>>
     {
-        private final ObjectDoubleHashMap<V> result;
-        private final ObjectDoubleHashMap<V> compensation = ObjectDoubleHashMap.newMap();
+        private final MutableObjectDoubleMap<V> result;
+        private final MutableObjectDoubleMap<V> compensation = ObjectDoubleMaps.mutable.empty();
 
-        private SumByDoubleCombiner(ObjectDoubleHashMap<V> result)
+        private SumByDoubleCombiner(MutableObjectDoubleMap<V> result)
         {
             super(true);
             this.result = result;
@@ -1491,10 +1493,10 @@ public final class ParallelIterate
 
     private static final class SumByFloatCombiner<T, V> extends AbstractProcedureCombiner<SumByFloatProcedure<T, V>>
     {
-        private final ObjectDoubleHashMap<V> result;
-        private final ObjectDoubleHashMap<V> compensation = ObjectDoubleHashMap.newMap();
+        private final MutableObjectDoubleMap<V> result;
+        private final MutableObjectDoubleMap<V> compensation = ObjectDoubleMaps.mutable.empty();
 
-        private SumByFloatCombiner(ObjectDoubleHashMap<V> result)
+        private SumByFloatCombiner(MutableObjectDoubleMap<V> result)
         {
             super(true);
             this.result = result;
@@ -1527,7 +1529,7 @@ public final class ParallelIterate
 
     private static final class SumByLongProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByLongProcedure<T, V>>
     {
-        private final ObjectLongHashMap<V> map = ObjectLongHashMap.newMap();
+        private final MutableObjectLongMap<V> map = ObjectLongMaps.mutable.empty();
         private final Function<? super T, ? extends V> groupBy;
         private final LongFunction<? super T> function;
 
@@ -1543,7 +1545,7 @@ public final class ParallelIterate
             this.map.addToValue(this.groupBy.valueOf(each), this.function.longValueOf(each));
         }
 
-        public ObjectLongHashMap<V> getResult()
+        public MutableObjectLongMap<V> getResult()
         {
             return this.map;
         }
@@ -1557,9 +1559,9 @@ public final class ParallelIterate
 
     private static final class SumByLongCombiner<T, V> extends AbstractProcedureCombiner<SumByLongProcedure<T, V>>
     {
-        private final ObjectLongHashMap<V> result;
+        private final MutableObjectLongMap<V> result;
 
-        private SumByLongCombiner(ObjectLongHashMap<V> result)
+        private SumByLongCombiner(MutableObjectLongMap<V> result)
         {
             super(true);
             this.result = result;
@@ -1581,7 +1583,7 @@ public final class ParallelIterate
 
     private static final class SumByIntProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByIntProcedure<T, V>>
     {
-        private final ObjectLongHashMap<V> map = ObjectLongHashMap.newMap();
+        private final MutableObjectLongMap<V> map = ObjectLongMaps.mutable.empty();
         private final Function<? super T, ? extends V> groupBy;
         private final IntFunction<? super T> function;
 
@@ -1597,7 +1599,7 @@ public final class ParallelIterate
             this.map.addToValue(this.groupBy.valueOf(each), (long) this.function.intValueOf(each));
         }
 
-        public ObjectLongHashMap<V> getResult()
+        public MutableObjectLongMap<V> getResult()
         {
             return this.map;
         }
@@ -1611,9 +1613,9 @@ public final class ParallelIterate
 
     private static final class SumByIntCombiner<T, V> extends AbstractProcedureCombiner<SumByIntProcedure<T, V>>
     {
-        private final ObjectLongHashMap<V> result;
+        private final MutableObjectLongMap<V> result;
 
-        private SumByIntCombiner(ObjectLongHashMap<V> result)
+        private SumByIntCombiner(MutableObjectLongMap<V> result)
         {
             super(true);
             this.result = result;
@@ -1635,7 +1637,7 @@ public final class ParallelIterate
 
     private static final class SumByBigDecimalProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByBigDecimalProcedure<T, V>>
     {
-        private final MutableMap<V, BigDecimal> map = UnifiedMap.newMap();
+        private final MutableMap<V, BigDecimal> map = Maps.mutable.empty();
         private final Function<? super T, ? extends V> groupBy;
         private final Function<? super T, BigDecimal> function;
 
@@ -1689,7 +1691,7 @@ public final class ParallelIterate
 
     private static final class SumByBigIntegerProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByBigIntegerProcedure<T, V>>
     {
-        private final MutableMap<V, BigInteger> map = UnifiedMap.newMap();
+        private final MutableMap<V, BigInteger> map = Maps.mutable.empty();
         private final Function<? super T, ? extends V> groupBy;
         private final Function<? super T, BigInteger> function;
 
