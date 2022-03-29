@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 hasTwoPrimitives() ::= "true"
 
@@ -13,7 +13,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -31,9 +31,9 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 6.0.
  */
-public enum Mutable<name1><name2>MapFactoryImpl implements Mutable<name1><name2>MapFactory
+public class Mutable<name1><name2>MapFactoryImpl implements Mutable<name1><name2>MapFactory
 {
-    INSTANCE;
+    public static final Mutable<name1><name2>MapFactory INSTANCE = new Mutable<name1><name2>MapFactoryImpl();
 
     @Override
     public Mutable<name1><name2>Map empty()

@@ -1,0 +1,45 @@
+import "copyrightAndOthers.stg"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/factory/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "<primitive1.name><primitive2.name>Maps"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.api.factory.primitive;
+
+import org.eclipse.collections.api.factory.ServiceLoaderUtils;
+import org.eclipse.collections.api.factory.map.primitive.Immutable<name1><name2>MapFactory;
+import org.eclipse.collections.api.factory.map.primitive.Mutable<name1><name2>MapFactory;
+
+/**
+ * <name1><name2>Maps is a static utility for creating {@link Immutable<name1><name2>MapFactory}
+ * and {@link Mutable<name1><name2>MapFactory}.
+ * This file was automatically generated from template file primitivePrimitiveMapsAPI.stg.
+ *
+ * @since 11.1.
+ */
+@SuppressWarnings("ConstantNamingConvention")
+public final class <name1><name2>Maps
+{
+    public static final Immutable<name1><name2>MapFactory immutable =
+            ServiceLoaderUtils.loadServiceClass(Immutable<name1><name2>MapFactory.class);
+    public static final Mutable<name1><name2>MapFactory mutable =
+            ServiceLoaderUtils.loadServiceClass(Mutable<name1><name2>MapFactory.class);
+
+    private <name1><name2>Maps()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+}
+
+>>
