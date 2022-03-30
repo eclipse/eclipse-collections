@@ -20,9 +20,9 @@ import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
+import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
-import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 
 public final class PrimitiveFunctions
 {

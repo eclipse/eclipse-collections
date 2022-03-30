@@ -44,6 +44,8 @@ import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMapIterable;
@@ -59,10 +61,7 @@ import org.eclipse.collections.impl.block.procedure.FastListCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.FastListRejectProcedure;
 import org.eclipse.collections.impl.block.procedure.FastListSelectProcedure;
 import org.eclipse.collections.impl.block.procedure.MultimapPutProcedure;
-import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
-import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
@@ -1041,7 +1040,7 @@ public final class InternalArrayIterate
     public static <V, T> MutableObjectDoubleMap<V> sumByDouble(T[] array, int size, Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
-        MutableObjectDoubleMap<V> groupKeyToCompensation = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> groupKeyToCompensation = ObjectDoubleMaps.mutable.empty();
         for (int i = 0; i < size; i++)
         {
             T item = array[i];
