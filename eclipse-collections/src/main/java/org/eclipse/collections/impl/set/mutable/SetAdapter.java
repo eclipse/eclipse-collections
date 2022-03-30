@@ -59,14 +59,6 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectByteProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectCharProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectDoubleProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionAdapter;
 import org.eclipse.collections.impl.lazy.parallel.set.NonParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
@@ -272,65 +264,49 @@ public final class SetAdapter<T>
     @Override
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        MutableBooleanSet result = BooleanSets.mutable.empty();
-        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
-        return result;
+        return this.collectBoolean(booleanFunction, BooleanSets.mutable.empty());
     }
 
     @Override
     public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
-        MutableByteSet result = ByteSets.mutable.empty();
-        this.forEach(new CollectByteProcedure<>(byteFunction, result));
-        return result;
+        return this.collectByte(byteFunction, ByteSets.mutable.empty());
     }
 
     @Override
     public MutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
-        MutableCharSet result = CharSets.mutable.empty();
-        this.forEach(new CollectCharProcedure<>(charFunction, result));
-        return result;
+        return this.collectChar(charFunction, CharSets.mutable.empty());
     }
 
     @Override
     public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        MutableDoubleSet result = DoubleSets.mutable.empty();
-        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
-        return result;
+        return this.collectDouble(doubleFunction, DoubleSets.mutable.empty());
     }
 
     @Override
     public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
-        MutableFloatSet result = FloatSets.mutable.empty();
-        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
-        return result;
+        return this.collectFloat(floatFunction, FloatSets.mutable.empty());
     }
 
     @Override
     public MutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
-        MutableIntSet result = IntSets.mutable.empty();
-        this.forEach(new CollectIntProcedure<>(intFunction, result));
-        return result;
+        return this.collectInt(intFunction, IntSets.mutable.empty());
     }
 
     @Override
     public MutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
-        MutableLongSet result = LongSets.mutable.empty();
-        this.forEach(new CollectLongProcedure<>(longFunction, result));
-        return result;
+        return this.collectLong(longFunction, LongSets.mutable.empty());
     }
 
     @Override
     public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
-        MutableShortSet result = ShortSets.mutable.empty();
-        this.forEach(new CollectShortProcedure<>(shortFunction, result));
-        return result;
+        return this.collectShort(shortFunction, ShortSets.mutable.empty());
     }
 
     @Override

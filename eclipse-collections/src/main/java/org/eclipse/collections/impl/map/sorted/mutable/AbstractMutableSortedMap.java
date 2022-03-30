@@ -58,14 +58,6 @@ import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectByteProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectCharProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectDoubleProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.AbstractMutableMapIterable;
@@ -149,65 +141,49 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     @Override
     public MutableBooleanList collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
-        MutableBooleanList result = BooleanLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
-        return result;
+        return this.collectBoolean(booleanFunction, BooleanLists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public MutableByteList collectByte(ByteFunction<? super V> byteFunction)
     {
-        MutableByteList result = ByteLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectByteProcedure<>(byteFunction, result));
-        return result;
+        return this.collectByte(byteFunction, ByteLists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public MutableCharList collectChar(CharFunction<? super V> charFunction)
     {
-        MutableCharList result = CharLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectCharProcedure<>(charFunction, result));
-        return result;
+        return this.collectChar(charFunction, CharLists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public MutableDoubleList collectDouble(DoubleFunction<? super V> doubleFunction)
     {
-        MutableDoubleList result = DoubleLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
-        return result;
+        return this.collectDouble(doubleFunction, DoubleLists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public MutableFloatList collectFloat(FloatFunction<? super V> floatFunction)
     {
-        MutableFloatList result = FloatLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
-        return result;
+        return this.collectFloat(floatFunction, FloatLists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public MutableIntList collectInt(IntFunction<? super V> intFunction)
     {
-        MutableIntList result = IntLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectIntProcedure<>(intFunction, result));
-        return result;
+        return this.collectInt(intFunction, IntLists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public MutableLongList collectLong(LongFunction<? super V> longFunction)
     {
-        MutableLongList result = LongLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectLongProcedure<>(longFunction, result));
-        return result;
+        return this.collectLong(longFunction, LongLists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public MutableShortList collectShort(ShortFunction<? super V> shortFunction)
     {
-        MutableShortList result = ShortLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectShortProcedure<>(shortFunction, result));
-        return result;
+        return this.collectShort(shortFunction, ShortLists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override

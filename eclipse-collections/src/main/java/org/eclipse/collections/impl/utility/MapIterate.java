@@ -64,14 +64,6 @@ import org.eclipse.collections.impl.block.procedure.MapEntryToProcedure2;
 import org.eclipse.collections.impl.block.procedure.MapPutProcedure;
 import org.eclipse.collections.impl.block.procedure.RejectProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectByteProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectCharProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectDoubleProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.MapAdapter;
@@ -440,7 +432,7 @@ public final class MapIterate
             BooleanFunction<? super V> booleanFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectBooleanProcedure<>(booleanFunction, target));
+        MapIterate.forEachValue(map, each -> target.add(booleanFunction.booleanValueOf(each)));
         return target;
     }
 
@@ -462,7 +454,7 @@ public final class MapIterate
             ByteFunction<? super V> byteFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectByteProcedure<>(byteFunction, target));
+        MapIterate.forEachValue(map, each -> target.add(byteFunction.byteValueOf(each)));
         return target;
     }
 
@@ -484,7 +476,7 @@ public final class MapIterate
             CharFunction<? super V> charFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectCharProcedure<>(charFunction, target));
+        MapIterate.forEachValue(map, each -> target.add(charFunction.charValueOf(each)));
         return target;
     }
 
@@ -506,7 +498,7 @@ public final class MapIterate
             DoubleFunction<? super V> doubleFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectDoubleProcedure<>(doubleFunction, target));
+        MapIterate.forEachValue(map, each -> target.add(doubleFunction.doubleValueOf(each)));
         return target;
     }
 
@@ -528,7 +520,7 @@ public final class MapIterate
             FloatFunction<? super V> floatFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectFloatProcedure<>(floatFunction, target));
+        MapIterate.forEachValue(map, each -> target.add(floatFunction.floatValueOf(each)));
         return target;
     }
 
@@ -550,7 +542,7 @@ public final class MapIterate
             IntFunction<? super V> intFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectIntProcedure<>(intFunction, target));
+        MapIterate.forEachValue(map, each -> target.add(intFunction.intValueOf(each)));
         return target;
     }
 
@@ -572,7 +564,7 @@ public final class MapIterate
             LongFunction<? super V> longFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectLongProcedure<>(longFunction, target));
+        MapIterate.forEachValue(map, each -> target.add(longFunction.longValueOf(each)));
         return target;
     }
 
@@ -594,7 +586,7 @@ public final class MapIterate
             ShortFunction<? super V> shortFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectShortProcedure<>(shortFunction, target));
+        MapIterate.forEachValue(map, each -> target.add(shortFunction.shortValueOf(each)));
         return target;
     }
 

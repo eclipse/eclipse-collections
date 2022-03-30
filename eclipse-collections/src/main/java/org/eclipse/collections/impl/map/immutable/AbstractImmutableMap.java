@@ -80,14 +80,6 @@ import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectByteProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectCharProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectDoubleProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.map.AbstractMapIterable;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -289,64 +281,56 @@ public abstract class AbstractImmutableMap<K, V>
     public ImmutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         MutableBooleanBag result = BooleanBags.mutable.empty();
-        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
-        return result.toImmutable();
+        return this.collectBoolean(booleanFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableByteBag collectByte(ByteFunction<? super V> byteFunction)
     {
         MutableByteBag result = ByteBags.mutable.empty();
-        this.forEach(new CollectByteProcedure<>(byteFunction, result));
-        return result.toImmutable();
+        return this.collectByte(byteFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableCharBag collectChar(CharFunction<? super V> charFunction)
     {
         MutableCharBag result = CharBags.mutable.empty();
-        this.forEach(new CollectCharProcedure<>(charFunction, result));
-        return result.toImmutable();
+        return this.collectChar(charFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         MutableDoubleBag result = DoubleBags.mutable.empty();
-        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
-        return result.toImmutable();
+        return this.collectDouble(doubleFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableFloatBag collectFloat(FloatFunction<? super V> floatFunction)
     {
         MutableFloatBag result = FloatBags.mutable.empty();
-        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
-        return result.toImmutable();
+        return this.collectFloat(floatFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableIntBag collectInt(IntFunction<? super V> intFunction)
     {
         MutableIntBag result = IntBags.mutable.empty();
-        this.forEach(new CollectIntProcedure<>(intFunction, result));
-        return result.toImmutable();
+        return this.collectInt(intFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableLongBag collectLong(LongFunction<? super V> longFunction)
     {
         MutableLongBag result = LongBags.mutable.empty();
-        this.forEach(new CollectLongProcedure<>(longFunction, result));
-        return result.toImmutable();
+        return this.collectLong(longFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableShortBag collectShort(ShortFunction<? super V> shortFunction)
     {
         MutableShortBag result = ShortBags.mutable.empty();
-        this.forEach(new CollectShortProcedure<>(shortFunction, result));
-        return result.toImmutable();
+        return this.collectShort(shortFunction, result).toImmutable();
     }
 
     @Override

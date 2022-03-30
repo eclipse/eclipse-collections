@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -57,14 +57,6 @@ import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectByteProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectCharProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectDoubleProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
@@ -134,65 +126,49 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public MutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
-        MutableBooleanBag result = BooleanBags.mutable.empty();
-        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
-        return result;
+        return this.collectBoolean(booleanFunction, BooleanBags.mutable.empty());
     }
 
     @Override
     public MutableByteBag collectByte(ByteFunction<? super V> byteFunction)
     {
-        MutableByteBag result = ByteBags.mutable.empty();
-        this.forEach(new CollectByteProcedure<>(byteFunction, result));
-        return result;
+        return this.collectByte(byteFunction, ByteBags.mutable.empty());
     }
 
     @Override
     public MutableCharBag collectChar(CharFunction<? super V> charFunction)
     {
-        MutableCharBag result = CharBags.mutable.empty();
-        this.forEach(new CollectCharProcedure<>(charFunction, result));
-        return result;
+        return this.collectChar(charFunction, CharBags.mutable.empty());
     }
 
     @Override
     public MutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction)
     {
-        MutableDoubleBag result = DoubleBags.mutable.empty();
-        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
-        return result;
+        return this.collectDouble(doubleFunction, DoubleBags.mutable.empty());
     }
 
     @Override
     public MutableFloatBag collectFloat(FloatFunction<? super V> floatFunction)
     {
-        MutableFloatBag result = FloatBags.mutable.empty();
-        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
-        return result;
+        return this.collectFloat(floatFunction, FloatBags.mutable.empty());
     }
 
     @Override
     public MutableIntBag collectInt(IntFunction<? super V> intFunction)
     {
-        MutableIntBag result = IntBags.mutable.empty();
-        this.forEach(new CollectIntProcedure<>(intFunction, result));
-        return result;
+        return this.collectInt(intFunction, IntBags.mutable.empty());
     }
 
     @Override
     public MutableLongBag collectLong(LongFunction<? super V> longFunction)
     {
-        MutableLongBag result = LongBags.mutable.empty();
-        this.forEach(new CollectLongProcedure<>(longFunction, result));
-        return result;
+        return this.collectLong(longFunction, LongBags.mutable.empty());
     }
 
     @Override
     public MutableShortBag collectShort(ShortFunction<? super V> shortFunction)
     {
-        MutableShortBag result = ShortBags.mutable.empty();
-        this.forEach(new CollectShortProcedure<>(shortFunction, result));
-        return result;
+        return this.collectShort(shortFunction, ShortBags.mutable.empty());
     }
 
     @Override
