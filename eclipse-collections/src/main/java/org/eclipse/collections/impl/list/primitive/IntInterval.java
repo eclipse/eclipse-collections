@@ -43,7 +43,6 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
-import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
 import org.eclipse.collections.impl.lazy.primitive.CollectIntToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyIntIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
@@ -768,7 +767,7 @@ public final class IntInterval
     @Override
     public ImmutableIntList reject(IntPredicate predicate)
     {
-        return IntLists.mutable.withAll(new SelectIntIterable(this, IntPredicates.not(predicate))).toImmutable();
+        return IntLists.mutable.withAll(new SelectIntIterable(this, value -> !predicate.accept(value))).toImmutable();
     }
 
     @Override

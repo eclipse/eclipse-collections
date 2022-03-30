@@ -43,7 +43,6 @@ import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.set.primitive.MutableLongSet;
 import org.eclipse.collections.api.tuple.primitive.LongLongPair;
 import org.eclipse.collections.api.tuple.primitive.LongObjectPair;
-import org.eclipse.collections.impl.block.factory.primitive.LongPredicates;
 import org.eclipse.collections.impl.lazy.primitive.CollectLongToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyLongIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseLongIterable;
@@ -799,7 +798,7 @@ public final class LongInterval
     @Override
     public ImmutableLongList reject(LongPredicate predicate)
     {
-        return LongLists.mutable.withAll(new SelectLongIterable(this, LongPredicates.not(predicate))).toImmutable();
+        return LongLists.mutable.withAll(new SelectLongIterable(this, value -> !predicate.accept(value))).toImmutable();
     }
 
     @Override
