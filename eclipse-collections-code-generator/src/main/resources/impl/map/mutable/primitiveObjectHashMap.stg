@@ -19,13 +19,6 @@ public Mutable<name>Bag collect<name>(<name>Function\<? super V> <type>Function)
 {
     return this.collect<name>(<type>Function, new <name>HashBag());
 }
-
-@Override
-public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? super V> <type>Function, R target)
-{
-    this.forEach(new Collect<name>Procedure\<V>(<type>Function, target));
-    return target;
-}
 >>
 
 body(type, name) ::= <<
@@ -84,14 +77,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.<name>ObjectProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
-import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
-import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
-import org.eclipse.collections.api.collection.primitive.MutableDoubleCollection;
-import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
-import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
-import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
-import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
@@ -135,14 +120,6 @@ import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectByteProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectCharProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectDoubleProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.factory.Lists;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -697,7 +697,11 @@ public interface RichIterable<T>
      * @return {@code target}, which contains appended elements as a result of the collect transformation
      * @since 5.0
      */
-    <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target);
+    default <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
+    {
+        this.forEach(each -> target.add(booleanFunction.booleanValueOf(each)));
+        return target;
+    }
 
     /**
      * Returns a new primitive {@code byte} iterable with the results of applying the specified function on each element
@@ -752,7 +756,11 @@ public interface RichIterable<T>
      * @return {@code target}, which contains appended elements as a result of the collect transformation
      * @since 5.0
      */
-    <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target);
+    default <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
+    {
+        this.forEach(each -> target.add(byteFunction.byteValueOf(each)));
+        return target;
+    }
 
     /**
      * Returns a new primitive {@code char} iterable with the results of applying the specified function on each element
@@ -807,7 +815,11 @@ public interface RichIterable<T>
      * @return {@code target}, which contains appended elements as a result of the collect transformation
      * @since 5.0
      */
-    <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target);
+    default <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
+    {
+        this.forEach(each -> target.add(charFunction.charValueOf(each)));
+        return target;
+    }
 
     /**
      * Returns a new primitive {@code double} iterable with the results of applying the specified function on each element
@@ -862,7 +874,11 @@ public interface RichIterable<T>
      * @return {@code target}, which contains appended elements as a result of the collect transformation
      * @since 5.0
      */
-    <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target);
+    default <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
+    {
+        this.forEach(each -> target.add(doubleFunction.doubleValueOf(each)));
+        return target;
+    }
 
     /**
      * Returns a new primitive {@code float} iterable with the results of applying the specified function on each element
@@ -917,7 +933,11 @@ public interface RichIterable<T>
      * @return {@code target}, which contains appended elements as a result of the collect transformation
      * @since 5.0
      */
-    <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target);
+    default <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
+    {
+        this.forEach(each -> target.add(floatFunction.floatValueOf(each)));
+        return target;
+    }
 
     /**
      * Returns a new primitive {@code int} iterable with the results of applying the specified function on each element
@@ -972,7 +992,11 @@ public interface RichIterable<T>
      * @return {@code target}, which contains appended elements as a result of the collect transformation
      * @since 5.0
      */
-    <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target);
+    default <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
+    {
+        this.forEach(each -> target.add(intFunction.intValueOf(each)));
+        return target;
+    }
 
     /**
      * Returns a new primitive {@code long} iterable with the results of applying the specified function on each element
@@ -1027,7 +1051,11 @@ public interface RichIterable<T>
      * @return {@code target}, which contains appended elements as a result of the collect transformation
      * @since 5.0
      */
-    <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target);
+    default <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
+    {
+        this.forEach(each -> target.add(longFunction.longValueOf(each)));
+        return target;
+    }
 
     /**
      * Returns a new primitive {@code short} iterable with the results of applying the specified function on each element
@@ -1082,7 +1110,11 @@ public interface RichIterable<T>
      * @return {@code target}, which contains appended elements as a result of the collect transformation
      * @since 5.0
      */
-    <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target);
+    default <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
+    {
+        this.forEach(each -> target.add(shortFunction.shortValueOf(each)));
+        return target;
+    }
 
     /**
      * Same as {@link #collect(Function)} with a {@code Function2} and specified parameter which is passed to the block.

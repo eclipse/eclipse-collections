@@ -84,14 +84,6 @@ import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectByteProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectCharProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectDoubleProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
-import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.AbstractMapIterable;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -322,64 +314,56 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public ImmutableBooleanList collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         MutableBooleanList result = BooleanLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
-        return result.toImmutable();
+        return this.collectBoolean(booleanFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableByteList collectByte(ByteFunction<? super V> byteFunction)
     {
         MutableByteList result = ByteLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectByteProcedure<>(byteFunction, result));
-        return result.toImmutable();
+        return this.collectByte(byteFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableCharList collectChar(CharFunction<? super V> charFunction)
     {
         MutableCharList result = CharLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectCharProcedure<>(charFunction, result));
-        return result.toImmutable();
+        return this.collectChar(charFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableDoubleList collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         MutableDoubleList result = DoubleLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
-        return result.toImmutable();
+        return this.collectDouble(doubleFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableFloatList collectFloat(FloatFunction<? super V> floatFunction)
     {
         MutableFloatList result = FloatLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
-        return result.toImmutable();
+        return this.collectFloat(floatFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableIntList collectInt(IntFunction<? super V> intFunction)
     {
         MutableIntList result = IntLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectIntProcedure<>(intFunction, result));
-        return result.toImmutable();
+        return this.collectInt(intFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableLongList collectLong(LongFunction<? super V> longFunction)
     {
         MutableLongList result = LongLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectLongProcedure<>(longFunction, result));
-        return result.toImmutable();
+        return this.collectLong(longFunction, result).toImmutable();
     }
 
     @Override
     public ImmutableShortList collectShort(ShortFunction<? super V> shortFunction)
     {
         MutableShortList result = ShortLists.mutable.withInitialCapacity(this.size());
-        this.forEach(new CollectShortProcedure<>(shortFunction, result));
-        return result.toImmutable();
+        return this.collectShort(shortFunction, result).toImmutable();
     }
 
     @Override
