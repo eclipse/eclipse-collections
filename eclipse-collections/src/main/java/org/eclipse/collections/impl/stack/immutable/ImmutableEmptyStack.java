@@ -60,6 +60,8 @@ import org.eclipse.collections.api.factory.primitive.DoubleStacks;
 import org.eclipse.collections.api.factory.primitive.FloatStacks;
 import org.eclipse.collections.api.factory.primitive.IntStacks;
 import org.eclipse.collections.api.factory.primitive.LongStacks;
+import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.factory.primitive.ShortStacks;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -90,8 +92,6 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Stacks;
-import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
-import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 
 final class ImmutableEmptyStack<T>
