@@ -20,12 +20,15 @@ import org.eclipse.collections.api.bag.primitive.ImmutableLongBag;
 import org.eclipse.collections.api.bag.primitive.MutableDoubleBag;
 import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.bag.primitive.MutableLongBag;
+import org.eclipse.collections.api.factory.primitive.DoubleBags;
 import org.eclipse.collections.api.factory.primitive.DoubleLists;
 import org.eclipse.collections.api.factory.primitive.DoubleSets;
 import org.eclipse.collections.api.factory.primitive.DoubleStacks;
+import org.eclipse.collections.api.factory.primitive.IntBags;
 import org.eclipse.collections.api.factory.primitive.IntLists;
 import org.eclipse.collections.api.factory.primitive.IntSets;
 import org.eclipse.collections.api.factory.primitive.IntStacks;
+import org.eclipse.collections.api.factory.primitive.LongBags;
 import org.eclipse.collections.api.factory.primitive.LongLists;
 import org.eclipse.collections.api.factory.primitive.LongSets;
 import org.eclipse.collections.api.factory.primitive.LongStacks;
@@ -47,9 +50,6 @@ import org.eclipse.collections.api.stack.primitive.ImmutableLongStack;
 import org.eclipse.collections.api.stack.primitive.MutableDoubleStack;
 import org.eclipse.collections.api.stack.primitive.MutableIntStack;
 import org.eclipse.collections.api.stack.primitive.MutableLongStack;
-import org.eclipse.collections.impl.factory.primitive.DoubleBags;
-import org.eclipse.collections.impl.factory.primitive.IntBags;
-import org.eclipse.collections.impl.factory.primitive.LongBags;
 
 /**
  * This class provides interop between primitive streams and primitive collections.
