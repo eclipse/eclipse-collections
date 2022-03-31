@@ -50,13 +50,11 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToShortFunctio
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.factory.primitive.<name>Bags;
+import org.eclipse.collections.api.factory.primitive.<name>Lists;
+import org.eclipse.collections.api.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
-import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
-import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
-import org.eclipse.collections.impl.factory.primitive.<name>Sets;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
-import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.utility.internal.primitive.<name>IterableIterate;
 import org.eclipse.collections.impl.utility.primitive.Lazy<name>Iterate;
 
@@ -79,7 +77,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     @Override
     public int size()
     {
-        return this.count(<name>Predicates.alwaysTrue());
+        return this.count(value -> true);
     }
 
     @Override
@@ -141,7 +139,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     @Override
     public boolean contains(<type> value)
     {
-        return this.anySatisfy(<name>Predicates.equal(value));
+        return this.anySatisfy(each -> each == value);
     }
 
     @Override
@@ -165,7 +163,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     @Override
     public Lazy<name>Iterable reject(<name>Predicate predicate)
     {
-        return Lazy<name>Iterate.select(this, <name>Predicates.not(predicate));
+        return Lazy<name>Iterate.select(this, value -> !predicate.accept(value));
     }
 
     @Override
@@ -252,7 +250,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     @Override
     public Mutable<name>List toList()
     {
-        final Mutable<name>List list = new <name>ArrayList();
+        final Mutable<name>List list = <name>Lists.mutable.empty();
         this.forEach(list::add);
         return list;
     }
@@ -260,7 +258,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     @Override
     public Mutable<name>Set toSet()
     {
-        final Mutable<name>Set set = new <name>HashSet();
+        final Mutable<name>Set set = <name>Sets.mutable.empty();
         this.forEach(set::add);
         return set;
     }
@@ -268,7 +266,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     @Override
     public Mutable<name>Bag toBag()
     {
-        final Mutable<name>Bag bag = new <name>HashBag();
+        final Mutable<name>Bag bag = <name>Bags.mutable.empty();
         this.forEach(bag::add);
         return bag;
     }
@@ -378,7 +376,7 @@ public <type>[] toSortedArray()
 @Override
 public Mutable<name>List toSortedList()
 {
-    return <name>ArrayList.newList(this).sortThis();
+    return <name>Lists.mutable.withAll(this).sortThis();
 }
 
 private static final class <name>MaxProcedure implements <name>Procedure
