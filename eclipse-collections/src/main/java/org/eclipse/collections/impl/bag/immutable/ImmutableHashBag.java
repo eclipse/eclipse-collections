@@ -373,12 +373,6 @@ public class ImmutableHashBag<T>
     }
 
     @Override
-    public <KK extends Comparable<? super KK>, K, V> MutableSortedMap<K, V> toSortedMapBy(Function<? super K, KK> sortBy, Function<? super T, ? extends K> keyFunction, Function<? super T, ? extends V> valueFunction)
-    {
-        return this.delegate.toSortedMapBy(sortBy, keyFunction, valueFunction);
-    }
-
-    @Override
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
         return this.delegate.select(predicate).toImmutable();
@@ -593,12 +587,6 @@ public class ImmutableHashBag<T>
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         return this.delegate.toSortedBag(comparator);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
-    {
-        return this.delegate.toSortedBagBy(function);
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -685,12 +685,6 @@ public class UnmodifiableRichIterable<T>
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
-    {
-        return this.iterable.toSortedListBy(function);
-    }
-
-    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         return this.iterable.toSortedSet();
@@ -700,12 +694,6 @@ public class UnmodifiableRichIterable<T>
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         return this.iterable.toSortedSet(comparator);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
-    {
-        return this.iterable.toSortedSetBy(function);
     }
 
     @Override
@@ -730,12 +718,6 @@ public class UnmodifiableRichIterable<T>
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         return this.iterable.toSortedBag(comparator);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
-    {
-        return this.iterable.toSortedBagBy(function);
     }
 
     @Override
@@ -770,15 +752,6 @@ public class UnmodifiableRichIterable<T>
             Function<? super T, ? extends NV> valueFunction)
     {
         return this.iterable.toSortedMap(comparator, keyFunction, valueFunction);
-    }
-
-    @Override
-    public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
-            Function<? super NK, KK> sortBy,
-            Function<? super T, ? extends NK> keyFunction,
-            Function<? super T, ? extends NV> valueFunction)
-    {
-        return this.iterable.toSortedMapBy(sortBy, keyFunction, valueFunction);
     }
 
     @Override

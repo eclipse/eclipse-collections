@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -247,12 +247,6 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     }
 
     @Override
-    public <VV extends Comparable<? super VV>> MutableList<V> toSortedListBy(Function<? super V, ? extends VV> function)
-    {
-        return this.getDelegate().toSortedListBy(function);
-    }
-
-    @Override
     public MutableSet<V> toSet()
     {
         return this.getDelegate().toSet();
@@ -271,12 +265,6 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     }
 
     @Override
-    public <VV extends Comparable<? super VV>> MutableSortedSet<V> toSortedSetBy(Function<? super V, ? extends VV> function)
-    {
-        return this.getDelegate().toSortedSetBy(function);
-    }
-
-    @Override
     public MutableBag<V> toBag()
     {
         return this.getDelegate().toBag();
@@ -292,12 +280,6 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     public MutableSortedBag<V> toSortedBag(Comparator<? super V> comparator)
     {
         return this.getDelegate().toSortedBag(comparator);
-    }
-
-    @Override
-    public <VV extends Comparable<? super VV>> MutableSortedBag<V> toSortedBagBy(Function<? super V, ? extends VV> function)
-    {
-        return this.getDelegate().toSortedBagBy(function);
     }
 
     @Override
@@ -322,12 +304,6 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator, Function<? super V, ? extends NK> keyFunction, Function<? super V, ? extends NV> valueFunction)
     {
         return this.getDelegate().toSortedMap(comparator, keyFunction, valueFunction);
-    }
-
-    @Override
-    public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(Function<? super NK, KK> sortBy, Function<? super V, ? extends NK> keyFunction, Function<? super V, ? extends NV> valueFunction)
-    {
-        return this.getDelegate().toSortedMapBy(sortBy, keyFunction, valueFunction);
     }
 
     @Override

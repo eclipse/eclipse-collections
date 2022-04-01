@@ -109,7 +109,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.factory.Bags;
@@ -664,12 +663,6 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     public MutableSortedBag\<V> toSortedBag(Comparator\<? super V> comparator)
     {
         return TreeBag.newBagWith(comparator, this.value1);
-    }
-
-    @Override
-    public \<VV extends Comparable\<? super VV>\> MutableSortedBag\<V> toSortedBagBy(Function\<? super V, ? extends VV> function)
-    {
-        return TreeBag.newBagWith(Comparators.byFunction(function), this.value1);
     }
 
     @Override

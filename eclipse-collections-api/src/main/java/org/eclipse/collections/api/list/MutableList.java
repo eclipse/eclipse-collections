@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.block.factory.SerializableComparators;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -262,7 +263,10 @@ public interface MutableList<T>
      * Sorts the internal data structure of this list based on the natural order of the attribute returned by {@code
      * function}.
      */
-    <V extends Comparable<? super V>> MutableList<T> sortThisBy(Function<? super T, ? extends V> function);
+    default <V extends Comparable<? super V>> MutableList<T> sortThisBy(Function<? super T, ? extends V> function)
+    {
+        return this.sortThis(SerializableComparators.byFunction(function));
+    }
 
     /**
      * @since 6.0

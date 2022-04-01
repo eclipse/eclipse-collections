@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,9 +33,21 @@ public class ImmutableEmptySortedSetSerializationTest
         Verify.assertSerializedForm(
                 2L,
                 "rO0ABXNyAFZvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLnNldC5zb3J0ZWQuaW1tdXRhYmxl\n"
+                        + "LkltbXV0YWJsZVNvcnRlZFNldFNlcmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHBzcgBYb3Jn\n"
+                        + "LmVjbGlwc2UuY29sbGVjdGlvbnMuYXBpLmJsb2NrLmZhY3RvcnkuU2VyaWFsaXphYmxlQ29tcGFy\n"
+                        + "YXRvcnMkTmF0dXJhbE9yZGVyQ29tcGFyYXRvcgAAAAAAAAABAgAAeHB3BAAAAAB4",
+                new ImmutableEmptySortedSet<>(Comparators.naturalOrder()));
+    }
+
+    @Test
+    public void serializedForm_with_comparator_old()
+    {
+        Verify.assertSerializedForm(
+                2L,
+                "rO0ABXNyAFZvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLnNldC5zb3J0ZWQuaW1tdXRhYmxl\n"
                         + "LkltbXV0YWJsZVNvcnRlZFNldFNlcmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHBzcgBNb3Jn\n"
                         + "LmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5ibG9jay5mYWN0b3J5LkNvbXBhcmF0b3JzJE5hdHVy\n"
                         + "YWxPcmRlckNvbXBhcmF0b3IAAAAAAAAAAQIAAHhwdwQAAAAAeA==",
-                new ImmutableEmptySortedSet<>(Comparators.naturalOrder()));
+                new ImmutableEmptySortedSet<>(Comparators.originalNaturalOrder()));
     }
 }

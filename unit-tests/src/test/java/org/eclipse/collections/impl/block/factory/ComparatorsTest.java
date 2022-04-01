@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,7 +33,6 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.list.Interval;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -54,28 +53,47 @@ public class ComparatorsTest
     @Test
     public void naturalOrder()
     {
-        MutableList<String> list = FastList.newListWith("1", "4", "2", "3");
+        MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
         Assert.assertEquals(
-                FastList.newListWith("1", "2", "3", "4"),
+                Lists.mutable.with("1", "2", "3", "4"),
                 list.sortThis(Comparators.naturalOrder()));
-        Assert.assertThrows(NullPointerException.class, () -> FastList.newListWith("1", "2", null, "4").sortThis(Comparators.naturalOrder()));
+        Assert.assertThrows(NullPointerException.class, () -> Lists.mutable.with("1", "2", null, "4").sortThis(Comparators.naturalOrder()));
+    }
+
+    @Test
+    public void originalNaturalOrder()
+    {
+        MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
+        Assert.assertEquals(
+                Lists.mutable.with("1", "2", "3", "4"),
+                list.sortThis(Comparators.originalNaturalOrder()));
+        Assert.assertThrows(NullPointerException.class, () -> Lists.mutable.with("1", "2", null, "4").sortThis(Comparators.naturalOrder()));
     }
 
     @Test
     public void reverseNaturalOrder()
     {
-        MutableList<String> list = FastList.newListWith("1", "4", "2", "3");
+        MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
         Assert.assertEquals(
-                FastList.newListWith("4", "3", "2", "1"),
+                Lists.mutable.with("4", "3", "2", "1"),
                 list.sortThis(Comparators.reverseNaturalOrder()));
+    }
+
+    @Test
+    public void originalReverseNaturalOrder()
+    {
+        MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
+        Assert.assertEquals(
+                Lists.mutable.with("4", "3", "2", "1"),
+                list.sortThis(Comparators.originalReverseNaturalOrder()));
     }
 
     @Test
     public void reverse()
     {
-        MutableList<String> list = FastList.newListWith("1", "4", "2", "3");
+        MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
         Assert.assertEquals(
-                FastList.newListWith("4", "3", "2", "1"),
+                Lists.mutable.with("4", "3", "2", "1"),
                 list.sortThis(Comparators.reverse(String::compareTo)));
         Assert.assertThrows(NullPointerException.class, () -> Comparators.reverse(null));
     }
@@ -198,6 +216,17 @@ public class ComparatorsTest
     }
 
     @Test
+    public void originalByFunction()
+    {
+        Person raab = new Person(null, "Raab", 0);
+        Person white = new Person(null, "White", 0);
+        Comparator<Person> personComparator = Comparators.originalByFunction(Person.TO_LAST);
+        Verify.assertNegative(personComparator.compare(raab, white));
+        Verify.assertPositive(personComparator.compare(white, raab));
+        Verify.assertZero(personComparator.compare(raab, raab));
+    }
+
+    @Test
     public void fromFunctionsSafeNullsHigh()
     {
         Person bob = new Person("Bob", null, 0);
@@ -269,32 +298,32 @@ public class ComparatorsTest
     @Test
     public void descendingCollectionSizeCompare()
     {
-        MutableList<List<Integer>> list = FastList.newListWith(
+        MutableList<List<Integer>> list = Lists.mutable.with(
                 Interval.oneTo(1),
                 Interval.oneTo(3),
                 Interval.oneTo(2));
         list.sortThis(Comparators.descendingCollectionSizeComparator());
         Assert.assertEquals(
-                FastList.<MutableList<Integer>>newListWith(
-                        FastList.newListWith(1, 2, 3),
-                        FastList.newListWith(1, 2),
-                        FastList.newListWith(1)),
+                Lists.mutable.<MutableList<Integer>>with(
+                        Lists.mutable.with(1, 2, 3),
+                        Lists.mutable.with(1, 2),
+                        Lists.mutable.with(1)),
                 list);
     }
 
     @Test
     public void ascendingCollectionSizeCompare()
     {
-        MutableList<List<Integer>> list = FastList.newListWith(
+        MutableList<List<Integer>> list = Lists.mutable.with(
                 Interval.oneTo(1),
                 Interval.oneTo(3),
                 Interval.oneTo(2));
         list.sortThis(Comparators.ascendingCollectionSizeComparator());
         Assert.assertEquals(
-                FastList.<MutableList<Integer>>newListWith(
-                        FastList.newListWith(1),
-                        FastList.newListWith(1, 2),
-                        FastList.newListWith(1, 2, 3)),
+                Lists.mutable.<MutableList<Integer>>with(
+                        Lists.mutable.with(1),
+                        Lists.mutable.with(1, 2),
+                        Lists.mutable.with(1, 2, 3)),
                 list);
     }
 
@@ -325,16 +354,16 @@ public class ComparatorsTest
     @Test
     public void byFirstOfPair()
     {
-        MutableList<Pair<Integer, String>> list = FastList.newListWith(Tuples.pair(3, "B"), Tuples.pair(1, "C"), Tuples.pair(2, "A"));
-        MutableList<Pair<Integer, String>> sorted = FastList.newListWith(Tuples.pair(1, "C"), Tuples.pair(2, "A"), Tuples.pair(3, "B"));
+        MutableList<Pair<Integer, String>> list = Lists.mutable.with(Tuples.pair(3, "B"), Tuples.pair(1, "C"), Tuples.pair(2, "A"));
+        MutableList<Pair<Integer, String>> sorted = Lists.mutable.with(Tuples.pair(1, "C"), Tuples.pair(2, "A"), Tuples.pair(3, "B"));
         Verify.assertListsEqual(sorted, list.sortThis(Comparators.byFirstOfPair(Integer::compareTo)));
     }
 
     @Test
     public void bySecondOfPair()
     {
-        MutableList<Pair<Integer, String>> list = FastList.newListWith(Tuples.pair(3, "B"), Tuples.pair(1, "C"), Tuples.pair(2, "A"));
-        MutableList<Pair<Integer, String>> sorted = FastList.newListWith(Tuples.pair(2, "A"), Tuples.pair(3, "B"), Tuples.pair(1, "C"));
+        MutableList<Pair<Integer, String>> list = Lists.mutable.with(Tuples.pair(3, "B"), Tuples.pair(1, "C"), Tuples.pair(2, "A"));
+        MutableList<Pair<Integer, String>> sorted = Lists.mutable.with(Tuples.pair(2, "A"), Tuples.pair(3, "B"), Tuples.pair(1, "C"));
         Verify.assertListsEqual(sorted, list.sortThis(Comparators.bySecondOfPair(String::compareTo)));
     }
 

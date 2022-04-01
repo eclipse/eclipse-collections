@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -627,12 +627,6 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
-    {
-        return this.mutableStack.toSortedListBy(function);
-    }
-
-    @Override
     public MutableSet<T> toSet()
     {
         return this.mutableStack.toSet();
@@ -657,12 +651,6 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
-    {
-        return this.mutableStack.toSortedSetBy(function);
-    }
-
-    @Override
     public MutableBag<T> toBag()
     {
         return this.mutableStack.toBag();
@@ -678,12 +666,6 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         return this.mutableStack.toSortedBag(comparator);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
-    {
-        return this.mutableStack.toSortedBagBy(function);
     }
 
     @Override
@@ -708,12 +690,6 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator, Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         return this.mutableStack.toSortedMap(comparator, keyFunction, valueFunction);
-    }
-
-    @Override
-    public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(Function<? super NK, KK> sortBy, Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
-    {
-        return this.mutableStack.toSortedMapBy(sortBy, keyFunction, valueFunction);
     }
 
     @Override

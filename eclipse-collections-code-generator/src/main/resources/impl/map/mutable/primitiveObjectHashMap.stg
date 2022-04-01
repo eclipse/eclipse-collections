@@ -1709,24 +1709,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     }
 
     @Override
-    public MutableList\<V> toSortedList()
-    {
-        return this.toList().sortThis();
-    }
-
-    @Override
-    public MutableList\<V> toSortedList(Comparator\<? super V> comparator)
-    {
-        return this.toList().sortThis(comparator);
-    }
-
-    @Override
-    public \<VV extends Comparable\<? super VV>\> MutableList\<V> toSortedListBy(Function\<? super V, ? extends VV> function)
-    {
-        return this.toList().sortThis(Comparators.byFunction(function));
-    }
-
-    @Override
     public MutableSet\<V> toSet()
     {
         MutableSet\<V> set = UnifiedSet.newSet();
@@ -1746,14 +1728,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     public MutableSortedSet\<V> toSortedSet(Comparator\<? super V> comparator)
     {
         MutableSortedSet\<V> set = TreeSortedSet.newSet(comparator);
-        this.forEachWith(Procedures2.\<V>addToCollection(), set);
-        return set;
-    }
-
-    @Override
-    public \<VV extends Comparable\<? super VV>\> MutableSortedSet\<V> toSortedSetBy(Function\<? super V, ? extends VV> function)
-    {
-        MutableSortedSet\<V> set = TreeSortedSet.newSet(Comparators.byFunction(function));
         this.forEachWith(Procedures2.\<V>addToCollection(), set);
         return set;
     }
@@ -1783,12 +1757,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     }
 
     @Override
-    public \<VV extends Comparable\<? super VV>\> MutableSortedBag\<V> toSortedBagBy(Function\<? super V, ? extends VV> function)
-    {
-        return this.toSortedBag(Comparators.byFunction(function));
-    }
-
-    @Override
     public \<NK, NV> MutableMap\<NK, NV> toMap(Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
     {
         UnifiedMap\<NK, NV> map = UnifiedMap.newMap();
@@ -1808,12 +1776,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         TreeSortedMap\<NK, NV> sortedMap = TreeSortedMap.newMap(comparator);
         this.forEach(new MapCollectProcedure\<V, NK, NV>(sortedMap, keyFunction, valueFunction));
         return sortedMap;
-    }
-
-    @Override
-    public \<KK extends Comparable\<? super KK>, NK, NV> MutableSortedMap\<NK, NV> toSortedMapBy(Function\<? super NK, KK> sortBy, Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
-    {
-        return this.toSortedMap(Comparators.byFunction(sortBy), keyFunction, valueFunction);
     }
 
     @Override
