@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 
 isTest() ::= "true"
@@ -14,7 +14,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name, wrapperName, charPrimitive) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.primitive;
 
@@ -36,9 +36,34 @@ public class Object<name>MapFactoryTest
     {
         Assert.assertEquals(new Object<name>HashMap(), Object<name>Maps.mutable.of());
         Assert.assertEquals(Object<name>Maps.mutable.of(), Object<name>Maps.mutable.empty());
+        Assert.assertEquals(Object<name>Maps.mutable.of("2", <(literal.(type))("1")>), Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>));
+        Assert.assertEquals(Object<name>Maps.mutable.of("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>),
+                Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>));
+
+        Assert.assertEquals(Object<name>Maps.mutable.of("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>, "6", <(literal.(type))("5")>),
+                Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>, "6", <(literal.(type))("5")>));
+
+        Assert.assertEquals(Object<name>Maps.mutable.of("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>, "6", <(literal.(type))("5")>, "8", <(literal.(type))("7")>),
+                Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>, "6", <(literal.(type))("5")>, "8", <(literal.(type))("7")>));
+
         Assert.assertEquals(Object<name>Maps.mutable.empty().toImmutable(), Object<name>Maps.immutable.empty());
         Assert.assertEquals(Object<name>Maps.mutable.empty().toImmutable(), Object<name>Maps.immutable.of());
         Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>).toImmutable(), Object<name>Maps.immutable.of("2", <(literal.(type))("1")>));
+    }
+
+    @Test
+    public void with()
+    {
+        Assert.assertEquals(Object<name>Maps.mutable.with(), Object<name>Maps.mutable.empty());
+        Assert.assertEquals(Object<name>Maps.mutable.with("2", <(literal.(type))("1")>), Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>));
+        Assert.assertEquals(Object<name>Maps.mutable.with("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>),
+                Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>));
+
+        Assert.assertEquals(Object<name>Maps.mutable.with("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>, "6", <(literal.(type))("5")>),
+                Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>, "6", <(literal.(type))("5")>));
+
+        Assert.assertEquals(Object<name>Maps.mutable.with("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>, "6", <(literal.(type))("5")>, "8", <(literal.(type))("7")>),
+                Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "4", <(literal.(type))("3")>, "6", <(literal.(type))("5")>, "8", <(literal.(type))("7")>));
     }
 
     @Test

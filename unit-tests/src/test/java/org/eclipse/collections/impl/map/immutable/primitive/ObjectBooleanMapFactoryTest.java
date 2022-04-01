@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -30,6 +30,28 @@ public class ObjectBooleanMapFactoryTest
         Assert.assertTrue(ObjectBooleanMaps.immutable.empty() instanceof ImmutableObjectBooleanEmptyMap);
         Assert.assertEquals(ObjectBooleanHashMap.newWithKeysValues("2", true).toImmutable(), ObjectBooleanMaps.immutable.of("2", true));
         Assert.assertTrue(ObjectBooleanMaps.immutable.of("2", true) instanceof ImmutableObjectBooleanSingletonMap);
+
+        Assert.assertEquals(ObjectBooleanMaps.mutable.of("2", true), ObjectBooleanHashMap.newWithKeysValues("2", true));
+        Assert.assertEquals(ObjectBooleanMaps.mutable.of("2", true, 3, false),
+                ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false));
+        Assert.assertEquals(ObjectBooleanMaps.mutable.of("2", true, 3, false, 4, false),
+                ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false, 4, false));
+        Assert.assertEquals(ObjectBooleanMaps.mutable.of("2", true, 3, false, 4, false, 5, true),
+                ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false, 4, false, 5, true));
+    }
+
+    @Test
+    public void with()
+    {
+        Assert.assertEquals(ObjectBooleanMaps.mutable.with(), ObjectBooleanMaps.mutable.empty());
+        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", false), ObjectBooleanHashMap.newWithKeysValues("2", false));
+        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", true), ObjectBooleanHashMap.newWithKeysValues("2", true));
+        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", true, 3, false),
+                ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false));
+        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", true, 3, false, 4, false),
+                ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false, 4, false));
+        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", true, 3, false, 4, false, 5, true),
+                ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false, 4, false, 5, true));
     }
 
     @Test
