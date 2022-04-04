@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
@@ -579,5 +580,11 @@ public class UnmodifiableSortedBag<T>
                 groupBy.valueOf(each),
                 function.longValueOf(each) * (long) occurrences));
         return result;
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.getSortedBag().distinctView();
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -1536,6 +1537,19 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
         ImmutableSortedSet<Integer> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(expected.comparator(), actual.comparator());
+    }
+
+    @Test
+    public void distinctView()
+    {
+        Comparator<Integer> comparator = Collections.reverseOrder();
+        ImmutableSortedBag<Integer> bag = this.classUnderTest(comparator);
+        RichIterable<Integer> expected = bag.toSortedSet(comparator);
+        RichIterable<Integer> actual = bag.distinctView();
+        // test content/type
+        Assert.assertEquals(expected, actual);
+        // test sorting
+        Verify.assertIterablesEqual(expected, actual);
     }
 
     private static final class Holder

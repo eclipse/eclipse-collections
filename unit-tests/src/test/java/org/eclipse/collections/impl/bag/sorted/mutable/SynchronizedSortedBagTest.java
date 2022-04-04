@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,13 +10,16 @@
 
 package org.eclipse.collections.impl.bag.sorted.mutable;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Set;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
+import org.eclipse.collections.impl.SynchronizedRichIterable;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
@@ -141,5 +144,18 @@ public class SynchronizedSortedBagTest extends AbstractMutableSortedBagTestCase
         Assert.assertEquals(
                 Lists.mutable.with(6, 5, 8, 5, 6, 8),
                 bag2.collectWithOccurrences((each, index) -> each + index));
+    }
+
+    @Override
+    @Test
+    public void distinctView()
+    {
+        Comparator<String> comparator = Collections.reverseOrder();
+        MutableSortedBag<String> bag = this.newWith(comparator, "1", "2", "2", "3", "3", "3", "3", "4", "5", "5", "6");
+        RichIterable<String> expected = bag.toSortedSet(comparator);
+        RichIterable<String> actual = bag.distinctView();
+        Verify.assertInstanceOf(SynchronizedRichIterable.class, actual);
+        // not using Assert.assertEquals as actual is not a Set
+        Verify.assertIterablesEqual(expected, actual);
     }
 }

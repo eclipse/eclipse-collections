@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -213,6 +213,17 @@ public interface Bag<T>
     String toStringOfItemToCount();
 
     ImmutableBagIterable<T> toImmutable();
+
+    /**
+     * Returns an unmodifiable view on the distinct elements with the same complexity as the Bag implementation.
+     *
+     * @return an unmodifiable view on the distinct elements of the Bag.
+     * @since 11.1
+     */
+    default RichIterable<T> distinctView()
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".distinctView() not implemented yet");
+    }
 
     /**
      * @since 8.0

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -588,5 +588,14 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
                 Tuples.pair("2", "2"),
                 Tuples.pair("3", "3"));
         Assert.assertEquals(expected, bag.zip(bag::iterator).toBag());
+    }
+
+    @Test
+    public void distinctView()
+    {
+        MutableBagIterable<String> bag = this.newWith("1", "2", "2", "3", "3", "3", "3", "4", "5", "5", "6");
+        RichIterable<String> expected = bag.toSet();
+        RichIterable<String> actual = bag.distinctView();
+        Assert.assertEquals(expected, actual);
     }
 }

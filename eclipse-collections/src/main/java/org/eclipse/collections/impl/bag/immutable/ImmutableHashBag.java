@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -701,5 +702,11 @@ public class ImmutableHashBag<T>
     protected Object writeReplace()
     {
         return new ImmutableBagSerializationProxy<>(this);
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.delegate.distinctView();
     }
 }

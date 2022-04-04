@@ -808,4 +808,10 @@ final class ImmutableEmptyBag<T>
     {
         return Sets.immutable.empty();
     }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return Sets.immutable.empty();
+    }
 }
