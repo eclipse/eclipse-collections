@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 hasTwoPrimitives() ::= "true"
 
@@ -13,7 +13,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.factory.map.primitive;
 
@@ -41,6 +41,70 @@ public interface Mutable<name1><name2>MapFactory
      * Same as {@link #empty()}.
      */
     Mutable<name1><name2>Map with();
+
+    /**
+     * @since 11.1.
+     */
+    default Mutable<name1><name2>Map of(<type1> key, <type2> value)
+    {
+        return this.with(key, value);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default Mutable<name1><name2>Map with(<type1> key, <type2> value)
+    {
+        return this.with().withKeyValue(key, value);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default Mutable<name1><name2>Map of(<type1> key1, <type2> value1, <type1> key2, <type2> value2)
+    {
+        return this.with(key1, value1, key2, value2);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default Mutable<name1><name2>Map with(<type1> key1, <type2> value1, <type1> key2, <type2> value2)
+    {
+        return this.with(key1, value1).withKeyValue(key1, value2);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default Mutable<name1><name2>Map of(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default Mutable<name1><name2>Map with(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3)
+    {
+        return this.with(key1, value1, key2, value2).withKeyValue(key3, value3);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default Mutable<name1><name2>Map of(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3, <type1> key4, <type2> value4)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default Mutable<name1><name2>Map with(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3, <type1> key4, <type2> value4)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3).withKeyValue(key4, value4);
+    }
 
     /**
      * Same as {@link #empty()}. but takes in an initial capacity

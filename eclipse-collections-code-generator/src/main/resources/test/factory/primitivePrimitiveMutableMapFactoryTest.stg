@@ -1,0 +1,71 @@
+import "copyrightAndOthers.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/factory/map/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Mutable<primitive1.name><primitive2.name>MapFactoryTest"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.api.factory.map.primitive;
+
+import org.eclipse.collections.api.factory.primitive.<name1><name2>Maps;
+import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Junit test for {@link Mutable<name1><name2>MapFactory}
+ * This file was automatically generated from template file primitivePrimitiveMutableMapFactoryTest.stg
+ */
+public class Mutable<name1><name2>MapFactoryTest
+{
+    @Test
+    public void with()
+    {
+        Assert.assertEquals(new <name1><name2>HashMap(), <name1><name2>Maps.mutable.with());
+
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>), <name1><name2>Maps.mutable.with(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
+
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>),
+                <name1><name2>Maps.mutable.with(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>));
+
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>),
+                <name1><name2>Maps.mutable.with(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>));
+
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>),
+                <name1><name2>Maps.mutable.with(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>));
+    }
+
+    @Test
+    public void of()
+    {
+        Assert.assertEquals(new <name1><name2>HashMap(), <name1><name2>Maps.mutable.of());
+
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>), <name1><name2>Maps.mutable.of(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
+
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>),
+                <name1><name2>Maps.mutable.of(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>));
+
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>),
+                <name1><name2>Maps.mutable.of(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>));
+
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>),
+                <name1><name2>Maps.mutable.of(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>));
+    }
+}
+
+>>

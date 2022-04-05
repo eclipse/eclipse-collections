@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 targetPath() ::= "org/eclipse/collections/api/factory/map/primitive"
 
@@ -11,7 +11,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.factory.map.primitive;
 
@@ -39,6 +39,70 @@ public interface Mutable<name>ObjectMapFactory
      * Same as {@link #empty()}.
      */
     \<V> Mutable<name>ObjectMap\<V> with();
+
+    /**
+     * @since 11.1.
+     */
+    default \<V> Mutable<name>ObjectMap\<V> of(<type> key, V value)
+    {
+        return this.with(key, value);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default \<V> Mutable<name>ObjectMap\<V> with(<type> key, V value)
+    {
+        return this.\<V>with().withKeyValue(key, value);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default \<V> Mutable<name>ObjectMap\<V> of(<type> key1, V value1, <type> key2, V value2)
+    {
+        return this.with(key1, value1, key2, value2);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default \<V> Mutable<name>ObjectMap\<V> with(<type> key1, V value1, <type> key2, V value2)
+    {
+        return this.with(key1, value1).withKeyValue(key2, value2);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default \<V> Mutable<name>ObjectMap\<V> of(<type> key1, V value1, <type> key2, V value2, <type> key3, V value3)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default \<V> Mutable<name>ObjectMap\<V> with(<type> key1, V value1, <type> key2, V value2, <type> key3, V value3)
+    {
+        return this.with(key1, value1, key2, value2).withKeyValue(key3, value3);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default \<V> Mutable<name>ObjectMap\<V> of(<type> key1, V value1, <type> key2, V value2, <type> key3, V value3, <type> key4, V value4)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    /**
+     * @since 11.1.
+     */
+    default \<V> Mutable<name>ObjectMap\<V> with(<type> key1, V value1, <type> key2, V value2, <type> key3, V value3, <type> key4, V value4)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3).withKeyValue(key4, value4);
+    }
 
     /**
      * Same as {@link #empty()}. but takes in an initial capacity

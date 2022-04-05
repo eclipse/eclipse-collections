@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 skipBoolean() ::= "true"
 
@@ -11,7 +11,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -49,6 +49,54 @@ public class Mutable<name>ObjectMapFactoryImpl implements Mutable<name>ObjectMap
     public \<V> Mutable<name>ObjectMap\<V> with()
     {
         return this.empty();
+    }
+
+    @Override
+    public \<V> Mutable<name>ObjectMap\<V> of(<type> key, V value)
+    {
+        return this.with(key, value);
+    }
+
+    @Override
+    public \<V> Mutable<name>ObjectMap\<V> with(<type> key, V value)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key, value);
+    }
+
+    @Override
+    public \<V> Mutable<name>ObjectMap\<V> of(<type> key1, V value1, <type> key2, V value2)
+    {
+        return this.with(key1, value1, key2, value2);
+    }
+
+    @Override
+    public \<V> Mutable<name>ObjectMap\<V> with(<type> key1, V value1, <type> key2, V value2)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2);
+    }
+
+    @Override
+    public \<V> Mutable<name>ObjectMap\<V> of(<type> key1, V value1, <type> key2, V value2, <type> key3, V value3)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    public \<V> Mutable<name>ObjectMap\<V> with(<type> key1, V value1, <type> key2, V value2, <type> key3, V value3)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    public \<V> Mutable<name>ObjectMap\<V> of(<type> key1, V value1, <type> key2, V value2, <type> key3, V value3, <type> key4, V value4)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    @Override
+    public \<V> Mutable<name>ObjectMap\<V> with(<type> key1, V value1, <type> key2, V value2, <type> key3, V value3, <type> key4, V value4)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     @Override
