@@ -19,7 +19,7 @@ import org.eclipse.collections.impl.list.immutable.primitive.Immutable<name>List
 import org.eclipse.collections.impl.list.mutable.primitive.Mutable<name>ListFactoryImpl;
 
 /**
- * <name>Lists is a static utility for creating {@link Immutable<name>ListFactory}.
+ * <name>Lists is a static utility for creating {@link Immutable<name>ListFactory} and {@link Mutable<name>ListFactory}.
  * This file was automatically generated from template file primitiveLists.stg.
  *
  * @since 3.2.

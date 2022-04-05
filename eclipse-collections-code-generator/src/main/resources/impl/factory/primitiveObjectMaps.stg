@@ -21,7 +21,7 @@ import org.eclipse.collections.impl.map.immutable.primitive.Immutable<name>Objec
 import org.eclipse.collections.impl.map.mutable.primitive.Mutable<name>ObjectMapFactoryImpl;
 
 /**
- * <name>ObjectMaps is a static utility for creating {@link Immutable<name>ObjectMapFactory}.
+ * <name>ObjectMaps is a static utility for creating {@link Immutable<name>ObjectMapFactory} and {@link Mutable<name>ObjectMapFactory}.
  * This file was automatically generated from template file primitiveObjectMaps.stg.
  *
  * @since 4.0.

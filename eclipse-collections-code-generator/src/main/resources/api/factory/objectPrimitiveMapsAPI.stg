@@ -19,7 +19,7 @@ import org.eclipse.collections.api.factory.map.primitive.MutableObject<name>MapF
 
 /**
  * Object<name>Maps is a static utility for creating {@link ImmutableObject<name>MapFactory} and {@link MutableObject<name>MapFactory}.
- * This file was automatically generated from template file primitiveMapsAPI.stg.
+ * This file was automatically generated from template file objectPrimitiveMapsAPI.stg.
  *
  * @since 11.1.
  */

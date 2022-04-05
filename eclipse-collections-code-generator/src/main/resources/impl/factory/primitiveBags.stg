@@ -19,7 +19,7 @@ import org.eclipse.collections.impl.bag.immutable.primitive.Immutable<name>BagFa
 import org.eclipse.collections.impl.bag.mutable.primitive.Mutable<name>BagFactoryImpl;
 
 /**
- * <name>Bags is a static utility for creating {@link Immutable<name>BagFactory}.
+ * <name>Bags is a static utility for creating {@link Immutable<name>BagFactory} and {@link Mutable<name>BagFactory}.
  * This file was automatically generated from template file primitiveBags.stg.
  *
  * @since 4.0.
