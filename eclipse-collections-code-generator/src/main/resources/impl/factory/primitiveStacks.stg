@@ -19,7 +19,7 @@ import org.eclipse.collections.impl.stack.immutable.primitive.Immutable<name>Sta
 import org.eclipse.collections.impl.stack.mutable.primitive.Mutable<name>StackFactoryImpl;
 
 /**
- * <name>Stacks is a static utility for creating {@link Immutable<name>StackFactory}.
+ * <name>Stacks is a static utility for creating {@link Immutable<name>StackFactory} and {@link Mutable<name>StackFactory}.
  * This file was automatically generated from template file primitiveStacks.stg.
  *
  * @since 4.0.
