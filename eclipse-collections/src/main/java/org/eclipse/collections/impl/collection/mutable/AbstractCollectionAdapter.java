@@ -21,7 +21,6 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
-import org.eclipse.collections.api.block.SerializableComparator;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -70,7 +69,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.BiMapCollectProcedure;
@@ -737,12 +735,6 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
-    {
-        return this.toSortedList(Comparators.byFunction(function));
-    }
-
-    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         return TreeSortedSet.newSet(null, this);
@@ -752,13 +744,6 @@ public abstract class AbstractCollectionAdapter<T>
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         return TreeSortedSet.newSet(comparator, this);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(
-            Function<? super T, ? extends V> function)
-    {
-        return this.toSortedSet(Comparators.byFunction(function));
     }
 
     @Override
@@ -783,12 +768,6 @@ public abstract class AbstractCollectionAdapter<T>
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         return TreeBag.newBag(comparator, this.getDelegate());
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
-    {
-        return this.toSortedBag(Comparators.byFunction(function));
     }
 
     @Override
@@ -825,16 +804,6 @@ public abstract class AbstractCollectionAdapter<T>
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        return TreeSortedMap.<K, V>newMap(comparator).collectKeysAndValues(this.getDelegate(), keyFunction, valueFunction);
-    }
-
-    @Override
-    public <KK extends Comparable<? super KK>, K, V> MutableSortedMap<K, V> toSortedMapBy(
-            Function<? super K, KK> sortBy,
-            Function<? super T, ? extends K> keyFunction,
-            Function<? super T, ? extends V> valueFunction)
-    {
-        SerializableComparator<K> comparator = Comparators.byFunction(sortBy);
         return TreeSortedMap.<K, V>newMap(comparator).collectKeysAndValues(this.getDelegate(), keyFunction, valueFunction);
     }
 

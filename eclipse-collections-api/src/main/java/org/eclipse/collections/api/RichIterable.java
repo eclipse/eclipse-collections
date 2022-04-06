@@ -33,6 +33,7 @@ import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
+import org.eclipse.collections.api.block.factory.SerializableComparators;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -1651,7 +1652,7 @@ public interface RichIterable<T>
      */
     default <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
-        return this.toSortedList(Comparator.comparing(function));
+        return this.toSortedList(SerializableComparators.byFunction(function));
     }
 
     /**
@@ -1684,7 +1685,7 @@ public interface RichIterable<T>
      */
     default <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
-        return this.toSortedSet(Comparator.comparing(function));
+        return this.toSortedSet(SerializableComparators.byFunction(function));
     }
 
     /**
@@ -1717,7 +1718,7 @@ public interface RichIterable<T>
      */
     default <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
     {
-        return this.toSortedBag(Comparator.comparing(function));
+        return this.toSortedBag(SerializableComparators.byFunction(function));
     }
 
     /**
@@ -1774,7 +1775,7 @@ public interface RichIterable<T>
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {
-        return this.toSortedMap(Comparator.comparing(sortBy), keyFunction, valueFunction);
+        return this.toSortedMap(SerializableComparators.byFunction(sortBy), keyFunction, valueFunction);
     }
 
     /**

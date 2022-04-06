@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -947,15 +947,6 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.delegate.toSortedListBy(function);
-        }
-    }
-
-    @Override
     public MutableSet<T> toSet()
     {
         synchronized (this.lock)
@@ -1001,15 +992,6 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.delegate.toSortedSetBy(function);
-        }
-    }
-
-    @Override
     public MutableBag<T> toBag()
     {
         synchronized (this.lock)
@@ -1033,15 +1015,6 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         synchronized (this.lock)
         {
             return this.delegate.toSortedBag(comparator);
-        }
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.delegate.toSortedBagBy(function);
         }
     }
 
@@ -1078,15 +1051,6 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         synchronized (this.lock)
         {
             return this.delegate.toSortedMap(comparator, keyFunction, valueFunction);
-        }
-    }
-
-    @Override
-    public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(Function<? super NK, KK> sortBy, Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
-    {
-        synchronized (this.lock)
-        {
-            return this.delegate.toSortedMapBy(sortBy, keyFunction, valueFunction);
         }
     }
 

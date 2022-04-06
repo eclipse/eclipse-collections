@@ -78,7 +78,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -587,12 +586,6 @@ final class ImmutableEmptyBag<T>
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
-    {
-        return Lists.mutable.empty();
-    }
-
-    @Override
     public MutableSet<T> toSet()
     {
         return Sets.mutable.empty();
@@ -614,12 +607,6 @@ final class ImmutableEmptyBag<T>
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         return TreeBag.newBag(comparator);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
-    {
-        return TreeBag.newBag(Comparators.byFunction(function));
     }
 
     @Override
@@ -654,12 +641,6 @@ final class ImmutableEmptyBag<T>
             Function<? super T, ? extends NV> valueFunction)
     {
         return TreeSortedMap.newMap(comparator);
-    }
-
-    @Override
-    public <KK extends Comparable<? super KK>, K, V> MutableSortedMap<K, V> toSortedMapBy(Function<? super K, KK> sortBy, Function<? super T, ? extends K> keyFunction, Function<? super T, ? extends V> valueFunction)
-    {
-        return TreeSortedMap.newMap(Comparators.byFunction(sortBy));
     }
 
     @Override

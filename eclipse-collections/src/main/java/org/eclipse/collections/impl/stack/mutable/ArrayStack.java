@@ -974,12 +974,6 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
-    {
-        return this.delegate.asReversed().toSortedListBy(function);
-    }
-
-    @Override
     public MutableSet<T> toSet()
     {
         return this.delegate.asReversed().toSet();
@@ -1004,12 +998,6 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
-    {
-        return this.delegate.asReversed().toSortedSetBy(function);
-    }
-
-    @Override
     public MutableBag<T> toBag()
     {
         return this.delegate.asReversed().toBag();
@@ -1025,12 +1013,6 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         return this.delegate.asReversed().toSortedBag(comparator);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
-    {
-        return this.delegate.asReversed().toSortedBagBy(function);
     }
 
     @Override

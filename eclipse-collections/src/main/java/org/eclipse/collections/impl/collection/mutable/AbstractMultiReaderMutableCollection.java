@@ -269,18 +269,6 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
-    public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
-            Function<? super NK, KK> sortBy,
-            Function<? super T, ? extends NK> keyFunction,
-            Function<? super T, ? extends NV> valueFunction)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.getDelegate().toSortedMapBy(sortBy, keyFunction, valueFunction);
-        }
-    }
-
-    @Override
     public <NK, NV> MutableBiMap<NK, NV> toBiMap(
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -369,16 +357,6 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toImmutableSortedBag(comparator);
-        }
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(
-            Function<? super T, ? extends V> function)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.getDelegate().toSortedBagBy(function);
         }
     }
 

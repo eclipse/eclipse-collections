@@ -75,7 +75,6 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
@@ -823,12 +822,6 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
-    {
-        return this.getMutableCollection().toSortedList(Comparators.byFunction(function));
-    }
-
-    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         return this.getMutableCollection().toSortedSet();
@@ -838,12 +831,6 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         return this.getMutableCollection().toSortedSet(comparator);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
-    {
-        return this.getMutableCollection().toSortedSetBy(function);
     }
 
     @Override
@@ -868,12 +855,6 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         return this.getMutableCollection().toSortedBag(comparator);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
-    {
-        return this.getMutableCollection().toSortedBag(Comparators.byFunction(function));
     }
 
     @Override

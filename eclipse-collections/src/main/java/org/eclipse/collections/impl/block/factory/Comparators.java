@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.block.SerializableComparator;
+import org.eclipse.collections.api.block.factory.SerializableComparators;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -62,6 +63,17 @@ public final class Comparators
      */
     public static <T> SerializableComparator<T> naturalOrder()
     {
+        return SerializableComparators.naturalOrder();
+    }
+
+    /**
+     * This method exists so we can guarantee serialization compatibility in tests.
+     * @since 11.1
+     * @deprecated
+     */
+    @Deprecated
+    public static <T> SerializableComparator<T> originalNaturalOrder()
+    {
         return (SerializableComparator<T>) NATURAL_ORDER_COMPARATOR;
     }
 
@@ -69,6 +81,17 @@ public final class Comparators
      * Uses the natural compareTo methods of the objects which will throw if there are any nulls.
      */
     public static <T> SerializableComparator<T> reverseNaturalOrder()
+    {
+        return SerializableComparators.reverseNaturalOrder();
+    }
+
+    /**
+     * This method exists so we can guarantee serialization compatibility in tests.
+     * @since 11.1
+     * @deprecated
+     */
+    @Deprecated
+    public static <T> SerializableComparator<T> originalReverseNaturalOrder()
     {
         return (SerializableComparator<T>) REVERSE_NATURAL_ORDER_COMPARATOR;
     }
@@ -325,6 +348,32 @@ public final class Comparators
 
     public static <T, V extends Comparable<? super V>> SerializableComparator<T> byFunction(Function<? super T, ? extends V> function)
     {
+        SerializableComparator<T> comparator = Comparators.getPrimitiveFunctionComparator(function);
+        if (comparator != null)
+        {
+            return comparator;
+        }
+        return Comparators.byFunction(function, Comparators.naturalOrder());
+    }
+
+    /**
+     * This signature is kept for serialization backwards compatibility.
+     * @since 11.1
+     * @deprecated
+     */
+    @Deprecated
+    public static <T, V extends Comparable<? super V>> SerializableComparator<T> originalByFunction(Function<? super T, ? extends V> function)
+    {
+        SerializableComparator<T> comparator = Comparators.getPrimitiveFunctionComparator(function);
+        if (comparator != null)
+        {
+            return comparator;
+        }
+        return Comparators.originalByFunction(function, Comparators.originalNaturalOrder());
+    }
+
+    private static <T, V extends Comparable<? super V>> SerializableComparator<T> getPrimitiveFunctionComparator(Function<? super T, ? extends V> function)
+    {
         if (function instanceof BooleanFunction)
         {
             return Functions.toBooleanComparator((BooleanFunction<T>) function);
@@ -357,7 +406,7 @@ public final class Comparators
         {
             return Functions.toShortComparator((ShortFunction<T>) function);
         }
-        return Comparators.byFunction(function, naturalOrder());
+        return null;
     }
 
     public static <T, V extends Comparable<? super V>> SerializableComparator<T> byFunctionNullsLast(Function<? super T, ? extends V> function)
@@ -414,9 +463,26 @@ public final class Comparators
         return Functions.toShortComparator(function);
     }
 
-    public static <T, V> SerializableComparator<T> byFunction(
-            Function<? super T, ? extends V> function,
-            Comparator<V> comparator)
+    /**
+     * Original signature accepted a Comparator which may not be Serializable. This signature is kept for
+     * backwards compatibility.
+     */
+    public static <T, V> SerializableComparator<T> byFunction(Function<? super T, ? extends V> function, Comparator<V> comparator)
+    {
+        if (comparator instanceof SerializableComparator)
+        {
+            return SerializableComparators.byFunction(function, (SerializableComparator<V>) comparator);
+        }
+        return Comparators.originalByFunction(function, comparator);
+    }
+
+    /**
+     * Original signature accepted a Comparator which may not be Serializable. This signature is kept for
+     * backwards compatibility.
+     * @deprecated
+     */
+    @Deprecated
+    public static <T, V> SerializableComparator<T> originalByFunction(Function<? super T, ? extends V> function, Comparator<V> comparator)
     {
         return new FunctionComparator<>(function, comparator);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Two Sigma and others.
+ * Copyright (c) 2022 Two Sigma and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1076,12 +1076,6 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public <VV extends Comparable<? super VV>> MutableList<V> toSortedListBy(Function<? super V, ? extends VV> function)
-    {
-        return this.delegate.toSortedListBy(function);
-    }
-
-    @Override
     public MutableSet<V> toSet()
     {
         return this.delegate.toSet();
@@ -1100,12 +1094,6 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public <VV extends Comparable<? super VV>> MutableSortedSet<V> toSortedSetBy(Function<? super V, ? extends VV> function)
-    {
-        return this.delegate.toSortedSetBy(function);
-    }
-
-    @Override
     public MutableBag<V> toBag()
     {
         return this.delegate.toBag();
@@ -1121,12 +1109,6 @@ public class UnmodifiableMutableOrderedMap<K, V>
     public MutableSortedBag<V> toSortedBag(Comparator<? super V> comparator)
     {
         return this.delegate.toSortedBag(comparator);
-    }
-
-    @Override
-    public <VV extends Comparable<? super VV>> MutableSortedBag<V> toSortedBagBy(Function<? super V, ? extends VV> function)
-    {
-        return this.delegate.toSortedBagBy(function);
     }
 
     @Override
@@ -1161,15 +1143,6 @@ public class UnmodifiableMutableOrderedMap<K, V>
             Function<? super V, ? extends NV> valueFunction)
     {
         return this.delegate.toSortedMap(comparator, keyFunction, valueFunction);
-    }
-
-    @Override
-    public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
-            Function<? super NK, KK> sortBy,
-            Function<? super V, ? extends NK> keyFunction,
-            Function<? super V, ? extends NV> valueFunction)
-    {
-        return this.delegate.toSortedMapBy(sortBy, keyFunction, valueFunction);
     }
 
     @Override

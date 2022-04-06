@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -536,12 +536,6 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
-    public <R extends Comparable<? super R>> MutableSortedBag<V> toSortedBagBy(Function<? super V, ? extends R> function)
-    {
-        return this.getMutableMap().toSortedBagBy(function);
-    }
-
-    @Override
     public LazyIterable<V> asLazy()
     {
         return this.getMutableMap().asLazy();
@@ -594,15 +588,6 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
-    public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
-            Function<? super NK, KK> sortBy,
-            Function<? super V, ? extends NK> keyFunction,
-            Function<? super V, ? extends NV> valueFunction)
-    {
-        return this.getMutableMap().toSortedMapBy(sortBy, keyFunction, valueFunction);
-    }
-
-    @Override
     public <NK, NV> MutableBiMap<NK, NV> toBiMap(
             Function<? super V, ? extends NK> keyFunction,
             Function<? super V, ? extends NV> valueFunction)
@@ -629,12 +614,6 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
-    public <R extends Comparable<? super R>> MutableList<V> toSortedListBy(Function<? super V, ? extends R> function)
-    {
-        return this.getMutableMap().toSortedListBy(function);
-    }
-
-    @Override
     public MutableSortedSet<V> toSortedSet()
     {
         return this.getMutableMap().toSortedSet();
@@ -644,12 +623,6 @@ public class UnmodifiableMutableMap<K, V>
     public MutableSortedSet<V> toSortedSet(Comparator<? super V> comparator)
     {
         return this.getMutableMap().toSortedSet(comparator);
-    }
-
-    @Override
-    public <R extends Comparable<? super R>> MutableSortedSet<V> toSortedSetBy(Function<? super V, ? extends R> function)
-    {
-        return this.getMutableMap().toSortedSetBy(function);
     }
 
     @Override

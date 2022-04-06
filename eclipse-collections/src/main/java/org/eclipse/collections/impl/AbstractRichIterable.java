@@ -249,10 +249,10 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     }
 
     @Override
-    public <KK extends Comparable<? super KK>, K, V> MutableSortedMap<K, V> toSortedMapBy(
-            Function<? super K, KK> sortBy,
-            Function<? super T, ? extends K> keyFunction,
-            Function<? super T, ? extends V> valueFunction)
+    public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
+            Function<? super NK, KK> sortBy,
+            Function<? super T, ? extends NK> keyFunction,
+            Function<? super T, ? extends NV> valueFunction)
     {
         return this.toSortedMap(Comparators.byFunction(sortBy), keyFunction, valueFunction);
     }

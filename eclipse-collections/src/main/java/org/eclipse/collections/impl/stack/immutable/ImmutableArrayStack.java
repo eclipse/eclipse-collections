@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -709,12 +709,6 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
-    {
-        return this.delegate.asReversed().toSortedListBy(function);
-    }
-
-    @Override
     public MutableSet<T> toSet()
     {
         return this.delegate.asReversed().toSet();
@@ -733,12 +727,6 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     }
 
     @Override
-    public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
-    {
-        return this.delegate.asReversed().toSortedSetBy(function);
-    }
-
-    @Override
     public MutableBag<T> toBag()
     {
         return this.delegate.asReversed().toBag();
@@ -754,12 +742,6 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         return this.delegate.asReversed().toSortedBag(comparator);
-    }
-
-    @Override
-    public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
-    {
-        return this.delegate.asReversed().toSortedBagBy(function);
     }
 
     @Override
