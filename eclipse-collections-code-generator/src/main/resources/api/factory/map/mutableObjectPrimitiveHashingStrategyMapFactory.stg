@@ -1,0 +1,40 @@
+import "copyrightAndOthers.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/map/primitive"
+
+fileName(primitive) ::= "MutableObject<primitive.name>HashingStrategyMapFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.api.factory.map.primitive;
+
+import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+
+/**
+ * A factory which creates instances of type {@link MutableObject<name>Map}.
+ * This file was automatically generated from template file mutableObjectPrimitiveHashingStrategyMapFactory.stg.
+ *
+ * @since 11.1.
+ */
+public interface MutableObject<name>HashingStrategyMapFactory
+{
+    \<K> MutableObject<name>Map\<K> empty(HashingStrategy\<? super K> hashingStrategy);
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    \<K> MutableObject<name>Map\<K> of(HashingStrategy\<? super K> hashingStrategy);
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    \<K> MutableObject<name>Map\<K> with(HashingStrategy\<? super K> hashingStrategy);
+}
+
+>>

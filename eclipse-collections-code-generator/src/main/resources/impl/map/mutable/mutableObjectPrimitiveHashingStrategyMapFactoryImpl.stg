@@ -1,0 +1,49 @@
+import "copyrightAndOthers.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "MutableObject<primitive.name>HashingStrategyMapFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.factory.map.primitive.MutableObject<name>HashingStrategyMapFactory;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+
+/**
+ * MutableObject<name>HashingStrategyMapFactoryImpl is a factory implementation which creates instances of type {@link MutableObject<name>Map}.
+ * This file was automatically generated from template file mutableObjectPrimitiveHashingStrategyMapFactoryImpl.stg.
+ *
+ * @since 11.1.
+ */
+public class MutableObject<name>HashingStrategyMapFactoryImpl implements MutableObject<name>HashingStrategyMapFactory
+{
+    public static final MutableObject<name>HashingStrategyMapFactory INSTANCE = new MutableObject<name>HashingStrategyMapFactoryImpl();
+
+    @Override
+    public \<K> MutableObject<name>Map\<K> empty(HashingStrategy\<? super K> hashingStrategy)
+    {
+        return Object<name>HashMapWithHashingStrategy.newMap(hashingStrategy);
+    }
+
+    @Override
+    public \<K> MutableObject<name>Map\<K> of(HashingStrategy\<? super K> hashingStrategy)
+    {
+        return this.empty(hashingStrategy);
+    }
+
+    @Override
+    public \<K> MutableObject<name>Map\<K> with(HashingStrategy\<? super K> hashingStrategy)
+    {
+        return this.empty(hashingStrategy);
+    }
+}
+
+>>
