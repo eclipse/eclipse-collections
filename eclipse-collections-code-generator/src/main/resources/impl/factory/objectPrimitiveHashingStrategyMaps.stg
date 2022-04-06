@@ -1,0 +1,36 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>HashingStrategyMaps"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.factory.map.primitive.MutableObject<name>HashingStrategyMapFactory;
+import org.eclipse.collections.impl.map.mutable.primitive.MutableObject<name>HashingStrategyMapFactoryImpl;
+
+/**
+ * Object<name>HashingStrategyMaps is a static utility for creating {@link MutableObject<name>HashingStrategyMapFactory}.
+ * This file was automatically generated from template file objectPrimitiveHashingStrategyMaps.stg.
+ *
+ * @since 11.1.
+ */
+@SuppressWarnings("ConstantNamingConvention")
+public final class Object<name>HashingStrategyMaps
+{
+    public static final MutableObject<name>HashingStrategyMapFactory mutable = MutableObject<name>HashingStrategyMapFactoryImpl.INSTANCE;
+
+    private Object<name>HashingStrategyMaps()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+}
+
+>>

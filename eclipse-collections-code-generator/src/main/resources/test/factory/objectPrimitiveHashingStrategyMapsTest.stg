@@ -1,0 +1,83 @@
+import "copyrightAndOthers.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>HashingStrategyMapsTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.factory.map.primitive.MutableObject<name>HashingStrategyMapFactory;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.impl.block.factory.HashingStrategies;
+import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Junit test for {@link Object<name>HashingStrategyMaps}
+ * This file was automatically generated from template file objectPrimitiveHashingStrategyMapsTest.stg
+ */
+public class Object<name>HashingStrategyMapsTest
+{
+    private static final HashingStrategy\<String> STRING_HASHING_STRATEGY = HashingStrategies.nullSafeHashingStrategy(new HashingStrategy\<String>()
+        {
+            public int computeHashCode(String object)
+            {
+                return object.hashCode();
+            }
+
+            public boolean equals(String object1, String object2)
+            {
+                return object1.equals(object2);
+            }
+        });
+
+    @Test
+    public void mutables()
+    {
+        this.assertMutableHashingStrategyMapFactory(Object<name>HashingStrategyMaps.mutable);
+        this.assertMutableHashingStrategyMapFactory(org.eclipse.collections.api.factory.primitive.Object<name>HashingStrategyMaps.mutable);
+    }
+
+    private void assertMutableHashingStrategyMapFactory(MutableObject<name>HashingStrategyMapFactory mapFactory)
+    {
+        Assert.assertEquals(Object<name>HashMap.newMap(), mapFactory.of(STRING_HASHING_STRATEGY));
+        Verify.assertInstanceOf(MutableObject<name>Map.class, mapFactory.of(STRING_HASHING_STRATEGY));
+    }
+
+    @Test
+    public void mapWith_mutable()
+    {
+        Assert.assertEquals(Object<name>HashMap.newMap(), Object<name>HashingStrategyMaps.mutable.with(STRING_HASHING_STRATEGY));
+        Verify.assertInstanceOf(MutableObject<name>Map.class, Object<name>HashingStrategyMaps.mutable.with(STRING_HASHING_STRATEGY));
+    }
+
+    @Test
+    public void emptyMap_mutable()
+    {
+        Verify.assertEmpty(Object<name>HashingStrategyMaps.mutable.of(STRING_HASHING_STRATEGY));
+    }
+
+    @Test
+    public void classIsNonInstantiable()
+    {
+        Verify.assertClassNonInstantiable(Object<name>Maps.class);
+    }
+}
+
+>>
