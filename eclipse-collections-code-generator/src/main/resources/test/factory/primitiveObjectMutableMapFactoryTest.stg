@@ -1,0 +1,66 @@
+import "copyrightAndOthers.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/factory/map/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>ObjectMapFactoryTest"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.api.factory.map.primitive;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.eclipse.collections.api.factory.primitive.<name>ObjectMaps;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
+
+/**
+ * Junit test for {@link Mutable<name>ObjectMapFactory}
+ * This file was automatically generated from template file primitiveObjectMutableMapFactoryTest.stg
+ */
+public class Mutable<name>ObjectMapFactoryTest
+{
+    @Test
+    public void with()
+    {
+        Assert.assertEquals(<name>ObjectHashMap.newMap(), <name>ObjectMaps.mutable.with());
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), <name>ObjectMaps.mutable.with(<(literal.(type))("1")>, "one"));
+
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"),
+                <name>ObjectMaps.mutable.with(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"));
+
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"),
+                <name>ObjectMaps.mutable.with(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"));
+
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three",  <(literal.(type))("4")>, "four"),
+                <name>ObjectMaps.mutable.with(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three",  <(literal.(type))("4")>, "four"));
+    }
+
+    @Test
+    public void of()
+    {
+        Assert.assertEquals(<name>ObjectHashMap.newMap(), <name>ObjectMaps.mutable.of());
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), <name>ObjectMaps.mutable.of(<(literal.(type))("1")>, "one"));
+
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"),
+                <name>ObjectMaps.mutable.of(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"));
+
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"),
+                <name>ObjectMaps.mutable.of(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"));
+
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three",  <(literal.(type))("4")>, "four"),
+                <name>ObjectMaps.mutable.of(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three",  <(literal.(type))("4")>, "four"));
+    }
+}
+
+>>

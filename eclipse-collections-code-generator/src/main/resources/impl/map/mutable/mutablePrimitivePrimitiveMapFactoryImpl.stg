@@ -54,6 +54,56 @@ public class Mutable<name1><name2>MapFactoryImpl implements Mutable<name1><name2
     }
 
     @Override
+    public Mutable<name1><name2>Map with(<type1> key, <type2> value)
+    {
+        return <name1><name2>HashMap.newWithKeysValues(key, value);
+    }
+
+    @Override
+    public Mutable<name1><name2>Map of(<type1> key, <type2> value)
+    {
+        return this.with(key, value);
+    }
+
+    @Override
+    public Mutable<name1><name2>Map of(<type1> key1, <type2> value1, <type1> key2, <type2> value2)
+    {
+        return this.with(key1, value1, key2, value2);
+    }
+
+    @Override
+    public Mutable<name1><name2>Map with(<type1> key1, <type2> value1, <type1> key2, <type2> value2)
+    {
+        return <name1><name2>HashMap.newWithKeysValues(key1, value1, key2, value2);
+    }
+
+    @Override
+    public Mutable<name1><name2>Map of(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    public Mutable<name1><name2>Map with(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3)
+    {
+        return <name1><name2>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    public Mutable<name1><name2>Map of(
+            <type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3, <type1> key4, <type2> value4)
+    {
+        return this.with(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    @Override
+    public Mutable<name1><name2>Map with(
+            <type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3, <type1> key4, <type2> value4)
+    {
+        return <name1><name2>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    @Override
     public Mutable<name1><name2>Map ofInitialCapacity(int capacity)
     {
         return this.withInitialCapacity(capacity);

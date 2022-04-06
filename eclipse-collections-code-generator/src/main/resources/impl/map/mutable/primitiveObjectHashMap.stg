@@ -228,6 +228,11 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return new <name>ObjectHashMap\<V>(3).withKeysValues(key1, value1, key2, value2, key3, value3);
     }
 
+    public static \<V> <name>ObjectHashMap\<V> newWithKeysValues(<type> key1, V value1, <type> key2, V value2, <type> key3, V value3, <type> key4, V value4)
+    {
+        return new <name>ObjectHashMap\<V>(4).withKeysValues(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
     @Override
     public boolean equals(Object obj)
     {
