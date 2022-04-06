@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -29,7 +29,6 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.block.factory.primitive.CharPredicates;
 import org.eclipse.collections.impl.block.factory.primitive.CharToCharFunctions;
 import org.eclipse.collections.impl.block.function.primitive.CharFunction;
 import org.eclipse.collections.impl.block.function.primitive.CodePointFunction;
@@ -602,7 +601,7 @@ public final class StringIterate
 
     public static String englishToUpperCase(String string)
     {
-        if (StringIterate.anySatisfyChar(string, CharPredicates.isLowerCase()))
+        if (StringIterate.anySatisfyChar(string, Character::isLowerCase))
         {
             return StringIterate.collectChar(string, CharToCharFunctions.toUpperCase());
         }
@@ -611,7 +610,7 @@ public final class StringIterate
 
     public static String englishToLowerCase(String string)
     {
-        if (StringIterate.anySatisfyChar(string, CharPredicates.isUpperCase()))
+        if (StringIterate.anySatisfyChar(string, Character::isUpperCase))
         {
             return StringIterate.collectChar(string, CharToCharFunctions.toLowerCase());
         }
