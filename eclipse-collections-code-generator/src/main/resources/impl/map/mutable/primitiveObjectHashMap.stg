@@ -77,6 +77,13 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.<name>ObjectProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.BiMaps;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.<name>ObjectMaps;
+<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.api.factory.primitive.Object<name>Maps;<endif><endif>
+import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
@@ -120,13 +127,6 @@ import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
-<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;<endif><endif>
-import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
-import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.primitive.AbstractLazy<name>Iterable;
