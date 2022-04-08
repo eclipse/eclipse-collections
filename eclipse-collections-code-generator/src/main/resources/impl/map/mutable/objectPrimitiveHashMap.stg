@@ -52,7 +52,8 @@ import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.primitive.<name>Bags;
 import org.eclipse.collections.api.factory.primitive.<name>Lists;
-<if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;<endif>
+import org.eclipse.collections.api.factory.primitive.<name>Sets;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.api.factory.primitive.<name>ObjectMaps;<endif>
 import org.eclipse.collections.api.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
@@ -65,14 +66,10 @@ import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
-import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name>Collection;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
-import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
-import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 <(procedureImport.(type))()>
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
@@ -805,7 +802,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     @Override
     public Mutable<name>Collection select(<name>Predicate predicate)
     {
-        <name>ArrayList result = new <name>ArrayList();
+        Mutable<name>List result = <name>Lists.mutable.empty();
 
         for (int i = 0; i \< this.keys.length; i++)
         {
@@ -820,7 +817,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     @Override
     public Mutable<name>Collection reject(<name>Predicate predicate)
     {
-        <name>ArrayList result = new <name>ArrayList();
+        Mutable<name>List result = <name>Lists.mutable.empty();
 
         for (int i = 0; i \< this.keys.length; i++)
         {
@@ -848,7 +845,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     @Override
     public \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        MutableList\<V> result = FastList.newList(this.size());
+        MutableList\<V> result = Lists.mutable.withInitialCapacity(this.size());
         for (int i = 0; i \< this.keys.length; i++)
         {
             if (isNonSentinel(this.keys[i]))
@@ -1102,7 +1099,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     @Override
     public Mutable<name>List toList()
     {
-        Mutable<name>List result = new <name>ArrayList(this.size());
+        Mutable<name>List result = <name>Lists.mutable.withInitialCapacity(this.size());
 
         for (int i = 0; i \< this.keys.length; i++)
         {
@@ -1117,7 +1114,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     @Override
     public Mutable<name>Set toSet()
     {
-        Mutable<name>Set result = new <name>HashSet(this.size());
+        Mutable<name>Set result = <name>Sets.mutable.empty();
 
         for (int i = 0; i \< this.keys.length; i++)
         {
@@ -1132,7 +1129,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     @Override
     public Mutable<name>Bag toBag()
     {
-        Mutable<name>Bag result = new <name>HashBag(this.size());
+        Mutable<name>Bag result = <name>Bags.mutable.empty();
 
         for (int i = 0; i \< this.keys.length; i++)
         {
@@ -1794,7 +1791,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
         @Override
         public boolean retainAll(<type>... source)
         {
-            return this.retainAll(<name>HashSet.newSetWith(source));
+            return this.retainAll(<name>Sets.mutable.with(source));
         }
 
         @Override
@@ -2037,7 +2034,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
         @Override
         public Mutable<name>Collection newEmpty()
         {
-            return new <name>HashBag();
+            return <name>Bags.mutable.empty();
         }
     }
 
