@@ -66,6 +66,8 @@ import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Proce
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 <if(!primitive1.bytePrimitive)>import org.eclipse.collections.impl.SpreadFunctions;<endif>
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
+import org.eclipse.collections.api.factory.primitive.<name1><name2>Maps;
+<if(!primitive2.booleanPrimitive)><if(!sameTwoPrimitives)>import org.eclipse.collections.api.factory.primitive.<name2><name1>Maps;<endif><endif>
 import org.eclipse.collections.api.iterator.<name1>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name1>Iterator;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;<endif>
@@ -78,8 +80,6 @@ import org.eclipse.collections.api.set.primitive.<name1>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name2>HashBag;
-import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
-<if(!primitive2.booleanPrimitive)><if(!sameTwoPrimitives)>import org.eclipse.collections.impl.factory.primitive.<name2><name1>Maps;<endif><endif>
 import org.eclipse.collections.impl.iterator.Unmodifiable<name1>Iterator;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.primitive.AbstractLazy<name1>Iterable;

@@ -49,6 +49,11 @@ import org.eclipse.collections.api.block.procedure.primitive.Object<name>Procedu
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.<name>Bags;
+import org.eclipse.collections.api.factory.primitive.<name>Lists;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;<endif>
+import org.eclipse.collections.api.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
@@ -63,12 +68,7 @@ import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name>Collection;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
-import org.eclipse.collections.impl.factory.primitive.<name>Bags;
-import org.eclipse.collections.impl.factory.primitive.<name>Lists;
-import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
-<if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;<endif>
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
