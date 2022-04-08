@@ -184,6 +184,11 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return new ObjectBooleanHashMapWithHashingStrategy<>(map.hashingStrategy, map);
     }
 
+    public static <K> ObjectBooleanHashMapWithHashingStrategy<K> newMapWithInitialCapacity(HashingStrategy<? super K> hashingStrategy, int initialCapacity)
+    {
+        return new ObjectBooleanHashMapWithHashingStrategy<>(hashingStrategy, initialCapacity);
+    }
+
     public static <K> ObjectBooleanHashMapWithHashingStrategy<K> newWithKeysValues(HashingStrategy<? super K> hashingStrategy, K key, boolean value)
     {
         return new ObjectBooleanHashMapWithHashingStrategy<K>(hashingStrategy, 1).withKeyValue(key, value);

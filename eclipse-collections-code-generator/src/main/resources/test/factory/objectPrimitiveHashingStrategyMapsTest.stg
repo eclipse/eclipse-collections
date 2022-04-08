@@ -19,6 +19,8 @@ body(type, wrapperName, name) ::= <<
 
 package org.eclipse.collections.impl.factory.primitive;
 
+import java.lang.reflect.Field;
+
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.factory.map.primitive.MutableObject<name>HashingStrategyMapFactory;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
@@ -68,9 +70,25 @@ public class Object<name>HashingStrategyMapsTest
     }
 
     @Test
-    public void emptyMap_mutable()
+    public void mapOf_mutable()
     {
         Verify.assertEmpty(Object<name>HashingStrategyMaps.mutable.of(STRING_HASHING_STRATEGY));
+    }
+
+    @Test
+    public void mapWithInitialCapacity_mutable() throws Exception
+    {
+        MutableObject<name>Map\<String> map = Object<name>HashingStrategyMaps.mutable.withInitialCapacity(STRING_HASHING_STRATEGY, 15);
+        Assert.assertEquals(Object<name>HashMap.newMap(), map);
+        Verify.assertInstanceOf(MutableObject<name>Map.class, map);
+
+        Field keys = map.getClass().getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = map.getClass().getDeclaredField("values");
+        values.setAccessible(true);
+
+        Assert.assertEquals(32L, ((Object[]) keys.get(map)).length);
+        Assert.assertEquals(32L, ((<type>[]) values.get(map)).length);
     }
 
     @Test

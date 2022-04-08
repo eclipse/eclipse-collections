@@ -16,9 +16,9 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
+import org.eclipse.collections.api.factory.primitive.ObjectIntHashingStrategyMaps;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
 import org.eclipse.collections.impl.bag.mutable.AbstractHashBag;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMapWithHashingStrategy;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -37,7 +37,7 @@ public class HashBagWithHashingStrategy<T>
             throw new IllegalArgumentException("Cannot Instantiate HashBagWithHashingStrategy with null HashingStrategy");
         }
         this.hashingStrategy = hashingStrategy;
-        this.items = ObjectIntHashMapWithHashingStrategy.newMap(hashingStrategy);
+        this.items = ObjectIntHashingStrategyMaps.mutable.with(hashingStrategy);
     }
 
     public HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy, int size)
@@ -47,7 +47,7 @@ public class HashBagWithHashingStrategy<T>
             throw new IllegalArgumentException("Cannot Instantiate HashBagWithHashingStrategy with null HashingStrategy");
         }
         this.hashingStrategy = hashingStrategy;
-        this.items = new ObjectIntHashMapWithHashingStrategy<>(hashingStrategy, size);
+        this.items = ObjectIntHashingStrategyMaps.mutable.withInitialCapacity(hashingStrategy, size);
     }
 
     private HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy, MutableObjectIntMap<T> map)

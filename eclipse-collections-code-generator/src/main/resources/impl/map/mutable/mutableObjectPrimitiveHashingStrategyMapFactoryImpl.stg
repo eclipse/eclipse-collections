@@ -44,6 +44,12 @@ public class MutableObject<name>HashingStrategyMapFactoryImpl implements Mutable
     {
         return this.empty(hashingStrategy);
     }
+
+    @Override
+    public \<K> MutableObject<name>Map\<K> withInitialCapacity(HashingStrategy\<? super K> hashingStrategy, int initialCapacity)
+    {
+        return Object<name>HashMapWithHashingStrategy.newMapWithInitialCapacity(hashingStrategy, initialCapacity);
+    }
 }
 
 >>

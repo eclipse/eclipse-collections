@@ -35,6 +35,11 @@ public interface MutableObject<name>HashingStrategyMapFactory
      * Same as {@link #empty()}.
      */
     \<K> MutableObject<name>Map\<K> with(HashingStrategy\<? super K> hashingStrategy);
+
+    /**
+     * Same as {@link #empty()} but takes in an initial capacity
+     */
+    \<K> MutableObject<name>Map\<K> withInitialCapacity(HashingStrategy\<? super K> hashingStrategy, int initialCapacity);
 }
 
 >>
