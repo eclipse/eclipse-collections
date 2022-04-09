@@ -157,6 +157,11 @@ public final class SortedSetAdapter<T>
     @Override
     public boolean equals(Object obj)
     {
+        if (obj == this)
+        {
+            return true;
+        }
+
         return this.delegate.equals(obj);
     }
 
