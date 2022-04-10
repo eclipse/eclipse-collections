@@ -1,13 +1,13 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Findbugs
+name: SpotBugs
 
 on: [push, pull_request]
 
 jobs:
   applications:
-    name: Findbugs ${{ matrix.java-version }}
+    name: SpotBugs ${{ matrix.java-version }}
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -25,8 +25,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: ${{ matrix.java-version }}
-      - name: Findbugs
-        run: ./mvnw install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true --no-transfer-progress
+      - name: SpotBugs
+        run: ./mvnw install spotbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true --no-transfer-progress
         env:
           MAVEN_OPTS: "-Xmx1g"
-

@@ -10,7 +10,10 @@
   ~ http://www.eclipse.org/org/documents/edl-v10.php.
   -->
 
-<FindBugsFilter>
+<FindBugsFilter
+    xmlns="https://github.com/spotbugs/filter/3.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
 
     <Match>
         <Bug pattern="CN_IDIOM_NO_SUPER_CALL" />
@@ -76,6 +79,7 @@
             <Class name="org.eclipse.collections.impl.math.SplitDoubleSumCombiner" />
             <Class name="org.eclipse.collections.impl.math.SplitIntegerSumCombiner" />
             <Class name="org.eclipse.collections.impl.parallel.ArrayProcedureFJTask" />
+            <Class name="org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator" />
         </Or>
     </Match>
 
@@ -384,15 +388,11 @@
 
     <Match>
         <Bug pattern="REC_CATCH_EXCEPTION" />
-        <Or>
-            <Class name="org.eclipse.collections.impl.utility.ArrayListIterate" />
-        </Or>
+        <Class name="org.eclipse.collections.impl.utility.ArrayListIterate" />
     </Match>
     <Match>
         <Bug pattern="DE_MIGHT_IGNORE" />
-        <Or>
-            <Class name="org.eclipse.collections.impl.utility.ArrayListIterate" />
-        </Or>
+        <Class name="org.eclipse.collections.impl.utility.ArrayListIterate" />
     </Match>
     <Match>
         <Bug pattern="SE_NO_SUITABLE_CONSTRUCTOR_FOR_EXTERNALIZATION" />

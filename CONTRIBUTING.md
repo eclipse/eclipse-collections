@@ -69,7 +69,7 @@ Coding Style
 Eclipse Collections follows a coding style that is similar to [Google's Style Guide for Java][style-guide], but with curly braces on their own lines. Many aspects of the style guide are enforced by CheckStyle, but not all, so please take care.
 
 ```bash
-$ mvn clean install checkstyle:check findbugs:check --projects "!scala-unit-tests,!jmh-scala-tests,!jmh-tests" -DskipTests=true
+$ mvn clean install checkstyle:check spotbugs:check --projects "!scala-unit-tests,!jmh-scala-tests,!jmh-tests" -DskipTests=true
 ```
 
 Avoid changing whitespace on lines that are unrelated to your pull request. This helps preserve the accuracy of the git blame view, and makes code reviews easier.
@@ -93,7 +93,7 @@ Excessive branching and merging can make git history confusing. With that in min
 Submit your pull request when ready. Three checks will be kicked off automatically.
 
 - IP Validation: Checks that all committers signed the Eclipse CLA and signed their commits.
-- Continuous integration: [GitHub Actions][github] that run JUnit tests, CheckStyle, and FindBugs.
+- Continuous integration: [GitHub Actions][github] that run JUnit tests, CheckStyle, and SpotBugs.
 - The standard GitHub check that the pull request has no conflicts with the base branch.
 
 Make sure all the checks pass. One of the committers will take a look and provide feedback or merge your contribution.

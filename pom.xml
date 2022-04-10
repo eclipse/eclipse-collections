@@ -124,7 +124,7 @@
         <trove4j.version>3.0.3</trove4j.version>
         <checkstyle.version>9.1</checkstyle.version>
         <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
-        <findbugs.plugin.version>3.0.5</findbugs.plugin.version>
+        <spotbugs.plugin.version>4.6.0.0</spotbugs.plugin.version>
         <jacoco.plugin.version>0.8.7</jacoco.plugin.version>
         <junit.version>4.13.2</junit.version>
 
@@ -501,15 +501,15 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>${findbugs.plugin.version}</version>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs.plugin.version}</version>
                     <configuration>
                         <effort>Max</effort>
                         <threshold>Default</threshold>
                         <xmlOutput>true</xmlOutput>
-                        <findbugsXmlOutput>true</findbugsXmlOutput>
-                        <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
+                        <spotbugsXmlOutput>true</spotbugsXmlOutput>
+                        <excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
                     </configuration>
                 </plugin>
 
@@ -690,14 +690,14 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
                 <configuration>
                     <effort>Max</effort>
                     <threshold>Default</threshold>
                     <xmlOutput>true</xmlOutput>
-                    <findbugsXmlOutput>true</findbugsXmlOutput>
-                    <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
+                    <spotbugsXmlOutput>true</spotbugsXmlOutput>
+                    <excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
                 </configuration>
             </plugin>
 

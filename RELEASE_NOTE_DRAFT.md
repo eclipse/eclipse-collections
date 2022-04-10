@@ -61,7 +61,7 @@ The Eclipse Collections team gives a huge thank you to everyone who participated
 * Removed extra calls to map.get in sumByDoubleFunction and sumByFloatFunction.
 * Removed implementations of OrderedIterable.toStack() that can use the default implementation instead.
 * Removed implementations of aggregateBy and aggregateInPlaceBy that can use default implementations instead.
-* Removed references to deleted classes in findbugs-exclude file.
+* Removed references to deleted classes in spotbugs-exclude file.
 
 # Removed Functionality
 --------------------------
