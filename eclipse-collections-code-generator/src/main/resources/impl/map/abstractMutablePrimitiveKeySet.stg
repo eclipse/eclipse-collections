@@ -565,7 +565,7 @@ public abstract class AbstractMutable<name>KeySet implements Mutable<name>Set, E
     public <type>[] toArray()
     {
         int size = this.getOuter().size();
-        final <type>[] result = new <type>[size];
+        <type>[] result = new <type>[size];
         this.getOuter().forEachKey(new <name>Procedure()
         {
             private int index;
