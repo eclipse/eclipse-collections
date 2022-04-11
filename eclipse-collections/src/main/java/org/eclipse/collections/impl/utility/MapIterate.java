@@ -39,6 +39,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.factory.primitive.CharLists;
@@ -411,7 +412,7 @@ public final class MapIterate
             Map<K, V> map,
             Function<? super V, ? extends A> function)
     {
-        return collect(map, function, FastList.newList(map.size()));
+        return collect(map, function, Lists.mutable.withInitialCapacity(map.size()));
     }
 
     /**
@@ -928,7 +929,7 @@ public final class MapIterate
      */
     public static <K, V> MutableList<Pair<K, V>> toListOfPairs(Map<K, V> map)
     {
-        MutableList<Pair<K, V>> pairs = FastList.newList(map.size());
+        MutableList<Pair<K, V>> pairs = Lists.mutable.withInitialCapacity(map.size());
         MapIterate.forEachKeyValue(map, (key, value) -> pairs.add(Tuples.pair(key, value)));
         return pairs;
     }

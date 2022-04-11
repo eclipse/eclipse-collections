@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,7 +13,7 @@ package org.eclipse.collections.impl.block.procedure;
 import java.util.List;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.api.factory.Lists;
 
 /**
  * ChainedProcedure allows a developer to chain together procedure to be executed in sequence.
@@ -22,7 +22,7 @@ public final class ChainedProcedure<T> implements Procedure<T>
 {
     private static final long serialVersionUID = 1L;
 
-    private final List<Procedure<? super T>> procedures = FastList.newList(3);
+    private final List<Procedure<? super T>> procedures = Lists.mutable.withInitialCapacity(3);
 
     public static <E> ChainedProcedure<E> with(Procedure<? super E> procedure1, Procedure<? super E> procedure2)
     {

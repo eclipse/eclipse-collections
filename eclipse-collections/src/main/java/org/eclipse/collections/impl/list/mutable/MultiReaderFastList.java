@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -121,7 +121,7 @@ public final class MultiReaderFastList<T>
 
     public static <T> MultiReaderFastList<T> newList(int capacity)
     {
-        return new MultiReaderFastList<>(FastList.newList(capacity));
+        return new MultiReaderFastList<>(Lists.mutable.withInitialCapacity(capacity));
     }
 
     public static <T> MultiReaderFastList<T> newList(Iterable<? extends T> iterable)

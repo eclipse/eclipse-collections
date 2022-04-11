@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,7 +15,7 @@ import java.util.Collection;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.api.factory.Lists;
 
 public final class CollectIfProcedure<T, V>
         implements Procedure<T>
@@ -30,7 +30,7 @@ public final class CollectIfProcedure<T, V>
             Function<? super T, ? extends V> function,
             Predicate<? super T> predicate)
     {
-        this(FastList.newList(taskSize), function, predicate);
+        this(Lists.mutable.withInitialCapacity(taskSize), function, predicate);
     }
 
     public CollectIfProcedure(

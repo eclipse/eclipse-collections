@@ -787,7 +787,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableList<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(FastList.newList(this.size())).toImmutable();
+        return this.zipWithIndex(Lists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
@@ -831,7 +831,7 @@ abstract class AbstractImmutableList<T>
     @Override
     protected MutableCollection<T> newMutable(int size)
     {
-        return FastList.newList(size);
+        return Lists.mutable.withInitialCapacity(size);
     }
 
     @Override

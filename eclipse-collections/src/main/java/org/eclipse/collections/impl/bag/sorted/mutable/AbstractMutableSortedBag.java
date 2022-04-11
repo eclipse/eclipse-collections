@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -218,7 +218,7 @@ public abstract class AbstractMutableSortedBag<T>
     @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, FastList.newList(this.size()));
+        return this.collect(function, Lists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
@@ -233,7 +233,7 @@ public abstract class AbstractMutableSortedBag<T>
     @Override
     public <V> MutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        return this.collectWithIndex(function, FastList.newList(this.size()));
+        return this.collectWithIndex(function, Lists.mutable.withInitialCapacity(this.size()));
     }
 
     /**

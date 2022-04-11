@@ -33,6 +33,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
@@ -231,7 +232,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public ImmutableList<V> select(Predicate<? super V> predicate)
     {
-        return this.select(predicate, FastList.newList(this.size())).toImmutable();
+        return this.select(predicate, Lists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
@@ -257,7 +258,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public ImmutableList<V> reject(Predicate<? super V> predicate)
     {
-        return this.reject(predicate, FastList.newList(this.size())).toImmutable();
+        return this.reject(predicate, Lists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
@@ -409,19 +410,19 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public <R> ImmutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
-        return this.flatCollect(function, FastList.newList(this.size())).toImmutable();
+        return this.flatCollect(function, Lists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
     public <S> ImmutableList<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, FastList.newList(this.size())).toImmutable();
+        return this.zip(that, Lists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
     public ImmutableList<Pair<V, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(FastList.newList(this.size())).toImmutable();
+        return this.zipWithIndex(Lists.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override
