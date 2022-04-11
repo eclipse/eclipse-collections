@@ -214,11 +214,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
         assertEquals(
                 this.newMutableForTransform(1, 1, 2, 1, 2, 1, 2, 3),
                 this.newWith(1, 2, 2, 3).flatCollect(Interval::oneTo, this.newMutableForTransform()));
-    }
 
-    @Test
-    default void RichIterable_flatCollectWith()
-    {
         assertEquals(
                 this.getExpectedTransformed(1, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 3, 4, 5),
                 this.newWith(1, 2, 2, 3).flatCollectWith(Interval::fromTo, 5));
