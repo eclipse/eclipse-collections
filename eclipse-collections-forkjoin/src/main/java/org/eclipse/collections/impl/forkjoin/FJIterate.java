@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -85,19 +85,11 @@ public final class FJIterate
      * <p>
      * e.g.
      * <pre>
-     * {@code final ConcurrentMutableMap<Integer, Object> chm = new ConcurrentHashMap<Integer, Object>();}
-     * FJIterate.<b>forEachWithIndex</b>(collection, new ObjectIntProcedure()
-     * {
-     *     public void value(Object object, int index)
-     *     {
-     *         chm.put(index, object);
-     *     }
-     * });
+     * Map&lt;Integer, Object&gt; chm = new ConcurrentHashMap&lt;Integer, Object&gt;();
+     * FJIterate.<b>forEachWithIndex</b>(collection, (each, index) -> chm.put(index, each));
      * </pre>
      */
-    public static <T> void forEachWithIndex(
-            Iterable<T> iterable,
-            ObjectIntProcedure<? super T> procedure)
+    public static <T> void forEachWithIndex(Iterable<T> iterable, ObjectIntProcedure<? super T> procedure)
     {
         FJIterate.forEachWithIndex(iterable, procedure, FJIterate.FORK_JOIN_POOL);
     }
@@ -108,14 +100,8 @@ public final class FJIterate
      * is executed against the specified executor.
      *
      * <pre>e.g.
-     * {@code final ConcurrentMutableMap<Integer, Object> chm = new ConcurrentHashMap<Integer, Object>();}
-     * FJIterate.<b>forEachWithIndex</b>(collection, new ObjectIntProcedure()
-     * {
-     *     public void value(Object object, int index)
-     *     {
-     *         chm.put(index, object);
-     *     }
-     * }, executor);
+     * Map&lt;Integer, Object&gt; chm = new ConcurrentHashMap&lt;Integer, Object&gt;();
+     * FJIterate.<b>forEachWithIndex</b>(collection, (each, index) -> chm.put(index, each), executor);
      * </pre>
      *
      * @param executor Use this executor for all execution.
@@ -241,14 +227,8 @@ public final class FJIterate
      * <p>
      * e.g.
      * <pre>
-     * {@code final ConcurrentMutableMap<Object, Boolean> chm = new ConcurrentHashMap<Object, Boolean>();}
-     * FJIterate.<b>forEach</b>(collection, new Procedure()
-     * {
-     *     public void value(Object object)
-     *     {
-     *         chm.put(object, Boolean.TRUE);
-     *     }
-     * });
+     * Map&lt;Object, Boolean&gt; chm = new ConcurrentHashMap&lt;Object, Boolean&gt;();
+     * FJIterate.<b>forEach</b>(collection, each -> chm.put(each, Boolean.TRUE));
      * </pre>
      */
     public static <T> void forEach(Iterable<T> iterable, Procedure<? super T> procedure)
@@ -262,14 +242,8 @@ public final class FJIterate
      * <p>
      * e.g.
      * <pre>
-     * {@code final ConcurrentMutableMap<Object, Boolean> chm = new ConcurrentHashMap<Object, Boolean>();}
-     * FJIterate.<b>forEachBatchSize</b>(collection, new Procedure()
-     * {
-     *     public void value(Object object)
-     *     {
-     *         chm.put(object, Boolean.TRUE);
-     *     }
-     * }, 100);
+     * Map&lt;Object, Boolean&gt; chm = new ConcurrentHashMap&lt;Object, Boolean&gt;();
+     * FJIterate.<b>forEachBatchSize</b>(collection, each -> chm.put(each, Boolean.TRUE), 100);
      * </pre>
      */
     public static <T> void forEach(Iterable<T> iterable, Procedure<? super T> procedure, int batchSize)

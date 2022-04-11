@@ -96,19 +96,11 @@ public final class ParallelIterate
      * <p>
      * e.g.
      * <pre>
-     * final Map&lt;Integer, Object&gt; chm = new ConcurrentHashMap&lt;Integer, Object&gt;();
-     * ParallelIterate.<b>forEachWithIndex</b>(collection, new ObjectIntProcedure()
-     * {
-     *     public void value(Object object, int index)
-     *     {
-     *         chm.put(index, object);
-     *     }
-     * });
+     * Map&lt;Integer, Object&gt; chm = new ConcurrentHashMap&lt;Integer, Object&gt;();
+     * ParallelIterate.<b>forEachWithIndex</b>(collection, (each, index) -> chm.put(index, each));
      * </pre>
      */
-    public static <T> void forEachWithIndex(
-            Iterable<T> iterable,
-            ObjectIntProcedure<? super T> objectIntProcedure)
+    public static <T> void forEachWithIndex(Iterable<T> iterable, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ParallelIterate.forEachWithIndex(iterable, objectIntProcedure, ParallelIterate.EXECUTOR_SERVICE);
     }
@@ -119,14 +111,8 @@ public final class ParallelIterate
      * is executed against the specified executor.
      *
      * <pre>e.g.
-     * final Map&lt;Integer, Object&gt; chm = new ConcurrentHashMap&lt;Integer, Object&gt;();
-     * ParallelIterate.<b>forEachWithIndex</b>(collection, new ObjectIntProcedure()
-     * {
-     *     public void value(Object object, int index)
-     *     {
-     *         chm.put(index, object);
-     *     }
-     * }, executor);
+     * Map&lt;Integer, Object&gt; chm = new ConcurrentHashMap&lt;Integer, Object&gt;();
+     * ParallelIterate.<b>forEachWithIndex</b>(collection, (each, index) -> chm.put(index, each), executor);
      * </pre>
      *
      * @param executor Use this executor for all execution.
@@ -264,14 +250,8 @@ public final class ParallelIterate
      * <p>
      * e.g.
      * <pre>
-     * final Map&lt;Object, Boolean&gt; chm = new ConcurrentHashMap&lt;Object, Boolean&gt;();
-     * ParallelIterate.<b>forEach</b>(collection, new Procedure()
-     * {
-     *     public void value(Object object)
-     *     {
-     *         chm.put(object, Boolean.TRUE);
-     *     }
-     * });
+     * Map&lt;Object, Boolean&gt; chm = new ConcurrentHashMap&lt;Object, Boolean&gt;();
+     * ParallelIterate.<b>forEach</b>(collection, each -> chm.put(each, Boolean.TRUE));
      * </pre>
      */
     public static <T> void forEach(Iterable<T> iterable, Procedure<? super T> procedure)
@@ -285,14 +265,8 @@ public final class ParallelIterate
      * <p>
      * e.g.
      * <pre>
-     * final Map&lt;Object, Boolean&gt; chm = new ConcurrentHashMap&lt;Object, Boolean&gt;();
-     * ParallelIterate.<b>forEachBatchSize</b>(collection, new Procedure()
-     * {
-     *     public void value(Object object)
-     *     {
-     *         chm.put(object, Boolean.TRUE);
-     *     }
-     * }, 100);
+     * Map&lt;Object, Boolean&gt; chm = new ConcurrentHashMap&lt;Object, Boolean&gt;();
+     * ParallelIterate.<b>forEachBatchSize</b>(collection, each -> chm.put(each, Boolean.TRUE), 100);
      * </pre>
      */
     public static <T> void forEach(Iterable<T> iterable, Procedure<? super T> procedure, int batchSize)
