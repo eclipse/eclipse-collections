@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.parallel;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.procedure.CollectIfProcedure;
-import org.eclipse.collections.impl.list.mutable.FastList;
 
 public final class CollectIfProcedureFactory<T, V> implements ProcedureFactory<CollectIfProcedure<T, V>>
 {
@@ -34,6 +34,6 @@ public final class CollectIfProcedureFactory<T, V> implements ProcedureFactory<C
     @Override
     public CollectIfProcedure<T, V> create()
     {
-        return new CollectIfProcedure<>(FastList.newList(this.collectionSize), this.function, this.predicate);
+        return new CollectIfProcedure<>(Lists.mutable.withInitialCapacity(this.collectionSize), this.function, this.predicate);
     }
 }

@@ -63,6 +63,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.factory.primitive.BooleanStacks;
 import org.eclipse.collections.api.factory.primitive.ByteStacks;
@@ -194,7 +195,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public ListIterable<T> pop(int count)
     {
         this.checkNegativeCount(count);
-        MutableList<T> result = FastList.newList(count);
+        MutableList<T> result = Lists.mutable.withInitialCapacity(count);
         if (this.checkZeroCount(count))
         {
             return result;

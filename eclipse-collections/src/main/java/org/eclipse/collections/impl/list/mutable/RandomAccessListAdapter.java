@@ -328,7 +328,7 @@ public final class RandomAccessListAdapter<T>
     @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return RandomAccessListIterate.collect(this.delegate, function, FastList.newList(this.delegate.size()));
+        return RandomAccessListIterate.collect(this.delegate, function, Lists.mutable.withInitialCapacity(this.delegate.size()));
     }
 
     @Override
@@ -382,7 +382,7 @@ public final class RandomAccessListAdapter<T>
     @Override
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return RandomAccessListIterate.flatCollect(this.delegate, function, FastList.newList(this.delegate.size()));
+        return RandomAccessListIterate.flatCollect(this.delegate, function, Lists.mutable.withInitialCapacity(this.delegate.size()));
     }
 
     @Override
@@ -420,7 +420,7 @@ public final class RandomAccessListAdapter<T>
     @Override
     public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return RandomAccessListIterate.collectWith(this.delegate, function, parameter, FastList.newList(this.delegate.size()));
+        return RandomAccessListIterate.collectWith(this.delegate, function, parameter, Lists.mutable.withInitialCapacity(this.delegate.size()));
     }
 
     @Override
@@ -438,13 +438,13 @@ public final class RandomAccessListAdapter<T>
     @Override
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return RandomAccessListIterate.zip(this.delegate, that, FastList.newList(this.delegate.size()));
+        return RandomAccessListIterate.zip(this.delegate, that, Lists.mutable.withInitialCapacity(this.delegate.size()));
     }
 
     @Override
     public MutableList<Pair<T, Integer>> zipWithIndex()
     {
-        return RandomAccessListIterate.zipWithIndex(this.delegate, FastList.newList(this.delegate.size()));
+        return RandomAccessListIterate.zipWithIndex(this.delegate, Lists.mutable.withInitialCapacity(this.delegate.size()));
     }
 
     @Override

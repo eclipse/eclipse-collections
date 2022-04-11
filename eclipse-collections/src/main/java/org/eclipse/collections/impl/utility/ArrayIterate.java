@@ -294,7 +294,7 @@ public final class ArrayIterate
                 objectArray,
                 predicate,
                 function,
-                FastList.newList(objectArray.length));
+                Lists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -422,7 +422,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collect on null");
         }
-        return ArrayIterate.collect(objectArray, function, FastList.newList(objectArray.length));
+        return ArrayIterate.collect(objectArray, function, Lists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -706,7 +706,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a flatCollect on null");
         }
-        return ArrayIterate.flatCollect(objectArray, function, FastList.newList(objectArray.length));
+        return ArrayIterate.flatCollect(objectArray, function, Lists.mutable.withInitialCapacity(objectArray.length));
     }
 
     public static <T, V, R extends Collection<V>> R flatCollect(
@@ -1333,7 +1333,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectWith on null");
         }
-        return ArrayIterate.collectWith(objectArray, function, parameter, FastList.newList(objectArray.length));
+        return ArrayIterate.collectWith(objectArray, function, parameter, Lists.mutable.withInitialCapacity(objectArray.length));
     }
 
     /**
@@ -1385,7 +1385,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayIterate.take(array, count, FastList.newList(Math.min(array.length, count)));
+        return ArrayIterate.take(array, count, Lists.mutable.withInitialCapacity(Math.min(array.length, count)));
     }
 
     /**
@@ -1414,7 +1414,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayIterate.drop(array, count, FastList.newList(array.length - Math.min(array.length, count)));
+        return ArrayIterate.drop(array, count, Lists.mutable.withInitialCapacity(array.length - Math.min(array.length, count)));
     }
 
     /**

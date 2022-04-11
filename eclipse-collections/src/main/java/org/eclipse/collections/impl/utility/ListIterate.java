@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -344,7 +344,7 @@ public final class ListIterate
             List<T> list,
             Function<? super T, ? extends A> function)
     {
-        return ListIterate.collect(list, function, FastList.newList(list.size()));
+        return ListIterate.collect(list, function, Lists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -369,7 +369,7 @@ public final class ListIterate
             List<T> list,
             ObjectIntToObjectFunction<? super T, ? extends A> function)
     {
-        return ListIterate.collectWithIndex(list, function, FastList.newList(list.size()));
+        return ListIterate.collectWithIndex(list, function, Lists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -631,7 +631,7 @@ public final class ListIterate
             List<T> list,
             Function<? super T, ? extends Iterable<A>> function)
     {
-        return ListIterate.flatCollect(list, function, FastList.newList(list.size()));
+        return ListIterate.flatCollect(list, function, Lists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -1350,7 +1350,7 @@ public final class ListIterate
             Function2<? super T, ? super P, ? extends A> function,
             P parameter)
     {
-        return ListIterate.collectWith(list, function, parameter, FastList.newList(list.size()));
+        return ListIterate.collectWith(list, function, parameter, Lists.mutable.withInitialCapacity(list.size()));
     }
 
     /**
@@ -1436,7 +1436,7 @@ public final class ListIterate
         }
         if (list instanceof RandomAccess)
         {
-            return RandomAccessListIterate.take(list, count, FastList.newList(Math.min(list.size(), count)));
+            return RandomAccessListIterate.take(list, count, Lists.mutable.withInitialCapacity(Math.min(list.size(), count)));
         }
         return ListIterate.take(list, count, FastList.newList());
     }
@@ -1468,7 +1468,7 @@ public final class ListIterate
         }
         if (list instanceof RandomAccess)
         {
-            return RandomAccessListIterate.drop(list, count, FastList.newList(list.size() - Math.min(list.size(), count)));
+            return RandomAccessListIterate.drop(list, count, Lists.mutable.withInitialCapacity(list.size() - Math.min(list.size(), count)));
         }
         return ListIterate.drop(list, count, FastList.newList());
     }
@@ -1715,7 +1715,7 @@ public final class ListIterate
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(List<T> list)
     {
-        return ListIterate.zipWithIndex(list, FastList.newList(list.size()));
+        return ListIterate.zipWithIndex(list, Lists.mutable.withInitialCapacity(list.size()));
     }
 
     /**

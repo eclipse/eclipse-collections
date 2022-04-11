@@ -1893,7 +1893,7 @@ public final class ArrayListIterate
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(ArrayList<T> list)
     {
-        return ArrayListIterate.zipWithIndex(list, FastList.newList(list.size()));
+        return ArrayListIterate.zipWithIndex(list, Lists.mutable.withInitialCapacity(list.size()));
     }
 
     /**

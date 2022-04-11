@@ -25,6 +25,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
@@ -224,7 +225,7 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     @Override
     public <R> MutableList<R> collect(Function<? super V, ? extends R> function)
     {
-        return this.collect(function, FastList.newList(this.size()));
+        return this.collect(function, Lists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
@@ -236,19 +237,19 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     @Override
     public <R> MutableList<R> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends R> function)
     {
-        return this.collectIf(predicate, function, FastList.newList(this.size()));
+        return this.collectIf(predicate, function, Lists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public <R> MutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
-        return this.flatCollect(function, FastList.newList(this.size()));
+        return this.flatCollect(function, Lists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public MutableList<V> reject(Predicate<? super V> predicate)
     {
-        return this.reject(predicate, FastList.newList(this.size()));
+        return this.reject(predicate, Lists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
@@ -266,7 +267,7 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     @Override
     public MutableList<V> select(Predicate<? super V> predicate)
     {
-        return this.select(predicate, FastList.newList(this.size()));
+        return this.select(predicate, Lists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
@@ -297,13 +298,13 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     @Override
     public <S> MutableList<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, FastList.newList(this.size()));
+        return this.zip(that, Lists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
     public MutableList<Pair<V, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(FastList.newList(this.size()));
+        return this.zipWithIndex(Lists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override

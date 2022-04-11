@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,8 +11,8 @@
 package org.eclipse.collections.impl.parallel;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.procedure.SelectProcedure;
-import org.eclipse.collections.impl.list.mutable.FastList;
 
 public final class SelectProcedureFactory<T> implements ProcedureFactory<SelectProcedure<T>>
 {
@@ -28,6 +28,6 @@ public final class SelectProcedureFactory<T> implements ProcedureFactory<SelectP
     @Override
     public SelectProcedure<T> create()
     {
-        return new SelectProcedure<>(this.predicate, FastList.newList(this.collectionSize));
+        return new SelectProcedure<>(this.predicate, Lists.mutable.withInitialCapacity(this.collectionSize));
     }
 }

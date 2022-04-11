@@ -31,6 +31,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.factory.primitive.CharLists;
@@ -486,7 +487,7 @@ public final class ArrayListAdapter<T>
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayListIterate.take(this.delegate, count, FastList.newList(Math.min(this.size(), count)));
+        return ArrayListIterate.take(this.delegate, count, Lists.mutable.withInitialCapacity(Math.min(this.size(), count)));
     }
 
     @Override
@@ -502,7 +503,7 @@ public final class ArrayListAdapter<T>
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayListIterate.drop(this.delegate, count, FastList.newList(this.size() - Math.min(this.size(), count)));
+        return ArrayListIterate.drop(this.delegate, count, Lists.mutable.withInitialCapacity(this.size() - Math.min(this.size(), count)));
     }
 
     @Override

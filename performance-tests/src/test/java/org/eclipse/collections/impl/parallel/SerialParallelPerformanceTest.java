@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -20,6 +20,7 @@ import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -644,15 +645,15 @@ public class SerialParallelPerformanceTest
             Verify.assertNotEmpty(Iterate.collect(
                     iterable,
                     PAIR_FUNCTION,
-                    FastList.newList(initialCapacity)));
+                    Lists.mutable.withInitialCapacity(initialCapacity)));
             Verify.assertNotEmpty(Iterate.collect(
                     iterable,
                     Integer::longValue,
-                    FastList.newList(initialCapacity)));
+                    Lists.mutable.withInitialCapacity(initialCapacity)));
             Verify.assertNotEmpty(Iterate.collect(
                     iterable,
                     Integer::shortValue,
-                    FastList.newList(initialCapacity)));
+                    Lists.mutable.withInitialCapacity(initialCapacity)));
         };
 
         return TimeKeeper.logAverageMillisecondsToRun(

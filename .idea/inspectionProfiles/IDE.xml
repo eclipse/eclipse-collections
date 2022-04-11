@@ -643,6 +643,12 @@
     <inspection_tool class="ReturnThis" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="RuntimeExec" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="RuntimeExecWithNonConstantString" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <replaceConfiguration name="FastList.newList(int) to Lists.mutable.withInitialCapacity(int)" text="org.eclipse.collections.impl.list.mutable.FastList.newList($initialCapacity$)" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Lists.mutable.withInitialCapacity($initialCapacity$)">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="initialCapacity" nameOfExprType="int" within="" contains="" />
+      </replaceConfiguration>
+    </inspection_tool>
     <inspection_tool class="SafeLock" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="SafeVarargsDetector" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="SamePackageImport" enabled="true" level="INSPECTION" enabled_by_default="true" />

@@ -1131,7 +1131,7 @@ public final class StringIterate
 
     public static MutableList<Character> toList(String string)
     {
-        MutableList<Character> characters = FastList.newList(string.length());
+        MutableList<Character> characters = Lists.mutable.withInitialCapacity(string.length());
         StringIterate.forEachChar(string, new AddCharacterToCollection(characters));
         return characters;
     }
@@ -1200,7 +1200,7 @@ public final class StringIterate
             return FastList.newList();
         }
 
-        MutableList<String> result = FastList.newList((length + size - 1) / size);
+        MutableList<String> result = Lists.mutable.withInitialCapacity((length + size - 1) / size);
 
         int startOffset = 0;
         while (startOffset < length)
