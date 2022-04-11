@@ -10,10 +10,10 @@
 
 package org.eclipse.collections.test.map;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.sorted.SortedMapIterable;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.OrderedIterableTestCase;
 import org.eclipse.collections.test.list.TransformsToListTrait;
 

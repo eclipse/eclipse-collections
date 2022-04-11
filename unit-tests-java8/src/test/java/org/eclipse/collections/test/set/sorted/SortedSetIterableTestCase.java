@@ -14,14 +14,14 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.ordered.SortedIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.test.SortedIterableTestCase;
 import org.eclipse.collections.test.domain.A;

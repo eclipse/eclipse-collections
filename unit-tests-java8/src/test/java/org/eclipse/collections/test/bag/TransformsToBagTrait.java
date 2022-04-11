@@ -20,6 +20,7 @@ import org.eclipse.collections.api.bag.primitive.MutableFloatBag;
 import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.bag.primitive.MutableLongBag;
 import org.eclipse.collections.api.bag.primitive.MutableShortBag;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.CharHashBag;
@@ -28,7 +29,6 @@ import org.eclipse.collections.impl.bag.mutable.primitive.FloatHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.test.RichIterableTestCase;
 
 public interface TransformsToBagTrait extends RichIterableTestCase

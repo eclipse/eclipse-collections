@@ -13,8 +13,8 @@ package org.eclipse.collections.test.stack.immutable;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 
+import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.stack.ImmutableStack;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.test.stack.StackIterableTestCase;
 import org.junit.Test;
 

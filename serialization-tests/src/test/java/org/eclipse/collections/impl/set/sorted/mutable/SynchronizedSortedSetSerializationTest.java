@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.set.sorted.mutable;
 
-import org.eclipse.collections.impl.factory.SortedSets;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 

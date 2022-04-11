@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.tuple;
 
 import java.util.Map;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -19,7 +20,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Triple;
 import org.eclipse.collections.api.tuple.Triplet;
 import org.eclipse.collections.api.tuple.Twin;
-import org.eclipse.collections.impl.factory.Lists;
 
 /**
  * A Pair is a container that holds two related objects. It is the equivalent of an Association in Smalltalk, or an

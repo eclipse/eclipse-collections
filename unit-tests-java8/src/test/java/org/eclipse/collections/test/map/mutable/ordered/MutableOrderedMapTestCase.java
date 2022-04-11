@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.test.map.mutable.ordered;
 
+import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MutableOrderedMap;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.test.MutableOrderedIterableTestCase;
 import org.eclipse.collections.test.map.OrderedMapIterableTestCase;

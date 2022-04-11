@@ -13,8 +13,8 @@ package org.eclipse.collections.test.bimap;
 import java.util.Iterator;
 
 import org.eclipse.collections.api.bimap.BiMap;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
 import org.eclipse.collections.test.set.UnsortedSetLikeTestTrait;
 import org.junit.Test;

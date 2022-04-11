@@ -53,6 +53,10 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.factory.primitive.BooleanStacks;
 import org.eclipse.collections.api.factory.primitive.ByteStacks;
 import org.eclipse.collections.api.factory.primitive.CharStacks;
@@ -87,11 +91,7 @@ import org.eclipse.collections.api.stack.primitive.ImmutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.EmptyIterator;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Multimaps;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 
 final class ImmutableEmptyStack<T>
@@ -798,4 +798,3 @@ final class ImmutableEmptyStack<T>
         return new ImmutableStackSerializationProxy<>(this);
     }
 }
-

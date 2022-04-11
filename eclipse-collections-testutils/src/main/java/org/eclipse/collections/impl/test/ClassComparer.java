@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Triplet;
 import org.eclipse.collections.api.tuple.Twin;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.StringIterate;

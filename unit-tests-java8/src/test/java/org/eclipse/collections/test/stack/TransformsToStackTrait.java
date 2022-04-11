@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.test.stack;
 
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -28,8 +30,6 @@ import org.eclipse.collections.api.stack.primitive.FloatStack;
 import org.eclipse.collections.api.stack.primitive.IntStack;
 import org.eclipse.collections.api.stack.primitive.LongStack;
 import org.eclipse.collections.api.stack.primitive.ShortStack;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.BooleanStacks;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;

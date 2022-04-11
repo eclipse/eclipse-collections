@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.collection.mutable;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 

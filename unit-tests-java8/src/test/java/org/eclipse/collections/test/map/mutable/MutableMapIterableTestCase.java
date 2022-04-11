@@ -15,10 +15,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.test.CollisionsTestCase;
