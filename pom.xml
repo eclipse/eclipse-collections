@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2021 Goldman Sachs and others.
+  ~ Copyright (c) 2022 Goldman Sachs and others.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -124,7 +124,6 @@
         <trove4j.version>3.0.3</trove4j.version>
         <checkstyle.version>9.1</checkstyle.version>
         <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
-        <findbugs.plugin.version>3.0.5</findbugs.plugin.version>
         <jacoco.plugin.version>0.8.7</jacoco.plugin.version>
         <junit.version>4.13.2</junit.version>
 
@@ -501,19 +500,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>${findbugs.plugin.version}</version>
-                    <configuration>
-                        <effort>Max</effort>
-                        <threshold>Default</threshold>
-                        <xmlOutput>true</xmlOutput>
-                        <findbugsXmlOutput>true</findbugsXmlOutput>
-                        <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
-                    </configuration>
-                </plugin>
-
-                <plugin>
                     <groupId>org.eclipse.cbi.maven.plugins</groupId>
                     <artifactId>eclipse-jarsigner-plugin</artifactId>
                     <version>1.3.2</version>
@@ -687,18 +673,6 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <configuration>
-                    <effort>Max</effort>
-                    <threshold>Default</threshold>
-                    <xmlOutput>true</xmlOutput>
-                    <findbugsXmlOutput>true</findbugsXmlOutput>
-                    <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
-                </configuration>
             </plugin>
 
         </plugins>

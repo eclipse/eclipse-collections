@@ -20,7 +20,6 @@
 [![][actions acceptance-tests img]][actions acceptance-tests]
 [![][actions performance-tests img]][actions performance-tests]
 [![][actions checkstyle img]][actions checkstyle]
-[![][actions findbugs img]][actions findbugs]
 [![][actions javadoc img]][actions javadoc]
 
 <a href="https://www.eclipse.org/collections/"><img src="https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png" height="50%" width="50%"></a>
@@ -119,9 +118,6 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 [actions checkstyle]:https://github.com/eclipse/eclipse-collections/actions?query=workflow%3A%22Checkstyle%22
 [actions checkstyle img]:https://github.com/eclipse/eclipse-collections/workflows/Checkstyle/badge.svg?branch=master
 
-[actions findbugs]:https://github.com/eclipse/eclipse-collections/actions?query=workflow%3A%22Findbugs%22
-[actions findbugs img]:https://github.com/eclipse/eclipse-collections/workflows/Findbugs/badge.svg?branch=master
-
 [actions javadoc]:https://github.com/eclipse/eclipse-collections/actions?query=workflow%3A%22JavaDoc%22
 [actions javadoc img]:https://github.com/eclipse/eclipse-collections/workflows/JavaDoc/badge.svg?branch=master
 
@@ -170,4 +166,3 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 [10-3-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.3.0
 [10-4-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.4.0
 [11-0-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/11.0.0
-
