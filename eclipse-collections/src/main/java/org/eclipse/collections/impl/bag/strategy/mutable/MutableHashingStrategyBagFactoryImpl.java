@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Bhavana Hindupur.
+ * Copyright (c) 2022 Bhavana Hindupur and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,7 +12,9 @@ package org.eclipse.collections.impl.bag.strategy.mutable;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.factory.bag.strategy.MutableHashingStrategyBagFactory;
+import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.utility.Iterate;
 
 public enum MutableHashingStrategyBagFactoryImpl implements MutableHashingStrategyBagFactory
@@ -35,6 +37,12 @@ public enum MutableHashingStrategyBagFactoryImpl implements MutableHashingStrate
     public <T> MutableBag<T> with(HashingStrategy<? super T> hashingStrategy)
     {
         return HashBagWithHashingStrategy.newBagWith(hashingStrategy);
+    }
+
+    @Override
+    public <T, V> MutableBag<T> fromFunction(Function<? super T, ? extends V> function)
+    {
+        return this.with(HashingStrategies.fromFunction(function));
     }
 
     @Override

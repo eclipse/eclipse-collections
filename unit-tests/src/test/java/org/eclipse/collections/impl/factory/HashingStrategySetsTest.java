@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,6 +19,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.test.domain.Person;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -66,6 +67,17 @@ public class HashingStrategySetsTest
         Verify.assertInstanceOf(MutableSet.class, factory.ofInitialCapacity(HashingStrategies.defaultStrategy(), 1));
         Assert.assertEquals(UnifiedSetWithHashingStrategy.newSet(HashingStrategies.defaultStrategy(), 3), factory.withInitialCapacity(HashingStrategies.defaultStrategy(), 3));
         Verify.assertInstanceOf(MutableSet.class, factory.ofInitialCapacity(HashingStrategies.defaultStrategy(), 3));
+
+        MutableSet<Person> people =
+                Sets.mutable.of(new Person("Alex", "Smith"), new Person("John", "Smith"), new Person("John", "Brown"));
+
+        Assert.assertEquals(
+                UnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.fromFunction(Person::getLastName)).withAll(people),
+                factory.fromFunction(Person::getLastName).withAll(people));
+
+        Assert.assertEquals(
+                UnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.fromFunction(Person::getLastName)).withAll(people),
+                factory.fromFunction(Person::getFirstName).withAll(people));
     }
 
     @Test

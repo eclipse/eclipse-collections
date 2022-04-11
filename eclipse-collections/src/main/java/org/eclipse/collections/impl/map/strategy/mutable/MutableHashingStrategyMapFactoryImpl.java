@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,8 +11,10 @@
 package org.eclipse.collections.impl.map.strategy.mutable;
 
 import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.factory.map.strategy.MutableHashingStrategyMapFactory;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.impl.block.factory.HashingStrategies;
 
 public enum MutableHashingStrategyMapFactoryImpl implements MutableHashingStrategyMapFactory
 {
@@ -28,6 +30,12 @@ public enum MutableHashingStrategyMapFactoryImpl implements MutableHashingStrate
     public <K, V> MutableMap<K, V> with(HashingStrategy<? super K> hashingStrategy)
     {
         return new UnifiedMapWithHashingStrategy<>(hashingStrategy);
+    }
+
+    @Override
+    public <K, V, T> MutableMap<K, V> fromFunction(Function<? super K, ? extends T> function)
+    {
+        return this.with(HashingStrategies.fromFunction(function));
     }
 
     @Override
