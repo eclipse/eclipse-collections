@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.test;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.factory.Lists;
 import org.junit.Test;
 
 import static org.junit.Assert.assertThrows;

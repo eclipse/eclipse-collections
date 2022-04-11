@@ -12,9 +12,9 @@ package org.eclipse.collections.test.map.mutable.ordered;
 
 import java.util.LinkedHashMap;
 
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.MutableOrderedMap;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.map.ordered.mutable.UnmodifiableMutableOrderedMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;

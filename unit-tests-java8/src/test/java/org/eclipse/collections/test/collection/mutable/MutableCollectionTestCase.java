@@ -12,9 +12,9 @@ package org.eclipse.collections.test.collection.mutable;
 
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.CollectionTestCase;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.RichIterableTestCase;

@@ -15,9 +15,9 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.mutable.FastList;
 
 class ImmutableStackSerializationProxy<T> implements Externalizable

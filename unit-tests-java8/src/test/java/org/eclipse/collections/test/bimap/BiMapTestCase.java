@@ -12,8 +12,8 @@ package org.eclipse.collections.test.bimap;
 
 import org.eclipse.collections.api.bimap.BiMap;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
 import org.eclipse.collections.test.map.MapIterableTestCase;
 import org.junit.Assert;

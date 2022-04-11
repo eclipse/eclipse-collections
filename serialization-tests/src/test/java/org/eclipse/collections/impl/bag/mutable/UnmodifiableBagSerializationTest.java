@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.bag.mutable;
 
-import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 

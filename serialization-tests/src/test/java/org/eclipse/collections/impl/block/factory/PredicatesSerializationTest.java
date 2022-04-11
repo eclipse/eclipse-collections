@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.block.factory;
 
 import java.util.Collections;
 
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -598,4 +598,3 @@ public class PredicatesSerializationTest
                 Predicates.bind(Predicates2.equal(), null));
     }
 }
-

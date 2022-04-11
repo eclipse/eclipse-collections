@@ -13,7 +13,7 @@ package org.eclipse.collections.test.list.mutable;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.list.FixedSizeListTestCase;
 import org.junit.Test;

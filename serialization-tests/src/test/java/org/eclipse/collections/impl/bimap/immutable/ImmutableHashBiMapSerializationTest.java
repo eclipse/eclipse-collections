@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.bimap.immutable;
 
-import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 

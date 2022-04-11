@@ -11,7 +11,7 @@
 package org.eclipse.collections.test.bag.mutable.sorted;
 
 import org.eclipse.collections.api.bag.MutableBagIterable;
-import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
 import org.junit.Assert;
 import org.junit.Test;

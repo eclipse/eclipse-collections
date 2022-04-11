@@ -12,10 +12,10 @@ package org.eclipse.collections.test.bag.mutable.sorted;
 
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.SortedIterableTestCase;
 import org.eclipse.collections.test.bag.BagTestCase;
 import org.eclipse.collections.test.domain.A;
