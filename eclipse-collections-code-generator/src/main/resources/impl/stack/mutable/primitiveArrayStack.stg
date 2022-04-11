@@ -176,6 +176,7 @@ public class <name>ArrayStack extends Abstract<name>Stack
      *
      * @since 9.2.
      */
+    @Override
     public <name>ArrayStack newEmpty()
     {
         return new <name>ArrayStack();
