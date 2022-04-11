@@ -1525,12 +1525,6 @@ public interface RichIterableTestCase extends IterableTestCase
         assertThat(iterable.detectWithIfNone(Predicates2.lessThan(), 2, () -> 4), is(1));
         assertThat(iterable.detectWithIfNone(Predicates2.lessThan(), 3, () -> 4), is(2));
         assertThat(iterable.detectWithIfNone(Predicates2.lessThan(), 4, () -> 4), is(3));
-    }
-
-    @Test
-    default void RichIterable_detectOptional()
-    {
-        RichIterable<Integer> iterable = this.newWith(3, 2, 1);
 
         assertThat(iterable.detectOptional(Predicates.greaterThan(0)), is(Optional.of(3)));
         assertThat(iterable.detectOptional(Predicates.greaterThan(1)), is(Optional.of(3)));
