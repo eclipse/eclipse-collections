@@ -25,6 +25,14 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.ordered.SortedIterable;
@@ -218,6 +226,99 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
         assertEquals(
                 this.newMutableForTransform(1, 2, 1, 2, 1, 3, 2, 1),
                 this.newWith(1, 2, 2, 3).flatCollectWith(Interval::fromTo, 1, this.newMutableForTransform()));
+    }
+
+    @Override
+    default void RichIterable_flatCollect_primitive()
+    {
+        {
+            MutableBooleanCollection target = this.newBooleanForTransform();
+            MutableBooleanCollection result = this.newWith(1, 1, 2, 2, 3, 3).flatCollectBoolean(
+                    each -> BooleanLists.immutable.with(each % 2 == 0, each % 2 == 0),
+                    target);
+            assertEquals(
+                    this.newBooleanForTransform(false, false, false, false, true, true, true, true, false, false, false, false),
+                    result);
+            assertSame(target, result);
+        }
+
+        RichIterable<Integer> iterable = this.newWith(1, 1, 2, 2, 3, 3, 11, 11, 12, 12, 13, 13);
+
+        {
+            MutableByteCollection target = this.newByteForTransform();
+            MutableByteCollection result = iterable.flatCollectByte(
+                    each -> ByteLists.immutable.with((byte) (each % 10), (byte) (each % 10)),
+                    target);
+            assertEquals(
+                    this.newByteForTransform((byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 2, (byte) 2, (byte) 2, (byte) 2, (byte) 3, (byte) 3, (byte) 3, (byte) 3, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 2, (byte) 2, (byte) 2, (byte) 2, (byte) 3, (byte) 3, (byte) 3, (byte) 3),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableCharCollection target = this.newCharForTransform();
+            MutableCharCollection result = iterable.flatCollectChar(
+                    each -> CharLists.immutable.with((char) (each % 10), (char) (each % 10)),
+                    target);
+            assertEquals(
+                    this.newCharForTransform((char) 1, (char) 1, (char) 1, (char) 1, (char) 2, (char) 2, (char) 2, (char) 2, (char) 3, (char) 3, (char) 3, (char) 3, (char) 1, (char) 1, (char) 1, (char) 1, (char) 2, (char) 2, (char) 2, (char) 2, (char) 3, (char) 3, (char) 3, (char) 3),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableDoubleCollection target = this.newDoubleForTransform();
+            MutableDoubleCollection result = iterable.flatCollectDouble(each -> DoubleLists.immutable.with(
+                    (double) (each % 10),
+                    (double) (each % 10)), target);
+            assertEquals(
+                    this.newDoubleForTransform(1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableFloatCollection target = this.newFloatForTransform();
+            MutableFloatCollection result = iterable.flatCollectFloat(each -> FloatLists.immutable.with(
+                    (float) (each % 10),
+                    (float) (each % 10)), target);
+            assertEquals(
+                    this.newFloatForTransform(
+                    1.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f, 2.0f, 2.0f, 3.0f, 3.0f, 3.0f, 3.0f, 1.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f, 2.0f, 2.0f, 3.0f, 3.0f, 3.0f, 3.0f),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableIntCollection target = this.newIntForTransform();
+            MutableIntCollection result =
+                    iterable.flatCollectInt(each -> IntLists.immutable.with(each % 10, each % 10), target);
+            assertEquals(
+                    this.newIntForTransform(1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableLongCollection target = this.newLongForTransform();
+            MutableLongCollection result =
+                    iterable.flatCollectLong(each -> LongLists.immutable.with(each % 10, each % 10), target);
+            assertEquals(
+                    this.newLongForTransform(1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableShortCollection target = this.newShortForTransform();
+            MutableShortCollection result = iterable.flatCollectShort(each -> ShortLists.immutable.with(
+                    (short) (each % 10),
+                    (short) (each % 10)), target);
+            assertEquals(
+                    this.newShortForTransform((short) 1, (short) 1, (short) 1, (short) 1, (short) 2, (short) 2, (short) 2, (short) 2, (short) 3, (short) 3, (short) 3, (short) 3, (short) 1, (short) 1, (short) 1, (short) 1, (short) 2, (short) 2, (short) 2, (short) 2, (short) 3, (short) 3, (short) 3, (short) 3),
+                    result);
+            assertSame(target, result);
+        }
     }
 
     @Override
