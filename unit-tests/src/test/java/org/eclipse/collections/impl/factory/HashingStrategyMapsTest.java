@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,11 +12,16 @@ package org.eclipse.collections.impl.factory;
 
 import org.eclipse.collections.api.factory.map.strategy.ImmutableHashingStrategyMapFactory;
 import org.eclipse.collections.api.factory.map.strategy.MutableHashingStrategyMapFactory;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.test.domain.Person;
+import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,6 +57,19 @@ public class HashingStrategyMapsTest
         Verify.assertInstanceOf(MutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
         Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6, 7, 8), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
         Verify.assertInstanceOf(MutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
+
+        MutableList<Pair<Person, String>> pairs = Lists.mutable.of(
+                Tuples.pair(new Person("John", "Smith"), "A"),
+                Tuples.pair(new Person("Alex", "Smith"), "B"),
+                Tuples.pair(new Person("Jeff", "Johnson"), "D"));
+
+        Assert.assertEquals(
+                new UnifiedMapWithHashingStrategy<Person, String>(HashingStrategies.fromFunction(Person::getLastName)).withAllKeyValues(pairs),
+                factory.<Person, String, String>fromFunction(Person::getLastName).withAllKeyValues(pairs));
+
+        Assert.assertEquals(
+                new UnifiedMapWithHashingStrategy<Person, String>(HashingStrategies.fromFunction(Person::getFirstName)).withAllKeyValues(pairs),
+                factory.<Person, String, String>fromFunction(Person::getFirstName).withAllKeyValues(pairs));
     }
 
     @Test
