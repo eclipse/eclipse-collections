@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
@@ -37,7 +38,6 @@ import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.impl.bag.AbstractBag;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
 public abstract class AbstractImmutableBagIterable<T>
         extends AbstractBag<T>
@@ -88,7 +88,7 @@ public abstract class AbstractImmutableBagIterable<T>
             List<T> toBeRemoved = (List<T>) elements;
             if (this.size() * toBeRemoved.size() > 10000)
             {
-                result.removeAll(UnifiedSet.newSet(elements));
+                result.removeAll(Sets.mutable.withAll(elements));
             }
             else
             {
@@ -97,7 +97,7 @@ public abstract class AbstractImmutableBagIterable<T>
         }
         else
         {
-            result.removeAll(UnifiedSet.newSet(elements));
+            result.removeAll(Sets.mutable.withAll(elements));
         }
     }
 

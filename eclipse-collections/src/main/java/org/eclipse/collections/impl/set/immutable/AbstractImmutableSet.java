@@ -113,7 +113,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     {
         if (!this.contains(element))
         {
-            MutableSet<T> result = UnifiedSet.newSet(this);
+            MutableSet<T> result = Sets.mutable.withAll(this);
             result.add(element);
             return result.toImmutable();
         }
@@ -125,7 +125,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     {
         if (this.contains(element))
         {
-            MutableSet<T> result = UnifiedSet.newSet(this);
+            MutableSet<T> result = Sets.mutable.withAll(this);
             result.remove(element);
             return result.toImmutable();
         }
@@ -135,7 +135,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableSet<T> newWithAll(Iterable<? extends T> elements)
     {
-        MutableSet<T> result = UnifiedSet.newSet(elements);
+        MutableSet<T> result = Sets.mutable.withAll(elements);
         result.addAll(this);
         return result.toImmutable();
     }
@@ -143,7 +143,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public ImmutableSet<T> newWithoutAll(Iterable<? extends T> elements)
     {
-        MutableSet<T> result = UnifiedSet.newSet(this);
+        MutableSet<T> result = Sets.mutable.withAll(this);
         this.removeAllFrom(elements, result);
         return result.toImmutable();
     }

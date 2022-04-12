@@ -126,7 +126,7 @@ public final class SetAdapter<T>
     @Override
     public MutableSet<T> clone()
     {
-        return UnifiedSet.newSet(this.delegate);
+        return Sets.mutable.withAll(this.delegate);
     }
 
     @Override

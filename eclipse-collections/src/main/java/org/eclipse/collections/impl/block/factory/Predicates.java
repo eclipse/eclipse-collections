@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,6 +18,7 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.impl.block.predicate.checked.CheckedPredicate;
 import org.eclipse.collections.impl.block.predicate.checked.ThrowingPredicate;
@@ -235,7 +236,7 @@ public abstract class Predicates<T>
         {
             return new InCollectionPredicate((Collection<?>) iterable);
         }
-        return new InSetIterablePredicate(UnifiedSet.newSet(iterable));
+        return new InSetIterablePredicate(Sets.mutable.withAll(iterable));
     }
 
     public static Predicates<Object> in(Object... array)
@@ -308,7 +309,7 @@ public abstract class Predicates<T>
         {
             return new NotInCollectionPredicate((Collection<?>) iterable);
         }
-        return new NotInSetIterablePredicate(UnifiedSet.newSet(iterable));
+        return new NotInSetIterablePredicate(Sets.mutable.withAll(iterable));
     }
 
     public static Predicates<Object> notIn(Object... array)

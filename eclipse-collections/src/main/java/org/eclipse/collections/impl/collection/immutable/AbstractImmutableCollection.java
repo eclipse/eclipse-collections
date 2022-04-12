@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,6 +33,7 @@ import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.MutableList;
@@ -44,7 +45,6 @@ import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
 public abstract class AbstractImmutableCollection<T>
@@ -146,7 +146,7 @@ public abstract class AbstractImmutableCollection<T>
             List<T> toBeRemoved = (List<T>) elements;
             if (this.size() * toBeRemoved.size() > 10000)
             {
-                result.removeAll(UnifiedSet.newSet(elements));
+                result.removeAll(Sets.mutable.withAll(elements));
             }
             else
             {
@@ -155,7 +155,7 @@ public abstract class AbstractImmutableCollection<T>
         }
         else
         {
-            result.removeAll(UnifiedSet.newSet(elements));
+            result.removeAll(Sets.mutable.withAll(elements));
         }
     }
 
