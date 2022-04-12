@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,6 +33,16 @@ public interface MutableMultimap<K, V>
     // Modification Operations
 
     boolean put(K key, V value);
+
+    /**
+     * Puts the key / value combination into the MutableMultimap and returns the MutableMultimap (this).
+     * @since 11.1
+     */
+    default MutableMultimap<K, V> withKeyValue(K key, V value)
+    {
+        this.put(key, value);
+        return this;
+    }
 
     /**
      * Modification operation similar to put, however, takes the key-value pair as the input.
