@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
 class ImmutableSetSerializationProxy<T> implements Externalizable
 {
@@ -65,7 +65,7 @@ class ImmutableSetSerializationProxy<T> implements Externalizable
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
-        MutableSet<T> deserializedSet = UnifiedSet.newSet(size);
+        MutableSet<T> deserializedSet = Sets.mutable.withInitialCapacity(size);
 
         for (int i = 0; i < size; i++)
         {

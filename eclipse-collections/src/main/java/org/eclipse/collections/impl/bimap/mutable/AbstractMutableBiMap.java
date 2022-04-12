@@ -48,6 +48,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.BiMaps;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
@@ -574,7 +575,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        return this.delegate.zipWithIndex(UnifiedSet.newSet(this.size()));
+        return this.delegate.zipWithIndex(Sets.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
@@ -852,7 +853,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
         protected Object writeReplace()
         {
-            MutableSet<K> replace = UnifiedSet.newSet(AbstractMutableBiMap.this.size());
+            MutableSet<K> replace = Sets.mutable.withInitialCapacity(AbstractMutableBiMap.this.size());
             AbstractMutableBiMap.this.forEachKey(CollectionAddProcedure.on(replace));
             return replace;
         }

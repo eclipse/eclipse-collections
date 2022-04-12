@@ -381,7 +381,7 @@ public final class SetAdapter<T>
     @Override
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return Iterate.zipWithIndex(this, UnifiedSet.newSet(this.size()));
+        return Iterate.zipWithIndex(this, Sets.mutable.withInitialCapacity(this.size()));
     }
 
     @Override

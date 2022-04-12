@@ -49,6 +49,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.primitive.BooleanBags;
 import org.eclipse.collections.api.factory.primitive.ByteBags;
 import org.eclipse.collections.api.factory.primitive.CharBags;
@@ -84,7 +85,6 @@ import org.eclipse.collections.impl.map.AbstractMapIterable;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.utility.MapIterate;
 
@@ -137,7 +137,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public Set<Entry<K, V>> entrySet()
     {
-        MutableSet<Entry<K, V>> set = UnifiedSet.newSet(this.size());
+        MutableSet<Entry<K, V>> set = Sets.mutable.withInitialCapacity(this.size());
         this.forEachKeyValue((key, value) -> set.add(ImmutableEntry.of(key, value)));
         return set.toImmutable().castToSet();
     }
@@ -417,7 +417,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Deprecated
     public ImmutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.newSet(this.size())).toImmutable();
+        return this.zipWithIndex(Sets.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override

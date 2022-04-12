@@ -29,6 +29,7 @@ public class MutableSetFactoryImpl implements MutableSetFactory
     @Override
     public <T> MutableSet<T> withInitialCapacity(int capacity)
     {
+        //noinspection SSBasedInspection
         return UnifiedSet.newSet(capacity);
     }
 

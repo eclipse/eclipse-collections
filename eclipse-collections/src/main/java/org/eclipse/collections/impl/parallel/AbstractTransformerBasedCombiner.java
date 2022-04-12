@@ -15,6 +15,7 @@ import java.util.Collection;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.set.SetIterable;
@@ -22,7 +23,6 @@ import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.utility.internal.DefaultSpeciesNewStrategy;
 
 public abstract class AbstractTransformerBasedCombiner<V, T, BT extends Procedure<T>>
@@ -55,7 +55,7 @@ public abstract class AbstractTransformerBasedCombiner<V, T, BT extends Procedur
         if (sourceIterable instanceof SetIterable)
         {
             this.setCombineOne(true);
-            return UnifiedSet.newSet(initialCapacity);
+            return Sets.mutable.withInitialCapacity(initialCapacity);
         }
         if (sourceIterable instanceof Bag || sourceIterable instanceof MapIterable)
         {
