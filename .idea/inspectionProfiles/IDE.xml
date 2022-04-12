@@ -648,6 +648,10 @@
         <constraint name="__context__" within="" contains="" />
         <constraint name="initialCapacity" nameOfExprType="int" within="" contains="" />
       </replaceConfiguration>
+      <replaceConfiguration name="FastList.newList(iterable) to Lists.mutable.newWith(iterable)" text="org.eclipse.collections.impl.list.mutable.FastList.newList($iterable$)" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Lists.mutable.withAll($iterable$)">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
     </inspection_tool>
     <inspection_tool class="SafeLock" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="SafeVarargsDetector" enabled="true" level="INSPECTION" enabled_by_default="true" />

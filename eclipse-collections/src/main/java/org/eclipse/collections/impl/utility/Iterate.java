@@ -3195,7 +3195,7 @@ public final class Iterate
      */
     public static <T> MutableList<T> toSortedList(Iterable<T> iterable, Comparator<? super T> comparator)
     {
-        return FastList.newList(iterable).sortThis(comparator);
+        return Lists.mutable.withAll(iterable).sortThis(comparator);
     }
 
     /**
