@@ -54,6 +54,7 @@ public class MutableListFactoryImpl implements MutableListFactory
     @Override
     public <T> MutableList<T> withAll(Iterable<? extends T> iterable)
     {
+        //noinspection SSBasedInspection
         return FastList.newList(iterable);
     }
 

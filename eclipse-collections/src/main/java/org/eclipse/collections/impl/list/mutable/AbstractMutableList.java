@@ -670,12 +670,12 @@ public abstract class AbstractMutableList<T>
         @Override
         public MutableList<T> toReversed()
         {
-            return FastList.newList(this).reverseThis();
+            return Lists.mutable.withAll(this).reverseThis();
         }
 
         protected Object writeReplace()
         {
-            return FastList.newList(this);
+            return Lists.mutable.withAll(this);
         }
 
         @Override
