@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,6 +26,17 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableListMultimap<K, V>
         extends ListMultimap<K, V>, MutableMultimap<K, V>
 {
+    /**
+     * Puts the key / value combination into the MutableListMultimap and returns the MutableListMultimap (this).
+     * @since 11.1
+     */
+    @Override
+    default MutableListMultimap<K, V> withKeyValue(K key, V value)
+    {
+        this.put(key, value);
+        return this;
+    }
+
     /**
      * @since 11.0
      */

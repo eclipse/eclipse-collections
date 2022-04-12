@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -43,18 +43,16 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
     @Override
     protected <K, V> MutableBagMultimap<K, V> newMultimapWithKeyValue(K key, V value)
     {
-        MutableBagMultimap<K, V> mutableMultimap = this.newMultimap();
-        mutableMultimap.put(key, value);
-        return mutableMultimap;
+        return this.<K, V>newMultimap()
+                .withKeyValue(key, value);
     }
 
     @Override
     protected <K, V> MutableBagMultimap<K, V> newMultimapWithKeysValues(K key1, V value1, K key2, V value2)
     {
-        MutableBagMultimap<K, V> mutableMultimap = this.newMultimap();
-        mutableMultimap.put(key1, value1);
-        mutableMultimap.put(key2, value2);
-        return mutableMultimap;
+        return this.<K, V>newMultimap()
+                .withKeyValue(key1, value1)
+                .withKeyValue(key2, value2);
     }
 
     @Override
@@ -63,11 +61,10 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
             K key2, V value2,
             K key3, V value3)
     {
-        MutableBagMultimap<K, V> mutableMultimap = this.newMultimap();
-        mutableMultimap.put(key1, value1);
-        mutableMultimap.put(key2, value2);
-        mutableMultimap.put(key3, value3);
-        return mutableMultimap;
+        return this.<K, V>newMultimap()
+                .withKeyValue(key1, value1)
+                .withKeyValue(key2, value2)
+                .withKeyValue(key3, value3);
     }
 
     @Override
@@ -77,12 +74,11 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
             K key3, V value3,
             K key4, V value4)
     {
-        MutableBagMultimap<K, V> mutableMultimap = this.newMultimap();
-        mutableMultimap.put(key1, value1);
-        mutableMultimap.put(key2, value2);
-        mutableMultimap.put(key3, value3);
-        mutableMultimap.put(key4, value4);
-        return mutableMultimap;
+        return this.<K, V>newMultimap()
+                .withKeyValue(key1, value1)
+                .withKeyValue(key2, value2)
+                .withKeyValue(key3, value3)
+                .withKeyValue(key4, value4);
     }
 
     @Override
@@ -140,7 +136,8 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
 
         MutableBagMultimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "Two", 2, "Two", 2);
-        UnifiedMapWithHashingStrategy<String, RichIterable<Integer>> expected = UnifiedMapWithHashingStrategy.newMap(HashingStrategies.defaultStrategy());
+        UnifiedMapWithHashingStrategy<String, RichIterable<Integer>> expected =
+                UnifiedMapWithHashingStrategy.newMap(HashingStrategies.defaultStrategy());
         expected.put("One", this.createCollection(1));
         expected.put("Two", this.createCollection(2, 2));
         MutableMap<String, RichIterable<Integer>> actual = multimap.toMap();
@@ -156,7 +153,8 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
 
         MutableBagMultimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "Two", 2, "Two", 2);
-        UnifiedMapWithHashingStrategy<String, RichIterable<Integer>> expected = UnifiedMapWithHashingStrategy.newMap(HashingStrategies.defaultStrategy());
+        UnifiedMapWithHashingStrategy<String, RichIterable<Integer>> expected =
+                UnifiedMapWithHashingStrategy.newMap(HashingStrategies.defaultStrategy());
         expected.put("One", UnifiedSet.newSetWith(1));
         expected.put("Two", UnifiedSet.newSetWith(2, 2));
         MutableMap<String, MutableSet<Integer>> actual = multimap.toMap(UnifiedSet::new);
@@ -167,7 +165,8 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
     @Test
     public void testHashingStrategyConstructor()
     {
-        HashBagMultimapWithHashingStrategy<Integer, Integer> multimapWithIdentity = HashBagMultimapWithHashingStrategy.newMultimap(HashingStrategies.identityStrategy());
+        HashBagMultimapWithHashingStrategy<Integer, Integer> multimapWithIdentity =
+                HashBagMultimapWithHashingStrategy.newMultimap(HashingStrategies.identityStrategy());
 
         multimapWithIdentity.put(new Integer(1), 1);
         multimapWithIdentity.putAll(new Integer(1), Lists.fixedSize.of(2, 20, 1));
@@ -176,14 +175,20 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
         Assert.assertEquals(3, multimapWithIdentity.sizeDistinct());
         Verify.assertSize(5, multimapWithIdentity);
 
-        HashBagMultimapWithHashingStrategy<Integer, Integer> multimapWithDefault = HashBagMultimapWithHashingStrategy.newMultimap(HashingStrategies.defaultStrategy(), multimapWithIdentity);
+        HashBagMultimapWithHashingStrategy<Integer, Integer> multimapWithDefault =
+                HashBagMultimapWithHashingStrategy.newMultimap(
+                        HashingStrategies.defaultStrategy(),
+                        multimapWithIdentity);
 
         Assert.assertEquals(1, multimapWithDefault.sizeDistinct());
         Verify.assertSize(5, multimapWithDefault);
 
-        Verify.assertIterablesEqual(multimapWithIdentity.valuesView().toBag(), multimapWithDefault.valuesView().toBag());
+        Verify.assertIterablesEqual(
+                multimapWithIdentity.valuesView().toBag(),
+                multimapWithDefault.valuesView().toBag());
 
-        HashBagMultimapWithHashingStrategy<Integer, Integer> copyOfMultimapWithDefault = HashBagMultimapWithHashingStrategy.newMultimap(multimapWithDefault);
+        HashBagMultimapWithHashingStrategy<Integer, Integer> copyOfMultimapWithDefault =
+                HashBagMultimapWithHashingStrategy.newMultimap(multimapWithDefault);
 
         Verify.assertMapsEqual(multimapWithDefault.toMap(), copyOfMultimapWithDefault.toMap());
     }
@@ -191,7 +196,8 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
     @Test
     public void testKeyHashingStrategy()
     {
-        HashBagMultimapWithHashingStrategy<Integer, Integer> multimap = HashBagMultimapWithHashingStrategy.newMultimap(HashingStrategies.identityStrategy());
+        HashBagMultimapWithHashingStrategy<Integer, Integer> multimap =
+                HashBagMultimapWithHashingStrategy.newMultimap(HashingStrategies.identityStrategy());
         Assert.assertEquals(HashingStrategies.identityStrategy(), multimap.getKeyHashingStrategy());
     }
 }

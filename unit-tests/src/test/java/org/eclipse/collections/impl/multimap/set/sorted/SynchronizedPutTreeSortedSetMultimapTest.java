@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -40,18 +40,16 @@ public class SynchronizedPutTreeSortedSetMultimapTest extends AbstractMutableSor
     @Override
     protected <K, V> MutableSortedSetMultimap<K, V> newMultimapWithKeyValue(K key, V value)
     {
-        MutableSortedSetMultimap<K, V> mutableMultimap = this.newMultimap();
-        mutableMultimap.put(key, value);
-        return mutableMultimap;
+        return this.<K, V>newMultimap()
+                .withKeyValue(key, value);
     }
 
     @Override
     protected <K, V> MutableSortedSetMultimap<K, V> newMultimapWithKeysValues(K key1, V value1, K key2, V value2)
     {
-        MutableSortedSetMultimap<K, V> mutableMultimap = this.newMultimap();
-        mutableMultimap.put(key1, value1);
-        mutableMultimap.put(key2, value2);
-        return mutableMultimap;
+        return this.<K, V>newMultimap()
+                .withKeyValue(key1, value1)
+                .withKeyValue(key2, value2);
     }
 
     @Override
@@ -60,11 +58,10 @@ public class SynchronizedPutTreeSortedSetMultimapTest extends AbstractMutableSor
             K key2, V value2,
             K key3, V value3)
     {
-        MutableSortedSetMultimap<K, V> mutableMultimap = this.newMultimap();
-        mutableMultimap.put(key1, value1);
-        mutableMultimap.put(key2, value2);
-        mutableMultimap.put(key3, value3);
-        return mutableMultimap;
+        return this.<K, V>newMultimap()
+                .withKeyValue(key1, value1)
+                .withKeyValue(key2, value2)
+                .withKeyValue(key3, value3);
     }
 
     @Override
@@ -74,12 +71,11 @@ public class SynchronizedPutTreeSortedSetMultimapTest extends AbstractMutableSor
             K key3, V value3,
             K key4, V value4)
     {
-        MutableSortedSetMultimap<K, V> mutableMultimap = this.newMultimap();
-        mutableMultimap.put(key1, value1);
-        mutableMultimap.put(key2, value2);
-        mutableMultimap.put(key3, value3);
-        mutableMultimap.put(key4, value4);
-        return mutableMultimap;
+        return this.<K, V>newMultimap()
+                .withKeyValue(key1, value1)
+                .withKeyValue(key2, value2)
+                .withKeyValue(key3, value3)
+                .withKeyValue(key4, value4);
     }
 
     @SafeVarargs
