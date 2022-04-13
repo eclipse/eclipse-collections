@@ -40,7 +40,6 @@ public abstract class AbstractImmutableObject<name>Map\<V> implements ImmutableO
 
         private Object<name>Map\<V> map;
 
-        @SuppressWarnings("UnusedDeclaration")
         public ImmutableObject<name>MapSerializationProxy()
         {
             // Empty constructor for Externalizable class

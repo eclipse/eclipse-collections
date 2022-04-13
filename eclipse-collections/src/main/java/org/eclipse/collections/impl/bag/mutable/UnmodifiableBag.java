@@ -421,7 +421,6 @@ public class UnmodifiableBag<T>
 
         private MutableBag<T> mutableBag;
 
-        @SuppressWarnings("UnusedDeclaration")
         public UnmodifiableBagSerializationProxy()
         {
             // Empty constructor for Externalizable class

@@ -186,7 +186,6 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
 
         private <name>Stack stack;
 
-        @SuppressWarnings("UnusedDeclaration")
         public Immutable<name>StackSerializationProxy()
         {
             // Empty constructor for Externalizable class

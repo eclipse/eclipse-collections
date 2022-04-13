@@ -456,7 +456,6 @@ final class Immutable<name1><name2>HashMap implements Immutable<name1><name2>Map
 
         private <name1><name2>Map map;
 
-        @SuppressWarnings("UnusedDeclaration")
         public Immutable<name1><name2>MapSerializationProxy()
         {
             // Empty constructor for Externalizable class
