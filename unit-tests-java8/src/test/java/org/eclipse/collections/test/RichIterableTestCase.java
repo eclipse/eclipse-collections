@@ -1941,17 +1941,17 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
 
-        Assert.assertEquals(31, iterable.injectInto(1, AddFunction.INTEGER_TO_INT));
-        Assert.assertEquals(30, iterable.injectInto(0, AddFunction.INTEGER_TO_INT));
+        Assert.assertEquals(31, iterable.injectIntoInt(1, AddFunction.INTEGER_TO_INT));
+        Assert.assertEquals(30, iterable.injectIntoInt(0, AddFunction.INTEGER_TO_INT));
 
-        Assert.assertEquals(31L, iterable.injectInto(1, AddFunction.INTEGER_TO_LONG));
-        Assert.assertEquals(30L, iterable.injectInto(0, AddFunction.INTEGER_TO_LONG));
+        Assert.assertEquals(31L, iterable.injectIntoLong(1, AddFunction.INTEGER_TO_LONG));
+        Assert.assertEquals(30L, iterable.injectIntoLong(0, AddFunction.INTEGER_TO_LONG));
 
-        Assert.assertEquals(31.0d, iterable.injectInto(1, AddFunction.INTEGER_TO_DOUBLE), 0.001);
-        Assert.assertEquals(30.0d, iterable.injectInto(0, AddFunction.INTEGER_TO_DOUBLE), 0.001);
+        Assert.assertEquals(31.0d, iterable.injectIntoDouble(1, AddFunction.INTEGER_TO_DOUBLE), 0.001);
+        Assert.assertEquals(30.0d, iterable.injectIntoDouble(0, AddFunction.INTEGER_TO_DOUBLE), 0.001);
 
-        Assert.assertEquals(31.0f, iterable.injectInto(1, AddFunction.INTEGER_TO_FLOAT), 0.001f);
-        Assert.assertEquals(30.0f, iterable.injectInto(0, AddFunction.INTEGER_TO_FLOAT), 0.001f);
+        Assert.assertEquals(31.0f, iterable.injectIntoFloat(1, AddFunction.INTEGER_TO_FLOAT), 0.001f);
+        Assert.assertEquals(30.0f, iterable.injectIntoFloat(0, AddFunction.INTEGER_TO_FLOAT), 0.001f);
     }
 
     @Test

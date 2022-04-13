@@ -1204,9 +1204,9 @@ public abstract class AbstractRichIterableTestCase
     public void injectIntoInt()
     {
         RichIterable<Integer> objects = this.newWith(1, 2, 3);
-        int result = objects.injectInto(1, AddFunction.INTEGER_TO_INT);
+        int result = objects.injectIntoInt(1, AddFunction.INTEGER_TO_INT);
         Assert.assertEquals(7, result);
-        int sum = objects.injectInto(0, AddFunction.INTEGER_TO_INT);
+        int sum = objects.injectIntoInt(0, AddFunction.INTEGER_TO_INT);
         Assert.assertEquals(6, sum);
     }
 
@@ -1214,9 +1214,9 @@ public abstract class AbstractRichIterableTestCase
     public void injectIntoLong()
     {
         RichIterable<Integer> objects = this.newWith(1, 2, 3);
-        long result = objects.injectInto(1, AddFunction.INTEGER_TO_LONG);
+        long result = objects.injectIntoLong(1, AddFunction.INTEGER_TO_LONG);
         Assert.assertEquals(7, result);
-        long sum = objects.injectInto(0, AddFunction.INTEGER_TO_LONG);
+        long sum = objects.injectIntoLong(0, AddFunction.INTEGER_TO_LONG);
         Assert.assertEquals(6, sum);
     }
 
@@ -1224,9 +1224,9 @@ public abstract class AbstractRichIterableTestCase
     public void injectIntoDouble()
     {
         RichIterable<Integer> objects = this.newWith(1, 2, 3);
-        double result = objects.injectInto(1, AddFunction.INTEGER_TO_DOUBLE);
+        double result = objects.injectIntoDouble(1, AddFunction.INTEGER_TO_DOUBLE);
         Assert.assertEquals(7.0d, result, 0.001);
-        double sum = objects.injectInto(0, AddFunction.INTEGER_TO_DOUBLE);
+        double sum = objects.injectIntoDouble(0, AddFunction.INTEGER_TO_DOUBLE);
         Assert.assertEquals(6.0d, sum, 0.001);
     }
 
@@ -1234,9 +1234,9 @@ public abstract class AbstractRichIterableTestCase
     public void injectIntoFloat()
     {
         RichIterable<Integer> objects = this.newWith(1, 2, 3);
-        float result = objects.injectInto(1, AddFunction.INTEGER_TO_FLOAT);
+        float result = objects.injectIntoFloat(1, AddFunction.INTEGER_TO_FLOAT);
         Assert.assertEquals(7.0f, result, 0.001f);
-        float sum = objects.injectInto(0, AddFunction.INTEGER_TO_FLOAT);
+        float sum = objects.injectIntoFloat(0, AddFunction.INTEGER_TO_FLOAT);
         Assert.assertEquals(6.0f, sum, 0.001f);
     }
 

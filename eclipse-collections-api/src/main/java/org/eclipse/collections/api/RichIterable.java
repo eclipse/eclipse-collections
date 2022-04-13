@@ -1580,8 +1580,22 @@ public interface RichIterable<T>
      * item in the iterable is used as the second parameter.
      *
      * @since 1.0
+     * @deprecated since 11.1 - use injectIntoInt instead
      */
+    @Deprecated
     int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function);
+
+    /**
+     * Returns the final int result of evaluating function using each element of the iterable and the previous evaluation
+     * result as the parameters. The injected value is used for the first parameter of the first evaluation, and the current
+     * item in the iterable is used as the second parameter.
+     *
+     * @since 11.1
+     */
+    default int injectIntoInt(int injectedValue, IntObjectToIntFunction<? super T> function)
+    {
+        return this.injectInto(injectedValue, function);
+    }
 
     /**
      * Returns the final long result of evaluating function using each element of the iterable and the previous evaluation
@@ -1589,8 +1603,22 @@ public interface RichIterable<T>
      * item in the iterable is used as the second parameter.
      *
      * @since 1.0
+     * @deprecated since 11.1 - use injectIntoLong instead
      */
+    @Deprecated
     long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function);
+
+    /**
+     * Returns the final long result of evaluating function using each element of the iterable and the previous evaluation
+     * result as the parameters. The injected value is used for the first parameter of the first evaluation, and the current
+     * item in the iterable is used as the second parameter.
+     *
+     * @since 11.1
+     */
+    default long injectIntoLong(long injectedValue, LongObjectToLongFunction<? super T> function)
+    {
+        return this.injectInto(injectedValue, function);
+    }
 
     /**
      * Returns the final float result of evaluating function using each element of the iterable and the previous evaluation
@@ -1598,8 +1626,22 @@ public interface RichIterable<T>
      * item in the iterable is used as the second parameter.
      *
      * @since 2.0
+     * @deprecated since 11.1 - use injectIntoFloat instead
      */
+    @Deprecated
     float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function);
+
+    /**
+     * Returns the final float result of evaluating function using each element of the iterable and the previous evaluation
+     * result as the parameters. The injected value is used for the first parameter of the first evaluation, and the current
+     * item in the iterable is used as the second parameter.
+     *
+     * @since 11.1
+     */
+    default float injectIntoFloat(float injectedValue, FloatObjectToFloatFunction<? super T> function)
+    {
+        return this.injectInto(injectedValue, function);
+    }
 
     /**
      * Returns the final double result of evaluating function using each element of the iterable and the previous evaluation
@@ -1607,8 +1649,22 @@ public interface RichIterable<T>
      * item in the iterable is used as the second parameter.
      *
      * @since 1.0
+     * @deprecated since 11.1 - use injectIntoDouble instead
      */
+    @Deprecated
     double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function);
+
+    /**
+     * Returns the final double result of evaluating function using each element of the iterable and the previous evaluation
+     * result as the parameters. The injected value is used for the first parameter of the first evaluation, and the current
+     * item in the iterable is used as the second parameter.
+     *
+     * @since 11.1
+     */
+    default double injectIntoDouble(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
+    {
+        return this.injectInto(injectedValue, function);
+    }
 
     /**
      * Adds all the elements in this iterable to the specific target Collection.
