@@ -1254,11 +1254,7 @@ public interface RichIterableTestCase extends IterableTestCase
         assertEquals(
                 this.newMutableForTransform(1, 2, 3, 1, 2, 1, 2, 1),
                 this.newWith(3, 2, 2, 1).flatCollect(Interval::oneTo, this.newMutableForTransform()));
-    }
 
-    @Test
-    default void RichIterable_flatCollectWith()
-    {
         assertEquals(
                 this.getExpectedTransformed(3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 1, 2, 3, 4, 5),
                 this.newWith(3, 2, 2, 1).flatCollectWith(Interval::fromTo, 5));

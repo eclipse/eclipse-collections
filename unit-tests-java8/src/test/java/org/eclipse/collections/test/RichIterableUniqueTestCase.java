@@ -633,11 +633,7 @@ public interface RichIterableUniqueTestCase
         assertEquals(
                 this.getExpectedTransformed(1, 2, 3, 1, 2, 1),
                 this.newWith(3, 2, 1).flatCollect(Interval::oneTo, this.newMutableForTransform()));
-    }
 
-    @Test
-    default void RichIterable_flatCollectWith()
-    {
         assertEquals(
                 this.getExpectedTransformed(3, 2, 1, 2, 1, 1),
                 this.newWith(3, 2, 1).flatCollectWith(Interval::fromTo, 1));
