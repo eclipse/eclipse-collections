@@ -139,11 +139,7 @@ public class UnifiedMapWithHashingStrategyNoIteratorTest implements MutableMapTe
         /**
          * TODO: {@link UnifiedMapWithHashingStrategy#detect(Predicate)} should be optimized to not use an iterator
          */
-    }
 
-    @Override
-    public void RichIterable_detectOptional()
-    {
         /**
          * TODO: {@link UnifiedMapWithHashingStrategy#detectOptional(Predicate)} should be optimized to not use an iterator
          */
