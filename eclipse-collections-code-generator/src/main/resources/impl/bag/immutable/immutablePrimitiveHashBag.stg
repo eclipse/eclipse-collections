@@ -411,7 +411,6 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
 
         private <name>Bag bag;
 
-        @SuppressWarnings("UnusedDeclaration")
         public Immutable<name>BagSerializationProxy()
         {
             // Empty constructor for Externalizable class

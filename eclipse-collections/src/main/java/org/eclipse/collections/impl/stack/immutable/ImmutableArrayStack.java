@@ -1163,7 +1163,6 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 
         private StackIterable<T> stack;
 
-        @SuppressWarnings("UnusedDeclaration")
         public ImmutableStackSerializationProxy()
         {
             // Empty constructor for Externalizable class
