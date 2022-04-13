@@ -96,7 +96,7 @@ public final class CollectionAdapter<T>
         {
             return SetAdapter.adapt((Set<E>) iterable);
         }
-        return UnifiedSet.newSet(iterable);
+        return Sets.mutable.withAll(iterable);
     }
 
     public static <E> MutableList<E> wrapList(Iterable<E> iterable)

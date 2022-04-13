@@ -45,6 +45,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
@@ -70,7 +71,6 @@ import org.eclipse.collections.impl.collection.mutable.AbstractMutableCollection
 import org.eclipse.collections.impl.lazy.ReverseIterable;
 import org.eclipse.collections.impl.lazy.parallel.list.ListIterableParallelIterable;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.ListIterate;
@@ -500,7 +500,7 @@ public abstract class AbstractMutableList<T>
     @Override
     public MutableSet<T> toSet()
     {
-        return UnifiedSet.newSet(this);
+        return Sets.mutable.withAll(this);
     }
 
     @Override

@@ -31,6 +31,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.MutableList;
@@ -44,7 +45,6 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 
@@ -94,7 +94,7 @@ public abstract class AbstractMutableBagIterable<T>
     public boolean retainAllIterable(Iterable<?> iterable)
     {
         int oldSize = this.size();
-        this.removeIfWith(Predicates2.notIn(), UnifiedSet.newSet(iterable));
+        this.removeIfWith(Predicates2.notIn(), Sets.mutable.withAll(iterable));
         return this.size() != oldSize;
     }
 
