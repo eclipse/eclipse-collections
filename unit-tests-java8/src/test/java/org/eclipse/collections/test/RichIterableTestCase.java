@@ -63,14 +63,6 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
-import org.eclipse.collections.api.tuple.primitive.ByteBytePair;
-import org.eclipse.collections.api.tuple.primitive.CharCharPair;
-import org.eclipse.collections.api.tuple.primitive.DoubleDoublePair;
-import org.eclipse.collections.api.tuple.primitive.FloatFloatPair;
-import org.eclipse.collections.api.tuple.primitive.IntIntPair;
-import org.eclipse.collections.api.tuple.primitive.LongLongPair;
-import org.eclipse.collections.api.tuple.primitive.ShortShortPair;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
@@ -91,24 +83,23 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.factory.Multimaps;
+import org.eclipse.collections.impl.factory.primitive.BooleanLists;
+import org.eclipse.collections.impl.factory.primitive.ByteLists;
+import org.eclipse.collections.impl.factory.primitive.CharLists;
+import org.eclipse.collections.impl.factory.primitive.DoubleLists;
+import org.eclipse.collections.impl.factory.primitive.FloatLists;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
+import org.eclipse.collections.impl.factory.primitive.ShortLists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
-import org.eclipse.collections.impl.set.mutable.primitive.DoubleHashSet;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -125,6 +116,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+@SuppressWarnings("UnnecessaryCodeBlock")
 public interface RichIterableTestCase extends IterableTestCase
 {
     @Override
@@ -396,133 +388,6 @@ public interface RichIterableTestCase extends IterableTestCase
         assertFalse(iterable0.containsAllIterable(Lists.immutable.of(1, 1, 1)));
         assertFalse(iterable0.containsAllIterable(Lists.immutable.of(4, 4, 5)));
         assertTrue(iterable0.containsAllIterable(Lists.immutable.empty()));
-    }
-
-    @Test
-    default void RichIterable_flatCollectBoolean()
-    {
-        RichIterable<BooleanBooleanPair> iterable = this.newWith(
-                PrimitiveTuples.pair(true, false),
-                PrimitiveTuples.pair(false, true));
-
-        BooleanHashBag result = new BooleanHashBag();
-        iterable.flatCollectBoolean(each -> BooleanArrayList.newListWith(
-                each.getOne(),
-                each.getTwo()), result);
-
-        assertEquals(BooleanHashBag.newBagWith(true, false, false, true), result);
-    }
-
-    @Test
-    default void RichIterable_flatCollectByte()
-    {
-        RichIterable<ByteBytePair> iterable =
-                this.newWith(
-                        PrimitiveTuples.pair((byte) 1, (byte) 2),
-                        PrimitiveTuples.pair((byte) 3, (byte) 4));
-
-        ByteHashBag result = new ByteHashBag();
-        iterable.flatCollectByte(each -> ByteArrayList.newListWith(
-                each.getOne(),
-                each.getTwo()), result);
-
-        assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2, (byte) 3, (byte) 4), result);
-    }
-
-    @Test
-    default void RichIterable_flatCollectShort()
-    {
-        RichIterable<ShortShortPair> iterable =
-                this.newWith(
-                        PrimitiveTuples.pair((short) 1, (short) 2),
-                        PrimitiveTuples.pair((short) 3, (short) 4));
-
-        ShortHashBag result = new ShortHashBag();
-        iterable.flatCollectShort(each -> ShortArrayList.newListWith(
-                each.getOne(),
-                each.getTwo()), result);
-
-        assertEquals(ShortHashBag.newBagWith((short) 1, (short) 2, (short) 3, (short) 4), result);
-    }
-
-    @Test
-    default void RichIterable_flatCollectInt()
-    {
-        RichIterable<IntIntPair> iterable =
-                this.newWith(
-                        PrimitiveTuples.pair(1, 2),
-                        PrimitiveTuples.pair(3, 4));
-
-        IntHashBag result = new IntHashBag();
-        iterable.flatCollectInt(each -> IntArrayList.newListWith(
-                each.getOne(),
-                each.getTwo()), result);
-
-        assertEquals(IntHashBag.newBagWith(1, 2, 3, 4), result);
-    }
-
-    @Test
-    default void RichIterable_flatCollectChar()
-    {
-        RichIterable<CharCharPair> iterable =
-                this.newWith(
-                        PrimitiveTuples.pair('a', 'b'),
-                        PrimitiveTuples.pair('c', 'd'));
-
-        CharHashBag result = new CharHashBag();
-        iterable.flatCollectChar(each -> CharArrayList.newListWith(
-                each.getOne(),
-                each.getTwo()), result);
-
-        assertEquals(CharHashBag.newBagWith('a', 'b', 'c', 'd'), result);
-    }
-
-    @Test
-    default void RichIterable_flatCollectLong()
-    {
-        RichIterable<LongLongPair> iterable =
-                this.newWith(
-                        PrimitiveTuples.pair(1L, 2L),
-                        PrimitiveTuples.pair(3L, 4L));
-
-        LongHashBag result = new LongHashBag();
-        iterable.flatCollectLong(each -> LongArrayList.newListWith(
-                each.getOne(),
-                each.getTwo()), result);
-
-        assertEquals(LongHashBag.newBagWith(1, 2, 3, 4), result);
-    }
-
-    @Test
-    default void RichIterable_flatCollectDouble()
-    {
-        RichIterable<DoubleDoublePair> iterable =
-                this.newWith(
-                        PrimitiveTuples.pair((double) 1, (double) 2),
-                        PrimitiveTuples.pair((double) 3, (double) 4));
-
-        DoubleHashBag result = new DoubleHashBag();
-        iterable.flatCollectDouble(each -> DoubleHashSet.newSetWith(
-                each.getOne(),
-                each.getTwo()), result);
-
-        assertEquals(DoubleHashBag.newBagWith(1, 2, 3, 4), result);
-    }
-
-    @Test
-    default void RichIterable_flatCollectFloat()
-    {
-        RichIterable<FloatFloatPair> iterable =
-                this.newWith(
-                        PrimitiveTuples.pair((float) 1, (float) 2),
-                        PrimitiveTuples.pair((float) 3, (float) 4));
-
-        FloatHashBag result = new FloatHashBag();
-        iterable.flatCollectFloat(each -> FloatArrayList.newListWith(
-                each.getOne(),
-                each.getTwo()), result);
-
-        assertEquals(FloatHashBag.newBagWith(1, 2, 3, 4), result);
     }
 
     @Test
@@ -1401,6 +1266,98 @@ public interface RichIterableTestCase extends IterableTestCase
         assertEquals(
                 this.newMutableForTransform(3, 2, 1, 2, 1, 2, 1, 1),
                 this.newWith(3, 2, 2, 1).flatCollectWith(Interval::fromTo, 1, this.newMutableForTransform()));
+    }
+
+    @Test
+    default void RichIterable_flatCollect_primitive()
+    {
+        {
+            MutableBooleanCollection target = this.newBooleanForTransform();
+            MutableBooleanCollection result = this.newWith(3, 3, 2, 2, 1, 1).flatCollectBoolean(
+                    each -> BooleanLists.immutable.with(each % 2 == 0, each % 2 == 0),
+                    target);
+            assertEquals(this.newBooleanForTransform(false, false, false, false, true, true, true, true, false, false, false, false), result);
+            assertSame(target, result);
+        }
+
+        RichIterable<Integer> iterable = this.newWith(13, 13, 12, 12, 11, 11, 3, 3, 2, 2, 1, 1);
+
+        {
+            MutableByteCollection target = this.newByteForTransform();
+            MutableByteCollection result = iterable.flatCollectByte(
+                    each -> ByteLists.immutable.with((byte) (each % 10), (byte) (each % 10)),
+                    target);
+            assertEquals(
+                    this.newByteForTransform((byte) 3, (byte) 3, (byte) 3, (byte) 3, (byte) 2, (byte) 2, (byte) 2, (byte) 2, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 3, (byte) 3, (byte) 3, (byte) 3, (byte) 2, (byte) 2, (byte) 2, (byte) 2, (byte) 1, (byte) 1, (byte) 1, (byte) 1),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableCharCollection target = this.newCharForTransform();
+            MutableCharCollection result = iterable.flatCollectChar(
+                    each -> CharLists.immutable.with((char) (each % 10), (char) (each % 10)),
+                    target);
+            assertEquals(
+                    this.newCharForTransform((char) 3, (char) 3, (char) 3, (char) 3, (char) 2, (char) 2, (char) 2, (char) 2, (char) 1, (char) 1, (char) 1, (char) 1, (char) 3, (char) 3, (char) 3, (char) 3, (char) 2, (char) 2, (char) 2, (char) 2, (char) 1, (char) 1, (char) 1, (char) 1),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableDoubleCollection target = this.newDoubleForTransform();
+            MutableDoubleCollection result = iterable.flatCollectDouble(
+                    each -> DoubleLists.immutable.with((double) (each % 10), (double) (each % 10)),
+                    target);
+            assertEquals(
+                    this.newDoubleForTransform(3.0, 3.0, 3.0, 3.0, 2.0, 2.0, 2.0, 2.0, 1.0, 1.0, 1.0, 1.0, 3.0, 3.0, 3.0, 3.0, 2.0, 2.0, 2.0, 2.0, 1.0, 1.0, 1.0, 1.0),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableFloatCollection target = this.newFloatForTransform();
+            MutableFloatCollection result = iterable.flatCollectFloat(
+                    each -> FloatLists.immutable.with((float) (each % 10), (float) (each % 10)),
+                    target);
+            assertEquals(
+                    this.newFloatForTransform(3.0f, 3.0f, 3.0f, 3.0f, 2.0f, 2.0f, 2.0f, 2.0f, 1.0f, 1.0f, 1.0f, 1.0f, 3.0f, 3.0f, 3.0f, 3.0f, 2.0f, 2.0f, 2.0f, 2.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableIntCollection target = this.newIntForTransform();
+            MutableIntCollection result = iterable.flatCollectInt(
+                    each -> IntLists.immutable.with(each % 10, each % 10),
+                    target);
+            assertEquals(
+                    this.newIntForTransform(3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableLongCollection target = this.newLongForTransform();
+            MutableLongCollection result = iterable.flatCollectLong(
+                    each -> LongLists.immutable.with(each % 10, each % 10),
+                    target);
+            assertEquals(
+                    this.newLongForTransform(3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1),
+                    result);
+            assertSame(target, result);
+        }
+
+        {
+            MutableShortCollection target = this.newShortForTransform();
+            MutableShortCollection result = iterable.flatCollectShort(
+                    each -> ShortLists.immutable.with((short) (each % 10), (short) (each % 10)),
+                    target);
+            assertEquals(
+                    this.newShortForTransform((short) 3, (short) 3, (short) 3, (short) 3, (short) 2, (short) 2, (short) 2, (short) 2, (short) 1, (short) 1, (short) 1, (short) 1, (short) 3, (short) 3, (short) 3, (short) 3, (short) 2, (short) 2, (short) 2, (short) 2, (short) 1, (short) 1, (short) 1, (short) 1),
+                    result);
+            assertSame(target, result);
+        }
     }
 
     @Test
