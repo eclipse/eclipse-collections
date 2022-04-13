@@ -52,7 +52,7 @@ public class Immutable<primitive.name><primitive.name>MapKeySetTest extends Abst
         super.contains();
         <type> collision1 = AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst();
         <type> collision2 = AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1);
-        <name><name>HashMap <type><name>HashMap = <name><name>HashMap.newWithKeysValues(collision1, collision1, collision2,  collision2);
+        <name><name>HashMap <type><name>HashMap = <name><name>HashMap.newWithKeysValues(collision1, collision1, collision2, collision2);
         <type><name>HashMap.removeKey(collision2);
         <name>Set <type>Set = <type><name>HashMap.keySet().freeze();
         Assert.assertTrue(<type>Set.contains(collision1));

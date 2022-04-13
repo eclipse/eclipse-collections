@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1467,8 +1467,8 @@ public class ArrayIterateTest
         Twin<Integer>[] integerTwins =
                 new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
 
-        Assert.assertEquals(Tuples.twin(7, 3),  ArrayIterate.minBy(integerTwins, Functions.firstOfPair()));
-        Assert.assertEquals(Tuples.twin(9, 1),  ArrayIterate.minBy(integerTwins, Functions.secondOfPair()));
+        Assert.assertEquals(Tuples.twin(7, 3), ArrayIterate.minBy(integerTwins, Functions.firstOfPair()));
+        Assert.assertEquals(Tuples.twin(9, 1), ArrayIterate.minBy(integerTwins, Functions.secondOfPair()));
     }
 
     @Test
@@ -1502,8 +1502,8 @@ public class ArrayIterateTest
         Twin<Integer>[] integerTwins =
                 new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
 
-        Assert.assertEquals(Tuples.twin(9, 1),  ArrayIterate.maxBy(integerTwins, Functions.firstOfPair()));
-        Assert.assertEquals(Tuples.twin(7, 3),  ArrayIterate.maxBy(integerTwins, Functions.secondOfPair()));
+        Assert.assertEquals(Tuples.twin(9, 1), ArrayIterate.maxBy(integerTwins, Functions.firstOfPair()));
+        Assert.assertEquals(Tuples.twin(7, 3), ArrayIterate.maxBy(integerTwins, Functions.secondOfPair()));
     }
 
     @Test

@@ -74,14 +74,14 @@ public class SpreadFunctionsTest
     @Test
     public void shortSpreadOne()
     {
-        Assert.assertEquals(-1526665035L,  SpreadFunctions.shortSpreadOne((short) 123));
-        Assert.assertEquals(-1120388305L,  SpreadFunctions.shortSpreadOne((short) 234));
+        Assert.assertEquals(-1526665035L, SpreadFunctions.shortSpreadOne((short) 123));
+        Assert.assertEquals(-1120388305L, SpreadFunctions.shortSpreadOne((short) 234));
     }
 
     @Test
     public void shortSpreadTwo()
     {
-        Assert.assertEquals(-474242978L,  SpreadFunctions.shortSpreadTwo((short) 123));
-        Assert.assertEquals(-1572485272L,  SpreadFunctions.shortSpreadTwo((short) 234));
+        Assert.assertEquals(-474242978L, SpreadFunctions.shortSpreadTwo((short) 123));
+        Assert.assertEquals(-1572485272L, SpreadFunctions.shortSpreadTwo((short) 234));
     }
 }

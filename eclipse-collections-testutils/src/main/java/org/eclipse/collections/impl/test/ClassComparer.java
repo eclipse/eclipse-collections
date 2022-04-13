@@ -144,7 +144,7 @@ public class ClassComparer
     public MutableSortedSet<String> printClass(Class<?> clazz)
     {
         MutableSortedSet<String> methodNames = this.getMethodNames(clazz);
-        this.outputTitle("Class: "  + (this.includePackageNames ? clazz.getName() : clazz.getSimpleName()));
+        this.outputTitle("Class: " + (this.includePackageNames ? clazz.getName() : clazz.getSimpleName()));
         this.outputGroupByToString(methodNames);
         return methodNames;
     }

@@ -1546,7 +1546,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (this.sentinelValues.containsZeroKey)
             {
-                Iterable\<VV> iterable  = function.valueOf(this.sentinelValues.zeroValue);
+                Iterable\<VV> iterable = function.valueOf(this.sentinelValues.zeroValue);
                 for (VV key : iterable)
                 {
                     target.put(key, this.sentinelValues.zeroValue);
@@ -1554,7 +1554,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             }
             if (this.sentinelValues.containsOneKey)
             {
-                Iterable\<VV> iterable  = function.valueOf(this.sentinelValues.oneValue);
+                Iterable\<VV> iterable = function.valueOf(this.sentinelValues.oneValue);
                 for (VV key : iterable)
                 {
                     target.put(key, this.sentinelValues.oneValue);
@@ -1565,7 +1565,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (isNonSentinel(this.keys[i]))
             {
-                Iterable\<VV> iterable  = function.valueOf(this.values[i]);
+                Iterable\<VV> iterable = function.valueOf(this.values[i]);
                 for (VV key : iterable)
                 {
                     target.put(key, this.values[i]);
@@ -2546,7 +2546,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             this.values[index] = function.value(this.values[index], parameter);
             return this.values[index];
         }
-        V value =  function.value(factory.value(), parameter);
+        V value = function.value(factory.value(), parameter);
         this.addKeyValueAtIndex(key, value, index);
         return value;
     }

@@ -1601,13 +1601,13 @@ public final class Collectors2
      * commonly called filter. The new collection is created as the result of evaluating the provided Supplier.</p>
      * <p>Examples:</p>
      * {@code MutableList<Integer> evens1 =
-     * Interval.oneTo(10).stream().collect(Collectors2.select(e ->  e % 2 == 0, Lists.mutable::empty));}<br>
+     * Interval.oneTo(10).stream().collect(Collectors2.select(e -> e % 2 == 0, Lists.mutable::empty));}<br>
      * {@code MutableList<Integer> evens2 =
-     * Interval.oneTo(10).reduceInPlace(Collectors2.select(e ->  e % 2 == 0, Lists.mutable::empty));}<br>
+     * Interval.oneTo(10).reduceInPlace(Collectors2.select(e -> e % 2 == 0, Lists.mutable::empty));}<br>
      * <p>
      * Equivalent to using @{@link RichIterable#select(Predicate, Collection)}
      * </p>
-     * {@code MutableList<Integer> evens = Interval.oneTo(10).select(e ->  e % 2 == 0, Lists.mutable.empty());}
+     * {@code MutableList<Integer> evens = Interval.oneTo(10).select(e -> e % 2 == 0, Lists.mutable.empty());}
      */
     public static <T, R extends Collection<T>> Collector<T, ?, R> select(Predicate<? super T> predicate, Supplier<R> supplier)
     {
@@ -1629,13 +1629,13 @@ public final class Collectors2
      * The new collection is created as the result of evaluating the provided Supplier.</p>
      * <p>Examples:</p>
      * {@code MutableList<Integer> evens1 =
-     * Interval.oneTo(10).stream().collect(Collectors2.selectWith((e, p) ->  e % p == 0, 2, Lists.mutable::empty));}<br>
+     * Interval.oneTo(10).stream().collect(Collectors2.selectWith((e, p) -> e % p == 0, 2, Lists.mutable::empty));}<br>
      * {@code MutableList<Integer> evens2 =
-     * Interval.oneTo(10).reduceInPlace(Collectors2.selectWith((e, p) ->  e % p == 0, 2, Lists.mutable::empty));}<br>
+     * Interval.oneTo(10).reduceInPlace(Collectors2.selectWith((e, p) -> e % p == 0, 2, Lists.mutable::empty));}<br>
      * <p>
      * Equivalent to using @{@link RichIterable#selectWith(Predicate2, Object, Collection)}
      * </p>
-     * {@code MutableList<Integer> evens = Interval.oneTo(10).selectWith((e, p) ->  e % p == 0, 2, Lists.mutable.empty());}
+     * {@code MutableList<Integer> evens = Interval.oneTo(10).selectWith((e, p) -> e % p == 0, 2, Lists.mutable.empty());}
      */
     public static <T, P, R extends Collection<T>> Collector<T, ?, R> selectWith(
             Predicate2<? super T, ? super P> predicate,
@@ -1660,13 +1660,13 @@ public final class Collectors2
      * commonly called filterNot. The new collection is created as the result of evaluating the provided Supplier.</p>
      * <p>Examples:</p>
      * {@code MutableList<Integer> odds1 =
-     * Interval.oneTo(10).stream().collect(Collectors2.reject(e ->  e % 2 == 0, Lists.mutable::empty));}<br>
+     * Interval.oneTo(10).stream().collect(Collectors2.reject(e -> e % 2 == 0, Lists.mutable::empty));}<br>
      * {@code MutableList<Integer> odds2 =
-     * Interval.oneTo(10).reduceInPlace(Collectors2.reject(e ->  e % 2 == 0, Lists.mutable::empty));}<br>
+     * Interval.oneTo(10).reduceInPlace(Collectors2.reject(e -> e % 2 == 0, Lists.mutable::empty));}<br>
      * <p>
      * Equivalent to using @{@link RichIterable#reject(Predicate, Collection)}
      * </p>
-     * {@code MutableList<Integer> odds = Interval.oneTo(10).reject(e ->  e % 2 == 0, Lists.mutable.empty());}
+     * {@code MutableList<Integer> odds = Interval.oneTo(10).reject(e -> e % 2 == 0, Lists.mutable.empty());}
      */
     public static <T, R extends Collection<T>> Collector<T, ?, R> reject(Predicate<? super T> predicate, Supplier<R> supplier)
     {
@@ -1688,13 +1688,13 @@ public final class Collectors2
      * The new collection is created as the result of evaluating the provided Supplier.</p>
      * <p>Examples:</p>
      * {@code MutableList<Integer> odds1 =
-     * Interval.oneTo(10).stream().collect(Collectors2.rejectWith((e, p) ->  e % p == 0, 2, Lists.mutable::empty));}<br>
+     * Interval.oneTo(10).stream().collect(Collectors2.rejectWith((e, p) -> e % p == 0, 2, Lists.mutable::empty));}<br>
      * {@code MutableList<Integer> odds2 =
-     * Interval.oneTo(10).reduceInPlace(Collectors2.rejectWith((e, p) ->  e % p == 0, 2, Lists.mutable::empty));}<br>
+     * Interval.oneTo(10).reduceInPlace(Collectors2.rejectWith((e, p) -> e % p == 0, 2, Lists.mutable::empty));}<br>
      * <p>
      * Equivalent to using @{@link RichIterable#rejectWith(Predicate2, Object, Collection)}
      * </p>
-     * {@code MutableList<Integer> odds = Interval.oneTo(10).rejectWith((e, p) ->  e % p == 0, 2, Lists.mutable.empty());}
+     * {@code MutableList<Integer> odds = Interval.oneTo(10).rejectWith((e, p) -> e % p == 0, 2, Lists.mutable.empty());}
      */
     public static <T, P, R extends Collection<T>> Collector<T, ?, R> rejectWith(
             Predicate2<? super T, ? super P> predicate,
@@ -2142,4 +2142,3 @@ public final class Collectors2
         };
     }
 }
-

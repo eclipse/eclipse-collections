@@ -1981,7 +1981,7 @@ public final class ConcurrentHashMap<K, V>
     }
 
     @Override
-    public ConcurrentHashMap<K, V> withMap(Map<? extends  K, ? extends V> map)
+    public ConcurrentHashMap<K, V> withMap(Map<? extends K, ? extends V> map)
     {
         return (ConcurrentHashMap<K, V>) super.withMap(map);
     }

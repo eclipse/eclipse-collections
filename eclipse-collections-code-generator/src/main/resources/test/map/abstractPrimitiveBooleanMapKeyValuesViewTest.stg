@@ -373,7 +373,7 @@ public abstract class Abstract<name>BooleanMapKeyValuesViewTestCase
     public void maxBy()
     {
         Assert.assertEquals(PrimitiveTuples.pair(<(literal.(type))("1")>, false),
-                this.newWith(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("4")>, false).maxBy((<name>BooleanPair object) ->  (int) object.getOne() & 1));
+                this.newWith(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("4")>, false).maxBy((<name>BooleanPair object) -> (int) object.getOne() & 1));
     }
 
     @Test

@@ -117,9 +117,9 @@ public interface Mutable<name>ObjectMapFactory
     /**
      * Same as {@link #withAll(<name>ObjectMap)}.
      */
-    \<V> Mutable<name>ObjectMap\<V> ofAll(<name>ObjectMap\<? extends V>  map);
+    \<V> Mutable<name>ObjectMap\<V> ofAll(<name>ObjectMap\<? extends V> map);
 
-    \<V> Mutable<name>ObjectMap\<V> withAll(<name>ObjectMap\<? extends V>  map);
+    \<V> Mutable<name>ObjectMap\<V> withAll(<name>ObjectMap\<? extends V> map);
 
     /**
      * Creates an {@code Mutable<name>ObjectMap} from an {@code Iterable\<T>} by applying {@code keyFunction} and {@code valueFunction}.
