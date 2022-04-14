@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -14,7 +14,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -176,12 +176,6 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
     public boolean notEmpty()
     {
         return this.getOccupiedWithData() != 0 || (this.getSentinelValues() != null && this.getSentinelValues().size() != 0);
-    }
-
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
     }
 
     /**
@@ -664,12 +658,6 @@ result = nextSum})>
         public void appendString(Appendable appendable, String start, String separator, String end)
         {
             AbstractMutable<name>ValuesMap.this.appendString(appendable, start, separator, end);
-        }
-
-        @Override
-        public void forEach(<name>Procedure procedure)
-        {
-            this.each(procedure);
         }
 
         @Override

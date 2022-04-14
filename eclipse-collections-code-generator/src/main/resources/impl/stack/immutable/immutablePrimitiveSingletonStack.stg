@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.stack.immutable.primitive;
 
@@ -63,12 +63,6 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
     public <name>Iterator <type>Iterator()
     {
         return new Singleton<name>Iterator(element1);
-    }
-
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
     }
 
     /**

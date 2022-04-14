@@ -69,12 +69,6 @@ import org.eclipse.collections.impl.utility.primitive.Lazy<name>Iterate;
 public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
 {
     @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
-    @Override
     public int size()
     {
         return this.count(value -> true);

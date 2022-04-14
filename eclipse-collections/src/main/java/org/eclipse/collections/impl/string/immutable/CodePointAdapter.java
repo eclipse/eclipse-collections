@@ -160,12 +160,6 @@ public class CodePointAdapter
     }
 
     @Override
-    public void forEach(IntProcedure procedure)
-    {
-        this.each(procedure);
-    }
-
-    @Override
     public void each(IntProcedure procedure)
     {
         int length = this.adapted.length();

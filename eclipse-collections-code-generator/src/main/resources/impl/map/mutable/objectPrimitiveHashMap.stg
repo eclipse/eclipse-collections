@@ -718,12 +718,6 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
         return false;
     }
 
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */
@@ -1876,12 +1870,6 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
         public boolean containsAll(<name>Iterable source)
         {
             return Object<name>HashMap.this.containsAll(source);
-        }
-
-        @Override
-        public void forEach(<name>Procedure procedure)
-        {
-            this.each(procedure);
         }
 
         @Override

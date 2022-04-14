@@ -554,12 +554,6 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         return <(equals.(type))("this.table[this.probe(value)]", "value")>;
     }
 
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */
@@ -1272,12 +1266,6 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
                 return ((temp >\>> <(castRealTypeToInt.(type))("value")>) & 1) != 0;
             }
             return <(equals.(type))("this.table[this.probe(value)]", "value")>;
-        }
-
-        @Override
-        public void forEach(<name>Procedure procedure)
-        {
-            this.each(procedure);
         }
 
         @Override

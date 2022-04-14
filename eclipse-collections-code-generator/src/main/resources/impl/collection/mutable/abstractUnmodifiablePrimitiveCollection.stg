@@ -192,12 +192,6 @@ public abstract class AbstractUnmodifiable<name>Collection
         return new Unmodifiable<name>Iterator(this.collection.<type>Iterator());
     }
 
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */

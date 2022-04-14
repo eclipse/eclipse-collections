@@ -188,12 +188,6 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
     }
 
     @Override
-    public void forEach(IntProcedure procedure)
-    {
-        this.each(procedure);
-    }
-
-    @Override
     public void each(IntProcedure procedure)
     {
         this.codePoints.each(procedure);

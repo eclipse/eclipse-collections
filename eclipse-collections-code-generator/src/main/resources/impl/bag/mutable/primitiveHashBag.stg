@@ -471,12 +471,6 @@ public class <name>HashBag
         return true;
     }
 
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */

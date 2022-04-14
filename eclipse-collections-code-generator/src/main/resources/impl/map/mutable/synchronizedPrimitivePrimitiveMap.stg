@@ -346,12 +346,6 @@ public class Synchronized<name1><name2>Map
         return this.map.<type2>Iterator();
     }
 
-    @Override
-    public void forEach(<name2>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */

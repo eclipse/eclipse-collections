@@ -322,12 +322,6 @@ public final class IntInterval
         }
     }
 
-    @Override
-    public void forEach(IntProcedure procedure)
-    {
-        this.each(procedure);
-    }
-
     private boolean goForward()
     {
         return this.from <= this.to && this.step > 0;

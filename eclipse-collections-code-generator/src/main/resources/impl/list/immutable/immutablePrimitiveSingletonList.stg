@@ -106,12 +106,6 @@ final class Immutable<name>SingletonList implements Immutable<name>List, Seriali
         return new Singleton<name>Iterator(element1);
     }
 
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */

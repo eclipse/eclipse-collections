@@ -240,7 +240,10 @@ public interface <name>Iterable extends PrimitiveIterable
     /**
      * Applies the <name>Procedure to each element in the <name>Iterable.
      */
-    void forEach(<name>Procedure procedure);
+    default void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
 
     /**
      * A synonym for forEach.

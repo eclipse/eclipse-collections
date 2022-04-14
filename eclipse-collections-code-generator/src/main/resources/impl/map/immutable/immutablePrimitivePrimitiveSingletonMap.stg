@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -16,7 +16,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
@@ -195,12 +195,6 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
     public <name2>Iterator <type2>Iterator()
     {
         return new Unmodifiable<name2>Iterator(<name1><name2>HashMap.newWithKeysValues(this.key1, this.value1).<type2>Iterator());
-    }
-
-    @Override
-    public void forEach(<name2>Procedure procedure)
-    {
-        this.each(procedure);
     }
 
     /**
