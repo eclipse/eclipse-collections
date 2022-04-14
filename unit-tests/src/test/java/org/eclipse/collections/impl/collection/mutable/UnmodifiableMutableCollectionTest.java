@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.collection.mutable;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -305,8 +306,9 @@ public class UnmodifiableMutableCollectionTest
     public void iterator()
     {
         Counter counter = new Counter();
-        for (Object each : this.unmodifiableCollection)
+        for (Iterator<String> iterator = this.unmodifiableCollection.iterator(); iterator.hasNext(); )
         {
+            iterator.next();
             counter.increment();
         }
         Assert.assertEquals(4, counter.getCount());

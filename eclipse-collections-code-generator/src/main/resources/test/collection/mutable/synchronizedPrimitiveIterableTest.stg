@@ -65,7 +65,7 @@ public class Synchronized<name>IterableTest extends Abstract<name>IterableTestCa
     @Test(expected = IllegalArgumentException.class)
     public void null_iterable_throws()
     {
-        Synchronized<name>Iterable iterable = Synchronized<name>Iterable.of(null);
+        Synchronized<name>Iterable.of(null);
     }
 
     @Override

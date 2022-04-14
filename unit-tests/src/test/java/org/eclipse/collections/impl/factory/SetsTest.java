@@ -640,8 +640,8 @@ public class SetsTest
             Set<E> setB,
             Set<E> setC)
     {
-        Set<E> set1 = function1.value(setA, function2.value(setB, setC));
-        Set<E> set2 = function2.value(function1.value(setA, setB), function1.value(setA, setC));
+        // Set<E> set1 = function1.value(setA, function2.value(setB, setC));
+        // Set<E> set2 = function2.value(function1.value(setA, setB), function1.value(setA, setC));
         // TODO: setsEqual will fail on some sorted sets until SortableSetAdapter is implemented
         //setsEqualProcedure.value(set1, set2);
     }

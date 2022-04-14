@@ -70,7 +70,7 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
     @Test(expected = NegativeArraySizeException.class)
     public void newWithNValues_throws_negative_size()
     {
-        <name>ArrayList newList = <name>ArrayList.newWithNValues(-5, <(literal.(type))("42")>);
+        <name>ArrayList.newWithNValues(-5, <(literal.(type))("42")>);
     }
 
     @Test

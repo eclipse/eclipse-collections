@@ -1129,7 +1129,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> strings = this.newBag();
         MutableBag<String> result = Bags.mutable.of();
         Iterator<String> iterator = strings.iterator();
-        for (int i = 0; iterator.hasNext(); i++)
+        while (iterator.hasNext())
         {
             String string = iterator.next();
             result.add(string);

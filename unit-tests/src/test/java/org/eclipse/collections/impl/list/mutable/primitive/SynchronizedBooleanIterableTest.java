@@ -54,7 +54,7 @@ public class SynchronizedBooleanIterableTest extends AbstractBooleanIterableTest
     @Test(expected = IllegalArgumentException.class)
     public void null_iterable_throws()
     {
-        SynchronizedBooleanIterable iterable = SynchronizedBooleanIterable.of(null);
+        SynchronizedBooleanIterable.of(null);
     }
 
     @Override

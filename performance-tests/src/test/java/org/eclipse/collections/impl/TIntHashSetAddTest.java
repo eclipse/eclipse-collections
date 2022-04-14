@@ -55,11 +55,10 @@ public class TIntHashSetAddTest
         {
             this.runHashContains(this.runHashPut(values, 1000000, 1), values, 1000000, 1);
         }
-        TIntHashSet set = null;
         long now1 = System.currentTimeMillis();
         for (int i = 0; i < 100; i++)
         {
-            set = this.runHashPut(values, 1000000, 1);
+            this.runHashPut(values, 1000000, 1);
         }
         long time1 = System.currentTimeMillis() - now1;
         LOGGER.info("TIntHashSet, set size 1,000,000, puts/msec: {}", 100000000 / time1);

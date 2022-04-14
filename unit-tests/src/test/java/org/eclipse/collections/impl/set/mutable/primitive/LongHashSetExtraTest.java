@@ -24,7 +24,6 @@ public class LongHashSetExtraTest
     public void testManyRemoves()
     {
         Random random = new Random(-6819587229044058720L);
-        int expectedCardinality = random.nextInt(100000) + 100000;
         long maxUpperBound = Long.MAX_VALUE;
         double base = Math.pow((double) maxUpperBound, 1.0 / 128);
         long[] threshold = new long[1];
