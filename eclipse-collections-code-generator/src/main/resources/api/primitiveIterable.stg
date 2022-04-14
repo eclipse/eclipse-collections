@@ -657,7 +657,7 @@ collectPrimitive(toName) ::= <<
  */
 default \<R extends Mutable<toName>Collection> R collect<toName>(<name>To<toName>Function function, R target)
 {
-    this.each(each ->  target.add(function.valueOf(each)));
+    this.each(each -> target.add(function.valueOf(each)));
     return target;
 }
 >>

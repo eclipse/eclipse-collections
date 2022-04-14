@@ -176,7 +176,7 @@ public abstract class Object<name>HashMapKeySetTestCase
         Assert.assertFalse(map.keySet().remove("Four"));
 
         Assert.assertTrue(map.keySet().remove("Two"));
-        Assert.assertEquals(this.newMapWithKeysValues("One", <(literal.(type))("1")>,  "Three", <(literal.(type))("3")>), map);
+        Assert.assertEquals(this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Three", <(literal.(type))("3")>), map);
         Assert.assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
     }
 
@@ -203,7 +203,7 @@ public abstract class Object<name>HashMapKeySetTestCase
         Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
 
         Assert.assertTrue(map.keySet().removeAll(FastList.newListWith("Two", "Four")));
-        Assert.assertEquals(this.newMapWithKeysValues("One", <(literal.(type))("1")>,  "Three", <(literal.(type))("3")>), map);
+        Assert.assertEquals(this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Three", <(literal.(type))("3")>), map);
         Assert.assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
     }
 
@@ -215,7 +215,7 @@ public abstract class Object<name>HashMapKeySetTestCase
         Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
 
         Assert.assertTrue(map.keySet().retainAll(FastList.newListWith("One", "Three")));
-        Assert.assertEquals(this.newMapWithKeysValues("One", <(literal.(type))("1")>,  "Three", <(literal.(type))("3")>), map);
+        Assert.assertEquals(this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Three", <(literal.(type))("3")>), map);
         Assert.assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
     }
 

@@ -42,8 +42,8 @@ public class Mutable<name>ObjectMapFactoryTest
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"),
                 <name>ObjectMaps.mutable.with(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"));
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three",  <(literal.(type))("4")>, "four"),
-                <name>ObjectMaps.mutable.with(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three",  <(literal.(type))("4")>, "four"));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three", <(literal.(type))("4")>, "four"),
+                <name>ObjectMaps.mutable.with(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three", <(literal.(type))("4")>, "four"));
     }
 
     @Test
@@ -58,8 +58,8 @@ public class Mutable<name>ObjectMapFactoryTest
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"),
                 <name>ObjectMaps.mutable.of(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"));
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three",  <(literal.(type))("4")>, "four"),
-                <name>ObjectMaps.mutable.of(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three",  <(literal.(type))("4")>, "four"));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three", <(literal.(type))("4")>, "four"),
+                <name>ObjectMaps.mutable.of(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three", <(literal.(type))("4")>, "four"));
     }
 }
 

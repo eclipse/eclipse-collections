@@ -26,7 +26,7 @@ public class AtomicCountProcedureTest
         AtomicCountProcedure<String> atomicCountProcedure = new AtomicCountProcedure<>(each -> STRING_LENGTH < each.length());
 
         atomicCountProcedure.value("word");
-        assertEquals(0,  atomicCountProcedure.getCount());
+        assertEquals(0, atomicCountProcedure.getCount());
 
         atomicCountProcedure.value("america");
         assertEquals(1, atomicCountProcedure.getCount());

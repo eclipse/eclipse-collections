@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -794,7 +794,7 @@ public class IterateTest
     public void toMapTarget()
     {
         MutableSet<Integer> set = UnifiedSet.newSet(this.getIntegerSet());
-        Map<String, Integer> map =  Iterate.toMap(set, String::valueOf, object -> 10 * object, new HashMap<>());
+        Map<String, Integer> map = Iterate.toMap(set, String::valueOf, object -> 10 * object, new HashMap<>());
         Verify.assertSize(5, map);
         Object expectedValue = 10;
         Object expectedKey = "1";

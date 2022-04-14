@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -153,7 +153,7 @@ public class TuplesTest
         Pair<String, String> pair1 = Tuples.pair("1", "1");
         Assert.assertEquals("1:1", pair1.toString());
 
-        Triple<String, String, String> triple = Tuples.triple("1", "2",  "3");
+        Triple<String, String, String> triple = Tuples.triple("1", "2", "3");
         Assert.assertEquals("1:2:3", triple.toString());
 
         Twin<String> identicalTwin = Tuples.identicalTwin("1");
@@ -200,7 +200,7 @@ public class TuplesTest
     @Test
     public void reverse()
     {
-        Triple<String, Integer, Boolean> triple = Tuples.triple("One",  2,  true);
+        Triple<String, Integer, Boolean> triple = Tuples.triple("One", 2, true);
         Triple<Boolean, Integer, String> reversedTriple = triple.reverse();
         Triple<Boolean, Integer, String> expectedTriple = Tuples.triple(true, 2, "One");
         Assert.assertEquals(true, reversedTriple.getOne());

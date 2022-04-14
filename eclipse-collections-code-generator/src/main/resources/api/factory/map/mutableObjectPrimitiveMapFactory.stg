@@ -123,9 +123,9 @@ public interface MutableObject<name>MapFactory
     /**
      * Same as {@link #withAll(Object<name>Map)}.
      */
-    \<K> MutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K>  map);
+    \<K> MutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K> map);
 
-    \<K> MutableObject<name>Map\<K> withAll(Object<name>Map\<? extends K>  map);
+    \<K> MutableObject<name>Map\<K> withAll(Object<name>Map\<? extends K> map);
 
     /**
      * Creates an {@code MutableObject<name>Map} from an {@code Iterable\<T>} by applying {@code keyFunction} and {@code valueFunction}.

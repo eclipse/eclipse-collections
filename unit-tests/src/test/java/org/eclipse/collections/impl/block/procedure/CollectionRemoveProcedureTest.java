@@ -27,7 +27,7 @@ public class CollectionRemoveProcedureTest
         Verify.assertContainsAll(procedure.getResult(), 1, 2);
         procedure.value(1);
         Verify.assertSize(1, procedure.getResult());
-        Verify.assertContainsAll(procedure.getResult(),  2);
+        Verify.assertContainsAll(procedure.getResult(), 2);
     }
 
     public void toStringTest()

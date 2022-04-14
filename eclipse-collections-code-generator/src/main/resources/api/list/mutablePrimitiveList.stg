@@ -230,7 +230,7 @@ default Mutable<name>List shuffleThis(Random rnd)
     for (int j = this.size() - 1; j > 0; j--)
     {
         int k = rnd.nextInt(j + 1);
-        <type> selected  = this.get(j);
+        <type> selected = this.get(j);
         this.set(j, this.get(k));
         this.set(k, selected);
     }
