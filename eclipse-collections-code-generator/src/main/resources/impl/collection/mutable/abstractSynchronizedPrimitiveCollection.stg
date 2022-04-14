@@ -356,12 +356,6 @@ public abstract class AbstractSynchronized<name>Collection
         return this.collection.<type>Iterator();
     }
 
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */

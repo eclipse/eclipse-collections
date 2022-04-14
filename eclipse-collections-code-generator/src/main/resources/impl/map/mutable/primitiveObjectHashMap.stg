@@ -3305,12 +3305,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
 
         @Override
-        public void forEach(<name>Procedure procedure)
-        {
-            this.each(procedure);
-        }
-
-        @Override
         public void each(<name>Procedure procedure)
         {
             <name>ObjectHashMap.this.forEachKey(procedure);

@@ -198,12 +198,6 @@ public class Synchronized<name>Stack
         return new Unmodifiable<name>Iterator(this.stack.<type>Iterator());
     }
 
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */

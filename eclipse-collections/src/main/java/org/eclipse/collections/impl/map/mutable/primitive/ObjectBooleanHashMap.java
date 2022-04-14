@@ -420,12 +420,6 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
         return this.containsAll(source.toArray());
     }
 
-    @Override
-    public void forEach(BooleanProcedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */

@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.bag.immutable.primitive;
 
@@ -138,12 +138,6 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
             }
         }
         return true;
-    }
-
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
     }
 
     /**

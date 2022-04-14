@@ -747,12 +747,6 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
     }
 
     @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
-    @Override
     public void each(<name>Procedure procedure)
     {
         this.forEachValue(procedure);

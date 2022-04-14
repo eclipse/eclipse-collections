@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 
 targetPath() ::= "org/eclipse/collections/impl/bag/immutable/primitive"
@@ -10,7 +10,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.bag.immutable.primitive;
 
@@ -143,12 +143,6 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
     public boolean containsAll(<type>... elements)
     {
         return this.delegate.containsAll(elements);
-    }
-
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
     }
 
     /**

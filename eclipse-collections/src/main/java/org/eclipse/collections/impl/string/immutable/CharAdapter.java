@@ -158,12 +158,6 @@ public class CharAdapter
     }
 
     @Override
-    public void forEach(CharProcedure procedure)
-    {
-        this.each(procedure);
-    }
-
-    @Override
     public void each(CharProcedure procedure)
     {
         StringIterate.forEachChar(this.adapted, procedure);

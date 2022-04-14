@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
@@ -74,12 +74,6 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
     public <name>Iterator <type>Iterator()
     {
         return new Unmodifiable<name>Iterator(this.delegate.<type>Iterator());
-    }
-
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
     }
 
     /**

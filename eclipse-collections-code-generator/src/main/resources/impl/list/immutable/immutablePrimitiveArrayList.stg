@@ -142,12 +142,6 @@ final class Immutable<name>ArrayList
         return new Internal<name>Iterator();
     }
 
-    @Override
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
     /**
      * @since 7.0.
      */

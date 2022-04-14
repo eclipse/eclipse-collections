@@ -344,12 +344,6 @@ public final class LongInterval
         }
     }
 
-    @Override
-    public void forEach(LongProcedure procedure)
-    {
-        this.each(procedure);
-    }
-
     private boolean goForward()
     {
         return this.from <= this.to && this.step > 0;
