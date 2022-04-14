@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,6 +28,7 @@ import org.eclipse.collections.api.block.function.primitive.ObjectByteToObjectFu
 import org.eclipse.collections.api.block.predicate.primitive.BytePredicate;
 import org.eclipse.collections.api.block.procedure.primitive.ByteProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.primitive.ByteBags;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.iterator.ByteIterator;
@@ -44,7 +45,6 @@ import org.eclipse.collections.impl.block.procedure.checked.primitive.CheckedByt
 import org.eclipse.collections.impl.factory.primitive.ByteSets;
 import org.eclipse.collections.impl.lazy.primitive.LazyByteIterableAdapter;
 import org.eclipse.collections.impl.set.immutable.primitive.ImmutableByteSetSerializationProxy;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
 public final class ByteHashSet implements MutableByteSet, Externalizable
 {
@@ -692,7 +692,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
     @Override
     public <V> MutableSet<V> collect(ByteToObjectFunction<? extends V> function)
     {
-        MutableSet<V> target = UnifiedSet.newSet(this.size());
+        MutableSet<V> target = Sets.mutable.withInitialCapacity(this.size());
 
         this.forEach(each -> target.add(function.valueOf(each)));
 
@@ -1359,7 +1359,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         @Override
         public <V> ImmutableSet<V> collect(ByteToObjectFunction<? extends V> function)
         {
-            MutableSet<V> target = UnifiedSet.newSet(this.size());
+            MutableSet<V> target = Sets.mutable.withInitialCapacity(this.size());
 
             this.forEach(each -> target.add(function.valueOf(each)));
 

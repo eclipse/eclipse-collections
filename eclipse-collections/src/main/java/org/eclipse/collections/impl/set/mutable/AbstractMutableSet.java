@@ -84,7 +84,7 @@ public abstract class AbstractMutableSet<T>
 
     protected <K> MutableSet<K> newEmptySameSize()
     {
-        return UnifiedSet.newSet(this.size());
+        return Sets.mutable.withInitialCapacity(this.size());
     }
 
     @Override

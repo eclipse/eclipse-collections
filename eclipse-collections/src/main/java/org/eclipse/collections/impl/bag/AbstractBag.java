@@ -61,6 +61,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -71,7 +72,6 @@ import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -898,7 +898,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSet<T> toSet()
     {
-        MutableSet<T> result = UnifiedSet.newSet(this.sizeDistinct());
+        MutableSet<T> result = Sets.mutable.withInitialCapacity(this.sizeDistinct());
         this.forEachWithOccurrences((each, occurrences) -> result.add(each));
         return result;
     }

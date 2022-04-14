@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -409,7 +409,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Deprecated
     public ImmutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        return this.delegate.zipWithIndex(UnifiedSet.newSet(this.size())).toImmutable();
+        return this.delegate.zipWithIndex(Sets.mutable.withInitialCapacity(this.size())).toImmutable();
     }
 
     @Override

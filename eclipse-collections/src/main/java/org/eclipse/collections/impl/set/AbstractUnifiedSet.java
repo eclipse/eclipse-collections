@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.primitive.BooleanSets;
 import org.eclipse.collections.api.factory.primitive.ByteSets;
 import org.eclipse.collections.api.factory.primitive.CharSets;
@@ -345,7 +346,7 @@ public abstract class AbstractUnifiedSet<T>
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.newSet(this.size()));
+        return this.zipWithIndex(Sets.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
