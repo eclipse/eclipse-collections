@@ -35,6 +35,12 @@ public interface MutableBagMultimap<K, V>
         return this;
     }
 
+    @Override
+    default MutableBagMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        return (MutableBagMultimap<K, V>) MutableBagIterableMultimap.super.withKeyMultiValues(key, values);
+    }
+
     /**
      * @since 11.0
      */

@@ -90,6 +90,12 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
         super.readExternal(in);
     }
 
+    @Override
+    public SynchronizedPutTreeSortedSetMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        return (SynchronizedPutTreeSortedSetMultimap<K, V>) super.withKeyMultiValues(key, values);
+    }
+
     public static <K, V> SynchronizedPutTreeSortedSetMultimap<K, V> newMultimap(Comparator<? super V> comparator)
     {
         return new SynchronizedPutTreeSortedSetMultimap<>(comparator);

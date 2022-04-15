@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,11 +10,14 @@
 
 package org.eclipse.collections.impl.multimap;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 
 public abstract class AbstractSynchronizedPutMultimap<K, V, C extends MutableCollection<V>> extends AbstractMutableMultimap<K, V, C>
@@ -91,6 +94,29 @@ public abstract class AbstractSynchronizedPutMultimap<K, V, C extends MutableCol
             }
             return false;
         }
+    }
+
+    @Override
+    public MutableMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        Objects.requireNonNull(values);
+        if (values.length > 0)
+        {
+            C existingValues = this.getIfAbsentPutCollection(key);
+            synchronized (existingValues)
+            {
+                this.addAll(existingValues, values);
+                return this;
+            }
+        }
+        return this;
+    }
+
+    private void addAll(C existingValues, V[] values)
+    {
+        int currentSize = existingValues.size();
+        int newSize = ArrayIterate.addAllTo(values, existingValues).size();
+        this.addToTotalSize(newSize - currentSize);
     }
 
     private C getIfAbsentPutCollection(K key)

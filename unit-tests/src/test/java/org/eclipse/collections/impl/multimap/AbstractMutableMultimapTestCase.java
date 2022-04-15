@@ -121,6 +121,39 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
+    public void withKeyMultiValues()
+    {
+        MutableMultimap<Integer, String> multimap = this.newMultimap();
+        multimap = multimap.withKeyMultiValues(1);
+        Verify.assertEmpty(multimap);
+        multimap = multimap.withKeyMultiValues(1, "A", "B");
+        Verify.assertSize(2, multimap);
+
+        MutableMultimap<Integer, String> expected = this.newMultimap();
+        expected.put(1, "A");
+        expected.put(1, "B");
+        Assert.assertEquals(expected, multimap);
+
+        multimap.withKeyMultiValues(1, "C");
+        Verify.assertSize(3, multimap);
+
+        expected.put(1, "C");
+        Verify.assertEquals(expected, multimap);
+
+        multimap.withKeyMultiValues(2, "Z", "K", "Y");
+        Verify.assertSize(6, multimap);
+
+        expected = expected.withKeyValue(2, "Z").withKeyValue(2, "K").withKeyValue(2, "Y");
+        Verify.assertEquals(expected, multimap);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void withKeyMultiValuesNullValueHandling()
+    {
+        this.newMultimap().withKeyMultiValues(1, null);
+    }
+
+    @Test
     public void putAll()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "2");

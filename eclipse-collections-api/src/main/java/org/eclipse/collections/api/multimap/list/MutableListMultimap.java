@@ -37,6 +37,12 @@ public interface MutableListMultimap<K, V>
         return this;
     }
 
+    @Override
+    default MutableListMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        return (MutableListMultimap<K, V>) MutableMultimap.super.withKeyMultiValues(key, values);
+    }
+
     /**
      * @since 11.0
      */

@@ -36,6 +36,12 @@ public interface MutableBagIterableMultimap<K, V>
     }
 
     @Override
+    default MutableBagIterableMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        return (MutableBagIterableMultimap<K, V>) MutableMultimap.super.withKeyMultiValues(key, values);
+    }
+
+    @Override
     MutableBagIterable<V> replaceValues(K key, Iterable<? extends V> values);
 
     @Override

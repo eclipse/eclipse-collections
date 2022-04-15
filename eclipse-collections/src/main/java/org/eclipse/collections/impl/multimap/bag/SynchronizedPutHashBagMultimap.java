@@ -89,6 +89,12 @@ public final class SynchronizedPutHashBagMultimap<K, V>
     }
 
     @Override
+    public SynchronizedPutHashBagMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        return (SynchronizedPutHashBagMultimap<K, V>) super.withKeyMultiValues(key, values);
+    }
+
+    @Override
     protected MutableBag<V> createCollection()
     {
         return Bags.mutable.withInitialCapacity(1);
