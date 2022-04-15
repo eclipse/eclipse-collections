@@ -24,6 +24,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
+import org.eclipse.collections.api.block.function.primitive.Object<name1><name2>ToObjectFunction;
 import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 
@@ -80,6 +81,20 @@ public interface <name1><name2>Map extends <name2>ValuesMap
      * @param procedure the procedure to invoke for each key/value pair
      */
     void forEachKeyValue(<name1><name2>Procedure procedure);
+
+    /**
+     * Implements the injectInto pattern with each key/value pair of the map.
+     * @param value to be injected into the map
+     * @param function to apply to the injected value and key/value pairs
+     * @return result of injecting the injectedValue into the map
+     * @since 11.1
+     */
+    default \<IV> IV injectIntoKeyValue(IV injectedValue, Object<name1><name2>ToObjectFunction\<? super IV, ? extends IV> function)
+    {
+        IV[] result = (IV[]) new Object[]{injectedValue};
+        this.forEachKeyValue((key, value) -> result[0] = function.valueOf(result[0], key, value));
+        return result[0];
+    }
 
     /**
      * Returns a view of the keys in this map. This iterable is backed by the map, so
