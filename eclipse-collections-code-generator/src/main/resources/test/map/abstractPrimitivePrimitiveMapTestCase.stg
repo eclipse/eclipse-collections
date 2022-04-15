@@ -452,6 +452,18 @@ public abstract class Abstract<name1><name2>MapTestCase
     }
 
     @Test
+    public void injectIntoKeyValue()
+    {
+        <name1><name2>Map map0 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>);
+
+        Long sum0 = map0.injectIntoKeyValue(new Long(0), (Long sum, <type1> eachKey, <type2> eachValue) ->
+        {
+            return new Long((long) (sum + eachKey + eachValue));
+        });
+        Assert.assertEquals(new Long(8), sum0);
+    }
+
+    @Test
     public void makeString()
     {
         Assert.assertEquals("", this.getEmptyMap().makeString());
