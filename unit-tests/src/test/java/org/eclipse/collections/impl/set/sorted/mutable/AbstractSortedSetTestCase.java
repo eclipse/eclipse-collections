@@ -564,7 +564,6 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         }
 
         Person john = new Person("John", "Smith");
-        Person jane = new Person("Jane", "Smith");
         Person johnDoe = new Person("John", "Doe");
         MutableSortedSet<Person> people = this.newWith(john, johnDoe);
         MutableList<Holder> list = Lists.mutable.with(new Holder(1), new Holder(2), new Holder(3));

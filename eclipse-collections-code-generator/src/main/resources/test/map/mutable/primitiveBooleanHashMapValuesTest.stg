@@ -378,7 +378,6 @@ public class <name>BooleanHashMapValuesTest extends AbstractMutableBooleanCollec
         Assert.assertFalse(emptyCollection.contains(true));
         Assert.assertFalse(emptyCollection.contains(false));
         BooleanIterable booleanIterable = this.classUnderTest();
-        int size = booleanIterable.size();
         Assert.assertTrue(booleanIterable.contains(true));
         Assert.assertTrue(booleanIterable.contains(false));
         Assert.assertFalse(this.newWith(true, true, true).contains(false));

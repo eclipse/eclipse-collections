@@ -52,7 +52,6 @@ public class BiMapsTest
         ImmutableBiMap<Integer, String> map2 = BiMaps.immutable.with(1, "2", 3, "4", 5, "6", 7, "8");
         Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(map2.castToMap()));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.ofAll(map2.castToMap()));
-        ImmutableBiMap<Integer, String> immutableBiMap1 = factory.ofAll(Maps.immutable.of(1, "2", 3, "4", 5, "6", 7, "8"));
     }
 
     @Test
