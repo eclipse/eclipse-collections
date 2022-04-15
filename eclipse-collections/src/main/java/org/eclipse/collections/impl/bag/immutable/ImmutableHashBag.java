@@ -73,12 +73,12 @@ public class ImmutableHashBag<T>
 
     public ImmutableHashBag(Iterable<? extends T> source)
     {
-        this.delegate = HashBag.newBag(source);
+        this.delegate = Bags.mutable.withAll(source);
     }
 
     public ImmutableHashBag(Bag<? extends T> source)
     {
-        this.delegate = HashBag.newBag(source);
+        this.delegate = Bags.mutable.withAll(source);
     }
 
     public static <T> ImmutableHashBag<T> newBag()
@@ -104,7 +104,7 @@ public class ImmutableHashBag<T>
     @Override
     public ImmutableBag<T> newWith(T element)
     {
-        return HashBag.newBag(this.delegate).with(element).toImmutable();
+        return Bags.mutable.withAll(this.delegate).with(element).toImmutable();
     }
 
     @Override
@@ -118,7 +118,7 @@ public class ImmutableHashBag<T>
     @Override
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
     {
-        return Iterate.addAllTo(elements, HashBag.newBag(this.delegate)).toImmutable();
+        return Iterate.addAllTo(elements, Bags.mutable.withAll(this.delegate)).toImmutable();
     }
 
     @Override
