@@ -652,6 +652,10 @@
         <constraint name="__context__" within="" contains="" />
         <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
+      <replaceConfiguration name="HashBag.newBag(iterable) --&gt; Bags.mutable.withAll(iterable)" text="org.eclipse.collections.impl.bag.mutable.HashBag.newBag($iterable$)" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Bags.mutable.withAll($iterable$)">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
       <replaceConfiguration name="UnifiedSet.newSet(capacity) with Sets.mutable.withInitialCapacity(capacity)." text="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet($capacity$)" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Sets.mutable.withInitialCapacity($capacity$)">
         <constraint name="__context__" within="" contains="" />
         <constraint name="capacity" nameOfExprType="int" within="" contains="" />

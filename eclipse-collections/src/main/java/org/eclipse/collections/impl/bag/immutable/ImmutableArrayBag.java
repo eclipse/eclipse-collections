@@ -168,7 +168,7 @@ public class ImmutableArrayBag<T>
         int distinctItemCount = this.sizeDistinct() + (elementIndex == -1 ? 1 : 0);
         if (distinctItemCount > MAXIMUM_USEFUL_ARRAY_BAG_SIZE)
         {
-            return HashBag.newBag(this).with(element).toImmutable();
+            return Bags.mutable.withAll(this).with(element).toImmutable();
         }
         return this.newArrayBagWith(element, elementIndex, distinctItemCount);
     }
@@ -229,7 +229,7 @@ public class ImmutableArrayBag<T>
     @Override
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
     {
-        return Bags.immutable.withAll(Iterate.addAllTo(elements, HashBag.newBag(this)));
+        return Bags.immutable.withAll(Iterate.addAllTo(elements, Bags.mutable.withAll(this)));
     }
 
     @Override
