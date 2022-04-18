@@ -22,6 +22,7 @@ import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredica
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>ObjectProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ObjectToObjectFunction;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 
@@ -72,6 +73,20 @@ public interface <name>ObjectMap\<V> extends PrimitiveObjectMap\<V>
      * @param procedure the procedure to invoke for each key/value pair
      */
     void forEachKeyValue(<name>ObjectProcedure\<? super V> procedure);
+
+    /**
+     * Implements the injectInto pattern with each key/value pair of the map.
+     * @param value to be injected into the map
+     * @param function to apply to the injected value and key/value pairs
+     * @return result of injecting the injectedValue into the map
+     * @since 11.1
+     */
+    default \<IV> IV injectIntoKeyValue(IV injectedValue, Object<name>ObjectToObjectFunction\<? super IV, ? super V, ? extends IV> function)
+    {
+        IV[] result = (IV[]) new Object[]{injectedValue};
+        this.forEachKeyValue((key, value) -> result[0] = function.valueOf(result[0], key, value));
+        return result[0];
+    }
 
     /**
      * Return a copy of this map containing only the key/value pairs that match the predicate.

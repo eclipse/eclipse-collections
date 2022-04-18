@@ -47,6 +47,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
@@ -1262,6 +1263,18 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertTrue(concat[1], "<(toStringLiteral.(type))("1")>one<(toStringLiteral.(type))("0")>zero".equals(concat[1]) || "<(toStringLiteral.(type))("0")>zero<(toStringLiteral.(type))("1")>one".equals(concat[1]));
         Assert.assertTrue(concat[2], "<(toStringLiteral.(type))("2")>two<(toStringLiteral.(type))("5")>five".equals(concat[2]) || "<(toStringLiteral.(type))("5")>five<(toStringLiteral.(type))("2")>two".equals(concat[2]));
         Assert.assertTrue(concat[3], "<(toStringLiteral.(type))("0")>zero<(toStringLiteral.(type))("5")>five".equals(concat[3]) || "<(toStringLiteral.(type))("5")>five<(toStringLiteral.(type))("0")>zero".equals(concat[3]));
+    }
+
+    @Test
+    public void injectIntoKeyValue()
+    {
+        <name>ObjectMap\<String> map0 = this.newWithKeysValues(<(literal.(type))("2")>, "3", <(literal.(type))("4")>, "5");
+
+        String result0 = map0.injectIntoKeyValue(new String("1"), (result, eachKey, eachValue) -> result + String.valueOf(eachKey) + eachValue);
+        Assert.assertTrue(result0, "1<(toStringLiteral.(type))("2")>3<(toStringLiteral.(type))("4")>5".equals(result0) || "1<(toStringLiteral.(type))("4")>5<(toStringLiteral.(type))("2")>3".equals(result0));
+
+        <name>ObjectMap copy = map0.injectIntoKeyValue(<name>ObjectMaps.mutable.empty(), Mutable<name>ObjectMap::withKeyValue);
+        Assert.assertEquals(map0, copy);
     }
 
     @Test
