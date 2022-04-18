@@ -128,7 +128,7 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         {
             return this.of(comparator);
         }
-        return new ImmutableSortedBagImpl<>(TreeBag.newBag(comparator, items));
+        return new ImmutableSortedBagImpl<>(SortedBags.mutable.withAll(comparator, items));
     }
 
     @Override

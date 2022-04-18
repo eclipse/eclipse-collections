@@ -101,6 +101,7 @@ public class MutableSortedBagFactoryImpl implements MutableSortedBagFactory
     @Override
     public <T> MutableSortedBag<T> withAll(Comparator<? super T> comparator, Iterable<? extends T> items)
     {
+        //noinspection SSBasedInspection
         return TreeBag.newBag(comparator, items);
     }
 }
