@@ -55,6 +55,7 @@ import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.BiMaps;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.MutableList;
@@ -761,7 +762,7 @@ public abstract class AbstractCollectionAdapter<T>
     @Override
     public MutableSortedBag<T> toSortedBag()
     {
-        return TreeBag.newBag(this.getDelegate());
+        return SortedBags.mutable.withAll(this.getDelegate());
     }
 
     @Override

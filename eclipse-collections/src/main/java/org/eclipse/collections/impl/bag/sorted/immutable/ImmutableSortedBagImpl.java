@@ -169,7 +169,7 @@ class ImmutableSortedBagImpl<T>
     @Override
     public ImmutableSortedBag<T> newWithAll(Iterable<? extends T> elements)
     {
-        MutableSortedBag<T> result = TreeBag.newBag(this);
+        MutableSortedBag<T> result = SortedBags.mutable.withAll(this);
         result.addAllIterable(elements);
         return result.toImmutable();
     }

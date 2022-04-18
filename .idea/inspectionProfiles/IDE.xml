@@ -652,11 +652,15 @@
         <constraint name="__context__" within="" contains="" />
         <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
-      <replaceConfiguration name="HashBag.newBag(iterable) --&gt; Bags.mutable.withAll(iterable)" text="org.eclipse.collections.impl.bag.mutable.HashBag.newBag($iterable$)" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Bags.mutable.withAll($iterable$)">
+      <replaceConfiguration name="HashBag.newBag(iterable) to Bags.mutable.withAll(iterable)" uuid="e963b320-db3f-3373-a44b-65914d7b65d4" text="org.eclipse.collections.impl.bag.mutable.HashBag.newBag($iterable$)" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Bags.mutable.withAll($iterable$)">
         <constraint name="__context__" within="" contains="" />
         <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
-      <replaceConfiguration name="UnifiedSet.newSet(capacity) with Sets.mutable.withInitialCapacity(capacity)." text="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet($capacity$)" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Sets.mutable.withInitialCapacity($capacity$)">
+      <replaceConfiguration name="TreeBag.newBag(iterable) to SortedBags.mutable.withAll(iterable)" text="org.eclipse.collections.impl.bag.sorted.mutable.TreeBag.newBag($iterable$)" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.SortedBags.mutable.withAll($iterable$)">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="UnifiedSet.newSet(capacity) to Sets.mutable.withInitialCapacity(capacity)" uuid="8f9161ac-867b-3e6a-bc70-4ff63e44a34a" text="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet($capacity$)" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Sets.mutable.withInitialCapacity($capacity$)">
         <constraint name="__context__" within="" contains="" />
         <constraint name="capacity" nameOfExprType="int" within="" contains="" />
       </replaceConfiguration>
