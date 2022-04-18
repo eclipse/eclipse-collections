@@ -55,6 +55,8 @@ import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.BiMaps;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.factory.SortedBags;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.MutableList;
@@ -69,7 +71,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
-import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.BiMapCollectProcedure;
@@ -743,7 +744,7 @@ public abstract class AbstractCollectionAdapter<T>
     @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
-        return TreeSortedSet.newSet(comparator, this);
+        return SortedSets.mutable.withAll(comparator, this);
     }
 
     @Override
@@ -761,13 +762,13 @@ public abstract class AbstractCollectionAdapter<T>
     @Override
     public MutableSortedBag<T> toSortedBag()
     {
-        return TreeBag.newBag(this.getDelegate());
+        return SortedBags.mutable.withAll(this.getDelegate());
     }
 
     @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
-        return TreeBag.newBag(comparator, this.getDelegate());
+        return SortedBags.mutable.withAll(comparator, this.getDelegate());
     }
 
     @Override

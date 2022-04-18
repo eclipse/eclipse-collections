@@ -139,7 +139,7 @@ public final class SortedSetAdapter<T>
     @Override
     public MutableSortedSet<T> clone()
     {
-        return TreeSortedSet.newSet(this.delegate);
+        return SortedSets.mutable.withAll(this.delegate);
     }
 
     @Override
@@ -431,7 +431,7 @@ public final class SortedSetAdapter<T>
     @Override
     public MutableSortedSet<T> distinct()
     {
-        return TreeSortedSet.newSet(this);
+        return SortedSets.mutable.withAll(this);
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.util.Comparator;
 
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
+import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.bag.sorted.ImmutableSortedBagFactory;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -79,7 +80,7 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         {
             return this.empty();
         }
-        return new ImmutableSortedBagImpl<>(TreeBag.newBag(items));
+        return new ImmutableSortedBagImpl<>(SortedBags.mutable.withAll(items));
     }
 
     @Override
@@ -127,7 +128,7 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         {
             return this.of(comparator);
         }
-        return new ImmutableSortedBagImpl<>(TreeBag.newBag(comparator, items));
+        return new ImmutableSortedBagImpl<>(SortedBags.mutable.withAll(comparator, items));
     }
 
     @Override
