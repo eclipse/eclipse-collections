@@ -43,7 +43,6 @@ import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSorted
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.Counter;
-import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -219,7 +218,7 @@ class ImmutableSortedBagImpl<T>
     @Override
     public ImmutableSortedBag<T> takeWhile(Predicate<? super T> predicate)
     {
-        MutableSortedBag<T> bag = TreeBag.newBag(this.comparator);
+        MutableSortedBag<T> bag = SortedBags.mutable.empty(this.comparator);
         for (int i = 0; i < this.elements.length; i++)
         {
             if (predicate.accept(this.elements[i]))
@@ -237,7 +236,7 @@ class ImmutableSortedBagImpl<T>
     @Override
     public ImmutableSortedBag<T> dropWhile(Predicate<? super T> predicate)
     {
-        MutableSortedBag<T> bag = TreeBag.newBag(this.comparator);
+        MutableSortedBag<T> bag = SortedBags.mutable.empty(this.comparator);
         int startIndex = this.detectNotIndex(predicate);
         for (int i = startIndex; i < this.elements.length; i++)
         {
@@ -708,7 +707,7 @@ class ImmutableSortedBagImpl<T>
             return this;
         }
 
-        MutableSortedBag<T> output = TreeBag.newBag(this.comparator());
+        MutableSortedBag<T> output = SortedBags.mutable.empty(this.comparator());
         int index = 0;
         for (int i = 0; i < this.elements.length; i++)
         {
@@ -742,7 +741,7 @@ class ImmutableSortedBagImpl<T>
             return SortedBags.immutable.empty(this.comparator());
         }
 
-        MutableSortedBag<T> output = TreeBag.newBag(this.comparator());
+        MutableSortedBag<T> output = SortedBags.mutable.empty(this.comparator());
         int index = 0;
         for (int i = 0; i < this.elements.length; i++)
         {

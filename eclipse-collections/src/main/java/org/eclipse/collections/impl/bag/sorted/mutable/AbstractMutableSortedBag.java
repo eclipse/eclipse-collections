@@ -109,7 +109,7 @@ public abstract class AbstractMutableSortedBag<T>
     public <S> MutableSortedBag<S> selectInstancesOf(Class<S> clazz)
     {
         Comparator<? super S> comparator = (Comparator<? super S>) this.comparator();
-        MutableSortedBag<S> result = TreeBag.newBag(comparator);
+        MutableSortedBag<S> result = SortedBags.mutable.empty(comparator);
         this.forEachWithOccurrences((each, occurrences) -> {
             if (clazz.isInstance(each))
             {
@@ -122,14 +122,14 @@ public abstract class AbstractMutableSortedBag<T>
     @Override
     public MutableSortedBag<T> takeWhile(Predicate<? super T> predicate)
     {
-        MutableSortedBag<T> result = TreeBag.newBag(this.comparator());
+        MutableSortedBag<T> result = SortedBags.mutable.empty(this.comparator());
         return IterableIterate.takeWhile(this, predicate, result);
     }
 
     @Override
     public MutableSortedBag<T> dropWhile(Predicate<? super T> predicate)
     {
-        MutableSortedBag<T> result = TreeBag.newBag(this.comparator());
+        MutableSortedBag<T> result = SortedBags.mutable.empty(this.comparator());
         return IterableIterate.dropWhile(this, predicate, result);
     }
 
@@ -163,25 +163,25 @@ public abstract class AbstractMutableSortedBag<T>
     @Override
     public MutableSortedBag<T> select(Predicate<? super T> predicate)
     {
-        return this.select(predicate, TreeBag.newBag(this.comparator()));
+        return this.select(predicate, SortedBags.mutable.empty(this.comparator()));
     }
 
     @Override
     public <P> MutableSortedBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.selectWith(predicate, parameter, TreeBag.newBag(this.comparator()));
+        return this.selectWith(predicate, parameter, SortedBags.mutable.empty(this.comparator()));
     }
 
     @Override
     public MutableSortedBag<T> reject(Predicate<? super T> predicate)
     {
-        return this.reject(predicate, TreeBag.newBag(this.comparator()));
+        return this.reject(predicate, SortedBags.mutable.empty(this.comparator()));
     }
 
     @Override
     public <P> MutableSortedBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.rejectWith(predicate, parameter, TreeBag.newBag(this.comparator()));
+        return this.rejectWith(predicate, parameter, SortedBags.mutable.empty(this.comparator()));
     }
 
     @Override

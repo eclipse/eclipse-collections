@@ -28,6 +28,7 @@ public class MutableSortedBagFactoryImpl implements MutableSortedBagFactory
     @Override
     public <T> MutableSortedBag<T> empty(Comparator<? super T> comparator)
     {
+        //noinspection SSBasedInspection
         return TreeBag.newBag(comparator);
     }
 
@@ -52,6 +53,7 @@ public class MutableSortedBagFactoryImpl implements MutableSortedBagFactory
     @Override
     public <T> MutableSortedBag<T> with(Comparator<? super T> comparator)
     {
+        //noinspection SSBasedInspection
         return TreeBag.newBag(comparator);
     }
 
