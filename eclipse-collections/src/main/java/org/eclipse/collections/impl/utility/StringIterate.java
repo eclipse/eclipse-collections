@@ -25,6 +25,7 @@ import org.eclipse.collections.api.block.procedure.primitive.CharProcedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
@@ -36,7 +37,6 @@ import org.eclipse.collections.impl.block.function.primitive.CodePointFunction;
 import org.eclipse.collections.impl.block.predicate.CodePointPredicate;
 import org.eclipse.collections.impl.block.procedure.primitive.CodePointProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.string.immutable.CharAdapter;
 import org.eclipse.collections.impl.string.immutable.CodePointAdapter;
 import org.eclipse.collections.impl.string.immutable.CodePointList;
@@ -192,7 +192,7 @@ public final class StringIterate
      */
     public static MutableSet<String> tokensToSet(String string, String separator)
     {
-        MutableSet<String> set = UnifiedSet.newSet();
+        MutableSet<String> set = Sets.mutable.empty();
         for (StringTokenizer stringTokenizer = new StringTokenizer(string, separator); stringTokenizer.hasMoreTokens(); )
         {
             String token = stringTokenizer.nextToken();
@@ -1173,7 +1173,7 @@ public final class StringIterate
 
     public static MutableSet<Character> toSet(String string)
     {
-        MutableSet<Character> characters = UnifiedSet.newSet();
+        MutableSet<Character> characters = Sets.mutable.empty();
         StringIterate.forEachChar(string, new AddCharacterToCollection(characters));
         return characters;
     }
@@ -1223,7 +1223,7 @@ public final class StringIterate
 
     public static MutableSet<Character> toUppercaseSet(String string)
     {
-        MutableSet<Character> characters = UnifiedSet.newSet();
+        MutableSet<Character> characters = Sets.mutable.empty();
         StringIterate.forEachChar(string, new AddUppercaseCharacterToCollection(characters));
         return characters;
     }
@@ -1239,7 +1239,7 @@ public final class StringIterate
 
     public static MutableSet<Character> toLowercaseSet(String string)
     {
-        MutableSet<Character> characters = UnifiedSet.newSet();
+        MutableSet<Character> characters = Sets.mutable.empty();
         StringIterate.forEachChar(string, new AddLowercaseCharacterToCollection(characters));
         return characters;
     }

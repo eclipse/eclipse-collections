@@ -603,7 +603,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             UnifiedSet<Pair<V, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
             return this.delegate.zip(that, target);
         }
-        return this.delegate.zip(that, UnifiedSet.newSet());
+        return this.delegate.zip(that, Sets.mutable.empty());
     }
 
     @Override

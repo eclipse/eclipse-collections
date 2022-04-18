@@ -38,6 +38,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
@@ -65,7 +66,6 @@ import org.eclipse.collections.impl.map.mutable.ConcurrentHashMapUnsafe;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.set.mutable.SetAdapter;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 
 @Beta
@@ -99,7 +99,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     {
         CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
         MutableSet<Future<Boolean>> futures =
-                parallelIterable.split().collect(batch -> completionService.submit(() -> batch.anySatisfy(predicate)), UnifiedSet.newSet());
+                parallelIterable.split().collect(batch -> completionService.submit(() -> batch.anySatisfy(predicate)), Sets.mutable.empty());
 
         while (futures.notEmpty())
         {
@@ -133,7 +133,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     {
         CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
         MutableSet<Future<Boolean>> futures =
-                parallelIterable.split().collect(batch -> completionService.submit(() -> batch.allSatisfy(predicate)), UnifiedSet.newSet());
+                parallelIterable.split().collect(batch -> completionService.submit(() -> batch.allSatisfy(predicate)), Sets.mutable.empty());
 
         while (futures.notEmpty())
         {

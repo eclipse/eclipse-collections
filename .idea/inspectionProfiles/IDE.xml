@@ -687,6 +687,9 @@
       <replaceConfiguration name="UnifiedMap.newMap() to Maps.mutable.empty()" text="org.eclipse.collections.impl.map.mutable.UnifiedMap.newMap()" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Maps.mutable.empty()">
         <constraint name="__context__" within="" contains="" />
       </replaceConfiguration>
+      <replaceConfiguration name="UnifiedSet.newSet() to Sets.mutable.empty()" text="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet()" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Sets.mutable.empty()">
+        <constraint name="__context__" within="" contains="" />
+      </replaceConfiguration>
       <replaceConfiguration name="UnifiedSet.newSet(capacity) to Sets.mutable.withInitialCapacity(capacity)" uuid="8f9161ac-867b-3e6a-bc70-4ff63e44a34a" text="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet($capacity$)" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Sets.mutable.withInitialCapacity($capacity$)">
         <constraint name="__context__" within="" contains="" />
         <constraint name="capacity" nameOfExprType="int" within="" contains="" />

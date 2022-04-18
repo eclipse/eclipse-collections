@@ -399,7 +399,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
             UnifiedSet<Pair<V, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
             return this.delegate.zip(that, target).toImmutable();
         }
-        return this.delegate.zip(that, UnifiedSet.newSet()).toImmutable();
+        return this.delegate.zip(that, Sets.mutable.empty()).toImmutable();
     }
 
     /**

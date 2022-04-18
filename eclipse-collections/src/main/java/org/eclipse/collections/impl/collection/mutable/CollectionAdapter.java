@@ -202,7 +202,7 @@ public final class CollectionAdapter<T>
     {
         if (this.delegate instanceof Set)
         {
-            return UnifiedSet.newSet();
+            return Sets.mutable.empty();
         }
         return Lists.mutable.empty();
     }

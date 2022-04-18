@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,10 +17,10 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.procedure.AdaptObjectIntProcedureToProcedure;
 import org.eclipse.collections.impl.lazy.iterator.DistinctIterator;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
@@ -47,7 +47,7 @@ public class DistinctIterable<T>
     @Override
     public void each(Procedure<? super T> procedure)
     {
-        MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = Sets.mutable.empty();
 
         Iterate.forEach(this.adapted, each ->
         {
@@ -67,7 +67,7 @@ public class DistinctIterable<T>
     @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
-        MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = Sets.mutable.empty();
 
         return Iterate.anySatisfy(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
     }
@@ -75,7 +75,7 @@ public class DistinctIterable<T>
     @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = Sets.mutable.empty();
 
         return Iterate.allSatisfy(this.adapted, each -> !seenSoFar.add(each) || predicate.accept(each));
     }
@@ -83,7 +83,7 @@ public class DistinctIterable<T>
     @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
-        MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = Sets.mutable.empty();
 
         return Iterate.allSatisfy(this.adapted, each -> !seenSoFar.add(each) || !predicate.accept(each));
     }
@@ -91,7 +91,7 @@ public class DistinctIterable<T>
     @Override
     public T detect(Predicate<? super T> predicate)
     {
-        MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = Sets.mutable.empty();
 
         return Iterate.detect(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
     }
@@ -99,7 +99,7 @@ public class DistinctIterable<T>
     @Override
     public Optional<T> detectOptional(Predicate<? super T> predicate)
     {
-        MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = Sets.mutable.empty();
 
         return Iterate.detectOptional(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
     }

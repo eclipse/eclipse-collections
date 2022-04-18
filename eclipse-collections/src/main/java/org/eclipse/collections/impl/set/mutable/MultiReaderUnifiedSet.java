@@ -104,7 +104,7 @@ public final class MultiReaderUnifiedSet<T>
 
     public static <T> MultiReaderUnifiedSet<T> newSet()
     {
-        return new MultiReaderUnifiedSet<>(UnifiedSet.newSet());
+        return new MultiReaderUnifiedSet<>(Sets.mutable.empty());
     }
 
     public static <T> MultiReaderUnifiedSet<T> newSet(int capacity)
