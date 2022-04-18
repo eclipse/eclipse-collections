@@ -58,6 +58,7 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.SortedBags;
+import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.factory.primitive.BooleanBags;
 import org.eclipse.collections.api.factory.primitive.ByteBags;
 import org.eclipse.collections.api.factory.primitive.CharBags;
@@ -630,7 +631,7 @@ final class ImmutableEmptyBag<T>
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {
-        return TreeSortedMap.newMap();
+        return SortedMaps.mutable.empty();
     }
 
     @Override
