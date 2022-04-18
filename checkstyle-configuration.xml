@@ -256,6 +256,8 @@
             <property name="severity" value="warning" />
         </module>
 
+        <module name="ArrayTrailingComma" />
+
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
         <module name="ArrayTypeStyle" />
