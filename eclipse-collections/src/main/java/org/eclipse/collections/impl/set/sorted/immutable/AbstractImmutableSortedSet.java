@@ -34,6 +34,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.factory.primitive.CharLists;
@@ -113,7 +114,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     {
         if (!this.contains(element))
         {
-            return TreeSortedSet.newSet(this).with(element).toImmutable();
+            return SortedSets.mutable.withAll(this).with(element).toImmutable();
         }
         return this;
     }

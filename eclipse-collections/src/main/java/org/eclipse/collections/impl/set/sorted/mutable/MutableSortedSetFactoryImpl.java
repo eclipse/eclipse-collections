@@ -58,6 +58,7 @@ public class MutableSortedSetFactoryImpl implements MutableSortedSetFactory
     @Override
     public <T> MutableSortedSet<T> withAll(Iterable<? extends T> items)
     {
+        //noinspection SSBasedInspection
         return TreeSortedSet.newSet(items);
     }
 
