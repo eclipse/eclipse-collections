@@ -32,6 +32,7 @@ import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
@@ -643,7 +644,7 @@ public class TreeBag<T>
     @Override
     public MutableSortedSet<T> distinct()
     {
-        return TreeSortedSet.newSet(this.comparator(), this.items.keySet());
+        return SortedSets.mutable.withAll(this.comparator(), this.items.keySet());
     }
 
     @Override
