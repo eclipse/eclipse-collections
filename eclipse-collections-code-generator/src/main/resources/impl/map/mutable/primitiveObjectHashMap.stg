@@ -899,7 +899,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     @Override
     public \<S> MutableBag\<S> selectInstancesOf(Class\<S> clazz)
     {
-        MutableBag\<S> result = HashBag.newBag(this.size());
+        MutableBag\<S> result = Bags.mutable.withInitialCapacity(this.size());
         this.forEach(new SelectInstancesOfProcedure\<S>(clazz, result));
         return result;
     }

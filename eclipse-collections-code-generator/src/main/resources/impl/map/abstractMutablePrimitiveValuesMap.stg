@@ -33,12 +33,12 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ValuesMap;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name>Collection;
@@ -273,7 +273,7 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
     @Override
     public \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        return this.collect(function, HashBag.newBag(this.size()));
+        return this.collect(function, Bags.mutable.withInitialCapacity(this.size()));
     }
 
     @Override

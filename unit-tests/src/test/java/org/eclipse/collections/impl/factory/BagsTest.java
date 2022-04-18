@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.factory;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.stream.Stream;
 
@@ -20,9 +21,11 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.bag.ImmutableBagFactory;
 import org.eclipse.collections.api.factory.bag.MultiReaderBagFactory;
 import org.eclipse.collections.api.factory.bag.MutableBagFactory;
+import org.eclipse.collections.impl.bag.mutable.AbstractHashBag;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.MultiReaderHashBag;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -64,6 +67,8 @@ public class BagsTest
         Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 2, 3, 3, 3), bagFactory.ofOccurrences(1, 1, 2, 2, 3, 3));
         Verify.assertInstanceOf(MutableBag.class, bagFactory.ofOccurrences(1, 1, 2, 2, 3, 3));
         Verify.assertInstanceOf(MutableBag.class, bagFactory.ofOccurrences(1, 1, 2, 2, 3, 3, 4, 4));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.ofInitialCapacity(15));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.withInitialCapacity(15));
     }
 
     @Test
@@ -129,6 +134,78 @@ public class BagsTest
         Assert.assertEquals(bag = bag.newWith("10"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
         Assert.assertEquals(bag = bag.newWith("11"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
         Assert.assertEquals(bag = bag.newWith("12"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
+    }
+
+    @Test
+    public void withInitialCapacity()
+    {
+        MutableBag<String> bags1 = Bags.mutable.withInitialCapacity(0);
+        this.assertPresizedBagEquals((HashBag<String>) bags1, 1L);
+
+        MutableBag<String> bags2 = Bags.mutable.withInitialCapacity(14);
+        this.assertPresizedBagEquals((HashBag<String>) bags2, 32L);
+
+        MutableBag<String> bag3 = Bags.mutable.withInitialCapacity(17);
+        this.assertPresizedBagEquals((HashBag<String>) bag3, 64L);
+
+        MutableBag<String> bags4 = Bags.mutable.withInitialCapacity(25);
+        this.assertPresizedBagEquals((HashBag<String>) bags4, 64L);
+
+        MutableBag<String> bags5 = Bags.mutable.withInitialCapacity(32);
+        this.assertPresizedBagEquals((HashBag<String>) bags5, 64L);
+
+        Assert.assertThrows(IllegalArgumentException.class, () -> Bags.mutable.withInitialCapacity(-6));
+    }
+
+    @Test
+    public void ofInitialCapacity()
+    {
+        MutableBag<String> bags1 = Bags.mutable.ofInitialCapacity(0);
+        this.assertPresizedBagEquals((HashBag<String>) bags1, 1L);
+
+        MutableBag<String> bags2 = Bags.mutable.ofInitialCapacity(14);
+        this.assertPresizedBagEquals((HashBag<String>) bags2, 32L);
+
+        MutableBag<String> bag3 = Bags.mutable.ofInitialCapacity(17);
+        this.assertPresizedBagEquals((HashBag<String>) bag3, 64L);
+
+        MutableBag<String> bags4 = Bags.mutable.ofInitialCapacity(25);
+        this.assertPresizedBagEquals((HashBag<String>) bags4, 64L);
+
+        MutableBag<String> bags5 = Bags.mutable.ofInitialCapacity(32);
+        this.assertPresizedBagEquals((HashBag<String>) bags5, 64L);
+
+        Assert.assertThrows(IllegalArgumentException.class, () -> Bags.mutable.ofInitialCapacity(-6));
+    }
+
+    private void assertPresizedBagEquals(HashBag<String> bag, long length)
+    {
+        try
+        {
+            Field itemsField = AbstractHashBag.class.getDeclaredField("items");
+            itemsField.setAccessible(true);
+            ObjectIntHashMap<Object> items = (ObjectIntHashMap<Object>) itemsField.get(bag);
+
+            Field keys = ObjectIntHashMap.class.getDeclaredField("keys");
+            keys.setAccessible(true);
+            Field values = ObjectIntHashMap.class.getDeclaredField("values");
+            values.setAccessible(true);
+
+            Assert.assertEquals(length, ((Object[]) keys.get(items)).length);
+            Assert.assertEquals(length, ((int[]) values.get(items)).length);
+        }
+        catch (SecurityException e)
+        {
+            Assert.fail("Unable to modify the visibility of the field " + e.getMessage());
+        }
+        catch (NoSuchFieldException e)
+        {
+            Assert.fail("No field named " + e.getMessage());
+        }
+        catch (IllegalAccessException e)
+        {
+            Assert.fail("No access to the field " + e.getMessage());
+        }
     }
 
     @SuppressWarnings("RedundantArrayCreation")
