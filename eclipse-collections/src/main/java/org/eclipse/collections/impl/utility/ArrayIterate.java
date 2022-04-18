@@ -50,6 +50,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.factory.primitive.CharLists;
@@ -79,7 +80,6 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -1279,7 +1279,7 @@ public final class ArrayIterate
             V[] objectArray,
             Function<? super V, ? extends K> keyFunction)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
+        MutableMap<K, V> map = Maps.mutable.empty();
         Procedure<V> procedure = new MapCollectProcedure<>(map, keyFunction);
         ArrayIterate.forEach(objectArray, procedure);
         return map;
@@ -1294,7 +1294,7 @@ public final class ArrayIterate
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
+        MutableMap<K, V> map = Maps.mutable.empty();
         Procedure<T> procedure = new MapCollectProcedure<>(map, keyFunction, valueFunction);
         ArrayIterate.forEach(objectArray, procedure);
         return map;
@@ -1482,7 +1482,7 @@ public final class ArrayIterate
             T[] array,
             Function<? super T, ? extends V> function)
     {
-        return ArrayIterate.groupByUniqueKey(array, function, UnifiedMap.newMap());
+        return ArrayIterate.groupByUniqueKey(array, function, Maps.mutable.empty());
     }
 
     /**
@@ -1711,7 +1711,7 @@ public final class ArrayIterate
      */
     public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(T[] array, Function<? super T, ? extends V> groupBy, Function<? super T, BigDecimal> function)
     {
-        MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
+        MutableMap<V, BigDecimal> result = Maps.mutable.empty();
         for (T each : array)
         {
             result.updateValue(groupBy.valueOf(each), Functions0.zeroBigDecimal(), original -> original.add(function.valueOf(each)));
@@ -1725,7 +1725,7 @@ public final class ArrayIterate
      */
     public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(T[] array, Function<? super T, ? extends V> groupBy, Function<? super T, BigInteger> function)
     {
-        MutableMap<V, BigInteger> result = UnifiedMap.newMap();
+        MutableMap<V, BigInteger> result = Maps.mutable.empty();
         for (T each : array)
         {
             result.updateValue(groupBy.valueOf(each), Functions0.zeroBigInteger(), original -> original.add(function.valueOf(each)));

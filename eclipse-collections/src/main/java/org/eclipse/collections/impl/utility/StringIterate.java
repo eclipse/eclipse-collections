@@ -24,6 +24,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.CharProcedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
@@ -35,7 +36,6 @@ import org.eclipse.collections.impl.block.function.primitive.CodePointFunction;
 import org.eclipse.collections.impl.block.predicate.CodePointPredicate;
 import org.eclipse.collections.impl.block.procedure.primitive.CodePointProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.string.immutable.CharAdapter;
 import org.eclipse.collections.impl.string.immutable.CodePointAdapter;
@@ -218,7 +218,7 @@ public final class StringIterate
             String pairSeparator,
             String keyValueSeparator)
     {
-        MutableMap<String, String> map = UnifiedMap.newMap();
+        MutableMap<String, String> map = Maps.mutable.empty();
         for (StringTokenizer tokenizer = new StringTokenizer(string, pairSeparator); tokenizer.hasMoreTokens(); )
         {
             String token = tokenizer.nextToken();
@@ -241,7 +241,7 @@ public final class StringIterate
             Function<String, K> keyFunction,
             Function<String, V> valueFunction)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
+        MutableMap<K, V> map = Maps.mutable.empty();
         for (StringTokenizer tokenizer = new StringTokenizer(string, separator); tokenizer.hasMoreTokens(); )
         {
             String token = tokenizer.nextToken();

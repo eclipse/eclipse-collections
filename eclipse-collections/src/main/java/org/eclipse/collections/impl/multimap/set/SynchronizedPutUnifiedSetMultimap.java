@@ -17,6 +17,7 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
@@ -27,7 +28,6 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.AbstractSynchronizedPutMultimap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.utility.ArrayIterate;
@@ -119,7 +119,7 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
     @Override
     public ImmutableSetMultimap<K, V> toImmutable()
     {
-        MutableMap<K, ImmutableSet<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableSet<V>> map = Maps.mutable.empty();
 
         this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
 

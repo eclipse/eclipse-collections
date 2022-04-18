@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,13 +13,13 @@ package org.eclipse.collections.impl.multimap.list;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 
@@ -59,7 +59,7 @@ public abstract class AbstractMutableListMultimap<K, V> extends AbstractMutableM
     @Override
     public ImmutableListMultimap<K, V> toImmutable()
     {
-        MutableMap<K, ImmutableList<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableList<V>> map = Maps.mutable.empty();
 
         this.map.forEachKeyValue((key, list) -> map.put(key, list.toImmutable()));
 

@@ -20,13 +20,13 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.AbstractSynchronizedPutMultimap;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -115,7 +115,7 @@ public final class SynchronizedPutHashBagMultimap<K, V>
     @Override
     public ImmutableBagMultimap<K, V> toImmutable()
     {
-        MutableMap<K, ImmutableBag<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableBag<V>> map = Maps.mutable.empty();
 
         this.map.forEachKeyValue((key, bag) -> map.put(key, bag.toImmutable()));
 

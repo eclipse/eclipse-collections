@@ -40,6 +40,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.factory.primitive.CharLists;
@@ -273,7 +274,7 @@ public final class MapIterate
             Map<K, V> map,
             Predicate2<? super K, ? super V> predicate)
     {
-        return MapIterate.selectMapOnEntry(map, predicate, UnifiedMap.newMap());
+        return MapIterate.selectMapOnEntry(map, predicate, Maps.mutable.empty());
     }
 
     /**
@@ -305,7 +306,7 @@ public final class MapIterate
      */
     public static <K, V> MutableMap<K, V> selectMapOnKey(Map<K, V> map, Predicate<? super K> predicate)
     {
-        MutableMap<K, V> resultMap = UnifiedMap.newMap();
+        MutableMap<K, V> resultMap = Maps.mutable.empty();
         Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(resultMap);
         Procedure2<K, V> procedure = (key, value) -> {
             if (predicate.accept(key))
@@ -324,7 +325,7 @@ public final class MapIterate
      */
     public static <K, V> MutableMap<K, V> selectMapOnValue(Map<K, V> map, Predicate<? super V> predicate)
     {
-        MutableMap<K, V> resultMap = UnifiedMap.newMap();
+        MutableMap<K, V> resultMap = Maps.mutable.empty();
         Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(resultMap);
         Procedure2<K, V> procedure = (key, value) -> {
             if (predicate.accept(value))
@@ -365,7 +366,7 @@ public final class MapIterate
             Map<K, V> map,
             Predicate2<? super K, ? super V> predicate)
     {
-        return MapIterate.rejectMapOnEntry(map, predicate, UnifiedMap.newMap());
+        return MapIterate.rejectMapOnEntry(map, predicate, Maps.mutable.empty());
     }
 
     /**
@@ -653,7 +654,7 @@ public final class MapIterate
             Function2<? super K1, ? super V1, Pair<K2, V2>> function,
             Predicate2<? super K1, ? super V1> predicate)
     {
-        return MapIterate.collectIf(map, function, predicate, UnifiedMap.newMap());
+        return MapIterate.collectIf(map, function, predicate, Maps.mutable.empty());
     }
 
     /**
@@ -688,7 +689,7 @@ public final class MapIterate
             Function<? super K1, ? extends K2> keyFunction,
             Function<? super V1, ? extends V2> valueFunction)
     {
-        return MapIterate.collect(map, keyFunction, valueFunction, UnifiedMap.newMap());
+        return MapIterate.collect(map, keyFunction, valueFunction, Maps.mutable.empty());
     }
 
     /**
@@ -790,7 +791,7 @@ public final class MapIterate
      */
     public static <K, V> MutableMap<V, K> flipUniqueValues(MapIterable<K, V> mapIterable)
     {
-        MutableMap<V, K> result = UnifiedMap.newMap();
+        MutableMap<V, K> result = Maps.mutable.empty();
 
         mapIterable.forEachKeyValue((key, value) -> {
             K oldKey = result.put(value, key);

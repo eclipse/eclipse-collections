@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,11 +18,11 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.set.SetIterable;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -121,7 +121,7 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
     @Override
     public <R extends Collection<V>> MutableMap<K, R> toMap(Function0<R> collectionFactory)
     {
-        MutableMap<K, R> result = UnifiedMap.newMap();
+        MutableMap<K, R> result = Maps.mutable.empty();
         this.map.forEachKeyValue((key, iterable) -> {
             R newCollection = collectionFactory.value();
             Iterate.addAllTo(iterable, newCollection);

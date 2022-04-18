@@ -52,6 +52,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.factory.primitive.CharLists;
@@ -73,7 +74,6 @@ import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -1307,7 +1307,7 @@ public final class IteratorIterate
             Function<? super T, ? extends V> groupBy,
             Function<? super T, BigDecimal> function)
     {
-        MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
+        MutableMap<V, BigDecimal> result = Maps.mutable.empty();
         while (iterator.hasNext())
         {
             T item = iterator.next();
@@ -1321,7 +1321,7 @@ public final class IteratorIterate
             Function<? super T, ? extends V> groupBy,
             Function<? super T, BigInteger> function)
     {
-        MutableMap<V, BigInteger> result = UnifiedMap.newMap();
+        MutableMap<V, BigInteger> result = Maps.mutable.empty();
         while (iterator.hasNext())
         {
             T item = iterator.next();
@@ -1336,7 +1336,7 @@ public final class IteratorIterate
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
+        MutableMap<K, V> map = Maps.mutable.empty();
         IteratorIterate.forEach(iterator, new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
@@ -1347,7 +1347,7 @@ public final class IteratorIterate
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
+        MutableMap<K, V> map = Maps.mutable.empty();
         IteratorIterate.forEach(iterator, new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }

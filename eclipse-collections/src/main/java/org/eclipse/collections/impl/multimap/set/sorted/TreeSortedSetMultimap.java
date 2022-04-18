@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -20,6 +20,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
@@ -102,7 +103,7 @@ public final class TreeSortedSetMultimap<K, V>
     @Override
     protected MutableMap<K, MutableSortedSet<V>> createMap()
     {
-        return UnifiedMap.newMap();
+        return Maps.mutable.empty();
     }
 
     @Override
@@ -138,7 +139,7 @@ public final class TreeSortedSetMultimap<K, V>
     @Override
     public ImmutableSortedSetMultimap<K, V> toImmutable()
     {
-        MutableMap<K, ImmutableSortedSet<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableSortedSet<V>> map = Maps.mutable.empty();
 
         this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
         return new ImmutableSortedSetMultimapImpl<>(map, this.comparator());
