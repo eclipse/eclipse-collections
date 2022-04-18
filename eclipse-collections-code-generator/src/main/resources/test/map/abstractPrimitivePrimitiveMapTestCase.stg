@@ -29,9 +29,11 @@ import org.eclipse.collections.api.<name2>Iterable;
 import org.eclipse.collections.api.Lazy<name2>Iterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
+import org.eclipse.collections.api.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.api.iterator.<name2>Iterator;
 import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
 import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name2>HashBag;
@@ -39,7 +41,6 @@ import org.eclipse.collections.impl.block.factory.primitive.<name2>Predicates;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
-import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;<endif>
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -461,6 +462,9 @@ public abstract class Abstract<name1><name2>MapTestCase
             return new Long((long) (sum + eachKey + eachValue));
         });
         Assert.assertEquals(new Long(8), sum0);
+
+        <name1><name2>Map copy = map0.injectIntoKeyValue(<name1><name2>Maps.mutable.empty(), Mutable<name1><name2>Map::withKeyValue);
+        Assert.assertEquals(map0, copy);
     }
 
     @Test
