@@ -22,6 +22,7 @@ public class MutableSortedBagFactoryImpl implements MutableSortedBagFactory
     @Override
     public <T> MutableSortedBag<T> empty()
     {
+        //noinspection SSBasedInspection
         return TreeBag.newBag();
     }
 
@@ -41,6 +42,7 @@ public class MutableSortedBagFactoryImpl implements MutableSortedBagFactory
     @Override
     public <T> MutableSortedBag<T> with()
     {
+        //noinspection SSBasedInspection
         return TreeBag.newBag();
     }
 

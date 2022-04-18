@@ -77,7 +77,6 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
-import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -600,7 +599,7 @@ final class ImmutableEmptyBag<T>
     @Override
     public MutableSortedBag<T> toSortedBag()
     {
-        return TreeBag.newBag();
+        return SortedBags.mutable.empty();
     }
 
     @Override
