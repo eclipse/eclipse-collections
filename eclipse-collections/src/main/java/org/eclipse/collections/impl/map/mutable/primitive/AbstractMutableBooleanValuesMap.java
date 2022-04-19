@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,7 @@ import org.eclipse.collections.api.block.procedure.primitive.BooleanProcedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.primitive.BooleanBags;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
@@ -32,7 +33,6 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.map.primitive.MutableBooleanValuesMap;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.SynchronizedBooleanCollection;
 import org.eclipse.collections.impl.collection.mutable.primitive.UnmodifiableBooleanCollection;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
@@ -314,7 +314,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
     @Override
     public <V> MutableBag<V> collect(BooleanToObjectFunction<? extends V> function)
     {
-        MutableBag<V> target = HashBag.newBag(this.size());
+        MutableBag<V> target = Bags.mutable.withInitialCapacity(this.size());
         if (this.getSentinelValues() != null)
         {
             if (this.getSentinelValues().containsZeroKey)

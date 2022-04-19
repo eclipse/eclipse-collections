@@ -37,11 +37,11 @@ import org.eclipse.collections.api.block.procedure.primitive.IntIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.IntObjectProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.procedure.CollectProcedure;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.RejectProcedure;
@@ -943,7 +943,7 @@ public final class Interval
     @Override
     public MutableBag<Integer> toBag()
     {
-        MutableBag<Integer> bag = HashBag.newBag(this.size());
+        MutableBag<Integer> bag = Bags.mutable.withInitialCapacity(this.size());
         this.forEach(CollectionAddProcedure.on(bag));
         return bag;
     }

@@ -64,6 +64,7 @@ public class HashBag<T>
 
     public static <E> HashBag<E> newBag(Bag<? extends E> source)
     {
+        //noinspection SSBasedInspection
         HashBag<E> result = HashBag.newBag(source.sizeDistinct());
         result.addAllBag(source);
         return result;

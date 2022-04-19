@@ -44,4 +44,15 @@ public class MutableBagFactoryImpl implements MutableBagFactory
     {
         return stream.collect(Collectors.toCollection(HashBag::newBag));
     }
+
+    @Override
+    public <T> MutableBag<T> withInitialCapacity(int capacity)
+    {
+        if (capacity < 0)
+        {
+            throw new IllegalArgumentException("initial capacity cannot be less than 0");
+        }
+        //noinspection SSBasedInspection
+        return HashBag.newBag(capacity);
+    }
 }

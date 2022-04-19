@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -174,4 +174,22 @@ public interface MutableBagFactory
      * @since 10.0.
      */
     <T> MutableBag<T> fromStream(Stream<? extends T> stream);
+
+    /**
+     * Same as {@link #empty()}. but takes in initial capacity.
+     * @since 11.1.
+     */
+    default <T> MutableBag<T> ofInitialCapacity(int capacity)
+    {
+        return this.withInitialCapacity(capacity);
+    }
+
+    /**
+     * Same as {@link #empty()}. but takes in initial capacity.
+     * @since 11.1.
+     */
+    default <T> MutableBag<T> withInitialCapacity(int capacity)
+    {
+        throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
+    }
 }
