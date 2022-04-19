@@ -57,6 +57,7 @@ import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.primitive.BooleanBags;
 import org.eclipse.collections.api.factory.primitive.ByteBags;
 import org.eclipse.collections.api.factory.primitive.CharBags;
@@ -605,7 +606,7 @@ final class ImmutableEmptyBag<T>
     @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
-        return TreeBag.newBag(comparator);
+        return SortedBags.mutable.empty(comparator);
     }
 
     @Override

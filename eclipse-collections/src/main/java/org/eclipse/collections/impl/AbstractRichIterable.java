@@ -43,6 +43,7 @@ import org.eclipse.collections.api.factory.BiMaps;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.MutableList;
@@ -206,7 +207,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
-        MutableSortedBag<T> sortedBag = TreeBag.newBag(comparator);
+        MutableSortedBag<T> sortedBag = SortedBags.mutable.empty(comparator);
         this.forEachWith(Procedures2.addToCollection(), sortedBag);
         return sortedBag;
     }

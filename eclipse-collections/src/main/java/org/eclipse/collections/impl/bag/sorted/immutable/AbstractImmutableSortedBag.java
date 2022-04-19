@@ -38,6 +38,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
@@ -66,7 +67,6 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.immutable.AbstractImmutableBagIterable;
-import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -157,25 +157,25 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public ImmutableSortedBag<T> select(Predicate<? super T> predicate)
     {
-        return this.select(predicate, TreeBag.newBag(this.comparator())).toImmutable();
+        return this.select(predicate, SortedBags.mutable.empty(this.comparator())).toImmutable();
     }
 
     @Override
     public <P> ImmutableSortedBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.selectWith(predicate, parameter, TreeBag.newBag(this.comparator())).toImmutable();
+        return this.selectWith(predicate, parameter, SortedBags.mutable.empty(this.comparator())).toImmutable();
     }
 
     @Override
     public ImmutableSortedBag<T> reject(Predicate<? super T> predicate)
     {
-        return this.reject(predicate, TreeBag.newBag(this.comparator())).toImmutable();
+        return this.reject(predicate, SortedBags.mutable.empty(this.comparator())).toImmutable();
     }
 
     @Override
     public <P> ImmutableSortedBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.rejectWith(predicate, parameter, TreeBag.newBag(this.comparator())).toImmutable();
+        return this.rejectWith(predicate, parameter, SortedBags.mutable.empty(this.comparator())).toImmutable();
     }
 
     @Override
@@ -285,7 +285,7 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public ImmutableSortedBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        MutableSortedBag<T> result = TreeBag.newBag(this.comparator());
+        MutableSortedBag<T> result = SortedBags.mutable.empty(this.comparator());
         this.forEachWithOccurrences((each, occurrences) ->
         {
             if (predicate.accept(occurrences))
@@ -300,7 +300,7 @@ abstract class AbstractImmutableSortedBag<T>
     public <S> ImmutableSortedBag<S> selectInstancesOf(Class<S> clazz)
     {
         Comparator<? super S> comparator = (Comparator<? super S>) this.comparator();
-        MutableSortedBag<S> result = TreeBag.newBag(comparator);
+        MutableSortedBag<S> result = SortedBags.mutable.empty(comparator);
         this.forEachWithOccurrences((each, occurrences) ->
         {
             if (clazz.isInstance(each))
@@ -434,7 +434,7 @@ abstract class AbstractImmutableSortedBag<T>
 
         MutableList<RichIterable<T>> result = Lists.mutable.empty();
         T[] objects = (T[]) this.toArray();
-        MutableCollection<T> batch = TreeBag.newBag(this.comparator());
+        MutableCollection<T> batch = SortedBags.mutable.empty(this.comparator());
         int j = 0;
 
         while (j < objects.length)

@@ -63,6 +63,7 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -938,7 +939,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
-        MutableSortedBag<T> result = TreeBag.newBag(comparator);
+        MutableSortedBag<T> result = SortedBags.mutable.empty(comparator);
         this.forEachWithOccurrences(result::addOccurrences);
         return result;
     }
