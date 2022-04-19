@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
@@ -16,7 +16,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name, wrapperName) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.primitive;
 
@@ -27,8 +27,9 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
-import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
@@ -332,6 +333,18 @@ public abstract class AbstractObject<name>MapTestCase
         });
         Assert.assertTrue("3null".equals(sumKey[0]) || "null3".equals(sumKey[0]));
         Assert.assertEquals(<(literal.(type))("9")>, sumValue[0]<delta.(type)>);
+    }
+
+    @Test
+    public void injectIntoKeyValue()
+    {
+        Object<name>Map\<String> map0 = this.newWithKeysValues("2", <(literal.(type))("3")>, "4", <(literal.(type))("5")>);
+
+        String result0 = map0.injectIntoKeyValue(new String("1"), (result, eachKey, eachValue) -> result + eachKey + String.valueOf(eachValue));
+        Assert.assertTrue(result0, "12<(toStringLiteral.(type))("3")>4<(toStringLiteral.(type))("5")>".equals(result0) || "14<(toStringLiteral.(type))("5")>2<(toStringLiteral.(type))("3")>".equals(result0));
+
+        Object<name>Map copy = map0.injectIntoKeyValue(Object<name>Maps.mutable.empty(), MutableObject<name>Map::withKeyValue);
+        Assert.assertEquals(map0, copy);
     }
 
     @Test
