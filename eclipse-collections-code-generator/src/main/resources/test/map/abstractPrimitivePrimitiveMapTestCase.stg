@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -18,7 +18,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.primitive;
 

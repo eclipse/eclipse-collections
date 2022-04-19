@@ -22,6 +22,7 @@ import org.eclipse.collections.api.block.predicate.primitive.Object<name>Predica
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.Object<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.block.function.primitive.ObjectObject<name>ToObjectFunction;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
 
@@ -92,6 +93,20 @@ public interface Object<name>Map\<K> extends <name>Iterable
      */
     void forEachKeyValue(Object<name>Procedure\<? super K> procedure);
     <if(!primitive.booleanPrimitive)><(flipUniqueValues.(name))(name)><endif>
+
+    /**
+     * Implements the injectInto pattern with each key/value pair of the map.
+     * @param value to be injected into the map
+     * @param function to apply to the injected value and key/value pairs
+     * @return result of injecting the injectedValue into the map
+     * @since 11.1
+     */
+    default \<IV> IV injectIntoKeyValue(IV injectedValue, ObjectObject<name>ToObjectFunction\<? super IV, ? super K, ? extends IV> function)
+    {
+        IV[] result = (IV[]) new Object[]{injectedValue};
+        this.forEachKeyValue((key, value) -> result[0] = function.valueOf(result[0], key, value));
+        return result[0];
+    }
 
     /**
      * Return a copy of this map containing only the key/value pairs that match the predicate.
