@@ -113,7 +113,102 @@ import org.eclipse.collections.impl.utility.Iterate;
 public final class Collectors2
 {
     private static final Collector.Characteristics[] EMPTY_CHARACTERISTICS = {};
+
     private static final Collector<?, ?, String> DEFAULT_MAKE_STRING = Collectors2.makeString(", ");
+
+    private static final Collector<?, ?, ?> DEFAULT_IMMUTABLE_LIST_COLLECTOR = Collector.of(
+            Lists.mutable::empty,
+            MutableList::add,
+            MutableList::withAll,
+            MutableList::toImmutable,
+            EMPTY_CHARACTERISTICS);
+
+    private static final Collector<?, ?, ?> DEFAULT_MUTABLE_LIST_COLLECTOR = Collector.of(
+            Lists.mutable::empty,
+            MutableList::add,
+            MutableList::withAll,
+            EMPTY_CHARACTERISTICS);
+
+    private static final Collector<?, ?, ?> DEFAULT_MUTABLE_SORTED_LIST_COLLECTOR = Collector.of(
+            Lists.mutable::empty,
+            MutableList::add,
+            MutableList::withAll,
+            MutableList::sortThis,
+            EMPTY_CHARACTERISTICS);
+
+    private static final Collector<?, ?, ?> DEFAULT_IMMUTABLE_SORTED_LIST_COLLECTOR = Collector.of(
+            Lists.mutable::empty,
+            MutableList::add,
+            MutableList::withAll,
+            list -> list.sortThis().toImmutable(),
+            EMPTY_CHARACTERISTICS);
+
+
+    private static final Collector<?, ?, ?> DEFAULT_MUTABLE_SET_COLLECTOR = Collector.of(
+            Sets.mutable::empty,
+            MutableSet::add,
+            MutableSet::withAll,
+            Collector.Characteristics.UNORDERED);
+
+    private static final Collector<?, ?, ?> DEFAULT_IMMUTABLE_SET_COLLECTOR = Collector.of(
+            Sets.mutable::empty,
+            MutableSet::add,
+            MutableSet::withAll,
+            MutableSet::toImmutable,
+            Collector.Characteristics.UNORDERED);
+
+    private static final Collector<?, ?, ?> DEFAULT_MUTABLE_SORTED_SET_COLLECTOR = Collector.of(
+            SortedSets.mutable::empty,
+            MutableSortedSet::add,
+            MutableSortedSet::withAll,
+            Collector.Characteristics.UNORDERED);
+
+    private static final Collector<?, ?, ?> DEFAULT_IMMUTABLE_SORTED_SET_COLLECTOR = Collector.of(
+            SortedSets.mutable::empty,
+            MutableSortedSet::add,
+            MutableSortedSet::withAll,
+            MutableSortedSet::toImmutable,
+            Collector.Characteristics.UNORDERED);
+
+    private static final Collector<?, ?, ?> DEFAULT_IMMUTABLE_BAG_COLLECTOR = Collector.of(
+            Bags.mutable::empty,
+            MutableBag::add,
+            MutableBag::withAll,
+            MutableBag::toImmutable,
+            Collector.Characteristics.UNORDERED);
+
+    private static final Collector<?, ?, ?> DEFAULT_MUTABLE_BAG_COLLECTOR = Collector.of(
+            Bags.mutable::empty,
+            MutableBag::add,
+            MutableBag::withAll,
+            Collector.Characteristics.UNORDERED);
+
+    private static final Collector<?, ?, ?> DEFAULT_MUTABLE_SORTED_BAG_COLLECTOR = Collector.of(
+            SortedBags.mutable::empty,
+            MutableSortedBag::add,
+            MutableSortedBag::withAll,
+            Collector.Characteristics.UNORDERED);
+
+    private static final Collector<?, ?, ?> DEFAULT_IMMUTABLE_SORTED_BAG_COLLECTOR = Collector.of(
+            SortedBags.mutable::empty,
+            MutableSortedBag::add,
+            MutableSortedBag::withAll,
+            MutableSortedBag::toImmutable,
+            Collector.Characteristics.UNORDERED);
+
+    private static final Collector<?, ?, ?> DEFAULT_IMMUTABLE_STACK_COLLECTOR = Collector.of(
+            Lists.mutable::empty,
+            MutableList::add,
+            MutableList::withAll,
+            Stacks.immutable::ofAll,
+            EMPTY_CHARACTERISTICS);
+
+    private static final Collector<?, ?, ?> DEFAULT_MUTABLE_STACK_COLLECTOR = Collector.of(
+            Lists.mutable::empty,
+            MutableList::add,
+            MutableList::withAll,
+            Stacks.mutable::ofAll,
+            EMPTY_CHARACTERISTICS);
 
     private Collectors2()
     {
@@ -135,6 +230,7 @@ public final class Collectors2
      * </p>
      * {@code System.out.println(Interval.oneTo(5).makeString());}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, String> makeString()
     {
         return (Collector<T, ?, String>) DEFAULT_MAKE_STRING;
@@ -196,13 +292,10 @@ public final class Collectors2
      * </p>
      * {@code MutableList<Integer> numbers = Interval.oneTo(5).toList();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, MutableList<T>> toList()
     {
-        return Collector.of(
-                Lists.mutable::empty,
-                MutableList::add,
-                MutableList::withAll,
-                EMPTY_CHARACTERISTICS);
+        return (Collector<T, ?, MutableList<T>>) DEFAULT_MUTABLE_LIST_COLLECTOR;
     }
 
     /**
@@ -215,14 +308,10 @@ public final class Collectors2
      * </p>
      * {@code ImmutableList<Integer> numbers = Interval.oneTo(5).toList().toImmutable();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, ImmutableList<T>> toImmutableList()
     {
-        return Collector.<T, MutableList<T>, ImmutableList<T>>of(
-                Lists.mutable::empty,
-                MutableList::add,
-                MutableList::withAll,
-                MutableList::toImmutable,
-                EMPTY_CHARACTERISTICS);
+        return (Collector<T, ?, ImmutableList<T>>) DEFAULT_IMMUTABLE_LIST_COLLECTOR;
     }
 
     /**
@@ -235,13 +324,10 @@ public final class Collectors2
      * </p>
      * {@code MutableSet<Integer> set = Interval.oneTo(5).toSet();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, MutableSet<T>> toSet()
     {
-        return Collector.of(
-                Sets.mutable::empty,
-                MutableSet::add,
-                MutableSet::withAll,
-                Collector.Characteristics.UNORDERED);
+        return (Collector<T, ?, MutableSet<T>>) DEFAULT_MUTABLE_SET_COLLECTOR;
     }
 
     /**
@@ -254,14 +340,10 @@ public final class Collectors2
      * </p>
      * {@code ImmutableSet<Integer> set = Interval.oneTo(5).toSet().toImmutable();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, ImmutableSet<T>> toImmutableSet()
     {
-        return Collector.<T, MutableSet<T>, ImmutableSet<T>>of(
-                Sets.mutable::empty,
-                MutableSet::add,
-                MutableSet::withAll,
-                MutableSet::toImmutable,
-                Collector.Characteristics.UNORDERED);
+        return (Collector<T, ?, ImmutableSet<T>>) DEFAULT_IMMUTABLE_SET_COLLECTOR;
     }
 
     /**
@@ -274,13 +356,10 @@ public final class Collectors2
      * </p>
      * {@code MutableSortedSet<Integer> set = Interval.oneTo(5).toSortedSet();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, MutableSortedSet<T>> toSortedSet()
     {
-        return Collector.of(
-                SortedSets.mutable::empty,
-                MutableSortedSet::add,
-                MutableSortedSet::withAll,
-                Collector.Characteristics.UNORDERED);
+        return (Collector<T, ?, MutableSortedSet<T>>) DEFAULT_MUTABLE_SORTED_SET_COLLECTOR;
     }
 
     /**
@@ -293,14 +372,10 @@ public final class Collectors2
      * </p>
      * {@code ImmutableSortedSet<Integer> set = Interval.oneTo(5).toSortedSet().toImmutable();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, ImmutableSortedSet<T>> toImmutableSortedSet()
     {
-        return Collector.<T, MutableSortedSet<T>, ImmutableSortedSet<T>>of(
-                SortedSets.mutable::empty,
-                MutableSortedSet::add,
-                MutableSortedSet::withAll,
-                MutableSortedSet::toImmutable,
-                Collector.Characteristics.UNORDERED);
+        return (Collector<T, ?, ImmutableSortedSet<T>>) DEFAULT_IMMUTABLE_SORTED_SET_COLLECTOR;
     }
 
     /**
@@ -382,13 +457,10 @@ public final class Collectors2
      * </p>
      * {@code MutableBag<Integer> bag = Interval.oneTo(5).toBag();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, MutableBag<T>> toBag()
     {
-        return Collector.of(
-                Bags.mutable::empty,
-                MutableBag::add,
-                MutableBag::withAll,
-                Collector.Characteristics.UNORDERED);
+        return (Collector<T, ?, MutableBag<T>>) Collectors2.DEFAULT_MUTABLE_BAG_COLLECTOR;
     }
 
     /**
@@ -401,14 +473,10 @@ public final class Collectors2
      * </p>
      * {@code ImmutableBag<Integer> bag = Interval.oneTo(5).toBag().toImmutable();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, ImmutableBag<T>> toImmutableBag()
     {
-        return Collector.<T, MutableBag<T>, ImmutableBag<T>>of(
-                Bags.mutable::empty,
-                MutableBag::add,
-                MutableBag::withAll,
-                MutableBag::toImmutable,
-                Collector.Characteristics.UNORDERED);
+        return (Collector<T, ?, ImmutableBag<T>>) DEFAULT_IMMUTABLE_BAG_COLLECTOR;
     }
 
     /**
@@ -421,14 +489,10 @@ public final class Collectors2
      * </p>
      * {@code MutableList<Integer> list = Interval.oneTo(5).toSortedList();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, MutableList<T>> toSortedList()
     {
-        return Collector.<T, MutableList<T>, MutableList<T>>of(
-                Lists.mutable::empty,
-                MutableList::add,
-                MutableList::withAll,
-                MutableList::sortThis,
-                EMPTY_CHARACTERISTICS);
+        return (Collector<T, ?, MutableList<T>>) DEFAULT_MUTABLE_SORTED_LIST_COLLECTOR;
     }
 
     /**
@@ -441,14 +505,10 @@ public final class Collectors2
      * </p>
      * {@code ImmutableList<Integer> list = Interval.oneTo(5).toSortedList().toImmutable();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, ImmutableList<T>> toImmutableSortedList()
     {
-        return Collector.<T, MutableList<T>, ImmutableList<T>>of(
-                Lists.mutable::empty,
-                MutableList::add,
-                MutableList::withAll,
-                list -> list.sortThis().toImmutable(),
-                EMPTY_CHARACTERISTICS);
+        return (Collector<T, ?, ImmutableList<T>>) DEFAULT_IMMUTABLE_SORTED_LIST_COLLECTOR;
     }
 
     /**
@@ -531,13 +591,10 @@ public final class Collectors2
      * </p>
      * {@code MutableSortedBag<Integer> bag = Interval.oneTo(5).toSortedBag();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, MutableSortedBag<T>> toSortedBag()
     {
-        return Collector.of(
-                SortedBags.mutable::empty,
-                MutableSortedBag::add,
-                MutableSortedBag::withAll,
-                Collector.Characteristics.UNORDERED);
+        return (Collector<T, ?, MutableSortedBag<T>>) DEFAULT_MUTABLE_SORTED_BAG_COLLECTOR;
     }
 
     /**
@@ -550,14 +607,10 @@ public final class Collectors2
      * </p>
      * {@code ImmutableSortedBag<Integer> bag = Interval.oneTo(5).toSortedBag().toImmutable();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, ImmutableSortedBag<T>> toImmutableSortedBag()
     {
-        return Collector.<T, MutableSortedBag<T>, ImmutableSortedBag<T>>of(
-                SortedBags.mutable::empty,
-                MutableSortedBag::add,
-                MutableSortedBag::withAll,
-                MutableSortedBag::toImmutable,
-                Collector.Characteristics.UNORDERED);
+        return (Collector<T, ?, ImmutableSortedBag<T>>) DEFAULT_IMMUTABLE_SORTED_BAG_COLLECTOR;
     }
 
     /**
@@ -639,14 +692,10 @@ public final class Collectors2
      * </p>
      * {@code MutableStack<Integer> stack = Interval.oneTo(5).toList().toStack();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, MutableStack<T>> toStack()
     {
-        return Collector.<T, MutableList<T>, MutableStack<T>>of(
-                Lists.mutable::empty,
-                MutableList::add,
-                MutableList::withAll,
-                Stacks.mutable::ofAll,
-                EMPTY_CHARACTERISTICS);
+        return (Collector<T, ?, MutableStack<T>>) DEFAULT_MUTABLE_STACK_COLLECTOR;
     }
 
     /**
@@ -659,14 +708,10 @@ public final class Collectors2
      * </p>
      * {@code ImmutableStack<Integer> stack = Interval.oneTo(5).toList().toStack().toImmutable();}
      */
+    @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, ImmutableStack<T>> toImmutableStack()
     {
-        return Collector.<T, MutableList<T>, ImmutableStack<T>>of(
-                Lists.mutable::empty,
-                MutableList::add,
-                MutableList::withAll,
-                Stacks.immutable::ofAll,
-                EMPTY_CHARACTERISTICS);
+        return (Collector<T, ?, ImmutableStack<T>>) DEFAULT_IMMUTABLE_STACK_COLLECTOR;
     }
 
     /**
