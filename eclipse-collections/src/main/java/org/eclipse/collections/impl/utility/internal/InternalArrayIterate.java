@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -44,6 +44,7 @@ import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.ListIterable;
@@ -63,7 +64,6 @@ import org.eclipse.collections.impl.block.procedure.FastListSelectProcedure;
 import org.eclipse.collections.impl.block.procedure.MultimapPutProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.ArrayIterate;
@@ -910,7 +910,7 @@ public final class InternalArrayIterate
     @Deprecated
     public static <T, R extends List<T>> R distinct(T[] objectArray, int size, R targetList)
     {
-        MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = Sets.mutable.empty();
 
         for (int i = 0; i < size; i++)
         {

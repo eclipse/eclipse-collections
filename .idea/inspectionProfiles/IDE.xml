@@ -656,6 +656,9 @@
         <constraint name="__context__" within="" contains="" />
         <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
+      <replaceConfiguration name="TreeBag.newBag() to SortedBags.mutable.empty()" text="org.eclipse.collections.impl.bag.sorted.mutable.TreeBag.newBag()" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.SortedBags.mutable.empty()">
+        <constraint name="__context__" within="" contains="" />
+      </replaceConfiguration>
       <replaceConfiguration name="TreeBag.newBag(comparator) to SortedBags.mutable.empty(comparator)" text="org.eclipse.collections.impl.bag.sorted.mutable.TreeBag.newBag($comparator$)" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.SortedBags.mutable.empty($comparator$)">
         <constraint name="__context__" within="" contains="" />
         <constraint name="comparator" nameOfExprType="Comparator" exprTypeWithinHierarchy="true" within="" contains="" />
@@ -669,6 +672,9 @@
         <constraint name="__context__" within="" contains="" />
         <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
+      <replaceConfiguration name="TreeSortedMap.newMap() to SortedMaps.mutable.empty()" text="org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap.newMap()" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.SortedMaps.mutable.empty()">
+        <constraint name="__context__" within="" contains="" />
+      </replaceConfiguration>
       <replaceConfiguration name="TreeSortedSet.newSet(comparator, iterable) to SortedSets.mutable.withAll(comparator, iterable)" text="org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet.newSet($comparator$, $iterable$)" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.SortedSets.mutable.withAll($comparator$, $iterable$)">
         <constraint name="__context__" within="" contains="" />
         <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
@@ -677,6 +683,12 @@
       <replaceConfiguration name="TreeSortedSet.newSet(iterable) to SortedSets.mutable.withAll(iterable)" text="org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet.newSet($iterable$)" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.SortedSets.mutable.withAll($iterable$)">
         <constraint name="__context__" within="" contains="" />
         <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="UnifiedMap.newMap() to Maps.mutable.empty()" text="org.eclipse.collections.impl.map.mutable.UnifiedMap.newMap()" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Maps.mutable.empty()">
+        <constraint name="__context__" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="UnifiedSet.newSet() to Sets.mutable.empty()" text="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet()" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Sets.mutable.empty()">
+        <constraint name="__context__" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="UnifiedSet.newSet(capacity) to Sets.mutable.withInitialCapacity(capacity)" uuid="8f9161ac-867b-3e6a-bc70-4ff63e44a34a" text="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet($capacity$)" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Sets.mutable.withInitialCapacity($capacity$)">
         <constraint name="__context__" within="" contains="" />

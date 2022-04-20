@@ -72,7 +72,6 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.Counter;
-import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -931,7 +930,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSortedBag<T> toSortedBag()
     {
-        MutableSortedBag<T> result = TreeBag.newBag();
+        MutableSortedBag<T> result = SortedBags.mutable.empty();
         this.forEachWithOccurrences(result::addOccurrences);
         return result;
     }

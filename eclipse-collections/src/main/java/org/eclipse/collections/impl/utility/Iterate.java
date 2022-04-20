@@ -60,6 +60,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
@@ -82,7 +83,6 @@ import org.eclipse.collections.impl.block.procedure.MinComparatorProcedure;
 import org.eclipse.collections.impl.block.procedure.MultimapKeyValuePutAllProcedure;
 import org.eclipse.collections.impl.block.procedure.MultimapKeyValuePutProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
@@ -3080,7 +3080,7 @@ public final class Iterate
             Iterable<T> iterable,
             Function<? super T, ? extends K> keyFunction)
     {
-        MutableMap<K, T> map = UnifiedMap.newMap();
+        MutableMap<K, T> map = Maps.mutable.empty();
         Iterate.forEach(iterable, new MapCollectProcedure<>(map, keyFunction));
         return map;
     }
@@ -3094,7 +3094,7 @@ public final class Iterate
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        return Iterate.addToMap(iterable, keyFunction, valueFunction, UnifiedMap.newMap());
+        return Iterate.addToMap(iterable, keyFunction, valueFunction, Maps.mutable.empty());
     }
 
     /**

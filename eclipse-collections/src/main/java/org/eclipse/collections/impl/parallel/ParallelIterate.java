@@ -50,7 +50,6 @@ import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.SynchronizedPutFastListMultimap;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -1281,7 +1280,7 @@ public final class ParallelIterate
             Function<? super T, ? extends V> groupBy,
             Function<? super T, BigDecimal> function)
     {
-        MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
+        MutableMap<V, BigDecimal> result = Maps.mutable.empty();
         ParallelIterate.forEach(
                 iterable,
                 new SumByBigDecimalProcedure<>(groupBy, function),
@@ -1299,7 +1298,7 @@ public final class ParallelIterate
             Function<? super T, ? extends V> groupBy,
             Function<? super T, BigInteger> function)
     {
-        MutableMap<V, BigInteger> result = UnifiedMap.newMap();
+        MutableMap<V, BigInteger> result = Maps.mutable.empty();
         ParallelIterate.forEach(
                 iterable,
                 new SumByBigIntegerProcedure<>(groupBy, function),

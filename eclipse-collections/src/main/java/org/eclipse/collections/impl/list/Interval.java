@@ -49,7 +49,6 @@ import org.eclipse.collections.impl.block.procedure.SelectProcedure;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.MutableListIterator;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
 /**
  * An Interval is a range of integers that may be iterated over using a step value. Interval
@@ -269,7 +268,7 @@ public final class Interval
      */
     public static MutableSet<Integer> toSet(int from, int to)
     {
-        MutableSet<Integer> targetCollection = UnifiedSet.newSet();
+        MutableSet<Integer> targetCollection = Sets.mutable.empty();
         Interval.fromTo(from, to).forEach(CollectionAddProcedure.on(targetCollection));
         return targetCollection;
     }

@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.SetIterable;
@@ -65,7 +66,7 @@ public final class SetIterables
             SetIterable<? extends E> setA,
             SetIterable<? extends E> setB)
     {
-        return SetIterables.intersectInto(setA, setB, UnifiedSet.newSet());
+        return SetIterables.intersectInto(setA, setB, Sets.mutable.empty());
     }
 
     public static <E, R extends Set<E>> R intersectInto(
@@ -87,7 +88,7 @@ public final class SetIterables
             SetIterable<? extends E> minuendSet,
             SetIterable<? extends E> subtrahendSet)
     {
-        return SetIterables.differenceInto(minuendSet, subtrahendSet, UnifiedSet.newSet());
+        return SetIterables.differenceInto(minuendSet, subtrahendSet, Sets.mutable.empty());
     }
 
     public static <E, R extends Set<E>> R differenceInto(
@@ -103,7 +104,7 @@ public final class SetIterables
             SetIterable<? extends E> setA,
             SetIterable<? extends E> setB)
     {
-        return SetIterables.symmetricDifferenceInto(setA, setB, UnifiedSet.newSet());
+        return SetIterables.symmetricDifferenceInto(setA, setB, Sets.mutable.empty());
     }
 
     public static <E, R extends Set<E>> R symmetricDifferenceInto(
@@ -135,7 +136,7 @@ public final class SetIterables
 
     public static <T> MutableSet<MutableSet<T>> powerSet(Set<T> set)
     {
-        MutableSet<MutableSet<T>> seed = UnifiedSet.newSetWith(UnifiedSet.newSet());
+        MutableSet<MutableSet<T>> seed = UnifiedSet.newSetWith(Sets.mutable.empty());
         return powerSetWithSeed(set, seed);
     }
 

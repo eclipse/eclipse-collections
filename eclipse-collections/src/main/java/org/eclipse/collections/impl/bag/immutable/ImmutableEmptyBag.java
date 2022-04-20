@@ -58,6 +58,7 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.SortedBags;
+import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.factory.primitive.BooleanBags;
 import org.eclipse.collections.api.factory.primitive.ByteBags;
 import org.eclipse.collections.api.factory.primitive.CharBags;
@@ -77,8 +78,6 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
-import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
@@ -600,7 +599,7 @@ final class ImmutableEmptyBag<T>
     @Override
     public MutableSortedBag<T> toSortedBag()
     {
-        return TreeBag.newBag();
+        return SortedBags.mutable.empty();
     }
 
     @Override
@@ -614,7 +613,7 @@ final class ImmutableEmptyBag<T>
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {
-        return UnifiedMap.newMap();
+        return Maps.mutable.empty();
     }
 
     @Override
@@ -631,7 +630,7 @@ final class ImmutableEmptyBag<T>
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {
-        return TreeSortedMap.newMap();
+        return SortedMaps.mutable.empty();
     }
 
     @Override

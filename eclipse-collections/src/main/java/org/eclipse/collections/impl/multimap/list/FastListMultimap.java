@@ -16,6 +16,7 @@ import java.util.Collection;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
@@ -93,7 +94,7 @@ public final class FastListMultimap<K, V>
     @Override
     protected MutableMap<K, MutableList<V>> createMap()
     {
-        return UnifiedMap.newMap();
+        return Maps.mutable.empty();
     }
 
     @Override

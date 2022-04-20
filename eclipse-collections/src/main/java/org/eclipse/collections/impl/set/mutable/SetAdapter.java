@@ -214,7 +214,7 @@ public final class SetAdapter<T>
     @Deprecated
     public MutableSet<T> newEmpty()
     {
-        return UnifiedSet.newSet();
+        return Sets.mutable.empty();
     }
 
     @Override
@@ -227,13 +227,13 @@ public final class SetAdapter<T>
     @Override
     public MutableSet<T> select(Predicate<? super T> predicate)
     {
-        return Iterate.select(this.delegate, predicate, UnifiedSet.newSet());
+        return Iterate.select(this.delegate, predicate, Sets.mutable.empty());
     }
 
     @Override
     public MutableSet<T> reject(Predicate<? super T> predicate)
     {
-        return Iterate.reject(this.delegate, predicate, UnifiedSet.newSet());
+        return Iterate.reject(this.delegate, predicate, Sets.mutable.empty());
     }
 
     @Override
@@ -255,7 +255,7 @@ public final class SetAdapter<T>
     @Override
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
-        MutableSet<S> result = UnifiedSet.newSet();
+        MutableSet<S> result = Sets.mutable.empty();
         this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
@@ -263,7 +263,7 @@ public final class SetAdapter<T>
     @Override
     public <V> MutableSet<V> collect(Function<? super T, ? extends V> function)
     {
-        return Iterate.collect(this.delegate, function, UnifiedSet.newSet());
+        return Iterate.collect(this.delegate, function, Sets.mutable.empty());
     }
 
     @Override
@@ -317,7 +317,7 @@ public final class SetAdapter<T>
     @Override
     public <V> MutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Iterate.flatCollect(this.delegate, function, UnifiedSet.newSet());
+        return Iterate.flatCollect(this.delegate, function, Sets.mutable.empty());
     }
 
     @Override
@@ -325,7 +325,7 @@ public final class SetAdapter<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return Iterate.collectIf(this.delegate, predicate, function, UnifiedSet.newSet());
+        return Iterate.collectIf(this.delegate, predicate, function, Sets.mutable.empty());
     }
 
     @Override
@@ -343,19 +343,19 @@ public final class SetAdapter<T>
     @Override
     public <P> MutableSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return Iterate.selectWith(this.delegate, predicate, parameter, UnifiedSet.newSet());
+        return Iterate.selectWith(this.delegate, predicate, parameter, Sets.mutable.empty());
     }
 
     @Override
     public <P> MutableSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return Iterate.rejectWith(this.delegate, predicate, parameter, UnifiedSet.newSet());
+        return Iterate.rejectWith(this.delegate, predicate, parameter, Sets.mutable.empty());
     }
 
     @Override
     public <P, V> MutableSet<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return Iterate.collectWith(this.delegate, function, parameter, UnifiedSet.newSet());
+        return Iterate.collectWith(this.delegate, function, parameter, Sets.mutable.empty());
     }
 
     /**
@@ -371,7 +371,7 @@ public final class SetAdapter<T>
             UnifiedSet<Pair<T, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
             return Iterate.zip(this, that, target);
         }
-        return Iterate.zip(this, that, UnifiedSet.newSet());
+        return Iterate.zip(this, that, Sets.mutable.empty());
     }
 
     /**

@@ -210,7 +210,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public <V> ImmutableSet<V> collect(Function<? super T, ? extends V> function)
     {
-        MutableSet<V> result = UnifiedSet.newSet();
+        MutableSet<V> result = Sets.mutable.empty();
         this.forEach(new CollectProcedure<>(function, result));
         return result.toImmutable();
     }
@@ -280,7 +280,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public <V> ImmutableSet<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        MutableSet<V> result = UnifiedSet.newSet();
+        MutableSet<V> result = Sets.mutable.empty();
         this.forEach(new CollectIfProcedure<>(result, function, predicate));
         return result.toImmutable();
     }
@@ -288,7 +288,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public <V> ImmutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        MutableSet<V> result = UnifiedSet.newSet();
+        MutableSet<V> result = Sets.mutable.empty();
         this.forEach(new FlatCollectProcedure<>(function, result));
         return result.toImmutable();
     }
@@ -364,7 +364,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
             UnifiedSet<Pair<T, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
             return this.zip(that, target).toImmutable();
         }
-        return this.zip(that, UnifiedSet.newSet()).toImmutable();
+        return this.zip(that, Sets.mutable.empty()).toImmutable();
     }
 
     /**

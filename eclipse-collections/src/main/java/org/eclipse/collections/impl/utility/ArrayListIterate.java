@@ -50,6 +50,8 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.factory.primitive.CharLists;
@@ -79,10 +81,8 @@ import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.internal.InternalArrayIterate;
@@ -1566,7 +1566,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableSet<T> seenSoFar = UnifiedSet.newSet();
+            MutableSet<T> seenSoFar = Sets.mutable.empty();
             T[] elements = ArrayListIterate.getInternalArray(list);
             for (int i = 0; i < size; i++)
             {
@@ -1821,7 +1821,7 @@ public final class ArrayListIterate
             ArrayList<T> list,
             Function<? super T, ? extends V> function)
     {
-        return ArrayListIterate.groupByUniqueKey(list, function, UnifiedMap.newMap());
+        return ArrayListIterate.groupByUniqueKey(list, function, Maps.mutable.empty());
     }
 
     /**
@@ -2026,7 +2026,7 @@ public final class ArrayListIterate
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
+        MutableMap<K, V> map = Maps.mutable.empty();
         ArrayListIterate.forEach(list, new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
@@ -2037,7 +2037,7 @@ public final class ArrayListIterate
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
+        MutableMap<K, V> map = Maps.mutable.empty();
         ArrayListIterate.forEach(list, new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }

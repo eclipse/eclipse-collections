@@ -32,6 +32,7 @@ import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -67,7 +68,7 @@ public class TreeBag<T>
 
     public TreeBag()
     {
-        this.items = TreeSortedMap.newMap();
+        this.items = SortedMaps.mutable.empty();
     }
 
     private TreeBag(MutableSortedMap<T, Counter> map)
