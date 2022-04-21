@@ -36,6 +36,7 @@ import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
@@ -46,10 +47,8 @@ import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -61,7 +60,7 @@ import java.util.Spliterators;<endif>
 
 
 /**
- * <name>ArrayList is similar to {@link FastList}, and is memory-optimized for <type> primitives.
+ * <name>ArrayList is similar to FastList, and is memory-optimized for <type> primitives.
  * This file was automatically generated from template file primitiveArrayList.stg.
  *
  * @since 3.0.
@@ -762,7 +761,7 @@ public class <name>ArrayList extends Abstract<name>Iterable
     @Override
     public \<V> MutableList\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        return this.collect(function, FastList.newList(this.size));
+        return this.collect(function, Lists.mutable.withInitialCapacity(this.size));
     }
 
     /**

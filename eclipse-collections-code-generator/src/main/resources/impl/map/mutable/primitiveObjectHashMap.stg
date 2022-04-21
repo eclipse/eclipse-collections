@@ -130,7 +130,6 @@ import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.primitive.AbstractLazy<name>Iterable;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -1482,7 +1481,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             Iterator\<V> iterator = this.iterator();
             while (iterator.hasNext())
             {
-                MutableList\<V> batch = FastList.newList();
+                MutableList\<V> batch = Lists.mutable.empty();
                 for (int i = 0; i \< size && iterator.hasNext(); i++)
                 {
                     batch.add(iterator.next());
