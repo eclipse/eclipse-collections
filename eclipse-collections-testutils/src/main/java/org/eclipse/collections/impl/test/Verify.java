@@ -281,19 +281,19 @@ public final class Verify extends Assert
             {
                 Assert.fail(mutableMapIterableName + " should be empty; actual size:<" + Iterate.sizeOf(actualMutableMapIterable) + '>');
             }
-            if (actualMutableMapIterable.size() != 0)
+            if (!actualMutableMapIterable.isEmpty())
             {
                 Assert.fail(mutableMapIterableName + " should be empty; actual size:<" + actualMutableMapIterable.size() + '>');
             }
-            if (actualMutableMapIterable.keySet().size() != 0)
+            if (!actualMutableMapIterable.keySet().isEmpty())
             {
                 Assert.fail(mutableMapIterableName + " should be empty; actual size:<" + actualMutableMapIterable.keySet().size() + '>');
             }
-            if (actualMutableMapIterable.values().size() != 0)
+            if (!actualMutableMapIterable.values().isEmpty())
             {
                 Assert.fail(mutableMapIterableName + " should be empty; actual size:<" + actualMutableMapIterable.values().size() + '>');
             }
-            if (actualMutableMapIterable.entrySet().size() != 0)
+            if (!actualMutableMapIterable.entrySet().isEmpty())
             {
                 Assert.fail(mutableMapIterableName + " should be empty; actual size:<" + actualMutableMapIterable.entrySet().size() + '>');
             }
@@ -322,6 +322,7 @@ public final class Verify extends Assert
     /**
      * Assert that the given {@link PrimitiveIterable} is empty.
      */
+    @SuppressWarnings("SizeReplaceableByIsEmpty")
     public static void assertEmpty(String iterableName, PrimitiveIterable primitiveIterable)
     {
         try
@@ -489,6 +490,7 @@ public final class Verify extends Assert
     /**
      * Assert that the given {@link Multimap} is empty.
      */
+    @SuppressWarnings("SizeReplaceableByIsEmpty")
     public static void assertEmpty(String multimapName, Multimap<?, ?> actualMultimap)
     {
         try
@@ -511,23 +513,23 @@ public final class Verify extends Assert
             {
                 Assert.fail(multimapName + " should be empty; actual size:<" + actualMultimap.size() + '>');
             }
-            if (actualMultimap.keyBag().size() != 0)
+            if (!actualMultimap.keyBag().isEmpty())
             {
                 Assert.fail(multimapName + " should be empty; actual size:<" + actualMultimap.keyBag().size() + '>');
             }
-            if (actualMultimap.keysView().size() != 0)
+            if (!actualMultimap.keysView().isEmpty())
             {
                 Assert.fail(multimapName + " should be empty; actual size:<" + actualMultimap.keysView().size() + '>');
             }
-            if (actualMultimap.valuesView().size() != 0)
+            if (!actualMultimap.valuesView().isEmpty())
             {
                 Assert.fail(multimapName + " should be empty; actual size:<" + actualMultimap.valuesView().size() + '>');
             }
-            if (actualMultimap.keyValuePairsView().size() != 0)
+            if (!actualMultimap.keyValuePairsView().isEmpty())
             {
                 Assert.fail(multimapName + " should be empty; actual size:<" + actualMultimap.keyValuePairsView().size() + '>');
             }
-            if (actualMultimap.keyMultiValuePairsView().size() != 0)
+            if (!actualMultimap.keyMultiValuePairsView().isEmpty())
             {
                 Assert.fail(multimapName + " should be empty; actual size:<" + actualMultimap.keyMultiValuePairsView().size() + '>');
             }
@@ -541,6 +543,7 @@ public final class Verify extends Assert
     /**
      * Assert that the given {@link Map} is empty.
      */
+    @SuppressWarnings("SizeReplaceableByIsEmpty")
     public static void assertEmpty(String mapName, Map<?, ?> actualMap)
     {
         try
@@ -555,15 +558,15 @@ public final class Verify extends Assert
             {
                 Assert.fail(mapName + " should be empty; actual size:<" + actualMap.size() + '>');
             }
-            if (actualMap.keySet().size() != 0)
+            if (!actualMap.keySet().isEmpty())
             {
                 Assert.fail(mapName + " should be empty; actual size:<" + actualMap.keySet().size() + '>');
             }
-            if (actualMap.values().size() != 0)
+            if (!actualMap.values().isEmpty())
             {
                 Assert.fail(mapName + " should be empty; actual size:<" + actualMap.values().size() + '>');
             }
-            if (actualMap.entrySet().size() != 0)
+            if (!actualMap.entrySet().isEmpty())
             {
                 Assert.fail(mapName + " should be empty; actual size:<" + actualMap.entrySet().size() + '>');
             }

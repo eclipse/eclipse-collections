@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.codegenerator;
 
+@FunctionalInterface
 public interface ErrorListener
 {
     void error(String string);
