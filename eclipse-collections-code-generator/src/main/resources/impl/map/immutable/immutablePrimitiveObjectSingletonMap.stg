@@ -89,6 +89,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
@@ -113,7 +114,6 @@ import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Sets;
@@ -130,7 +130,6 @@ import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.factory.primitive.ShortBags;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
@@ -698,7 +697,7 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     @Override
     public LazyIterable\<V> asLazy()
     {
-        return new LazyIterableAdapter\<>(FastList.newListWith(this.value1));
+        return new LazyIterableAdapter\<>(Lists.mutable.with(this.value1));
     }
 
     @Override
@@ -886,7 +885,7 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
         MutableList\<RichIterable\<V>\> result = Lists.mutable.of();
-        result.add(FastList.newListWith(this.value1));
+        result.add(Lists.mutable.with(this.value1));
         return result;
     }
 
