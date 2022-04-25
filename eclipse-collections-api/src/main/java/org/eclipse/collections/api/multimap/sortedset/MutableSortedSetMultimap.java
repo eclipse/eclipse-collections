@@ -39,6 +39,12 @@ public interface MutableSortedSetMultimap<K, V>
     }
 
     @Override
+    default MutableSortedSetMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        return (MutableSortedSetMultimap<K, V>) MutableSetIterableMultimap.super.withKeyMultiValues(key, values);
+    }
+
+    @Override
     MutableSortedSet<V> replaceValues(K key, Iterable<? extends V> values);
 
     @Override

@@ -94,6 +94,12 @@ public final class SynchronizedPutFastListMultimap<K, V>
     }
 
     @Override
+    public SynchronizedPutFastListMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        return (SynchronizedPutFastListMultimap<K, V>) super.withKeyMultiValues(key, values);
+    }
+
+    @Override
     protected MutableList<V> createCollection()
     {
         return Lists.mutable.withInitialCapacity(1);

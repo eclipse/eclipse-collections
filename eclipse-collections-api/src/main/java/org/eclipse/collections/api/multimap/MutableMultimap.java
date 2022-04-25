@@ -10,6 +10,9 @@
 
 package org.eclipse.collections.api.multimap;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -41,6 +44,17 @@ public interface MutableMultimap<K, V>
     default MutableMultimap<K, V> withKeyValue(K key, V value)
     {
         this.put(key, value);
+        return this;
+    }
+
+    /**
+     * Puts the key / values combination into the MutableMultimap and returns the MutableMultimap (this).
+     * @since 11.1
+     */
+    default MutableMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        Objects.requireNonNull(values);
+        this.putAll(key, Arrays.asList(values));
         return this;
     }
 

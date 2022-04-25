@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Shotaro Sano and others.
+ * Copyright (c) 2022 Shotaro Sano and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -118,6 +118,15 @@ public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMulti
         synchronized (this.lock)
         {
             return this.getDelegate().remove(key, value);
+        }
+    }
+
+    @Override
+    public MutableMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().withKeyMultiValues(key, values);
         }
     }
 

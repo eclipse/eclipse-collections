@@ -67,6 +67,12 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
         Iterate.forEach(inputIterable, this::add);
     }
 
+    @Override
+    public SynchronizedPutUnifiedSetMultimap<K, V> withKeyMultiValues(K key, V... values)
+    {
+        return (SynchronizedPutUnifiedSetMultimap<K, V>) super.withKeyMultiValues(key, values);
+    }
+
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap()
     {
         return new SynchronizedPutUnifiedSetMultimap<>();
