@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -578,7 +578,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         MutableList<Integer> mutableList = Lists.mutable.ofAll(immutableList);
         Assert.assertEquals(mutableList.drop(1), immutableList.drop(1));
 
-        if (mutableList.size() > 0)
+        if (mutableList.notEmpty())
         {
             Assert.assertEquals(
                     mutableList.drop(mutableList.size() - 1),
