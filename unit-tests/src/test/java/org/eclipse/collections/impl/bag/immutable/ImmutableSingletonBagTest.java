@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -86,7 +86,7 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
     public void equalsAndHashCode()
     {
         super.equalsAndHashCode();
-        ImmutableSingletonBag<Integer> immutable = new ImmutableSingletonBag<>(1);
+        ImmutableBag<Integer> immutable = new ImmutableSingletonBag<>(1);
         Bag<Integer> mutable = Bags.mutable.of(1);
         Verify.assertEqualsAndHashCode(immutable, mutable);
         Assert.assertNotEquals(immutable, FastList.newList(mutable));

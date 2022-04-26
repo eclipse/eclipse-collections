@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.block.function.primitive;
 
+import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class BooleanCaseFunctionTest
     @Test
     public void noopCase()
     {
-        BooleanCaseFunction<Boolean> function = new BooleanCaseFunction<>();
+        BooleanToObjectFunction<Boolean> function = new BooleanCaseFunction<>();
         Assert.assertNull(function.valueOf(true));
     }
 

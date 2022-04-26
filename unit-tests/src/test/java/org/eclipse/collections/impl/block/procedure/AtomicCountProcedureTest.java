@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.block.procedure;
 
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.impl.list.Interval;
 import org.junit.Test;
 
@@ -35,7 +36,7 @@ public class AtomicCountProcedureTest
     @Test(expected = ArithmeticException.class)
     public void predicateException()
     {
-        AtomicCountProcedure<String> atomicCountProcedure = new AtomicCountProcedure<>(each -> STRING_LENGTH < each.length() / ZERO);
+        Procedure<String> atomicCountProcedure = new AtomicCountProcedure<>(each -> STRING_LENGTH < each.length() / ZERO);
 
         atomicCountProcedure.value("word");
     }

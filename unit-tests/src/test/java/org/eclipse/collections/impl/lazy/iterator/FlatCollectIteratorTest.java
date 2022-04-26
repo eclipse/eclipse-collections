@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.lazy.iterator;
 
-import java.util.List;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.impl.block.factory.Functions;
@@ -36,7 +36,7 @@ public class FlatCollectIteratorTest
     public void nextAfterEmptyIterable()
     {
         Object expected = new Object();
-        FlatCollectIterator<List<Object>, Object> flattenIterator = new FlatCollectIterator<>(
+        Iterator<Object> flattenIterator = new FlatCollectIterator<>(
                 Lists.fixedSize.of(
                         Lists.fixedSize.of(),
                         Lists.fixedSize.of(expected)),

@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.partition.bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
+import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ public class PartitionHashBagTest
     @Test
     public void toImmutable()
     {
-        PartitionHashBag<Integer> partitionHashBag = new PartitionHashBag<>();
+        PartitionMutableBag<Integer> partitionHashBag = new PartitionHashBag<>();
         MutableBag<Integer> selected = Bags.mutable.of(1, 2, 3);
         MutableBag<Integer> rejected = Bags.mutable.of(4, 5, 6);
         partitionHashBag.getSelected().withAll(selected);

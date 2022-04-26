@@ -1079,7 +1079,7 @@ public final class RandomAccessListIterate
 
     public static <T> PartitionMutableList<T> partition(List<T> list, Predicate<? super T> predicate)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
+        PartitionMutableList<T> partitionFastList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)
@@ -1095,7 +1095,7 @@ public final class RandomAccessListIterate
 
     public static <T, P> PartitionMutableList<T> partitionWith(List<T> list, Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
+        PartitionMutableList<T> partitionFastList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)

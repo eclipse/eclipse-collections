@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -262,7 +262,7 @@ public class ImmutableBooleanHashSetTest extends AbstractImmutableBooleanCollect
 
         BooleanIterator booleanIterator3 = this.trueFalseSet.booleanIterator();
         Assert.assertTrue(booleanIterator3.hasNext());
-        BooleanHashSet actual = new BooleanHashSet();
+        MutableBooleanSet actual = new BooleanHashSet();
         actual.add(booleanIterator3.next());
         Assert.assertTrue(booleanIterator3.hasNext());
         actual.add(booleanIterator3.next());

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,7 @@ import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.map.ConcurrentMutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.set.UnsortedSetMultimap;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
@@ -66,7 +67,7 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
     public void forEach(Procedure<? super T> procedure)
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
+        ConcurrentMutableMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         this.delegate.forEach(each -> {
             if (distinct.put(each, true) == null)
             {
@@ -131,7 +132,7 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
     private static final class DistinctAndPredicate<T> implements Predicate<T>
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        private final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
+        private final ConcurrentMutableMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         private final Predicate<? super T> predicate;
 
         private DistinctAndPredicate(Predicate<? super T> predicate)
@@ -149,7 +150,7 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
     private static final class DistinctOrPredicate<T> implements Predicate<T>
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        private final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
+        private final ConcurrentMutableMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         private final Predicate<? super T> predicate;
 
         private DistinctOrPredicate(Predicate<? super T> predicate)

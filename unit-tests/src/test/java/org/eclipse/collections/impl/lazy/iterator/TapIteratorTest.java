@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.lazy.iterator;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -39,7 +40,7 @@ public class TapIteratorTest
     public void nextAfterEmptyIterable()
     {
         Object expected = new Object();
-        TapIterator<Object> iterator = new TapIterator<>(
+        Iterator<Object> iterator = new TapIterator<>(
                 Lists.fixedSize.of(expected), object -> { });
         Assert.assertSame(expected, iterator.next());
     }
@@ -47,8 +48,8 @@ public class TapIteratorTest
     @Test
     public void iterator()
     {
-        TapIterator<AtomicInteger> iterator =
-                new TapIterator<AtomicInteger>(
+        Iterator<AtomicInteger> iterator =
+                new TapIterator<>(
                         Lists.mutable.of(
                                 new AtomicInteger(1),
                                 new AtomicInteger(2),

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 import java.util.Random;
 
 import org.eclipse.collections.api.block.predicate.primitive.LongPredicate;
+import org.eclipse.collections.api.set.primitive.MutableLongSet;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -54,7 +55,7 @@ public class LongHashSetExtraTest
     @Test
     public void testArrayGrowth() throws Exception
     {
-        LongHashSet set = new LongHashSet();
+        MutableLongSet set = new LongHashSet();
         long putLong = 0;
         for (; putLong < 1000L; putLong++)
         {

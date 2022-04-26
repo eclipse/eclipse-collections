@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,8 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Iterator;
 
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.junit.Assert;
@@ -28,7 +30,7 @@ public class MultimapKeyValuesSerializingProcedureTest
         map.put("A", "alpha");
         map.put("A", "beta");
         FastList<? extends Serializable> expectedWrites = FastList.newListWith("A", 2, "alpha", "beta");
-        MultimapKeyValuesSerializingProcedure<String, String> procedure =
+        Procedure2<String, RichIterable<String>> procedure =
                 new MultimapKeyValuesSerializingProcedure<>(new MockObjectOutput(expectedWrites));
         map.toMap().forEachKeyValue(procedure);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.eclipse.collections.api.InternalIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.MultiReaderList;
@@ -36,7 +35,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void forEach()
     {
-        InternalIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
+        LazyIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
         Appendable builder = new StringBuilder();
         Procedure<String> appendProcedure = Procedures.append(builder);
         select.forEach(appendProcedure);
@@ -46,7 +45,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void forEachWithIndex()
     {
-        InternalIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
+        LazyIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
         StringBuilder builder = new StringBuilder();
         select.forEachWithIndex((object, index) -> {
             builder.append(object);
@@ -59,7 +58,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void iterator()
     {
-        InternalIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
+        LazyIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
         StringBuilder builder = new StringBuilder();
         for (String each : select)
         {
@@ -71,7 +70,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void forEachWith()
     {
-        InternalIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
+        LazyIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
         StringBuilder builder = new StringBuilder();
         select.forEachWith((each, aBuilder) -> aBuilder.append(each), builder);
         Assert.assertEquals("12345", builder.toString());
@@ -82,7 +81,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     public void distinct()
     {
         super.distinct();
-        CollectIterable<Integer, String> collect = new CollectIterable<>(FastList.newListWith(3, 2, 2, 4, 1, 3, 1, 5), String::valueOf);
+        LazyIterable<String> collect = new CollectIterable<>(FastList.newListWith(3, 2, 2, 4, 1, 3, 1, 5), String::valueOf);
         Assert.assertEquals(
                 FastList.newListWith("3", "2", "4", "1", "5"),
                 collect.distinct().toList());
@@ -174,7 +173,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         super.detectWith();
         AtomicInteger functionCount = new AtomicInteger(0);
         MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
-        CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
+        LazyIterable<Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
         Assert.assertEquals(3L, collect.detectWith((each, ignore) -> each.equals(3), null).longValue());
         Assert.assertNull(collect.detectWith((each, ignore) -> each.equals(100), null));
     }
@@ -186,7 +185,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         super.detectWithIfNone();
         AtomicInteger functionCount = new AtomicInteger(0);
         MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
-        CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
+        LazyIterable<Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
         Assert.assertEquals(3L, collect.detectWithIfNone((each, ignore) -> each.equals(3), null, () -> Integer.valueOf(0)).longValue());
         Assert.assertNull(collect.detectWithIfNone((each, ignore) -> each.equals(100), null, () -> null));
     }
@@ -210,9 +209,8 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         super.detectWithOptional();
         AtomicInteger functionCount = new AtomicInteger(0);
         MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
-        CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
+        LazyIterable<Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
         Assert.assertEquals(3L, collect.detectWithOptional((each, ignore) -> each.equals(3), null).get().longValue());
         Assert.assertNull(collect.detectWithOptional((each, ignore) -> each.equals(100), null).orElse(null));
     }
 }
-

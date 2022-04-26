@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.partition.bag.sorted;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
+import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class PartitionTreeBagTest
     @Test
     public void toImmutable()
     {
-        PartitionTreeBag<Integer> partitionTreeBag = new PartitionTreeBag<>(Comparators.naturalOrder());
+        PartitionMutableSortedBag<Integer> partitionTreeBag = new PartitionTreeBag<>(Comparators.naturalOrder());
         MutableSortedBag<Integer> selected = SortedBags.mutable.of(1, 2, 3);
         MutableSortedBag<Integer> rejected = SortedBags.mutable.of(4, 5, 6);
         partitionTreeBag.getSelected().addAll(selected);

@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.partition.set.strategy;
 
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
+import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.junit.Assert;
@@ -22,7 +23,7 @@ public class PartitionUnifiedSetWithHashingStrategyTest
     @Test
     public void toImmutable()
     {
-        PartitionUnifiedSetWithHashingStrategy<Integer> partitionUnifiedSetWithHashingStrategy =
+        PartitionMutableSet<Integer> partitionUnifiedSetWithHashingStrategy =
                 new PartitionUnifiedSetWithHashingStrategy<>(HashingStrategies.defaultStrategy());
 
         MutableSet<Integer> selected = Sets.mutable.of(1, 2, 3);

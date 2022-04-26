@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,7 +13,9 @@ package org.eclipse.collections.impl.test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
 public final class SerializeTestHelper
@@ -51,7 +53,7 @@ public final class SerializeTestHelper
 
     private static <T> void writeObjectToStream(Object sourceObject, ByteArrayOutputStream baos) throws IOException
     {
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos))
+        try (ObjectOutput objectOutputStream = new ObjectOutputStream(baos))
         {
             objectOutputStream.writeObject(sourceObject);
             objectOutputStream.flush();
@@ -62,7 +64,7 @@ public final class SerializeTestHelper
     private static Object readOneObject(ByteArrayInputStream bais)
             throws IOException, ClassNotFoundException
     {
-        try (ObjectInputStream objectStream = new ObjectInputStream(bais))
+        try (ObjectInput objectStream = new ObjectInputStream(bais))
         {
             return objectStream.readObject();
         }

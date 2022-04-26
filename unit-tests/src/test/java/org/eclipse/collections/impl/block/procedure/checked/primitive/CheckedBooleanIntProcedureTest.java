@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.block.procedure.checked.primitive;
 
 import java.io.IOException;
 
+import org.eclipse.collections.api.block.procedure.primitive.BooleanIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.primitive.BooleanIntPair;
@@ -25,7 +26,7 @@ public class CheckedBooleanIntProcedureTest
     public void value()
     {
         MutableList<BooleanIntPair> list = Lists.mutable.empty();
-        CheckedBooleanIntProcedure procedure = new CheckedBooleanIntProcedure()
+        BooleanIntProcedure procedure = new CheckedBooleanIntProcedure()
         {
             @Override
             public void safeValue(boolean item1, int item2)

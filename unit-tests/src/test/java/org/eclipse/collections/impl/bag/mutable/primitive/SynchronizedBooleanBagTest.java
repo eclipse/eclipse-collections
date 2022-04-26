@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -38,7 +38,7 @@ public class SynchronizedBooleanBagTest extends AbstractMutableBooleanBagTestCas
     public void asSynchronized()
     {
         super.asSynchronized();
-        SynchronizedBooleanBag bagWithLockObject = new SynchronizedBooleanBag(BooleanHashBag.newBagWith(true, false, true), new Object());
+        MutableBooleanBag bagWithLockObject = new SynchronizedBooleanBag(BooleanHashBag.newBagWith(true, false, true), new Object());
         Assert.assertSame(bagWithLockObject, bagWithLockObject.asSynchronized());
         Assert.assertEquals(bagWithLockObject, bagWithLockObject.asSynchronized());
         MutableBooleanBag bag = this.classUnderTest();
