@@ -436,6 +436,42 @@ public class Synchronized<name>ObjectMap\<V>
     }
 
     @Override
+    public boolean containsNoneIterable(Iterable\<?> source)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.containsNoneIterable(source);
+        }
+    }
+
+    @Override
+    public boolean containsNone(Collection\<?> source)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.containsNone(source);
+        }
+    }
+
+    @Override
+    public boolean containsAnyIterable(Iterable\<?> source)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.containsAnyIterable(source);
+        }
+    }
+
+    @Override
+    public boolean containsAny(Collection\<?> source)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.containsAny(source);
+        }
+    }
+
+    @Override
     public boolean containsAllArguments(Object... elements)
     {
         synchronized (this.lock)

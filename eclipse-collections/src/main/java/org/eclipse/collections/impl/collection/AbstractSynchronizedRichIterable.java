@@ -220,6 +220,42 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public boolean containsAny(Collection<?> source)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.containsAny(source);
+        }
+    }
+
+    @Override
+    public boolean containsNone(Collection<?> source)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.containsNone(source);
+        }
+    }
+
+    @Override
+    public boolean containsAnyIterable(Iterable<?> source)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.containsAnyIterable(source);
+        }
+    }
+
+    @Override
+    public boolean containsNoneIterable(Iterable<?> source)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.containsNoneIterable(source);
+        }
+    }
+
+    @Override
     public boolean containsAllIterable(Iterable<?> source)
     {
         synchronized (this.lock)
