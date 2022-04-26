@@ -22,12 +22,12 @@ public class PartitionUnifiedSetTest
     @Test
     public void toImmutable()
     {
-        PartitionMutableSet<Integer> partitionUnifiedSet = new PartitionUnifiedSet<>();
+        PartitionMutableSet<Integer> partitionMutableSet = new PartitionUnifiedSet<>();
         MutableSet<Integer> selected = Sets.mutable.of(1, 2, 3);
         MutableSet<Integer> rejected = Sets.mutable.of(4, 5, 6);
-        partitionUnifiedSet.getSelected().addAll(selected);
-        partitionUnifiedSet.getRejected().addAll(rejected);
-        PartitionImmutableSet<Integer> integerPartitionImmutableSet = partitionUnifiedSet.toImmutable();
+        partitionMutableSet.getSelected().addAll(selected);
+        partitionMutableSet.getRejected().addAll(rejected);
+        PartitionImmutableSet<Integer> integerPartitionImmutableSet = partitionMutableSet.toImmutable();
         Assert.assertEquals(selected, integerPartitionImmutableSet.getSelected());
         Assert.assertEquals(rejected, integerPartitionImmutableSet.getRejected());
     }

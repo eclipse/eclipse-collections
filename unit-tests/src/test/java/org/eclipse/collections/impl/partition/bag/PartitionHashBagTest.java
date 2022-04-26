@@ -22,13 +22,13 @@ public class PartitionHashBagTest
     @Test
     public void toImmutable()
     {
-        PartitionMutableBag<Integer> partitionHashBag = new PartitionHashBag<>();
+        PartitionMutableBag<Integer> partitionMutableBag = new PartitionHashBag<>();
         MutableBag<Integer> selected = Bags.mutable.of(1, 2, 3);
         MutableBag<Integer> rejected = Bags.mutable.of(4, 5, 6);
-        partitionHashBag.getSelected().withAll(selected);
-        partitionHashBag.getRejected().withAll(rejected);
+        partitionMutableBag.getSelected().withAll(selected);
+        partitionMutableBag.getRejected().withAll(rejected);
 
-        PartitionImmutableBag<Integer> partitionImmutableBag = partitionHashBag.toImmutable();
+        PartitionImmutableBag<Integer> partitionImmutableBag = partitionMutableBag.toImmutable();
         Assert.assertEquals(selected, partitionImmutableBag.getSelected());
         Assert.assertEquals(rejected, partitionImmutableBag.getRejected());
     }

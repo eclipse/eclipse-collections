@@ -186,17 +186,17 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Override
     public PartitionImmutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
-        this.forEach(new PartitionProcedure<>(predicate, partitionUnifiedSet));
-        return partitionUnifiedSet.toImmutable();
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableSet));
+        return partitionMutableSet.toImmutable();
     }
 
     @Override
     public <P> PartitionImmutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
-        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionUnifiedSet));
-        return partitionUnifiedSet.toImmutable();
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableSet));
+        return partitionMutableSet.toImmutable();
     }
 
     @Override
