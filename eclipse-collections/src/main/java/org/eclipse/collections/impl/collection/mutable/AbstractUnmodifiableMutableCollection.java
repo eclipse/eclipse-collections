@@ -242,6 +242,30 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
     }
 
     @Override
+    public boolean containsAny(Collection<?> source)
+    {
+        return this.getMutableCollection().containsAny(source);
+    }
+
+    @Override
+    public boolean containsNone(Collection<?> source)
+    {
+        return this.getMutableCollection().containsNone(source);
+    }
+
+    @Override
+    public boolean containsAnyIterable(Iterable<?> source)
+    {
+        return this.getMutableCollection().containsAnyIterable(source);
+    }
+
+    @Override
+    public boolean containsNoneIterable(Iterable<?> source)
+    {
+        return this.getMutableCollection().containsNoneIterable(source);
+    }
+
+    @Override
     public boolean containsAllIterable(Iterable<?> source)
     {
         return this.getMutableCollection().containsAllIterable(source);

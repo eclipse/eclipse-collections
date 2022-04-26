@@ -1386,6 +1386,38 @@ public abstract class Abstract<name>ObjectMapTestCase
     }
 
     @Test
+    public void containsAnyIterable()
+    {
+        Assert.assertTrue(this.classUnderTest().containsAnyIterable(FastList.newListWith("zero", "thirtyOne")));
+        Assert.assertTrue(this.classUnderTest().containsAnyIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        Assert.assertFalse(this.classUnderTest().containsAnyIterable(FastList.newListWith("none")));
+    }
+
+    @Test
+    public void containsAny()
+    {
+        Assert.assertTrue(this.classUnderTest().containsAny(FastList.newListWith("zero", "thirtyOne")));
+        Assert.assertTrue(this.classUnderTest().containsAny(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        Assert.assertFalse(this.classUnderTest().containsAny(FastList.newListWith("none")));
+    }
+
+    @Test
+    public void containsNoneIterable()
+    {
+        Assert.assertFalse(this.classUnderTest().containsNoneIterable(FastList.newListWith("zero", "thirtyOne")));
+        Assert.assertFalse(this.classUnderTest().containsNoneIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        Assert.assertTrue(this.classUnderTest().containsNoneIterable(FastList.newListWith("none")));
+    }
+
+    @Test
+    public void containsNone()
+    {
+        Assert.assertFalse(this.classUnderTest().containsNone(FastList.newListWith("zero", "thirtyOne")));
+        Assert.assertFalse(this.classUnderTest().containsNone(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        Assert.assertTrue(this.classUnderTest().containsNone(FastList.newListWith("none")));
+    }
+
+    @Test
     public void containsAllArguments()
     {
         Assert.assertTrue(this.classUnderTest().containsAllArguments("zero", "thirtyOne"));

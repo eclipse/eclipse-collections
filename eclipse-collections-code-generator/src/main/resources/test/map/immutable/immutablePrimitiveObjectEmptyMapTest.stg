@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 
@@ -15,7 +15,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
@@ -117,6 +117,50 @@ public class Immutable<name>ObjectEmptyMapTest extends AbstractImmutable<name>Ob
         Assert.assertFalse(this.classUnderTest().containsAll(FastList.newListWith("zero", "one", "thirtyTwo")));
         Assert.assertFalse(this.classUnderTest().containsAll(FastList.newListWith("two", "one", "nine")));
         Assert.assertTrue(this.classUnderTest().containsAll(FastList.newListWith()));
+    }
+
+    @Override
+    @Test
+    public void containsAnyIterable()
+    {
+        Assert.assertFalse(this.classUnderTest().containsAnyIterable(FastList.newListWith("zero", "thirtyOne")));
+        Assert.assertFalse(this.classUnderTest().containsAnyIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        Assert.assertFalse(this.classUnderTest().containsAnyIterable(FastList.newListWith("zero", "one", "thirtyTwo")));
+        Assert.assertFalse(this.classUnderTest().containsAnyIterable(FastList.newListWith("two", "one", "nine")));
+        Assert.assertFalse(this.classUnderTest().containsAnyIterable(FastList.newListWith()));
+    }
+
+    @Override
+    @Test
+    public void containsAny()
+    {
+        Assert.assertFalse(this.classUnderTest().containsAny(FastList.newListWith("zero", "thirtyOne")));
+        Assert.assertFalse(this.classUnderTest().containsAny(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        Assert.assertFalse(this.classUnderTest().containsAny(FastList.newListWith("zero", "one", "thirtyTwo")));
+        Assert.assertFalse(this.classUnderTest().containsAny(FastList.newListWith("two", "one", "nine")));
+        Assert.assertFalse(this.classUnderTest().containsAny(FastList.newListWith()));
+    }
+
+    @Override
+    @Test
+    public void containsNoneIterable()
+    {
+        Assert.assertTrue(this.classUnderTest().containsNoneIterable(FastList.newListWith("zero", "thirtyOne")));
+        Assert.assertTrue(this.classUnderTest().containsNoneIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        Assert.assertTrue(this.classUnderTest().containsNoneIterable(FastList.newListWith("zero", "one", "thirtyTwo")));
+        Assert.assertTrue(this.classUnderTest().containsNoneIterable(FastList.newListWith("two", "one", "nine")));
+        Assert.assertTrue(this.classUnderTest().containsNoneIterable(FastList.newListWith()));
+    }
+
+    @Override
+    @Test
+    public void containsNone()
+    {
+        Assert.assertTrue(this.classUnderTest().containsNone(FastList.newListWith("zero", "thirtyOne")));
+        Assert.assertTrue(this.classUnderTest().containsNone(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        Assert.assertTrue(this.classUnderTest().containsNone(FastList.newListWith("zero", "one", "thirtyTwo")));
+        Assert.assertTrue(this.classUnderTest().containsNone(FastList.newListWith("two", "one", "nine")));
+        Assert.assertTrue(this.classUnderTest().containsNone(FastList.newListWith()));
     }
 
     @Override

@@ -210,7 +210,7 @@ public interface RichIterable<T>
     /**
      * Returns true if any of the elements in source is contained in this collection.
      *
-     * @since 11.0
+     * @since 11.1
      */
     default boolean containsAny(Collection<?> source)
     {
@@ -221,7 +221,7 @@ public interface RichIterable<T>
     /**
      * Returns true if none of the elements in source are contained in this collection.
      *
-     * @since 11.0
+     * @since 11.1
      */
     default boolean containsNone(Collection<?> source)
     {
@@ -232,7 +232,7 @@ public interface RichIterable<T>
     /**
      * Returns true if any of the elements in source is contained in this collection.
      *
-     * @since 11.0
+     * @since 11.1
      */
     default boolean containsAnyIterable(Iterable<?> source)
     {
@@ -243,7 +243,7 @@ public interface RichIterable<T>
     /**
      * Returns true if none of the elements in source are contained in this collection.
      *
-     * @since 11.0
+     * @since 11.1
      */
     default boolean containsNoneIterable(Iterable<?> source)
     {
