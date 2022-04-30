@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -243,6 +243,12 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertTrue(collection.containsAnyIterable(Arrays.asList(0, 1)));
         Assert.assertFalse(collection.containsAnyIterable(Lists.mutable.with(5, 6)));
         Assert.assertFalse(collection.containsAnyIterable(Arrays.asList(5, 6)));
+        Assert.assertTrue(collection.containsAnyIterable(Interval.oneTo(100)));
+        Assert.assertFalse(collection.containsAnyIterable(Interval.fromTo(5, 100)));
+        Assert.assertTrue(Interval.oneTo(100).containsAnyIterable(collection));
+        Assert.assertFalse(Interval.fromTo(5, 100).containsAnyIterable(collection));
+        Assert.assertTrue(this.newWith(Interval.oneTo(100).toArray()).containsAnyIterable(Interval.oneTo(50)));
+        Assert.assertFalse(this.newWith(Interval.fromTo(5, 100).toArray()).containsAnyIterable(Interval.fromTo(200, 250)));
     }
 
     @Test
@@ -253,6 +259,12 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertTrue(collection.containsNoneIterable(Arrays.asList(0, 5, 6, 7)));
         Assert.assertFalse(collection.containsNoneIterable(Lists.mutable.with(0, 1, 5, 6)));
         Assert.assertFalse(collection.containsNoneIterable(Arrays.asList(0, 1, 5, 6)));
+        Assert.assertFalse(collection.containsNoneIterable(Interval.oneTo(100)));
+        Assert.assertTrue(collection.containsNoneIterable(Interval.fromTo(5, 100)));
+        Assert.assertFalse(Interval.oneTo(100).containsNoneIterable(collection));
+        Assert.assertTrue(Interval.fromTo(5, 100).containsNoneIterable(collection));
+        Assert.assertFalse(this.newWith(Interval.oneTo(100).toArray()).containsNoneIterable(Interval.oneTo(50)));
+        Assert.assertTrue(this.newWith(Interval.fromTo(5, 100).toArray()).containsNoneIterable(Interval.fromTo(200, 250)));
     }
 
     @Test
@@ -271,6 +283,10 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertTrue(collection.containsAny(Arrays.asList(0, 1)));
         Assert.assertFalse(collection.containsAny(Lists.mutable.with(5, 6)));
         Assert.assertFalse(collection.containsAny(Arrays.asList(5, 6)));
+        Assert.assertTrue(collection.containsAny(Interval.oneTo(100)));
+        Assert.assertFalse(collection.containsAny(Interval.fromTo(5, 100)));
+        Assert.assertTrue(this.newWith(Interval.oneTo(100).toArray()).containsAny(Interval.oneTo(50)));
+        Assert.assertFalse(this.newWith(Interval.fromTo(5, 100).toArray()).containsAny(Interval.fromTo(200, 250)));
     }
 
     @Test
@@ -281,6 +297,10 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertTrue(collection.containsNone(Arrays.asList(0, 5, 6, 7)));
         Assert.assertFalse(collection.containsNone(Lists.mutable.with(0, 1, 5, 6)));
         Assert.assertFalse(collection.containsNone(Arrays.asList(0, 1, 5, 6)));
+        Assert.assertFalse(collection.containsNone(Interval.oneTo(100)));
+        Assert.assertTrue(collection.containsNone(Interval.fromTo(5, 100)));
+        Assert.assertFalse(this.newWith(Interval.oneTo(100).toArray()).containsNone(Interval.oneTo(50)));
+        Assert.assertTrue(this.newWith(Interval.fromTo(5, 100).toArray()).containsNone(Interval.fromTo(200, 250)));
     }
 
     @Test

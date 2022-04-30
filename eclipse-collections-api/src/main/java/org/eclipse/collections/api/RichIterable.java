@@ -83,6 +83,7 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -214,7 +215,7 @@ public interface RichIterable<T>
      */
     default boolean containsAny(Collection<?> source)
     {
-        return source instanceof RichIterable ? ((RichIterable<?>) source).anySatisfy(this::contains)
+        return source instanceof RichIterable ? this.containsAnyIterable(source)
                 : source.stream().anyMatch(this::contains);
     }
 
@@ -225,7 +226,7 @@ public interface RichIterable<T>
      */
     default boolean containsNone(Collection<?> source)
     {
-        return source instanceof RichIterable ? ((RichIterable<?>) source).noneSatisfy(this::contains)
+        return source instanceof RichIterable ? this.containsNoneIterable(source)
                 : source.stream().noneMatch(this::contains);
     }
 
@@ -236,8 +237,28 @@ public interface RichIterable<T>
      */
     default boolean containsAnyIterable(Iterable<?> source)
     {
-        return source instanceof RichIterable ? ((RichIterable<?>) source).anySatisfy(this::contains)
-                : StreamSupport.stream(source.spliterator(), false).anyMatch(this::contains);
+        if (source instanceof RichIterable)
+        {
+            RichIterable<?> outside = this;
+            RichIterable<?> inside = (RichIterable<?>) source;
+            if (this.size() < inside.size())
+            {
+                outside = inside;
+                inside = this;
+            }
+            if (outside instanceof SetIterable)
+            {
+                RichIterable<?> temp = outside;
+                outside = inside;
+                inside = temp;
+            }
+            else if (inside.size() > 32 && !(inside instanceof SetIterable))
+            {
+                inside = inside.toSet();
+            }
+            return outside.anySatisfy(inside::contains);
+        }
+        return StreamSupport.stream(source.spliterator(), false).anyMatch(this::contains);
     }
 
     /**
@@ -247,8 +268,28 @@ public interface RichIterable<T>
      */
     default boolean containsNoneIterable(Iterable<?> source)
     {
-        return source instanceof RichIterable ? ((RichIterable<?>) source).noneSatisfy(this::contains)
-                : StreamSupport.stream(source.spliterator(), false).noneMatch(this::contains);
+        if (source instanceof RichIterable)
+        {
+            RichIterable<?> outside = this;
+            RichIterable<?> inside = (RichIterable<?>) source;
+            if (this.size() < inside.size())
+            {
+                outside = inside;
+                inside = this;
+            }
+            if (outside instanceof SetIterable)
+            {
+                RichIterable<?> temp = outside;
+                outside = inside;
+                inside = temp;
+            }
+            else if (inside.size() > 32 && !(inside instanceof SetIterable))
+            {
+                inside = inside.toSet();
+            }
+            return outside.noneSatisfy(inside::contains);
+        }
+        return StreamSupport.stream(source.spliterator(), false).noneMatch(this::contains);
     }
 
     /**
