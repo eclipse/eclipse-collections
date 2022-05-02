@@ -475,6 +475,90 @@ public interface RichIterableTestCase extends IterableTestCase
     }
 
     @Test
+    default void RichIterable_containsAny()
+    {
+        RichIterable<Integer> iterable3 = this.newWith(3, 2, 1);
+
+        assertTrue(iterable3.containsAny(Lists.mutable.of(3)));
+        assertTrue(iterable3.containsAny(Lists.mutable.of(3, 2, 1)));
+        assertTrue(iterable3.containsAny(Lists.mutable.of(3, 3, 3)));
+        assertTrue(iterable3.containsAny(Lists.mutable.of(3, 3, 3, 3, 2, 2, 2, 1, 1)));
+        assertFalse(iterable3.containsAny(Lists.mutable.of(4)));
+        assertFalse(iterable3.containsAny(Lists.mutable.of(4, 4, 5)));
+        assertTrue(iterable3.containsAny(Lists.mutable.of(3, 2, 1, 0)));
+        assertFalse(iterable3.containsAny(Lists.mutable.empty()));
+
+        RichIterable<Integer> iterable2 = this.newWith(2, 1);
+
+        assertTrue(iterable2.containsAny(Lists.mutable.of(2)));
+        assertTrue(iterable2.containsAny(Lists.mutable.of(2, 1)));
+        assertTrue(iterable2.containsAny(Lists.mutable.of(2, 2, 2)));
+        assertTrue(iterable2.containsAny(Lists.mutable.of(2, 2, 2, 1, 1)));
+        assertFalse(iterable2.containsAny(Lists.mutable.of(4)));
+        assertFalse(iterable2.containsAny(Lists.mutable.of(4, 4, 5)));
+        assertTrue(iterable2.containsAny(Lists.mutable.of(2, 1, 0)));
+        assertFalse(iterable2.containsAny(Lists.mutable.empty()));
+
+        RichIterable<Integer> iterable1 = this.newWith(1);
+
+        assertTrue(iterable1.containsAny(Lists.mutable.of(1)));
+        assertTrue(iterable1.containsAny(Lists.mutable.of(1, 1, 1)));
+        assertFalse(iterable1.containsAny(Lists.mutable.of(4)));
+        assertFalse(iterable1.containsAny(Lists.mutable.of(4, 4, 5)));
+        assertTrue(iterable1.containsAny(Lists.mutable.of(2, 1, 0)));
+        assertFalse(iterable1.containsAny(Lists.mutable.empty()));
+
+        RichIterable<Integer> iterable0 = this.newWith();
+
+        assertFalse(iterable0.containsAll(Lists.mutable.of(1)));
+        assertFalse(iterable0.containsAll(Lists.mutable.of(1, 1, 1)));
+        assertFalse(iterable0.containsAll(Lists.mutable.of(4, 4, 5)));
+        assertTrue(iterable0.containsAll(Lists.mutable.empty()));
+    }
+
+    @Test
+    default void RichIterable_containsNone()
+    {
+        RichIterable<Integer> iterable3 = this.newWith(3, 2, 1);
+
+        assertFalse(iterable3.containsNone(Lists.mutable.of(3)));
+        assertFalse(iterable3.containsNone(Lists.mutable.of(3, 2, 1)));
+        assertFalse(iterable3.containsNone(Lists.mutable.of(3, 3, 3)));
+        assertFalse(iterable3.containsNone(Lists.mutable.of(3, 3, 3, 3, 2, 2, 2, 1, 1)));
+        assertTrue(iterable3.containsNone(Lists.mutable.of(4)));
+        assertTrue(iterable3.containsNone(Lists.mutable.of(4, 4, 5)));
+        assertFalse(iterable3.containsNone(Lists.mutable.of(3, 2, 1, 0)));
+        assertTrue(iterable3.containsNone(Lists.mutable.empty()));
+
+        RichIterable<Integer> iterable2 = this.newWith(2, 1);
+
+        assertFalse(iterable2.containsNone(Lists.mutable.of(2)));
+        assertFalse(iterable2.containsNone(Lists.mutable.of(2, 1)));
+        assertFalse(iterable2.containsNone(Lists.mutable.of(2, 2, 2)));
+        assertFalse(iterable2.containsNone(Lists.mutable.of(2, 2, 2, 1, 1)));
+        assertTrue(iterable2.containsNone(Lists.mutable.of(4)));
+        assertTrue(iterable2.containsNone(Lists.mutable.of(4, 4, 5)));
+        assertFalse(iterable2.containsNone(Lists.mutable.of(2, 1, 0)));
+        assertTrue(iterable2.containsNone(Lists.mutable.empty()));
+
+        RichIterable<Integer> iterable1 = this.newWith(1);
+
+        assertFalse(iterable1.containsNone(Lists.mutable.of(1)));
+        assertFalse(iterable1.containsNone(Lists.mutable.of(1, 1, 1)));
+        assertTrue(iterable1.containsNone(Lists.mutable.of(4)));
+        assertTrue(iterable1.containsNone(Lists.mutable.of(4, 4, 5)));
+        assertFalse(iterable1.containsNone(Lists.mutable.of(2, 1, 0)));
+        assertTrue(iterable1.containsNone(Lists.mutable.empty()));
+
+        RichIterable<Integer> iterable0 = this.newWith();
+
+        assertTrue(iterable0.containsNone(Lists.mutable.of(1)));
+        assertTrue(iterable0.containsNone(Lists.mutable.of(1, 1, 1)));
+        assertTrue(iterable0.containsNone(Lists.mutable.of(4, 4, 5)));
+        assertTrue(iterable0.containsNone(Lists.mutable.empty()));
+    }
+
+    @Test
     default void RichIterable_iterator_iterationOrder()
     {
         MutableCollection<Integer> iterationOrder = this.newMutableForFilter();

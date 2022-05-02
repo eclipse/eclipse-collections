@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Hiroshi Ito.
+ * Copyright (c) 2022 Hiroshi Ito and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -115,6 +115,18 @@ public class UnifiedMapWithHashingStrategyNoIteratorTest implements MutableMapTe
         /**
          * TODO: {@link UnifiedMapWithHashingStrategy#noneSatisfy(Predicate)} should be optimized to not use an iterator
          */
+    }
+
+    @Override
+    public void RichIterable_containsAny()
+    {
+        // Not applicable - this can be removed once anySatisfy is optimized to not use iterator
+    }
+
+    @Override
+    public void RichIterable_containsNone()
+    {
+        // Not applicable - this can be removed once noneSatisfy is optimized to not use iterator
     }
 
     @Override
