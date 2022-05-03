@@ -23,6 +23,11 @@ public interface MutableSortedMapFactory
     <K, V> MutableSortedMap<K, V> empty();
 
     /**
+     * @since 12.0
+     */
+    <K, V> MutableSortedMap<K, V> empty(Comparator<? super K> comparator);
+
+    /**
      * Same as {@link #empty()}.
      */
     <K, V> MutableSortedMap<K, V> of();

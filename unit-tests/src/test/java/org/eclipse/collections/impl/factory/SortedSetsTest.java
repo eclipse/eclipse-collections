@@ -64,6 +64,7 @@ public class SortedSetsTest
         Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(SortedSets.immutable.of(1, 2, 3, 4, 5, 6, 7, 8).castToSortedSet()));
         Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(SortedSets.immutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8).castToSortedSet()));
         Assert.assertEquals(SortedSets.mutable.empty(), factory.ofSortedSet(SortedSets.mutable.with()));
+        Assert.assertEquals(SortedSets.mutable.empty(Integer::compare), factory.ofSortedSet(SortedSets.mutable.with(Integer::compare)));
         Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8)));
         Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(SortedSets.mutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8)));
         Assert.assertEquals(SortedSets.immutable.empty(), SortedSets.immutable.ofAll(null, Lists.mutable.empty()));
