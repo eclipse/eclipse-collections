@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,7 @@ import java.util.Iterator;
 
 import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.stack.ImmutableStack;
+import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.test.stack.StackIterableTestCase;
 import org.junit.Test;
 
@@ -51,6 +52,31 @@ public interface ImmutableStackTestCase extends StackIterableTestCase
     {
         ImmutableStack<Integer> immutableStack = this.newWith(5, 1, 4, 2, 3);
         ImmutableStack<Integer> emptyStack = immutableStack.pop().pop().pop().pop().pop();
+        assertSame(Stacks.immutable.with(), emptyStack);
+        assertThrows(EmptyStackException.class, emptyStack::pop);
+    }
+
+    @Test
+    default void MutableStack_peekAndPop()
+    {
+        ImmutableStack<Integer> immutableStack = this.newWith(5, 1, 4, 2, 3);
+        Pair<Integer, ImmutableStack<Integer>> elementAndStack = immutableStack.peekAndPop();
+        Integer poppedElement = elementAndStack.getOne();
+        ImmutableStack<Integer> poppedStack = elementAndStack.getTwo();
+        assertEquals(5, poppedElement);
+        assertEquals(Stacks.immutable.withReversed(1, 4, 2, 3), poppedStack);
+        assertEquals(Stacks.immutable.withReversed(5, 1, 4, 2, 3), immutableStack);
+    }
+
+    @Test
+    default void ImmutableStack_peekAndPop_throws()
+    {
+        ImmutableStack<Integer> immutableStack = this.newWith(5, 1, 4, 2, 3);
+        ImmutableStack<Integer> emptyStack = immutableStack.peekAndPop().getTwo()
+                .peekAndPop().getTwo()
+                .peekAndPop().getTwo()
+                .peekAndPop().getTwo()
+                .peekAndPop().getTwo();
         assertSame(Stacks.immutable.with(), emptyStack);
         assertThrows(EmptyStackException.class, emptyStack::pop);
     }

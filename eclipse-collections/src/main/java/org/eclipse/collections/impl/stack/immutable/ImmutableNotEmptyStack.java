@@ -69,6 +69,7 @@ import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.partition.stack.PartitionArrayStack.PartitionProcedure;
+import org.eclipse.collections.impl.tuple.Tuples;
 
 final class ImmutableNotEmptyStack<T>
         extends AbstractRichIterable<T>
@@ -114,6 +115,18 @@ final class ImmutableNotEmptyStack<T>
             pointer = pointer.pop();
         }
         return pointer;
+    }
+
+    @Override
+    public Pair<T, ImmutableStack<T>> peekAndPop()
+    {
+        return Tuples.pair(this.peek(), this.pop());
+    }
+
+    @Override
+    public Pair<ListIterable<T>, ImmutableStack<T>> peekAndPop(int count)
+    {
+        return Tuples.pair(this.peek(count), this.pop(count));
     }
 
     @Override
