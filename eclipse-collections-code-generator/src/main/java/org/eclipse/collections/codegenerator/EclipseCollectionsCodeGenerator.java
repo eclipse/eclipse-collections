@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,6 +23,7 @@ import org.eclipse.collections.codegenerator.model.Primitive;
 import org.eclipse.collections.codegenerator.tools.FileUtils;
 import org.eclipse.collections.codegenerator.tools.IntegerOrStringRenderer;
 import org.stringtemplate.v4.ST;
+import org.stringtemplate.v4.STErrorListener;
 import org.stringtemplate.v4.STGroupFile;
 
 public class EclipseCollectionsCodeGenerator
@@ -67,7 +68,7 @@ public class EclipseCollectionsCodeGenerator
                 continue;
             }
 
-            LoggingErrorListener stErrorListener = new LoggingErrorListener(this.errorListener, url);
+            STErrorListener stErrorListener = new LoggingErrorListener(this.errorListener, url);
 
             templateFile.setListener(stErrorListener);
             templateFile.registerRenderer(String.class, new IntegerOrStringRenderer());

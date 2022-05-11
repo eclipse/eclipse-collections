@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.iterator;
 
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class SingletonBooleanIteratorTest
     @Test
     public void hasNext()
     {
-        SingletonBooleanIterator iterator = new SingletonBooleanIterator(false);
+        BooleanIterator iterator = new SingletonBooleanIterator(false);
         Assert.assertTrue(iterator.hasNext());
         Assert.assertTrue(iterator.hasNext());
         iterator.next();

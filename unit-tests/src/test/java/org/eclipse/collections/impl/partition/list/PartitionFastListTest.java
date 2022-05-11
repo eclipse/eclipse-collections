@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.partition.list;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
+import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,7 +24,7 @@ public class PartitionFastListTest
     {
         MutableList<Integer> selected = Lists.mutable.of(1, 2, 3);
         MutableList<Integer> rejected = Lists.mutable.of(4, 5, 6);
-        PartitionFastList<Integer> partitionedList = new PartitionFastList<>();
+        PartitionMutableList<Integer> partitionedList = new PartitionFastList<>();
         partitionedList.getSelected().addAll(selected);
         partitionedList.getRejected().addAll(rejected);
         PartitionImmutableList<Integer> immutable = partitionedList.toImmutable();

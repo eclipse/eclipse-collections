@@ -32,7 +32,7 @@ public class CompositeFastListTest extends AbstractListTestCase
     @Override
     protected <T> MutableList<T> newWith(T... littleElements)
     {
-        CompositeFastList<T> result = new CompositeFastList<>();
+        MutableList<T> result = new CompositeFastList<>();
         for (T element : littleElements)
         {
             result.add(element);
@@ -217,7 +217,7 @@ public class CompositeFastListTest extends AbstractListTestCase
     @Test
     public void set_bugFix_off_by_one_error()
     {
-        CompositeFastList<Integer> compositeList = new CompositeFastList<>();
+        MutableList<Integer> compositeList = new CompositeFastList<>();
         MutableList<Integer> list1 = FastList.newListWith(1, 2, 3);
         MutableList<Integer> list2 = FastList.newListWith(4, 5);
         MutableList<Integer> list3 = FastList.newList();
@@ -383,7 +383,7 @@ public class CompositeFastListTest extends AbstractListTestCase
 
         MutableList<String> list2 = FastList.newListWith("one", "two", "three");
 
-        CompositeFastList<String> composite2 = new CompositeFastList<>();
+        MutableList<String> composite2 = new CompositeFastList<>();
         MutableList<String> firstBit = FastList.newListWith("one", "two");
         MutableList<String> secondBit = FastList.newListWith("three");
         composite2.addAll(firstBit);
@@ -414,7 +414,7 @@ public class CompositeFastListTest extends AbstractListTestCase
 
         MutableList<String> list2 = FastList.newListWith("one", "two", "three");
 
-        CompositeFastList<String> composite2 = new CompositeFastList<>();
+        MutableList<String> composite2 = new CompositeFastList<>();
         MutableList<String> firstBit = FastList.newListWith("one", "two");
         MutableList<String> secondBit = FastList.newListWith("three");
         composite2.addAll(firstBit);

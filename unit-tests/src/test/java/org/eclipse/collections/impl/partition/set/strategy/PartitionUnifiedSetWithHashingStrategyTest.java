@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.partition.set.strategy;
 
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
+import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.junit.Assert;
@@ -22,15 +23,15 @@ public class PartitionUnifiedSetWithHashingStrategyTest
     @Test
     public void toImmutable()
     {
-        PartitionUnifiedSetWithHashingStrategy<Integer> partitionUnifiedSetWithHashingStrategy =
+        PartitionMutableSet<Integer> partitionMutableSet =
                 new PartitionUnifiedSetWithHashingStrategy<>(HashingStrategies.defaultStrategy());
 
         MutableSet<Integer> selected = Sets.mutable.of(1, 2, 3);
         MutableSet<Integer> rejected = Sets.mutable.of(4, 5, 6);
-        partitionUnifiedSetWithHashingStrategy.getSelected().addAll(selected);
-        partitionUnifiedSetWithHashingStrategy.getRejected().addAll(rejected);
+        partitionMutableSet.getSelected().addAll(selected);
+        partitionMutableSet.getRejected().addAll(rejected);
 
-        PartitionImmutableSet<Integer> partitionImmutableSet = partitionUnifiedSetWithHashingStrategy.toImmutable();
+        PartitionImmutableSet<Integer> partitionImmutableSet = partitionMutableSet.toImmutable();
         Assert.assertEquals(selected, partitionImmutableSet.getSelected());
         Assert.assertEquals(rejected, partitionImmutableSet.getRejected());
     }

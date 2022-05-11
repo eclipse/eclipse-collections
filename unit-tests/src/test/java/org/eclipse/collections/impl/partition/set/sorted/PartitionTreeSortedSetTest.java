@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.partition.set.sorted;
 
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.partition.set.sorted.PartitionImmutableSortedSet;
+import org.eclipse.collections.api.partition.set.sorted.PartitionMutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.junit.Assert;
@@ -22,7 +23,7 @@ public class PartitionTreeSortedSetTest
     @Test
     public void toImmutable()
     {
-        PartitionTreeSortedSet<Integer> partitionTreeSortedSet = new PartitionTreeSortedSet<>(Comparators.naturalOrder());
+        PartitionMutableSortedSet<Integer> partitionTreeSortedSet = new PartitionTreeSortedSet<>(Comparators.naturalOrder());
         MutableSortedSet<Integer> selected = SortedSets.mutable.of(1, 2, 3);
         MutableSortedSet<Integer> rejected = SortedSets.mutable.of(4, 5, 6);
 

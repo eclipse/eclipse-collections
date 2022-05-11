@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -41,7 +41,7 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
     @Test
     public void testBooleanArrayListWithInitialCapacity() throws Exception
     {
-        BooleanArrayList arrayList = new BooleanArrayList(7);
+        MutableBooleanList arrayList = new BooleanArrayList(7);
         Verify.assertEmpty(arrayList);
         Field items = BooleanArrayList.class.getDeclaredField("items");
         items.setAccessible(true);
@@ -55,7 +55,7 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
     @Test
     public void addAtIndexAtCapacity() throws Exception
     {
-        BooleanArrayList listWithCapacity = new BooleanArrayList(64);
+        MutableBooleanList listWithCapacity = new BooleanArrayList(64);
         for (int i = 0; i < 64; i++)
         {
             listWithCapacity.add((i & 1) == 0);

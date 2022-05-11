@@ -1301,9 +1301,9 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            PartitionFastList<T> partitionFastList = new PartitionFastList<>();
-            MutableList<T> selected = partitionFastList.getSelected();
-            MutableList<T> rejected = partitionFastList.getRejected();
+            PartitionMutableList<T> partitionMutableList = new PartitionFastList<>();
+            MutableList<T> selected = partitionMutableList.getSelected();
+            MutableList<T> rejected = partitionMutableList.getRejected();
 
             T[] elements = ArrayListIterate.getInternalArray(list);
             for (int i = 0; i < size; i++)
@@ -1312,7 +1312,7 @@ public final class ArrayListIterate
                 MutableList<T> bucket = predicate.accept(each) ? selected : rejected;
                 bucket.add(each);
             }
-            return partitionFastList;
+            return partitionMutableList;
         }
         return RandomAccessListIterate.partition(list, predicate);
     }
@@ -1322,9 +1322,9 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            PartitionFastList<T> partitionFastList = new PartitionFastList<>();
-            MutableList<T> selected = partitionFastList.getSelected();
-            MutableList<T> rejected = partitionFastList.getRejected();
+            PartitionMutableList<T> partitionMutableList = new PartitionFastList<>();
+            MutableList<T> selected = partitionMutableList.getSelected();
+            MutableList<T> rejected = partitionMutableList.getRejected();
 
             T[] elements = ArrayListIterate.getInternalArray(list);
             for (int i = 0; i < size; i++)
@@ -1333,7 +1333,7 @@ public final class ArrayListIterate
                 MutableList<T> bucket = predicate.accept(each, parameter) ? selected : rejected;
                 bucket.add(each);
             }
-            return partitionFastList;
+            return partitionMutableList;
         }
         return RandomAccessListIterate.partitionWith(list, predicate, parameter);
     }

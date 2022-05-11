@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.Pool;
 import org.eclipse.collections.impl.CollidingInt;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.factory.Lists;
@@ -789,7 +790,7 @@ public class UnifiedSetAcceptanceTest
     {
         CollidingInt[] toPool = new CollidingInt[5000];
 
-        UnifiedSet<CollidingInt> set = new UnifiedSet<>();
+        Pool<CollidingInt> set = new UnifiedSet<>();
 
         for (int i = 0; i < toPool.length; i++)
         {
@@ -842,7 +843,7 @@ public class UnifiedSetAcceptanceTest
 
         toPool = shuffle(toPool);
 
-        UnifiedSet<CollidingInt> set = new UnifiedSet<>();
+        Pool<CollidingInt> set = new UnifiedSet<>();
         for (int i = 0; i < toPool.length; i++)
         {
             Assert.assertSame(toPool[i], set.put(toPool[i]));

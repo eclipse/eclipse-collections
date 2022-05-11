@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.block.procedure;
 
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class AdaptObjectIntProcedureToProcedureTest
     public void value()
     {
         MockObjectIntProcedure mockObjectIntProcedure = new MockObjectIntProcedure();
-        AdaptObjectIntProcedureToProcedure<Integer> procedure =
+        Procedure<Integer> procedure =
                 new AdaptObjectIntProcedureToProcedure<>(mockObjectIntProcedure);
         procedure.value(1);
         Assert.assertEquals(1, mockObjectIntProcedure.getEachValue());

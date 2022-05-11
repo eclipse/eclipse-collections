@@ -69,6 +69,7 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 
+@SuppressWarnings("TypeMayBeWeakened")
 public final class InternalArrayIterate
 {
     private InternalArrayIterate()

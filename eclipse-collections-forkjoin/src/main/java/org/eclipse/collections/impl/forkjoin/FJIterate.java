@@ -111,8 +111,8 @@ public final class FJIterate
             PT procedure,
             ForkJoinPool executor)
     {
-        PassThruObjectIntProcedureFactory<PT> procedureFactory = new PassThruObjectIntProcedureFactory<>(procedure);
-        PassThruCombiner<PT> combiner = new PassThruCombiner<>();
+        ObjectIntProcedureFactory<PT> procedureFactory = new PassThruObjectIntProcedureFactory<>(procedure);
+        Combiner<PT> combiner = new PassThruCombiner<>();
         FJIterate.forEachWithIndex(iterable, procedureFactory, combiner, executor);
     }
 
@@ -131,8 +131,8 @@ public final class FJIterate
             int minForkSize,
             int taskCount)
     {
-        PassThruObjectIntProcedureFactory<PT> procedureFactory = new PassThruObjectIntProcedureFactory<>(procedure);
-        PassThruCombiner<PT> combiner = new PassThruCombiner<>();
+        ObjectIntProcedureFactory<PT> procedureFactory = new PassThruObjectIntProcedureFactory<>(procedure);
+        Combiner<PT> combiner = new PassThruCombiner<>();
         FJIterate.forEachWithIndex(iterable, procedureFactory, combiner, minForkSize, taskCount);
     }
 
@@ -269,8 +269,8 @@ public final class FJIterate
             PT procedure,
             ForkJoinPool executor)
     {
-        PassThruProcedureFactory<PT> procedureFactory = new PassThruProcedureFactory<>(procedure);
-        PassThruCombiner<PT> combiner = new PassThruCombiner<>();
+        ProcedureFactory<PT> procedureFactory = new PassThruProcedureFactory<>(procedure);
+        Combiner<PT> combiner = new PassThruCombiner<>();
         FJIterate.forEach(iterable, procedureFactory, combiner, executor);
     }
 
@@ -298,8 +298,8 @@ public final class FJIterate
             int taskCount,
             ForkJoinPool executor)
     {
-        PassThruProcedureFactory<PT> procedureFactory = new PassThruProcedureFactory<>(procedure);
-        PassThruCombiner<PT> combiner = new PassThruCombiner<>();
+        ProcedureFactory<PT> procedureFactory = new PassThruProcedureFactory<>(procedure);
+        Combiner<PT> combiner = new PassThruCombiner<>();
         FJIterate.forEach(iterable, procedureFactory, combiner, minForkSize, taskCount, executor);
     }
 

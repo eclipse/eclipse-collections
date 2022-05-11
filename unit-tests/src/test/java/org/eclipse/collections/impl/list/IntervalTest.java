@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -414,10 +414,10 @@ public class IntervalTest
     }
 
     @Test
-    public void toFastList()
+    public void toList()
     {
         Interval interval = Interval.evensFromTo(0, 10);
-        FastList<Integer> toList = (FastList<Integer>) interval.toList();
+        MutableList<Integer> toList = interval.toList();
         Verify.assertStartsWith(toList, 0, 2, 4, 6, 8, 10);
         Verify.assertSize(6, toList);
     }

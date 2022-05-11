@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.sorted.immutable;
 
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.util.SortedMap;
 
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -393,9 +394,9 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     @Test
     public void values()
     {
-        ImmutableEmptySortedMap<Integer, String> map = (ImmutableEmptySortedMap<Integer, String>)
+        SortedMap<Integer, String> map = (ImmutableEmptySortedMap<Integer, String>)
                 this.classUnderTest();
-        ImmutableEmptySortedMap<Integer, String> revMap = (ImmutableEmptySortedMap<Integer, String>)
+        SortedMap<Integer, String> revMap = (ImmutableEmptySortedMap<Integer, String>)
                 this.classUnderTest(Comparators.reverseNaturalOrder());
 
         Verify.assertEmpty(map.values());

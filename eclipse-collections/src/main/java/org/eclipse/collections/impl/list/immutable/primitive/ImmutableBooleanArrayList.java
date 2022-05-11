@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -396,7 +396,7 @@ final class ImmutableBooleanArrayList
     @Override
     public ImmutableBooleanList distinct()
     {
-        BooleanArrayList target = new BooleanArrayList();
+        MutableBooleanList target = new BooleanArrayList();
         MutableBooleanSet seenSoFar = new BooleanHashSet();
         for (int i = 0; i < this.size; i++)
         {

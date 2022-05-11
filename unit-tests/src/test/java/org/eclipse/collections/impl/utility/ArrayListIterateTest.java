@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -377,7 +377,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableBooleanList actual = ArrayListIterate.collectBoolean(list, PrimitiveFunctions.integerIsPositive());
-        BooleanArrayList expected = new BooleanArrayList(list.size());
+        MutableBooleanList expected = new BooleanArrayList(list.size());
         expected.add(false);
         for (int i = 1; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
@@ -392,7 +392,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableBooleanList target = new BooleanArrayList();
         MutableBooleanList actual = ArrayListIterate.collectBoolean(list, PrimitiveFunctions.integerIsPositive(), target);
-        BooleanArrayList expected = new BooleanArrayList(list.size());
+        MutableBooleanList expected = new BooleanArrayList(list.size());
         expected.add(false);
         for (int i = 1; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
@@ -425,7 +425,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableByteList actual = ArrayListIterate.collectByte(list, PrimitiveFunctions.unboxIntegerToByte());
-        ByteArrayList expected = new ByteArrayList(list.size());
+        MutableByteList expected = new ByteArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((byte) i);
@@ -439,7 +439,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableByteList target = new ByteArrayList();
         MutableByteList actual = ArrayListIterate.collectByte(list, PrimitiveFunctions.unboxIntegerToByte(), target);
-        ByteArrayList expected = new ByteArrayList(list.size());
+        MutableByteList expected = new ByteArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((byte) i);
@@ -471,7 +471,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableCharList actual = ArrayListIterate.collectChar(list, PrimitiveFunctions.unboxIntegerToChar());
-        CharArrayList expected = new CharArrayList(list.size());
+        MutableCharList expected = new CharArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((char) i);
@@ -485,7 +485,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableCharList target = new CharArrayList();
         MutableCharList actual = ArrayListIterate.collectChar(list, PrimitiveFunctions.unboxIntegerToChar(), target);
-        CharArrayList expected = new CharArrayList(list.size());
+        MutableCharList expected = new CharArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((char) i);
@@ -517,7 +517,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableDoubleList actual = ArrayListIterate.collectDouble(list, PrimitiveFunctions.unboxIntegerToDouble());
-        DoubleArrayList expected = new DoubleArrayList(list.size());
+        MutableDoubleList expected = new DoubleArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((double) i);
@@ -531,7 +531,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableDoubleList target = new DoubleArrayList();
         MutableDoubleList actual = ArrayListIterate.collectDouble(list, PrimitiveFunctions.unboxIntegerToDouble(), target);
-        DoubleArrayList expected = new DoubleArrayList(list.size());
+        MutableDoubleList expected = new DoubleArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((double) i);
@@ -563,7 +563,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableFloatList actual = ArrayListIterate.collectFloat(list, PrimitiveFunctions.unboxIntegerToFloat());
-        FloatArrayList expected = new FloatArrayList(list.size());
+        MutableFloatList expected = new FloatArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((float) i);
@@ -577,7 +577,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableFloatList target = new FloatArrayList();
         MutableFloatList actual = ArrayListIterate.collectFloat(list, PrimitiveFunctions.unboxIntegerToFloat(), target);
-        FloatArrayList expected = new FloatArrayList(list.size());
+        MutableFloatList expected = new FloatArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((float) i);
@@ -609,7 +609,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableIntList actual = ArrayListIterate.collectInt(list, PrimitiveFunctions.unboxIntegerToInt());
-        IntArrayList expected = new IntArrayList(list.size());
+        MutableIntList expected = new IntArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add(i);
@@ -623,7 +623,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableIntList target = new IntArrayList();
         MutableIntList actual = ArrayListIterate.collectInt(list, PrimitiveFunctions.unboxIntegerToInt(), target);
-        IntArrayList expected = new IntArrayList(list.size());
+        MutableIntList expected = new IntArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add(i);
@@ -655,7 +655,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableLongList actual = ArrayListIterate.collectLong(list, PrimitiveFunctions.unboxIntegerToLong());
-        LongArrayList expected = new LongArrayList(list.size());
+        MutableLongList expected = new LongArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((long) i);
@@ -669,7 +669,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableLongList target = new LongArrayList();
         MutableLongList actual = ArrayListIterate.collectLong(list, PrimitiveFunctions.unboxIntegerToLong(), target);
-        LongArrayList expected = new LongArrayList(list.size());
+        MutableLongList expected = new LongArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((long) i);
@@ -701,7 +701,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableShortList actual = ArrayListIterate.collectShort(list, PrimitiveFunctions.unboxIntegerToShort());
-        ShortArrayList expected = new ShortArrayList(list.size());
+        MutableShortList expected = new ShortArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((short) i);
@@ -715,7 +715,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = new ArrayList<>(Interval.zeroTo(OVER_OPTIMIZED_LIMIT));
         MutableShortList target = new ShortArrayList();
         MutableShortList actual = ArrayListIterate.collectShort(list, PrimitiveFunctions.unboxIntegerToShort(), target);
-        ShortArrayList expected = new ShortArrayList(list.size());
+        MutableShortList expected = new ShortArrayList(list.size());
         for (int i = 0; i <= OVER_OPTIMIZED_LIMIT; i++)
         {
             expected.add((short) i);
@@ -1246,7 +1246,7 @@ public class ArrayListIterateTest
     @Test
     public void detectIndexWithOver100()
     {
-        ArrayList<Integer> list = new ArrayList<>(Interval.toReverseList(1, 101));
+        List<Integer> list = new ArrayList<>(Interval.toReverseList(1, 101));
         Assert.assertEquals(100, Iterate.detectIndexWith(list, Object::equals, 1));
         Assert.assertEquals(0, Iterate.detectIndexWith(list, Object::equals, 101));
         Assert.assertEquals(-1, Iterate.detectIndexWith(list, Object::equals, 200));
@@ -1255,7 +1255,7 @@ public class ArrayListIterateTest
     @Test
     public void detectIndexWithSmallList()
     {
-        ArrayList<Integer> list = new ArrayList<>(Interval.toReverseList(1, 5));
+        List<Integer> list = new ArrayList<>(Interval.toReverseList(1, 5));
         Assert.assertEquals(4, Iterate.detectIndexWith(list, Object::equals, 1));
         Assert.assertEquals(0, Iterate.detectIndexWith(list, Object::equals, 5));
         Assert.assertEquals(-1, Iterate.detectIndexWith(list, Object::equals, 10));

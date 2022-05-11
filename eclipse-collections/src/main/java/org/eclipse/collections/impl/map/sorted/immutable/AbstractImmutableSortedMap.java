@@ -284,17 +284,17 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public PartitionImmutableList<V> partition(Predicate<? super V> predicate)
     {
-        PartitionMutableList<V> partitionFastList = new PartitionFastList<>();
-        this.forEach(new PartitionProcedure<>(predicate, partitionFastList));
-        return partitionFastList.toImmutable();
+        PartitionMutableList<V> partitionMutableList = new PartitionFastList<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableList));
+        return partitionMutableList.toImmutable();
     }
 
     @Override
     public <P> PartitionImmutableList<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        PartitionMutableList<V> partitionFastList = new PartitionFastList<>();
-        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionFastList));
-        return partitionFastList.toImmutable();
+        PartitionMutableList<V> partitionMutableList = new PartitionFastList<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableList));
+        return partitionMutableList.toImmutable();
     }
 
     @Override

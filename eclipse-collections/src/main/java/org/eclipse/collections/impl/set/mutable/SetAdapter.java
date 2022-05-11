@@ -239,17 +239,17 @@ public final class SetAdapter<T>
     @Override
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
-        this.forEach(new PartitionProcedure<>(predicate, partitionUnifiedSet));
-        return partitionUnifiedSet;
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableSet));
+        return partitionMutableSet;
     }
 
     @Override
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
-        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionUnifiedSet));
-        return partitionUnifiedSet;
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableSet));
+        return partitionMutableSet;
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -68,7 +68,7 @@ public class ListIterateTest
     @Test
     public void toArray()
     {
-        LinkedList<Integer> notAnArrayList = new LinkedList<>(Interval.oneTo(10));
+        List<Integer> notAnArrayList = new LinkedList<>(Interval.oneTo(10));
         Integer[] target1 = {1, 2, null, null};
         ListIterate.toArray(notAnArrayList, target1, 2, 2);
         Assert.assertArrayEquals(target1, new Integer[]{1, 2, 1, 2});
@@ -82,7 +82,7 @@ public class ListIterateTest
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void toArray_throws()
     {
-        LinkedList<Integer> notAnArrayList = new LinkedList<>(Interval.oneTo(10));
+        List<Integer> notAnArrayList = new LinkedList<>(Interval.oneTo(10));
         Integer[] target1 = {1, 2, null, null};
         ListIterate.toArray(notAnArrayList, target1, 2, 10);
     }
@@ -506,7 +506,7 @@ public class ListIterateTest
         Assert.assertEquals(twinTwo, ListIterate.minBy(list, Functions.firstOfPair()));
         Assert.assertEquals(twinOne, ListIterate.minBy(list, Functions.secondOfPair()));
 
-        LinkedList<Twin<Integer>> linkedList = new LinkedList<>(Lists.mutable.of(twinOne, twinTwo));
+        List<Twin<Integer>> linkedList = new LinkedList<>(Lists.mutable.of(twinOne, twinTwo));
         Assert.assertEquals(twinTwo, ListIterate.minBy(linkedList, Functions.firstOfPair()));
         Assert.assertEquals(twinOne, ListIterate.minBy(linkedList, Functions.secondOfPair()));
     }
@@ -536,7 +536,7 @@ public class ListIterateTest
         Assert.assertEquals(twinOne, ListIterate.maxBy(list, Functions.firstOfPair()));
         Assert.assertEquals(twinTwo, ListIterate.maxBy(list, Functions.secondOfPair()));
 
-        LinkedList<Twin<Integer>> linkedList = new LinkedList<>(Lists.mutable.of(twinOne, twinTwo));
+        List<Twin<Integer>> linkedList = new LinkedList<>(Lists.mutable.of(twinOne, twinTwo));
         Assert.assertEquals(twinOne, ListIterate.maxBy(linkedList, Functions.firstOfPair()));
         Assert.assertEquals(twinTwo, ListIterate.maxBy(linkedList, Functions.secondOfPair()));
     }

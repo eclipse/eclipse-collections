@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -96,14 +96,14 @@ public class ArrayStackTest extends MutableStackTestCase
     @Test
     public void forEach_exception()
     {
-        ArrayStack<Object> arrayStack = new ArrayStack<>();
+        MutableStack<Object> arrayStack = new ArrayStack<>();
         Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.forEach(0, 1, null));
     }
 
     @Test
     public void forEachWithIndex_exception()
     {
-        ArrayStack<Object> arrayStack = new ArrayStack<>();
+        MutableStack<Object> arrayStack = new ArrayStack<>();
         Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStack.forEachWithIndex(0, 1, null));
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -277,7 +277,7 @@ public class FJIterateTest
     public void testForEachWithIndexToArrayUsingFastListSerialPath()
     {
         Integer[] array = new Integer[200];
-        FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
+        MutableList<Integer> list = new FastList<>(Interval.oneTo(200));
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
@@ -287,7 +287,7 @@ public class FJIterateTest
     public void testForEachWithIndexToArrayUsingFastList()
     {
         Integer[] array = new Integer[200];
-        FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
+        MutableList<Integer> list = new FastList<>(Interval.oneTo(200));
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));

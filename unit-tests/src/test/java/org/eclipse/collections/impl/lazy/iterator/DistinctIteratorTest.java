@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.lazy.iterator;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -45,7 +46,7 @@ public class DistinctIteratorTest
     @Test(expected = NoSuchElementException.class)
     public void nextException()
     {
-        DistinctIterator<Integer> iterator = new DistinctIterator<Integer>(Lists.mutable.empty());
+        Iterator<Integer> iterator = new DistinctIterator<>(Lists.mutable.empty());
         Assert.assertFalse(iterator.hasNext());
         iterator.next();
     }

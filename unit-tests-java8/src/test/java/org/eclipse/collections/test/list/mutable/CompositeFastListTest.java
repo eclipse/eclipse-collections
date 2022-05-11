@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,7 +25,7 @@ public class CompositeFastListTest implements MutableListTestCase
     public final <T> MutableList<T> newWith(T... elements)
     {
         RichIterable<RichIterable<T>> chunks = FastList.wrapCopy(elements).chunk(3);
-        CompositeFastList<T> result = new CompositeFastList<>();
+        MutableList<T> result = new CompositeFastList<>();
         for (RichIterable<T> chunk : chunks)
         {
             result.addAll(FastList.newList(chunk));
