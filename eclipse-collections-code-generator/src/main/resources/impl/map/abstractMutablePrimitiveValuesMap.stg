@@ -323,12 +323,6 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
     }
 
     @Override
-    public boolean noneSatisfy(<name>Predicate predicate)
-    {
-        return !this.anySatisfy(predicate);
-    }
-
-    @Override
     public RichIterable\<<name>Iterable> chunk(int size)
     {
         if (size \<= 0)

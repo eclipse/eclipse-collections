@@ -388,7 +388,10 @@ public interface <name>Iterable extends PrimitiveIterable
      * Returns true if none of the elements in the <name>Iterable return true for the
      * specified predicate, otherwise returns false.
      */
-    boolean noneSatisfy(<name>Predicate predicate);
+    default boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return !this.anySatisfy(predicate);
+    }
 
     /**
      * Converts the <name>Iterable to a new Mutable<name>List.

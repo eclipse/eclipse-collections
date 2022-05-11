@@ -788,12 +788,6 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         return true;
     }
 
-    @Override
-    public boolean noneSatisfy(<name>Predicate predicate)
-    {
-        return !this.anySatisfy(predicate);
-    }
-
     <(sumMethod.(type))()>
     @Override
     public <type> max()

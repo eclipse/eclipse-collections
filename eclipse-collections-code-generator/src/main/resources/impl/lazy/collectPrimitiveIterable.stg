@@ -119,12 +119,6 @@ public class Collect<name>Iterable\<T>
     }
 
     @Override
-    public boolean noneSatisfy(final <name>Predicate predicate)
-    {
-        return this.iterable.allSatisfy((T each) -> !predicate.accept(this.function.<type>ValueOf(each)));
-    }
-
-    @Override
     public <type>[] toArray()
     {
         final <type>[] array = new <type>[this.size()];

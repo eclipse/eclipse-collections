@@ -1370,12 +1370,6 @@ public class <name>BooleanHashMap extends AbstractMutableBooleanValuesMap implem
         }
 
         @Override
-        public boolean noneSatisfy(<name>Predicate predicate)
-        {
-            return !this.anySatisfy(predicate);
-        }
-
-        @Override
         public <type> detectIfNone(<name>Predicate predicate, <type> value)
         {
             if (<name>BooleanHashMap.this.sentinelValues != null)

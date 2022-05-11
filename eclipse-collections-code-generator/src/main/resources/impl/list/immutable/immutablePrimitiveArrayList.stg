@@ -203,12 +203,6 @@ final class Immutable<name>ArrayList
     }
 
     @Override
-    public boolean noneSatisfy(<name>Predicate predicate)
-    {
-        return !this.anySatisfy(predicate);
-    }
-
-    @Override
     public Immutable<name>List select(<name>Predicate predicate)
     {
         return this.select(predicate, new <name>ArrayList()).toImmutable();

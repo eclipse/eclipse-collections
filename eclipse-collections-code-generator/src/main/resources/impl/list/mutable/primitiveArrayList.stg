@@ -693,12 +693,6 @@ public class <name>ArrayList extends Abstract<name>Iterable
     }
 
     @Override
-    public boolean noneSatisfy(<name>Predicate predicate)
-    {
-        return !this.anySatisfy(predicate);
-    }
-
-    @Override
     public <name>ArrayList select(<name>Predicate predicate)
     {
         return this.select(predicate, new <name>ArrayList());

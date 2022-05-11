@@ -170,30 +170,6 @@ public abstract class AbstractMutable<name>KeySet implements Mutable<name>Set, E
     }
 
     @Override
-    public boolean noneSatisfy(<name>Predicate predicate)
-    {
-        if (this.getSentinelValues() != null)
-        {
-            if (this.getSentinelValues().containsZeroKey && predicate.accept(EMPTY_KEY))
-            {
-                return false;
-            }
-            if (this.getSentinelValues().containsOneKey && predicate.accept(REMOVED_KEY))
-            {
-                return false;
-            }
-        }
-        for (int i = 0; i \< this.getTableSize(); i++)
-        {
-            if (isNonSentinel(this.getKeyAtIndex(i)) && predicate.accept(this.getKeyAtIndex(i)))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
     public boolean add(<type> element)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
