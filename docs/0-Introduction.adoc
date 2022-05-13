@@ -1,0 +1,64 @@
+////
+  Copyright (c) 2022 Goldman Sachs and others. All rights reserved. 
+  This program and the accompanying materials   are made available 
+  under the terms of the Eclipse Public License v1.0 and 
+  Eclipse Distribution License v. 1.0 which accompany this distribution.
+  The Eclipse Public License is available at 
+  http://www.eclipse.org/legal/epl-v10.html.
+  The Eclipse Distribution License is available at 
+  http://www.eclipse.org/org/documents/edl-v10.php.
+////
+= Eclipse&nbsp;Collections Reference&nbsp;Guide 
+:sectanchors:
+:toc: left
+:toc-title: 
+:toclevels: 2
+
+// cross-topic links (test)
+:Iteration:     xref:1-Iteration_Patterns.adoc[Iteration Patterns]
+:Containers:    xref:2-Collection_Containers.adoc[Collections and Containers]
+:Blocks:        xref:3-Code_Blocks.adoc[Code Blocks]
+:Testing:       xref:4-Testing_Utilities.adoc[Testing Utilities]
+:QuickRef:		xref:5-Quick_Reference.adoc[Quick Reference]
+//
+:EC_Kata: https://github.com/eclipse/eclipse-collections-kata[Eclipse Collections Kata]
+//
+
+++++
+<img align="right" src="https://raw.githubusercontent.com/eclipse/eclipse-collections/master/artwork/eclipse-collections-logo.svg" height="40%" width="40%"></a>
+++++
+
+
+Eclipse Collections is a library of collection-management utilities that work with the Java Collections Framework (JCF).
+It offers JCF-compatible implementation alternatives for List, Set and Map.
+It also introduces a host of new features including Multimaps, BiMaps and Bags, lazy evaluation, immutable containers, parallel processing and a full complement of primitive containers.
+
+== About Eclipse Collections
+____
+A collections framework for Java based on Smalltalk patterns.
+____
+
+Eclipse Collections is based on the concept of _internal iteration_&#x2014;putting collection-handling methods on the collection classes, a concept derived from the Smalltalk language.
+Internal iteration affords a more consistent and intuitive approach to managing collections by encapsulating the details of how various iteration patterns are implemented.
+Hiding this complexity lets you write more readable code with less duplication.
+
+image:EclipseCollectionDiagram.png[Eclipse Collections diagram, title="Parts of an Eclipse Colllections iterable method"]
+
+
+== About this guide
+
+[.lead]
+This guide is an introduction to basic Eclipse Collections concepts and its commonly-used features.
+It provides a high-level survey of the Eclipse Collections library and its capabilities.
+The topics covered are:
+
+* *{Iteration}*: the logic underlying Eclipse Collections methods.
+* *{Containers}*: the JCF-compatible collection types and new containers introduced in Eclipse Collections.
+* *{Blocks}*: functions that can be passed as parameters, plus factory classes, static methods, and other features of the library.
+* *{Testing}*: a specialized implementation of the JUnit Assert class for Eclipse Collections unit testing.
+* *{QuickRef}*: a topical "cheat sheet" with links to the Eclipse Collections API documentation.
+
+== Getting started With Eclipse Collections
+
+We recommend first-time users try out the {EC_Kata}.
+The Kata is a fun way to help you learn idiomatic Eclipse Collections usage through coding exercises.
