@@ -1,0 +1,45 @@
+////
+  Copyright (c) 2022 Goldman Sachs and others.
+All rights reserved.
+  This program and the accompanying materials   are made available
+  under the terms of the Eclipse Public License v1.0 and 
+  Eclipse Distribution License v.1.0 which accompany this distribution.
+  The Eclipse Public License is available at
+  http://www.eclipse.org/legal/epl-v10.html.
+  The Eclipse Distribution License is available at
+  http://www.eclipse.org/org/documents/edl-v10.php.
+////
+= Unit testing
+// API links
+:Assert: https://junit.org/junit4/javadoc/4.13/org/junit/Assert.html[Assert]
+:Verify: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/impl/test/Verify.html[Verify]
+:testutils: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/impl/test/package-summary.html[eclipse-collections-testutils]
+
+____
+Using the Eclipse Collections test utilities.
+____
+Eclipse Collections includes a jar file called *{testutils}* that helps you to write unit tests.
+
+The most important class is *{Verify}*, implemented as an extension of JUnit *{Assert}*. *Verify* provides many collection-specific assertions, such as this one to confirm test that two lists are equal.
+
+****
+[source,java]
+----
+MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
+Verify.assertListsEqual(Lists.mutable.with(1, 2, 3), list);
+
+
+Verify.assertSize(2, customersFromLondon);
+//instead of
+
+Assert.assertEquals(2, customersFromLondon.size());
+Verify.assertEmpty(Lists.mutable.empty());
+Verify.assertNotEmpty(Lists.mutable.with(1));
+Verify.assertContains(1, Lists.mutable.with(1));
+----
+****
+
+[cols="3,^1,>3",]
+|===
+|xref:3-Code_Blocks.adoc[previous: Code Blocks]  |xref:0-Introduction.adoc[top] |xref:2-Collection_Containers.adoc[next: 5-Quick_Reference.adoc]
+|===

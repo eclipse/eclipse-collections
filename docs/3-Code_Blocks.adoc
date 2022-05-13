@@ -1,0 +1,253 @@
+////
+  Copyright (c) 2022 Goldman Sachs and others.
+All rights reserved.
+  This program and the accompanying materials   are made available
+  under the terms of the Eclipse Public License v1.0 and
+  Eclipse Distribution License v.1.0 which accompany this distribution.
+  The Eclipse Public License is available at
+  http://www.eclipse.org/legal/epl-v10.html.
+  The Eclipse Distribution License is available at
+  http://www.eclipse.org/org/documents/edl-v10.php.
+////
+= Code blocks
+:sectanchors:
+:toc: left
+:toc-title: Code blocks
+:toclevels: 3
+// Javadoc links
+:api-url:			https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections
+//
+:Function:			{api-url}/api/block/function/Function.html[Function]
+:Function0:			{api-url}/api/block/function/Function0.html[Function0]
+:Function2:			{api-url}/api/block/function/Function2.html[Function2]
+:Function3:			{api-url}/api/block/function/Function3.html[Function3]
+:IntFunction:		{api-url}/api/block/function/primitive/IntFunction.html[IntFunction]
+:IntPredicate:		{api-url}/api/block/predicate/primitive/IntPredicate.html[IntPredicate]
+:IntProcedure:		{api-url}/api/block/procedure/primitive/IntProcedure.html[IntProcedure]
+:MutableMultimap:	{api-url}/api/multimap/MutableSetMultimap.html[MutableMultimap]
+:Predicate:			{api-url}/api/block/predicate/Predicate.html[Predicate]
+:Predicate2:		{api-url}/api/block/predicate/Predicate2.html[Predicate2]
+:Predicates:		{api-url}/impl/block/factory/Predicates.html[Predicates]
+:Predicates2:		{api-url}/impl/block/factory/Predicates2.html[Predicates2]
+:StringPredicates:	{api-url}/impl/block/factory/StringPredicates.html[StringPredicates]
+:IntegerPredicates: {api-url}/impl/block/factory/IntegerPredicates.html[IntegerPredicates]
+:LongPredicates:	{api-url}/impl/block/factory/LongPredicates.html[LongPredicates]
+:Procedure:			{api-url}/api/block/procedure/Procedure.html[Procedure]
+:Procedure2:		{api-url}/api/block/procedure/Procedure2.html[Procedure2]
+:Functions:			{api-url}/impl/block/factory/Functions.html[Functions]
+:Functions0:		{api-url}/impl/block/factory/Functions0.html[Functions0]
+:Functions2:		{api-url}/impl/block/factory/Functions2.html[Functions2]
+:IfFunction:        {api-url}/impl/block/function/IfFunction.html[IfFunction]
+:CaseFunction:      {api-url}/impl/block/function/CaseFunction.html[CaseFunction]
+:StringFunctions:	{api-url}/impl/block/factory/StringFunctions.html[StringFunctions]
+:Procedures:		{api-url}/impl/block/factory/Procedures.html[Procedures]
+:Procedures2:		{api-url}/impl/block/factory/Procedures2.html[Procedures2]
+// end links; begin body
+
+A _code block_, in Eclipse Collections terms, is a single-abstract-method object that is passed as a parameter to an iteration method.
+It is an abstraction that represents the evaluation of each element in the course of iteration.
+It helps us to further separate _what_ is being done from _how_ it is done.
+This topic enumerates the basic code block types&mdash;the Eclipse Collections interfaces and classes&mdash;and the relevant methods to which they apply.
+
+What we call a "code block" in Eclipse Collections is roughly analogous to a _lambda expression_.
+The closest analog to a lambda in Java in versions prior to Java 8 is the _anonymous inner class_.
+
+Here are two examples, one implementing *{Predicate}* using an anonymous inner class, and the other using a Java 8+ lambda expression.
+
+.*select* using an anonymous inner class
+====
+[source,java]
+----
+MutableList<Person> texans = this.people.select(
+  new Predicate<Person>()
+  {
+	public boolean accept(Person each)
+	{
+	  return each.getAddress().getState().equals("TX");
+	}
+  });
+Verify.assertSize(1, texans);
+----
+====
+
+.*select* using a lambda
+====
+[source,java]
+----
+MutableList<Person> texans =
+  this.people.select( each -> each.getAddress().getState().equals("TX"));
+Verify.assertSize(1, texans);
+----
+====
+
+In each case, if the value of _state_ field for any element in *people* equals "TX" then the *select* method includes that element in the result list, *texans*.
+
+This topic introduces the most commonly-used code blocks and the Eclipse Collections methods that use them.
+Along with the code block types described here, the current version of Eclipse Collections offers a full suite of primitive code blocks and corresponding code block factories, such as *{IntFunction}*, *{IntPredicate}*, and *{IntProcedure}*.
+These code blocks are used by methods on primitive collections.
+
+
+[NOTE]
+====
+*About _parameter_ and _argument_*
+
+These terms are often (if inaccurately) used interchangeably to refer to method or function inputs.
+(The usual distinction holds that _parameter_ refers to a formal definition of the input, while argument denotes the actual values.)
+
+For the limited purposes of this guide&mdash;and in particular the scope of this topic&mdash;we use _parameter_ to specify the input to an iteration method, such as *select()*.
+These parameters can take the form of a code block, (implementing *Predicate*) which itself is an object with methods.
+The input for a code block we'll refer to here as the _argument_ - in this example, the argument is *each* (the "current element" upon each iteration).
+====
+
+== Predicate
+
+A *{Predicate}* is a single-argument code block that evaluates an element and returns a boolean value.
+Also known as a _discriminator_ or _filter,_ it is used with the filtering methods *select*, *reject*, *detect*, *anySatisfy*, *allSatisfy*, and *count*.
+
+[cols=",,,,",options="header",]
+[%autowidth]
+|===
+|				|Description									|Arguments	|Returns |Used By
+|*Predicate*	|Evaluates each element of a collection +
+				 (the argument), and returns a boolean value.	|One (T)	|boolean |*select*, *reject*, *detect*, *anySatisfy*, *allSatisfy*, *count*
+|*Predicate2*	|Evaluates each element of a collection +
+				 (the first argument); the second argument +
+				 is a parameter passed into the *Predicate2* +
+				 from the calling method.						|Two (T,P)	|boolean |*selectWith*, *rejectWith*, *detectWith*, *anySatisfyWith*, *allSatisfyWith*, *countWith*
+|===
+
+The *accept* method is implemented to indicate the object passed to the method meets the criteria of this *Predicate*.
+Here is a *Predicate* implemented in a *select* method as an anonymous inner class:
+
+.Predicate as an anonymous inner class
+====
+[source,java]
+----
+MutableList<Integer> greaterThanFifty =
+	list.select(new Predicate<Integer>()
+	{
+		public boolean accept(Integer each)
+		{
+			return each > 50;
+		}
+	});
+----
+====
+
+The *{Predicates}* class can be used to build common filters.
+*Predicates* supports equals, not equals, less than, greater than, less than or equal to, greater than or equal to, in, not in, and, or, and numerous other predicate-type operations.
+
+.*select* using a *Predicates* factory
+====
+[source,java]
+----
+MutableList<Integer> myList =...
+MutableList<Integer> selected1 = myList.select(Predicates.greaterThan(50));
+----
+====
+
+=== Predicate Factories
+
+[cols=",",]
+[%autowidth]
+|===
+|*{Predicates}*			|Supports equal, greaterThan, lessThan, in, notIn, and, or, instanceOf, null, notNull, anySatisfy, allSatisfy, etc.
+|*{Predicates2}*		|Works with methods suffixed with "With," such as *selectWith*.
+|*{StringPredicates}*	|Supports empty, notEmpty, contains, isAlpha, isNumeric, isBlank, startsWith, endsWith, matches, etc.
+|*{IntegerPredicates}*	|Supports isEven, isOdd, isPositive, isNegative, isZero.
+|*{LongPredicates}*		|Supports isEven, isOdd, isPositive, isNegative, isZero.
+|===
+
+== Function
+
+The *{Function}* code block in its most common usage takes each element of a collection as the argument to the code-block logic. It selects an attribute from the element via a "getter" — its *valueOf* method. It then returns a computed value or, if no evaluation logic is performed, the attribute itself.
+
+*Function* code blocks are used as a parameter in a variety of common Eclipse Collections methods:
+
+* With the *collect* method to calculate a new value for each element of a given collection, and then return a transformed collection of the same type.
+* With the *groupBy* method to generate keys for each nested collection (values) of a new Multimap.
+* With the *flatCollect* method, where it must return an *Iterable* that gets "flattened" with other iterables, into a single collection.
+* With the *Predicates* factory's *attributeOperator* methods - such as *attributeLessThanOrEqualTo* - to build *Predicate* (boolean) objects.
+
+[cols=",,,,",options="header",]
+[%autowidth]
+|===
+| |Description	|Arguments	|Returns 	|Used By
+|*{Function}* +
+_(transformer)_	|Evaluates each element of a collection as  the argument to the code block logic and  returns a computed value 	|One (T) |Object (V) |*collect*,*flatCollect*, *groupBy*
+|*{Function0}*	|Executes and returns a value (like Callable);  represents deferred evaluation.  |Zero 	|Object (V) |*getIfAbsent*, *getIfAbsentPut*, *ifPresentApply*
+|*{Function2}*	|Used by *injectInto* methods; takes the  accumulator argument as the first argument, and the current item of the collection as the  second argument. 	|Two (T,P) 	|Object (V) |*forEachEntry* *injectInto* *collectWith*
+|*{Function3}*	|Used by *injectIntoWith*; takes the injected argument as the first argument, the current  item of the collection as the second argument,  and the specified parameter for the third argument. The result of each subsequent iteration is passed  in as the first argument. 	|Three (T,P,?) 	|Object (V) |*injectIntoWith*
+|===
+
+==== Other Functions
+
+[cols=",",]
+[%autowidth]
+|===
+|*{IfFunction}*   |Supports if and else using a discriminator with Function.
+|*{CaseFunction}* |This allows for multi-conditional or rule based selector using **Predicate**s (use this with guidance).
+|===
+
+
+=== Function factories
+
+[cols=",",]
+[%autowidth]
+|===
+|*Functions*  		|*getToClass*, *getToString*, *getPassThru*
+|*Functions0* 		|*newFastList*, *newHashBag*, *newUnifiedMap*, *newUnifiedSet*, *nullValue*, *value*
+|*Functions2* 		|*fromFunction*
+|*StringFunctions* 	|*firstLetter*, *length*, *subString*, *toFirstChar*, *toInteger*, *toLowerCase*, *toPrimitive* [type], toUpperCase, trim, *firstLetter*
+|===
+
+
+== Procedure
+
+A *{Procedure}* is a code block that performs an evaluation on its single argument and returns nothing. A *Procedure* is most commonly used with _ForEach_ -pattern methods.
+
+=== Count and calculate
+
+[cols=",",]
+[%autowidth]
+|===
+|*CountProcedure* |Apply a *Predicate* to an object and increment a count if it returns true.
+|*CounterProcedure* |Wrap a specified block and keeps track of the number of times it is executed.
+|===
+
+=== Control execution
+
+[cols=",",]
+[%autowidth]
+|===
+|*ChainedProcedure* |Chain together blocks of code to be executed in sequence; *ChainedProcedure* can chain **Procedure**s, **Function**s or *Function2s*.
+|*CaseProcedure* |Create an object form of a case statement, which instead of being based on a single switch value is based on a list of discriminator or block combinations. For the first discriminator that returns true for a given value in the case statement, the corresponding block will be executed.
+|*IfProcedure* |Evaluate the specified block only when a *Predicate* returns true. If the result of evaluating the *Predicate* is false, and the developer has specified that there is an *elseProcedure*, then the elseProcedure is evaluated.
+|*IfProcedureWith* |Same as *IfProcedure*, but with a second argument passed from the calling iteration method.
+|*ObjectIntProcedure* |Takes an int as a second argument; this is usually the index of the current element of a collection.
+|===
+
+=== Modify collections and maps
+
+[cols=",",]
+[%autowidth]
+|===
+|*CollectionAddProcedure* |Add elements to the specified collection when block methods are called.
+|*CollectionRemoveProcedure* |Remove element from the specified collection when block methods are called.
+|*MapPutProcedure* |Use a specified *Function* to calculate the key for an object and puts the object into the specified Map at the position of the calculated key.
+|*MultimapPutProcedure* |Use a specified *Function* to calculate the key for an object and puts the object with the key into the specified *MutableMultimap*.
+|===
+
+=== Procedure factories
+
+[cols=","]
+[%autowidth]
+|===
+|*Procedures*  |*append, bind, caseDefault, fromObjectIntProcedure, ifElse, ifTrue, println, synchronizedEach*
+|*Procedures2* |*addToCollection, fromProcedure*
+|===
+
+[cols="3,^1,>3",]
+|===
+|xref:2-Collection_Containers.adoc[previous: Collections and containers]  |xref:0-Introduction.adoc[top] |xref:4-Testing_Utilities.adoc[next: Testing Utilities]
+|===

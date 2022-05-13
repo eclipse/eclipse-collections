@@ -1,0 +1,2185 @@
+////
+  Copyright (c) 2022 Goldman Sachs and others.
+All rights reserved.
+  This program and the accompanying materials   are made available
+  under the terms of the Eclipse Public License v1.0 and 
+  Eclipse Distribution License v.1.0 which accompany this distribution.
+  The Eclipse Public License is available at
+  http://www.eclipse.org/legal/epl-v10.html.
+  The Eclipse Distribution License is available at
+  http://www.eclipse.org/org/documents/edl-v10.php.
+////
+= Iteration patterns
+:sectanchors:
+:toc: left
+:toc-title: 
+:toclevels: 2
+
+// This section would normally be stored in a separate include file; at present, GitHub does not support AsciiDoc include directives.
+// GitHub page links and images
+:Eclipse-Collections-Kata:      https://github.com/eclipse/eclipse-collections-kata[Eclipse Collections Kata]
+:Eclipse-Collections-Mind-Map:  https://github.com/eclipse/eclipse-collections/blob/master/docs/EclipseCollectionsMindMap.png[Eclipse Collections Mind Map]
+
+// Javadoc links
+:api-url:               https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections
+
+:Bag:                   {api-url}/api/bag/Bag.html[Bag]
+:BagMultimap:           {api-url}/api/multimap/bag/BagMultimap.html[BagMultimap]
+:Collectors2:           {api-url}/impl/collector/Collectors2.html[Collectors2]
+:FastList:              {api-url}/impl/list/mutable/FastList.html[FastList]
+:Function:              {api-url}/api/block/function/Function.html[Function]
+:Function0:             {api-url}/api/block/function/Function0.html[Function0]
+:Function2:             {api-url}/api/block/function/Function2.html[Function2]
+:ImmutableCollection:   {api-url}/api/collection/ImmutableCollection.html[ImmutableCollection]
+:IntFunction:           {api-url}/api/block/function/primitive/IntFunction.html[IntFunction]
+:IntIterable:           {api-url}/api/IntIterable.html[IntIterable]
+:LazyIterable:          {api-url}/api/LazyIterable.html[LazyIterable]
+:ListIterable:          {api-url}/api/list/ListIterable.html[ListIterable]
+:ListMultimap:          {api-url}/api/multimap/list/ListMultimap.html[ListMultimap]
+:MapIterable:           {api-url}/api/map/MapIterable.html[MapIterable]
+:Multimap:              {api-url}/api/multimap/Multimap.html[Multimap]
+:Multimaps:             {api-url}/impl/factory/Multimaps.html[Multimaps]
+:MutableBag:            {api-url}/api/bag/MutableBag.html[MutableBag]
+:MutableCollection:     {api-url}/api/collection/MutableCollection.html[MutableCollection]
+:MutableIntCollection:  {api-url}/api/collection/primitive/MutableIntCollection.html[MutableIntCollection]
+:MutableList:           {api-url}/api/list/MutableList.html[MutableList]
+:MutableMap:            {api-url}/api/map/MutableMap.html[MutableMap]
+:MutableSet:            {api-url}/api/set/MutableSet.html[MutableSet]
+:ObjectIntProcedure:    {api-url}/api/block/procedure/primitive/ObjectIntProcedure.html[ObjectIntProcedure]
+:Pair:                  {api-url}/api/tuple/Pair.html[Pair]
+:ParallelIterable:      {api-url}/api/ParallelIterable.html[ParallelIterable]
+:ParallelIterate:       {api-url}/impl/parallel/ParallelIterate.html[ParallelIterate]
+:PartitionIterable:     {api-url}/api/partition/PartitionIterable.html[PartitionIterable]
+:Predicate:             {api-url}/api/block/predicate/Predicate.html[Predicate]
+:Predicate2:            {api-url}/api/block/predicate/Predicate2.html[Predicate2]
+:Predicates:            {api-url}/impl/block/factory/Predicates.html[Predicates]
+:Predicates2:           {api-url}/impl/block/factory/Predicates2.html[Predicates2]
+:Procedure:             {api-url}/api/block/procedure/Procedure.html[Procedure]
+:Procedure2:            {api-url}/api/block/procedure/Procedure2.html[Procedure2]
+:RichIterable:          {api-url}/api/RichIterable.html[RichIterable]
+:SetIterable:           {api-url}/api/set/SetIterable.html[SetIterable]
+:SetMultimap:           {api-url}/api/multimap/set/SetMultimap.html[SetMultimap]
+:StackIterable:         {api-url}/api/stack/StackIterable.html[StackIterable]
+:StringFunctions:       {api-url}/impl/block/factory/StringFunctions.html[StringFunctions]
+:UnifiedSet:            {api-url}/impl/set/mutable/UnifiedSet.html[UnifiedSet]
+// end links; begin body
+
+Eclipse Collections extends the Java Collections Framework with new interfaces and classes and provides additional methods.
+These new methods implement _iteration patterns_ derived from the collection protocols of the Smalltalk language (e.g., _select_, _reject_, _collect_, _detect_, _injectInto_).
+
+In idiomatic (imperative) Java code, iteration is performed by external *for* and *while* loops that enclose a block of business logic to be performed on each element of a collection.
+This is an approach that often leads to much code duplication.
+
+In Eclipse Collections, business logic is reified as a _code block_: a class that is passed as a parameter to an iteration method.
+Each implementation of an iteration method iterates over the collection, passing each element to the code block for processing.
+In Java 8, these code blocks can be specified using the lambda and method reference syntax.
+
+The most important advantage of internal iteration patterns is that they increase readability by giving names to the structural iteration patterns and by reducing code duplication.
+Moreover, by encapsulating implementation within specialized collection types (e.g., list, sets, maps), iteration can be optimized for the particular type.
+
+== Common iteration patterns
+
+These are the most commonly-used iteration patterns in Eclipse Collections.
+
+[cols=".<,.<,.<" width=80%, grid=none, frame=none]
+|===
+|*Filtering patterns* +
+&#8226; _Select_    +
+&#8226; _Reject_    +
+&#8226; _Partition_ +
+
+*Transforming patterns* +
+&#8226; _Collect_     +
+&#8226; _FlatCollect_ +
+&#8226; _GroupBy_     +|
+
+*Fused patterns* +
+&#8226; _CollectIf_  +
+&#8226; _CountBy_    +
+&#8226; _ContainsBy_
+
+*"Short-circuit" patterns*  +
+&#8226; _Detect_            +
+&#8226; _DetectIfNone_      +
+&#8226; _AnySatisfy_        +
+&#8226; _AllSatisfy_        +
+&#8226; _NoneSatisfy_       |
+
+*Generic action patterns* +
+&#8226; _ForEach_                 +
+&#8226; _InjectInt_               +
+|===
+
+[#select-reject-patterns]
+=== Select and Reject patterns
+____
+Filter a collection to create a new collection: includes *select*, *reject*, and *partition*.
+____
+
+Methods using the _Select_ pattern return a new collection comprising those elements from the source collection that satisfy some logical condition.
+_Reject_ is the inverse pattern, returning a new collection of elements that do _not_ satisfy the condition.
+The condition is a boolean expression in the form of single-argument code block that implements the *{Predicate}* interface.
+
+==== Select pattern examples
+
+.Select pattern (pseudocode)
+====
+----
+create <newCollection>
+ for each <element> of <collection>
+     if condition(<element>)
+         add <element> to <newCollection>
+----
+====
+
+.Select using a lambda expression
+====
+[source,java]
+----
+MutableList<Integer> greaterThanFifty = list.select(each -> each > 50);
+----
+====
+
+.Select using an anonymous inner class as a code block
+====
+[source,java]
+----
+MutableList<Integer> greaterThanFifty =
+    list.select(new Predicate<Integer>()
+    {
+        public boolean accept(Integer each)
+        {
+            return each > 50;
+        }
+    });
+----
+====
+
+
+.Creating a select *{Predicate}* using the *{Predicates}* factory
+====
+[source,java]
+----
+MutableList<Integer> greaterThanFifty = list.select(Predicates.greaterThan(50));
+----
+====
+
+.Select in Java 8+ Streams using *{Collectors2}*
+====
+[source,java]
+----
+MutableList<Integer> greaterThanFifty = list.stream()
+    .collect(Collectors2.select(each -> each.intValue() > 50, Lists.mutable::empty));
+----
+====
+
+.Select pattern in imperative Java
+====
+[source,java]
+----
+List<Integer> greaterThanFifty = Lists.mutable.empty();
+for (Integer each : list)
+{
+    if (each.intValue() > 50)
+    {
+        greaterThanFifty.add(each);
+    }
+}
+----
+====
+
+==== Reject pattern examples
+
+.Reject pattern (pseudocode)
+====
+----
+create <newCollection>
+ for each <element> of <collection>
+     if not condition(<element>)
+         add <element> to <newCollection>
+----
+====
+
+.Reject using a lambda expression
+====
+[source,java]
+----
+MutableList<Integer> notGreaterThanFifty =
+    list.reject(each -> each > 50);
+----
+====
+
+.Reject *{Predicate}* using the *{Predicates}* factory
+====
+[source,java]
+----
+MutableList<Integer> notGreaterThanFifty = list.reject(Predicates.greaterThan(50));
+----
+====
+
+.Reject in Java 8+ Streams using *{Collectors2}*
+====
+[source,java]
+----
+MutableList<Integer> notGreaterThanFifty = list.stream()
+    .collect(Collectors2.reject(each -> each.intValue() > 50, Lists.mutable::empty));
+----
+====
+
+.Reject pattern in imperative Java
+====
+[source,java]
+----
+List<Integer> notGreaterThanFifty = Lists.mutable.empty();
+for (Integer each : list)
+{
+    if (each <= 50)
+    {
+        notGreaterThanFifty.add(each);
+    }
+}
+----
+====
+
+==== Select and Reject methods
+
+These Eclipse Collections methods implement the Select and Reject pattern:
+
+****
+##`*select(Predicate):&nbsp;RichIterable*`## +
+##`*reject(Predicate):&nbsp;RichIterable*`##
+****
+The *{Predicate}* is evaluated for each element of the collection.
+The selected elements are those where the Predicate returned true (false for rejected).
+The selected (or rejected) elements are returned in a new collection of the same type.
+
+****
+##`*select(Predicate,&nbsp;__targetCollection__):&nbsp;__targetCollection__*`## +
+##`*reject(Predicate,&nbsp;__targetCollection__):&nbsp;__targetCollection__*`##
+****
+
+Same as the *select*/*reject* methods with one argument, but results are added to the specified _targetCollection_.
+
+****
+##`*selectWith(Predicate2,&nbsp;__argument__):&nbsp;RichIterable*`## +
+##`*rejectWith(Predicate2,&nbsp;__argument__):&nbsp;RichIterable*`##
+****
+
+For each element of the collection, *{Predicate2}* is evaluated with the element as one argument, plus one additional argument; selected or rejected elements are returned in a new collection of the same type.
+See <<reuse-code-block>> for more information.
+
+****
+##`*selectWith(Predicate2,&nbsp;__argument__,&nbsp;__targetCollection__):&nbsp;__targetCollection__*`## +
+##`*rejectWith(Predicate2,&nbsp;__argument__,&nbsp;__targetCollection__):&nbsp;__targetCollection__*`##
+****
+
+Same as the *selectWith*/*rejectWith* methods, but results are added to the specified _targetCollection_.
+
+=== Partition pattern
+____
+Create two collections using *Select* and *Reject*.
+____
+
+The _Partition_ pattern allocates each element of a collection into one of two new collections depending on whether the element satisfies the condition expressed by the *Predicate*.
+In effect, it combines the  <<select-reject-patterns>>.
+The collections are returned in a *{PartitionIterable}* specialized for the type of the source collection.
+You can retrieve the selected and rejected elements from the *PartitionIterable*.
+In this example, the list of people is partitioned into lists of adults and children.
+
+.Partition using a lambda expression
+====
+[source,java]
+----
+PartitionMutableList<Person> partitionedFolks = 
+    people.partition(person -> person.getAge() >= 18);
+MutableList<Person> adults = partitionedFolks.getSelected();
+MutableList<Person> children = partitionedFolks.getRejected();
+----
+====
+
+.Partition using an anonymous inner class
+====
+[source,java]
+----
+MutableList<Person> people =...
+PartitionMutableList<Person> partitionedFolks = people.partition(
+    new Predicate<Person>()
+    {
+        public boolean accept(Person each)
+        {
+            return each.getAge() >= 18;
+        }
+    });
+MutableList<Person> adults = partitionedFolks.getSelected();
+MutableList<Person> children = partitionedFolks.getRejected();
+----
+====
+
+//// 
+// TODO: is this deprecated? Can't find partitioningBy
+.Partition in Java 8+ Streams using Collectors.partitioningBy
+====
+[source,java]
+----
+List<Person> people =...
+Map<Boolean, List<Person>> partitionedFolks = people.stream()
+    .collect(Collectors.partitioningBy(person -> person.getAge() >= 18)
+List<Person> adults = partitionedFolks.get(Boolean.TRUE);
+List<Person> children = partitionedFolks.get(Boolean.FALSE);
+----
+====
+////
+
+//TODO: Why is this example here?
+.Java 8 Streams using *{Collectors2}.partition*
+====
+[source,java]
+----
+List<Person> people =...
+PartitionMutableList<Person>> partitionedFolks = people.stream()
+    .collect(Collectors2.partition(person -> person.getAge() >= 18, PartitionFastList::new)
+MutableList<Person> adults = partitionedFolks.getSelected();
+MutableList<Person> children = partitionedFolks.getRejected());
+----
+====
+
+==== Partition methods
+
+These Eclipse Collections methods implement the partition pattern:
+
+****
+##`*partition(Predicate): PartitionIterable*`##
+****
+
+Returns a *PartitionIterable*, a logical pair of containers.
+The first container consists of all elements that satisfy the *Predicate*.
+The second container consists of all elements that do not satisfy the *Predicate*.
+The subtypes of *PartitionIterable* correspond with the subtypes of *{RichIterable}*.
+
+****
+##`*partitionWith(Predicate2, _argument_): PartitionIterable*`##
+****
+
+For each element of the collection, *Predicate2* is evaluated with the element as one argument, plus one additional argument; partitioned elements are returned in a new collection of type *PartitionIterable*.
+
+=== Collect pattern
+____
+Transform a collection's elements, creating a new collection: includes *collect*, *flatCollect*, and *groupBy*.
+____
+
+The _Collect_ pattern methods return a new collection whose data elements are the results of an evaluation performed by the code block; that is, each element of the original collection is mapped to a new object, which is usually a different type.
+The code block used as the *collect* method's parameter implements the *{Function}* interface.
+
+Eclipse Collections provides two specialized variations on the _Collect_ pattern: the <<flat-collect-pattern,_FlatCollect_>> (or Flatten) pattern and the <<groupby-pattern,_GroupBy_>> pattern.
+As with _Collect_, the patterns' methods take a single *Function* as a parameter.
+
+
+.Collect pattern (pseudocode)
+====
+----
+create <newCollection>
+ for each <element> of <collection>
+     <result> = transform(<element>)
+     add <result> to <newCollection>
+----
+====
+
+.Collect using a lambda and using a method reference
+====
+[source,java]
+----
+MutableList<Address> addresses = 
+    people.collect(person -> person.getAddress());
+
+//or
+
+MutableList<Address> addresses = 
+    people.collect(Person::getAddress);
+----
+====
+
+.Collect using an anonymous inner class
+====
+[source,java]
+----
+MutableList<Person> people =...;
+Function<Person, Address> addressFunction =
+    new Function<Person, Address>()
+    {
+        public Address valueOf(Person person)
+        {
+            return person.getAddress();
+        }
+    };
+MutableList<Address> addresses = people.collect(addressFunction);
+----
+====
+
+Notice that this assumes each person in the *people* collection has just one address.
+
+If, instead, a person has multiple addresses, the *{Function}* returns a list of addresses for each person (a list that has only one element if the person has just one address).
+The result is a *List* of **List**s.
+
+.Collect using a lambda and using a method reference
+====
+[source,java]
+----
+MutableList<MutableList<Address>> addresses = 
+    people.collect(person -> person.getAddresses());
+
+//or
+
+MutableList<MutableList<Address>> addresses = 
+    people.collect(Person::getAddresses);
+----
+====
+
+.Collect using an anonymous inner class
+====
+[source,java]
+----
+MutableList<Person> people =...;
+Function<Person, MutableList<Address>> addressFunction =
+    new Function<Person, MutableList<Address>>()
+    {
+        public MutableList<Address> valueOf(Person person)
+        {
+            return person.getAddresses();
+        }
+    };
+MutableList<MutableList<Address>> addresses =
+    people.collect(addressFunction);
+----
+====
+
+.Collect in Java 8+ Streams using *{Collectors2}*
+====
+[source,java]
+----
+MutableList<MutableList<Address>> addresses = people.stream()
+    .map(person -> person.getAddresses())
+    .collect(Collectors2.toList());
+
+//or
+
+MutableList<MutableList<Address>> addresses = people.stream()
+    .collect(Collectors2.collect(Person::getAdddresses, Lists.mutable::empty));
+----
+====
+
+.Collect pattern in imperative Java
+====
+[source,java]
+----
+List<Address> addresses = Lists.mutable.empty();
+for (Person person : people)
+{
+    addresses.add(person.getAddress());
+}
+
+//or for multiple addresses
+
+List<List<Address>> addresses = Lists.mutable.empty();
+for (Person person : people)
+{
+    addresses.add(person.getAddresses());
+}
+----
+====
+
+[#collect-methods]
+==== Collect methods
+These Eclipse Collections methods implement the Collect pattern:
+
+****
+##`*collect(Function):&nbsp;RichIterable*`## 
+****
+For each element of the collection, the *{Function}* is evaluated with the current element as the argument; returns a new collection with the transformed type.
+
+****
+##`*collectInt(IntFunction): IntIterable*`##
+****
+
+Similar to *collect*, but it takes an *{IntFunction}* and returns a primitive collection which extends from *{IntIterable}*.
+There are variants for all eight primitives: *collectBoolean*, *collectFloat* etc.
+
+****
+##`*collect(Function, __targetCollection__): __targetCollection__*`##
+****
+
+Same as *collect*, except that the results are added to the specified _targetCollection_, which extends java.util.Collection.
+
+****
+##`*collectInt(IntFunction, __targetCollection__): __targetCollection__*`##
+****
+
+Same as *collectInt*, except that the results are added to the specified _targetCollection_, which extends *{MutableIntCollection}*.
+There are variants for all eight primitives.
+
+****
+##`*collectIf(Predicate, Function): RichIterable*`##
+****
+
+Same as *collect*, except that the *Predicate* is first evaluated with the element as the argument to filter the collection.
+
+****
+##`*collectIf(Predicate, Function, __argument2__): RichIterable*`##
+****
+
+Same as *collect*, but the *{Function2}* is evaluated with the element as one argument, plus one additional argument; returns a new collection of the same size and the transformed type.
+
+****
+##`*collectWith(Function2, _argument2_, __targetCollection__): __targetCollection__*`##
+****
+
+Same as *collectWith*, except that the results are added to a specified _targetCollection_.
+(On all **RichIterable**s since version 1.0)
+
+
+[#flat-collect-pattern]
+=== FlatCollect pattern
+____
+Create a single, linear collection from selected values of a collection's elements.
+____
+The _FlatCollect_ or _Flatten_ pattern is a specialized form of the the _Collect_ pattern.
+It returns a single-level, or "flattened," collection of attribute values from a source collection's elements.
+
+****
+##`*flatCollect(Function): RichIterable*`##
+****
+
+Applies the *Function* to each element.
+The *Function* must return an Iterable type.
+Returns the intermediate Iterables in a single, flattened collection.
+
+Given a list of *people*, as in the <<collect-methods, *collect* method examples>>, here is how *flatCollect* could be used to create a flat list from the address fields of the *person* objects in that list, using the same *Function* (*addressFunction*):
+
+.Pseudocode
+====
+----
+create <newCollection>
+ for each <element> of <collection>
+     <results> = transform(<element>)
+     Add all <results> to <newCollection>
+----
+====
+
+.FlatCollect using a lambda and using a method reference
+====
+[source,java]
+----
+MutableList<Address> flatAddress = 
+    people.flatCollect(person -> person.getAddresses());
+
+// or 
+
+MutableList<Address> flatAddress = 
+    people.flatCollect(Person::getAddresses);
+----
+====
+
+Note the *flatCollect* method's similarity to a *collect* method having the same signature: each method's *Function* parameter maps to an *Iterable* type.
+This is optional for *collect*, but required of *flatCollect.* Both methods return a new collection.
+The difference is that *collect* in this form creates a _collection of collections_ from a simple *List*, *Set* or *Bag*, while *flatCollect* performs a different (and in this instance, somewhat more useful) action, returning a flat list of addresses.
+
+.FlatCollect using an anonymous inner class
+====
+[source,java]
+----
+MutableList<Address> addresses = 
+    people.flatCollect(
+       new Function<Person, MutableList<Address>>()
+       {
+           public MutableList<Address> valueOf(Person person)
+           {
+               return person.getAddresses();
+           }
+       });
+----
+====
+
+.FlatCollect in Java 8+ Streams using *{Collectors2}*
+====
+[source,java]
+----
+MutableList<Address> flatAddress = people.stream()
+    .collect(Collectors2.flatCollect(Person::getAddresses, Lists.mutable::empty));
+----
+====
+
+.FlatCollect in imperative Java
+====
+[source,java]
+----
+List<Address> addresses = Lists.mutable.empty();
+for (Person person : people)
+{
+    addresses.addAll(person.getAddresses());
+}
+----
+====
+
+[#groupby-pattern]
+=== GroupBy pattern
+____
+Create a Multimap from a collection by grouping on a selected or generated key value.
+____
+The _GroupBy_ pattern gathers the elements on the collection into a map-like container called a *{Multimap}*, which associates multiple values for each key.
+The *{Function}* is applied to each element and the result is used as the key into the *Multimap* where the element should appear as the value.
+
+See xref:2-Collection_Containers.adoc#multimap-container[the discussion of Multimap] for examples of **groupby**.
+
+****
+##`*groupBy(Function): Multimap*`##
+****
+
+Group the elements into a new *{Multimap}*; uses the *{Function}* to get the key for each element.
+
+****
+##`*groupBy(Function, _targetMultimap_) : targetMultimap*`##
+****
+Same as *groupBy* except that results are added to the specified _targetMultimap_.
+
+****
+##`*groupByEach(Function): Multimap*`##
+****
+
+Same as *groupBy* except that the *Function* transforms each value into multiple keys, returning a new *Multimap* containing all the key/value pairs.
+
+
+//TODO: xrefs for *Related topics:* link:#multimap[Multimap] link:#forEach-pattern[ForEach pattern]
+
+[#short-circuit]
+=== Short-circuit patterns
+____
+Methods that control processing by testing a collection for a logical condition: includes *detect*, *anySatisfy*, and *allSatisfy*.
+____
+
+The "short-circuit" patterns&mdash;<<detect-pattern,_Detect_>>, <<anysatisfy-pattern,_AnySatisfy_>> and <<allsatisfy-pattern,_AllSatisfy_>>&mdash;are so called because they describe methods that cease execution when a specific condition is met.
+With each iteration, the *Predicate* is evaluated.
+If the evaluation resolves as a specified boolean (_true_/_false_) value, then iteration halts and returns the appropriate value.
+
+[#detect-pattern]
+==== Detect pattern
+____
+Finds and returns the _first_ element that satisfies a given logical expression.
+____
+
+_Detect_ returns the first element that satisfies a *Predicate*.
+If every element in the collection is tested and the *Predicate* never returns _true_, then the method returns _null_.
+
+.Detect pattern (pseudocode)
+====
+----
+for each <element> of <collection>
+  if condition(<element>)
+    return <element> // and end process
+----
+====
+
+.Detect using a lambda
+====
+[source,java]
+----
+Integer result = 
+    list.detect(each -> each > 50);
+----
+====
+
+.Detect using a *{Predicates}* factory
+====
+[source,java]
+----
+Integer result = 
+    list.detect(Predicates.greaterThan(50));
+----
+====
+
+.Detect in Java 8+ Streams
+====
+[source,java]
+----
+Integer result = 
+    list.stream().findAny(each -> each > 50).get();
+----
+====
+
+.Detect in imperative Java
+====
+[source,java]
+----
+for (int i = 0; i < list.size(); i++)
+{
+    Integer v = list.get(i);
+    if (v.intValue() > 50)
+    {
+        return v;
+    }
+}
+return null;
+----
+====
+
+==== Detect methods
+
+****
+##`*detect(Predicate): element*`##
+****
+
+Returns the first element which satisfies the *Predicate* or null if no element satisfies the *Predicate*.
+
+****
+##`*detectIfNone(Predicate, Function0): element (or Function0 result)*`##
+****
+
+Same as *detect*, but if no element causes *Predicate* to evaluate as _true_, return the result of evaluating *Function0*.
+
+****
+##`*detectWith(Predicate2, _parameter_): element*`##
+****
+
+Returns the first element that evaluates as _true_ for the specified *Predicate2* and _parameter_, or null if none evaluate as _true_.
+See link:#performance-optimized-methods-reusing-two-argument-code-blocks[Reusing a code block] for more information.
+
+****
+##`*detectWithIfNone(Predicate2, _parameter_, Function0): element (or Function0 result)*`##
+****
+
+Same as *detectWith*, but if no element causes *{Predicate2}* to evaluate as _true_, return the result of evaluating *{Function0}*.
+
+[#anysatisfy-pattern]
+==== AnySatisfy pattern
+____
+Determine if _any_ collection element satisfies a given logical expression.
+____
+
+The _AnySatisfy_ pattern determines whether _any_ element of a collection satisfies a *Predicate*.
+It applies the *Predicate* to each element; if the *Predicate* returns _true_, execution halts and the method returns _true_ immediately.
+Otherwise, every element is checked and the method returns _false_.
+
+.AnySatisfy (pseudocode)
+====
+----
+for each <element> of <collection>
+     if condition(<element>)
+         return true  // and end process
+ otherwise return false
+----
+====
+
+.AnySatisfy using a lambda
+====
+[source,java]
+----
+boolean result = 
+    list.anySatisfy(num -> num > 50);
+----
+====
+
+.AnySatisfy using a *{Predicates}* factory
+====
+[source,java]
+----
+boolean result = 
+    list.anySatisfy(Predicates.greaterThan(50));
+----
+====
+
+.AnySatisfy in Java 8+ Streams
+====
+[source,java]
+----
+boolean result = 
+    list.stream().anyMatch(num -> num > 50);
+----
+====
+
+.AnySatisfy in imperative Java
+====
+[source,java]
+----
+for (int i = 0; i < list.size(); i++)
+{
+    Integer v = list.get(i);
+    if (v.intValue() > 50)
+    {
+        return true;
+    }
+}
+return false;
+----
+====
+
+==== AnySatisfy methods
+
+****
+##`*anySatisfy(Predicate): boolean*`##
+****
+
+Returns true if the *Predicate* returns _true_ for any element of the collection.
+Otherwise (or if the collection is empty), return false.
+
+****
+##`*anySatisfyWith(Predicate2, _parameter_): boolean*`##
+****
+
+Returns true if the *Predicate2* returns _true_ for any element of the collection.
+Otherwise (or if the collection is empty), return false.
+
+[#allsatisfy-pattern]
+==== AllSatisfy pattern
+____
+Determine if _all_ collection elements satisfy a given logical expression.
+____
+
+The _AllSatisfy_ pattern is the inverse of _AnySatisfy_. It reports whether _all_ elements satisfy a *Predicate*.
+It applies the *Predicate* to each element; if the *Predicate*  returns _false_, execution halts and the method returns _false_ immediately.
+Otherwise, every element is checked and the method returns _true_.
+
+.AllSatisfy (pseudocode)
+====
+----
+for each <element> of <collection>
+     if not condition(<element>)
+         return false  // and end process
+ otherwise return true
+                      
+----
+====
+
+.AllSatisfy using a lambda
+====
+[source,java]
+----
+boolean result = 
+    list.allSatisfy(each -> each > 50);
+----
+====
+
+.AllSatisfy using a *{Predicates}* factory
+====
+[source,java]
+----
+boolean result = 
+    list.allSatisfy(Predicates.greaterThan(50));
+----
+====
+
+.AllSatisfy in Java 8+ Streams
+====
+[source,java]
+----
+boolean result = 
+    list.stream().allMatch(each -> each > 50);
+----
+====
+
+.AllSatisfy in imperative Java
+====
+[source,java]
+----
+for (int i = 0; i < list.size(); i++)
+{
+    Integer v = list.get(i);
+    if (v.intValue() <= 50)
+    {
+        return false;
+    }
+}
+return true;
+----
+====
+
+_NoneSatisfy_ is similar to _AllSatisfy_, but negates the *Predicate*.
+It returns _true_ only if _no_ element satisfies the *Predicate*.
+If the container is empty it also returns true.
+
+==== AllSatisfy methods
+
+****
+##`*allSatisfy(Predicate): boolean*`##
+****
+
+Returns true if the *Predicate* returns _true_ for all elements of the collection.
+Otherwise (or if the collection is empty), return _false_.
+
+****
+##`*allSatisfyWith(Predicate2, _parameter_): boolean*`##
+****
+
+Return true if the *Predicate2* returns _true_ for all elements of the collection.
+Otherwise (or if the collection is empty), return _false_.
+
+****
+##`*noneSatisfy(Predicate):** boolean*`##
+****
+
+Return true if the *Predicate* returns _false_ for all elements of the collection or if the collection is empty.
+Otherwise, return _false_.
+
+****
+##`*noneSatisfyWith(Predicate2, _parameter_): boolean*`##
+****
+
+Return true if the *Predicate2* returns _false_ for all elements of the collection or if the collection is empty.
+Otherwise, return _false_.
+
+=== ForEach pattern
+____
+Perform a calculation on each element of the current collection.
+____
+
+The _ForEach_ pattern defines the most basic iteration operation that can be used with all collection types.
+Unlike the other patterns discussed in this topic, the ForEach pattern prescribes methods that operate on each element of the calling collection object, with no value returned by the method itself.
+
+In Eclipse Collections, the *each* and *forEach* methods offer the most straightforward replacement for the Java *for* loop.
+It executes the code in a Procedure on each element.
+You can use these methods to perform some action using the values of the source collection&mdash;for example, to print a value or to call another method on each element.
+
+.ForEach (pseudocode)
+====
+----
+for each <element> of <collection>
+     evaluate(<element>)
+----
+====
+
+.ForEach using a lambda
+====
+[source,java]
+----
+list.each(each -> doSomething(each));
+
+// or
+
+list.forEach(each -> doSomething(each));
+----
+====
+
+.ForEach using an anonymous inner class
+====
+[source,java]
+----
+list.each(new Procedure()
+{
+    public void value(Object each)
+    {
+        doSomething(each);
+    }
+});
+----
+====
+
+.ForEach in imperative Java
+====
+[source,java]
+----
+for (int i = 0; i < list.size(); i++)
+{
+    this.doSomething(list.get(i));
+}
+----
+====
+
+==== Each and ForEach methods
+
+****
+##`*each(Procedure): void*`##
+****
+
+For each element, the *{Procedure}* is evaluated with the element as the argument.
+
+****
+##`*forEach(Procedure): void*`##
+****
+
+For each element, the *{Procedure}* is evaluated with the element as the argument.
+
+****
+##`*forEachIf(Predicate, Procedure): void*`##
+****
+
+For each element that satisfies the *Predicate*, executes the *Procedure* on that element.
+
+****
+##`*forEach(_fromIndex_, _toindex_, Procedure): void*`##
+****
+
+Iterates over the section of a *{ListIterable}* covered by the specified indexes (inclusive).
+
+****
+##`*forEachWith(Procedure2, _parameter_): void*`##
+****
+
+For each element of the collection, the *{Procedure2}* is evaluated with the element as the first argument, and the specified _parameter_ as the second argument.
+
+****
+##`*forEachWithIndex(ObjectIntProcedure): void*`##
+****
+
+Iterates over a collection passing each element and the current relative int index to the specified instance of *{ObjectIntProcedure}*.
+
+****
+##`*forEachWithIndex(_fromIndex_, _toIndex_, ObjectIntProcedure): void*`##
+****
+
+Iterates over the section of the list covered by the specified indexes (inclusive).
+
+=== InjectInto pattern
+____
+Calculate and maintain a _running value_ during iteration; use each evaluated result as an argument in the next iteration.
+____
+
+The _InjectInto_ pattern is used to carry a computed result from one iteration as input to the next.
+In this pattern, the *injectInto* method takes an initial _injected_ _value_ as a parameter.
+This value is used as the first argument to a two-argument code block; the current element (for each iteration of the collection) is taken as the second argument.
+
+For each iteration, the code block's evaluation result is passed to the next iteration as the first argument (the injected value) of the code block, with the (new) current element as the second argument.
+The injectInto() method returns the code block's cumulative result upon the final iteration.
+
+.InjectInto (pseudocode)
+====
+----
+set <result> to <initialvalue>
+ for each <element> of <collection>
+     <result> = apply(<result>, <element>)
+ return <result>
+----
+====
+
+.InjectInto using a lambda and using a method reference
+====
+[source,java]
+----
+Integer result = 
+    Lists.mutable.of(1, 2).injectInto(3, (result, each) -> result + each);
+
+// or
+
+Integer result = 
+    Lists.mutable.of(1, 2).injectInto(3, Integer::sum);
+----
+====
+
+.InjectInto using a static class
+====
+[source,java]
+----
+Integer result = 
+    Lists.mutable.of(1, 2).injectInto(3, AddFunction.INTEGER);
+----
+====
+
+.InjectInto in Java 8 Streams using a lambda and using a method reference)
+====
+[source,java]
+----
+Integer result = 
+    Lists.mutable.of(1, 2).stream().reduce(3, (result, each) -> result + each);
+
+// or
+
+Integer result = 
+    Lists.mutable.of(1, 2).stream().reduce(3, Integer::sum);
+----
+====
+
+.InjectInto in imperative Java
+====
+[source,java]
+----
+List<Integer> list = Lists.mutable.of(1, 2);
+int result = 3;
+for (int i = 0; i < list.size(); i++)
+{
+    Integer v = list.get(i);
+    result = result + v.intValue();
+}
+----
+====
+
+==== InjectInto methods
+
+****
+##`*injectInto(_injectedValue_, Function2): _(final result)_*`##
+****
+
+Return the final result of all evaluations using as the arguments each element of the collection, and the result of the previous iteration's evaluation.
+
+****
+##`*injectInto(_floatValue_, FloatObjectToFloatFunction): float*`##
+****
+
+Return the final result of all evaluations using as the arguments each element of the collection, and the result of the previous iteration's evaluation.
+The injected value and result are both primitive floats.
+
+****
+##`*injectInto(_intValue_, IntObjectToIntFunction): int*`##
+****
+
+Return the final result of all evaluations using as the arguments each element of the collection, and the result of the previous iteration's evaluation.
+The injected value and final result are both primitive ints.
+
+****
+##`*injectInto(_longValue_, LongObjectToLongFunction): long*`##
+****
+
+Return the final result of all evaluations using as the arguments each element of the collection, and the result of the previous iteration's evaluation.
+The injected value and result are both primitive longs.
+
+****
+##`*injectInto(_doubleValue_, DoubleObjectToDoubleFunction): double*`##
+****
+
+Return the final result of all evaluations using as the arguments each element of the collection, and the result of the previous iteration's evaluation.
+The injected value and result are both primitive doubles.
+
+[#richiterable-interface]
+== RichIterable
+____
+The superinterface that specifies the iteration patterns in Eclipse Collections container types.
+____
+
+*{RichIterable}* is the most important interface in Eclipse Collections.
+It provides the blueprint for all non-mutating iteration patterns.
+It represents an object made up of elements that can be individually and consecutively viewed or evaluated (an _iterable_), and it prescribes the actions that can be performed with each evaluation (the iteration patterns).
+The most commonly used implementations include *{FastList}* and *{UnifiedSet}*.
+
+*{RichIterable}* is extended by *{ListIterable}*, *{SetIterable}*, *{Bag}*, *{StackIterable}*, and *{MapIterable}*.
+A *MapIterable* of keys and values is also a *RichIterable* of values. 
+(Note that *{Multimap}* and its subinterfaces have a separate API.)
+
+*RichIterable* is also extended by *{MutableCollection}*, and indirectly by *{MutableList}* and *{MutableSet}* (which also extend the mutable Java Collection types *List* and *Set*).
+Another subinterface defines a non-JDK container, *{MutableBag}* (or multiset); yet another, *{ImmutableCollection}*, delineates the immutable forms of these Eclipse Collections containers.
+These latter two interfaces are detailed in the link:#collections-and-containers[Collections and containers] topic.
+
+The subinterface *{LazyIterable}* for the most part replicates *RichIterable*, but overrides some specific collection-returning methods&mdash; *collect*, *collectIf*, *select*, *reject*, and *flatCollect*&mdash;so that they delay their actual execution until the returned collection is needed, a technique called "lazy iteration."
+
+[lazy-iteration]
+=== Lazy iteration
+____
+Deferring evaluation until necessary.
+____
+
+_Lazy iteration_ is an optimization pattern in which an iteration method is invoked, but its actual execution is deferred until its action or return values are required by another, subsequent method.
+In practical terms, the objective is typically to forestall unnecessary processing, memory use, and temporary-object creation unless and until they are needed.
+
+Lazy iteration is implemented as an adapter on the current *RichIterable* collection by the *asLazy* method:
+
+****
+##`*richIterable.asLazy()*`##
+****
+
+Returns a deferred-evaluation iterable of type *{LazyIterable}*.
+(Note the list below of other Eclipse Collections methods that return lazy Iterables.)
+
+In a way, lazy iteration is a companion to the <<short-circuit,short-circuit iteration patterns>>, in which iteration ceases as soon the method's purpose is achieved.
+In the last line of the example below, the *anySatisfy* method quits execution when it detects the "address2" element in the *addresses* list created by *collect*.
+The third element ("address 3") is never examined by *anySatisfy* - although it was present in *addresses*.
+
+.*anySatisfy* and *collect* using an anonymous inner class
+====
+[source,java]
+----
+Person person1 = new Person(address1);
+Person person2 = new Person(address2);
+Person person3 = new Person(address3);
+MutableList<Person> people =
+    Lists.mutable.with(person1, person2, person3);
+MutableList<MutableList<Address>> addresses =
+    people.collect(addressFunction);
+Assert.assertTrue(addresses.anySatisfy(Predicates.equal(address2)));
+----
+====
+
+One excess element out of three may be trivial, but if *people* were to be a very long list (or a stream), *anySatisfy* will still have to wait for the *collect* method to finish aggregating an equally-large temporary collection - one that will have only its first two elements inspected.
+By applying a lazy-iteration adapter to *people*, the *collect* iteration defers to that of *anySatisfy*: only the elements *anySatisfy* requires are "collected."
+
+.*anySatisfy* and *collect* using a *{Predicates}* factory)
+====
+[source,java]
+----
+MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
+LazyIterable<Person> lazyPeople = people.asLazy();
+LazyIterable<Address> addresses = lazyPeople.collect(addressFunction);
+Assert.assertTrue(addresses.anySatisfy(Predicates.equal(address2)));
+----
+====
+
+This example demonstrates lazy iteration using both Java 8 lambdas and method references:
+
+.Lazy iteration using a lambda and using a method reference
+====
+[source,java]
+----
+LazyIterable<Person> lazyPeople = people.asLazy();
+LazyIterable<Address> addresses =
+    lazyPeople.flatCollect(person -> person.getAddresses());
+
+//or
+
+LazyIterable<Address> addresses = 
+    lazyPeople.flatCollect(Person::getAddresses);
+----
+====
+
+Finally, note these Eclipse Collections methods that implicitly return a lazy-iterable type.
+
+==== Lazy interables in {MutableMap} implementations
+
+****
+##`*valuesView() : RichIterable*`##
+****
+
+An unmodifiable view of the map's values.
+
+****
+##`*keysView() : RichIterable*`##
+****
+
+An unmodifiable view of the map's keyset.
+
+****
+##`*keyValuesView() : RichIterable*`##
+****
+
+An unmodifiable view of the map's entryset.
+
+==== Lazy interables in {Multimap} implementations
+
+****
+##`*keyMultiValuePairsView() : RichIterable*`##
+****
+
+An unmodifiable view of key and multi-value pairs.
+
+****
+##`*keysView() : RichIterable*`##
+****
+
+An unmodifiable view of unique keys.
+
+****
+##`*keyValuePairsView() : RichIterable*`##
+****
+
+An unmodifiable view of key/value pairs.
+
+****
+##`*multiValuesView() : RichIterable*`##
+****
+
+An unmodifiable view of each key's values, without the key.
+
+=== Parallel-lazy iteration
+____
+An API that combines parallel iteration with lazy evaluation.
+____
+
+Parallel-eager utility is available through the *{ParallelIterate}* utility class.
+Serial-lazy evaluation is available through *LazyIterable*, the view returned by *RichIterable*.*asLazy()*.
+The *{ParallelIterable}* interface defines a view where iteration is both parallel and lazy.
+Sub-interfaces of *ParallelIterable* are returned from the various implementations of *asParallel(* *ExecutorService* *executorService*, *int* *batchSize* *)*.
+The *ParallelIterable* API is new in 5.0 and considered experimental, as indicated by the *@Beta* annotation.
+API tagged as *@Beta* may be altered in ways that are not backward-compatible, even in minor versions of Eclipse Collections.
+The method *asParallel* is not on interfaces like *RichIterable* in version 5.0, but rather on a few supported collections, including *FastList* and *UnifiedSet*.
+
+[source,java]
+----
+FastList integers = Lists.mutable.with(1, 2, 3, 4, 5, 6, 7, 8, 9);
+ExecutorService threadPool =
+  Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+int batchSize = 2;
+ParallelListIterable parallelListIterable =
+  integers.asParallel(threadPool, batchSize);
+// deferred evaluation
+ParallelListIterable evenNumbers =
+  parallelListIterable.select(each -> each % 2 == 0);
+// deferred evaluation
+ParallelListIterable evenStrings =
+  evenNumbers.collect(Object::toString);
+// forced evaluation
+MutableList strings = evenStrings.toList();
+threadPool.shutdown();
+Assert.assertEquals(Lists.mutable.with("2", "4", "6", "8"), strings);
+----
+
+In this code example, the calls to *select* and *collect* are lazy, as indicated by the fact that they return subclasses of *{ParallelIterable}*.
+The call to *toList()* forces evaluation.
+
+The two parameters to *asParallel(ExecutorService* _executorService_, *int* _batchSize_**)** are used to configure parallelism.
+
+[cols=",",]
+[%autowidth]
+|===
+|_executorService_ |This code example sets up a thread pool with one thread per core, which is appropriate for CPU-bound tasks.
+                    A thread pool used for I/O bound tasks should be infinite or should have one thread per I/O-bound resource, for example, one thread per database connection.
+                    It often makes sense to share thread pools between multiple calls to *asParallel*.
+|_batchSize_       |The batch size determines the number of elements from the backing collection (*FastList* or *UnifiedSet*) that get processed by each task submitted to the thread pool.
+                    Appropriate batch sizes for CPU-bound tasks are usually larger, in the 10,000 to 100,000 range.
+|===
+
+==== Performance
+
+As with lazy evaluation, there is no guarantee that using parallel-lazy evaluation will yield better performance than simple serial-eager evaluation.
+Performance testing is required, using an appropriate thread pool and trying various batch sizes.
+
+==== Cancelability
+
+It's possible to cancel a parallel-lazy computation in progress.
+It requires a thread pool that can be shut down, which means it usually won't be a thread pool shared between multiple computations.
+Cancelling also requires a runnable thread with access to the thread pool.
+Building on the previous example, we just need to change *evenStrings*.*toList()* to execute in a background thread.
+Then the main thread could call *threadPool.shutdownNow()* which would cause *toList()* to terminate relatively quickly by throwing an exception.
+Shutting down the thread pool won't stop any batches in progress.
+However, no new batches will be started.
+
+=== RichIterable methods
+
+These methods are available on all implementations of *{RichIterable}*.
+
+==== Building strings
+____
+Methods that convert collection elements to a string that can be appended to a stream or buffer.
+____
+
+The *makeString* method returns a representation of the calling *RichIterable* collection as a *String* object.
+Elements are converted to strings as they would be by *String.valueOf(Object)*.
+You can specify start and end strings as delimiters (the default is an empty string for both) and the separator string for the between-values delimiter (defaults to comma and space).
+
+****
+##`*makeString(_startString_, _separatorString_, _endString_): String*`##
+****
+
+Returns a string representation of the calling collection that is a list of elements in the order they are returned by the iterator, enclosed in the _startString_ and _endString_.
+Elements are delimited by the _separatorString_.
+
+****
+##`*makeString(_separatorString_): String*`##
+****
+
+Same result with no starting and ending strings.
+
+****
+##`*makeString(): String*`##
+****
+
+Same result with the default delimiter ", " (comma space) and no starting and ending strings.
+
+.*makeString*
+====
+[source,java]
+----
+MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
+String myDelim = list.makeString("[", "/", "]"); // "[1/2/3]"
+String mySeper = list.makeString("/"); // "1/2/3"
+String defaultString = list.makeString(); //"1, 2, 3"
+----
+====
+
+.Building strings in Java 8+ Streams
+====
+[source,java]
+----
+MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
+String myDelim = 
+    list.stream().map(Object::toString).collect(Collectors.joining("/", "[", "]")); // "[1/2/3]"
+String mySeper = 
+    list.stream().map(Object::toString).collect(Collectors.joining("/")); // "1/2/3"
+String defaultString = 
+    list.stream().map(Object::toString).collect(Collectors.joining()); // "1/2/3"
+----
+====
+
+.Building strings in Java 8+ Streams with *{Collectors2}*
+====
+[source,java]
+----
+MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
+String myDelim = 
+    list.stream().collect(Collectors2.makeString("[", "/", "]")); // "[1/2/3]"
+String mySeper = 
+    list.stream().collect(Collectors2.makeString("/")); // "1/2/3"
+String defaultString = 
+    list.stream().collect(Collectors2.makeString()); // "1/2/3"
+----
+====
+
+The *appendString* method uses forms similar to *makeString*, but the string representation of the collection is written to a Java *Appendable* object, such as a *PrintStream*, *StringBuilder* or *StringBuffer*; the method itself is void.
+
+****
+##`*appendString(Appendable, _startString_, _separatorString_, _endString_): void*`##
+****
+
+Appends a string representation of this collection onto the given *Appendable* using the specified start, end, and separator strings
+
+****
+##`*appendString(Appendable, _separatorString_): void*`##
+****
+
+Appends with specified separator, but no starting or ending strings.
+
+****
+##`*appendString(Appendable): void*`##
+****
+
+Appends with the default delimiter ", " (comma space) and no starting and ending strings.
+
+.*appendString*
+====
+[source,java]
+----
+MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
+Appendable myStringBuilder = new StringBuilder();
+list.appendString(myStringBuilder, "[", "/", "]"); //"[1/2/3]");
+----
+====
+
+==== Counting elements
+____
+Get the total number of elements that satisfy a condition.
+____
+
+The *count* and *countWith* methods calculate the number of collection elements that satisfy a given predicate.
+The *countWith* method takes a second parameter that is used as an additional argument in evaluating the current element.
+
+****
+##`*count(Predicate): int*`##
+****
+
+Returns the number of elements that satisfy the *Predicate*.
+For example:
+
+Here is a Java 8+ lambda example:
+
+.*count* using a lambda
+====
+[source,java]
+----
+int count =
+    people.count(person -> person.getAddress().getState().getName().equals("New York"));
+----
+====
+
+.*count* using an anonymous inner class
+====
+[source,java]
+----
+int count = 
+    people.count(new Predicate<Person>() 
+    {
+      public boolean value(Person person) 
+      {
+        return person.getAddress().getState().getName().equals("New York");
+      }
+    });
+----
+====
+
+****
+##`*countWith(Predicate2, _parameter_): int*`##
+****
+
+Returns the number of elements that satisfy the *Predicate2*.
+The second parameter to *countWith* is passed as the second parameter to the *Predicate2*.
+
+.*count* using a *{Predicates2}* factory
+====
+[source,java]
+----
+int count = 
+    lastNames.countWith(Predicates2.equal(), "Smith");
+----
+====
+
+Use these methods to get the total number of collection items or to determine whether the collection is empty.
+
+****
+##`*size() : int*`##
+****
+
+Returns the number of items in the collection.
+
+****
+##`*isEmpty() : boolean*`##
+****
+
+Returns _true_ if this iterable has zero items.
+
+****
+##`*notEmpty() : boolean*`##
+****
+
+Returns _true_ if this iterable has greater than zero items.
+
+==== Finding elements
+____
+Locate elements by iteration position or highest/lowest value.
+____
+The *getFirst* and *getLast* methods return the first and last elements, respectively of a *RichIterable* collection.
+In the case of a List, these are the elements at the first and last index.
+For all any other collections, *getFirst* and *getLast* return the first and last elements that would be returned by an iterator.
+Note that the first or last element of a hash-based Set could be any element, because element order in a hashed structure is not defined.
+Both methods return _null_ if the collection is empty.
+If null is a valid element, use the *isEmpty* method to determine if the container is in fact empty.
+
+****
+##`*getFirst(): element*`##
+****
+
+Returns the first element of an iterable collection.
+
+****
+##`*getLast(): element*`##
+****
+
+Returns the last element of an iterable collection.
+
+The *min* and *max* methods, without parameters, return an element from an iterable based on its natural order, that is, by calling the compareTo() method on each element.
+
+****
+##`*max(): element*`##
+****
+
+Returns the maximum value based on the natural ordering.
+
+****
+##`*min(): element*`##
+****
+
+Returns the minimum value based on the natural ordering.
+
+.*max* and *min*
+====
+[source,java]
+----
+RichIterable<Integer> iterable = Lists.mutable.with(5, 4, 8, 9, 1);
+Assert.assertEquals(Integer.valueOf(9), iterable.max());
+Assert.assertEquals(Integer.valueOf(1), iterable.min());
+----
+====
+
+If any element in the iterable is not Comparable, then a ClassCastException is thrown.
+
+====
+[source,java]
+----
+RichIterable<Object> iterable = Lists.mutable.with(5, 4, 8, 9, 1, new Foo());
+iterable.max(); // throws ClassCastException
+----
+====
+
+The *min* and *max* methods each have an overload that takes a Comparator that determines the natural order.
+
+****
+##`*max(_Comparator_): element*`##
+****
+
+Returns the maximum element out of this collection based on the comparator.
+
+****
+##`*min(_Comparator_): element*`##
+****
+
+Returns the minimum element out of this collection based on the comparator.
+
+.*max* and *min*
+====
+[source,java]
+----
+public class SillyWalk 
+{
+  public final int wiggles;
+  
+  public SillyWalk(int wiggles) 
+  {
+    this.wiggles = wiggles;
+  }
+}
+----
+====
+
+====
+----
+private static final Comparator<SillyWalk> SILLY_WALK_COMPARATOR =
+    new Comparator<SillyWalk>() 
+    {
+      public int compare(SillyWalk o1, SillyWalk o2) 
+      {
+        return o1.wiggles - o2.wiggles;
+      }
+    };
+SillyWalk sillyWalk2 = new SillyWalk(2);
+SillyWalk sillyWalk3 = new SillyWalk(3);
+RichIterable<SillyWalk> walks = Lists.mutable.with(sillyWalk2, sillyWalk3);
+Assert.assertEquals(sillyWalk3,walks.max(SILLY_WALK_COMPARATOR));
+Assert.assertEquals(sillyWalk2,walks.min(SILLY_WALK_COMPARATOR));
+----
+====
+
+The related methods *minBy* and *maxBy* take a *Function* and return the minimum or maximum element in the *RichIterable* based on the natural order of the attribute returned by the *Function*.
+
+****
+##`*maxBy(Function): element*`##
+****
+
+Returns the maximum element out of this collection based on the result of applying the *Function* to each element.
+
+****
+##`*minBy(Function): element*`##
+****
+
+Returns the minimum element out of this collection based on the result of applying the *Function* to each element.
+
+Here, we find the youngest person (the minimum person by age).
+
+.*minBy* using a method reference
+====
+[source,java]
+----
+Person alice = new Person("Alice", 40);
+Person bob = new Person("Bob", 30);
+Person charlie = new Person("Charlie", 50);
+MutableList<Person> people = Lists.mutable.with(alice, bob, charlie);
+Assert.assertEquals(bob, people.minBy(Person::getAge));
+----
+====
+
+In this code example we already had a *Function*, so calling *minBy* was more concise than calling *min()*.
+These two forms are equivalent though.
+
+====
+[source,java]
+----
+people.minBy(Person::getAge);
+people.min(Comparators.byFunction(Person::getAge));
+----
+====
+
+==== Aggregating elements
+____
+Methods that create maps of aggregated values by grouping them on a calculated key.
+____
+
+The *aggregateBy* method groups elements in the *RichIterable* by the *{Function}*.
+Then all the elements that map to the same key are aggregated together using the *{Function2}*.
+The third parameter, a *{Function0}*, creates the initial value in each aggregation.
+Aggregate results are allowed to be immutable as they will be replaced in the map.
+
+*aggregateBy* is conceptually analogous to calling a *groupBy* method on a *RichIterable* to create a *Multimap*, and then calling *injectInto* on each collection of the *Multimap* values to create a *{MapIterable}*.
+
+*aggregateInPlaceBy* is similar to *aggregateBy*, but it mutates values in the output map instead of replacing them.
+Thus in this case, the aggregate results must be mutable.
+
+****
+##`*aggregateBy(Function, Function0, Function2): MapIterable*`##
+****
+
+Returns a *{MapIterable}* by grouping results by keys supplied by evaluating a *Function*.
+
+.*aggregateBy* using a lambda and a method reference
+====
+[source,java]
+----
+FastList<Integer> integers = FastList.newListWith(1, 1, 1, 2, 2, 3);
+MutableMap<Integer, Integer> aggregation =
+integers.aggregateBy(
+        integer -> integer % 2,
+        () -> 0,
+        Integer::sum);
+Assert.assertEquals(4, aggregation.get(0).intValue());
+Assert.assertEquals(6, aggregation.get(1).intValue());
+----
+====
+
+.*aggregateBy* using anonymous inner classes
+====
+[source,java]
+----
+Function0<Integer> factory = new Function0<Integer>()
+{
+    public Integer value()
+    {
+        return Integer.valueOf(0);
+    }
+};
+Function2<Integer, Integer, Integer> sumAggregator =
+new Function2<Integer,
+        Integer, Integer>()
+{
+    public Integer value(Integer aggregate, Integer value)
+    {
+        return aggregate + value;
+    }
+};
+Function<Integer, Integer> groupBy =
+new Function<Integer, Integer>()
+{
+    public Integer valueOf(Integer integer)
+    {
+        return integer % 2;
+    }
+};
+FastList<Integer> integers = FastList.newListWith(1, 1, 1, 2, 2, 3);
+MutableMap<Integer, Integer> aggregation = integers.aggregateBy(groupBy, factory, sumAggregator);
+Assert.assertEquals(4, aggregation.get(0).intValue());
+Assert.assertEquals(6, aggregation.get(1).intValue());
+                  
+----
+====
+
+****
+##`*aggregateInPlaceBy(Function, Function0, Function2): MapIterable*`##
+****
+
+Returns the same result as *aggregateBy* with no starting and ending strings.
+
+.*aggregateInPlaceBy* using a lambda and a method reference
+====
+[source,java]
+----
+FastList<Integer> integers = FastList.newListWith(1, 1, 1, 2, 2, 3);
+MutableMap<Integer, AtomicInteger> aggregation =
+integers.aggregateInPlaceBy(
+        integer -> integer % 2,
+        () -> new AtomicInteger(0),
+        AtomicInteger::addAndGet)
+Assert.assertEquals(4, aggregation.get(0).intValue());
+Assert.assertEquals(6, aggregation.get(1).intValue());
+----
+====
+
+.*aggregateInPlaceBy* using anonymous inner classes
+====
+[source,java]
+----
+Function0<AtomicInteger> factory = new Function0<AtomicInteger>()
+{
+    public AtomicInteger value()
+    {
+        return new AtomicInteger(0);
+    }
+};
+Procedure2<AtomicInteger, Integer> sumAggregator = new Procedure2<AtomicInteger, Integer>()
+{
+    public void value(AtomicInteger aggregate, Integer value)
+    {
+        aggregate.addAndGet(value);
+    }
+};
+Function<Integer, Integer> groupBy =
+new Function<Integer, Integer>()
+{
+    public Integer valueOf(Integer integer)
+    {
+        return integer % 2;
+    }
+};
+FastList<Integer> integers = FastList.newListWith(1, 1, 1, 2, 2, 3);
+MutableMap<Integer, AtomicInteger> aggregation = integers.aggregateInPlaceBy(groupBy, factory, sumAggregator);
+Assert.assertEquals(4, aggregation.get(0).intValue());
+Assert.assertEquals(6, aggregation.get(1).intValue());
+----
+====
+
+//TODO zip is deprecated; use OrderedIterable.zip(Iterable)
+==== Creating collections using chunk and zip
+____
+Grouping and pairing elements of one or more collections.
+____
+
+The *chunk* method can be used to gather the elements of a collection into _chunks_; that is, it creates a collection made up of collections of a specified fixed _size_ (an integer).
+If the _size_ doesn't divide evenly into the total of collection elements, then the final chunk is smaller.
+
+****
+##`*chunk(_size_): RichIterable*`##
+****
+
+Returns a new collection with the source collection's elements grouped in "chunks," with _size_ elements in each chunk, and the last chunk containing the remaining elements, if any.
+
+.*chunk*
+====
+[source,java]
+----
+MutableList<Integer> list =
+    Lists.mutable.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+RichIterable<RichIterable<Integer>> chunks = list.chunk(4);
+System.out.println(chunks);
+       
+----
+====
+
+This example prints out:
+
+----
+[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]
+              
+----
+
+The *zip* method pairs up the elements of one *RichIterable* with those of second.
+If one of the two collections has more elements than the other, those remaining elements are dropped.
+The *zipWithIndex* method is a special case of *zip* that pairs the elements in a collection with their index positions.
+
+****
+##`*zip(RichIterable): RichIterable*`##
+****
+
+Returns a new *RichIterable* by combining, into pairs, corresponding elements from the calling RichIterable collection and the RichIterable collection named in the parameter.
+If one of the two collections is longer, its remaining elements are ignored..
+
+.*zip*
+====
+[source,java]
+----
+MutableList<String> list1 = Lists.mutable.with("One", "Two", "Three", "Truncated");
+MutableList<String> list2 = Lists.mutable.with("Four", "Five", "Six");
+MutableList<Pair<String, String>> pairs = list1.zip(list2);
+System.out.println(pairs);
+----
+====
+
+This example prints out:
+
+----
+[One:Four, Two:Five, Three:Six]
+----
+
+****
+##`*zipWithIndex(): RichIterable*`##
+****
+
+Returns a new *RichIterable* consisting of the calling collection's elements, each paired with its index (beginning with index 0).
+
+.*zipWithIndex*
+====
+[source,java]
+----
+MutableList<String> list = Lists.mutable.with("One", "Two", "Three");
+MutableList<Pair<String, Integer>> pairs = list.zipWithIndex();
+System.out.println(pairs);
+----
+====
+
+This example prints out:
+
+----
+[One:0, Two:1, Three:2]
+----
+
+[#reuse-code-block]
+==== Reusing code blocks
+____
+Using *selectWith*, *rejectWith*, and *collectWith* inside other iteration patterns (or loops) where code blocks can be created outside of the outer iteration patterns or made static.
+____
+
+The collection-returning iteration methods - *collect*, *select*, and *reject* - each take a single parameter: a code block that itself takes a single argument.
+These patterns have alternate forms, methods named *collectWith*, *selectWith*, and**rejectWith** respectively.
+The same is true of the boolean-returning <<short-circuit,short-circuit methods>>, *detect*, *anySatisfy*, *allSatisfy*, and *noneSatisfy*; each has a counterpart having the suffix "With." All of these are available on *RichIterable* and its subinterfaces.
+
+In each case, the "...With" form of the method takes two parameters:
+
+* The first method parameter is a code block that itself takes _two_ arguments; the first argument of the code block is the current element with each iteration.
+* The second method parameter is an object that is then passed to the code block as its second argument.
+
+****
+##`*selectWith(Predicate2, _argument_): RichIterable*`##
+****
+
+****
+##`*rejectWith(Predicate2, _argument_): RichIterable*`##
+****
+
+For each element of the collection, *Predicate2* is evaluated with the element as one argument, plus
+ one additional argument; selected or rejected elements are returned in a new collection of the same type.
+
+****
+##`*collectWith(Predicate2, _argument_): RichIterable*`##
+****
+
+Same as the *collect* method, but two arguments are passed to the code block; returns a new collection of the same type and size.
+
+[NOTE]
+====
+These " *...With*" forms accomplish exactly the same actions as their basic counterparts.
+Although slightly more verbose, they allow for a specific performance optimization, that is, the reuse of the code block with different arguments.
+====
+
+Here is an example of *select* that finds the adults in a list of people.
+First, the JDK version, and then rewritten in Eclipse Collections form:
+
+.Select pattern in imperative Java
+====
+[source,java]
+----
+List<Person> people =...;
+List<Person> adults = Lists.mutable.empty();
+for (Person person : people)
+{
+  if (person.getAge() >= 18)
+  {
+    adults.add(person);
+  }
+}
+----
+====
+
+.Select in Eclipse Collections using a lambda
+====
+[source,java]
+----
+MutableList<Person> people =...;
+MutableList<Person> adults = 
+    people.select(each -> each.getAge() >= 18);
+----
+====
+
+.Select in Eclipse Collections using an anonymous inner class)
+====
+[source,java]
+----
+MutableList<Person> people =...;
+MutableList<Person> adults = people.select(
+    new Predicate<Person>()
+    {
+      public boolean accept(Person each)
+      {
+        return each.getAge() >= 18;
+      }
+    });
+----
+====
+
+
+Here's the same algorithm, again in Eclipse Collections, this time using *selectWith*:
+
+.*selectWith* using a lambda and using a method reference
+====
+[source,java]
+----
+MutableList<Person> people =...;
+MutableList<Person> adults = 
+    people.selectWith((eachPerson, age) -> eachPerson.getAge() > age, 18);
+
+// or
+
+MutableList<Person> adults = 
+    people.selectWith(Person::isOlderThan, 18);
+----
+====
+
+.*selectWith* using an anonymous inner class
+====
+[source,java]
+----
+MutableList<Person> people =...;
+MutableList<Person> adults = people.selectWith(
+    new Predicate2<Person, Integer>()
+    {
+      @Override
+      public boolean accept(Person eachPerson, Integer age)
+      {
+        return eachPerson.getAge() > age;
+      }
+    }, 18);
+----
+====
+
+In this single instance, there is no reason to write it out this longer way; the extra generality - making _age_ the second argument to the *Predicate2* - is unnecessary.
+
+It does make sense, however, if you wanted to filter on multiple ages: you could hold onto and reuse the *Predicate2*, thereby creating less garbage.
+
+.EC selectWith using an anonymous inner class
+====
+[source,java]
+----
+MutableList<Person> people =...;
+Predicate2<Person, Integer> agePredicate =
+    new Predicate2<Person, Integer>()
+    {
+      @Override
+      public boolean accept(Person eachPerson, Integer age)
+      {
+        return eachPerson.getAge() > age;
+      }
+    };
+MutableList<Person> drivers = people.selectWith(agePredicate, 17);
+MutableList<Person> voters = people.selectWith(agePredicate, 18);
+MutableList<Person> drinkers = people.selectWith(agePredicate, 21);
+----
+====
+
+*collectWith*, *selectWith*, and *rejectWith* work well with method references.
+
+.*selectWith* using a method reference
+====
+[source,java]
+----
+MutableList<Person> drivers = people.selectWith(Person::isOlderThan, 17);
+MutableList<Person> voters = people.selectWith(Person::isOlderThan, 18);
+MutableList<Person> drinkers = people.selectWith(Person::isOlderThan, 21);
+----
+====
+
+This style encourages adding more behavior to the classes held in the containers.
+This style works with any "*...With*" method in Java 8 or higher.
+
+== Map iteration methods
+____
+Methods for iterating over **Map**s and **Multimap**s.
+____
+
+The *{MapIterable}* and *{Multimap}* interfaces are _associative arrays_ that contain key-value pairs.
+All of the keys in a *MapIterable* are unique; a *Multimap* can have multiple values associated with each key.
+
+The *Multimap* interface does not extend *MapIterable*.
+*Multimap* has a number of subinterfaces, such as *{ListMultimap}*, *{SetMultimap}*, and *{BagMultimap}*, each with custom behavior for how to handle the collection of values associated with each key.
+
+=== Creating iterable views of maps
+____
+Wrapper classes that return an iterable view of a map; ForEach patterns for *Map* containers.
+____
+
+These three methods each return an unmodifiable *{RichIterable}* view of a *Map*.
+They are essentially wrappers over the modifiable, non-lazy objects returned by the corresponding Java Collections Framework methods.
+
+****
+##`*valuesView(): RichIterable*`##
+****
+
+_(Maps and Multimaps)_ Returns an unmodifiable *RichIterable* wrapper over the values of the *Map*.
+
+****
+##`*keysView(): RichIterable*`##
+****
+
+_(Maps and Multimaps)_ Returns an unmodifiable *RichIterable* wrapper over the keySet of the *Map*.
+
+****
+##`*keyValuesView(): RichIterable*`##
+****
+
+_(Maps only)_ Returns an unmodifiable lazy iterable of key/value pairs.
+
+==== ForEach Iteration
+
+These three methods call a code block for each element on a *Map*; all return void.
+
+****
+##`*forEachKey(Procedure): void*`##
+****
+
+Calls the *{Procedure}* on each key of the *Map*.
+
+****
+##`*forEachValue(Procedure): void*`##
+****
+
+Calls the *Procedure* on each value of the *Map*.
+
+****
+##`*forEachKeyValue(Procedure2): void*`##
+****
+
+Calls the *{Procedure2}* on each key-value pair of the *Map*.
+
+=== Collecting entries
+____
+Gather entries from another collection into a *Map*.
+____
+
+Use the *collectKeysAndValues* method to add all the entries derived from another collection into the current *Map*.
+
+****
+##`*collectKeysAndValues(_collection_, _keyFunction_, _valueFunction_): MutableMap*`##
+****
+
+_(Mutable maps only)_ The key and value for each entry is determined by applying the _keyFunction_ and _valueFunction_ (in each case, a {*Function*}) to each item in _collection_.
+Each is converted into a key-value entry and inserted into the *Map*.
+If a new entry has the same key as an existing entry in the calling map, the new entry's value replaces that of the existing entry.
+
+=== Finding, testing and putting values
+____
+Detect a value by its key and, optionally, insert or return other values.
+____
+
+The *updateValue*, *getIfAbsent* and *ifPresentApply* methods locate a specified key and return a map value that corresponds to that key.
+Depending on whether a value is found at the given key, each method performs a specific action.
+
+****
+##`*add(Pair<K, V>): value*`##
+****
+
+Adds the given key-value pair to the map.
+This is a convenience method for working with **{Pair}**s, similar to **put(**K, V**)**.
+
+****
+##`*updateValue(_key_, Function0, Function): value*`##
+****
+
+If a value in the *Map* corresponds to the specified _key_, this method applies the specified *Function* to the value and replaces the value; otherwise applies the *{Function}* to the value supplied by the *{Function0}* and puts the result as a value in the map at the specified key.
+
+****
+##`*updateValueWith(_key_, Function0, Function2, _parameter_): value*`##
+****
+
+If a value in the *Map* corresponds to the specified _key_, this method applies the specified *{Function2}* to the value and the specified _parameter_ and replaces the value with the result; otherwise applies the *Function2* to the value supplied by the *Function0* and the _parameter_ and puts the result as a value in the map at the specified key.
+
+****
+##`*getIfAbsent(_key_, Function0): element (or Function0 result)*`##
+****
+
+Returns the value in the *Map* that corresponds to the specified _key_; if there is no value at the key, returns the result of evaluating the specified *Function0* (here, specifically, a code block without parameters that returns some object).
+
+****
+##`*getIfAbsentPut(_key_, _value_): element*`##
+****
+
+Returns the value in the *Map* that corresponds to the specified _key_; if there is no value at the key, returns specified _value_, and puts that value in the map at the specified key.
+
+****
+##`*getIfAbsentPut(_key_, Function0): element (or Function0 result)*`##
+****
+
+Returns the value in the *Map* that corresponds to the specified _key_; if there is no value at the key, returns the result of evaluating the specified *Function0*, and puts that value in the map at the specified key
+
+****
+##`*getIfAbsentPutWith(_key_, Function,_parameter_): element (or Function result)*`##
+****
+
+Returns the value in the *Map* that corresponds to the specified _key_; if there is no value at the key, returns the result of evaluating the specified one-argument Function using the specified _parameter_, and put that value in the map at the specified key.
+
+****
+##`**getIfAbsentWith*(_key_, *Function*, _parameter_) *:* *element* (or *Function* result)*`##
+****
+
+Returns the value in the *Map* that corresponds to the specified _key_; if there is no value at the key, returns the result of evaluating the specified *Function* and parameter.
+
+****
+##`**ifPresentApply*(_key_, *Function*) *:* (*Function* result)*`##
+****
+
+If there is a value in the *Map* that corresponds to the specified _key_, returns the result of evaluating the specified *Function* with the value, otherwise returns null.
+
+=== Flipping maps
+____
+Return a new associative array where the position of the keys and values have been flipped
+____
+
+****
+##`*flip(): Multimap*`##
+****
+
+Since the values in the *MapIterable* are not necessarily unique, *flip()* returns a *Multimap* instead of a *MapIterable*.
+
+****
+##`*flipUniqueValues(): MapIterable*`##
+****
+
+Similar to *MapIterable*.*flip()* but asserts that the values in the *MapIterable* are unique and thus returns *MapIterable* instead of *Multimap*.
+Throws *IllegalArgumentException* if the *MapIterable* contains duplicate values.
+
+[cols="3,^1,>3",]
+|===
+|xref:0-Introduction.adoc[previous: Introduction]  | |xref:2-Collection_Containers.adoc[next: Collections and containers]
+|===
+
