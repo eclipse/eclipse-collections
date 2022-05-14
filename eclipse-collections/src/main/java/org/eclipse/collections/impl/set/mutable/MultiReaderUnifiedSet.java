@@ -68,7 +68,7 @@ import static org.eclipse.collections.impl.factory.Iterables.mList;
  * lock to be taken to provide thread-safe iteration. You can use an {@code iterator()} if you use the
  * {@code withReadLockAndDelegate()} or {@code withWriteLockAndDelegate()} methods. Both of these methods take a parameter of type
  * {@code Procedure<MutableSet>}, and a wrapped version of the underlying Unified is returned. This wrapper guarantees that no
- * external pointer can ever reference the underlying UnifiedSet outside of a locked procedure. In the case of the read
+ * external pointer can ever reference the underlying UnifiedSet outside a locked procedure. In the case of the read
  * lock method, an Unmodifiable version of the collection is offered, which will throw UnsupportedOperationExceptions on
  * any write methods like add or remove.
  */

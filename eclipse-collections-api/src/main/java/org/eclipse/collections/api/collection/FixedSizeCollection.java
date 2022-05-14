@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -62,8 +62,8 @@ public interface FixedSizeCollection<T>
 
     /**
      * This method allows fixed size collections the ability to add multiple elements to their existing elements. A new
-     * instance of {@link MutableCollection} is returned containing the elements of the original collection with all of
-     * the new elements {@link #addAll(Collection) added}. Implementations will return a new FixedSizeCollection where
+     * instance of {@link MutableCollection} is returned containing the elements of the original collection with all
+     * the new elements {@link #addAll(Collection)} added. Implementations will return a new FixedSizeCollection where
      * possible. In order to use this method properly with mutable and fixed size collections the following approach
      * must be taken:
      *

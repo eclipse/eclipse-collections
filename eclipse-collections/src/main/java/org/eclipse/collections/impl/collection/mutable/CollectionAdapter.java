@@ -36,8 +36,8 @@ import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
- * This class provides a MutableCollection interface wrapper around a JDK Collections Collection interface instance. All
- * of the MutableCollection interface methods are supported in addition to the JDK Collection interface methods.
+ * This class provides a MutableCollection interface wrapper around a JDK Collections Collection interface instance.
+ * All the MutableCollection interface methods are supported in addition to the JDK Collection interface methods.
  * <p>
  * To create a new instance that wraps a collection with the MutableSet interface, use the {@link #wrapSet(Iterable)}
  * factory method. To create a new instance that wraps a collection with the MutableList interface, use the

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,7 +16,7 @@ import java.util.function.BiConsumer;
 /**
  * A Procedure2 is used by forEachWith() methods and for MapIterate.forEachKeyValue(). In the forEachKeyValue()
  * case the procedure takes the key as the first argument, and the value as the second.  In the forEachWith() case
- * the procedure takes the the element of the collection as the first argument, and the specified parameter as the
+ * the procedure takes the element of the collection as the first argument, and the specified parameter as the
  * second argument.
  */
 @FunctionalInterface

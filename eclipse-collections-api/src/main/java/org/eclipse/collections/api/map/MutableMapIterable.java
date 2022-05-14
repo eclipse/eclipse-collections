@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -186,7 +186,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     /**
      * This method allows mutable, fixed size, and immutable maps the ability to add elements to their existing
      * elements. In order to support fixed size maps, a new instance of a map would have to be returned including the
-     * keys and values of the original plus all of the additional keys and values. In the case of mutable maps, the
+     * keys and values of the original plus all the additional keys and values. In the case of mutable maps, the
      * original map is modified and then returned. In order to use this method properly with mutable and fixed size
      * maps the following approach must be taken:
      *
@@ -231,7 +231,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     /**
      * This method allows mutable, fixed size, and immutable maps the ability to remove elements from their existing
      * elements. In order to support fixed size maps, a new instance of a map would have to be returned including the
-     * keys and values of the original minus all of the keys and values to be removed. In the case of mutable maps, the
+     * keys and values of the original minus all the keys and values to be removed. In the case of mutable maps, the
      * original map is modified and then returned. In order to use this method properly with mutable and fixed size
      * maps the following approach must be taken:
      *

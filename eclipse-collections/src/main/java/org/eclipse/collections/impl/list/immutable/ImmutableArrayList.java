@@ -55,7 +55,7 @@ import org.eclipse.collections.impl.utility.internal.InternalArrayIterate;
 import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
 
 /**
- * An ImmutableArrayList wraps a Java array but it cannot be modified after creation.
+ * An ImmutableArrayList wraps a Java array, but it cannot be modified after creation.
  */
 final class ImmutableArrayList<T>
         extends AbstractImmutableList<T>

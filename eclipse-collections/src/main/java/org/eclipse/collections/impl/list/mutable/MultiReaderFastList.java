@@ -81,7 +81,7 @@ import static org.eclipse.collections.impl.factory.Iterables.mList;
  * these methods are available however, if you use the {@code withReadLockAndDelegate()} or {@code withWriteLockAndDelegate()} methods.
  * Both of these methods take a parameter of type {@code Procedure<MutableList>}, and a wrapped version of the underlying
  * FastList is returned. This wrapper guarantees that no external pointer can ever reference the underlying FastList
- * outside of a locked procedure. In the case of the read lock method, an Unmodifiable version of the collection is
+ * outside a locked procedure. In the case of the read lock method, an Unmodifiable version of the collection is
  * offered, which will throw UnsupportedOperationExceptions on any write methods like add or remove.
  */
 public final class MultiReaderFastList<T>

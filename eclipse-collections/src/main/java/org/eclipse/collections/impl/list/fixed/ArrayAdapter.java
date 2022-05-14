@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,7 +25,7 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
- * This class provides a MutableList wrapper around an array. All of the internal iteration methods of the MutableList
+ * This class provides a MutableList wrapper around an array. All the internal iteration methods of the MutableList
  * interface as well as the JDK Collections List interface are provided. However, the pre-determined fixed-sized
  * semantics of an array are maintained and thus mutating List interface methods such as {@link #add(Object)}, {@link
  * #addAll(Collection)}, {@link #remove(Object)}, {@link #removeAll(Collection)}, etc. are not supported and will throw

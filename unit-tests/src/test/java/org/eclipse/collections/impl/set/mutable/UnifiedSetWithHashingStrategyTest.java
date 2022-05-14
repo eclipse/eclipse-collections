@@ -532,7 +532,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
             Assert.assertSame(newValue, unifiedSet.put(new Integer(newValue)));
         }
 
-        // assert that all redundant puts into a each position of chain bucket return the original element added
+        // assert that all redundant puts into each position of chain bucket return the original element added
         Pool<Integer> set = UnifiedSetWithHashingStrategy.newSet(
                 INTEGER_HASHING_STRATEGY, 4).with(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4);
         for (int i = 0; i < set.size(); i++)
@@ -634,7 +634,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
         Assert.assertTrue(integers.remove(COLLISION_1));
         Verify.assertSize(4, integers);
 
-        //Testing removing a non existent element from a non bucket slot
+        //Testing removing a non-existent element from a non bucket slot
         integers.add(2);
         integers.add(4);
         Assert.assertFalse(integers.remove(1002));

@@ -171,7 +171,7 @@ public interface Bag<T>
     /**
      * Returns the {@code count} most frequently occurring items.
      *
-     * In the event of a tie, all of the items with the number of occurrences that match the occurrences of the last
+     * In the event of a tie, all the items with the number of occurrences that match the occurrences of the last
      * item will be returned.
      *
      * @since 6.0

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -170,7 +170,7 @@ public interface Multimap<K, V>
     RichIterable<K> keysView();
 
     /**
-     * Returns a unmodifiable {@link SetIterable} of keys with O(1) complexity.
+     * Returns an unmodifiable {@link SetIterable} of keys with O(1) complexity.
      */
     SetIterable<K> keySet();
 
@@ -180,7 +180,7 @@ public interface Multimap<K, V>
     Bag<K> keyBag();
 
     /**
-     * Returns an unmodifiable view of all of the values mapped to each key.
+     * Returns an unmodifiable view of all the values mapped to each key.
      */
     RichIterable<RichIterable<V>> multiValuesView();
 
@@ -190,12 +190,12 @@ public interface Multimap<K, V>
     RichIterable<V> valuesView();
 
     /**
-     * Returns a lazy view of the pair of a key and and a lazy view of the values mapped to that key.
+     * Returns a lazy view of the pair of a key and a lazy view of the values mapped to that key.
      */
     RichIterable<Pair<K, RichIterable<V>>> keyMultiValuePairsView();
 
     /**
-     * Returns a lazy view of all of the key/value pairs.
+     * Returns a lazy view of all the key/value pairs.
      */
     RichIterable<Pair<K, V>> keyValuePairsView();
 

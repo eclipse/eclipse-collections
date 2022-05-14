@@ -1271,7 +1271,7 @@ public interface RichIterable<T>
     /**
      * Returns a new collection with the results of applying the specified function on each element of the source
      * collection, but only for those elements which return true upon evaluation of the predicate. This is the
-     * the optimized equivalent of calling iterable.select(predicate).collect(function).
+     * optimized equivalent of calling iterable.select(predicate).collect(function).
      * <p>
      * Example using a Java 8 lambda and method reference:
      * <pre>
@@ -2652,7 +2652,7 @@ public interface RichIterable<T>
             R target);
 
     /**
-     * For each element of the iterable, the function is evaluated and he results of these evaluations are collected
+     * For each element of the iterable, the function is evaluated, and the results of these evaluations are collected
      * into a new map, where the transformed value is the key. The generated keys must each be unique, or else an
      * exception is thrown.
      *

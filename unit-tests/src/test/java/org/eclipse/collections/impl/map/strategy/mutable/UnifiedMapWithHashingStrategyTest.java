@@ -983,7 +983,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
 
         map.removeKey("2");
         map.removeKey("3");
-        // Assert that trim does not happen as long as table.size is as smaller as required
+        // Assert that trim does not happen as long as table.size is as small as required
         Assert.assertFalse(map.trimToSize());
         map.removeKey("5");
         map.removeKey("7");

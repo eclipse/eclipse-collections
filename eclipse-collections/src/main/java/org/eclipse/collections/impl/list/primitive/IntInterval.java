@@ -250,7 +250,7 @@ public final class IntInterval
     }
 
     /**
-     * Returns true if the IntInterval contains all of the specified int values.
+     * Returns true if the IntInterval contains all the specified int values.
      */
     @Override
     public boolean containsAll(int... values)

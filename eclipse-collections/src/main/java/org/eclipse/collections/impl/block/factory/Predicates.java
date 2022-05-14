@@ -26,10 +26,10 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
- * The Predicates class can be used to build common Predicates to be used by methods such
- * as detect:, select: and reject: on the Iterate, MapIterate, and ArrayIterate classes. Predicates supports
- * equals, not equals, less than, greater than, less than or equal to, greater than or equal to, in, not in
- * and, or, and several other Predicate type operations.
+ * The Predicates class can be used to build common Predicates for use in methods such
+ * as detect, select and reject which are found on Iterate, MapIterate, and ArrayIterate classes.
+ * Predicates supports equals, not equals, less than, greater than, less than or equal to, greater than
+ * or equal to, in, not in and, or, and several other Predicate type operations.
  */
 public abstract class Predicates<T>
         implements Predicate<T>

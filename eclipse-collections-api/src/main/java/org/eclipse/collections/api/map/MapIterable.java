@@ -178,8 +178,8 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * returns the original.
      * <p>
      * Since the keys in the input are unique, the values in the output are unique, so the return type should
-     * be a SetMultimap. However since SetMultimap and SortedSetMultimap don't inherit from one another, SetMultimap
-     * here does not allow SortedMapIterable to have a SortedSetMultimap return. Thus we compromise and call this
+     * be a SetMultimap. However, since SetMultimap and SortedSetMultimap don't inherit from one another, SetMultimap
+     * here does not allow SortedMapIterable to have a SortedSetMultimap return. Thus, we compromise and call this
      * Multimap, even though all implementations will be a SetMultimap or SortedSetMultimap.
      *
      * @since 5.0
@@ -232,7 +232,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
 
     /**
      * Return the first key and value of the map for which the predicate evaluates to true when they are given
-     * as arguments. The predicate will only be evaluated until such pair is found or until all of the keys and
+     * as arguments. The predicate will only be evaluated until such pair is found or until all the keys and
      * values of the map have been used as arguments. That is, there may be keys and values of the map that are
      * never used as arguments to the predicate. The result is null if predicate does not evaluate to true for
      * any key/value combination.
@@ -246,8 +246,8 @@ public interface MapIterable<K, V> extends RichIterable<V>
 
     /**
      * Return the first key and value of the map as an Optional for which the predicate evaluates to true when
-     * they are given as arguments. The predicate will only be evaluated until such pair is found or until all
-     * of the keys and values of the map have been used as arguments. That is, there may be keys and values of
+     * they are given as arguments. The predicate will only be evaluated until such pair is found or until
+     * all the keys and values of the map have been used as arguments. That is, there may be keys and values of
      * the map that are never used as arguments to the predicate.
      *
      * <pre>

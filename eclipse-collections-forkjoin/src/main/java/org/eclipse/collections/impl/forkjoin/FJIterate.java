@@ -59,7 +59,7 @@ import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * The FJIterate class contains several parallel algorithms that work with Collections and make use of Java's fork-join
- * framework. All of the higher level parallel algorithms depend on the basic parallel algorithm named {@code forEach}.
+ * framework. All the higher level parallel algorithms depend on the basic parallel algorithm named {@code forEach}.
  * The forEach algorithm employs a batching fork and join approach.
  * <p>
  * All Collections that are not either a {@link RandomAccess} or {@link List} are first converted to a Java array

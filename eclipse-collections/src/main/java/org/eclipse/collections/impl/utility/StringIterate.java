@@ -45,7 +45,7 @@ import org.eclipse.collections.impl.tuple.Tuples;
 /**
  * A string is essentially an array of characters. In Smalltalk a String is a subclass of ArrayedCollection, which means
  * it supports the Collection protocol. StringIterate implements the methods available on the collection protocol that
- * make sense for Strings. Some of the methods are over-specialized, in the form of englishToUppercase() which is a fast
+ * make sense for Strings. Some methods are over-specialized, in the form of englishToUppercase() which is a fast
  * form of uppercase, but does not work for different locales.
  */
 public final class StringIterate
@@ -802,7 +802,7 @@ public final class StringIterate
     }
 
     /**
-     * @return true if all of the characters in the {@code string} answer true for the specified {@code predicate}.
+     * @return true if all the characters in the {@code string} answer true for the specified {@code predicate}.
      * @deprecated since 7.0. Use {@link #allSatisfyChar(String, CharPredicate)} instead.
      */
     @Deprecated
@@ -812,7 +812,7 @@ public final class StringIterate
     }
 
     /**
-     * @return true if all of the characters in the {@code string} answer true for the specified {@code predicate}.
+     * @return true if all the characters in the {@code string} answer true for the specified {@code predicate}.
      * @since 7.0
      */
     public static boolean allSatisfyChar(String string, CharPredicate predicate)
@@ -829,7 +829,7 @@ public final class StringIterate
     }
 
     /**
-     * @return true if all of the code points in the {@code string} answer true for the specified {@code predicate}.
+     * @return true if all the code points in the {@code string} answer true for the specified {@code predicate}.
      * @deprecated since 7.0. Use {@link #allSatisfyCodePoint(String, CodePointPredicate)} instead.
      */
     @Deprecated
@@ -839,7 +839,7 @@ public final class StringIterate
     }
 
     /**
-     * @return true if all of the code points in the {@code string} answer true for the specified {@code predicate}.
+     * @return true if all the code points in the {@code string} answer true for the specified {@code predicate}.
      * @since 7.0
      */
     public static boolean allSatisfyCodePoint(String string, CodePointPredicate predicate)
@@ -914,7 +914,7 @@ public final class StringIterate
     }
 
     /**
-     * @return a new string with all of the characters that return true for the specified {@code predicate}.
+     * @return a new string with all the characters that return true for the specified {@code predicate}.
      * @deprecated since 7.0. Use {@link #selectChar(String, CharPredicate)} instead.
      */
     @Deprecated
@@ -924,7 +924,7 @@ public final class StringIterate
     }
 
     /**
-     * @return a new string with all of the characters that return true for the specified {@code predicate}.
+     * @return a new string with all the characters that return true for the specified {@code predicate}.
      * @since 7.0
      */
     public static String selectChar(String string, CharPredicate predicate)
@@ -943,7 +943,7 @@ public final class StringIterate
     }
 
     /**
-     * @return a new string with all of the code points that return true for the specified {@code predicate}.
+     * @return a new string with all the code points that return true for the specified {@code predicate}.
      * @deprecated since 7.0. Use {@link #selectCodePoint(String, CodePointPredicate)} instead.
      */
     @Deprecated
@@ -953,7 +953,7 @@ public final class StringIterate
     }
 
     /**
-     * @return a new string with all of the code points that return true for the specified {@code predicate}.
+     * @return a new string with all the code points that return true for the specified {@code predicate}.
      * @since 7.0
      */
     public static String selectCodePoint(String string, CodePointPredicate predicate)
@@ -973,7 +973,7 @@ public final class StringIterate
     }
 
     /**
-     * @return a new string excluding all of the characters that return true for the specified {@code predicate}.
+     * @return a new string excluding all the characters that return true for the specified {@code predicate}.
      * @deprecated since 7.0. Use {@link #rejectChar(String, CharPredicate)} instead.
      */
     @Deprecated
@@ -983,7 +983,7 @@ public final class StringIterate
     }
 
     /**
-     * @return a new string excluding all of the characters that return true for the specified {@code predicate}.
+     * @return a new string excluding all the characters that return true for the specified {@code predicate}.
      * @since 7.0
      */
     public static String rejectChar(String string, CharPredicate predicate)
@@ -1002,7 +1002,7 @@ public final class StringIterate
     }
 
     /**
-     * @return a new string excluding all of the code points that return true for the specified {@code predicate}.
+     * @return a new string excluding all the code points that return true for the specified {@code predicate}.
      * @deprecated since 7.0. Use {@link #rejectCodePoint(String, CodePointPredicate)} instead.
      */
     @Deprecated
@@ -1012,7 +1012,7 @@ public final class StringIterate
     }
 
     /**
-     * @return a new string excluding all of the code points that return true for the specified {@code predicate}.
+     * @return a new string excluding all the code points that return true for the specified {@code predicate}.
      * @since 7.0
      */
     public static String rejectCodePoint(String string, CodePointPredicate predicate)

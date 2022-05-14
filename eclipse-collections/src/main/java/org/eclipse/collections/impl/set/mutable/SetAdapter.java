@@ -69,7 +69,7 @@ import org.eclipse.collections.impl.utility.internal.SetIterables;
 import org.eclipse.collections.impl.utility.internal.SetIterate;
 
 /**
- * This class provides a MutableSet wrapper around a JDK Collections Set interface instance. All of the MutableSet
+ * This class provides a MutableSet wrapper around a JDK Collections Set interface instance. All the MutableSet
  * interface methods are supported in addition to the JDK Set interface methods.
  * <p>
  * To create a new wrapper around an existing Set instance, use the {@link #adapt(Set)} factory method.
