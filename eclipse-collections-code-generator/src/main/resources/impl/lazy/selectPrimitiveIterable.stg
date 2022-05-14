@@ -98,12 +98,6 @@ public class Select<name>Iterable
     }
 
     @Override
-    public boolean noneSatisfy(<name>Predicate predicate)
-    {
-        return !this.anySatisfy(predicate);
-    }
-
-    @Override
     public <type>[] toArray()
     {
         final <type>[] array = new <type>[this.size()];
