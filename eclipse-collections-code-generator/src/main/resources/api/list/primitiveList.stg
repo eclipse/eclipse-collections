@@ -22,6 +22,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFun
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name><name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.ordered.primitive.Reversible<name>Iterable;
@@ -33,6 +34,7 @@ import java.util.Spliterator;
 import java.util.stream.StreamSupport;
 import java.util.stream.<name>Stream;
 <endif>
+import java.util.Objects;
 
 /**
  * This file was automatically generated from template file primitiveList.stg.
@@ -56,6 +58,27 @@ public interface <name>List extends Reversible<name>Iterable
     {
         this.forEach(procedure);
         return this;
+    }
+
+    /**
+     * This method iterates over two CharList instances of the same size together using the specified CharCharProcedure.
+     *
+     * @since 11.1
+     */
+    default void forEachInBoth(<name>List other, <name><name>Procedure procedure)
+    {
+        Objects.requireNonNull(other);
+        if (this.size() == other.size())
+        {
+            this.forEachWithIndex((each, index) -> procedure.value(each, other.get(index)));
+        }
+        else
+        {
+            throw new IllegalArgumentException("Attempt to call forEachInBoth with two <name>List instances of different sizes :"
+                    + this.size()
+                    + ':'
+                    + other.size());
+        }
     }
 
     /**

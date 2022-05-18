@@ -30,10 +30,11 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
-import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name><name>Procedure;
+<if(!primitive.intPrimitive)>import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;<endif>
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.list.MutableList;
-<if(!primitive.booleanPrimitive)>import org.eclipse.collections.api.list.primitive.<name>List;<endif>
+import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
@@ -329,6 +330,15 @@ public class Synchronized<name>List
     public Lazy<name>Iterable asReversed()
     {
         return Reverse<name>Iterable.adapt(this);
+    }
+
+    @Override
+    public void forEachInBoth(<name>List other, <name><name>Procedure procedure)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>List().forEachInBoth(other, procedure);
+        }
     }
 
     @Override
