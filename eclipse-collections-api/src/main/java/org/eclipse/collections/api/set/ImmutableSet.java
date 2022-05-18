@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -41,7 +41,7 @@ import org.eclipse.collections.api.tuple.Pair;
 /**
  * ImmutableSet is the non-modifiable equivalent interface to {@link MutableSet}. {@link MutableSet#toImmutable()} will
  * give you an appropriately trimmed implementation of ImmutableSet. All ImmutableSet implementations must implement
- * the java.util.Set interface so they can satisfy the equals() contract and be compared against other set structures
+ * the java.util.Set interface in order to satisfy the equals() contract and be compared against other set structures
  * like UnifiedSet or HashSet.
  */
 public interface ImmutableSet<T>

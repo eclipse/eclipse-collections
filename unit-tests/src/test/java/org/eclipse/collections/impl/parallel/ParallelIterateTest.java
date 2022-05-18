@@ -629,7 +629,7 @@ public class ParallelIterateTest
                 });
 
         // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
-        // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
+        // Indeed, the lower bits of this calculation result are always incorrect due to the information loss of original float values.
         Assert.assertEquals(
                 1.082323233761663,
                 result.get(1),

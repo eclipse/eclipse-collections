@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -46,7 +46,7 @@ import org.eclipse.collections.api.tuple.Pair;
 
 /**
  * A MutableMap is similar to a JCF Map but adds additional useful internal iterator methods. The MutableMap interface
- * additionally implements some of the methods in the Smalltalk Dictionary protocol.
+ * additionally implements some methods in the Smalltalk Dictionary protocol.
  */
 public interface MutableMap<K, V>
         extends MutableMapIterable<K, V>, UnsortedMapIterable<K, V>, Cloneable

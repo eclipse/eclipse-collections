@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -417,7 +417,7 @@ public final class Functions
     }
 
     /**
-     * Bind the input of a Procedure to the result of an function, returning a new Procedure.
+     * Bind the input of a Procedure to the result of a function, returning a new Procedure.
      *
      * @param delegate The Procedure to delegate the invocation to.
      * @param function The Function that will create the input for the delegate
@@ -431,7 +431,7 @@ public final class Functions
     }
 
     /**
-     * Bind the input of a ObjectIntProcedure to the result of an function, returning a new ObjectIntProcedure.
+     * Bind the input of a ObjectIntProcedure to the result of a function, returning a new ObjectIntProcedure.
      *
      * @param delegate The ObjectIntProcedure to delegate the invocation to.
      * @param function The Function that will create the input for the delegate
@@ -445,7 +445,7 @@ public final class Functions
     }
 
     /**
-     * Bind the input of the first argument of a Procedure2 to the result of an function, returning a new Procedure2.
+     * Bind the input of the first argument of a Procedure2 to the result of a function, returning a new Procedure2.
      *
      * @param delegate The Procedure2 to delegate the invocation to.
      * @param function The Function that will create the input for the delegate

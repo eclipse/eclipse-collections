@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -148,8 +148,8 @@ public final class HashBagMultimapWithHashingStrategy<K, V>
         super.readExternal(in);
     }
 
-    // Currently this returns a HashBagMultimap.
-    // On a future release, it will return HashBagWithHashingStrategyMultimap, where the HashBag collection hashing strategy
+    // Currently, this returns a HashBagMultimap.
+    // In a future release, it will return HashBagWithHashingStrategyMultimap, where the HashBag collection hashing strategy
     // will be the hashing strategy of this multimap
     @Override
     public MutableBagMultimap<V, K> flip()

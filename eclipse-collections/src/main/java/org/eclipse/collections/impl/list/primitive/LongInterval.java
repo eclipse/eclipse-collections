@@ -253,7 +253,7 @@ public final class LongInterval
     }
 
     /**
-     * Returns true if the LongInterval contains all of the specified long values.
+     * Returns true if the LongInterval contains all the specified long values.
      */
     @Override
     public boolean containsAll(long... values)

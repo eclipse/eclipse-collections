@@ -51,7 +51,7 @@ public final class StringPredicates
     }
 
     /**
-     * Returns true if a String specified on the predicate is contained within a String passed to the the accept
+     * Returns true if a String specified on the predicate is contained within a String passed to the accept
      * method.
      */
     public static Predicates<String> contains(String otherString)
@@ -60,7 +60,7 @@ public final class StringPredicates
     }
 
     /**
-     * Returns true if a String specified on the predicate is contained within a String passed to the the accept
+     * Returns true if a String specified on the predicate is contained within a String passed to the accept
      * method.
      *
      * @since 5.0
@@ -71,7 +71,7 @@ public final class StringPredicates
     }
 
     /**
-     * Returns true if a char specified on the predicate is contained within a String passed to the the accept
+     * Returns true if a char specified on the predicate is contained within a String passed to the accept
      * method.
      */
     public static Predicates<String> contains(char character)
@@ -80,7 +80,7 @@ public final class StringPredicates
     }
 
     /**
-     * Returns true if a String passed to the the accept method starts with the string specified on the predicate.
+     * Returns true if a String passed to the accept method starts with the string specified on the predicate.
      */
     public static Predicates<String> startsWith(String substring)
     {
@@ -88,7 +88,7 @@ public final class StringPredicates
     }
 
     /**
-     * Returns true if a String passed to the the accept method ends with the string specified on the predicate.
+     * Returns true if a String passed to the accept method ends with the string specified on the predicate.
      */
     public static Predicates<String> endsWith(String substring)
     {

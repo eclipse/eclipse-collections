@@ -19,7 +19,7 @@ import org.eclipse.collections.api.block.function.primitive.IntObjectToIntFuncti
 import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunction;
 
 /**
- * Provides static Function2s which can be used by Iterate.injectInto for adding primitives or to a collection
+ * Provides static Function2 implementations which can be used by Iterate.injectInto for adding primitives or to a collection
  */
 public final class AddFunction
 {

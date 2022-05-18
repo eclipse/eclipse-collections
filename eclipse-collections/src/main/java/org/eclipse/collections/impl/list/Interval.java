@@ -264,7 +264,7 @@ public final class Interval
     }
 
     /**
-     * Returns an Set representing the Integer values from the value from to the value to.
+     * Returns a Set representing the Integer values from the value from to the value to.
      */
     public static MutableSet<Integer> toSet(int from, int to)
     {
@@ -305,7 +305,7 @@ public final class Interval
     }
 
     /**
-     * Returns true if the Interval contains all of the specified int values.
+     * Returns true if the Interval contains all the specified int values.
      */
     public boolean containsAll(int... values)
     {
@@ -533,7 +533,7 @@ public final class Interval
 
     /**
      * This method runs a runnable a specified number of times against an executor. The method is effectively
-     * asynchronous because it does not wait for all of the runnables to finish.
+     * asynchronous because it does not wait for all the runnables to finish.
      */
     public void run(Runnable runnable, Executor executor)
     {

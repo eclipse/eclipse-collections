@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,7 +16,7 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
- * MultimapEachPutProcedure uses an Function to calculate the keys for an object and puts the object with each of
+ * MultimapEachPutProcedure uses a Function to calculate the keys for an object and puts the object with each of
  * the keys into the specified {@link MutableMultimap}.
  */
 public final class MultimapEachPutProcedure<K, V> implements Procedure<V>

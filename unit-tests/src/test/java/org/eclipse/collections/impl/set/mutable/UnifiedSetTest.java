@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -194,7 +194,7 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
             Assert.assertSame(newValue, unifiedSet.put(new Integer(newValue)));
         }
 
-        // assert that all redundant puts into a each position of chain bucket return the original element added
+        // assert that all redundant puts into each position of chain bucket return the original element added
         Pool<Integer> set = UnifiedSet.<Integer>newSet(4).with(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4);
         for (int i = 0; i < set.size(); i++)
         {

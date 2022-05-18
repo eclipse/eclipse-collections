@@ -92,8 +92,8 @@ import org.eclipse.collections.impl.utility.internal.IterableIterate;
 import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
 
 /**
- * The Iterate utility class acts as a router to other utility classes to provide optimized iteration pattern
- * implementations based on the type of iterable. The lowest common denominator used will normally be IterableIterate.
+ * A utility class that acts as a router to other utility classes to provide optimized iteration pattern
+ * implementations based on the type of Iterable. The lowest common denominator used will normally be IterableIterate.
  * Iterate can be used when a JDK interface is the only type available to the developer, as it can
  * determine the best way to iterate based on instanceof checks.
  *

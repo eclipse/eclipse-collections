@@ -68,7 +68,7 @@ import org.eclipse.collections.impl.factory.Iterables;
  * to be taken to provide thread-safe iteration. All of these methods are available however, if you use the
  * {@code withReadLockAndDelegate()} or {@code withWriteLockAndDelegate()} methods. Both of these methods take a parameter of type
  * {@code Procedure<MutableBag>}, and a wrapped version of the underlying HashBag is returned. This wrapper guarantees that
- * no external pointer can ever reference the underlying HashBag outside of a locked procedure. In the case of the
+ * no external pointer can ever reference the underlying HashBag outside a locked procedure. In the case of the
  * read lock method, an Unmodifiable version of the collection is offered, which will throw UnsupportedOperationExceptions
  * on any write methods like add or remove.
  */

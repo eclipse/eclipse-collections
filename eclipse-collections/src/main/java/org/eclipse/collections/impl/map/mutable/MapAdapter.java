@@ -25,7 +25,7 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.MapIterate;
 
 /**
- * This class provides a MutableMap wrapper around a JDK Collections Map interface instance. All of the MutableMap
+ * This class provides a MutableMap wrapper around a JDK Collections Map interface instance. All the MutableMap
  * interface methods are supported in addition to the JDK Map interface methods.
  * <p>
  * To create a new wrapper around an existing Map instance, use the {@link #adapt(Map)} factory method.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -45,7 +45,7 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * An ImmutableMap is different than a JCF Map but in that it has no mutating methods. It shares the read-only
+ * An ImmutableMap is different from a JCF Map because it has no mutating methods. It provides the read-only
  * protocol of a JDK Map.
  */
 public interface ImmutableMap<K, V>

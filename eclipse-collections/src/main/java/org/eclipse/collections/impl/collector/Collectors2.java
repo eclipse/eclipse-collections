@@ -981,7 +981,7 @@ public final class Collectors2
     }
 
     /**
-     * Returns the counts of all of the values returned by applying the specified function to each
+     * Returns the counts of all the values returned by applying the specified function to each
      * item of the Stream.
      *
      * @since 9.1

@@ -89,7 +89,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Mangles the stack trace of {@link AssertionError} so that it looks like its been thrown from the line that
+     * Mangles the stack trace of {@link AssertionError} so that it looks like it's been thrown from the line that
      * called to a custom assertion.
      * <p>
      * This method behaves identically to {@link #throwMangledException(AssertionError, int)} and is provided
@@ -113,9 +113,9 @@ public final class Verify extends Assert
 
     /**
      * Mangles the stack trace of {@link AssertionError} so that it looks like
-     * its been thrown from the line that called to a custom assertion.
+     * it's been thrown from the line that called to a custom assertion.
      * <p>
-     * This is useful for when you are in a debugging session and you want to go to the source
+     * This is useful for when you are in a debugging session, and you want to go to the source
      * of the problem in the test case quickly. The regular use case for this would be something
      * along the lines of:
      * <pre>
@@ -1356,7 +1356,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert that the given {@link Map} contains all of the given keys and values.
+     * Assert that the given {@link Map} contains all the given keys and values.
      */
     public static void assertContainsAllKeyValues(Map<?, ?> actualMap, Object... keyValues)
     {
@@ -1371,7 +1371,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert that the given {@link Map} contains all of the given keys and values.
+     * Assert that the given {@link Map} contains all the given keys and values.
      */
     public static void assertContainsAllKeyValues(
             String mapName,
@@ -1398,7 +1398,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert that the given {@link MapIterable} contains all of the given keys and values.
+     * Assert that the given {@link MapIterable} contains all the given keys and values.
      */
     public static void assertContainsAllKeyValues(MapIterable<?, ?> mapIterable, Object... keyValues)
     {
@@ -1413,7 +1413,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert that the given {@link MapIterable} contains all of the given keys and values.
+     * Assert that the given {@link MapIterable} contains all the given keys and values.
      */
     public static void assertContainsAllKeyValues(
             String mapIterableName,
@@ -1440,7 +1440,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert that the given {@link MutableMapIterable} contains all of the given keys and values.
+     * Assert that the given {@link MutableMapIterable} contains all the given keys and values.
      */
     public static void assertContainsAllKeyValues(MutableMapIterable<?, ?> mutableMapIterable, Object... keyValues)
     {
@@ -1455,7 +1455,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert that the given {@link MutableMapIterable} contains all of the given keys and values.
+     * Assert that the given {@link MutableMapIterable} contains all the given keys and values.
      */
     public static void assertContainsAllKeyValues(
             String mutableMapIterableName,
@@ -1482,7 +1482,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert that the given {@link ImmutableMapIterable} contains all of the given keys and values.
+     * Assert that the given {@link ImmutableMapIterable} contains all the given keys and values.
      */
     public static void assertContainsAllKeyValues(ImmutableMapIterable<?, ?> immutableMapIterable, Object... keyValues)
     {
@@ -1497,7 +1497,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert that the given {@link ImmutableMapIterable} contains all of the given keys and values.
+     * Assert that the given {@link ImmutableMapIterable} contains all the given keys and values.
      */
     public static void assertContainsAllKeyValues(
             String immutableMapIterableName,
@@ -2414,7 +2414,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert the given {@link Multimap} contains all of the given keys and values.
+     * Assert the given {@link Multimap} contains all the given keys and values.
      */
     public static void assertContainsAllEntries(Multimap<?, ?> actualMultimap, Object... keyValues)
     {
@@ -2429,7 +2429,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert the given {@link Multimap} contains all of the given keys and values.
+     * Assert the given {@link Multimap} contains all the given keys and values.
      */
     public static void assertContainsAllEntries(
             String multimapName,
@@ -3397,7 +3397,7 @@ public final class Verify extends Assert
     }
 
     /**
-     * Assert that {@code objectA} and {@code objectB} are equal (via the {@link Object#equals(Object)} method,
+     * Assert that {@code objectA} and {@code objectB} are equal via the {@link Object#equals(Object)} method,
      * and that they both return the same {@link Object#hashCode()}.
      */
     public static void assertEqualsAndHashCode(Object objectA, Object objectB)

@@ -57,7 +57,7 @@ import org.eclipse.collections.impl.utility.Iterate;
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 /**
- * The ParallelIterate class contains several parallel algorithms that work with Collections. All of the higher
+ * The ParallelIterate class contains several parallel algorithms that work with Collections. All the higher
  * level parallel algorithms depend on the basic parallel algorithm named {@code forEach}. The forEach algorithm employs
  * a batching fork and join approach.
  * <p>

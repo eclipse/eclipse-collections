@@ -37,7 +37,7 @@ import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.OrderedIterate;
 
 /**
- * This class provides a MutableList wrapper around a JDK Collections List interface instance. All of the MutableList
+ * This class provides a MutableList wrapper around a JDK Collections List interface instance. All the MutableList
  * interface methods are supported in addition to the JDK List interface methods.
  * <p>
  * To create a new wrapper around an existing List instance, use the {@link #adapt(List)} factory method.

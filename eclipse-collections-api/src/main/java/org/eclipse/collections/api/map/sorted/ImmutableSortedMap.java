@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,7 +49,7 @@ import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * An ImmutableSortedMap is different than a JCF SortedMap in that it has no mutating methods, but it shares
+ * An ImmutableSortedMap is different from a JCF SortedMap because it has no mutating methods. It provides
  * the read-only protocol of a SortedMap.
  */
 public interface ImmutableSortedMap<K, V>

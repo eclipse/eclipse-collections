@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -39,8 +39,8 @@ import org.eclipse.collections.api.partition.ordered.PartitionReversibleIterable
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * A ReversibleIterable is an ordered iterable that you can iterate over forwards or backwards. Besides being ordered,
- * it has methods that support efficient iteration from the end, including {@link #asReversed()} and
+ * A ReversibleIterable is an ordered iterable that you can iterate over forwards or backwards.
+ * It has methods that support efficient iteration from the end, including {@link #asReversed()} and
  * {@link #reverseForEach(Procedure)}.
  *
  * @since 5.0

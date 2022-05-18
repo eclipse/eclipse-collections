@@ -67,7 +67,7 @@ public final class Comparators
     }
 
     /**
-     * This method exists so we can guarantee serialization compatibility in tests.
+     * This method exists in order to guarantee serialization compatibility in tests.
      * @since 11.1
      * @deprecated
      */
@@ -86,7 +86,7 @@ public final class Comparators
     }
 
     /**
-     * This method exists so we can guarantee serialization compatibility in tests.
+     * This method exists in order to guarantee serialization compatibility in tests.
      * @since 11.1
      * @deprecated
      */

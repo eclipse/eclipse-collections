@@ -60,7 +60,7 @@ import org.eclipse.collections.impl.utility.ArrayListIterate;
 import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
 
 /**
- * This class provides a MutableList wrapper around a JDK Collections ArrayList instance. All of the MutableList
+ * This class provides a MutableList wrapper around a JDK Collections ArrayList instance. All the MutableList
  * interface methods are supported in addition to the JDK ArrayList methods.
  * <p>
  * To create a new wrapper around an existing ArrayList instance, use the {@link #adapt(ArrayList)} factory method. To

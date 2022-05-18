@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Xebialabs.
+ * Copyright (c) 2022 Xebialabs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,7 +15,7 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.Procedure;
 
 /**
- * BiMapCollectProcedure uses an Function to calculate the key for an object and puts the object with the key
+ * BiMapCollectProcedure uses a Function to calculate the key for an object and puts the object with the key
  * into the specified BiMap.
  */
 public final class BiMapCollectProcedure<T, K, V> implements Procedure<T>

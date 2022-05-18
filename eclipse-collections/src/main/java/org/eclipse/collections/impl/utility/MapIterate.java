@@ -218,7 +218,7 @@ public final class MapIterate
     }
 
     /**
-     * If there is a value in the Map tat the specified key, return the result of applying the specified Function
+     * If there is a value in the Map that the specified key, return the result of applying the specified Function
      * on the value, otherwise return null.
      */
     public static <K, V, A> A ifPresentApply(
@@ -389,7 +389,7 @@ public final class MapIterate
     }
 
     /**
-     * Adds all the <em>keys</em> from map to a the specified targetCollection.
+     * Adds all the <em>keys</em> from map to the specified targetCollection.
      */
     public static <K, V> Collection<K> addAllKeysTo(Map<K, V> map, Collection<K> targetCollection)
     {
@@ -398,7 +398,7 @@ public final class MapIterate
     }
 
     /**
-     * Adds all the <em>values</em> from map to a the specified targetCollection.
+     * Adds all the <em>values</em> from map to the specified targetCollection.
      */
     public static <K, V> Collection<V> addAllValuesTo(Map<K, V> map, Collection<V> targetCollection)
     {
