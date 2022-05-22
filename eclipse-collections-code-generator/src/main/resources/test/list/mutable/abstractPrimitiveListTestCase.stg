@@ -483,6 +483,29 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
      * @since 11.1.
      */
     @Test
+    public void forEachInBoth()
+    {
+        Mutable<name>List list1 = this.newWith(<["3", "1"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List list2 = this.newWith(<["7", "9"]:(literal.(type))(); separator=", ">);
+        MutableList\<<name><name>Pair> result = Lists.mutable.empty();
+        list1.forEachInBoth(list2, (one, two) -> result.add(PrimitiveTuples.pair(one, two)));
+
+        MutableList\<<name><name>Pair> expected = Lists.mutable.with(
+                PrimitiveTuples.pair(<["3", "7"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["1", "9"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(expected, result);
+
+        Mutable<name>List list3 = this.newWith(<["7", "9", "1"]:(literal.(type))(); separator=", ">);
+        Assert.assertThrows(
+                IllegalArgumentException.class,
+                () -> list1.forEachInBoth(list3,
+                        (one, three) -> result.add(PrimitiveTuples.pair(one, three))));
+    }
+
+    /**
+     * @since 11.1.
+     */
+    @Test
     public void selectWithIndex()
     {
         Mutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);

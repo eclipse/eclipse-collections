@@ -12,7 +12,9 @@ package org.eclipse.collections.impl;
 
 import org.eclipse.collections.api.bag.primitive.MutableCharBag;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.primitive.MutableCharList;
 import org.eclipse.collections.api.tuple.Triplet;
 import org.eclipse.collections.api.tuple.primitive.CharCharPair;
 import org.eclipse.collections.impl.factory.Strings;
@@ -49,6 +51,9 @@ public class WordleTest
     {
         Verify.assertAllSatisfy(
                 TRIPLES,
+                triple -> triple.getOne().equals(new Wordle(triple.getTwo()).guessForEachInBoth(triple.getThree())));
+        Verify.assertAllSatisfy(
+                TRIPLES,
                 triple -> triple.getOne().equals(new Wordle(triple.getTwo()).guessInjectIntoIndex(triple.getThree())));
         Verify.assertAllSatisfy(
                 TRIPLES,
@@ -70,6 +75,27 @@ public class WordleTest
             this.string = string.toLowerCase();
         }
 
+        public String guessForEachInBoth(String guess)
+        {
+            CharAdapter guessChars = Strings.asChars(guess.toLowerCase());
+            CharAdapter hiddenChars = Strings.asChars(this.string);
+            MutableCharBag remaining = CharBags.mutable.empty();
+            hiddenChars.forEachInBoth(guessChars, (h, g) -> remaining.add(h == g ? '.' : h));
+            MutableCharList result = CharLists.mutable.empty();
+            guessChars.forEachInBoth(hiddenChars, (g, h) -> result.add(this.guessMatch(g, h, remaining)));
+            return result.makeString("");
+        }
+
+        private char guessMatch(char guessChar, char hiddenChar, MutableCharBag remaining)
+        {
+            return guessChar == hiddenChar ? Character.toUpperCase(guessChar) : this.guessInDifferentPosition(guessChar, remaining);
+        }
+
+        private char guessInDifferentPosition(char guessChar, MutableCharBag remaining)
+        {
+            return remaining.remove(guessChar) ? guessChar : '.';
+        }
+
         public String guessInjectIntoIndex(String guess)
         {
             CharAdapter guessChars = Strings.asChars(guess.toLowerCase());
@@ -78,9 +104,7 @@ public class WordleTest
                     hiddenChars.injectIntoWithIndex(
                             CharBags.mutable.empty(),
                             (bag, each, i) -> guessChars.get(i) == each ? bag : bag.with(each));
-            return guessChars.collectWithIndex((each, i) -> hiddenChars.get(i) == each
-                            ? Character.toUpperCase(each) : remaining.remove(each) ? each : '.')
-                    .makeString("");
+            return guessChars.collectWithIndex((each, i) -> this.guessMatch(each, hiddenChars.get(i), remaining)).makeString("");
         }
 
         public String guessRejectWithIndex(String guess)
@@ -89,9 +113,7 @@ public class WordleTest
             CharAdapter hiddenChars = Strings.asChars(this.string);
             MutableCharBag remaining =
                     hiddenChars.rejectWithIndex((each, i) -> guessChars.get(i) == each, CharBags.mutable.empty());
-            return guessChars.collectWithIndex((each, i) -> hiddenChars.get(i) == each
-                            ? Character.toUpperCase(each) : remaining.remove(each) ? each : '.')
-                    .makeString("");
+            return guessChars.collectWithIndex((each, i) -> this.guessMatch(each, hiddenChars.get(i), remaining)).makeString("");
         }
 
         public String guessSelectWithIndex(String guess)
@@ -100,9 +122,7 @@ public class WordleTest
             CharAdapter hiddenChars = Strings.asChars(this.string);
             MutableCharBag remaining =
                     hiddenChars.selectWithIndex((each, i) -> guessChars.get(i) != each, CharBags.mutable.empty());
-            return guessChars.collectWithIndex((each, i) -> hiddenChars.get(i) == each
-                            ? Character.toUpperCase(each) : remaining.remove(each) ? each : '.')
-                    .makeString("");
+            return guessChars.collectWithIndex((each, i) -> this.guessMatch(each, hiddenChars.get(i), remaining)).makeString("");
         }
 
         public String guessZipCharReject(String guess)
@@ -114,9 +134,7 @@ public class WordleTest
                             .reject(pair -> pair.getOne() == pair.getTwo())
                             .collectChar(CharCharPair::getOne)
                             .toBag();
-            return charPairs.collectChar(pair -> pair.getOne() == pair.getTwo()
-                            ? Character.toUpperCase(pair.getTwo()) : remaining.remove(pair.getTwo()) ? pair.getTwo() : '.')
-                    .makeString("");
+            return charPairs.collectChar(pair -> this.guessMatch(pair.getTwo(), pair.getOne(), remaining)).makeString("");
         }
     }
 }
