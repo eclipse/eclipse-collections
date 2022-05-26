@@ -12,36 +12,47 @@ All rights reserved.
 = Code blocks
 :sectanchors:
 :toc: left
-:toc-title: Code blocks
+:toc-title: 
 :toclevels: 3
 // Javadoc links
-:api-url:			https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections
+:api-url:           https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections
 //
-:Function:			{api-url}/api/block/function/Function.html[Function]
-:Function0:			{api-url}/api/block/function/Function0.html[Function0]
-:Function2:			{api-url}/api/block/function/Function2.html[Function2]
-:Function3:			{api-url}/api/block/function/Function3.html[Function3]
-:IntFunction:		{api-url}/api/block/function/primitive/IntFunction.html[IntFunction]
-:IntPredicate:		{api-url}/api/block/predicate/primitive/IntPredicate.html[IntPredicate]
-:IntProcedure:		{api-url}/api/block/procedure/primitive/IntProcedure.html[IntProcedure]
-:MutableMultimap:	{api-url}/api/multimap/MutableSetMultimap.html[MutableMultimap]
-:Predicate:			{api-url}/api/block/predicate/Predicate.html[Predicate]
-:Predicate2:		{api-url}/api/block/predicate/Predicate2.html[Predicate2]
-:Predicates:		{api-url}/impl/block/factory/Predicates.html[Predicates]
-:Predicates2:		{api-url}/impl/block/factory/Predicates2.html[Predicates2]
-:StringPredicates:	{api-url}/impl/block/factory/StringPredicates.html[StringPredicates]
-:IntegerPredicates: {api-url}/impl/block/factory/IntegerPredicates.html[IntegerPredicates]
-:LongPredicates:	{api-url}/impl/block/factory/LongPredicates.html[LongPredicates]
-:Procedure:			{api-url}/api/block/procedure/Procedure.html[Procedure]
-:Procedure2:		{api-url}/api/block/procedure/Procedure2.html[Procedure2]
-:Functions:			{api-url}/impl/block/factory/Functions.html[Functions]
-:Functions0:		{api-url}/impl/block/factory/Functions0.html[Functions0]
-:Functions2:		{api-url}/impl/block/factory/Functions2.html[Functions2]
-:IfFunction:        {api-url}/impl/block/function/IfFunction.html[IfFunction]
-:CaseFunction:      {api-url}/impl/block/function/CaseFunction.html[CaseFunction]
-:StringFunctions:	{api-url}/impl/block/factory/StringFunctions.html[StringFunctions]
-:Procedures:		{api-url}/impl/block/factory/Procedures.html[Procedures]
-:Procedures2:		{api-url}/impl/block/factory/Procedures2.html[Procedures2]
+:CaseFunction:              {api-url}/impl/block/function/CaseFunction.html[CaseFunction]
+:CaseProcedure:             {api-url}/impl/block/procedure/CaseProcedure.html[CaseProcedure]
+:ChainedProcedure:          {api-url}/impl/block/procedure/ChainedProcedure.html[ChainedProcedure]
+:CollectionAddProcedure:    {api-url}/impl/block/procedure/CollectionAddProcedure.html[CollectionAddProcedure]
+:CollectionRemoveProcedure: {api-url}/impl/block/procedure/CollectionRemoveProcedure.html[CollectionRemoveProcedure]
+:CountProcedure:            {api-url}/impl/block/procedure/CountProcedure.html[CountProcedure]
+:CounterProcedure:          {api-url}/impl/block/procedure/CounterProcedure.html[CounterProcedure]
+:Function0:                 {api-url}/api/block/function/Function0.html[Function0]
+:Function2:                 {api-url}/api/block/function/Function2.html[Function2]
+:Function3:                 {api-url}/api/block/function/Function3.html[Function3]
+:Function:                  {api-url}/api/block/function/Function.html[Function]
+:Functions0:                {api-url}/impl/block/factory/Functions0.html[Functions0]
+:Functions2:                {api-url}/impl/block/factory/Functions2.html[Functions2]
+:Functions:                 {api-url}/impl/block/factory/Functions.html[Functions]
+:IfFunction:                {api-url}/impl/block/function/IfFunction.html[IfFunction]
+:IfProcedure:               {api-url}/impl/block/procedure/IfProcedure.html[IfProcedure]
+:IfProcedureWith:           {api-url}/impl/block/procedure/IfProcedureWith.html[IfProcedureWith]
+:IntFunction:               {api-url}/api/block/function/primitive/IntFunction.html[IntFunction]
+:IntPredicate:              {api-url}/api/block/predicate/primitive/IntPredicate.html[IntPredicate]
+:IntProcedure:              {api-url}/api/block/procedure/primitive/IntProcedure.html[IntProcedure]
+:IntegerPredicates:         {api-url}/impl/block/factory/IntegerPredicates.html[IntegerPredicates]
+:LongPredicates:            {api-url}/impl/block/factory/LongPredicates.html[LongPredicates]
+:MapPutProcedure:           {api-url}/impl/block/procedure/MapPutProcedure.html[MapPutProcedure]
+:MultimapPutProcedure:      {api-url}/impl/block/procedure/MultimapPutProcedure.html[MultimapPutProcedure]
+:MutableMultimap:           {api-url}/api/multimap/MutableSetMultimap.html[MutableMultimap]
+:ObjectIntProcedure:        {api-url}/api/block/procedure/primitive/ObjectIntProcedure.html[ObjectIntProcedure]
+:Predicate2:                {api-url}/api/block/predicate/Predicate2.html[Predicate2]
+:Predicate:                 {api-url}/api/block/predicate/Predicate.html[Predicate]
+:Predicates2:               {api-url}/impl/block/factory/Predicates2.html[Predicates2]
+:Predicates:                {api-url}/impl/block/factory/Predicates.html[Predicates]
+:Procedure2:                {api-url}/api/block/procedure/Procedure2.html[Procedure2]
+:Procedure:                 {api-url}/api/block/procedure/Procedure.html[Procedure]
+:Procedures2:               {api-url}/impl/block/factory/Procedures2.html[Procedures2]
+:Procedures:                {api-url}/impl/block/factory/Procedures.html[Procedures]
+:StringFunctions:           {api-url}/impl/block/factory/StringFunctions.html[StringFunctions]
+:StringPredicates:          {api-url}/impl/block/factory/StringPredicates.html[StringPredicates]
 // end links; begin body
 
 A _code block_, in Eclipse Collections terms, is a single-abstract-method object that is passed as a parameter to an iteration method.
@@ -52,7 +63,17 @@ This topic enumerates the basic code block types&mdash;the Eclipse Collections i
 What we call a "code block" in Eclipse Collections is roughly analogous to a _lambda expression_.
 The closest analog to a lambda in Java in versions prior to Java 8 is the _anonymous inner class_.
 
-Here are two examples, one implementing *{Predicate}* using an anonymous inner class, and the other using a Java 8+ lambda expression.
+Here are two examples, one implementing *{Predicate}* using a Java 8+ lambda expression, and the other using an anonymous inner class.
+
+.*select* using a lambda
+====
+[source,java]
+----
+MutableList<Person> texans =
+  this.people.select( each -> each.getAddress().getState().equals("TX"));
+Verify.assertSize(1, texans);
+----
+====
 
 .*select* using an anonymous inner class
 ====
@@ -61,21 +82,11 @@ Here are two examples, one implementing *{Predicate}* using an anonymous inner c
 MutableList<Person> texans = this.people.select(
   new Predicate<Person>()
   {
-	public boolean accept(Person each)
-	{
-	  return each.getAddress().getState().equals("TX");
-	}
+    public boolean accept(Person each)
+    {
+      return each.getAddress().getState().equals("TX");
+    }
   });
-Verify.assertSize(1, texans);
-----
-====
-
-.*select* using a lambda
-====
-[source,java]
-----
-MutableList<Person> texans =
-  this.people.select( each -> each.getAddress().getState().equals("TX"));
 Verify.assertSize(1, texans);
 ----
 ====
@@ -107,13 +118,13 @@ Also known as a _discriminator_ or _filter,_ it is used with the filtering metho
 [cols=",,,,",options="header",]
 [%autowidth]
 |===
-|				|Description									|Arguments	|Returns |Used By
-|*Predicate*	|Evaluates each element of a collection +
-				 (the argument), and returns a boolean value.	|One (T)	|boolean |*select*, *reject*, *detect*, *anySatisfy*, *allSatisfy*, *count*
-|*Predicate2*	|Evaluates each element of a collection +
-				 (the first argument); the second argument +
-				 is a parameter passed into the *Predicate2* +
-				 from the calling method.						|Two (T,P)	|boolean |*selectWith*, *rejectWith*, *detectWith*, *anySatisfyWith*, *allSatisfyWith*, *countWith*
+|               |Description                                    |Arguments  |Returns |Used By
+|*Predicate*    |Evaluates each element of a collection +
+                 (the argument), and returns a boolean value.   |One (T)    |boolean |*select*, *reject*, *detect*, *anySatisfy*, *allSatisfy*, *count*
+|*Predicate2*   |Evaluates each element of a collection +
+                 (the first argument); the second argument +
+                 is a parameter passed into the *Predicate2* +
+                 from the calling method.                       |Two (T,P)  |boolean |*selectWith*, *rejectWith*, *detectWith*, *anySatisfyWith*, *allSatisfyWith*, *countWith*
 |===
 
 The *accept* method is implemented to indicate the object passed to the method meets the criteria of this *Predicate*.
@@ -124,13 +135,13 @@ Here is a *Predicate* implemented in a *select* method as an anonymous inner cla
 [source,java]
 ----
 MutableList<Integer> greaterThanFifty =
-	list.select(new Predicate<Integer>()
-	{
-		public boolean accept(Integer each)
-		{
-			return each > 50;
-		}
-	});
+    list.select(new Predicate<Integer>()
+    {
+        public boolean accept(Integer each)
+        {
+            return each > 50;
+        }
+    });
 ----
 ====
 
@@ -151,11 +162,11 @@ MutableList<Integer> selected1 = myList.select(Predicates.greaterThan(50));
 [cols=",",]
 [%autowidth]
 |===
-|*{Predicates}*			|Supports equal, greaterThan, lessThan, in, notIn, and, or, instanceOf, null, notNull, anySatisfy, allSatisfy, etc.
-|*{Predicates2}*		|Works with methods suffixed with "With," such as *selectWith*.
-|*{StringPredicates}*	|Supports empty, notEmpty, contains, isAlpha, isNumeric, isBlank, startsWith, endsWith, matches, etc.
-|*{IntegerPredicates}*	|Supports isEven, isOdd, isPositive, isNegative, isZero.
-|*{LongPredicates}*		|Supports isEven, isOdd, isPositive, isNegative, isZero.
+|*{Predicates}*         |Supports equal, greaterThan, lessThan, in, notIn, and, or, instanceOf, null, notNull, anySatisfy, allSatisfy, etc.
+|*{Predicates2}*        |Works with methods suffixed with "With," such as *selectWith*.
+|*{StringPredicates}*   |Supports empty, notEmpty, contains, isAlpha, isNumeric, isBlank, startsWith, endsWith, matches, etc.
+|*{IntegerPredicates}*  |Supports isEven, isOdd, isPositive, isNegative, isZero.
+|*{LongPredicates}*     |Supports isEven, isOdd, isPositive, isNegative, isZero.
 |===
 
 == Function
@@ -172,12 +183,12 @@ The *{Function}* code block in its most common usage takes each element of a col
 [cols=",,,,",options="header",]
 [%autowidth]
 |===
-| |Description	|Arguments	|Returns 	|Used By
+| |Description  |Arguments  |Returns    |Used By
 |*{Function}* +
-_(transformer)_	|Evaluates each element of a collection as  the argument to the code block logic and  returns a computed value 	|One (T) |Object (V) |*collect*,*flatCollect*, *groupBy*
-|*{Function0}*	|Executes and returns a value (like Callable);  represents deferred evaluation.  |Zero 	|Object (V) |*getIfAbsent*, *getIfAbsentPut*, *ifPresentApply*
-|*{Function2}*	|Used by *injectInto* methods; takes the  accumulator argument as the first argument, and the current item of the collection as the  second argument. 	|Two (T,P) 	|Object (V) |*forEachEntry* *injectInto* *collectWith*
-|*{Function3}*	|Used by *injectIntoWith*; takes the injected argument as the first argument, the current  item of the collection as the second argument,  and the specified parameter for the third argument. The result of each subsequent iteration is passed  in as the first argument. 	|Three (T,P,?) 	|Object (V) |*injectIntoWith*
+_(transformer)_ |Evaluates each element of a collection as  the argument to the code block logic and  returns a computed value  |One (T) |Object (V) |*collect*,*flatCollect*, *groupBy*
+|*{Function0}*  |Executes and returns a value (like Callable);  represents deferred evaluation.  |Zero  |Object (V) |*getIfAbsent*, *getIfAbsentPut*, *ifPresentApply*
+|*{Function2}*  |Used by *injectInto* methods; takes the  accumulator argument as the first argument, and the current item of the collection as the  second argument.   |Two (T,P)  |Object (V) |*forEachEntry* *injectInto* *collectWith*
+|*{Function3}*  |Used by *injectIntoWith*; takes the injected argument as the first argument, the current  item of the collection as the second argument,  and the specified parameter for the third argument. The result of each subsequent iteration is passed  in as the first argument.     |Three (T,P,?)  |Object (V) |*injectIntoWith*
 |===
 
 ==== Other Functions
@@ -195,10 +206,10 @@ _(transformer)_	|Evaluates each element of a collection as  the argument to the 
 [cols=",",]
 [%autowidth]
 |===
-|*Functions*  		|*getToClass*, *getToString*, *getPassThru*
-|*Functions0* 		|*newFastList*, *newHashBag*, *newUnifiedMap*, *newUnifiedSet*, *nullValue*, *value*
-|*Functions2* 		|*fromFunction*
-|*StringFunctions* 	|*firstLetter*, *length*, *subString*, *toFirstChar*, *toInteger*, *toLowerCase*, *toPrimitive* [type], toUpperCase, trim, *firstLetter*
+|*{Functions}*        |*getToClass*, *getToString*, *getPassThru*
+|*{Functions0}*       |*newFastList*, *newHashBag*, *newUnifiedMap*, *newUnifiedSet*, *nullValue*, *value*
+|*{Functions2}*       |*fromFunction*
+|*{StringFunctions}*  |*firstLetter*, *length*, *subString*, *toFirstChar*, *toInteger*, *toLowerCase*, *toPrimitive* [type], toUpperCase, trim, *firstLetter*
 |===
 
 
@@ -211,8 +222,8 @@ A *{Procedure}* is a code block that performs an evaluation on its single argume
 [cols=",",]
 [%autowidth]
 |===
-|*CountProcedure* |Apply a *Predicate* to an object and increment a count if it returns true.
-|*CounterProcedure* |Wrap a specified block and keeps track of the number of times it is executed.
+|*{CountProcedure}* |Apply a *Predicate* to an object and increment a count if it returns true.
+|*{CounterProcedure}* |Wrap a specified block and keeps track of the number of times it is executed.
 |===
 
 === Control execution
@@ -220,11 +231,11 @@ A *{Procedure}* is a code block that performs an evaluation on its single argume
 [cols=",",]
 [%autowidth]
 |===
-|*ChainedProcedure* |Chain together blocks of code to be executed in sequence; *ChainedProcedure* can chain **Procedure**s, **Function**s or *Function2s*.
-|*CaseProcedure* |Create an object form of a case statement, which instead of being based on a single switch value is based on a list of discriminator or block combinations. For the first discriminator that returns true for a given value in the case statement, the corresponding block will be executed.
-|*IfProcedure* |Evaluate the specified block only when a *Predicate* returns true. If the result of evaluating the *Predicate* is false, and the developer has specified that there is an *elseProcedure*, then the elseProcedure is evaluated.
-|*IfProcedureWith* |Same as *IfProcedure*, but with a second argument passed from the calling iteration method.
-|*ObjectIntProcedure* |Takes an int as a second argument; this is usually the index of the current element of a collection.
+|*{ChainedProcedure}* |Chain together blocks of code to be executed in sequence; *ChainedProcedure* can chain **Procedure**s, **Function**s or *Function2s*.
+|*{CaseProcedure}* |Create an object form of a case statement, which instead of being based on a single switch value is based on a list of discriminator or block combinations. For the first discriminator that returns true for a given value in the case statement, the corresponding block will be executed.
+|*{IfProcedure}* |Evaluate the specified block only when a *Predicate* returns true. If the result of evaluating the *Predicate* is false, and the developer has specified that there is an *elseProcedure*, then the elseProcedure is evaluated.
+|*{IfProcedureWith}* |Same as *IfProcedure*, but with a second argument passed from the calling iteration method.
+|*{ObjectIntProcedure}* |Takes an int as a second argument; this is usually the index of the current element of a collection.
 |===
 
 === Modify collections and maps
@@ -232,10 +243,10 @@ A *{Procedure}* is a code block that performs an evaluation on its single argume
 [cols=",",]
 [%autowidth]
 |===
-|*CollectionAddProcedure* |Add elements to the specified collection when block methods are called.
-|*CollectionRemoveProcedure* |Remove element from the specified collection when block methods are called.
-|*MapPutProcedure* |Use a specified *Function* to calculate the key for an object and puts the object into the specified Map at the position of the calculated key.
-|*MultimapPutProcedure* |Use a specified *Function* to calculate the key for an object and puts the object with the key into the specified *MutableMultimap*.
+|*{CollectionAddProcedure}* |Add elements to the specified collection when block methods are called.
+|*{CollectionRemoveProcedure}* |Remove element from the specified collection when block methods are called.
+|*{MapPutProcedure}* |Use a specified *Function* to calculate the key for an object and puts the object into the specified Map at the position of the calculated key.
+|*{MultimapPutProcedure}* |Use a specified *Function* to calculate the key for an object and puts the object with the key into the specified *MutableMultimap*.
 |===
 
 === Procedure factories
@@ -243,8 +254,8 @@ A *{Procedure}* is a code block that performs an evaluation on its single argume
 [cols=","]
 [%autowidth]
 |===
-|*Procedures*  |*append, bind, caseDefault, fromObjectIntProcedure, ifElse, ifTrue, println, synchronizedEach*
-|*Procedures2* |*addToCollection, fromProcedure*
+|*{Procedures}*  |*append, bind, caseDefault, fromObjectIntProcedure, ifElse, ifTrue, println, synchronizedEach*
+|*{Procedures2}* |*addToCollection, fromProcedure*
 |===
 
 [cols="3,^1,>3",]
