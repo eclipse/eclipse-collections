@@ -48,7 +48,7 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 * [Eclipse Collections Katas](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
     * Start Here - [Pet Kata](http://eclipse.github.io/eclipse-collections-kata/pet-kata/#/)
     * Continue Here - [Company Kata](http://eclipse.github.io/eclipse-collections-kata/company-kata/#/)
-* [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md) and [Javadoc](https://www.eclipse.org/collections/javadoc/11.0.0/overview-summary.html)
+* [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/0-RefGuide.adoc) and [Javadoc](https://www.eclipse.org/collections/javadoc/11.0.0/overview-summary.html)
 * [Serializing Eclipse Collections with Jackson](./docs/jackson.md)
 * [Articles](https://github.com/eclipse/eclipse-collections/wiki/Articles) and [Blogs](https://medium.com/tag/eclipse-collections/latest)
 * Some OSS projects that use Eclipse Collections

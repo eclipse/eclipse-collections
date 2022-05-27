@@ -627,7 +627,7 @@ ____
 The _GroupBy_ pattern gathers the elements on the collection into a map-like container called a *{Multimap}*, which associates multiple values for each key.
 The *{Function}* is applied to each element and the result is used as the key into the *Multimap* where the element should appear as the value.
 
-See xref:2-Collection_Containers.adoc#multimap-container[the discussion of Multimap] for examples of **groupby**.
+See xref:2-Collection_Containers.adoc#multimap-container[the discussion of Multimap] for examples of *groupby*.
 
 ****
 ##`*groupBy(Function): Multimap*`##

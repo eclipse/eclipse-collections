@@ -8,6 +8,9 @@
   ~ http://www.eclipse.org/org/documents/edl-v10.php.
   -->
 # Reference Guide <a href="https://www.eclipse.org/collections/"><img align="right" src="https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png" height="25%" width="25%"></a>
+
+<div dir="auto"><a href="https://github.com/eclipse/eclipse-collections/blob/master/docs/0-RefGuide.adoc">A newer version of this guide is available.</a></div><br/>
+
 - [About Eclipse Collections](#-about-eclipse-collections)
 - [About this guide](#-about-this-guide)
 - [Getting Started With Eclipse Collections](#-getting-started-with-eclipse-collections)
