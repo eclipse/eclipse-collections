@@ -297,7 +297,11 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    boolean containsAllIterable(Iterable<?> source);
+    default boolean containsAllIterable(Iterable<?> source)
+    {
+        RichIterable<?> outside = this.toSet();
+        return StreamSupport.stream(source.spliterator(), false).allMatch(outside::contains);
+    }
 
     /**
      * Returns true if all elements in source are contained in this collection.
@@ -305,7 +309,11 @@ public interface RichIterable<T>
      * @see Collection#containsAll(Collection)
      * @since 1.0
      */
-    boolean containsAll(Collection<?> source);
+    default boolean containsAll(Collection<?> source)
+    {
+        return source instanceof RichIterable ? this.containsAllIterable(source)
+                : source.stream().allMatch(this::contains);
+    }
 
     /**
      * Returns true if all elements in the specified var arg array are contained in this collection.

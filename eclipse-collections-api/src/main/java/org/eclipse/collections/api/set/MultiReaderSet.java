@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.set;
 
+import java.util.Collection;
+
 import org.eclipse.collections.api.block.procedure.Procedure;
 
 /**
@@ -23,4 +25,10 @@ public interface MultiReaderSet<T>
     void withReadLockAndDelegate(Procedure<? super MutableSet<T>> procedure);
 
     void withWriteLockAndDelegate(Procedure<? super MutableSet<T>> procedure);
+
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableSet.super.containsAll(source);
+    }
 }

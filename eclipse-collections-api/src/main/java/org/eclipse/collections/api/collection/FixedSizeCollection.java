@@ -156,6 +156,12 @@ public interface FixedSizeCollection<T>
     @Override
     boolean retainAllIterable(Iterable<?> iterable);
 
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableCollection.super.containsAll(source);
+    }
+
     /**
      * @throws UnsupportedOperationException the {@code clear} method is not supported by this collection.
      */

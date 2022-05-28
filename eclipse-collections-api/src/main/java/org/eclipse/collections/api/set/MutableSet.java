@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.set;
 
+import java.util.Collection;
+
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -195,6 +197,12 @@ public interface MutableSet<T>
 
     @Override
     MutableSet<UnsortedSetIterable<T>> powerSet();
+
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableSetIterable.super.containsAll(source);
+    }
 
     /**
      * Converts the MutableSet to the default ImmutableSet implementation.

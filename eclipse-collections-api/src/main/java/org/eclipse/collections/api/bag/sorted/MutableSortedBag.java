@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.bag.sorted;
 
+import java.util.Collection;
+
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -49,6 +51,12 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableSortedBag<T>
         extends SortedBag<T>, MutableBagIterable<T>, Cloneable
 {
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableBagIterable.super.containsAll(source);
+    }
+
     @Override
     MutableSortedBag<T> selectByOccurrences(IntPredicate predicate);
 
