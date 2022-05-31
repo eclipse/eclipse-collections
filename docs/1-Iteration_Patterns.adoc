@@ -2093,7 +2093,7 @@ Use the *collectKeysAndValues* method to add all the entries derived from anothe
 ##`*collectKeysAndValues(_collection_, _keyFunction_, _valueFunction_): MutableMap*`##
 ****
 
-_(Mutable maps only)_ The key and value for each entry is determined by applying the _keyFunction_ and _valueFunction_ (in each case, a {*Function*}) to each item in _collection_.
+_(Mutable maps only)_ The key and value for each entry is determined by applying the _keyFunction_ and _valueFunction_ (in each case, a *{Function}*) to each item in _collection_.
 Each is converted into a key-value entry and inserted into the *Map*.
 If a new entry has the same key as an existing entry in the calling map, the new entry's value replaces that of the existing entry.
 

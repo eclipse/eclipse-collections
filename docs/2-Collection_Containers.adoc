@@ -18,6 +18,7 @@ All rights reserved.
 // Javadoc links
 :api-url:               https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections
 //
+:ArrayStack            {api-url}/impl/stack/mutable/ArrayStack.html[ArrayStack]
 :Bag:                  {api-url}/api/bag/Bag.html[Bag]
 :Bags:                 {api-url}/impl/factory/Bags.html[Bags]
 :BiMap:                {api-url}/api/bimap/BiMap.html[BiMap]
@@ -40,6 +41,7 @@ All rights reserved.
 :IntArrayList:         {api-url}/impl/list/mutable/primitive/IntArrayList.html[IntArrayList]
 :IntHashSet:           {api-url}/impl/set/mutable/primitive/IntHashSet.html[IntHashSet]
 :IntLists:             {api-url}/impl/factory/primitive/IntLists.html[IntLists]
+:IntIntHashMap         {api-url}/impl/map/mutable/primitive/IntIntHashMap.html[IntIntHashMap]
 :IntObjectHashMap:     {api-url}/impl/map/mutable/primitive/IntObjectHashMap.html[IntObjectHashMap]
 :ListIterable:         {api-url}/api/list/ListIterable.html[ListIterable]
 :Lists:                {api-url}/impl/factory/Lists.html[Lists]
@@ -54,12 +56,14 @@ All rights reserved.
 :MutableSetMultimap:   {api-url}/api/multimap/set/MutableSetMultimap.html[MutableSetMultimap]
 :MutableSortedBag:     {api-url}/api/bag/sorted/MutableSortedBag.html[MutableSortedBag]
 :MutableSortedSet:     {api-url}/api/set/sorted/MutableSortedSet.html[MutableSortedSet]
+:MutableSortedMap:     {api-url}/api/map/sorted/MutableSortedSet.html[MutableSortedMap]
 :MutableStack:         {api-url}/api/stack/MutableStack.html[MutableStack]
 :ObjectIntHashMap:     {api-url}/impl/map/mutable/primitive/ObjectIntHashMap.html[ObjectIntHashMap]
 :RichIterable:         {api-url}/api/RichIterable.html[RichIterable]
 :Sets:                 {api-url}/impl/factory/Sets.html[Sets]
 :SortedBag:            {api-url}/api/bag/sorted/SortedBag.html[SortedBag]
 :SortedSetIterable:    {api-url}/api/set/sorted/SortedSetIterable.html[SortedSetIterable]
+:StackIterable:        {api-url}//api/stack/StackIterable.html[StackIterable]
 :Stacks:               {api-url}/impl/factory/Stacks.html[Stacks]
 :StringFunctions:      {api-url}/impl/block/factory/StringFunctions.html[StringFunctions]
 :TreeBag:              {api-url}/impl/bag/sorted/mutable/TreeBag.html[TreeBag]
@@ -1426,5 +1430,5 @@ There are similar methods for each primitive type, e.g., *MutableFloatCollection
 
 [cols="3,^1,>3",]
 |===
-|xref:1-Iteration_Patterns.adoc[previous: Iteration Patterns]|xref:0-RefGuide.adoc[top] |xref:3-Code_Blocks.adoc[next: Code Blocks]
+|xref:1-Iteration_Patterns.adoc[previous: Iteration patterns]|xref:0-RefGuide.adoc[top] |xref:3-Code_Blocks.adoc[next: Code blocks]
 |===
