@@ -168,3 +168,9 @@
 
 [link=EclipseCollectionsMindMap.png]
 image::EclipseCollectionsMindMap.png[Mindmap,800,945]
+
+[cols="3,^1",]
+[%autowidth]
+|===
+|xref:4-Testing_Utilities.adoc[previous: Unit testing]  |xref:0-RefGuide.adoc[top] 
+|===
