@@ -18,7 +18,7 @@ All rights reserved.
 // Javadoc links
 :api-url:               https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections
 //
-:ArrayStack            {api-url}/impl/stack/mutable/ArrayStack.html[ArrayStack]
+:ArrayStack:            {api-url}/impl/stack/mutable/ArrayStack.html[ArrayStack]
 :Bag:                  {api-url}/api/bag/Bag.html[Bag]
 :Bags:                 {api-url}/impl/factory/Bags.html[Bags]
 :BiMap:                {api-url}/api/bimap/BiMap.html[BiMap]
@@ -41,7 +41,7 @@ All rights reserved.
 :IntArrayList:         {api-url}/impl/list/mutable/primitive/IntArrayList.html[IntArrayList]
 :IntHashSet:           {api-url}/impl/set/mutable/primitive/IntHashSet.html[IntHashSet]
 :IntLists:             {api-url}/impl/factory/primitive/IntLists.html[IntLists]
-:IntIntHashMap         {api-url}/impl/map/mutable/primitive/IntIntHashMap.html[IntIntHashMap]
+:IntIntHashMap:         {api-url}/impl/map/mutable/primitive/IntIntHashMap.html[IntIntHashMap]
 :IntObjectHashMap:     {api-url}/impl/map/mutable/primitive/IntObjectHashMap.html[IntObjectHashMap]
 :ListIterable:         {api-url}/api/list/ListIterable.html[ListIterable]
 :Lists:                {api-url}/impl/factory/Lists.html[Lists]
@@ -566,10 +566,10 @@ Assert.assertEquals(HashBiMap.newWithKeysValues(2, "2"), biMap);
 ----
 
 ****
-##`*MutableBiMapinverse()*`##
+##`*MutableBiMap.inverse()*`##
 ****
 
-Returns a reversed view of the *BiMap*.
+Returns a reversed view of the *BiMap*. Calling *inverse* is an inexpensive operation as the view is already cached in the *BiMap*. This is the recommend method for looking up the key associated to a value using `biMap.inverse().get(value)`.
 
 [source,java]
 ----
@@ -1407,7 +1407,7 @@ Returns a read-only view of the source collection.
 ****
 
 Returns a read-only view of the source primitive collection.
-There are similar methods for each primitive type, e.g., *MutableFloatCollection.asUnmodifiable()*  
+There are similar methods for each primitive type, e.g., *MutableFloatCollection.asUnmodifiable()*
 
 === Synchronized collections
 
