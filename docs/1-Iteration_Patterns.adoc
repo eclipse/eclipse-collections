@@ -2,7 +2,7 @@
   Copyright (c) 2022 Goldman Sachs and others.
 All rights reserved.
   This program and the accompanying materials   are made available
-  under the terms of the Eclipse Public License v1.0 and 
+  under the terms of the Eclipse Public License v1.0 and
   Eclipse Distribution License v.1.0 which accompany this distribution.
   The Eclipse Public License is available at
   http://www.eclipse.org/legal/epl-v10.html.
@@ -12,7 +12,7 @@ All rights reserved.
 = Iteration patterns
 :sectanchors:
 :toc: left
-:toc-title: 
+:toc-title:
 :toclevels: 2
 
 // This section would normally be stored in a separate include file; at present, GitHub does not support AsciiDoc include directives.
@@ -134,7 +134,7 @@ create <newCollection>
 
 .Select using a lambda expression
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> greaterThanFifty = list.select(each -> each > 50);
 ----
@@ -142,7 +142,7 @@ MutableList<Integer> greaterThanFifty = list.select(each -> each > 50);
 
 .Select using an anonymous inner class as a code block
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> greaterThanFifty =
     list.select(new Predicate<Integer>()
@@ -158,7 +158,7 @@ MutableList<Integer> greaterThanFifty =
 
 .Creating a select *{Predicate}* using the *{Predicates}* factory
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> greaterThanFifty = list.select(Predicates.greaterThan(50));
 ----
@@ -166,7 +166,7 @@ MutableList<Integer> greaterThanFifty = list.select(Predicates.greaterThan(50));
 
 .Select in Java 8+ Streams using *{Collectors2}*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> greaterThanFifty = list.stream()
     .collect(Collectors2.select(each -> each.intValue() > 50, Lists.mutable::empty));
@@ -175,7 +175,7 @@ MutableList<Integer> greaterThanFifty = list.stream()
 
 .Select pattern in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 List<Integer> greaterThanFifty = Lists.mutable.empty();
 for (Integer each : list)
@@ -202,7 +202,7 @@ create <newCollection>
 
 .Reject using a lambda expression
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> notGreaterThanFifty =
     list.reject(each -> each > 50);
@@ -211,15 +211,16 @@ MutableList<Integer> notGreaterThanFifty =
 
 .Reject *{Predicate}* using the *{Predicates}* factory
 ====
-[source,java]
+[source,java,linenums]
 ----
-MutableList<Integer> notGreaterThanFifty = list.reject(Predicates.greaterThan(50));
+MutableList<Integer> notGreaterThanFifty =
+    list.reject(Predicates.greaterThan(50));
 ----
 ====
 
 .Reject in Java 8+ Streams using *{Collectors2}*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> notGreaterThanFifty = list.stream()
     .collect(Collectors2.reject(each -> each.intValue() > 50, Lists.mutable::empty));
@@ -228,7 +229,7 @@ MutableList<Integer> notGreaterThanFifty = list.stream()
 
 .Reject pattern in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 List<Integer> notGreaterThanFifty = Lists.mutable.empty();
 for (Integer each : list)
@@ -288,9 +289,9 @@ In this example, the list of people is partitioned into lists of adults and chil
 
 .Partition using a lambda expression
 ====
-[source,java]
+[source,java,linenums]
 ----
-PartitionMutableList<Person> partitionedFolks = 
+PartitionMutableList<Person> partitionedFolks =
     people.partition(person -> person.getAge() >= 18);
 MutableList<Person> adults = partitionedFolks.getSelected();
 MutableList<Person> children = partitionedFolks.getRejected();
@@ -299,7 +300,7 @@ MutableList<Person> children = partitionedFolks.getRejected();
 
 .Partition using an anonymous inner class
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> people =...
 PartitionMutableList<Person> partitionedFolks = people.partition(
@@ -315,11 +316,11 @@ MutableList<Person> children = partitionedFolks.getRejected();
 ----
 ====
 
-//// 
+////
 // TODO: is this deprecated? Can't find partitioningBy
 .Partition in Java 8+ Streams using Collectors.partitioningBy
 ====
-[source,java]
+[source,java,linenums]
 ----
 List<Person> people =...
 Map<Boolean, List<Person>> partitionedFolks = people.stream()
@@ -333,7 +334,7 @@ List<Person> children = partitionedFolks.get(Boolean.FALSE);
 //TODO: Why is this example here?
 .Java 8 Streams using *{Collectors2}.partition*
 ====
-[source,java]
+[source,java,linenums]
 ----
 List<Person> people =...
 PartitionMutableList<Person>> partitionedFolks = people.stream()
@@ -386,21 +387,21 @@ create <newCollection>
 
 .Collect using a lambda and using a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
-MutableList<Address> addresses = 
+MutableList<Address> addresses =
     people.collect(person -> person.getAddress());
 
 //or
 
-MutableList<Address> addresses = 
+MutableList<Address> addresses =
     people.collect(Person::getAddress);
 ----
 ====
 
 .Collect using an anonymous inner class
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> people =...;
 Function<Person, Address> addressFunction =
@@ -422,21 +423,21 @@ The result is a *List* of **List**s.
 
 .Collect using a lambda and using a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
-MutableList<MutableList<Address>> addresses = 
+MutableList<MutableList<Address>> addresses =
     people.collect(person -> person.getAddresses());
 
 //or
 
-MutableList<MutableList<Address>> addresses = 
+MutableList<MutableList<Address>> addresses =
     people.collect(Person::getAddresses);
 ----
 ====
 
 .Collect using an anonymous inner class
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> people =...;
 Function<Person, MutableList<Address>> addressFunction =
@@ -454,7 +455,7 @@ MutableList<MutableList<Address>> addresses =
 
 .Collect in Java 8+ Streams using *{Collectors2}*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<MutableList<Address>> addresses = people.stream()
     .map(person -> person.getAddresses())
@@ -469,7 +470,7 @@ MutableList<MutableList<Address>> addresses = people.stream()
 
 .Collect pattern in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 List<Address> addresses = Lists.mutable.empty();
 for (Person person : people)
@@ -492,7 +493,7 @@ for (Person person : people)
 These Eclipse Collections methods implement the Collect pattern:
 
 ****
-##`*collect(Function):&nbsp;RichIterable*`## 
+##`*collect(Function):&nbsp;RichIterable*`##
 ****
 For each element of the collection, the *{Function}* is evaluated with the current element as the argument; returns a new collection with the transformed type.
 
@@ -566,14 +567,14 @@ create <newCollection>
 
 .FlatCollect using a lambda and using a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
-MutableList<Address> flatAddress = 
+MutableList<Address> flatAddress =
     people.flatCollect(person -> person.getAddresses());
 
-// or 
+// or
 
-MutableList<Address> flatAddress = 
+MutableList<Address> flatAddress =
     people.flatCollect(Person::getAddresses);
 ----
 ====
@@ -584,9 +585,9 @@ The difference is that *collect* in this form creates a _collection of collectio
 
 .FlatCollect using an anonymous inner class
 ====
-[source,java]
+[source,java,linenums]
 ----
-MutableList<Address> addresses = 
+MutableList<Address> addresses =
     people.flatCollect(
        new Function<Person, MutableList<Address>>()
        {
@@ -600,7 +601,7 @@ MutableList<Address> addresses =
 
 .FlatCollect in Java 8+ Streams using *{Collectors2}*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Address> flatAddress = people.stream()
     .collect(Collectors2.flatCollect(Person::getAddresses, Lists.mutable::empty));
@@ -609,7 +610,7 @@ MutableList<Address> flatAddress = people.stream()
 
 .FlatCollect in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 List<Address> addresses = Lists.mutable.empty();
 for (Person person : people)
@@ -679,34 +680,34 @@ for each <element> of <collection>
 
 .Detect using a lambda
 ====
-[source,java]
+[source,java,linenums]
 ----
-Integer result = 
+Integer result =
     list.detect(each -> each > 50);
 ----
 ====
 
 .Detect using a *{Predicates}* factory
 ====
-[source,java]
+[source,java,linenums]
 ----
-Integer result = 
+Integer result =
     list.detect(Predicates.greaterThan(50));
 ----
 ====
 
 .Detect in Java 8+ Streams
 ====
-[source,java]
+[source,java,linenums]
 ----
-Integer result = 
+Integer result =
     list.stream().findAny(each -> each > 50).get();
 ----
 ====
 
 .Detect in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 for (int i = 0; i < list.size(); i++)
 {
@@ -769,34 +770,34 @@ for each <element> of <collection>
 
 .AnySatisfy using a lambda
 ====
-[source,java]
+[source,java,linenums]
 ----
-boolean result = 
+boolean result =
     list.anySatisfy(num -> num > 50);
 ----
 ====
 
 .AnySatisfy using a *{Predicates}* factory
 ====
-[source,java]
+[source,java,linenums]
 ----
-boolean result = 
+boolean result =
     list.anySatisfy(Predicates.greaterThan(50));
 ----
 ====
 
 .AnySatisfy in Java 8+ Streams
 ====
-[source,java]
+[source,java,linenums]
 ----
-boolean result = 
+boolean result =
     list.stream().anyMatch(num -> num > 50);
 ----
 ====
 
 .AnySatisfy in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 for (int i = 0; i < list.size(); i++)
 {
@@ -843,40 +844,40 @@ for each <element> of <collection>
      if not condition(<element>)
          return false  // and end process
  otherwise return true
-                      
+
 ----
 ====
 
 .AllSatisfy using a lambda
 ====
-[source,java]
+[source,java,linenums]
 ----
-boolean result = 
+boolean result =
     list.allSatisfy(each -> each > 50);
 ----
 ====
 
 .AllSatisfy using a *{Predicates}* factory
 ====
-[source,java]
+[source,java,linenums]
 ----
-boolean result = 
+boolean result =
     list.allSatisfy(Predicates.greaterThan(50));
 ----
 ====
 
 .AllSatisfy in Java 8+ Streams
 ====
-[source,java]
+[source,java,linenums]
 ----
-boolean result = 
+boolean result =
     list.stream().allMatch(each -> each > 50);
 ----
 ====
 
 .AllSatisfy in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 for (int i = 0; i < list.size(); i++)
 {
@@ -946,7 +947,7 @@ for each <element> of <collection>
 
 .ForEach using a lambda
 ====
-[source,java]
+[source,java,linenums]
 ----
 list.each(each -> doSomething(each));
 
@@ -958,7 +959,7 @@ list.forEach(each -> doSomething(each));
 
 .ForEach using an anonymous inner class
 ====
-[source,java]
+[source,java,linenums]
 ----
 list.each(new Procedure()
 {
@@ -972,7 +973,7 @@ list.each(new Procedure()
 
 .ForEach in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 for (int i = 0; i < list.size(); i++)
 {
@@ -1049,44 +1050,44 @@ set <result> to <initialvalue>
 
 .InjectInto using a lambda and using a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
-Integer result = 
+Integer result =
     Lists.mutable.of(1, 2).injectInto(3, (result, each) -> result + each);
 
 // or
 
-Integer result = 
+Integer result =
     Lists.mutable.of(1, 2).injectInto(3, Integer::sum);
 ----
 ====
 
 .InjectInto using a static class
 ====
-[source,java]
+[source,java,linenums]
 ----
-Integer result = 
+Integer result =
     Lists.mutable.of(1, 2).injectInto(3, AddFunction.INTEGER);
 ----
 ====
 
 .InjectInto in Java 8 Streams using a lambda and using a method reference)
 ====
-[source,java]
+[source,java,linenums]
 ----
-Integer result = 
+Integer result =
     Lists.mutable.of(1, 2).stream().reduce(3, (result, each) -> result + each);
 
 // or
 
-Integer result = 
+Integer result =
     Lists.mutable.of(1, 2).stream().reduce(3, Integer::sum);
 ----
 ====
 
 .InjectInto in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 List<Integer> list = Lists.mutable.of(1, 2);
 int result = 3;
@@ -1146,7 +1147,7 @@ It represents an object made up of elements that can be individually and consecu
 The most commonly used implementations include *{FastList}* and *{UnifiedSet}*.
 
 *{RichIterable}* is extended by *{ListIterable}*, *{SetIterable}*, *{Bag}*, *{StackIterable}*, and *{MapIterable}*.
-A *MapIterable* of keys and values is also a *RichIterable* of values. 
+A *MapIterable* of keys and values is also a *RichIterable* of values.
 (Note that *{Multimap}* and its subinterfaces have a separate API.)
 
 *RichIterable* is also extended by *{MutableCollection}*, and indirectly by *{MutableList}* and *{MutableSet}* (which also extend the mutable Java Collection types *List* and *Set*).
@@ -1179,7 +1180,7 @@ The third element ("address 3") is never examined by *anySatisfy* - although it 
 
 .*anySatisfy* and *collect* using an anonymous inner class
 ====
-[source,java]
+[source,java,linenums]
 ----
 Person person1 = new Person(address1);
 Person person2 = new Person(address2);
@@ -1197,7 +1198,7 @@ By applying a lazy-iteration adapter to *people*, the *collect* iteration defers
 
 .*anySatisfy* and *collect* using a *{Predicates}* factory)
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
 LazyIterable<Person> lazyPeople = people.asLazy();
@@ -1210,7 +1211,7 @@ This example demonstrates lazy iteration using both Java 8 lambdas and method re
 
 .Lazy iteration using a lambda and using a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
 LazyIterable<Person> lazyPeople = people.asLazy();
 LazyIterable<Address> addresses =
@@ -1218,7 +1219,7 @@ LazyIterable<Address> addresses =
 
 //or
 
-LazyIterable<Address> addresses = 
+LazyIterable<Address> addresses =
     lazyPeople.flatCollect(Person::getAddresses);
 ----
 ====
@@ -1284,7 +1285,7 @@ The *ParallelIterable* API is new in 5.0 and considered experimental, as indicat
 API tagged as *@Beta* may be altered in ways that are not backward-compatible, even in minor versions of Eclipse Collections.
 The method *asParallel* is not on interfaces like *RichIterable* in version 5.0, but rather on a few supported collections, including *FastList* and *UnifiedSet*.
 
-[source,java]
+[source,java,linenums]
 ----
 FastList integers = Lists.mutable.with(1, 2, 3, 4, 5, 6, 7, 8, 9);
 ExecutorService threadPool =
@@ -1368,7 +1369,7 @@ Same result with the default delimiter ", " (comma space) and no starting and en
 
 .*makeString*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
 String myDelim = list.makeString("[", "/", "]"); // "[1/2/3]"
@@ -1379,28 +1380,28 @@ String defaultString = list.makeString(); //"1, 2, 3"
 
 .Building strings in Java 8+ Streams
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
-String myDelim = 
+String myDelim =
     list.stream().map(Object::toString).collect(Collectors.joining("/", "[", "]")); // "[1/2/3]"
-String mySeper = 
+String mySeper =
     list.stream().map(Object::toString).collect(Collectors.joining("/")); // "1/2/3"
-String defaultString = 
+String defaultString =
     list.stream().map(Object::toString).collect(Collectors.joining()); // "1/2/3"
 ----
 ====
 
 .Building strings in Java 8+ Streams with *{Collectors2}*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
-String myDelim = 
+String myDelim =
     list.stream().collect(Collectors2.makeString("[", "/", "]")); // "[1/2/3]"
-String mySeper = 
+String mySeper =
     list.stream().collect(Collectors2.makeString("/")); // "1/2/3"
-String defaultString = 
+String defaultString =
     list.stream().collect(Collectors2.makeString()); // "1/2/3"
 ----
 ====
@@ -1427,7 +1428,7 @@ Appends with the default delimiter ", " (comma space) and no starting and ending
 
 .*appendString*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
 Appendable myStringBuilder = new StringBuilder();
@@ -1454,7 +1455,7 @@ Here is a Java 8+ lambda example:
 
 .*count* using a lambda
 ====
-[source,java]
+[source,java,linenums]
 ----
 int count =
     people.count(person -> person.getAddress().getState().getName().equals("New York"));
@@ -1463,12 +1464,12 @@ int count =
 
 .*count* using an anonymous inner class
 ====
-[source,java]
+[source,java,linenums]
 ----
-int count = 
-    people.count(new Predicate<Person>() 
+int count =
+    people.count(new Predicate<Person>()
     {
-      public boolean value(Person person) 
+      public boolean value(Person person)
       {
         return person.getAddress().getState().getName().equals("New York");
       }
@@ -1485,9 +1486,9 @@ The second parameter to *countWith* is passed as the second parameter to the *Pr
 
 .*count* using a *{Predicates2}* factory
 ====
-[source,java]
+[source,java,linenums]
 ----
-int count = 
+int count =
     lastNames.countWith(Predicates2.equal(), "Smith");
 ----
 ====
@@ -1551,7 +1552,7 @@ Returns the minimum value based on the natural ordering.
 
 .*max* and *min*
 ====
-[source,java]
+[source,java,linenums]
 ----
 RichIterable<Integer> iterable = Lists.mutable.with(5, 4, 8, 9, 1);
 Assert.assertEquals(Integer.valueOf(9), iterable.max());
@@ -1562,7 +1563,7 @@ Assert.assertEquals(Integer.valueOf(1), iterable.min());
 If any element in the iterable is not Comparable, then a ClassCastException is thrown.
 
 ====
-[source,java]
+[source,java,linenums]
 ----
 RichIterable<Object> iterable = Lists.mutable.with(5, 4, 8, 9, 1, new Foo());
 iterable.max(); // throws ClassCastException
@@ -1585,13 +1586,13 @@ Returns the minimum element out of this collection based on the comparator.
 
 .*max* and *min*
 ====
-[source,java]
+[source,java,linenums]
 ----
-public class SillyWalk 
+public class SillyWalk
 {
   public final int wiggles;
-  
-  public SillyWalk(int wiggles) 
+
+  public SillyWalk(int wiggles)
   {
     this.wiggles = wiggles;
   }
@@ -1600,11 +1601,12 @@ public class SillyWalk
 ====
 
 ====
+[source,java,linenums]
 ----
 private static final Comparator<SillyWalk> SILLY_WALK_COMPARATOR =
-    new Comparator<SillyWalk>() 
+    new Comparator<SillyWalk>()
     {
-      public int compare(SillyWalk o1, SillyWalk o2) 
+      public int compare(SillyWalk o1, SillyWalk o2)
       {
         return o1.wiggles - o2.wiggles;
       }
@@ -1635,7 +1637,7 @@ Here, we find the youngest person (the minimum person by age).
 
 .*minBy* using a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
 Person alice = new Person("Alice", 40);
 Person bob = new Person("Bob", 30);
@@ -1649,7 +1651,7 @@ In this code example we already had a *Function*, so calling *minBy* was more co
 These two forms are equivalent though.
 
 ====
-[source,java]
+[source,java,linenums]
 ----
 people.minBy(Person::getAge);
 people.min(Comparators.byFunction(Person::getAge));
@@ -1679,7 +1681,7 @@ Returns a *{MapIterable}* by grouping results by keys supplied by evaluating a *
 
 .*aggregateBy* using a lambda and a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
 FastList<Integer> integers = FastList.newListWith(1, 1, 1, 2, 2, 3);
 MutableMap<Integer, Integer> aggregation =
@@ -1694,7 +1696,7 @@ Assert.assertEquals(6, aggregation.get(1).intValue());
 
 .*aggregateBy* using anonymous inner classes
 ====
-[source,java]
+[source,java,linenums]
 ----
 Function0<Integer> factory = new Function0<Integer>()
 {
@@ -1724,7 +1726,7 @@ FastList<Integer> integers = FastList.newListWith(1, 1, 1, 2, 2, 3);
 MutableMap<Integer, Integer> aggregation = integers.aggregateBy(groupBy, factory, sumAggregator);
 Assert.assertEquals(4, aggregation.get(0).intValue());
 Assert.assertEquals(6, aggregation.get(1).intValue());
-                  
+
 ----
 ====
 
@@ -1736,7 +1738,7 @@ Returns the same result as *aggregateBy* with no starting and ending strings.
 
 .*aggregateInPlaceBy* using a lambda and a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
 FastList<Integer> integers = FastList.newListWith(1, 1, 1, 2, 2, 3);
 MutableMap<Integer, AtomicInteger> aggregation =
@@ -1751,7 +1753,7 @@ Assert.assertEquals(6, aggregation.get(1).intValue());
 
 .*aggregateInPlaceBy* using anonymous inner classes
 ====
-[source,java]
+[source,java,linenums]
 ----
 Function0<AtomicInteger> factory = new Function0<AtomicInteger>()
 {
@@ -1799,13 +1801,13 @@ Returns a new collection with the source collection's elements grouped in "chunk
 
 .*chunk*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Integer> list =
     Lists.mutable.with(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 RichIterable<RichIterable<Integer>> chunks = list.chunk(4);
 System.out.println(chunks);
-       
+
 ----
 ====
 
@@ -1813,7 +1815,7 @@ This example prints out:
 
 ----
 [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]
-              
+
 ----
 
 The *zip* method pairs up the elements of one *RichIterable* with those of second.
@@ -1829,7 +1831,7 @@ If one of the two collections is longer, its remaining elements are ignored..
 
 .*zip*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<String> list1 = Lists.mutable.with("One", "Two", "Three", "Truncated");
 MutableList<String> list2 = Lists.mutable.with("Four", "Five", "Six");
@@ -1852,7 +1854,7 @@ Returns a new *RichIterable* consisting of the calling collection's elements, ea
 
 .*zipWithIndex*
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<String> list = Lists.mutable.with("One", "Two", "Three");
 MutableList<Pair<String, Integer>> pairs = list.zipWithIndex();
@@ -1909,7 +1911,7 @@ First, the JDK version, and then rewritten in Eclipse Collections form:
 
 .Select pattern in imperative Java
 ====
-[source,java]
+[source,java,linenums]
 ----
 List<Person> people =...;
 List<Person> adults = Lists.mutable.empty();
@@ -1925,17 +1927,17 @@ for (Person person : people)
 
 .Select in Eclipse Collections using a lambda
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> people =...;
-MutableList<Person> adults = 
+MutableList<Person> adults =
     people.select(each -> each.getAge() >= 18);
 ----
 ====
 
 .Select in Eclipse Collections using an anonymous inner class)
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> people =...;
 MutableList<Person> adults = people.select(
@@ -1954,22 +1956,22 @@ Here's the same algorithm, again in Eclipse Collections, this time using *select
 
 .*selectWith* using a lambda and using a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> people =...;
-MutableList<Person> adults = 
+MutableList<Person> adults =
     people.selectWith((eachPerson, age) -> eachPerson.getAge() > age, 18);
 
 // or
 
-MutableList<Person> adults = 
+MutableList<Person> adults =
     people.selectWith(Person::isOlderThan, 18);
 ----
 ====
 
 .*selectWith* using an anonymous inner class
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> people =...;
 MutableList<Person> adults = people.selectWith(
@@ -1990,7 +1992,7 @@ It does make sense, however, if you wanted to filter on multiple ages: you could
 
 .EC selectWith using an anonymous inner class
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> people =...;
 Predicate2<Person, Integer> agePredicate =
@@ -2012,7 +2014,7 @@ MutableList<Person> drinkers = people.selectWith(agePredicate, 21);
 
 .*selectWith* using a method reference
 ====
-[source,java]
+[source,java,linenums]
 ----
 MutableList<Person> drivers = people.selectWith(Person::isOlderThan, 17);
 MutableList<Person> voters = people.selectWith(Person::isOlderThan, 18);
