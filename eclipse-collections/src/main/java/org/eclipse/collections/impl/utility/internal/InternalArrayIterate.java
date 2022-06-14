@@ -33,16 +33,28 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.ByteFunction;
+import org.eclipse.collections.api.block.function.primitive.CharFunction;
 import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
+import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
+import org.eclipse.collections.api.collection.primitive.MutableDoubleCollection;
+import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
+import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
+import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
+import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
@@ -1211,6 +1223,158 @@ public final class InternalArrayIterate
             {
                 target.add(item);
             }
+        }
+        return target;
+    }
+
+    /**
+     * Adds all array elements to the target MutableBooleanCollection after using the function supplied to convert
+     * each source element to the appropriate type
+     *
+     * @since 12.0
+     */
+    public static <R extends MutableBooleanCollection, T> R collectBoolean(
+            T[] items,
+            int size,
+            BooleanFunction<? super T> booleanFunction,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            target.add(booleanFunction.booleanValueOf(items[i]));
+        }
+        return target;
+    }
+
+    /**
+     * Adds all array elements to the target MutableByteCollection after using the function supplied to convert
+     * each source element to the appropriate type
+     *
+     * @since 12.0
+     */
+    public static <R extends MutableByteCollection, T> R collectByte(
+            T[] items,
+            int size,
+            ByteFunction<? super T> byteFunction,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            target.add(byteFunction.byteValueOf(items[i]));
+        }
+        return target;
+    }
+
+    /**
+     * Adds all array elements to the target MutableCharCollection after using the function supplied to convert
+     * each source element to the appropriate type
+     *
+     * @since 12.0
+     */
+    public static <R extends MutableCharCollection, T> R collectChar(
+            T[] items,
+            int size,
+            CharFunction<? super T> charFunction,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            target.add(charFunction.charValueOf(items[i]));
+        }
+        return target;
+    }
+
+    /**
+     * Adds all array elements to the target MutableDoubleCollection after using the function supplied to convert
+     * each source element to the appropriate type
+     *
+     * @since 12.0
+     */
+    public static <R extends MutableDoubleCollection, T> R collectDouble(
+            T[] items,
+            int size,
+            DoubleFunction<? super T> doubleFunction,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            target.add(doubleFunction.doubleValueOf(items[i]));
+        }
+        return target;
+    }
+
+    /**
+     * Adds all array elements to the target MutableFloatCollection after using the function supplied to convert
+     * each source element to the appropriate type
+     *
+     * @since 12.0
+     */
+    public static <R extends MutableFloatCollection, T> R collectFloat(
+            T[] items,
+            int size,
+            FloatFunction<? super T> floatFunction,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            target.add(floatFunction.floatValueOf(items[i]));
+        }
+        return target;
+    }
+
+    /**
+     * Adds all array elements to the target MutableIntCollection after using the function supplied to convert
+     * each source element to the appropriate type
+     *
+     * @since 12.0
+     */
+    public static <R extends MutableIntCollection, T> R collectInt(
+            T[] items,
+            int size,
+            IntFunction<? super T> intFunction,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            target.add(intFunction.intValueOf(items[i]));
+        }
+        return target;
+    }
+
+    /**
+     * Adds all array elements to the target MutableLongCollection after using the function supplied to convert
+     * each source element to the appropriate type
+     *
+     * @since 12.0
+     */
+    public static <R extends MutableLongCollection, T> R collectLong(
+            T[] items,
+            int size,
+            LongFunction<? super T> longFunction,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            target.add(longFunction.longValueOf(items[i]));
+        }
+        return target;
+    }
+
+    /**
+     * Adds all array elements to the target MutableShortCollection after using the function supplied to convert
+     * each source element to the appropriate type
+     *
+     * @since 12.0
+     */
+    public static <R extends MutableShortCollection, T> R collectShort(
+            T[] items,
+            int size,
+            ShortFunction<? super T> shortFunction,
+            R target)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            target.add(shortFunction.shortValueOf(items[i]));
         }
         return target;
     }
