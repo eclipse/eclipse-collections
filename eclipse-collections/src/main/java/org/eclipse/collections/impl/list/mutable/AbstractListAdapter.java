@@ -30,14 +30,6 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
-import org.eclipse.collections.api.list.primitive.MutableBooleanList;
-import org.eclipse.collections.api.list.primitive.MutableByteList;
-import org.eclipse.collections.api.list.primitive.MutableCharList;
-import org.eclipse.collections.api.list.primitive.MutableDoubleList;
-import org.eclipse.collections.api.list.primitive.MutableFloatList;
-import org.eclipse.collections.api.list.primitive.MutableIntList;
-import org.eclipse.collections.api.list.primitive.MutableLongList;
-import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.stack.MutableStack;
@@ -259,54 +251,6 @@ public abstract class AbstractListAdapter<T>
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
         return ListIterate.collect(this.getDelegate(), function);
-    }
-
-    @Override
-    public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
-    {
-        return ListIterate.collectBoolean(this.getDelegate(), booleanFunction);
-    }
-
-    @Override
-    public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
-    {
-        return ListIterate.collectByte(this.getDelegate(), byteFunction);
-    }
-
-    @Override
-    public MutableCharList collectChar(CharFunction<? super T> charFunction)
-    {
-        return ListIterate.collectChar(this.getDelegate(), charFunction);
-    }
-
-    @Override
-    public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
-    {
-        return ListIterate.collectDouble(this.getDelegate(), doubleFunction);
-    }
-
-    @Override
-    public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
-    {
-        return ListIterate.collectFloat(this.getDelegate(), floatFunction);
-    }
-
-    @Override
-    public MutableIntList collectInt(IntFunction<? super T> intFunction)
-    {
-        return ListIterate.collectInt(this.getDelegate(), intFunction);
-    }
-
-    @Override
-    public MutableLongList collectLong(LongFunction<? super T> longFunction)
-    {
-        return ListIterate.collectLong(this.getDelegate(), longFunction);
-    }
-
-    @Override
-    public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
-    {
-        return ListIterate.collectShort(this.getDelegate(), shortFunction);
     }
 
     @Override

@@ -19,26 +19,10 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
-import org.eclipse.collections.api.block.function.primitive.ByteFunction;
-import org.eclipse.collections.api.block.function.primitive.CharFunction;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.FloatFunction;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
-import org.eclipse.collections.api.block.function.primitive.LongFunction;
-import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.Sets;
-import org.eclipse.collections.api.factory.primitive.BooleanSets;
-import org.eclipse.collections.api.factory.primitive.ByteSets;
-import org.eclipse.collections.api.factory.primitive.CharSets;
-import org.eclipse.collections.api.factory.primitive.DoubleSets;
-import org.eclipse.collections.api.factory.primitive.FloatSets;
-import org.eclipse.collections.api.factory.primitive.IntSets;
-import org.eclipse.collections.api.factory.primitive.LongSets;
-import org.eclipse.collections.api.factory.primitive.ShortSets;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.ImmutableSet;
@@ -46,14 +30,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
-import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
-import org.eclipse.collections.api.set.primitive.MutableByteSet;
-import org.eclipse.collections.api.set.primitive.MutableCharSet;
-import org.eclipse.collections.api.set.primitive.MutableDoubleSet;
-import org.eclipse.collections.api.set.primitive.MutableFloatSet;
-import org.eclipse.collections.api.set.primitive.MutableIntSet;
-import org.eclipse.collections.api.set.primitive.MutableLongSet;
-import org.eclipse.collections.api.set.primitive.MutableShortSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
@@ -264,54 +240,6 @@ public final class SetAdapter<T>
     public <V> MutableSet<V> collect(Function<? super T, ? extends V> function)
     {
         return Iterate.collect(this.delegate, function, Sets.mutable.empty());
-    }
-
-    @Override
-    public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
-    {
-        return this.collectBoolean(booleanFunction, BooleanSets.mutable.empty());
-    }
-
-    @Override
-    public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
-    {
-        return this.collectByte(byteFunction, ByteSets.mutable.empty());
-    }
-
-    @Override
-    public MutableCharSet collectChar(CharFunction<? super T> charFunction)
-    {
-        return this.collectChar(charFunction, CharSets.mutable.empty());
-    }
-
-    @Override
-    public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
-    {
-        return this.collectDouble(doubleFunction, DoubleSets.mutable.empty());
-    }
-
-    @Override
-    public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
-    {
-        return this.collectFloat(floatFunction, FloatSets.mutable.empty());
-    }
-
-    @Override
-    public MutableIntSet collectInt(IntFunction<? super T> intFunction)
-    {
-        return this.collectInt(intFunction, IntSets.mutable.empty());
-    }
-
-    @Override
-    public MutableLongSet collectLong(LongFunction<? super T> longFunction)
-    {
-        return this.collectLong(longFunction, LongSets.mutable.empty());
-    }
-
-    @Override
-    public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
-    {
-        return this.collectShort(shortFunction, ShortSets.mutable.empty());
     }
 
     @Override

@@ -23,6 +23,14 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.primitive.BooleanSets;
+import org.eclipse.collections.api.factory.primitive.ByteSets;
+import org.eclipse.collections.api.factory.primitive.CharSets;
+import org.eclipse.collections.api.factory.primitive.DoubleSets;
+import org.eclipse.collections.api.factory.primitive.FloatSets;
+import org.eclipse.collections.api.factory.primitive.IntSets;
+import org.eclipse.collections.api.factory.primitive.LongSets;
+import org.eclipse.collections.api.factory.primitive.ShortSets;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
@@ -103,28 +111,52 @@ public interface MutableSet<T>
     <V> MutableSet<V> collect(Function<? super T, ? extends V> function);
 
     @Override
-    MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction);
+    default MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
+    {
+        return this.collectBoolean(booleanFunction, BooleanSets.mutable.empty());
+    }
 
     @Override
-    MutableByteSet collectByte(ByteFunction<? super T> byteFunction);
+    default MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
+    {
+        return this.collectByte(byteFunction, ByteSets.mutable.empty());
+    }
 
     @Override
-    MutableCharSet collectChar(CharFunction<? super T> charFunction);
+    default MutableCharSet collectChar(CharFunction<? super T> charFunction)
+    {
+        return this.collectChar(charFunction, CharSets.mutable.empty());
+    }
 
     @Override
-    MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction);
+    default MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
+    {
+        return this.collectDouble(doubleFunction, DoubleSets.mutable.empty());
+    }
 
     @Override
-    MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction);
+    default MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
+    {
+        return this.collectFloat(floatFunction, FloatSets.mutable.empty());
+    }
 
     @Override
-    MutableIntSet collectInt(IntFunction<? super T> intFunction);
+    default MutableIntSet collectInt(IntFunction<? super T> intFunction)
+    {
+        return this.collectInt(intFunction, IntSets.mutable.empty());
+    }
 
     @Override
-    MutableLongSet collectLong(LongFunction<? super T> longFunction);
+    default MutableLongSet collectLong(LongFunction<? super T> longFunction)
+    {
+        return this.collectLong(longFunction, LongSets.mutable.empty());
+    }
 
     @Override
-    MutableShortSet collectShort(ShortFunction<? super T> shortFunction);
+    default MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
+    {
+        return this.collectShort(shortFunction, ShortSets.mutable.empty());
+    }
 
     @Override
     <P, V> MutableSet<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);

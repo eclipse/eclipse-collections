@@ -382,21 +382,9 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public MutableBooleanCollection collectBoolean(BooleanFunction<? super T> booleanFunction)
-    {
-        return Iterate.collectBoolean(this.getDelegate(), booleanFunction);
-    }
-
-    @Override
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
         return Iterate.collectBoolean(this.getDelegate(), booleanFunction, target);
-    }
-
-    @Override
-    public MutableByteCollection collectByte(ByteFunction<? super T> byteFunction)
-    {
-        return Iterate.collectByte(this.getDelegate(), byteFunction);
     }
 
     @Override
@@ -406,21 +394,9 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public MutableCharCollection collectChar(CharFunction<? super T> charFunction)
-    {
-        return Iterate.collectChar(this.getDelegate(), charFunction);
-    }
-
-    @Override
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
         return Iterate.collectChar(this.getDelegate(), charFunction, target);
-    }
-
-    @Override
-    public MutableDoubleCollection collectDouble(DoubleFunction<? super T> doubleFunction)
-    {
-        return Iterate.collectDouble(this.getDelegate(), doubleFunction);
     }
 
     @Override
@@ -430,21 +406,9 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public MutableFloatCollection collectFloat(FloatFunction<? super T> floatFunction)
-    {
-        return Iterate.collectFloat(this.getDelegate(), floatFunction);
-    }
-
-    @Override
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
         return Iterate.collectFloat(this.getDelegate(), floatFunction, target);
-    }
-
-    @Override
-    public MutableIntCollection collectInt(IntFunction<? super T> intFunction)
-    {
-        return Iterate.collectInt(this.getDelegate(), intFunction);
     }
 
     @Override
@@ -454,21 +418,9 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public MutableLongCollection collectLong(LongFunction<? super T> longFunction)
-    {
-        return Iterate.collectLong(this.getDelegate(), longFunction);
-    }
-
-    @Override
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
         return Iterate.collectLong(this.getDelegate(), longFunction, target);
-    }
-
-    @Override
-    public MutableShortCollection collectShort(ShortFunction<? super T> shortFunction)
-    {
-        return Iterate.collectShort(this.getDelegate(), shortFunction);
     }
 
     @Override

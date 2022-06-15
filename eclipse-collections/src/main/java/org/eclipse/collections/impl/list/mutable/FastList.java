@@ -74,23 +74,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
-import org.eclipse.collections.api.factory.primitive.BooleanLists;
-import org.eclipse.collections.api.factory.primitive.ByteLists;
-import org.eclipse.collections.api.factory.primitive.CharLists;
-import org.eclipse.collections.api.factory.primitive.DoubleLists;
-import org.eclipse.collections.api.factory.primitive.FloatLists;
-import org.eclipse.collections.api.factory.primitive.IntLists;
-import org.eclipse.collections.api.factory.primitive.LongLists;
-import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.list.primitive.MutableBooleanList;
-import org.eclipse.collections.api.list.primitive.MutableByteList;
-import org.eclipse.collections.api.list.primitive.MutableCharList;
-import org.eclipse.collections.api.list.primitive.MutableDoubleList;
-import org.eclipse.collections.api.list.primitive.MutableFloatList;
-import org.eclipse.collections.api.list.primitive.MutableIntList;
-import org.eclipse.collections.api.list.primitive.MutableLongList;
-import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
@@ -768,12 +752,6 @@ public class FastList<T>
     }
 
     @Override
-    public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
-    {
-        return this.collectBoolean(booleanFunction, BooleanLists.mutable.withInitialCapacity(this.size));
-    }
-
-    @Override
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
         for (int i = 0; i < this.size; i++)
@@ -792,12 +770,6 @@ public class FastList<T>
             target.addAll(function.valueOf(this.items[i]));
         }
         return target;
-    }
-
-    @Override
-    public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
-    {
-        return this.collectByte(byteFunction, ByteLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -822,12 +794,6 @@ public class FastList<T>
     }
 
     @Override
-    public MutableCharList collectChar(CharFunction<? super T> charFunction)
-    {
-        return this.collectChar(charFunction, CharLists.mutable.withInitialCapacity(this.size));
-    }
-
-    @Override
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
         for (int i = 0; i < this.size; i++)
@@ -846,12 +812,6 @@ public class FastList<T>
             target.addAll(function.valueOf(this.items[i]));
         }
         return target;
-    }
-
-    @Override
-    public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
-    {
-        return this.collectDouble(doubleFunction, DoubleLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -876,12 +836,6 @@ public class FastList<T>
     }
 
     @Override
-    public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
-    {
-        return this.collectFloat(floatFunction, FloatLists.mutable.withInitialCapacity(this.size));
-    }
-
-    @Override
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
         for (int i = 0; i < this.size; i++)
@@ -900,12 +854,6 @@ public class FastList<T>
             target.addAll(function.valueOf(this.items[i]));
         }
         return target;
-    }
-
-    @Override
-    public MutableIntList collectInt(IntFunction<? super T> intFunction)
-    {
-        return this.collectInt(intFunction, IntLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
@@ -930,12 +878,6 @@ public class FastList<T>
     }
 
     @Override
-    public MutableLongList collectLong(LongFunction<? super T> longFunction)
-    {
-        return this.collectLong(longFunction, LongLists.mutable.withInitialCapacity(this.size));
-    }
-
-    @Override
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
         for (int i = 0; i < this.size; i++)
@@ -954,12 +896,6 @@ public class FastList<T>
             target.addAll(function.valueOf(this.items[i]));
         }
         return target;
-    }
-
-    @Override
-    public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
-    {
-        return this.collectShort(shortFunction, ShortLists.mutable.withInitialCapacity(this.size));
     }
 
     @Override
