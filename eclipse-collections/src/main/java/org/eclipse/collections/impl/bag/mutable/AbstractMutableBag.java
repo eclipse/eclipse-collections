@@ -18,38 +18,14 @@ import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.ParallelUnsortedBag;
-import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
-import org.eclipse.collections.api.bag.primitive.MutableByteBag;
-import org.eclipse.collections.api.bag.primitive.MutableCharBag;
-import org.eclipse.collections.api.bag.primitive.MutableDoubleBag;
-import org.eclipse.collections.api.bag.primitive.MutableFloatBag;
-import org.eclipse.collections.api.bag.primitive.MutableIntBag;
-import org.eclipse.collections.api.bag.primitive.MutableLongBag;
-import org.eclipse.collections.api.bag.primitive.MutableShortBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
-import org.eclipse.collections.api.block.function.primitive.ByteFunction;
-import org.eclipse.collections.api.block.function.primitive.CharFunction;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.FloatFunction;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
-import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
-import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Sets;
-import org.eclipse.collections.api.factory.primitive.BooleanBags;
-import org.eclipse.collections.api.factory.primitive.ByteBags;
-import org.eclipse.collections.api.factory.primitive.CharBags;
-import org.eclipse.collections.api.factory.primitive.DoubleBags;
-import org.eclipse.collections.api.factory.primitive.FloatBags;
-import org.eclipse.collections.api.factory.primitive.IntBags;
-import org.eclipse.collections.api.factory.primitive.LongBags;
-import org.eclipse.collections.api.factory.primitive.ShortBags;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.set.MutableSet;
@@ -201,54 +177,6 @@ public abstract class AbstractMutableBag<T>
     public <V> MutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.flatCollect(function, HashBag.newBag());
-    }
-
-    @Override
-    public MutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction)
-    {
-        return this.collectBoolean(booleanFunction, BooleanBags.mutable.empty());
-    }
-
-    @Override
-    public MutableByteBag collectByte(ByteFunction<? super T> byteFunction)
-    {
-        return this.collectByte(byteFunction, ByteBags.mutable.empty());
-    }
-
-    @Override
-    public MutableCharBag collectChar(CharFunction<? super T> charFunction)
-    {
-        return this.collectChar(charFunction, CharBags.mutable.empty());
-    }
-
-    @Override
-    public MutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction)
-    {
-        return this.collectDouble(doubleFunction, DoubleBags.mutable.empty());
-    }
-
-    @Override
-    public MutableFloatBag collectFloat(FloatFunction<? super T> floatFunction)
-    {
-        return this.collectFloat(floatFunction, FloatBags.mutable.empty());
-    }
-
-    @Override
-    public MutableIntBag collectInt(IntFunction<? super T> intFunction)
-    {
-        return this.collectInt(intFunction, IntBags.mutable.empty());
-    }
-
-    @Override
-    public MutableLongBag collectLong(LongFunction<? super T> longFunction)
-    {
-        return this.collectLong(longFunction, LongBags.mutable.empty());
-    }
-
-    @Override
-    public MutableShortBag collectShort(ShortFunction<? super T> shortFunction)
-    {
-        return this.collectShort(shortFunction, ShortBags.mutable.empty());
     }
 
     /**

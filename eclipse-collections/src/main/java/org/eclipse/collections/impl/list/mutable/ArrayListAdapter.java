@@ -19,36 +19,12 @@ import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
-import org.eclipse.collections.api.block.function.primitive.ByteFunction;
-import org.eclipse.collections.api.block.function.primitive.CharFunction;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.FloatFunction;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
-import org.eclipse.collections.api.block.function.primitive.LongFunction;
-import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
-import org.eclipse.collections.api.factory.primitive.BooleanLists;
-import org.eclipse.collections.api.factory.primitive.ByteLists;
-import org.eclipse.collections.api.factory.primitive.CharLists;
-import org.eclipse.collections.api.factory.primitive.DoubleLists;
-import org.eclipse.collections.api.factory.primitive.FloatLists;
-import org.eclipse.collections.api.factory.primitive.IntLists;
-import org.eclipse.collections.api.factory.primitive.LongLists;
-import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.list.primitive.MutableBooleanList;
-import org.eclipse.collections.api.list.primitive.MutableByteList;
-import org.eclipse.collections.api.list.primitive.MutableCharList;
-import org.eclipse.collections.api.list.primitive.MutableDoubleList;
-import org.eclipse.collections.api.list.primitive.MutableFloatList;
-import org.eclipse.collections.api.list.primitive.MutableIntList;
-import org.eclipse.collections.api.list.primitive.MutableLongList;
-import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
@@ -327,70 +303,6 @@ public final class ArrayListAdapter<T>
     public <V> ArrayListAdapter<V> collect(Function<? super T, ? extends V> function)
     {
         return this.wrap(ArrayListIterate.collect(this.delegate, function));
-    }
-
-    @Override
-    public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
-    {
-        MutableBooleanList result = BooleanLists.mutable.withInitialCapacity(this.size());
-        this.each(each -> result.add(booleanFunction.booleanValueOf(each)));
-        return result;
-    }
-
-    @Override
-    public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
-    {
-        MutableByteList result = ByteLists.mutable.withInitialCapacity(this.size());
-        this.each(each -> result.add(byteFunction.byteValueOf(each)));
-        return result;
-    }
-
-    @Override
-    public MutableCharList collectChar(CharFunction<? super T> charFunction)
-    {
-        MutableCharList result = CharLists.mutable.withInitialCapacity(this.size());
-        this.each(each -> result.add(charFunction.charValueOf(each)));
-        return result;
-    }
-
-    @Override
-    public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
-    {
-        MutableDoubleList result = DoubleLists.mutable.withInitialCapacity(this.size());
-        this.each(each -> result.add(doubleFunction.doubleValueOf(each)));
-        return result;
-    }
-
-    @Override
-    public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
-    {
-        MutableFloatList result = FloatLists.mutable.withInitialCapacity(this.size());
-        this.each(each -> result.add(floatFunction.floatValueOf(each)));
-        return result;
-    }
-
-    @Override
-    public MutableIntList collectInt(IntFunction<? super T> intFunction)
-    {
-        MutableIntList result = IntLists.mutable.withInitialCapacity(this.size());
-        this.each(each -> result.add(intFunction.intValueOf(each)));
-        return result;
-    }
-
-    @Override
-    public MutableLongList collectLong(LongFunction<? super T> longFunction)
-    {
-        MutableLongList result = LongLists.mutable.withInitialCapacity(this.size());
-        this.each(each -> result.add(longFunction.longValueOf(each)));
-        return result;
-    }
-
-    @Override
-    public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
-    {
-        MutableShortList result = ShortLists.mutable.withInitialCapacity(this.size());
-        this.each(each -> result.add(shortFunction.shortValueOf(each)));
-        return result;
     }
 
     @Override

@@ -34,6 +34,14 @@ import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
 import org.eclipse.collections.api.list.primitive.MutableCharList;
@@ -166,28 +174,52 @@ public interface MutableList<T>
     }
 
     @Override
-    MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction);
+    default MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
+    {
+        return this.collectBoolean(booleanFunction, BooleanLists.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
-    MutableByteList collectByte(ByteFunction<? super T> byteFunction);
+    default MutableByteList collectByte(ByteFunction<? super T> byteFunction)
+    {
+        return this.collectByte(byteFunction, ByteLists.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
-    MutableCharList collectChar(CharFunction<? super T> charFunction);
+    default MutableCharList collectChar(CharFunction<? super T> charFunction)
+    {
+        return this.collectChar(charFunction, CharLists.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
-    MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction);
+    default MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
+    {
+        return this.collectDouble(doubleFunction, DoubleLists.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
-    MutableFloatList collectFloat(FloatFunction<? super T> floatFunction);
+    default MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
+    {
+        return this.collectFloat(floatFunction, FloatLists.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
-    MutableIntList collectInt(IntFunction<? super T> intFunction);
+    default MutableIntList collectInt(IntFunction<? super T> intFunction)
+    {
+        return this.collectInt(intFunction, IntLists.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
-    MutableLongList collectLong(LongFunction<? super T> longFunction);
+    default MutableLongList collectLong(LongFunction<? super T> longFunction)
+    {
+        return this.collectLong(longFunction, LongLists.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
-    MutableShortList collectShort(ShortFunction<? super T> shortFunction);
+    default MutableShortList collectShort(ShortFunction<? super T> shortFunction)
+    {
+        return this.collectShort(shortFunction, ShortLists.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
     default <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)

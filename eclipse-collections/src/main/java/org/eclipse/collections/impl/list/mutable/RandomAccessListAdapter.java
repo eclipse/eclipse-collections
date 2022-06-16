@@ -20,14 +20,6 @@ import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
-import org.eclipse.collections.api.block.function.primitive.ByteFunction;
-import org.eclipse.collections.api.block.function.primitive.CharFunction;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.FloatFunction;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
-import org.eclipse.collections.api.block.function.primitive.LongFunction;
-import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -35,14 +27,6 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.list.primitive.MutableBooleanList;
-import org.eclipse.collections.api.list.primitive.MutableByteList;
-import org.eclipse.collections.api.list.primitive.MutableCharList;
-import org.eclipse.collections.api.list.primitive.MutableDoubleList;
-import org.eclipse.collections.api.list.primitive.MutableFloatList;
-import org.eclipse.collections.api.list.primitive.MutableIntList;
-import org.eclipse.collections.api.list.primitive.MutableLongList;
-import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
@@ -329,54 +313,6 @@ public final class RandomAccessListAdapter<T>
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
         return RandomAccessListIterate.collect(this.delegate, function, Lists.mutable.withInitialCapacity(this.delegate.size()));
-    }
-
-    @Override
-    public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
-    {
-        return RandomAccessListIterate.collectBoolean(this.delegate, booleanFunction);
-    }
-
-    @Override
-    public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
-    {
-        return RandomAccessListIterate.collectByte(this.delegate, byteFunction);
-    }
-
-    @Override
-    public MutableCharList collectChar(CharFunction<? super T> charFunction)
-    {
-        return RandomAccessListIterate.collectChar(this.delegate, charFunction);
-    }
-
-    @Override
-    public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
-    {
-        return RandomAccessListIterate.collectDouble(this.delegate, doubleFunction);
-    }
-
-    @Override
-    public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
-    {
-        return RandomAccessListIterate.collectFloat(this.delegate, floatFunction);
-    }
-
-    @Override
-    public MutableIntList collectInt(IntFunction<? super T> intFunction)
-    {
-        return RandomAccessListIterate.collectInt(this.delegate, intFunction);
-    }
-
-    @Override
-    public MutableLongList collectLong(LongFunction<? super T> longFunction)
-    {
-        return RandomAccessListIterate.collectLong(this.delegate, longFunction);
-    }
-
-    @Override
-    public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
-    {
-        return RandomAccessListIterate.collectShort(this.delegate, shortFunction);
     }
 
     @Override

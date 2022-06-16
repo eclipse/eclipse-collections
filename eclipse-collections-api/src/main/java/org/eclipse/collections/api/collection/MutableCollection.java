@@ -39,6 +39,14 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.primitive.BooleanLists;
+import org.eclipse.collections.api.factory.primitive.ByteLists;
+import org.eclipse.collections.api.factory.primitive.CharLists;
+import org.eclipse.collections.api.factory.primitive.DoubleLists;
+import org.eclipse.collections.api.factory.primitive.FloatLists;
+import org.eclipse.collections.api.factory.primitive.IntLists;
+import org.eclipse.collections.api.factory.primitive.LongLists;
+import org.eclipse.collections.api.factory.primitive.ShortLists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
@@ -286,7 +294,10 @@ public interface MutableCollection<T>
      * </pre>
      */
     @Override
-    MutableBooleanCollection collectBoolean(BooleanFunction<? super T> booleanFunction);
+    default MutableBooleanCollection collectBoolean(BooleanFunction<? super T> booleanFunction)
+    {
+        return this.collectBoolean(booleanFunction, BooleanLists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * {@inheritDoc}
@@ -297,7 +308,10 @@ public interface MutableCollection<T>
      * </pre>
      */
     @Override
-    MutableByteCollection collectByte(ByteFunction<? super T> byteFunction);
+    default MutableByteCollection collectByte(ByteFunction<? super T> byteFunction)
+    {
+        return this.collectByte(byteFunction, ByteLists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * {@inheritDoc}
@@ -308,7 +322,10 @@ public interface MutableCollection<T>
      * </pre>
      */
     @Override
-    MutableCharCollection collectChar(CharFunction<? super T> charFunction);
+    default MutableCharCollection collectChar(CharFunction<? super T> charFunction)
+    {
+        return this.collectChar(charFunction, CharLists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * {@inheritDoc}
@@ -319,7 +336,10 @@ public interface MutableCollection<T>
      * </pre>
      */
     @Override
-    MutableDoubleCollection collectDouble(DoubleFunction<? super T> doubleFunction);
+    default MutableDoubleCollection collectDouble(DoubleFunction<? super T> doubleFunction)
+    {
+        return this.collectDouble(doubleFunction, DoubleLists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * {@inheritDoc}
@@ -330,7 +350,10 @@ public interface MutableCollection<T>
      * </pre>
      */
     @Override
-    MutableFloatCollection collectFloat(FloatFunction<? super T> floatFunction);
+    default MutableFloatCollection collectFloat(FloatFunction<? super T> floatFunction)
+    {
+        return this.collectFloat(floatFunction, FloatLists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * {@inheritDoc}
@@ -341,7 +364,10 @@ public interface MutableCollection<T>
      * </pre>
      */
     @Override
-    MutableIntCollection collectInt(IntFunction<? super T> intFunction);
+    default MutableIntCollection collectInt(IntFunction<? super T> intFunction)
+    {
+        return this.collectInt(intFunction, IntLists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * {@inheritDoc}
@@ -352,7 +378,10 @@ public interface MutableCollection<T>
      * </pre>
      */
     @Override
-    MutableLongCollection collectLong(LongFunction<? super T> longFunction);
+    default MutableLongCollection collectLong(LongFunction<? super T> longFunction)
+    {
+        return this.collectLong(longFunction, LongLists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * {@inheritDoc}
@@ -363,7 +392,10 @@ public interface MutableCollection<T>
      * </pre>
      */
     @Override
-    MutableShortCollection collectShort(ShortFunction<? super T> shortFunction);
+    default MutableShortCollection collectShort(ShortFunction<? super T> shortFunction)
+    {
+        return this.collectShort(shortFunction, ShortLists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * {@inheritDoc}
