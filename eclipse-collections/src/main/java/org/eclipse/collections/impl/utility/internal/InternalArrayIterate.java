@@ -924,16 +924,7 @@ public final class InternalArrayIterate
     public static <T, R extends List<T>> R distinct(T[] objectArray, int size, R targetList)
     {
         MutableSet<T> seenSoFar = Sets.mutable.empty();
-
-        for (int i = 0; i < size; i++)
-        {
-            T each = objectArray[i];
-            if (seenSoFar.add(each))
-            {
-                targetList.add(each);
-            }
-        }
-        return targetList;
+        return InternalArrayIterate.select(objectArray, size, seenSoFar::add, targetList);
     }
 
     /**
@@ -950,17 +941,7 @@ public final class InternalArrayIterate
     public static <T> FastList<T> distinct(T[] objectArray, int size, HashingStrategy<? super T> hashingStrategy)
     {
         MutableSet<T> seenSoFar = UnifiedSetWithHashingStrategy.newSet(hashingStrategy);
-
-        FastList<T> result = FastList.newList();
-        for (int i = 0; i < size; i++)
-        {
-            T each = objectArray[i];
-            if (seenSoFar.add(each))
-            {
-                result.add(each);
-            }
-        }
-        return result;
+        return InternalArrayIterate.select(objectArray, size, seenSoFar::add, FastList.newList());
     }
 
     public static <T> long sumOfInt(T[] array, int size, IntFunction<? super T> function)

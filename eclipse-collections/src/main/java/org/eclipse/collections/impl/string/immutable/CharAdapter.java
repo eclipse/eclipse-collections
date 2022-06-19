@@ -166,19 +166,8 @@ public class CharAdapter
     @Override
     public CharAdapter distinct()
     {
-        StringBuilder builder = new StringBuilder();
         MutableCharSet seenSoFar = CharSets.mutable.empty();
-
-        int size = this.size();
-        for (int i = 0; i < size; i++)
-        {
-            char each = this.get(i);
-            if (seenSoFar.add(each))
-            {
-                builder.append(each);
-            }
-        }
-        return new CharAdapter(builder.toString());
+        return this.select(seenSoFar::add);
     }
 
     @Override

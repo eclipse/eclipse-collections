@@ -1097,20 +1097,10 @@ public final class IteratorIterate
      * @deprecated in 7.0.
      */
     @Deprecated
-    public static <T, R extends List<T>> R distinct(
-            Iterator<T> iterator,
-            R targetCollection)
+    public static <T, R extends List<T>> R distinct(Iterator<T> iterator, R targetCollection)
     {
         Set<T> seenSoFar = Sets.mutable.empty();
-        while (iterator.hasNext())
-        {
-            T item = iterator.next();
-            if (seenSoFar.add(item))
-            {
-                targetCollection.add(item);
-            }
-        }
-        return targetCollection;
+        return IteratorIterate.select(iterator, seenSoFar::add, targetCollection);
     }
 
     /**

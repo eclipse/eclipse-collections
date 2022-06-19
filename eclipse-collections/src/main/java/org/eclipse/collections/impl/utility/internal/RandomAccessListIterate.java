@@ -1265,16 +1265,7 @@ public final class RandomAccessListIterate
     public static <T, R extends List<T>> R distinct(List<T> list, R targetList)
     {
         MutableSet<T> seenSoFar = Sets.mutable.empty();
-        int size = list.size();
-        for (int i = 0; i < size; i++)
-        {
-            T item = list.get(i);
-            if (seenSoFar.add(item))
-            {
-                targetList.add(item);
-            }
-        }
-        return targetList;
+        return RandomAccessListIterate.select(list, seenSoFar::add, targetList);
     }
 
     /**
