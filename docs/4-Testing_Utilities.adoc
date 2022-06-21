@@ -12,8 +12,8 @@ All rights reserved.
 = Unit testing
 // API links
 :Assert: https://junit.org/junit4/javadoc/4.13/org/junit/Assert.html[Assert]
-:Verify: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/impl/test/Verify.html[Verify]
-:testutils: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/impl/test/package-summary.html[eclipse-collections-testutils]
+:Verify: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/impl/test/Verify.html[Verify]
+:testutils: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/impl/test/package-summary.html[eclipse-collections-testutils]
 
 ____
 Using the Eclipse Collections test utilities.

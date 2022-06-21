@@ -21,7 +21,7 @@ All rights reserved.
 :Eclipse-Collections-Mind-Map:  https://github.com/eclipse/eclipse-collections/blob/master/docs/EclipseCollectionsMindMap.png[Eclipse Collections Mind Map]
 
 // Javadoc links
-:api-url:               https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections
+:api-url:               https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections
 
 :Bag:                   {api-url}/api/bag/Bag.html[Bag]
 :BagMultimap:           {api-url}/api/multimap/bag/BagMultimap.html[BagMultimap]

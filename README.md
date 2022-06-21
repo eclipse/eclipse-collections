@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2021 Goldman Sachs and others.
+  ~ Copyright (c) 2022 Goldman Sachs and others.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -48,7 +48,7 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 * [Eclipse Collections Katas](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
     * Start Here - [Pet Kata](http://eclipse.github.io/eclipse-collections-kata/pet-kata/#/)
     * Continue Here - [Company Kata](http://eclipse.github.io/eclipse-collections-kata/company-kata/#/)
-* [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/0-RefGuide.adoc) and [Javadoc](https://www.eclipse.org/collections/javadoc/11.0.0/overview-summary.html)
+* [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/0-RefGuide.adoc) and [Javadoc](https://www.eclipse.org/collections/javadoc/11.1.0/overview-summary.html)
 * [Serializing Eclipse Collections with Jackson](./docs/jackson.md)
 * [Articles](https://github.com/eclipse/eclipse-collections/wiki/Articles) and [Blogs](https://medium.com/tag/eclipse-collections/latest)
 * Some OSS projects that use Eclipse Collections
@@ -57,12 +57,12 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 
 ## Eclipse Collections and JDK Compatibility Matrix
 
-|EC     | 7.x.x | 8.x.x | 9.x.x |[10.0.0][10-0-Release] |[10.1.0][10-1-Release] |[10.2.0][10-2-Release] |[10.3.0][10-3-Release] |[10.4.0][10-4-Release] |[11.0.0][11-0-Release] |
-|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
-|JDK 5 - 7  |&check;|       |       |       |       |       |       |       | |
-|JDK 8  |&check;|&check;|&check;|&check;|&check;|&check;|&check;|&check;| &check;|
-|JDK 9 - 14  |       |       |&check;|&check;|&check;|&check;|&check;|&check;| &check;|
-|JDK 15 - 18|       |       |       |       |       |       |       |&check;|&check;|
+|EC     | 7.x.x | 8.x.x | 9.x.x |[10.0.0][10-0-Release] |[10.1.0][10-1-Release] |[10.2.0][10-2-Release] |[10.3.0][10-3-Release] |[10.4.0][10-4-Release] |[11.0.0][11-0-Release] | [11.1.0][11-1-Release] |
+|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
+|JDK 5 - 7  |&check;|       |       |       |       |       |       |       | ||
+|JDK 8  |&check;|&check;|&check;|&check;|&check;|&check;|&check;|&check;| &check;|&check;|
+|JDK 9 - 14  |       |       |&check;|&check;|&check;|&check;|&check;|&check;| &check;|&check;|
+|JDK 15 - 18|       |       |       |       |       |       |       |&check;|&check;|&check;|
 
 ## Acquiring Eclipse Collections
 
@@ -71,25 +71,25 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections-api</artifactId>
-  <version>11.0.0</version>
+  <version>11.1.0</version>
 </dependency>
 
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections</artifactId>
-  <version>11.0.0</version>
+  <version>11.1.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'org.eclipse.collections:eclipse-collections-api:11.0.0'
-implementation 'org.eclipse.collections:eclipse-collections:11.0.0'
+implementation 'org.eclipse.collections:eclipse-collections-api:11.1.0'
+implementation 'org.eclipse.collections:eclipse-collections:11.1.0'
 ```
 
 ### OSGi Bundle
-Eclipse software repository location: http://download.eclipse.org/collections/11.0.0/repository
+Eclipse software repository location: http://download.eclipse.org/collections/11.1.0/repository
 
 
 ## How to Contribute
@@ -139,30 +139,31 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 [license-edl]:LICENSE-EDL-1.0.txt
 [license-edl img]:https://img.shields.io/badge/License-EDL-blue.svg
 
-[snyk-badge]:https://snyk.io/vuln/maven:org.eclipse.collections:eclipse-collections@11.0.0?utm_medium=referral&utm_source=badge&utm_campaign=snyk-widget
-[snyk-badge img]:https://snyk-widget.herokuapp.com/badge/mvn/org.eclipse.collections/eclipse-collections/11.0.0/badge.svg
+[snyk-badge]:https://snyk.io/vuln/maven:org.eclipse.collections:eclipse-collections@11.1.0?utm_medium=referral&utm_source=badge&utm_campaign=snyk-widget
+[snyk-badge img]:https://snyk-widget.herokuapp.com/badge/mvn/org.eclipse.collections/eclipse-collections/11.1.0/badge.svg
 
-[RichIterable]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/RichIterable.html
-[ListIterable]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/list/ListIterable.html
-[SetIterable]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/set/SetIterable.html
-[Bag]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/bag/Bag.html
-[StackIterable]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/stack/StackIterable.html
-[MapIterable]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/map/MapIterable.html
-[Multimap]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/multimap/Multimap.html
-[BiMap]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/bimap/BiMap.html
-[Interval]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/impl/list/Interval.html
-[MutableCollection]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/collection/MutableCollection.html
-[ImmutableCollection]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/collection/ImmutableCollection.html
-[LazyIterable]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/LazyIterable.html
-[ParallelIterable]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/ParallelIterable.html
-[PrimitiveIterable]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/PrimitiveIterable.html
-[Utilities]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/impl/utility/package-summary.html
-[Adapters]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/impl/collection/mutable/AbstractCollectionAdapter.html
+[RichIterable]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/RichIterable.html
+[ListIterable]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/list/ListIterable.html
+[SetIterable]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/set/SetIterable.html
+[Bag]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/bag/Bag.html
+[StackIterable]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/stack/StackIterable.html
+[MapIterable]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/map/MapIterable.html
+[Multimap]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/multimap/Multimap.html
+[BiMap]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/bimap/BiMap.html
+[Interval]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/impl/list/Interval.html
+[MutableCollection]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/collection/MutableCollection.html
+[ImmutableCollection]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/collection/ImmutableCollection.html
+[LazyIterable]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/LazyIterable.html
+[ParallelIterable]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/ParallelIterable.html
+[PrimitiveIterable]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/PrimitiveIterable.html
+[Utilities]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/impl/utility/package-summary.html
+[Adapters]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/impl/collection/mutable/AbstractCollectionAdapter.html
 
-[Factories]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/impl/factory/package-summary.html
+[Factories]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/impl/factory/package-summary.html
 [10-0-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.0.0
 [10-1-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.1.0
 [10-2-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.2.0
 [10-3-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.3.0
 [10-4-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.4.0
 [11-0-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/11.0.0
+[11-1-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/11.1.0
