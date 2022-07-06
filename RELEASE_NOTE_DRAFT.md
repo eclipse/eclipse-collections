@@ -1,7 +1,7 @@
-11.0.0
+11.1.0
 ====================
 
-This is the 11.0.0 major release.
+This is the 11.1.0 minor release.
 
 Central theme of this release is addition of new APIs, features as requested by the community and decrease Tech Debt.
 
@@ -9,93 +9,75 @@ The Eclipse Collections team gives a huge thank you to everyone who participated
 
 # New Functionality
 -----------------
-* Added toImmutableList/Set/Bag/Map/BiMap to RichIterable.
-* Added toImmutableSortedList/Set/Bag to RichIterable.
-* Added toImmutableSortedBag/List/Set with Comparator to RichIterable. 
-* Added toImmutableSortedBagBy/ListBy/SetBy with Function to RichIterable.
-* Added selectWithIndex and rejectWithIndex to OrderedIterable and ListIterable.
-* Added putAllMapIterable method to MutableMap.
-* Added withMapIterable to MutableMap.
-* Added newWithMap and newWithMapIterable to ImmutableMap.
-* Added anySatisfyWithOccurrences, allSatisfyWithOccurrences, noneSatisfyWithOccurrences, detectWithOccurrences to Bag.
-* Added covariant overrides for sortThis().
-* Added covariant return types to methods in MultiReaderList that return `this`.
-* Added primitive singleton iterator.
-* Added union, intersect, difference, symmetric difference, cartesianProduct , isSubsetOf, isProperSubsetOf to primitive sets.
-* Added containsAny and containsNone on primitive iterables.
-* Added toSortedList(Comparator) and toSortedListBy(Function) to primitive iterables.
-* Added isEqual and isSame to Pair and Triple as default methods.
-* Added converters from Pair and Triple to List types.
-* Added toImmutableSortedBagBy to Collectors2.
-* Added toImmutableSortedMap and toImmutableSortedMapBy to Collectors2.
-* Added toSortedMap and toSortedMapBy to Collectors2.
-* Added Norwegian translation for the Eclipse Collections website.
-* Added ClassComparer utility. 
+* Added Bag.distinctView(). 
+* Added Bags.mutable.withInitialCapacity.
+* Added forEachInBoth to Primitive Lists.
+* Added MultiReader to Bags factory in API module.
+* Added MultiReader to Lists factory in API module.
+* Added MultiReader to Sets factory in API module.
+* Added Primitive Bag factories in API module.
+* Added Primitive Set factories in API module.
+* Added Primitive Stack factories in API module.
+* Added factory for ObjectPrimitiveHashMapWithHashingStrategy.
+* Added withInitialCapacity api in mutableObjectPrimitiveHashingStrategyMapFactory.
+* Added ability to create Hashing Strategy Sets, Maps and Bags using Function.
+* Added injectInto for primitive types to primitive iterables.
+* Added injectIntoKeyValue to MapIterable.
+* Added injectIntoKeyValue to objectPrimitiveMap.
+* Added injectIntoKeyValue to primitiveObjectMap.
+* Added injectIntoKeyValue to primitivePrimitiveMap.
+* Added mutable reduction scenario to injectIntoKeyValue test for primitive maps.
+* Added object to primitive map factory to API module.
+* Added of and with factory methods to object -> primitive map factories.
+* Added of and with factory methods to primitive -> primitive and primitive -> object map factories.
+* Added withKeyMultiValues to MutableMultimap and subtypes. 
+* Added withKeyValue to MutableMultimap and subtypes.
+* Added getAndPut to mutableObjectPrimitiveMap to retrieve the value associated with the key if one exists.
+* Added peekAndPop methods in ImmutableStack.
+* Added fused method for collect + makeString.
+* Added missing implementations of toString().
+* Added selectWithIndex and rejectWithIndex to Ordered Primitive Iterables.
+* Implemented containsAny, containsNone, containsAnyIterable, containsNoneIterable on RichIterable.
 
 # Optimizations
 ----------------------
-* Optimized ImmutableListFactoryImpl.withAll(Iterable).
-* Optimized containsAll on primitive iterables.
-* Optimized primitive hash set newSet and withAll.
-* Optimized sumByLong and sumByInt Primitive methods for Bags.
-* Optimized toImmutable on primitive sets.
-* Optimized union and difference on SetIterables.
-* Added enhanced for-loop syntax wherever as possible.
+* Optimized asParallel() for immutable sets in O(1) instead of O(n).
+* Optimized some implementations of toString() that were delegating to iterators.
+* Improved equals() performance for Set implementations.
 
 # Tech Debt Reduction
 ---------------------
-* Deprecated  ImmutableArrayStack.
-* Fixed bug with noneSatisfy for ImmutableBooleanEmptySet.
-* Fixed compiler errors for JDK-15-EA.
-* Fixed return types of aggregateBy().
-* Fixed types on Multimap.*MultiValues().
-* Fixed primitive hash map values collections removed  for special key zero.
-* Fixed CollectIterable detect methods.
-* Added missing overrides for toImmutable methods on synchronized primitive object maps.
-* Added missing overrides of aggregateBy() and aggregateInPlaceBy().
-* Added documentation on serializing Eclipse Collections with jackson.
-* Added logic to throw UnsupportedOperationException on calling withMap method in FixedSizeMap. This is a breaking change.
-* Made org.eclipse.collections.impl.list.Interval#goForward private. This is a breaking change.
-* Replaced HashingStrategies.longHashCode with Java 8 Long.hashCode. This is a breaking change.
-* Deleted version.properties as the file is no longer needed.
-* Removed extra calls to map.get in sumByDoubleFunction and sumByFloatFunction.
-* Removed implementations of OrderedIterable.toStack() that can use the default implementation instead.
-* Removed implementations of aggregateBy and aggregateInPlaceBy that can use default implementations instead.
-* Removed references to deleted classes in findbugs-exclude file.
+* Replaced implementation factories and dependencies with API factories where possible.
+* Fixed CheckStyle configuration for NewlineAtEndOfFile so that it works across operating systems.
+* Made forEach a default method on primitiveIterable.stg.
+* Made noneSatisfy a default method on primitiveIterable.stg.
+* Removed unnecessary implementations of toSortedList/Set/Bag/MapBy.
+* Disambiguate and deprecate primitive injectInto methods on RichIterable.
+* Improved code generation logic into separate goals for sources, test-sources, and resources.
+* Improved PIT mutation test coverage.
+* Improved overall test coverage by adding missing tests. 
 
-# Removed Functionality
---------------------------
-* Removed Verify.assertThrows() which takes a Runnable in favor of Assert.assertThrows(). This is a breaking change.
-* Removed assertNotEquals() from Verify as Assert already has the same API. This is a breaking change.
+# Documentation Changes
+----------------------
+* Updated reference guide and convert to AsciiDoc.
+* Updated CONTRIBUTING.md to reflect contribution guidelines around commit sign-off.
+* Updated README.md with OSS projects that use Eclipse Collections.
 
 # Build Changes
 -----------------
-* Upgraded EBR plugin to 1.3.0.
-* Upgraded actions/cache to 2.1.6.
-* Upgraded actions/upload-artifact to 2.2.4.
-* Upgraded antlr ST4 to 2.1.5.
-* Upgraded checkstyle plugin to 3.1.2.
-* Upgraded checkstyle to 8.42.
-* Upgraded codehaus maven plugin to 2.8.1.
-* Upgraded jacoco to v2.2.3.
-* Upgraded jmh-core to 1.33.
-* Upgraded maven-resources-plugin to 3.2.0.
-* Upgraded to JUnit 4.13.1.
-* Upgraded to setup-java v2.
-* Skip p2 repository module during EA builds and Java 15+ builds.
-* Enabled Dependabot v2.
-* Added GitHub action to generate code coverage report.
-* Added JDK Early Access GitHub Actions.
-
-# Breaking Changes
--------------------------
-Warning: These changes are already mentioned above. The list below might not be exhaustive, make sure to test your application and usages to verify.
-
-* Added logic to throw UnsupportedOperationException on calling withMap method in FixedSizeMap.
-* Made org.eclipse.collections.impl.list.Interval#goForward private.
-* Replaced HashingStrategies.longHashCode with Java 8 Long.hashCode.
-* Removed Verify.assertThrows() which takes a Runnable in favor of Assert.assertThrows().
-* Removed assertNotEquals() from Verify as Assert already has the same API.
+* Upgraded CheckStyle from 9.1 to 10.1.
+* Upgraded actions/cache from 2.1.7 to 3.0.2.
+* Upgraded checkstyle-configuration.xml from 1.2 schema to 1.3 schema.
+* Upgraded setup-java v3.
+* Upgraded actions/cache from 2.1.6 to 2.1.7.
+* Upgraded actions/checkout from 2 to 3.
+* Upgraded actions/upload-artifact from 2.2.4 to 3.
+* Upgraded maven-plugin-api from 3.6.3 to 3.8.5.
+* Upgraded maven-shade-plugin from 3.2.2 to 3.2.4.
+* Upgraded maven-site-plugin from 3.9.0 to 3.11.0.
+* Switched to oracle-actions to download JDK for EA builds.
+* Turned on additional CheckStyle rules and IntelliJ inspections. 
+* Removed FindBugs build from GitHub workflows.
 
 # Note
 -------
@@ -110,49 +92,49 @@ Acquiring Eclipse Collections
 
 ```xml
 <dependency>
-  <groupId>org.eclipse.collections</groupId>
-  <artifactId>eclipse-collections-api</artifactId>
-  <version>11.0.0</version>
+ <groupId>org.eclipse.collections</groupId>
+ <artifactId>eclipse-collections-api</artifactId>
+ <version>11.1.0</version>
 </dependency>
 
 <dependency>
-  <groupId>org.eclipse.collections</groupId>
-  <artifactId>eclipse-collections</artifactId>
-  <version>11.0.0</version>
+ <groupId>org.eclipse.collections</groupId>
+ <artifactId>eclipse-collections</artifactId>
+ <version>11.1.0</version>
 </dependency>
 
 <dependency>
-  <groupId>org.eclipse.collections</groupId>
-  <artifactId>eclipse-collections-testutils</artifactId>
-  <version>11.0.0</version>
-  <scope>test</scope>
+ <groupId>org.eclipse.collections</groupId>
+ <artifactId>eclipse-collections-testutils</artifactId>
+ <version>11.1.0</version>
+ <scope>test</scope>
 </dependency>
 
 <dependency>
-  <groupId>org.eclipse.collections</groupId>
-  <artifactId>eclipse-collections-forkjoin</artifactId>
-  <version>11.0.0</version>
+ <groupId>org.eclipse.collections</groupId>
+ <artifactId>eclipse-collections-forkjoin</artifactId>
+ <version>11.1.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'org.eclipse.collections:eclipse-collections-api:11.0.0'
-implementation 'org.eclipse.collections:eclipse-collections:11.0.0'
-testImplementation 'org.eclipse.collections:eclipse-collections-testutils:11.0.0'
-implementation 'org.eclipse.collections:eclipse-collections-forkjoin:11.0.0'
+implementation 'org.eclipse.collections:eclipse-collections-api:11.1.0'
+implementation 'org.eclipse.collections:eclipse-collections:11.1.0'
+testImplementation 'org.eclipse.collections:eclipse-collections-testutils:11.1.0'
+implementation 'org.eclipse.collections:eclipse-collections-forkjoin:11.1.0'
 ```
 
 ### Ivy
 
 ```xml
-<dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="11.0.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections" rev="11.0.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-testutils" rev="11.0.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="11.0.0"/>
+<dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="11.1.0" />
+<dependency org="org.eclipse.collections" name="eclipse-collections" rev="11.1.0" />
+<dependency org="org.eclipse.collections" name="eclipse-collections-testutils" rev="11.1.0" />
+<dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="11.1.0"/>
 ```
 
 ### OSGi Bundle
 
-Eclipse software repository location: http://download.eclipse.org/collections/11.0.0/repository
+Eclipse software repository location: http://download.eclipse.org/collections/11.1.0/repository

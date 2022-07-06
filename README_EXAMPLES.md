@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2021 Goldman Sachs and others.
+  ~ Copyright (c) 2022 Goldman Sachs and others.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -109,7 +109,7 @@ Assert.assertFalse(people.noneSatisfyWith(Person::lastNameEquals, "Smith"));
 
 ## [Back to README](./README.md)
 
-[MutableCollection]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/collection/MutableCollection.html
-[ImmutableCollection]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/collection/ImmutableCollection.html
-[LazyIterable]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/LazyIterable.html
-[Lists]: https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/factory/Lists.html
+[MutableCollection]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/collection/MutableCollection.html
+[ImmutableCollection]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/collection/ImmutableCollection.html
+[LazyIterable]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/LazyIterable.html
+[Lists]: https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/factory/Lists.html

@@ -11,8 +11,8 @@
 == Eclipse Collections Quick Reference
 :sectanchors:
 // Javadoc links
-:api-url:         https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections
-:rich-url:        https://www.eclipse.org/collections/javadoc/11.0.0/org/eclipse/collections/api/RichIterable.html
+:api-url:         https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections
+:rich-url:        https://www.eclipse.org/collections/javadoc/11.1.0/org/eclipse/collections/api/RichIterable.html
 // Interfaces
 :Bag:                 {api-url}/api/bag/Bag.html[Bag]
 :Multimap:            {api-url}/api/multimap/Multimap.html[Multimap]
@@ -81,7 +81,7 @@
 
 
 [cols="1,4",options="header",]
-|===    
+|===
 |{RichIterable} API +
 (except as noted)    |Description
 |*{allSatisfy}*      |Returns true if all elements satisfy a *Predicate*; short-circuits execution.
@@ -172,5 +172,5 @@ image::EclipseCollectionsMindMap.png[Mindmap,800,945]
 [cols="3,^1",]
 [%autowidth]
 |===
-|xref:4-Testing_Utilities.adoc[previous: Unit testing]  |xref:0-RefGuide.adoc[top] 
+|xref:4-Testing_Utilities.adoc[previous: Unit testing]  |xref:0-RefGuide.adoc[top]
 |===
