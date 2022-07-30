@@ -464,11 +464,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectBoolean on null");
         }
-        for (T each : objectArray)
-        {
-            target.add(booleanFunction.booleanValueOf(each));
-        }
-        return target;
+        return InternalArrayIterate.collectBoolean(objectArray, objectArray.length, booleanFunction, target);
     }
 
     /**
@@ -495,11 +491,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectByte on null");
         }
-        for (T each : objectArray)
-        {
-            target.add(byteFunction.byteValueOf(each));
-        }
-        return target;
+        return InternalArrayIterate.collectByte(objectArray, objectArray.length, byteFunction, target);
     }
 
     /**
@@ -526,11 +518,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectChar on null");
         }
-        for (T each : objectArray)
-        {
-            target.add(charFunction.charValueOf(each));
-        }
-        return target;
+        return InternalArrayIterate.collectChar(objectArray, objectArray.length, charFunction, target);
     }
 
     /**
@@ -557,11 +545,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectDouble on null");
         }
-        for (T each : objectArray)
-        {
-            target.add(doubleFunction.doubleValueOf(each));
-        }
-        return target;
+        return InternalArrayIterate.collectDouble(objectArray, objectArray.length, doubleFunction, target);
     }
 
     /**
@@ -588,11 +572,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectFloat on null");
         }
-        for (T each : objectArray)
-        {
-            target.add(floatFunction.floatValueOf(each));
-        }
-        return target;
+        return InternalArrayIterate.collectFloat(objectArray, objectArray.length, floatFunction, target);
     }
 
     /**
@@ -621,11 +601,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectInt on null");
         }
-        for (T each : objectArray)
-        {
-            target.add(intFunction.intValueOf(each));
-        }
-        return target;
+        return InternalArrayIterate.collectInt(objectArray, objectArray.length, intFunction, target);
     }
 
     /**
@@ -654,11 +630,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectLong on null");
         }
-        for (T each : objectArray)
-        {
-            target.add(longFunction.longValueOf(each));
-        }
-        return target;
+        return InternalArrayIterate.collectLong(objectArray, objectArray.length, longFunction, target);
     }
 
     /**
@@ -687,11 +659,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectShort on null");
         }
-        for (T each : objectArray)
-        {
-            target.add(shortFunction.shortValueOf(each));
-        }
-        return target;
+        return InternalArrayIterate.collectShort(objectArray, objectArray.length, shortFunction, target);
     }
 
     /**

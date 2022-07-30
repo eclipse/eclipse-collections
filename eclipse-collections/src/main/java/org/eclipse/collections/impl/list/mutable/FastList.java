@@ -754,11 +754,7 @@ public class FastList<T>
     @Override
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
-        for (int i = 0; i < this.size; i++)
-        {
-            target.add(booleanFunction.booleanValueOf(this.items[i]));
-        }
-        return target;
+        return InternalArrayIterate.collectBoolean(this.items, this.size, booleanFunction, target);
     }
 
     @Override
@@ -775,11 +771,7 @@ public class FastList<T>
     @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
-        for (int i = 0; i < this.size; i++)
-        {
-            target.add(byteFunction.byteValueOf(this.items[i]));
-        }
-        return target;
+        return InternalArrayIterate.collectByte(this.items, this.size, byteFunction, target);
     }
 
     @Override
@@ -796,11 +788,7 @@ public class FastList<T>
     @Override
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
-        for (int i = 0; i < this.size; i++)
-        {
-            target.add(charFunction.charValueOf(this.items[i]));
-        }
-        return target;
+        return InternalArrayIterate.collectChar(this.items, this.size, charFunction, target);
     }
 
     @Override
@@ -817,11 +805,7 @@ public class FastList<T>
     @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
-        for (int i = 0; i < this.size; i++)
-        {
-            target.add(doubleFunction.doubleValueOf(this.items[i]));
-        }
-        return target;
+        return InternalArrayIterate.collectDouble(this.items, this.size, doubleFunction, target);
     }
 
     @Override
@@ -838,11 +822,7 @@ public class FastList<T>
     @Override
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
-        for (int i = 0; i < this.size; i++)
-        {
-            target.add(floatFunction.floatValueOf(this.items[i]));
-        }
-        return target;
+        return InternalArrayIterate.collectFloat(this.items, this.size, floatFunction, target);
     }
 
     @Override
@@ -859,11 +839,7 @@ public class FastList<T>
     @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
-        for (int i = 0; i < this.size; i++)
-        {
-            target.add(intFunction.intValueOf(this.items[i]));
-        }
-        return target;
+        return InternalArrayIterate.collectInt(this.items, this.size, intFunction, target);
     }
 
     @Override
@@ -880,11 +856,7 @@ public class FastList<T>
     @Override
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
-        for (int i = 0; i < this.size; i++)
-        {
-            target.add(longFunction.longValueOf(this.items[i]));
-        }
-        return target;
+        return InternalArrayIterate.collectLong(this.items, this.size, longFunction, target);
     }
 
     @Override
@@ -901,11 +873,7 @@ public class FastList<T>
     @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
-        for (int i = 0; i < this.size; i++)
-        {
-            target.add(shortFunction.shortValueOf(this.items[i]));
-        }
-        return target;
+        return InternalArrayIterate.collectShort(this.items, this.size, shortFunction, target);
     }
 
     @Override
