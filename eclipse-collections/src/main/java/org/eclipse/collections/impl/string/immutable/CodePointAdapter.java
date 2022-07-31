@@ -174,20 +174,8 @@ public class CodePointAdapter
     @Override
     public CodePointAdapter distinct()
     {
-        StringBuilder builder = new StringBuilder();
         MutableIntSet seenSoFar = IntSets.mutable.empty();
-
-        int length = this.adapted.length();
-        for (int i = 0; i < length; )
-        {
-            int codePoint = this.adapted.codePointAt(i);
-            if (seenSoFar.add(codePoint))
-            {
-                builder.appendCodePoint(codePoint);
-            }
-            i += Character.charCount(codePoint);
-        }
-        return new CodePointAdapter(builder.toString());
+        return this.select(seenSoFar::add);
     }
 
     @Override

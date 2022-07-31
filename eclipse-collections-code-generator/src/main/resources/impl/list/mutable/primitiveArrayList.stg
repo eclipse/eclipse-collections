@@ -1022,18 +1022,8 @@ public class <name>ArrayList extends Abstract<name>Iterable
     @Override
     public Mutable<name>List distinct()
     {
-        <name>ArrayList target = new <name>ArrayList();
         Mutable<name>Set seenSoFar = new <name>HashSet(this.size());
-
-        for (int i = 0; i \< this.size; i++)
-        {
-            <type> each = this.items[i];
-            if (seenSoFar.add(each))
-            {
-                target.add(each);
-            }
-        }
-        return target;
+        return this.select(seenSoFar::add);
     }
 
     @Override
