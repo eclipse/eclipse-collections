@@ -28,6 +28,16 @@ public class MutableSortedMapFactoryImpl implements MutableSortedMapFactory
     }
 
     @Override
+    public <K, V> MutableSortedMap<K, V> empty(Comparator<? super K> comparator)
+    {
+        if (comparator == null)
+        {
+            return this.of();
+        }
+        return TreeSortedMap.newMap(comparator);
+    }
+
+    @Override
     public <K, V> MutableSortedMap<K, V> of()
     {
         return this.empty();
@@ -96,11 +106,7 @@ public class MutableSortedMapFactoryImpl implements MutableSortedMapFactory
     @Override
     public <K, V> MutableSortedMap<K, V> with(Comparator<? super K> comparator)
     {
-        if (comparator == null)
-        {
-            return this.of();
-        }
-        return TreeSortedMap.newMap(comparator);
+        return this.empty(comparator);
     }
 
     @Override

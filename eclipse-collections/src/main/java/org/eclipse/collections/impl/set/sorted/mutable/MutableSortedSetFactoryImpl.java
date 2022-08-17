@@ -26,6 +26,12 @@ public class MutableSortedSetFactoryImpl implements MutableSortedSetFactory
     }
 
     @Override
+    public <T> MutableSortedSet<T> empty(Comparator<? super T> comparator)
+    {
+        return TreeSortedSet.newSet(comparator);
+    }
+
+    @Override
     public <T> MutableSortedSet<T> of()
     {
         return this.empty();
@@ -71,7 +77,7 @@ public class MutableSortedSetFactoryImpl implements MutableSortedSetFactory
     @Override
     public <T> MutableSortedSet<T> with(Comparator<? super T> comparator)
     {
-        return TreeSortedSet.newSet(comparator);
+        return this.empty(comparator);
     }
 
     @Override

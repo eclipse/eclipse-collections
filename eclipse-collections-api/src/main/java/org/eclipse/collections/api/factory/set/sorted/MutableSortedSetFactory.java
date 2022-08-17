@@ -22,6 +22,11 @@ public interface MutableSortedSetFactory
     <T> MutableSortedSet<T> empty();
 
     /**
+     * @since 12.0
+     */
+    <T> MutableSortedSet<T> empty(Comparator<? super T> comparator);
+
+    /**
      * Same as {@link #empty()}.
      */
     <T> MutableSortedSet<T> of();
