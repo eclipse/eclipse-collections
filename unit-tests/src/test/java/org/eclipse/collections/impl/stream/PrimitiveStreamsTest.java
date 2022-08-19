@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 The Bank of New York Mellon.
+ * Copyright (c) 2022 The Bank of New York Mellon and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -51,6 +51,7 @@ import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.factory.primitive.LongSets;
 import org.eclipse.collections.impl.factory.primitive.LongStacks;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
+import org.eclipse.collections.impl.list.primitive.LongInterval;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -105,6 +106,21 @@ public class PrimitiveStreamsTest
         ImmutableIntBag bag = PrimitiveStreams.iIntBag(IntStream.rangeClosed(1, 10));
         Assert.assertEquals(IntInterval.oneTo(10).toBag(), bag);
         Assert.assertEquals(IntBags.mutable.ofAll(IntStream.rangeClosed(1, 10)), bag);
+    }
+
+    @Test
+    public void toEmptyImmutableIntBag()
+    {
+        ImmutableIntBag bag = PrimitiveStreams.iIntBag(IntStream.empty());
+        Assert.assertEquals(IntBags.immutable.empty(), bag);
+    }
+
+    @Test
+    public void toImmutableIntBagWithOneElement()
+    {
+        ImmutableIntBag bag = PrimitiveStreams.iIntBag(IntStream.rangeClosed(1, 1));
+        Assert.assertEquals(IntInterval.oneTo(1).toBag(), bag);
+        Assert.assertEquals(IntBags.mutable.ofAll(IntStream.rangeClosed(1, 1)), bag);
     }
 
     @Test
@@ -172,6 +188,21 @@ public class PrimitiveStreamsTest
     }
 
     @Test
+    public void toEmptyImmutableLongBag()
+    {
+        ImmutableLongBag bag = PrimitiveStreams.iLongBag(LongStream.empty());
+        Assert.assertEquals(LongBags.immutable.empty(), bag);
+    }
+
+    @Test
+    public void toImmutableLongBagWithOneElement()
+    {
+        ImmutableLongBag bag = PrimitiveStreams.iLongBag(LongStream.rangeClosed(1, 1));
+        Assert.assertEquals(LongInterval.oneTo(1).toBag(), bag);
+        Assert.assertEquals(LongBags.mutable.ofAll(LongStream.rangeClosed(1, 1)), bag);
+    }
+
+    @Test
     public void toLongStack()
     {
         MutableLongStack stack = PrimitiveStreams.mLongStack(LongStream.rangeClosed(1, 10));
@@ -233,6 +264,20 @@ public class PrimitiveStreamsTest
         ImmutableDoubleBag bag = PrimitiveStreams.iDoubleBag(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
         Assert.assertEquals(DoubleBags.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), bag);
         Assert.assertEquals(DoubleBags.mutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), bag);
+    }
+
+    @Test
+    public void toEmptyImmutableDoubleBag()
+    {
+        ImmutableDoubleBag bag = PrimitiveStreams.iDoubleBag(DoubleStream.empty());
+        Assert.assertEquals(DoubleBags.immutable.empty(), bag);
+    }
+
+    @Test
+    public void toImmutableDoubleBagWithOneElement()
+    {
+        ImmutableDoubleBag bag = PrimitiveStreams.iDoubleBag(DoubleStream.of(1.0));
+        Assert.assertEquals(DoubleBags.mutable.ofAll(DoubleStream.of(1.0)), bag);
     }
 
     @Test

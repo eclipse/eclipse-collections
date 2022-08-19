@@ -15,7 +15,9 @@ package org.eclipse.collections.impl.bag.immutable.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.factory.bag.primitive.Immutable<name>BagFactory;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 <(wideStreamImport.(type))>
 
@@ -92,7 +94,21 @@ public class Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
         {
             return (Immutable<name>Bag) items;
         }
-        return this.with(items.toArray());
+        if (items == null)
+        {
+            return this.with();
+        }
+        Mutable<name>Bag bag = new <name>HashBag();
+        items.forEach(bag::add);
+        if (bag.size() == 0)
+        {
+            return this.with();
+        }
+        if (bag.size() == 1)
+        {
+            return this.with(bag.toArray());
+        }
+        return Immutable<name>HashBag.newBagWith(bag);
     }
 
     /**
@@ -145,7 +161,21 @@ public Immutable<name>Bag ofAll(<(wideStream.(type))> items)
 @Override
 public Immutable<name>Bag withAll(<(wideStream.(type))> items)
 {
-    return this.with(items.toArray());
+    if (items == null)
+    {
+        return this.with();
+    }
+    Mutable<name>Bag bag = new <name>HashBag();
+    items.forEach(bag::add);
+    if (bag.size() == 0)
+    {
+        return this.with();
+    }
+    if (bag.size() == 1)
+    {
+        return this.with(bag.toArray());
+    }
+    return Immutable<name>HashBag.newBagWith(bag);
 }
 >>
 
