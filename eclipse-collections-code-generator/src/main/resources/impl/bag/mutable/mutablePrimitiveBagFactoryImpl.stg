@@ -126,7 +126,9 @@ public Mutable<name>Bag ofAll(<(wideStream.(type))> items)
 @Override
 public Mutable<name>Bag withAll(<(wideStream.(type))> items)
 {
-    return this.with(items.toArray());
+    Mutable<name>Bag bag = new <name>HashBag();
+    items.forEach(bag::add);
+    return bag;
 }
 >>
 

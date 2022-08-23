@@ -66,6 +66,13 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
         this.delegate = <name>HashBag.newBagWith(newElements);
     }
 
+    private Immutable<name>HashBag(Mutable<name>Bag delegate)
+    {
+        Mutable<name>Bag defensiveCopy = new <name>HashBag(delegate);
+        this.checkOptimizedSize(defensiveCopy.size());
+        this.delegate = defensiveCopy;
+    }
+
     private void checkOptimizedSize(int length)
     {
         if (length \<= 1)
@@ -75,6 +82,11 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
     }
 
     public static Immutable<name>HashBag newBagWith(<type>... elements)
+    {
+        return new Immutable<name>HashBag(elements);
+    }
+
+    public static Immutable<name>HashBag newBagWith(Mutable<name>Bag elements)
     {
         return new Immutable<name>HashBag(elements);
     }

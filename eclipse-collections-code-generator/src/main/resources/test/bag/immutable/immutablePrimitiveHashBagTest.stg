@@ -19,6 +19,8 @@ body(type, name, wrapperName) ::= <<
 package org.eclipse.collections.impl.bag.immutable.primitive;
 
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.junit.Assert;
@@ -59,6 +61,21 @@ public class Immutable<name>HashBagTest extends AbstractImmutable<name>BagTestCa
         Immutable<name>Set expected = <name>Sets.immutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Immutable<name>Set actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void newBagWithMutable()
+    {
+        <name>HashBag mutable3 = <name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Immutable<name>Bag immutable3 = mutable3.toImmutable();
+        <name>HashBag mutable4 = <name>HashBag.newBagWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
+        Mutable<name>Bag mutableBag = new <name>HashBag(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Immutable<name>HashBag immutableBag = Immutable<name>HashBag.newBagWith(mutableBag);
+        Assert.assertEquals(mutable3, mutableBag);
+        Assert.assertEquals(immutable3, immutableBag);
+        mutableBag.add(<(literal.(type))("4")>);
+        Assert.assertEquals(mutable4, mutableBag);
+        Assert.assertEquals(immutable3, immutableBag);
     }
 }
 
