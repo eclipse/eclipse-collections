@@ -97,9 +97,9 @@ public final class Sets
     /**
      * @since 9.0.
      */
-    public static <T> MutableSet<T> adapt(Set<T> list)
+    public static <T> MutableSet<T> adapt(Set<T> set)
     {
-        return SetAdapter.adapt(list);
+        return SetAdapter.adapt(set);
     }
 
     public static <E> MutableSet<E> union(
