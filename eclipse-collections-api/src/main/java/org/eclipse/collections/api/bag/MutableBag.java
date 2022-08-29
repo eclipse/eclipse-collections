@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.bag;
 
+import java.util.Collection;
+
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
 import org.eclipse.collections.api.bag.primitive.MutableCharBag;
@@ -261,6 +263,12 @@ public interface MutableBag<T>
 
     @Override
     <V> MutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
+
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableBagIterable.super.containsAll(source);
+    }
 
     /**
      * @since 9.2

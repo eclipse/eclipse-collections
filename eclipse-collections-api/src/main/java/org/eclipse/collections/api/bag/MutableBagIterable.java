@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.bag;
 
+import java.util.Collection;
+
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
@@ -42,6 +44,12 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
      * @throws IllegalArgumentException if {@code occurrences} are less than 0.
      */
     int addOccurrences(T item, int occurrences);
+
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableCollection.super.containsAll(source);
+    }
 
     boolean removeOccurrences(Object item, int occurrences);
 

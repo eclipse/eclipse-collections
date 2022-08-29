@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.list;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -424,6 +425,12 @@ public interface MutableList<T>
     {
         Collections.shuffle(this, random);
         return this;
+    }
+
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableCollection.super.containsAll(source);
     }
 
     /**

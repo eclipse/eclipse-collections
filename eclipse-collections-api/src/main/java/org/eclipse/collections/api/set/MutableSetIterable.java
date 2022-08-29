@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.set;
 
+import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -97,5 +98,11 @@ public interface MutableSetIterable<T> extends SetIterable<T>, MutableCollection
     {
         this.removeAllIterable(elements);
         return this;
+    }
+
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableCollection.super.containsAll(source);
     }
 }

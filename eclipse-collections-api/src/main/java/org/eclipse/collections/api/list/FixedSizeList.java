@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.list;
 
+import java.util.Collection;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -40,6 +41,12 @@ public interface FixedSizeList<T>
 
     @Override
     FixedSizeList<T> tap(Procedure<? super T> procedure);
+
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableList.super.containsAll(source);
+    }
 
     @Override
     default FixedSizeList<T> sortThis(Comparator<? super T> comparator)

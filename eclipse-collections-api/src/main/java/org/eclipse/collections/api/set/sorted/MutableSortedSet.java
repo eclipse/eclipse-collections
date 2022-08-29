@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.set.sorted;
 
+import java.util.Collection;
 import java.util.SortedSet;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -236,6 +237,12 @@ public interface MutableSortedSet<T>
 
     @Override
     MutableSortedSet<T> tailSet(T fromElement);
+
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return MutableSetIterable.super.containsAll(source);
+    }
 
     /**
      * @since 11.0

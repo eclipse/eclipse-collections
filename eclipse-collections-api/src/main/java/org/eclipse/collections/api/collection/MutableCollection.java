@@ -596,6 +596,12 @@ public interface MutableCollection<T>
     boolean retainAllIterable(Iterable<?> iterable);
 
     @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return RichIterable.super.containsAll(source);
+    }
+
+    @Override
     default <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,

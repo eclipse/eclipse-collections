@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.set;
 
+import java.util.Collection;
+
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.FixedSizeCollection;
 
@@ -33,4 +35,10 @@ public interface FixedSizeSet<T>
 
     @Override
     FixedSizeSet<T> tap(Procedure<? super T> procedure);
+
+    @Override
+    default boolean containsAll(Collection<?> source)
+    {
+        return FixedSizeCollection.super.containsAll(source);
+    }
 }
