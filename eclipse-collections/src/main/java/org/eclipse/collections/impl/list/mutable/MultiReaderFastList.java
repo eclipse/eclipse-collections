@@ -200,7 +200,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> clone()
+    public MultiReaderList<T> clone()
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
@@ -322,58 +322,18 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> newEmpty()
+    public MultiReaderList<T> newEmpty()
     {
         return MultiReaderFastList.newList();
     }
 
     @Override
-    public MutableList<T> reject(Predicate<? super T> predicate)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.reject(predicate);
-        }
-    }
-
-    @Override
-    public <P> MutableList<T> rejectWith(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.rejectWith(predicate, parameter);
-        }
-    }
-
-    @Override
-    public MutableList<T> tap(Procedure<? super T> procedure)
+    public MultiReaderList<T> tap(Procedure<? super T> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             this.forEach(procedure);
             return this;
-        }
-    }
-
-    @Override
-    public MutableList<T> select(Predicate<? super T> predicate)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.select(predicate);
-        }
-    }
-
-    @Override
-    public <P> MutableList<T> selectWith(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.selectWith(predicate, parameter);
         }
     }
 
@@ -546,7 +506,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> subList(int fromIndex, int toIndex)
+    public MultiReaderList<T> subList(int fromIndex, int toIndex)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {

@@ -192,7 +192,7 @@ public final class MultiReaderUnifiedSet<T>
     }
 
     @Override
-    public MutableSet<T> clone()
+    public MultiReaderSet<T> clone()
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
@@ -313,7 +313,7 @@ public final class MultiReaderUnifiedSet<T>
     }
 
     @Override
-    public MutableSet<T> newEmpty()
+    public MultiReaderSet<T> newEmpty()
     {
         return MultiReaderUnifiedSet.newSet();
     }
@@ -339,7 +339,7 @@ public final class MultiReaderUnifiedSet<T>
     }
 
     @Override
-    public MutableSet<T> tap(Procedure<? super T> procedure)
+    public MultiReaderSet<T> tap(Procedure<? super T> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
@@ -393,34 +393,6 @@ public final class MultiReaderUnifiedSet<T>
         {
             return this.delegate.selectInstancesOf(clazz);
         }
-    }
-
-    @Override
-    public MutableSet<T> with(T element)
-    {
-        this.add(element);
-        return this;
-    }
-
-    @Override
-    public MutableSet<T> without(T element)
-    {
-        this.remove(element);
-        return this;
-    }
-
-    @Override
-    public MutableSet<T> withAll(Iterable<? extends T> elements)
-    {
-        this.addAllIterable(elements);
-        return this;
-    }
-
-    @Override
-    public MutableSet<T> withoutAll(Iterable<? extends T> elements)
-    {
-        this.removeAllIterable(elements);
-        return this;
     }
 
     @Override

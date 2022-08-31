@@ -23,4 +23,45 @@ public interface MultiReaderSet<T>
     void withReadLockAndDelegate(Procedure<? super MutableSet<T>> procedure);
 
     void withWriteLockAndDelegate(Procedure<? super MutableSet<T>> procedure);
+
+    @Override
+    MultiReaderSet<T> newEmpty();
+
+    @Override
+    MultiReaderSet<T> clone();
+
+    @Override
+    default MultiReaderSet<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
+
+    @Override
+    default MultiReaderSet<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
+
+    @Override
+    default MultiReaderSet<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
+
+    @Override
+    default MultiReaderSet<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
+
+    @Override
+    default MultiReaderSet<T> tap(Procedure<? super T> procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
 }
