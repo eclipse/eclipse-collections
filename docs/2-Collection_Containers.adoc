@@ -937,7 +937,7 @@ They are named *{IntArrayList}*, *{FloatArrayList}* etc.
 Current JVMs use one byte per boolean in a *boolean[]* (instead of one bit per boolean).
 Thus the *BooleanArrayList* is backed by a *java.util.BitSet* as an optimization.
 
-.our ways to creCreate an *IntArrayList*, use one of the following:
+.our ways to create an *IntArrayList*, use one of the following:
 ====
 [source,java]
 ----
