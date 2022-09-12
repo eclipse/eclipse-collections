@@ -436,4 +436,10 @@ public interface MutableList<T>
     {
         return this.toImmutable();
     }
+
+    @Override
+    default int indexOf(Object o)
+    {
+        return ListIterable.super.indexOf(o);
+    }
 }

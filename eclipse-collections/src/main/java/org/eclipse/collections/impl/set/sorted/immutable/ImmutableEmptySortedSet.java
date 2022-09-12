@@ -273,12 +273,6 @@ final class ImmutableEmptySortedSet<T>
     }
 
     @Override
-    public int indexOf(Object object)
-    {
-        return -1;
-    }
-
-    @Override
     public Comparator<? super T> comparator()
     {
         return this.comparator;

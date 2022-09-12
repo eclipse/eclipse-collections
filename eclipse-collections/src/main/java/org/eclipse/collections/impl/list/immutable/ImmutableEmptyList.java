@@ -408,12 +408,6 @@ final class ImmutableEmptyList<T>
     }
 
     @Override
-    public int indexOf(Object object)
-    {
-        return -1;
-    }
-
-    @Override
     public boolean equals(Object otherList)
     {
         if (otherList == this)
