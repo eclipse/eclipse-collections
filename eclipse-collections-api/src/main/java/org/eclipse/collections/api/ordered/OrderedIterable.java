@@ -11,8 +11,10 @@
 package org.eclipse.collections.api.ordered;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
@@ -59,7 +61,20 @@ public interface OrderedIterable<T> extends RichIterable<T>
      *
      * @see List#indexOf(Object)
      */
-    int indexOf(Object object);
+    default int indexOf(Object object)
+    {
+        int i = 0;
+        Iterator<T> iterator = this.iterator();
+        while (iterator.hasNext())
+        {
+            if (Objects.equals(iterator.next(), object))
+            {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
 
     /**
      * Returns the first element of an iterable. In the case of a List it is the element at the first index. In the

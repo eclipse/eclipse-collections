@@ -455,12 +455,6 @@ class ImmutableEmptySortedBag<T>
     }
 
     @Override
-    public int indexOf(Object object)
-    {
-        return -1;
-    }
-
-    @Override
     public int compareTo(SortedBag<T> o)
     {
         return o.size() * -1;

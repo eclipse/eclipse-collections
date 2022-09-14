@@ -548,12 +548,6 @@ public abstract class AbstractImmutableSortedMap<K, V>
     }
 
     @Override
-    public int indexOf(Object object)
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
-    }
-
-    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super V, ? super S> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".corresponds() not implemented yet");
