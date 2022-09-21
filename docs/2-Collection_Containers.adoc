@@ -965,6 +965,90 @@ They are named *{IntHashSet}*, *{FloatHashSet}* etc.
 *{BooleanHashSet}* is implemented using a single integer to hold one of four possible states: ([], [F], [T], or [T, F]).
 All other sets use open addressing and quadratic probing.
 
+.There are different ways you can create primitive sets, which are listed below.
+- You can create primitive sets using **newSetWith** method.
+- You can initialize primitive sets using constructor argument. There are several overloaded constructors available.
+Below examples are provided with *IntHashSet* but all are same for *FloatHashSet* and *BooleanHashSet* as well.
+- There is another way to construct primitive types using primitive factory classes.
+[source,java]
+----
+// Initialize IntHashSet using newSetWith method, which is taking int vargs.
+MutableIntSet intHashSet1 = IntHashSet.newSetWith(1, 2, 3, 4, 5);
+MutableFloatSet floatHashSet1 = FloatHashSet.newSetWith(12.5f, 13.5f, 14.88f, 15.6f);
+MutableBooleanSet booleanHashSet = BooleanHashSet.newSetWith(true, false);
+
+// Empty Constructor will initialize IntHashSet with 16 size
+MutableIntSet intHashSet2 = new IntHashSet();
+
+// Initialize Constructor with initialCapacity
+MutableIntSet intHashSet3 = new IntHashSet(32);
+
+// Initialize Constructor with set of integers using vargs.
+MutableIntSet intHashSet4 = new IntHashSet(1, 2, 3, 4, 5, 6);
+
+// Initialize Constructor with IntIterable.
+IntIterable intIterable = intHashSet4; // you can get from any list, set which implement this interface
+MutableIntSet intHashSet = new IntHashSet(intIterable);
+
+// Initialize Constructor with existing IntHashSet
+MutableIntSet intHashSet5 = new IntHashSet(intHashSet2);
+----
+
+Primitive sets can be created using factory classes, *IntSets*, *FloatSets* and *BooleanSets* are primitive factory classes which provides mutable & immutable ways of creating sets. factory classes provide different set of methods for creating sets like *with*, *withAll*, *empty* and *ofAll* with different set of arguments. Provided examples are with *IntSets* but all are valid for *FloatSets* and *BooleanSets* as well.
+
+*withInitialCapacity* is only available in mutable factories.
+[source, java]
+----
+// mutable intset creation using initialCapacity
+MutableIntSet mutableIntSetCapacity = IntSets.mutable.withInitialCapacity(12);
+mutableIntSetCapacity.addAll(1, 3, 5, 6);
+
+// mutable sets creation using factory class using with method.
+MutableIntSet mutableIntSet = IntSets.mutable.with(1, 2, 3, 4, 5);
+MutableFloatSet mutableFloatSet = FloatSets.mutable.with(1.5f, 2.5f);
+MutableBooleanSet mutableBooleanSet = BooleanSets.mutable.with(true, false, false, true);
+
+// Immutable sets creation using factory class using with method.
+ImmutableIntSet immutableIntSet = IntSets.immutable.with(1, 2, 3, 4, 5);
+ImmutableFloatSet immutableFloatSet = FloatSets.immutable.with(1.5f, 2.5f);
+ImmutableBooleanSet immutableBooleanSet = BooleanSets.immutable.with(true, false, false, true);
+
+// immutable intset creating using IntIterable
+IntIterable intIterable = immutableIntSet; // you can get from any list, set which implement this interface
+ImmutableIntSet immutableIntSet = IntSets.immutable.withAll(intIterable);
+----
+
+Operation which you can perform on primitive hashsets.
+[source,java]
+----
+// Initialize IntHashSet using newSetWith method, which is taking int vargs.
+MutableIntSet intHashSet = IntHashSet.newSetWith(1, 2, 3, 4, 5);
+intHashSet.add(6);
+intHashSet.addAll(7, 8, 9); //addAll takes varags argument
+
+// We can use allSatisfy/anySatisfy method which take predicate to compare with all value of primitive sets
+boolean allSatisfy = intHashSet.allSatisfy(x -> 2 < x);
+boolean anySatisfy = intHashSet.anySatisfy(x -> 5 > x);
+
+// containsAll check for all element in primitive set
+boolean containsAll = intHashSet.containsAll(5, 4);
+
+// We can do a math operation like min, max on intHashSet
+int min = intHashSet.min();
+int max = intHashSet.max();
+
+// We can filter set with select method, which return filtered set, same way you can use reject as well
+MutableIntSet evens = intHashSet.select(x -> 0 == x % 2);
+MutableIntSet odds = intHashSet.reject(x -> 0 == x % 2);
+
+// We can do different set of conversion operation on primitive set as well, like toArray, toSortedArray, toBag, toSortedList and many more.
+ImmutableIntSet immutableIntSet = intHashSet.toImmutable();
+int[] toArray = intHashSet.toArray();
+int[] toSortedArray = intHashSet.toSortedArray();
+MutableIntList mutableIntList = intHashSet.toSortedList();
+MutableIntBag mutableIntBag = intHashSet.toBag();
+----
+
 === Primitive stacks
 
 Primitive stack implementations are similar to JCF *ArrayStack* but optimized for primitives.
