@@ -21,7 +21,6 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.bag.ImmutableBagFactory;
 import org.eclipse.collections.api.factory.bag.MultiReaderBagFactory;
 import org.eclipse.collections.api.factory.bag.MutableBagFactory;
-import org.eclipse.collections.impl.bag.mutable.AbstractHashBag;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.MultiReaderHashBag;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -182,7 +181,7 @@ public class BagsTest
     {
         try
         {
-            Field itemsField = AbstractHashBag.class.getDeclaredField("items");
+            Field itemsField = HashBag.class.getDeclaredField("items");
             itemsField.setAccessible(true);
             ObjectIntHashMap<Object> items = (ObjectIntHashMap<Object>) itemsField.get(bag);
 

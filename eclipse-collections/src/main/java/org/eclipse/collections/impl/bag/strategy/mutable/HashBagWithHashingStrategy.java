@@ -16,9 +16,9 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
-import org.eclipse.collections.api.factory.primitive.ObjectIntHashingStrategyMaps;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
 import org.eclipse.collections.impl.bag.mutable.AbstractHashBag;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMapWithHashingStrategy;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -29,6 +29,7 @@ public class HashBagWithHashingStrategy<T>
     private static final long serialVersionUID = 1L;
 
     private final HashingStrategy<? super T> hashingStrategy;
+    private final ObjectIntHashMapWithHashingStrategy<T> items;
 
     public HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy)
     {
@@ -37,7 +38,7 @@ public class HashBagWithHashingStrategy<T>
             throw new IllegalArgumentException("Cannot Instantiate HashBagWithHashingStrategy with null HashingStrategy");
         }
         this.hashingStrategy = hashingStrategy;
-        this.items = ObjectIntHashingStrategyMaps.mutable.with(hashingStrategy);
+        this.items = ObjectIntHashMapWithHashingStrategy.newMap(hashingStrategy);
     }
 
     public HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy, int size)
@@ -47,10 +48,10 @@ public class HashBagWithHashingStrategy<T>
             throw new IllegalArgumentException("Cannot Instantiate HashBagWithHashingStrategy with null HashingStrategy");
         }
         this.hashingStrategy = hashingStrategy;
-        this.items = ObjectIntHashingStrategyMaps.mutable.withInitialCapacity(hashingStrategy, size);
+        this.items = ObjectIntHashMapWithHashingStrategy.newMapWithInitialCapacity(hashingStrategy, size);
     }
 
-    private HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy, MutableObjectIntMap<T> map)
+    private HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy, ObjectIntHashMapWithHashingStrategy<T> map)
     {
         this.hashingStrategy = hashingStrategy;
         this.items = map;
@@ -90,6 +91,20 @@ public class HashBagWithHashingStrategy<T>
         return result;
     }
 
+    @Override
+    protected MutableObjectIntMap<T> items()
+    {
+        return this.items;
+    }
+
+    /**
+     * Rehashes every element in the set into a new backing table of the smallest possible size and eliminating removed sentinels.
+     */
+    public void trimToSize()
+    {
+        this.items.compact();
+    }
+
     public HashingStrategy<? super T> hashingStrategy()
     {
         return this.hashingStrategy;
@@ -104,7 +119,7 @@ public class HashBagWithHashingStrategy<T>
     @Override
     public MutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        MutableObjectIntMap<T> map = this.items.select((each, occurrences) -> predicate.accept(occurrences));
+        ObjectIntHashMapWithHashingStrategy<T> map = this.items.select((each, occurrences) -> predicate.accept(occurrences));
         return new HashBagWithHashingStrategy<>(this.hashingStrategy, map);
     }
 
