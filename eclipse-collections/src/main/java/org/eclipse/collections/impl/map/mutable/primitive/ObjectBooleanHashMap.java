@@ -1109,6 +1109,17 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
         return Math.min(capacity - 1, capacity / OCCUPIED_DATA_RATIO);
     }
 
+    public boolean trimToSize()
+    {
+        int newCapacity = this.smallestPowerOfTwoGreaterThan(this.size());
+        if (this.keys.length > newCapacity)
+        {
+            this.rehash(newCapacity);
+            return true;
+        }
+        return false;
+    }
+
     private void rehashAndGrow()
     {
         this.rehash(this.keys.length << 1);

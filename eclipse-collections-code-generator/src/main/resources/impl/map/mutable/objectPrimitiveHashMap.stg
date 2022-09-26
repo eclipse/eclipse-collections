@@ -1211,9 +1211,23 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     }
     <endif>
 
+    public boolean trimToSize()
+    {
+        int newCapacity = this.smallestPowerOfTwoGreaterThan(this.size());
+        if (this.keys.length > newCapacity)
+        {
+            this.rehash(newCapacity);
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Rehashes every element in the set into a new backing table of the smallest possible size and eliminating removed sentinels.
+     *
+     * @deprecated since 12.0.0 - use trimToSize instead
      */
+    @Deprecated
     public void compact()
     {
         this.rehash(this.smallestPowerOfTwoGreaterThan(this.size()));
