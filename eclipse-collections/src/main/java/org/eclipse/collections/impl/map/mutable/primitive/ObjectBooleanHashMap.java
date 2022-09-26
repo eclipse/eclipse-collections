@@ -1109,6 +1109,14 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
         return Math.min(capacity - 1, capacity / OCCUPIED_DATA_RATIO);
     }
 
+    /**
+     * Rehashes every element in the set into a new backing table of the smallest possible size and eliminating removed sentinels.
+     */
+    public void compact()
+    {
+        this.rehash(this.smallestPowerOfTwoGreaterThan(this.size()));
+    }
+
     private void rehashAndGrow()
     {
         this.rehash(this.keys.length << 1);
