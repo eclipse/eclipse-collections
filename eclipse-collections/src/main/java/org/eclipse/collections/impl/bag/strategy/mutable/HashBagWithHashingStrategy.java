@@ -16,9 +16,10 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
-import org.eclipse.collections.api.factory.primitive.ObjectIntHashingStrategyMaps;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
 import org.eclipse.collections.impl.bag.mutable.AbstractHashBag;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMapWithHashingStrategy;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -37,7 +38,7 @@ public class HashBagWithHashingStrategy<T>
             throw new IllegalArgumentException("Cannot Instantiate HashBagWithHashingStrategy with null HashingStrategy");
         }
         this.hashingStrategy = hashingStrategy;
-        this.items = ObjectIntHashingStrategyMaps.mutable.with(hashingStrategy);
+        this.items = ObjectIntHashMapWithHashingStrategy.newMap(hashingStrategy);
     }
 
     public HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy, int size)
@@ -47,7 +48,7 @@ public class HashBagWithHashingStrategy<T>
             throw new IllegalArgumentException("Cannot Instantiate HashBagWithHashingStrategy with null HashingStrategy");
         }
         this.hashingStrategy = hashingStrategy;
-        this.items = ObjectIntHashingStrategyMaps.mutable.withInitialCapacity(hashingStrategy, size);
+        this.items = ObjectIntHashMapWithHashingStrategy.newMapWithInitialCapacity(hashingStrategy, size);
     }
 
     private HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy, MutableObjectIntMap<T> map)
@@ -88,6 +89,16 @@ public class HashBagWithHashingStrategy<T>
         HashBagWithHashingStrategy<E> result = HashBagWithHashingStrategy.newBag(hashingStrategy);
         ArrayIterate.addAllTo(elements, result);
         return result;
+    }
+
+    /**
+     * Rehashes every element in the set into a new backing table of the smallest possible size and eliminating removed sentinels.
+     *
+     * @since 12.0
+     */
+    public void trimToSize()
+    {
+        ((ObjectIntHashMap<T>) this.items).trimToSize();
     }
 
     public HashingStrategy<? super T> hashingStrategy()

@@ -19,8 +19,8 @@ import java.util.Arrays;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
-import org.eclipse.collections.api.factory.primitive.ObjectIntMaps;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -38,12 +38,12 @@ public class HashBag<T>
 
     public HashBag()
     {
-        this.items = ObjectIntMaps.mutable.empty();
+        this.items = new ObjectIntHashMap<>();
     }
 
     public HashBag(int size)
     {
-        this.items = ObjectIntMaps.mutable.withInitialCapacity(size);
+        this.items = new ObjectIntHashMap<>(size);
     }
 
     private HashBag(MutableObjectIntMap<T> map)
@@ -86,6 +86,16 @@ public class HashBag<T>
         return result;
     }
 
+    /**
+     * Rehashes every element in the set into a new backing table of the smallest possible size and eliminating removed sentinels.
+     *
+     * @since 12.0
+     */
+    public void trimToSize()
+    {
+        ((ObjectIntHashMap<T>) this.items).trimToSize();
+    }
+
     @Override
     protected int computeHashCode(T item)
     {
@@ -108,7 +118,7 @@ public class HashBag<T>
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.items = ObjectIntMaps.mutable.empty();
+        this.items = new ObjectIntHashMap<>();
         ((Externalizable) this.items).readExternal(in);
         this.size = (int) this.items.sum();
     }

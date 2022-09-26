@@ -78,7 +78,7 @@ public final class MultiReaderHashBag<T>
 {
     private static final long serialVersionUID = 1L;
 
-    private MutableBag<T> delegate;
+    private HashBag<T> delegate;
 
     /**
      * @deprecated Empty default constructor used for serialization.
@@ -90,12 +90,12 @@ public final class MultiReaderHashBag<T>
         // For Externalizable use only
     }
 
-    private MultiReaderHashBag(MutableBag<T> newDelegate)
+    private MultiReaderHashBag(HashBag<T> newDelegate)
     {
         this(newDelegate, new ReentrantReadWriteLock());
     }
 
-    private MultiReaderHashBag(MutableBag<T> newDelegate, ReadWriteLock newLock)
+    private MultiReaderHashBag(HashBag<T> newDelegate, ReadWriteLock newLock)
     {
         this.lock = newLock;
         this.lockWrapper = new ReadWriteLockWrapper(newLock);
@@ -120,6 +120,16 @@ public final class MultiReaderHashBag<T>
     public static <T> MultiReaderHashBag<T> newBagWith(T... elements)
     {
         return new MultiReaderHashBag<>(HashBag.newBagWith(elements));
+    }
+
+    /**
+     * Rehashes every element in the set into a new backing table of the smallest possible size and eliminating removed sentinels.
+     *
+     * @since 12.0
+     */
+    public void trimToSize()
+    {
+        this.delegate.trimToSize();
     }
 
     @Override
@@ -648,7 +658,7 @@ public final class MultiReaderHashBag<T>
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.delegate = (MutableBag<T>) in.readObject();
+        this.delegate = (HashBag<T>) in.readObject();
         this.lock = new ReentrantReadWriteLock();
         this.lockWrapper = new ReadWriteLockWrapper(this.lock);
     }
