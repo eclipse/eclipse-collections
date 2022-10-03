@@ -30,7 +30,7 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java-version }}
       - name: Enable Maven Cache
-        uses: actions/cache@v3.0.2
+        uses: actions/cache@v3.0.10
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
