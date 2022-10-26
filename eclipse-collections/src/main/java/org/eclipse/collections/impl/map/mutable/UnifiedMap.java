@@ -3322,6 +3322,6 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     @Override
     public ImmutableMap<K, V> toImmutable()
     {
-        return Maps.immutable.withAll(this);
+        return Maps.immutable.withMap(this);
     }
 }

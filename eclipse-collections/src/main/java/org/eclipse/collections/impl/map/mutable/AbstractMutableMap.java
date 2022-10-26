@@ -84,7 +84,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Override
     public ImmutableMap<K, V> toImmutable()
     {
-        return Maps.immutable.withAll(this);
+        return Maps.immutable.withMap(this);
     }
 
     @Override
