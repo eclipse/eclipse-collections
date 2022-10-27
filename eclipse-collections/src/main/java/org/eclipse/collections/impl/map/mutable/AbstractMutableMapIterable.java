@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.mutable;
 
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -225,5 +226,25 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
     public <V1> MutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
     {
         return this.flatCollect(function, Bags.mutable.empty());
+    }
+
+    @Override
+    public V computeIfPresent(K key,
+            BiFunction<? super K,? super V,? extends V> remappingFunction)
+    {
+        V oldValue = this.get(key);
+        if (oldValue != null)
+        {
+            V newValue = remappingFunction.apply(key, oldValue);
+            if (newValue == null)
+            {
+                return this.remove(key);
+            }
+            else
+            {
+                return this.put(key, newValue);
+            }
+        }
+        return null;
     }
 }

@@ -13,6 +13,7 @@ package org.eclipse.collections.api.map;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -433,4 +434,8 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
                 valueFunction.valueOf(value)));
         return map;
     }
+
+    @Override
+    V computeIfPresent(K key,
+            BiFunction<? super K,? super V,? extends V> remappingFunction);
 }

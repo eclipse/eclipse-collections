@@ -31,6 +31,7 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -2314,5 +2315,40 @@ public final class ConcurrentHashMap<K, V>
     public ImmutableMap<K, V> toImmutable()
     {
         return Maps.immutable.ofMap(this);
+    }
+
+    @Override
+    public V computeIfPresent(K key,
+            BiFunction<? super K,? super V,? extends V> remappingFunction)
+    {
+        int hash = this.hash(key);
+        AtomicReferenceArray currentArray = this.table;
+        int length = currentArray.length();
+        int index = ConcurrentHashMap.indexFor(hash, length);
+        Object o = currentArray.get(index);
+        if (o == null)
+        {
+            return null;
+        }
+        while (true)
+        {
+            if (o == RESIZED || o == RESIZING)
+            {
+                currentArray = this.helpWithResizeWhileCurrentIndex(currentArray, index);
+            }
+            else
+            {
+                Entry<K, V> e = (Entry<K, V>) o;
+                V value = remappingFunction.apply(key, e.getValue());
+                if (value == null)
+                {
+                    this.slowRemove(key, hash, currentArray);
+                }
+                else
+                {
+                    return this.slowPut(key, value, hash, currentArray);
+                }
+            }
+        }
     }
 }
