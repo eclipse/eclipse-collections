@@ -277,4 +277,28 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase
                 Collections.nCopies(1000, 2),
                 map4.values());
     }
+
+    @Test
+    default void Map_computeIfPresent()
+    {
+        MutableMapIterable<Integer, Integer> map = this.newWithKeysValues(1, 1, 2, 2, 3, 3);
+        Map<Integer, Integer> hashMap = new LinkedHashMap<>();
+        hashMap.put(1, 1);
+        hashMap.put(2, 2);
+        hashMap.put(3, 3);
+
+        assertEquals(
+                map.computeIfPresent(1, Integer::sum),
+                hashMap.computeIfPresent(1, Integer::sum));
+        MutableMapIterable<Integer, Integer> map2 =
+                this.newWithKeysValues(1, hashMap.get(1), 2, 2, 3, 3);
+        assertEquals(map, map2);
+        assertNull(map.computeIfPresent(4, Integer::sum));
+        assertNull(hashMap.computeIfPresent(4, Integer::sum));
+        assertNull(map.computeIfPresent(2, (x, y) -> null));
+        assertNull(hashMap.computeIfPresent(2, (x, y) -> null));
+        MutableMapIterable<Integer, Integer> map3 =
+                this.newWithKeysValues(1, 2, 3, 3);
+        assertEquals(map, map3);
+    }
 }

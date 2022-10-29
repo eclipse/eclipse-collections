@@ -227,24 +227,4 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
     {
         return this.flatCollect(function, Bags.mutable.empty());
     }
-
-    @Override
-    public V computeIfPresent(K key,
-            BiFunction<? super K,? super V,? extends V> remappingFunction)
-    {
-        V oldValue = this.get(key);
-        if (oldValue != null)
-        {
-            V newValue = remappingFunction.apply(key, oldValue);
-            if (newValue == null)
-            {
-                return this.remove(key);
-            }
-            else
-            {
-                return this.put(key, newValue);
-            }
-        }
-        return null;
-    }
 }

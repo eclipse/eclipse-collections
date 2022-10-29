@@ -2321,6 +2321,7 @@ public final class ConcurrentHashMap<K, V>
     public V computeIfPresent(K key,
             BiFunction<? super K,? super V,? extends V> remappingFunction)
     {
+        Objects.requireNonNull(remappingFunction);
         int hash = this.hash(key);
         AtomicReferenceArray currentArray = this.table;
         int length = currentArray.length();
@@ -2343,10 +2344,12 @@ public final class ConcurrentHashMap<K, V>
                 if (value == null)
                 {
                     this.slowRemove(key, hash, currentArray);
+                    return null;
                 }
                 else
                 {
-                    return this.slowPut(key, value, hash, currentArray);
+                    this.slowPut(key, value, hash, currentArray);
+                    return value;
                 }
             }
         }

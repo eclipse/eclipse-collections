@@ -12,6 +12,7 @@ package org.eclipse.collections.api.map;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 
@@ -42,5 +43,12 @@ public interface ConcurrentMutableMap<K, V>
     {
         this.putAllMapIterable(mapIterable);
         return this;
+    }
+
+    @Override
+    default V computeIfPresent(K key,
+            BiFunction<? super K,? super V,? extends V> remappingFunction)
+    {
+        return ConcurrentMap.super.computeIfPresent(key, remappingFunction);
     }
 }

@@ -183,4 +183,11 @@ public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestC
                     throw new AssertionError();
                 }, "test"));
     }
+
+    @Override
+    public void Map_computeIfPresent()
+    {
+        MutableMapIterable<Integer, Integer> map = this.newWithKeysValues(1, 1, 2, 2, 3, 3);
+        assertThrows(UnsupportedOperationException.class, () -> map.computeIfPresent(1, Integer::sum));
+    }
 }

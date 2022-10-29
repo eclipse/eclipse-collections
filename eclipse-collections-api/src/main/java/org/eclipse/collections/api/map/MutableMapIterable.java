@@ -434,8 +434,4 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
                 valueFunction.valueOf(value)));
         return map;
     }
-
-    @Override
-    V computeIfPresent(K key,
-            BiFunction<? super K,? super V,? extends V> remappingFunction);
 }
