@@ -19,12 +19,6 @@ import org.junit.runner.RunWith;
 @RunWith(Java8Runner.class)
 public class UnmodifiableMutableSetTest implements UnmodifiableMutableSetTestCase
 {
-    @Override
-    public boolean allowsDuplicates()
-    {
-        return false;
-    }
-
     @SafeVarargs
     @Override
     public final <T> MutableSet<T> newWith(T... elements)

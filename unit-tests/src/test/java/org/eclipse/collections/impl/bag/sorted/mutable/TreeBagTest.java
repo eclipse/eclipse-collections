@@ -126,20 +126,6 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
-    public void min_null_safe()
-    {
-        super.min_null_safe();
-    }
-
-    @Override
-    @Test(expected = NullPointerException.class)
-    public void max_null_safe()
-    {
-        super.max_null_safe();
-    }
-
-    @Override
     @Test
     public void collectWithOccurrences()
     {

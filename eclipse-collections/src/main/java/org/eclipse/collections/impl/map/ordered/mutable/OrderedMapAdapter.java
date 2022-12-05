@@ -16,7 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -568,12 +567,6 @@ public class OrderedMapAdapter<K, V>
         // TODO: Make this work in a major version by changing {@link org.eclipse.collections.api.RichIterable#groupByUniqueKey}'s type R from MutableMap to MutableMapIterable.
         // return this.groupByUniqueKey(function, this.newEmpty());
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".groupByUniqueKey() not implemented yet");
-    }
-
-    @Override
-    public LazyIterable<V> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
     @Override

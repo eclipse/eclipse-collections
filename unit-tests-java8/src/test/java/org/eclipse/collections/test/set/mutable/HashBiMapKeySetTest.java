@@ -45,10 +45,4 @@ public class HashBiMapKeySetTest implements SetTestCase
         // TODO Move up to a keySet view abstraction
         SetTestCase.super.Collection_add();
     }
-
-    @Override
-    public boolean allowsDuplicates()
-    {
-        return false;
-    }
 }

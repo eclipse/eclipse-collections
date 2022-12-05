@@ -499,12 +499,6 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     }
 
     @Override
-    public LazyIterable<T> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
-    }
-
-    @Override
     public ImmutableSortedSet<T> toReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toReversed() not implemented yet");

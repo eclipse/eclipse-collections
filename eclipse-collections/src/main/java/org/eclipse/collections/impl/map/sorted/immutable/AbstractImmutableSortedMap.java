@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
 
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -503,12 +502,6 @@ public abstract class AbstractImmutableSortedMap<K, V>
     {
         MutableObjectDoubleMap<V1> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function)).toImmutable();
-    }
-
-    @Override
-    public LazyIterable<V> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
     @Override

@@ -29,7 +29,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.lazy.ReverseIterable;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.ArrayListIterate;
@@ -428,11 +427,5 @@ public final class ArrayListAdapter<T>
     public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
         return ArrayListIterate.partitionWhile(this.delegate, predicate);
-    }
-
-    @Override
-    public ReverseIterable<T> asReversed()
-    {
-        return ReverseIterable.adapt(this);
     }
 }

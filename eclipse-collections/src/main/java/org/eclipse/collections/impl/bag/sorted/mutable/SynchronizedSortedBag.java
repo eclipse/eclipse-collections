@@ -17,7 +17,6 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ParallelBag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
@@ -697,12 +696,6 @@ public class SynchronizedSortedBag<T>
         {
             this.getDelegate().reverseForEachWithIndex(procedure);
         }
-    }
-
-    @Override
-    public LazyIterable<T> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
     @Override

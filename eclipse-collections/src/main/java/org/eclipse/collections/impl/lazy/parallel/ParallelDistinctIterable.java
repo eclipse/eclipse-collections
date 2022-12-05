@@ -20,7 +20,6 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.map.ConcurrentMutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.set.UnsortedSetMultimap;
-import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.lazy.parallel.list.DistinctBatch;
 import org.eclipse.collections.impl.lazy.parallel.set.AbstractParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.lazy.parallel.set.UnsortedSetBatch;
@@ -55,12 +54,6 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
         // TODO: Replace the map with a concurrent set once it's implemented
         ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         return this.delegate.split().collect(batch -> new DistinctBatch<>(batch, distinct));
-    }
-
-    @Override
-    public ParallelUnsortedSetIterable<T> asUnique()
-    {
-        return this;
     }
 
     @Override

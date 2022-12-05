@@ -1321,12 +1321,6 @@ public class UnmodifiableTreeMap<K, V>
     }
 
     @Override
-    public LazyIterable<V> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
-    }
-
-    @Override
     public int detectLastIndex(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");

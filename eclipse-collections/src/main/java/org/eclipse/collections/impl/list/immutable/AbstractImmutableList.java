@@ -948,12 +948,6 @@ abstract class AbstractImmutableList<T>
         }
 
         @Override
-        public Iterator<T> iterator()
-        {
-            return this.listIterator(0);
-        }
-
-        @Override
         public ImmutableSubList<T> subList(int fromIndex, int toIndex)
         {
             if (fromIndex < 0)

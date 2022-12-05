@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
 
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -599,12 +598,6 @@ public class SynchronizedSortedMap<K, V>
         {
             this.getDelegate().reverseForEachWithIndex(procedure);
         }
-    }
-
-    @Override
-    public LazyIterable<V> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
     @Override

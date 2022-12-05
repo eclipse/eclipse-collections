@@ -94,13 +94,6 @@ public abstract class UnmodifiableMutableListTestCase extends UnmodifiableMemory
 
     @Override
     @Test
-    public void addAtIndex()
-    {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getCollection().add(0, null));
-    }
-
-    @Override
-    @Test
     public void addAllAtIndex()
     {
         Assert.assertThrows(UnsupportedOperationException.class, () -> this.getCollection().addAll(0, null));

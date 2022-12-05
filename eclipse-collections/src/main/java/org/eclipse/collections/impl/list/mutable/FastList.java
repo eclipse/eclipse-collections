@@ -84,7 +84,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
@@ -340,18 +339,6 @@ public class FastList<T>
     {
         this.ensureCapacity(this.size + source.size());
         Iterate.forEachWith(source, Procedures2.addToCollection(), this);
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> source)
-    {
-        return Iterate.allSatisfyWith(source, Predicates2.in(), this);
-    }
-
-    @Override
-    public boolean containsAllArguments(Object... source)
-    {
-        return ArrayIterate.allSatisfyWith(source, Predicates2.in(), this);
     }
 
     @Override

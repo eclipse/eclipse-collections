@@ -39,7 +39,6 @@ import org.eclipse.collections.impl.list.mutable.AbstractMutableList;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
 import org.eclipse.collections.impl.utility.ArrayIterate;
-import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.internal.InternalArrayIterate;
 import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
@@ -294,12 +293,6 @@ public abstract class AbstractArrayAdapter<T>
     public boolean remove(Object o)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> collection)
-    {
-        return Iterate.allSatisfyWith(collection, Predicates2.in(), this);
     }
 
     @Override
