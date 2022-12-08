@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.impl.lazy.parallel.list;
 
-import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.junit.Test;
@@ -27,12 +26,6 @@ public class ParallelListIterableTest extends ParallelListIterableTestCase
     protected ParallelListIterable<Integer> newWith(Integer... littleElements)
     {
         return FastList.newListWith(littleElements).asParallel(this.executorService, this.batchSize);
-    }
-
-    @Override
-    protected ListIterable<Integer> getExpectedWith(Integer... littleElements)
-    {
-        return FastList.newListWith(littleElements);
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -775,12 +775,6 @@ public abstract class AbstractMutableList<T>
             };
         }
 
-        @Override
-        public MutableList<T> subList(int fromIndex, int toIndex)
-        {
-            return new SubList<>(this, fromIndex, toIndex);
-        }
-
         private void checkIfOutOfBounds(int index)
         {
             if (index >= this.size || index < 0)
@@ -813,18 +807,6 @@ public abstract class AbstractMutableList<T>
         public MutableStack<T> toStack()
         {
             return ArrayStack.newStack(this);
-        }
-
-        @Override
-        public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
-        {
-            ListIterate.forEachWithIndex(this, objectIntProcedure);
-        }
-
-        @Override
-        public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
-        {
-            ListIterate.forEachWith(this, procedure, parameter);
         }
     }
 

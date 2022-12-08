@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -39,7 +38,6 @@ import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.SortedBags;
-import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.factory.primitive.BooleanLists;
 import org.eclipse.collections.api.factory.primitive.ByteLists;
 import org.eclipse.collections.api.factory.primitive.CharLists;
@@ -63,7 +61,6 @@ import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
-import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.immutable.AbstractImmutableBagIterable;
@@ -419,12 +416,6 @@ abstract class AbstractImmutableSortedBag<T>
     }
 
     @Override
-    public MutableStack<T> toStack()
-    {
-        return Stacks.mutable.withAll(this);
-    }
-
-    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         if (size <= 0)
@@ -459,11 +450,5 @@ abstract class AbstractImmutableSortedBag<T>
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");
-    }
-
-    @Override
-    public LazyIterable<T> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 }

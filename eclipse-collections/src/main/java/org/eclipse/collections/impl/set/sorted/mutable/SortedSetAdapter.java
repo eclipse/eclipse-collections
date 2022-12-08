@@ -675,12 +675,6 @@ public final class SortedSetAdapter<T>
     }
 
     @Override
-    public LazyIterable<T> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
-    }
-
-    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");

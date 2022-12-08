@@ -11,12 +11,10 @@
 package org.eclipse.collections.impl.stack.immutable.primitive;
 
 import org.eclipse.collections.api.BooleanIterable;
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.stack.primitive.ImmutableBooleanStack;
 import org.eclipse.collections.api.stack.primitive.MutableBooleanStack;
 import org.eclipse.collections.impl.factory.primitive.BooleanStacks;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.BooleanArrayStack;
 import org.eclipse.collections.impl.stack.primitive.AbstractBooleanStackTestCase;
 import org.eclipse.collections.impl.test.Verify;
@@ -41,12 +39,6 @@ public abstract class AbstractImmutableBooleanStackTestCase extends AbstractBool
     protected MutableBooleanStack newMutableCollectionWith(boolean... elements)
     {
         return BooleanArrayStack.newStackWith(elements);
-    }
-
-    @Override
-    protected RichIterable<Object> newObjectCollectionWith(Object... elements)
-    {
-        return ArrayStack.newStackWith(elements);
     }
 
     @Override

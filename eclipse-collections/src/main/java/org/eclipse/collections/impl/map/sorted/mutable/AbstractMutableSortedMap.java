@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.impl.map.sorted.mutable;
 
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -323,12 +322,6 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.newMap(this.size()));
-    }
-
-    @Override
-    public LazyIterable<V> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
     @Override

@@ -655,12 +655,6 @@ public class SynchronizedSortedSet<T>
     }
 
     @Override
-    public LazyIterable<T> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
-    }
-
-    @Override
     public MutableSortedSet<T> toReversed()
     {
         synchronized (this.getLock())

@@ -442,12 +442,6 @@ final class ImmutableSingletonBag<T>
     }
 
     @Override
-    public ImmutableBag<T> toImmutable()
-    {
-        return this;
-    }
-
-    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.value);
