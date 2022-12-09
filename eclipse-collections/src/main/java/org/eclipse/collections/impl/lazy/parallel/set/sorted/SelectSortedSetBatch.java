@@ -37,13 +37,6 @@ public class SelectSortedSetBatch<T> extends AbstractBatch<T> implements SortedS
         this.sortedSetBatch.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
-    /*
-    public SetBatch<T> select(Predicate<? super T> predicate)
-    {
-        return new SelectSetBatch<T>(this.setBatch, Predicates.and(this.predicate, predicate));
-    }
-    */
-
     @Override
     public SortedSetBatch<T> select(Predicate<? super T> predicate)
     {

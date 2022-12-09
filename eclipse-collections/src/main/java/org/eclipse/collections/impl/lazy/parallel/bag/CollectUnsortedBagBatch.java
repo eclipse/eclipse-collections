@@ -43,13 +43,6 @@ public class CollectUnsortedBagBatch<T, V> extends AbstractBatch<V> implements U
         throw new UnsupportedOperationException("not implemented yet");
     }
 
-    /*
-    public <VV> BagBatch<VV> collect(Function<? super V, ? extends VV> function)
-    {
-        return new CollectBagBatch<T, VV>(this.bagBatch, Functions.chain(this.function, function));
-    }
-    */
-
     @Override
     public UnsortedBagBatch<V> select(Predicate<? super V> predicate)
     {

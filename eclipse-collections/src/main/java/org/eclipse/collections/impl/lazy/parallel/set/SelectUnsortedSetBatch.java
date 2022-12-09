@@ -38,13 +38,6 @@ public class SelectUnsortedSetBatch<T> extends AbstractBatch<T> implements Unsor
         this.unsortedSetBatch.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
-    /*
-    public SetBatch<T> select(Predicate<? super T> predicate)
-    {
-        return new SelectSetBatch<T>(this.setBatch, Predicates.and(this.predicate, predicate));
-    }
-    */
-
     @Override
     public UnsortedSetBatch<T> select(Predicate<? super T> predicate)
     {

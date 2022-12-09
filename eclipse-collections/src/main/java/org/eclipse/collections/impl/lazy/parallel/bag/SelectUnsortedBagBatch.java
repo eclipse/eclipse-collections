@@ -60,13 +60,6 @@ public class SelectUnsortedBagBatch<T> extends AbstractBatch<T> implements Unsor
         return new FlatCollectUnsortedBagBatch<>(this, function);
     }
 
-    /*
-    public BagBatch<T> select(Predicate<? super T> predicate)
-    {
-        return new SelectBagBatch<T>(this.bagBatch, Predicates.and(this.predicate, predicate));
-    }
-    */
-
     private static final class IfProcedureWithOccurrences<T> implements ObjectIntProcedure<T>
     {
         private final Predicate<? super T> predicate;

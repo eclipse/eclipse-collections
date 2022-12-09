@@ -42,13 +42,6 @@ public class CollectSortedSetBatch<T, V> extends AbstractBatch<V> implements Lis
         this.sortedSetBatch.forEach(Functions.bind(procedure, this.function));
     }
 
-    /*
-    public <VV> ListBatch<VV> collect(Function<? super V, ? extends VV> function)
-    {
-        return new CollectListBatch<T, VV>(this.sortedSetBatch, Functions.chain(this.function, function));
-    }
-    */
-
     @Override
     public ListBatch<V> select(Predicate<? super V> predicate)
     {
