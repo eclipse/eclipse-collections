@@ -11,7 +11,6 @@
 package org.eclipse.collections.api.ordered;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -63,17 +62,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      */
     default int indexOf(Object object)
     {
-        int i = 0;
-        Iterator<T> iterator = this.iterator();
-        while (iterator.hasNext())
-        {
-            if (Objects.equals(iterator.next(), object))
-            {
-                return i;
-            }
-            i++;
-        }
-        return -1;
+        return this.detectIndex(each -> Objects.equals(each, object));
     }
 
     /**
@@ -175,14 +164,8 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * both inclusive.
      *
      * <pre>e.g.
-     * OrderedIterable&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally)
-     * people.forEach(0, 1, new Procedure&lt;Person&gt;()
-     * {
-     *     public void value(Person person)
-     *     {
-     *          LOGGER.info(person.getName());
-     *     }
-     * });
+     * OrderedIterable&lt;Person&gt; people = FastList.newListWith(ted, mary, bob, sally)
+     * people.forEach(0, 1, person -&gt; LOGGER.info(person.getName()));
      * </pre>
      * <p>
      * This code would output ted and mary's names.
@@ -193,13 +176,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * Iterates over the iterable passing each element and the current relative int index to the specified instance of
      * ObjectIntProcedure
      * <pre>e.g.
-     * people.forEachWithIndex(new ObjectIntProcedure&lt;Person&gt;()
-     * {
-     *     public void value(Person person, int index)
-     *     {
-     *         LOGGER.info("Index: " + index + " person: " + person.getName());
-     *     }
-     * });
+     * people.forEachWithIndex((person, index) -&gt; LOGGER.info("Index: " + index + " person: " + person.getName()));
      * </pre>
      */
     @Override
@@ -211,13 +188,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      *
      * <pre>e.g.
      * OrderedIterable&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally)
-     * people.forEachWithIndex(0, 1, new ObjectIntProcedure&lt;Person&gt;()
-     * {
-     *     public void value(Person person, int index)
-     *     {
-     *          LOGGER.info(person.getName());
-     *     }
-     * });
+     * people.forEachWithIndex(0, 1, (person, index) -&gt; LOGGER.info(person.getName()));
      * </pre>
      * <p>
      * This code would output ted and mary's names.
