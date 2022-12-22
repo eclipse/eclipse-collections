@@ -1110,6 +1110,70 @@ Primitive stack implementations are similar to JCF *ArrayStack* but optimized fo
 
 Primitive bag implementations are similar to JCF *HashBag*, but both _item_ and _count_ are primitives.
 
+Primitive bag can be created using factory classes which provides mutable & immutable ways of creating bags. factory classes provide different set of methods for creating bags like *with*, *withAll*, *empty* and *ofAll* with different set of arguments.
+
+*withInitialCapacity* is only available in mutable factories.
+[source, java]
+----
+// mutable bag creation using initialCapacity
+MutableBag<String> initialCapacity = Bags.mutable.<String>withInitialCapacity(10);
+
+// empty mutable bag creation & add value using addOccurrences
+MutableBag<String> bag = Bags.mutable.empty();
+bag.addOccurrences("1", 1);
+bag.addOccurrences("2", 2);
+Assertions.assertEquals(1, bag.occurrencesOf("1"));
+Assertions.assertEquals(2, bag.occurrencesOf("2"));
+
+// Create bag using *with* method and remove value using removeOccurrences
+MutableBag<String> bag = Bags.mutable.with("1", "1", "1", "2", "2", "2", "2", "3", "3", "3", "3");
+bag.removeOccurrences("1", 2);
+Assertions.assertEquals(1, bag.occurrencesOf("1"));
+
+// Create bag using *withOccurrences*
+MutableBag<String> bag = Bags.mutable.withOccurrences("1", 1, "2", 2, "3", 3, "4", 4);
+
+// Create bag using *with* and get selected values using *selectByOccurrences*
+MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
+MutableBag<String> selected = bag.selectByOccurrences(IntPredicates.greaterThan(2));
+MutableBag<String> expected = Bags.mutable.withOccurrences("3", 3, "4", 4);
+Assertions.assertEquals(expected, selected);
+
+// Create bag using *with* and collect values using *collectWithOccurrences*
+MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
+MutableBag<ObjectIntPair<String>> result = bag.collectWithOccurrences(PrimitiveTuples::pair);
+MutableBag<ObjectIntPair<String>> expected = Bags.mutable.with(
+        PrimitiveTuples.pair("1", 1),
+        PrimitiveTuples.pair("2", 2),
+        PrimitiveTuples.pair("3", 3),
+        PrimitiveTuples.pair("4", 4));
+Assertions.assertEquals(expected, result);
+
+// Create bag using *with* and conditional check using *anySatisfyWithOccurrences*
+MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
+Assertions.assertTrue(bag.anySatisfyWithOccurrences((each, occurrences) -> "1".equals(each) && 1 == occurrences));
+Assertions.assertTrue(bag.anySatisfyWithOccurrences((each, occurrences) -> "2".equals(each) && 2 == occurrences));
+Assertions.assertTrue(bag.anySatisfyWithOccurrences((each, occurrences) -> "3".equals(each) && 3 == occurrences));
+Assertions.assertTrue(bag.anySatisfyWithOccurrences((each, occurrences) -> "4".equals(each) && 4 == occurrences));
+
+// Create bag using *with* and conditional check using *allSatisfyWithOccurrences*
+MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
+Assertions.assertTrue(bag.allSatisfyWithOccurrences((each, occurrences) -> "1234".contains(each) && occurrences > 0));
+
+// Create bag using *with* and conditional check using *noneSatisfyWithOccurrences*
+MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
+Assertions.assertTrue(bag.noneSatisfyWithOccurrences((each, occurrences) -> "5678".contains(each) && occurrences > 1));
+
+// Create bag using *with* and detect value using *detectWithOccurrences*
+MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
+String string = bag.detectWithOccurrences((each, occurrences) -> occurrences > 3);
+Assertions.assertEquals("4", string);
+
+// Create bag and get distinct size of it
+Bag<String> bag = Bags.mutable.with("4", "4", "4", "4", "3", "3", "3", "1", "2", "2");
+Assertions.assertEquals(4, bag.sizeDistinct());
+----
+
 === Primitive Maps
 
 There are three types of primitive maps:
