@@ -1110,68 +1110,73 @@ Primitive stack implementations are similar to JCF *ArrayStack* but optimized fo
 
 Primitive bag implementations are similar to JCF *HashBag*, but both _item_ and _count_ are primitives.
 
-Primitive bag can be created using factory classes which provides mutable & immutable ways of creating bags. factory classes provide different set of methods for creating bags like *with*, *withAll*, *empty* and *ofAll* with different set of arguments.
+Primitive bags can be created using factory classes, *IntBags*, *LongBags*, *FloatBags*, *DoubleBags*, *CharBags*, *ByteBags*, *BooleanBags* and *ShortBags* are primitive factory classes which provides mutable & immutable ways of creating bags. factory classes provide different set of methods for creating sets like *with*, *withAll*, *empty* and *ofAll* with different set of arguments. Provided examples are with *IntBags* but all are valid for other factory classes as well.
 
-*withInitialCapacity* is only available in mutable factories.
 [source, java]
 ----
-// mutable bag creation using initialCapacity
-MutableBag<String> initialCapacity = Bags.mutable.<String>withInitialCapacity(10);
+// mutable intBag creation using with
+MutableIntBag bag = IntBags.mutable.with(1, 2, 2, 3, 3, 3);
 
-// empty mutable bag creation & add value using addOccurrences
-MutableBag<String> bag = Bags.mutable.empty();
-bag.addOccurrences("1", 1);
-bag.addOccurrences("2", 2);
-Assertions.assertEquals(1, bag.occurrencesOf("1"));
-Assertions.assertEquals(2, bag.occurrencesOf("2"));
+// addOccurrences & removeOccurrences
+this.bag.addOccurrences(4, 4);
+Assertions.assertEquals(4, this.bag.occurrencesOf(4));
+this.bag.removeOccurrences(4, 4);
+Assertions.assertEquals(0, this.bag.occurrencesOf(4));
 
-// Create bag using *with* method and remove value using removeOccurrences
-MutableBag<String> bag = Bags.mutable.with("1", "1", "1", "2", "2", "2", "2", "3", "3", "3", "3");
-bag.removeOccurrences("1", 2);
-Assertions.assertEquals(1, bag.occurrencesOf("1"));
+// with, withAll, without & withoutAll operations on bag
+MutableIntBag bagWith = this.bag.with(4).with(5);
+Assertions.assertEquals(IntBags.immutable.with(1, 2, 2, 3, 3, 3, 4, 5), bagWith);
+Assertions.assertSame(this.bag, bagWith);
 
-// Create bag using *withOccurrences*
-MutableBag<String> bag = Bags.mutable.withOccurrences("1", 1, "2", 2, "3", 3, "4", 4);
+// Add three values to the bag
+MutableIntBag bagWithAll = this.bag.withAll(IntLists.immutable.with(6, 7, 8));
+Assertions.assertEquals(IntBags.immutable.with(1, 2, 2, 3, 3, 3, 4, 5, 6, 7, 8), bagWithAll);
+Assertions.assertSame(this.bag, bagWithAll);
 
-// Create bag using *with* and get selected values using *selectByOccurrences*
-MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
-MutableBag<String> selected = bag.selectByOccurrences(IntPredicates.greaterThan(2));
-MutableBag<String> expected = Bags.mutable.withOccurrences("3", 3, "4", 4);
-Assertions.assertEquals(expected, selected);
+// Remove two values from the bag
+MutableIntBag bagWithout = this.bag.without(7).without(8);
+Assertions.assertEquals(IntBags.immutable.with(1, 2, 2, 3, 3, 3, 4, 5, 6), bagWithout);
+Assertions.assertSame(this.bag, bagWithout);
 
-// Create bag using *with* and collect values using *collectWithOccurrences*
-MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
-MutableBag<ObjectIntPair<String>> result = bag.collectWithOccurrences(PrimitiveTuples::pair);
-MutableBag<ObjectIntPair<String>> expected = Bags.mutable.with(
-        PrimitiveTuples.pair("1", 1),
-        PrimitiveTuples.pair("2", 2),
-        PrimitiveTuples.pair("3", 3),
-        PrimitiveTuples.pair("4", 4));
-Assertions.assertEquals(expected, result);
+// Remove three values from the bag
+MutableIntBag bagWithoutAll = this.bag.withoutAll(IntLists.immutable.with(4, 5, 6));
+Assertions.assertEquals(IntBags.immutable.with(1, 2, 2, 3, 3, 3), bagWithoutAll);
+Assertions.assertSame(this.bag, bagWithoutAll);
 
-// Create bag using *with* and conditional check using *anySatisfyWithOccurrences*
-MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
-Assertions.assertTrue(bag.anySatisfyWithOccurrences((each, occurrences) -> "1".equals(each) && 1 == occurrences));
-Assertions.assertTrue(bag.anySatisfyWithOccurrences((each, occurrences) -> "2".equals(each) && 2 == occurrences));
-Assertions.assertTrue(bag.anySatisfyWithOccurrences((each, occurrences) -> "3".equals(each) && 3 == occurrences));
-Assertions.assertTrue(bag.anySatisfyWithOccurrences((each, occurrences) -> "4".equals(each) && 4 == occurrences));
+// We can use allSatisfy/anySatisfy method which take predicate to compare with all value of primitive sets
+Assertions.assertTrue(this.bag.anySatisfy(each -> 0 == each % 2));
+Assertions.assertFalse(this.bag.allSatisfy(each -> 0 == each % 2));
+Assertions.assertFalse(this.bag.noneSatisfy(each -> 0 == each % 2));
 
-// Create bag using *with* and conditional check using *allSatisfyWithOccurrences*
-MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
-Assertions.assertTrue(bag.allSatisfyWithOccurrences((each, occurrences) -> "1234".contains(each) && occurrences > 0));
+// Convert to ImmutableIntBags
+ImmutableIntBag immutableIntBag = this.bag.toImmutable();
+Assertions.assertEquals(this.bag, immutableIntBag);
 
-// Create bag using *with* and conditional check using *noneSatisfyWithOccurrences*
-MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
-Assertions.assertTrue(bag.noneSatisfyWithOccurrences((each, occurrences) -> "5678".contains(each) && occurrences > 1));
+// Convert your bag to MutableIntList
+MutableIntList list = this.bag.toList();
+Assertions.assertEquals(IntLists.mutable.with(1, 2, 2, 3, 3, 3), list.sortThis());
 
-// Create bag using *with* and detect value using *detectWithOccurrences*
-MutableBag<String> bag = Bags.mutable.with("1", "2", "2", "3", "3", "3", "4", "4", "4", "4");
-String string = bag.detectWithOccurrences((each, occurrences) -> occurrences > 3);
-Assertions.assertEquals("4", string);
+// get sum of values from bag
+long sum = this.bag.sum();
+Assertions.assertEquals(14L, sum);
 
-// Create bag and get distinct size of it
-Bag<String> bag = Bags.mutable.with("4", "4", "4", "4", "3", "3", "3", "1", "2", "2");
-Assertions.assertEquals(4, bag.sizeDistinct());
+// there are many mathematical operation you can perform which are listed below
+double average = this.bag.averageIfEmpty(0.0);
+Assertions.assertEquals(2.3, average, 0.1);
+
+double median = this.bag.medianIfEmpty(0.0);
+Assertions.assertEquals(2.5, median, 0.0);
+
+int min = this.bag.minIfEmpty(0);
+Assertions.assertEquals(1, min);
+
+int max = this.bag.maxIfEmpty(0);
+Assertions.assertEquals(3, max);
+
+IntSummaryStatistics stats = this.bag.summaryStatistics();
+Assertions.assertEquals(14L, stats.getSum());
+Assertions.assertEquals(1, stats.getMin());
+Assertions.assertEquals(3, stats.getMax());
 ----
 
 === Primitive Maps
