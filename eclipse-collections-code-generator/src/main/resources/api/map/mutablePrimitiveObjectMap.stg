@@ -214,6 +214,15 @@ public interface Mutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, Mutable
      * @return a synchronized view of this map
      */
     Mutable<name>ObjectMap\<V> asSynchronized();
+
+    /**
+     * Remove an entry from the map if the {@code predicate} evaluates to true.
+     *
+     * @param predicate should return true if the key/value pair should be removed.
+     * @return true if any entry is removed.
+     * @since 12.0
+     */
+    boolean removeIf(<name>ObjectPredicate\<? super V> predicate);
 }
 
 >>

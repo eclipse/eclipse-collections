@@ -519,6 +519,23 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
     }
 
     @Test
+    public void removeIf()
+    {
+        this.map.removeIf((k, v) -> true);
+        Assert.assertTrue(this.map.isEmpty());
+
+        Mutable<name>ObjectMap\<String> testMap = this.classUnderTest();
+        testMap.put(<(literal.(type))("1")>, "one");
+        testMap.removeIf((k, v) -> true);
+        Assert.assertTrue(testMap.isEmpty());
+
+        testMap = this.classUnderTest();
+        testMap.put(<(literal.(type))("1")>, "one");
+        testMap.removeIf((k, v) -> k % 2 == 0);
+        Assert.assertEquals(2, testMap.size());
+    }
+
+    @Test
     public void updateValue()
     {
         Function\<Integer, Integer> incrementFunction = integer -> integer + 1;

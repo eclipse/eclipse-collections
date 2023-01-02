@@ -574,7 +574,7 @@
                     <show>public</show>
                     <detectJavaApiLink>true</detectJavaApiLink>
                     <links>
-                        <link>http://junit.sourceforge.net/javadoc/</link>
+                        <link>https://junit.org/junit4/javadoc/latest</link>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
                     </links>
                     <destDir>${project.version}</destDir>
@@ -631,7 +631,7 @@
                     <show>public</show>
                     <detectJavaApiLink>true</detectJavaApiLink>
                     <links>
-                        <link>http://junit.sourceforge.net/javadoc/</link>
+                        <link>https://junit.org/junit4/javadoc/latest</link>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
                     </links>
                     <destDir>${project.version}</destDir>

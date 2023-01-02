@@ -246,6 +246,13 @@ public class Unmodifiable<name>ObjectMapTest extends AbstractMutable<name>Object
     }
 
     @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeIf()
+    {
+        super.removeIf();
+    }
+
+    @Override
     @Test
     public void freeze()
     {

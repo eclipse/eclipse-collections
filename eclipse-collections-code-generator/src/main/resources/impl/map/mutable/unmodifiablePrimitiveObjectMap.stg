@@ -212,6 +212,12 @@ public class Unmodifiable<name>ObjectMap\<V>
     }
 
     @Override
+    public boolean removeIf(<name>ObjectPredicate\<? super V> predicate)
+    {
+        throw new UnsupportedOperationException("Cannot call removeIf() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
     public V get(<type> key)
     {
         return this.map.get(key);

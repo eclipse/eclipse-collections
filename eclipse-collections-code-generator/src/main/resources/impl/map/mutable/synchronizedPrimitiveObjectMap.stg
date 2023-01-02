@@ -264,6 +264,15 @@ public class Synchronized<name>ObjectMap\<V>
     }
 
     @Override
+    public boolean removeIf(<name>ObjectPredicate\<? super V> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.removeIf(predicate);
+        }
+    }
+
+    @Override
     public V get(<type> key)
     {
         synchronized (this.lock)

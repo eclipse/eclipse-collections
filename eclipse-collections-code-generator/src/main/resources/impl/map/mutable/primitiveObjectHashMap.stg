@@ -2674,6 +2674,49 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     }
 
     @Override
+    public boolean removeIf(<name>ObjectPredicate\<? super V> predicate)
+    {
+        boolean result = false;
+        if (this.sentinelValues != null && this.sentinelValues.containsZeroKey
+                && predicate.accept(EMPTY_KEY, this.sentinelValues.zeroValue))
+        {
+            if (this.sentinelValues.containsOneKey)
+            {
+                this.sentinelValues.containsZeroKey = false;
+                this.sentinelValues.zeroValue = null;
+            }
+            else
+            {
+                this.sentinelValues = null;
+            }
+            result = true;
+        }
+        if (this.sentinelValues != null && this.sentinelValues.containsOneKey
+                && predicate.accept(REMOVED_KEY, this.sentinelValues.oneValue))
+        {
+            if (this.sentinelValues.containsZeroKey)
+            {
+                this.sentinelValues.containsOneKey = false;
+                this.sentinelValues.oneValue = null;
+            }
+            else
+            {
+                this.sentinelValues = null;
+            }
+            result = true;
+        }
+        for (int i = 0; i \< this.keys.length; i++)
+        {
+            if (isNonSentinel(this.keys[i]) && predicate.accept(this.keys[i], this.values[i]))
+            {
+                this.removeKeyAtIndex(i);
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
