@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -89,10 +89,11 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * RichIterable is an interface which extends the InternalIterable interface with several internal iterator methods, from
- * the Smalltalk Collection protocol. These include select, reject, detect, collect, injectInto, anySatisfy,
- * allSatisfy. The API also includes converter methods to convert a RichIterable to a List (toList), to a sorted
- * List (toSortedList), to a Set (toSet), and to a Map (toMap).
+ * RichIterable is a read-only interface which extends the InternalIterable interface and adds many internal iterator methods.
+ * The basic methods were inspired by the Smalltalk Collection protocol. These methods include select, reject, detect,
+ * collect, injectInto, anySatisfy, allSatisfy. The API also includes converter methods to convert a RichIterable to
+ * other mutable and immutable collection types. The converter methods all have a prefix of "to" (e.g. toList, toSet,
+ * toBag, toMap, etc).
  *
  * @since 1.0
  */
@@ -322,18 +323,6 @@ public interface RichIterable<T>
      * RichIterable&lt;Person&gt; tapped =
      *     people.<b>tap</b>(person -&gt; LOGGER.info(person.getName()));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * RichIterable&lt;Person&gt; tapped =
-     *     people.<b>tap</b>(new Procedure&lt;Person&gt;()
-     *     {
-     *         public void value(Person person)
-     *         {
-     *             LOGGER.info(person.getName());
-     *         }
-     *     });
-     * </pre>
      *
      * @see #each(Procedure)
      * @see #forEach(Procedure)
@@ -347,17 +336,6 @@ public interface RichIterable<T>
      * Example using a Java 8 lambda expression:
      * <pre>
      * people.each(person -&gt; LOGGER.info(person.getName()));
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * people.each(new Procedure&lt;Person&gt;()
-     * {
-     *     public void value(Person person)
-     *     {
-     *         LOGGER.info(person.getName());
-     *     }
-     * });
      * </pre>
      * This method is a variant of {@link InternalIterable#forEach(Procedure)}
      * that has a signature conflict with {@link Iterable#forEach(java.util.function.Consumer)}.
@@ -378,18 +356,6 @@ public interface RichIterable<T>
      * RichIterable&lt;Person&gt; selected =
      *     people.<b>select</b>(person -&gt; person.getAddress().getCity().equals("London"));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * RichIterable&lt;Person&gt; selected =
-     *     people.<b>select</b>(new Predicate&lt;Person&gt;()
-     *     {
-     *         public boolean accept(Person person)
-     *         {
-     *             return person.getAddress().getCity().equals("London");
-     *         }
-     *     });
-     * </pre>
      *
      * @since 1.0
      */
@@ -402,18 +368,6 @@ public interface RichIterable<T>
      * <pre>
      * MutableList&lt;Person&gt; selected =
      *     people.select(person -&gt; person.person.getLastName().equals("Smith"), Lists.mutable.empty());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableList&lt;Person&gt; selected =
-     *     people.select(new Predicate&lt;Person&gt;()
-     *     {
-     *         public boolean accept(Person person)
-     *         {
-     *             return person.person.getLastName().equals("Smith");
-     *         }
-     *     }, Lists.mutable.empty());
      * </pre>
      * <p>
      *
@@ -435,18 +389,6 @@ public interface RichIterable<T>
      * RichIterable&lt;Person&gt; selected =
      *     people.selectWith((Person person, Integer age) -&gt; person.getAge()&gt;= age, Integer.valueOf(18));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * RichIterable&lt;Person&gt; selected =
-     *     people.selectWith(new Predicate2&lt;Person, Integer&gt;()
-     *     {
-     *         public boolean accept(Person person, Integer age)
-     *         {
-     *             return person.getAge()&gt;= age;
-     *         }
-     *     }, Integer.valueOf(18));
-     * </pre>
      *
      * @param predicate a {@link Predicate2} to use as the select criteria
      * @param parameter a parameter to pass in for evaluation of the second argument {@code P} in {@code predicate}
@@ -464,18 +406,6 @@ public interface RichIterable<T>
      * <pre>
      * MutableList&lt;Person&gt; selected =
      *     people.selectWith((Person person, Integer age) -&gt; person.getAge()&gt;= age, Integer.valueOf(18), Lists.mutable.empty());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableList&lt;Person&gt; selected =
-     *     people.selectWith(new Predicate2&lt;Person, Integer&gt;()
-     *     {
-     *         public boolean accept(Person person, Integer age)
-     *         {
-     *             return person.getAge()&gt;= age;
-     *         }
-     *     }, Integer.valueOf(18), Lists.mutable.empty());
      * </pre>
      *
      * @param predicate        a {@link Predicate2} to use as the select criteria
@@ -500,18 +430,6 @@ public interface RichIterable<T>
      * RichIterable&lt;Person&gt; rejected =
      *     people.reject(person -&gt; person.person.getLastName().equals("Smith"));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * RichIterable&lt;Person&gt; rejected =
-     *     people.reject(new Predicate&lt;Person&gt;()
-     *     {
-     *         public boolean accept(Person person)
-     *         {
-     *             return person.person.getLastName().equals("Smith");
-     *         }
-     *     });
-     * </pre>
      *
      * @param predicate a {@link Predicate} to use as the reject criteria
      * @return a RichIterable that contains elements that cause {@link Predicate#accept(Object)} method to evaluate to false
@@ -529,18 +447,6 @@ public interface RichIterable<T>
      * RichIterable&lt;Person&gt; rejected =
      *     people.rejectWith((Person person, Integer age) -&gt; person.getAge() &lt; age, Integer.valueOf(18));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableList&lt;Person&gt; rejected =
-     *     people.rejectWith(new Predicate2&lt;Person, Integer&gt;()
-     *     {
-     *         public boolean accept(Person person, Integer age)
-     *         {
-     *             return person.getAge() &lt; age;
-     *         }
-     *     }, Integer.valueOf(18));
-     * </pre>
      *
      * @param predicate a {@link Predicate2} to use as the select criteria
      * @param parameter a parameter to pass in for evaluation of the second argument {@code P} in {@code predicate}
@@ -556,18 +462,6 @@ public interface RichIterable<T>
      * <pre>
      * MutableList&lt;Person&gt; rejected =
      *     people.reject(person -&gt; person.person.getLastName().equals("Smith"), Lists.mutable.empty());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableList&lt;Person&gt; rejected =
-     *     people.reject(new Predicate&lt;Person&gt;()
-     *     {
-     *         public boolean accept(Person person)
-     *         {
-     *             return person.person.getLastName().equals("Smith");
-     *         }
-     *     }, Lists.mutable.empty());
      * </pre>
      *
      * @param predicate a {@link Predicate} to use as the reject criteria
@@ -586,18 +480,6 @@ public interface RichIterable<T>
      * <pre>
      * MutableList&lt;Person&gt; rejected =
      *     people.rejectWith((Person person, Integer age) -&gt; person.getAge() &lt; age, Integer.valueOf(18), Lists.mutable.empty());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableList&lt;Person&gt; rejected =
-     *     people.rejectWith(new Predicate2&lt;Person, Integer&gt;()
-     *     {
-     *         public boolean accept(Person person, Integer age)
-     *         {
-     *             return person.getAge() &lt; age;
-     *         }
-     *     }, Integer.valueOf(18), Lists.mutable.empty());
      * </pre>
      *
      * @param predicate        a {@link Predicate2} to use as the reject criteria
@@ -621,18 +503,6 @@ public interface RichIterable<T>
      * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
      *     people.<b>partition</b>(person -&gt; person.getAddress().getState().getName().equals("New York"));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
-     *     people.<b>partition</b>(new Predicate&lt;Person&gt;()
-     *     {
-     *         public boolean accept(Person person)
-     *         {
-     *             return person.getAddress().getState().getName().equals("New York");
-     *         }
-     *     });
-     * </pre>
      *
      * @since 1.0.
      */
@@ -645,18 +515,6 @@ public interface RichIterable<T>
      * <pre>
      * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
      *     people.<b>partitionWith</b>((Person person, String state) -&gt; person.getAddress().getState().getName().equals(state), "New York");
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
-     *     people.<b>partitionWith</b>(new Predicate2&lt;Person, String&gt;()
-     *     {
-     *         public boolean accept(Person person, String state)
-     *         {
-     *             return person.getAddress().getState().getName().equals(state);
-     *         }
-     *     }, "New York");
      * </pre>
      *
      * @since 5.0.
@@ -684,18 +542,6 @@ public interface RichIterable<T>
      * RichIterable&lt;String&gt; names =
      *     people.collect(person -&gt; person.getFirstName() + " " + person.getLastName());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * RichIterable&lt;String&gt; names =
-     *     people.collect(new Function&lt;Person, String&gt;()
-     *     {
-     *         public String valueOf(Person person)
-     *         {
-     *             return person.getFirstName() + " " + person.getLastName();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 1.0
      */
@@ -709,18 +555,6 @@ public interface RichIterable<T>
      * <pre>
      * MutableList&lt;String&gt; names =
      *     people.collect(person -&gt; person.getFirstName() + " " + person.getLastName(), Lists.mutable.empty());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableList&lt;String&gt; names =
-     *     people.collect(new Function&lt;Person, String&gt;()
-     *     {
-     *         public String valueOf(Person person)
-     *         {
-     *             return person.getFirstName() + " " + person.getLastName();
-     *         }
-     *     }, Lists.mutable.empty());
      * </pre>
      *
      * @param function a {@link Function} to use as the collect transformation function
@@ -740,18 +574,6 @@ public interface RichIterable<T>
      * BooleanIterable licenses =
      *     people.collectBoolean(person -&gt; person.hasDrivingLicense());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * BooleanIterable licenses =
-     *     people.collectBoolean(new BooleanFunction&lt;Person&gt;()
-     *     {
-     *         public boolean booleanValueOf(Person person)
-     *         {
-     *             return person.hasDrivingLicense();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 4.0
      */
@@ -765,18 +587,6 @@ public interface RichIterable<T>
      * <pre>
      * BooleanArrayList licenses =
      *     people.collectBoolean(person -&gt; person.hasDrivingLicense(), new BooleanArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * BooleanArrayList licenses =
-     *     people.collectBoolean(new BooleanFunction&lt;Person&gt;()
-     *     {
-     *         public boolean booleanValueOf(Person person)
-     *         {
-     *             return person.hasDrivingLicense();
-     *         }
-     *     }, new BooleanArrayList());
      * </pre>
      *
      * @param booleanFunction a {@link BooleanFunction} to use as the collect transformation function
@@ -799,18 +609,6 @@ public interface RichIterable<T>
      * ByteIterable bytes =
      *     people.collectByte(person -&gt; person.getCode());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * ByteIterable bytes =
-     *     people.collectByte(new ByteFunction&lt;Person&gt;()
-     *     {
-     *         public byte byteValueOf(Person person)
-     *         {
-     *             return person.getCode();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 4.0
      */
@@ -824,18 +622,6 @@ public interface RichIterable<T>
      * <pre>
      * ByteArrayList bytes =
      *     people.collectByte(person -&gt; person.getCode(), new ByteArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * ByteArrayList bytes =
-     *     people.collectByte(new ByteFunction&lt;Person&gt;()
-     *     {
-     *         public byte byteValueOf(Person person)
-     *         {
-     *             return person.getCode();
-     *         }
-     *     }, new ByteArrayList());
      * </pre>
      *
      * @param byteFunction a {@link ByteFunction} to use as the collect transformation function
@@ -858,18 +644,6 @@ public interface RichIterable<T>
      * CharIterable chars =
      *     people.collectChar(person -&gt; person.getMiddleInitial());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * CharIterable chars =
-     *     people.collectChar(new CharFunction&lt;Person&gt;()
-     *     {
-     *         public char charValueOf(Person person)
-     *         {
-     *             return person.getMiddleInitial();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 4.0
      */
@@ -883,18 +657,6 @@ public interface RichIterable<T>
      * <pre>
      * CharArrayList chars =
      *     people.collectChar(person -&gt; person.getMiddleInitial(), new CharArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * CharArrayList chars =
-     *     people.collectChar(new CharFunction&lt;Person&gt;()
-     *     {
-     *         public char charValueOf(Person person)
-     *         {
-     *             return person.getMiddleInitial();
-     *         }
-     *     }, new CharArrayList());
      * </pre>
      *
      * @param charFunction a {@link CharFunction} to use as the collect transformation function
@@ -917,18 +679,6 @@ public interface RichIterable<T>
      * DoubleIterable doubles =
      *     people.collectDouble(person -&gt; person.getMilesFromNorthPole());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * DoubleIterable doubles =
-     *     people.collectDouble(new DoubleFunction&lt;Person&gt;()
-     *     {
-     *         public double doubleValueOf(Person person)
-     *         {
-     *             return person.getMilesFromNorthPole();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 4.0
      */
@@ -942,18 +692,6 @@ public interface RichIterable<T>
      * <pre>
      * DoubleArrayList doubles =
      *     people.collectDouble(person -&gt; person.getMilesFromNorthPole(), new DoubleArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * DoubleArrayList doubles =
-     *     people.collectDouble(new DoubleFunction&lt;Person&gt;()
-     *     {
-     *         public double doubleValueOf(Person person)
-     *         {
-     *             return person.getMilesFromNorthPole();
-     *         }
-     *     }, new DoubleArrayList());
      * </pre>
      *
      * @param doubleFunction a {@link DoubleFunction} to use as the collect transformation function
@@ -976,18 +714,6 @@ public interface RichIterable<T>
      * FloatIterable floats =
      *     people.collectFloat(person -&gt; person.getHeightInInches());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * FloatIterable floats =
-     *     people.collectFloat(new FloatFunction&lt;Person&gt;()
-     *     {
-     *         public float floatValueOf(Person person)
-     *         {
-     *             return person.getHeightInInches();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 4.0
      */
@@ -1001,18 +727,6 @@ public interface RichIterable<T>
      * <pre>
      * FloatArrayList floats =
      *     people.collectFloat(person -&gt; person.getHeightInInches(), new FloatArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * FloatArrayList floats =
-     *     people.collectFloat(new FloatFunction&lt;Person&gt;()
-     *     {
-     *         public float floatValueOf(Person person)
-     *         {
-     *             return person.getHeightInInches();
-     *         }
-     *     }, new FloatArrayList());
      * </pre>
      *
      * @param floatFunction a {@link FloatFunction} to use as the collect transformation function
@@ -1035,18 +749,6 @@ public interface RichIterable<T>
      * IntIterable ints =
      *     people.collectInt(person -&gt; person.getAge());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * IntIterable ints =
-     *     people.collectInt(new IntFunction&lt;Person&gt;()
-     *     {
-     *         public int intValueOf(Person person)
-     *         {
-     *             return person.getAge();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 4.0
      */
@@ -1060,18 +762,6 @@ public interface RichIterable<T>
      * <pre>
      * IntArrayList ints =
      *     people.collectInt(person -&gt; person.getAge(), new IntArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * IntArrayList ints =
-     *     people.collectInt(new IntFunction&lt;Person&gt;()
-     *     {
-     *         public int intValueOf(Person person)
-     *         {
-     *             return person.getAge();
-     *         }
-     *     }, new IntArrayList());
      * </pre>
      *
      * @param intFunction a {@link IntFunction} to use as the collect transformation function
@@ -1094,18 +784,6 @@ public interface RichIterable<T>
      * LongIterable longs =
      *     people.collectLong(person -&gt; person.getGuid());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * LongIterable longs =
-     *     people.collectLong(new LongFunction&lt;Person&gt;()
-     *     {
-     *         public long longValueOf(Person person)
-     *         {
-     *             return person.getGuid();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 4.0
      */
@@ -1119,18 +797,6 @@ public interface RichIterable<T>
      * <pre>
      * LongArrayList longs =
      *     people.collectLong(person -&gt; person.getGuid(), new LongArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * LongArrayList longs =
-     *     people.collectLong(new LongFunction&lt;Person&gt;()
-     *     {
-     *         public long longValueOf(Person person)
-     *         {
-     *             return person.getGuid();
-     *         }
-     *     }, new LongArrayList());
      * </pre>
      *
      * @param longFunction a {@link LongFunction} to use as the collect transformation function
@@ -1153,18 +819,6 @@ public interface RichIterable<T>
      * ShortIterable shorts =
      *     people.collectShort(person -&gt; person.getNumberOfJunkMailItemsReceivedPerMonth());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * ShortIterable shorts =
-     *     people.collectShort(new ShortFunction&lt;Person&gt;()
-     *     {
-     *         public short shortValueOf(Person person)
-     *         {
-     *             return person.getNumberOfJunkMailItemsReceivedPerMonth();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 4.0
      */
@@ -1178,18 +832,6 @@ public interface RichIterable<T>
      * <pre>
      * ShortArrayList shorts =
      *     people.collectShort(person -&gt; person.getNumberOfJunkMailItemsReceivedPerMonth, new ShortArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * ShortArrayList shorts =
-     *     people.collectShort(new ShortFunction&lt;Person&gt;()
-     *     {
-     *         public short shortValueOf(Person person)
-     *         {
-     *             return person.getNumberOfJunkMailItemsReceivedPerMonth;
-     *         }
-     *     }, new ShortArrayList());
      * </pre>
      *
      * @param shortFunction a {@link ShortFunction} to use as the collect transformation function
@@ -1211,20 +853,6 @@ public interface RichIterable<T>
      * RichIterable&lt;Integer&gt; integers =
      *     Lists.mutable.with(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Function2&lt;Integer, Integer, Integer&gt; addParameterFunction =
-     *     new Function2&lt;Integer, Integer, Integer&gt;()
-     *     {
-     *         public Integer value(Integer each, Integer parameter)
-     *         {
-     *             return each + parameter;
-     *         }
-     *     };
-     * RichIterable&lt;Integer&gt; integers =
-     *     Lists.mutable.with(1, 2, 3).collectWith(addParameterFunction, Integer.valueOf(1));
-     * </pre>
      *
      * @param function  A {@link Function2} to use as the collect transformation function
      * @param parameter A parameter to pass in for evaluation of the second argument {@code P} in {@code function}
@@ -1241,20 +869,6 @@ public interface RichIterable<T>
      * <pre>
      * MutableSet&lt;Integer&gt; integers =
      *     Lists.mutable.with(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1), Sets.mutable.empty());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Function2&lt;Integer, Integer, Integer&gt; addParameterFunction =
-     *     new Function2&lt;Integer, Integer, Integer&gt;()
-     *     {
-     *         public Integer value(final Integer each, final Integer parameter)
-     *         {
-     *             return each + parameter;
-     *         }
-     *     };
-     * MutableSet&lt;Integer&gt; integers =
-     *     Lists.mutable.with(1, 2, 3).collectWith(addParameterFunction, Integer.valueOf(1), Sets.mutable.empty());
      * </pre>
      *
      * @param function         a {@link Function2} to use as the collect transformation function
@@ -1474,18 +1088,6 @@ public interface RichIterable<T>
      * Person person =
      *     people.detect(person -&gt; person.getFirstName().equals("John") &amp;&amp; person.getLastName().equals("Smith"));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Person person =
-     *     people.detect(new Predicate&lt;Person&gt;()
-     *     {
-     *         public boolean accept(Person person)
-     *         {
-     *             return person.getFirstName().equals("John") &amp;&amp; person.getLastName().equals("Smith");
-     *         }
-     *     });
-     * </pre>
      *
      * @since 1.0
      */
@@ -1499,18 +1101,6 @@ public interface RichIterable<T>
      * <pre>
      * Person person =
      *     people.detectWith((person, fullName) -&gt; person.getFullName().equals(fullName), "John Smith");
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Person person =
-     *     people.detectWith(new Predicate2&lt;Person, String&gt;()
-     *     {
-     *         public boolean accept(Person person, String fullName)
-     *         {
-     *             return person.getFullName().equals(fullName);
-     *         }
-     *     }, "John Smith");
      * </pre>
      *
      * @since 5.0
@@ -1577,18 +1167,6 @@ public interface RichIterable<T>
      * <pre>
      * int count =
      *     people.<b>count</b>(person -&gt; person.getAddress().getState().getName().equals("New York"));
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * int count =
-     *     people.<b>count</b>(new Predicate&lt;Person&gt;()
-     *     {
-     *         public boolean accept(Person person)
-     *         {
-     *             return person.getAddress().getState().getName().equals("New York");
-     *         }
-     *     });
      * </pre>
      *
      * @since 1.0
@@ -2524,18 +2102,6 @@ public interface RichIterable<T>
      * Multimap&lt;String, Person&gt; peopleByLastName =
      *     people.groupBy(Person::getLastName);
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Multimap&lt;String, Person&gt; peopleByLastName =
-     *     people.groupBy(new Function&lt;Person, String&gt;()
-     *     {
-     *         public String valueOf(Person person)
-     *         {
-     *             return person.getLastName();
-     *         }
-     *     });
-     * </pre>
      *
      * @since 1.0
      */
@@ -2615,18 +2181,6 @@ public interface RichIterable<T>
      * <pre>
      * FastListMultimap&lt;String, Person&gt; peopleByLastName =
      *     people.groupBy(Person::getLastName, new FastListMultimap&lt;String, Person&gt;());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * FastListMultimap&lt;String, Person&gt; peopleByLastName =
-     *     people.groupBy(new Function&lt;Person, String&gt;()
-     *     {
-     *         public String valueOf(Person person)
-     *         {
-     *             return person.getLastName();
-     *         }
-     *     }, new FastListMultimap&lt;String, Person&gt;());
      * </pre>
      *
      * @since 1.0

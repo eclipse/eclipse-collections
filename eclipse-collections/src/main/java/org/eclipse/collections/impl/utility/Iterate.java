@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -113,17 +113,6 @@ public final class Iterate
      * <pre>
      * Iterate.<b>forEach</b>(people, person -&gt; LOGGER.info(person.getName());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Iterate.<b>forEach</b>(people, new Procedure&lt;Person&gt;()
-     * {
-     *     public void value(Person person)
-     *     {
-     *         LOGGER.info(person.getName());
-     *     }
-     * });
-     * </pre>
      */
     public static <T> void forEach(Iterable<T> iterable, Procedure<? super T> procedure)
     {
@@ -168,18 +157,6 @@ public final class Iterate
      *  }, fred);
      * </pre>
      *
-     * <pre>e.g.
-     * Iterate.<b>forEachWith</b>(people, new Procedure2&lt;Person, Person&gt;()
-     * {
-     *     public void value(Person person, Person other)
-     *     {
-     *         if (person.isRelatedTo(other))
-     *         {
-     *              LOGGER.info(person.getName());
-     *         }
-     *     }
-     * }, fred);
-     * </pre>
      */
     public static <T, P> void forEachWith(
             Iterable<T> iterable,
@@ -216,17 +193,6 @@ public final class Iterate
      * <pre>
      * Iterate.<b>forEachWithIndex</b>(people, (Person person, int index) -&gt; LOGGER.info("Index: " + index + " person: " + person.getName()));
      * </pre>
-     * <p>
-     * Example using anonymous inner class:
-     * <pre>
-     * Iterate.<b>forEachWithIndex</b>(people, new ObjectIntProcedure&lt;Person&gt;()
-     * {
-     *     public void value(Person person, int index)
-     *     {
-     *         LOGGER.info("Index: " + index + " person: " + person.getName());
-     *     }
-     * });
-     * </pre>
      */
     public static <T> void forEachWithIndex(Iterable<T> iterable, ObjectIntProcedure<? super T> objectIntProcedure)
     {
@@ -259,18 +225,6 @@ public final class Iterate
      * <pre>
      * Collection&lt;Person&gt; selected =
      *     Iterate.<b>select</b>(people, person -&gt; person.getAddress().getCity().equals("Metuchen"));
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>e.g.
-     * Collection&lt;Person&gt; selected =
-     *     Iterate.<b>select</b>(people, new Predicate&lt;Person&gt;()
-     *     {
-     *         public boolean accept(Person person)
-     *         {
-     *             return person.getAddress().getCity().equals("Metuchen");
-     *         }
-     *     });
      * </pre>
      */
     public static <T> Collection<T> select(Iterable<T> iterable, Predicate<? super T> predicate)
@@ -308,18 +262,6 @@ public final class Iterate
      * <pre>
      * Collection&lt;Person&gt; selected =
      *     Iterate.<b>selectWith</b>(people, (Person person, Integer age) -&gt; person.getAge() &gt;= age, Integer.valueOf(18));
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Collection&lt;Person&gt; selected =
-     *      Iterate.<b>selectWith</b>(people, new Predicate2&lt;Person, Integer&gt;()
-     *     {
-     *         public boolean accept(Person person, Integer age)
-     *         {
-     *             return person.getAge() &gt;= age;
-     *         }
-     *     }, Integer.valueOf(18));
      * </pre>
      */
     public static <T, IV> Collection<T> selectWith(
@@ -362,18 +304,6 @@ public final class Iterate
      * Twin&lt;MutableList&lt;Person&gt;&gt;selectedRejected =
      *      Iterate.<b>selectAndRejectWith</b>(people, (Person person, String lastName) -&gt; lastName.equals(person.getLastName()), "Mason");
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Twin&lt;MutableList&lt;Person&gt;&gt;selectedRejected =
-     *      Iterate.<b>selectAndRejectWith</b>(people, new Predicate2&lt;String, String&gt;()
-     *      {
-     *          public boolean accept(Person person, String lastName)
-     *          {
-     *              return lastName.equals(person.getLastName());
-     *          }
-     *      }, "Mason");
-     * </pre>
      */
     public static <T, IV> Twin<MutableList<T>> selectAndRejectWith(
             Iterable<T> iterable,
@@ -407,18 +337,6 @@ public final class Iterate
      * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
      *      Iterate.<b>partition</b>(people, person -&gt; person.getAddress().getState().getName().equals("New York"));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
-     *      Iterate.<b>partition</b>(people, new Predicate&lt;Person&gt;()
-     *      {
-     *          public boolean accept(Person person)
-     *          {
-     *              return person.getAddress().getState().getName().equals("New York");
-     *          }
-     *      });
-     * </pre>
      */
     public static <T> PartitionIterable<T> partition(Iterable<T> iterable, Predicate<? super T> predicate)
     {
@@ -448,18 +366,6 @@ public final class Iterate
      * <pre>
      * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
      *     Iterate.<b>partitionWith</b>(people, (Person person, String state) -&gt; person.getAddress().getState().getName().equals(state), "New York");
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
-     *      Iterate.<b>partitionWith</b>(people, new Predicate&lt;Person, String&gt;()
-     *      {
-     *          public boolean accept(Person person, String state)
-     *          {
-     *              return person.getAddress().getState().getName().equals(state);
-     *          }
-     *      }, "New York");
      * </pre>
      *
      * @since 5.0.
@@ -522,17 +428,6 @@ public final class Iterate
      * Example using a Java 8 lambda expression:
      * <pre>
      * int count = Iterate.<b>count</b>(people, person -&gt; person.getAddress().getState().getName().equals("New York"));
-     * </pre>
-     * <p>
-     * Example using anonymous inner class
-     * <pre>
-     * int count = Iterate.<b>count</b>(people, new Predicate&lt;Person&gt;()
-     * {
-     *     public boolean accept(Person person)
-     *     {
-     *         return person.getAddress().getState().getName().equals("New York");
-     *     }
-     * });
      * </pre>
      */
     public static <T> int count(Iterable<T> iterable, Predicate<? super T> predicate)
@@ -657,18 +552,6 @@ public final class Iterate
      * <pre>
      * MutableList&lt;Person&gt; selected =
      *      Iterate.<b>select</b>(people, person -&gt; person.person.getLastName().equals("Smith"), FastList.newList());
-     * </pre>
-     * <p>
-     * Example using anonymous inner class:
-     * <pre>
-     * MutableList&lt;Person&gt; selected =
-     *      Iterate.<b>select</b>(people, new Predicate&lt;Person&gt;()
-     *      {
-     *          public boolean accept(Person person)
-     *          {
-     *         return person.person.getLastName().equals("Smith");
-     *     }
-     * }, FastList.newList());
      * </pre>
      * <p>
      * Example using Predicates factory:
@@ -802,19 +685,6 @@ public final class Iterate
      * <pre>
      * Collection&lt;Person&gt; rejected =
      *      Iterate.<b>reject</b>(people, person -&gt; person.person.getLastName().equals("Smith"));
-     * </pre>
-     * <p>
-     * Example using anonymous inner class:
-     * <pre>
-     * Collection&lt;Person&gt; rejected =
-     *      Iterate.<b>reject</b>(people,
-     *          new Predicate&lt;Person&gt;()
-     *          {
-     *              public boolean accept(Person person)
-     *              {
-     *                  return person.person.getLastName().equals("Smith");
-     *              }
-     *          });
      * </pre>
      * <p>
      * Example using Predicates factory:
@@ -983,18 +853,6 @@ public final class Iterate
      * Collection&lt;Person&gt; rejected =
      *     Iterate.<b>rejectWith</b>(people, (Person person, Integer age) -&gt; person.getAge() &gt;= age, Integer.valueOf(18));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Collection&lt;Person&gt; rejected =
-     *      Iterate.<b>rejectWith</b>(people, new Predicate2&lt;Person, Integer&gt;()
-     *     {
-     *         public boolean accept(Person person, Integer age)
-     *         {
-     *             return person.getAge() &gt;= age;
-     *         }
-     *     }, Integer.valueOf(18));
-     * </pre>
      */
     public static <T, P> Collection<T> rejectWith(
             Iterable<T> iterable,
@@ -1035,21 +893,6 @@ public final class Iterate
      * <pre>
      * MutableList&lt;Person&gt; rejected =
      *      Iterate.<b>reject</b>(people, person -&gt; person.person.getLastName().equals("Smith"), FastList.newList());
-     * </pre>
-     * <p>
-     * Example using anonymous inner class:
-     * <pre>
-     * MutableList&lt;Person&gt; rejected =
-     *      Iterate.<b>reject</b>(
-     *          people,
-     *          new Predicate&lt;Person&gt;()
-     *          {
-     *              public boolean accept(Person person)
-     *              {
-     *                  return person.person.getLastName().equals("Smith");
-     *              }
-     *          },
-     *          FastList.newList());
      * </pre>
      * <p>
      * Example using Predicates factory:
@@ -1176,20 +1019,6 @@ public final class Iterate
      * Collection&lt;String&gt; names =
      *      Iterate.<b>collect</b>(people, person -&gt; person.getFirstName() + " " + person.getLastName());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Collection&lt;String&gt; names =
-     *      Iterate.<b>collect</b>(
-     *          people,
-     *          new Function&lt;Person, String&gt;()
-     *          {
-     *              public String valueOf(Person person)
-     *              {
-     *                  return person.getFirstName() + " " + person.getLastName();
-     *              }
-     *          });
-     * </pre>
      */
     public static <T, V> Collection<V> collect(
             Iterable<T> iterable,
@@ -1232,21 +1061,6 @@ public final class Iterate
      * MutableList&lt;String&gt; names =
      *      Iterate.<b>collect</b>(people, person -&gt; person.getFirstName() + " " + person.getLastName(), FastList.newList());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableList&lt;String&gt; names =
-     *      Iterate.<b>collect</b>(
-     *          people,
-     *          new Function&lt;Person, String&gt;()
-     *          {
-     *              public String valueOf(Person person)
-     *              {
-     *                  return person.getFirstName() + " " + person.getLastName();
-     *              }
-     *          },
-     *          FastList.newList());
-     * </pre>
      */
     public static <T, A, R extends Collection<A>> R collect(
             Iterable<T> iterable,
@@ -1279,20 +1093,6 @@ public final class Iterate
      * <pre>
      * MutableBooleanCollection voters =
      *      Iterable.<b>collectBoolean</b>(people, person -&gt; person.canVote());
-     * </pre>
-     * <p>
-     * Example using anonymous inner class:
-     * <pre>
-     * MutableBooleanCollection voters =
-     *      Iterate.<b>collectBoolean</b>(
-     *          people,
-     *          new BooleanFunction&lt;Person&gt;()
-     *          {
-     *              public boolean booleanValueOf(Person person)
-     *              {
-     *                  return person.canVote();
-     *              }
-     *          });
      * </pre>
      */
     public static <T> MutableBooleanCollection collectBoolean(
@@ -1327,21 +1127,6 @@ public final class Iterate
      * BooleanArrayList voters =
      *      Iterable.<b>collectBoolean</b>(people, person -&gt; person.canVote(), new BooleanArrayList());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * BooleanArrayList voters =
-     *      Iterate.<b>collectBoolean</b>(
-     *          people,
-     *          new BooleanFunction&lt;Person&gt;()
-     *          {
-     *              public boolean booleanValueOf(Person person)
-     *              {
-     *                  return person.canVote();
-     *              }
-     *          },
-     *          new BooleanArrayList());
-     * </pre>
      */
     public static <T, R extends MutableBooleanCollection> R collectBoolean(
             Iterable<T> iterable,
@@ -1374,20 +1159,6 @@ public final class Iterate
      * <pre>
      * MutableByteCollection bytes =
      *      Iterate.<b>collectByte</b>(people, person -&gt; person.getCode());
-     * </pre>
-     * <p>
-     * Example using anonymous inner class:
-     * <pre>
-     * MutableByteCollection bytes =
-     *      Iterate.<b>collectByte</b>(
-     *          people,
-     *          new ByteFunction&lt;Person&gt;()
-     *          {
-     *              public byte byteValueOf(Person person)
-     *              {
-     *                  return person.getCode();
-     *              }
-     *          });
      * </pre>
      */
     public static <T> MutableByteCollection collectByte(
@@ -1422,21 +1193,6 @@ public final class Iterate
      * ByteArrayList bytes =
      *      Iterate.<b>collectByte</b>(people, person -&gt; person.getCode(), new ByteArrayList());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * ByteArrayList bytes =
-     *      Iterate.<b>collectByte</b>(
-     *          people,
-     *          new ByteFunction&lt;Person&gt;()
-     *          {
-     *              public byte byteValueOf(Person person)
-     *              {
-     *                  return person.getCode();
-     *              }
-     *          },
-     *          new ByteArrayList());
-     * </pre>
      */
     public static <T, R extends MutableByteCollection> R collectByte(
             Iterable<T> iterable,
@@ -1470,20 +1226,6 @@ public final class Iterate
      * MutableCharCollection chars =
      *      Iterate.<b>collectChar</b>(people, person -&gt; person.getMiddleInitial());
      * </pre>
-     * <p>
-     * Example using anonymous inner class:
-     * <pre>
-     * MutableCharCollection chars =
-     *      Iterate.<b>collectChar</b>(
-     *          people,
-     *          new CharFunction&lt;Person&gt;()
-     *          {
-     *              public char charValueOf(Person person)
-     *              {
-     *                  return person.getMiddleInitial();
-     *              }
-     *          });
-     * </pre>
      */
     public static <T> MutableCharCollection collectChar(
             Iterable<T> iterable,
@@ -1515,21 +1257,6 @@ public final class Iterate
      * <pre>
      * CharArrayList chars =
      *      Iterate.<b>collectChar</b>(people, person -&gt; person.getMiddleInitial());
-     * </pre>
-     * <p>
-     * Example using anonymous inner class:
-     * <pre>
-     * CharArrayList chars =
-     *      Iterate.<b>collectChar</b>(
-     *          people,
-     *          new CharFunction&lt;Person&gt;()
-     *          {
-     *              public char charValueOf(Person person)
-     *              {
-     *                  return person.getMiddleInitial();
-     *              }
-     *          },
-     *          new CharArrayList());
      * </pre>
      */
     public static <T, R extends MutableCharCollection> R collectChar(
@@ -1564,18 +1291,6 @@ public final class Iterate
      * MutableDoubleCollection doubles =
      *      Iterate.<b>collectDouble</b>(people, person -&gt; person.getMilesFromNorthPole());
      * </pre>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableDoubleCollection doubles =
-     *      Iterate.<b>collectDouble</b>(people,
-     *          new DoubleFunction&lt;Person&gt;()
-     *          {
-     *              public double doubleValueOf(Person person)
-     *              {
-     *                  return person.getMilesFromNorthPole();
-     *              }
-     *          });
-     * </pre>
      */
     public static <T> MutableDoubleCollection collectDouble(
             Iterable<T> iterable,
@@ -1608,19 +1323,6 @@ public final class Iterate
      * <pre>
      * DoubleArrayList doubles =
      *      Iterate.<b>collectDouble</b>(people, person -&gt; person.getMilesFromNorthPole());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * DoubleArrayList doubles =
-     *      Iterate.<b>collectDouble</b>(people,
-     *          new DoubleFunction&lt;Person&gt;()
-     *          {
-     *              public double doubleValueOf(Person person)
-     *              {
-     *                  return person.getMilesFromNorthPole();
-     *              }
-     *          }, new DoubleArrayList());
      * </pre>
      */
     public static <T, R extends MutableDoubleCollection> R collectDouble(
@@ -1655,19 +1357,6 @@ public final class Iterate
      * MutableFloatCollection floats =
      *      Iterate.<b>collectFloat</b>(people, person -&gt; person.getHeightInInches());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableFloatCollection floats =
-     *      Iterate.<b>collectFloat</b>(people,
-     *          new FloatFunction&lt;Person&gt;()
-     *          {
-     *              public float floatValueOf(Person person)
-     *              {
-     *                  return person.getHeightInInches();
-     *              }
-     *          });
-     * </pre>
      */
     public static <T> MutableFloatCollection collectFloat(
             Iterable<T> iterable,
@@ -1700,19 +1389,6 @@ public final class Iterate
      * <pre>
      * FloatArrayList floats =
      *      Iterate.<b>collectFloat</b>(people, person -&gt; person.getHeightInInches(), new FloatArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * FloatArrayList floats =
-     *      Iterate.<b>collectFloat</b>(people,
-     *          new FloatFunction&lt;Person&gt;()
-     *          {
-     *              public float floatValueOf(Person person)
-     *              {
-     *                  return person.getHeightInInches();
-     *              }
-     *          }, new FloatArrayList());
      * </pre>
      */
     public static <T, R extends MutableFloatCollection> R collectFloat(
@@ -1747,19 +1423,6 @@ public final class Iterate
      * MutableIntCollection ages =
      *      Iterate.<b>collectInt</b>(people, person -&gt; person.getAge());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableIntCollection ages =
-     *      Iterate.<b>collectInt</b>(people,
-     *          new IntFunction&lt;Person&gt;()
-     *          {
-     *              public int intValueOf(Person person)
-     *              {
-     *                  return person.getAge();
-     *              }
-     *          });
-     * </pre>
      */
     public static <T> MutableIntCollection collectInt(
             Iterable<T> iterable,
@@ -1792,19 +1455,6 @@ public final class Iterate
      * <pre>
      * IntArrayList ages =
      *      Iterate.<b>collectInt</b>(people, person -&gt; person.getAge(), new IntArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * IntArrayList ages =
-     *      Iterate.<b>collectInt</b>(people,
-     *          new IntFunction&lt;Person&gt;()
-     *          {
-     *              public int intValueOf(Person person)
-     *              {
-     *                  return person.getAge();
-     *              }
-     *          }, new IntArrayList());
      * </pre>
      */
     public static <T, R extends MutableIntCollection> R collectInt(
@@ -1839,19 +1489,6 @@ public final class Iterate
      * MutableLongCollection longs =
      *      Iterate.<b>collectLong</b>(people, person -&gt; person.getGuid());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableLongCollection longs =
-     *      Iterate.<b>collectLong</b>(people,
-     *          new LongFunction&lt;Person&gt;()
-     *          {
-     *              public long longValueOf(Person person)
-     *              {
-     *                  return person.getGuid();
-     *              }
-     *          });
-     * </pre>
      */
     public static <T> MutableLongCollection collectLong(
             Iterable<T> iterable,
@@ -1884,19 +1521,6 @@ public final class Iterate
      * <pre>
      * LongArrayList longs =
      *      Iterate.<b>collectLong</b>(people, person -&gt; person.getGuid(), new LongArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * LongArrayList longs =
-     *      Iterate.<b>collectLong</b>(people,
-     *              new LongFunction&lt;Person&gt;()
-     *              {
-     *                  public long longValueOf(Person person)
-     *                  {
-     *                      return person.getGuid();
-     *                  }
-     *              }, new LongArrayList());
      * </pre>
      */
     public static <T, R extends MutableLongCollection> R collectLong(
@@ -1931,19 +1555,6 @@ public final class Iterate
      * MutableShortCollection shorts =
      *      Iterate.<b>collectShort</b>(people, person -&gt; person.getNumberOfJunkMailItemsReceivedPerMonth());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableShortCollection shorts =
-     *      Iterate.<b>collectShort</b>(people,
-     *          new ShortFunction&lt;Person&gt;()
-     *          {
-     *              public short shortValueOf(Person person)
-     *              {
-     *                  return person.getNumberOfJunkMailItemsReceivedPerMonth();
-     *              }
-     *          });
-     * </pre>
      */
     public static <T> MutableShortCollection collectShort(
             Iterable<T> iterable,
@@ -1976,19 +1587,6 @@ public final class Iterate
      * <pre>
      * ShortArrayList shorts =
      *      Iterate.<b>collectShort</b>(people, person -&gt; person.getNumberOfJunkMailItemsReceivedPerMonth(), new ShortArrayList());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * ShortArrayList shorts =
-     *      Iterate.<b>collectShort</b>(people,
-     *          new ShortFunction&lt;Person&gt;()
-     *          {
-     *              public short shortValueOf(Person person)
-     *              {
-     *                  return person.getNumberOfJunkMailItemsReceivedPerMonth();
-     *              }
-     *          }, new ShortArrayList());
      * </pre>
      */
     public static <T, R extends MutableShortCollection> R collectShort(
@@ -2267,17 +1865,6 @@ public final class Iterate
      * <pre>
      * Person person = Iterate.<b>detect</b>(people, person -&gt; person.getFirstName().equals("John") &amp;&amp; person.getLastName().equals("Smith"));
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Person person = Iterate.<b>detect</b>(people, new Predicate&lt;Person&gt;()
-     * {
-     *     public boolean accept(Person person)
-     *     {
-     *         return person.getFirstName().equals("John") &amp;&amp; person.getLastName().equals("Smith");
-     *     }
-     * });
-     * </pre>
      */
     public static <T> T detect(Iterable<T> iterable, Predicate<? super T> predicate)
     {
@@ -2307,17 +1894,6 @@ public final class Iterate
      * Example using a Java 8 lambda expression:
      * <pre>
      * Person person = Iterate.<b>detectWith</b>(people, (person, fullName) -&gt; person.getFullName().equals(fullName), "John Smith");
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * Person person = Iterate.<b>detectWith</b>(people, new Predicate2&lt;Person, String&gt;()
-     * {
-     *     public boolean accept(Person person, String fullName)
-     *     {
-     *         return person.getFullName().equals(fullName);
-     *     }
-     * }, "John Smith");
      * </pre>
      */
     public static <T, P> T detectWith(
@@ -3148,25 +2724,6 @@ public final class Iterate
      * MutableMultimap&lt;String, String&gt; multimap =
      *      Iterate.<b>toMultimap</b>(integers, each -&gt; "key:" + each, each -&gt; Lists.mutable.of("value:" + each), FastListMultimap.newMultimap());
      * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableMultimap&lt;String, String&gt; multimap =
-     *      Iterate.<b>groupByAndCollect</b>(integers,
-     *          new Function&lt;Integer, String&gt;()
-     *          {
-     *              public String valueOf(Integer each)
-     *              {
-     *                  return "key:" + each;
-     *              }
-     *          }, new Function&lt;Integer, Iterable&lt;String&gt;&gt;()
-     *          {
-     *              public Iterable&lt;String&gt; valueOf(Integer each)
-     *              {
-     *                  return Lists.mutable.of("value:" + each);
-     *              }
-     *          }, FastListMultimap.newMultimap());
-     * </pre>
      *
      * @see Iterate#groupBy(Iterable, Function) when only keys get transformed
      * @see Iterate#groupByEach(Iterable, Function) when only keys get transformed and Function returns multiple keys
@@ -3464,25 +3021,6 @@ public final class Iterate
      * <pre>
      * MutableMultimap&lt;String, String&gt; multimap =
      *      Iterate.<b>groupByAndCollect</b>(integers, each -&gt; "key:" + each, each -&gt; "value:" + each, FastListMultimap.newMultimap());
-     * </pre>
-     * <p>
-     * Example using an anonymous inner class:
-     * <pre>
-     * MutableMultimap&lt;String, String&gt; multimap =
-     *      Iterate.<b>groupByAndCollect</b>(integers,
-     *          new Function&lt;Integer, String&gt;()
-     *          {
-     *              public String valueOf(Integer each)
-     *              {
-     *                  return "key:" + each;
-     *              }
-     *          }, new Function&lt;Integer, String&gt;()
-     *          {
-     *              public String valueOf(Integer each)
-     *              {
-     *                  return "value:" + each;
-     *              }
-     *          }, FastListMultimap.newMultimap());
      * </pre>
      *
      * @see Iterate#groupBy(Iterable, Function) when only keys get transformed
