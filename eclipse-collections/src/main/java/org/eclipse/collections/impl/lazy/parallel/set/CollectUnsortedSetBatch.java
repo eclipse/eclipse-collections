@@ -38,13 +38,6 @@ public class CollectUnsortedSetBatch<T, V> extends AbstractBatch<V> implements U
         this.unsortedSetBatch.forEach(Functions.bind(procedure, this.function));
     }
 
-    /*
-    public <VV> SetBatch<VV> collect(Function<? super V, ? extends VV> function)
-    {
-        return new CollectSetBatch<T, VV>(this.setBatch, Functions.chain(this.function, function));
-    }
-    */
-
     @Override
     public UnsortedSetBatch<V> select(Predicate<? super V> predicate)
     {

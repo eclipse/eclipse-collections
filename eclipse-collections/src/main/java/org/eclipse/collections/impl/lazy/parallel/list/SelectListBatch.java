@@ -37,13 +37,6 @@ public class SelectListBatch<T> extends AbstractBatch<T> implements ListBatch<T>
         this.listBatch.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
-    /*
-    public ListBatch<T> select(Predicate<? super T> predicate)
-    {
-        return new SelectListBatch<T>(this.listBatch, Predicates.and(this.predicate, predicate));
-    }
-    */
-
     @Override
     public ListBatch<T> select(Predicate<? super T> predicate)
     {

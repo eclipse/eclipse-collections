@@ -242,9 +242,6 @@ public class ConcurrentHashMapUnsafe<K, V>
         int h = key.hashCode();
         h ^= (h >>> 18) ^ (h >>> 12);
         return h ^ (h >>> 10);
-        // h ^= h >>> 20 ^ h >>> 12;
-        // h ^= h >>> 7 ^ h >>> 4;
-        // return h;
     }
 
     private Object[] helpWithResizeWhileCurrentIndex(Object[] currentArray, int index)

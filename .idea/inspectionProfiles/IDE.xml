@@ -153,8 +153,6 @@
     <inspection_tool class="Convert2Diamond" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="Convert2MethodRef" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ConvertAnnotations" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="ConvertJavadoc" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="ConvertOldAnnotations" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="CovariantCompareTo" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CovariantEquals" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CssInvalidElementInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
@@ -254,6 +252,28 @@
     </inspection_tool>
     <inspection_tool class="FieldCanBeLocal" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="FieldMayBeStatic" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="FieldNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+      <extension name="ConstantNamingConvention" enabled="true">
+        <option name="m_regex" value="[A-Z_\d]*" />
+        <option name="m_minLength" value="2" />
+        <option name="m_maxLength" value="99" />
+      </extension>
+      <extension name="ConstantWithMutableFieldTypeNamingConvention" enabled="true">
+        <option name="m_regex" value="[A-Z_\d]*" />
+        <option name="m_minLength" value="2" />
+        <option name="m_maxLength" value="99" />
+      </extension>
+      <extension name="EnumeratedConstantNamingConvention" enabled="true">
+        <option name="m_regex" value="[A-Z_\d]*" />
+        <option name="m_minLength" value="2" />
+        <option name="m_maxLength" value="99" />
+      </extension>
+      <extension name="InstanceVariableNamingConvention" enabled="false">
+        <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+        <option name="m_minLength" value="2" />
+        <option name="m_maxLength" value="32" />
+      </extension>
+    </inspection_tool>
     <inspection_tool class="FinalStaticMethod" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="Finalize" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreTrivialFinalizers" value="true" />
@@ -322,6 +342,7 @@
     <inspection_tool class="IntegerMultiplicationImplicitCastToLong" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="ignoreNonOverflowingCompileTimeConstants" value="true" />
     </inspection_tool>
+    <inspection_tool class="InterfaceMayBeAnnotatedFunctional" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="InterfaceNeverImplemented" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreInterfacesThatOnlyDeclareConstants" value="false" />
     </inspection_tool>
@@ -375,7 +396,6 @@
       <option name="m_minLength" value="5" />
       <option name="m_maxLength" value="64" />
     </inspection_tool>
-    <inspection_tool class="JUnitTestNG" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JavaAccessorMethodCalledAsEmptyParen" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JavaAccessorMethodOverridenAsEmptyParen" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JavaDoc" enabled="true" level="INSPECTION" enabled_by_default="true">
@@ -411,6 +431,11 @@
     </inspection_tool>
     <inspection_tool class="JavaLangImport" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="JavaLangReflect" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JavadocDeclaration" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ADDITIONAL_TAGS" value="ant.task" />
+      <option name="IGNORE_PERIOD_PROBLEM" value="false" />
+      <option name="IGNORE_SELF_REFS" value="true" />
+    </inspection_tool>
     <inspection_tool class="JavaeeApplicationDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JpaDataSourceORMDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JpaDataSourceORMInspection" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -471,6 +496,38 @@
     <inspection_tool class="MimeType" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="MisorderedAssertEqualsParameters" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="MissingDeprecatedAnnotation" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="MissingJavadoc" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="PACKAGE_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="MODULE_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="TOP_LEVEL_CLASS_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="INNER_CLASS_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="METHOD_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="FIELD_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+    </inspection_tool>
     <inspection_tool class="MissingMnemonic" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="MissingOverrideAnnotation" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="ignoreObjectMethods" value="false" />
@@ -699,8 +756,8 @@
         <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="HashBag.newBag(capacity) with Bags.mutable.withInitialCapacity(capacity)." text="org.eclipse.collections.impl.bag.mutable.HashBag.newBag($capacity$)" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.factory.Bags.mutable.withInitialCapacity($capacity$)">
-         <constraint name="__context__" within="" contains="" />
-         <constraint name="capacity" nameOfExprType="int" within="" contains="" />
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="capacity" nameOfExprType="int" within="" contains="" />
       </replaceConfiguration>
     </inspection_tool>
     <inspection_tool class="SafeLock" enabled="true" level="INSPECTION" enabled_by_default="true" />
@@ -764,7 +821,6 @@
     <inspection_tool class="StaticCollection" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="m_ignoreWeakCollections" value="false" />
     </inspection_tool>
-    <inspection_tool class="InterfaceMayBeAnnotatedFunctional" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="StaticFieldReferenceOnSubclass" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="StaticGuardedByInstance" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="StaticImport" enabled="true" level="WARNING" enabled_by_default="true">
