@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
+import java.util.function.BiConsumer;
 
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -595,5 +596,11 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public <V1> ImmutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
     {
         return this.countByEach(function, Bags.mutable.empty()).toImmutable();
+    }
+
+    @Override
+    public void forEach(BiConsumer<? super K, ? super V> action)
+    {
+        super.forEach(action);
     }
 }

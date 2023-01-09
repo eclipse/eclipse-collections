@@ -11,9 +11,11 @@
 package org.eclipse.collections.api.map;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -348,5 +350,11 @@ public interface MapIterable<K, V> extends RichIterable<V>
                 nonMutatingAggregator,
                 valueFunction.valueOf(value)));
         return map;
+    }
+
+    default void forEach(BiConsumer<? super K, ? super V> action)
+    {
+        Objects.requireNonNull(action);
+        this.forEachKeyValue(action::accept);
     }
 }

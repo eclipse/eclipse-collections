@@ -319,4 +319,18 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
             assertTrue(map2.containsValue(null));
         }
     }
+
+    @Test
+    default void MapIterable_forEach()
+    {
+        MapIterable<Object, Integer> map = this.newWith(3, 3, 3, 2, 2, 1);
+        MutableCollection<Integer> forEach = this.newMutableForFilter();
+        map.forEach((key, value) -> forEach.add(value + 10));
+        assertEquals(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEach);
+
+        MapIterable<Integer, String> map2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three");
+        MutableCollection<String> forEach2 = this.newMutableForFilter();
+        map2.forEach((key, value) -> forEach2.add(key + value));
+        assertEquals(this.newMutableForFilter("3Three", "2Two", "1Three"), forEach2);
+    }
 }

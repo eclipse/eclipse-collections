@@ -124,4 +124,18 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
                 target,
                 iterable.toList());
     }
+
+    @Override
+    default void MapIterable_forEach()
+    {
+        BiMap<Object, Integer> bimap = this.newWith(3, 2, 1);
+        MutableCollection<Integer> forEach = this.newMutableForFilter();
+        bimap.forEach((key, value) -> forEach.add(value + 10));
+        assertEquals(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEach);
+
+        BiMap<Integer, String> bimap2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        MutableCollection<String> forEach2 = this.newMutableForFilter();
+        bimap2.forEach((key, value) -> forEach2.add(key + value));
+        assertEquals(this.newMutableForFilter("3Three", "2Two", "1One"), forEach2);
+    }
 }

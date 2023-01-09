@@ -13,6 +13,7 @@ package org.eclipse.collections.api.map;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -432,5 +433,11 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
                 nonMutatingAggregator,
                 valueFunction.valueOf(value)));
         return map;
+    }
+
+    @Override
+    default void forEach(BiConsumer<? super K, ? super V> action)
+    {
+        MapIterable.super.forEach(action);
     }
 }

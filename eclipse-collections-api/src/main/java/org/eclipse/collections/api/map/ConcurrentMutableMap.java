@@ -12,6 +12,7 @@ package org.eclipse.collections.api.map;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.BiConsumer;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 
@@ -42,5 +43,11 @@ public interface ConcurrentMutableMap<K, V>
     {
         this.putAllMapIterable(mapIterable);
         return this;
+    }
+
+    @Override
+    default void forEach(BiConsumer<? super K, ? super V> action)
+    {
+        MutableMap.super.forEach(action);
     }
 }
