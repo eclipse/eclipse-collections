@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,7 @@ import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.list.Interval;
@@ -365,6 +367,19 @@ public class ComparatorsTest
         MutableList<Pair<Integer, String>> list = Lists.mutable.with(Tuples.pair(3, "B"), Tuples.pair(1, "C"), Tuples.pair(2, "A"));
         MutableList<Pair<Integer, String>> sorted = Lists.mutable.with(Tuples.pair(2, "A"), Tuples.pair(3, "B"), Tuples.pair(1, "C"));
         Verify.assertListsEqual(sorted, list.sortThis(Comparators.bySecondOfPair(String::compareTo)));
+    }
+
+    @Test
+    public void fromPredicate()
+    {
+        ImmutableList<Instant> orderedInstants = Lists.immutable.with(
+                Instant.parse("2000-01-01T00:00:00Z"),
+                Instant.parse("2001-01-01T00:00:00Z"),
+                Instant.parse("2002-01-01T00:00:00Z"),
+                Instant.parse("2003-01-01T00:00:00Z"));
+        MutableList<Instant> shuffledInstants = orderedInstants.toList().shuffleThis();
+        shuffledInstants.sortThis(Comparators.fromPredicate(Instant::isBefore));
+        Verify.assertListsEqual(orderedInstants.castToList(), shuffledInstants);
     }
 
     @Test

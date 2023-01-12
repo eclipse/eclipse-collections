@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -282,6 +282,17 @@ public class ComparatorsSerializationTest
                         + "YXRvcnMkQnlTZWNvbmRPZlBhaXJDb21wYXJhdG9yAAAAAAAAAAECAAFMAApjb21wYXJhdG9ydAAW\n"
                         + "TGphdmEvdXRpbC9Db21wYXJhdG9yO3hwcA==",
                 Comparators.bySecondOfPair(null));
+    }
+
+    @Test
+    public void fromPredicate()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAFpvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuQ29tcGFy\n"
+                        + "YXRvcnMkRnJvbVByZWRpY2F0ZVNlcmlhbGl6YWJsZUNvbXBhcmF0b3IAAAAAAAAAAQIAAUwAEWlz\n"
+                        + "QmVmb3JlUHJlZGljYXRldAAgTGphdmEvdXRpbC9mdW5jdGlvbi9CaVByZWRpY2F0ZTt4cHA=",
+                Comparators.fromPredicate(null));
     }
 
     @Test
