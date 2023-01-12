@@ -1132,6 +1132,20 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return Math.min(capacity - 1, capacity / OCCUPIED_DATA_RATIO);
     }
 
+    /**
+    * @since 12.0
+    */
+    public boolean trimToSize()
+    {
+        int newCapacity = this.smallestPowerOfTwoGreaterThan(this.size());
+        if (this.keys.length > newCapacity)
+        {
+            this.rehash(newCapacity);
+            return true;
+        }
+        return false;
+    }
+
     private void rehashAndGrow()
     {
         this.rehash(this.keys.length << 1);
