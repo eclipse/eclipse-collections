@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -499,5 +500,11 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
         {
             return new ImmutableBiMapSerializationProxy<>(this);
         }
+    }
+
+    @Override
+    public void forEach(BiConsumer<? super K, ? super V> action)
+    {
+        super.forEach(action);
     }
 }
