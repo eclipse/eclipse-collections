@@ -45,12 +45,7 @@ public class C implements A
 
         C c = (C) o;
 
-        if (Double.compare(c.d, this.d) != 0)
-        {
-            return false;
-        }
-
-        return true;
+        return Double.compare(c.d, this.d) == 0;
     }
 
     @Override

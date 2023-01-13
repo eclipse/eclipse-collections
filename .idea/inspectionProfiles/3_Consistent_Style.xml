@@ -1,6 +1,7 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0" is_locked="true">
     <option name="myName" value="3 Consistent Style" />
+    <option name="myName" value="3 Consistent Style" />
     <inspection_tool class="AbsoluteAlignmentInUserInterface" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AbstractBeanReferencesInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="AbstractClassExtendsConcreteClass" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -782,7 +783,7 @@
     <inspection_tool class="ConfigurationProperties" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="ConflictingAnnotations" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ConflictingExtensionProperty" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="ConfusingElse" enabled="false" level="WARNING" enabled_by_default="false">
+    <inspection_tool class="ConfusingElse" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="reportWhenNoStatementFollow" value="false" />
     </inspection_tool>
     <inspection_tool class="ConfusingFloatingPointLiteral" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -3297,7 +3298,7 @@
     <inspection_tool class="TransitionPropertiesLabel" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="TrivialConditionalJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="TrivialFunctionalExpressionUsage" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="TrivialIf" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="TrivialIf" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="TrivialIfJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="TrivialStringConcatenation" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="TryFinallyCanBeTryWithResources" enabled="false" level="WARNING" enabled_by_default="false" />

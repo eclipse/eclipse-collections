@@ -61,12 +61,7 @@ public final class Person implements Comparable<Person>, Serializable
         {
             return false;
         }
-        if (!this.lastName.equals(person.lastName))
-        {
-            return false;
-        }
-
-        return true;
+        return this.lastName.equals(person.lastName);
     }
 
     @Override
