@@ -2539,16 +2539,12 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     {
         if (value == null)
         {
-            if (other == null)
-            {
-                return true;
-            }
+            return other == null;
         }
-        else if (other == value || value.equals(other))
+        else
         {
-            return true;
+            return other == value || value.equals(other);
         }
-        return false;
     }
 
     protected class EntrySet implements Set<Entry<K, V>>, Serializable, BatchIterable<Entry<K, V>>

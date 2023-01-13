@@ -45,12 +45,7 @@ public class B implements A
 
         B b = (B) o;
 
-        if (this.i != b.i)
-        {
-            return false;
-        }
-
-        return true;
+        return this.i == b.i;
     }
 
     @Override

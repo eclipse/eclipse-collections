@@ -1856,10 +1856,7 @@ public final class ConcurrentHashMap<K, V>
             {
                 V v1 = this.value;
                 Object v2 = e.getValue();
-                if (v1 == v2 || v1 != null && v1.equals(v2))
-                {
-                    return true;
-                }
+                return v1 == v2 || v1 != null && v1.equals(v2);
             }
             return false;
         }

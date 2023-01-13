@@ -1053,16 +1053,12 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
     {
         if (value == null)
         {
-            if (other == null)
-            {
-                return true;
-            }
+            return other == null;
         }
-        else if (other == value || value.equals(other))
+        else
         {
-            return true;
+            return other == value || value.equals(other);
         }
-        return false;
     }
 
     private K toNonSentinel(Object key)

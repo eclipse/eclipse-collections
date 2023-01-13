@@ -936,6 +936,7 @@
     <inspection_tool class="TrailingSpacesInProperty" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="TransientFieldNotInitialized" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="TrivialConditionalJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="TrivialIf" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="TrivialIfJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
     <inspection_tool class="TrivialStringConcatenation" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="TryWithIdenticalCatches" enabled="true" level="INSPECTION" enabled_by_default="true" />
