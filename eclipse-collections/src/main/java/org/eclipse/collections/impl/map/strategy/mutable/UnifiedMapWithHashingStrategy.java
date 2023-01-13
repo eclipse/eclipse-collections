@@ -2270,10 +2270,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         {
             return other == null;
         }
-        else
-        {
-            return other == value || value.equals(other);
-        }
+        return other == value || value.equals(other);
     }
 
     protected class EntrySet implements Set<Entry<K, V>>, Serializable, BatchIterable<Entry<K, V>>

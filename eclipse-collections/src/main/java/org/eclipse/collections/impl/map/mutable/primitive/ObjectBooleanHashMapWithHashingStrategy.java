@@ -1074,7 +1074,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         {
             return other == null;
         }
-        else if (key != NULL_KEY && other != null)
+        if (key != NULL_KEY && other != null)
         {
             return this.hashingStrategy.equals(key, this.toNonSentinel(other));
         }
