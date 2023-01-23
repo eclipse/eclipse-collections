@@ -1275,7 +1275,6 @@ PartitionMutableList<Person> partitionedFolks =
 ImmutableList<Person> list0 = Lists.immutable.empty();
 ImmutableList<Person> list1 = list0.newWith(new Person(...)); // add a single element to the new immutable list
 ImmutableList<Person> adults = list1.newWithAll(partitionedFolks.getSelected()); // add none, one or more objects to the new immutable list
-I
 
 ImmutableSet<String> set0 = Sets.immutable.empty();
 ImmutableSet<String> set1 = set0.newWith("1"); // add a single element to the new immutable set
