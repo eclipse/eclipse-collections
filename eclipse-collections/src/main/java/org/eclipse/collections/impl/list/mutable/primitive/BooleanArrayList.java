@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -316,7 +316,7 @@ public final class BooleanArrayList
         int sourceSize = source.length;
         int newSize = this.size + sourceSize;
 
-        for (int i = newSize; i > index; i--)
+        for (int i = newSize - 1; i >= index + sourceSize; i--)
         {
             this.items.set(i, this.items.get(i - sourceSize));
         }
