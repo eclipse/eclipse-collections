@@ -12,6 +12,8 @@ package org.eclipse.collections.impl.test;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.factory.SortedSets;
@@ -89,6 +91,17 @@ public class ClassComparer
     {
         ClassComparer comparer = new ClassComparer(true, true, true);
         return comparer.getMethodNames(subsetClass).isProperSubsetOf(comparer.getMethodNames(supersetClass));
+    }
+
+    public static boolean isProperSupersetOfInstance(Class<?> supersetClass, Class<?> subsetClass)
+    {
+        return ClassComparer.isProperSubsetOfInstance(subsetClass, supersetClass);
+    }
+
+    public static boolean isProperSubsetOfInstance(Class<?> subsetClass, Class<?> supersetClass)
+    {
+        ClassComparer comparer = new ClassComparer(true, true, true);
+        return comparer.getInstanceMethodNames(subsetClass).isProperSubsetOf(comparer.getInstanceMethodNames(supersetClass));
     }
 
     public Triplet<MutableSortedSet<String>> compare(Class<?> leftClass, Class<?> rightClass)
@@ -177,6 +190,12 @@ public class ClassComparer
     public MutableSortedSet<String> getMethodNames(Class<?> classOne)
     {
         return ArrayIterate.collectIf(classOne.getMethods(), this::includeMethod, this::methodName, SortedSets.mutable.empty());
+    }
+
+    public MutableSortedSet<String> getInstanceMethodNames(Class<?> classOne)
+    {
+        Method[] instanceMethods = Arrays.stream(classOne.getMethods()).filter(method -> !Modifier.isStatic(method.getModifiers())).toArray(Method[]::new);
+        return ArrayIterate.collectIf(instanceMethods, this::includeMethod, this::methodName, SortedSets.mutable.empty());
     }
 
     public void includeObjectMethods()

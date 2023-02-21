@@ -88,7 +88,7 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
     @Test
     public void unifiedSetProperSuperSetOfHashSet()
     {
-        Assert.assertTrue(ClassComparer.isProperSupersetOf(UnifiedSet.class, HashSet.class));
+        Assert.assertTrue(ClassComparer.isProperSupersetOfInstance(UnifiedSet.class, HashSet.class));
     }
 
     @Override

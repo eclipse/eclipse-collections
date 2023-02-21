@@ -162,7 +162,7 @@ public class UnifiedMapTest extends UnifiedMapTestCase
     @Test
     public void unifiedMapProperSuperSetOfHashMap()
     {
-        Assert.assertTrue(ClassComparer.isProperSupersetOf(UnifiedMap.class, HashMap.class));
+        Assert.assertTrue(ClassComparer.isProperSupersetOfInstance(UnifiedMap.class, HashMap.class));
     }
 
     @Test
