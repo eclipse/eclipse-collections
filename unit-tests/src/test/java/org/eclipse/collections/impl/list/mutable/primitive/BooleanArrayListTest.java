@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,6 +50,45 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
         Assert.assertEquals(64L, ((BitSet) items.get(arrayList1)).size());
         BooleanArrayList arrayList2 = new BooleanArrayList(65);
         Assert.assertEquals(128L, ((BitSet) items.get(arrayList2)).size());
+    }
+
+    @Test
+    public void addAllAtIndexOne()
+    {
+        BooleanArrayList booleanArrayList = this.classUnderTest();
+        booleanArrayList.addAllAtIndex(0, false, true);
+        Assert.assertEquals(new BooleanArrayList(false, true, true, false, true), booleanArrayList);
+    }
+
+    @Test
+    public void addAllAtIndexTwo()
+    {
+        BooleanArrayList booleanArrayList = this.classUnderTest();
+        booleanArrayList.addAllAtIndex(1, false, true, true);
+        Assert.assertEquals(new BooleanArrayList(true, false, true, true, false, true), booleanArrayList);
+    }
+
+    @Test
+    public void addAllAtIndexThree()
+    {
+        BooleanArrayList booleanArrayList = this.classUnderTest();
+        booleanArrayList.addAllAtIndex(2, false, true);
+        Assert.assertEquals(new BooleanArrayList(true, false, false, true, true), booleanArrayList);
+    }
+
+    @Test
+    public void addAllAtIndexFour()
+    {
+        BooleanArrayList booleanArrayList = this.classUnderTest();
+        booleanArrayList.addAllAtIndex(3, false, true);
+        Assert.assertEquals(new BooleanArrayList(true, false, true, false, true), booleanArrayList);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void addAlAtIndexOutOfBounds()
+    {
+        BooleanArrayList booleanArrayList = this.classUnderTest();
+        booleanArrayList.addAllAtIndex(4, false, true);
     }
 
     @Test
