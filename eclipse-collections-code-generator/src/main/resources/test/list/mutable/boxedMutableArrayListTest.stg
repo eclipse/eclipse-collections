@@ -1,0 +1,179 @@
+import "copyrightOf.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
+
+fileName(primitive) ::= "BoxedMutable<primitive.name>ListTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyrightOf("The Bank of New York Mellon")>
+
+package org.eclipse.collections.impl.list.mutable.primitive;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link BoxedMutable<name>List}.
+ * This file was automatically generated from template file boxedMutableArrayListTest.stg.
+ */
+public class BoxedMutable<name>ListTest
+{
+    private BoxedMutable<name>List classUnderTest()
+    {
+        return new BoxedMutable<name>List(new <name>ArrayList(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Test
+    public void size()
+    {
+        BoxedMutable<name>List list = this.classUnderTest();
+        Verify.assertSize(3, list);
+        list.remove(0);
+        Verify.assertSize(2, list);
+    }
+
+    @Test
+    public void clear()
+    {
+        BoxedMutable<name>List list = this.classUnderTest();
+        Verify.assertSize(3, list);
+        list.clear();
+        Verify.assertEmpty(list);
+    }
+
+    @Test
+    public void add()
+    {
+        BoxedMutable<name>List list = this.classUnderTest();
+        list.add(<(literal.(type))("4")>);
+        list.add(<(literal.(type))("7")>);
+        Assert.assertEquals(new BoxedMutable<name>List(new <name>ArrayList(<["1", "2", "3", "4", "7"]:(literal.(type))(); separator=", ">)), list);
+    }
+
+    @Test
+    public void remove()
+    {
+        Assert.assertEquals(<(literal.(type))("2")>, (<type>) this.classUnderTest().remove(1)<wideDelta.(type)>);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void removeIndexOutOfBounds()
+    {
+        this.classUnderTest().remove(10);
+    }
+
+    @Test
+    public void indexOf()
+    {
+        BoxedMutable<name>List list = this.classUnderTest();
+        Assert.assertEquals(1, list.indexOf(<(literal.(type))("2")>));
+        Assert.assertEquals(-1, list.indexOf(<(literal.(type))("5")>));
+    }
+
+    @Test
+    public void lastIndexOf()
+    {
+        BoxedMutable<name>List list = this.classUnderTest();
+        list.add(<(literal.(type))("1")>);
+        Assert.assertEquals(3, list.lastIndexOf(<(literal.(type))("1")>));
+        Assert.assertEquals(1, list.lastIndexOf(<(literal.(type))("2")>));
+        Assert.assertEquals(-1, list.indexOf(<(literal.(type))("5")>));
+    }
+
+    @Test
+    public void set()
+    {
+        BoxedMutable<name>List list = this.classUnderTest();
+        Assert.assertEquals(<(literal.(type))("2")>, (<type>) list.set(1, <(literal.(type))("5")>)<wideDelta.(type)>);
+        Assert.assertEquals(new BoxedMutable<name>List(new <name>ArrayList(<["1", "5", "3"]:(literal.(type))(); separator=", ">)), list);
+
+        Assert.assertEquals(<(literal.(type))("5")>, (<type>) list.set(1, <(literal.(type))("7")>)<wideDelta.(type)>);
+        Assert.assertEquals(new BoxedMutable<name>List(new <name>ArrayList(<["1", "7", "3"]:(literal.(type))(); separator=", ">)), list);
+    }
+
+    @Test
+    public void mutationOfOriginalList()
+    {
+        <name>ArrayList originalList = new <name>ArrayList(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        BoxedMutable<name>List list = new BoxedMutable<name>List(originalList);
+        Assert.assertEquals(list, Lists.mutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+
+        originalList.add(<(literal.(type))("4")>);
+        Assert.assertEquals(list, Lists.mutable.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+
+        originalList.remove(<(literal.(type))("2")>);
+        Assert.assertEquals(list, Lists.mutable.of(<["1", "3", "4"]:(literal.(type))(); separator=", ">));
+
+        originalList.addAllAtIndex(1, <["7", "8", "9"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(list, Lists.mutable.of(<["1", "7", "8", "9", "3", "4"]:(literal.(type))(); separator=", ">));
+
+        originalList.clear();
+        Verify.assertEmpty(list);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void setIndexOutOfBounds()
+    {
+        this.classUnderTest().set(5, <(literal.(type))("5")>);
+    }
+
+    @Test
+    public void get()
+    {
+        BoxedMutable<name>List list = this.classUnderTest();
+        Assert.assertEquals(<(literal.(type))("1")>, (<type>) list.get(0)<wideDelta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, (<type>) list.get(1)<wideDelta.(type)>);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getIndexOutOfBounds()
+    {
+        this.classUnderTest().get(5);
+    }
+
+    @Test
+    public void addAll()
+    {
+        BoxedMutable<name>List list = this.classUnderTest();
+        list.addAll(1, Lists.mutable.of(<(literal.(type))("7")>, <(literal.(type))("9")>));
+        Assert.assertEquals(Lists.mutable.of(<["1", "7", "9", "2", "3"]:(literal.(type))(); separator=", ">), list);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void addAllIndexOutOfBounds()
+    {
+        this.classUnderTest().addAll(5, Lists.mutable.of(<(literal.(type))("7")>, <(literal.(type))("9")>));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void subList()
+    {
+        this.classUnderTest().subList(1, 3);
+    }
+
+    @Test
+    public void equalsHashCode()
+    {
+        Verify.assertEqualsAndHashCode(Lists.mutable.ofAll(this.classUnderTest()), this.classUnderTest());
+        List\<<wrapperName>\> list =
+                StreamSupport.stream(this.classUnderTest().spliterator(), false).collect(Collectors.toList());
+
+        Verify.assertEqualsAndHashCode(list, this.classUnderTest());
+    }
+}
+
+>>

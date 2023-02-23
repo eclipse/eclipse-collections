@@ -8,10 +8,10 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "<primitive.name>ArrayList"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
@@ -1074,6 +1074,12 @@ public class <name>ArrayList extends Abstract<name>Iterable
             target.add(PrimitiveTuples.pair(this.items[i], iterator.next()));
         }
         return target;
+    }
+
+    @Override
+    public MutableList\<<wrapperName>\> boxed()
+    {
+        return new BoxedMutable<name>List(this);
     }
 
     private class Internal<name>Iterator implements Mutable<name>Iterator

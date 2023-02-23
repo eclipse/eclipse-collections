@@ -1,0 +1,113 @@
+import "copyrightOf.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
+
+fileName(primitive) ::= "BoxedMutable<primitive.name>List"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyrightOf("The Bank of New York Mellon")>
+
+package org.eclipse.collections.impl.list.mutable.primitive;
+
+import java.util.Collection;
+import java.util.Objects;
+import java.util.RandomAccess;
+
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.impl.list.mutable.AbstractMutableList;
+import org.eclipse.collections.impl.utility.Iterate;
+
+/**
+ * A boxed view of a {@link Mutable<name>List}.
+ *
+ * This is for scenarios where optimization is not a consideration and therefore no further methods will be optimized.
+ * \<p>
+ * This file was automatically generated from template file boxedPrimitiveList.stg.
+ *
+ * @since 12.0
+ */
+public class BoxedMutable<name>List extends AbstractMutableList\<<wrapperName>\>
+        implements MutableList\<<wrapperName>\>, RandomAccess
+{
+    private final Mutable<name>List delegate;
+
+    public BoxedMutable<name>List(Mutable<name>List delegate)
+    {
+        this.delegate = Objects.requireNonNull(delegate);
+    }
+
+    @Override
+    public int size()
+    {
+        return this.delegate.size();
+    }
+
+    @Override
+    public boolean add(<wrapperName> item)
+    {
+        return this.delegate.add(item.<type>Value());
+    }
+
+    @Override
+    public boolean addAll(int index, Collection\<? extends <wrapperName>\> c)
+    {
+        <type>[] target = new <type>[c.size()];
+        Iterate.forEachWithIndex(c, (each, parameter) -> target[parameter] = each.<type>Value());
+        return this.delegate.addAllAtIndex(index, target);
+    }
+
+    @Override
+    public void clear()
+    {
+        this.delegate.clear();
+    }
+
+    @Override
+    public <wrapperName> get(int index)
+    {
+        return this.delegate.get(index);
+    }
+
+    @Override
+    public <wrapperName> set(int index, <wrapperName> element)
+    {
+        return this.delegate.set(index, element.<type>Value());
+    }
+
+    @Override
+    public void add(int index, <wrapperName> element)
+    {
+        this.delegate.addAtIndex(index, element.<type>Value());
+    }
+
+    @Override
+    public <wrapperName> remove(int index)
+    {
+        return this.delegate.removeAtIndex(index);
+    }
+
+    @Override
+    public int indexOf(Object o)
+    {
+        return o instanceof <wrapperName> ? this.delegate.indexOf((<wrapperName>) o) : -1;
+    }
+
+    @Override
+    public int lastIndexOf(Object o)
+    {
+        return o instanceof <wrapperName> ? this.delegate.lastIndexOf((<wrapperName>) o) : -1;
+    }
+
+    @Override
+    public MutableList\<<wrapperName>\> subList(int fromIndex, int toIndex)
+    {
+        return this.delegate.subList(fromIndex, toIndex).boxed();
+    }
+}
+
+>>

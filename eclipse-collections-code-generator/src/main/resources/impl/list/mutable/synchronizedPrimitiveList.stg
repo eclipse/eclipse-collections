@@ -8,10 +8,10 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "Synchronized<primitive.name>List"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
@@ -43,6 +43,7 @@ import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchro
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
+import org.eclipse.collections.impl.list.mutable.SynchronizedMutableList;
 <if(primitive.specializedStream)>
 import java.util.Spliterator;<endif>
 
@@ -214,6 +215,15 @@ public class Synchronized<name>List
         synchronized (this.getLock())
         {
             return this.getMutable<name>List().select(predicate);
+        }
+    }
+
+    @Override
+    public MutableList\<<wrapperName>\> boxed()
+    {
+        synchronized (this.getLock())
+        {
+            return SynchronizedMutableList.of(new BoxedMutable<name>List(this), this.getLock());
         }
     }
 

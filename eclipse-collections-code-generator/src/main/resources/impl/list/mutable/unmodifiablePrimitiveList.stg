@@ -8,10 +8,10 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "Unmodifiable<primitive.name>List"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
@@ -89,6 +89,12 @@ public class Unmodifiable<name>List
     public int lastIndexOf(<type> value)
     {
         return this.getMutable<name>List().lastIndexOf(value);
+    }
+
+    @Override
+    public MutableList\<<wrapperName>\> boxed()
+    {
+        return new BoxedMutable<name>List(this);
     }
 
     @Override

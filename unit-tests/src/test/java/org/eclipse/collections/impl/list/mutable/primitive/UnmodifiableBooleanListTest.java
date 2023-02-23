@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -46,6 +46,12 @@ public class UnmodifiableBooleanListTest extends AbstractBooleanListTestCase
     public void addAtIndex_throws_index_greater_than_size()
     {
         new UnmodifiableBooleanList(new BooleanArrayList()).addAtIndex(1, false);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void unmodifiableBoxed()
+    {
+        this.newWith(true, false, true).asUnmodifiable().add(true);
     }
 
     @Override

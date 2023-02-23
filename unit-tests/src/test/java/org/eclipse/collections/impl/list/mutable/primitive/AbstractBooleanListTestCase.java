@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.list.mutable.primitive;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
@@ -121,6 +122,13 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         MutableBooleanList emptyList = this.newWith();
         Assert.assertEquals(-1L, emptyList.indexOf(true));
         Assert.assertEquals(-1L, emptyList.indexOf(false));
+    }
+
+    @Test
+    public void boxed()
+    {
+        MutableBooleanList list = this.newWith(true, false, true);
+        Assert.assertEquals(Lists.mutable.of(true, false, true), list.boxed());
     }
 
     @Test

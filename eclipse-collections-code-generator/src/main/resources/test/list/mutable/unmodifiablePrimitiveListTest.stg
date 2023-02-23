@@ -60,6 +60,12 @@ public class Unmodifiable<name>ListTest extends Abstract<name>ListTestCase
         new Unmodifiable<name>List(new <name>ArrayList()).addAtIndex(1, <(literal.(type))("0")>);
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void unmodifiableBoxed()
+    {
+        this.classUnderTest().boxed().add(<(literal.(type))("1")>);
+    }
+
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addAtIndex_throws_index_negative()
