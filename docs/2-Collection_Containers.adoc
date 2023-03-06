@@ -1127,12 +1127,10 @@ Primitive maps with numeric value types (not boolean or Object) have a method *a
 ====
 [source,java]
 ----
-MutableByteIntMap map =
-new ByteIntHashMap();
+MutableByteIntMap map = new ByteIntHashMap();
 Assert.assertEquals(1, map.addToValue((byte) 0, 1));
 Assert.assertEquals(ByteIntHashMap.newWithKeysValues((byte) 0, 1), map);
-Assert.assertEquals(11, map.addToValue((
-byte) 0, 10));
+Assert.assertEquals(11, map.addToValue((byte) 0, 10));
 Assert.assertEquals(ByteIntHashMap.newWithKeysValues((byte) 0, 11), map);
 ----
 ====
