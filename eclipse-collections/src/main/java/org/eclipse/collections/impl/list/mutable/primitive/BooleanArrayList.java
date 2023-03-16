@@ -1003,4 +1003,10 @@ public final class BooleanArrayList
             this.lastIndex = -1;
         }
     }
+
+    @Override
+    public MutableList<Boolean> boxed()
+    {
+        return new BoxedMutableBooleanList(this);
+    }
 }

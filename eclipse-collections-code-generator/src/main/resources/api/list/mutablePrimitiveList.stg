@@ -6,10 +6,10 @@ targetPath() ::= "org/eclipse/collections/api/list/primitive"
 fileName(primitive) ::= "Mutable<primitive.name>List"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.api.list.primitive;
@@ -42,6 +42,8 @@ public interface Mutable<name>List extends Mutable<name>Collection, <name>List
     <type> removeAtIndex(int index);
 
     <type> set(int index, <type> element);
+
+    MutableList\<<wrapperName>\> boxed();
 
     default void swap(int index1, int index2)
     {

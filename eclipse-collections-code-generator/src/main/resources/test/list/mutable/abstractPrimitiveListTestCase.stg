@@ -79,6 +79,15 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
         Assert.assertEquals(<(wideLiteral.(type))("3")>, list.get(2)<(wideDelta.(type))>);
     }
 
+    @Test
+    public void boxed()
+    {
+        Mutable<name>List list = this.classUnderTest();
+        BoxedMutable<name>List expected = new BoxedMutable<name>List(list);
+        MutableList\<<wrapperName>\> actual = list.boxed();
+        Assert.assertEquals(expected, actual);
+    }
+
     @Test(expected = IndexOutOfBoundsException.class)
     public void get_throws_index_greater_than_size()
     {
