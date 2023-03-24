@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.set.mutable.primitive;
 import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -40,6 +41,12 @@ public class BooleanHashSetTest extends AbstractBooleanSetTestCase
         Field table = BooleanHashSet.class.getDeclaredField("state");
         table.setAccessible(true);
         Assert.assertEquals(0, table.get(new BooleanHashSet()));
+    }
+
+    @Test
+    public void boxed()
+    {
+        Assert.assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE), this.classUnderTest().boxed());
     }
 
     @Override

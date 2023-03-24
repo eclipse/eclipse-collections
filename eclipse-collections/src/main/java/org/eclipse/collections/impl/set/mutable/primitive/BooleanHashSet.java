@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -51,6 +51,21 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
     // state = 2 ==> [T]
     // state = 3 ==> [T, F]
     private int state;
+
+    public BooleanHashSet()
+    {
+    }
+
+    public BooleanHashSet(boolean... elements)
+    {
+        this();
+        this.addAll(elements);
+    }
+
+    public BooleanHashSet(BooleanHashSet set)
+    {
+        this.state = set.state;
+    }
 
     private static class EmptyBooleanIterator implements MutableBooleanIterator
     {
@@ -105,6 +120,12 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
             this.currentIndex = -1;
             BooleanHashSet.this.remove(false);
         }
+    }
+
+    @Override
+    public MutableSet<Boolean> boxed()
+    {
+        return new BoxedMutableBooleanSet(this);
     }
 
     private class TrueBooleanIterator implements MutableBooleanIterator
@@ -190,21 +211,6 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
                     throw new AssertionError();
             }
         }
-    }
-
-    public BooleanHashSet()
-    {
-    }
-
-    public BooleanHashSet(BooleanHashSet set)
-    {
-        this.state = set.state;
-    }
-
-    public BooleanHashSet(boolean... elements)
-    {
-        this();
-        this.addAll(elements);
     }
 
     public static BooleanHashSet newSetWith(boolean... source)

@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.set.mutable.primitive;
 
 import org.eclipse.collections.api.block.function.primitive.ByteToObjectFunction;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.MutableByteSet;
 import org.eclipse.collections.impl.block.factory.primitive.BytePredicates;
@@ -53,6 +54,12 @@ public class ByteHashSetTest extends AbstractByteSetTestCase
         ByteHashSet hashSetFromSet = ByteHashSet.newSet(set);
         Assert.assertEquals(set, hashSetFromList);
         Assert.assertEquals(set, hashSetFromSet);
+    }
+
+    @Test
+    public void boxed()
+    {
+        Assert.assertEquals(Sets.mutable.of((byte) 1, (byte) 2, (byte) 3), this.classUnderTest().boxed());
     }
 
     @Override
