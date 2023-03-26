@@ -105,4 +105,9 @@ public enum Primitive
     {
         return this == FLOAT || this == DOUBLE;
     }
+
+    public boolean isCharOrShortOrByteOrFloatPrimitive()
+    {
+        return this == CHAR || this == SHORT || this == BYTE || this == FLOAT;
+    }
 }

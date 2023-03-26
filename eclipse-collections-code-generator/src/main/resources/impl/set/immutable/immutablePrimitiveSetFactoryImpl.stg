@@ -16,6 +16,9 @@ package org.eclipse.collections.impl.set.immutable.primitive;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.factory.set.primitive.Immutable<name>SetFactory;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+
+<if(!primitive.charOrShortOrByteOrFloatPrimitive)>import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+<endif>
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 <(wideStreamImport.(type))>
@@ -146,7 +149,9 @@ public Immutable<name>Set ofAll(<(wideStream.(type))> items)
 @Override
 public Immutable<name>Set withAll(<(wideStream.(type))> items)
 {
-    return this.with(items.toArray());
+    Mutable<name>Set newSet = <name>Sets.mutable.empty();
+    items.forEach(item -> newSet.add(item));
+    return newSet.toImmutable();
 }
 >>
 
