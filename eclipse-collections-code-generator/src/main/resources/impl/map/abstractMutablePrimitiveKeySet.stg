@@ -10,10 +10,10 @@ skipBoolean() ::= "true"
 fileName(primitive) ::= "AbstractMutable<primitive.name>KeySet"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
@@ -47,6 +47,7 @@ import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.set.mutable.primitive.BoxedMutable<name>Set;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.Synchronized<name>Set;
 import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name>Set;
@@ -77,6 +78,12 @@ public abstract class AbstractMutable<name>KeySet implements Mutable<name>Set, E
     private static boolean isNonSentinel(<type> key)
     {
         return !isEmptyKey(key) && !isRemovedKey(key);
+    }
+
+    @Override
+    public MutableSet\<<wrapperName>\> boxed()
+    {
+        return new BoxedMutable<name>Set(this);
     }
 
     protected abstract <type> getKeyAtIndex(int index);

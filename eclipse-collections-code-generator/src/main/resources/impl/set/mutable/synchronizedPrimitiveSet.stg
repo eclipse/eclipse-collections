@@ -8,10 +8,10 @@ targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
 fileName(primitive) ::= "Synchronized<primitive.name>Set"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.set.mutable.primitive;
@@ -33,6 +33,7 @@ import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchronized<name>Collection;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
 
 /**
  * A synchronized view of a {@link Mutable<name>Set}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -90,6 +91,15 @@ public class Synchronized<name>Set
             this.getMutable<name>Set().remove(element);
         }
         return this;
+    }
+
+    @Override
+    public MutableSet\<<wrapperName>\> boxed()
+    {
+        synchronized (this.getLock())
+        {
+            return SynchronizedMutableSet.of(new BoxedMutable<name>Set(this), this.getLock());
+        }
     }
 
     @Override

@@ -1,0 +1,156 @@
+import "copyrightOf.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
+
+fileName(primitive) ::= "BoxedMutable<primitive.name>SetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyrightOf("The Bank of New York Mellon")>
+
+package org.eclipse.collections.impl.set.mutable.primitive;
+
+import java.util.Arrays;
+import java.util.HashSet;
+
+import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link BoxedMutable<name>Set}.
+ * This file was automatically generated from template file boxedMutableHashSetTest.stg.
+ */
+public class BoxedMutable<name>SetTest
+{
+    private BoxedMutable<name>Set classUnderTest()
+    {
+        return new BoxedMutable<name>Set(new <name>HashSet(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void setCreationValidation()
+    {
+        new BoxedMutable<name>Set(null);
+    }
+
+    @Test
+    public void size()
+    {
+        BoxedMutable<name>Set set = this.classUnderTest();
+        Verify.assertSize(3, set);
+        set.clear();
+        Verify.assertEmpty(set);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getFirst()
+    {
+        this.classUnderTest().getFirst();
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getLast()
+    {
+        this.classUnderTest().getLast();
+    }
+
+    @Test
+    public void each()
+    {
+        MutableSet\<<wrapperName>\> result = Sets.mutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        this.classUnderTest().each(each -> result.remove(each));
+        Verify.assertEmpty(result);
+    }
+
+    @Test
+    public void contains()
+    {
+        BoxedMutable<name>Set set = this.classUnderTest();
+        Verify.assertContains(<(literal.(type))("1")>, set);
+        Verify.assertContains(<(literal.(type))("2")>, set);
+        Verify.assertNotContains(<(literal.(type))("10")>, set);
+        Verify.assertNotContains(null, set);
+        Verify.assertNotContains("abc", set);
+    }
+
+    @Test
+    public void add()
+    {
+        BoxedMutable<name>Set set = this.classUnderTest();
+        Assert.assertFalse(set.add(<(literal.(type))("1")>));
+        Assert.assertEquals(Sets.mutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">), set);
+        Assert.assertTrue(set.add(<(literal.(type))("4")>));
+        Assert.assertEquals(Sets.mutable.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), set);
+    }
+
+    @Test
+    public void remove()
+    {
+        BoxedMutable<name>Set set = this.classUnderTest();
+        Verify.assertTrue(set.remove(<(literal.(type))("1")>));
+        Verify.assertFalse(set.remove(<(literal.(type))("1")>));
+        Verify.assertFalse(set.remove("abc"));
+        Assert.assertEquals(Sets.mutable.of(<(literal.(type))("2")>, <(literal.(type))("3")>), set);
+    }
+
+    @Test
+    public void clear()
+    {
+        BoxedMutable<name>Set set = this.classUnderTest();
+        set.clear();
+        Verify.assertEmpty(set);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void asParallel()
+    {
+        this.classUnderTest().asParallel(null, 1);
+    }
+
+    @Test
+    public void iterator()
+    {
+        MutableSet\<<wrapperName>\> result = Sets.mutable.empty();
+        this.classUnderTest().iterator().forEachRemaining(result::add);
+        Assert.assertEquals(Sets.mutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">), result);
+    }
+
+    @Test
+    public void hashCodeEquals()
+    {
+        BoxedMutable<name>Set set = this.classUnderTest();
+        Verify.assertEqualsAndHashCode(Sets.mutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">), set);
+        Verify.assertEqualsAndHashCode(new HashSet\<>(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">)), set);
+    }
+
+    @Test
+    public void mutationOfOriginalSet()
+    {
+        <name>HashSet original = new <name>HashSet(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        BoxedMutable<name>Set set = new BoxedMutable<name>Set(original);
+
+        original.remove(<(literal.(type))("2")>);
+        Assert.assertEquals(Sets.mutable.of(<["1", "3"]:(literal.(type))(); separator=", ">), set);
+
+        original.add(<(literal.(type))("5")>);
+        Assert.assertEquals(Sets.mutable.of(<["1", "3", "5"]:(literal.(type))(); separator=", ">), set);
+
+        original.clear();
+        Verify.assertEmpty(set);
+
+        original.add(<(literal.(type))("7")>);
+        Assert.assertEquals(Sets.mutable.of(<(literal.(type))("7")>), set);
+    }
+}
+
+>>

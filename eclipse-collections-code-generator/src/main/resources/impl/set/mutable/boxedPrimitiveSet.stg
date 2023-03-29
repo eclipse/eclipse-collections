@@ -1,0 +1,153 @@
+import "copyrightOf.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
+
+fileName(primitive) ::= "BoxedMutable<primitive.name>Set"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyrightOf("The Bank of New York Mellon")>
+
+package org.eclipse.collections.impl.set.mutable.primitive;
+
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.set.mutable.AbstractMutableSet;
+
+/**
+ * A boxed view of a {@link Mutable<name>Set}.
+ *
+ * This is for scenarios where optimization is not a consideration and therefore no further methods will be optimized.
+ * \<p>
+ * This file was automatically generated from template file  boxedPrimitiveSet.stg.
+ *
+ * @since 12.0
+ */
+public class BoxedMutable<name>Set extends AbstractMutableSet\<<wrapperName>\>
+        implements MutableSet\<<wrapperName>\>
+{
+    private final Mutable<name>Set delegate;
+
+    public BoxedMutable<name>Set(Mutable<name>Set delegate)
+    {
+        this.delegate = Objects.requireNonNull(delegate);
+    }
+
+    @Override
+    public int size()
+    {
+        return this.delegate.size();
+    }
+
+    @Override
+    public <wrapperName> getFirst()
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public <wrapperName> getLast()
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void each(Procedure\<? super <wrapperName>\> procedure)
+    {
+        this.delegate.each(procedure::value);
+    }
+
+    @Override
+    public boolean add(<wrapperName> item)
+    {
+        return this.delegate.add(item.<type>Value());
+    }
+
+    @Override
+    public boolean contains(Object object)
+    {
+        return object instanceof <wrapperName> && this.delegate.contains(((<wrapperName>) object).<type>Value());
+    }
+
+    @Override
+    public boolean remove(Object object)
+    {
+        return object instanceof <wrapperName> && this.delegate.remove(((<wrapperName>) object).<type>Value());
+    }
+
+    @Override
+    public void clear()
+    {
+        this.delegate.clear();
+    }
+
+    @Override
+    public ParallelUnsortedSetIterable\<<wrapperName>\> asParallel(ExecutorService executorService, int batchSize)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.delegate.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object)
+    {
+        if (this == object)
+        {
+            return true;
+        }
+
+        if (!(object instanceof Set))
+        {
+            return false;
+        }
+
+        Set\<?> other = (Set\<?>) object;
+        return this.size() == other.size() && this.containsAll(other);
+    }
+
+    @Override
+    public Iterator\<<wrapperName>\> iterator()
+    {
+        return new BoxedPrimitive<name>SetIterator(this.delegate.<type>Iterator());
+    }
+
+    private static final class BoxedPrimitive<name>SetIterator implements Iterator\<<wrapperName>\>
+    {
+        private final Mutable<name>Iterator delegate;
+
+        private BoxedPrimitive<name>SetIterator(Mutable<name>Iterator iterator)
+        {
+            this.delegate = iterator;
+        }
+
+        @Override
+        public boolean hasNext()
+        {
+            return this.delegate.hasNext();
+        }
+
+        @Override
+        public <wrapperName> next()
+        {
+            return this.delegate.next();
+        }
+    }
+}
+
+>>

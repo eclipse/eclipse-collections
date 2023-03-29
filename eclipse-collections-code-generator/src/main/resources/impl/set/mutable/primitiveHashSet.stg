@@ -109,6 +109,12 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         System.arraycopy(set.table, 0, this.table, 0, set.table.length);
     }
 
+    @Override
+    public MutableSet\<<wrapperName>\> boxed()
+    {
+        return new BoxedMutable<name>Set(this);
+    }
+
     private int smallestPowerOfTwoGreaterThan(int n)
     {
         return n > 1 ? Integer.highestOneBit(n - 1) \<\< 1 : 1;

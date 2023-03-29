@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -76,6 +76,12 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         }
     }
 
+    public ByteHashSet(byte... elements)
+    {
+        this();
+        this.addAll(elements);
+    }
+
     public ByteHashSet(ByteHashSet set)
     {
         this.size = set.size;
@@ -85,10 +91,10 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         this.bitGroup2 = set.bitGroup2;
     }
 
-    public ByteHashSet(byte... elements)
+    @Override
+    public MutableSet<Byte> boxed()
     {
-        this();
-        this.addAll(elements);
+        return new BoxedMutableByteSet(this);
     }
 
     public static ByteHashSet newSet(ByteIterable source)

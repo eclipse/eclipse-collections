@@ -238,4 +238,10 @@ public void add_NEGATIVE_INFINITY()
     this.newWith(<wrapperName>.NEGATIVE_INFINITY).add(<wrapperName>.NEGATIVE_INFINITY);
 }
 
+@Test(expected = UnsupportedOperationException.class)
+public void boxed()
+{
+    this.classUnderTest().boxed().add(<(literal.(type))("4")>);
+}
+
 >>

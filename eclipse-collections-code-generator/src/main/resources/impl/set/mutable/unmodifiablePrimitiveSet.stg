@@ -8,10 +8,10 @@ targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
 fileName(primitive) ::= "Unmodifiable<primitive.name>Set"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.set.mutable.primitive;
@@ -65,6 +65,12 @@ public class Unmodifiable<name>Set
     public Unmodifiable<name>Set with(<type> element)
     {
         throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public MutableSet\<<wrapperName>\> boxed()
+    {
+        return new BoxedMutable<name>Set(this);
     }
 
     @Override
