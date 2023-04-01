@@ -12,7 +12,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="eclipse-collections" />
     <orderEntry type="module" module-name="eclipse-collections-api" />
-    <orderEntry type="library" name="Maven: org.openjdk.jcstress:jcstress-core:0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.openjdk.jcstress:jcstress-core:0.15" level="project" />
     <orderEntry type="library" name="Maven: net.sf.jopt-simple:jopt-simple:4.6" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.jna:jna:5.8.0" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.jna:jna-platform:5.8.0" level="project" />
   </component>
 </module>

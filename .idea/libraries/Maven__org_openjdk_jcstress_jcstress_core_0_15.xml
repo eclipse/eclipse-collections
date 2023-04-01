@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.openjdk.jcstress:jcstress-core:0.15">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jcstress/jcstress-core/0.15/jcstress-core-0.15.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jcstress/jcstress-core/0.15/jcstress-core-0.15-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjdk/jcstress/jcstress-core/0.15/jcstress-core-0.15-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
