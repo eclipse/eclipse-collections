@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.block.factory;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.function.BiPredicate;
 
 import org.eclipse.collections.api.block.SerializableComparator;
 import org.eclipse.collections.api.block.factory.SerializableComparators;
@@ -191,6 +192,15 @@ public final class Comparators
     public static <T> SerializableComparator<Pair<?, T>> bySecondOfPair(Comparator<? super T> comparator)
     {
         return new BySecondOfPairComparator<>(comparator);
+    }
+
+    /**
+     * @param isBeforePredicate a predicate that returns true if the first argument is less than, or should appear before, the second argument
+     * @since 12.0.0
+     */
+    public static <T> SerializableComparator<T> fromPredicate(BiPredicate<? super T, ? super T> isBeforePredicate)
+    {
+        return new FromPredicateSerializableComparator<>(isBeforePredicate);
     }
 
     private static final class NaturalOrderComparator<T extends Comparable<T>> implements SerializableComparator<T>
@@ -551,6 +561,32 @@ public final class Comparators
         public int compare(T one, T two)
         {
             return ((Comparable<T>) one).compareTo(two);
+        }
+    }
+
+    private static final class FromPredicateSerializableComparator<T> implements SerializableComparator<T>
+    {
+        private static final long serialVersionUID = 1L;
+
+        private final BiPredicate<? super T, ? super T> isBeforePredicate;
+
+        private FromPredicateSerializableComparator(BiPredicate<? super T, ? super T> isBeforePredicate)
+        {
+            this.isBeforePredicate = isBeforePredicate;
+        }
+
+        @Override
+        public int compare(T o1, T o2)
+        {
+            if (this.isBeforePredicate.test(o1, o2))
+            {
+                return -1;
+            }
+            if (this.isBeforePredicate.test(o2, o1))
+            {
+                return 1;
+            }
+            return 0;
         }
     }
 }
