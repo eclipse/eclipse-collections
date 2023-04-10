@@ -147,7 +147,9 @@ public Mutable<name>Set ofAll(<(wideStream.(type))> items)
 @Override
 public Mutable<name>Set withAll(<(wideStream.(type))> items)
 {
-    return this.with(items.toArray());
+    Mutable<name>Set newSet = this.empty();
+    items.forEach(newSet::add);
+    return newSet;
 }
 >>
 
