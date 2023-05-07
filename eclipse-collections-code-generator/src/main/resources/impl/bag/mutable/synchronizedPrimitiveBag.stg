@@ -35,6 +35,9 @@ import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchro
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;<endif>
+
 
 /**
  * A synchronized view of a {@link Mutable<name>Bag}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -277,6 +280,17 @@ public class Synchronized<name>Bag
             return this.getMutable<name>Bag().newEmpty();
         }
     }
+<if(primitive.specializedStream)>
+
+    /**
+    * This function needs to be synchronized manually
+    */
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        return this.getMutable<name>Bag().spliterator();
+    }
+<endif>
 }
 
 >>

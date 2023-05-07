@@ -29,6 +29,9 @@ import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;<endif>
+
 
 /**
  * This file was automatically generated from template file unmodifiablePrimitiveBag.stg.
@@ -184,6 +187,14 @@ public class Unmodifiable<name>Bag
     {
         return this.getMutable<name>Bag().newEmpty();
     }
+<if(primitive.specializedStream)>
+
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        return this.getMutable<name>Bag().spliterator();
+    }
+<endif>
 }
 
 >>

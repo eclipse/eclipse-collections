@@ -304,6 +304,16 @@ public abstract class AbstractImmutable<name>BagTestCase extends AbstractImmutab
         String actual = this.newWith(<["100", "101", "101"]:(literal.(type))(); separator=", ">).toStringOfItemToCount();
         Assert.assertTrue(("{" + <(literal.(type))("100")> + "=1, " + <(literal.(type))("101")> + "=2}").equals(actual) || ("{" + <(literal.(type))("101")> + "=2, " + <(literal.(type))("100")> + "=1}").equals(actual));
     }
+<if(primitive.specializedStream)>
+
+    @Test
+    public void stream()
+    {
+        Assert.assertEquals(this.newWith(), this.newWith(<name>Bags.immutable.empty().primitiveStream().toArray()));
+        Assert.assertEquals(this.newWith(<(literal.(type))("1")>), this.newWith(<name>Bags.immutable.of(<["1"]:(literal.(type))(); separator=", ">).primitiveStream().toArray()));
+        Assert.assertEquals(this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(Immutable<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).primitiveStream().toArray()));
+    }
+<endif>
 }
 
 >>

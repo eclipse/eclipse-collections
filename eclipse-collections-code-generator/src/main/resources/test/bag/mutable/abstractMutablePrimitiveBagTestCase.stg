@@ -37,6 +37,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+<if(primitive.specializedStream)>import org.eclipse.collections.impl.factory.primitive.<name>Bags;<endif>
 
 /**
  * JUnit test for {@link Mutable<name>Bag}.
@@ -400,6 +401,16 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         String actual = this.newWith(<["100", "101", "101"]:(literal.(type))(); separator=", ">).toStringOfItemToCount();
         Assert.assertTrue(("{" + <(literal.(type))("100")> + "=1, " + <(literal.(type))("101")> + "=2}").equals(actual) || ("{" + <(literal.(type))("101")> + "=2, " + <(literal.(type))("100")> + "=1}").equals(actual));
     }
+<if(primitive.specializedStream)>
+
+    @Test
+    public void stream()
+    {
+        Assert.assertEquals(this.newWith(), this.newWith(<name>Bags.mutable.empty().primitiveStream().toArray()));
+        Assert.assertEquals(this.newWith(<(literal.(type))("1")>), this.newWith(<name>Bags.mutable.of(<["1"]:(literal.(type))(); separator=", ">).primitiveStream().toArray()));
+        Assert.assertEquals(this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).primitiveStream().toArray()));
+    }
+<endif>
 }
 
 >>

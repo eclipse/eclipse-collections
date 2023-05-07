@@ -27,6 +27,12 @@ import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.api.set.primitive.<name>Set;
 
+<if(primitive.specializedStream)>
+import java.util.Spliterator;
+import java.util.stream.StreamSupport;
+import java.util.stream.<name>Stream;
+<endif>
+
 /**
  * This file was automatically generated from template file primitiveBag.stg.
  *
@@ -134,6 +140,20 @@ public interface <name>Bag extends <name>Iterable
         this.forEachWithOccurrences((each, occurrences) -> joiner.add(each + "=" + occurrences));
         return joiner.toString();
     }
+<if(primitive.specializedStream)>
+
+    Spliterator.Of<name> spliterator();
+
+    default <name>Stream primitiveStream()
+    {
+        return StreamSupport.<type>Stream(this.spliterator(), false);
+    }
+
+    default <name>Stream primitiveParallelStream()
+    {
+        return StreamSupport.<type>Stream(this.spliterator(), true);
+    }
+<endif>
 }
 
 >>

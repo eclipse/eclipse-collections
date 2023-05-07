@@ -48,6 +48,10 @@ import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;
+import org.eclipse.collections.impl.stream.primitive.<name>SingletonSpliterator;<endif>
+
 
 /**
  * Immutable<name>SingletonBag is an optimization for {@link Immutable<name>Bag} of size 1.
@@ -412,6 +416,14 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
     {
         return new Singleton<name>Iterator(element1);
     }
+    <if(primitive.specializedStream)>
+
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        return new <name>SingletonSpliterator(this.element1);
+    }
+    <endif>
 }
 
 >>

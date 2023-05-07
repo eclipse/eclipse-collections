@@ -51,6 +51,10 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;
+import java.util.Spliterators;<endif>
+
 
 /**
  * <name>HashBag is similar to {@link HashBag}, and is memory-optimized for <type> primitives.
@@ -881,6 +885,14 @@ public class <name>HashBag
             this.canRemove = false;
         }
     }
+<if(primitive.specializedStream)>
+
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        return Spliterators.spliterator(this.items.keySet().toArray(), Spliterator.SIZED);
+    }
+<endif>
 }
 
 >>
