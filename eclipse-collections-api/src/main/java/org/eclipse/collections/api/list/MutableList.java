@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -60,6 +60,26 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableList<T>
         extends MutableCollection<T>, List<T>, Cloneable, ListIterable<T>
 {
+    /**
+     * This default override exists because java.util.List added a default getFirst() method in Java 21.
+     * @since 12.0
+     */
+    @Override
+    default T getFirst()
+    {
+        return this.isEmpty() ? null : this.get(0);
+    }
+
+    /**
+     * This default override exists because java.util.List added a default getLast() method in Java 21.
+     * @since 12.0
+     */
+    @Override
+    default T getLast()
+    {
+        return this.isEmpty() ? null : this.get(this.size() - 1);
+    }
+
     @Override
     default MutableList<T> with(T element)
     {
