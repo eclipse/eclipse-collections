@@ -475,12 +475,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>2.7.1</version>
-                </plugin>
-
-                <plugin>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${checkstyle.plugin.version}</version>
                     <configuration>
@@ -556,11 +550,6 @@
         </pluginManagement>
 
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-            </plugin>
-
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
