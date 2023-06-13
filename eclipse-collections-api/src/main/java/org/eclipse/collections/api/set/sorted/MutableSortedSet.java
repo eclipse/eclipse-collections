@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2023 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,6 +50,28 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableSortedSet<T>
         extends MutableSetIterable<T>, SortedSetIterable<T>, SortedSet<T>, Cloneable
 {
+    /**
+     * This default override exists because java.util.SortedSet added a default getFirst() method in Java 21.
+     *
+     * @since 12.0
+     */
+    @Override
+    default T getFirst()
+    {
+        return this.first();
+    }
+
+    /**
+     * This default override exists because java.util.SortedSet added a default getLast() method in Java 21.
+     *
+     * @since 12.0
+     */
+    @Override
+    default T getLast()
+    {
+        return this.last();
+    }
+
     @Override
     default MutableSortedSet<T> with(T element)
     {
@@ -160,7 +182,9 @@ public interface MutableSortedSet<T>
      * @since 9.2
      */
     @Override
-    default <P, V> MutableList<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
+    default <P, V> MutableList<V> flatCollectWith(
+            Function2<? super T, ? super P, ? extends Iterable<V>> function,
+            P parameter)
     {
         return this.flatCollect(each -> function.apply(each, parameter));
     }
