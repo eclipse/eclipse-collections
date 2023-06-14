@@ -102,11 +102,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
 
