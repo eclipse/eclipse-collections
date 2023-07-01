@@ -3110,6 +3110,11 @@ public final class Iterate
         return Iterate.max(iterable, Comparators.naturalOrder());
     }
 
+    /**
+     * Returns the only element of a collection.
+     *
+     * @throws IllegalArgumentException if the Collection is null, empty, or has more than one element.
+     */
     public static <T> T getOnly(Iterable<T> iterable)
     {
         if (iterable != null)
