@@ -591,25 +591,25 @@ public class UnmodifiableRichIterable<T>
     @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function)
     {
-        return this.iterable.injectInto(injectedValue, function);
+        return this.iterable.injectIntoInt(injectedValue, function);
     }
 
     @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function)
     {
-        return this.iterable.injectInto(injectedValue, function);
+        return this.iterable.injectIntoLong(injectedValue, function);
     }
 
     @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
     {
-        return this.iterable.injectInto(injectedValue, function);
+        return this.iterable.injectIntoDouble(injectedValue, function);
     }
 
     @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
     {
-        return this.iterable.injectInto(injectedValue, function);
+        return this.iterable.injectIntoFloat(injectedValue, function);
     }
 
     @Override

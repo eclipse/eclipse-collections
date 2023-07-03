@@ -751,7 +751,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     {
         synchronized (this.lock)
         {
-            return this.delegate.injectInto(injectedValue, function);
+            return this.delegate.injectIntoInt(injectedValue, function);
         }
     }
 
@@ -760,7 +760,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     {
         synchronized (this.lock)
         {
-            return this.delegate.injectInto(injectedValue, function);
+            return this.delegate.injectIntoLong(injectedValue, function);
         }
     }
 
@@ -769,7 +769,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     {
         synchronized (this.lock)
         {
-            return this.delegate.injectInto(injectedValue, function);
+            return this.delegate.injectIntoFloat(injectedValue, function);
         }
     }
 
@@ -778,7 +778,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     {
         synchronized (this.lock)
         {
-            return this.delegate.injectInto(injectedValue, function);
+            return this.delegate.injectIntoDouble(injectedValue, function);
         }
     }
 

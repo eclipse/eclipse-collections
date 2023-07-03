@@ -236,7 +236,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_LETTER);
+            return StringIterate.anySatisfyCodePoint(anObject, CodePointPredicate.IS_LETTER);
         }
 
         @Override
@@ -253,7 +253,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_DIGIT);
+            return StringIterate.anySatisfyCodePoint(anObject, CodePointPredicate.IS_DIGIT);
         }
 
         @Override
@@ -270,7 +270,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_LETTER_OR_DIGIT);
+            return StringIterate.anySatisfyCodePoint(anObject, CodePointPredicate.IS_LETTER_OR_DIGIT);
         }
 
         @Override
@@ -321,7 +321,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_WHITESPACE);
+            return StringIterate.anySatisfyCodePoint(anObject, CodePointPredicate.IS_WHITESPACE);
         }
 
         @Override
@@ -338,7 +338,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_UPPERCASE);
+            return StringIterate.anySatisfyCodePoint(anObject, CodePointPredicate.IS_UPPERCASE);
         }
 
         @Override
@@ -355,7 +355,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_LOWERCASE);
+            return StringIterate.anySatisfyCodePoint(anObject, CodePointPredicate.IS_LOWERCASE);
         }
 
         @Override
@@ -372,7 +372,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_UNDEFINED);
+            return StringIterate.anySatisfyCodePoint(anObject, CodePointPredicate.IS_UNDEFINED);
         }
 
         @Override
@@ -389,7 +389,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return StringIterate.allSatisfy(anObject, CodePointPredicate.IS_DIGIT);
+            return StringIterate.allSatisfyCodePoint(anObject, CodePointPredicate.IS_DIGIT);
         }
 
         @Override
@@ -406,7 +406,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return StringIterate.allSatisfy(anObject, CodePointPredicate.IS_LETTER_OR_DIGIT);
+            return StringIterate.allSatisfyCodePoint(anObject, CodePointPredicate.IS_LETTER_OR_DIGIT);
         }
 
         @Override
@@ -457,7 +457,7 @@ public final class StringPredicates
         @Override
         public boolean accept(String anObject)
         {
-            return anObject != null && StringIterate.allSatisfy(anObject, CodePointPredicate.IS_LETTER);
+            return anObject != null && StringIterate.allSatisfyCodePoint(anObject, CodePointPredicate.IS_LETTER);
         }
 
         @Override
