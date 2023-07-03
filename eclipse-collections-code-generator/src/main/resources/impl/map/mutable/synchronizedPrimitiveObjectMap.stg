@@ -954,7 +954,7 @@ public class Synchronized<name>ObjectMap\<V>
     {
         synchronized (this.lock)
         {
-            return this.map.injectInto(injectedValue, function);
+            return this.map.injectIntoInt(injectedValue, function);
         }
     }
 
@@ -963,7 +963,7 @@ public class Synchronized<name>ObjectMap\<V>
     {
         synchronized (this.lock)
         {
-            return this.map.injectInto(injectedValue, function);
+            return this.map.injectIntoLong(injectedValue, function);
         }
     }
 
@@ -972,7 +972,7 @@ public class Synchronized<name>ObjectMap\<V>
     {
         synchronized (this.lock)
         {
-            return this.map.injectInto(injectedValue, function);
+            return this.map.injectIntoFloat(injectedValue, function);
         }
     }
 
@@ -981,7 +981,7 @@ public class Synchronized<name>ObjectMap\<V>
     {
         synchronized (this.lock)
         {
-            return this.map.injectInto(injectedValue, function);
+            return this.map.injectIntoDouble(injectedValue, function);
         }
     }
 
