@@ -37,26 +37,26 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="acceptance-tests" target="1.8" />
-      <module name="eclipse-collections" target="1.8" />
-      <module name="eclipse-collections-api" target="1.8" />
-      <module name="eclipse-collections-code-generator" target="1.8" />
-      <module name="eclipse-collections-code-generator-maven-plugin" target="1.8" />
-      <module name="eclipse-collections-forkjoin" target="1.8" />
-      <module name="eclipse-collections-parent" target="1.8" />
-      <module name="eclipse-collections-testutils" target="1.8" />
-      <module name="jcstress-tests" target="1.8" />
-      <module name="jmh-scala-tests" target="1.8" />
-      <module name="jmh-tests" target="1.8" />
-      <module name="junit-trait-runner" target="1.8" />
-      <module name="org.eclipse.collections" target="1.8" />
-      <module name="p2-repository" target="1.8" />
-      <module name="performance-tests" target="1.8" />
-      <module name="scala-unit-tests" target="1.8" />
-      <module name="serialization-tests" target="1.8" />
-      <module name="test-coverage" target="1.8" />
-      <module name="unit-tests" target="1.8" />
-      <module name="unit-tests-java8" target="1.8" />
+      <module name="acceptance-tests" target="11" />
+      <module name="eclipse-collections" target="11" />
+      <module name="eclipse-collections-api" target="11" />
+      <module name="eclipse-collections-code-generator" target="11" />
+      <module name="eclipse-collections-code-generator-maven-plugin" target="11" />
+      <module name="eclipse-collections-forkjoin" target="11" />
+      <module name="eclipse-collections-parent" target="11" />
+      <module name="eclipse-collections-testutils" target="11" />
+      <module name="jcstress-tests" target="11" />
+      <module name="jmh-scala-tests" target="11" />
+      <module name="jmh-tests" target="11" />
+      <module name="junit-trait-runner" target="11" />
+      <module name="org.eclipse.collections" target="11" />
+      <module name="p2-repository" target="11" />
+      <module name="performance-tests" target="11" />
+      <module name="scala-unit-tests" target="11" />
+      <module name="serialization-tests" target="11" />
+      <module name="test-coverage" target="11" />
+      <module name="unit-tests" target="11" />
+      <module name="unit-tests-java8" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
