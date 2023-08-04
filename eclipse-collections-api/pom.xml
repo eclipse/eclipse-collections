@@ -88,7 +88,7 @@
                     <windowtitle>Eclipse Collections API - ${project.version}</windowtitle>
                     <show>public</show>
                     <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
+                        <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
                     </links>
                     <destDir>${project.version}</destDir>
                     <doclint>none</doclint>
