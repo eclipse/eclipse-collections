@@ -32,7 +32,7 @@ jobs:
           echo "steps.download-jdk.outputs.archive = ${{ steps.download-jdk.outputs.archive }}"
           echo "steps.download-jdk.outputs.version = ${{ steps.download-jdk.outputs.version }}"
       - name: Set Maven Wrapper
-        run: mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.6.3
+        run: mvn -N wrapper:wrapper -Dmaven=3.6.3 --no-transfer-progress
       - name: 'JDK Version'
         run: java --version
       - name: Javadoc
