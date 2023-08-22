@@ -37,7 +37,7 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
     * [Readable][RichIterable], [`Mutable`][MutableCollection], and [`Immutable`][ImmutableCollection] Types
     * Mutable and Immutable Collection [Factories][Factories]
     * [Adapters][Adapters] and [Utility][Utilities] classes for JCF Types
-* Performance Brijesh
+* Performance 
     * Memory Efficient Containers
     * Optimized Eager, [`Lazy`][LazyIterable] and [`Parallel`][ParallelIterable] APIs
     * [Primitive][PrimitiveIterable] Collections for all primitive types
