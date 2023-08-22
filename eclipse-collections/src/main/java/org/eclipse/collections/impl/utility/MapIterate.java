@@ -16,6 +16,8 @@
  * making your code more concise and readable.
  
  * This utility class is especially useful when you want to return a MutableMap as a result of your operations. 
+  
+ * Explore the capabilities of MapIterate to streamline your data manipulation tasks when working with maps. It is a versatile tool in your Java development toolkit.
  */
 
 package org.eclipse.collections.impl.utility;
