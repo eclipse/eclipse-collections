@@ -56,8 +56,11 @@ import org.eclipse.collections.impl.utility.LazyIterate;
  * Mutable Examples:
  *
  * <pre>
+ * // This functions generally creates the empty set
  * MutableSet&lt;String&gt; emptySet = Sets.mutable.empty();
+ * // Creates a mutable set containing the specified elements "a", "b", and "c"
  * MutableSet&lt;String&gt; setWith = Sets.mutable.with("a", "b", "c");
+ * // Creates a mutable set containing the specified elements "a", "b", and "c" (synonymous with setWith)
  * MutableSet&lt;String&gt; setOf = Sets.mutable.of("a", "b", "c");
  * </pre>
  *
