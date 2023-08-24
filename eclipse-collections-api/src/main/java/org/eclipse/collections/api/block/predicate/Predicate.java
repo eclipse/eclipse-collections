@@ -12,9 +12,11 @@ package org.eclipse.collections.api.block.predicate;
 
 import java.io.Serializable;
 
-/**
- * A Predicate is a lambda or closure with a boolean result. The method accept should be implemented to indicate the object
- * passed to the method meets the criteria of this Predicate. A Predicate is also known as a Discriminator or Filter.
+/*
+ A Predicate is an interface used to define a condition that can be evaluated
+ to a boolean result. Classes implementing the org.eclipse.collections.api.block.predicate.Predicate
+ interface allow users to specify their custom criteria for filtering or discriminating
+ objects in a collection.
  */
 @FunctionalInterface
 public interface Predicate<T>
