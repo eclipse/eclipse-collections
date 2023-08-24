@@ -6,18 +6,6 @@
  * The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
- * 
- * Utility class for iterating and performing operations on java.util.Map objects.
- 
- * The MapIterate class provides a set of convenient methods for working with associative arrays, 
- * particularly java.util.Map instances.
- 
- * It simplifies common tasks like filtering, transforming, and collecting data from maps,
- * making your code more concise and readable.
- 
- * This utility class is especially useful when you want to return a MutableMap as a result of your operations. 
-  
- * Explore the capabilities of MapIterate to streamline your data manipulation tasks when working with maps. It is a versatile tool in your Java development toolkit.
  */
 
 package org.eclipse.collections.impl.utility;
@@ -105,6 +93,18 @@ import org.eclipse.collections.impl.utility.internal.IterableIterate;
  *
  * @see Iterate
  * @since 1.0
+ 
+ * Utility class for iterating and performing operations on java.util.Map objects.
+ 
+ * The MapIterate class provides a set of convenient methods for working with associative arrays, 
+ * particularly java.util.Map instances.
+ 
+ * It simplifies common tasks like filtering, transforming, and collecting data from maps,
+ * making your code more concise and readable.
+ 
+ * This utility class is especially useful when you want to return a MutableMap as a result of your operations. 
+  
+ * Explore the capabilities of MapIterate to streamline your data manipulation tasks when working with maps. It is a versatile tool in your Java development toolkit.
  */
 public final class MapIterate
 {
