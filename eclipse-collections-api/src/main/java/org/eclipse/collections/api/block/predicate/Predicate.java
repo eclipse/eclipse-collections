@@ -16,7 +16,7 @@ import java.io.Serializable;
  A Predicate is an interface used to define a condition that can be evaluated
  to a boolean result. Classes implementing the org.eclipse.collections.api.block.predicate.Predicate
  interface allow users to specify their custom criteria for filtering or discriminating
- objects in a collection.
+ objects in a collection
  */
 @FunctionalInterface
 public interface Predicate<T>
