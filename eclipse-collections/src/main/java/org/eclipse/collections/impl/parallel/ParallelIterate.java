@@ -96,7 +96,7 @@ public final class ParallelIterate
      * e.g.
      * <pre>
      * Map&lt;Integer, Object&gt; chm = new ConcurrentHashMap&lt;Integer, Object&gt;();
-     * ParallelIterate.<b>forEachWithIndex</b>(collection, (each, index) -> chm.put(index, each));
+     * ParallelIterate.<b>forEachWithIndex</b>(collection, (each, index) -&gt; chm.put(index, each));
      * </pre>
      */
     public static <T> void forEachWithIndex(Iterable<T> iterable, ObjectIntProcedure<? super T> objectIntProcedure)
@@ -111,7 +111,7 @@ public final class ParallelIterate
      *
      * <pre>e.g.
      * Map&lt;Integer, Object&gt; chm = new ConcurrentHashMap&lt;Integer, Object&gt;();
-     * ParallelIterate.<b>forEachWithIndex</b>(collection, (each, index) -> chm.put(index, each), executor);
+     * ParallelIterate.<b>forEachWithIndex</b>(collection, (each, index) -&gt; chm.put(index, each), executor);
      * </pre>
      *
      * @param executor Use this executor for all execution.
@@ -250,7 +250,7 @@ public final class ParallelIterate
      * e.g.
      * <pre>
      * Map&lt;Object, Boolean&gt; chm = new ConcurrentHashMap&lt;Object, Boolean&gt;();
-     * ParallelIterate.<b>forEach</b>(collection, each -> chm.put(each, Boolean.TRUE));
+     * ParallelIterate.<b>forEach</b>(collection, each -&gt; chm.put(each, Boolean.TRUE));
      * </pre>
      */
     public static <T> void forEach(Iterable<T> iterable, Procedure<? super T> procedure)
@@ -265,7 +265,7 @@ public final class ParallelIterate
      * e.g.
      * <pre>
      * Map&lt;Object, Boolean&gt; chm = new ConcurrentHashMap&lt;Object, Boolean&gt;();
-     * ParallelIterate.<b>forEachBatchSize</b>(collection, each -> chm.put(each, Boolean.TRUE), 100);
+     * ParallelIterate.<b>forEachBatchSize</b>(collection, each -&gt; chm.put(each, Boolean.TRUE), 100);
      * </pre>
      */
     public static <T> void forEach(Iterable<T> iterable, Procedure<? super T> procedure, int batchSize)
