@@ -246,8 +246,6 @@
 
         <module name="SimplifyBooleanReturn" />
 
-        <module name="FinalClass" />
-
         <module name="HideUtilityClassConstructor" />
 
         <!-- Effective Java Item 17 - Use interfaces only to define types -->
