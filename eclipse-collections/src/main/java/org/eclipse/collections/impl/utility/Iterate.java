@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -123,14 +122,6 @@ public final class Iterate
         else if (iterable instanceof BatchIterable)
         {
             ((BatchIterable<T>) iterable).forEach(procedure);
-        }
-        else if (iterable instanceof ArrayList)
-        {
-            ArrayListIterate.forEach((ArrayList<T>) iterable, procedure);
-        }
-        else if (iterable instanceof List)
-        {
-            ListIterate.forEach((List<T>) iterable, procedure);
         }
         else if (iterable != null)
         {
@@ -730,15 +721,11 @@ public final class Iterate
         {
             ((MutableList<T>) list).sortThis();
         }
-        else if (list instanceof ArrayList)
-        {
-            ArrayListIterate.sortThis((ArrayList<T>) list);
-        }
         else
         {
             if (list.size() > 1)
             {
-                Collections.sort(list);
+                list.sort(null);
             }
         }
         return list;
@@ -753,15 +740,11 @@ public final class Iterate
         {
             ((MutableList<T>) list).sortThis(comparator);
         }
-        else if (list instanceof ArrayList)
-        {
-            ArrayListIterate.sortThis((ArrayList<T>) list, comparator);
-        }
         else
         {
             if (list.size() > 1)
             {
-                Collections.sort(list, comparator);
+                list.sort(comparator);
             }
         }
         return list;
