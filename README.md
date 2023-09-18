@@ -32,18 +32,32 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 ## Why Eclipse Collections?
 
 * Productivity
-    * [Rich][RichIterable], functional, and fluent APIs with great symmetry
-    * [`List`][ListIterable], [`Set`][SetIterable], [`Bag`][Bag], [`Stack`][StackIterable], [`Map`][MapIterable], [`Multimap`][Multimap], [`BiMap`][BiMap], [`Interval`][Interval] Types
-    * [Readable][RichIterable], [`Mutable`][MutableCollection], and [`Immutable`][ImmutableCollection] Types
-    * Mutable and Immutable Collection [Factories][Factories]
-    * [Adapters][Adapters] and [Utility][Utilities] classes for JCF Types
+  * Supports _eager_, _lazy_, _serial_ and _parallel_ iteration patterns
+  * [Rich][RichIterable], functional, and fluent APIs with eager methods available directly on collection types
+  * Provides [`List`][ListIterable], [`Set`][SetIterable], [`Bag`][Bag], [`Stack`][StackIterable], [`Map`][MapIterable], [`Multimap`][Multimap], [`BiMap`][BiMap], [`Interval`][Interval] object container types
+  * [Readable][RichIterable], [`Mutable`][MutableCollection], and [`Immutable`][ImmutableCollection] interfaces for each collection type with covariant return types
+    * [Blog: Rich, Lazy, Mutable, Immutable interfaces in Eclipse collections][BlogRichLazyMutableImmutable] 
+  * Mutable and Immutable Collection [Factories][Factories]
+    * [Blog series: As a matter of Factory][BlogAsAMatterOfFactory] 
+  * [Adapters][Adapters] and [Utility][Utilities] classes for JCF Types
+    * [Blog: Iterate over any Iterable in Java][BlogIterateOverAnyIterableInJava] 
 * Performance
     * Memory Efficient Containers
+      * [Blog: UnifiedMap: How it works?][BlogUnifiedMapHowItWorks]
+      * [Blog: UnifiedSet - The Memory Saver][BlogUnifiedSetTheMemorySaver]
     * Optimized Eager, [`Lazy`][LazyIterable] and [`Parallel`][ParallelIterable] APIs
+      * [Blog: The unparalleled design of Eclipse Collections][BlogUnparalleledDesignOfEclipseCollections] 
     * [Primitive][PrimitiveIterable] Collections for all primitive types
+      * Provides `List`, `Set`, `Bag`, `Stack`, `Map`, `Interval` primitive container types
+* Maturity
+    * Eclipse Collections has been actively developed and used in financial services applications since 2004
+    * Eclipse Collections existed for a decade before concise lambda expressions were added in Java 8
+      * [Blog: My ten-year quest for concise lambda expressions in Java][BlogLambdaExpressionsInJava] 
 
 ## Learn Eclipse Collections
 
+* Blog Series: [Getting Started with Eclipse Collections][BlogGettingStartedWithEclipseCollections]
+* Blog Series: [The missing Java data structures no one ever told you about][BlogTheMissingJavaDataStructures]
 * [Some Quick Code Examples](./README_EXAMPLES.md)
 * [Eclipse Collections Katas](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
     * Start Here - [Pet Kata](https://eclipse.github.io/eclipse-collections-kata/pet-kata/#/)
@@ -57,12 +71,15 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 
 ## Eclipse Collections and JDK Compatibility Matrix
 
-|EC     | 7.x.x | 8.x.x | 9.x.x |[10.0.0][10-0-Release] |[10.1.0][10-1-Release] |[10.2.0][10-2-Release] |[10.3.0][10-3-Release] |[10.4.0][10-4-Release] |[11.0.0][11-0-Release] | [11.1.0][11-1-Release] |
-|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
-|JDK 5 - 7  |&check;|       |       |       |       |       |       |       | ||
-|JDK 8  |&check;|&check;|&check;|&check;|&check;|&check;|&check;|&check;| &check;|&check;|
-|JDK 9 - 14  |       |       |&check;|&check;|&check;|&check;|&check;|&check;| &check;|&check;|
-|JDK 15 - 18|       |       |       |       |       |       |       |&check;|&check;|&check;|
+| EC     | JDK 5 - 7 | JDK 8 | JDK 9 - 14 | JDK 15 - 21 |
+|--------|-----------|-------|------------|-------------|
+| 7.x.x  | &check;   |&check;|            |             |
+| 8.x.x  |           |&check;|            |             |
+| 9.x.x  |           |&check;| &check;    |             |
+| 10.x.x |           |&check;| &check;    |             |
+| 10.4.0 |           |&check;| &check;    | &check;     |
+| 11.x.x |           |&check;| &check;    | &check;     |
+
 
 ## Acquiring Eclipse Collections
 
@@ -158,6 +175,15 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 [PrimitiveIterable]: https://eclipse.dev/collections/javadoc/11.1.0/org/eclipse/collections/api/PrimitiveIterable.html
 [Utilities]: https://eclipse.dev/collections/javadoc/11.1.0/org/eclipse/collections/impl/utility/package-summary.html
 [Adapters]: https://eclipse.dev/collections/javadoc/11.1.0/org/eclipse/collections/impl/collection/mutable/AbstractCollectionAdapter.html
+[BlogRichLazyMutableImmutable]: https://betterprogramming.pub/rich-lazy-mutable-and-immutable-interfaces-in-eclipse-collections-ce64a31b5936?source=friends_link&sk=8056191cec086d565643c8c7b9bd3c1c
+[BlogLambdaExpressionsInJava]: https://betterprogramming.pub/my-ten-year-quest-for-concise-lambda-expressions-in-java-39fde576b950?source=friends_link&sk=843d797af3f58f893ebdee5e13ce0115
+[BlogGettingStartedWithEclipseCollections]: https://donraab.medium.com/blog-series-getting-started-with-eclipse-collections-5634dc39b9e6?source=friends_link&sk=92d8eba8a56167fa840cf9c9ada07326
+[BlogTheMissingJavaDataStructures]: https://medium.com/javarevisited/blog-series-the-missing-java-data-structures-no-one-ever-told-you-about-17f34cc4b7e2?source=friends_link&sk=9403ae8464ae3477bfc1e52119c1576d
+[BlogUnifiedMapHowItWorks]: https://medium.com/oracledevs/unifiedmap-how-it-works-48af0b80cb37
+[BlogUnifiedSetTheMemorySaver]: https://medium.com/oracledevs/unifiedset-the-memory-saver-25b830745959
+[BlogUnparalleledDesignOfEclipseCollections]: https://medium.com/javarevisited/the-unparalleled-design-of-eclipse-collections-e4340b00f79f?source=friends_link&sk=629e6384171b18233a167a499b46408c
+[BlogIterateOverAnyIterableInJava]: https://medium.com/javarevisited/iterate-over-any-iterable-in-java-bec78eeeb452?source=friends_link&sk=7d460d1494cb76ce6bc9a5543785224a
+[BlogAsAMatterOfFactory]: https://medium.com/oracledevs/as-a-matter-of-factory-factories-matter-482d8adff094?source=friends_link&sk=96a4cd8fbc42e309c39a917449e6bff2
 
 [Factories]: https://eclipse.dev/collections/javadoc/11.1.0/org/eclipse/collections/impl/factory/package-summary.html
 [10-0-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.0.0
