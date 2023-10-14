@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -8,12 +8,12 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 
-package org.eclipse.collections.impl.map.mutable.primitive;
+package org.eclipse.collections.impl.map.immutable.primitive;
 
 import org.eclipse.collections.api.set.primitive.ByteSet;
 import org.eclipse.collections.api.set.primitive.ImmutableByteSet;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.set.mutable.primitive.AbstractImmutableByteHashSetTestCase;
+import org.eclipse.collections.impl.map.mutable.primitive.ByteByteHashMap;
+import org.eclipse.collections.impl.set.immutable.primitive.AbstractImmutableByteHashSetTestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,20 +22,6 @@ import org.junit.Test;
  */
 public class ImmutableByteByteMapKeySetTest extends AbstractImmutableByteHashSetTestCase
 {
-    protected static ByteArrayList generateCollisions()
-    {
-        ByteArrayList collisions = new ByteArrayList();
-        ImmutableByteByteMapKeySet set = (ImmutableByteByteMapKeySet) new ByteByteHashMap().keySet().freeze();
-        for (byte i = 2; collisions.size() <= 10; i++)
-        {
-            if (set.spreadAndMask(i) == set.spreadAndMask((byte) 2))
-            {
-                collisions.add(i);
-            }
-        }
-        return collisions;
-    }
-
     @Override
     protected ImmutableByteSet classUnderTest()
     {

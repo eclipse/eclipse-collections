@@ -43,7 +43,7 @@ import org.junit.Test;
  */
 public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>CollectionTestCase
 {
-    protected static <name>ArrayList generateCollisions1()
+    public static <name>ArrayList generateCollisions1()
     {
         <name>ArrayList collisions = new <name>ArrayList();
         <name>HashSet set = new <name>HashSet();
