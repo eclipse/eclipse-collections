@@ -8,12 +8,11 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 
-package org.eclipse.collections.impl.set.mutable.primitive;
+package org.eclipse.collections.impl.set.immutable.primitive;
 
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.LazyByteIterable;
-import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.iterator.ByteIterator;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
@@ -23,7 +22,11 @@ import org.eclipse.collections.api.tuple.primitive.ByteBytePair;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BytePredicates;
 import org.eclipse.collections.impl.collection.immutable.primitive.AbstractImmutableByteCollectionTestCase;
+import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
+import org.eclipse.collections.impl.map.mutable.primitive.CollisionGeneratorUtil;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.primitive.ByteHashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
@@ -50,6 +53,11 @@ public abstract class AbstractImmutableByteHashSetTestCase extends AbstractImmut
     protected MutableSet<Byte> newObjectCollectionWith(Byte... elements)
     {
         return UnifiedSet.newSetWith(elements);
+    }
+
+    protected static ByteArrayList generateCollisions()
+    {
+        return CollisionGeneratorUtil.generateCollisions();
     }
 
     @Override

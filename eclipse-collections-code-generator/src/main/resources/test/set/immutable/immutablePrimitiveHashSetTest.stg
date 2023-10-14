@@ -22,7 +22,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import org.eclipse.collections.impl.set.mutable.primitive.AbstractImmutable<name>HashSetTestCase;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 
 /**
