@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -76,7 +77,7 @@ public class LongLongMapSmallStressTest extends AbstractJMHTestRunner
         this.longLongKoloboke = HashLongLongMaps.newMutableMap(MAP_SIZE);
         this.longLongEc = new LongLongHashMap(MAP_SIZE);
 
-        Random random = new Random(0x123456789ABCDL);
+        Random random = new SecureRandom();
 
         int number = 23;
         int lower = Integer.MIN_VALUE;

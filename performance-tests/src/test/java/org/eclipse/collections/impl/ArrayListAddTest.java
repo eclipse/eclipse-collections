@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -39,7 +40,7 @@ public class ArrayListAddTest
     private void runIntegerArrayListAdd(String type)
     {
         System.currentTimeMillis();
-        Random r = new Random(123412123);
+        Random r = new SecureRandom();
         Integer[] ints = new Integer[1000000];
         for (int i = 0; i < ints.length; i++)
         {
@@ -63,7 +64,7 @@ public class ArrayListAddTest
     private void runLongArrayListAdd(String type)
     {
         System.currentTimeMillis();
-        Random r = new Random(123412123);
+        Random r = new SecureRandom();
         Long[] longs = new Long[1000000];
         for (int i = 0; i < longs.length; i++)
         {
@@ -94,7 +95,7 @@ public class ArrayListAddTest
     private void runStringArrayListAdd(String type)
     {
         System.currentTimeMillis();
-        Random r = new Random(123412123);
+        Random r = new SecureRandom();
         String[] strings = new String[1000000];
         for (int i = 0; i < strings.length; i++)
         {

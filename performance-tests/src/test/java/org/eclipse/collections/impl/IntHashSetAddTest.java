@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
@@ -36,7 +37,7 @@ public class IntHashSetAddTest
     private void runIntHashPut()
     {
         System.currentTimeMillis();
-        Random r = new Random(123412123);
+        Random r = new SecureRandom();
         int[] ints = new int[1000000];
         for (int i = 0; i < ints.length; i++)
         {

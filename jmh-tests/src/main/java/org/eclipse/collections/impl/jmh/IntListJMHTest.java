@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PrimitiveIterator;
@@ -67,7 +68,7 @@ public class IntListJMHTest
     @Setup
     public void setUp()
     {
-        PrimitiveIterator.OfInt intGenerator = new Random(1L).ints(-1000, 1000).iterator();
+        PrimitiveIterator.OfInt intGenerator = new SecureRandom().ints(-1000, 1000).iterator();
         this.ecList = FastList.newWithNValues(1_000_000, intGenerator::nextInt);
         this.jdkList = new ArrayList<>(1_000_000);
         this.jdkList.addAll(this.ecList);

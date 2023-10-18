@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -50,10 +51,10 @@ public class LongIntMapTest extends AbstractJMHTestRunner
             highMasks[i] = (long) i << 58;
         }
 
-        long[] randomLongsGet = new Random(0x123456789ABCDL).longs().limit(this.mapSizeDividedBy16000).toArray();
+        long[] randomLongsGet = new SecureRandom().longs().limit(this.mapSizeDividedBy16000).toArray();
 
         this.randomLongsForMap = new long[this.mapSizeDividedBy16000 * 64];
-        Random randomSeeds = new Random(0x123456789ABCDL);
+        Random randomSeeds = new SecureRandom();
         for (int i = 0; i < randomLongsGet.length; i++)
         {
             for (int j = 0; j < 64; j++)
@@ -68,7 +69,7 @@ public class LongIntMapTest extends AbstractJMHTestRunner
                 }
             }
         }
-        this.randomIntegersForMap = new Random(0x123456789ABCDL).ints().limit((long) (this.mapSizeDividedBy16000 * 64)).toArray();
+        this.randomIntegersForMap = new SecureRandom().ints().limit((long) (this.mapSizeDividedBy16000 * 64)).toArray();
 
         this.longIntMap = new LongIntHashMap();
         for (int i = 0; i < this.mapSizeDividedBy16000 * 64; i++)

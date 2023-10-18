@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.eclipse.collections.api.list.primitive.MutableIntList;
@@ -102,7 +103,7 @@ public class IntIntMapProbeTest
 
     private void testNonRandomGet(MutableIntIntMap intIntMap, int keyCount, int[] intKeysForMap)
     {
-        Random random = new Random(0x123456789ABCDL);
+        Random random = new SecureRandom();
         this.shuffle(intKeysForMap, random);
 
         for (int i = 0; i < keyCount; i++)
@@ -118,7 +119,7 @@ public class IntIntMapProbeTest
 
     private void testRandomGet(MutableIntIntMap intIntMap, int keyCount)
     {
-        Random random = new Random(0x123456789ABCDL);
+        Random random = new SecureRandom();
         MutableIntSet set = new IntHashSet(keyCount);
         while (set.size() < keyCount)
         {
@@ -140,7 +141,7 @@ public class IntIntMapProbeTest
 
     private void testNonRandomRemove(MutableIntIntMap intIntMap, int keyCount, int[] intKeysForMap)
     {
-        Random random = new Random(0x123456789ABCDL);
+        Random random = new SecureRandom();
         this.shuffle(intKeysForMap, random);
 
         for (int i = 0; i < keyCount; i++)
@@ -161,7 +162,7 @@ public class IntIntMapProbeTest
 
     private void testRandomRemove(MutableIntIntMap intIntMap, int keyCount)
     {
-        Random random = new Random(0x123456789ABCDL);
+        Random random = new SecureRandom();
 
         MutableIntSet set = new IntHashSet(keyCount);
         while (set.size() < keyCount)

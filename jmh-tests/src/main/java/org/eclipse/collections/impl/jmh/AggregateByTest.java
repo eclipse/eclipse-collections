@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.DoubleSummaryStatistics;
@@ -51,7 +52,7 @@ public class AggregateByTest extends AbstractJMHTestRunner
 {
     private static final int SIZE = 1_000_000;
     private static final int BATCH_SIZE = 10_000;
-    private static final Random RANDOM = new Random(System.currentTimeMillis());
+    private static final Random RANDOM = new SecureRandom();
     private static final PrimitiveIterator.OfInt INTS = RANDOM.ints(1, 10).iterator();
     private static final PrimitiveIterator.OfDouble DOUBLES = RANDOM.doubles(1.0d, 100.0d).iterator();
     private final Pool<Account> accountPool = UnifiedSet.newSet();

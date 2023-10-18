@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -88,7 +89,7 @@ public class IntIntMapSmallStressTest extends AbstractJMHTestRunner
         this.intIntEc = new IntIntHashMap(MAP_SIZE);
         this.integerIntegerJdk = new HashMap<>(MAP_SIZE);
 
-        Random random = new Random(0x123456789ABCDL);
+        Random random = new SecureRandom();
 
         int[] randomNumbersForMap = this.getRandomKeys(random).toArray();
 

@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -39,7 +40,7 @@ public class FastListAddTest
     private void runIntegerFastListAdd(String type)
     {
         System.currentTimeMillis();
-        Random r = new Random(123412123);
+        Random r = new SecureRandom();
         Integer[] ints = new Integer[1000000];
         for (int i = 0; i < ints.length; i++)
         {
@@ -51,7 +52,7 @@ public class FastListAddTest
     private void runLongFastListAdd(String type)
     {
         System.currentTimeMillis();
-        Random r = new Random(123412123);
+        Random r = new SecureRandom();
         Long[] longs = new Long[1000000];
         for (int i = 0; i < longs.length; i++)
         {
@@ -63,7 +64,7 @@ public class FastListAddTest
     private void runStringFastListAdd(String type)
     {
         System.currentTimeMillis();
-        Random r = new Random(123412123);
+        Random r = new SecureRandom();
         String[] strings = new String[1000000];
         for (int i = 0; i < strings.length; i++)
         {

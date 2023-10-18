@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh.map;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +48,7 @@ public class MapGrowthTest extends AbstractJMHTestRunner
     {
         this.elements = new String[this.size];
 
-        Random random = new Random(123456789012345L);
+        Random random = new SecureRandom();
         for (int i = 0; i < this.size; i++)
         {
             this.elements[i] = RandomStringUtils.random(RANDOM_COUNT, 0, 0, false, true, null, random);

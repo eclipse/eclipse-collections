@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh;
 
+import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -39,7 +40,7 @@ public class CollectorJoiningTest extends AbstractJMHTestRunner
 {
     private static final int SIZE = 25;
     private static final int BATCH_SIZE = 5;
-    private static final Stream<Integer> INTEGERS = new Random().ints(0, 10_000).boxed();
+    private static final Stream<Integer> INTEGERS = new SecureRandom().ints(0, 10_000).boxed();
 
     private final List<Integer> integersJDK = INTEGERS.limit(SIZE).collect(Collectors.toList());
     private final MutableList<Integer> integersEC = FastList.newListWith(this.integersJDK.toArray(new Integer[SIZE]));

@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.map.mutable;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
@@ -80,7 +81,7 @@ public class ParallelUnsafeMapIteratePutAcceptanceTest
                 constContents[i] = size - i;
             }
         }
-        Collections.shuffle(Arrays.asList(contents), new Random(SEED));
+        Collections.shuffle(Arrays.asList(contents), new SecureRandom());
         this.runAllPutTests(contents, constContents);
     }
 

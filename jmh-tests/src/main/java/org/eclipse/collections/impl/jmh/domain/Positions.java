@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh.domain;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PrimitiveIterator;
@@ -23,7 +24,7 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 public class Positions
 {
     private static final int DEFAULT_SIZE = 3_000_000;
-    private static final Random RANDOM = new Random(System.currentTimeMillis());
+    private static final Random RANDOM = new SecureRandom();
     private static final PrimitiveIterator.OfDouble DOUBLES = RANDOM.ints(1, 100).asDoubleStream().iterator();
     private static final PrimitiveIterator.OfInt INTS = RANDOM.ints(1, 100).iterator();
     private final Pool<Account> accountPool = UnifiedSet.newSet();

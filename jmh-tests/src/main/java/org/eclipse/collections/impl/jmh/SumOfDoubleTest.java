@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -37,7 +38,7 @@ public class SumOfDoubleTest extends AbstractJMHTestRunner
 {
     private static final int SIZE = 3_000_000;
     private static final int BATCH_SIZE = 10_000;
-    private static final Stream<Double> DOUBLES = new Random().doubles(1.0d, 100.0d).boxed();
+    private static final Stream<Double> DOUBLES = new SecureRandom().doubles(1.0d, 100.0d).boxed();
 
     private final List<Double> doublesJDK = DOUBLES.limit(SIZE).collect(Collectors.toList());
     private final MutableList<Double> doublesEC = FastList.newListWith(this.doublesJDK.toArray(new Double[SIZE]));

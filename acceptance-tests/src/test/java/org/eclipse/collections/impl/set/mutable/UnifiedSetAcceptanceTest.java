@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.set.mutable;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -659,7 +660,7 @@ public class UnifiedSetAcceptanceTest
     public static <T> T[] shuffle(T[] array)
     {
         Object[] result = new Object[array.length];
-        Random rand = new Random(12345678912345L);
+        Random rand = new SecureRandom();
         int left = array.length;
         for (int i = 0; i < array.length; i++)
         {
@@ -803,7 +804,7 @@ public class UnifiedSetAcceptanceTest
             Assert.assertSame(toPool[i], set.put(new CollidingInt(i, shift)));
         }
 
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < toPool.length * 4; i++)
         {
             int x = random.nextInt(toPool.length);
@@ -854,7 +855,7 @@ public class UnifiedSetAcceptanceTest
             Assert.assertSame(toPool[i], set.put(new CollidingInt(toPool[i].getValue(), shift)));
         }
 
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < toPool.length * 4; i++)
         {
             int x = random.nextInt(toPool.length);
