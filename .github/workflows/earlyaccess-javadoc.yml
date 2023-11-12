@@ -12,13 +12,13 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        java-version: [19, 20, 21]
+        java-version: [22]
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download JDK ${{ matrix.java-version }} from jdk.java.net
         uses: oracle-actions/setup-java@v1
         id: download-jdk
