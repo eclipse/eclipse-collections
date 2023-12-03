@@ -591,6 +591,15 @@ public class Synchronized<name>Stack
             return this.stack.collectWithIndex(function, target);
         }
     }
+
+    @Override
+    public Mutable<name>Stack toStack()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.toStack();
+        }
+    }
 }
 
 >>
