@@ -58,6 +58,7 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 
 * Blog Series: [Getting Started with Eclipse Collections][BlogGettingStartedWithEclipseCollections]
 * Blog Series: [The missing Java data structures no one ever told you about][BlogTheMissingJavaDataStructures]
+* Blog: [Java has Streams. Do we need third-party collections?][BlogJavaHasStreamsDoWeNeedCollections]
 * [Some Quick Code Examples](./README_EXAMPLES.md)
 * [Eclipse Collections Katas](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
     * Start Here - [Pet Kata](https://eclipse.github.io/eclipse-collections-kata/pet-kata/#/)
@@ -71,15 +72,17 @@ Eclipse Collections is compatible with Java 8+. Eclipse Collections is a part of
 
 ## Eclipse Collections and JDK Compatibility Matrix
 
-| EC     | JDK 5 - 7 | JDK 8 | JDK 9 - 14 | JDK 15 - 21 |
-|--------|-----------|-------|------------|-------------|
-| 7.x.x  | &check;   |&check;|            |             |
-| 8.x.x  |           |&check;|            |             |
-| 9.x.x  |           |&check;| &check;    |             |
-| 10.x.x |           |&check;| &check;    |             |
-| 10.4.0 |           |&check;| &check;    | &check;     |
-| 11.x.x |           |&check;| &check;    | &check;     |
+| EC     | JDK 5 - 7 | JDK 8   | JDK 9 - 10 | JDK 11 - 14 | JDK 15 - 21 |
+|--------|-----------|---------|------------|-------------|-------------|
+| 7.x.x  | &check;   | &check; |            |             |             |
+| 8.x.x  |           | &check; |            |             |             |
+| 9.x.x  |           | &check; | &check;    | &check;     |             |
+| 10.x.x |           | &check; | &check;    | &check;     |             |
+| 10.4.0 |           | &check; | &check;    | &check;     | &check;     |
+| 11.x.x |           | &check; | &check;    | &check;     | &check;     |
+| 12.x.x |           |         |            | &check;     | &check;     |
 
+**Note:** Eclipse Collections 12.x will be compatible with Java 11+. EC 12.0 has not been released as GA yet, but there are a few milestone releases available to test with.  
 
 ## Acquiring Eclipse Collections
 
@@ -184,6 +187,7 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 [BlogUnparalleledDesignOfEclipseCollections]: https://medium.com/javarevisited/the-unparalleled-design-of-eclipse-collections-e4340b00f79f?source=friends_link&sk=629e6384171b18233a167a499b46408c
 [BlogIterateOverAnyIterableInJava]: https://medium.com/javarevisited/iterate-over-any-iterable-in-java-bec78eeeb452?source=friends_link&sk=7d460d1494cb76ce6bc9a5543785224a
 [BlogAsAMatterOfFactory]: https://medium.com/oracledevs/as-a-matter-of-factory-factories-matter-482d8adff094?source=friends_link&sk=96a4cd8fbc42e309c39a917449e6bff2
+[BlogJavaHasStreamsDoWeNeedCollections]: https://motlin.medium.com/java-has-streams-do-we-need-third-party-collections-dd12f473d105
 
 [Factories]: https://eclipse.dev/collections/javadoc/11.1.0/org/eclipse/collections/impl/factory/package-summary.html
 [10-0-Release]: https://github.com/eclipse/eclipse-collections/releases/tag/10.0.0
