@@ -30,6 +30,7 @@ import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 public interface OrderedIterableTestCase extends RichIterableTestCase
 {
@@ -92,10 +93,10 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
         assertEquals(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getFirstOptional());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     default void OrderedIterable_getFirstOptional_null_element()
     {
-        ((OrderedIterable<?>) this.newWith(new Object[]{null})).getFirstOptional();
+        assertThrows(NullPointerException.class, () -> ((OrderedIterable<?>) this.newWith(new Object[]{null})).getFirstOptional());
     }
 
     @Test

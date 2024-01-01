@@ -234,10 +234,10 @@ public interface IterableTestCase
         IterableTestCase.assertEquals(Sets.immutable.with(3, 2, 1), set);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     default void Iterable_next_throws_on_empty()
     {
-        this.newWith().iterator().next();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().iterator().next());
     }
 
     @Test

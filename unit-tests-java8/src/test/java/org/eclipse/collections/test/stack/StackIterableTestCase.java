@@ -117,17 +117,19 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     default void OrderedIterable_getLastOptional()
     {
-        ((OrderedIterable<?>) this.newWith(3, 2, 1)).getLastOptional();
+        assertThrows(UnsupportedOperationException.class, () ->
+                ((OrderedIterable<?>) this.newWith(3, 2, 1)).getLastOptional());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     default void OrderedIterable_getLastOptional_null_element()
     {
-        ((OrderedIterable<?>) this.newWith(new Object[]{null})).getLastOptional();
+        assertThrows(UnsupportedOperationException.class, () ->
+                ((OrderedIterable<?>) this.newWith(new Object[]{null})).getLastOptional());
     }
 
     @Test
@@ -136,10 +138,10 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
         assertEquals(Integer.valueOf(5), this.newWith(5, 1, 4, 2, 3).peek());
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     default void StackIterable_peek_throws()
     {
-        this.newWith().peek();
+        assertThrows(EmptyStackException.class, () -> this.newWith().peek());
     }
 
     @Test

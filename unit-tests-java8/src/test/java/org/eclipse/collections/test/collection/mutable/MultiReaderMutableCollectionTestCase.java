@@ -13,15 +13,17 @@ package org.eclipse.collections.test.collection.mutable;
 import org.eclipse.collections.impl.collection.mutable.AbstractMultiReaderMutableCollection;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public interface MultiReaderMutableCollectionTestCase extends MutableCollectionTestCase
 {
     @Override
     <T> AbstractMultiReaderMutableCollection<T> newWith(T... elements);
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     default void Iterable_iterator_throws()
     {
-        this.newWith(3, 2, 1).iterator();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(3, 2, 1).iterator());
     }
 
     @Test

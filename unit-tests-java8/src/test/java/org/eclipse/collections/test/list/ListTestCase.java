@@ -58,16 +58,16 @@ public interface ListTestCase extends CollectionTestCase
         assertEquals(Integer.valueOf(3), list.get(2));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     default void List_get_negative()
     {
-        this.newWith(1, 2, 3).get(-1);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(1, 2, 3).get(-1));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     default void List_get_out_of_bounds()
     {
-        this.newWith(1, 2, 3).get(4);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(1, 2, 3).get(4));
     }
 
     @Test

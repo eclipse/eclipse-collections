@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 
 // TODO MapIterable.keySet() should return SetIterable, and use SetIterableTestCase here
 @RunWith(Java8Runner.class)
@@ -43,10 +44,10 @@ public class UnifiedMapKeySetTest implements SetTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void Collection_add()
     {
         // TODO Move up to a keySet view abstraction
-        SetTestCase.super.Collection_add();
+        assertThrows(UnsupportedOperationException.class, () -> SetTestCase.super.Collection_add());
     }
 }
