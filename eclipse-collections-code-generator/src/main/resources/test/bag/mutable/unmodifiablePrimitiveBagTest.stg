@@ -28,6 +28,8 @@ import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link Unmodifiable<name>Bag}.
  * This file was automatically generated from template file unmodifiablePrimitiveBagTest.stg.
@@ -61,10 +63,10 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addOccurrences()
     {
-        this.bag.addOccurrences(<(literal.(type))("1")>, 3);
+        assertThrows(UnsupportedOperationException.class, () -> this.bag.addOccurrences(<(literal.(type))("1")>, 3));
     }
 
     @Override
@@ -75,115 +77,125 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeOccurrences()
     {
-        this.bag.removeOccurrences(<(literal.(type))("1")>, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.bag.removeOccurrences(<(literal.(type))("1")>, 1));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeOccurrences_throws()
     {
-        this.newWith().removeOccurrences(<(literal.(type))("1")>, -1);
+        assertThrows(UnsupportedOperationException.class, () ->
+                this.newWith().removeOccurrences(<(literal.(type))("1")>, -1));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.bag.clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.bag.clear());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.newWith().add(<(literal.(type))("1")>);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().add(<(literal.(type))("1")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllArray()
     {
-        this.classUnderTest().addAll();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        this.classUnderTest().addAll(this.newMutableCollectionWith());
+        assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().addAll(this.newMutableCollectionWith()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        this.classUnderTest().remove(<(literal.(type))("1")>);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(<(literal.(type))("1")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIf()
     {
-        this.classUnderTest().removeIf(<name>Predicates.equal(<(literal.(type))("1")>));
+        assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().removeIf(<name>Predicates.equal(<(literal.(type))("1")>)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        this.classUnderTest().removeAll();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll_iterable()
     {
-        this.classUnderTest().removeAll(this.newMutableCollectionWith());
+        assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().removeAll(this.newMutableCollectionWith()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        this.classUnderTest().retainAll();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll_iterable()
     {
-        this.classUnderTest().retainAll(this.newMutableCollectionWith());
+        assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().retainAll(this.newMutableCollectionWith()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.newWith().with(<["1"]:(literal.(type))(); separator=", ">);
+        assertThrows(UnsupportedOperationException.class, () ->
+                this.newWith().with(<["1"]:(literal.(type))(); separator=", ">));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.newWith().withAll(this.newMutableCollectionWith(<(literal.(type))("1")>));
+        assertThrows(UnsupportedOperationException.class, () ->
+                this.newWith().withAll(this.newMutableCollectionWith(<(literal.(type))("1")>)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).without(<(literal.(type))("9")>);
+        assertThrows(UnsupportedOperationException.class, () ->
+                this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).without(<(literal.(type))("9")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).withoutAll(this.newMutableCollectionWith(<["8", "9"]:(literal.(type))(); separator=", ">));
+        assertThrows(UnsupportedOperationException.class, () ->
+                this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">)
+                .withoutAll(this.newMutableCollectionWith(<["8", "9"]:(literal.(type))(); separator=", ">)));
     }
 
     @Override
@@ -212,7 +224,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void <type>Iterator_throws_non_empty_collection()
     {
         Unmodifiable<name>Bag collection = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
@@ -221,7 +233,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
         {
             iterator.next();
         }
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override

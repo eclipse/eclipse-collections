@@ -38,6 +38,8 @@ import org.junit.Test;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link Mutable<name>Bag}.
  * This file was automatically generated from template file abstractMutablePrimitiveBagTestCase.stg.
@@ -177,10 +179,10 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void addOccurrences_throws()
     {
-        this.newWith().addOccurrences(<(literal.(type))("100")>, -1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().addOccurrences(<(literal.(type))("100")>, -1));
     }
 
     @Test
@@ -199,10 +201,11 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Assert.assertEquals(new <name>HashBag(), bag);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void removeOccurrences_throws()
     {
-        this.newWith().removeOccurrences(<(literal.(type))("100")>, -1);
+        assertThrows(IllegalArgumentException.class, () ->
+                this.newWith().removeOccurrences(<(literal.(type))("100")>, -1));
     }
 
     @Test
