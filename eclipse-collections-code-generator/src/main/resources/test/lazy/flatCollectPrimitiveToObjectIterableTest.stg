@@ -33,6 +33,8 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * This file was automatically generated from template file flatCollectPrimitiveToObjectIterableTest.stg.
  */
@@ -104,10 +106,10 @@ public class FlatCollect<name>ToObjectIterableTest
         Assert.assertTrue(this.newPrimitiveWith(<["1", "2"]:(literal.(type))(); separator=", ">).notEmpty());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeThrows()
     {
-        this.newPrimitiveWith().iterator().remove();
+        assertThrows(UnsupportedOperationException.class, () -> this.newPrimitiveWith().iterator().remove());
     }
 
     @Test
