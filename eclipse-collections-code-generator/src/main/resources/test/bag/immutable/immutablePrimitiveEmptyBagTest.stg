@@ -28,6 +28,8 @@ import org.junit.Test;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link Immutable<name>EmptyBag}.
  * This file was automatically generated from template file immutablePrimitiveEmptyBagTest.stg.
@@ -41,10 +43,10 @@ public class Immutable<name>EmptyBagTest extends AbstractImmutable<name>BagTestC
     }
 
     @Override
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void average()
     {
-        this.classUnderTest().average();
+        assertThrows(ArithmeticException.class, () -> this.classUnderTest().average());
     }
 
     @Override
@@ -55,10 +57,10 @@ public class Immutable<name>EmptyBagTest extends AbstractImmutable<name>BagTestC
     }
 
     @Override
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void median()
     {
-        this.classUnderTest().median();
+        assertThrows(ArithmeticException.class, () -> this.classUnderTest().median());
     }
 
     @Override
@@ -69,17 +71,17 @@ public class Immutable<name>EmptyBagTest extends AbstractImmutable<name>BagTestC
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.classUnderTest().max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override
