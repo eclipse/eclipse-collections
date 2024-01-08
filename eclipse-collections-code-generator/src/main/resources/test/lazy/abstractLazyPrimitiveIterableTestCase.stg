@@ -43,6 +43,8 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * Abstract JUnit test for {@link Lazy<name>Iterable}.
  * This file was automatically generated from template file abstractLazyPrimitiveIterableTestCase.stg.
@@ -66,7 +68,7 @@ public abstract class AbstractLazy<name>IterableTestCase
         Assert.assertEquals(<(wideLiteral.(type))("6")>, sum<(wideDelta.(type))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void <type>Iterator_throws()
     {
         <name>Iterator iterator = this.classUnderTest().<type>Iterator();
@@ -75,7 +77,7 @@ public abstract class AbstractLazy<name>IterableTestCase
             iterator.next();
         }
 
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test
@@ -236,10 +238,10 @@ public abstract class AbstractLazy<name>IterableTestCase
         this.getEmptyIterable().max();
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_throws_emptyIterable()
     {
-        this.getEmptyIterable().min();
+        assertThrows(NoSuchElementException.class, () -> this.getEmptyIterable().min());
     }
 
     @Test
@@ -286,10 +288,10 @@ public abstract class AbstractLazy<name>IterableTestCase
         new Lazy<name>IterableAdapter(new <name>ArrayList()).max();
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minThrowsOnEmpty()
     {
-        new Lazy<name>IterableAdapter(new <name>ArrayList()).min();
+        assertThrows(NoSuchElementException.class, () -> new Lazy<name>IterableAdapter(new <name>ArrayList()).min());
     }
 
     @Test
@@ -298,10 +300,10 @@ public abstract class AbstractLazy<name>IterableTestCase
         Assert.assertEquals(2.0d, this.classUnderTest().average(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void averageThrowsOnEmpty()
     {
-        this.getEmptyIterable().average();
+        assertThrows(ArithmeticException.class, () -> this.getEmptyIterable().average());
     }
 
     @Test
@@ -311,10 +313,10 @@ public abstract class AbstractLazy<name>IterableTestCase
         Assert.assertEquals(16.0d, this.newWith(<["1", "31"]:(literal.(type))(); separator=", ">).median(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void medianThrowsOnEmpty()
     {
-        this.getEmptyIterable().median();
+        assertThrows(ArithmeticException.class, () -> this.getEmptyIterable().median());
     }
 
     @Test

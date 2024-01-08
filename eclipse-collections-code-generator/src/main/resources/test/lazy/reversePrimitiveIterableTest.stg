@@ -31,6 +31,8 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link Reverse<name>Iterable}.
  * This file was automatically generated from template file reversePrimitiveIterableTest.stg.
@@ -85,7 +87,7 @@ public class Reverse<name>IterableTest
         Assert.assertFalse(iterator.hasNext());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         <name>Iterable iterable = <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed();
@@ -95,7 +97,7 @@ public class Reverse<name>IterableTest
             iterator.next();
         }
 
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test
@@ -200,10 +202,10 @@ public class Reverse<name>IterableTest
         Assert.assertEquals(<(wideLiteral.(type))("0")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().min()<(wideDelta.(type))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_throws_emptyList()
     {
-        new <name>ArrayList().asReversed().min();
+        assertThrows(NoSuchElementException.class, () -> new <name>ArrayList().asReversed().min());
     }
 
     @Test

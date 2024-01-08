@@ -33,6 +33,8 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link Tap<name>Iterable}.
  * This file was automatically generated from template file primitiveTapIterableTest.stg.
@@ -223,16 +225,18 @@ public class Tap<name>IterableTest
         Assert.assertEquals(list.makeString(""), builder.toString());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxThrowsOnEmpty()
     {
-        new Tap<name>Iterable(new <name>ArrayList(), System.out::println).max();
+        assertThrows(NoSuchElementException.class, () ->
+            new Tap<name>Iterable(new <name>ArrayList(), System.out::println).max());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minThrowsOnEmpty()
     {
-        new Tap<name>Iterable(new <name>ArrayList(), System.out::println).min();
+        assertThrows(NoSuchElementException.class, () ->
+            new Tap<name>Iterable(new <name>ArrayList(), System.out::println).min());
     }
 
     @Test
@@ -245,10 +249,11 @@ public class Tap<name>IterableTest
         Assert.assertEquals(list.makeString("") + list.makeString(""), builder.toString());
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void averageThrowsOnEmpty()
     {
-        new Tap<name>Iterable(new <name>ArrayList(), System.out::println).average();
+        assertThrows(ArithmeticException.class, () ->
+            new Tap<name>Iterable(new <name>ArrayList(), System.out::println).average());
     }
 
     @Test

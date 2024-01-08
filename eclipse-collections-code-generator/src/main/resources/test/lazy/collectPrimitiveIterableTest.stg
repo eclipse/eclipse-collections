@@ -37,6 +37,8 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * This file was automatically generated from template file collectPrimitiveIterableTest.stg.
  */
@@ -194,16 +196,18 @@ public void sumConsistentRounding()
         Assert.assertEquals(<(literal.(type))("0")>, FastList.\<Integer>newList().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).maxIfEmpty(<(literal.(type))("0")>)<(delta.(type))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxThrowsOnEmpty()
     {
-        Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).max();
+        assertThrows(NoSuchElementException.class, () ->
+                Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).max());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minThrowsOnEmpty()
     {
-        Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).min();
+        assertThrows(NoSuchElementException.class, () ->
+                Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).min());
     }
 
     @Test
@@ -212,10 +216,11 @@ public void sumConsistentRounding()
         Assert.assertEquals(2.5, Interval.oneTo(4).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).average(), 0.001);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void averageThrowsOnEmpty()
     {
-        Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).average();
+        assertThrows(ArithmeticException.class, () ->
+                Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).average());
     }
 
     @Test
