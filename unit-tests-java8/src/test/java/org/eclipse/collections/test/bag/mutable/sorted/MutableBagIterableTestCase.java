@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,22 +26,6 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     <T> MutableBagIterable<T> newWith(T... elements);
 
     @Test
-    default void MutableBagIterable_addOccurrences_throws()
-    {
-        Assert.assertThrows(
-                IllegalArgumentException.class,
-                () -> this.newWith(1, 2, 2, 3, 3, 3).addOccurrences(4, -1));
-    }
-
-    @Test
-    default void MutableBagIterable_removeOccurrences_throws()
-    {
-        Assert.assertThrows(
-                IllegalArgumentException.class,
-                () -> this.newWith(1, 2, 2, 3, 3, 3).removeOccurrences(4, -1));
-    }
-
-    @Test
     default void MutableBagIterable_addOccurrences()
     {
         MutableBagIterable<Integer> mutableBag = this.newWith(1, 2, 2, 3, 3, 3);
@@ -49,6 +33,10 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
         assertEquals(Bags.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
         assertEquals(3, mutableBag.addOccurrences(1, 2));
         assertEquals(Bags.immutable.with(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
+
+        Assert.assertThrows(
+                IllegalArgumentException.class,
+                () -> mutableBag.addOccurrences(4, -1));
     }
 
     @Test
@@ -63,5 +51,9 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
         assertEquals(Bags.immutable.with(2, 2, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(2, 1));
         assertEquals(Bags.immutable.with(2, 3), mutableBag);
+
+        Assert.assertThrows(
+                IllegalArgumentException.class,
+                () -> mutableBag.removeOccurrences(4, -1));
     }
 }

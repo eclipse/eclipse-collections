@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -20,29 +20,15 @@ public interface UnmodifiableBagIterableTestCase extends UnmodifiableMutableColl
 {
     @Override
     @Test
-    default void MutableBagIterable_addOccurrences_throws()
-    {
-        assertThrows(
-                UnsupportedOperationException.class,
-                () -> this.newWith(1, 2, 2, 3, 3, 3).addOccurrences(4, -1));
-    }
-
-    @Override
-    @Test
-    default void MutableBagIterable_removeOccurrences_throws()
-    {
-        assertThrows(
-                UnsupportedOperationException.class,
-                () -> this.newWith(1, 2, 2, 3, 3, 3).removeOccurrences(4, -1));
-    }
-
-    @Override
-    @Test
     default void MutableBagIterable_addOccurrences()
     {
         assertThrows(
                 UnsupportedOperationException.class,
                 () -> this.newWith(1, 2, 2, 3, 3, 3).addOccurrences(4, 4));
+
+        assertThrows(
+                UnsupportedOperationException.class,
+                () -> this.newWith(1, 2, 2, 3, 3, 3).addOccurrences(4, -1));
     }
 
     @Override
@@ -52,5 +38,9 @@ public interface UnmodifiableBagIterableTestCase extends UnmodifiableMutableColl
         assertThrows(
                 UnsupportedOperationException.class,
                 () -> this.newWith(1, 2, 2, 3, 3, 3).removeOccurrences(4, 4));
+
+        assertThrows(
+                UnsupportedOperationException.class,
+                () -> this.newWith(1, 2, 2, 3, 3, 3).removeOccurrences(4, -1));
     }
 }

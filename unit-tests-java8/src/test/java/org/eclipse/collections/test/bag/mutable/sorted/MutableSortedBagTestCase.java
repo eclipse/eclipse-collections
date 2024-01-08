@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -37,13 +37,7 @@ public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableOrde
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 4, 4, 3, 3, 3, 2, 2, 1, 1, 1), mutableSortedBag);
         assertEquals(3, mutableSortedBag.addOccurrences(1, 0));
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 4, 4, 3, 3, 3, 2, 2, 1, 1, 1), mutableSortedBag);
-    }
 
-    @Override
-    @Test
-    default void MutableBagIterable_addOccurrences_throws()
-    {
-        MutableSortedBag<Integer> mutableSortedBag = this.newWith(3, 3, 3, 2, 2, 1);
         assertThrows(IllegalArgumentException.class, () -> mutableSortedBag.addOccurrences(4, -1));
     }
 
@@ -64,15 +58,7 @@ public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableOrde
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 3, 2), mutableBag);
         assertTrue(mutableBag.removeOccurrences(2, 2));
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 3), mutableBag);
-    }
 
-    @Override
-    @Test
-    default void MutableBagIterable_removeOccurrences_throws()
-    {
-        assertThrows(IllegalArgumentException.class, () -> {
-            MutableSortedBag<Integer> mutableBag = this.newWith(3, 3, 3, 2, 2, 1);
-            assertFalse(mutableBag.removeOccurrences(4, -1));
-        });
+        assertThrows(IllegalArgumentException.class, () -> mutableBag.removeOccurrences(4, -1));
     }
 }
