@@ -14,6 +14,8 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public interface UnmodifiableMutableStackTestCase extends MutableStackTestCase, FixedSizeIterableTestCase
 {
     @Override
@@ -24,18 +26,18 @@ public interface UnmodifiableMutableStackTestCase extends MutableStackTestCase, 
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     default void MutableStack_pop()
     {
         MutableStack<Integer> mutableStack = this.newWith(5, 1, 4, 2, 3);
-        mutableStack.pop();
+        assertThrows(UnsupportedOperationException.class, () -> mutableStack.pop());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     default void MutableStack_pop_throws()
     {
         MutableStack<Integer> mutableStack = this.newWith();
-        mutableStack.pop();
+        assertThrows(UnsupportedOperationException.class, () -> mutableStack.pop());
     }
 }

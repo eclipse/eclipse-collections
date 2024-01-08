@@ -19,6 +19,8 @@ import org.eclipse.collections.test.set.SetTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.junit.Assert.assertThrows;
+
 @RunWith(Java8Runner.class)
 public class HashBiMapKeySetTest implements SetTestCase
 {
@@ -39,10 +41,10 @@ public class HashBiMapKeySetTest implements SetTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void Collection_add()
     {
         // TODO Move up to a keySet view abstraction
-        SetTestCase.super.Collection_add();
+        assertThrows(UnsupportedOperationException.class, () -> SetTestCase.super.Collection_add());
     }
 }

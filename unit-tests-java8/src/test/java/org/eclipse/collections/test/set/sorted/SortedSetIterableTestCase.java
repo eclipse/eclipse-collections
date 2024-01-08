@@ -66,17 +66,17 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     default void RichIterable_getFirst_empty_null()
     {
-        this.newWith().getFirst();
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().getFirst());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     default void RichIterable_getLast_empty_null()
     {
-        this.newWith().getLast();
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().getLast());
     }
 
     @Override
