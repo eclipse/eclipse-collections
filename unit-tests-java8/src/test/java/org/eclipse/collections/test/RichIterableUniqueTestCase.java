@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -793,7 +793,7 @@ public interface RichIterableUniqueTestCase
 
     @Override
     @Test
-    default void RichIterable_aggregateBy_aggregateInPlaceBy()
+    default void RichIterable_aggregateBy_aggregateInPlaceBy_reduceBy()
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
 
@@ -815,6 +815,15 @@ public interface RichIterableUniqueTestCase
         assertEquals(3, aggregateInPlaceBy.get("3").intValue());
         assertEquals(2, aggregateInPlaceBy.get("2").intValue());
         assertEquals(1, aggregateInPlaceBy.get("1").intValue());
+
+        MapIterable<String, Integer> reduceBy = iterable.reduceBy(
+                Object::toString,
+                (integer1, integer2) -> integer1 + integer2);
+
+        assertEquals(4, reduceBy.get("4").intValue());
+        assertEquals(3, reduceBy.get("3").intValue());
+        assertEquals(2, reduceBy.get("2").intValue());
+        assertEquals(1, reduceBy.get("1").intValue());
     }
 
     @Override

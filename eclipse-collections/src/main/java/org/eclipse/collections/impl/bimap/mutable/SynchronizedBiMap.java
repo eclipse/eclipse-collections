@@ -232,6 +232,17 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     }
 
     @Override
+    public <KK> MutableMap<KK, V> reduceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function2<? super V, ? super V, ? extends V> reduceFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().reduceBy(groupBy, reduceFunction);
+        }
+    }
+
+    @Override
     public MutableSetMultimap<V, K> flip()
     {
         synchronized (this.lock)

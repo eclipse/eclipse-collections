@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -379,6 +379,23 @@ public interface Bag<T>
             for (int i = 0; i < occurrences; i++)
             {
                 target.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+            }
+        });
+        return target;
+    }
+
+    @Override
+    default <K, R extends MutableMapIterable<K, T>> R reduceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function2<? super T, ? super T, ? extends T> reduceFunction,
+            R target)
+    {
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            K key = groupBy.valueOf(each);
+            for (int i = 0; i < occurrences; i++)
+            {
+                target.merge(key, each, reduceFunction);
             }
         });
         return target;

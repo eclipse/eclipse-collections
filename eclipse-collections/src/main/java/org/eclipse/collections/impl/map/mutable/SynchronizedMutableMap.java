@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -424,6 +424,14 @@ public class SynchronizedMutableMap<K, V>
             Function2<? super V2, ? super V1, ? extends V2> nonMutatingAggregator)
     {
         return (MutableMap<K1, V2>) super.aggregateBy(keyFunction, valueFunction, zeroValueFactory, nonMutatingAggregator);
+    }
+
+    @Override
+    public <KK> MutableMap<KK, V> reduceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function2<? super V, ? super V, ? extends V> reduceFunction)
+    {
+        return (MutableMap<KK, V>) super.reduceBy(groupBy, reduceFunction);
     }
 
     /**

@@ -1485,6 +1485,14 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
+    public <KK> MutableMapIterable<KK, V> reduceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function2<? super V, ? super V, ? extends V> reduceFunction)
+    {
+        return this.delegate.reduceBy(groupBy, reduceFunction);
+    }
+
+    @Override
     public MutableMapIterable<K, V> newEmpty()
     {
         return this.delegate.newEmpty();

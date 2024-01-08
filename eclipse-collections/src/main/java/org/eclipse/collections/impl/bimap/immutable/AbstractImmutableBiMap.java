@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -479,6 +479,14 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     public <K2, V2> ImmutableMap<K2, V2> aggregateInPlaceBy(Function<? super V, ? extends K2> groupBy, Function0<? extends V2> zeroValueFactory, Procedure2<? super V2, ? super V> mutatingAggregator)
     {
         return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+    }
+
+    @Override
+    public <K2> ImmutableMap<K2, V> reduceBy(
+            Function<? super V, ? extends K2> groupBy,
+            Function2<? super V, ? super V, ? extends V> reduceFunction)
+    {
+        return this.delegate.reduceBy(groupBy, reduceFunction);
     }
 
     @Override
