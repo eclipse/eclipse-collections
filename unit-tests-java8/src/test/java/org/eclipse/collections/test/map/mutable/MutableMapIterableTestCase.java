@@ -277,4 +277,54 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase
                 Collections.nCopies(1000, 2),
                 map4.values());
     }
+
+    @Test
+    default void Map_merge()
+    {
+        MutableMapIterable<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+
+        // null value
+        Assert.assertThrows(NullPointerException.class, () -> map.merge(1, null, (v1, v2) -> {
+            Assert.fail("Expected no merge to be performed since the value is null");
+            return null;
+        }));
+        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+
+        // null remapping function
+        Assert.assertThrows(NullPointerException.class, () -> map.merge(1, "4", null));
+        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+
+        // new key, remapping function isn't called
+        String value1 = map.merge(4, "4", (v1, v2) -> {
+            Assert.fail("Expected no merge to be performed since the key is not present in the map");
+            return null;
+        });
+        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4"), map);
+        assertEquals("4", value1);
+
+        // exiting key
+        String value2 = map.merge(2, "Two", (v1, v2) -> {
+            assertEquals("2", v1);
+            assertEquals("Two", v2);
+            return v1 + v2;
+        });
+        Assert.assertEquals("2Two", value2);
+        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 3, "3", 4, "4"), map);
+
+        // existing key, null returned from remapping function, removes key
+        String value3 = map.merge(3, "Three", (v1, v2) -> null);
+        assertNull(value3);
+        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4"), map);
+
+        // new key, null returned from remapping function
+        String value4 = map.merge(5, "5", (v1, v2) -> null);
+        Assert.assertEquals("5", value4);
+        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4", 5, "5"), map);
+
+        // existing key, remapping function throws exception
+        Assert.assertThrows(IllegalArgumentException.class, () -> map.merge(4, "Four", (v1, v2) -> {
+            throw new IllegalArgumentException();
+        }));
+        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4", 5, "5"), map);
+    }
 }

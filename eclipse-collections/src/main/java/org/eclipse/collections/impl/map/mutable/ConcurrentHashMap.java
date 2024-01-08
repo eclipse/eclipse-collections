@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,6 +31,7 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -2302,6 +2303,89 @@ public final class ConcurrentHashMap<K, V>
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
                     return result;
+                }
+            }
+        }
+    }
+
+    @Override
+    public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
+    {
+        Objects.requireNonNull(value, "value cannot be null");
+        Objects.requireNonNull(remappingFunction, "remappingFunction cannot be null");
+
+        int hash = this.hash(key);
+        AtomicReferenceArray currentArray = this.table;
+        int length = currentArray.length();
+        int index = ConcurrentHashMap.indexFor(hash, length);
+        Object o = currentArray.get(index);
+        if (o == null)
+        {
+            Entry<K, V> newEntry = new Entry<>(key, value, null);
+            if (currentArray.compareAndSet(index, null, newEntry))
+            {
+                this.addToSize(1);
+                return value;
+            }
+        }
+        return this.slowMerge(key, value, remappingFunction, hash, currentArray);
+    }
+
+    private V slowMerge(
+            K key,
+            V value,
+            BiFunction<? super V, ? super V, ? extends V> remappingFunction,
+            int hash,
+            AtomicReferenceArray currentArray)
+    {
+        //noinspection LabeledStatement
+        outer:
+        while (true)
+        {
+            int length = currentArray.length();
+            int index = ConcurrentHashMap.indexFor(hash, length);
+            Object o = currentArray.get(index);
+            if (o == RESIZED || o == RESIZING)
+            {
+                currentArray = this.helpWithResizeWhileCurrentIndex(currentArray, index);
+            }
+            else
+            {
+                Entry<K, V> e = (Entry<K, V>) o;
+                while (e != null)
+                {
+                    Object candidate = e.getKey();
+                    if (candidate.equals(key))
+                    {
+                        V oldValue = e.getValue();
+                        V newValue = remappingFunction.apply(oldValue, value);
+                        Entry<K, V> replacementChainForRemoval =
+                                this.createReplacementChainForRemoval((Entry<K, V>) o, e);
+                        Entry<K, V> newEntry = newValue == null
+                                ? replacementChainForRemoval
+                                : new Entry<>(
+                                        e.getKey(),
+                                        newValue,
+                                        replacementChainForRemoval);
+                        if (!currentArray.compareAndSet(index, o, newEntry))
+                        {
+                            //noinspection ContinueStatementWithLabel
+                            continue outer;
+                        }
+
+                        if (newValue == null)
+                        {
+                            this.addToSize(-1);
+                        }
+                        return newValue;
+                    }
+                    e = e.getNext();
+                }
+                Entry<K, V> newEntry = new Entry<>(key, value, (Entry<K, V>) o);
+                if (currentArray.compareAndSet(index, o, newEntry))
+                {
+                    this.incrementSizeAndPossiblyResize(currentArray, length, o);
+                    return value;
                 }
             }
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,8 +22,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -567,6 +569,91 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             this.rehash(this.table.length);
         }
         return result;
+    }
+
+    @Override
+    public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
+    {
+        Objects.requireNonNull(value, "value cannot be null");
+        Objects.requireNonNull(remappingFunction, "remappingFunction cannot be null");
+
+        int index = this.index(key);
+        Object cur = this.table[index];
+        if (cur == null)
+        {
+            this.table[index] = UnifiedMap.toSentinelIfNull(key);
+            this.table[index + 1] = value;
+            ++this.occupied;
+            return value;
+        }
+        if (cur != CHAINED_KEY && this.nonNullTableObjectEquals(cur, key))
+        {
+            V newValue = remappingFunction.apply((V) this.table[index + 1], value);
+            this.table[index + 1] = newValue;
+            if (newValue == null)
+            {
+                this.table[index] = null;
+                --this.occupied;
+            }
+            return newValue;
+        }
+        return this.chainedMerge(key, index, value, remappingFunction);
+    }
+
+    private V chainedMerge(K key, int index, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
+    {
+        if (this.table[index] == CHAINED_KEY)
+        {
+            Object[] chain = (Object[]) this.table[index + 1];
+            for (int i = 0; i < chain.length; i += 2)
+            {
+                if (chain[i] == null)
+                {
+                    chain[i] = UnifiedMap.toSentinelIfNull(key);
+                    chain[i + 1] = value;
+                    if (++this.occupied > this.maxSize)
+                    {
+                        this.rehash(this.table.length);
+                    }
+                    return value;
+                }
+                if (this.nonNullTableObjectEquals(chain[i], key))
+                {
+                    V newValue = remappingFunction.apply((V) chain[i + 1], value);
+                    if (newValue == null)
+                    {
+                        this.overwriteWithLastElementFromChain(chain, index, i);
+                    }
+                    else
+                    {
+                        chain[i + 1] = newValue;
+                    }
+                    return newValue;
+                }
+            }
+            Object[] newChain = new Object[chain.length + 4];
+            System.arraycopy(chain, 0, newChain, 0, chain.length);
+            this.table[index + 1] = newChain;
+            newChain[chain.length] = UnifiedMap.toSentinelIfNull(key);
+            newChain[chain.length + 1] = value;
+            if (++this.occupied > this.maxSize)
+            {
+                this.rehash(this.table.length);
+            }
+            return value;
+        }
+        Object[] newChain = new Object[4];
+        newChain[0] = this.table[index];
+        newChain[1] = this.table[index + 1];
+        newChain[2] = UnifiedMap.toSentinelIfNull(key);
+        newChain[3] = value;
+        this.table[index] = CHAINED_KEY;
+        this.table[index + 1] = newChain;
+        if (++this.occupied > this.maxSize)
+        {
+            this.rehash(this.table.length);
+        }
+        return value;
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -864,6 +864,16 @@ public class UnifiedMapTest extends UnifiedMapTestCase
         Interval.oneTo(3).each(each -> map.removeKey(each.toString()));
         Assert.assertTrue(map.trimToSize());
         Assert.assertEquals(5, map.size());
+    }
+
+    @Test
+    public void merge()
+    {
+        MutableMap<Integer, Integer> actualMap = this.mapWithCollisionsOfSize(8);
+        Integer merge = actualMap.merge(COLLISION_1, 1, (integer1, integer2) -> null);
+        Assert.assertNull(merge);
+        MutableMap<Integer, Integer> expectedMap = MORE_COLLISIONS.subList(1, 8).toMap(k -> k, v -> v);
+        Assert.assertEquals(expectedMap, actualMap);
     }
 
     @Override

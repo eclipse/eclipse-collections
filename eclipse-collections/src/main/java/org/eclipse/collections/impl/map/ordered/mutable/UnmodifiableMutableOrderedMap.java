@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -247,6 +248,12 @@ public class UnmodifiableMutableOrderedMap<K, V>
             P parameter)
     {
         throw new UnsupportedOperationException("Cannot call updateValueWith() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
+    {
+        throw new UnsupportedOperationException("Cannot call merge() on " + this.getClass().getSimpleName());
     }
 
     @Override
