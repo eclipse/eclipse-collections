@@ -20,6 +20,7 @@ import org.eclipse.collections.impl.map.ordered.mutable.UnmodifiableMutableOrder
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -182,5 +183,20 @@ public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestC
                 () -> map.updateValueWith("Two", () -> 0, (ignored, parameter) -> {
                     throw new AssertionError();
                 }, "test"));
+    }
+
+    @Override
+    public void Map_merge()
+    {
+        MutableMapIterable<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+        assertThrows(UnsupportedOperationException.class, () -> map.merge(3, "4", (v1, v2) -> {
+            fail("Expected lambda not to be called on unmodifiable map");
+            return null;
+        }));
+        assertThrows(UnsupportedOperationException.class, () -> map.merge(4, "4", (v1, v2) -> {
+            fail("Expected lambda not to be called on unmodifiable map");
+            return null;
+        }));
+        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
     }
 }

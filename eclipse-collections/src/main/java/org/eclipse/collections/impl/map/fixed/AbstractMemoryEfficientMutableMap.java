@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.fixed;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -91,6 +92,12 @@ abstract class AbstractMemoryEfficientMutableMap<K, V>
     public <P> V updateValueWith(K key, Function0<? extends V> factory, Function2<? super V, ? super P, ? extends V> function, P parameter)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".updateValueWith() not implemented yet");
+    }
+
+    @Override
+    public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".merge() not implemented yet");
     }
 
     @Override

@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -210,6 +211,12 @@ public class OrderedMapAdapter<K, V>
     public V put(K key, V value)
     {
         return this.delegate.put(key, value);
+    }
+
+    @Override
+    public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
+    {
+        return this.delegate.merge(key, value, remappingFunction);
     }
 
     @Override
