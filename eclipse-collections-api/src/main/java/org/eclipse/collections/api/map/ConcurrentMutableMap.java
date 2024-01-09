@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.api.map;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 
@@ -50,4 +51,10 @@ public interface ConcurrentMutableMap<K, V>
     {
         MutableMap.super.forEach(action);
     }
+
+    /**
+     * A concurrent implementation of {@link ConcurrentMap#merge(Object, Object, BiFunction)} and {@link Map#merge(Object, Object, BiFunction)}. In the implementing classes, it is possible for the {@code remappingFunction} to be called multiple times. It is also possible for the {@code remappingFunction} to be called one or more times, but the result is not used (because the old entry was concurrently removed).
+     */
+    @Override
+    V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction);
 }
