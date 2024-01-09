@@ -31,6 +31,10 @@ test-coverage/**
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+.idea/jarRepositories.xml
+.idea/markdown-navigator.xml
+.idea/markdown-navigator/profiles_settings.xml
+.idea/checkstyle-idea.xml
 
 # Maven
 .idea/**/libraries
