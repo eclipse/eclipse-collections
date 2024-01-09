@@ -11,9 +11,9 @@
 package org.eclipse.collections.impl.bag.mutable;
 
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.junit.Assert;
 import org.junit.Test;

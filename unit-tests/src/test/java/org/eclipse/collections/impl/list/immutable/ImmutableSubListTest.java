@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.list.immutable;
 
 import java.util.ListIterator;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 

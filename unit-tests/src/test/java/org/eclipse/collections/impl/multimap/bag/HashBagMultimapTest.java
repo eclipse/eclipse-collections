@@ -11,9 +11,9 @@
 package org.eclipse.collections.impl.multimap.bag;
 
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Bags;
 
 /**
  * Test of {@link HashBagMultimap}.

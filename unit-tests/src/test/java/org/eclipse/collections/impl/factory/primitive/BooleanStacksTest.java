@@ -10,10 +10,10 @@
 
 package org.eclipse.collections.impl.factory.primitive;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.stack.primitive.ImmutableBooleanStackFactory;
 import org.eclipse.collections.api.stack.primitive.ImmutableBooleanStack;
 import org.eclipse.collections.api.stack.primitive.MutableBooleanStack;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.stack.mutable.primitive.BooleanArrayStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;

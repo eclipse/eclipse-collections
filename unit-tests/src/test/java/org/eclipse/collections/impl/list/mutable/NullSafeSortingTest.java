@@ -17,8 +17,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.RandomAccess;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.junit.Test;
 

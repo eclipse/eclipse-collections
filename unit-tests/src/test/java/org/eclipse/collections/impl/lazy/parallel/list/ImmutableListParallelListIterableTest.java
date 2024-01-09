@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.lazy.parallel.list;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ParallelListIterable;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Test;
 
 public class ImmutableListParallelListIterableTest extends ParallelListIterableTestCase

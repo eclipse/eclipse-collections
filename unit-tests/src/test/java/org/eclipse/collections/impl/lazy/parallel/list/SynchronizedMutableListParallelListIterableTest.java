@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.lazy.parallel.list;
 import java.util.LinkedList;
 
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -20,7 +21,6 @@ import org.eclipse.collections.impl.block.function.checked.CheckedFunction;
 import org.eclipse.collections.impl.block.predicate.checked.CheckedPredicate;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;

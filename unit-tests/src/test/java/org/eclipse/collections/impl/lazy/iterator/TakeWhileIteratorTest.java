@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.lazy.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.junit.Assert;
 import org.junit.Test;

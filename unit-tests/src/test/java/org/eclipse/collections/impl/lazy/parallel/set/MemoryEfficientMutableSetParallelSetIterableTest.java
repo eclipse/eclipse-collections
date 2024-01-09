@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.lazy.parallel.set;
 
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.junit.Test;
 

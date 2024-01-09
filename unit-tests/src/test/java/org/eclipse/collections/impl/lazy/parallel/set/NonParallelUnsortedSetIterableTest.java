@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.lazy.parallel.set;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
 
 public class NonParallelUnsortedSetIterableTest extends NonParallelUnsortedSetIterableTestCase

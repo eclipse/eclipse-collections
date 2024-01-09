@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.list.fixed;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 
 public class SingletonListSubListTest extends UnmodifiableMemoryEfficientListTestCase<String>
 {

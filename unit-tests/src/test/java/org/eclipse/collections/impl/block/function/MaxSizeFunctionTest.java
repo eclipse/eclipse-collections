@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.block.function;
 
-import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.junit.Assert;
 import org.junit.Test;

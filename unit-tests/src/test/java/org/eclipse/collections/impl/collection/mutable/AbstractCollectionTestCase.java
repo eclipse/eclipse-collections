@@ -14,6 +14,7 @@ import java.util.Collections;
 
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Twin;
@@ -21,7 +22,6 @@ import org.eclipse.collections.impl.AbstractRichIterableTestCase;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.collector.Collectors2;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
 import org.eclipse.collections.impl.list.Interval;

@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.lazy.iterator;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Test;
 
 public class ZipIteratorTest

@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.map.immutable;
 
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ImmutableMap;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
 import org.junit.Assert;

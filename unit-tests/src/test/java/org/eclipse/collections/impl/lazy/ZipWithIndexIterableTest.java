@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.lazy;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

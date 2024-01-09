@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.multimap.set.sorted;
 import java.util.Collections;
 
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
@@ -24,7 +25,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimapTestCase;
