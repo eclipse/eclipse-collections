@@ -118,86 +118,6 @@ public class UnifiedMapWithHashingStrategyNoIteratorTest implements MutableMapTe
     }
 
     @Override
-    public void RichIterable_containsAny()
-    {
-        // Not applicable - this can be removed once anySatisfy is optimized to not use iterator
-    }
-
-    @Override
-    public void RichIterable_containsNone()
-    {
-        // Not applicable - this can be removed once noneSatisfy is optimized to not use iterator
-    }
-
-    @Override
-    public void MapIterable_detect()
-    {
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#detect(org.eclipse.collections.api.block.predicate.Predicate2)} should be optimized to not use an iterator
-         */
-    }
-
-    @Override
-    public void MapIterable_detectOptional()
-    {
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#detectOptional(org.eclipse.collections.api.block.predicate.Predicate2)} should be optimized to not use an iterator
-         */
-    }
-
-    @Override
-    public void RichIterable_detect()
-    {
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#detect(Predicate)} should be optimized to not use an iterator
-         */
-
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#detectOptional(Predicate)} should be optimized to not use an iterator
-         */
-    }
-
-    @Override
-    public void RichIterable_detectOptionalNull()
-    {
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#detectOptional(Predicate)} should be optimized to not use an iterator
-         */
-    }
-
-    @Override
-    public void RichIterable_iterationOrder()
-    {
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#anySatisfy(Predicate)} should be optimized to not use an iterator
-         */
-    }
-
-    @Override
-    public void RichIterable_minBy_maxBy()
-    {
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#minBy(Function)} should be optimized to not use an iterator
-         */
-
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#maxBy(Function)} should be optimized to not use an iterator
-         */
-    }
-
-    @Override
-    public void RichIterable_minByOptional_maxByOptional()
-    {
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#minByOptional(Function)} should be optimized to not use an iterator
-         */
-
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#maxByOptional(Function)} should be optimized to not use an iterator
-         */
-    }
-
-    @Override
     public void MutableMapIterable_updateValue()
     {
         /**
@@ -206,14 +126,6 @@ public class UnifiedMapWithHashingStrategyNoIteratorTest implements MutableMapTe
 
         /**
          * TODO: {@link org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy#addAll(Collection)} should be optimized to not use an iterator when another UnifiedSet is passed in.
-         */
-    }
-
-    @Override
-    public void MutableMapIterable_removeIf()
-    {
-        /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#removeIf(Predicate2)} should be optimized to not use an iterator
          */
     }
 
