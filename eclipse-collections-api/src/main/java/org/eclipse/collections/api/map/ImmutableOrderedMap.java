@@ -87,6 +87,9 @@ public interface ImmutableOrderedMap<K, V> extends OrderedMap<K, V>, ImmutableMa
     <R> ImmutableOrderedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    <R> ImmutableOrderedMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     ImmutableOrderedMap<K, V> toReversed();
 
     @Override

@@ -123,6 +123,15 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     }
 
     @Override
+    public <R> MutableBiMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().collectKeysUnique(function);
+        }
+    }
+
+    @Override
     public MutableSet<V> select(Predicate<? super V> predicate)
     {
         return (MutableSet<V>) super.select(predicate);

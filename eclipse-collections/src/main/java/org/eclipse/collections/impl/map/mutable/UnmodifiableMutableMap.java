@@ -441,6 +441,12 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
+    public <R> MutableMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return this.getMutableMap().collectKeysUnique(function);
+    }
+
+    @Override
     public <K2, V2> MutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return this.getMutableMap().collect(function);

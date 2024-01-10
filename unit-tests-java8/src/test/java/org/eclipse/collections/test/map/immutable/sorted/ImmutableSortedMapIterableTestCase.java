@@ -18,4 +18,13 @@ public interface ImmutableSortedMapIterableTestCase extends SortedMapIterableTes
 {
     @Override
     <T> ImmutableSortedMap<Object, T> newWith(T... elements);
+
+    @Override
+    <K, V> ImmutableSortedMap<K, V> newWithKeysValues(Object... elements);
+
+    @Override
+    default void Iterable_remove()
+    {
+        SortedMapIterableTestCase.super.Iterable_remove();
+    }
 }

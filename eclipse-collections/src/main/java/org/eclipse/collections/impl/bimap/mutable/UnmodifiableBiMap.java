@@ -570,6 +570,12 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     }
 
     @Override
+    public <R> MutableBiMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return this.delegate.collectKeysUnique(function);
+    }
+
+    @Override
     public BooleanIterable collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         return this.delegate.collectBoolean(booleanFunction);

@@ -114,6 +114,9 @@ public interface ImmutableMap<K, V>
     <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    <R> ImmutableMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     <VV> ImmutableBag<VV> collect(Function<? super V, ? extends VV> function);
 
     @Override
