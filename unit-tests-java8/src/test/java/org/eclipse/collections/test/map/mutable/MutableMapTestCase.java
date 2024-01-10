@@ -10,17 +10,13 @@
 
 package org.eclipse.collections.test.map.mutable;
 
-import java.util.Iterator;
-
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.test.MutableUnorderedIterableTestCase;
 import org.eclipse.collections.test.map.UnsortedMapIterableTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public interface MutableMapTestCase extends UnsortedMapIterableTestCase, MutableUnorderedIterableTestCase, MutableMapIterableTestCase
 {
@@ -46,14 +42,6 @@ public interface MutableMapTestCase extends UnsortedMapIterableTestCase, Mutable
     @Test
     default void Iterable_remove()
     {
-        MutableMap<Object, Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
-        Iterator<Integer> iterator = iterable.iterator();
-        iterator.next();
-        iterator.remove();
-        assertEquals(this.allowsDuplicates() ? 5 : 2, Iterate.sizeOf(iterable));
-        assertThat(iterable.toBag(), isOneOf(
-                this.getExpectedFiltered(3, 3, 3, 2, 2),
-                this.getExpectedFiltered(3, 3, 3, 2, 1),
-                this.getExpectedFiltered(3, 3, 2, 2, 1)));
+        MutableMapIterableTestCase.super.Iterable_remove();
     }
 }

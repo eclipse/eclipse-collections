@@ -645,6 +645,24 @@ public final class MapIterate
         return target;
     }
 
+    public static <K, V, K2, R extends Map<K2, V>> R collectKeysUnique(
+            Map<K, V> map,
+            Function2<? super K, ? super V, ? extends K2> function,
+            R target)
+    {
+        MapIterate.forEachKeyValue(
+                map,
+                (key, value) -> {
+                    K2 newKey = function.value(key, value);
+                    V previousValue = target.put(newKey, value);
+                    if (previousValue != null)
+                    {
+                        throw new IllegalStateException("Key " + newKey + " already exists in map!");
+                    }
+                });
+        return target;
+    }
+
     /**
      * For each value of the map, the Predicate2 is evaluated with the key and value as the parameter,
      * and if true, then {@code function} is applied.

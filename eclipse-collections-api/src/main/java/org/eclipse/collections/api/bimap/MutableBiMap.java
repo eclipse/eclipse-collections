@@ -86,6 +86,9 @@ public interface MutableBiMap<K, V> extends BiMap<K, V>, MutableMapIterable<K, V
     <R> MutableBiMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    <R> MutableBiMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     MutableSet<V> select(Predicate<? super V> predicate);
 
     @Override

@@ -188,6 +188,12 @@ final class EmptyMap<K, V>
     }
 
     @Override
+    public <R> FixedSizeMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return Maps.fixedSize.of();
+    }
+
+    @Override
     public <K2, V2> FixedSizeMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return Maps.fixedSize.of();

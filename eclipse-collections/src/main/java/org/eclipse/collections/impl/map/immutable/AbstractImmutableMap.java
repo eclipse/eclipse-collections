@@ -241,6 +241,13 @@ public abstract class AbstractImmutableMap<K, V>
     }
 
     @Override
+    public <R> ImmutableMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        UnifiedMap<R, V> result = MapIterate.collectKeysUnique(this, function, UnifiedMap.newMap(this.size()));
+        return result.toImmutable();
+    }
+
+    @Override
     public ImmutableMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
         MutableMap<K, V> result = MapIterate.selectMapOnEntry(this, predicate, UnifiedMap.newMap());

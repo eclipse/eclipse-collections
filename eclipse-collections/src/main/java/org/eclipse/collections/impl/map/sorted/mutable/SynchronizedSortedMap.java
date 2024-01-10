@@ -47,6 +47,7 @@ import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
@@ -501,6 +502,15 @@ public class SynchronizedSortedMap<K, V>
         synchronized (this.lock)
         {
             return this.getDelegate().collectValues(function);
+        }
+    }
+
+    @Override
+    public <R> MutableOrderedMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().collectKeysUnique(function);
         }
     }
 

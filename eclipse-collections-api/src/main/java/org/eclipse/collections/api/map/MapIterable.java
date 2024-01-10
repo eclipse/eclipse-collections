@@ -233,6 +233,16 @@ public interface MapIterable<K, V> extends RichIterable<V>
     <R> MapIterable<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     /**
+     * For each key and value of the map the function is evaluated. The results of these evaluations are returned in
+     * a new map. The map returned will use the keys projected from the function rather than the original keys.
+     *
+     * @throws IllegalStateException if the keys returned by the function are not unique
+     *
+     * @since 12.0
+     */
+    <R> MapIterable<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    /**
      * Return the first key and value of the map for which the predicate evaluates to true when they are given
      * as arguments. The predicate will only be evaluated until such pair is found or until all the keys and
      * values of the map have been used as arguments. That is, there may be keys and values of the map that are

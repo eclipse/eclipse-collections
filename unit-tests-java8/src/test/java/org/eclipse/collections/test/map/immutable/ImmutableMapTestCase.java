@@ -18,4 +18,13 @@ public interface ImmutableMapTestCase extends UnsortedMapIterableTestCase, Immut
 {
     @Override
     <T> ImmutableMap<Object, T> newWith(T... elements);
+
+    @Override
+    <K, V> ImmutableMap<K, V> newWithKeysValues(Object... elements);
+
+    @Override
+    default void Iterable_remove()
+    {
+        UnsortedMapIterableTestCase.super.Iterable_remove();
+    }
 }
