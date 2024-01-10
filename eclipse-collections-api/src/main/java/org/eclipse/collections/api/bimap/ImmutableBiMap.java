@@ -85,6 +85,9 @@ public interface ImmutableBiMap<K, V> extends BiMap<K, V>, ImmutableMapIterable<
     <R> ImmutableBiMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    <R> ImmutableBiMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     ImmutableSet<V> select(Predicate<? super V> predicate);
 
     @Override

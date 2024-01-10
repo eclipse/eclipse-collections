@@ -400,6 +400,12 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
+    public <R> MutableOrderedMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return this.delegate.collectKeysUnique(function);
+    }
+
+    @Override
     public MutableOrderedMap<K, V> toReversed()
     {
         return this.delegate.toReversed();
