@@ -77,6 +77,7 @@ import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
 import org.eclipse.collections.impl.collection.mutable.CollectionAdapter;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.AbstractMapIterable;
+import org.eclipse.collections.impl.map.ordered.immutable.ImmutableOrderedMapAdapter;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.set.mutable.SetAdapter;
@@ -381,7 +382,7 @@ public class OrderedMapAdapter<K, V>
     @Override
     public ImmutableOrderedMap<K, V> toImmutable()
     {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toImmutable() not implemented yet");
+        return new ImmutableOrderedMapAdapter<>(this);
     }
 
     @Override

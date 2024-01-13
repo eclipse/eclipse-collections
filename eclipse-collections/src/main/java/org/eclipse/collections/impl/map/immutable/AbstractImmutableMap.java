@@ -102,7 +102,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public MutableMap<K, V> toMap()
     {
-        return UnifiedMap.newMap(this);
+        return Maps.mutable.withMap(this);
     }
 
     @Override

@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.map;
 
+import java.util.Map;
+
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -34,12 +36,35 @@ import org.eclipse.collections.api.list.primitive.ImmutableFloatList;
 import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.ImmutableLongList;
 import org.eclipse.collections.api.list.primitive.ImmutableShortList;
+import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.tuple.Pair;
 
 public interface ImmutableOrderedMap<K, V> extends OrderedMap<K, V>, ImmutableMapIterable<K, V>
 {
+    @Override
+    ImmutableOrderedMap<K, V> newWithKeyValue(K key, V value);
+
+    @Override
+    ImmutableOrderedMap<K, V> newWithAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);
+
+    @Override
+    ImmutableOrderedMap<K, V> newWithMap(Map<? extends K, ? extends V> map);
+
+    @Override
+    ImmutableOrderedMap<K, V> newWithMapIterable(MapIterable<? extends K, ? extends V> mapIterable);
+
+    @Override
+    ImmutableOrderedMap<K, V> newWithAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs);
+
+    @Override
+    ImmutableOrderedMap<K, V> newWithoutKey(K key);
+
+    @Override
+    ImmutableOrderedMap<K, V> newWithoutAllKeys(Iterable<? extends K> keys);
+
     @Override
     ImmutableOrderedMap<K, V> tap(Procedure<? super V> procedure);
 
@@ -183,4 +208,18 @@ public interface ImmutableOrderedMap<K, V> extends OrderedMap<K, V>, ImmutableMa
     <KK> ImmutableOrderedMap<KK, V> reduceBy(
             Function<? super V, ? extends KK> groupBy,
             Function2<? super V, ? super V, ? extends V> reduceFunction);
+
+    @Override
+    <VV> ImmutableObjectLongMap<VV> sumByInt(
+            Function<? super V, ? extends VV> groupBy,
+            IntFunction<? super V> function);
+
+    @Override
+    <VV> ImmutableObjectDoubleMap<VV> sumByFloat(Function<? super V, ? extends VV> groupBy, FloatFunction<? super V> function);
+
+    @Override
+    <VV> ImmutableObjectLongMap<VV> sumByLong(Function<? super V, ? extends VV> groupBy, LongFunction<? super V> function);
+
+    @Override
+    <VV> ImmutableObjectDoubleMap<VV> sumByDouble(Function<? super V, ? extends VV> groupBy, DoubleFunction<? super V> function);
 }
