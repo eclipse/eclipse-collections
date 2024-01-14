@@ -117,16 +117,17 @@ public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name
         Assert.assertEquals(this.classUnderTest(), stack);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_with_negative_count_throws_exception()
     {
-        this.classUnderTest().pop(-1);
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().pop(-1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_with_count_greater_than_stack_size_throws_exception()
     {
-        this.classUnderTest().pop(this.classUnderTest().size() + 1);
+        Assert.assertThrows(IllegalArgumentException.class, () ->
+                this.classUnderTest().pop(this.classUnderTest().size() + 1));
     }
 
     @Override
@@ -172,10 +173,10 @@ public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name
     }
 
     @Override
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void medianThrowsOnEmpty()
     {
-        <name>Stacks.immutable.of().median();
+        Assert.assertThrows(ArithmeticException.class, () -> <name>Stacks.immutable.of().median());
     }
 
     @Override

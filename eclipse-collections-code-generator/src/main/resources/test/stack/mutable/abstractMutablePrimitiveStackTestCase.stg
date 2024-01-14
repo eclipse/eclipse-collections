@@ -85,10 +85,10 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
         Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowTypeWithParens.(type))("size - 2")>), stack.peek(1));
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void peek_empty_stack_throws_exception()
     {
-        this.newWith().peek();
+        Assert.assertThrows(EmptyStackException.class, () -> this.newWith().peek());
     }
 
     @Test
@@ -170,22 +170,22 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
         Verify.assertSize(0, stack1);
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void pop_empty_stack_throws_exception()
     {
-        this.newWith().pop();
+        Assert.assertThrows(EmptyStackException.class, () -> this.newWith().pop());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_with_negative_count_throws_exception()
     {
-        this.newWith(<(literal.(type))("1")>).pop(-1);
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith(<(literal.(type))("1")>).pop(-1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_with_count_greater_than_stack_size_throws_exception()
     {
-        this.newWith(<(literal.(type))("1")>).pop(2);
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith(<(literal.(type))("1")>).pop(2));
     }
 
     @Test

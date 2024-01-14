@@ -104,22 +104,24 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void peek_at_index_less_than_zero_throws_exception()
     {
-        this.classUnderTest().peekAt(-1);
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().peekAt(-1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void peek_at_index_greater_than_size_throws_exception()
     {
-        this.classUnderTest().peekAt(this.classUnderTest().size() + 1);
+        Assert.assertThrows(IllegalArgumentException.class, () ->
+                this.classUnderTest().peekAt(this.classUnderTest().size() + 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void peek_at_index_equal_to_size_throws_exception()
     {
-        this.classUnderTest().peekAt(this.classUnderTest().size());
+        Assert.assertThrows(IllegalArgumentException.class, () ->
+                this.classUnderTest().peekAt(this.classUnderTest().size()));
     }
 
     @Override
@@ -349,28 +351,30 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(-1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getFirst()
     {
-        this.classUnderTest().getFirst();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().getFirst());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void indexOf()
     {
-        this.classUnderTest().indexOf(<["0"]:(literal.(type))(); separator=", ">);
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().indexOf(<["0"]:(literal.(type))(); separator=", ">));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void injectIntoWithIndex()
     {
-        this.classUnderTest().injectIntoWithIndex(null, null);
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().injectIntoWithIndex(null, null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void forEachWithIndex()
     {
-        this.classUnderTest().forEachWithIndex(null);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().forEachWithIndex(null));
     }
 }
 
