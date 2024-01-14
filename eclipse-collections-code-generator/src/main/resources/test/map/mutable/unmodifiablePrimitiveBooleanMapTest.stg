@@ -76,17 +76,17 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.classUnderTest().clear();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeKey()
     {
-        this.classUnderTest().removeKey(<(literal.(type))("5")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeKey(<(literal.(type))("5")>));
     }
 
     @Override
@@ -96,62 +96,64 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
         Assert.assertTrue(this.classUnderTest().removeKeyIfAbsent(<(literal.(type))("10")>, true));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeKeyIfAbsentThrowsException()
     {
-        this.classUnderTest().removeKeyIfAbsent(<(literal.(type))("0")>, true);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeKeyIfAbsent(<(literal.(type))("0")>, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void put()
     {
-        this.classUnderTest().put(<(literal.(type))("0")>, true);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().put(<(literal.(type))("0")>, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void updateValues()
     {
-        this.classUnderTest().updateValues((k, v) -> v);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().updateValues((k, v) -> v));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withKeysValues()
     {
-        this.classUnderTest().withKeyValue(<(literal.(type))("1")>, true);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withKeyValue(<(literal.(type))("1")>, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutKey()
     {
-        this.classUnderTest().withoutKey(<(literal.(type))("32")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withoutKey(<(literal.(type))("32")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAllKeys()
     {
-        this.classUnderTest().withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>));
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAllKeyValues()
     {
-        this.classUnderTest().withAllKeyValues(Iterables.iList(PrimitiveTuples.pair(<(literal.(type))("1")>, true)));
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().withAllKeyValues(Iterables.iList(PrimitiveTuples.pair(<(literal.(type))("1")>, true))));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void putDuplicateWithRemovedSlot()
     {
         <type> collision1 = AbstractMutable<name>BooleanMapTestCase.generateCollisions().getFirst();
 
         Unmodifiable<name>BooleanMap hashMap = this.getEmptyMap();
-        hashMap.put(collision1, true);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> hashMap.put(collision1, true));
     }
 
     @Override
@@ -196,10 +198,10 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
         Assert.assertTrue(this.classUnderTest().getIfAbsentPut(<(literal.(type))("0")>, false));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutThrowsException()
     {
-        this.classUnderTest().getIfAbsentPut(<(literal.(type))("10")>, true);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().getIfAbsentPut(<(literal.(type))("10")>, true));
     }
 
     @Override
@@ -211,12 +213,13 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
         Assert.assertTrue(this.classUnderTest().getIfAbsentPut(<(literal.(type))("0")>, factory));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPut_FunctionThrowsException()
     {
         BooleanFunction0 factory = () -> true;
 
-        this.classUnderTest().getIfAbsentPut(<(literal.(type))("10")>, factory);
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().getIfAbsentPut(<(literal.(type))("10")>, factory));
     }
 
     @Override
@@ -228,12 +231,13 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
         Assert.assertTrue(this.classUnderTest().getIfAbsentPutWith(<(literal.(type))("0")>, functionLengthEven, "12345678"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutWithThrowsException()
     {
         BooleanFunction\<String> functionLengthEven = (String string) -> (string.length() & 1) == <(literal.(type))("0")>;
 
-        this.classUnderTest().getIfAbsentPutWith(<(literal.(type))("10")>, functionLengthEven, "unused");
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().getIfAbsentPutWith(<(literal.(type))("10")>, functionLengthEven, "unused"));
     }
 
     @Override
@@ -245,21 +249,23 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
         Assert.assertTrue(this.classUnderTest().getIfAbsentPutWithKey(<(literal.(type))("0")>, keyIsEven));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutWithKeyThrowsException()
     {
         <name>ToBooleanFunction keyIsEven = (<type> parameter) -> (<(castRealTypeToInt.(type))("parameter")> & 1) == <(literal.(type))("0")>;
 
-        this.classUnderTest().getIfAbsentPutWithKey(<(literal.(type))("10")>, keyIsEven);
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().getIfAbsentPutWithKey(<(literal.(type))("10")>, keyIsEven));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void updateValue()
     {
         BooleanToBooleanFunction flip = (boolean value) -> !value;
 
-        this.classUnderTest().updateValue(<(literal.(type))("0")>, false, flip);
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().updateValue(<(literal.(type))("0")>, false, flip));
     }
 
     @Override

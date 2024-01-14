@@ -72,10 +72,11 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
         Assert.assertEquals(32L, ((<type>[]) values.get(hashMap2)).length);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        this.newMapWithInitialCapacity(-1);
+        Assert.assertThrows(IllegalArgumentException.class, () ->
+                this.newMapWithInitialCapacity(-1));
     }
 
     @Test

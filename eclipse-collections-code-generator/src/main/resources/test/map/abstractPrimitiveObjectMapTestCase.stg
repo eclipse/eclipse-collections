@@ -913,10 +913,10 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals("abcd", map3.min(Comparators.naturalOrder()));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_throws_empty()
     {
-        <name>ObjectHashMap.newMap().min();
+        Assert.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.newMap().min());
     }
 
     @Test
@@ -947,10 +947,10 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals("zyx", map3.max(Comparators.naturalOrder()));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_throws_empty()
     {
-        <name>ObjectHashMap.newMap().max();
+        Assert.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.newMap().max());
     }
 
     @Test
@@ -1346,16 +1346,17 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals("two", this.newWithKeysValues(<(literal.(type))("2")>, "two").getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_empty_throws()
     {
-        this.getEmptyMap().getOnly();
+        Assert.assertThrows(IllegalStateException.class, () -> this.getEmptyMap().getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_not_only_one_throws()
     {
-        this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five").getOnly();
+        Assert.assertThrows(IllegalStateException.class, () ->
+                this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five").getOnly());
     }
 
     @Test
@@ -1552,18 +1553,18 @@ public abstract class Abstract<name>ObjectMapTestCase
                 || FastList.newListWith(FastList.newListWith("five"), FastList.newListWith("one")).equals(chunk2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_throws_negative_size()
     {
-        this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five")
-                .chunk(-1);
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five")
+                .chunk(-1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_throws_zero_size()
     {
-        this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five")
-                .chunk(0);
+        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five")
+                .chunk(0));
     }
 
     @Test
@@ -1670,12 +1671,12 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals(UnifiedMap.newWithKeysValues('t', "two"), map2.groupByUniqueKey(firstChar));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
         Function\<String, Character> firstChar = (String object) -> 'a';
-        map1.groupByUniqueKey(firstChar);
+        Assert.assertThrows(IllegalStateException.class, () -> map1.groupByUniqueKey(firstChar));
     }
 
     @Test
@@ -1688,28 +1689,31 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals(UnifiedMap.newWithKeysValues('z', "zero", 't', "two"), map2.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('t', "two")));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws_1()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
         Function\<String, Character> firstChar = (String object) -> object.charAt(0);
-        map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('z', "zero"));
+        Assert.assertThrows(IllegalStateException.class, () ->
+                map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('z', "zero")));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws_2()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero");
         Function\<String, Character> firstChar = (String object) -> object.charAt(0);
-        map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('z', "zero"));
+        Assert.assertThrows(IllegalStateException.class, () ->
+                map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('z', "zero")));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws_3()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("2")>, "two");
         Function\<String, Character> firstChar = (String object) -> object.charAt(0);
-        map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('t', "two"));
+        Assert.assertThrows(IllegalStateException.class, () ->
+                map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('t', "two")));
     }
 
     @Test

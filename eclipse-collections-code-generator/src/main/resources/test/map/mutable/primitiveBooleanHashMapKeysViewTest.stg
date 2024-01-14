@@ -151,7 +151,7 @@ public class <name>BooleanHashMapKeysViewTest
         Assert.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         <name>Iterator iterator = this.iterable.<type>Iterator();
@@ -160,7 +160,7 @@ public class <name>BooleanHashMapKeysViewTest
             iterator.next();
         }
 
-        iterator.next();
+        Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test
@@ -243,10 +243,10 @@ public class <name>BooleanHashMapKeysViewTest
         Assert.assertEquals(generateCollisions1().get(1), this.iterable.max()<delta.(type)>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_throws_emptyList()
     {
-        new <name>BooleanHashMap().keysView().max();
+        Assert.assertThrows(NoSuchElementException.class, () -> new <name>BooleanHashMap().keysView().max());
     }
 
     @Test
@@ -272,10 +272,10 @@ public class <name>BooleanHashMapKeysViewTest
         Assert.assertEquals(generateCollisions1().get(1), this.iterable.maxIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_throws_emptyList()
     {
-        new <name>BooleanHashMap().keysView().min();
+        Assert.assertThrows(NoSuchElementException.class, () -> new <name>BooleanHashMap().keysView().min());
     }
 
     @Test
@@ -284,10 +284,10 @@ public class <name>BooleanHashMapKeysViewTest
         Assert.assertEquals(<(wideLiteral.(type))("94")>, <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("30")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true).withKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false).keysView().sum()<wideDelta.(type)>);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void average_throws_emptyList()
     {
-        new <name>BooleanHashMap().keysView().average();
+        Assert.assertThrows(ArithmeticException.class, () -> new <name>BooleanHashMap().keysView().average());
     }
 
     @Test
@@ -303,10 +303,10 @@ public class <name>BooleanHashMapKeysViewTest
         Assert.assertEquals(30.5, <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("30")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true).withKeyValue(<(literal.(type))("1")>, true).keysView().median(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void median_throws_emptyList()
     {
-        new <name>BooleanHashMap().keysView().median();
+        Assert.assertThrows(ArithmeticException.class, () -> new <name>BooleanHashMap().keysView().median());
     }
 
     @Test

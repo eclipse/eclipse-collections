@@ -57,39 +57,39 @@ public class Synchronized<name>BooleanMapKeySetTest extends Abstract<name>SetTes
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        this.classUnderTest().addAll(new <name>ArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name>ArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.classUnderTest().add(<(literal.(type))("0")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type))("0")>));
     }
 
     <if(primitive.floatingPoint)><NaNTests()><endif>
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllArray()
     {
-        this.classUnderTest().addAll(<["0", "1"]:(literal.(type))(); separator=", ">);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type))(); separator=", ">));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.classUnderTest().with(<(literal.(type))("0")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type))("0")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.classUnderTest().withAll(new <name>ArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withAll(new <name>ArrayList()));
     }
 
     @Override
@@ -115,10 +115,10 @@ public class Synchronized<name>BooleanMapKeySetTest extends Abstract<name>SetTes
         Assert.assertEquals(expectedSet.toList(), setWithout.toList());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void freeze()
     {
-        this.classUnderTest().freeze();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().freeze());
     }
 
     @Override
@@ -204,24 +204,26 @@ public class Synchronized<name>BooleanMapKeySetTest extends Abstract<name>SetTes
 
 NaNTests() ::= <<
 @Override
-@Test(expected = UnsupportedOperationException.class)
+@Test
 public void add_NaN()
 {
-    this.newWith(<wrapperName>.NaN).add(<wrapperName>.NaN);
+    Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith(<wrapperName>.NaN).add(<wrapperName>.NaN));
 }
 
 @Override
-@Test(expected = UnsupportedOperationException.class)
+@Test
 public void add_POSITIVE_INFINITY()
 {
-    this.newWith(<wrapperName>.POSITIVE_INFINITY).add(<wrapperName>.POSITIVE_INFINITY);
+    Assert.assertThrows(UnsupportedOperationException.class, () ->
+            this.newWith(<wrapperName>.POSITIVE_INFINITY).add(<wrapperName>.POSITIVE_INFINITY));
 }
 
 @Override
-@Test(expected = UnsupportedOperationException.class)
+@Test
 public void add_NEGATIVE_INFINITY()
 {
-    this.newWith(<wrapperName>.NEGATIVE_INFINITY).add(<wrapperName>.NEGATIVE_INFINITY);
+    Assert.assertThrows(UnsupportedOperationException.class, () ->
+            this.newWith(<wrapperName>.NEGATIVE_INFINITY).add(<wrapperName>.NEGATIVE_INFINITY));
 }
 
 >>

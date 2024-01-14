@@ -326,16 +326,16 @@ public abstract class Abstract<name>BooleanMapKeyValuesViewTestCase
         Assert.assertNull(this.newWith(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false).detect(PrimitiveTuples.pair(2, 4L)::equals));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws()
     {
-        this.newWith().min(Comparators.naturalOrder());
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().min(Comparators.naturalOrder()));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws()
     {
-        this.newWith().max(Comparators.naturalOrder());
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().max(Comparators.naturalOrder()));
     }
 
     @Test
@@ -542,7 +542,7 @@ public abstract class Abstract<name>BooleanMapKeyValuesViewTestCase
         Assert.assertEquals(objects.toBag(), actual);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_next_throws()
     {
         RichIterable\<<name>BooleanPair> objects = this.newWith(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false);
@@ -553,15 +553,15 @@ public abstract class Abstract<name>BooleanMapKeyValuesViewTestCase
             iterator.next();
         }
         Assert.assertFalse(iterator.hasNext());
-        iterator.next();
+        Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void iterator_remove_throws()
     {
         RichIterable\<<name>BooleanPair> objects = this.newWith(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false);
         Iterator\<<name>BooleanPair> iterator = objects.iterator();
-        iterator.remove();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
     }
 
     @Test
@@ -921,11 +921,11 @@ public abstract class Abstract<name>BooleanMapKeyValuesViewTestCase
                 collection.chunk(1).toBag());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
         RichIterable\<<name>BooleanPair> collection = this.newWith(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false);
-        collection.chunk(0);
+        Assert.assertThrows(IllegalArgumentException.class, () -> collection.chunk(0));
     }
 
     @Test

@@ -354,16 +354,16 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
         Assert.assertNull(this.newWith(<(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>, 4).detect(Predicates.equal(PrimitiveTuples.pair(<(literal.(type))("2")>, Integer.valueOf(4)))));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws()
     {
-        this.newWith().min(Comparators.naturalOrder());
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().min(Comparators.naturalOrder()));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws()
     {
-        this.newWith().max(Comparators.naturalOrder());
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().max(Comparators.naturalOrder()));
     }
 
     @Test
@@ -585,7 +585,7 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
         Assert.assertEquals(objects.toBag(), actual);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_next_throws()
     {
         RichIterable\<<name>ObjectPair\<Integer>\> objects = this.newWith(<(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>, 4);
@@ -596,15 +596,15 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
             iterator.next();
         }
         Assert.assertFalse(iterator.hasNext());
-        iterator.next();
+        Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void iterator_remove_throws()
     {
         RichIterable\<<name>ObjectPair\<Integer>\> objects = this.newWith(<(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>, 4);
         Iterator\<<name>ObjectPair\<Integer>\> iterator = objects.iterator();
-        iterator.remove();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
     }
 
     @Test
@@ -953,11 +953,11 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
                 collection.chunk(1).toBag());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
         RichIterable\<<name>ObjectPair\<Integer>\> collection = this.newWith(<(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>, 4);
-        collection.chunk(0);
+        Assert.assertThrows(IllegalArgumentException.class, () -> collection.chunk(0));
     }
 
     @Test

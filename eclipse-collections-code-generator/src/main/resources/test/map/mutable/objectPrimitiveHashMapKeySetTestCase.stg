@@ -44,16 +44,18 @@ public abstract class Object<name>HashMapKeySetTestCase
 
     public abstract MutableObject<name>Map\<String> newEmptyMap();
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>).keySet().add("Four");
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>).keySet().add("Four"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>).keySet().addAll(FastList.newListWith("Four"));
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>).keySet().addAll(FastList.newListWith("Four")));
     }
 
     @Test

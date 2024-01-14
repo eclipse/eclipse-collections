@@ -104,10 +104,10 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
         Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        new <name>BooleanHashMap(-1);
+        Assert.assertThrows(IllegalArgumentException.class, () -> new <name>BooleanHashMap(-1));
     }
 
     @Test
