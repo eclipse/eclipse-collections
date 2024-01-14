@@ -37,10 +37,10 @@ public class BoxedMutable<name>SetTest
         return new BoxedMutable<name>Set(new <name>HashSet(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void setCreationValidation()
     {
-        new BoxedMutable<name>Set(null);
+        Assert.assertThrows(NullPointerException.class, () -> new BoxedMutable<name>Set(null));
     }
 
     @Test
@@ -52,16 +52,16 @@ public class BoxedMutable<name>SetTest
         Verify.assertEmpty(set);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getFirst()
     {
-        this.classUnderTest().getFirst();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().getFirst());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getLast()
     {
-        this.classUnderTest().getLast();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().getLast());
     }
 
     @Test
@@ -111,10 +111,10 @@ public class BoxedMutable<name>SetTest
         Verify.assertEmpty(set);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void asParallel()
     {
-        this.classUnderTest().asParallel(null, 1);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().asParallel(null, 1));
     }
 
     @Test

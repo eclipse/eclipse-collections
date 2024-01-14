@@ -65,10 +65,10 @@ public class <name>HashSetTest extends Abstract<name>SetTestCase
         Assert.assertEquals(32L, ((<type>[]) table.get(hashSet2)).length);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        new <name>HashSet(-1);
+        Assert.assertThrows(IllegalArgumentException.class, () -> new <name>HashSet(-1));
     }
 
     @Override
