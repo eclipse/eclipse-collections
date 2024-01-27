@@ -298,7 +298,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void <type>Iterator_throws()
     {
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
@@ -308,7 +308,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
             iterator.next();
         }
 
-        iterator.next();
+        Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override

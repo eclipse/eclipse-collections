@@ -137,7 +137,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void <type>Iterator_throws()
     {
         Immutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1));
@@ -147,7 +147,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
             iterator.next();
         }
 
-        iterator.next();
+        Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
