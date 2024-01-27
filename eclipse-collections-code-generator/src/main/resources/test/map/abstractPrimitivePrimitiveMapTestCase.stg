@@ -457,11 +457,11 @@ public abstract class Abstract<name1><name2>MapTestCase
     {
         <name1><name2>Map map0 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>);
 
-        Long sum0 = map0.injectIntoKeyValue(new Long(0), (Long sum, <type1> eachKey, <type2> eachValue) ->
+        Long sum0 = map0.injectIntoKeyValue(Long.valueOf(0), (Long sum, <type1> eachKey, <type2> eachValue) ->
         {
-            return new Long((long) (sum + eachKey + eachValue));
+            return Long.valueOf((long) (sum + eachKey + eachValue));
         });
-        Assert.assertEquals(new Long(8), sum0);
+        Assert.assertEquals(Long.valueOf(8), sum0);
 
         <name1><name2>Map copy = map0.injectIntoKeyValue(<name1><name2>Maps.mutable.empty(), Mutable<name1><name2>Map::withKeyValue);
         Assert.assertEquals(map0, copy);
@@ -700,16 +700,16 @@ public abstract class Abstract<name1><name2>MapTestCase
         Assert.assertEquals(<(literal.(type2))("3")>, this.newWithKeysValues(<["3"]:keyValue(); separator=", ">).min()<(wideDelta.(type2))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws()
     {
-        this.getEmptyMap().max();
+        Assert.assertThrows(NoSuchElementException.class, () -> this.getEmptyMap().max());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws()
     {
-        this.getEmptyMap().min();
+        Assert.assertThrows(NoSuchElementException.class, () -> this.getEmptyMap().min());
     }
 
     @Test
@@ -752,10 +752,10 @@ public abstract class Abstract<name1><name2>MapTestCase
         Assert.assertEquals(1.0, map1.average(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void averageThrowsOnEmpty()
     {
-        this.getEmptyMap().average();
+        Assert.assertThrows(ArithmeticException.class, () -> this.getEmptyMap().average());
     }
 
     @Test
@@ -769,10 +769,10 @@ public abstract class Abstract<name1><name2>MapTestCase
         Assert.assertEquals(1.0, map3.median(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void medianThrowsOnEmpty()
     {
-        this.getEmptyMap().median();
+        Assert.assertThrows(ArithmeticException.class, () -> this.getEmptyMap().median());
     }
 
     @Test

@@ -103,10 +103,10 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         Assert.assertEquals(32L, ((Object[]) values.get(hashMap2)).length);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        new <name>ObjectHashMap\<>(-1);
+        Assert.assertThrows(IllegalArgumentException.class, () -> new <name>ObjectHashMap\<>(-1));
     }
 
     @Test

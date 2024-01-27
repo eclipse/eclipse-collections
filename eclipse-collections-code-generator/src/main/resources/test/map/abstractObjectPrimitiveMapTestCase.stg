@@ -525,10 +525,10 @@ public abstract class AbstractObject<name>MapTestCase
         Assert.assertEquals(<(literal.(type))("3")>, this.newWithKeysValues(null, <(literal.(type))("3")>, 0, <(literal.(type))("0")>, 2, <(literal.(type))("2")>).max()<delta.(type)>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_throws_emptyList()
     {
-        this.\<Integer>getEmptyMap().max();
+        Assert.assertThrows(NoSuchElementException.class, () -> this.\<Integer>getEmptyMap().max());
     }
 
     @Test
@@ -538,10 +538,10 @@ public abstract class AbstractObject<name>MapTestCase
         Assert.assertEquals(<(literal.(type))("0")>, this.newWithKeysValues(null, <(literal.(type))("0")>, 5, <(literal.(type))("5")>, 1, <(literal.(type))("1")>).min()<delta.(type)>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_throws_emptyList()
     {
-        this.\<Integer>getEmptyMap().min();
+        Assert.assertThrows(NoSuchElementException.class, () -> this.\<Integer>getEmptyMap().min());
     }
 
     @Test
@@ -566,10 +566,10 @@ public abstract class AbstractObject<name>MapTestCase
         Assert.assertEquals(1.0, this.map.average(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void averageThrowsOnEmpty()
     {
-        this.getEmptyMap().average();
+        Assert.assertThrows(ArithmeticException.class, () -> this.getEmptyMap().average());
     }
 
     @Test
@@ -579,10 +579,10 @@ public abstract class AbstractObject<name>MapTestCase
         Assert.assertEquals(1.5, this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3", <(literal.(type))("3")>).median(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void medianThrowsOnEmpty()
     {
-        this.getEmptyMap().median();
+        Assert.assertThrows(ArithmeticException.class, () -> this.getEmptyMap().median());
     }
 
     @Test

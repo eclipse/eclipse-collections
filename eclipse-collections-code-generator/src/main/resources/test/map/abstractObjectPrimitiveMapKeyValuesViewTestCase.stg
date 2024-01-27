@@ -313,16 +313,16 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
         Assert.assertNull(this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>).detect(Predicates.equal(PrimitiveTuples.pair(<(literal.(type))("2")>, Integer.valueOf(4)))));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws()
     {
-        this.newWith().min(Comparators.naturalOrder());
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().min(Comparators.naturalOrder()));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws()
     {
-        this.newWith().max(Comparators.naturalOrder());
+        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().max(Comparators.naturalOrder()));
     }
 
     @Test
@@ -525,7 +525,7 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
         Assert.assertEquals(objects.toBag(), actual);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         RichIterable\<Object<name>Pair\<Integer>\> objects = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>);
@@ -536,7 +536,7 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
             iterator.next();
         }
         Assert.assertFalse(iterator.hasNext());
-        iterator.next();
+        Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test
@@ -877,11 +877,11 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
                 collection.chunk(1).toBag());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
         RichIterable\<Object<name>Pair\<Integer>\> collection = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>);
-        collection.chunk(0);
+        Assert.assertThrows(IllegalArgumentException.class, () -> collection.chunk(0));
     }
 
     @Test

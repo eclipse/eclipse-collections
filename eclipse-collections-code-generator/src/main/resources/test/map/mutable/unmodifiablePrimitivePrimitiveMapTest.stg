@@ -82,24 +82,24 @@ public class Unmodifiable<name1><name2>MapTest extends AbstractMutable<name1><na
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.map.clear();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.clear());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeKey()
     {
-        this.map.removeKey(<(literal.(type1))("5")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.removeKey(<(literal.(type1))("5")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        this.map.remove(<(literal.(type1))("5")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.remove(<(literal.(type1))("5")>));
     }
 
     @Override
@@ -109,84 +109,85 @@ public class Unmodifiable<name1><name2>MapTest extends AbstractMutable<name1><na
         Assert.assertEquals(<(literal.(type2))("100")>, this.map.removeKeyIfAbsent(<(literal.(type1))("10")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeKeyIfAbsentThrowsException()
     {
         Assert.assertEquals(<(literal.(type2))("100")>, this.map.removeKeyIfAbsent(<(literal.(type1))("10")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
-        this.map.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void put()
     {
-        this.map.put(<(literal.(type1))("0")>, <(literal.(type2))("1")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.put(<(literal.(type1))("0")>, <(literal.(type2))("1")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getAndPut()
     {
-        this.map.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type2))("2")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type2))("2")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void putPair()
     {
-        this.map.putPair(PrimitiveTuples.pair(<(literal.(type1))("0")>, <(literal.(type2))("1")>));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.putPair(PrimitiveTuples.pair(<(literal.(type1))("0")>, <(literal.(type2))("1")>)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void updateValues()
     {
-        this.map.updateValues((k, v) -> v);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.updateValues((k, v) -> v));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addToValue()
     {
-        this.map.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("1")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("1")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withKeysValues()
     {
-        this.map.withKeyValue(<(literal.(type1))("1")>, <(literal.(type2))("1")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.withKeyValue(<(literal.(type1))("1")>, <(literal.(type2))("1")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutKey()
     {
-        this.map.withoutKey(<(literal.(type1))("32")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.withoutKey(<(literal.(type1))("32")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAllKeys()
     {
-        this.map.withoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.withoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAllKeyValues()
     {
-        this.map.withAllKeyValues(Iterables.iList(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("1")>)));
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.map.withAllKeyValues(Iterables.iList(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("1")>))));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void putDuplicateWithRemovedSlot()
     {
         <type1> collision1 = AbstractMutable<name1><name2>MapTestCase.generateCollisions().getFirst();
 
         Unmodifiable<name1><name2>Map hashMap = this.getEmptyMap();
-        hashMap.put(collision1, <(literal.(type2))("1")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> hashMap.put(collision1, <(literal.(type2))("1")>));
     }
 
     @Override
@@ -229,10 +230,10 @@ public class Unmodifiable<name1><name2>MapTest extends AbstractMutable<name1><na
         Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.getIfAbsentPut(<(literal.(type1))("0")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutThrowsException()
     {
-        this.map.getIfAbsentPut(<(literal.(type1))("10")>, <(literal.(type2))("100")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.getIfAbsentPut(<(literal.(type1))("10")>, <(literal.(type2))("100")>));
     }
 
     @Override
@@ -244,12 +245,12 @@ public class Unmodifiable<name1><name2>MapTest extends AbstractMutable<name1><na
         Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.getIfAbsentPut(<(literal.(type1))("0")>, factory)<(wideDelta.(type2))>);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPut_FunctionThrowsException()
     {
         <name2>Function0 factory = () -> <(literal.(type2))("100")>;
 
-        this.map.getIfAbsentPut(<(literal.(type1))("10")>, factory);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.getIfAbsentPut(<(literal.(type1))("10")>, factory));
     }
 
     @Override
@@ -261,12 +262,13 @@ public class Unmodifiable<name1><name2>MapTest extends AbstractMutable<name1><na
         Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.getIfAbsentPutWith(<(literal.(type1))("0")>, functionLength, "123456789")<(wideDelta.(type2))>);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutWithThrowsException()
     {
         <name2>Function\<String> functionLength = (String string) -> <(castFromInt.(type2))("string.length()")>;
 
-        this.map.getIfAbsentPutWith(<(literal.(type1))("10")>, functionLength, "unused");
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.map.getIfAbsentPutWith(<(literal.(type1))("10")>, functionLength, "unused"));
     }
 
     @Override
@@ -287,26 +289,26 @@ public class Unmodifiable<name1><name2>MapTest extends AbstractMutable<name1><na
         Assert.assertEquals(frozenSet, frozenSetCopy);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutWithKeyThrowsException()
     {
         <name1>To<name2>Function function = (<type1> <type1>Parameter) -> <castExactly(type2, {<type1>Parameter}, sameTwoPrimitives)>;
-        this.map.getIfAbsentPutWithKey(<(literal.(type1))("10")>, function);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.getIfAbsentPutWithKey(<(literal.(type1))("10")>, function));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void putAllThrowsException()
     {
         Unmodifiable<name1><name2>Map copyMap = new Unmodifiable<name1><name2>Map(<name1><name2>HashMap.newWithKeysValues(<["0", "31", "32"]:keyValue(); separator=", ">));
-        this.map.putAll(copyMap);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.putAll(copyMap));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void updateValue()
     {
         <name2>To<name2>Function incrementFunction = (<type2> value) -> <(castIntToNarrowTypeWithParens.(type2))({value + <(literal.(type2))("1")>})>;
-        this.map.updateValue(<keyValue("0")>, incrementFunction);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.map.updateValue(<keyValue("0")>, incrementFunction));
     }
 
     @Override

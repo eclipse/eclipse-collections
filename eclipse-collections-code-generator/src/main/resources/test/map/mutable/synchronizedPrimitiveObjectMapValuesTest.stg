@@ -55,16 +55,19 @@ public class Synchronized<name>ObjectMapValuesTest
         return new Synchronized<name>ObjectMap\<>(<name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3).withKeyValue(key4, value4));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3).values().add(4);
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3).values().add(4));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3).values().addAll(FastList.newListWith(4));
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3)
+                    .values().addAll(FastList.newListWith(4)));
     }
 
     @Test

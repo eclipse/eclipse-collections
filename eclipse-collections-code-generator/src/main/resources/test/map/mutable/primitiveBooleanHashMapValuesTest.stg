@@ -93,52 +93,55 @@ public class <name>BooleanHashMapValuesTest extends AbstractMutableBooleanCollec
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        this.classUnderTest().addAll(new BooleanArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().addAll(new BooleanArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.classUnderTest().add(false);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllArray()
     {
-        this.classUnderTest().addAll(true, false);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(true, false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.classUnderTest().with(true);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        this.classUnderTest().without(false);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().without(false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.classUnderTest().withAll(new BooleanArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().withAll(new BooleanArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        this.classUnderTest().withoutAll(new BooleanArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().withoutAll(new BooleanArrayList()));
     }
 
     @Override

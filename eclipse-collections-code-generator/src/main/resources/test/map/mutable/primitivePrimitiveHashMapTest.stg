@@ -124,10 +124,10 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         <endif>
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        new <name1><name2>HashMap(-1);
+        Assert.assertThrows(IllegalArgumentException.class, () -> new <name1><name2>HashMap(-1));
     }
 
     @Test

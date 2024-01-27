@@ -57,102 +57,103 @@ public class Unmodifiable<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        this.classUnderTest().addAll(new <name1>ArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name1>ArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.classUnderTest().add(<(literal.(type1))("0")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type1))("0")>));
     }
 
     <if(primitive1.floatingPoint)><NaNTests()><endif>
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllArray()
     {
-        this.classUnderTest().addAll(<["0", "1"]:(literal.(type1))(); separator=", ">);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type1))(); separator=", ">));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.classUnderTest().with(<(literal.(type1))("0")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type1))("0")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        this.classUnderTest().without(<(literal.(type1))("0")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().without(<(literal.(type1))("0")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.classUnderTest().withAll(new <name1>ArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withAll(new <name1>ArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        this.classUnderTest().withoutAll(new <name1>ArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withoutAll(new <name1>ArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        this.classUnderTest().remove(<(literal.(type1))("1")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(<(literal.(type1))("1")>));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIf()
     {
-        this.classUnderTest().removeIf(<name1>Predicates.equal(<(literal.(type1))("1")>));
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().removeIf(<name1>Predicates.equal(<(literal.(type1))("1")>)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll_iterable()
     {
-        this.classUnderTest().removeAll(new <name1>ArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll(new <name1>ArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        this.classUnderTest().removeAll();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll_iterable()
     {
-        this.classUnderTest().retainAll(new <name1>ArrayList());
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll(new <name1>ArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        this.classUnderTest().retainAll();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.classUnderTest().clear();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
     @Override
@@ -268,24 +269,26 @@ keyValue(value) ::= <<
 
 NaNTests() ::= <<
 @Override
-@Test(expected = UnsupportedOperationException.class)
+@Test
 public void add_NaN()
 {
-    this.newWith(<wrapperName1>.NaN).add(<wrapperName1>.NaN);
+    Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith(<wrapperName1>.NaN).add(<wrapperName1>.NaN));
 }
 
 @Override
-@Test(expected = UnsupportedOperationException.class)
+@Test
 public void add_POSITIVE_INFINITY()
 {
-    this.newWith(<wrapperName1>.POSITIVE_INFINITY).add(<wrapperName1>.POSITIVE_INFINITY);
+    Assert.assertThrows(UnsupportedOperationException.class, () ->
+            this.newWith(<wrapperName1>.POSITIVE_INFINITY).add(<wrapperName1>.POSITIVE_INFINITY));
 }
 
 @Override
-@Test(expected = UnsupportedOperationException.class)
+@Test
 public void add_NEGATIVE_INFINITY()
 {
-    this.newWith(<wrapperName1>.NEGATIVE_INFINITY).add(<wrapperName1>.NEGATIVE_INFINITY);
+    Assert.assertThrows(UnsupportedOperationException.class, () ->
+            this.newWith(<wrapperName1>.NEGATIVE_INFINITY).add(<wrapperName1>.NEGATIVE_INFINITY));
 }
 
 >>
