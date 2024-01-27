@@ -45,17 +45,17 @@ public class Immutable<name>EmptyStackTest extends AbstractImmutable<name>StackT
     }
 
     @Override
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void pop()
     {
-        this.classUnderTest().pop();
+        Assert.assertThrows(EmptyStackException.class, () -> this.classUnderTest().pop());
     }
 
     @Override
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void pop_with_count_greater_than_stack_size_throws_exception()
     {
-        this.classUnderTest().pop(1);
+        Assert.assertThrows(EmptyStackException.class, () -> this.classUnderTest().pop(1));
     }
 
     @Override
@@ -77,10 +77,10 @@ public class Immutable<name>EmptyStackTest extends AbstractImmutable<name>StackT
     }
 
     @Override
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void peek()
     {
-        this.classUnderTest().peek();
+        Assert.assertThrows(EmptyStackException.class, () -> this.classUnderTest().peek());
     }
 
     @Test
@@ -91,24 +91,24 @@ public class Immutable<name>EmptyStackTest extends AbstractImmutable<name>StackT
     }
 
     @Override
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void peek_at_index_equal_to_size_throws_exception()
     {
-        this.classUnderTest().peekAt(0);
+        Assert.assertThrows(EmptyStackException.class, () -> this.classUnderTest().peekAt(0));
     }
 
     @Override
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void peek_at_index_greater_than_size_throws_exception()
     {
-        this.classUnderTest().peekAt(1);
+        Assert.assertThrows(EmptyStackException.class, () -> this.classUnderTest().peekAt(1));
     }
 
     @Override
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void average()
     {
-        this.classUnderTest().average();
+        Assert.assertThrows(ArithmeticException.class, () -> this.classUnderTest().average());
     }
 
     @Override
@@ -119,10 +119,10 @@ public class Immutable<name>EmptyStackTest extends AbstractImmutable<name>StackT
     }
 
     @Override
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void median()
     {
-        this.classUnderTest().median();
+        Assert.assertThrows(ArithmeticException.class, () -> this.classUnderTest().median());
     }
 
     @Override
@@ -133,17 +133,17 @@ public class Immutable<name>EmptyStackTest extends AbstractImmutable<name>StackT
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.classUnderTest().max();
+        Assert.assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.classUnderTest().min();
+        Assert.assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override

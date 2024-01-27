@@ -40,10 +40,11 @@ public class Immutable<name>ArrayStackTest extends AbstractImmutable<name>StackT
         return Immutable<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testNewStack_throws()
     {
-        Immutable<name>ArrayStack.newStack(<name>Stacks.mutable.with(<["1"]:(literal.(type))(); separator=", ">));
+        Assert.assertThrows(IllegalArgumentException.class, () ->
+                Immutable<name>ArrayStack.newStack(<name>Stacks.mutable.with(<["1"]:(literal.(type))(); separator=", ">)));
     }
 
     @Test

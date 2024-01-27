@@ -54,28 +54,29 @@ public class Unmodifiable<name>StackTest extends Abstract<name>StackTestCase
         return new Unmodifiable<name>Stack(<name>ArrayStack.newStackFromTopToBottom(elements));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void push()
     {
-        this.classUnderTest().push(<(literal.(type))("5")>);
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                this.classUnderTest().push(<(literal.(type))("5")>));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void pop()
     {
-        this.classUnderTest().pop();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().pop());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void popWithCount()
     {
-        this.classUnderTest().pop(2);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().pop(2));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.classUnderTest().clear();
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
     @Test
