@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -232,34 +232,26 @@ public interface IterableTestCase
         assertTrue(set.add(iterator.next()));
         assertTrue(set.add(iterator.next()));
         IterableTestCase.assertEquals(Sets.immutable.with(3, 2, 1), set);
-    }
 
-    @Test
-    default void Iterable_next_throws_on_empty()
-    {
         assertThrows(NoSuchElementException.class, () -> this.newWith().iterator().next());
-    }
 
-    @Test
-    default void Iterable_next_throws_at_end()
-    {
-        Iterable<Integer> iterable = this.newWith(3, 2, 1);
-        Iterator<Integer> iterator = iterable.iterator();
-        assertTrue(iterator.hasNext());
-        iterator.next();
-        assertTrue(iterator.hasNext());
-        iterator.next();
-        assertTrue(iterator.hasNext());
-        iterator.next();
-        assertFalse(iterator.hasNext());
-        assertThrows(NoSuchElementException.class, iterator::next);
+        Iterable<Integer> iterable2 = this.newWith(3, 2, 1);
+        Iterator<Integer> iterator2 = iterable2.iterator();
+        assertTrue(iterator2.hasNext());
+        iterator2.next();
+        assertTrue(iterator2.hasNext());
+        iterator2.next();
+        assertTrue(iterator2.hasNext());
+        iterator2.next();
+        assertFalse(iterator2.hasNext());
+        assertThrows(NoSuchElementException.class, iterator2::next);
 
-        Iterator<Integer> iterator2 = iterable.iterator();
-        iterator2.next();
-        iterator2.next();
-        iterator2.next();
-        assertThrows(NoSuchElementException.class, iterator2::next);
-        assertThrows(NoSuchElementException.class, iterator2::next);
+        Iterator<Integer> iterator3 = iterable2.iterator();
+        iterator3.next();
+        iterator3.next();
+        iterator3.next();
+        assertThrows(NoSuchElementException.class, iterator3::next);
+        assertThrows(NoSuchElementException.class, iterator3::next);
     }
 
     void Iterable_remove();

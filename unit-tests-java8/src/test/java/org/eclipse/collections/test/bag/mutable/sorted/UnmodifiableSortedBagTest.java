@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,7 +17,6 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.bag.mutable.UnmodifiableBagIterableTestCase;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Java8Runner.class)
@@ -36,20 +35,6 @@ public class UnmodifiableSortedBagTest implements MutableSortedBagTestCase, Unmo
         MutableSortedBag<T> result = new TreeBag<>(Comparators.reverseNaturalOrder());
         IterableTestCase.addAllTo(elements, result);
         return UnmodifiableSortedBag.of(result);
-    }
-
-    @Override
-    @Test
-    public void MutableBagIterable_addOccurrences_throws()
-    {
-        UnmodifiableBagIterableTestCase.super.MutableBagIterable_addOccurrences_throws();
-    }
-
-    @Override
-    @Test
-    public void MutableBagIterable_removeOccurrences_throws()
-    {
-        UnmodifiableBagIterableTestCase.super.MutableBagIterable_removeOccurrences_throws();
     }
 
     @Override

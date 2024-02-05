@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -106,22 +106,9 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
             assertEquals(this.getExpectedFiltered(3, 3, 3, 2, 2, 1), mutableCollection);
             assertFalse(iterator.hasNext());
         });
-    }
 
-    @Test
-    public void MultiReaderHashBag_hasNext()
-    {
-        MultiReaderHashBag<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
-        iterable.withReadLockAndDelegate(delegate -> assertTrue(delegate.iterator().hasNext()));
-        MultiReaderHashBag<?> emptyIterable = this.newWith();
-        emptyIterable.withReadLockAndDelegate(delegate -> assertFalse(delegate.iterator().hasNext()));
-    }
-
-    @Test
-    public void MultiReaderHashBag_next_throws_at_end()
-    {
-        MultiReaderHashBag<Integer> iterable = this.newWith(3, 2, 1);
-        iterable.withReadLockAndDelegate(delegate -> {
+        MultiReaderHashBag<Integer> iterable2 = this.newWith(3, 2, 1);
+        iterable2.withReadLockAndDelegate(delegate -> {
             Iterator<Integer> iterator = delegate.iterator();
             assertTrue(iterator.hasNext());
             iterator.next();
@@ -132,14 +119,18 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
             assertFalse(iterator.hasNext());
             assertThrows(NoSuchElementException.class, iterator::next);
         });
+
+        assertThrows(
+                NoSuchElementException.class,
+                () -> this.newWith().withReadLockAndDelegate(delegate -> delegate.iterator().next()));
     }
 
     @Test
-    public void MultiReaderHashBag_next_throws_on_empty()
+    public void MultiReaderHashBag_hasNext()
     {
-        MultiReaderHashBag<Object> iterable = this.newWith();
-        assertThrows(
-                NoSuchElementException.class,
-                () -> iterable.withReadLockAndDelegate(delegate -> delegate.iterator().next()));
+        MultiReaderHashBag<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
+        iterable.withReadLockAndDelegate(delegate -> assertTrue(delegate.iterator().hasNext()));
+        MultiReaderHashBag<?> emptyIterable = this.newWith();
+        emptyIterable.withReadLockAndDelegate(delegate -> assertFalse(delegate.iterator().hasNext()));
     }
 }
