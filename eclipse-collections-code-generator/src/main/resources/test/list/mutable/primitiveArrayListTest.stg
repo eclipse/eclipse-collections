@@ -69,10 +69,10 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
         Verify.assertSize(0, newList2);
     }
 
-    @Test(expected = NegativeArraySizeException.class)
+    @Test
     public void newWithNValues_throws_negative_size()
     {
-        <name>ArrayList.newWithNValues(-5, <(literal.(type))("42")>);
+        Assert.assertThrows(NegativeArraySizeException.class, () -> <name>ArrayList.newWithNValues(-5, <(literal.(type))("42")>));
     }
 
     @Test
@@ -126,12 +126,12 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void dotProduct_throwsOnListsOfDifferentSizes()
     {
         <name>ArrayList list1 = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         <name>ArrayList list2 = <name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">);
-        list1.dotProduct(list2);
+        Assert.assertThrows(IllegalArgumentException.class, () -> list1.dotProduct(list2));
     }
 
     @Override
