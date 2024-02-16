@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,9 +11,9 @@
 package org.eclipse.collections.impl.multimap.bag;
 
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Bags;
 
 /**
  * Test of {@link HashBagMultimap}.

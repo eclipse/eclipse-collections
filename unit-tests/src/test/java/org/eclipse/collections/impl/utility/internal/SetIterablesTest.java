@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.utility.internal;
 
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.SetIterable;
-import org.eclipse.collections.impl.factory.Sets;
 import org.junit.Assert;
 import org.junit.Test;
 

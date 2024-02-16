@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.set.mutable.primitive;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.LazyByteIterable;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.iterator.ByteIterator;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.MutableByteSet;
@@ -20,7 +21,6 @@ import org.eclipse.collections.api.tuple.primitive.ByteBytePair;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BytePredicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableByteCollectionTestCase;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.ByteSets;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;

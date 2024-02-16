@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,13 +13,13 @@ package org.eclipse.collections.impl.factory.primitive;
 import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.factory.set.primitive.ImmutableBooleanSetFactory;
 import org.eclipse.collections.api.factory.set.primitive.MutableBooleanSetFactory;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;

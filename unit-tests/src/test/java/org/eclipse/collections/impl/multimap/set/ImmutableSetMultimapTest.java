@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.multimap.set;
 
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
@@ -18,7 +19,6 @@ import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimapTestCase;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;

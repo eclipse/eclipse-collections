@@ -12,9 +12,9 @@ package org.eclipse.collections.impl.utility.internal;
 
 import java.util.Set;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.set.fixed;
 
 import org.eclipse.collections.api.block.function.primitive.CharFunction;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 

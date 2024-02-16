@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectBooleanMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.ObjectBooleanMaps;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMap;
 import org.junit.Assert;

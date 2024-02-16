@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.utility;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.primitive.CharProcedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.CharList;
 import org.eclipse.collections.api.list.primitive.ImmutableCharList;
@@ -30,7 +31,6 @@ import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.primitive.CodePointFunction;
 import org.eclipse.collections.impl.block.predicate.CodePointPredicate;
 import org.eclipse.collections.impl.block.procedure.primitive.CodePointProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.CharSets;
 import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.list.mutable.FastList;

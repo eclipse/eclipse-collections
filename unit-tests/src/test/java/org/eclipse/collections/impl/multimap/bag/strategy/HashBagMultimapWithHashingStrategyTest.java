@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,8 @@ package org.eclipse.collections.impl.multimap.bag.strategy;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -19,8 +21,6 @@ import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy;
 import org.eclipse.collections.impl.multimap.bag.AbstractMutableBagMultimapTestCase;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,7 @@ import org.eclipse.collections.api.LazyLongIterable;
 import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.procedure.primitive.LongProcedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.iterator.LongIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -27,7 +28,6 @@ import org.eclipse.collections.api.tuple.primitive.LongObjectPair;
 import org.eclipse.collections.impl.ThrowingAppendable;
 import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.LongPredicates;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;
 import org.eclipse.collections.impl.factory.primitive.CharLists;

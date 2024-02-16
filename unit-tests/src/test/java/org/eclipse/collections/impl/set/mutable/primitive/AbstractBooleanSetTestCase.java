@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,7 @@ import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjectFunction;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
@@ -24,7 +25,6 @@ import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.math.MutableInteger;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;

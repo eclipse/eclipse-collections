@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.lazy.parallel.list;
 
 import java.util.LinkedList;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ParallelListIterable;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
 
 public class ListAdapterParallelListIterableTest extends NonParallelListIterableTestCase

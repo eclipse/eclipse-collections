@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.block.procedure;
 import java.util.Comparator;
 import java.util.Optional;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

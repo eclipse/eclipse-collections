@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,13 +15,13 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
 import org.eclipse.collections.impl.collection.mutable.primitive.SynchronizedBooleanCollection;
 import org.eclipse.collections.impl.collection.mutable.primitive.UnmodifiableBooleanCollection;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.lazy.parallel.set;
 
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Sets;
 import org.junit.Test;
 
 public class ImmutableUnifiedSetParallelSetIterableTest extends ParallelUnsortedSetIterableTestCase

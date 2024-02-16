@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.multimap.bag.sorted;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.BagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -22,7 +23,6 @@ import org.eclipse.collections.api.multimap.sortedbag.SortedBagMultimap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimapTestCase;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
