@@ -71,6 +71,7 @@ import org.eclipse.collections.api.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.api.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
@@ -1435,6 +1436,29 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().zipWithIndex(target);
+        }
+    }
+
+    @Override
+    public <K> MapIterable<K, T> reduceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function2<? super T, ? super T, ? extends T> reduceFunction)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().reduceBy(groupBy, reduceFunction);
+        }
+    }
+
+    @Override
+    public <K, R extends MutableMapIterable<K, T>> R reduceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function2<? super T, ? super T, ? extends T> reduceFunction,
+            R target)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.getDelegate().reduceBy(groupBy, reduceFunction, target);
         }
     }
 

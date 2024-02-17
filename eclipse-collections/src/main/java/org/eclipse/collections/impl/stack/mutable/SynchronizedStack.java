@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1478,6 +1478,17 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         synchronized (this.lock)
         {
             return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
+        }
+    }
+
+    @Override
+    public <K> MutableMap<K, T> reduceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function2<? super T, ? super T, ? extends T> reduceFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.reduceBy(groupBy, reduceFunction);
         }
     }
 

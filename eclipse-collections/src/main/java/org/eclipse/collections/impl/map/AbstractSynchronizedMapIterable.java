@@ -360,6 +360,17 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
     }
 
     @Override
+    public <KK> MutableMapIterable<KK, V> reduceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function2<? super V, ? super V, ? extends V> reduceFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().reduceBy(groupBy, reduceFunction);
+        }
+    }
+
+    @Override
     public RichIterable<K> keysView()
     {
         return LazyIterate.adapt(this.keySet());

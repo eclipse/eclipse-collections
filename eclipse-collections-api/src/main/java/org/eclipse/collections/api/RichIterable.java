@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -2359,6 +2359,42 @@ public interface RichIterable<T>
         {
             K key = groupBy.valueOf(each);
             target.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+        });
+        return target;
+    }
+
+    /**
+     * Applies an aggregate function over the iterable grouping results into a map based on the specific groupBy function.
+     * Aggregate results are allowed to be immutable as they will be replaced in place in the map.
+     *
+     * @since 12.0
+     *
+     */
+    default <K> MapIterable<K, T> reduceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function2<? super T, ? super T, ? extends T> reduceFunction)
+    {
+        return this.reduceBy(
+                groupBy,
+                reduceFunction,
+                Maps.mutable.empty());
+    }
+
+    /**
+     * Applies an aggregate function over the iterable grouping results into a map based on the specific groupBy function.
+     * Aggregate results are allowed to be immutable as they will be replaced in place in the map.
+     *
+     * @since 12.0
+     */
+    default <K, R extends MutableMapIterable<K, T>> R reduceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function2<? super T, ? super T, ? extends T> reduceFunction,
+            R target)
+    {
+        this.forEach(each ->
+        {
+            K key = groupBy.valueOf(each);
+            target.merge(key, each, reduceFunction);
         });
         return target;
     }

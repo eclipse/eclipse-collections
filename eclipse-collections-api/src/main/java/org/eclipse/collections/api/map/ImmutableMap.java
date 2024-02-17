@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -229,6 +229,15 @@ public interface ImmutableMap<K, V>
                 nonMutatingAggregator,
                 valueFunction.valueOf(value)));
         return map.toImmutable();
+    }
+
+    @Override
+    default <KK> ImmutableMap<KK, V> reduceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function2<? super V, ? super V, ? extends V> reduceFunction)
+    {
+        MutableMap<KK, V> map = Maps.mutable.empty();
+        return this.reduceBy(groupBy, reduceFunction, map).toImmutable();
     }
 
     @Override

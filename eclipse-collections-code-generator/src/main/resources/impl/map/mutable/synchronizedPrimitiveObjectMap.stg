@@ -602,6 +602,17 @@ public class Synchronized<name>ObjectMap\<V>
     }
 
     @Override
+    public \<K> MutableMap\<K, V> reduceBy(
+            Function\<? super V, ? extends K> groupBy,
+            Function2\<? super V, ? super V, ? extends V> reduceFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.reduceBy(groupBy, reduceFunction);
+        }
+    }
+
+    @Override
     public MutableBag\<V> reject(Predicate\<? super V> predicate)
     {
         synchronized (this.lock)
@@ -1717,4 +1728,3 @@ public class Synchronized<name>ObjectMap\<V>
 }
 
 >>
-
