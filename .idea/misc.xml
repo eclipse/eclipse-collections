@@ -10,6 +10,7 @@
       <writeAnnotation name="org.apache.maven.plugins.annotations.Parameter" />
     </writeAnnotations>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FacetAutodetectingManager">
     <autodetection-disabled>
       <facet-type id="Scala">
