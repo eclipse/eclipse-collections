@@ -160,7 +160,7 @@ public class ImmutableMapFactoryImpl implements ImmutableMapFactory
             return new ImmutableUnifiedMap<>(map);
         }
 
-        Map.Entry<K, V>[] entries = map.entrySet().toArray(new Map.Entry[map.entrySet().size()]);
+        Map.Entry<K, V>[] entries = map.entrySet().toArray(new Map.Entry[0]);
         switch (entries.length)
         {
             case 1:
