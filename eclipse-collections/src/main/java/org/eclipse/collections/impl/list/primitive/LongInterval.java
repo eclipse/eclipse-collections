@@ -513,7 +513,7 @@ public final class LongInterval
     @Override
     public ImmutableLongList subList(int fromIndex, int toIndex)
     {
-        throw new UnsupportedOperationException("subList not yet implemented!");
+        return new LongIntervalSubList<>(this, fromIndex, toIndex);
     }
 
     /**
@@ -1086,6 +1086,124 @@ public final class LongInterval
                 return this.current <= this.to;
             }
             return this.current >= this.to;
+        }
+    }
+
+    protected static class LongIntervalSubList
+            extends LongIntervall
+            implements Serializable, RandomAccess
+    {
+        // Not important since it uses writeReplace()
+        private static final long serialVersionUID = 1L;
+
+        private final LongInterval original;
+        private final int offset;
+        private final int size;
+
+        protected SubList(ImmutableList<T> list, int fromIndex, int toIndex)
+        {
+            if (fromIndex < 0)
+            {
+                throw new IndexOutOfBoundsException("fromIndex = " + fromIndex);
+            }
+            if (toIndex > list.size())
+            {
+                throw new IndexOutOfBoundsException("toIndex = " + toIndex);
+            }
+            if (fromIndex > toIndex)
+            {
+                throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ')');
+            }
+            this.original = list;
+            this.offset = fromIndex;
+            this.size = toIndex - fromIndex;
+        }
+
+        @Override
+        public T get(int index)
+        {
+            this.checkIfOutOfBounds(index);
+            return this.original.get(index + this.offset);
+        }
+
+        @Override
+        public int size()
+        {
+            return this.size;
+        }
+
+        @Override
+        public ImmutableLongList newWith(T newItem)
+        {
+            return LongArrayList.newList(this.original).with(element).toImmutable();
+        }
+
+        protected Object writeReplace()
+        {
+            return Lists.immutable.withAll(this.original);
+        }
+
+        @Override
+        public LongIntervalSubList subList(int fromIndex, int toIndex)
+        {
+            if (fromIndex < 0)
+            {
+                throw new IndexOutOfBoundsException("fromIndex = " + fromIndex);
+            }
+            if (toIndex > this.size())
+            {
+                throw new IndexOutOfBoundsException("toIndex = " + toIndex);
+            }
+            if (fromIndex > toIndex)
+            {
+                throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ')');
+            }
+
+            return new LongIntervalSubList<>(this.original, this.offset + fromIndex, this.offset + toIndex);
+        }
+
+        private void checkIfOutOfBounds(int index)
+        {
+            if (index >= this.size || index < 0)
+            {
+                throw new IndexOutOfBoundsException("Index: " + index + " Size: " + this.size);
+            }
+        }
+
+        @Override
+        public long getFirst()
+        {
+            return this.isEmpty() ? null : this.original.get(this.offset);
+        }
+
+        @Override
+        public long getLast()
+        {
+            return this.isEmpty() ? null : this.original.get(this.offset + this.size - 1);
+        }
+
+        @Override
+        public MutableStack<long> toStack()
+        {
+            return ArrayStack.newStack(this);
+        }
+
+        @Override
+        public void each(Procedure<long> procedure)
+        {
+            ListIterate.forEach(this, procedure);
+        }
+
+        @Override
+        public void forEachWithIndex(ObjectIntProcedure<long> objectIntProcedure)
+        {
+            ListIterate.forEachWithIndex(this, objectIntProcedure);
+        }
+
+        @Override
+        public <P> void forEachWith(Procedure2<long, ? super P> procedure, P parameter)
+        {
+            ListIterate.forEachWith(this, procedure, parameter);
         }
     }
 }
