@@ -124,7 +124,7 @@
         <trove4j.version>3.0.3</trove4j.version>
         <checkstyle.version>10.12.6</checkstyle.version>
         <checkstyle.plugin.version>3.2.1</checkstyle.plugin.version>
-        <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
+        <jacoco.plugin.version>0.8.11</jacoco.plugin.version>
         <junit.version>4.13.2</junit.version>
 
         <maven.compiler.source>21</maven.compiler.source>
