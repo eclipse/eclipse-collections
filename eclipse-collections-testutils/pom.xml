@@ -65,10 +65,12 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.11</version>
             </plugin>
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
             </plugin>
 
             <plugin>
@@ -86,7 +88,7 @@
                     <windowtitle>Eclipse Collections Test Utilities - ${project.version}</windowtitle>
                     <show>public</show>
                     <links>
-                        <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
+                        <link>https://docs.oracle.com/en/java/javase/21/docs/api</link>
                     </links>
                     <destDir>${project.version}</destDir>
                     <doclint>none</doclint>
