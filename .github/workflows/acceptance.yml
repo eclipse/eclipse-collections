@@ -19,7 +19,7 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v4
       - name: Set Maven Wrapper
-        run: mvn -N wrapper:wrapper -Dmaven=3.6.3 --no-transfer-progress
+        run: mvn -N wrapper:wrapper -Dmaven=3.9.6 --no-transfer-progress
       - name: Set JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v4
         with:
