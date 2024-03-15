@@ -127,8 +127,8 @@
         <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
         <junit.version>4.13.2</junit.version>
 
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.fork>true</maven.compiler.fork>
         <maven.compiler.meminitial>2048m</maven.compiler.meminitial>
         <maven.compiler.maxmem>2048m</maven.compiler.maxmem>
@@ -297,7 +297,7 @@
 
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.6.1</version>
+                    <version>3.1.2</version>
                     <executions>
                         <execution>
                             <id>analyze</id>
@@ -339,7 +339,7 @@
 
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.6.3</version>
+                    <version>3.5.0</version>
                 </plugin>
 
                 <plugin>
@@ -557,14 +557,14 @@
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <source>21</source>
+                    <source>1.8</source>
                     <doctitle>Eclipse Collections - ${project.version}</doctitle>
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
                     <detectJavaApiLink>true</detectJavaApiLink>
                     <links>
                         <link>https://junit.org/junit4/javadoc/latest</link>
-                        <link>https://docs.oracle.com/en/java/javase/21/docs/api</link>
+                        <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
                     </links>
                     <destDir>${project.version}</destDir>
                     <doclint>html,syntax,accessibility</doclint>
@@ -616,14 +616,14 @@
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <source>21</source>
+                    <source>1.8</source>
                     <doctitle>Eclipse Collections - ${project.version}</doctitle>
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
                     <detectJavaApiLink>true</detectJavaApiLink>
                     <links>
                         <link>https://junit.org/junit4/javadoc/latest</link>
-                        <link>https://docs.oracle.com/en/java/javase/21/docs/api</link>
+                        <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
                     </links>
                     <destDir>${project.version}</destDir>
                     <doclint>html,syntax,accessibility</doclint>

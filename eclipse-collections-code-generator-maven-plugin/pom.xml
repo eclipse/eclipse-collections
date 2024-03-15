@@ -27,7 +27,7 @@
     <name>Eclipse Collections Code Generator Maven Plugin</name>
 
     <prerequisites>
-        <maven>3.9.6</maven>
+        <maven>3.1.1</maven>
     </prerequisites>
 
     <properties>
@@ -97,7 +97,7 @@
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
                     <links>
-                        <link>https://docs.oracle.com/en/java/javase/21/docs/api</link>
+                        <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
                     </links>
                     <destDir>${project.version}</destDir>
                     <doclint>none</doclint>
@@ -114,7 +114,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.11.0</version>
                 <configuration>
                     <goalPrefix>eclipse-collections-code-generator</goalPrefix>
                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
