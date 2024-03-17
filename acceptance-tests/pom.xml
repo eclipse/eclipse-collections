@@ -28,6 +28,7 @@
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sonar.skip>true</sonar.skip>
+        <jmh.version>1.37</jmh.version>
     </properties>
 
     <dependencies>
@@ -77,6 +78,19 @@
             <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
@@ -104,9 +118,6 @@
                 <executions>
                     <execution>
                         <id>analyze</id>
-                        <goals>
-                            <goal>analyze-only</goal>
-                        </goals>
                         <configuration>
                             <failOnWarning>true</failOnWarning>
                             <ignoredUnusedDeclaredDependencies>
@@ -117,6 +128,94 @@
                                     org.slf4j:slf4j-simple:jar
                                 </ignoredUnusedDeclaredDependency>
                             </ignoredUnusedDeclaredDependencies>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>run-benchmarks</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <classpathScope>test</classpathScope>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath />
+                                <argument>org.openjdk.jmh.Main</argument>
+                                <argument>.*</argument>
+                                <!-- Measurement mode. -->
+                                <argument>-bm</argument>
+                                <argument>avgt,thrpt</argument>
+                                <!-- Forks. -->
+                                <argument>-f</argument>
+                                <argument>1</argument>
+                                <!-- Units. -->
+                                <argument>-tu</argument>
+                                <argument>ms</argument>
+                                <!-- Machine-readible output. -->
+                                <argument>-rff</argument>
+                                <argument>jmh-results.csv</argument>
+                                <!-- Human-readable output. -->
+                                <argument>-o</argument>
+                                <argument>jmh-results.txt</argument>
+                                <!-- Fail on error. -->
+                                <argument>-foe</argument>
+                                <argument>true</argument>
+                                <!-- Iterations. -->
+                                <!-- <argument>-i</argument> -->
+                                <!-- <argument>1</argument> -->
+                                <!-- Warmup. -->
+                                <argument>-wi</argument>
+                                <argument>1</argument>
+                                <!-- Warmup mode. -->
+                                <!-- <argument>-wm</argument> -->
+                                <!-- <argument>BULK</argument> -->
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>${uberjar.name}</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.openjdk.jmh.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <!--
+                                        Shading signed JARs will fail without this.
+                                        http://stackoverflow.com/questions/999489/invalid-signature-file-when-attempting-to-run-a-jar
+                                    -->
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>

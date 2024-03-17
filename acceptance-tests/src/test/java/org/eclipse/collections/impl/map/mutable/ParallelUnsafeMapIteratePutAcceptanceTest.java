@@ -29,7 +29,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.openjdk.jmh.annotations.*;
 
+@State(Scope.Benchmark)
 public class ParallelUnsafeMapIteratePutAcceptanceTest
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(ParallelUnsafeMapIteratePutAcceptanceTest.class);
@@ -62,6 +64,7 @@ public class ParallelUnsafeMapIteratePutAcceptanceTest
     }
 
     @Test
+    @Benchmark
     public void testMapIteratePut()
     {
         int constSize = 100000;
