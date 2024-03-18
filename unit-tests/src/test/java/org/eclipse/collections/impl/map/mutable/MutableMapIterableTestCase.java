@@ -41,6 +41,7 @@ import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iMap;
@@ -186,10 +187,7 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
     @Test
     public void removeNullFromKeySet()
     {
-        if (this.newMap() instanceof ConcurrentMap || this.newMap() instanceof SortedMap)
-        {
-            return;
-        }
+        Assume.assumeFalse(this.newMap() instanceof ConcurrentMap || this.newMap() instanceof SortedMap);
 
         MutableMapIterable<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
         Assert.assertFalse(map.keySet().remove(null));
@@ -257,10 +255,7 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
     @Test
     public void removeNullFromValues()
     {
-        if (this.newMap() instanceof ConcurrentMap)
-        {
-            return;
-        }
+        Assume.assumeFalse(this.newMap() instanceof ConcurrentMap);
 
         MutableMapIterable<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
         Assert.assertFalse(map.values().remove(null));
@@ -732,10 +727,7 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
     @Test
     public void retainAllFromKeySet_null_collision()
     {
-        if (this.newMap() instanceof ConcurrentMap || this.newMap() instanceof SortedMap)
-        {
-            return;
-        }
+        Assume.assumeFalse(this.newMap() instanceof ConcurrentMap || this.newMap() instanceof SortedMap);
 
         IntegerWithCast key = new IntegerWithCast(0);
         MutableMapIterable<IntegerWithCast, String> mutableMapIterable = this.newMapWithKeysValues(
@@ -754,10 +746,8 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
     @Test
     public void rehash_null_collision()
     {
-        if (this.newMap() instanceof ConcurrentMap || this.newMap() instanceof SortedMap)
-        {
-            return;
-        }
+        Assume.assumeFalse(this.newMap() instanceof ConcurrentMap || this.newMap() instanceof SortedMap);
+
         MutableMapIterable<IntegerWithCast, String> mutableMapIterable = this.newMapWithKeyValue(null, null);
 
         for (int i = 0; i < 256; i++)
