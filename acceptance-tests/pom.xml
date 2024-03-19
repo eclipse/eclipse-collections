@@ -154,7 +154,7 @@
                                 <argument>.*</argument>
                                 <!-- Measurement mode. -->
                                 <argument>-bm</argument>
-                                <argument>avgt,thrpt</argument>
+                                <argument>avgt</argument>
                                 <!-- Forks. -->
                                 <argument>-f</argument>
                                 <argument>1</argument>

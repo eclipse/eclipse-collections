@@ -59,9 +59,9 @@ public class SerialParallelPerformanceTest
 
     private static final int SCALE_FACTOR = Integer.parseInt(System.getProperty("scaleFactor", "100"));
 
-    private static final int WARM_UP_COUNT = Integer.parseInt(System.getProperty("WarmupCount", "100"));
-    private static final int PARALLEL_RUN_COUNT = Integer.parseInt(System.getProperty("ParallelRunCount", "200"));
-    private static final int SERIAL_RUN_COUNT = Integer.parseInt(System.getProperty("SerialRunCount", "200"));
+    private static final int WARM_UP_COUNT = Integer.parseInt(System.getProperty("WarmupCount", "5"));
+    private static final int PARALLEL_RUN_COUNT = Integer.parseInt(System.getProperty("ParallelRunCount", "10"));
+    private static final int SERIAL_RUN_COUNT = Integer.parseInt(System.getProperty("SerialRunCount", "10"));
 
     private static final int SMALL_COUNT = 100 * SCALE_FACTOR;
     private static final int MEDIUM_COUNT = 1000 * SCALE_FACTOR;
@@ -213,7 +213,7 @@ public class SerialParallelPerformanceTest
             Procedure<Function0<Iterable<Integer>>> algorithm)
     {
         this.printMachineAndTestConfiguration(algorithmName);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 1; i++)
         {
             this.getSizes().forEach(Procedures.cast(count -> this.getIntegerListGenerators(count).forEach(algorithm)));
         }
@@ -224,7 +224,7 @@ public class SerialParallelPerformanceTest
             Procedure<Function0<Iterable<String>>> algorithm)
     {
         this.printMachineAndTestConfiguration(algorithmName);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 1; i++)
         {
             this.getSizes().forEach(Procedures.cast(count -> this.getRandomWordsGenerators(count).forEach(algorithm)));
         }

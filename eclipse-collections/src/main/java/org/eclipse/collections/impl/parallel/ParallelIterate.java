@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.RandomAccess;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -1317,14 +1318,7 @@ public final class ParallelIterate
      */
     public static ExecutorService newPooledExecutor(int newPoolSize, String poolName, boolean useDaemonThreads)
     {
-        return new ThreadPoolExecutor(
-                newPoolSize,
-                newPoolSize,
-                0L,
-                TimeUnit.MILLISECONDS,
-                new SynchronousQueue<>(),
-                new CollectionsThreadFactory(poolName, useDaemonThreads),
-                new ThreadPoolExecutor.CallerRunsPolicy());
+        return Executors.newVirtualThreadPerTaskExecutor();
     }
 
     /**
