@@ -320,7 +320,20 @@ public class SerialParallelLazyPerformanceTest
         });
         return generators.shuffleThis();
     }
-
+    
+    /* Runs all test methods except groupBy()
+       Parameters of tests:
+       Iterable size: 10,000 / 100,000 / 1,000,000 (from getSizes())
+       Execution methods / iterable types: (from individual algorithm methods)
+          - Serial using Lambda FastList
+          - Parallel Lazy _ using Lambda FastList
+          - Parallel Lazy _ using Predicate FastList
+          - Parallel Lazy _ using MethodRef FastList
+          - Parallel Java8 _ using Lambda FastList
+          - Parallel Java8 _ using Lambda ArrayList
+          - Parallel Java8 _ using Predicate ArrayList
+          - Parallel Java8 _ using MethodRef ArrayList
+    */
     private void measureAlgorithmForIntegerIterable(String algorithmName, Procedure<Function0<FastList<Integer>>> algorithm, boolean shuffle)
     {
         this.printMachineAndTestConfiguration(algorithmName);
