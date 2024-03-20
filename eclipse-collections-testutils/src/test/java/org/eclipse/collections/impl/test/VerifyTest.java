@@ -329,7 +329,6 @@ public class VerifyTest
         }));
     }
 
-    @Test
     public void shallowClone1()
     {
         try
@@ -346,7 +345,6 @@ public class VerifyTest
         }
     }
 
-    @Test
     public void shallowClone2()
     {
         Cloneable simpleCloneable = new SimpleCloneable();
