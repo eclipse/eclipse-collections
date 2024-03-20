@@ -207,7 +207,12 @@ public class SerialParallelPerformanceTest
         generators.add(() -> this.generateWordsSet(count));
         return generators.shuffleThis();
     }
-
+    /* Runs test methods select(), reject(), count(), collectIf(), collect()
+       Parameters of tests:
+       Iterable size: 10,000 / 100,000 / 1,000,000 (from getSizes())
+       Execution method: Serial / Parallel / ForkJoin (from individual algorithm methods)
+       Iterable type: FastList / ImmutableArrayList / UnifiedSet (from getIntegerListGenerators())
+    */
     private void measureAlgorithmForIntegerIterable(
             String algorithmName,
             Procedure<Function0<Iterable<Integer>>> algorithm)
@@ -219,11 +224,18 @@ public class SerialParallelPerformanceTest
         }
     }
 
+    /* Runs test methods groupBy(), aggregateBy(), aggregateInPlaceBy()
+       Parameters of tests:
+       Iterable size: 10,000 / 100,000 / 1,000,000 (from getSizes())
+       Execution method: Serial / Parallel / ForkJoin (from individual algorithm methods)
+       Iterable type: FastList / ImmutableArrayList / UnifiedSet (from getRandomWordsGenerators())
+    */
     private void measureAlgorithmForRandomStringIterable(
             String algorithmName,
             Procedure<Function0<Iterable<String>>> algorithm)
     {
         this.printMachineAndTestConfiguration(algorithmName);
+        // How many times to run tests. Was originally 4; shortened to 1
         for (int i = 0; i < 1; i++)
         {
             this.getSizes().forEach(Procedures.cast(count -> this.getRandomWordsGenerators(count).forEach(algorithm)));
