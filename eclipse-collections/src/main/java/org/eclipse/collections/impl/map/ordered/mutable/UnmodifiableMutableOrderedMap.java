@@ -1031,7 +1031,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
             int injectedValue,
             IntObjectToIntFunction<? super V> function)
     {
-        return this.delegate.injectInto(injectedValue, function);
+        return this.delegate.injectIntoInt(injectedValue, function);
     }
 
     @Override
@@ -1039,7 +1039,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
             long injectedValue,
             LongObjectToLongFunction<? super V> function)
     {
-        return this.delegate.injectInto(injectedValue, function);
+        return this.delegate.injectIntoLong(injectedValue, function);
     }
 
     @Override
@@ -1047,7 +1047,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
             float injectedValue,
             FloatObjectToFloatFunction<? super V> function)
     {
-        return this.delegate.injectInto(injectedValue, function);
+        return this.delegate.injectIntoFloat(injectedValue, function);
     }
 
     @Override
@@ -1055,7 +1055,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
             double injectedValue,
             DoubleObjectToDoubleFunction<? super V> function)
     {
-        return this.delegate.injectInto(injectedValue, function);
+        return this.delegate.injectIntoDouble(injectedValue, function);
     }
 
     @Override

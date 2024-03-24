@@ -750,25 +750,25 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super V> function)
     {
-        return this.getDelegate().injectInto(injectedValue, function);
+        return this.getDelegate().injectIntoInt(injectedValue, function);
     }
 
     @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super V> function)
     {
-        return this.getDelegate().injectInto(injectedValue, function);
+        return this.getDelegate().injectIntoLong(injectedValue, function);
     }
 
     @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super V> function)
     {
-        return this.getDelegate().injectInto(injectedValue, function);
+        return this.getDelegate().injectIntoFloat(injectedValue, function);
     }
 
     @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super V> function)
     {
-        return this.getDelegate().injectInto(injectedValue, function);
+        return this.getDelegate().injectIntoDouble(injectedValue, function);
     }
 
     @Override

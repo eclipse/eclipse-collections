@@ -526,25 +526,25 @@ public class ImmutableHashBag<T>
     @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function)
     {
-        return this.delegate.injectInto(injectedValue, function);
+        return this.delegate.injectIntoInt(injectedValue, function);
     }
 
     @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function)
     {
-        return this.delegate.injectInto(injectedValue, function);
+        return this.delegate.injectIntoLong(injectedValue, function);
     }
 
     @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
     {
-        return this.delegate.injectInto(injectedValue, function);
+        return this.delegate.injectIntoDouble(injectedValue, function);
     }
 
     @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
     {
-        return this.delegate.injectInto(injectedValue, function);
+        return this.delegate.injectIntoFloat(injectedValue, function);
     }
 
     @Override

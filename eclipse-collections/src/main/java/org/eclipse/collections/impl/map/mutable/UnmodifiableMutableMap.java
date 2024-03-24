@@ -803,25 +803,25 @@ public class UnmodifiableMutableMap<K, V>
     @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super V> function)
     {
-        return this.getMutableMap().injectInto(injectedValue, function);
+        return this.getMutableMap().injectIntoInt(injectedValue, function);
     }
 
     @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super V> function)
     {
-        return this.getMutableMap().injectInto(injectedValue, function);
+        return this.getMutableMap().injectIntoLong(injectedValue, function);
     }
 
     @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super V> function)
     {
-        return this.getMutableMap().injectInto(injectedValue, function);
+        return this.getMutableMap().injectIntoDouble(injectedValue, function);
     }
 
     @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super V> function)
     {
-        return this.getMutableMap().injectInto(injectedValue, function);
+        return this.getMutableMap().injectIntoFloat(injectedValue, function);
     }
 
     @Override
