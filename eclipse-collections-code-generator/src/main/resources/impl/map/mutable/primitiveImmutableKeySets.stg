@@ -30,7 +30,7 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
  *
  * @since 6.0.
  */
-class <className> extends AbstractImmutable<name>Set implements Serializable
+public class <className> extends AbstractImmutable<name>Set implements Serializable
 {
     private static final long serialVersionUID = 1L;
     private static final <type> EMPTY_KEY = <(literal.(type))("0")>;
@@ -44,7 +44,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
     private final boolean containsZeroKey;
     private final boolean containsOneKey;
 
-    <className>(<type>[] <keyArray>, int occupiedWithData, boolean containsZeroKey, boolean containsOneKey)
+    public <className>(<type>[] <keyArray>, int occupiedWithData, boolean containsZeroKey, boolean containsOneKey)
     {
         this.<keyArray> = <keyArray>;
         this.occupiedWithData = occupiedWithData;
