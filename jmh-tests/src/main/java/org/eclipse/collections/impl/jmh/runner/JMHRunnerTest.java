@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -20,21 +20,46 @@ import org.openjdk.jmh.runner.options.VerboseMode;
 
 public class JMHRunnerTest
 {
-    @Test
-    public void runTests() throws RunnerException
+    public static void main(String[] args)
     {
-        int warmupCount = 20;
-        int runCount = 10;
-        Options opts = new OptionsBuilder()
-                .include(".*org.eclipse.collections.impl.jmh.*")
-                .warmupTime(TimeValue.seconds(2))
-                .warmupIterations(warmupCount)
-                .measurementTime(TimeValue.seconds(2))
-                .measurementIterations(runCount)
-                .verbosity(VerboseMode.EXTRA)
-                .forks(2)
-                .build();
+        JMHRunnerTest.runAllJMHBenchmarks(VerboseMode.NORMAL);
+    }
 
-        new Runner(opts).run();
+    private static void runAllJMHBenchmarks(VerboseMode mode)
+    {
+        runBenchmarks(mode, ".*org.eclipse.collections.impl.jmh.*");
+    }
+
+    private static void runBenchmarks(VerboseMode mode, String include)
+    {
+        Options opts = new OptionsBuilder()
+                .include(include)
+                .verbosity(mode)
+                .forks(1)
+                .warmupTime(TimeValue.seconds(2))
+                .warmupIterations(5)
+                .measurementTime(TimeValue.seconds(2))
+                .measurementIterations(5)
+                .build();
+        try
+        {
+            new Runner(opts).run();
+        }
+        catch (RunnerException ex)
+        {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Test
+    public void runAllBenchmarks()
+    {
+        JMHRunnerTest.runAllJMHBenchmarks(VerboseMode.NORMAL);
+    }
+
+    @Test
+    public void runMapBenchmarks()
+    {
+        JMHRunnerTest.runBenchmarks(VerboseMode.NORMAL, ".*org.eclipse.collections.impl.jmh.map.*");
     }
 }

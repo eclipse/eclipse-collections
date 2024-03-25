@@ -27,7 +27,6 @@
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sonar.skip>true</sonar.skip>
-        <jmh.version>1.36</jmh.version>
     </properties>
 
     <dependencies>
@@ -68,9 +67,9 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang.version}</version>
         </dependency>
 
         <dependency>
@@ -94,24 +93,24 @@
         <dependency>
             <groupId>com.carrotsearch</groupId>
             <artifactId>hppc</artifactId>
-            <version>0.9.1</version>
+            <version>${hppc.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>net.openhft</groupId>
+            <groupId>com.koloboke</groupId>
             <artifactId>koloboke-api-jdk8</artifactId>
-            <version>0.6.8</version>
+            <version>${koloboke.version}</version>
         </dependency>
         <dependency>
-            <groupId>net.openhft</groupId>
+            <groupId>com.koloboke</groupId>
             <artifactId>koloboke-impl-jdk8</artifactId>
-            <version>0.6.8</version>
+            <version>${koloboke.version}</version>
             <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>net.sf.trove4j</groupId>
-            <artifactId>trove4j</artifactId>
+            <artifactId>core</artifactId>
             <version>${trove4j.version}</version>
         </dependency>
     </dependencies>
