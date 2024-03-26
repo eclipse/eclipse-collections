@@ -119,13 +119,17 @@
 
         <slf4j.version>2.0.7</slf4j.version>
         <clover.version>4.4.1</clover.version>
-        <scala.version>2.12.15</scala.version>
-        <guava.version>31.1-jre</guava.version>
-        <trove4j.version>3.0.3</trove4j.version>
+        <scala.version>2.12.19</scala.version>
+        <guava.version>33.1.0-jre</guava.version>
+        <trove4j.version>3.1.0</trove4j.version>
+        <koloboke.version>1.0.0</koloboke.version>
+        <hppc.version>0.9.1</hppc.version>
+        <commons.lang.version>3.14.0</commons.lang.version>
         <checkstyle.version>10.12.6</checkstyle.version>
         <checkstyle.plugin.version>3.2.1</checkstyle.plugin.version>
         <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
         <junit.version>4.13.2</junit.version>
+        <jmh.version>1.37</jmh.version>
 
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -422,7 +426,7 @@
                 <plugin>
                     <groupId>net.alchim31.maven</groupId>
                     <artifactId>scala-maven-plugin</artifactId>
-                    <version>4.8.0</version>
+                    <version>4.8.1</version>
                     <configuration>
                         <scalaVersion>${scala.version}</scalaVersion>
                     </configuration>
