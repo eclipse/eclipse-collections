@@ -4,3 +4,7 @@ Automatic-Module-Name: org.eclipse.collections.api
 Bundle-SymbolicName: org.eclipse.collections.api
 Export-Package: \
   *;version="${package-version}"
+
+Require-Capability: \
+  osgi.extender;\
+    filter:="(&(osgi.extender=osgi.serviceloader.processor)(version>=1.0)(!(version>=2.0)))"
