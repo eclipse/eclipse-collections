@@ -1,6 +1,6 @@
 package-version=${version;===;${Bundle-Version}}
 
-Automatic-Module-Name: org.eclipse.collections.impl
+-jpms-module-info: org.eclipse.collections.impl
 Bundle-SymbolicName: org.eclipse.collections.impl
 
 Export-Package: \
@@ -9,3 +9,7 @@ Export-Package: \
 Import-Package: \
  sun.misc.*;resolution:=optional, \
  *
+
+Require-Capability: \
+  osgi.extender;\
+    filter:="(&(osgi.extender=osgi.serviceloader.registrar)(version>=1.0)(!(version>=2.0)))"
