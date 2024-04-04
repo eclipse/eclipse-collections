@@ -19,18 +19,18 @@
     </parent>
     <artifactId>org.eclipse.collections.feature</artifactId>
     <packaging>eclipse-feature</packaging>
+    <name>Eclipse Collections p2 Feature</name>
     <build>
         <plugins>
             <plugin>
-                <groupId>org.eclipse.tycho.extras</groupId>
-                <artifactId>tycho-source-feature-plugin</artifactId>
-                <version>${tycho-extras-version}</version>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-source-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>source-feature</id>
+                        <id>feature-source</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>source-feature</goal>
+                            <goal>feature-source</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -38,7 +38,6 @@
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-p2-plugin</artifactId>
-                <version>${tycho-version}</version>
                 <executions>
                     <execution>
                         <id>attached-p2-metadata</id>
@@ -49,20 +48,30 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.eclipse.cbi.maven.plugins</groupId>
-                <artifactId>eclipse-jarsigner-plugin</artifactId>
-                <version>1.3.2</version>
-                <executions>
-                  <execution>
-                      <id>sign</id>
-                      <phase>verify</phase>
-                      <goals>
-                          <goal>sign</goal>
-                      </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release-artifacts</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.cbi.maven.plugins</groupId>
+                        <artifactId>eclipse-jarsigner-plugin</artifactId>
+                        <version>1.3.4</version>
+                        <executions>
+                            <execution>
+                                <id>sign</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

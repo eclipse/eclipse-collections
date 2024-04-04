@@ -27,6 +27,7 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 6.0.
  */
+@aQute.bnd.annotation.spi.ServiceProvider(MutableObject<name>MapFactory.class)
 public class MutableObject<name>MapFactoryImpl implements MutableObject<name>MapFactory
 {
     public static final MutableObject<name>MapFactory INSTANCE = new MutableObject<name>MapFactoryImpl();

@@ -15,6 +15,7 @@ import java.util.Objects;
 import org.eclipse.collections.api.factory.map.FixedSizeMapFactory;
 import org.eclipse.collections.api.map.FixedSizeMap;
 
+@aQute.bnd.annotation.spi.ServiceProvider(FixedSizeMapFactory.class)
 public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
 {
     public static final FixedSizeMapFactory INSTANCE = new FixedSizeMapFactoryImpl();

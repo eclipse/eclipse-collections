@@ -14,6 +14,8 @@ import org.eclipse.collections.api.factory.set.sorted.ImmutableSortedSetFactory;
 import org.eclipse.collections.api.factory.set.sorted.MutableSortedSetFactory;
 
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = ImmutableSortedSetFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MutableSortedSetFactory.class)
 public final class SortedSets
 {
     public static final ImmutableSortedSetFactory immutable = ServiceLoaderUtils.loadServiceClass(ImmutableSortedSetFactory.class);

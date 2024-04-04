@@ -14,6 +14,7 @@ import org.eclipse.collections.api.factory.stack.ImmutableStackFactory;
 import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.impl.utility.Iterate;
 
+@aQute.bnd.annotation.spi.ServiceProvider(ImmutableStackFactory.class)
 public class ImmutableStackFactoryImpl implements ImmutableStackFactory
 {
     public static final ImmutableStackFactory INSTANCE = new ImmutableStackFactoryImpl();

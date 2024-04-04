@@ -19,6 +19,7 @@ import org.eclipse.collections.api.factory.bimap.ImmutableBiMapFactory;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.utility.MapIterate;
 
+@aQute.bnd.annotation.spi.ServiceProvider(ImmutableBiMapFactory.class)
 public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 {
     public static final ImmutableBiMapFactory INSTANCE = new ImmutableBiMapFactoryImpl();

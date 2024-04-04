@@ -186,7 +186,7 @@ public interface Mutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, Mutable
      * Puts all of the key/value mappings from the specified pairs into this map. If this
      * map already has a value associated with one of the keys in the pairs, it will be
      * replaced with the value in the pair.
-     * @param iterable the pairs to put into this map
+     * @param keyValuePairs the pairs to put into this map
      * @return this map
      * @see #putPair(<name>ObjectPair)
      */

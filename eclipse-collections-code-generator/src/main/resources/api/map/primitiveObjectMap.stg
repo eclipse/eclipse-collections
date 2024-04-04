@@ -76,7 +76,7 @@ public interface <name>ObjectMap\<V> extends PrimitiveObjectMap\<V>
 
     /**
      * Implements the injectInto pattern with each key/value pair of the map.
-     * @param value to be injected into the map
+     * @param injectedValue value to be injected into the map
      * @param function to apply to the injected value and key/value pairs
      * @return result of injecting the injectedValue into the map
      * @since 11.1

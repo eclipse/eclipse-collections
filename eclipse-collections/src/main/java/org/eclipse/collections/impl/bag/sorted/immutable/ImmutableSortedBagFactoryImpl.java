@@ -19,6 +19,7 @@ import org.eclipse.collections.api.factory.bag.sorted.ImmutableSortedBagFactory;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.utility.Iterate;
 
+@aQute.bnd.annotation.spi.ServiceProvider(ImmutableSortedBagFactory.class)
 public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
 {
     public static final ImmutableSortedBagFactory INSTANCE = new ImmutableSortedBagFactoryImpl();

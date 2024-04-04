@@ -16,6 +16,7 @@ import org.eclipse.collections.api.factory.list.FixedSizeListFactory;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.impl.utility.Iterate;
 
+@aQute.bnd.annotation.spi.ServiceProvider(FixedSizeListFactory.class)
 public class FixedSizeListFactoryImpl implements FixedSizeListFactory
 {
     public static final FixedSizeListFactory INSTANCE = new FixedSizeListFactoryImpl();

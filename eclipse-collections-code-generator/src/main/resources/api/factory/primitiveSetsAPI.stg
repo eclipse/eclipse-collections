@@ -24,6 +24,8 @@ import org.eclipse.collections.api.factory.set.primitive.Mutable<name>SetFactory
  * @since 11.1.
  */
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Immutable<name>SetFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Mutable<name>SetFactory.class)
 public final class <name>Sets
 {
     public static final Immutable<name>SetFactory immutable =

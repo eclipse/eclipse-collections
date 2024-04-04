@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.bimap.mutable;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.factory.bimap.MutableBiMapFactory;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MutableBiMapFactory.class)
 public class MutableBiMapFactoryImpl implements MutableBiMapFactory
 {
     public static final MutableBiMapFactory INSTANCE = new MutableBiMapFactoryImpl();

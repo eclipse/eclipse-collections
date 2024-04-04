@@ -27,6 +27,7 @@ import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
  *
  * @since 4.0.
  */
+@aQute.bnd.annotation.spi.ServiceProvider(ImmutableObject<name>MapFactory.class)
 public class ImmutableObject<name>MapFactoryImpl implements ImmutableObject<name>MapFactory
 {
     public static final ImmutableObject<name>MapFactory INSTANCE = new ImmutableObject<name>MapFactoryImpl();

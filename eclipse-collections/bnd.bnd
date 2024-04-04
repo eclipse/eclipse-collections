@@ -1,7 +1,8 @@
-package-version=${version;===;${Bundle-Version}}
+package-version=${versionmask;===;${Bundle-Version}}
 
-Automatic-Module-Name: org.eclipse.collections.impl
+-jpms-module-info: org.eclipse.collections.impl;version="${package-version}"
 Bundle-SymbolicName: org.eclipse.collections.impl
+Bundle-ActivationPolicy: lazy
 
 Export-Package: \
 	org.eclipse.collections.impl.*;version="${package-version}"

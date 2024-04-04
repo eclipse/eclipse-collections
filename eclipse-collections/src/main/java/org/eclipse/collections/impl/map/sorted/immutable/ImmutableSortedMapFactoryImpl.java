@@ -17,6 +17,7 @@ import org.eclipse.collections.api.factory.map.sorted.ImmutableSortedMapFactory;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 
+@aQute.bnd.annotation.spi.ServiceProvider(ImmutableSortedMapFactory.class)
 public class ImmutableSortedMapFactoryImpl implements ImmutableSortedMapFactory
 {
     public static final ImmutableSortedMapFactory INSTANCE = new ImmutableSortedMapFactoryImpl();

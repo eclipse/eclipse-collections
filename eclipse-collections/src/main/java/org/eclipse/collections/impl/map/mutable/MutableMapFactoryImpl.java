@@ -17,6 +17,7 @@ import org.eclipse.collections.api.factory.map.MutableMapFactory;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MutableMapFactory.class)
 public class MutableMapFactoryImpl implements MutableMapFactory
 {
     public static final MutableMapFactory INSTANCE = new MutableMapFactoryImpl();

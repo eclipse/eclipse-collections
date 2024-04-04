@@ -16,6 +16,7 @@ import java.util.Map;
 import org.eclipse.collections.api.factory.map.sorted.MutableSortedMapFactory;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MutableSortedMapFactory.class)
 public class MutableSortedMapFactoryImpl implements MutableSortedMapFactory
 {
     public static final MutableSortedMapFactory INSTANCE = new MutableSortedMapFactoryImpl();

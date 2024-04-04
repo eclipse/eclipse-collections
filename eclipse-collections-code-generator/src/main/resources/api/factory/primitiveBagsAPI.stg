@@ -24,6 +24,8 @@ import org.eclipse.collections.api.factory.bag.primitive.Mutable<name>BagFactory
  * @since 11.1.
  */
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Immutable<name>BagFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Mutable<name>BagFactory.class)
 public final class <name>Bags
 {
     public static final Immutable<name>BagFactory immutable =

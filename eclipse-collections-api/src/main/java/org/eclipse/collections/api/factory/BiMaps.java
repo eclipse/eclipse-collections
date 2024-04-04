@@ -14,6 +14,8 @@ import org.eclipse.collections.api.factory.bimap.ImmutableBiMapFactory;
 import org.eclipse.collections.api.factory.bimap.MutableBiMapFactory;
 
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = ImmutableBiMapFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MutableBiMapFactory.class)
 public final class BiMaps
 {
     public static final ImmutableBiMapFactory immutable = ServiceLoaderUtils.loadServiceClass(ImmutableBiMapFactory.class);

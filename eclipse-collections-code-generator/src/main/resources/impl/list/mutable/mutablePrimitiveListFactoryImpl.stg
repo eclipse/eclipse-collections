@@ -26,6 +26,7 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 6.0.
  */
+@aQute.bnd.annotation.spi.ServiceProvider(Mutable<name>ListFactory.class)
 public class Mutable<name>ListFactoryImpl implements Mutable<name>ListFactory
 {
     public static final Mutable<name>ListFactory INSTANCE = new Mutable<name>ListFactoryImpl();

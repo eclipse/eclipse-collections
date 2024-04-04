@@ -16,9 +16,10 @@
     <artifactId>p2-feature</artifactId>
     <packaging>pom</packaging>
 
-    <name>Eclipse Collections p2 Repository with Feature Build</name>
+    <name>Eclipse Collections p2 Parent</name>
 
     <modules>
+        <module>org.eclipse.collections.target</module>
         <module>org.eclipse.collections.feature</module>
         <module>org.eclipse.collections.repository</module>
     </modules>
@@ -28,46 +29,54 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- versions used for plug-ins below -->
-        <tycho-version>1.7.0</tycho-version>
-        <tycho-extras-version>1.7.0</tycho-extras-version>
+        <!-- From Tycho 3.0 Java 17 is required as runtime VM -->
+        <tycho-version>4.0.7</tycho-version>
+        <tycho-extras-version>4.0.7</tycho-extras-version>
 
         <!-- pattern/format used for the qualifier -->
         <qualifier.format>'v'yyyyMMdd-HHmm</qualifier.format>
 
         <!-- by default complain if working tree is dirty (error|warning|ignore) -->
         <dirtyWorkingTree>warning</dirtyWorkingTree>
-
-        <collections.repository.url>file:///${project.basedir}/../../p2-repository/org.eclipse.collections/target/repository</collections.repository.url>
     </properties>
+    
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.collections</groupId>
+			<artifactId>eclipse-collections</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.collections</groupId>
+			<artifactId>eclipse-collections-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 
     <build>
         <plugins>
-            <!-- configure default plug-ins -->
+			<!-- configure default plug-ins -->
 
-            <!-- enable Tycho -->
+			<!-- enable Tycho -->
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.eclipse.tycho</groupId>
-                        <artifactId>tycho-core</artifactId>
-                        <version>${tycho-version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.eclipse.tycho</groupId>
-                        <artifactId>tycho-p2-facade</artifactId>
-                        <version>${tycho-version}</version>
-                    </dependency>
-                </dependencies>
                 <extensions>true</extensions>
             </plugin>
 
-            <!-- target platform configuration -->
+			<!-- target platform configuration -->
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>target-platform-configuration</artifactId>
                 <configuration>
+                    <target>
+                        <artifact>
+                            <groupId>org.eclipse.collections</groupId>
+                            <artifactId>target</artifactId>
+                            <version>${project.version}</version>
+                        </artifact>
+                    </target>
+                    <targetDefinitionIncludeSource>honor</targetDefinitionIncludeSource>
                     <environments>
                         <environment>
                             <os>*</os>
@@ -75,7 +84,6 @@
                             <arch>*</arch>
                         </environment>
                     </environments>
-                    <includePackedArtifacts>true</includePackedArtifacts>
                 </configuration>
             </plugin>
 
@@ -90,7 +98,8 @@
                         <version>${tycho-version}</version>
                     </dependency>
                     <dependency>
-                        <groupId>org.eclipse.tycho.extras</groupId>
+                        <!-- remove .extras on update of Tycho >= 3 -->
+                        <groupId>org.eclipse.tycho</groupId>
                         <artifactId>tycho-buildtimestamp-jgit</artifactId>
                         <version>${tycho-version}</version>
                     </dependency>
@@ -156,11 +165,6 @@
                 </plugin>
                 <plugin>
                     <groupId>org.eclipse.tycho.extras</groupId>
-                    <artifactId>tycho-source-feature-plugin</artifactId>
-                    <version>${tycho-extras-version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.eclipse.tycho.extras</groupId>
                     <artifactId>tycho-custom-bundle-plugin</artifactId>
                     <version>${tycho-extras-version}</version>
                 </plugin>
@@ -177,11 +181,6 @@
         <repository>
             <id>eclipse.license</id>
             <url>https://download.eclipse.org/cbi/updates/license/</url>
-            <layout>p2</layout>
-        </repository>
-        <repository>
-            <id>collections.plugin.repository</id>
-            <url>${collections.repository.url}</url>
             <layout>p2</layout>
         </repository>
     </repositories>

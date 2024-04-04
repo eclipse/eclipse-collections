@@ -23,6 +23,7 @@ import org.eclipse.collections.api.factory.map.primitive.MutableObject<name>Hash
  * @since 11.1.
  */
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MutableObject<name>HashingStrategyMapFactory.class)
 public final class Object<name>HashingStrategyMaps
 {
     public static final MutableObject<name>HashingStrategyMapFactory mutable =

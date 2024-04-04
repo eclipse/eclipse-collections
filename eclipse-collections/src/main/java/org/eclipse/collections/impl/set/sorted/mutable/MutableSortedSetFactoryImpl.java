@@ -15,6 +15,7 @@ import java.util.Comparator;
 import org.eclipse.collections.api.factory.set.sorted.MutableSortedSetFactory;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MutableSortedSetFactory.class)
 public class MutableSortedSetFactoryImpl implements MutableSortedSetFactory
 {
     public static final MutableSortedSetFactory INSTANCE = new MutableSortedSetFactoryImpl();

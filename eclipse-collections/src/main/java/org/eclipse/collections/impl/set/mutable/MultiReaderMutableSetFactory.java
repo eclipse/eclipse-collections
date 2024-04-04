@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 import org.eclipse.collections.api.factory.set.MultiReaderSetFactory;
 import org.eclipse.collections.api.set.MultiReaderSet;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MultiReaderSetFactory.class)
 public class MultiReaderMutableSetFactory implements MultiReaderSetFactory
 {
     public static final MultiReaderSetFactory INSTANCE = new MultiReaderMutableSetFactory();

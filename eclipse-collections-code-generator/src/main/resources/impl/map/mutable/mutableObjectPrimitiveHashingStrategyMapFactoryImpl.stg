@@ -23,6 +23,7 @@ import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
  *
  * @since 11.1.
  */
+@aQute.bnd.annotation.spi.ServiceProvider(MutableObject<name>HashingStrategyMapFactory.class)
 public class MutableObject<name>HashingStrategyMapFactoryImpl implements MutableObject<name>HashingStrategyMapFactory
 {
     public static final MutableObject<name>HashingStrategyMapFactory INSTANCE = new MutableObject<name>HashingStrategyMapFactoryImpl();

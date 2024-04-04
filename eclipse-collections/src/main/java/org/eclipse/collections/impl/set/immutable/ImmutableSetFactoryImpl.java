@@ -16,6 +16,7 @@ import org.eclipse.collections.api.factory.set.ImmutableSetFactory;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
+@aQute.bnd.annotation.spi.ServiceProvider(ImmutableSetFactory.class)
 public class ImmutableSetFactoryImpl implements ImmutableSetFactory
 {
     public static final ImmutableSetFactory INSTANCE = new ImmutableSetFactoryImpl();

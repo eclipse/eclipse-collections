@@ -36,7 +36,7 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java-version }}
       - name: Unit-Test
-        run: ./mvnw --color=always verify --projects '!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always verify
         env:
           MAVEN_OPTS: "-Xmx1g"
 
@@ -60,7 +60,7 @@ jobs:
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - run: java --version
       - name: Unit-Test
-        run: ./mvnw --color=always verify --projects '!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always verify
         env:
           MAVEN_OPTS: "-Xmx2g"
 
@@ -122,12 +122,14 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 11
+      - name: Build Generator
+        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin'
       - name: JavaDoc Aggregate
-        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:aggregate --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
         env:
           MAVEN_OPTS: "-Xmx1g"
       - name: JavaDoc Jar
-        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:jar --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:jar --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
         env:
           MAVEN_OPTS: "-Xmx1g"
 
@@ -150,7 +152,9 @@ jobs:
           echo "steps.download-jdk.outputs.version = ${{ steps.download-jdk.outputs.version }}"
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - run: java --version
+      - name: Build Generator
+        run: ./mvnw -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin'
       - name: Javadoc
-        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:aggregate --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
         env:
           MAVEN_OPTS: "-Xmx2g"
