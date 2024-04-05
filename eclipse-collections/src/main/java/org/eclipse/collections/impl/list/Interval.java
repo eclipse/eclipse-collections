@@ -100,7 +100,8 @@ public final class Interval
      */
     public Interval to(int newTo)
     {
-        return Interval.fromToBy(this.from, newTo, this.step);
+        int adjustedStep = IntervalUtils.calculateAdjustedStep(this.from, newTo, this.step);
+        return Interval.fromToBy(this.from, newTo, adjustedStep);
     }
 
     /**
@@ -137,7 +138,8 @@ public final class Interval
      */
     public static Interval oneTo(int count)
     {
-        return Interval.oneToBy(count, 1);
+        int adjustedStep = IntervalUtils.calculateAdjustedStep(1, count, 1);
+        return Interval.oneToBy(count, adjustedStep);
     }
 
     /**
@@ -145,10 +147,6 @@ public final class Interval
      */
     public static Interval oneToBy(int count, int step)
     {
-        if (count < 1)
-        {
-            throw new IllegalArgumentException("Only positive ranges allowed using oneToBy");
-        }
         return Interval.fromToBy(1, count, step);
     }
 
@@ -157,7 +155,8 @@ public final class Interval
      */
     public static Interval zeroTo(int count)
     {
-        return Interval.zeroToBy(count, 1);
+        int adjustedStep = IntervalUtils.calculateAdjustedStep(0, count, 1);
+        return Interval.zeroToBy(count, adjustedStep);
     }
 
     /**
@@ -181,7 +180,7 @@ public final class Interval
     }
 
     /**
-     * Returns an Interval starting from the value from until the specified value to (exclusive) with a step value of 1
+     * Returns an Interval starting from the value from until the specified value to (exclusive) with a step value of 1.
      */
     public static Interval fromToExclusive(int from, int to)
     {

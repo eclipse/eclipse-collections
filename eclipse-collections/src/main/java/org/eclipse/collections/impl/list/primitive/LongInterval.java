@@ -104,7 +104,8 @@ public final class LongInterval
      */
     public LongInterval to(long newTo)
     {
-        return LongInterval.fromToBy(this.from, newTo, this.step);
+        long adjustedStep = LongInterval.calculateAdjustedStep(this.from, newTo, this.step);
+        return LongInterval.fromToBy(this.from, newTo, adjustedStep);
     }
 
     /**
@@ -141,7 +142,8 @@ public final class LongInterval
      */
     public static LongInterval oneTo(long count)
     {
-        return LongInterval.oneToBy(count, 1);
+        long adjustedStep = LongInterval.calculateAdjustedStep(1L, count, 1L);
+        return LongInterval.oneToBy(count, adjustedStep);
     }
 
     /**
@@ -149,10 +151,6 @@ public final class LongInterval
      */
     public static LongInterval oneToBy(long count, long step)
     {
-        if (count < 1)
-        {
-            throw new IllegalArgumentException("Only positive ranges allowed using oneToBy");
-        }
         return LongInterval.fromToBy(1, count, step);
     }
 
@@ -161,7 +159,8 @@ public final class LongInterval
      */
     public static LongInterval zeroTo(long count)
     {
-        return LongInterval.zeroToBy(count, 1);
+        long adjustedStep = LongInterval.calculateAdjustedStep(0L, count, 1L);
+        return LongInterval.zeroToBy(count, adjustedStep);
     }
 
     /**
@@ -1087,5 +1086,11 @@ public final class LongInterval
             }
             return this.current >= this.to;
         }
+    }
+
+    private static long calculateAdjustedStep(long from, long to, long stepBy)
+    {
+        int direction = Long.signum(to - from);
+        return direction == 0 ? stepBy : (long) direction * stepBy;
     }
 }

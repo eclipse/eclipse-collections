@@ -113,5 +113,11 @@ public final class IntervalUtils
         int index = (int) (diff / step);
         return diff % step == 0L ? index : (index + 2) * -1;
     }
+
+    public static int calculateAdjustedStep(int from, int to, int stepBy)
+    {
+        int direction = Integer.signum(to - from);
+        return direction == 0 ? stepBy : direction * stepBy;
+    }
 }
 
