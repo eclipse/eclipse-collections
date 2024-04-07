@@ -278,10 +278,32 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith("1", "2", "2", "2", "2", "2", "2", "3"), bag);
     }
 
+    @Test
+    public void withOccurrences()
+    {
+        MutableBagIterable<String> bag = this.newWith();
+        MutableBagIterable<String> withOccurrences = bag.withOccurrences("0", 0);
+
+        Assert.assertEquals(HashBag.newBag(), withOccurrences);
+        Assert.assertSame(bag, withOccurrences);
+        Assert.assertEquals(HashBag.newBagWith("1"), bag.withOccurrences("1", 1));
+        Assert.assertEquals(HashBag.newBagWith("1"), bag.withOccurrences("1", 0));
+        Assert.assertEquals(HashBag.newBagWith("1", "2", "2"), bag.withOccurrences("2", 2));
+        Assert.assertEquals(HashBag.newBagWith("1", "2", "2"), bag.withOccurrences("1", 0));
+        Assert.assertEquals(HashBag.newBagWith("1", "2", "2", "2", "2", "2", "2"), bag.withOccurrences("2", 4));
+        Assert.assertEquals(HashBag.newBagWith("1", "2", "2", "2", "2", "2", "2", "3"), bag.withOccurrences("3", 1));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void addOccurrences_throws()
     {
         this.newWith().addOccurrences(new Object(), -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void withOccurrences_throws()
+    {
+        this.newWith().withOccurrences(new Object(), -1);
     }
 
     @Test
@@ -306,10 +328,34 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
         MutableBagTestCase.assertBagsEqual(HashBag.<String>newBag(), bag);
     }
 
+    @Test
+    public void withoutOccurrences()
+    {
+        MutableBagIterable<String> bag = this.newWith("betamax-tape", "betamax-tape");
+        MutableBagIterable<String> expected = HashBag.newBag(bag);
+
+        MutableBagTestCase.assertBagsEqual(expected, bag.withoutOccurrences("dvd", 2));
+        Assert.assertSame(bag, bag.withoutOccurrences("dvd", 2));
+
+        MutableBagTestCase.assertBagsEqual(expected, bag.withoutOccurrences("dvd", 0));
+
+        MutableBagTestCase.assertBagsEqual(expected, bag.withoutOccurrences("betamax-tape", 0));
+
+        MutableBagTestCase.assertBagsEqual(HashBag.newBagWith("betamax-tape"), bag.withoutOccurrences("betamax-tape", 1));
+
+        MutableBagTestCase.assertBagsEqual(HashBag.<String>newBag(), bag.withoutOccurrences("betamax-tape", 10));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void removeOccurrences_throws()
     {
         this.newWith().removeOccurrences(new Object(), -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void withoutOccurrences_throws()
+    {
+        this.newWith().withoutOccurrences(new Object(), -1);
     }
 
     @Test

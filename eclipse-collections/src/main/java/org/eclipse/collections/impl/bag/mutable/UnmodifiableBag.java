@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -396,6 +396,18 @@ public class UnmodifiableBag<T>
     public MutableBag<T> without(T element)
     {
         throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public MutableBag<T> withOccurrences(T element, int occurrences)
+    {
+        throw new UnsupportedOperationException("Cannot call withOccurrences() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public MutableBag<T> withoutOccurrences(T element, int occurrences)
+    {
+        throw new UnsupportedOperationException("Cannot call withoutOccurrences() on " + this.getClass().getSimpleName());
     }
 
     @Override

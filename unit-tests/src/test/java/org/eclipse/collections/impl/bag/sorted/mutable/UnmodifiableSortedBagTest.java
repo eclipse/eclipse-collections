@@ -261,9 +261,23 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
+    public void withOccurrences()
+    {
+        super.withOccurrences();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
     public void addOccurrences_throws()
     {
         super.addOccurrences_throws();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withOccurrences_throws()
+    {
+        super.withOccurrences_throws();
     }
 
     @Override
@@ -282,9 +296,23 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
+    public void withoutOccurrences()
+    {
+        super.withoutOccurrences();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
     public void removeOccurrences_throws()
     {
         super.removeOccurrences_throws();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withoutOccurrences_throws()
+    {
+        super.withoutOccurrences_throws();
     }
 
     @Override
