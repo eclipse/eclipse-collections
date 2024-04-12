@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -124,6 +124,18 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
     default MutableBagIterable<T> without(T element)
     {
         this.remove(element);
+        return this;
+    }
+
+    default MutableBagIterable<T> withOccurrences(T element, int occurrences)
+    {
+        this.addOccurrences(element, occurrences);
+        return this;
+    }
+
+    default MutableBagIterable<T> withoutOccurrences(T element, int occurrences)
+    {
+        this.removeOccurrences(element, occurrences);
         return this;
     }
 

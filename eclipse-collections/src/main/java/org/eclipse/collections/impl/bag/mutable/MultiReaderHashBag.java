@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Goldman Sachs and others.
+ * Copyright (c) 2024 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -775,6 +775,20 @@ public final class MultiReaderHashBag<T>
         public boolean removeOccurrences(Object item, int occurrences)
         {
             return this.getDelegate().removeOccurrences(item, occurrences);
+        }
+
+        @Override
+        public MutableBag<T> withOccurrences(T item, int occurrences)
+        {
+            this.addOccurrences(item, occurrences);
+            return this;
+        }
+
+        @Override
+        public MutableBag<T> withoutOccurrences(Object item, int occurrences)
+        {
+            this.removeOccurrences(item, occurrences);
+            return this;
         }
 
         @Override

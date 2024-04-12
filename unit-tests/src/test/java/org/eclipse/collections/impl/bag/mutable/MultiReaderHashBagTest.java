@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MultiReaderBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -111,6 +112,21 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 2, 3, 4, 4), bag);
     }
 
+    @Test
+    public void withOccurrences()
+    {
+        MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2, 3);
+        MultiReaderBag<Integer> withOccurrences = bag.withOccurrences(1, 0);
+
+        Assert.assertSame(bag, withOccurrences);
+        Assert.assertEquals(HashBag.newBagWith(1, 1, 2, 3), withOccurrences);
+        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 3), bag.withOccurrences(1, 2));
+        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 3), bag.withOccurrences(4, 0));
+        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 3, 4, 4), bag.withOccurrences(4, 2));
+        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 3, 4, 4), bag.withOccurrences(2, 1));
+        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 2, 3, 4, 4), bag.withOccurrences(2, 1));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void addOccurrences_throws()
     {
@@ -127,6 +143,19 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         bag.removeOccurrences(1, 3);
         bag.removeOccurrences(3, 1);
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 2, 2), bag);
+    }
+
+    @Test
+    public void withoutOccurrences()
+    {
+        MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 1, 1, 2, 2, 3);
+        MultiReaderBag<Integer> withoutOccurrences = bag.withoutOccurrences(4, 2);
+
+        Assert.assertSame(bag, withoutOccurrences);
+        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 3), withoutOccurrences);
+
+        bag.withoutOccurrences(1, 3);
+        Assert.assertEquals(HashBag.newBagWith(1, 2, 2), bag.withoutOccurrences(3, 1));
     }
 
     @Test
