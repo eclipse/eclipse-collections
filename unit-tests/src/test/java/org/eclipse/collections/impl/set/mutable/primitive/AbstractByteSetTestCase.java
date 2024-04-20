@@ -26,6 +26,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.impl.map.mutable.primitive.CollisionGeneratorUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,6 +35,11 @@ import org.junit.Test;
  */
 public abstract class AbstractByteSetTestCase extends AbstractMutableByteCollectionTestCase
 {
+    protected static ByteArrayList generateCollisions()
+    {
+        return CollisionGeneratorUtil.generateCollisions();
+    }
+
     @Override
     protected abstract MutableByteSet classUnderTest();
 

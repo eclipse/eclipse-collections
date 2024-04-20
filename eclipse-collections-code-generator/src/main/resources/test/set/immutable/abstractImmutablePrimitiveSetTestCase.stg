@@ -5,7 +5,7 @@ skipBoolean() ::= "true"
 
 isTest() ::= "true"
 
-targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
+targetPath() ::= "org/eclipse/collections/impl/set/immutable/primitive"
 
 fileName(primitive) ::= "AbstractImmutable<primitive.name>HashSetTestCase"
 
@@ -16,10 +16,11 @@ class(primitive) ::= <<
 body(type, wrapperName, name) ::= <<
 <copyrightAndOthers()>
 
-package org.eclipse.collections.impl.set.mutable.primitive;
+package org.eclipse.collections.impl.set.immutable.primitive;
 
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.impl.set.mutable.primitive.Abstract<name>SetTestCase;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.set.MutableSet;
@@ -31,6 +32,7 @@ import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.collection.immutable.primitive.AbstractImmutable<name>CollectionTestCase;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
@@ -64,16 +66,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
 
     protected static <name>ArrayList generateCollisions()
     {
-        <name>ArrayList collisions = new <name>ArrayList();
-        <name>HashSet set = new <name>HashSet();
-        for (<type> i = <(literal.(type))("32")>; collisions.size() \<= 10; i++)
-        {
-            if (set.spreadAndMask(i) == set.spreadAndMask(<(literal.(type))("32")>))
-            {
-                collisions.add(i);
-            }
-        }
-        return collisions;
+        return Abstract<name>SetTestCase.generateCollisions1();
     }
 
     @Override
