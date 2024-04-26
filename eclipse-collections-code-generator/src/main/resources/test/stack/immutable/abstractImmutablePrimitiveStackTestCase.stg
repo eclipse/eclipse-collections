@@ -1,6 +1,7 @@
 import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -29,8 +30,7 @@ import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
 import org.eclipse.collections.impl.stack.primitive.Abstract<name>StackTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Abstract JUnit test for {@link Immutable<name>Stack}.
@@ -81,11 +81,11 @@ public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name
         Immutable<name>Stack stack = this.classUnderTest();
         int size = stack.size();
         Immutable<name>Stack modified = stack.push(<(literal.(type))("5")>);
-        Assert.assertEquals(<(literal.(type))("5")>, modified.peek()<wideDelta.(type)>);
+        Assertions.assertEquals(<(literal.(type))("5")>, modified.peek()<wideDelta.(type)>);
         Verify.assertSize(size + 1, modified);
         Verify.assertSize(size, stack);
-        Assert.assertNotSame(modified, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        Assertions.assertNotSame(modified, stack);
+        Assertions.assertEquals(this.classUnderTest(), stack);
     }
 
     @Test
@@ -94,11 +94,11 @@ public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name
         Immutable<name>Stack stack = this.classUnderTest();
         int size = stack.size();
         Immutable<name>Stack modified = stack.pop();
-        Assert.assertEquals(size - 1, modified.peek()<wideDelta.(type)>);
+        Assertions.assertEquals(size - 1, modified.peek()<wideDelta.(type)>);
         Verify.assertSize(size - 1, modified);
         Verify.assertSize(size, stack);
-        Assert.assertNotSame(modified, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        Assertions.assertNotSame(modified, stack);
+        Assertions.assertEquals(this.classUnderTest(), stack);
     }
 
     @Test
@@ -106,27 +106,27 @@ public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name
     {
         Immutable<name>Stack stack = this.classUnderTest();
         Immutable<name>Stack stack1 = stack.pop(0);
-        Assert.assertSame(stack1, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        Assertions.assertSame(stack1, stack);
+        Assertions.assertEquals(this.classUnderTest(), stack);
         int size = stack.size();
         Immutable<name>Stack modified = stack.pop(2);
-        Assert.assertEquals(size - 2, modified.peek()<wideDelta.(type)>);
+        Assertions.assertEquals(size - 2, modified.peek()<wideDelta.(type)>);
         Verify.assertSize(size - 2, modified);
         Verify.assertSize(size, stack);
-        Assert.assertNotSame(modified, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        Assertions.assertNotSame(modified, stack);
+        Assertions.assertEquals(this.classUnderTest(), stack);
     }
 
     @Test
     public void pop_with_negative_count_throws_exception()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().pop(-1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().pop(-1));
     }
 
     @Test
     public void pop_with_count_greater_than_stack_size_throws_exception()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
                 this.classUnderTest().pop(this.classUnderTest().size() + 1));
     }
 
@@ -134,16 +134,16 @@ public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name
     @Test
     public void testToString()
     {
-        Assert.assertEquals(this.createExpectedString("[", ", ", "]"), this.classUnderTest().toString());
+        Assertions.assertEquals(this.createExpectedString("[", ", ", "]"), this.classUnderTest().toString());
     }
 
     @Override
     @Test
     public void makeString()
     {
-        Assert.assertEquals(this.createExpectedString("", ", ", ""), this.classUnderTest().makeString());
-        Assert.assertEquals(this.createExpectedString("", "|", ""), this.classUnderTest().makeString("|"));
-        Assert.assertEquals(this.createExpectedString("{", "|", "}"), this.classUnderTest().makeString("{", "|", "}"));
+        Assertions.assertEquals(this.createExpectedString("", ", ", ""), this.classUnderTest().makeString());
+        Assertions.assertEquals(this.createExpectedString("", "|", ""), this.classUnderTest().makeString("|"));
+        Assertions.assertEquals(this.createExpectedString("{", "|", "}"), this.classUnderTest().makeString("{", "|", "}"));
     }
 
     @Override
@@ -152,15 +152,15 @@ public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name
     {
         StringBuilder appendable1 = new StringBuilder();
         this.classUnderTest().appendString(appendable1);
-        Assert.assertEquals(this.createExpectedString("", ", ", ""), appendable1.toString());
+        Assertions.assertEquals(this.createExpectedString("", ", ", ""), appendable1.toString());
 
         StringBuilder appendable2 = new StringBuilder();
         this.classUnderTest().appendString(appendable2, "|");
-        Assert.assertEquals(this.createExpectedString("", "|", ""), appendable2.toString());
+        Assertions.assertEquals(this.createExpectedString("", "|", ""), appendable2.toString());
 
         StringBuilder appendable3 = new StringBuilder();
         this.classUnderTest().appendString(appendable3, "{", "|", "}");
-        Assert.assertEquals(this.createExpectedString("{", "|", "}"), appendable3.toString());
+        Assertions.assertEquals(this.createExpectedString("{", "|", "}"), appendable3.toString());
     }
 
     @Override
@@ -169,14 +169,14 @@ public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name
     {
         <name>ArrayList expected = <name>ArrayList.newListWith();
         this.classUnderTest().forEach(expected::add);
-        Assert.assertEquals(expected, this.classUnderTest().toList());
+        Assertions.assertEquals(expected, this.classUnderTest().toList());
     }
 
     @Override
     @Test
     public void medianThrowsOnEmpty()
     {
-        Assert.assertThrows(ArithmeticException.class, () -> <name>Stacks.immutable.of().median());
+        Assertions.assertThrows(ArithmeticException.class, () -> <name>Stacks.immutable.of().median());
     }
 
     @Override
@@ -185,7 +185,7 @@ public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name
     {
         super.toImmutable();
         Immutable<name>Stack expected = this.classUnderTest();
-        Assert.assertSame(expected, expected.toImmutable());
+        Assertions.assertSame(expected, expected.toImmutable());
     }
 }
 

@@ -1,6 +1,7 @@
 import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -20,8 +21,7 @@ package org.eclipse.collections.impl.stack.mutable.primitive;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * This file was automatically generated from template file synchronizedPrimitiveStackTest.stg.
@@ -69,15 +69,15 @@ public class Synchronized<name>StackTest extends AbstractMutable<name>StackTestC
     public void asSynchronized()
     {
         Mutable<name>Stack stack1 = new Synchronized<name>Stack(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), new Object());
-        Assert.assertEquals(stack1, stack1.asSynchronized());
-        Assert.assertSame(stack1, stack1.asSynchronized());
+        Assertions.assertEquals(stack1, stack1.asSynchronized());
+        Assertions.assertSame(stack1, stack1.asSynchronized());
     }
 
     @Test
     public void toStack()
     {
         Mutable<name>Stack stack = <name>Stacks.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(stack, this.classUnderTest().toStack());
+        Assertions.assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 

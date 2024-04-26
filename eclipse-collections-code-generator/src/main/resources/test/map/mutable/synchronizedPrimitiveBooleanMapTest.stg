@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
+import "junit.stg"
 
 skipBoolean() ::= "true"
 
@@ -20,8 +21,7 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link Synchronized<name>BooleanMap}.
@@ -71,7 +71,7 @@ public class Synchronized<name>BooleanMapTest extends AbstractMutable<name>Boole
     {
         super.asSynchronized();
         Synchronized<name>BooleanMap map1 = this.classUnderTest();
-        Assert.assertSame(map1, map1.asSynchronized());
+        Assertions.assertSame(map1, map1.asSynchronized());
     }
 }
 

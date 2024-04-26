@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -26,8 +27,7 @@ import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>BooleanHashMap;
 import org.eclipse.collections.impl.map.primitive.Abstract<name>BooleanMapTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Abstract JUnit test for {@link Immutable<name>BooleanMap}.
@@ -89,11 +89,11 @@ public abstract class AbstractImmutable<name>BooleanMapTestCase extends Abstract
         Verify.assertPostSerializedEqualsAndHashCode(map6);
         Verify.assertPostSerializedEqualsAndHashCode(map8);
         Verify.assertPostSerializedIdentity(this.getEmptyMap());
-        Assert.assertNotEquals(map1, map3);
-        Assert.assertNotEquals(map1, map4);
-        Assert.assertNotEquals(map1, map5);
-        Assert.assertNotEquals(map7, map6);
-        Assert.assertNotEquals(map7, map8);
+        Assertions.assertNotEquals(map1, map3);
+        Assertions.assertNotEquals(map1, map4);
+        Assertions.assertNotEquals(map1, map5);
+        Assertions.assertNotEquals(map7, map6);
+        Assertions.assertNotEquals(map7, map8);
     }
 }
 

@@ -2,6 +2,7 @@ import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -31,8 +32,7 @@ import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Func
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link <name1><name2>HashMap}.
@@ -90,10 +90,10 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         <endif>
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
         <if(!sameTwoPrimitives)>
-        Assert.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
+        Assertions.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
         <else>
-        Assert.assertEquals(32L, ((<type1>[]) keysValues.get(hashMap)).length);
+        Assertions.assertEquals(32L, ((<type1>[]) keysValues.get(hashMap)).length);
         <endif>
     }
 
@@ -107,27 +107,27 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         values.setAccessible(true);
 
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap(3);
-        Assert.assertEquals(8L, ((<type1>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(8L, ((<type2>[]) values.get(hashMap)).length);
+        Assertions.assertEquals(8L, ((<type1>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(8L, ((<type2>[]) values.get(hashMap)).length);
 
         <name1><name2>HashMap hashMap2 = new <name1><name2>HashMap(15);
-        Assert.assertEquals(32L, ((<type1>[]) keys.get(hashMap2)).length);
-        Assert.assertEquals(32L, ((<type2>[]) values.get(hashMap2)).length);
+        Assertions.assertEquals(32L, ((<type1>[]) keys.get(hashMap2)).length);
+        Assertions.assertEquals(32L, ((<type2>[]) values.get(hashMap2)).length);
         <else>
         Field keysValues = <name1><name2>HashMap.class.getDeclaredField("keysValues");
         keysValues.setAccessible(true);
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap(3);
-        Assert.assertEquals(16L, ((<type1>[]) keysValues.get(hashMap)).length);
+        Assertions.assertEquals(16L, ((<type1>[]) keysValues.get(hashMap)).length);
 
         <name1><name2>HashMap hashMap2 = new <name1><name2>HashMap(15);
-        Assert.assertEquals(64L, ((<type1>[]) keysValues.get(hashMap2)).length);
+        Assertions.assertEquals(64L, ((<type1>[]) keysValues.get(hashMap2)).length);
         <endif>
     }
 
     @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> new <name1><name2>HashMap(-1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new <name1><name2>HashMap(-1));
     }
 
     @Test
@@ -140,16 +140,16 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         values.setAccessible(true);
 
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
-        Assert.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
+        Assertions.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
         <else>
         Field keysValues = <name1><name2>HashMap.class.getDeclaredField("keysValues");
         keysValues.setAccessible(true);
 
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
-        Assert.assertEquals(32L, ((<type1>[]) keysValues.get(hashMap)).length);
+        Assertions.assertEquals(32L, ((<type1>[]) keysValues.get(hashMap)).length);
         <endif>
-        Assert.assertEquals(new <name1><name2>HashMap(), hashMap);
+        Assertions.assertEquals(new <name1><name2>HashMap(), hashMap);
     }
 
     @Test
@@ -158,7 +158,7 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
         for (int i = 2; i \< 10; i++)
         {
-            Assert.assertFalse(hashMap.containsKey(<(castFromInt.(type1))("i")>));
+            Assertions.assertFalse(hashMap.containsKey(<(castFromInt.(type1))("i")>));
             hashMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
         }
 
@@ -167,30 +167,30 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         Field values = <name1><name2>HashMap.class.getDeclaredField("values");
         keys.setAccessible(true);
         values.setAccessible(true);
-        Assert.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
+        Assertions.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
         <endif>
         Verify.assertSize(8, hashMap);
         for (int i = 2; i \< 10; i++)
         {
-            Assert.assertTrue(hashMap.containsKey(<(castFromInt.(type1))("i")>));
-            Assert.assertTrue(hashMap.containsValue(<(castFromInt.(type2))("i")>));
+            Assertions.assertTrue(hashMap.containsKey(<(castFromInt.(type1))("i")>));
+            Assertions.assertTrue(hashMap.containsValue(<(castFromInt.(type2))("i")>));
         }
 
         Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
         Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
         occupiedWithData.setAccessible(true);
         occupiedWithSentinels.setAccessible(true);
-        Assert.assertEquals(8, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(8, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(7, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(7, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
         hashMap.put(<(literal.(type1))("10")>, <(literal.(type2))("10")>);
         hashMap.put(<(literal.(type1))("11")>, <(literal.(type2))("11")>);
-        Assert.assertEquals(9, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(9, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -207,28 +207,28 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         Field values = <name1><name2>HashMap.class.getDeclaredField("values");
         keys.setAccessible(true);
         values.setAccessible(true);
-        Assert.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
+        Assertions.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
         <endif>
 
         Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
         occupiedWithData.setAccessible(true);
-        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(8, occupiedWithData.get(hashMap));
 
         Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
         occupiedWithSentinels.setAccessible(true);
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         for (int i = 0; i \< 4; i++)
         {
             hashMap.remove(<(castIntToNarrowTypeWithParens.(type1))("i + 2")>);
-            Assert.assertEquals(7 - i, occupiedWithData.get(hashMap));
-            Assert.assertEquals(i + 1, occupiedWithSentinels.get(hashMap));
+            Assertions.assertEquals(7 - i, occupiedWithData.get(hashMap));
+            Assertions.assertEquals(i + 1, occupiedWithSentinels.get(hashMap));
         }
 
         hashMap.remove(<(literal.(type1))("6")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(5, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(5, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -240,16 +240,16 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         occupiedWithSentinels.setAccessible(true);
         <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3"]:keyValue(); separator=", ">);
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(2, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(1, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithData.get(hashMap));
 
         hashMap.clear();
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(0, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithData.get(hashMap));
     }
 
     @Test
@@ -261,20 +261,20 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         occupiedWithSentinels.setAccessible(true);
         <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(2, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(2, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("5")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(2, occupiedWithData.get(hashMap));
     }
 
     @Test
@@ -286,26 +286,26 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         occupiedWithSentinels.setAccessible(true);
         <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
 
         <name2>To<name2>Function function = (<type2> <type2>Parameter) -> <type2>Parameter;
 
         hashMap.updateValue(<(literal.(type1))("2")>, <(literal.(type2))("0")>, function);
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
 
         hashMap.updateValue(<(literal.(type1))("5")>, <(literal.(type2))("0")>, function);
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
 
         hashMap.updateValue(<(literal.(type1))("2")>, <(literal.(type2))("0")>, function); // putting in a slot marked REMOVED
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
     }
 
     @Test
@@ -316,24 +316,24 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         occupiedWithData.setAccessible(true);
         occupiedWithSentinels.setAccessible(true);
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
-        Assert.assertEquals(0, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         for (int i = 2; i \< 10; i++)
         {
             hashMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
-            Assert.assertEquals(i - 1, occupiedWithData.get(hashMap));
+            Assertions.assertEquals(i - 1, occupiedWithData.get(hashMap));
         }
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(7, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(7, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.put(<(literal.(type1))("2")>, <(literal.(type2))("9")>); // putting in a slot marked REMOVED
-        Assert.assertEquals(8, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(8, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -346,20 +346,20 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
 
         hashMap.getIfAbsentPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPut(<(literal.(type1))("5")>, <(literal.(type2))("5")>);
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>); //putting in a slot marked REMOVED
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -374,20 +374,20 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         <name2>Function0 function = () -> <(literal.(type2))("5")>;
 
         hashMap.getIfAbsentPut(<(literal.(type1))("2")>, function);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPut(<(literal.(type1))("5")>, function);
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPut(<(literal.(type1))("2")>, function); //putting in a slot marked REMOVED
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -402,20 +402,20 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         <name2>Function\<<wrapperName2>\> function = <wrapperName2>::<type2>Value;
 
         hashMap.getIfAbsentPutWith(<(literal.(type1))("2")>, function, <wrapperName2>.valueOf(<(literal.(type2))("5")>));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPutWith(<(literal.(type1))("5")>, function, <wrapperName2>.valueOf(<(literal.(type2))("5")>));
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPutWith(<(literal.(type1))("2")>, function, <wrapperName2>.valueOf(<(literal.(type2))("5")>)); //putting in a slot marked REMOVED
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -427,32 +427,32 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         occupiedWithSentinels.setAccessible(true);
         <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
 
-        Assert.assertEquals(2, hashMap.getAndPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(2, hashMap.getAndPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
-        Assert.assertEquals(50, hashMap.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(5, hashMap.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("5")>, <(literal.(type2))("70")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(50, hashMap.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(5, hashMap.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("5")>, <(literal.(type2))("70")>)<wideDelta.(type2)>);
 
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
-        Assert.assertEquals(50, hashMap.getAndPut(<(literal.(type1))("1")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(50, hashMap.getAndPut(<(literal.(type1))("1")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
-        Assert.assertEquals(5, hashMap.getAndPut(<(literal.(type1))("1")>, <(literal.(type2))("11")>, <(literal.(type2))("60")>)<wideDelta.(type2)>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(5, hashMap.getAndPut(<(literal.(type1))("1")>, <(literal.(type2))("11")>, <(literal.(type2))("60")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.removeKey(<(literal.(type1))("2")>);
-        Assert.assertEquals(2, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(50, hashMap.getAndPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(2, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(50, hashMap.getAndPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -467,20 +467,20 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         <name1>To<name2>Function function = (<type1> <type1>Parameter) -> (<type2>) <type1>Parameter;
 
         hashMap.getIfAbsentPutWithKey(<(literal.(type1))("2")>, function);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPutWithKey(<(literal.(type1))("5")>, function);
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(3, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPutWithKey(<(literal.(type1))("2")>, function); //putting in a slot marked REMOVED
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(4, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -491,24 +491,24 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
         occupiedWithData.setAccessible(true);
         occupiedWithSentinels.setAccessible(true);
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
-        Assert.assertEquals(0, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         for (int i = 2; i \< 10; i++)
         {
-            Assert.assertFalse(hashMap.containsKey(<(castFromInt.(type1))("i")>));
+            Assertions.assertFalse(hashMap.containsKey(<(castFromInt.(type1))("i")>));
             hashMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
-            Assert.assertEquals(i - 1, occupiedWithData.get(hashMap));
+            Assertions.assertEquals(i - 1, occupiedWithData.get(hashMap));
         }
 
         hashMap.remove(<(literal.(type1))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(7, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(7, occupiedWithData.get(hashMap));
 
         hashMap.put(<(literal.(type1))("2")>, <(literal.(type2))("3")>); //putting in a slot marked as REMOVED
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+        Assertions.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assertions.assertEquals(8, occupiedWithData.get(hashMap));
     }
 
     @Test
@@ -518,7 +518,7 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
 
         for (int i = 2; i \< 10; i++)
         {
-            Assert.assertFalse(copyMap.containsKey(<(castFromInt.(type1))("i")>));
+            Assertions.assertFalse(copyMap.containsKey(<(castFromInt.(type1))("i")>));
             copyMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
         }
 
@@ -530,11 +530,11 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
 
         for (int i = 2; i \< 10; i++)
         {
-            Assert.assertTrue(hashMap.containsKey(<(castFromInt.(type1))("i")>));
-            Assert.assertTrue(hashMap.containsValue(<(castFromInt.(type2))("i")>));
+            Assertions.assertTrue(hashMap.containsKey(<(castFromInt.(type1))("i")>));
+            Assertions.assertTrue(hashMap.containsValue(<(castFromInt.(type2))("i")>));
         }
 
-        Assert.assertEquals(copyMap, hashMap);
+        Assertions.assertEquals(copyMap, hashMap);
     }
 
     @Override
@@ -543,12 +543,12 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
     {
         super.withKeysValues();
         <name1><name2>HashMap hashMap0 = new <name1><name2>HashMap();
-        Assert.assertSame(hashMap0.withKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>), hashMap0);
+        Assertions.assertSame(hashMap0.withKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>), hashMap0);
         <name1><name2>HashMap hashMap1 = new <name1><name2>HashMap().withKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>);
         <name1><name2>HashMap hashMap2 = new <name1><name2>HashMap().withKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>, <(literal.(type1))("4")>, <(literal.(type2))("4")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>), hashMap0);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>), hashMap1);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>, <(literal.(type1))("4")>, <(literal.(type2))("4")>), hashMap2);
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>), hashMap0);
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>), hashMap1);
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>, <(literal.(type1))("4")>, <(literal.(type2))("4")>), hashMap2);
     }
 
     @Test
@@ -556,7 +556,7 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
     {
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap().withKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("4")>, <(literal.(type2))("5")>);
         <wrapperName2> sum = hashMap.injectInto(<wrapperName2>.valueOf(<(literal.(type2))("1")>), (<wrapperName2> result, <type2> value) -> <wrapperName2>.valueOf((<type2>) (result + value)));
-        Assert.assertEquals(<wrapperName2>.valueOf(<(literal.(type2))("15")>), sum);
+        Assertions.assertEquals(<wrapperName2>.valueOf(<(literal.(type2))("15")>), sum);
     }
 
     @Test
@@ -568,9 +568,9 @@ public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapT
 
         for (int i = 2; i \< 100; i++)
         {
-            Assert.assertEquals(<(literal.(type2))("0")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
-            Assert.assertEquals(<(wideLiteral.(type2))("1")>, hashMap.updateValue(<(castFromInt.(type1))("i")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
-            Assert.assertEquals(<(literal.(type2))("1")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
+            Assertions.assertEquals(<(literal.(type2))("0")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
+            Assertions.assertEquals(<(wideLiteral.(type2))("1")>, hashMap.updateValue(<(castFromInt.(type1))("i")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
+            Assertions.assertEquals(<(literal.(type2))("1")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
         }
     }
 

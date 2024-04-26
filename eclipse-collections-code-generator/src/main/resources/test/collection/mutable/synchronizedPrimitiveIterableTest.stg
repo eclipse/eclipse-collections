@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -29,8 +30,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.primitive.Synchronized<name>Iterable;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link Synchronized<name>Iterable}s
@@ -62,10 +62,10 @@ public class Synchronized<name>IterableTest extends Abstract<name>IterableTestCa
         return FastList.newListWith(elements);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void null_iterable_throws()
     {
-        Synchronized<name>Iterable.of(null);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Synchronized<name>Iterable.of(null));
     }
 
     @Override
@@ -77,13 +77,13 @@ public class Synchronized<name>IterableTest extends Abstract<name>IterableTestCa
         <name>Iterator iterator = iterable.<type>Iterator();
         for (int i = 0; i \< 4; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
-            Assert.assertTrue(list.remove(iterator.next()));
+            Assertions.assertTrue(iterator.hasNext());
+            Assertions.assertTrue(list.remove(iterator.next()));
         }
         Verify.assertEmpty(list);
-        Assert.assertFalse(iterator.hasNext());
+        Assertions.assertFalse(iterator.hasNext());
 
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override

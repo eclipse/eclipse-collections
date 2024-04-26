@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -21,8 +22,7 @@ package org.eclipse.collections.impl.collection.immutable.primitive;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Abstract<name>IterableTestCase;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Abstract JUnit test for {@link Immutable<name>Collection}s.
@@ -41,10 +41,10 @@ public abstract class AbstractImmutable<name>CollectionTestCase extends Abstract
 
     protected void assertSizeAndContains(Immutable<name>Collection collection, <type>... elements)
     {
-        Assert.assertEquals(elements.length, collection.size());
+        Assertions.assertEquals(elements.length, collection.size());
         for (<type> i: elements)
         {
-            Assert.assertTrue(collection.contains(i));
+            Assertions.assertTrue(collection.contains(i));
         }
     }
 

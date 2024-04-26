@@ -1,6 +1,7 @@
 import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -21,8 +22,7 @@ import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 
@@ -45,7 +45,7 @@ public class Immutable<name>SingletonBagTest extends AbstractImmutable<name>BagT
         StringBuilder stringBuilder = new StringBuilder();
         this.classUnderTest().forEachWithOccurrences((<type> argument1, int argument2) -> stringBuilder.append(argument1).append(argument2));
         String string = stringBuilder.toString();
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>1", string);
+        Assertions.assertEquals("<(toStringLiteral.(type))("1")>1", string);
     }
 
     @Override
@@ -54,9 +54,9 @@ public class Immutable<name>SingletonBagTest extends AbstractImmutable<name>BagT
     {
         Immutable<name>SingletonBag bag = new Immutable<name>SingletonBag(<(literal.(type))("1")>);
         Immutable<name>Bag filtered1 = bag.selectByOccurrences(i -> i > 0);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1"]:(literal.(type))(); separator=", ">), filtered1);
+        Assertions.assertEquals(<name>HashBag.newBagWith(<["1"]:(literal.(type))(); separator=", ">), filtered1);
         Immutable<name>Bag filtered2 = bag.selectByOccurrences(i -> i > 1);
-        Assert.assertEquals(<name>Bags.immutable.empty(), filtered2);
+        Assertions.assertEquals(<name>Bags.immutable.empty(), filtered2);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Immutable<name>SingletonBagTest extends AbstractImmutable<name>BagT
     public void selectDuplicates()
     {
         Immutable<name>SingletonBag bag = new Immutable<name>SingletonBag(<(literal.(type))("1")>);
-        Assert.assertEquals(<name>HashBag.newBagWith(), bag.selectDuplicates());
+        Assertions.assertEquals(<name>HashBag.newBagWith(), bag.selectDuplicates());
     }
 
     @Override
@@ -76,7 +76,7 @@ public class Immutable<name>SingletonBagTest extends AbstractImmutable<name>BagT
         Immutable<name>Bag bag = this.classUnderTest();
         Immutable<name>Set expected = <name>Sets.immutable.with(<(literal.(type))("1")>);
         Immutable<name>Set actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class Immutable<name>SingletonBagTest extends AbstractImmutable<name>BagT
 
         Immutable<name>SingletonBag iterable = new Immutable<name>SingletonBag(<(literal.(type))("1")>);
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("1")>), Mutable<wrapperName>::add);
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("2")>), result);
+        Assertions.assertEquals(new Mutable<wrapperName>(<(literal.(type))("2")>), result);
     }
 }
 

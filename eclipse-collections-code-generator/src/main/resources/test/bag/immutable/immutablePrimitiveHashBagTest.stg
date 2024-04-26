@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -23,8 +24,7 @@ import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 
@@ -48,7 +48,7 @@ public class Immutable<name>HashBagTest extends AbstractImmutable<name>BagTestCa
 
         Immutable<name>HashBag iterable = Immutable<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
+        Assertions.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Immutable<name>HashBagTest extends AbstractImmutable<name>BagTestCa
         Immutable<name>Bag bag = this.classUnderTest();
         Immutable<name>Set expected = <name>Sets.immutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Immutable<name>Set actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -71,11 +71,11 @@ public class Immutable<name>HashBagTest extends AbstractImmutable<name>BagTestCa
         <name>HashBag mutable4 = <name>HashBag.newBagWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
         Mutable<name>Bag mutableBag = new <name>HashBag(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Immutable<name>HashBag immutableBag = Immutable<name>HashBag.newBagWith(mutableBag);
-        Assert.assertEquals(mutable3, mutableBag);
-        Assert.assertEquals(immutable3, immutableBag);
+        Assertions.assertEquals(mutable3, mutableBag);
+        Assertions.assertEquals(immutable3, immutableBag);
         mutableBag.add(<(literal.(type))("4")>);
-        Assert.assertEquals(mutable4, mutableBag);
-        Assert.assertEquals(immutable3, immutableBag);
+        Assertions.assertEquals(mutable4, mutableBag);
+        Assertions.assertEquals(immutable3, immutableBag);
     }
 }
 

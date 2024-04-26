@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -22,8 +23,7 @@ package org.eclipse.collections.impl.map.immutable.primitive;
 
 import org.eclipse.collections.api.map.primitive.Immutable<name>BooleanMap;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link Immutable<name>BooleanHashMap}.
@@ -37,7 +37,7 @@ public class Immutable<name>BooleanHashMapTest extends AbstractImmutable<name>Bo
     {
         super.toImmutable();
         Immutable<name>BooleanMap map1 = this.classUnderTest();
-        Assert.assertSame(map1, map1.toImmutable());
+        Assertions.assertSame(map1, map1.toImmutable());
     }
 
     @Test
@@ -45,9 +45,9 @@ public class Immutable<name>BooleanHashMapTest extends AbstractImmutable<name>Bo
     {
         Immutable<name>BooleanMap map1 = this.classUnderTest();
         Immutable<name>BooleanMap expected = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true, <(literal.(type))("33")>, false);
-        Assert.assertEquals(expected, map1.newWithKeyValue(<(literal.(type))("33")>, false));
-        Assert.assertNotSame(map1, map1.newWithKeyValue(<(literal.(type))("33")>, false));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        Assertions.assertEquals(expected, map1.newWithKeyValue(<(literal.(type))("33")>, false));
+        Assertions.assertNotSame(map1, map1.newWithKeyValue(<(literal.(type))("33")>, false));
+        Assertions.assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -55,9 +55,9 @@ public class Immutable<name>BooleanHashMapTest extends AbstractImmutable<name>Bo
     {
         Immutable<name>BooleanMap map1 = this.classUnderTest();
         Immutable<name>BooleanMap expected = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false);
-        Assert.assertEquals(expected, map1.newWithoutKey(<(literal.(type))("32")>));
-        Assert.assertNotSame(map1, map1.newWithoutKey(<(literal.(type))("32")>));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        Assertions.assertEquals(expected, map1.newWithoutKey(<(literal.(type))("32")>));
+        Assertions.assertNotSame(map1, map1.newWithoutKey(<(literal.(type))("32")>));
+        Assertions.assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -65,9 +65,9 @@ public class Immutable<name>BooleanHashMapTest extends AbstractImmutable<name>Bo
     {
         Immutable<name>BooleanMap map1 = this.classUnderTest();
         Immutable<name>BooleanMap expected = this.newWithKeysValues(<(literal.(type))("31")>, false);
-        Assert.assertEquals(expected, map1.newWithoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>)));
-        Assert.assertNotSame(map1, map1.newWithoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>)));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        Assertions.assertEquals(expected, map1.newWithoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>)));
+        Assertions.assertNotSame(map1, map1.newWithoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>)));
+        Assertions.assertEquals(this.classUnderTest(), map1);
     }
 }
 

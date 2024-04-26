@@ -128,7 +128,7 @@
         <checkstyle.version>10.12.6</checkstyle.version>
         <checkstyle.plugin.version>3.2.1</checkstyle.plugin.version>
         <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
-        <junit.version>4.13.2</junit.version>
+        <junit.version>5.10.2</junit.version>
         <jmh.version>1.37</jmh.version>
 
         <maven.compiler.source>11</maven.compiler.source>
@@ -168,8 +168,32 @@
         <dependencies>
 
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.vintage</groupId>
+                <artifactId>junit-vintage-engine</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-launcher</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-runner</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -310,15 +334,26 @@
                             </goals>
                             <configuration>
                                 <failOnWarning>true</failOnWarning>
+                                <ignoredUsedUndeclaredDependencies>
+                                    <ignoredUsedUndeclaredDependency>
+                                        junit:junit:jar
+                                    </ignoredUsedUndeclaredDependency>
+                                </ignoredUsedUndeclaredDependencies>
                                 <ignoredUnusedDeclaredDependencies>
                                     <ignoredUnusedDeclaredDependency>
                                         com.google.code.findbugs:jsr305:jar
+                                    </ignoredUnusedDeclaredDependency>
+                                    <ignoredUnusedDeclaredDependency>
+                                        org.junit.vintage:junit-vintage-engine:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
                                         ch.qos.logback:logback-classic:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
                                         org.slf4j:slf4j-nop:jar
+                                    </ignoredUnusedDeclaredDependency>
+                                    <ignoredUnusedDeclaredDependency>
+                                        org.junit.jupiter:junit-jupiter-engine:jar
                                     </ignoredUnusedDeclaredDependency>
                                 </ignoredUnusedDeclaredDependencies>
                             </configuration>
@@ -462,7 +497,7 @@
 
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.5</version>
                     <configuration>
                         <includes>
                             <include>**/*Test.java</include>

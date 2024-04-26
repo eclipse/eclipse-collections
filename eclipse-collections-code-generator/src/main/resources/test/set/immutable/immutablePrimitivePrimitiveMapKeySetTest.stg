@@ -22,7 +22,7 @@ import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.impl.map.mutable.primitive.<primitive.name><primitive.name>HashMap;
 import org.eclipse.collections.impl.set.immutable.primitive.AbstractImmutable<name>HashSetTestCase;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * JUnit test for {@link Immutable<name>Set} created from the freeze() method.
@@ -56,8 +56,8 @@ public class Immutable<primitive.name><primitive.name>MapKeySetTest extends Abst
         <name><name>HashMap <type><name>HashMap = <name><name>HashMap.newWithKeysValues(collision1, collision1, collision2, collision2);
         <type><name>HashMap.removeKey(collision2);
         <name>Set <type>Set = <type><name>HashMap.keySet().freeze();
-        Assert.assertTrue(<type>Set.contains(collision1));
-        Assert.assertFalse(<type>Set.contains(collision2));
+        Assertions.assertTrue(<type>Set.contains(collision1));
+        Assertions.assertFalse(<type>Set.contains(collision2));
     }
 }
 

@@ -1,6 +1,7 @@
 import "copyrightAndOthers.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -25,10 +26,7 @@ import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
-import org.junit.Assert;
-import org.junit.Test;
-
-import static org.junit.Assert.assertThrows;
+<junit()>
 
 /**
  * JUnit test for {@link Unmodifiable<name>Bag}.
@@ -66,28 +64,29 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     @Test
     public void addOccurrences()
     {
-        assertThrows(UnsupportedOperationException.class, () -> this.bag.addOccurrences(<(literal.(type))("1")>, 3));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.bag.addOccurrences(<(literal.(type))("1")>, 3));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addOccurrences_throws()
     {
-        this.newWith().addOccurrences(<(literal.(type))("1")>, -1);
+        Assertions.assertThrows(
+                UnsupportedOperationException.class, () -> this.newWith().addOccurrences(<(literal.(type))("1")>, -1));
     }
 
     @Override
     @Test
     public void removeOccurrences()
     {
-        assertThrows(UnsupportedOperationException.class, () -> this.bag.removeOccurrences(<(literal.(type))("1")>, 1));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.bag.removeOccurrences(<(literal.(type))("1")>, 1));
     }
 
     @Override
     @Test
     public void removeOccurrences_throws()
     {
-        assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.newWith().removeOccurrences(<(literal.(type))("1")>, -1));
     }
 
@@ -95,28 +94,28 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     @Test
     public void clear()
     {
-        assertThrows(UnsupportedOperationException.class, () -> this.bag.clear());
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.bag.clear());
     }
 
     @Override
     @Test
     public void add()
     {
-        assertThrows(UnsupportedOperationException.class, () -> this.newWith().add(<(literal.(type))("1")>));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.newWith().add(<(literal.(type))("1")>));
     }
 
     @Override
     @Test
     public void addAllArray()
     {
-        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll());
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll());
     }
 
     @Override
     @Test
     public void addAllIterable()
     {
-        assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().addAll(this.newMutableCollectionWith()));
     }
 
@@ -124,14 +123,14 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     @Test
     public void remove()
     {
-        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(<(literal.(type))("1")>));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(<(literal.(type))("1")>));
     }
 
     @Override
     @Test
     public void removeIf()
     {
-        assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().removeIf(<name>Predicates.equal(<(literal.(type))("1")>)));
     }
 
@@ -139,14 +138,14 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     @Test
     public void removeAll()
     {
-        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll());
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll());
     }
 
     @Override
     @Test
     public void removeAll_iterable()
     {
-        assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().removeAll(this.newMutableCollectionWith()));
     }
 
@@ -154,14 +153,14 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     @Test
     public void retainAll()
     {
-        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll());
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll());
     }
 
     @Override
     @Test
     public void retainAll_iterable()
     {
-        assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().retainAll(this.newMutableCollectionWith()));
     }
 
@@ -169,7 +168,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     @Test
     public void with()
     {
-        assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.newWith().with(<["1"]:(literal.(type))(); separator=", ">));
     }
 
@@ -177,7 +176,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     @Test
     public void withAll()
     {
-        assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.newWith().withAll(this.newMutableCollectionWith(<(literal.(type))("1")>)));
     }
 
@@ -185,7 +184,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     @Test
     public void without()
     {
-        assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).without(<(literal.(type))("9")>));
     }
 
@@ -193,7 +192,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     @Test
     public void withoutAll()
     {
-        assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">)
                 .withoutAll(this.newMutableCollectionWith(<["8", "9"]:(literal.(type))(); separator=", ">)));
     }
@@ -203,24 +202,24 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     public void contains()
     {
         Unmodifiable<name>Bag collection = this.newWith(<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertFalse(collection.contains(<(literal.(type))("29")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("49")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("29")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("49")>));
 
         <type>[] numbers = {<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">};
         for (<type> number : numbers)
         {
-            Assert.assertTrue(collection.contains(number));
+            Assertions.assertTrue(collection.contains(number));
         }
 
-        Assert.assertFalse(collection.contains(<(literal.(type))("-1")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("29")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("49")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("-1")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("29")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("49")>));
 
         Unmodifiable<name>Bag collection1 = this.newWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">);
-        Assert.assertTrue(collection1.contains(<(literal.(type))("0")>));
-        Assert.assertTrue(collection1.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(collection1.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection1.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(collection1.contains(<(literal.(type))("0")>));
+        Assertions.assertTrue(collection1.contains(<(literal.(type))("1")>));
+        Assertions.assertTrue(collection1.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(collection1.contains(<(literal.(type))("3")>));
     }
 
     @Override
@@ -233,7 +232,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
         {
             iterator.next();
         }
-        assertThrows(NoSuchElementException.class, () -> iterator.next());
+        Assertions.assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
@@ -241,8 +240,8 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     public void asUnmodifiable()
     {
         super.asUnmodifiable();
-        Assert.assertSame(this.bag, this.bag.asUnmodifiable());
-        Assert.assertEquals(this.bag, this.bag.asUnmodifiable());
+        Assertions.assertSame(this.bag, this.bag.asUnmodifiable());
+        Assertions.assertEquals(this.bag, this.bag.asUnmodifiable());
     }
 
     @Override
@@ -251,9 +250,9 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     {
         Unmodifiable<name>Bag unmodifiable<name>Bag = this.classUnderTest();
         Mutable<name>Iterator iterator = unmodifiable<name>Bag.<type>Iterator();
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         iterator.next();
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assertions.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -262,8 +261,8 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     {
         Unmodifiable<name>Bag unmodifiable<name>Bag = this.classUnderTest();
         Mutable<name>Iterator iterator = unmodifiable<name>Bag.<type>Iterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assertions.assertTrue(iterator.hasNext());
+        Assertions.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override

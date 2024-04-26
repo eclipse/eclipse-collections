@@ -1,5 +1,6 @@
 import "copyright.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -22,8 +23,7 @@ import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link Immutable<name>SetFactoryImpl}.
@@ -35,7 +35,7 @@ public class Immutable<name>SetFactoryImplTest
     public void of()
     {
         Verify.assertEmpty(<name>Sets.immutable.of());
-        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>).toImmutable(), <name>Sets.immutable.of(<(literal.(type))("1")>));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>).toImmutable(), <name>Sets.immutable.of(<(literal.(type))("1")>));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class Immutable<name>SetFactoryImplTest
     public void ofAll()
     {
         Immutable<name>Set set = <name>Sets.immutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<name>HashSet.newSet(set).toImmutable(), <name>Sets.immutable.ofAll(set));
+        Assertions.assertEquals(<name>HashSet.newSet(set).toImmutable(), <name>Sets.immutable.ofAll(set));
     }
 }
 

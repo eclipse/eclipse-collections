@@ -1,5 +1,6 @@
 import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -34,8 +35,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.impl.factory.Sets;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Abstract JUnit test for {@link Mutable<name>Set}.
@@ -102,14 +102,14 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     public void isEmpty()
     {
         super.isEmpty();
-        Assert.assertFalse(this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)).isEmpty());
+        Assertions.assertFalse(this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)).isEmpty());
     }
 
     @Override
     @Test
     public void notEmpty()
     {
-        Assert.assertTrue(this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)).notEmpty());
+        Assertions.assertTrue(this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)).notEmpty());
     }
 
     @Override
@@ -120,11 +120,11 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
         set.clear();
         Verify.assertSize(0, set);
-        Assert.assertFalse(set.contains(<(literal.(type))("0")>));
-        Assert.assertFalse(set.contains(<(literal.(type))("31")>));
-        Assert.assertFalse(set.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(set.contains(Abstract<name>SetTestCase.generateCollisions1().getFirst()));
-        Assert.assertFalse(set.contains(Abstract<name>SetTestCase.generateCollisions1().get(1)));
+        Assertions.assertFalse(set.contains(<(literal.(type))("0")>));
+        Assertions.assertFalse(set.contains(<(literal.(type))("31")>));
+        Assertions.assertFalse(set.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(set.contains(Abstract<name>SetTestCase.generateCollisions1().getFirst()));
+        Assertions.assertFalse(set.contains(Abstract<name>SetTestCase.generateCollisions1().get(1)));
     }
 
     @Override
@@ -133,20 +133,20 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.add();
         Mutable<name>Set set = this.newWith();
-        Assert.assertTrue(set.add(<(literal.(type))("14")>));
-        Assert.assertFalse(set.add(<(literal.(type))("14")>));
-        Assert.assertTrue(set.add(<(literal.(type))("2")>));
-        Assert.assertFalse(set.add(<(literal.(type))("2")>));
-        Assert.assertTrue(set.add(<(literal.(type))("35")>));
-        Assert.assertFalse(set.add(<(literal.(type))("35")>));
-        Assert.assertTrue(set.add(<(literal.(type))("31")>));
-        Assert.assertFalse(set.add(<(literal.(type))("31")>));
-        Assert.assertTrue(set.add(<(literal.(type))("32")>));
-        Assert.assertFalse(set.add(<(literal.(type))("32")>));
-        Assert.assertTrue(set.add(<(literal.(type))("0")>));
-        Assert.assertFalse(set.add(<(literal.(type))("0")>));
-        Assert.assertTrue(set.add(<(literal.(type))("1")>));
-        Assert.assertFalse(set.add(<(literal.(type))("1")>));
+        Assertions.assertTrue(set.add(<(literal.(type))("14")>));
+        Assertions.assertFalse(set.add(<(literal.(type))("14")>));
+        Assertions.assertTrue(set.add(<(literal.(type))("2")>));
+        Assertions.assertFalse(set.add(<(literal.(type))("2")>));
+        Assertions.assertTrue(set.add(<(literal.(type))("35")>));
+        Assertions.assertFalse(set.add(<(literal.(type))("35")>));
+        Assertions.assertTrue(set.add(<(literal.(type))("31")>));
+        Assertions.assertFalse(set.add(<(literal.(type))("31")>));
+        Assertions.assertTrue(set.add(<(literal.(type))("32")>));
+        Assertions.assertFalse(set.add(<(literal.(type))("32")>));
+        Assertions.assertTrue(set.add(<(literal.(type))("0")>));
+        Assertions.assertFalse(set.add(<(literal.(type))("0")>));
+        Assertions.assertTrue(set.add(<(literal.(type))("1")>));
+        Assertions.assertFalse(set.add(<(literal.(type))("1")>));
     }
 
 <if(primitive.floatingPoint)>
@@ -160,28 +160,28 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.addAllIterable();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertFalse(set.addAll(new <name>ArrayList()));
-        Assert.assertFalse(set.addAll(<name>ArrayList.newListWith(<(literal.(type))("31")>, Abstract<name>SetTestCase.generateCollisions1().get(0), Abstract<name>SetTestCase.generateCollisions1().get(1))));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertFalse(set.addAll(new <name>ArrayList()));
+        Assertions.assertFalse(set.addAll(<name>ArrayList.newListWith(<(literal.(type))("31")>, Abstract<name>SetTestCase.generateCollisions1().get(0), Abstract<name>SetTestCase.generateCollisions1().get(1))));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
 
-        Assert.assertTrue(set.addAll(<name>HashSet.newSetWith(<["0", "1", "2", "30"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(4))));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "2", "30", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1), Abstract<name>SetTestCase.generateCollisions1().get(4)), set);
+        Assertions.assertTrue(set.addAll(<name>HashSet.newSetWith(<["0", "1", "2", "30"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(4))));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "1", "2", "30", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1), Abstract<name>SetTestCase.generateCollisions1().get(4)), set);
 
-        Assert.assertTrue(set.addAll(<name>HashSet.newSetWith(<(literal.(type))("5")>)));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1), Abstract<name>SetTestCase.generateCollisions1().get(4)), set);
+        Assertions.assertTrue(set.addAll(<name>HashSet.newSetWith(<(literal.(type))("5")>)));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1), Abstract<name>SetTestCase.generateCollisions1().get(4)), set);
 
-        Assert.assertTrue(set.addAll(<name>HashSet.newSetWith(Abstract<name>SetTestCase.generateCollisions1().get(5))));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1), Abstract<name>SetTestCase.generateCollisions1().get(4), Abstract<name>SetTestCase.generateCollisions1().get(5)), set);
+        Assertions.assertTrue(set.addAll(<name>HashSet.newSetWith(Abstract<name>SetTestCase.generateCollisions1().get(5))));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1), Abstract<name>SetTestCase.generateCollisions1().get(4), Abstract<name>SetTestCase.generateCollisions1().get(5)), set);
 
         <name>HashSet set1 = new <name>HashSet();
-        Assert.assertTrue(set1.addAll(<["2", "35"]:(literal.(type))(); separator=", ">));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["2", "35"]:(literal.(type))(); separator=", ">), set1);
+        Assertions.assertTrue(set1.addAll(<["2", "35"]:(literal.(type))(); separator=", ">));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["2", "35"]:(literal.(type))(); separator=", ">), set1);
     }
 
     @Test
     public void testOfAllFactory()
     {
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 <name>HashSet.newSetWith(<["0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">),
                 <name>Sets.mutable.ofAll(<name>HashBag.newBagWith(<["0", "1", "2", "5", "30", "31", "0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">)));
     }
@@ -192,20 +192,20 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.remove();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertFalse(this.newWith().remove(<(literal.(type))("15")>));
-        Assert.assertFalse(set.remove(<(literal.(type))("15")>));
-        Assert.assertTrue(set.remove(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
-        Assert.assertFalse(set.remove(Abstract<name>SetTestCase.generateNonCollisions().getFirst()));
-        Assert.assertFalse(set.remove(Abstract<name>SetTestCase.generateCollisions1().get(3)));
-        Assert.assertTrue(set.remove(Abstract<name>SetTestCase.generateCollisions1().get(1)));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst()), set);
-        Assert.assertTrue(set.remove(Abstract<name>SetTestCase.generateCollisions1().getFirst()));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "31"]:(literal.(type))(); separator=", ">), set);
-        Assert.assertTrue(set.remove(<(literal.(type))("31")>));
-        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>), set);
-        Assert.assertTrue(set.remove(<(literal.(type))("1")>));
-        Assert.assertEquals(<name>HashSet.newSetWith(), set);
+        Assertions.assertFalse(this.newWith().remove(<(literal.(type))("15")>));
+        Assertions.assertFalse(set.remove(<(literal.(type))("15")>));
+        Assertions.assertTrue(set.remove(<(literal.(type))("0")>));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertFalse(set.remove(Abstract<name>SetTestCase.generateNonCollisions().getFirst()));
+        Assertions.assertFalse(set.remove(Abstract<name>SetTestCase.generateCollisions1().get(3)));
+        Assertions.assertTrue(set.remove(Abstract<name>SetTestCase.generateCollisions1().get(1)));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst()), set);
+        Assertions.assertTrue(set.remove(Abstract<name>SetTestCase.generateCollisions1().getFirst()));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["1", "31"]:(literal.(type))(); separator=", ">), set);
+        Assertions.assertTrue(set.remove(<(literal.(type))("31")>));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>), set);
+        Assertions.assertTrue(set.remove(<(literal.(type))("1")>));
+        Assertions.assertEquals(<name>HashSet.newSetWith(), set);
     }
 
     @Override
@@ -214,15 +214,15 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.removeAll();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertFalse(set.removeAll());
-        Assert.assertFalse(set.removeAll(<(literal.(type))("15")>, Abstract<name>SetTestCase.generateCollisions1().get(2), Abstract<name>SetTestCase.generateCollisions1().get(3)));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
-        Assert.assertTrue(set.removeAll(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(3)));
-        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
-        Assert.assertTrue(set.removeAll(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)));
-        Assert.assertEquals(new <name>HashSet(), set);
-        Assert.assertFalse(set.removeAll(<(literal.(type))("1")>));
-        Assert.assertEquals(new <name>HashSet(), set);
+        Assertions.assertFalse(set.removeAll());
+        Assertions.assertFalse(set.removeAll(<(literal.(type))("15")>, Abstract<name>SetTestCase.generateCollisions1().get(2), Abstract<name>SetTestCase.generateCollisions1().get(3)));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertTrue(set.removeAll(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(3)));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertTrue(set.removeAll(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)));
+        Assertions.assertEquals(new <name>HashSet(), set);
+        Assertions.assertFalse(set.removeAll(<(literal.(type))("1")>));
+        Assertions.assertEquals(new <name>HashSet(), set);
     }
 
     @Override
@@ -231,15 +231,15 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.removeAll_iterable();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertFalse(set.removeAll(new <name>ArrayList()));
-        Assert.assertFalse(set.removeAll(<name>ArrayList.newListWith(<(literal.(type))("15")>, Abstract<name>SetTestCase.generateCollisions1().get(2), Abstract<name>SetTestCase.generateCollisions1().get(3))));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
-        Assert.assertTrue(set.removeAll(<name>HashSet.newSetWith(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(4))));
-        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
-        Assert.assertTrue(set.removeAll(<name>HashSet.newSetWith(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1))));
-        Assert.assertEquals(new <name>HashSet(), set);
-        Assert.assertFalse(set.removeAll(<name>HashSet.newSetWith(<(literal.(type))("1")>)));
-        Assert.assertEquals(new <name>HashSet(), set);
+        Assertions.assertFalse(set.removeAll(new <name>ArrayList()));
+        Assertions.assertFalse(set.removeAll(<name>ArrayList.newListWith(<(literal.(type))("15")>, Abstract<name>SetTestCase.generateCollisions1().get(2), Abstract<name>SetTestCase.generateCollisions1().get(3))));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertTrue(set.removeAll(<name>HashSet.newSetWith(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(4))));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertTrue(set.removeAll(<name>HashSet.newSetWith(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1))));
+        Assertions.assertEquals(new <name>HashSet(), set);
+        Assertions.assertFalse(set.removeAll(<name>HashSet.newSetWith(<(literal.(type))("1")>)));
+        Assertions.assertEquals(new <name>HashSet(), set);
     }
 
     @Override
@@ -248,14 +248,14 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.retainAll();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertFalse(set.retainAll(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
-        Assert.assertTrue(set.retainAll(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(4), Abstract<name>SetTestCase.generateCollisions1().get(1)));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
-        Assert.assertTrue(set.retainAll(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst()));
-        Assert.assertEquals(new <name>HashSet(), set);
-        Assert.assertFalse(set.retainAll(<(literal.(type))("1")>));
-        Assert.assertEquals(new <name>HashSet(), set);
+        Assertions.assertFalse(set.retainAll(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertTrue(set.retainAll(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(4), Abstract<name>SetTestCase.generateCollisions1().get(1)));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertTrue(set.retainAll(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst()));
+        Assertions.assertEquals(new <name>HashSet(), set);
+        Assertions.assertFalse(set.retainAll(<(literal.(type))("1")>));
+        Assertions.assertEquals(new <name>HashSet(), set);
     }
 
     @Override
@@ -264,14 +264,14 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.retainAll_iterable();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertFalse(set.retainAll(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1))));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
-        Assert.assertTrue(set.retainAll(<name>HashSet.newSetWith(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(4), Abstract<name>SetTestCase.generateCollisions1().get(1))));
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
-        Assert.assertTrue(set.retainAll(<name>HashSet.newSetWith(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst())));
-        Assert.assertEquals(new <name>HashSet(), set);
-        Assert.assertFalse(set.retainAll(<name>HashSet.newSetWith(<(literal.(type))("1")>)));
-        Assert.assertEquals(new <name>HashSet(), set);
+        Assertions.assertFalse(set.retainAll(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1))));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertTrue(set.retainAll(<name>HashSet.newSetWith(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(4), Abstract<name>SetTestCase.generateCollisions1().get(1))));
+        Assertions.assertEquals(<name>HashSet.newSetWith(<["0", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().get(1)), set);
+        Assertions.assertTrue(set.retainAll(<name>HashSet.newSetWith(<(literal.(type))("1")>, Abstract<name>SetTestCase.generateCollisions1().getFirst())));
+        Assertions.assertEquals(new <name>HashSet(), set);
+        Assertions.assertFalse(set.retainAll(<name>HashSet.newSetWith(<(literal.(type))("1")>)));
+        Assertions.assertEquals(new <name>HashSet(), set);
     }
 
     @Override
@@ -282,19 +282,19 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         MutableSet\<<wrapperName>\> actual = UnifiedSet.newSet();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
         <name>Iterator iterator = set.<type>Iterator();
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertEquals(expected, actual);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assertions.assertFalse(iterator.hasNext());
+        Assertions.assertEquals(expected, actual);
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -308,7 +308,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
             iterator.next();
         }
 
-        Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
+        Assertions.assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
@@ -319,7 +319,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
 
         Mutable<name>Set set = this.newWith(<["0", "2", "31"]:(literal.(type))(); separator=", ">);
         <wrapperName> sum = set.injectInto(<wrapperName>.valueOf(<(literal.(type))("0")>), (<wrapperName> result, <type> value) -> <wrapperName>.valueOf((<type>) (result + value)));
-        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("33")>), sum);
+        Assertions.assertEquals(<wrapperName>.valueOf(<(literal.(type))("33")>), sum);
     }
 
     @Override
@@ -331,7 +331,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
         set.forEach((<type> each) -> sum[0] += each);
 
-        Assert.assertEquals(32L + Abstract<name>SetTestCase.generateCollisions1().getFirst() + Abstract<name>SetTestCase.generateCollisions1().get(1), sum[0]<(delta.(type))>);
+        Assertions.assertEquals(32L + Abstract<name>SetTestCase.generateCollisions1().getFirst() + Abstract<name>SetTestCase.generateCollisions1().get(1), sum[0]<(delta.(type))>);
     }
 
     @Override
@@ -340,9 +340,9 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.count();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertEquals(4L, set.count(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
-        Assert.assertEquals(3L, set.count(<name>Predicates.lessThan(<(literal.(type))("32")>)));
-        Assert.assertEquals(1L, set.count(<name>Predicates.greaterThan(<(literal.(type))("32")>)));
+        Assertions.assertEquals(4L, set.count(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
+        Assertions.assertEquals(3L, set.count(<name>Predicates.lessThan(<(literal.(type))("32")>)));
+        Assertions.assertEquals(1L, set.count(<name>Predicates.greaterThan(<(literal.(type))("32")>)));
     }
 
     @Override
@@ -371,9 +371,9 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.detectIfNone();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertEquals(<(literal.(type))("0")>, set.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("1")>), <(literal.(type))("9")>)<(delta.(type))>);
-        Assert.assertEquals(Abstract<name>SetTestCase.generateCollisions1().get(1), set.detectIfNone(<name>Predicates.greaterThan(Abstract<name>SetTestCase.generateCollisions1().getFirst()), <(literal.(type))("9")>)<(delta.(type))>);
-        Assert.assertEquals(<(literal.(type))("9")>, set.detectIfNone(<name>Predicates.greaterThan(Abstract<name>SetTestCase.generateCollisions1().get(1)), <(literal.(type))("9")>)<(delta.(type))>);
+        Assertions.assertEquals(<(literal.(type))("0")>, set.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("1")>), <(literal.(type))("9")>)<(delta.(type))>);
+        Assertions.assertEquals(Abstract<name>SetTestCase.generateCollisions1().get(1), set.detectIfNone(<name>Predicates.greaterThan(Abstract<name>SetTestCase.generateCollisions1().getFirst()), <(literal.(type))("9")>)<(delta.(type))>);
+        Assertions.assertEquals(<(literal.(type))("9")>, set.detectIfNone(<name>Predicates.greaterThan(Abstract<name>SetTestCase.generateCollisions1().get(1)), <(literal.(type))("9")>)<(delta.(type))>);
     }
 
     @Override
@@ -382,7 +382,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.collect();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 UnifiedSet.newSetWith(<["-1", "0", "30"]:(literal.(type))(); separator=", ">, <(castIntToNarrowTypeWithParens.(type))({Abstract<name>SetTestCase.generateCollisions1().getFirst() - 1})>, <(castIntToNarrowTypeWithParens.(type))({Abstract<name>SetTestCase.generateCollisions1().get(1) - 1})>),
                 set.collect((<type> byteParameter) -> <(castIntToNarrowTypeWithParens.(type))("byteParameter - 1")>));
     }
@@ -393,7 +393,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.toSortedArray();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertArrayEquals(new <type>[]{<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)}, set.toSortedArray()<(delta.(type))>);
+        Assertions.assertArrayEquals(new <type>[]{<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1)}, set.toSortedArray()<(delta.(type))>);
     }
 
     @Override
@@ -419,16 +419,16 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         super.testEquals();
         Mutable<name>Set set1 = this.newWith(<["1", "31", "32"]:(literal.(type))(); separator=", ">);
         Mutable<name>Set set2 = this.newWith(<["32", "31", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(set1.hashCode(), set2.hashCode());
+        Assertions.assertEquals(set1.hashCode(), set2.hashCode());
     }
 
     @Override
     @Test
     public void toBag()
     {
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toBag());
-        Assert.assertEquals(<name>HashBag.newBagWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).toBag());
-        Assert.assertEquals(<name>HashBag.newBagWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).toBag());
+        Assertions.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toBag());
+        Assertions.assertEquals(<name>HashBag.newBagWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).toBag());
+        Assertions.assertEquals(<name>HashBag.newBagWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).toBag());
     }
 
     @Override
@@ -437,7 +437,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     {
         super.asLazy();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
-        Assert.assertEquals(set.toSet(), set.asLazy().toSet());
+        Assertions.assertEquals(set.toSet(), set.asLazy().toSet());
         Verify.assertInstanceOf(Lazy<name>Iterable.class, set.asLazy());
     }
 
@@ -448,7 +448,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         super.asSynchronized();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
         Verify.assertInstanceOf(Synchronized<name>Set.class, set.asSynchronized());
-        Assert.assertEquals(new Synchronized<name>Set(set), set.asSynchronized());
+        Assertions.assertEquals(new Synchronized<name>Set(set), set.asSynchronized());
     }
 
     @Override
@@ -458,7 +458,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         super.asUnmodifiable();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
         Verify.assertInstanceOf(Unmodifiable<name>Set.class, set.asUnmodifiable());
-        Assert.assertEquals(new Unmodifiable<name>Set(set), set.asUnmodifiable());
+        Assertions.assertEquals(new Unmodifiable<name>Set(set), set.asUnmodifiable());
     }
 
     @Test
@@ -498,7 +498,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     private void assertUnion(Mutable<name>Set set1, Mutable<name>Set set2, Mutable<name>Set expected)
     {
         Mutable<name>Set actual = set1.union(set2);
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -538,7 +538,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     private void assertIntersect(Mutable<name>Set set1, Mutable<name>Set set2, Mutable<name>Set expected)
     {
         Mutable<name>Set actual = set1.intersect(set2);
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -573,7 +573,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     private void assertDifference(Mutable<name>Set set1, Mutable<name>Set set2, Mutable<name>Set expected)
     {
         Mutable<name>Set actual = set1.difference(set2);
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -608,7 +608,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     private void assertSymmetricDifference(Mutable<name>Set set1, Mutable<name>Set set2, Mutable<name>Set expected)
     {
         Mutable<name>Set actual = set1.symmetricDifference(set2);
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -648,7 +648,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     private void assertIsSubsetOf(Mutable<name>Set set1, Mutable<name>Set set2, boolean expected)
     {
         boolean actual = set1.isSubsetOf(set2);
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -688,7 +688,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     private void assertIsProperSubsetOf(Mutable<name>Set set1, Mutable<name>Set set2, boolean expected)
     {
         boolean actual = set1.isProperSubsetOf(set2);
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -726,7 +726,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     private void assertCartesianProduct(Mutable<name>Set set1, Mutable<name>Set set2, MutableSet\<<name><name>Pair> expected)
     {
         MutableSet\<<name><name>Pair> actual = set1.cartesianProduct(set2).toSet();
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 }
 
@@ -738,10 +738,10 @@ public void add_<key>()
 {
     Mutable<name>Set set = this.newWith(<wrapperName>.<key>);
     Set\<<wrapperName>\> hashSet = new HashSet\<>();
-    Assert.assertTrue(hashSet.add(<wrapperName>.<key>));
+    Assertions.assertTrue(hashSet.add(<wrapperName>.<key>));
 
-    Assert.assertFalse(hashSet.add(<wrapperName>.<key>));
-    Assert.assertFalse(set.add(<wrapperName>.<key>));
+    Assertions.assertFalse(hashSet.add(<wrapperName>.<key>));
+    Assertions.assertFalse(set.add(<wrapperName>.<key>));
     Verify.assertSize(hashSet.size(), set);
 }
 

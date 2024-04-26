@@ -1,6 +1,7 @@
 import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -25,8 +26,7 @@ import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link Immutable<name>ArrayStack}.
@@ -43,20 +43,20 @@ public class Immutable<name>ArrayStackTest extends AbstractImmutable<name>StackT
     @Test
     public void testNewStack_throws()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
                 Immutable<name>ArrayStack.newStack(<name>Stacks.mutable.with(<["1"]:(literal.(type))(); separator=", ">)));
     }
 
     @Test
     public void newWithIterable()
     {
-        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWithIterable(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        Assertions.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWithIterable(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
     }
 
     @Test
     public void newWithTopToBottom()
     {
-        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWithTopToBottom(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assertions.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWithTopToBottom(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
     }
 
     @Override
@@ -67,14 +67,14 @@ public class Immutable<name>ArrayStackTest extends AbstractImmutable<name>StackT
 
         Immutable<name>ArrayStack iterable = Immutable<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
+        Assertions.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
     }
 
     @Test
     public void toStack()
     {
         Mutable<name>Stack stack = <name>Stacks.mutable.withAllReversed(Immutable<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
-        Assert.assertEquals(stack, Immutable<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).toStack());
+        Assertions.assertEquals(stack, Immutable<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).toStack());
     }
 }
 

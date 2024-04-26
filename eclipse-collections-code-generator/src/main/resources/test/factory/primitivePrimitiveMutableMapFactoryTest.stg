@@ -2,6 +2,7 @@ import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -24,8 +25,7 @@ package org.eclipse.collections.api.factory.map.primitive;
 
 import org.eclipse.collections.api.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Junit test for {@link Mutable<name1><name2>MapFactory}
@@ -36,34 +36,34 @@ public class Mutable<name1><name2>MapFactoryTest
     @Test
     public void with()
     {
-        Assert.assertEquals(new <name1><name2>HashMap(), <name1><name2>Maps.mutable.with());
+        Assertions.assertEquals(new <name1><name2>HashMap(), <name1><name2>Maps.mutable.with());
 
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>), <name1><name2>Maps.mutable.with(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>), <name1><name2>Maps.mutable.with(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
 
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>),
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>),
                 <name1><name2>Maps.mutable.with(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>));
 
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>),
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>),
                 <name1><name2>Maps.mutable.with(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>));
 
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>),
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>),
                 <name1><name2>Maps.mutable.with(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>));
     }
 
     @Test
     public void of()
     {
-        Assert.assertEquals(new <name1><name2>HashMap(), <name1><name2>Maps.mutable.of());
+        Assertions.assertEquals(new <name1><name2>HashMap(), <name1><name2>Maps.mutable.of());
 
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>), <name1><name2>Maps.mutable.of(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>), <name1><name2>Maps.mutable.of(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
 
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>),
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>),
                 <name1><name2>Maps.mutable.of(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>));
 
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>),
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>),
                 <name1><name2>Maps.mutable.of(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>));
 
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>),
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>),
                 <name1><name2>Maps.mutable.of(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("5")>, <(literal.(type2))("6")>, <(literal.(type1))("7")>, <(literal.(type2))("8")>));
     }
 }

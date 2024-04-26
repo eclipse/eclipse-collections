@@ -2,6 +2,7 @@ import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -25,8 +26,7 @@ package org.eclipse.collections.impl.factory.primitive;
 import org.eclipse.collections.api.factory.map.primitive.Immutable<name1><name2>MapFactory;
 import org.eclipse.collections.api.factory.map.primitive.Mutable<name1><name2>MapFactory;
 import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Junit test for {@link <name1><name2>Maps}
@@ -43,12 +43,12 @@ public class <name1><name2>MapsTest
 
     private void assertImmutableMapFactory(Immutable<name1><name2>MapFactory mapFactory)
     {
-        Assert.assertSame(new <name1><name2>HashMap().toImmutable(), mapFactory.with());
-        Assert.assertSame(new <name1><name2>HashMap().toImmutable(), mapFactory.of());
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>).toImmutable(), mapFactory.of(<(literal.(type1))("1")>, <(literal.(type2))("1")>));
+        Assertions.assertSame(new <name1><name2>HashMap().toImmutable(), mapFactory.with());
+        Assertions.assertSame(new <name1><name2>HashMap().toImmutable(), mapFactory.of());
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>).toImmutable(), mapFactory.of(<(literal.(type1))("1")>, <(literal.(type2))("1")>));
         <name1><name2>HashMap sourceMap = <name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>);
-        Assert.assertEquals(sourceMap.toImmutable(), mapFactory.ofAll(sourceMap));
-        Assert.assertEquals(sourceMap.toImmutable(), mapFactory.withAll(sourceMap));
+        Assertions.assertEquals(sourceMap.toImmutable(), mapFactory.ofAll(sourceMap));
+        Assertions.assertEquals(sourceMap.toImmutable(), mapFactory.withAll(sourceMap));
     }
 
     @Test
@@ -60,11 +60,11 @@ public class <name1><name2>MapsTest
 
     private void assertMutableMapFactory(Mutable<name1><name2>MapFactory mapFactory)
     {
-        Assert.assertEquals(new <name1><name2>HashMap(), mapFactory.with());
-        Assert.assertEquals(new <name1><name2>HashMap(), mapFactory.of());
+        Assertions.assertEquals(new <name1><name2>HashMap(), mapFactory.with());
+        Assertions.assertEquals(new <name1><name2>HashMap(), mapFactory.of());
         <name1><name2>HashMap sourceMap = <name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>);
-        Assert.assertEquals(sourceMap, mapFactory.ofAll(sourceMap));
-        Assert.assertEquals(sourceMap, mapFactory.withAll(sourceMap));
+        Assertions.assertEquals(sourceMap, mapFactory.ofAll(sourceMap));
+        Assertions.assertEquals(sourceMap, mapFactory.withAll(sourceMap));
     }
 }
 

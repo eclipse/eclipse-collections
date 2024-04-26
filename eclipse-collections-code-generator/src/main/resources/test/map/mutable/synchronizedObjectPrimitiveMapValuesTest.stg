@@ -2,6 +2,7 @@ import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 skipBoolean() ::= "true"
 
@@ -37,8 +38,7 @@ import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<na
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link SynchronizedObject<name>Map#values()}.
@@ -84,27 +84,39 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
         <name>Iterator iterator = bag.<type>Iterator();
         for (int i = 0; i \< 4; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
-            Assert.assertTrue(list.remove(iterator.next()));
+            Assertions.assertTrue(iterator.hasNext());
+            Assertions.assertTrue(list.remove(iterator.next()));
         }
         Verify.assertEmpty(list);
-        Assert.assertFalse(iterator.hasNext());
+        Assertions.assertFalse(iterator.hasNext());
 
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Test
+    public void <type>Iterator_throws_non_empty_collection()
+    {
+        Mutable<name>Collection collection = this.classUnderTest();
+        <name>Iterator iterator = collection.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        Assertions.assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
     @Test
     public void addAllIterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name>ArrayList()));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name>ArrayList()));
     }
 
     @Override
     @Test
     public void add()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type))("0")>));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type))("0")>));
     }
 
     <if(primitive.floatingPoint)><NaNTests()><endif>
@@ -112,21 +124,21 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     @Test
     public void addAllArray()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type))(); separator=", ">));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type))(); separator=", ">));
     }
 
     @Override
     @Test
     public void with()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type))("0")>));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type))("0")>));
     }
 
     @Override
     @Test
     public void withAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withAll(new <name>ArrayList()));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withAll(new <name>ArrayList()));
     }
 
     @Override
@@ -135,10 +147,10 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     {
         Mutable<name>Collection collection = this.newWith(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>);
         Mutable<name>Collection collectionWithout = collection.without(<(literal.(type))("2")>);
-        Assert.assertSame(collection, collectionWithout);
+        Assertions.assertSame(collection, collectionWithout);
         Mutable<name>Collection expectedCollection = this.newWith(<(literal.(type))("1")>, <(literal.(type))("3")>);
-        Assert.assertEquals(expectedCollection.toList(), collectionWithout.toList());
-        Assert.assertEquals(expectedCollection.toList(), collectionWithout.without(<(literal.(type))("4")>).toList());
+        Assertions.assertEquals(expectedCollection.toList(), collectionWithout.toList());
+        Assertions.assertEquals(expectedCollection.toList(), collectionWithout.without(<(literal.(type))("4")>).toList());
     }
 
     @Override
@@ -147,9 +159,9 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     {
         Mutable<name>Collection collection = this.newWith(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>);
         Mutable<name>Collection collectionWithout = collection.withoutAll(new <name>ArrayList(<(literal.(type))("2")>, <(literal.(type))("4")>));
-        Assert.assertSame(collection, collectionWithout);
+        Assertions.assertSame(collection, collectionWithout);
         Mutable<name>Collection expectedCollection = this.newWith(<(literal.(type))("1")>, <(literal.(type))("3")>);
-        Assert.assertEquals(expectedCollection.toList(), collectionWithout.toList());
+        Assertions.assertEquals(expectedCollection.toList(), collectionWithout.toList());
     }
 
     @Override
@@ -158,13 +170,13 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     {
         Object<name>HashMap\<Integer> map = Object<name>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">);
         Mutable<name>Collection collection = map.values();
-        Assert.assertTrue(collection.remove(<(literal.(type))("3")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(collection.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(collection.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("2")>));
+        Assertions.assertTrue(collection.remove(<(literal.(type))("3")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("1")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("2")>));
     }
 
     @Override
@@ -173,134 +185,134 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     {
         Object<name>HashMap\<Integer> map = Object<name>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">);
         Mutable<name>Collection collection = map.values();
-        Assert.assertTrue(collection.removeIf(<name>Predicates.equal(<(literal.(type))("3")>)));
-        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(collection.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(collection.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection.removeIf(<name>Predicates.equal(<(literal.(type))("3")>)));
+        Assertions.assertTrue(collection.removeIf(<name>Predicates.equal(<(literal.(type))("3")>)));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("1")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(collection.removeIf(<name>Predicates.equal(<(literal.(type))("3")>)));
     }
 
     @Override
     @Test
     public void removeAll()
     {
-        Assert.assertFalse(this.newWith().removeAll());
-        Assert.assertFalse(this.newWith().removeAll(<(literal.(type))("1")>));
+        Assertions.assertFalse(this.newWith().removeAll());
+        Assertions.assertFalse(this.newWith().removeAll(<(literal.(type))("1")>));
 
         Object<name>HashMap\<Integer> map = Object<name>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">);
         Mutable<name>Collection collection = map.values();
-        Assert.assertFalse(collection.removeAll());
+        Assertions.assertFalse(collection.removeAll());
 
-        Assert.assertTrue(collection.removeAll(<(literal.(type))("1")>, <(literal.(type))("5")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(collection.contains(<(literal.(type))("2")>));
-        Assert.assertTrue(collection.contains(<(literal.(type))("3")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("2")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(collection.removeAll(<(literal.(type))("1")>, <(literal.(type))("5")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("1")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("2")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("3")>));
 
-        Assert.assertTrue(collection.removeAll(<(literal.(type))("3")>, <(literal.(type))("2")>));
-        Assert.assertTrue(collection.isEmpty());
-        Assert.assertFalse(collection.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(map.isEmpty());
+        Assertions.assertTrue(collection.removeAll(<(literal.(type))("3")>, <(literal.(type))("2")>));
+        Assertions.assertTrue(collection.isEmpty());
+        Assertions.assertFalse(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(map.isEmpty());
     }
 
     @Override
     @Test
     public void removeAll_iterable()
     {
-        Assert.assertFalse(this.newWith().removeAll(new <name>ArrayList()));
-        Assert.assertFalse(this.newWith().removeAll(<name>ArrayList.newListWith(<(literal.(type))("1")>)));
+        Assertions.assertFalse(this.newWith().removeAll(new <name>ArrayList()));
+        Assertions.assertFalse(this.newWith().removeAll(<name>ArrayList.newListWith(<(literal.(type))("1")>)));
 
         Object<name>HashMap\<Integer> map = Object<name>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">);
         Mutable<name>Collection collection = map.values();
-        Assert.assertFalse(collection.removeAll());
+        Assertions.assertFalse(collection.removeAll());
 
-        Assert.assertTrue(collection.removeAll(<name>ArrayList.newListWith(<(literal.(type))("1")>, <(literal.(type))("5")>)));
-        Assert.assertFalse(collection.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(collection.contains(<(literal.(type))("2")>));
-        Assert.assertTrue(collection.contains(<(literal.(type))("3")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("2")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(collection.removeAll(<name>ArrayList.newListWith(<(literal.(type))("1")>, <(literal.(type))("5")>)));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("1")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("2")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("3")>));
 
-        Assert.assertTrue(collection.removeAll(<name>ArrayList.newListWith(<(literal.(type))("3")>, <(literal.(type))("2")>)));
-        Assert.assertTrue(collection.isEmpty());
-        Assert.assertFalse(collection.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(map.isEmpty());
+        Assertions.assertTrue(collection.removeAll(<name>ArrayList.newListWith(<(literal.(type))("3")>, <(literal.(type))("2")>)));
+        Assertions.assertTrue(collection.isEmpty());
+        Assertions.assertFalse(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(map.isEmpty());
     }
 
     @Override
     @Test
     public void retainAll()
     {
-        Assert.assertFalse(this.newWith().retainAll());
-        Assert.assertFalse(this.newWith().retainAll(<(literal.(type))("1")>));
+        Assertions.assertFalse(this.newWith().retainAll());
+        Assertions.assertFalse(this.newWith().retainAll(<(literal.(type))("1")>));
 
         Object<name>HashMap\<Integer> map = Object<name>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">);
         Mutable<name>Collection collection = map.values();
-        Assert.assertFalse(collection.retainAll(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>));
+        Assertions.assertFalse(collection.retainAll(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>));
 
-        Assert.assertTrue(collection.retainAll(<(literal.(type))("1")>, <(literal.(type))("5")>));
-        Assert.assertTrue(collection.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(collection.retainAll(<(literal.(type))("1")>, <(literal.(type))("5")>));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("3")>));
 
-        Assert.assertTrue(collection.retainAll(<(literal.(type))("3")>, <(literal.(type))("2")>));
-        Assert.assertTrue(collection.isEmpty());
-        Assert.assertFalse(collection.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(map.isEmpty());
+        Assertions.assertTrue(collection.retainAll(<(literal.(type))("3")>, <(literal.(type))("2")>));
+        Assertions.assertTrue(collection.isEmpty());
+        Assertions.assertFalse(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(map.isEmpty());
     }
 
     @Override
     @Test
     public void retainAll_iterable()
     {
-        Assert.assertFalse(this.newWith().retainAll(new <name>ArrayList()));
-        Assert.assertFalse(this.newWith().retainAll(<name>ArrayList.newListWith(<(literal.(type))("1")>)));
+        Assertions.assertFalse(this.newWith().retainAll(new <name>ArrayList()));
+        Assertions.assertFalse(this.newWith().retainAll(<name>ArrayList.newListWith(<(literal.(type))("1")>)));
 
         Object<name>HashMap\<Integer> map = Object<name>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">);
         Mutable<name>Collection collection = map.values();
-        Assert.assertFalse(collection.retainAll(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>));
+        Assertions.assertFalse(collection.retainAll(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>));
 
-        Assert.assertTrue(collection.retainAll(<name>ArrayList.newListWith(<(literal.(type))("1")>, <(literal.(type))("5")>)));
-        Assert.assertTrue(collection.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(map.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(collection.retainAll(<name>ArrayList.newListWith(<(literal.(type))("1")>, <(literal.(type))("5")>)));
+        Assertions.assertTrue(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(map.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("3")>));
 
-        Assert.assertTrue(collection.retainAll(<name>ArrayList.newListWith(<(literal.(type))("3")>, <(literal.(type))("2")>)));
-        Assert.assertTrue(collection.isEmpty());
-        Assert.assertFalse(collection.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(map.contains(<(literal.(type))("3")>));
-        Assert.assertTrue(map.isEmpty());
+        Assertions.assertTrue(collection.retainAll(<name>ArrayList.newListWith(<(literal.(type))("3")>, <(literal.(type))("2")>)));
+        Assertions.assertTrue(collection.isEmpty());
+        Assertions.assertFalse(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(map.contains(<(literal.(type))("3")>));
+        Assertions.assertTrue(map.isEmpty());
     }
 
     @Override
@@ -317,19 +329,19 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
         Verify.assertEmpty(collection);
         Verify.assertEmpty(map);
         Verify.assertSize(0, collection);
-        Assert.assertFalse(collection.contains(<(literal.(type))("0")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("0")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("2")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("3")>));
 
         Mutable<name>Collection collection1 = this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">);
         collection1.clear();
         Verify.assertEmpty(collection1);
         Verify.assertSize(0, collection1);
-        Assert.assertFalse(collection1.contains(<(literal.(type))("0")>));
-        Assert.assertFalse(collection1.contains(<(literal.(type))("1")>));
-        Assert.assertFalse(collection1.contains(<(literal.(type))("31")>));
-        Assert.assertFalse(collection1.contains(<(literal.(type))("32")>));
+        Assertions.assertFalse(collection1.contains(<(literal.(type))("0")>));
+        Assertions.assertFalse(collection1.contains(<(literal.(type))("1")>));
+        Assertions.assertFalse(collection1.contains(<(literal.(type))("31")>));
+        Assertions.assertFalse(collection1.contains(<(literal.(type))("32")>));
 
         Mutable<name>Collection collection2 = this.newWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">);
         collection2.clear();
@@ -341,19 +353,19 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     public void contains()
     {
         Mutable<name>Collection collection = this.newWith(<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertFalse(collection.contains(<(literal.(type))("29")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("49")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("29")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("49")>));
 
         <type>[] numbers = {<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">};
         for (<type> number : numbers)
         {
-            Assert.assertTrue(collection.contains(number));
-            Assert.assertTrue(collection.remove(number));
-            Assert.assertFalse(collection.contains(number));
+            Assertions.assertTrue(collection.contains(number));
+            Assertions.assertTrue(collection.remove(number));
+            Assertions.assertFalse(collection.contains(number));
         }
 
-        Assert.assertFalse(collection.contains(<(literal.(type))("29")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("49")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("29")>));
+        Assertions.assertFalse(collection.contains(<(literal.(type))("49")>));
     }
 
     @Override
@@ -379,63 +391,57 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     public void collect()
     {
         <name>ToObjectFunction\<<wrapperName>\> function = (<type> parameter) -> <(castIntToNarrowTypeWithParens.(type))("parameter - 1")>;
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).toBag(), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).collect(function).toBag());
+        Assertions.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).toBag(), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).collect(function).toBag());
         <name>Iterable iterable = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).toBag(), iterable.collect(function).toBag());
-        Assert.assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
-        Assert.assertEquals(this.newObjectCollectionWith(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function));
+        Assertions.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).toBag(), iterable.collect(function).toBag());
+        Assertions.assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
+        Assertions.assertEquals(this.newObjectCollectionWith(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function));
     }
 
     @Override
     @Test
     public void makeString()
     {
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", this.newWith(<(literal.(type))("1")>).makeString("/"));
-        Assert.assertEquals("<(toStringLiteral.(type))("31")>", this.newWith(<(literal.(type))("31")>).makeString());
-        Assert.assertEquals("<(toStringLiteral.(type))("32")>", this.newWith(<(literal.(type))("32")>).makeString());
-        Assert.assertEquals("", this.newWith().makeString());
-        Assert.assertEquals("", this.newWith().makeString("/"));
-        Assert.assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
+        Assertions.assertEquals("<(toStringLiteral.(type))("1")>", this.newWith(<(literal.(type))("1")>).makeString("/"));
+        Assertions.assertEquals("<(toStringLiteral.(type))("31")>", this.newWith(<(literal.(type))("31")>).makeString());
+        Assertions.assertEquals("<(toStringLiteral.(type))("32")>", this.newWith(<(literal.(type))("32")>).makeString());
+        Assertions.assertEquals("", this.newWith().makeString());
+        Assertions.assertEquals("", this.newWith().makeString("/"));
+        Assertions.assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
 
         <name>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type))(); separator=", ">);
-        Assert.assertTrue(
-                iterable1.makeString(),
+        Assertions.assertTrue(
                 iterable1.makeString().equals("<["0", "31"]:(toStringLiteral.(type))(); separator=", ">")
-                        || iterable1.makeString().equals("<["31", "0"]:(toStringLiteral.(type))(); separator=", ">"));
+                        || iterable1.makeString().equals("<["31", "0"]:(toStringLiteral.(type))(); separator=", ">"), iterable1.makeString());
 
         <name>Iterable iterable2 = this.newWith(<["31", "32"]:(literal.(type))(); separator=", ">);
-        Assert.assertTrue(
-                iterable2.makeString("[", "/", "]"),
+        Assertions.assertTrue(
                 iterable2.makeString("[", "/", "]").equals("[<["31", "32"]:(toStringLiteral.(type))(); separator="/">]")
-                        || iterable2.makeString("[", "/", "]").equals("[<["32", "31"]:(toStringLiteral.(type))(); separator="/">]"));
+                        || iterable2.makeString("[", "/", "]").equals("[<["32", "31"]:(toStringLiteral.(type))(); separator="/">]"), iterable2.makeString("[", "/", "]"));
 
         <name>Iterable iterable3 = this.newWith(<["32", "33"]:(literal.(type))(); separator=", ">);
-        Assert.assertTrue(
-                iterable3.makeString("/"),
+        Assertions.assertTrue(
                 iterable3.makeString("/").equals("<["32", "33"]:(toStringLiteral.(type))(); separator="/">")
-                        || iterable3.makeString("/").equals("<["33", "32"]:(toStringLiteral.(type))(); separator="/">"));
+                        || iterable3.makeString("/").equals("<["33", "32"]:(toStringLiteral.(type))(); separator="/">"), iterable3.makeString("/"));
 
         <name>Iterable iterable4 = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
-        Assert.assertTrue("<["1", "2"]:(toStringLiteral.(type))(); separator=", ">".equals(iterable4.makeString())
+        Assertions.assertTrue("<["1", "2"]:(toStringLiteral.(type))(); separator=", ">".equals(iterable4.makeString())
                 || "<["2", "1"]:(toStringLiteral.(type))(); separator=", ">".equals(iterable4.makeString()));
-        Assert.assertTrue("<["1", "2"]:(toStringLiteral.(type))(); separator="/">".equals(iterable4.makeString("/"))
+        Assertions.assertTrue("<["1", "2"]:(toStringLiteral.(type))(); separator="/">".equals(iterable4.makeString("/"))
                 || "<["2", "1"]:(toStringLiteral.(type))(); separator="/">".equals(iterable4.makeString("/")));
-        Assert.assertTrue("[<["1", "2"]:(toStringLiteral.(type))(); separator="/">]".equals(iterable4.makeString("[", "/", "]"))
+        Assertions.assertTrue("[<["1", "2"]:(toStringLiteral.(type))(); separator="/">]".equals(iterable4.makeString("[", "/", "]"))
                 || "[<["2", "1"]:(toStringLiteral.(type))(); separator="/">]".equals(iterable4.makeString("[", "/", "]")));
 
         <name>Iterable iterable5 = this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertTrue(
-                iterable5.makeString(),
+        Assertions.assertTrue(
                 iterable5.makeString().equals("<["0", "1"]:(toStringLiteral.(type))(); separator=", ">")
-                        || iterable5.makeString().equals("<["1", "0"]:(toStringLiteral.(type))(); separator=", ">"));
-        Assert.assertTrue(
-                iterable5.makeString("[", "/", "]"),
+                        || iterable5.makeString().equals("<["1", "0"]:(toStringLiteral.(type))(); separator=", ">"), iterable5.makeString());
+        Assertions.assertTrue(
                 iterable5.makeString("[", "/", "]").equals("[<["0", "1"]:(toStringLiteral.(type))(); separator="/">]")
-                        || iterable5.makeString("[", "/", "]").equals("[<["1", "0"]:(toStringLiteral.(type))(); separator="/">]"));
-        Assert.assertTrue(
-                iterable5.makeString("/"),
+                        || iterable5.makeString("[", "/", "]").equals("[<["1", "0"]:(toStringLiteral.(type))(); separator="/">]"), iterable5.makeString("[", "/", "]"));
+        Assertions.assertTrue(
                 iterable5.makeString("/").equals("<["0", "1"]:(toStringLiteral.(type))(); separator="/">")
-                        || iterable5.makeString("/").equals("<["1", "0"]:(toStringLiteral.(type))(); separator="/">"));
+                        || iterable5.makeString("/").equals("<["1", "0"]:(toStringLiteral.(type))(); separator="/">"), iterable5.makeString("/"));
     }
 
     @Override
@@ -444,64 +450,64 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     {
         StringBuilder appendable = new StringBuilder();
         this.newWith().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        Assertions.assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "/");
-        Assert.assertEquals("", appendable.toString());
+        Assertions.assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "[", ", ", "]");
-        Assert.assertEquals("[]", appendable.toString());
+        Assertions.assertEquals("[]", appendable.toString());
         StringBuilder appendable1 = new StringBuilder();
         this.newWith(<(literal.(type))("1")>).appendString(appendable1);
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", appendable1.toString());
+        Assertions.assertEquals("<(toStringLiteral.(type))("1")>", appendable1.toString());
         StringBuilder appendable2 = new StringBuilder();
 
         <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
         iterable.appendString(appendable2);
-        Assert.assertTrue("<["1", "2"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable2.toString())
+        Assertions.assertTrue("<["1", "2"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable2.toString())
                 || "<["2", "1"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable2.toString()));
         StringBuilder appendable3 = new StringBuilder();
         iterable.appendString(appendable3, "/");
-        Assert.assertTrue("<["1", "2"]:(toStringLiteral.(type))(); separator="/">".equals(appendable3.toString())
+        Assertions.assertTrue("<["1", "2"]:(toStringLiteral.(type))(); separator="/">".equals(appendable3.toString())
                 || "<["2", "1"]:(toStringLiteral.(type))(); separator="/">".equals(appendable3.toString()));
 
         StringBuilder appendable5 = new StringBuilder();
         this.newWith(<(literal.(type))("31")>).appendString(appendable5);
-        Assert.assertEquals("<(toStringLiteral.(type))("31")>", appendable5.toString());
+        Assertions.assertEquals("<(toStringLiteral.(type))("31")>", appendable5.toString());
 
         StringBuilder appendable6 = new StringBuilder();
         this.newWith(<(literal.(type))("32")>).appendString(appendable6);
-        Assert.assertEquals("<(toStringLiteral.(type))("32")>", appendable6.toString());
+        Assertions.assertEquals("<(toStringLiteral.(type))("32")>", appendable6.toString());
 
         StringBuilder appendable7 = new StringBuilder();
         <name>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type))(); separator=", ">);
         iterable1.appendString(appendable7);
-        Assert.assertTrue(appendable7.toString(), "<["0", "31"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable7.toString())
-                || "<["31", "0"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable7.toString()));
+        Assertions.assertTrue("<["0", "31"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable7.toString())
+                || "<["31", "0"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable7.toString()), appendable7.toString());
 
         StringBuilder appendable8 = new StringBuilder();
         <name>Iterable iterable2 = this.newWith(<["31", "32"]:(literal.(type))(); separator=", ">);
         iterable2.appendString(appendable8, "/");
-        Assert.assertTrue(appendable8.toString(), "<["31", "32"]:(toStringLiteral.(type))(); separator="/">".equals(appendable8.toString())
-                || "<["32", "31"]:(toStringLiteral.(type))(); separator="/">".equals(appendable8.toString()));
+        Assertions.assertTrue("<["31", "32"]:(toStringLiteral.(type))(); separator="/">".equals(appendable8.toString())
+                || "<["32", "31"]:(toStringLiteral.(type))(); separator="/">".equals(appendable8.toString()), appendable8.toString());
 
         StringBuilder appendable9 = new StringBuilder();
         <name>Iterable iterable4 = this.newWith(<["32", "33"]:(literal.(type))(); separator=", ">);
         iterable4.appendString(appendable9, "[", "/", "]");
-        Assert.assertTrue(appendable9.toString(), "[<["32", "33"]:(toStringLiteral.(type))(); separator="/">]".equals(appendable9.toString())
-                || "[<["33", "32"]:(toStringLiteral.(type))(); separator="/">]".equals(appendable9.toString()));
+        Assertions.assertTrue("[<["32", "33"]:(toStringLiteral.(type))(); separator="/">]".equals(appendable9.toString())
+                || "[<["33", "32"]:(toStringLiteral.(type))(); separator="/">]".equals(appendable9.toString()), appendable9.toString());
 
         StringBuilder appendable10 = new StringBuilder();
         <name>Iterable iterable5 = this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">);
         iterable5.appendString(appendable10);
-        Assert.assertTrue(appendable10.toString(), "<["0", "1"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable10.toString())
-                || "<["1", "0"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable10.toString()));
+        Assertions.assertTrue("<["0", "1"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable10.toString())
+                || "<["1", "0"]:(toStringLiteral.(type))(); separator=", ">".equals(appendable10.toString()), appendable10.toString());
         StringBuilder appendable11 = new StringBuilder();
         iterable5.appendString(appendable11, "/");
-        Assert.assertTrue(appendable11.toString(), "<["0", "1"]:(toStringLiteral.(type))(); separator="/">".equals(appendable11.toString())
-                || "<["1", "0"]:(toStringLiteral.(type))(); separator="/">".equals(appendable11.toString()));
+        Assertions.assertTrue("<["0", "1"]:(toStringLiteral.(type))(); separator="/">".equals(appendable11.toString())
+                || "<["1", "0"]:(toStringLiteral.(type))(); separator="/">".equals(appendable11.toString()), appendable11.toString());
         StringBuilder appendable12 = new StringBuilder();
         iterable5.appendString(appendable12, "[", "/", "]");
-        Assert.assertTrue(appendable12.toString(), "[<["0", "1"]:(toStringLiteral.(type))(); separator="/">]".equals(appendable12.toString())
-                || "[<["1", "0"]:(toStringLiteral.(type))(); separator="/">]".equals(appendable12.toString()));
+        Assertions.assertTrue("[<["0", "1"]:(toStringLiteral.(type))(); separator="/">]".equals(appendable12.toString())
+                || "[<["1", "0"]:(toStringLiteral.(type))(); separator="/">]".equals(appendable12.toString()), appendable12.toString());
     }
 
     @Override
@@ -510,7 +516,7 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     {
         Mutable<name>Collection collection = this.classUnderTest();
         Verify.assertInstanceOf(Synchronized<name>Collection.class, this.classUnderTest().asSynchronized());
-        Assert.assertTrue(collection.asSynchronized().containsAll(this.classUnderTest()));
+        Assertions.assertTrue(collection.asSynchronized().containsAll(this.classUnderTest()));
     }
 
     @Override
@@ -519,7 +525,7 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     {
         Mutable<name>Collection collection = this.classUnderTest();
         Verify.assertInstanceOf(Unmodifiable<name>Collection.class, this.classUnderTest().asUnmodifiable());
-        Assert.assertTrue(collection.asUnmodifiable().containsAll(this.classUnderTest()));
+        Assertions.assertTrue(collection.asUnmodifiable().containsAll(this.classUnderTest()));
     }
 
     @Override
@@ -551,7 +557,7 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     public void chunk()
     {
         <name>Iterable iterable = this.classUnderTest();
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Lists.mutable.with(
                         <name>Bags.mutable.with(<["1"]:(literal.(type))(); separator=", ">),
                         <name>Bags.mutable.with(<["2"]:(literal.(type))(); separator=", ">),
@@ -559,7 +565,7 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
                 iterable.chunk(1).toSet());
 
         MutableSet\<<name>Iterable> chunked = iterable.chunk(2).toSet();
-        Assert.assertTrue(
+        Assertions.assertTrue(
                 Lists.mutable.with(
                         <name>Bags.mutable.with(<["1", "2"]:(literal.(type))(); separator=", ">),
                         <name>Bags.mutable.with(<["3"]:(literal.(type))(); separator=", ">)).toSet().equals(chunked)
@@ -570,16 +576,16 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
                         <name>Bags.mutable.with(<["1", "3"]:(literal.(type))(); separator=", ">),
                         <name>Bags.mutable.with(<["2"]:(literal.(type))(); separator=", ">)).toSet().equals(chunked));
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Lists.mutable.with(
                         <name>Bags.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(3).toSet());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Lists.mutable.with(<name>Bags.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 

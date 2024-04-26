@@ -1,5 +1,6 @@
 import "copyright.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -22,8 +23,7 @@ import org.eclipse.collections.api.factory.map.primitive.Immutable<name>ObjectMa
 import org.eclipse.collections.api.factory.map.primitive.Mutable<name>ObjectMapFactory;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
 
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * This file was automatically generated from template file primitiveObjectMapsTest.stg.
@@ -39,12 +39,12 @@ public class <name>ObjectMapFactoryTest
 
     private void assertImmutable<name>ObjectMapFactory(Immutable<name>ObjectMapFactory mapFactory)
     {
-        Assert.assertSame(<name>ObjectHashMap.newMap().toImmutable(), mapFactory.with());
-        Assert.assertSame(<name>ObjectHashMap.newMap().toImmutable(), mapFactory.of());
-        Assert.assertEquals(<name>ObjectMaps.immutable.of(<(literal.(type))("1")>, <(literal.(type))("1")>), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, <(literal.(type))("1")>).toImmutable());
+        Assertions.assertSame(<name>ObjectHashMap.newMap().toImmutable(), mapFactory.with());
+        Assertions.assertSame(<name>ObjectHashMap.newMap().toImmutable(), mapFactory.of());
+        Assertions.assertEquals(<name>ObjectMaps.immutable.of(<(literal.(type))("1")>, <(literal.(type))("1")>), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, <(literal.(type))("1")>).toImmutable());
         <name>ObjectHashMap sourceMap = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("2")>);
-        Assert.assertEquals(sourceMap.toImmutable(), mapFactory.ofAll(sourceMap));
-        Assert.assertEquals(sourceMap.toImmutable(), mapFactory.withAll(sourceMap));
+        Assertions.assertEquals(sourceMap.toImmutable(), mapFactory.ofAll(sourceMap));
+        Assertions.assertEquals(sourceMap.toImmutable(), mapFactory.withAll(sourceMap));
     }
 
     public void mutables()
@@ -55,11 +55,11 @@ public class <name>ObjectMapFactoryTest
 
     private void assertMutable<name>ObjectMapFactory(Mutable<name>ObjectMapFactory mapFactory)
     {
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), mapFactory.with());
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), mapFactory.of());
+        Assertions.assertEquals(<name>ObjectHashMap.newMap(), mapFactory.with());
+        Assertions.assertEquals(<name>ObjectHashMap.newMap(), mapFactory.of());
         <name>ObjectHashMap sourceMap = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("2")>);
-        Assert.assertEquals(sourceMap, mapFactory.ofAll(sourceMap));
-        Assert.assertEquals(sourceMap, mapFactory.withAll(sourceMap));
+        Assertions.assertEquals(sourceMap, mapFactory.ofAll(sourceMap));
+        Assertions.assertEquals(sourceMap, mapFactory.withAll(sourceMap));
     }
 }
 

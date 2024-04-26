@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 skipBoolean() ::= "true"
 
@@ -20,9 +21,13 @@ body(type, name, wrapperName) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
+import java.util.NoSuchElementException;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
+<junit()>
 
 /**
  * JUnit test for {@link Object<name>HashMapWithHashingStrategyWithHashingStrategy#values()}.
@@ -42,6 +47,19 @@ public class Object<name>HashMapWithHashingStrategyValuesTest extends Object<nam
                 return object1.equals(object2);
             }
         });
+
+    @Test
+    @Override
+    public void <type>Iterator_throws_non_empty_collection()
+    {
+        Mutable<name>Collection collection = this.classUnderTest();
+        <name>Iterator iterator = collection.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        Assertions.assertThrows(NoSuchElementException.class, () -> iterator.next());
+    }
 
     @Override
     public MutableObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1)

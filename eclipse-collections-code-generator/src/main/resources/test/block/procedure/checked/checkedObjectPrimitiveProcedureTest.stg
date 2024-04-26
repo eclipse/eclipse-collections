@@ -1,5 +1,6 @@
 import "copyright.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -18,8 +19,7 @@ package org.eclipse.collections.impl.block.procedure.checked.primitive;
 
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Provides a set of common tests of checked procedures for Object and <type> values.
@@ -41,13 +41,13 @@ public final class CheckedObject<name>ProcedureTest
                 result[0] = true;
             }
         }.value(null, <(zero.(type))>);
-        Assert.assertTrue(result[0]);
+        Assertions.assertTrue(result[0]);
     }
 
     @Test
     public void runtimeException()
     {
-        Assert.assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
             new CheckedObject<name>Procedure\<Object>()
             {
                 @Override
@@ -62,7 +62,7 @@ public final class CheckedObject<name>ProcedureTest
     @Test
     public void checkedException()
     {
-        Assert.assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
             new CheckedObject<name>Procedure\<Object>()
             {
                 @Override
