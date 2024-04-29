@@ -2115,7 +2115,7 @@ public final class Iterate
     {
         if (iterable instanceof RichIterable)
         {
-            return ((RichIterable<T>) iterable).injectInto(injectValue, function);
+            return ((RichIterable<T>) iterable).injectIntoInt(injectValue, function);
         }
         if (iterable instanceof ArrayList)
         {
@@ -2142,7 +2142,7 @@ public final class Iterate
     {
         if (iterable instanceof RichIterable)
         {
-            return ((RichIterable<T>) iterable).injectInto(injectValue, function);
+            return ((RichIterable<T>) iterable).injectIntoLong(injectValue, function);
         }
         if (iterable instanceof ArrayList)
         {
@@ -2169,7 +2169,7 @@ public final class Iterate
     {
         if (iterable instanceof RichIterable)
         {
-            return ((RichIterable<T>) iterable).injectInto(injectValue, function);
+            return ((RichIterable<T>) iterable).injectIntoDouble(injectValue, function);
         }
         if (iterable instanceof ArrayList)
         {
@@ -2196,7 +2196,7 @@ public final class Iterate
     {
         if (iterable instanceof RichIterable)
         {
-            return ((RichIterable<T>) iterable).injectInto(injectValue, function);
+            return ((RichIterable<T>) iterable).injectIntoFloat(injectValue, function);
         }
         if (iterable instanceof ArrayList)
         {

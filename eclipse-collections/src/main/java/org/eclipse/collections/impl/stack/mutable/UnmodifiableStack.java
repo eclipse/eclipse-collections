@@ -581,25 +581,25 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> intObjectToIntFunction)
     {
-        return this.mutableStack.injectInto(injectedValue, intObjectToIntFunction);
+        return this.mutableStack.injectIntoInt(injectedValue, intObjectToIntFunction);
     }
 
     @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> longObjectToLongFunction)
     {
-        return this.mutableStack.injectInto(injectedValue, longObjectToLongFunction);
+        return this.mutableStack.injectIntoLong(injectedValue, longObjectToLongFunction);
     }
 
     @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> floatObjectToFloatFunction)
     {
-        return this.mutableStack.injectInto(injectedValue, floatObjectToFloatFunction);
+        return this.mutableStack.injectIntoFloat(injectedValue, floatObjectToFloatFunction);
     }
 
     @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> doubleObjectToDoubleFunction)
     {
-        return this.mutableStack.injectInto(injectedValue, doubleObjectToDoubleFunction);
+        return this.mutableStack.injectIntoDouble(injectedValue, doubleObjectToDoubleFunction);
     }
 
     @Override

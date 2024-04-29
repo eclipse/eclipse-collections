@@ -915,7 +915,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     {
         synchronized (this.lock)
         {
-            return this.delegate.injectInto(injectedValue, intObjectToIntFunction);
+            return this.delegate.injectIntoInt(injectedValue, intObjectToIntFunction);
         }
     }
 
@@ -924,7 +924,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     {
         synchronized (this.lock)
         {
-            return this.delegate.injectInto(injectedValue, longObjectToLongFunction);
+            return this.delegate.injectIntoLong(injectedValue, longObjectToLongFunction);
         }
     }
 
@@ -933,7 +933,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     {
         synchronized (this.lock)
         {
-            return this.delegate.injectInto(injectedValue, floatObjectToFloatFunction);
+            return this.delegate.injectIntoFloat(injectedValue, floatObjectToFloatFunction);
         }
     }
 
@@ -942,7 +942,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     {
         synchronized (this.lock)
         {
-            return this.delegate.injectInto(injectedValue, doubleObjectToDoubleFunction);
+            return this.delegate.injectIntoDouble(injectedValue, doubleObjectToDoubleFunction);
         }
     }
 
