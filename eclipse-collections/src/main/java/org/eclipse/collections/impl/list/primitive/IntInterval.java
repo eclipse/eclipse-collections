@@ -101,7 +101,8 @@ public final class IntInterval
      */
     public IntInterval to(int newTo)
     {
-        return IntInterval.fromToBy(this.from, newTo, this.step);
+        int adjustedStep = IntervalUtils.calculateAdjustedStep(this.from, newTo, this.step);
+        return IntInterval.fromToBy(this.from, newTo, adjustedStep);
     }
 
     /**
@@ -138,7 +139,8 @@ public final class IntInterval
      */
     public static IntInterval oneTo(int count)
     {
-        return IntInterval.oneToBy(count, 1);
+        int adjustedStep = IntervalUtils.calculateAdjustedStep(1, count, 1);
+        return IntInterval.oneToBy(count, adjustedStep);
     }
 
     /**
@@ -146,10 +148,6 @@ public final class IntInterval
      */
     public static IntInterval oneToBy(int count, int step)
     {
-        if (count < 1)
-        {
-            throw new IllegalArgumentException("Only positive ranges allowed using oneToBy");
-        }
         return IntInterval.fromToBy(1, count, step);
     }
 
@@ -158,7 +156,8 @@ public final class IntInterval
      */
     public static IntInterval zeroTo(int count)
     {
-        return IntInterval.zeroToBy(count, 1);
+        int adjustedStep = IntervalUtils.calculateAdjustedStep(0, count, 1);
+        return IntInterval.zeroToBy(count, adjustedStep);
     }
 
     /**

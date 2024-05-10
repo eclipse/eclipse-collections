@@ -60,6 +60,7 @@ public class LongIntervalTest
         Verify.assertEqualsAndHashCode(interval3, LongInterval.fromToBy(1, 10, 2));
         Verify.assertSize(Integer.MAX_VALUE, LongInterval.fromTo(Integer.MIN_VALUE + 1, -1));
         Verify.assertSize(Integer.MAX_VALUE, LongInterval.fromTo(1, Integer.MAX_VALUE));
+        Verify.assertSize(21, LongInterval.from(10L).to(-10L).by(-1L));
 
         Assert.assertThrows(IllegalArgumentException.class, () -> LongInterval.fromTo(Integer.MIN_VALUE, Integer.MAX_VALUE));
         Assert.assertThrows(IllegalArgumentException.class, () -> LongInterval.fromTo(-1, Integer.MAX_VALUE));
@@ -102,6 +103,13 @@ public class LongIntervalTest
     public void fromToBy_throws_on_illegal_step()
     {
         LongInterval.fromToBy(5, 0, 1);
+    }
+
+    @Test
+    public void fromAndToAndBy_throws_step_is_incorrect()
+    {
+        Assert.assertThrows(IllegalArgumentException.class, () -> LongInterval.from(10L).to(-10L).by(1L));
+        Assert.assertThrows(IllegalArgumentException.class, () -> LongInterval.from(-10L).to(10L).by(-1L));
     }
 
     @Test
@@ -353,6 +361,8 @@ public class LongIntervalTest
         Verify.assertSize(2, LongInterval.fromToBy(Integer.MAX_VALUE - 10, Integer.MAX_VALUE, 8));
 
         // Negative Ranges
+        Verify.assertSize(10, LongInterval.zeroTo(-9));
+        Verify.assertSize(11, LongInterval.oneTo(-9));
         Verify.assertSize(10, LongInterval.fromTo(0, -9));
         Verify.assertSize(2_000_000_000, LongInterval.fromTo(-1, -2_000_000_000));
         Verify.assertSize(200_000_000, LongInterval.fromTo(-1, -2_000_000_000).by(-10));

@@ -62,6 +62,7 @@ public class IntIntervalTest
         Verify.assertEqualsAndHashCode(interval3, IntInterval.fromToBy(1, 10, 2));
         Verify.assertSize(Integer.MAX_VALUE, IntInterval.fromTo(Integer.MIN_VALUE + 1, -1));
         Verify.assertSize(Integer.MAX_VALUE, IntInterval.fromTo(1, Integer.MAX_VALUE));
+        Verify.assertSize(21, IntInterval.from(10).to(-10).by(-1));
 
         Assert.assertThrows(IllegalArgumentException.class, () -> IntInterval.fromTo(Integer.MIN_VALUE, Integer.MAX_VALUE));
         Assert.assertThrows(IllegalArgumentException.class, () -> IntInterval.fromTo(-1, Integer.MAX_VALUE));
@@ -86,6 +87,13 @@ public class IntIntervalTest
     public void fromToBy_throws_on_illegal_step()
     {
         IntInterval.fromToBy(5, 0, 1);
+    }
+
+    @Test
+    public void fromAndToAndBy_throws_step_is_incorrect()
+    {
+        Assert.assertThrows(IllegalArgumentException.class, () -> IntInterval.from(10).to(-10).by(1));
+        Assert.assertThrows(IllegalArgumentException.class, () -> IntInterval.from(-10).to(10).by(-1));
     }
 
     @Test
@@ -337,6 +345,8 @@ public class IntIntervalTest
         Verify.assertSize(2, IntInterval.fromToBy(Integer.MAX_VALUE - 10, Integer.MAX_VALUE, 8));
 
         // Negative Ranges
+        Verify.assertSize(10, IntInterval.zeroTo(-9));
+        Verify.assertSize(11, IntInterval.oneTo(-9));
         Verify.assertSize(10, IntInterval.fromTo(0, -9));
         Verify.assertSize(2_000_000_000, IntInterval.fromTo(-1, -2_000_000_000));
         Verify.assertSize(200_000_000, IntInterval.fromTo(-1, -2_000_000_000).by(-10));
