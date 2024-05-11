@@ -788,6 +788,26 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
         }
     }
 
+    /**
+     * @since 12.0
+     */
+    @Override
+    public boolean allSatisfyKeyValue(Object<name>Predicate\<K> predicate)
+    {
+        for (int i = 0; i \< this.keys.length; i++)
+        {
+            Object key = this.keys[i];
+            if (isNonSentinel(key))
+            {
+                if (!predicate.accept(this.toNonSentinel(key), this.values[i]))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
     public Object<name>HashMapWithHashingStrategy\<K> select(Object<name>Predicate\<? super K> predicate)
     {

@@ -298,6 +298,15 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
         this.delegate.forEachKeyValue(object<name>Procedure);
     }
 
+    /**
+     * @since 12.0
+     */
+    @Override
+    public boolean allSatisfyKeyValue(Object<name>Predicate\<K> predicate)
+    {
+        return this.delegate.allSatisfyKeyValue(predicate);
+    }
+
     @Override
     public ImmutableObject<name>Map\<K> select(Object<name>Predicate\<? super K> object<name>Predicate)
     {
