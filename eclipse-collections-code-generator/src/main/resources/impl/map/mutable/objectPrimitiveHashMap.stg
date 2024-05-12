@@ -216,9 +216,14 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
 
         for (int i = 0; i \< this.keys.length; i++)
         {
-            if (isNonSentinel(this.keys[i]) && (!other.containsKey(this.toNonSentinel(this.keys[i])) || <(notEquals.(type))("this.values[i]", "other.getOrThrow(this.toNonSentinel(this.keys[i]))")>))
+            Object key = this.keys[i];
+            if (isNonSentinel(key))
             {
-                return false;
+                K nonSentinel = this.toNonSentinel(key);
+                if (!other.containsKey(nonSentinel) || <(notEquals.(type))("this.values[i]", "other.getOrThrow(nonSentinel)")>)
+                {
+                    return false;
+                }
             }
         }
         return true;
@@ -863,6 +868,26 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
             }
         }
         return count;
+    }
+
+    /**
+     * @since 12.0
+     */
+    @Override
+    public boolean allSatisfyKeyValue(Object<name>Predicate\<K> predicate)
+    {
+        for (int i = 0; i \< this.keys.length; i++)
+        {
+            Object key = this.keys[i];
+            if (isNonSentinel(key))
+            {
+                if (!predicate.accept(this.toNonSentinel(key), this.values[i]))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override

@@ -285,6 +285,18 @@ public class SynchronizedObject<name>Map\<K>
         }
     }
 
+    /**
+     * @since 12.0
+     */
+    @Override
+    public boolean allSatisfyKeyValue(Object<name>Predicate\<K> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.allSatisfyKeyValue(predicate);
+        }
+    }
+
     @Override
     public MutableObject<name>Map\<K> select(Object<name>Predicate\<? super K> predicate)
     {
