@@ -1,6 +1,7 @@
 import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -22,8 +23,7 @@ import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.stack.primitive.Abstract<name>StackTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * This file was automatically generated from template file unmodifiablePrimitiveStackTest.stg.
@@ -57,34 +57,34 @@ public class Unmodifiable<name>StackTest extends Abstract<name>StackTestCase
     @Test
     public void push()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().push(<(literal.(type))("5")>));
     }
 
     @Test
     public void pop()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().pop());
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().pop());
     }
 
     @Test
     public void popWithCount()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().pop(2));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().pop(2));
     }
 
     @Test
     public void clear()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
     @Test
     public void asUnmodifiable()
     {
         Mutable<name>Stack stack1 = new Unmodifiable<name>Stack(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
-        Assert.assertEquals(stack1, stack1.asUnmodifiable());
-        Assert.assertSame(stack1, stack1.asUnmodifiable());
+        Assertions.assertEquals(stack1, stack1.asUnmodifiable());
+        Assertions.assertSame(stack1, stack1.asUnmodifiable());
     }
 
     @Test
@@ -99,9 +99,9 @@ public class Unmodifiable<name>StackTest extends Abstract<name>StackTestCase
     {
         Unmodifiable<name>Stack <type>Iterable = (Unmodifiable<name>Stack) this.classUnderTest();
         Mutable<name>Iterator iterator = (Mutable<name>Iterator) <type>Iterable.<type>Iterator();
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         iterator.next();
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assertions.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Test
@@ -109,15 +109,15 @@ public class Unmodifiable<name>StackTest extends Abstract<name>StackTestCase
     {
         Unmodifiable<name>Stack <type>Iterable = (Unmodifiable<name>Stack) this.classUnderTest();
         Mutable<name>Iterator iterator = (Mutable<name>Iterator) <type>Iterable.<type>Iterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assertions.assertTrue(iterator.hasNext());
+        Assertions.assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Test
     public void toStack()
     {
         Mutable<name>Stack stack = <name>Stacks.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(stack, this.classUnderTest().toStack());
+        Assertions.assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 

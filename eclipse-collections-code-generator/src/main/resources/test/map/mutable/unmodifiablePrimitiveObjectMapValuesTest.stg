@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
+import "junit.stg"
 
 skipBoolean() ::= "true"
 
@@ -29,8 +30,7 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link Unmodifiable<name>ObjectMap#values()}.
@@ -57,7 +57,7 @@ public class Unmodifiable<name>ObjectMapValuesTest
     @Test
     public void add()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3)
                     .values().add(4));
     }
@@ -65,7 +65,7 @@ public class Unmodifiable<name>ObjectMapValuesTest
     @Test
     public void addAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3).values().addAll(FastList.newListWith(4)));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3).values().addAll(FastList.newListWith(4)));
     }
 
     @Test
@@ -73,10 +73,10 @@ public class Unmodifiable<name>ObjectMapValuesTest
     {
         Unmodifiable<name>ObjectMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, null);
         Collection\<Integer> values = map.values();
-        Assert.assertTrue(values.contains(1));
-        Assert.assertTrue(values.contains(2));
-        Assert.assertTrue(values.contains(null));
-        Assert.assertFalse(values.contains(4));
+        Assertions.assertTrue(values.contains(1));
+        Assertions.assertTrue(values.contains(2));
+        Assertions.assertTrue(values.contains(null));
+        Assertions.assertFalse(values.contains(4));
     }
 
     @Test
@@ -84,11 +84,11 @@ public class Unmodifiable<name>ObjectMapValuesTest
     {
         Unmodifiable<name>ObjectMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, null);
         Collection\<Integer> values = map.values();
-        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2)));
-        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2, null)));
-        Assert.assertTrue(values.containsAll(FastList.newListWith(null, null)));
-        Assert.assertFalse(values.containsAll(FastList.newListWith(1, 4)));
-        Assert.assertFalse(values.containsAll(FastList.newListWith(5, 4)));
+        Assertions.assertTrue(values.containsAll(FastList.newListWith(1, 2)));
+        Assertions.assertTrue(values.containsAll(FastList.newListWith(1, 2, null)));
+        Assertions.assertTrue(values.containsAll(FastList.newListWith(null, null)));
+        Assertions.assertFalse(values.containsAll(FastList.newListWith(1, 4)));
+        Assertions.assertFalse(values.containsAll(FastList.newListWith(5, 4)));
     }
 
     @Test
@@ -96,12 +96,12 @@ public class Unmodifiable<name>ObjectMapValuesTest
     {
         Unmodifiable<name>ObjectMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("1")>, null);
         Collection\<Integer> values = map.values();
-        Assert.assertFalse(values.isEmpty());
+        Assertions.assertFalse(values.isEmpty());
         <name>ObjectHashMap\<Integer> map1 = <name>ObjectHashMap.newMap();
         Collection\<Integer> values1 = map1.values();
-        Assert.assertTrue(values1.isEmpty());
+        Assertions.assertTrue(values1.isEmpty());
         map1.put(<(literal.(type))("1")>, 1);
-        Assert.assertFalse(values1.isEmpty());
+        Assertions.assertFalse(values1.isEmpty());
     }
 
     @Test
@@ -119,16 +119,16 @@ public class Unmodifiable<name>ObjectMapValuesTest
         MutableSet\<String> actual = UnifiedSet.newSet();
 
         Iterator\<String> iterator = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, null).iterator();
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        Assertions.assertFalse(iterator.hasNext());
 
-        Assert.assertEquals(expected, actual);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assertions.assertEquals(expected, actual);
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -144,11 +144,11 @@ public class Unmodifiable<name>ObjectMapValuesTest
         Unmodifiable<name>ObjectMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, null);
         HashBag\<Integer> expected = HashBag.newBagWith(1, 2, null);
         Collection\<Integer> values = map.values();
-        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray()));
-        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size()])));
-        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[0])));
+        Assertions.assertEquals(expected, HashBag.newBagWith(values.toArray()));
+        Assertions.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size()])));
+        Assertions.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[0])));
         expected.add(null);
-        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size() + 1])));
+        Assertions.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size() + 1])));
     }
 }
 

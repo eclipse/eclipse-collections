@@ -1,6 +1,7 @@
 import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -23,12 +24,9 @@ import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
-
-import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link Immutable<name>EmptyBag}.
@@ -46,49 +44,49 @@ public class Immutable<name>EmptyBagTest extends AbstractImmutable<name>BagTestC
     @Test
     public void average()
     {
-        assertThrows(ArithmeticException.class, () -> this.classUnderTest().average());
+        Assertions.assertThrows(ArithmeticException.class, () -> this.classUnderTest().average());
     }
 
     @Override
     @Test
     public void averageIfEmpty()
     {
-        Assert.assertEquals(1.2, this.classUnderTest().averageIfEmpty(1.2), 0.0);
+        Assertions.assertEquals(1.2, this.classUnderTest().averageIfEmpty(1.2), 0.0);
     }
 
     @Override
     @Test
     public void median()
     {
-        assertThrows(ArithmeticException.class, () -> this.classUnderTest().median());
+        Assertions.assertThrows(ArithmeticException.class, () -> this.classUnderTest().median());
     }
 
     @Override
     @Test
     public void medianIfEmpty()
     {
-        Assert.assertEquals(1.2, this.classUnderTest().medianIfEmpty(1.2), 0.0);
+        Assertions.assertEquals(1.2, this.classUnderTest().medianIfEmpty(1.2), 0.0);
     }
 
     @Override
     @Test
     public void max()
     {
-        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
+        Assertions.assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Override
     @Test
     public void min()
     {
-        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
+        Assertions.assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(this.classUnderTest().notEmpty());
+        Assertions.assertFalse(this.classUnderTest().notEmpty());
     }
 
     @Override
@@ -105,7 +103,7 @@ public class Immutable<name>EmptyBagTest extends AbstractImmutable<name>BagTestC
         StringBuilder stringBuilder = new StringBuilder();
         this.classUnderTest().forEachWithOccurrences((<type> argument1, int argument2) -> stringBuilder.append(argument1).append(argument2));
         String string = stringBuilder.toString();
-        Assert.assertEquals("", string);
+        Assertions.assertEquals("", string);
     }
 
     @Override
@@ -117,15 +115,15 @@ public class Immutable<name>EmptyBagTest extends AbstractImmutable<name>BagTestC
         Immutable<name>Bag bag = this.classUnderTest();
         Immutable<name>Set expected = <name>Sets.immutable.empty();
         Immutable<name>Set actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void occurrencesOf()
     {
-        Assert.assertEquals(0, this.classUnderTest().occurrencesOf(<(literal.(type))("1")>));
-        Assert.assertEquals(0, this.classUnderTest().occurrencesOf(<(literal.(type))("2")>));
-        Assert.assertEquals(0, this.classUnderTest().occurrencesOf(<(literal.(type))("3")>));
+        Assertions.assertEquals(0, this.classUnderTest().occurrencesOf(<(literal.(type))("1")>));
+        Assertions.assertEquals(0, this.classUnderTest().occurrencesOf(<(literal.(type))("2")>));
+        Assertions.assertEquals(0, this.classUnderTest().occurrencesOf(<(literal.(type))("3")>));
     }
 
     @Override
@@ -136,7 +134,7 @@ public class Immutable<name>EmptyBagTest extends AbstractImmutable<name>BagTestC
 
         Immutable<name>EmptyBag iterable = new Immutable<name>EmptyBag();
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("0")>), result);
+        Assertions.assertEquals(new Mutable<wrapperName>(<(literal.(type))("0")>), result);
     }
 }
 

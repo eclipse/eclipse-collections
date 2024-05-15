@@ -1,6 +1,7 @@
 import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -18,8 +19,7 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.bag.mutable.primitive;
 
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link Synchronized<name>Bag}.
@@ -46,10 +46,10 @@ public class Synchronized<name>BagTest extends AbstractMutable<name>BagTestCase
         super.asSynchronized();
         Synchronized<name>Bag bag = this.classUnderTest();
         Mutable<name>Bag bagWithLockObject = new Synchronized<name>Bag(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), new Object());
-        Assert.assertEquals(bag, bagWithLockObject);
-        Assert.assertSame(bagWithLockObject, bagWithLockObject.asSynchronized());
-        Assert.assertSame(bag, bag.asSynchronized());
-        Assert.assertEquals(bag, bag.asSynchronized());
+        Assertions.assertEquals(bag, bagWithLockObject);
+        Assertions.assertSame(bagWithLockObject, bagWithLockObject.asSynchronized());
+        Assertions.assertSame(bag, bag.asSynchronized());
+        Assertions.assertEquals(bag, bag.asSynchronized());
     }
 }
 

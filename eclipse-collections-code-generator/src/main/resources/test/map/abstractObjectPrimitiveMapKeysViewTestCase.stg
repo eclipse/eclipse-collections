@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
+import "junit.stg"
 
 skipBoolean() ::= "true"
 
@@ -27,8 +28,7 @@ import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterableTestCase;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Abstract JUnit test for {@link Object<name>Map#keysView()}.
@@ -46,17 +46,17 @@ public abstract class AbstractObject<name>MapKeysViewTestCase extends AbstractLa
         MutableSet\<String> actual = UnifiedSet.newSet();
 
         Iterator\<String> iterator = this.newWithKeysValues("zero", <(literal.(type))("0")>, "thirtyOne", <(literal.(type))("31")>, "thirtyTwo", <(literal.(type))("32")>).keysView().iterator();
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        Assertions.assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        Assertions.assertFalse(iterator.hasNext());
 
-        Assert.assertEquals(expected, actual);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assertions.assertEquals(expected, actual);
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
 }
 

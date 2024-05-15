@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
+import "junit.stg"
 
 skipBoolean() ::= "true"
 
@@ -29,8 +30,7 @@ import org.eclipse.collections.api.block.function.primitive.BooleanToBooleanFunc
 import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
 import org.eclipse.collections.api.map.primitive.Mutable<name>BooleanMap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link <name>BooleanHashMap}.
@@ -83,8 +83,8 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
         values.setAccessible(true);
 
         <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
-        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+        Assertions.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
     }
 
     @Test
@@ -96,18 +96,18 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
         values.setAccessible(true);
 
         <name>BooleanHashMap hashMap = new <name>BooleanHashMap(3);
-        Assert.assertEquals(8L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+        Assertions.assertEquals(8L, ((<type>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
 
         <name>BooleanHashMap hashMap2 = new <name>BooleanHashMap(15);
-        Assert.assertEquals(32L, ((<type>[]) keys.get(hashMap2)).length);
-        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+        Assertions.assertEquals(32L, ((<type>[]) keys.get(hashMap2)).length);
+        Assertions.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
     }
 
     @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> new <name>BooleanHashMap(-1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new <name>BooleanHashMap(-1));
     }
 
     @Test
@@ -119,9 +119,9 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
         values.setAccessible(true);
 
         <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
-        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
-        Assert.assertEquals(new <name>BooleanHashMap(), hashMap);
+        Assertions.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+        Assertions.assertEquals(new <name>BooleanHashMap(), hashMap);
     }
 
     @Test
@@ -130,7 +130,7 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
         <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
         for (<type> i = <(literal.(type))("2")>; i \< 10; i++)
         {
-            Assert.assertFalse(hashMap.containsKey(i));
+            Assertions.assertFalse(hashMap.containsKey(i));
             hashMap.put(i, (<(castRealTypeToInt.(type))("i")> & 1) == <(literal.(type))("0")>);
         }
 
@@ -138,26 +138,26 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
         Field values = <name>BooleanHashMap.class.getDeclaredField("values");
         keys.setAccessible(true);
         values.setAccessible(true);
-        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+        Assertions.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
         Verify.assertSize(8, hashMap);
         for (<type> i = <(literal.(type))("2")>; i \< 10; i++)
         {
-            Assert.assertTrue(hashMap.containsKey(i));
+            Assertions.assertTrue(hashMap.containsKey(i));
         }
-        Assert.assertTrue(hashMap.containsValue(false));
-        Assert.assertTrue(hashMap.containsValue(true));
+        Assertions.assertTrue(hashMap.containsValue(false));
+        Assertions.assertTrue(hashMap.containsValue(true));
         hashMap.put(<(literal.(type))("10")>, true);
-        Assert.assertEquals(32L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+        Assertions.assertEquals(32L, ((<type>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
 
         for (<type> i = 11; i \< 75; i++)
         {
-            Assert.assertFalse(String.valueOf(i), hashMap.containsKey(i));
+            Assertions.assertFalse(hashMap.containsKey(i), String.valueOf(i));
             hashMap.put(i, (<(castRealTypeToInt.(type))("i")> & 1) == <(literal.(type))("0")>);
         }
-        Assert.assertEquals(256L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(256L, ((BitSet) values.get(hashMap)).size());
+        Assertions.assertEquals(256L, ((<type>[]) keys.get(hashMap)).length);
+        Assertions.assertEquals(256L, ((BitSet) values.get(hashMap)).size());
     }
 
     @Test
@@ -168,8 +168,8 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
 
         for (<type> i = <(literal.(type))("1")>; i \< 11; i++)
         {
-            Assert.assertFalse(hashMap.containsKey(i));
-            Assert.assertFalse(copyMap.containsKey(i));
+            Assertions.assertFalse(hashMap.containsKey(i));
+            Assertions.assertFalse(copyMap.containsKey(i));
             copyMap.put(i, (<(castRealTypeToInt.(type))("i")> & 1) == <(literal.(type))("0")>);
         }
 
@@ -182,11 +182,11 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
 
         for (<type> i = <(literal.(type))("1")>; i \< 11; i++)
         {
-            Assert.assertTrue(hashMap.containsKey(i));
-            Assert.assertTrue(copyMap.containsKey(i));
+            Assertions.assertTrue(hashMap.containsKey(i));
+            Assertions.assertTrue(copyMap.containsKey(i));
         }
 
-        Assert.assertEquals(hashMap, copyMap);
+        Assertions.assertEquals(hashMap, copyMap);
     }
 
     @Override
@@ -195,12 +195,12 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
     {
         super.withKeysValues();
         <name>BooleanHashMap hashMap0 = new <name>BooleanHashMap();
-        Assert.assertSame(hashMap0.withKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true), hashMap0);
+        Assertions.assertSame(hashMap0.withKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true), hashMap0);
         <name>BooleanHashMap hashMap1 = new <name>BooleanHashMap().withKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false);
         <name>BooleanHashMap hashMap2 = new <name>BooleanHashMap().withKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false, <(literal.(type))("4")>, true);
-        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true), hashMap0);
-        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false), hashMap1);
-        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false, <(literal.(type))("4")>, true), hashMap2);
+        Assertions.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true), hashMap0);
+        Assertions.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false), hashMap1);
+        Assertions.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false, <(literal.(type))("4")>, true), hashMap2);
     }
 
     @Test
@@ -210,7 +210,7 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
 
         <wrapperName> total = hashMap0.injectInto(<wrapperName>.valueOf(<(literal.(type))("0")>), (<wrapperName> result, boolean value) -> value ? result : <wrapperName>.valueOf((<type>) (result + <(literal.(type))("2")>)));
 
-        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("6")>), total);
+        Assertions.assertEquals(<wrapperName>.valueOf(<(literal.(type))("6")>), total);
     }
 
     @Test
@@ -219,11 +219,11 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
         <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertFalse(hashMap.get(each));
+            Assertions.assertFalse(hashMap.get(each));
             hashMap.put(each, each % 2 == 0);
-            Assert.assertEquals(each % 2 == 0, hashMap.get(each));
+            Assertions.assertEquals(each % 2 == 0, hashMap.get(each));
             hashMap.remove(each);
-            Assert.assertFalse(hashMap.get(each));
+            Assertions.assertFalse(hashMap.get(each));
         }
     }
 
@@ -233,9 +233,9 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
         <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertFalse(hashMap.get(each));
+            Assertions.assertFalse(hashMap.get(each));
             hashMap.getIfAbsentPut(each, each % 2 == 0);
-            Assert.assertEquals(each % 2 == 0, hashMap.get(each));
+            Assertions.assertEquals(each % 2 == 0, hashMap.get(each));
         }
     }
 
@@ -248,9 +248,9 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
 
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertFalse(hashMap.get(each));
-            Assert.assertTrue(hashMap.getIfAbsentPutWith(each, functionLength, ""));
-            Assert.assertTrue(hashMap.get(each));
+            Assertions.assertFalse(hashMap.get(each));
+            Assertions.assertTrue(hashMap.getIfAbsentPutWith(each, functionLength, ""));
+            Assertions.assertTrue(hashMap.get(each));
         }
     }
 
@@ -263,9 +263,9 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
 
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertFalse(hashMap.get(each));
-            Assert.assertEquals(each % 2 == 0, hashMap.getIfAbsentPutWithKey(each, function));
-            Assert.assertEquals(each % 2 == 0, hashMap.get(each));
+            Assertions.assertFalse(hashMap.get(each));
+            Assertions.assertEquals(each % 2 == 0, hashMap.getIfAbsentPutWithKey(each, function));
+            Assertions.assertEquals(each % 2 == 0, hashMap.get(each));
         }
     }
 
@@ -278,9 +278,9 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
 
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertFalse(hashMap.get(each));
-            Assert.assertTrue(hashMap.getIfAbsentPut(each, factory));
-            Assert.assertTrue(hashMap.get(each));
+            Assertions.assertFalse(hashMap.get(each));
+            Assertions.assertTrue(hashMap.getIfAbsentPut(each, factory));
+            Assertions.assertTrue(hashMap.get(each));
         }
     }
 
@@ -293,9 +293,9 @@ public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTes
 
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertFalse(hashMap.get(each));
-            Assert.assertEquals(each % 2 != 0, hashMap.updateValue(each, each % 2 == 0, function));
-            Assert.assertEquals(each % 2 != 0, hashMap.get(each));
+            Assertions.assertFalse(hashMap.get(each));
+            Assertions.assertEquals(each % 2 != 0, hashMap.updateValue(each, each % 2 == 0, function));
+            Assertions.assertEquals(each % 2 != 0, hashMap.get(each));
         }
     }
 }

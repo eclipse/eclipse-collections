@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
+import "junit.stg"
 
 skipBoolean() ::= "true"
 
@@ -20,8 +21,7 @@ body(type, name, wrapperName) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link SynchronizedObject<name>Map}.
@@ -72,7 +72,7 @@ public class SynchronizedObject<name>MapTest extends AbstractMutableObject<name>
     public void asSynchronized()
     {
         super.asSynchronized();
-        Assert.assertSame(this.map, this.map.asSynchronized());
+        Assertions.assertSame(this.map, this.map.asSynchronized());
     }
 }
 

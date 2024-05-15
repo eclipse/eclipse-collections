@@ -61,9 +61,8 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
         </dependency>
 
         <dependency>
@@ -112,6 +111,9 @@
                             <ignoredUnusedDeclaredDependencies>
                                 <ignoredUnusedDeclaredDependency>
                                     com.google.code.findbugs:jsr305:jar
+                                </ignoredUnusedDeclaredDependency>
+                                <ignoredUnusedDeclaredDependency>
+                                    org.junit.vintage:junit-vintage-engine:jar
                                 </ignoredUnusedDeclaredDependency>
                                 <ignoredUnusedDeclaredDependency>
                                     org.slf4j:slf4j-simple:jar

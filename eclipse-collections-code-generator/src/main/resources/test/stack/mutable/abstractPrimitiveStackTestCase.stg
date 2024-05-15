@@ -1,6 +1,7 @@
 import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -41,8 +42,7 @@ import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Abstract JUnit test for {@link <name>Stack}.
@@ -78,19 +78,19 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         int size = this.classUnderTest().size();
         for (int i = 0; i \< size; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
-            Assert.assertEquals(<(castIntToNarrowTypeWithParens.(type))("size - i")>, iterator.next()<wideDelta.(type)>);
+            Assertions.assertTrue(iterator.hasNext());
+            Assertions.assertEquals(<(castIntToNarrowTypeWithParens.(type))("size - i")>, iterator.next()<wideDelta.(type)>);
         }
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertEquals(size, this.classUnderTest().<type>Iterator().next()<wideDelta.(type)>);
+        Assertions.assertFalse(iterator.hasNext());
+        Assertions.assertEquals(size, this.classUnderTest().<type>Iterator().next()<wideDelta.(type)>);
     }
 
     @Test
     public void peek()
     {
-        Assert.assertEquals(this.classUnderTest().size(), this.classUnderTest().peek()<wideDelta.(type)>);
-        Assert.assertEquals(<name>ArrayList.newListWith(), this.classUnderTest().peek(0));
-        Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("this.classUnderTest().size()")>, <(castIntToNarrowTypeWithParens.(type))("this.classUnderTest().size() - 1")>),
+        Assertions.assertEquals(this.classUnderTest().size(), this.classUnderTest().peek()<wideDelta.(type)>);
+        Assertions.assertEquals(<name>ArrayList.newListWith(), this.classUnderTest().peek(0));
+        Assertions.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("this.classUnderTest().size()")>, <(castIntToNarrowTypeWithParens.(type))("this.classUnderTest().size() - 1")>),
                 this.classUnderTest().peek(2));
     }
 
@@ -100,27 +100,27 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         int size = this.classUnderTest().size();
         for (int i = 0; i \< size; i++)
         {
-            Assert.assertEquals(<(castIntToNarrowTypeWithParens.(type))("size - i")>, this.classUnderTest().peekAt(i)<wideDelta.(type)>);
+            Assertions.assertEquals(<(castIntToNarrowTypeWithParens.(type))("size - i")>, this.classUnderTest().peekAt(i)<wideDelta.(type)>);
         }
     }
 
     @Test
     public void peek_at_index_less_than_zero_throws_exception()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().peekAt(-1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().peekAt(-1));
     }
 
     @Test
     public void peek_at_index_greater_than_size_throws_exception()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
                 this.classUnderTest().peekAt(this.classUnderTest().size() + 1));
     }
 
     @Test
     public void peek_at_index_equal_to_size_throws_exception()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
                 this.classUnderTest().peekAt(this.classUnderTest().size()));
     }
 
@@ -129,7 +129,7 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
     public void testToString()
     {
         super.testToString();
-        Assert.assertEquals(this.createExpectedString("[", ", ", "]"), this.classUnderTest().toString());
+        Assertions.assertEquals(this.createExpectedString("[", ", ", "]"), this.classUnderTest().toString());
     }
 
     @Override
@@ -143,7 +143,7 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         {
             list.add(<(castIntToNarrowTypeWithParens.(type))("size - i")>);
         }
-        Assert.assertEquals(list, this.classUnderTest().toList());
+        Assertions.assertEquals(list, this.classUnderTest().toList());
     }
 
     @Override
@@ -151,9 +151,9 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
     public void makeString()
     {
         super.makeString();
-        Assert.assertEquals(this.createExpectedString("", ", ", ""), this.classUnderTest().makeString());
-        Assert.assertEquals(this.createExpectedString("", "|", ""), this.classUnderTest().makeString("|"));
-        Assert.assertEquals(this.createExpectedString("{", "|", "}"), this.classUnderTest().makeString("{", "|", "}"));
+        Assertions.assertEquals(this.createExpectedString("", ", ", ""), this.classUnderTest().makeString());
+        Assertions.assertEquals(this.createExpectedString("", "|", ""), this.classUnderTest().makeString("|"));
+        Assertions.assertEquals(this.createExpectedString("{", "|", "}"), this.classUnderTest().makeString("{", "|", "}"));
     }
 
     protected String createExpectedString(String start, String sep, String end)
@@ -175,15 +175,15 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
     {
         <name>Iterable iterable = this.classUnderTest();
         int size = iterable.size();
-        Assert.assertEquals(size >= 4 ? <(wideLiteral.(type))("4")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("4")>), <(literal.(type))("0")>)<wideDelta.(type)>);
-        Assert.assertEquals(size >= 2 ? <(wideLiteral.(type))("2")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("2")>), <(literal.(type))("0")>)<wideDelta.(type)>);
-        Assert.assertEquals(size > 0 ? <(wideLiteral.(type))("3")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<wideDelta.(type)>);
-        Assert.assertEquals(size > 3 ? <(wideLiteral.(type))("4")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<wideDelta.(type)>);
+        Assertions.assertEquals(size >= 4 ? <(wideLiteral.(type))("4")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("4")>), <(literal.(type))("0")>)<wideDelta.(type)>);
+        Assertions.assertEquals(size >= 2 ? <(wideLiteral.(type))("2")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("2")>), <(literal.(type))("0")>)<wideDelta.(type)>);
+        Assertions.assertEquals(size > 0 ? <(wideLiteral.(type))("3")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<wideDelta.(type)>);
+        Assertions.assertEquals(size > 3 ? <(wideLiteral.(type))("4")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<wideDelta.(type)>);
 
         <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, iterable1.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("1")>), <(literal.(type))("4")>)<wideDelta.(type)>);
-        Assert.assertEquals(<(wideLiteral.(type))("3")>, iterable1.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("2")>), <(literal.(type))("4")>)<wideDelta.(type)>);
-        Assert.assertEquals(<(wideLiteral.(type))("4")>, iterable1.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("4")>), <(literal.(type))("4")>)<wideDelta.(type)>);
+        Assertions.assertEquals(<(wideLiteral.(type))("0")>, iterable1.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("1")>), <(literal.(type))("4")>)<wideDelta.(type)>);
+        Assertions.assertEquals(<(wideLiteral.(type))("3")>, iterable1.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("2")>), <(literal.(type))("4")>)<wideDelta.(type)>);
+        Assertions.assertEquals(<(wideLiteral.(type))("4")>, iterable1.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("4")>), <(literal.(type))("4")>)<wideDelta.(type)>);
     }
 
     @Override
@@ -193,21 +193,21 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         super.appendString();
         StringBuilder appendable1 = new StringBuilder();
         this.classUnderTest().appendString(appendable1);
-        Assert.assertEquals(this.createExpectedString("", ", ", ""), appendable1.toString());
+        Assertions.assertEquals(this.createExpectedString("", ", ", ""), appendable1.toString());
 
         StringBuilder appendable2 = new StringBuilder();
         this.classUnderTest().appendString(appendable2, "|");
-        Assert.assertEquals(this.createExpectedString("", "|", ""), appendable2.toString());
+        Assertions.assertEquals(this.createExpectedString("", "|", ""), appendable2.toString());
 
         StringBuilder appendable3 = new StringBuilder();
         this.classUnderTest().appendString(appendable3, "{", "|", "}");
-        Assert.assertEquals(this.createExpectedString("{", "|", "}"), appendable3.toString());
+        Assertions.assertEquals(this.createExpectedString("{", "|", "}"), appendable3.toString());
     }
 
     @Test
     public void toImmutable()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
+        Assertions.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
         Verify.assertInstanceOf(Immutable<name>Stack.class, this.classUnderTest().toImmutable());
     }
 
@@ -220,7 +220,7 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         <name>Stack stack = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
         <name>Stack selected = stack.selectWithIndex((value, i) -> i % 2 == 0);
 
-        Assert.assertEquals(<name>Stacks.immutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), selected);
+        Assertions.assertEquals(<name>Stacks.immutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), selected);
     }
 
     /**
@@ -232,7 +232,7 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         <name>Stack stack = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
         Mutable<name>List selected = stack.selectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
 
-        Assert.assertEquals(<name>Lists.immutable.with(<["7", "1"]:(literal.(type))(); separator=", ">), selected);
+        Assertions.assertEquals(<name>Lists.immutable.with(<["7", "1"]:(literal.(type))(); separator=", ">), selected);
     }
 
     /**
@@ -244,7 +244,7 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         <name>Stack stack = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
         <name>Stack rejected = stack.rejectWithIndex((value, i) -> i % 2 == 0);
 
-        Assert.assertEquals(<name>Stacks.mutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), rejected);
+        Assertions.assertEquals(<name>Stacks.mutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), rejected);
     }
 
     /**
@@ -256,7 +256,7 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         <name>Stack stack = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
         Mutable<name>List rejected = stack.rejectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
 
-        Assert.assertEquals(<name>Lists.immutable.with(<["9", "3"]:(literal.(type))(); separator=", ">), rejected);
+        Assertions.assertEquals(<name>Lists.immutable.with(<["9", "3"]:(literal.(type))(); separator=", ">), rejected);
     }
 
     /**
@@ -267,10 +267,10 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
     {
         StackIterable\<<name>IntPair> pairs = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">)
                 .collectWithIndex(PrimitiveTuples::pair);
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(<name>IntPair::getTwo, IntLists.mutable.empty()));
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 <name>Lists.mutable.with(<["7", "9", "1", "3"]:(literal.(type))(); separator=", ">),
                 pairs.collect<name>(<name>IntPair::getOne, <name>Lists.mutable.empty()));
     }
@@ -283,17 +283,17 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
     {
         MutableList\<<name>IntPair> pairs = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">)
                 .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(<name>IntPair::getTwo, IntLists.mutable.empty()));
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 <name>Lists.mutable.with(<["7", "9", "1", "3"]:(literal.(type))(); separator=", ">),
                 pairs.collect<name>(<name>IntPair::getOne, <name>Lists.mutable.empty()));
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 IntSets.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(<name>IntPair::getTwo, IntSets.mutable.empty()));
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 <name>Sets.mutable.with(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">),
                 pairs.collect<name>(<name>IntPair::getOne, <name>Sets.mutable.empty()));
     }
@@ -346,35 +346,35 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
 
         Verify.assertIterablesEqual(Lists.mutable.with(), this.newWith().chunk(1));
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(-1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(-1));
     }
 
     @Test
     public void getFirst()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().getFirst());
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().getFirst());
     }
 
     @Test
     public void indexOf()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().indexOf(<["0"]:(literal.(type))(); separator=", ">));
     }
 
     @Test
     public void injectIntoWithIndex()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().injectIntoWithIndex(null, null));
     }
 
     @Test
     public void forEachWithIndex()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().forEachWithIndex(null));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().forEachWithIndex(null));
     }
 }
 

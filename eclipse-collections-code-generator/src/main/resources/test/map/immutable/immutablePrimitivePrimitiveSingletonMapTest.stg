@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -36,8 +37,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;<endif>
 import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
 import org.eclipse.collections.impl.math.Mutable<primitive2.wrapperName>;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link Immutable<name1><name2>SingletonMap}.
@@ -56,69 +56,69 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     {
         Immutable<name1><name2>Map map1 = this.classUnderTest();
         Immutable<name1><name2>Map expected = this.newWithKeysValues(<["0"]:keyValue(); separator=", ">);
-        Assert.assertEquals(expected, map1.newWithKeyValue(<["0"]:keyValue(); separator=", ">));
-        Assert.assertNotSame(map1, map1.newWithKeyValue(<["0"]:keyValue(); separator=", ">));
+        Assertions.assertEquals(expected, map1.newWithKeyValue(<["0"]:keyValue(); separator=", ">));
+        Assertions.assertNotSame(map1, map1.newWithKeyValue(<["0"]:keyValue(); separator=", ">));
     }
 
     @Test
     public void newWithoutKeyValue()
     {
         Immutable<name1><name2>Map map1 = this.classUnderTest();
-        Assert.assertEquals(map1, map1.newWithoutKey(<(literal.(type1))("32")>));
-        Assert.assertSame(map1, map1.newWithoutKey(<(literal.(type1))("32")>));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        Assertions.assertEquals(map1, map1.newWithoutKey(<(literal.(type1))("32")>));
+        Assertions.assertSame(map1, map1.newWithoutKey(<(literal.(type1))("32")>));
+        Assertions.assertEquals(this.classUnderTest(), map1);
 
         Immutable<name1><name2>Map map2 = this.classUnderTest();
-        Assert.assertEquals(this.getEmptyMap(), map2.newWithoutKey(<(literal.(type1))("0")>));
-        Assert.assertNotSame(map2, map2.newWithoutKey(<(literal.(type1))("0")>));
-        Assert.assertEquals(this.classUnderTest(), map2);
+        Assertions.assertEquals(this.getEmptyMap(), map2.newWithoutKey(<(literal.(type1))("0")>));
+        Assertions.assertNotSame(map2, map2.newWithoutKey(<(literal.(type1))("0")>));
+        Assertions.assertEquals(this.classUnderTest(), map2);
     }
 
     @Test
     public void newWithoutAllKeys()
     {
         Immutable<name1><name2>Map map1 = this.classUnderTest();
-        Assert.assertEquals(this.getEmptyMap(), map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
-        Assert.assertNotSame(map1, map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        Assertions.assertEquals(this.getEmptyMap(), map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
+        Assertions.assertNotSame(map1, map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
+        Assertions.assertEquals(this.classUnderTest(), map1);
 
         Immutable<name1><name2>Map map2 = this.classUnderTest();
-        Assert.assertEquals(map2, map2.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("31")>, <(literal.(type1))("32")>)));
-        Assert.assertEquals(this.classUnderTest(), map2);
+        Assertions.assertEquals(map2, map2.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("31")>, <(literal.(type1))("32")>)));
+        Assertions.assertEquals(this.classUnderTest(), map2);
     }
 
     @Override
     @Test
     public void containsValue()
     {
-        Assert.assertTrue(this.map.containsValue(<(literal.(type2))("0")>));
-        Assert.assertFalse(this.map.containsValue(<(literal.(type2))("31")>));
-        Assert.assertFalse(this.map.containsValue(<(literal.(type2))("32")>));
+        Assertions.assertTrue(this.map.containsValue(<(literal.(type2))("0")>));
+        Assertions.assertFalse(this.map.containsValue(<(literal.(type2))("31")>));
+        Assertions.assertFalse(this.map.containsValue(<(literal.(type2))("32")>));
     }
 
     @Override
     @Test
     public void contains()
     {
-        Assert.assertTrue(this.map.contains(<(literal.(type2))("0")>));
-        Assert.assertFalse(this.map.contains(<(literal.(type2))("31")>));
-        Assert.assertFalse(this.map.contains(<(literal.(type2))("32")>));
+        Assertions.assertTrue(this.map.contains(<(literal.(type2))("0")>));
+        Assertions.assertFalse(this.map.contains(<(literal.(type2))("31")>));
+        Assertions.assertFalse(this.map.contains(<(literal.(type2))("32")>));
     }
 
     @Override
     @Test
     public void getIfAbsent()
     {
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.getIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(wideLiteral.(type2))("15")>, this.map.getIfAbsent(<(literal.(type1))("31")>, <(literal.(type2))("15")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(wideLiteral.(type2))("25")>, this.map.getIfAbsent(<(literal.(type1))("32")>, <(literal.(type2))("25")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(<(wideLiteral.(type2))("0")>, this.map.getIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(<(wideLiteral.(type2))("15")>, this.map.getIfAbsent(<(literal.(type1))("31")>, <(literal.(type2))("15")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(<(wideLiteral.(type2))("25")>, this.map.getIfAbsent(<(literal.(type1))("32")>, <(literal.(type2))("25")>)<wideDelta.(type2)>);
     }
 
     @Override
     @Test
     public void asLazy()
     {
-        Assert.assertEquals(<name2>ArrayList.newListWith(<(literal.(type2))("0")>), this.map.asLazy().toList());
+        Assertions.assertEquals(<name2>ArrayList.newListWith(<(literal.(type2))("0")>), this.map.asLazy().toList());
     }
 
     @Override
@@ -126,72 +126,72 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     public void <type2>Iterator()
     {
         <name2>Iterator iterator = this.map.<type2>Iterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, iterator.next()<wideDelta.(type2)>);
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assertions.assertTrue(iterator.hasNext());
+        Assertions.assertEquals(<(wideLiteral.(type2))("0")>, iterator.next()<wideDelta.(type2)>);
+        Assertions.assertFalse(iterator.hasNext());
+        Assertions.assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
     @Test
     public void getOrThrow()
     {
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.getOrThrow(<(literal.(type1))("0")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(<(wideLiteral.(type2))("0")>, this.map.getOrThrow(<(literal.(type1))("0")>)<wideDelta.(type2)>);
 
-        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("31")>));
-        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("32")>));
+        Assertions.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("31")>));
+        Assertions.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type1))("32")>));
     }
 
     @Override
     @Test
     public void get()
     {
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.get(<(literal.(type1))("31")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.get(<(literal.(type1))("32")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(<(wideLiteral.(type2))("0")>, this.map.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(<(wideLiteral.(type2))("0")>, this.map.get(<(literal.(type1))("31")>)<wideDelta.(type2)>);
+        Assertions.assertEquals(<(wideLiteral.(type2))("0")>, this.map.get(<(literal.(type1))("32")>)<wideDelta.(type2)>);
     }
 
     @Override
     @Test
     public void containsAll()
     {
-        Assert.assertFalse(this.map.containsAll(<["0", "31", "32"]:(literal.(type2))(); separator=", ">));
-        Assert.assertFalse(this.map.containsAll(<["31", "35"]:(literal.(type2))(); separator=", ">));
-        Assert.assertTrue(this.map.containsAll(<(literal.(type2))("0")>));
-        Assert.assertTrue(this.map.containsAll());
+        Assertions.assertFalse(this.map.containsAll(<["0", "31", "32"]:(literal.(type2))(); separator=", ">));
+        Assertions.assertFalse(this.map.containsAll(<["31", "35"]:(literal.(type2))(); separator=", ">));
+        Assertions.assertTrue(this.map.containsAll(<(literal.(type2))("0")>));
+        Assertions.assertTrue(this.map.containsAll());
     }
 
     @Override
     @Test
     public void containsKey()
     {
-        Assert.assertTrue(this.map.containsKey(<(literal.(type1))("0")>));
-        Assert.assertFalse(this.map.containsKey(<(literal.(type1))("31")>));
-        Assert.assertFalse(this.map.containsKey(<(literal.(type1))("32")>));
+        Assertions.assertTrue(this.map.containsKey(<(literal.(type1))("0")>));
+        Assertions.assertFalse(this.map.containsKey(<(literal.(type1))("31")>));
+        Assertions.assertFalse(this.map.containsKey(<(literal.(type1))("32")>));
     }
 
     @Override
     @Test
     public void keysView()
     {
-        Assert.assertEquals(<name1>ArrayList.newListWith(<(literal.(type1))("0")>), this.map.keysView().toSortedList());
+        Assertions.assertEquals(<name1>ArrayList.newListWith(<(literal.(type1))("0")>), this.map.keysView().toSortedList());
     }
 
     @Override
     @Test
     public void toSortedArray()
     {
-        Assert.assertTrue(Arrays.equals(new <type2>[]{<(literal.(type2))("0")>}, this.map.toSortedArray()));
+        Assertions.assertTrue(Arrays.equals(new <type2>[]{<(literal.(type2))("0")>}, this.map.toSortedArray()));
     }
 
     @Override
     @Test
     public void containsAll_Iterable()
     {
-        Assert.assertFalse(this.map.containsAll(<name2>ArrayList.newListWith(<["0", "31", "32"]:(literal.(type2))(); separator=", ">)));
-        Assert.assertFalse(this.map.containsAll(<name2>ArrayList.newListWith(<["0", "31", "35"]:(literal.(type2))(); separator=", ">)));
-        Assert.assertTrue(this.map.containsAll(<name2>ArrayList.newListWith(<["0"]:(literal.(type2))(); separator=", ">)));
-        Assert.assertTrue(this.map.containsAll(new <name2>ArrayList()));
+        Assertions.assertFalse(this.map.containsAll(<name2>ArrayList.newListWith(<["0", "31", "32"]:(literal.(type2))(); separator=", ">)));
+        Assertions.assertFalse(this.map.containsAll(<name2>ArrayList.newListWith(<["0", "31", "35"]:(literal.(type2))(); separator=", ">)));
+        Assertions.assertTrue(this.map.containsAll(<name2>ArrayList.newListWith(<["0"]:(literal.(type2))(); separator=", ">)));
+        Assertions.assertTrue(this.map.containsAll(new <name2>ArrayList()));
     }
 
     @Override
@@ -199,9 +199,9 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     public void select()
     {
         <name1><name2>Map actual1 = this.classUnderTest().select((<type1> key, <type2> value) -> <(equals.(type1))("key", {<(literal.(type1))("0")>})>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), actual1);
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), actual1);
         <name1><name2>Map actual2 = this.classUnderTest().select((<type1> key, <type2> value) -> <(equals.(type1))("key", {<(literal.(type1))("1")>})>);
-        Assert.assertEquals(this.getEmptyMap(), actual2);
+        Assertions.assertEquals(this.getEmptyMap(), actual2);
     }
 
     @Override
@@ -209,9 +209,9 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     public void reject()
     {
         <name1><name2>Map actual1 = this.classUnderTest().reject((<type1> key, <type2> value) -> <(equals.(type1))("key", {<(literal.(type1))("1")>})>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), actual1);
+        Assertions.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), actual1);
         <name1><name2>Map actual2 = this.classUnderTest().reject((<type1> key, <type2> value) -> <(equals.(type1))("key", {<(literal.(type1))("0")>})>);
-        Assert.assertEquals(this.getEmptyMap(), actual2);
+        Assertions.assertEquals(this.getEmptyMap(), actual2);
     }
 
     @Override
@@ -219,10 +219,10 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     public void select_value()
     {
         <name2>Iterable actual1 = this.classUnderTest().select(<name2>Predicates.equal(<(literal.(type2))("1")>));
-        Assert.assertEquals(<name2>Bags.immutable.empty(), actual1);
+        Assertions.assertEquals(<name2>Bags.immutable.empty(), actual1);
 
         <name2>Iterable actual2 = this.classUnderTest().select(<name2>Predicates.equal(<(literal.(type2))("0")>));
-        Assert.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("0")>), actual2);
+        Assertions.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("0")>), actual2);
     }
 
     @Override
@@ -230,18 +230,18 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     public void reject_value()
     {
         <name2>Iterable actual1 = this.classUnderTest().reject(<name2>Predicates.equal(<(literal.(type2))("0")>));
-        Assert.assertEquals(<name2>Bags.immutable.empty(), actual1);
+        Assertions.assertEquals(<name2>Bags.immutable.empty(), actual1);
 
         <name2>Iterable actual2 = this.classUnderTest().reject(<name2>Predicates.equal(<(literal.(type2))("1")>));
-        Assert.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("0")>), actual2);
+        Assertions.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("0")>), actual2);
     }
 
     @Override
     @Test
     public void count()
     {
-        Assert.assertEquals(0, this.classUnderTest().count(<name2>Predicates.equal(<(literal.(type2))("1")>)));
-        Assert.assertEquals(1, this.classUnderTest().count(<name2>Predicates.equal(<(literal.(type2))("0")>)));
+        Assertions.assertEquals(0, this.classUnderTest().count(<name2>Predicates.equal(<(literal.(type2))("1")>)));
+        Assertions.assertEquals(1, this.classUnderTest().count(<name2>Predicates.equal(<(literal.(type2))("0")>)));
     }
 
     @Test
@@ -249,7 +249,7 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     {
         Immutable<name1><name2>SingletonMap iterable = new Immutable<name1><name2>SingletonMap(<["1"]:keyValue(); separator=", ">);
         Mutable<primitive2.wrapperName> result = iterable.injectInto(new Mutable<primitive2.wrapperName>(<(literal.(type2))("0")>), Mutable<primitive2.wrapperName>::add);
-        Assert.assertEquals(new Mutable<primitive2.wrapperName>(<(literal.(type2))("1")>), result);
+        Assertions.assertEquals(new Mutable<primitive2.wrapperName>(<(literal.(type2))("1")>), result);
     }
 }
 

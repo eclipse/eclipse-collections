@@ -2,6 +2,8 @@ import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
+import "junit.stg"
+
 
 skipBoolean() ::= "true"
 isTest() ::= "true"
@@ -22,8 +24,7 @@ package org.eclipse.collections.impl.block.function.primitive;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * This file was automatically generated from template file primitiveCaseFunctionTest.stg.
@@ -34,7 +35,7 @@ public class <name>CaseFunctionTest
     public void noopCase()
     {
         <name>CaseFunction\<<wrapperName>\> function = new <name>CaseFunction\<<wrapperName>\>();
-        Assert.assertNull(function.valueOf(<(literal.(type))("0")>));
+        Assertions.assertNull(function.valueOf(<(literal.(type))("0")>));
     }
 
     @Test
@@ -42,7 +43,7 @@ public class <name>CaseFunctionTest
     {
         <name>CaseFunction\<<wrapperName>\> function = new <name>CaseFunction\<<wrapperName>\>();
         function.addCase(ignored -> true, <wrapperName>::valueOf);
-        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("0")>), function.valueOf(<(literal.(type))("0")>));
+        Assertions.assertEquals(<wrapperName>.valueOf(<(literal.(type))("0")>), function.valueOf(<(literal.(type))("0")>));
     }
 
     @Test
@@ -51,13 +52,13 @@ public class <name>CaseFunctionTest
         <name>CaseFunction\<String> function = new <name>CaseFunction\<String>(i -> "Yow!")
                 .addCase(i -> <(equals.(type))("i", "0")>, i -> "Patience, grasshopper");
 
-        Assert.assertEquals("Yow!", function.valueOf(<(literal.(type))("1")>));
+        Assertions.assertEquals("Yow!", function.valueOf(<(literal.(type))("1")>));
 
         <name>CaseFunction\<String> function1 = function.setDefault(i -> "Patience, young grasshopper");
-        Assert.assertSame(function, function1);
+        Assertions.assertSame(function, function1);
 
-        Assert.assertEquals("Patience, grasshopper", function.valueOf(<(literal.(type))("0")>));
-        Assert.assertEquals("Patience, young grasshopper", function.valueOf(<(literal.(type))("1")>));
+        Assertions.assertEquals("Patience, grasshopper", function.valueOf(<(literal.(type))("0")>));
+        Assertions.assertEquals("Patience, young grasshopper", function.valueOf(<(literal.(type))("1")>));
 
         Verify.assertContains("<name>CaseFunction", function.toString());
     }
@@ -72,7 +73,7 @@ public class <name>CaseFunctionTest
                         .addCase(e -> <(equals.(type))("e % 3", "0")>, e -> "Fizz")
                         .addCase(e -> <(equals.(type))("e % 5", "0")>, e -> "Buzz"))
                 .makeString(":");
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "::Fizz::Buzz:Fizz:::Fizz:Buzz::Fizz:::FizzBuzz:::Fizz::Buzz",
                 fizzBuzz);
     }

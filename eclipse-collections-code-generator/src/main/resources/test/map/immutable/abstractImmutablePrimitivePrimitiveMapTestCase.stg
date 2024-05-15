@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "junit.stg"
 
 isTest() ::= "true"
 
@@ -30,8 +31,7 @@ import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.impl.map.mutable.primitive.<name2><name1>HashMap;<endif>
 import org.eclipse.collections.impl.map.primitive.Abstract<name1><name2>MapTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * Abstract JUnit test for {@link Immutable<name1><name2>Map}.
@@ -93,11 +93,11 @@ public abstract class AbstractImmutable<name1><name2>MapTestCase extends Abstrac
         Verify.assertPostSerializedEqualsAndHashCode(map6);
         Verify.assertPostSerializedEqualsAndHashCode(map8);
         Verify.assertPostSerializedIdentity(this.getEmptyMap());
-        Assert.assertNotEquals(map1, map3);
-        Assert.assertNotEquals(map1, map4);
-        Assert.assertNotEquals(map1, map5);
-        Assert.assertNotEquals(map7, map6);
-        Assert.assertNotEquals(map7, map8);
+        Assertions.assertNotEquals(map1, map3);
+        Assertions.assertNotEquals(map1, map4);
+        Assertions.assertNotEquals(map1, map5);
+        Assertions.assertNotEquals(map7, map6);
+        Assertions.assertNotEquals(map7, map8);
     }
 
     @Override
@@ -105,7 +105,7 @@ public abstract class AbstractImmutable<name1><name2>MapTestCase extends Abstrac
     public void keySet()
     {
         super.keySet();
-        Assert.assertThrows(
+        Assertions.assertThrows(
                 UnsupportedOperationException.class,
                 () -> this.classUnderTest().keySet().remove(<(literal.(type1))("0")>));
     }
@@ -114,7 +114,7 @@ public abstract class AbstractImmutable<name1><name2>MapTestCase extends Abstrac
     public void values()
     {
         super.values();
-        Assert.assertThrows(
+        Assertions.assertThrows(
                 UnsupportedOperationException.class,
                 () -> this.classUnderTest().values().remove(<(literal.(type2))("0")>));
     }
@@ -122,16 +122,16 @@ public abstract class AbstractImmutable<name1><name2>MapTestCase extends Abstrac
     @Test
     public void flipUniqueValues()
     {
-        Assert.assertEquals(<name2><name1>Maps.immutable.empty(), <name1><name2>Maps.immutable.empty().flipUniqueValues());
+        Assertions.assertEquals(<name2><name1>Maps.immutable.empty(), <name1><name2>Maps.immutable.empty().flipUniqueValues());
         Verify.assertInstanceOf(Immutable<name2><name1>EmptyMap.class, <name1><name2>Maps.immutable.empty().flipUniqueValues());
 
-        Assert.assertEquals(<name2><name1>Maps.immutable.with(<(literal.(type2))("2")>, <(literal.(type1))("1")>), this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>).flipUniqueValues());
+        Assertions.assertEquals(<name2><name1>Maps.immutable.with(<(literal.(type2))("2")>, <(literal.(type1))("1")>), this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>).flipUniqueValues());
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 <name2><name1>HashMap.newWithKeysValues(<(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("3")>, <(literal.(type1))("2")>, <(literal.(type2))("4")>, <(literal.(type1))("3")>, <(literal.(type2))("5")>, <(literal.(type1))("4")>).toImmutable(),
                 this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("4")>, <(literal.(type2))("5")>).flipUniqueValues());
 
-        Assert.assertThrows(IllegalStateException.class, () -> this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("1")>).flipUniqueValues());
+        Assertions.assertThrows(IllegalStateException.class, () -> this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("1")>).flipUniqueValues());
     }
 }
 

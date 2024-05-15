@@ -2,6 +2,7 @@ import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
+import "junit.stg"
 
 skipBoolean() ::= "true"
 
@@ -24,8 +25,7 @@ import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
-import org.junit.Assert;
-import org.junit.Test;
+<junit()>
 
 /**
  * JUnit test for {@link ImmutableObject<name>HashMap}.
@@ -44,9 +44,9 @@ public class ImmutableObject<name>HashMapTest extends AbstractImmutableObject<na
     {
         ImmutableObject<name>Map\<String> map1 = this.classUnderTest();
         ImmutableObject<name>Map\<String> expected = Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3", <(literal.(type))("3")>).toImmutable();
-        Assert.assertEquals(expected, map1.newWithKeyValue("3", <(literal.(type))("3")>));
-        Assert.assertNotSame(map1, map1.newWithKeyValue("3", <(literal.(type))("3")>));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        Assertions.assertEquals(expected, map1.newWithKeyValue("3", <(literal.(type))("3")>));
+        Assertions.assertNotSame(map1, map1.newWithKeyValue("3", <(literal.(type))("3")>));
+        Assertions.assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -54,9 +54,9 @@ public class ImmutableObject<name>HashMapTest extends AbstractImmutableObject<na
     {
         ImmutableObject<name>Map\<String> map1 = this.classUnderTest();
         ImmutableObject<name>Map\<String> expected = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>);
-        Assert.assertEquals(expected, map1.newWithoutKey("2"));
-        Assert.assertNotSame(map1, map1.newWithoutKey("2"));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        Assertions.assertEquals(expected, map1.newWithoutKey("2"));
+        Assertions.assertNotSame(map1, map1.newWithoutKey("2"));
+        Assertions.assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -64,9 +64,9 @@ public class ImmutableObject<name>HashMapTest extends AbstractImmutableObject<na
     {
         ImmutableObject<name>Map\<String> map1 = this.classUnderTest();
         ImmutableObject<name>Map\<String> expected = this.newWithKeysValues("1", <(literal.(type))("1")>);
-        Assert.assertEquals(expected, map1.newWithoutAllKeys(FastList.newListWith("0", "2")));
-        Assert.assertNotSame(map1, map1.newWithoutAllKeys(FastList.newListWith("0", "2")));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        Assertions.assertEquals(expected, map1.newWithoutAllKeys(FastList.newListWith("0", "2")));
+        Assertions.assertNotSame(map1, map1.newWithoutAllKeys(FastList.newListWith("0", "2")));
+        Assertions.assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ImmutableObject<name>HashMapTest extends AbstractImmutableObject<na
     {
         ImmutableObject<name>HashMap\<String> iterable = new ImmutableObject<name>HashMap\<>(Object<name>HashMap.newWithKeysValues("3", <(literal.(type))("3")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>));
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), (Mutable<wrapperName> object, <type> value) -> object.add(value));
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
+        Assertions.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
     }
 }
 
