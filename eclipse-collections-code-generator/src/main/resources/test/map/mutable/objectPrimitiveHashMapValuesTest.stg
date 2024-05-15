@@ -20,7 +20,13 @@ body(type, name, wrapperName) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
+import java.util.NoSuchElementException;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.junit.Test;
+
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link Object<name>HashMap#values()}.
@@ -32,6 +38,19 @@ public class Object<name>HashMapValuesTest extends Object<name>HashMapValuesTest
     public Object<name>HashMap\<String> newMapWithKeysValues(String key1, <type> value1)
     {
         return Object<name>HashMap.newWithKeysValues(key1, value1);
+    }
+
+    @Test
+    @Override
+    public void <type>Iterator_throws_non_empty_collection()
+    {
+        Mutable<name>Collection collection = this.classUnderTest();
+        <name>Iterator iterator = collection.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override

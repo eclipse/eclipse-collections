@@ -31,6 +31,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 /**
@@ -79,11 +80,11 @@ public class Reverse<name>IterableTest
         <name>Iterable iterable = <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed();
         <name>Iterator iterator = iterable.<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(<(wideLiteral.(type))("1")>, iterator.next()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("1")>, iterator.next()<(wideDelta.(type))>);
         Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(<(wideLiteral.(type))("2")>, iterator.next()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("2")>, iterator.next()<(wideDelta.(type))>);
         Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(<(wideLiteral.(type))("3")>, iterator.next()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("3")>, iterator.next()<(wideDelta.(type))>);
         Assert.assertFalse(iterator.hasNext());
     }
 
@@ -107,7 +108,7 @@ public class Reverse<name>IterableTest
         <wideType.(type)>[] sum = new <wideType.(type)>[1];
         iterable.forEach((<type> each) -> sum[0] += each);
 
-        Assert.assertEquals(<(wideLiteral.(type))("6")>, sum[0]<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("6")>, sum[0]<(wideDelta.(type))>);
     }
 
     @Test
@@ -129,7 +130,7 @@ public class Reverse<name>IterableTest
     @Test
     public void count()
     {
-        Assert.assertEquals(2L, <name>ArrayList.newListWith(<["1", "0", "2"]:(literal.(type))(); separator=", ">).asReversed().count(<name>Predicates.greaterThan(<zero.(type)>)));
+        assertEquals(2L, <name>ArrayList.newListWith(<["1", "0", "2"]:(literal.(type))(); separator=", ">).asReversed().count(<name>Predicates.greaterThan(<zero.(type)>)));
     }
 
     @Test
@@ -173,8 +174,8 @@ public class Reverse<name>IterableTest
     public void detectIfNone()
     {
         <name>Iterable iterable = <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed();
-        Assert.assertEquals(<(wideLiteral.(type))("1")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("1")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
     }
 
     @Test
@@ -187,19 +188,19 @@ public class Reverse<name>IterableTest
     @Test
     public void max()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("9")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().max()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("9")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().max()<(wideDelta.(type))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_throws_emptyList()
     {
-        new <name>ArrayList().asReversed().max();
+        assertThrows(NoSuchElementException.class, () -> new <name>ArrayList().asReversed().max());
     }
 
     @Test
     public void min()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().min()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().min()<(wideDelta.(type))>);
     }
 
     @Test
@@ -211,23 +212,23 @@ public class Reverse<name>IterableTest
     @Test
     public void minIfEmpty()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("5")>, new <name>ArrayList().asReversed().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, new <name>ArrayList().asReversed().minIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("5")>, new <name>ArrayList().asReversed().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, new <name>ArrayList().asReversed().minIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
     }
 
     @Test
     public void maxIfEmpty()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("5")>, new <name>ArrayList().asReversed().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, new <name>ArrayList().asReversed().maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("9")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("5")>, new <name>ArrayList().asReversed().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, new <name>ArrayList().asReversed().maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("9")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
     }
 
     @Test
     public void sum()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("10")>, <name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).asReversed().sum()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("10")>, <name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).asReversed().sum()<(wideDelta.(type))>);
     }
 
     <if(primitive.floatPrimitive)>@Test
@@ -242,7 +243,7 @@ public void sumConsistentRounding()
 
     // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
     // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
-    Assert.assertEquals(
+    assertEquals(
             1.082323233761663,
             iterable.sum(),
             1.0e-15);
@@ -258,7 +259,7 @@ public void sumConsistentRounding()
             .asReversed()
             .toArray());
 
-    Assert.assertEquals(
+    assertEquals(
             1.082323233711138,
             iterable.sum(),
             1.0e-15);
@@ -268,14 +269,14 @@ public void sumConsistentRounding()
     @Test
     public void average()
     {
-        Assert.assertEquals(2.5, <name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).asReversed().average(), 0.0);
+        assertEquals(2.5, <name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).asReversed().average(), 0.0);
     }
 
     @Test
     public void median()
     {
-        Assert.assertEquals(2.5, <name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).asReversed().median(), 0.0);
-        Assert.assertEquals(3.0, <name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).asReversed().median(), 0.0);
+        assertEquals(2.5, <name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).asReversed().median(), 0.0);
+        assertEquals(3.0, <name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).asReversed().median(), 0.0);
     }
 
     @Test
@@ -294,19 +295,19 @@ public void sumConsistentRounding()
     public void testToString()
     {
         <name>Iterable iterable = <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed();
-        Assert.assertEquals("[<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">]", iterable.toString());
-        Assert.assertEquals("[]", new <name>ArrayList().asReversed().toString());
+        assertEquals("[<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">]", iterable.toString());
+        assertEquals("[]", new <name>ArrayList().asReversed().toString());
     }
 
     @Test
     public void makeString()
     {
         <name>Iterable iterable = <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed();
-        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", iterable.makeString());
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", <name>ArrayList.newListWith(<(literal.(type))("1")>).makeString("/"));
-        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", iterable.makeString("/"));
-        Assert.assertEquals(iterable.toString(), iterable.makeString("[", ", ", "]"));
-        Assert.assertEquals("", new <name>ArrayList().asReversed().makeString());
+        assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", iterable.makeString());
+        assertEquals("<(toStringLiteral.(type))("1")>", <name>ArrayList.newListWith(<(literal.(type))("1")>).makeString("/"));
+        assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", iterable.makeString("/"));
+        assertEquals(iterable.toString(), iterable.makeString("[", ", ", "]"));
+        assertEquals("", new <name>ArrayList().asReversed().makeString());
     }
 
     @Test
@@ -315,46 +316,46 @@ public void sumConsistentRounding()
         <name>Iterable iterable = <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed();
         StringBuilder appendable = new StringBuilder();
         new <name>ArrayList().asReversed().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         StringBuilder appendable2 = new StringBuilder();
         iterable.appendString(appendable2);
-        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", appendable2.toString());
+        assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", appendable2.toString());
         StringBuilder appendable3 = new StringBuilder();
         iterable.appendString(appendable3, "/");
-        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", appendable3.toString());
+        assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", appendable3.toString());
         StringBuilder appendable4 = new StringBuilder();
         iterable.appendString(appendable4, "[", ", ", "]");
-        Assert.assertEquals(iterable.toString(), appendable4.toString());
+        assertEquals(iterable.toString(), appendable4.toString());
     }
 
     @Test
     public void toList()
     {
-        Assert.assertEquals(<name>ArrayList.newListWith(<["2", "1"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">).asReversed().toList());
+        assertEquals(<name>ArrayList.newListWith(<["2", "1"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">).asReversed().toList());
     }
 
     @Test
     public void toSet()
     {
-        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed().toSet());
+        assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed().toSet());
     }
 
     @Test
     public void toBag()
     {
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed().toBag());
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed().toBag());
     }
 
     @Test
     public void asLazy()
     {
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed().asLazy().toList());
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">).asReversed().asLazy().toList());
     }
 
     @Test
     public void toSortedList()
     {
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["2", "3", "1"]:(literal.(type))(); separator=", ">).asReversed().toSortedList());
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["2", "3", "1"]:(literal.(type))(); separator=", ">).asReversed().toSortedList());
     }
 }
 

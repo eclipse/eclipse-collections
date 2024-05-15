@@ -43,6 +43,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 /**
@@ -65,7 +66,7 @@ public abstract class AbstractLazy<name>IterableTestCase
         {
             sum += iterator.next();
         }
-        Assert.assertEquals(<(wideLiteral.(type))("6")>, sum<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("6")>, sum<(wideDelta.(type))>);
     }
 
     @Test
@@ -85,7 +86,7 @@ public abstract class AbstractLazy<name>IterableTestCase
     {
         <wideType.(type)>[] sum = new <wideType.(type)>[1];
         this.classUnderTest().forEach(each -> sum[0] += each);
-        Assert.assertEquals(<(wideLiteral.(type))("6")>, sum[0]<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("6")>, sum[0]<(wideDelta.(type))>);
     }
 
     @Test
@@ -111,11 +112,11 @@ public abstract class AbstractLazy<name>IterableTestCase
     @Test
     public void count()
     {
-        Assert.assertEquals(1L, this.classUnderTest().count(<name>Predicates.lessThan(<(literal.(type))("2")>)));
-        Assert.assertEquals(0L, this.classUnderTest().count(<name>Predicates.lessThan(<(literal.(type))("0")>)));
-        Assert.assertEquals(2L, this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">).count(<name>Predicates.lessThan(<(literal.(type))("2")>)));
-        Assert.assertEquals(2L, this.newWith(<["32", "33"]:(literal.(type))(); separator=", ">).count(<name>Predicates.lessThan(<(literal.(type))("34")>)));
-        Assert.assertEquals(0L, this.newWith(<["32", "33"]:(literal.(type))(); separator=", ">).count(<name>Predicates.lessThan(<(literal.(type))("0")>)));
+        assertEquals(1L, this.classUnderTest().count(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        assertEquals(0L, this.classUnderTest().count(<name>Predicates.lessThan(<(literal.(type))("0")>)));
+        assertEquals(2L, this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">).count(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        assertEquals(2L, this.newWith(<["32", "33"]:(literal.(type))(); separator=", ">).count(<name>Predicates.lessThan(<(literal.(type))("34")>)));
+        assertEquals(0L, this.newWith(<["32", "33"]:(literal.(type))(); separator=", ">).count(<name>Predicates.lessThan(<(literal.(type))("0")>)));
     }
 
     @Test
@@ -180,12 +181,12 @@ public abstract class AbstractLazy<name>IterableTestCase
     @Test
     public void detectIfNone()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("1")>, this.classUnderTest().detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.classUnderTest().detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">).detectIfNone(<name>Predicates.lessThan(<(literal.(type))("2")>), <(literal.(type))("1")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("33")>, this.newWith(<["32", "33"]:(literal.(type))(); separator=", ">).detectIfNone(<name>Predicates.equal(<(literal.(type))("33")>), <(literal.(type))("1")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">).detectIfNone(<name>Predicates.equal(<(literal.(type))("33")>), <(literal.(type))("32")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["34", "35"]:(literal.(type))(); separator=", ">).detectIfNone(<name>Predicates.equal(<(literal.(type))("33")>), <(literal.(type))("32")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("1")>, this.classUnderTest().detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, this.classUnderTest().detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">).detectIfNone(<name>Predicates.lessThan(<(literal.(type))("2")>), <(literal.(type))("1")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("33")>, this.newWith(<["32", "33"]:(literal.(type))(); separator=", ">).detectIfNone(<name>Predicates.equal(<(literal.(type))("33")>), <(literal.(type))("1")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">).detectIfNone(<name>Predicates.equal(<(literal.(type))("33")>), <(literal.(type))("32")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["34", "35"]:(literal.(type))(); separator=", ">).detectIfNone(<name>Predicates.equal(<(literal.(type))("33")>), <(literal.(type))("32")>)<(wideDelta.(type))>);
     }
 
     @Test
@@ -200,9 +201,9 @@ public abstract class AbstractLazy<name>IterableTestCase
         StringBuilder tapStringBuilder = new StringBuilder();
         StringBuilder eachStringBuilder = new StringBuilder();
         Lazy<name>Iterable lazy = this.classUnderTest().tap(tapStringBuilder::append);
-        Assert.assertEquals(lazy.makeString(""), tapStringBuilder.toString());
+        assertEquals(lazy.makeString(""), tapStringBuilder.toString());
         lazy.tap(eachStringBuilder::append).forEach(eachStringBuilder::append);
-        Assert.assertEquals(CharAdapter.adapt(eachStringBuilder.toString()).toBag(), CharAdapter.adapt(tapStringBuilder.toString()).toBag());
+        assertEquals(CharAdapter.adapt(eachStringBuilder.toString()).toBag(), CharAdapter.adapt(tapStringBuilder.toString()).toBag());
     }
 
     @Test
@@ -214,28 +215,28 @@ public abstract class AbstractLazy<name>IterableTestCase
     @Test
     public void lazyCollectPrimitives()
     {
-        Assert.assertEquals(BooleanLists.immutable.of(false, true, false), this.classUnderTest().collectBoolean(e -> e % 2 == 0).toList());
-        Assert.assertEquals(CharLists.immutable.of((char) 2, (char) 3, (char) 4), this.classUnderTest().asLazy().collectChar(e -> (char) (e + 1)).toList());
-        Assert.assertEquals(ByteLists.immutable.of((byte) 2, (byte) 3, (byte) 4), this.classUnderTest().asLazy().collectByte(e -> (byte) (e + 1)).toList());
-        Assert.assertEquals(ShortLists.immutable.of((short) 2, (short) 3, (short) 4), this.classUnderTest().asLazy().collectShort(e -> (short) (e + 1)).toList());
-        Assert.assertEquals(IntLists.immutable.of(2, 3, 4), this.classUnderTest().asLazy().collectInt(e -> (int) (e + 1)).toList());
-        Assert.assertEquals(FloatLists.immutable.of(2.0f, 3.0f, 4.0f), this.classUnderTest().asLazy().collectFloat(e -> (float) (e + 1)).toList());
-        Assert.assertEquals(LongLists.immutable.of(2L, 3L, 4L), this.classUnderTest().asLazy().collectLong(e -> (long) (e + 1)).toList());
-        Assert.assertEquals(DoubleLists.immutable.of(2.0, 3.0, 4.0), this.classUnderTest().asLazy().collectDouble(e -> (double) (e + 1)).toList());
+        assertEquals(BooleanLists.immutable.of(false, true, false), this.classUnderTest().collectBoolean(e -> e % 2 == 0).toList());
+        assertEquals(CharLists.immutable.of((char) 2, (char) 3, (char) 4), this.classUnderTest().asLazy().collectChar(e -> (char) (e + 1)).toList());
+        assertEquals(ByteLists.immutable.of((byte) 2, (byte) 3, (byte) 4), this.classUnderTest().asLazy().collectByte(e -> (byte) (e + 1)).toList());
+        assertEquals(ShortLists.immutable.of((short) 2, (short) 3, (short) 4), this.classUnderTest().asLazy().collectShort(e -> (short) (e + 1)).toList());
+        assertEquals(IntLists.immutable.of(2, 3, 4), this.classUnderTest().asLazy().collectInt(e -> (int) (e + 1)).toList());
+        assertEquals(FloatLists.immutable.of(2.0f, 3.0f, 4.0f), this.classUnderTest().asLazy().collectFloat(e -> (float) (e + 1)).toList());
+        assertEquals(LongLists.immutable.of(2L, 3L, 4L), this.classUnderTest().asLazy().collectLong(e -> (long) (e + 1)).toList());
+        assertEquals(DoubleLists.immutable.of(2.0, 3.0, 4.0), this.classUnderTest().asLazy().collectDouble(e -> (double) (e + 1)).toList());
     }
 
     @Test
     public void sum()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("6")>, this.classUnderTest().sum()<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("1")>, this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">).sum()<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("33")>, this.newWith(<["0", "33"]:(literal.(type))(); separator=", ">).sum()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("6")>, this.classUnderTest().sum()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("1")>, this.newWith(<["0", "1"]:(literal.(type))(); separator=", ">).sum()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("33")>, this.newWith(<["0", "33"]:(literal.(type))(); separator=", ">).sum()<(wideDelta.(type))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_throws_emptyIterable()
     {
-        this.getEmptyIterable().max();
+        assertThrows(NoSuchElementException.class, () -> this.getEmptyIterable().max());
     }
 
     @Test
@@ -247,27 +248,27 @@ public abstract class AbstractLazy<name>IterableTestCase
     @Test
     public void max()
     {
-        Assert.assertEquals(<(literal.(type))("3")>, this.classUnderTest().max()<(wideDelta.(type))>);
-        Assert.assertEquals(<(literal.(type))("33")>, this.newWith(<["33", "0"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-        Assert.assertEquals(<(literal.(type))("100")>, this.newWith(<["100", "1"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-        Assert.assertEquals(<(literal.(type))("2")>, this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("3")>, this.classUnderTest().max()<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("33")>, this.newWith(<["33", "0"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("100")>, this.newWith(<["100", "1"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("2")>, this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
     }
 
     @Test
     public void min()
     {
-        Assert.assertEquals(<(literal.(type))("1")>, this.classUnderTest().min()<(wideDelta.(type))>);
-        Assert.assertEquals(<(literal.(type))("0")>, this.newWith(<["33", "0"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.newWith(<["100", "1"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.newWith(<["2", "1"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("1")>, this.classUnderTest().min()<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("0")>, this.newWith(<["33", "0"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("1")>, this.newWith(<["100", "1"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("1")>, this.newWith(<["2", "1"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
     }
 
     @Test
     public void minIfEmpty()
     {
-        Assert.assertEquals(<(literal.(type))("5")>, this.getEmptyIterable().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.classUnderTest().minIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(
+        assertEquals(<(literal.(type))("5")>, this.getEmptyIterable().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("1")>, this.classUnderTest().minIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(
                 <(literal.(type))("0")>,
                 this.classUnderTest().select(<name>Predicates.lessThan(<(literal.(type))("0")>)).minIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
     }
@@ -275,17 +276,17 @@ public abstract class AbstractLazy<name>IterableTestCase
     @Test
     public void maxIfEmpty()
     {
-        Assert.assertEquals(<(literal.(type))("5")>, this.getEmptyIterable().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(literal.(type))("3")>, this.classUnderTest().maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(
+        assertEquals(<(literal.(type))("5")>, this.getEmptyIterable().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(literal.(type))("3")>, this.classUnderTest().maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(
                 <(literal.(type))("0")>,
                 this.classUnderTest().select(<name>Predicates.lessThan(<(literal.(type))("0")>)).maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxThrowsOnEmpty()
     {
-        new Lazy<name>IterableAdapter(new <name>ArrayList()).max();
+        assertThrows(NoSuchElementException.class, () -> new Lazy<name>IterableAdapter(new <name>ArrayList()).max());
     }
 
     @Test
@@ -297,7 +298,7 @@ public abstract class AbstractLazy<name>IterableTestCase
     @Test
     public void average()
     {
-        Assert.assertEquals(2.0d, this.classUnderTest().average(), 0.0);
+        assertEquals(2.0d, this.classUnderTest().average(), 0.0);
     }
 
     @Test
@@ -309,8 +310,8 @@ public abstract class AbstractLazy<name>IterableTestCase
     @Test
     public void median()
     {
-        Assert.assertEquals(2.0d, this.classUnderTest().median(), 0.0);
-        Assert.assertEquals(16.0d, this.newWith(<["1", "31"]:(literal.(type))(); separator=", ">).median(), 0.0);
+        assertEquals(2.0d, this.classUnderTest().median(), 0.0);
+        assertEquals(16.0d, this.newWith(<["1", "31"]:(literal.(type))(); separator=", ">).median(), 0.0);
     }
 
     @Test
@@ -451,7 +452,7 @@ public abstract class AbstractLazy<name>IterableTestCase
                 || "<["2", "1"]:(toStringLiteral.(type))(); separator="/">".equals(appendable3.toString()));
         StringBuilder appendable4 = new StringBuilder();
         iterable.appendString(appendable4, "[", ", ", "]");
-        Assert.assertEquals(iterable.toString(), appendable4.toString());
+        assertEquals(iterable.toString(), appendable4.toString());
 
         StringBuilder appendable7 = new StringBuilder();
         Lazy<name>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type))(); separator=", ">);
@@ -503,26 +504,26 @@ public abstract class AbstractLazy<name>IterableTestCase
     @Test
     public void toSortedList()
     {
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toSortedList());
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toSortedList());
     }
 
     @Test
     public void toSet()
     {
-        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toSet());
+        assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toSet());
     }
 
     @Test
     public void toBag()
     {
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toBag());
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toBag());
     }
 
     @Test
     public void asLazy()
     {
         Lazy<name>Iterable iterable = this.classUnderTest();
-        Assert.assertEquals(iterable.toSet(), iterable.asLazy().toSet());
+        assertEquals(iterable.toSet(), iterable.asLazy().toSet());
         Verify.assertInstanceOf(Lazy<name>Iterable.class, iterable.asLazy());
         Assert.assertSame(iterable, iterable.asLazy());
     }

@@ -43,6 +43,9 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link Synchronized<name1><name2>Map#values()}.
  * This file was automatically generated from template file synchronizedPrimitivePrimitiveMapValuesTest.stg.
@@ -53,6 +56,19 @@ public class Synchronized<name1><name2>MapValuesTest extends AbstractMutable<nam
     protected Mutable<name2>Collection classUnderTest()
     {
         return new Synchronized<name1><name2>Map(<name1><name2>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">)).values();
+    }
+
+    @Override
+    @Test
+    public void <type2>Iterator_throws_non_empty_collection()
+    {
+        Mutable<name2>Collection collection = this.classUnderTest();
+        <name2>Iterator iterator = collection.<type2>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
@@ -140,8 +156,8 @@ public class Synchronized<name1><name2>MapValuesTest extends AbstractMutable<nam
         Mutable<name2>Collection collectionWithout = collection.without(<(literal.(type2))("2")>);
         Assert.assertSame(collection, collectionWithout);
         Mutable<name2>Collection expectedCollection = this.newWith(<(literal.(type2))("1")>, <(literal.(type2))("3")>);
-        Assert.assertEquals(expectedCollection.toList(), collectionWithout.toList());
-        Assert.assertEquals(expectedCollection.toList(), collectionWithout.without(<(literal.(type2))("4")>).toList());
+        assertEquals(expectedCollection.toList(), collectionWithout.toList());
+        assertEquals(expectedCollection.toList(), collectionWithout.without(<(literal.(type2))("4")>).toList());
     }
 
     @Override
@@ -152,7 +168,7 @@ public class Synchronized<name1><name2>MapValuesTest extends AbstractMutable<nam
         Mutable<name2>Collection collectionWithout = collection.withoutAll(new <name2>ArrayList(<(literal.(type2))("2")>, <(literal.(type2))("4")>));
         Assert.assertSame(collection, collectionWithout);
         Mutable<name2>Collection expectedCollection = this.newWith(<(literal.(type2))("1")>, <(literal.(type2))("3")>);
-        Assert.assertEquals(expectedCollection.toList(), collectionWithout.toList());
+        assertEquals(expectedCollection.toList(), collectionWithout.toList());
     }
 
     @Override
@@ -403,23 +419,23 @@ public class Synchronized<name1><name2>MapValuesTest extends AbstractMutable<nam
     public void collect()
     {
         <name2>ToObjectFunction\<<wrapperName2>\> function = (<type2> parameter) -> <(castIntToNarrowTypeWithParens.(type2))("parameter - 1")>;
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type2))(); separator=", ">).toBag(), this.newWith(<["1", "2", "3"]:(literal.(type2))(); separator=", ">).collect(function).toBag());
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type2))(); separator=", ">).toBag(), this.newWith(<["1", "2", "3"]:(literal.(type2))(); separator=", ">).collect(function).toBag());
         <name2>Iterable iterable = this.newWith(<["1", "2", "3"]:(literal.(type2))(); separator=", ">);
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type2))(); separator=", ">).toBag(), iterable.collect(function).toBag());
-        Assert.assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
-        Assert.assertEquals(this.newObjectCollectionWith(<(literal.(type2))("2")>), this.newWith(<(literal.(type2))("3")>).collect(function));
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type2))(); separator=", ">).toBag(), iterable.collect(function).toBag());
+        assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
+        assertEquals(this.newObjectCollectionWith(<(literal.(type2))("2")>), this.newWith(<(literal.(type2))("3")>).collect(function));
     }
 
     @Override
     @Test
     public void makeString()
     {
-        Assert.assertEquals("<(toStringLiteral.(type2))("1")>", this.newWith(<(literal.(type2))("1")>).makeString("/"));
-        Assert.assertEquals("<(toStringLiteral.(type2))("31")>", this.newWith(<(literal.(type2))("31")>).makeString());
-        Assert.assertEquals("<(toStringLiteral.(type2))("32")>", this.newWith(<(literal.(type2))("32")>).makeString());
-        Assert.assertEquals("", this.newWith().makeString());
-        Assert.assertEquals("", this.newWith().makeString("/"));
-        Assert.assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
+        assertEquals("<(toStringLiteral.(type2))("1")>", this.newWith(<(literal.(type2))("1")>).makeString("/"));
+        assertEquals("<(toStringLiteral.(type2))("31")>", this.newWith(<(literal.(type2))("31")>).makeString());
+        assertEquals("<(toStringLiteral.(type2))("32")>", this.newWith(<(literal.(type2))("32")>).makeString());
+        assertEquals("", this.newWith().makeString());
+        assertEquals("", this.newWith().makeString("/"));
+        assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
 
         <name2>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type2))(); separator=", ">);
         Assert.assertTrue(
@@ -468,14 +484,14 @@ public class Synchronized<name1><name2>MapValuesTest extends AbstractMutable<nam
     {
         StringBuilder appendable = new StringBuilder();
         this.newWith().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "/");
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "[", ", ", "]");
-        Assert.assertEquals("[]", appendable.toString());
+        assertEquals("[]", appendable.toString());
         StringBuilder appendable1 = new StringBuilder();
         this.newWith(<(literal.(type2))("1")>).appendString(appendable1);
-        Assert.assertEquals("<(toStringLiteral.(type2))("1")>", appendable1.toString());
+        assertEquals("<(toStringLiteral.(type2))("1")>", appendable1.toString());
         StringBuilder appendable2 = new StringBuilder();
 
         <name2>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type2))(); separator=", ">);
@@ -489,11 +505,11 @@ public class Synchronized<name1><name2>MapValuesTest extends AbstractMutable<nam
 
         StringBuilder appendable5 = new StringBuilder();
         this.newWith(<(literal.(type2))("31")>).appendString(appendable5);
-        Assert.assertEquals("<(toStringLiteral.(type2))("31")>", appendable5.toString());
+        assertEquals("<(toStringLiteral.(type2))("31")>", appendable5.toString());
 
         StringBuilder appendable6 = new StringBuilder();
         this.newWith(<(literal.(type2))("32")>).appendString(appendable6);
-        Assert.assertEquals("<(toStringLiteral.(type2))("32")>", appendable6.toString());
+        assertEquals("<(toStringLiteral.(type2))("32")>", appendable6.toString());
 
         StringBuilder appendable7 = new StringBuilder();
         <name2>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type2))(); separator=", ">);
@@ -558,7 +574,7 @@ public class Synchronized<name1><name2>MapValuesTest extends AbstractMutable<nam
     public void chunk()
     {
         <name2>Iterable iterable = this.classUnderTest();
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         <name2>Bags.mutable.with(<["1"]:(literal.(type2))(); separator=", ">),
                         <name2>Bags.mutable.with(<["2"]:(literal.(type2))(); separator=", ">),
@@ -578,11 +594,11 @@ public class Synchronized<name1><name2>MapValuesTest extends AbstractMutable<nam
                         <name2>Bags.mutable.with(<["1", "3"]:(literal.(type2))(); separator=", ">),
                         <name2>Bags.mutable.with(<["2"]:(literal.(type2))(); separator=", ">)).toSet().equals(chunked));
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         <name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
                 iterable.chunk(3).toSet());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(<name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
 
@@ -633,7 +649,7 @@ public void sumConsistentRounding()
             .collect<name2>(i -> <["1.0"]:(decimalLiteral.(type2))()> / (i.<type2>Value() * i.<type2>Value() * i.<type2>Value() * i.<type2>Value()))
             .toArray());
 
-    Assert.assertEquals(
+    assertEquals(
             <(floatResults.(type1))()>,
             iterable.sum(),
             1.0e-15);
@@ -653,7 +669,7 @@ public void sumConsistentRounding()
             .collect<name2>(i -> <["1.0"]:(decimalLiteral.(type2))()> / (i.<type2>Value() * i.<type2>Value() * i.<type2>Value() * i.<type2>Value()))
             .toArray());
 
-    Assert.assertEquals(
+    assertEquals(
             <(doubleResults.(type1))()>,
             iterable.sum(),
             1.0e-15);

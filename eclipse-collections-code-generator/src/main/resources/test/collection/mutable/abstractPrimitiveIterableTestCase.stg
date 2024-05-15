@@ -60,6 +60,9 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 /**
  * Abstract JUnit test for {@link <name>Iterable}s
  * This file was automatically generated from template file abstractPrimitiveIterableTestCase.stg.
@@ -94,9 +97,9 @@ public abstract class Abstract<name>IterableTestCase
     @Test
     public void newCollection()
     {
-        Assert.assertEquals(this.newMutableCollectionWith(), this.newWith());
-        Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
-        Assert.assertEquals(this.newMutableCollectionWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">));
+        assertEquals(this.newMutableCollectionWith(), this.newWith());
+        assertEquals(this.newMutableCollectionWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        assertEquals(this.newMutableCollectionWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">));
     }
 
     @Test
@@ -129,7 +132,7 @@ public abstract class Abstract<name>IterableTestCase
         Mutable<name>List tapResult = <name>Lists.mutable.empty();
         <name>Iterable collection = this.newWith(<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">);
         Assert.assertSame(collection, collection.tap(tapResult::add));
-        Assert.assertEquals(collection.toList(), tapResult);
+        assertEquals(collection.toList(), tapResult);
     }
 
     @Test
@@ -447,7 +450,7 @@ public abstract class Abstract<name>IterableTestCase
     @Test
     public abstract void <type>Iterator();
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void <type>Iterator_throws()
     {
         <name>Iterator iterator = this.classUnderTest().<type>Iterator();
@@ -455,10 +458,10 @@ public abstract class Abstract<name>IterableTestCase
         {
             iterator.next();
         }
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void <type>Iterator_throws_non_empty_collection()
     {
         <name>Iterable iterable = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
@@ -467,7 +470,7 @@ public abstract class Abstract<name>IterableTestCase
         {
             iterator.next();
         }
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test
@@ -478,7 +481,7 @@ public abstract class Abstract<name>IterableTestCase
 
         int size = this.classUnderTest().size();
         long sum1 = (long) ((size * (size + 1)) / 2);
-        Assert.assertEquals(sum1, sum[0]<wideDelta.(type)>);
+        assertEquals(sum1, sum[0]<wideDelta.(type)>);
     }
 
     @Test
@@ -494,11 +497,11 @@ public abstract class Abstract<name>IterableTestCase
     {
         <name>Iterable iterable = this.classUnderTest();
         int size = iterable.size();
-        Assert.assertEquals(size >= 3 ? 3 : size, iterable.count(<name>Predicates.lessThan(<(literal.(type))("4")>)));
-        Assert.assertEquals(2L, this.newWith(<["1", "0", "2"]:(literal.(type))(); separator=", ">).count(<name>Predicates.greaterThan(<zero.(type)>)));
+        assertEquals(size >= 3 ? 3 : size, iterable.count(<name>Predicates.lessThan(<(literal.(type))("4")>)));
+        assertEquals(2L, this.newWith(<["1", "0", "2"]:(literal.(type))(); separator=", ">).count(<name>Predicates.greaterThan(<zero.(type)>)));
 
-        Assert.assertEquals(1, this.newWith(<["1"]:(literal.(type))(); separator=", ">).count(<name>Predicates.alwaysTrue()));
-        Assert.assertEquals(0, this.newWith(<["1"]:(literal.(type))(); separator=", ">).count(<name>Predicates.alwaysFalse()));
+        assertEquals(1, this.newWith(<["1"]:(literal.(type))(); separator=", ">).count(<name>Predicates.alwaysTrue()));
+        assertEquals(0, this.newWith(<["1"]:(literal.(type))(); separator=", ">).count(<name>Predicates.alwaysFalse()));
     }
 
     @Test
@@ -516,8 +519,8 @@ public abstract class Abstract<name>IterableTestCase
 
         <name>Iterable iterable1 = this.classUnderTest();
         int size = iterable1.size();
-        Assert.assertEquals(size > 3, iterable1.anySatisfy(<name>Predicates.greaterThan(<(literal.(type))("3")>)));
-        Assert.assertEquals(size != 0, iterable1.anySatisfy(<name>Predicates.lessThan(<(literal.(type))("3")>)));
+        assertEquals(size > 3, iterable1.anySatisfy(<name>Predicates.greaterThan(<(literal.(type))("3")>)));
+        assertEquals(size != 0, iterable1.anySatisfy(<name>Predicates.lessThan(<(literal.(type))("3")>)));
     }
 
     @Test
@@ -536,8 +539,8 @@ public abstract class Abstract<name>IterableTestCase
 
         <name>Iterable iterable1 = this.classUnderTest();
         int size = iterable1.size();
-        Assert.assertEquals(size == 0, iterable1.allSatisfy(<name>Predicates.greaterThan(<(literal.(type))("3")>)));
-        Assert.assertEquals(size \< 3, iterable1.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("3")>)));
+        assertEquals(size == 0, iterable1.allSatisfy(<name>Predicates.greaterThan(<(literal.(type))("3")>)));
+        assertEquals(size \< 3, iterable1.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("3")>)));
     }
 
     @Test
@@ -556,80 +559,80 @@ public abstract class Abstract<name>IterableTestCase
 
         <name>Iterable iterable1 = this.classUnderTest();
         int size = iterable1.size();
-        Assert.assertEquals(size \<= 3, iterable1.noneSatisfy(<name>Predicates.greaterThan(<(literal.(type))("3")>)));
-        Assert.assertEquals(size == 0, iterable1.noneSatisfy(<name>Predicates.lessThan(<(literal.(type))("3")>)));
+        assertEquals(size \<= 3, iterable1.noneSatisfy(<name>Predicates.greaterThan(<(literal.(type))("3")>)));
+        assertEquals(size == 0, iterable1.noneSatisfy(<name>Predicates.lessThan(<(literal.(type))("3")>)));
     }
 
     @Test
     public void collect()
     {
         <name>ToObjectFunction\<<wrapperName>\> function = parameter -> <(castIntToNarrowTypeWithParens.(type))("parameter - 1")>;
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).collect(function));
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).collect(function));
         <name>Iterable iterable = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">), iterable.collect(function));
-        Assert.assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
-        Assert.assertEquals(this.newObjectCollectionWith(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function));
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">), iterable.collect(function));
+        assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
+        assertEquals(this.newObjectCollectionWith(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function));
     }
 
     @Test
     public void collectWithTarget()
     {
         <name>ToObjectFunction\<<wrapperName>\> function = parameter -> <(castIntToNarrowTypeWithParens.(type))("parameter - 1")>;
-        Assert.assertEquals(Bags.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).collect(function, Bags.mutable.empty()));
+        assertEquals(Bags.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).collect(function, Bags.mutable.empty()));
         <name>Iterable iterable = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(Sets.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), iterable.collect(function, Sets.mutable.empty()));
-        Assert.assertEquals(Lists.mutable.empty(), this.newWith().collect(function, Lists.mutable.empty()));
-        Assert.assertEquals(Lists.mutable.with(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function, Lists.mutable.empty()));
+        assertEquals(Sets.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), iterable.collect(function, Sets.mutable.empty()));
+        assertEquals(Lists.mutable.empty(), this.newWith().collect(function, Lists.mutable.empty()));
+        assertEquals(Lists.mutable.with(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function, Lists.mutable.empty()));
     }
 
     @Test
     public void flatCollectWithTarget()
     {
         <name>ToObjectFunction\<List\<<wrapperName>\>> function = parameter -> Lists.mutable.with(<(castIntToNarrowTypeWithParens.(type))("parameter - 1")>);
-        Assert.assertEquals(Bags.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).flatCollect(function, Bags.mutable.empty()));
+        assertEquals(Bags.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).flatCollect(function, Bags.mutable.empty()));
         <name>Iterable iterable = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(Sets.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), iterable.flatCollect(function, Sets.mutable.empty()));
-        Assert.assertEquals(Lists.mutable.empty(), this.newWith().flatCollect(function, Lists.mutable.empty()));
-        Assert.assertEquals(Lists.mutable.with(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).flatCollect(function, Lists.mutable.empty()));
+        assertEquals(Sets.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), iterable.flatCollect(function, Sets.mutable.empty()));
+        assertEquals(Lists.mutable.empty(), this.newWith().flatCollect(function, Lists.mutable.empty()));
+        assertEquals(Lists.mutable.with(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).flatCollect(function, Lists.mutable.empty()));
     }
 
     @Test
     public void flatCollectIterableWithTarget()
     {
         <name>ToObjectFunction\<Iterable\<<wrapperName>\>> function = parameter -> Lists.mutable.with(<(castIntToNarrowTypeWithParens.(type))("parameter - 1")>).asLazy();
-        Assert.assertEquals(Bags.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).flatCollect(function, Bags.mutable.empty()));
+        assertEquals(Bags.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).flatCollect(function, Bags.mutable.empty()));
         <name>Iterable iterable = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(Sets.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), iterable.flatCollect(function, Sets.mutable.empty()));
-        Assert.assertEquals(Lists.mutable.empty(), this.newWith().flatCollect(function, Lists.mutable.empty()));
-        Assert.assertEquals(Lists.mutable.with(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).flatCollect(function, Lists.mutable.empty()));
+        assertEquals(Sets.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), iterable.flatCollect(function, Sets.mutable.empty()));
+        assertEquals(Lists.mutable.empty(), this.newWith().flatCollect(function, Lists.mutable.empty()));
+        assertEquals(Lists.mutable.with(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).flatCollect(function, Lists.mutable.empty()));
     }
 
     @Test
     public void collectPrimitivesToLists()
     {
         <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(
+        assertEquals(
                 BooleanLists.mutable.with(true, true),
                 iterable.collectBoolean(each -> true, BooleanLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 ByteLists.mutable.with((byte) 1, (byte) 1),
                 iterable.collectByte(each -> (byte) 1, ByteLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 CharLists.mutable.with('a', 'a'),
                 iterable.collectChar(each -> 'a', CharLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 ShortLists.mutable.with((short) 1, (short) 1),
                 iterable.collectShort(each -> (short) 1, ShortLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 IntLists.mutable.with(1, 1),
                 iterable.collectInt(each -> 1, IntLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 FloatLists.mutable.with(1.0f, 1.0f),
                 iterable.collectFloat(each -> 1.0f, FloatLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 LongLists.mutable.with(1L, 1L),
                 iterable.collectLong(each -> 1L, LongLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 DoubleLists.mutable.with(1.0d, 1.0d),
                 iterable.collectDouble(each -> 1.0d, DoubleLists.mutable.empty()));
     }
@@ -638,28 +641,28 @@ public abstract class Abstract<name>IterableTestCase
     public void collectPrimitivesToSets()
     {
         <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(
+        assertEquals(
                 BooleanSets.mutable.with(false),
                 iterable.collectBoolean(each -> false, BooleanSets.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 ByteSets.mutable.with((byte) 2),
                 iterable.collectByte(each -> (byte) 2, ByteSets.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 CharSets.mutable.with('b'),
                 iterable.collectChar(each -> 'b', CharSets.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 ShortSets.mutable.with((short) 2),
                 iterable.collectShort(each -> (short) 2, ShortSets.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 IntSets.mutable.with(2),
                 iterable.collectInt(each -> 2, IntSets.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 FloatSets.mutable.with(2.0f),
                 iterable.collectFloat(each -> 2.0f, FloatSets.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 LongSets.mutable.with(2L),
                 iterable.collectLong(each -> 2L, LongSets.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 DoubleSets.mutable.with(2.0d),
                 iterable.collectDouble(each -> 2.0d, DoubleSets.mutable.empty()));
     }
@@ -672,8 +675,8 @@ public abstract class Abstract<name>IterableTestCase
         Verify.assertSize(size >= 3 ? 3 : size, iterable.select(<name>Predicates.lessThan(<(literal.(type))("4")>)));
         Verify.assertSize(size >= 2 ? 2 : size, iterable.select(<name>Predicates.lessThan(<(literal.(type))("3")>)));
         <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(this.newMutableCollectionWith(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.lessThan(<(literal.(type))("2")>)));
-        Assert.assertEquals(this.newMutableCollectionWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+        assertEquals(this.newMutableCollectionWith(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        assertEquals(this.newMutableCollectionWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
 
         <name>Iterable iterable2 = this.newWith(<["0"]:(literal.(type))(); separator=", ">);
         Verify.assertSize(iterable2.size() == 1 ? 1 : 0, iterable2.select(<name>Predicates.alwaysTrue()));
@@ -688,8 +691,8 @@ public abstract class Abstract<name>IterableTestCase
         Verify.assertSize(size >= 3 ? 3 : size, iterable.select(<name>Predicates.lessThan(<(literal.(type))("4")>), <name>Sets.mutable.empty()));
         Verify.assertSize(size >= 2 ? 2 : size, iterable.select(<name>Predicates.lessThan(<(literal.(type))("3")>), <name>Sets.mutable.empty()));
         <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<name>Sets.mutable.with(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.lessThan(<(literal.(type))("2")>), <name>Sets.mutable.empty()));
-        Assert.assertEquals(<name>Sets.mutable.with(<["2", "3"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.greaterThan(<(literal.(type))("1")>), <name>Sets.mutable.empty()));
+        assertEquals(<name>Sets.mutable.with(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.lessThan(<(literal.(type))("2")>), <name>Sets.mutable.empty()));
+        assertEquals(<name>Sets.mutable.with(<["2", "3"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.greaterThan(<(literal.(type))("1")>), <name>Sets.mutable.empty()));
     }
 
     @Test
@@ -700,8 +703,8 @@ public abstract class Abstract<name>IterableTestCase
         Verify.assertSize(size \<= 3 ? 0 : size - 3, iterable.reject(<name>Predicates.lessThan(<(literal.(type))("4")>)));
         Verify.assertSize(size \<= 2 ? 0 : size - 2, iterable.reject(<name>Predicates.lessThan(<(literal.(type))("3")>)));
         <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(this.newMutableCollectionWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.lessThan(<(literal.(type))("2")>)));
-        Assert.assertEquals(this.newMutableCollectionWith(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+        assertEquals(this.newMutableCollectionWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        assertEquals(this.newMutableCollectionWith(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
 
         <name>Iterable iterable2 = this.newWith(<["0"]:(literal.(type))(); separator=", ">);
         Verify.assertSize(iterable2.size() == 1 ? 1 : 0, iterable2.reject(<name>Predicates.alwaysFalse()));
@@ -716,8 +719,8 @@ public abstract class Abstract<name>IterableTestCase
         Verify.assertSize(size \<= 3 ? 0 : size - 3, iterable.reject(<name>Predicates.lessThan(<(literal.(type))("4")>), <name>Sets.mutable.empty()));
         Verify.assertSize(size \<= 2 ? 0 : size - 2, iterable.reject(<name>Predicates.lessThan(<(literal.(type))("3")>), <name>Sets.mutable.empty()));
         <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<name>Sets.mutable.with(<["2", "3"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.lessThan(<(literal.(type))("2")>), <name>Sets.mutable.empty()));
-        Assert.assertEquals(<name>Sets.mutable.with(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.greaterThan(<(literal.(type))("1")>), <name>Sets.mutable.empty()));
+        assertEquals(<name>Sets.mutable.with(<["2", "3"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.lessThan(<(literal.(type))("2")>), <name>Sets.mutable.empty()));
+        assertEquals(<name>Sets.mutable.with(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.greaterThan(<(literal.(type))("1")>), <name>Sets.mutable.empty()));
     }
 
     @Test
@@ -725,15 +728,15 @@ public abstract class Abstract<name>IterableTestCase
     {
         <name>Iterable iterable = this.classUnderTest();
         int size = iterable.size();
-        Assert.assertEquals(size >= 4 ? <(wideLiteral.(type))("4")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("4")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(size >= 2 ? <(wideLiteral.(type))("2")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("2")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(size > 0 ? <(wideLiteral.(type))("1")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("2")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(size > 3 ? <(wideLiteral.(type))("4")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(size >= 4 ? <(wideLiteral.(type))("4")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("4")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(size >= 2 ? <(wideLiteral.(type))("2")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("2")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(size > 0 ? <(wideLiteral.(type))("1")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("2")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(size > 3 ? <(wideLiteral.(type))("4")> : <(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
 
         <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, iterable1.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("1")>), <(literal.(type))("4")>)<(delta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("3")>, iterable1.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("2")>), <(literal.(type))("4")>)<(delta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("4")>, iterable1.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("4")>), <(literal.(type))("4")>)<(delta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, iterable1.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("1")>), <(literal.(type))("4")>)<(delta.(type))>);
+        assertEquals(<(wideLiteral.(type))("3")>, iterable1.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("2")>), <(literal.(type))("4")>)<(delta.(type))>);
+        assertEquals(<(wideLiteral.(type))("4")>, iterable1.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("4")>), <(literal.(type))("4")>)<(delta.(type))>);
     }
 
     @Test
@@ -742,10 +745,10 @@ public abstract class Abstract<name>IterableTestCase
         <(maxTests.(type))(type, name)>
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_throws_emptyCollection()
     {
-        this.newWith().max();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().max());
     }
 
     @Test
@@ -754,30 +757,30 @@ public abstract class Abstract<name>IterableTestCase
         <(minTests.(type))(type, name)>
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_throws_emptyCollection()
     {
-        this.newWith().min();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().min());
     }
 
     @Test
     public void minIfEmpty()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("5")>, this.newWith().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.newWith().minIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("5")>, this.newWith().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, this.newWith().minIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
         int size = this.classUnderTest().size();
-        Assert.assertEquals(size == 0 ? <(literal.(type))("5")> : <(literal.(type))("1")>, this.classUnderTest().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(size == 0 ? <(literal.(type))("5")> : <(literal.(type))("1")>, this.classUnderTest().minIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
     }
 
     @Test
     public void maxIfEmpty()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("5")>, this.newWith().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.newWith().maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("9")>, this.newWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("5")>, this.newWith().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, this.newWith().maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("9")>, this.newWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
         int size = this.classUnderTest().size();
-        Assert.assertEquals(size == 0 ? <(literal.(type))("5")> : size, this.classUnderTest().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
+        assertEquals(size == 0 ? <(literal.(type))("5")> : size, this.classUnderTest().maxIfEmpty(<(literal.(type))("5")>)<(wideDelta.(type))>);
     }
 
     @Test
@@ -785,9 +788,9 @@ public abstract class Abstract<name>IterableTestCase
     {
         int size = this.classUnderTest().size();
         long sum = (long) ((size * (size + 1)) / 2);
-        Assert.assertEquals(sum, this.classUnderTest().sum()<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("10")>, this.newWith(<["0", "1", "2", "3", "4"]:(literal.(type))(); separator=", ">).sum()<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("93")>, this.newWith(<["30", "31", "32"]:(literal.(type))(); separator=", ">).sum()<wideDelta.(type)>);
+        assertEquals(sum, this.classUnderTest().sum()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("10")>, this.newWith(<["0", "1", "2", "3", "4"]:(literal.(type))(); separator=", ">).sum()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("93")>, this.newWith(<["30", "31", "32"]:(literal.(type))(); separator=", ">).sum()<wideDelta.(type)>);
     }
 
     @Test
@@ -795,9 +798,9 @@ public abstract class Abstract<name>IterableTestCase
     {
         int size = this.classUnderTest().size();
         long sum = (long) ((size * (size + 1)) / 2);
-        Assert.assertEquals(sum, this.classUnderTest().summaryStatistics().getSum()<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("10")>, this.newWith(<["0", "1", "2", "3", "4"]:(literal.(type))(); separator=", ">).summaryStatistics().getSum()<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("93")>, this.newWith(<["30", "31", "32"]:(literal.(type))(); separator=", ">).summaryStatistics().getSum()<wideDelta.(type)>);
+        assertEquals(sum, this.classUnderTest().summaryStatistics().getSum()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("10")>, this.newWith(<["0", "1", "2", "3", "4"]:(literal.(type))(); separator=", ">).summaryStatistics().getSum()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("93")>, this.newWith(<["30", "31", "32"]:(literal.(type))(); separator=", ">).summaryStatistics().getSum()<wideDelta.(type)>);
     }
 
     <if(primitive.floatPrimitive)>@Test
@@ -811,7 +814,7 @@ public void sumConsistentRounding()
 
     // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
     // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
-    Assert.assertEquals(
+    assertEquals(
             1.082323233761663,
             iterable.sum(),
             1.0e-15);
@@ -826,7 +829,7 @@ public void sumConsistentRounding()
             .collect<name>(i -> <["1.0"]:(decimalLiteral.(type))()> / (i.<type>Value() * i.<type>Value() * i.<type>Value() * i.<type>Value()))
             .toArray());
 
-    Assert.assertEquals(
+    assertEquals(
             1.082323233711138,
             iterable.sum(),
             1.0e-15);
@@ -839,16 +842,16 @@ public void sumConsistentRounding()
         int size = this.classUnderTest().size();
         long sum = (long) ((size * (size + 1)) / 2);
         double average = sum / size;
-        Assert.assertEquals(average, this.classUnderTest().average(), 0.0);
-        Assert.assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).average(), 0.0);
-        Assert.assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).average(), 0.0);
-        Assert.assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32", "32"]:(literal.(type))(); separator=", ">).average(), 0.0);
+        assertEquals(average, this.classUnderTest().average(), 0.0);
+        assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).average(), 0.0);
+        assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).average(), 0.0);
+        assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32", "32"]:(literal.(type))(); separator=", ">).average(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void averageThrowsOnEmpty()
     {
-        this.newWith().average();
+        assertThrows(ArithmeticException.class, () -> this.newWith().average());
     }
 
     /**
@@ -857,30 +860,30 @@ public void sumConsistentRounding()
     @Test
     public void averageIfEmpty()
     {
-        Assert.assertEquals(2.5, this.newWith().averageIfEmpty(2.5), 0.0);
+        assertEquals(2.5, this.newWith().averageIfEmpty(2.5), 0.0);
         int size = this.classUnderTest().size();
         long sum = (long) ((size * (size + 1)) / 2);
         double average = sum / size;
-        Assert.assertEquals(average, this.classUnderTest().averageIfEmpty(0.0), 0.0);
-        Assert.assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).averageIfEmpty(0.0), 0.0);
-        Assert.assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).averageIfEmpty(0.0), 0.0);
-        Assert.assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32", "32"]:(literal.(type))(); separator=", ">).averageIfEmpty(0.0), 0.0);
+        assertEquals(average, this.classUnderTest().averageIfEmpty(0.0), 0.0);
+        assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).averageIfEmpty(0.0), 0.0);
+        assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).averageIfEmpty(0.0), 0.0);
+        assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32", "32"]:(literal.(type))(); separator=", ">).averageIfEmpty(0.0), 0.0);
     }
 
     @Test
     public void median()
     {
-        Assert.assertEquals(1.0, this.newWith(<["1"]:(literal.(type))(); separator=", ">).median(), 0.0);
-        Assert.assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).median(), 0.0);
-        Assert.assertEquals(3.0, this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).median(), 0.0);
-        Assert.assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).median(), 0.0);
-        Assert.assertEquals(30.5, this.newWith(<["1", "30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).median(), 0.0);
+        assertEquals(1.0, this.newWith(<["1"]:(literal.(type))(); separator=", ">).median(), 0.0);
+        assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).median(), 0.0);
+        assertEquals(3.0, this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).median(), 0.0);
+        assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).median(), 0.0);
+        assertEquals(30.5, this.newWith(<["1", "30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).median(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void medianThrowsOnEmpty()
     {
-        this.newWith().median();
+        assertThrows(ArithmeticException.class, () -> this.newWith().median());
     }
 
     /**
@@ -889,18 +892,18 @@ public void sumConsistentRounding()
     @Test
     public void medianIfEmpty()
     {
-        Assert.assertEquals(2.5, this.newWith().medianIfEmpty(2.5), 0.0);
-        Assert.assertEquals(1.0, this.newWith(<["1"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
-        Assert.assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
-        Assert.assertEquals(3.0, this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
-        Assert.assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
-        Assert.assertEquals(30.5, this.newWith(<["1", "30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
+        assertEquals(2.5, this.newWith().medianIfEmpty(2.5), 0.0);
+        assertEquals(1.0, this.newWith(<["1"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
+        assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
+        assertEquals(3.0, this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
+        assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
+        assertEquals(30.5, this.newWith(<["1", "30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
     }
 
     @Test
     public void toArray()
     {
-        Assert.assertEquals(this.classUnderTest().size(), this.classUnderTest().toArray().length);
+        assertEquals(this.classUnderTest().size(), this.classUnderTest().toArray().length);
         <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
         Assert.assertTrue(Arrays.equals(new <type>[]{<["1", "2"]:(literal.(type))(); separator=", ">}, iterable.toArray())
                 || Arrays.equals(new <type>[]{<["2", "1"]:(literal.(type))(); separator=", ">}, iterable.toArray()));
@@ -940,7 +943,7 @@ public void sumConsistentRounding()
         Arrays.sort(targetTooBig);
         for (int i = 0; i \< originalAsSortedArray.length; i++)
         {
-            Assert.assertEquals(originalAsSortedArray[i], bigResult[i + 1]<(delta.(type))>);
+            assertEquals(originalAsSortedArray[i], bigResult[i + 1]<(delta.(type))>);
         }
     }
 
@@ -994,22 +997,22 @@ public void sumConsistentRounding()
     @Test
     public void testHashCode()
     {
-        Assert.assertEquals(this.newObjectCollectionWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(<["32"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["32"]:(literal.(type))(); separator=", ">).hashCode());
+        assertEquals(this.newObjectCollectionWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).hashCode());
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).hashCode());
+        assertEquals(this.newObjectCollectionWith(<["32"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["32"]:(literal.(type))(); separator=", ">).hashCode());
         Assert.assertNotEquals(this.newObjectCollectionWith(<["32"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["0"]:(literal.(type))(); separator=", ">).hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(<["31", "32", "50"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["31", "32", "50"]:(literal.(type))(); separator=", ">).hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(<["32", "50", "60"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["32", "50", "60"]:(literal.(type))(); separator=", ">).hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith().hashCode(), this.newWith().hashCode());
+        assertEquals(this.newObjectCollectionWith(<["31", "32", "50"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["31", "32", "50"]:(literal.(type))(); separator=", ">).hashCode());
+        assertEquals(this.newObjectCollectionWith(<["32", "50", "60"]:(literal.(type))(); separator=", ">).hashCode(), this.newWith(<["32", "50", "60"]:(literal.(type))(); separator=", ">).hashCode());
+        assertEquals(this.newObjectCollectionWith().hashCode(), this.newWith().hashCode());
     }
 
     @Test
     public void testToString()
     {
-        Assert.assertEquals("[]", this.newWith().toString());
-        Assert.assertEquals("[<(toStringLiteral.(type))("1")>]", this.newWith(<(literal.(type))("1")>).toString());
-        Assert.assertEquals("[<(toStringLiteral.(type))("31")>]", this.newWith(<(literal.(type))("31")>).toString());
-        Assert.assertEquals("[<(toStringLiteral.(type))("32")>]", this.newWith(<(literal.(type))("32")>).toString());
+        assertEquals("[]", this.newWith().toString());
+        assertEquals("[<(toStringLiteral.(type))("1")>]", this.newWith(<(literal.(type))("1")>).toString());
+        assertEquals("[<(toStringLiteral.(type))("31")>]", this.newWith(<(literal.(type))("31")>).toString());
+        assertEquals("[<(toStringLiteral.(type))("32")>]", this.newWith(<(literal.(type))("32")>).toString());
 
         <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
         Assert.assertTrue("[<["1", "2"]:(toStringLiteral.(type))(); separator=", ">]".equals(iterable.toString())
@@ -1044,13 +1047,13 @@ public void sumConsistentRounding()
     public void makeString()
     {
         <name>Iterable iterable = this.classUnderTest();
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", this.newWith(<(literal.(type))("1")>).makeString("/"));
-        Assert.assertEquals("<(toStringLiteral.(type))("31")>", this.newWith(<(literal.(type))("31")>).makeString());
-        Assert.assertEquals("<(toStringLiteral.(type))("32")>", this.newWith(<(literal.(type))("32")>).makeString());
-        Assert.assertEquals(iterable.toString(), iterable.makeString("[", ", ", "]"));
-        Assert.assertEquals("", this.newWith().makeString());
-        Assert.assertEquals("", this.newWith().makeString("/"));
-        Assert.assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
+        assertEquals("<(toStringLiteral.(type))("1")>", this.newWith(<(literal.(type))("1")>).makeString("/"));
+        assertEquals("<(toStringLiteral.(type))("31")>", this.newWith(<(literal.(type))("31")>).makeString());
+        assertEquals("<(toStringLiteral.(type))("32")>", this.newWith(<(literal.(type))("32")>).makeString());
+        assertEquals(iterable.toString(), iterable.makeString("[", ", ", "]"));
+        assertEquals("", this.newWith().makeString());
+        assertEquals("", this.newWith().makeString("/"));
+        assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
 
         <name>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type))(); separator=", ">);
         Assert.assertTrue(
@@ -1098,14 +1101,14 @@ public void sumConsistentRounding()
     {
         StringBuilder appendable = new StringBuilder();
         this.newWith().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "/");
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "[", ", ", "]");
-        Assert.assertEquals("[]", appendable.toString());
+        assertEquals("[]", appendable.toString());
         StringBuilder appendable1 = new StringBuilder();
         this.newWith(<(literal.(type))("1")>).appendString(appendable1);
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", appendable1.toString());
+        assertEquals("<(toStringLiteral.(type))("1")>", appendable1.toString());
         StringBuilder appendable2 = new StringBuilder();
 
         <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
@@ -1118,15 +1121,15 @@ public void sumConsistentRounding()
                 || "<["2", "1"]:(toStringLiteral.(type))(); separator="/">".equals(appendable3.toString()));
         StringBuilder appendable4 = new StringBuilder();
         iterable.appendString(appendable4, "[", ", ", "]");
-        Assert.assertEquals(iterable.toString(), appendable4.toString());
+        assertEquals(iterable.toString(), appendable4.toString());
 
         StringBuilder appendable5 = new StringBuilder();
         this.newWith(<(literal.(type))("31")>).appendString(appendable5);
-        Assert.assertEquals("<(toStringLiteral.(type))("31")>", appendable5.toString());
+        assertEquals("<(toStringLiteral.(type))("31")>", appendable5.toString());
 
         StringBuilder appendable6 = new StringBuilder();
         this.newWith(<(literal.(type))("32")>).appendString(appendable6);
-        Assert.assertEquals("<(toStringLiteral.(type))("32")>", appendable6.toString());
+        assertEquals("<(toStringLiteral.(type))("32")>", appendable6.toString());
 
         StringBuilder appendable7 = new StringBuilder();
         <name>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type))(); separator=", ">);
@@ -1167,19 +1170,19 @@ public void sumConsistentRounding()
         <name>Iterable iterable = this.newWith(<["31", "32"]:(literal.(type))(); separator=", ">);
         Assert.assertTrue(<name>ArrayList.newListWith(<["31", "32"]:(literal.(type))(); separator=", ">).equals(iterable.toList())
                 || <name>ArrayList.newListWith(<["32", "31"]:(literal.(type))(); separator=", ">).equals(iterable.toList()));
-        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("0")>), this.newWith(<(literal.(type))("0")>).toList());
-        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("31")>), this.newWith(<(literal.(type))("31")>).toList());
-        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("32")>), this.newWith(<(literal.(type))("32")>).toList());
-        Assert.assertEquals(new <name>ArrayList(), this.newWith().toList());
+        assertEquals(<name>ArrayList.newListWith(<(literal.(type))("0")>), this.newWith(<(literal.(type))("0")>).toList());
+        assertEquals(<name>ArrayList.newListWith(<(literal.(type))("31")>), this.newWith(<(literal.(type))("31")>).toList());
+        assertEquals(<name>ArrayList.newListWith(<(literal.(type))("32")>), this.newWith(<(literal.(type))("32")>).toList());
+        assertEquals(new <name>ArrayList(), this.newWith().toList());
     }
 
     @Test
     public void toSortedList()
     {
-        Assert.assertEquals(<name>ArrayList.newListWith(), this.newWith().toSortedList());
-        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), this.newWith(<(literal.(type))("1")>).toSortedList());
-        Assert.assertEquals(<name>ArrayList.newListWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "31", "1"]:(literal.(type))(); separator=", ">).toSortedList());
-        Assert.assertEquals(<name>ArrayList.newListWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "31", "32", "1"]:(literal.(type))(); separator=", ">).toSortedList());
+        assertEquals(<name>ArrayList.newListWith(), this.newWith().toSortedList());
+        assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), this.newWith(<(literal.(type))("1")>).toSortedList());
+        assertEquals(<name>ArrayList.newListWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "31", "1"]:(literal.(type))(); separator=", ">).toSortedList());
+        assertEquals(<name>ArrayList.newListWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "31", "32", "1"]:(literal.(type))(); separator=", ">).toSortedList());
     }
 
     @Test
@@ -1193,7 +1196,7 @@ public void sumConsistentRounding()
 
         result
                 .collectBoolean(e -> e % 2 == 0, BooleanLists.mutable.of())
-                .forEachWithIndex((e, i) -> Assert.assertEquals("index " + i, i \< 5, e));
+                .forEachWithIndex((e, i) -> assertEquals("index " + i, i \< 5, e));
     }
 
     @Test
@@ -1205,7 +1208,7 @@ public void sumConsistentRounding()
         Mutable<name>List result = index.toSortedListBy(i -> list.get((int) i));
 
         Assert.assertNotSame(index, result);
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "0", "4", "3"]:(literal.(type))(); separator=", ">), result);
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "0", "4", "3"]:(literal.(type))(); separator=", ">), result);
     }
 
     @Test
@@ -1217,51 +1220,51 @@ public void sumConsistentRounding()
         Mutable<name>List result = index.toSortedListBy(i -> list.get((int) i), Comparators.naturalOrder().reversed());
 
         Assert.assertNotSame(index, result);
-        Assert.assertEquals(<name>ArrayList.newListWith(<["3", "4", "0", "2", "1"]:(literal.(type))(); separator=", ">), result);
+        assertEquals(<name>ArrayList.newListWith(<["3", "4", "0", "2", "1"]:(literal.(type))(); separator=", ">), result);
     }
 
     @Test
     public void toSet()
     {
-        Assert.assertEquals(<name>HashSet.newSetWith(), this.newWith().toSet());
-        Assert.assertEquals(<name>HashSet.newSetWith(<["1"]:(literal.(type))(); separator=", ">), this.newWith(<(literal.(type))("1")>).toSet());
-        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).toSet());
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).toSet());
-        Assert.assertEquals(<name>HashSet.newSetWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).toSet());
-        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).toSet());
+        assertEquals(<name>HashSet.newSetWith(), this.newWith().toSet());
+        assertEquals(<name>HashSet.newSetWith(<["1"]:(literal.(type))(); separator=", ">), this.newWith(<(literal.(type))("1")>).toSet());
+        assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).toSet());
+        assertEquals(<name>HashSet.newSetWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).toSet());
+        assertEquals(<name>HashSet.newSetWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).toSet());
+        assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).toSet());
     }
 
     @Test
     public void toBag()
     {
-        Assert.assertEquals(new <name>HashBag(), this.newWith().toBag());
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1"]:(literal.(type))(); separator=", ">), this.newWith(<(literal.(type))("1")>).toBag());
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).toBag());
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).toBag());
-        Assert.assertEquals(<name>HashBag.newBagWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).toBag());
+        assertEquals(new <name>HashBag(), this.newWith().toBag());
+        assertEquals(<name>HashBag.newBagWith(<["1"]:(literal.(type))(); separator=", ">), this.newWith(<(literal.(type))("1")>).toBag());
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).toBag());
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).toBag());
+        assertEquals(<name>HashBag.newBagWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).toBag());
     }
 
     @Test
     public void asLazy()
     {
         <name>Iterable iterable = this.classUnderTest();
-        Assert.assertEquals(iterable.toBag(), iterable.asLazy().toBag());
+        assertEquals(iterable.toBag(), iterable.asLazy().toBag());
         Verify.assertInstanceOf(Lazy<name>Iterable.class, iterable.asLazy());
 
         <name>Iterable iterable1 = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(iterable1.toBag(), iterable1.asLazy().toBag());
+        assertEquals(iterable1.toBag(), iterable1.asLazy().toBag());
         Verify.assertInstanceOf(Lazy<name>Iterable.class, iterable1.asLazy());
 
         <name>Iterable iterable2 = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(iterable2.toBag(), iterable2.asLazy().toBag());
+        assertEquals(iterable2.toBag(), iterable2.asLazy().toBag());
         Verify.assertInstanceOf(Lazy<name>Iterable.class, iterable2.asLazy());
 
         <name>Iterable iterable3 = this.newWith();
-        Assert.assertEquals(iterable3.toBag(), iterable3.asLazy().toBag());
+        assertEquals(iterable3.toBag(), iterable3.asLazy().toBag());
         Verify.assertInstanceOf(Lazy<name>Iterable.class, iterable3.asLazy());
 
         <name>Iterable iterable4 = this.newWith(<["1"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(iterable4.toBag(), iterable4.asLazy().toBag());
+        assertEquals(iterable4.toBag(), iterable4.asLazy().toBag());
         Verify.assertInstanceOf(Lazy<name>Iterable.class, iterable4.asLazy());
     }
 
@@ -1270,15 +1273,15 @@ public void sumConsistentRounding()
     {
         <name>Iterable iterable1 = this.newWith(<["0", "2", "31"]:(literal.(type))(); separator=", ">);
         <wrapperName> sum1 = iterable1.injectInto(<wrapperName>.valueOf(<(literal.(type))("0")>), (<wrapperName> result, <type> value) -> <wrapperName>.valueOf((<type>) (result + value + 1)));
-        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("36")>), sum1);
+        assertEquals(<wrapperName>.valueOf(<(literal.(type))("36")>), sum1);
 
         <name>Iterable iterable2 = this.newWith(<[ "1", "2", "31"]:(literal.(type))(); separator=", ">);
         <wrapperName> sum2 = iterable2.injectInto(<wrapperName>.valueOf(<(literal.(type))("0")>), (<wrapperName> result, <type> value) -> <wrapperName>.valueOf((<type>) (result + value + 1)));
-        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("37")>), sum2);
+        assertEquals(<wrapperName>.valueOf(<(literal.(type))("37")>), sum2);
 
         <name>Iterable iterable3 = this.newWith(<["0", "1", "2", "31"]:(literal.(type))(); separator=", ">);
         <wrapperName> sum3 = iterable3.injectInto(<wrapperName>.valueOf(<(literal.(type))("0")>), (<wrapperName> result, <type> value) -> <wrapperName>.valueOf((<type>) (result + value + 1)));
-        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("38")>), sum3);
+        assertEquals(<wrapperName>.valueOf(<(literal.(type))("38")>), sum3);
     }
 
     @Test
@@ -1286,11 +1289,11 @@ public void sumConsistentRounding()
     {
         <name>Iterable iterable1 = this.newWith(<["0", "2", "31"]:(literal.(type))(); separator=", ">);
         boolean sum1 = iterable1.injectIntoBoolean(false, (boolean result, <type> value) -> (boolean) (result || value == <(literal.(type))("0")>));
-        Assert.assertEquals(true, sum1);
+        assertEquals(true, sum1);
 
         <name>Iterable iterable2 = this.newWith(<[ "1", "2", "31"]:(literal.(type))(); separator=", ">);
         boolean sum2 = iterable2.injectIntoBoolean(false, (boolean result, <type> value) -> (boolean) (result || value == <(literal.(type))("0")>));
-        Assert.assertEquals(false, sum2);
+        assertEquals(false, sum2);
     }
 
     <injectIntoPrimitiveTest("Byte", "byte", false)>
@@ -1307,10 +1310,11 @@ public void sumConsistentRounding()
 
     <injectIntoPrimitiveTest("Double", "double", true)>
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void reduceOnEmptyThrows()
     {
-        this.newWith().reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>);
+        assertThrows(NoSuchElementException.class,
+                () -> this.newWith().reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>));
     }
 
     @Test
@@ -1318,43 +1322,43 @@ public void sumConsistentRounding()
     {
         <name>Iterable iterable1 = this.newWith(<["0", "2", "31"]:(literal.(type))(); separator=", ">);
         <(wideType.(type))> sum1 = iterable1.reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>);
-        Assert.assertEquals(<(wideLiteral.(type))("35")>, sum1<if(primitive.floatingPoint)>, 0.001<endif>);
+        assertEquals(<(wideLiteral.(type))("35")>, sum1<if(primitive.floatingPoint)>, 0.001<endif>);
 
         <name>Iterable iterable2 = this.newWith(<[ "1", "2", "31"]:(literal.(type))(); separator=", ">);
         <(wideType.(type))> sum2 = iterable2.reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>);
-        Assert.assertEquals(<(wideLiteral.(type))("36")>, sum2<if(primitive.floatingPoint)>, 0.001<endif>);
+        assertEquals(<(wideLiteral.(type))("36")>, sum2<if(primitive.floatingPoint)>, 0.001<endif>);
 
         <name>Iterable iterable3 = this.newWith(<["0", "1", "2", "31"]:(literal.(type))(); separator=", ">);
         <(wideType.(type))> sum3 = iterable3.reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>);
-        Assert.assertEquals(<(wideLiteral.(type))("37")>, sum3<if(primitive.floatingPoint)>, 0.001<endif>);
+        assertEquals(<(wideLiteral.(type))("37")>, sum3<if(primitive.floatingPoint)>, 0.001<endif>);
     }
 
     @Test
     public void reduceIfEmpty()
     {
         <(wideType.(type))> empty1 = this.newWith().reduceIfEmpty((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>, <(wideLiteral.(type))("1")>);
-        Assert.assertEquals(<(wideLiteral.(type))("1")>, empty1<if(primitive.floatingPoint)>, 0.001<endif>);
+        assertEquals(<(wideLiteral.(type))("1")>, empty1<if(primitive.floatingPoint)>, 0.001<endif>);
         <(wideType.(type))> empty2 = this.newWith().reduceIfEmpty((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>, <(wideLiteral.(type))("0")>);
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, empty2<if(primitive.floatingPoint)>, 0.001<endif>);
+        assertEquals(<(wideLiteral.(type))("0")>, empty2<if(primitive.floatingPoint)>, 0.001<endif>);
 
         <name>Iterable iterable1 = this.newWith(<["0", "2", "31"]:(literal.(type))(); separator=", ">);
         <(wideType.(type))> sum1 = iterable1.reduceIfEmpty((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>, <(wideLiteral.(type))("0")>);
-        Assert.assertEquals(<(wideLiteral.(type))("35")>, sum1<if(primitive.floatingPoint)>, 0.001<endif>);
+        assertEquals(<(wideLiteral.(type))("35")>, sum1<if(primitive.floatingPoint)>, 0.001<endif>);
 
         <name>Iterable iterable2 = this.newWith(<[ "1", "2", "31"]:(literal.(type))(); separator=", ">);
         <(wideType.(type))> sum2 = iterable2.reduceIfEmpty((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>, <(wideLiteral.(type))("0")>);
-        Assert.assertEquals(<(wideLiteral.(type))("36")>, sum2<if(primitive.floatingPoint)>, 0.001<endif>);
+        assertEquals(<(wideLiteral.(type))("36")>, sum2<if(primitive.floatingPoint)>, 0.001<endif>);
 
         <name>Iterable iterable3 = this.newWith(<["0", "1", "2", "31"]:(literal.(type))(); separator=", ">);
         <(wideType.(type))> sum3 = iterable3.reduceIfEmpty((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>, <(wideLiteral.(type))("0")>);
-        Assert.assertEquals(<(wideLiteral.(type))("37")>, sum3<if(primitive.floatingPoint)>, 0.001<endif>);
+        assertEquals(<(wideLiteral.(type))("37")>, sum3<if(primitive.floatingPoint)>, 0.001<endif>);
     }
 
     @Test
     public void chunk()
     {
         <name>Iterable iterable = this.newWith(<["0", "1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         this.newMutableCollectionWith(<["0"]:(literal.(type))(); separator=", ">),
                         this.newMutableCollectionWith(<["1"]:(literal.(type))(); separator=", ">),
@@ -1363,35 +1367,35 @@ public void sumConsistentRounding()
                         this.newMutableCollectionWith(<["4"]:(literal.(type))(); separator=", ">),
                         this.newMutableCollectionWith(<["5"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(1).toSet());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         this.newMutableCollectionWith(<["0", "1"]:(literal.(type))(); separator=", ">),
                         this.newMutableCollectionWith(<["2", "3"]:(literal.(type))(); separator=", ">),
                         this.newMutableCollectionWith(<["4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(2).toSet());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         this.newMutableCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">),
                         this.newMutableCollectionWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(3).toSet());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         this.newMutableCollectionWith(<["0", "1", "2", "3"]:(literal.(type))(); separator=", ">),
                         this.newMutableCollectionWith(<["4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(this.newMutableCollectionWith(<["0", "1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(6).toSet());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(this.newMutableCollectionWith(<["0", "1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(7).toSet());
-        Assert.assertEquals(Lists.mutable.with(), this.newWith().chunk(1));
-        Assert.assertEquals(Lists.mutable.with(this.newMutableCollectionWith(<["0"]:(literal.(type))(); separator=", ">)), this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(1));
-        Assert.assertEquals(Lists.mutable.with(), this.newWith().chunk(1));
+        assertEquals(Lists.mutable.with(), this.newWith().chunk(1));
+        assertEquals(Lists.mutable.with(this.newMutableCollectionWith(<["0"]:(literal.(type))(); separator=", ">)), this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(1));
+        assertEquals(Lists.mutable.with(), this.newWith().chunk(1));
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newMutableCollectionWith().chunk(-1));
+        assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        assertThrows(IllegalArgumentException.class, () -> this.newMutableCollectionWith().chunk(-1));
     }
 }
 
@@ -1423,31 +1427,31 @@ maxTests ::= [
 ]
 
 intMaxTest(type, name) ::= <<
-Assert.assertEquals(<(wideLiteral.(type))("9")>, this.newWith(<["-1", "-2", "9"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("-1")>, this.newWith(<["-1", "-2", "-9"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["-1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("31")>, this.newWith(<["31", "0", "30"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("39")>, this.newWith(<["32", "39", "35"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(this.classUnderTest().size(), this.classUnderTest().max()<(delta.(type))>);
+assertEquals(<(wideLiteral.(type))("9")>, this.newWith(<["-1", "-2", "9"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("-1")>, this.newWith(<["-1", "-2", "-9"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["-1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("31")>, this.newWith(<["31", "0", "30"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("39")>, this.newWith(<["32", "39", "35"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(this.classUnderTest().size(), this.classUnderTest().max()<(delta.(type))>);
 >>
 
 charMaxTest(type, name) ::= <<
-Assert.assertEquals(<(literal.(type))("-1")>, this.newWith(<["-1", "-2", "9"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<(literal.(type))("32")>, this.newWith(<["1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<(literal.(type))("-1")>, this.newWith(<["-1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<(literal.(type))("31")>, this.newWith(<["31", "0", "30"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<(literal.(type))("39")>, this.newWith(<["32", "39", "35"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(this.classUnderTest().size(), this.classUnderTest().max()<(wideDelta.(type))>);
+assertEquals(<(literal.(type))("-1")>, this.newWith(<["-1", "-2", "9"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<(literal.(type))("32")>, this.newWith(<["1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<(literal.(type))("-1")>, this.newWith(<["-1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<(literal.(type))("31")>, this.newWith(<["31", "0", "30"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<(literal.(type))("39")>, this.newWith(<["32", "39", "35"]:(literal.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(this.classUnderTest().size(), this.classUnderTest().max()<(wideDelta.(type))>);
 >>
 
 floatMaxTest(type, name) ::= <<
 <intMaxTest(type, name)>
-Assert.assertEquals(32.5, this.newWith(<["-1.5", "31.8", "32.5"]:(decimalLiteral.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(-1.5, this.newWith(<["-1.5", "-31.8", "-32.5"]:(decimalLiteral.(type))(); separator=", ">).max()<(wideDelta.(type))>);
-Assert.assertEquals(<name>.POSITIVE_INFINITY, this.newWith(<["-1.5", "31.8", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.POSITIVE_INFINITY).max()<(wideDelta.(type))>);
-Assert.assertEquals(<name>.NaN, this.newWith(<["-1.5", "31.8", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.NaN, 31.5f).max()<(wideDelta.(type))>);
-Assert.assertEquals(32.5, this.newWith(<["-1.5", "31.8", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.NEGATIVE_INFINITY, 31.5f).max()<(wideDelta.(type))>);
+assertEquals(32.5, this.newWith(<["-1.5", "31.8", "32.5"]:(decimalLiteral.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(-1.5, this.newWith(<["-1.5", "-31.8", "-32.5"]:(decimalLiteral.(type))(); separator=", ">).max()<(wideDelta.(type))>);
+assertEquals(<name>.POSITIVE_INFINITY, this.newWith(<["-1.5", "31.8", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.POSITIVE_INFINITY).max()<(wideDelta.(type))>);
+assertEquals(<name>.NaN, this.newWith(<["-1.5", "31.8", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.NaN, 31.5f).max()<(wideDelta.(type))>);
+assertEquals(32.5, this.newWith(<["-1.5", "31.8", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.NEGATIVE_INFINITY, 31.5f).max()<(wideDelta.(type))>);
 >>
 
 minTests ::= [
@@ -1461,29 +1465,29 @@ minTests ::= [
 ]
 
 intMinTest(type, name) ::= <<
-Assert.assertEquals(<(wideLiteral.(type))("-2")>, this.newWith(<["-1", "-2", "9"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("-1")>, this.newWith(<["-1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("31")>, this.newWith(<["31", "32", "33"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["32", "39", "35"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("1")>, this.classUnderTest().min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("-2")>, this.newWith(<["-1", "-2", "9"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("-1")>, this.newWith(<["-1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("31")>, this.newWith(<["31", "32", "33"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["32", "39", "35"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("1")>, this.classUnderTest().min()<(wideDelta.(type))>);
 >>
 
 charMinTest(type, name) ::= <<
-Assert.assertEquals(<(wideLiteral.(type))("9")>, this.newWith(<["-1", "-2", "9"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["-1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("31")>, this.newWith(<["31", "32", "33"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["32", "39", "35"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(<(wideLiteral.(type))("1")>, this.classUnderTest().min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("9")>, this.newWith(<["-1", "-2", "9"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("0")>, this.newWith(<["-1", "0", "9", "30", "31", "32"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("31")>, this.newWith(<["31", "32", "33"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("32")>, this.newWith(<["32", "39", "35"]:(literal.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(<(wideLiteral.(type))("1")>, this.classUnderTest().min()<(wideDelta.(type))>);
 >>
 
 floatMinTest(type, name) ::= <<
 <intMinTest(type, name)>
-Assert.assertEquals(-1.5, this.newWith(<["-1.5", "31.5", "32.5"]:(decimalLiteral.(type))(); separator=", ">).min()<(wideDelta.(type))>);
-Assert.assertEquals(1.5, this.newWith(<["1.5", "31.0", "30.0"]:(decimalLiteral.(type))(); separator=", ">, <name>.POSITIVE_INFINITY).min()<(wideDelta.(type))>);
-Assert.assertEquals(31.5, this.newWith(<["31.5", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.NaN).min()<(wideDelta.(type))>);
-Assert.assertEquals(<name>.NEGATIVE_INFINITY, this.newWith(<["-1.5", "31.5", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.NEGATIVE_INFINITY, 31.5f).min()<(wideDelta.(type))>);
+assertEquals(-1.5, this.newWith(<["-1.5", "31.5", "32.5"]:(decimalLiteral.(type))(); separator=", ">).min()<(wideDelta.(type))>);
+assertEquals(1.5, this.newWith(<["1.5", "31.0", "30.0"]:(decimalLiteral.(type))(); separator=", ">, <name>.POSITIVE_INFINITY).min()<(wideDelta.(type))>);
+assertEquals(31.5, this.newWith(<["31.5", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.NaN).min()<(wideDelta.(type))>);
+assertEquals(<name>.NEGATIVE_INFINITY, this.newWith(<["-1.5", "31.5", "32.5"]:(decimalLiteral.(type))(); separator=", ">, <name>.NEGATIVE_INFINITY, 31.5f).min()<(wideDelta.(type))>);
 >>
 
 NaNTests(key) ::= <<
@@ -1522,12 +1526,12 @@ public void testEquals_NaN()
     Set\<<wrapperName>\> hashSet6 = new HashSet\<>();
     hashSet6.add(<wrapperName>.NEGATIVE_INFINITY);
 
-    Assert.assertEquals(hashSet1, hashSet2);
-    Assert.assertEquals(iterable1, iterable2);
-    Assert.assertEquals(hashSet3, hashSet4);
-    Assert.assertEquals(iterable3, iterable4);
-    Assert.assertEquals(hashSet5, hashSet6);
-    Assert.assertEquals(iterable5, iterable6);
+    assertEquals(hashSet1, hashSet2);
+    assertEquals(iterable1, iterable2);
+    assertEquals(hashSet3, hashSet4);
+    assertEquals(iterable3, iterable4);
+    assertEquals(hashSet5, hashSet6);
+    assertEquals(iterable5, iterable6);
 
     Assert.assertNotEquals(hashSet1, hashSet3);
     Assert.assertNotEquals(iterable1, iterable3);
@@ -1548,7 +1552,7 @@ public void contains_different_NaNs()
     Set\<<wrapperName>\> hashSet = new HashSet\<>();
     hashSet.add(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan1));
     <bitsType.(type)> nan2 = <NaNBits2.(type)>;
-    Assert.assertEquals(hashSet.contains(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)), primitiveIterable.contains(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)));
+    assertEquals(hashSet.contains(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)), primitiveIterable.contains(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)));
 }
 
 >>
@@ -1587,14 +1591,14 @@ public void injectInto<toName>()
 {
     <name>Iterable iterable1 = this.newWith(<["0", "2", "31"]:(literal.(type))(); separator=", ">);
     <toType> sum1 = iterable1.injectInto<toName>(<(literal.(toType))("0")>, (<toType> result, <type> value) -> (<toType>) (result + value + 1));
-    Assert.assertEquals(<(literal.(toType))("36")>, sum1<if(toFloatingPoint)>, 0.001<endif>);
+    assertEquals(<(literal.(toType))("36")>, sum1<if(toFloatingPoint)>, 0.001<endif>);
 
     <name>Iterable iterable2 = this.newWith(<[ "1", "2", "31"]:(literal.(type))(); separator=", ">);
     <toType> sum2 = iterable2.injectInto<toName>(<(literal.(toType))("0")>, (<toType> result, <type> value) -> (<toType>) (result + value + 1));
-    Assert.assertEquals(<(literal.(toType))("37")>, sum2<if(toFloatingPoint)>, 0.001<endif>);
+    assertEquals(<(literal.(toType))("37")>, sum2<if(toFloatingPoint)>, 0.001<endif>);
 
     <name>Iterable iterable3 = this.newWith(<["0", "1", "2", "31"]:(literal.(type))(); separator=", ">);
     <toType> sum3 = iterable3.injectInto<toName>(<(literal.(toType))("0")>, (<toType> result, <type> value) -> (<toType>) (result + value + 1));
-    Assert.assertEquals(<(literal.(toType))("38")>, sum3<if(toFloatingPoint)>, 0.001<endif>);
+    assertEquals(<(literal.(toType))("38")>, sum3<if(toFloatingPoint)>, 0.001<endif>);
 }
 >>

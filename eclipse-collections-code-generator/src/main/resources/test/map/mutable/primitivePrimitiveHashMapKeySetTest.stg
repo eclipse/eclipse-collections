@@ -22,6 +22,9 @@ body(type1, type2, name1, name2, wrapperName1) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
+import java.util.NoSuchElementException;
+import org.eclipse.collections.api.collection.primitive.Mutable<name1>Collection;
+import org.eclipse.collections.api.iterator.<name1>Iterator;
 import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;
 import org.eclipse.collections.impl.block.factory.primitive.<name1>Predicates;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
@@ -29,6 +32,9 @@ import org.eclipse.collections.impl.set.mutable.primitive.Abstract<name1>SetTest
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link <name1><name2>HashMap#keySet()}.
@@ -41,6 +47,19 @@ public class <name1><name2>HashMapKeySetTest extends Abstract<name1>SetTestCase
     protected Mutable<name1>Set classUnderTest()
     {
         return <name1><name2>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">).keySet();
+    }
+
+    @Override
+    @Test
+    public void <type1>Iterator_throws_non_empty_collection()
+    {
+        Mutable<name1>Collection collection = this.classUnderTest();
+        <name1>Iterator iterator = collection.<type1>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
@@ -133,7 +152,7 @@ public class <name1><name2>HashMapKeySetTest extends Abstract<name1>SetTestCase
     public void sum()
     {
         super.sum();
-        Assert.assertEquals(<(wideLiteral.(type1))("3")>, this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).sum()<wideDelta.(type1)>);
+        assertEquals(<(wideLiteral.(type1))("3")>, this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).sum()<wideDelta.(type1)>);
     }
 
     @Override
@@ -141,8 +160,8 @@ public class <name1><name2>HashMapKeySetTest extends Abstract<name1>SetTestCase
     {
         Mutable<name1>Set set1 = this.newWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">);
         Mutable<name1>Set set2 = this.newWith(<["32", "31", "1", "0"]:(literal.(type1))(); separator=", ">);
-        Assert.assertEquals(set1.hashCode(), set2.hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">).hashCode(), set1.hashCode());
+        assertEquals(set1.hashCode(), set2.hashCode());
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">).hashCode(), set1.hashCode());
     }
 }
 

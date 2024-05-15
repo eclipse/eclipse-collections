@@ -41,6 +41,9 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link UnmodifiableObject<name>Map#values()}.
  * This file was automatically generated from template file unmodifiableObjectPrimitiveMapValuesTest.stg.
@@ -51,6 +54,19 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     protected Mutable<name>Collection classUnderTest()
     {
         return new UnmodifiableObject<name>Map\<>(Object<name>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">)).values();
+    }
+
+    @Override
+    @Test
+    public void <type>Iterator_throws_non_empty_collection()
+    {
+        Mutable<name>Collection collection = this.classUnderTest();
+        <name>Iterator iterator = collection.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
@@ -91,21 +107,21 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator.hasNext());
 
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
     @Test
     public void addAllIterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name>ArrayList()));
     }
 
     @Override
     @Test
     public void add()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type))("0")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type))("0")>));
     }
 
     <if(primitive.floatingPoint)><NaNTests()>
@@ -114,21 +130,21 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     @Test
     public void addAllArray()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type))(); separator=", ">));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type))(); separator=", ">));
     }
 
     @Override
     @Test
     public void with()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type))("0")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type))("0")>));
     }
 
     @Override
     @Test
     public void without()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().without(<(literal.(type))("0")>));
     }
 
@@ -136,7 +152,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     @Test
     public void withAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().withAll(new <name>ArrayList()));
     }
 
@@ -144,7 +160,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     @Test
     public void withoutAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().withoutAll(new <name>ArrayList()));
     }
 
@@ -152,14 +168,14 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     @Test
     public void remove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().remove(<(literal.(type))("3")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().remove(<(literal.(type))("3")>));
     }
 
     @Override
     @Test
     public void removeIf()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                 this.newWith().removeIf(<name>Predicates.equal(<(literal.(type))("3")>)));
     }
 
@@ -167,28 +183,28 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     @Test
     public void removeAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().removeAll());
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().removeAll());
     }
 
     @Override
     @Test
     public void removeAll_iterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().removeAll(new <name>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().removeAll(new <name>ArrayList()));
     }
 
     @Override
     @Test
     public void retainAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().retainAll());
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().retainAll());
     }
 
     @Override
     @Test
     public void retainAll_iterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().retainAll(new <name>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().retainAll(new <name>ArrayList()));
     }
 
     @Override
@@ -196,7 +212,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     public void clear()
     {
         Mutable<name>Collection emptyCollection = this.newWith();
-        Assert.assertThrows(UnsupportedOperationException.class, () -> emptyCollection.clear());
+        assertThrows(UnsupportedOperationException.class, () -> emptyCollection.clear());
     }
 
     @Override
@@ -240,23 +256,23 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     public void collect()
     {
         <name>ToObjectFunction\<<wrapperName>\> function = (<type> parameter) -> <(castIntToNarrowTypeWithParens.(type))("parameter - 1")>;
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).toBag(), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).collect(function).toBag());
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).toBag(), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).collect(function).toBag());
         <name>Iterable iterable = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).toBag(), iterable.collect(function).toBag());
-        Assert.assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
-        Assert.assertEquals(this.newObjectCollectionWith(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function));
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).toBag(), iterable.collect(function).toBag());
+        assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
+        assertEquals(this.newObjectCollectionWith(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function));
     }
 
     @Override
     @Test
     public void makeString()
     {
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", this.newWith(<(literal.(type))("1")>).makeString("/"));
-        Assert.assertEquals("<(toStringLiteral.(type))("31")>", this.newWith(<(literal.(type))("31")>).makeString());
-        Assert.assertEquals("<(toStringLiteral.(type))("32")>", this.newWith(<(literal.(type))("32")>).makeString());
-        Assert.assertEquals("", this.newWith().makeString());
-        Assert.assertEquals("", this.newWith().makeString("/"));
-        Assert.assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
+        assertEquals("<(toStringLiteral.(type))("1")>", this.newWith(<(literal.(type))("1")>).makeString("/"));
+        assertEquals("<(toStringLiteral.(type))("31")>", this.newWith(<(literal.(type))("31")>).makeString());
+        assertEquals("<(toStringLiteral.(type))("32")>", this.newWith(<(literal.(type))("32")>).makeString());
+        assertEquals("", this.newWith().makeString());
+        assertEquals("", this.newWith().makeString("/"));
+        assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
 
         <name>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type))(); separator=", ">);
         Assert.assertTrue(
@@ -305,14 +321,14 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     {
         StringBuilder appendable = new StringBuilder();
         this.newWith().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "/");
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "[", ", ", "]");
-        Assert.assertEquals("[]", appendable.toString());
+        assertEquals("[]", appendable.toString());
         StringBuilder appendable1 = new StringBuilder();
         this.newWith(<(literal.(type))("1")>).appendString(appendable1);
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", appendable1.toString());
+        assertEquals("<(toStringLiteral.(type))("1")>", appendable1.toString());
         StringBuilder appendable2 = new StringBuilder();
 
         <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
@@ -326,11 +342,11 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
 
         StringBuilder appendable5 = new StringBuilder();
         this.newWith(<(literal.(type))("31")>).appendString(appendable5);
-        Assert.assertEquals("<(toStringLiteral.(type))("31")>", appendable5.toString());
+        assertEquals("<(toStringLiteral.(type))("31")>", appendable5.toString());
 
         StringBuilder appendable6 = new StringBuilder();
         this.newWith(<(literal.(type))("32")>).appendString(appendable6);
-        Assert.assertEquals("<(toStringLiteral.(type))("32")>", appendable6.toString());
+        assertEquals("<(toStringLiteral.(type))("32")>", appendable6.toString());
 
         StringBuilder appendable7 = new StringBuilder();
         <name>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type))(); separator=", ">);
@@ -412,7 +428,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -420,7 +436,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     {
         Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -434,7 +450,7 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
     public void chunk()
     {
         <name>Iterable iterable = this.classUnderTest();
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         <name>Bags.mutable.with(<["1"]:(literal.(type))(); separator=", ">),
                         <name>Bags.mutable.with(<["2"]:(literal.(type))(); separator=", ">),
@@ -453,16 +469,16 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
                         <name>Bags.mutable.with(<["1", "3"]:(literal.(type))(); separator=", ">),
                         <name>Bags.mutable.with(<["2"]:(literal.(type))(); separator=", ">)).toSet().equals(chunked));
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         <name>Bags.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(3).toSet());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(<name>Bags.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 
