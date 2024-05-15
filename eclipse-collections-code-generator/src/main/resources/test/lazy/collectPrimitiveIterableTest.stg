@@ -230,10 +230,11 @@ public void sumConsistentRounding()
         Assert.assertEquals(4.0, Interval.oneTo(7).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).median(), 0.001);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void medianThrowsOnEmpty()
     {
-        Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).median();
+        assertThrows(ArithmeticException.class,
+                () -> Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).median());
     }
 
     @Test

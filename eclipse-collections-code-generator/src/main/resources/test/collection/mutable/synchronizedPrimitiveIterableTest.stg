@@ -32,6 +32,8 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link Synchronized<name>Iterable}s
  * This file was automatically generated from template file synchronizedPrimitiveIterableTest.stg.
@@ -62,10 +64,10 @@ public class Synchronized<name>IterableTest extends Abstract<name>IterableTestCa
         return FastList.newListWith(elements);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void null_iterable_throws()
     {
-        Synchronized<name>Iterable.of(null);
+        assertThrows(IllegalArgumentException.class, () -> Synchronized<name>Iterable.of(null));
     }
 
     @Override

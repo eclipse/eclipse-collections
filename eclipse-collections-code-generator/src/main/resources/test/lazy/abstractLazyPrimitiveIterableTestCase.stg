@@ -232,10 +232,10 @@ public abstract class AbstractLazy<name>IterableTestCase
         Assert.assertEquals(<(wideLiteral.(type))("33")>, this.newWith(<["0", "33"]:(literal.(type))(); separator=", ">).sum()<(wideDelta.(type))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_throws_emptyIterable()
     {
-        this.getEmptyIterable().max();
+        assertThrows(NoSuchElementException.class, () -> this.getEmptyIterable().max());
     }
 
     @Test
@@ -282,10 +282,10 @@ public abstract class AbstractLazy<name>IterableTestCase
                 this.classUnderTest().select(<name>Predicates.lessThan(<(literal.(type))("0")>)).maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxThrowsOnEmpty()
     {
-        new Lazy<name>IterableAdapter(new <name>ArrayList()).max();
+        assertThrows(NoSuchElementException.class, () -> new Lazy<name>IterableAdapter(new <name>ArrayList()).max());
     }
 
     @Test

@@ -42,6 +42,7 @@ import java.util.stream.Collectors;
 import java.util.Arrays;
 import java.util.Collections;<endif>
 
+import static org.junit.Assert.assertThrows;
 
 /**
  * Abstract JUnit test for {@link Immutable<name>List}.
@@ -80,16 +81,16 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         }
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void get_throws_index_greater_than_size()
     {
-        this.classUnderTest().get(this.classUnderTest().size());
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(this.classUnderTest().size()));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void get_throws_index_negative()
     {
-        this.classUnderTest().get(-1);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(-1));
     }
 
     @Test
@@ -149,10 +150,10 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Assert.assertFalse(iterator.hasNext());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subList()
     {
-        this.classUnderTest().subList(0, 1);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().subList(0, 1));
     }
 
     @Override

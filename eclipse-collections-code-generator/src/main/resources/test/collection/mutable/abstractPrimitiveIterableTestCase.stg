@@ -60,6 +60,8 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * Abstract JUnit test for {@link <name>Iterable}s
  * This file was automatically generated from template file abstractPrimitiveIterableTestCase.stg.
@@ -447,7 +449,7 @@ public abstract class Abstract<name>IterableTestCase
     @Test
     public abstract void <type>Iterator();
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void <type>Iterator_throws()
     {
         <name>Iterator iterator = this.classUnderTest().<type>Iterator();
@@ -455,10 +457,10 @@ public abstract class Abstract<name>IterableTestCase
         {
             iterator.next();
         }
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void <type>Iterator_throws_non_empty_collection()
     {
         <name>Iterable iterable = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
@@ -467,7 +469,7 @@ public abstract class Abstract<name>IterableTestCase
         {
             iterator.next();
         }
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test
@@ -742,10 +744,10 @@ public abstract class Abstract<name>IterableTestCase
         <(maxTests.(type))(type, name)>
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_throws_emptyCollection()
     {
-        this.newWith().max();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().max());
     }
 
     @Test
@@ -754,10 +756,10 @@ public abstract class Abstract<name>IterableTestCase
         <(minTests.(type))(type, name)>
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_throws_emptyCollection()
     {
-        this.newWith().min();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().min());
     }
 
     @Test
@@ -845,10 +847,10 @@ public void sumConsistentRounding()
         Assert.assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32", "32"]:(literal.(type))(); separator=", ">).average(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void averageThrowsOnEmpty()
     {
-        this.newWith().average();
+        assertThrows(ArithmeticException.class, () -> this.newWith().average());
     }
 
     /**
@@ -877,10 +879,10 @@ public void sumConsistentRounding()
         Assert.assertEquals(30.5, this.newWith(<["1", "30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).median(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void medianThrowsOnEmpty()
     {
-        this.newWith().median();
+        assertThrows(ArithmeticException.class, () -> this.newWith().median());
     }
 
     /**
@@ -1307,10 +1309,12 @@ public void sumConsistentRounding()
 
     <injectIntoPrimitiveTest("Double", "double", true)>
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void reduceOnEmptyThrows()
     {
-        this.newWith().reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>);
+        assertThrows(
+                NoSuchElementException.class,
+                () -> this.newWith().reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>));
     }
 
     @Test

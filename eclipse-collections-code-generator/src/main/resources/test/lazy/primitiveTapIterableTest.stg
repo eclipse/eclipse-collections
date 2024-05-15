@@ -266,10 +266,10 @@ public class Tap<name>IterableTest
         Assert.assertEquals(list.makeString(""), builder.toString());
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void medianThrowsOnEmpty()
     {
-        new Tap<name>Iterable(new <name>ArrayList(), System.out::println).median();
+        assertThrows(ArithmeticException.class, () -> new Tap<name>Iterable(new <name>ArrayList(), System.out::println).median());
     }
 
     @Test
