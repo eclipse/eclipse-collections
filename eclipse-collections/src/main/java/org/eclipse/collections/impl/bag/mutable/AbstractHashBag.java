@@ -67,8 +67,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         {
             return false;
         }
-
-        return this.items.keyValuesView().allSatisfy(each -> bag.occurrencesOf(each.getOne()) == each.getTwo());
+        return this.items.allSatisfyKeyValue((key, count) -> bag.occurrencesOf(key) == count);
     }
 
     @Override

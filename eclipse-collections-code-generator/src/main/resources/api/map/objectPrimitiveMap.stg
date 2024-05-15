@@ -95,6 +95,21 @@ public interface Object<name>Map\<K> extends <name>Iterable
     <if(!primitive.booleanPrimitive)><(flipUniqueValues.(name))(name)><endif>
 
     /**
+     * @since 12.0
+     */
+    default boolean allSatisfyKeyValue(Object<name>Predicate\<K> predicate)
+    {
+        for (Object<name>Pair\<K> pair : this.keyValuesView())
+        {
+            if (!predicate.accept(pair.getOne(), pair.getTwo()))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Implements the injectInto pattern with each key/value pair of the map.
      * @param value to be injected into the map
      * @param function to apply to the injected value and key/value pairs
