@@ -44,6 +44,9 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link Unmodifiable<name1><name2>Map#values()}.
  * This file was automatically generated from template file unmodifiablePrimitivePrimitiveMapValuesTest.stg.
@@ -54,6 +57,19 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     protected Mutable<name2>Collection classUnderTest()
     {
         return <name1><name2>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">).values().asUnmodifiable();
+    }
+
+    @Override
+    @Test
+    public void <type2>Iterator_throws_non_empty_collection()
+    {
+        Mutable<name2>Collection collection = this.classUnderTest();
+        <name2>Iterator iterator = collection.<type2>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
@@ -94,7 +110,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
         Verify.assertEmpty(list);
         Assert.assertFalse(iterator.hasNext());
 
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -105,7 +121,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
         Mutable<name2>Iterator iterator = <type2>Iterable.<type2>Iterator();
         Assert.assertTrue(iterator.hasNext());
         iterator.next();
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -115,7 +131,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
         Mutable<name2>Collection <type2>Iterable = this.classUnderTest();
         Mutable<name2>Iterator iterator = <type2>Iterable.<type2>Iterator();
         Assert.assertTrue(iterator.hasNext());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -129,7 +145,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void addAllIterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().addAll(new <name2>ArrayList()));
     }
 
@@ -137,7 +153,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void add()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().add(<(literal.(type2))("0")>));
     }
 
@@ -146,7 +162,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void addAllArray()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                     this.classUnderTest().addAll(<["0", "1"]:(literal.(type2))(); separator=", ">));
     }
 
@@ -154,7 +170,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void with()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                     this.classUnderTest().with(<(literal.(type2))("0")>));
     }
 
@@ -162,7 +178,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void without()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                     this.classUnderTest().without(<(literal.(type2))("0")>));
     }
 
@@ -170,7 +186,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void withAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                     this.classUnderTest().withAll(new <name2>ArrayList()));
     }
 
@@ -178,7 +194,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void withoutAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                     this.classUnderTest().withoutAll(new <name2>ArrayList()));
     }
 
@@ -186,7 +202,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void remove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                     this.classUnderTest().remove(<(literal.(type2))("0")>));
     }
 
@@ -194,7 +210,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void removeIf()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                     this.classUnderTest().removeIf(<name2>Predicates.equal(<(literal.(type2))("0")>)));
     }
 
@@ -211,28 +227,28 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     @Test
     public void removeAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().removeAll());
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().removeAll());
     }
 
     @Override
     @Test
     public void removeAll_iterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().removeAll(new <name2>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().removeAll(new <name2>ArrayList()));
     }
 
     @Override
     @Test
     public void retainAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().retainAll());
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().retainAll());
     }
 
     @Override
     @Test
     public void retainAll_iterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().retainAll(new <name2>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().retainAll(new <name2>ArrayList()));
     }
 
     @Override
@@ -240,7 +256,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     public void clear()
     {
         Mutable<name2>Collection emptyCollection = this.newWith();
-        Assert.assertThrows(UnsupportedOperationException.class, () -> emptyCollection.clear());
+        assertThrows(UnsupportedOperationException.class, () -> emptyCollection.clear());
     }
 
     @Override
@@ -286,23 +302,23 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
         super.collect();
 
         <name2>ToObjectFunction\<<wrapperName2>\> function = (<type2> parameter) -> <(castIntToNarrowTypeWithParens.(type2))("parameter - 1")>;
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type2))(); separator=", ">).toBag(), this.newWith(<["1", "2", "3"]:(literal.(type2))(); separator=", ">).collect(function).toBag());
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type2))(); separator=", ">).toBag(), this.newWith(<["1", "2", "3"]:(literal.(type2))(); separator=", ">).collect(function).toBag());
         <name2>Iterable iterable = this.newWith(<["1", "2", "3"]:(literal.(type2))(); separator=", ">);
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type2))(); separator=", ">).toBag(), iterable.collect(function).toBag());
-        Assert.assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
-        Assert.assertEquals(this.newObjectCollectionWith(<(literal.(type2))("2")>), this.newWith(<(literal.(type2))("3")>).collect(function));
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "2"]:(literal.(type2))(); separator=", ">).toBag(), iterable.collect(function).toBag());
+        assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
+        assertEquals(this.newObjectCollectionWith(<(literal.(type2))("2")>), this.newWith(<(literal.(type2))("3")>).collect(function));
     }
 
     @Override
     @Test
     public void makeString()
     {
-        Assert.assertEquals("<(toStringLiteral.(type2))("1")>", this.newWith(<(literal.(type2))("1")>).makeString("/"));
-        Assert.assertEquals("<(toStringLiteral.(type2))("31")>", this.newWith(<(literal.(type2))("31")>).makeString());
-        Assert.assertEquals("<(toStringLiteral.(type2))("32")>", this.newWith(<(literal.(type2))("32")>).makeString());
-        Assert.assertEquals("", this.newWith().makeString());
-        Assert.assertEquals("", this.newWith().makeString("/"));
-        Assert.assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
+        assertEquals("<(toStringLiteral.(type2))("1")>", this.newWith(<(literal.(type2))("1")>).makeString("/"));
+        assertEquals("<(toStringLiteral.(type2))("31")>", this.newWith(<(literal.(type2))("31")>).makeString());
+        assertEquals("<(toStringLiteral.(type2))("32")>", this.newWith(<(literal.(type2))("32")>).makeString());
+        assertEquals("", this.newWith().makeString());
+        assertEquals("", this.newWith().makeString("/"));
+        assertEquals("[]", this.newWith().makeString("[", ", ", "]"));
 
         <name2>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type2))(); separator=", ">);
         Assert.assertTrue(
@@ -351,14 +367,14 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     {
         StringBuilder appendable = new StringBuilder();
         this.newWith().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "/");
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "[", ", ", "]");
-        Assert.assertEquals("[]", appendable.toString());
+        assertEquals("[]", appendable.toString());
         StringBuilder appendable1 = new StringBuilder();
         this.newWith(<(literal.(type2))("1")>).appendString(appendable1);
-        Assert.assertEquals("<(toStringLiteral.(type2))("1")>", appendable1.toString());
+        assertEquals("<(toStringLiteral.(type2))("1")>", appendable1.toString());
         StringBuilder appendable2 = new StringBuilder();
 
         <name2>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type2))(); separator=", ">);
@@ -372,11 +388,11 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
 
         StringBuilder appendable5 = new StringBuilder();
         this.newWith(<(literal.(type2))("31")>).appendString(appendable5);
-        Assert.assertEquals("<(toStringLiteral.(type2))("31")>", appendable5.toString());
+        assertEquals("<(toStringLiteral.(type2))("31")>", appendable5.toString());
 
         StringBuilder appendable6 = new StringBuilder();
         this.newWith(<(literal.(type2))("32")>).appendString(appendable6);
-        Assert.assertEquals("<(toStringLiteral.(type2))("32")>", appendable6.toString());
+        assertEquals("<(toStringLiteral.(type2))("32")>", appendable6.toString());
 
         StringBuilder appendable7 = new StringBuilder();
         <name2>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type2))(); separator=", ">);
@@ -452,7 +468,7 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     public void chunk()
     {
         <name2>Iterable iterable = this.classUnderTest();
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         <name2>Bags.mutable.with(<["1"]:(literal.(type2))(); separator=", ">),
                         <name2>Bags.mutable.with(<["2"]:(literal.(type2))(); separator=", ">),
@@ -471,16 +487,16 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
                         <name2>Bags.mutable.with(<["1", "3"]:(literal.(type2))(); separator=", ">),
                         <name2>Bags.mutable.with(<["2"]:(literal.(type2))(); separator=", ">)).toSet().equals(chunked));
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         <name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
                 iterable.chunk(3).toSet());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(<name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 
@@ -526,7 +542,7 @@ public void sumConsistentRounding()
             .collect<name2>(i -> <["1.0"]:(decimalLiteral.(type2))()> / (i.<type2>Value() * i.<type2>Value() * i.<type2>Value() * i.<type2>Value()))
             .toArray());
 
-    Assert.assertEquals(
+    assertEquals(
             <(floatResults.(type1))()>,
             iterable.sum(),
             1.0e-15);
@@ -546,7 +562,7 @@ public void sumConsistentRounding()
             .collect<name2>(i -> <["1.0"]:(decimalLiteral.(type2))()> / (i.<type2>Value() * i.<type2>Value() * i.<type2>Value() * i.<type2>Value()))
             .toArray());
 
-    Assert.assertEquals(
+    assertEquals(
             <(doubleResults.(type1))()>,
             iterable.sum(),
             1.0e-15);

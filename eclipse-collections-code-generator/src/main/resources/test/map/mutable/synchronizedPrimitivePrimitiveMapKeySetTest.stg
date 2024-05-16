@@ -22,6 +22,9 @@ body(type1, type2, name1, name2, wrapperName1) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
+import java.util.NoSuchElementException;
+import org.eclipse.collections.api.collection.primitive.Mutable<name1>Collection;
+import org.eclipse.collections.api.iterator.<name1>Iterator;
 import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;
 import org.eclipse.collections.impl.block.factory.primitive.<name1>Predicates;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
@@ -29,6 +32,9 @@ import org.eclipse.collections.impl.set.mutable.primitive.Abstract<name1>SetTest
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link Synchronized<name1><name2>Map#keySet()}.
@@ -41,6 +47,19 @@ public class Synchronized<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     protected Mutable<name1>Set classUnderTest()
     {
         return new Synchronized<name1><name2>Map(<name1><name2>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">)).keySet();
+    }
+
+    @Test
+    @Override
+    public void <type1>Iterator_throws_non_empty_collection()
+    {
+        Mutable<name1>Collection collection = this.classUnderTest();
+        <name1>Iterator iterator = collection.<type1>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
@@ -58,14 +77,14 @@ public class Synchronized<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     @Test
     public void addAllIterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name1>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name1>ArrayList()));
     }
 
     @Override
     @Test
     public void add()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type1))("0")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type1))("0")>));
     }
 
     <if(primitive1.floatingPoint)><NaNTests()><endif>
@@ -73,21 +92,21 @@ public class Synchronized<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     @Test
     public void addAllArray()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type1))(); separator=", ">));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type1))(); separator=", ">));
     }
 
     @Override
     @Test
     public void with()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type1))("0")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type1))("0")>));
     }
 
     @Override
     @Test
     public void withAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withAll(new <name1>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withAll(new <name1>ArrayList()));
     }
 
     @Override
@@ -98,8 +117,8 @@ public class Synchronized<name1><name2>MapKeySetTest extends Abstract<name1>SetT
         Mutable<name1>Set setWithout = set.without(<(literal.(type1))("2")>);
         Assert.assertSame(set, setWithout);
         Mutable<name1>Set expectedSet = this.newWith(<(literal.(type1))("1")>, <(literal.(type1))("3")>);
-        Assert.assertEquals(expectedSet.toList(), setWithout.toList());
-        Assert.assertEquals(expectedSet.toList(), setWithout.without(<(literal.(type1))("4")>).toList());
+        assertEquals(expectedSet.toList(), setWithout.toList());
+        assertEquals(expectedSet.toList(), setWithout.without(<(literal.(type1))("4")>).toList());
     }
 
     @Override
@@ -110,7 +129,7 @@ public class Synchronized<name1><name2>MapKeySetTest extends Abstract<name1>SetT
         Mutable<name1>Set setWithout = set.withoutAll(new <name1>ArrayList(<(literal.(type1))("2")>, <(literal.(type1))("4")>));
         Assert.assertSame(set, setWithout);
         Mutable<name1>Set expectedSet = this.newWith(<(literal.(type1))("1")>, <(literal.(type1))("3")>);
-        Assert.assertEquals(expectedSet.toList(), setWithout.toList());
+        assertEquals(expectedSet.toList(), setWithout.toList());
     }
 
     @Override
@@ -142,7 +161,7 @@ public class Synchronized<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     public void sum()
     {
         super.sum();
-        Assert.assertEquals(<(wideLiteral.(type1))("3")>, this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).sum()<wideDelta.(type1)>);
+        assertEquals(<(wideLiteral.(type1))("3")>, this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).sum()<wideDelta.(type1)>);
     }
 
     @Override
@@ -150,8 +169,8 @@ public class Synchronized<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     {
         Mutable<name1>Set set1 = this.newWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">);
         Mutable<name1>Set set2 = this.newWith(<["32", "31", "1", "0"]:(literal.(type1))(); separator=", ">);
-        Assert.assertEquals(set1.hashCode(), set2.hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">).hashCode(), set1.hashCode());
+        assertEquals(set1.hashCode(), set2.hashCode());
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">).hashCode(), set1.hashCode());
     }
 }
 
@@ -166,14 +185,14 @@ NaNTests() ::= <<
 @Test
 public void add_NaN()
 {
-    Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith(<wrapperName1>.NaN).add(<wrapperName1>.NaN));
+    assertThrows(UnsupportedOperationException.class, () -> this.newWith(<wrapperName1>.NaN).add(<wrapperName1>.NaN));
 }
 
 @Override
 @Test
 public void add_POSITIVE_INFINITY()
 {
-    Assert.assertThrows(UnsupportedOperationException.class, () ->
+    assertThrows(UnsupportedOperationException.class, () ->
             this.newWith(<wrapperName1>.POSITIVE_INFINITY).add(<wrapperName1>.POSITIVE_INFINITY));
 }
 
@@ -181,7 +200,7 @@ public void add_POSITIVE_INFINITY()
 @Test
 public void add_NEGATIVE_INFINITY()
 {
-    Assert.assertThrows(UnsupportedOperationException.class, () ->
+    assertThrows(UnsupportedOperationException.class, () ->
             this.newWith(<wrapperName1>.NEGATIVE_INFINITY).add(<wrapperName1>.NEGATIVE_INFINITY));
 }
 

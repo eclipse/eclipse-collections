@@ -20,6 +20,9 @@ body(type, name, wrapperName) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
+import java.util.NoSuchElementException;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
@@ -27,6 +30,9 @@ import org.eclipse.collections.impl.set.mutable.primitive.Abstract<name>SetTestC
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link Synchronized<name>ObjectMap#keySet()}.
@@ -39,6 +45,19 @@ public class Synchronized<name>ObjectMapKeySetTest extends Abstract<name>SetTest
     protected Mutable<name>Set classUnderTest()
     {
         return new Synchronized<name>ObjectMap\<>(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3)).keySet();
+    }
+
+    @Test
+    @Override
+    public void <type>Iterator_throws_non_empty_collection()
+    {
+        Mutable<name>Collection collection = this.classUnderTest();
+        <name>Iterator iterator = collection.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
@@ -97,8 +116,8 @@ public class Synchronized<name>ObjectMapKeySetTest extends Abstract<name>SetTest
         Mutable<name>Set setWithout = set.without(<(literal.(type))("2")>);
         Assert.assertSame(set, setWithout);
         Mutable<name>Set expectedSet = this.newWith(<(literal.(type))("1")>, <(literal.(type))("3")>);
-        Assert.assertEquals(expectedSet.toList(), setWithout.toList());
-        Assert.assertEquals(expectedSet.toList(), setWithout.without(<(literal.(type))("4")>).toList());
+        assertEquals(expectedSet.toList(), setWithout.toList());
+        assertEquals(expectedSet.toList(), setWithout.without(<(literal.(type))("4")>).toList());
     }
 
     @Override
@@ -109,7 +128,7 @@ public class Synchronized<name>ObjectMapKeySetTest extends Abstract<name>SetTest
         Mutable<name>Set setWithout = set.withoutAll(new <name>ArrayList(<(literal.(type))("2")>, <(literal.(type))("4")>));
         Assert.assertSame(set, setWithout);
         Mutable<name>Set expectedSet = this.newWith(<(literal.(type))("1")>, <(literal.(type))("3")>);
-        Assert.assertEquals(expectedSet.toList(), setWithout.toList());
+        assertEquals(expectedSet.toList(), setWithout.toList());
     }
 
     @Override
@@ -141,7 +160,7 @@ public class Synchronized<name>ObjectMapKeySetTest extends Abstract<name>SetTest
     public void sum()
     {
         super.sum();
-        Assert.assertEquals(<(wideLiteral.(type))("3")>, this.newWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>).sum()<wideDelta.(type)>);
+        assertEquals(<(wideLiteral.(type))("3")>, this.newWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>).sum()<wideDelta.(type)>);
     }
 
     @Override
@@ -149,8 +168,8 @@ public class Synchronized<name>ObjectMapKeySetTest extends Abstract<name>SetTest
     {
         Mutable<name>Set set1 = this.newWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>, <(literal.(type))("32")>);
         Mutable<name>Set set2 = this.newWith(<(literal.(type))("32")>, <(literal.(type))("31")>, <(literal.(type))("1")>, <(literal.(type))("0")>);
-        Assert.assertEquals(set1.hashCode(), set2.hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>, <(literal.(type))("32")>).hashCode(), set1.hashCode());
+        assertEquals(set1.hashCode(), set2.hashCode());
+        assertEquals(this.newObjectCollectionWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>, <(literal.(type))("32")>).hashCode(), set1.hashCode());
     }
 }
 
