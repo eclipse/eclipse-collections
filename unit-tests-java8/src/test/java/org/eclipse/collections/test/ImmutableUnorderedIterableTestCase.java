@@ -12,7 +12,6 @@ package org.eclipse.collections.test;
 
 import java.util.Iterator;
 
-import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
 import static org.junit.Assert.assertThrows;
