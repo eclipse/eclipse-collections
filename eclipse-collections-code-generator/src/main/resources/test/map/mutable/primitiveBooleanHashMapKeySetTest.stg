@@ -20,10 +20,6 @@ body(type, name, wrapperName) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import java.util.NoSuchElementException;
-
-import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
-import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.set.MutableSet;
@@ -36,8 +32,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.assertThrows;
-
 /**
  * JUnit test for {@link <name>BooleanHashMap#keySet()}.
  *
@@ -49,19 +43,6 @@ public class <name>BooleanHashMapKeySetTest extends Abstract<name>SetTestCase
     protected Mutable<name>Set classUnderTest()
     {
         return <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, true, <(literal.(type))("2")>, false, <(literal.(type))("3")>, true).keySet();
-    }
-
-    @Override
-    @Test
-    public void <type>Iterator_throws_non_empty_collection()
-    {
-        Mutable<name>Collection collection = this.classUnderTest();
-        <name>Iterator iterator = collection.<type>Iterator();
-        while (iterator.hasNext())
-        {
-            iterator.next();
-        }
-        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
