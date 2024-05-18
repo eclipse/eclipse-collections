@@ -190,10 +190,10 @@ public class Reverse<name>IterableTest
         Assert.assertEquals(<(wideLiteral.(type))("9")>, <name>ArrayList.newListWith(<["1", "0", "9", "7"]:(literal.(type))(); separator=", ">).asReversed().max()<(wideDelta.(type))>);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_throws_emptyList()
     {
-        new <name>ArrayList().asReversed().max();
+        assertThrows(NoSuchElementException.class, () -> new <name>ArrayList().asReversed().max());
     }
 
     @Test

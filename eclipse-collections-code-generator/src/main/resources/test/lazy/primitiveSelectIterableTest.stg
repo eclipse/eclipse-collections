@@ -214,10 +214,12 @@ public void sumConsistentRounding()
             new Select<name>Iterable(new <name>ArrayList(), <name>Predicates.lessThan(<(literal.(type))("3")>)).max());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minThrowsOnEmpty()
     {
-        new Select<name>Iterable(new <name>ArrayList(), <name>Predicates.lessThan(<(literal.(type))("3")>)).min();
+        assertThrows(
+                NoSuchElementException.class,
+                () -> new Select<name>Iterable(new <name>ArrayList(), <name>Predicates.lessThan(<(literal.(type))("3")>)).min());
     }
 
     @Test
@@ -239,10 +241,11 @@ public void sumConsistentRounding()
         Assert.assertEquals(1.5d, this.iterable.median(), 0.0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void medianThrowsOnEmpty()
     {
-        new Select<name>Iterable(new <name>ArrayList(), <name>Predicates.lessThan(<(literal.(type))("3")>)).median();
+        assertThrows(ArithmeticException.class,
+                () -> new Select<name>Iterable(new <name>ArrayList(), <name>Predicates.lessThan(<(literal.(type))("3")>)).median());
     }
 
     @Test

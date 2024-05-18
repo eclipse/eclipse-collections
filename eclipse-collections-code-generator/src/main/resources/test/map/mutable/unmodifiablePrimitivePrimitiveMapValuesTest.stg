@@ -32,12 +32,12 @@ import org.eclipse.collections.api.iterator.<name2>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.block.factory.primitive.<name2>Predicates;
-import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name2>CollectionTestCase;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name2>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 <if(primitive2.floatOrDoublePrimitive)><if(primitive1.byteOrShortOrCharPrimitive)>import org.eclipse.collections.impl.list.Interval;<endif><endif>
 import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;
 import org.eclipse.collections.impl.test.Verify;

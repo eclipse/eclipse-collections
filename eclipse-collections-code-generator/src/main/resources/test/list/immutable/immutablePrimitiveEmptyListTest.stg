@@ -29,6 +29,8 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 /**
  * JUnit test for {@link Immutable<name>EmptyList}.
  * This file was automatically generated from template file immutablePrimitiveEmptyListTest.stg.
@@ -42,10 +44,10 @@ public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTes
     }
 
     @Override
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void get()
     {
-        this.classUnderTest().get(1);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(1));
     }
 
     @Override
@@ -60,17 +62,17 @@ public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTes
     }
 
     @Override
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getFirst()
     {
-        this.classUnderTest().getFirst();
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().getFirst());
     }
 
     @Override
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getLast()
     {
-        this.classUnderTest().getLast();
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().getLast());
     }
 
     @Override
@@ -123,10 +125,10 @@ public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTes
     }
 
     @Override
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void average()
     {
-        this.classUnderTest().average();
+        assertThrows(ArithmeticException.class, () -> this.classUnderTest().average());
     }
 
     @Override
@@ -137,10 +139,10 @@ public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTes
     }
 
     @Override
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void median()
     {
-        this.classUnderTest().median();
+        assertThrows(ArithmeticException.class, () -> this.classUnderTest().median());
     }
 
     @Override
@@ -151,17 +153,17 @@ public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTes
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.classUnderTest().max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Test
@@ -172,12 +174,12 @@ public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTes
         Assert.assertEquals(<(wideLiteral.(type))("0")>, list1.dotProduct(list2)<(wideDelta.(type))>);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void dotProduct_throwsOnListsOfDifferentSizes()
     {
         Immutable<name>EmptyList list1 = new Immutable<name>EmptyList();
         Immutable<name>ArrayList list2 = Immutable<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">);
-        list1.dotProduct(list2);
+        assertThrows(IllegalArgumentException.class, () -> list1.dotProduct(list2));
     }
 
     @Override

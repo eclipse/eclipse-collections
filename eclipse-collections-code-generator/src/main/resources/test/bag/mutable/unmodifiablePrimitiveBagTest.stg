@@ -70,10 +70,10 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addOccurrences_throws()
     {
-        this.newWith().addOccurrences(<(literal.(type))("1")>, -1);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().addOccurrences(<(literal.(type))("1")>, -1));
     }
 
     @Override

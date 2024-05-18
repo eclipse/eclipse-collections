@@ -21,7 +21,6 @@ package org.eclipse.collections.impl.collection.mutable.primitive;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
-import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
@@ -396,23 +395,6 @@ public abstract class AbstractMutable<name>CollectionTestCase extends Abstract<n
         Mutable<name>Collection unmodifiableCollection = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).asUnmodifiable();
         Verify.assertInstanceOf(unmodifiableCollection.getClass(), collection.asUnmodifiable());
         Assert.assertEquals(unmodifiableCollection, collection.asUnmodifiable());
-    }
-
-    @Override
-    @Test(expected = NoSuchElementException.class)
-    public void <type>Iterator_throws_non_empty_collection()
-    {
-        super.<type>Iterator_throws_non_empty_collection();
-        Mutable<name>Collection collection = this.newWith();
-        collection.add(<(literal.(type))("1")>);
-        collection.add(<(literal.(type))("2")>);
-        collection.add(<(literal.(type))("3")>);
-        <name>Iterator iterator = collection.<type>Iterator();
-        while (iterator.hasNext())
-        {
-            iterator.next();
-        }
-        iterator.next();
     }
 
     @Test
