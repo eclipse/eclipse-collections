@@ -13,8 +13,10 @@ package org.eclipse.collections.impl.bag.mutable.primitive;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link SynchronizedBooleanBag}.
@@ -39,11 +41,11 @@ public class SynchronizedBooleanBagTest extends AbstractMutableBooleanBagTestCas
     {
         super.asSynchronized();
         MutableBooleanBag bagWithLockObject = new SynchronizedBooleanBag(BooleanHashBag.newBagWith(true, false, true), new Object());
-        Assert.assertSame(bagWithLockObject, bagWithLockObject.asSynchronized());
-        Assert.assertEquals(bagWithLockObject, bagWithLockObject.asSynchronized());
+        assertSame(bagWithLockObject, bagWithLockObject.asSynchronized());
+        assertEquals(bagWithLockObject, bagWithLockObject.asSynchronized());
         MutableBooleanBag bag = this.classUnderTest();
-        Assert.assertSame(bag, bag.asSynchronized());
-        Assert.assertEquals(bag, bag.asSynchronized());
+        assertSame(bag, bag.asSynchronized());
+        assertEquals(bag, bag.asSynchronized());
     }
 
     @Override
@@ -54,6 +56,6 @@ public class SynchronizedBooleanBagTest extends AbstractMutableBooleanBagTestCas
         MutableBooleanBag bag = this.classUnderTest();
         MutableBooleanSet expected = BooleanSets.mutable.with(false);
         MutableBooleanSet actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

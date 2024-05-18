@@ -10,8 +10,9 @@
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertSame;
 
 public class SynchronizedObjectBooleanMapTest extends AbstractMutableObjectBooleanMapTestCase
 {
@@ -58,6 +59,6 @@ public class SynchronizedObjectBooleanMapTest extends AbstractMutableObjectBoole
     public void asSynchronized()
     {
         super.asSynchronized();
-        Assert.assertSame(this.map, this.map.asSynchronized());
+        assertSame(this.map, this.map.asSynchronized());
     }
 }

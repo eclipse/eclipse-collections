@@ -42,8 +42,16 @@ import org.eclipse.collections.impl.test.domain.Person;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.ArrayIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
 {
@@ -123,7 +131,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
     @Test
     public void constructorOfPairs()
     {
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedMapWithHashingStrategy.newWithKeysValues(INTEGER_HASHING_STRATEGY, 1, "one", 2, "two", 3, "three"),
                 UnifiedMapWithHashingStrategy.newMapWith(INTEGER_HASHING_STRATEGY, Tuples.pair(1, "one"), Tuples.pair(2, "two"), Tuples.pair(3, "three")));
     }
@@ -137,20 +145,20 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         Pair<Integer, String> pair4 = Tuples.pair(4, "Four");
         UnifiedMapWithHashingStrategy<Integer, String> expected = UnifiedMapWithHashingStrategy.newMapWith(INTEGER_HASHING_STRATEGY, pair1, pair2, pair3, pair4);
         UnifiedMapWithHashingStrategy<Integer, String> actual1 = UnifiedMapWithHashingStrategy.newMapWith(INTEGER_HASHING_STRATEGY, FastList.newListWith(pair1, pair2, pair3, pair4));
-        Assert.assertEquals(expected, actual1);
-        Assert.assertEquals(expected.hashingStrategy(), actual1.hashingStrategy());
+        assertEquals(expected, actual1);
+        assertEquals(expected.hashingStrategy(), actual1.hashingStrategy());
 
         UnifiedMapWithHashingStrategy<Integer, String> actual2 = UnifiedMapWithHashingStrategy.newMapWith(INTEGER_HASHING_STRATEGY, UnifiedSet.newSetWith(pair1, pair2, pair3, pair4));
-        Assert.assertEquals(expected, actual2);
-        Assert.assertEquals(expected.hashingStrategy(), actual2.hashingStrategy());
+        assertEquals(expected, actual2);
+        assertEquals(expected.hashingStrategy(), actual2.hashingStrategy());
     }
 
     @Test
     public void newMap_throws()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedMapWithHashingStrategy<Integer, Integer>(INTEGER_HASHING_STRATEGY, -1, 0.5f));
-        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedMapWithHashingStrategy<Integer, Integer>(INTEGER_HASHING_STRATEGY, 1, -0.5f));
-        Assert.assertThrows(IllegalArgumentException.class, () -> new UnifiedMapWithHashingStrategy<Integer, Integer>(INTEGER_HASHING_STRATEGY, 1, 1.5f));
+        assertThrows(IllegalArgumentException.class, () -> new UnifiedMapWithHashingStrategy<Integer, Integer>(INTEGER_HASHING_STRATEGY, -1, 0.5f));
+        assertThrows(IllegalArgumentException.class, () -> new UnifiedMapWithHashingStrategy<Integer, Integer>(INTEGER_HASHING_STRATEGY, 1, -0.5f));
+        assertThrows(IllegalArgumentException.class, () -> new UnifiedMapWithHashingStrategy<Integer, Integer>(INTEGER_HASHING_STRATEGY, 1, 1.5f));
     }
 
     @Override
@@ -161,7 +169,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
 
         UnifiedMapWithHashingStrategy<Person, Integer> map = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 LAST_NAME_HASHING_STRATEGY, JOHNDOE, 1, JANEDOE, 2, JOHNSMITH, 3, JANESMITH, 4);
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(JOHNDOE, 2), map.select((argument1, argument2) -> "Doe".equals(argument1.getLastName())));
+        assertEquals(UnifiedMap.newWithKeysValues(JOHNDOE, 2), map.select((argument1, argument2) -> "Doe".equals(argument1.getLastName())));
     }
 
     @Override
@@ -172,7 +180,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
 
         UnifiedMapWithHashingStrategy<Person, Integer> map = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 LAST_NAME_HASHING_STRATEGY, JOHNDOE, 1, JANEDOE, 2, JOHNSMITH, 3, JANESMITH, 4);
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(JOHNDOE, 2), map.reject((argument1, argument2) -> "Smith".equals(argument1.getLastName())));
+        assertEquals(UnifiedMap.newWithKeysValues(JOHNDOE, 2), map.reject((argument1, argument2) -> "Smith".equals(argument1.getLastName())));
     }
 
     @Override
@@ -194,15 +202,15 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
     {
         UnifiedMapWithHashingStrategy<Person, Integer> map = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 LAST_NAME_HASHING_STRATEGY, JOHNDOE, 1, JANEDOE, 2, JOHNSMITH, 3, JANESMITH, 4);
-        Assert.assertTrue(map.containsKey(JOHNDOE));
-        Assert.assertTrue(map.containsValue(2));
-        Assert.assertTrue(map.containsKey(JOHNSMITH));
-        Assert.assertTrue(map.containsValue(4));
-        Assert.assertTrue(map.containsKey(JANEDOE));
-        Assert.assertTrue(map.containsKey(JANESMITH));
+        assertTrue(map.containsKey(JOHNDOE));
+        assertTrue(map.containsValue(2));
+        assertTrue(map.containsKey(JOHNSMITH));
+        assertTrue(map.containsValue(4));
+        assertTrue(map.containsKey(JANEDOE));
+        assertTrue(map.containsKey(JANESMITH));
 
-        Assert.assertFalse(map.containsValue(1));
-        Assert.assertFalse(map.containsValue(3));
+        assertFalse(map.containsValue(1));
+        assertFalse(map.containsValue(3));
     }
 
     @Test
@@ -212,24 +220,24 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
                 LAST_NAME_HASHING_STRATEGY, JOHNDOE, 1, JANEDOE, 2, JOHNSMITH, 3, JANESMITH, 4);
 
         //Testing removing people
-        Assert.assertEquals(2, map.remove(JANEDOE).intValue());
-        Assert.assertEquals(4, map.remove(JOHNSMITH).intValue());
+        assertEquals(2, map.remove(JANEDOE).intValue());
+        assertEquals(4, map.remove(JOHNSMITH).intValue());
 
         Verify.assertEmpty(map);
 
         //Testing removing from a chain
         UnifiedMapWithHashingStrategy<Integer, Integer> map2 =
                 UnifiedMapWithHashingStrategy.newWithKeysValues(INTEGER_HASHING_STRATEGY, COLLISION_1, 1, COLLISION_2, 2, COLLISION_3, 3, COLLISION_4, 4);
-        Assert.assertEquals(4, map2.remove(COLLISION_4).intValue());
-        Assert.assertEquals(1, map2.remove(COLLISION_1).intValue());
+        assertEquals(4, map2.remove(COLLISION_4).intValue());
+        assertEquals(1, map2.remove(COLLISION_1).intValue());
         Verify.assertSize(2, map2);
 
         //Testing removing null from a chain
         UnifiedMapWithHashingStrategy<Integer, Integer> map3 =
                 UnifiedMapWithHashingStrategy.newWithKeysValues(INTEGER_HASHING_STRATEGY, COLLISION_1, 1, null, 2, 3, 3, 4, null);
-        Assert.assertEquals(2, map3.remove(null).intValue());
+        assertEquals(2, map3.remove(null).intValue());
         Verify.assertSize(3, map3);
-        Assert.assertNull(map3.remove(4));
+        assertNull(map3.remove(4));
         Verify.assertSize(2, map3);
     }
 
@@ -237,7 +245,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
     public void keySet_isEmpty()
     {
         Set<Integer> keySet = UnifiedMapWithHashingStrategy.newWithKeysValues(INTEGER_HASHING_STRATEGY, 1, 1, 2, 2).keySet();
-        Assert.assertFalse(keySet.isEmpty());
+        assertFalse(keySet.isEmpty());
         keySet.clear();
         Verify.assertEmpty(keySet);
     }
@@ -271,7 +279,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
     {
         Iterator<Map.Entry<Integer, Integer>> iterator = UnifiedMapWithHashingStrategy.newWithKeysValues(INTEGER_HASHING_STRATEGY, 1, 1).entrySet().iterator();
         Map.Entry<Integer, Integer> element = iterator.next();
-        Assert.assertEquals("1=1", element.toString());
+        assertEquals("1=1", element.toString());
     }
 
     @Override
@@ -319,10 +327,10 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         Verify.assertNotContains(ImmutableEntry.of(JOHNDOE, 1), entries);
         Verify.assertNotContains(ImmutableEntry.of(JANESMITH, 3), entries);
 
-        Assert.assertTrue(entries.remove(ImmutableEntry.of(JANESMITH, 4)));
+        assertTrue(entries.remove(ImmutableEntry.of(JANESMITH, 4)));
         Verify.assertNotContains(ImmutableEntry.of(JOHNSMITH, 4), entries);
 
-        Assert.assertTrue(entries.remove(ImmutableEntry.of(JOHNDOE, 2)));
+        assertTrue(entries.remove(ImmutableEntry.of(JOHNDOE, 2)));
         Verify.assertEmpty(entries);
     }
 
@@ -330,9 +338,9 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
     public void valuesCollection_containsAll()
     {
         Collection<Integer> values = this.newMapWithKeysValues(1, 1, 2, 2, 3, 3, 4, 4).values();
-        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2)));
-        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2, 3, 4)));
-        Assert.assertFalse(values.containsAll(FastList.newListWith(1, 2, 3, 4, 5)));
+        assertTrue(values.containsAll(FastList.newListWith(1, 2)));
+        assertTrue(values.containsAll(FastList.newListWith(1, 2, 3, 4)));
+        assertFalse(values.containsAll(FastList.newListWith(1, 2, 3, 4, 5)));
     }
 
     @Test
@@ -404,7 +412,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
             {
                 entries.batchForEach(new EntrySumProcedure(sum), sectionIndex, sectionCount);
             }
-            Assert.assertEquals(20, sum.getValue());
+            assertEquals(20, sum.getValue());
         }
     }
 
@@ -423,8 +431,8 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         {
             collisions.batchForEach(new EntrySumProcedure(sum2), i, batchCount);
         }
-        Assert.assertEquals(1, batchCount);
-        Assert.assertEquals(78, sum2.getValue());
+        assertEquals(1, batchCount);
+        assertEquals(78, sum2.getValue());
 
         //Testing 3 batches with chains and uneven last batch
         Sum sum3 = new IntegerSum(0);
@@ -432,7 +440,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         {
             collisions.batchForEach(new EntrySumProcedure(sum3), i, 5);
         }
-        Assert.assertEquals(78, sum3.getValue());
+        assertEquals(78, sum3.getValue());
     }
 
     @Test
@@ -453,7 +461,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
                 sum4.add(each.getValue() == null ? 1 : each.getValue());
             }, i, numBatches);
         }
-        Assert.assertEquals(52, sum4.getValue());
+        assertEquals(52, sum4.getValue());
     }
 
     @Test
@@ -464,7 +472,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         BatchIterable<Map.Entry<Integer, Integer>> empty =
                 (BatchIterable<Map.Entry<Integer, Integer>>) UnifiedMapWithHashingStrategy.newMap(INTEGER_HASHING_STRATEGY).entrySet();
         empty.batchForEach(new EntrySumProcedure(sum5), 0, empty.getBatchCount(1));
-        Assert.assertEquals(0, sum5.getValue());
+        assertEquals(0, sum5.getValue());
     }
 
     private void batchForEachTestCases(BatchIterable<Integer> batchIterable, int expectedValue)
@@ -477,7 +485,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
             {
                 batchIterable.batchForEach(new SumProcedure<>(sum), sectionIndex, sectionCount);
             }
-            Assert.assertEquals(expectedValue, sum.getValue());
+            assertEquals(expectedValue, sum.getValue());
         }
     }
 
@@ -491,8 +499,8 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         {
             batchIterable.batchForEach(new SumProcedure<>(sum), i, numBatches);
         }
-        Assert.assertEquals(1, numBatches);
-        Assert.assertEquals(expectedValue, sum.getValue());
+        assertEquals(1, numBatches);
+        assertEquals(expectedValue, sum.getValue());
 
         //Testing 3 batches with chains and uneven last batch
         Sum sum2 = new IntegerSum(0);
@@ -500,7 +508,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         {
             batchIterable.batchForEach(new SumProcedure<>(sum2), i, 5);
         }
-        Assert.assertEquals(expectedValue, sum2.getValue());
+        assertEquals(expectedValue, sum2.getValue());
     }
 
     private void batchForEachNullHandling(BatchIterable<Integer> batchIterable, int expectedValue)
@@ -512,7 +520,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         {
             batchIterable.batchForEach(each -> sum.add(each == null ? 1 : each), i, batchIterable.getBatchCount(7));
         }
-        Assert.assertEquals(expectedValue, sum.getValue());
+        assertEquals(expectedValue, sum.getValue());
     }
 
     private void batchForEachEmptyBatchIterable(BatchIterable<Integer> batchIterable)
@@ -520,7 +528,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         //Test batchForEach on empty set, it should simply do nothing and not throw any exceptions
         Sum sum = new IntegerSum(0);
         batchIterable.batchForEach(new SumProcedure<>(sum), 0, batchIterable.getBatchCount(1));
-        Assert.assertEquals(0, sum.getValue());
+        assertEquals(0, sum.getValue());
     }
 
     @Test
@@ -586,7 +594,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
                         INTEGER_HASHING_STRATEGY, 1, 1, 2, 2, 3, 3, 4, 4).entrySet();
         Sum sum = new IntegerSum(0);
         entries.forEach(new EntrySumProcedure(sum));
-        Assert.assertEquals(20, sum.getValue());
+        assertEquals(20, sum.getValue());
     }
 
     @Test
@@ -599,7 +607,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
 
         Sum sum = new IntegerSum(0);
         collisions.forEach(new EntrySumProcedure(sum));
-        Assert.assertEquals(78, sum.getValue());
+        assertEquals(78, sum.getValue());
     }
 
     @Test
@@ -618,7 +626,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
             sum.add(each.getValue() == null ? 0 : each.getValue());
         });
 
-        Assert.assertEquals(48, sum.getValue());
+        assertEquals(48, sum.getValue());
     }
 
     @Test
@@ -629,14 +637,14 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         BatchIterable<Map.Entry<Integer, Integer>> empty =
                 (BatchIterable<Map.Entry<Integer, Integer>>) UnifiedMapWithHashingStrategy.newMap(INTEGER_HASHING_STRATEGY).entrySet();
         empty.forEach(new EntrySumProcedure(sum));
-        Assert.assertEquals(0, sum.getValue());
+        assertEquals(0, sum.getValue());
     }
 
     private void batchIterable_forEach(BatchIterable<Integer> batchIterable, int expectedValue)
     {
         IntegerSum sum = new IntegerSum(0);
         batchIterable.forEach(new SumProcedure<>(sum));
-        Assert.assertEquals(expectedValue, sum.getValue());
+        assertEquals(expectedValue, sum.getValue());
     }
 
     private void batchIterable_forEachNullHandling(BatchIterable<Integer> batchIterable, int expectedValue)
@@ -644,7 +652,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         //Testing forEach handling null keys and null values
         Sum sum = new IntegerSum(0);
         batchIterable.forEach(each -> sum.add(each == null ? 0 : each));
-        Assert.assertEquals(expectedValue, sum.getValue());
+        assertEquals(expectedValue, sum.getValue());
     }
 
     private void batchIterable_forEachEmptyBatchIterable(BatchIterable<Integer> batchIterable)
@@ -652,7 +660,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         //Test forEach on empty set, it should simply do nothing and not throw any exceptions
         Sum sum = new IntegerSum(0);
         batchIterable.batchForEach(new SumProcedure<>(sum), 0, batchIterable.getBatchCount(1));
-        Assert.assertEquals(0, sum.getValue());
+        assertEquals(0, sum.getValue());
     }
 
     @Override
@@ -694,36 +702,36 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
     public void getMapMemoryUsedInWords()
     {
         UnifiedMapWithHashingStrategy<String, String> map = UnifiedMapWithHashingStrategy.newMap(STRING_HASHING_STRATEGY);
-        Assert.assertEquals(34, map.getMapMemoryUsedInWords());
+        assertEquals(34, map.getMapMemoryUsedInWords());
         map.put("1", "1");
-        Assert.assertEquals(34, map.getMapMemoryUsedInWords());
+        assertEquals(34, map.getMapMemoryUsedInWords());
 
         UnifiedMapWithHashingStrategy<Integer, Integer> map2 = this.mapWithCollisionsOfSize(2);
-        Assert.assertEquals(16, map2.getMapMemoryUsedInWords());
+        assertEquals(16, map2.getMapMemoryUsedInWords());
     }
 
     @Test
     public void getHashingStrategy()
     {
         UnifiedMapWithHashingStrategy<Integer, Object> map = UnifiedMapWithHashingStrategy.newMap(INTEGER_HASHING_STRATEGY);
-        Assert.assertSame(INTEGER_HASHING_STRATEGY, map.hashingStrategy());
+        assertSame(INTEGER_HASHING_STRATEGY, map.hashingStrategy());
     }
 
     @Test
     public void getCollidingBuckets()
     {
         UnifiedMapWithHashingStrategy<Object, Object> map = UnifiedMapWithHashingStrategy.newMap(HashingStrategies.defaultStrategy());
-        Assert.assertEquals(0, map.getCollidingBuckets());
+        assertEquals(0, map.getCollidingBuckets());
 
         UnifiedMapWithHashingStrategy<Integer, Integer> map2 = this.mapWithCollisionsOfSize(2);
-        Assert.assertEquals(1, map2.getCollidingBuckets());
+        assertEquals(1, map2.getCollidingBuckets());
 
         map2.put(42, 42);
-        Assert.assertEquals(1, map2.getCollidingBuckets());
+        assertEquals(1, map2.getCollidingBuckets());
 
         UnifiedMapWithHashingStrategy<String, String> map3 = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 STRING_HASHING_STRATEGY, "Six", "6", "Bar", "-", "Three", "3", "Five", "5");
-        Assert.assertEquals(2, map3.getCollidingBuckets());
+        assertEquals(2, map3.getCollidingBuckets());
     }
 
     @Override
@@ -737,21 +745,21 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
                 INTEGER_HASHING_STRATEGY, 2, 0.75f);
         MORE_COLLISIONS.forEach(Procedures.cast(each -> map.getIfAbsentPut(each, new PassThruFunction0<>(each))));
 
-        Assert.assertEquals(this.mapWithCollisionsOfSize(9), map);
+        assertEquals(this.mapWithCollisionsOfSize(9), map);
 
         //Testing getting element present in chain
         UnifiedMapWithHashingStrategy<Integer, Integer> map2 = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 INTEGER_HASHING_STRATEGY, COLLISION_1, 1, COLLISION_2, 2, COLLISION_3, 3, COLLISION_4, 4);
-        Assert.assertEquals(2, map2.getIfAbsentPut(COLLISION_2, () ->
+        assertEquals(2, map2.getIfAbsentPut(COLLISION_2, () ->
         {
-            Assert.fail();
+            fail();
             return null;
         }).intValue());
 
         //Testing rehashing while creating a new chained key
         UnifiedMapWithHashingStrategy<Integer, Integer> map3 = UnifiedMapWithHashingStrategy.<Integer, Integer>newMap(
                 INTEGER_HASHING_STRATEGY, 2, 0.75f).withKeysValues(COLLISION_1, 1, 2, 2, 3, 3);
-        Assert.assertEquals(4, map3.getIfAbsentPut(COLLISION_2, new PassThruFunction0<>(4)).intValue());
+        assertEquals(4, map3.getIfAbsentPut(COLLISION_2, new PassThruFunction0<>(4)).intValue());
     }
 
     @Override
@@ -765,13 +773,13 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
                 INTEGER_HASHING_STRATEGY, 2, 0.75f);
         MORE_COLLISIONS.forEach(Procedures.cast(each -> map.getIfAbsentPut(each, each)));
 
-        Assert.assertEquals(this.mapWithCollisionsOfSize(9), map);
+        assertEquals(this.mapWithCollisionsOfSize(9), map);
 
         //Testing getting element present in chain
         UnifiedMapWithHashingStrategy<Integer, Integer> map2 = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 INTEGER_HASHING_STRATEGY, COLLISION_1, 1, COLLISION_2, 2, COLLISION_3, 3, COLLISION_4, 4);
-        Assert.assertEquals(Integer.valueOf(2), map2.getIfAbsentPut(COLLISION_2, Integer.valueOf(5)));
-        Assert.assertEquals(Integer.valueOf(5), map2.getIfAbsentPut(5, Integer.valueOf(5)));
+        assertEquals(Integer.valueOf(2), map2.getIfAbsentPut(COLLISION_2, Integer.valueOf(5)));
+        assertEquals(Integer.valueOf(5), map2.getIfAbsentPut(5, Integer.valueOf(5)));
     }
 
     @Override
@@ -785,13 +793,13 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
                 INTEGER_HASHING_STRATEGY, 2, 0.75f);
         MORE_COLLISIONS.forEach(Procedures.cast(each -> map.getIfAbsentPutWith(each, Functions.getIntegerPassThru(), each)));
 
-        Assert.assertEquals(this.mapWithCollisionsOfSize(9), map);
+        assertEquals(this.mapWithCollisionsOfSize(9), map);
 
         //Testing getting element present in chain
         UnifiedMapWithHashingStrategy<Integer, Integer> map2 = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 INTEGER_HASHING_STRATEGY, COLLISION_1, 1, COLLISION_2, 2, COLLISION_3, 3, COLLISION_4, 4);
-        Assert.assertEquals(Integer.valueOf(2), map2.getIfAbsentPutWith(COLLISION_2, Functions.getIntegerPassThru(), Integer.valueOf(5)));
-        Assert.assertEquals(Integer.valueOf(5), map2.getIfAbsentPutWith(5, Functions.getIntegerPassThru(), Integer.valueOf(5)));
+        assertEquals(Integer.valueOf(2), map2.getIfAbsentPutWith(COLLISION_2, Functions.getIntegerPassThru(), Integer.valueOf(5)));
+        assertEquals(Integer.valueOf(5), map2.getIfAbsentPutWith(5, Functions.getIntegerPassThru(), Integer.valueOf(5)));
     }
 
     @Test
@@ -802,9 +810,9 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         UnifiedMapWithHashingStrategy<Person, Integer> map2 = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 FIRST_NAME_HASHING_STRATEGY, JOHNDOE, 1, JANEDOE, 1, JOHNSMITH, 1, JANESMITH, 1);
 
-        Assert.assertEquals(map1, map2);
-        Assert.assertEquals(map2, map1);
-        Assert.assertNotEquals(map1.hashCode(), map2.hashCode());
+        assertEquals(map1, map2);
+        assertEquals(map2, map1);
+        assertNotEquals(map1.hashCode(), map2.hashCode());
 
         UnifiedMapWithHashingStrategy<Person, Integer> map3 = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 LAST_NAME_HASHING_STRATEGY, JOHNDOE, 1, JANEDOE, 2, JOHNSMITH, 3, JANESMITH, 4);
@@ -812,11 +820,11 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         Map<Person, Integer> hashMap = new HashMap<>(map3);
 
         Verify.assertEqualsAndHashCode(map3, map4);
-        Assert.assertTrue(map3.equals(hashMap) && hashMap.equals(map3) && map3.hashCode() != hashMap.hashCode());
+        assertTrue(map3.equals(hashMap) && hashMap.equals(map3) && map3.hashCode() != hashMap.hashCode());
 
         UnifiedMap<Person, Integer> unifiedMap = UnifiedMap.newWithKeysValues(JOHNDOE, 1, JANEDOE, 1, JOHNSMITH, 1, JANESMITH, 1);
         UnifiedMapWithHashingStrategy<Person, Integer> map5 = UnifiedMapWithHashingStrategy.newMap(LAST_NAME_HASHING_STRATEGY, unifiedMap);
-        Assert.assertNotEquals(map5, unifiedMap);
+        assertNotEquals(map5, unifiedMap);
     }
 
     @Override
@@ -828,9 +836,9 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         // this map is deliberately small to force a rehash to occur from the put method, in a map with a chained bucket
         UnifiedMapWithHashingStrategy<Integer, Integer> map = UnifiedMapWithHashingStrategy.newMap(
                 INTEGER_HASHING_STRATEGY, 2, 0.75f);
-        COLLISIONS.forEach(0, 4, each -> Assert.assertNull(map.put(each, each)));
+        COLLISIONS.forEach(0, 4, each -> assertNull(map.put(each, each)));
 
-        Assert.assertEquals(this.mapWithCollisionsOfSize(5), map);
+        assertEquals(this.mapWithCollisionsOfSize(5), map);
     }
 
     @Test
@@ -839,34 +847,34 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         UnifiedMapWithHashingStrategy<Integer, Integer> map = UnifiedMapWithHashingStrategy.newMap(INTEGER_HASHING_STRATEGY);
 
         //Testing putting values in non chains
-        Assert.assertNull(map.put(1, 1));
-        Assert.assertNull(map.put(2, 2));
-        Assert.assertNull(map.put(3, 3));
-        Assert.assertNull(map.put(4, 4));
-        Assert.assertNull(map.put(5, null));
+        assertNull(map.put(1, 1));
+        assertNull(map.put(2, 2));
+        assertNull(map.put(3, 3));
+        assertNull(map.put(4, 4));
+        assertNull(map.put(5, null));
 
         //Testing getting values from no chains
-        Assert.assertEquals(1, map.get(1).intValue());
-        Assert.assertEquals(2, map.get(2).intValue());
-        Assert.assertNull(map.get(5));
+        assertEquals(1, map.get(1).intValue());
+        assertEquals(2, map.get(2).intValue());
+        assertNull(map.get(5));
 
         //Testing putting and getting elements in a chain
-        Assert.assertNull(map.put(COLLISION_1, 1));
-        Assert.assertNull(map.get(COLLISION_2));
+        assertNull(map.put(COLLISION_1, 1));
+        assertNull(map.get(COLLISION_2));
 
-        Assert.assertNull(map.put(COLLISION_2, 2));
-        Assert.assertNull(map.get(COLLISION_3));
+        assertNull(map.put(COLLISION_2, 2));
+        assertNull(map.get(COLLISION_3));
 
-        Assert.assertNull(map.put(COLLISION_3, null));
-        Assert.assertNull(map.put(COLLISION_4, 4));
-        Assert.assertNull(map.put(COLLISION_5, 5));
+        assertNull(map.put(COLLISION_3, null));
+        assertNull(map.put(COLLISION_4, 4));
+        assertNull(map.put(COLLISION_5, 5));
 
-        Assert.assertEquals(1, map.get(COLLISION_1).intValue());
-        Assert.assertEquals(5, map.get(COLLISION_5).intValue());
-        Assert.assertNull(map.get(COLLISION_3));
+        assertEquals(1, map.get(COLLISION_1).intValue());
+        assertEquals(5, map.get(COLLISION_5).intValue());
+        assertNull(map.get(COLLISION_3));
 
         map.remove(COLLISION_2);
-        Assert.assertNull(map.get(COLLISION_2));
+        assertNull(map.get(COLLISION_2));
 
         //Testing for casting exceptions
         HashingStrategy<Person> lastName = new HashingStrategy<Person>()
@@ -883,16 +891,16 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         };
 
         UnifiedMapWithHashingStrategy<Person, Integer> map2 = UnifiedMapWithHashingStrategy.newMap(lastName);
-        Assert.assertNull(map2.put(new Person("abe", "smith"), 1));
-        Assert.assertNull(map2.put(new Person("brad", "smith"), 2));
-        Assert.assertNull(map2.put(new Person("charlie", "smith"), 3));
+        assertNull(map2.put(new Person("abe", "smith"), 1));
+        assertNull(map2.put(new Person("brad", "smith"), 2));
+        assertNull(map2.put(new Person("charlie", "smith"), 3));
     }
 
     @Test
     public void hashingStrategy()
     {
         UnifiedMapWithHashingStrategy<Integer, Integer> map = UnifiedMapWithHashingStrategy.newWithKeysValues(INTEGER_HASHING_STRATEGY, 1, 1, 2, 2);
-        Assert.assertSame(INTEGER_HASHING_STRATEGY, map.hashingStrategy());
+        assertSame(INTEGER_HASHING_STRATEGY, map.hashingStrategy());
     }
 
     @Test
@@ -913,8 +921,8 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
             expected.put(each, each);
         });
 
-        Assert.assertEquals(expected, map);
-        Assert.assertEquals(261, map.size());
+        assertEquals(expected, map);
+        assertEquals(261, map.size());
 
         MutableList<Integer> toRemove = Lists.mutable.withAll(Interval.evensFromTo(0, 20));
 
@@ -926,9 +934,9 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         });
 
         // First assertion to verify that trim does not happen since, the table is already at the smallest required power of 2.
-        Assert.assertFalse(map.trimToSize());
-        Assert.assertEquals(expected, map);
-        Assert.assertEquals(239, map.size());
+        assertFalse(map.trimToSize());
+        assertEquals(expected, map);
+        assertEquals(239, map.size());
 
         Interval.evensFromTo(0, 250).each(each ->
         {
@@ -937,68 +945,68 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         });
 
         // Second assertion to verify that trim happens since, the table length is less than smallest required power of 2.
-        Assert.assertTrue(map.trimToSize());
-        Assert.assertFalse(map.trimToSize());
-        Assert.assertEquals(expected, map);
-        Assert.assertEquals(124, map.size());
-        expected.forEachKey(each -> Assert.assertEquals(each, map.get(each)));
+        assertTrue(map.trimToSize());
+        assertFalse(map.trimToSize());
+        assertEquals(expected, map);
+        assertEquals(124, map.size());
+        expected.forEachKey(each -> assertEquals(each, map.get(each)));
 
         integers.each(each ->
         {
             map.remove(each.toString());
             expected.remove(each.toString());
         });
-        Assert.assertTrue(map.trimToSize());
-        Assert.assertFalse(map.trimToSize());
-        Assert.assertEquals(expected, map);
-        expected.forEachKey(each -> Assert.assertEquals(each, map.get(each)));
+        assertTrue(map.trimToSize());
+        assertFalse(map.trimToSize());
+        assertEquals(expected, map);
+        expected.forEachKey(each -> assertEquals(each, map.get(each)));
 
         map.clear();
         expected.clear();
-        Assert.assertTrue(map.trimToSize());
+        assertTrue(map.trimToSize());
 
         Interval.zeroTo(20).each(each ->
         {
             map.put(each.toString(), each.toString());
             expected.put(each.toString(), each.toString());
         });
-        Assert.assertFalse(map.trimToSize());
+        assertFalse(map.trimToSize());
         Interval.fromTo(9, 18).each(each ->
         {
             map.remove(each.toString());
             expected.remove(each.toString());
         });
-        Assert.assertTrue(map.trimToSize());
-        Assert.assertFalse(map.trimToSize());
-        Assert.assertEquals(expected, map);
-        expected.forEachKey(each -> Assert.assertEquals(each, map.get(each)));
+        assertTrue(map.trimToSize());
+        assertFalse(map.trimToSize());
+        assertEquals(expected, map);
+        expected.forEachKey(each -> assertEquals(each, map.get(each)));
 
         map.clear();
-        Assert.assertTrue(map.trimToSize());
-        Assert.assertTrue(map.isEmpty());
+        assertTrue(map.trimToSize());
+        assertTrue(map.isEmpty());
         Interval.zeroTo(6).each(each -> map.put(each.toString(), each.toString()));
         // Assert that trim does not happen as long as table.size is already as smaller than required
-        Assert.assertFalse(map.trimToSize());
+        assertFalse(map.trimToSize());
         map.put("7", "7");
 
         map.removeKey("2");
         map.removeKey("3");
         // Assert that trim does not happen as long as table.size is as small as required
-        Assert.assertFalse(map.trimToSize());
+        assertFalse(map.trimToSize());
         map.removeKey("5");
         map.removeKey("7");
-        Assert.assertTrue(map.trimToSize());
+        assertTrue(map.trimToSize());
         // Inflate the map so that table.length increases to next power of 2 and check that trim does not happen
         map.put("2", "2");
         map.put("5", "5");
         map.put("7", "7");
         // Assert that the resized table due to put is the required size and no need to trim that.
-        Assert.assertFalse(map.trimToSize());
+        assertFalse(map.trimToSize());
 
         Interval.zeroTo(4).each(each -> map.put(each.toString(), each.toString()));
         Interval.oneTo(3).each(each -> map.removeKey(each.toString()));
-        Assert.assertTrue(map.trimToSize());
-        Assert.assertEquals(5, map.size());
+        assertTrue(map.trimToSize());
+        assertEquals(5, map.size());
     }
 
     @Override

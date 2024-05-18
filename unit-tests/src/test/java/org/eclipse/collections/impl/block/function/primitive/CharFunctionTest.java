@@ -10,8 +10,9 @@
 
 package org.eclipse.collections.impl.block.function.primitive;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Junit test for {@link CharFunction}.
@@ -24,16 +25,16 @@ public class CharFunctionTest
     @Test
     public void toUppercase()
     {
-        Assert.assertEquals('A', CharFunction.TO_UPPERCASE.valueOf('a'));
-        Assert.assertEquals('A', CharFunction.TO_UPPERCASE.valueOf('A'));
-        Assert.assertEquals('1', CharFunction.TO_UPPERCASE.valueOf('1'));
+        assertEquals('A', CharFunction.TO_UPPERCASE.valueOf('a'));
+        assertEquals('A', CharFunction.TO_UPPERCASE.valueOf('A'));
+        assertEquals('1', CharFunction.TO_UPPERCASE.valueOf('1'));
     }
 
     @Test
     public void toLowercase()
     {
-        Assert.assertEquals('a', CharFunction.TO_LOWERCASE.valueOf('a'));
-        Assert.assertEquals('a', CharFunction.TO_LOWERCASE.valueOf('A'));
-        Assert.assertEquals('1', CharFunction.TO_LOWERCASE.valueOf('1'));
+        assertEquals('a', CharFunction.TO_LOWERCASE.valueOf('a'));
+        assertEquals('a', CharFunction.TO_LOWERCASE.valueOf('A'));
+        assertEquals('1', CharFunction.TO_LOWERCASE.valueOf('1'));
     }
 }

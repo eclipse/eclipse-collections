@@ -27,10 +27,12 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iBag;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class ImmutableHashBagTest extends ImmutableBagTestCase
 {
@@ -56,10 +58,10 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
     @Override
     public void toStringOfItemToCount()
     {
-        Assert.assertEquals("{}", ImmutableHashBag.newBag().toStringOfItemToCount());
-        Assert.assertEquals("{1=3}", ImmutableHashBag.newBagWith("1", "1", "1").toStringOfItemToCount());
+        assertEquals("{}", ImmutableHashBag.newBag().toStringOfItemToCount());
+        assertEquals("{1=3}", ImmutableHashBag.newBagWith("1", "1", "1").toStringOfItemToCount());
         String actual = ImmutableHashBag.newBagWith("1", "2", "2").toStringOfItemToCount();
-        Assert.assertTrue("{1=1, 2=2}".equals(actual) || "{2=2, 1=1}".equals(actual));
+        assertTrue("{1=1, 2=2}".equals(actual) || "{2=2, 1=1}".equals(actual));
     }
 
     @Override
@@ -69,8 +71,8 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         super.selectInstancesOf();
 
         ImmutableBag<Number> numbers = ImmutableHashBag.newBagWith(1, 2.0, 2.0, 3, 3, 3, 4.0, 4.0, 4.0, 4.0);
-        Assert.assertEquals(iBag(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
+        assertEquals(iBag(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
+        assertEquals(iBag(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
     }
 
     @Override
@@ -78,9 +80,9 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
     public void collectBoolean()
     {
         ImmutableBooleanBag result = this.newBag().collectBoolean("4"::equals);
-        Assert.assertEquals(2, result.sizeDistinct());
-        Assert.assertEquals(4, result.occurrencesOf(true));
-        Assert.assertEquals(6, result.occurrencesOf(false));
+        assertEquals(2, result.sizeDistinct());
+        assertEquals(4, result.occurrencesOf(true));
+        assertEquals(6, result.occurrencesOf(false));
     }
 
     @Test
@@ -88,7 +90,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
     {
         ImmutableHashBag<Object> immutableHashBag = ImmutableHashBag.newBagWith(HashBag.newBag().with(1, 2, 3, 4));
         Verify.assertSize(4, immutableHashBag);
-        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), immutableHashBag.toSortedList());
+        assertEquals(FastList.newListWith(1, 2, 3, 4), immutableHashBag.toSortedList());
     }
 
     @Override
@@ -107,11 +109,11 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         });
         Multimap<Integer, Integer> actual =
                 immutableBag.groupByEach(new NegativeIntervalFunction());
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
         Multimap<Integer, Integer> actualWithTarget =
                 immutableBag.groupByEach(new NegativeIntervalFunction(), HashBagMultimap.newMultimap());
-        Assert.assertEquals(expected, actualWithTarget);
+        assertEquals(expected, actualWithTarget);
     }
 
     @Override
@@ -119,7 +121,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
     public void groupByUniqueKey()
     {
         ImmutableBag<Integer> immutableBag = ImmutableHashBag.newBagWith(1, 2, 3);
-        Assert.assertEquals(Maps.immutable.of(1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id));
+        assertEquals(Maps.immutable.of(1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id));
     }
 
     @Override
@@ -127,7 +129,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
     public void groupByUniqueKey_target()
     {
         ImmutableBag<Integer> immutableBag = ImmutableHashBag.newBagWith(1, 2, 3);
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0)));
+        assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
     @Test
@@ -147,10 +149,10 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         ImmutableBag<String> strings = ImmutableHashBag.newBagWith(mutable);
         ImmutableList<ObjectIntPair<String>> top5 = strings.topOccurrences(5);
         Verify.assertIterableSize(5, top5);
-        Assert.assertEquals("ten", top5.getFirst().getOne());
-        Assert.assertEquals(10, top5.getFirst().getTwo());
-        Assert.assertEquals("six", top5.getLast().getOne());
-        Assert.assertEquals(6, top5.getLast().getTwo());
+        assertEquals("ten", top5.getFirst().getOne());
+        assertEquals(10, top5.getFirst().getTwo());
+        assertEquals("six", top5.getLast().getOne());
+        assertEquals(6, top5.getLast().getTwo());
         Verify.assertIterableSize(0, ImmutableHashBag.newBagWith().topOccurrences(5));
         Verify.assertIterableSize(3, this.newWith("one", "two", "three").topOccurrences(5));
         Verify.assertIterableSize(3, this.newWith("one", "two", "three").topOccurrences(1));
@@ -162,7 +164,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         Verify.assertIterableSize(3, this.newWith("one", "one", "two", "two", "three", "three").topOccurrences(1));
         Verify.assertIterableSize(0, this.newWith("one").newWithout("one").topOccurrences(0));
         Verify.assertIterableSize(0, this.newWith("one").topOccurrences(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith("one").topOccurrences(-1));
+        assertThrows(IllegalArgumentException.class, () -> this.newWith("one").topOccurrences(-1));
     }
 
     @Test
@@ -182,10 +184,10 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         ImmutableBag<String> strings = ImmutableHashBag.newBagWith(mutable);
         ImmutableList<ObjectIntPair<String>> bottom5 = strings.bottomOccurrences(5);
         Verify.assertIterableSize(5, bottom5);
-        Assert.assertEquals("one", bottom5.getFirst().getOne());
-        Assert.assertEquals(1, bottom5.getFirst().getTwo());
-        Assert.assertEquals("five", bottom5.getLast().getOne());
-        Assert.assertEquals(5, bottom5.getLast().getTwo());
+        assertEquals("one", bottom5.getFirst().getOne());
+        assertEquals(1, bottom5.getFirst().getTwo());
+        assertEquals("five", bottom5.getLast().getOne());
+        assertEquals(5, bottom5.getLast().getTwo());
         Verify.assertIterableSize(0, ImmutableHashBag.newBagWith().bottomOccurrences(5));
         Verify.assertIterableSize(3, this.newWith("one", "two", "three").bottomOccurrences(5));
         Verify.assertIterableSize(3, this.newWith("one", "two", "three").bottomOccurrences(1));
@@ -197,7 +199,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         Verify.assertIterableSize(3, this.newWith("one", "one", "two", "two", "three", "three").bottomOccurrences(1));
         Verify.assertIterableSize(0, this.newWith("one").newWithout("one").bottomOccurrences(0));
         Verify.assertIterableSize(0, this.newWith("one").bottomOccurrences(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith("one").bottomOccurrences(-1));
+        assertThrows(IllegalArgumentException.class, () -> this.newWith("one").bottomOccurrences(-1));
     }
 
     @Override
@@ -209,6 +211,6 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         ImmutableBag<String> bag = this.newBag();
         ImmutableSet<String> expected = Sets.immutable.of("1");
         ImmutableSet<String> actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

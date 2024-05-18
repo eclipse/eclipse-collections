@@ -25,8 +25,10 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link TreeBag}.
@@ -60,7 +62,7 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
         TreeBag<Integer> sortedBagA = TreeBag.newBag(Collections.reverseOrder());
         TreeBag<Integer> sortedBagB = TreeBag.newBag(sortedBagA.with(1).with(2, 3).with(4, 5, 6).with(1, 1, 1, 1));
         Verify.assertSortedBagsEqual(sortedBagA, sortedBagB);
-        Assert.assertTrue(sortedBagA.getFirst().equals(sortedBagB.getFirst()) && sortedBagB.getFirst() == 6);
+        assertTrue(sortedBagA.getFirst().equals(sortedBagB.getFirst()) && sortedBagB.getFirst() == 6);
         Verify.assertSortedBagsEqual(sortedBagB, TreeBag.newBag(sortedBagB));
     }
 
@@ -78,7 +80,7 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
         TreeBag<Integer> sortedBagA = TreeBag.newBag(Collections.reverseOrder());
         TreeBag<Integer> sortedBagB = TreeBag.newBag(sortedBagA.with(1).with(2, 3).with(4, 5, 6).with(1, 1, 1, 1));
 
-        Assert.assertEquals(Lists.mutable.of(
+        assertEquals(Lists.mutable.of(
                 PrimitiveTuples.pair((Integer) 6, 0),
                 PrimitiveTuples.pair((Integer) 5, 1),
                 PrimitiveTuples.pair((Integer) 4, 2),
@@ -97,7 +99,7 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
         TreeBag<String> sortedBagA = TreeBag.newBag(Collections.reverseOrder());
         TreeBag<String> sortedBagB = TreeBag.newBag(sortedBagA.with("1").with("2", "3").with("1"));
         String s = "Alex";
-        Assert.assertEquals(Lists.mutable.of("3", s, "2", s, "1", s, "1", s),
+        assertEquals(Lists.mutable.of("3", s, "2", s, "1", s, "1", s),
                 sortedBagB.flatCollectWith(Lists.mutable::of, s));
     }
 
@@ -132,13 +134,13 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
         Bag<Integer> bag1 = this.newWith(3, 3, 3, 2, 2, 1);
         Bag<ObjectIntPair<Integer>> actual1 =
                 bag1.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
-        Assert.assertEquals(
+        assertEquals(
                 Bags.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1)),
                 actual1);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(1), 1),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
@@ -147,7 +149,7 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
 
         Set<ObjectIntPair<Integer>> actual2 =
                 bag1.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
-        Assert.assertEquals(
+        assertEquals(
                 Sets.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
@@ -155,7 +157,7 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
                 actual2);
 
         Bag<Integer> bag2 = this.newWith(Comparator.reverseOrder(), 3, 3, 3, 2, 2, 1);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
@@ -163,7 +165,7 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
                 bag2.collectWithOccurrences(PrimitiveTuples::pair));
 
         Bag<Integer> bag3 = this.newWith(3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 4, 5, 7);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(6, 5, 8, 5, 6, 8),
                 bag3.collectWithOccurrences((each, index) -> each + index));
     }

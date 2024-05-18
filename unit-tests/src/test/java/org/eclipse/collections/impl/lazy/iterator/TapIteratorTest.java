@@ -17,8 +17,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class TapIteratorTest
 {
@@ -42,7 +44,7 @@ public class TapIteratorTest
         Object expected = new Object();
         Iterator<Object> iterator = new TapIterator<>(
                 Lists.fixedSize.of(expected), object -> { });
-        Assert.assertSame(expected, iterator.next());
+        assertSame(expected, iterator.next());
     }
 
     @Test
@@ -61,6 +63,6 @@ public class TapIteratorTest
         {
             intList.add(iterator.next().get());
         }
-        Assert.assertEquals(IntLists.mutable.of(10, 20, 30), intList);
+        assertEquals(IntLists.mutable.of(10, 20, 30), intList);
     }
 }

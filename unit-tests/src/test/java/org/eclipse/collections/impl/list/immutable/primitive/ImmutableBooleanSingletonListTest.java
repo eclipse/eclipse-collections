@@ -12,8 +12,10 @@ package org.eclipse.collections.impl.list.immutable.primitive;
 
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class ImmutableBooleanSingletonListTest extends AbstractImmutableBooleanListTestCase
 {
@@ -28,14 +30,14 @@ public class ImmutableBooleanSingletonListTest extends AbstractImmutableBooleanL
     public void testEquals()
     {
         super.testEquals();
-        Assert.assertNotEquals(this.newWith(true), this.newWith());
+        assertNotEquals(this.newWith(true), this.newWith());
     }
 
     @Override
     @Test
     public void toReversed()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toReversed());
+        assertEquals(this.classUnderTest(), this.classUnderTest().toReversed());
     }
 
     @Override
@@ -45,6 +47,6 @@ public class ImmutableBooleanSingletonListTest extends AbstractImmutableBooleanL
         String[] sum = new String[2];
         sum[0] = "";
         this.classUnderTest().forEachWithIndex((each, index) -> sum[0] += index + ":" + each);
-        Assert.assertEquals("0:true", sum[0]);
+        assertEquals("0:true", sum[0]);
     }
 }

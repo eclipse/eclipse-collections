@@ -14,8 +14,10 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class MutableStackFactoryTest
 {
@@ -25,7 +27,7 @@ public class MutableStackFactoryTest
     public void with()
     {
         MutableStack<Object> stack = this.mutableStackFactory.with();
-        Verify.assertNotNull(stack);
+        assertNotNull(stack);
         Verify.assertEmpty(stack);
     }
 
@@ -33,15 +35,15 @@ public class MutableStackFactoryTest
     public void of()
     {
         MutableStack<Integer> stack = this.mutableStackFactory.of();
-        Verify.assertNotNull(stack);
+        assertNotNull(stack);
         Verify.assertEmpty(stack);
 
         MutableStack<Integer> intStack = this.mutableStackFactory.of(1, 2, 3);
         Verify.assertSize(3, intStack);
         Verify.assertContainsAll(intStack, 1, 2, 3);
-        Assert.assertEquals(3, (long) intStack.pop());
-        Assert.assertEquals(2, (long) intStack.pop());
-        Assert.assertEquals(1, (long) intStack.pop());
+        assertEquals(3, (long) intStack.pop());
+        assertEquals(2, (long) intStack.pop());
+        assertEquals(1, (long) intStack.pop());
     }
 
     @Test
@@ -49,8 +51,8 @@ public class MutableStackFactoryTest
     {
         MutableStack<Integer> intStack = this.mutableStackFactory.ofAll(Lists.mutable.of(4, 5));
         Verify.assertSize(2, intStack);
-        Assert.assertEquals(5, (long) intStack.pop());
-        Assert.assertEquals(4, (long) intStack.pop());
+        assertEquals(5, (long) intStack.pop());
+        assertEquals(4, (long) intStack.pop());
         Verify.assertEmpty(intStack);
     }
 
@@ -59,8 +61,8 @@ public class MutableStackFactoryTest
     {
         MutableStack<Integer> intStack = this.mutableStackFactory.ofAllReversed(Lists.mutable.of(4, 5));
         Verify.assertSize(2, intStack);
-        Assert.assertEquals(4, (long) intStack.pop());
-        Assert.assertEquals(5, (long) intStack.pop());
+        assertEquals(4, (long) intStack.pop());
+        assertEquals(5, (long) intStack.pop());
         Verify.assertEmpty(intStack);
     }
 }

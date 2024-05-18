@@ -70,6 +70,7 @@ import static org.eclipse.collections.impl.test.Verify.assertPostSerializedEqual
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.eclipse.collections.test.IterableTestCase.assertNotEquals;
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
@@ -90,7 +91,7 @@ public interface RichIterableUniqueTestCase
     {
         Iterable<Integer> iterable = this.newWith(3, 2, 1);
         Object deserialized = SerializeTestHelper.serializeDeserialize(iterable);
-        Assert.assertNotSame(iterable, deserialized);
+        assertNotSame(iterable, deserialized);
     }
 
     @Override

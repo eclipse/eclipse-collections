@@ -15,8 +15,10 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class SerializableComparatorsTest
 {
@@ -30,10 +32,10 @@ public class SerializableComparatorsTest
     public void naturalOrder()
     {
         MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with("1", "2", "3", "4"),
                 list.sortThis(SerializableComparators.naturalOrder()));
-        Assert.assertThrows(
+        assertThrows(
                 NullPointerException.class,
                 () -> FastList.newListWith("1", "2", null, "4").sortThis(Comparators.naturalOrder()));
     }
@@ -42,7 +44,7 @@ public class SerializableComparatorsTest
     public void reverseNaturalOrder()
     {
         MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with("4", "3", "2", "1"),
                 list.sortThis(SerializableComparators.reverseNaturalOrder()));
     }
@@ -51,9 +53,9 @@ public class SerializableComparatorsTest
     public void reverse()
     {
         MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with("4", "3", "2", "1"),
                 list.sortThis(SerializableComparators.reverse(String::compareTo)));
-        Assert.assertThrows(NullPointerException.class, () -> SerializableComparators.reverse(null));
+        assertThrows(NullPointerException.class, () -> SerializableComparators.reverse(null));
     }
 }

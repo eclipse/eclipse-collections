@@ -14,8 +14,9 @@ import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.MutableSet;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PartitionUnifiedSetTest
 {
@@ -28,7 +29,7 @@ public class PartitionUnifiedSetTest
         partitionMutableSet.getSelected().addAll(selected);
         partitionMutableSet.getRejected().addAll(rejected);
         PartitionImmutableSet<Integer> integerPartitionImmutableSet = partitionMutableSet.toImmutable();
-        Assert.assertEquals(selected, integerPartitionImmutableSet.getSelected());
-        Assert.assertEquals(rejected, integerPartitionImmutableSet.getRejected());
+        assertEquals(selected, integerPartitionImmutableSet.getSelected());
+        assertEquals(rejected, integerPartitionImmutableSet.getRejected());
     }
 }

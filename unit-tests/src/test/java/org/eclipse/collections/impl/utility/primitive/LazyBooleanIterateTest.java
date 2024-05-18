@@ -15,8 +15,10 @@ import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.block.procedure.primitive.BooleanProcedure;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LazyBooleanIterateTest
 {
@@ -25,19 +27,19 @@ public class LazyBooleanIterateTest
     @Test
     public void adapt()
     {
-        Assert.assertEquals(this.iterable, LazyBooleanIterate.adapt(this.iterable).toList());
+        assertEquals(this.iterable, LazyBooleanIterate.adapt(this.iterable).toList());
     }
 
     @Test
     public void collectIf()
     {
-        Assert.assertEquals(this.iterable.collect(each -> each), LazyBooleanIterate.collectIf(this.iterable, each -> true, each -> each).toList());
+        assertEquals(this.iterable.collect(each -> each), LazyBooleanIterate.collectIf(this.iterable, each -> true, each -> each).toList());
     }
 
     @Test
     public void empty()
     {
-        Assert.assertTrue(LazyBooleanIterate.empty().isEmpty());
+        assertTrue(LazyBooleanIterate.empty().isEmpty());
     }
 
     @Test
@@ -45,7 +47,7 @@ public class LazyBooleanIterateTest
     {
         MutableBooleanList list = BooleanLists.mutable.empty();
         LazyBooleanIterable booleanIterable = LazyBooleanIterate.tap(this.iterable, (BooleanProcedure) list::add);
-        Assert.assertEquals(this.iterable, BooleanLists.mutable.ofAll(booleanIterable));
-        Assert.assertEquals(this.iterable, list);
+        assertEquals(this.iterable, BooleanLists.mutable.ofAll(booleanIterable));
+        assertEquals(this.iterable, list);
     }
 }

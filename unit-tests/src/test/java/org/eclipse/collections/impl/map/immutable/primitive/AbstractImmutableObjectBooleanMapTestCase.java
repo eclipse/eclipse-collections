@@ -13,8 +13,9 @@ package org.eclipse.collections.impl.map.immutable.primitive;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectBooleanMap;
 import org.eclipse.collections.impl.map.mutable.primitive.AbstractObjectBooleanMapTestCase;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMap;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertSame;
 
 public abstract class AbstractImmutableObjectBooleanMapTestCase extends AbstractObjectBooleanMapTestCase
 {
@@ -57,6 +58,6 @@ public abstract class AbstractImmutableObjectBooleanMapTestCase extends Abstract
     {
         super.toImmutable();
         ImmutableObjectBooleanMap<String> map = this.classUnderTest();
-        Assert.assertSame(map, map.toImmutable());
+        assertSame(map, map.toImmutable());
     }
 }

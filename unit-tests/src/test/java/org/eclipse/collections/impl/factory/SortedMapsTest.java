@@ -11,8 +11,9 @@
 package org.eclipse.collections.impl.factory;
 
 import org.eclipse.collections.api.factory.map.sorted.MutableSortedMapFactory;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class SortedMapsTest
 {
@@ -20,7 +21,7 @@ public class SortedMapsTest
     public void mutables()
     {
         MutableSortedMapFactory factory = SortedMaps.mutable;
-        Assert.assertEquals(SortedMaps.mutable.empty(), factory.empty());
-        Assert.assertEquals(SortedMaps.mutable.empty(Integer::compare), factory.empty(Integer::compare));
+        assertEquals(SortedMaps.mutable.empty(), factory.empty());
+        assertEquals(SortedMaps.mutable.empty(Integer::compare), factory.empty(Integer::compare));
     }
 }

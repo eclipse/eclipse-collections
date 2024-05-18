@@ -32,8 +32,10 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * Test of {@link UnifiedSetWithHashingStrategyMultimap}.
@@ -160,7 +162,7 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         UnifiedSetWithHashingStrategyMultimap<Integer, Person> hashingMap2 = UnifiedSetWithHashingStrategyMultimap.newMultimap(map2);
 
         Verify.assertSetsEqual(hashingMap.get(1), hashingMap2.get(1));
-        Assert.assertSame(hashingMap.getValueHashingStrategy(), hashingMap2.getValueHashingStrategy());
+        assertSame(hashingMap.getValueHashingStrategy(), hashingMap2.getValueHashingStrategy());
     }
 
     @Test
@@ -178,8 +180,8 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
 
         Verify.assertMapsEqual(expected, lastNameMap.getMap());
         Verify.assertMapsEqual(expected, newEmptyMap.getMap());
-        Assert.assertSame(LAST_NAME_STRATEGY, lastNameMap.getValueHashingStrategy());
-        Assert.assertSame(LAST_NAME_STRATEGY, newEmptyMap.getValueHashingStrategy());
+        assertSame(LAST_NAME_STRATEGY, lastNameMap.getValueHashingStrategy());
+        assertSame(LAST_NAME_STRATEGY, newEmptyMap.getValueHashingStrategy());
     }
 
     @Override
@@ -219,9 +221,9 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         UnifiedSetWithHashingStrategyMultimap<Integer, Person> expectedMultimap = UnifiedSetWithHashingStrategyMultimap.newMultimap(FIRST_NAME_STRATEGY);
         expectedMultimap.put(2, JANESMITH);
         expectedMultimap.put(2, JANEDOE);
-        Assert.assertEquals(expectedMultimap, selectedMultimap);
+        assertEquals(expectedMultimap, selectedMultimap);
         Verify.assertMapsEqual(expectedMultimap.getMap(), selectedMultimap.getMap());
-        Assert.assertSame(expectedMultimap.getValueHashingStrategy(), selectedMultimap.getValueHashingStrategy());
+        assertSame(expectedMultimap.getValueHashingStrategy(), selectedMultimap.getValueHashingStrategy());
     }
 
     @Override
@@ -242,9 +244,9 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         UnifiedSetWithHashingStrategyMultimap<Integer, Person> expectedMultimap = UnifiedSetWithHashingStrategyMultimap.newMultimap(FIRST_NAME_STRATEGY);
         expectedMultimap.put(1, JOHNSMITH);
         expectedMultimap.put(1, JOHNDOE);
-        Assert.assertEquals(expectedMultimap, rejectedMultimap);
+        assertEquals(expectedMultimap, rejectedMultimap);
         Verify.assertMapsEqual(expectedMultimap.getMap(), rejectedMultimap.getMap());
-        Assert.assertSame(expectedMultimap.getValueHashingStrategy(), rejectedMultimap.getValueHashingStrategy());
+        assertSame(expectedMultimap.getValueHashingStrategy(), rejectedMultimap.getValueHashingStrategy());
     }
 
     @Override
@@ -270,9 +272,9 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         expectedMultimap.put(2, JANESMITH);
         expectedMultimap.put(2, JANEDOE);
         expectedMultimap.put(2, JOHNDOE);
-        Assert.assertEquals(expectedMultimap, selectedMultimap);
+        assertEquals(expectedMultimap, selectedMultimap);
         Verify.assertMapsEqual(expectedMultimap.getMap(), selectedMultimap.getMap());
-        Assert.assertSame(expectedMultimap.getValueHashingStrategy(), selectedMultimap.getValueHashingStrategy());
+        assertSame(expectedMultimap.getValueHashingStrategy(), selectedMultimap.getValueHashingStrategy());
     }
 
     @Override
@@ -297,9 +299,9 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         UnifiedSetWithHashingStrategyMultimap<Integer, Person> expectedMultimap = UnifiedSetWithHashingStrategyMultimap.newMultimap(FIRST_NAME_STRATEGY);
         expectedMultimap.put(3, JOHNSMITH);
         expectedMultimap.put(3, JOHNDOE);
-        Assert.assertEquals(expectedMultimap, rejectedMultimap);
+        assertEquals(expectedMultimap, rejectedMultimap);
         Verify.assertMapsEqual(expectedMultimap.getMap(), rejectedMultimap.getMap());
-        Assert.assertSame(expectedMultimap.getValueHashingStrategy(), rejectedMultimap.getValueHashingStrategy());
+        assertSame(expectedMultimap.getValueHashingStrategy(), rejectedMultimap.getValueHashingStrategy());
     }
 
     @Override
@@ -325,7 +327,7 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         expectedMultimap1.put("2", 200);
         expectedMultimap1.put("2", 200);
 
-        Assert.assertEquals(expectedMultimap1, collectedMultimap1);
+        assertEquals(expectedMultimap1, collectedMultimap1);
 
         MutableBagMultimap<String, Integer> collectedMultimap2 = multimap.collectKeysValues((key, value) -> Tuples.pair("1", key * value.getAge()));
         MutableBagMultimap<String, Integer> expectedMultimap2 = HashBagMultimap.newMultimap();
@@ -334,7 +336,7 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         expectedMultimap2.put("1", 200);
         expectedMultimap2.put("1", 200);
 
-        Assert.assertEquals(expectedMultimap2, collectedMultimap2);
+        assertEquals(expectedMultimap2, collectedMultimap2);
     }
 
     @Override
@@ -358,14 +360,14 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         expectedMultimap1.put("1", 100);
         expectedMultimap1.put("2", 100);
 
-        Assert.assertEquals(expectedMultimap1, collectedMultimap1);
+        assertEquals(expectedMultimap1, collectedMultimap1);
 
         MutableBagMultimap<String, Integer> collectedMultimap2 = multimap.collectKeyMultiValues(key -> "1", Person::getAge);
         MutableBagMultimap<String, Integer> expectedMultimap2 = HashBagMultimap.newMultimap();
         expectedMultimap2.put("1", 100);
         expectedMultimap2.put("1", 100);
 
-        Assert.assertEquals(expectedMultimap2, collectedMultimap2);
+        assertEquals(expectedMultimap2, collectedMultimap2);
     }
 
     @Override
@@ -387,6 +389,6 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         expectedMultimap.put(1, 100);
         expectedMultimap.put(2, 100);
 
-        Assert.assertEquals(expectedMultimap, collectedMultimap);
+        assertEquals(expectedMultimap, collectedMultimap);
     }
 }

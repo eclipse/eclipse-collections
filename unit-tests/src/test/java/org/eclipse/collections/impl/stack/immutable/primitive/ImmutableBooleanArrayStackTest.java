@@ -13,8 +13,9 @@ package org.eclipse.collections.impl.stack.immutable.primitive;
 import org.eclipse.collections.api.stack.primitive.ImmutableBooleanStack;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.stack.mutable.primitive.BooleanArrayStack;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit test for {@link ImmutableBooleanArrayStack}.
@@ -30,12 +31,12 @@ public class ImmutableBooleanArrayStackTest extends AbstractImmutableBooleanStac
     @Test
     public void newWithIterable()
     {
-        Assert.assertEquals(BooleanArrayStack.newStackWith(true, true, false), this.newWithIterable(BooleanArrayList.newListWith(true, true, false)));
+        assertEquals(BooleanArrayStack.newStackWith(true, true, false), this.newWithIterable(BooleanArrayList.newListWith(true, true, false)));
     }
 
     @Test
     public void newWithTopToBottom()
     {
-        Assert.assertEquals(BooleanArrayStack.newStackFromTopToBottom(true, true, false), this.newWithTopToBottom(true, true, false));
+        assertEquals(BooleanArrayStack.newStackFromTopToBottom(true, true, false), this.newWithTopToBottom(true, true, false));
     }
 }

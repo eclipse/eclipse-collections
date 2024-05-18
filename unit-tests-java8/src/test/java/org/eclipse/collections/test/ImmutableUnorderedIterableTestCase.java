@@ -15,6 +15,8 @@ import java.util.Iterator;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public interface ImmutableUnorderedIterableTestCase extends UnorderedIterableTestCase
 {
     @Override
@@ -23,6 +25,6 @@ public interface ImmutableUnorderedIterableTestCase extends UnorderedIterableTes
     {
         Iterator<Integer> iterator = this.newWith(3, 2, 1).iterator();
         iterator.next();
-        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 }

@@ -13,8 +13,12 @@ package org.eclipse.collections.impl.block.procedure;
 import java.util.Optional;
 
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class MaxByProcedureTest
 {
@@ -22,27 +26,27 @@ public class MaxByProcedureTest
     public void visitedAtLeastOnce()
     {
         MaxByProcedure<Integer, Integer> procedure = new MaxByProcedure<>(Functions.getPassThru());
-        Assert.assertFalse(procedure.isVisitedAtLeastOnce());
+        assertFalse(procedure.isVisitedAtLeastOnce());
         procedure.value(1);
-        Assert.assertTrue(procedure.isVisitedAtLeastOnce());
+        assertTrue(procedure.isVisitedAtLeastOnce());
         procedure.value(2);
-        Assert.assertTrue(procedure.isVisitedAtLeastOnce());
+        assertTrue(procedure.isVisitedAtLeastOnce());
     }
 
     @Test
     public void getResultOptional()
     {
         MaxByProcedure<Integer, Integer> procedure = new MaxByProcedure<>(Functions.getPassThru());
-        Assert.assertFalse(procedure.getResultOptional().isPresent());
+        assertFalse(procedure.getResultOptional().isPresent());
         procedure.value(2);
         Optional<Integer> resultOptional = procedure.getResultOptional();
-        Assert.assertTrue(resultOptional.isPresent());
-        Assert.assertEquals((Integer) 2, resultOptional.get());
+        assertTrue(resultOptional.isPresent());
+        assertEquals((Integer) 2, resultOptional.get());
 
         procedure.value(1);
         Optional<Integer> resultOptional2 = procedure.getResultOptional();
-        Assert.assertTrue(resultOptional2.isPresent());
-        Assert.assertEquals((Integer) 2, resultOptional2.get());
+        assertTrue(resultOptional2.isPresent());
+        assertEquals((Integer) 2, resultOptional2.get());
     }
 
     @Test
@@ -51,15 +55,15 @@ public class MaxByProcedureTest
         MaxByProcedure<Integer, Integer> procedure = new MaxByProcedure<>(Functions.getPassThru());
         Integer first = new Integer(1);
         procedure.value(first);
-        Assert.assertSame(first, procedure.getResult());
+        assertSame(first, procedure.getResult());
         Integer second = new Integer(1);
         procedure.value(second);
-        Assert.assertSame(first, procedure.getResult());
+        assertSame(first, procedure.getResult());
         Integer third = new Integer(3);
         procedure.value(third);
-        Assert.assertSame(third, procedure.getResult());
+        assertSame(third, procedure.getResult());
         Integer fourth = new Integer(0);
         procedure.value(fourth);
-        Assert.assertSame(third, procedure.getResult());
+        assertSame(third, procedure.getResult());
     }
 }

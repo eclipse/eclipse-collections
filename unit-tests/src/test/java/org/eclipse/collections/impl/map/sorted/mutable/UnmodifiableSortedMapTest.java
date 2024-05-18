@@ -16,8 +16,10 @@ import java.util.TreeMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class UnmodifiableSortedMapTest
 {
@@ -30,7 +32,7 @@ public class UnmodifiableSortedMapTest
     @Test
     public void comparator()
     {
-        Assert.assertEquals(Comparators.<Integer>reverseNaturalOrder(), this.revMap.comparator());
+        assertEquals(Comparators.<Integer>reverseNaturalOrder(), this.revMap.comparator());
     }
 
     @Test
@@ -57,25 +59,25 @@ public class UnmodifiableSortedMapTest
     @Test
     public void firstKey()
     {
-        Assert.assertEquals(1, this.map.firstKey().intValue());
-        Assert.assertEquals(4, this.revMap.firstKey().intValue());
+        assertEquals(1, this.map.firstKey().intValue());
+        assertEquals(4, this.revMap.firstKey().intValue());
     }
 
     @Test
     public void lasKey()
     {
-        Assert.assertEquals(4, this.map.lastKey().intValue());
-        Assert.assertEquals(1, this.revMap.lastKey().intValue());
+        assertEquals(4, this.map.lastKey().intValue());
+        assertEquals(1, this.revMap.lastKey().intValue());
     }
 
     private void checkMutability(Map<Integer, String> map)
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.put(3, "1"));
+        assertThrows(UnsupportedOperationException.class, () -> map.put(3, "1"));
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.putAll(SortedMaps.mutable.of(1, "1", 2, "2")));
+        assertThrows(UnsupportedOperationException.class, () -> map.putAll(SortedMaps.mutable.of(1, "1", 2, "2")));
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.remove(2));
+        assertThrows(UnsupportedOperationException.class, () -> map.remove(2));
 
-        Assert.assertThrows(UnsupportedOperationException.class, map::clear);
+        assertThrows(UnsupportedOperationException.class, map::clear);
     }
 }

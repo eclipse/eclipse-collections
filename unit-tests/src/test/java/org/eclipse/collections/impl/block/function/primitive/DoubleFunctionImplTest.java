@@ -10,8 +10,10 @@
 
 package org.eclipse.collections.impl.block.function.primitive;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public final class DoubleFunctionImplTest
 {
@@ -20,8 +22,8 @@ public final class DoubleFunctionImplTest
     @Test
     public void testValueOf()
     {
-        Assert.assertSame(new TestDoubleFunctionImpl(0.0d).valueOf(JUNK), new TestDoubleFunctionImpl(0.0d).valueOf(JUNK));
-        Assert.assertEquals(Double.valueOf(1.0d), new TestDoubleFunctionImpl(1.0d).valueOf(JUNK));
+        assertSame(new TestDoubleFunctionImpl(0.0d).valueOf(JUNK), new TestDoubleFunctionImpl(0.0d).valueOf(JUNK));
+        assertEquals(Double.valueOf(1.0d), new TestDoubleFunctionImpl(1.0d).valueOf(JUNK));
     }
 
     private static final class TestDoubleFunctionImpl extends DoubleFunctionImpl<Object>

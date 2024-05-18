@@ -20,8 +20,12 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractMutableBiMapValuesTestCase
 {
@@ -58,14 +62,14 @@ public abstract class AbstractMutableBiMapValuesTestCase
     {
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, null);
         Collection<Integer> values = map.values();
-        Assert.assertTrue(values.contains(1));
-        Assert.assertTrue(values.contains(2));
-        Assert.assertTrue(values.contains(null));
-        Assert.assertFalse(values.contains(4));
+        assertTrue(values.contains(1));
+        assertTrue(values.contains(2));
+        assertTrue(values.contains(null));
+        assertFalse(values.contains(4));
         values.remove(null);
-        Assert.assertFalse(values.contains(null));
+        assertFalse(values.contains(null));
         map.remove(1.0f);
-        Assert.assertFalse(values.contains(1));
+        assertFalse(values.contains(1));
     }
 
     @Test
@@ -73,17 +77,17 @@ public abstract class AbstractMutableBiMapValuesTestCase
     {
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, null);
         Collection<Integer> values = map.values();
-        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2)));
-        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2, null)));
-        Assert.assertTrue(values.containsAll(FastList.newListWith(null, null)));
-        Assert.assertFalse(values.containsAll(FastList.newListWith(1, 4)));
-        Assert.assertFalse(values.containsAll(FastList.newListWith(5, 4)));
+        assertTrue(values.containsAll(FastList.newListWith(1, 2)));
+        assertTrue(values.containsAll(FastList.newListWith(1, 2, null)));
+        assertTrue(values.containsAll(FastList.newListWith(null, null)));
+        assertFalse(values.containsAll(FastList.newListWith(1, 4)));
+        assertFalse(values.containsAll(FastList.newListWith(5, 4)));
         values.remove(null);
-        Assert.assertFalse(values.containsAll(FastList.newListWith(1, 2, null)));
-        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2)));
+        assertFalse(values.containsAll(FastList.newListWith(1, 2, null)));
+        assertTrue(values.containsAll(FastList.newListWith(1, 2)));
         map.remove(1.0f);
-        Assert.assertFalse(values.containsAll(FastList.newListWith(1, 2)));
-        Assert.assertTrue(values.containsAll(FastList.newListWith(2)));
+        assertFalse(values.containsAll(FastList.newListWith(1, 2)));
+        assertTrue(values.containsAll(FastList.newListWith(2)));
     }
 
     @Test
@@ -91,12 +95,12 @@ public abstract class AbstractMutableBiMapValuesTestCase
     {
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, null, 2.0f, 2, 3.0f, 3);
         Collection<Integer> values = map.values();
-        Assert.assertFalse(values.isEmpty());
+        assertFalse(values.isEmpty());
         HashBiMap<Float, Integer> map1 = HashBiMap.newMap();
         Collection<Integer> values1 = map1.values();
-        Assert.assertTrue(values1.isEmpty());
+        assertTrue(values1.isEmpty());
         map1.put(1.0f, 1);
-        Assert.assertFalse(values1.isEmpty());
+        assertFalse(values1.isEmpty());
     }
 
     @Test
@@ -124,54 +128,54 @@ public abstract class AbstractMutableBiMapValuesTestCase
         MutableSet<String> actual = UnifiedSet.newSet();
 
         Iterator<String> iterator = HashBiMap.newWithKeysValues(0.0f, "zero", 31.0f, "thirtyOne", 32.0f, null).iterator();
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
 
-        Assert.assertEquals(expected, actual);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertEquals(expected, actual);
+        assertThrows(NoSuchElementException.class, iterator::next);
 
         MutableBiMap<Float, String> map1 = this.newMapWithKeysValues(0.0f, "zero", 1.0f, null);
         Iterator<String> iterator1 = map1.iterator();
-        Assert.assertThrows(IllegalStateException.class, iterator1::remove);
+        assertThrows(IllegalStateException.class, iterator1::remove);
         iterator1.next();
         iterator1.remove();
-        Assert.assertTrue(map1.toString(), HashBiMap.newWithKeysValues(0.0f, "zero").equals(map1)
+        assertTrue(map1.toString(), HashBiMap.newWithKeysValues(0.0f, "zero").equals(map1)
                 || HashBiMap.newWithKeysValues(1.0f, null).equals(map1));
-        Assert.assertTrue(map1.toString(), HashBiMap.newWithKeysValues(0.0f, "zero").inverse().equals(map1.inverse())
+        assertTrue(map1.toString(), HashBiMap.newWithKeysValues(0.0f, "zero").inverse().equals(map1.inverse())
                 || HashBiMap.newWithKeysValues(1.0f, null).inverse().equals(map1.inverse()));
         iterator1.next();
         iterator1.remove();
-        Assert.assertEquals(HashBiMap.newMap(), map1);
-        Assert.assertThrows(IllegalStateException.class, iterator1::remove);
+        assertEquals(HashBiMap.newMap(), map1);
+        assertThrows(IllegalStateException.class, iterator1::remove);
 
         MutableBiMap<Float, String> map2 = this.newMapWithKeysValues(0.0f, null, 9.0f, "nine");
         Iterator<String> iterator2 = map2.iterator();
-        Assert.assertThrows(IllegalStateException.class, iterator2::remove);
+        assertThrows(IllegalStateException.class, iterator2::remove);
         iterator2.next();
         iterator2.remove();
-        Assert.assertTrue(map2.toString(), HashBiMap.newWithKeysValues(0.0f, null).equals(map2)
+        assertTrue(map2.toString(), HashBiMap.newWithKeysValues(0.0f, null).equals(map2)
                 || HashBiMap.newWithKeysValues(9.0f, "nine").equals(map2));
-        Assert.assertTrue(map2.toString(), HashBiMap.newWithKeysValues(0.0f, null).inverse().equals(map2.inverse())
+        assertTrue(map2.toString(), HashBiMap.newWithKeysValues(0.0f, null).inverse().equals(map2.inverse())
                 || HashBiMap.newWithKeysValues(9.0f, "nine").inverse().equals(map2.inverse()));
         iterator2.next();
         iterator2.remove();
-        Assert.assertEquals(HashBiMap.newMap(), map2);
+        assertEquals(HashBiMap.newMap(), map2);
 
         MutableBiMap<Float, String> map3 = this.newMapWithKeysValues(8.0f, "eight", 9.0f, null);
         Iterator<String> iterator3 = map3.iterator();
-        Assert.assertThrows(IllegalStateException.class, iterator3::remove);
+        assertThrows(IllegalStateException.class, iterator3::remove);
         iterator3.next();
         iterator3.remove();
-        Assert.assertTrue(map3.toString(), HashBiMap.newWithKeysValues(8.0f, "eight").equals(map3)
+        assertTrue(map3.toString(), HashBiMap.newWithKeysValues(8.0f, "eight").equals(map3)
                 || HashBiMap.newWithKeysValues(9.0f, null).equals(map3));
         iterator3.next();
         iterator3.remove();
-        Assert.assertEquals(HashBiMap.newMap(), map3);
+        assertEquals(HashBiMap.newMap(), map3);
     }
 
     @Test
@@ -185,46 +189,46 @@ public abstract class AbstractMutableBiMapValuesTestCase
     public void removeFromValues()
     {
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3);
-        Assert.assertFalse(map.values().remove(4));
+        assertFalse(map.values().remove(4));
 
-        Assert.assertTrue(map.values().remove(2));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3).inverse(), map.inverse());
+        assertTrue(map.values().remove(2));
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3), map);
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3).inverse(), map.inverse());
     }
 
     @Test
     public void removeNullFromValues()
     {
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3);
-        Assert.assertFalse(map.values().remove(null));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3).inverse(), map.inverse());
+        assertFalse(map.values().remove(null));
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3), map);
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3).inverse(), map.inverse());
         map.put(4.0f, null);
-        Assert.assertTrue(map.values().remove(null));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3).inverse(), map.inverse());
+        assertTrue(map.values().remove(null));
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3), map);
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3).inverse(), map.inverse());
     }
 
     @Test
     public void removeAllFromValues()
     {
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3);
-        Assert.assertFalse(map.values().removeAll(FastList.newListWith(4)));
+        assertFalse(map.values().removeAll(FastList.newListWith(4)));
 
-        Assert.assertTrue(map.values().removeAll(FastList.newListWith(2, 4)));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3).inverse(), map.inverse());
+        assertTrue(map.values().removeAll(FastList.newListWith(2, 4)));
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3), map);
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3).inverse(), map.inverse());
     }
 
     @Test
     public void retainAllFromValues()
     {
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3);
-        Assert.assertFalse(map.values().retainAll(FastList.newListWith(1, 2, 3, 4)));
+        assertFalse(map.values().retainAll(FastList.newListWith(1, 2, 3, 4)));
 
-        Assert.assertTrue(map.values().retainAll(FastList.newListWith(1, 3)));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3).inverse(), map.inverse());
+        assertTrue(map.values().retainAll(FastList.newListWith(1, 3)));
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3), map);
+        assertEquals(HashBiMap.newWithKeysValues(1.0f, 1, 3.0f, 3).inverse(), map.inverse());
     }
 
     @Test
@@ -233,10 +237,10 @@ public abstract class AbstractMutableBiMapValuesTestCase
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, null);
         HashBag<Integer> expected = HashBag.newBagWith(1, 2, null);
         Collection<Integer> values = map.values();
-        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray()));
-        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size()])));
-        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[0])));
+        assertEquals(expected, HashBag.newBagWith(values.toArray()));
+        assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size()])));
+        assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[0])));
         expected.add(null);
-        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size() + 1])));
+        assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size() + 1])));
     }
 }

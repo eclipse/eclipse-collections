@@ -15,8 +15,9 @@ import java.util.List;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Procedures2;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class Procedure2Test
 {
@@ -26,8 +27,8 @@ public class Procedure2Test
         Procedure2<String, Collection<String>> addToCollection = Procedures2.addToCollection();
         List<String> list = Lists.mutable.empty();
         addToCollection.accept("A", list);
-        Assert.assertEquals(list, Lists.mutable.of("A"));
+        assertEquals(list, Lists.mutable.of("A"));
         addToCollection.accept("B", list);
-        Assert.assertEquals(list, Lists.mutable.of("A", "B"));
+        assertEquals(list, Lists.mutable.of("A", "B"));
     }
 }

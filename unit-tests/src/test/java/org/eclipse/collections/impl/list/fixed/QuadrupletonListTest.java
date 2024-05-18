@@ -20,8 +20,12 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link QuadrupletonList}.
@@ -70,21 +74,21 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testRemove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
         this.assertUnchanged();
     }
 
     @Test
     public void testAddAtIndex()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
         this.assertUnchanged();
     }
 
     @Test
     public void testAdd()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
         this.assertUnchanged();
     }
 
@@ -100,26 +104,26 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
     public void testGet()
     {
         Verify.assertStartsWith(this.list, "1", "2", "3", "4");
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(4));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(4));
     }
 
     @Test
     public void testSet()
     {
         MutableList<String> list = Lists.fixedSize.of("1", "2", "3", "4");
-        Assert.assertEquals("1", list.set(0, "4"));
-        Assert.assertEquals("2", list.set(1, "3"));
-        Assert.assertEquals("3", list.set(2, "2"));
-        Assert.assertEquals("4", list.set(3, "1"));
-        Assert.assertEquals(FastList.newListWith("4", "3", "2", "1"), list);
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.set(4, "0"));
+        assertEquals("1", list.set(0, "4"));
+        assertEquals("2", list.set(1, "3"));
+        assertEquals("3", list.set(2, "2"));
+        assertEquals("4", list.set(3, "1"));
+        assertEquals(FastList.newListWith("4", "3", "2", "1"), list);
+        assertThrows(IndexOutOfBoundsException.class, () -> list.set(4, "0"));
     }
 
     private void assertUnchanged()
     {
         Verify.assertSize(4, this.list);
         Verify.assertNotContains("5", this.list);
-        Assert.assertEquals(FastList.newListWith("1", "2", "3", "4"), this.list);
+        assertEquals(FastList.newListWith("1", "2", "3", "4"), this.list);
     }
 
     @Test
@@ -127,15 +131,15 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
     {
         Verify.assertPostSerializedEqualsAndHashCode(this.list);
         MutableList<String> copyOfList = SerializeTestHelper.serializeDeserialize(this.list);
-        Assert.assertNotSame(this.list, copyOfList);
+        assertNotSame(this.list, copyOfList);
     }
 
     @Test
     public void testGetFirstGetLast()
     {
         MutableList<String> list4 = Lists.fixedSize.of("1", "2", "3", "4");
-        Assert.assertEquals("1", list4.getFirst());
-        Assert.assertEquals("4", list4.getLast());
+        assertEquals("1", list4.getFirst());
+        assertEquals("4", list4.getLast());
     }
 
     @Test
@@ -144,7 +148,7 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
         MutableList<String> result = Lists.mutable.of();
         MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4");
         source.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(FastList.newListWith("1", "2", "3", "4"), result);
+        assertEquals(FastList.newListWith("1", "2", "3", "4"), result);
     }
 
     @Test
@@ -158,8 +162,8 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
             result.add(each);
             indexSum[0] += index;
         });
-        Assert.assertEquals(FastList.newListWith("1", "2", "3", "4"), result);
-        Assert.assertEquals(6, indexSum[0]);
+        assertEquals(FastList.newListWith("1", "2", "3", "4"), result);
+        assertEquals(6, indexSum[0]);
     }
 
     @Test
@@ -168,7 +172,7 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
         MutableList<String> result = Lists.mutable.of();
         MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4");
         source.forEachWith(Procedures2.fromProcedure(result::add), null);
-        Assert.assertEquals(FastList.newListWith("1", "2", "3", "4"), result);
+        assertEquals(FastList.newListWith("1", "2", "3", "4"), result);
     }
 
     @Test
@@ -198,7 +202,7 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
     public void without()
     {
         MutableList<Integer> list = new QuadrupletonList<>(1, 2, 3, 2);
-        Assert.assertSame(list, list.without(9));
+        assertSame(list, list.without(9));
         list = list.without(2);
         Verify.assertListsEqual(FastList.newListWith(1, 3, 2), list);
         Verify.assertInstanceOf(TripletonList.class, list);
@@ -207,6 +211,6 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testGetOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
+        assertThrows(IllegalStateException.class, () -> this.list.getOnly());
     }
 }

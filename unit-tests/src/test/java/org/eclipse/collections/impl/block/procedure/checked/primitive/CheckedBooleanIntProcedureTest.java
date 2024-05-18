@@ -17,8 +17,10 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.primitive.BooleanIntPair;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class CheckedBooleanIntProcedureTest
 {
@@ -36,7 +38,7 @@ public class CheckedBooleanIntProcedureTest
         };
         procedure.value(true, 1);
         procedure.value(false, 10);
-        Assert.assertEquals(Lists.mutable.of(PrimitiveTuples.pair(true, 1),
+        assertEquals(Lists.mutable.of(PrimitiveTuples.pair(true, 1),
                 PrimitiveTuples.pair(false, 10)), list);
     }
 
@@ -54,12 +56,12 @@ public class CheckedBooleanIntProcedureTest
                     throw ioException;
                 }
             }.value(true, 10);
-            Assert.fail("Exception should have been thrown");
+            fail("Exception should have been thrown");
         }
         catch (Exception e)
         {
-            Assert.assertEquals("Checked exception caught in BooleanIntProcedure", e.getMessage());
-            Assert.assertEquals(ioException, e.getCause());
+            assertEquals("Checked exception caught in BooleanIntProcedure", e.getMessage());
+            assertEquals(ioException, e.getCause());
         }
     }
 
@@ -77,11 +79,11 @@ public class CheckedBooleanIntProcedureTest
                     throw exception;
                 }
             }.value(true, 10);
-            Assert.fail("Exception should have been thrown");
+            fail("Exception should have been thrown");
         }
         catch (Exception e)
         {
-            Assert.assertEquals(exception, e);
+            assertEquals(exception, e);
         }
     }
 }

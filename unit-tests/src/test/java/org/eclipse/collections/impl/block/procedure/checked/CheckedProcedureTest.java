@@ -20,8 +20,11 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class CheckedProcedureTest
 {
@@ -33,7 +36,7 @@ public class CheckedProcedureTest
             @Override
             public void safeValue(Date date)
             {
-                Assert.assertNotNull(date.toString());
+                assertNotNull(date.toString());
             }
         };
         procedure.value(new Date());
@@ -87,7 +90,7 @@ public class CheckedProcedureTest
         {
             success = true;
         }
-        Assert.assertTrue(success);
+        assertTrue(success);
     }
 
     @Test
@@ -98,7 +101,7 @@ public class CheckedProcedureTest
             @Override
             public void safeValue(Integer integer)
             {
-                Assert.assertEquals(Integer.valueOf(1), integer);
+                assertEquals(Integer.valueOf(1), integer);
             }
         };
         procedure.value(1);
@@ -112,7 +115,7 @@ public class CheckedProcedureTest
             @Override
             public void safeValue(Timestamp timestamp)
             {
-                Assert.assertNotNull(timestamp.toString());
+                assertNotNull(timestamp.toString());
             }
         };
         procedure.value(new Timestamp(0));

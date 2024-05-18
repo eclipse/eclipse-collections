@@ -13,11 +13,11 @@ package org.eclipse.collections.test.bag.mutable.sorted;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public interface MutableBagIterableTestCase extends MutableCollectionTestCase
@@ -34,7 +34,7 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
         assertEquals(3, mutableBag.addOccurrences(1, 2));
         assertEquals(Bags.immutable.with(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
 
-        Assert.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class,
                 () -> mutableBag.addOccurrences(4, -1));
     }
@@ -52,7 +52,7 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
         assertTrue(mutableBag.removeOccurrences(2, 1));
         assertEquals(Bags.immutable.with(2, 3), mutableBag);
 
-        Assert.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class,
                 () -> mutableBag.removeOccurrences(4, -1));
     }

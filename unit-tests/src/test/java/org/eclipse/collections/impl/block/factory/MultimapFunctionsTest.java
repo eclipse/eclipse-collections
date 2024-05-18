@@ -16,8 +16,9 @@ import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class MultimapFunctionsTest
 {
@@ -31,7 +32,7 @@ public class MultimapFunctionsTest
 
         Function<String, RichIterable<String>> getFunction = MultimapFunctions.get(multimap);
 
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(
                         FastList.newListWith("O", "N", "E"),
                         FastList.newListWith("T", "W", "O"),

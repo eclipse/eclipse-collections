@@ -19,9 +19,15 @@ import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test for {@link UnmodifiableSortedSet}.
@@ -72,7 +78,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     {
         Verify.assertInstanceOf(UnmodifiableSortedSet.class, this.newWith().asUnmodifiable());
         MutableSortedSet<Object> set = this.newWith();
-        Assert.assertSame(set, set.asUnmodifiable());
+        assertSame(set, set.asUnmodifiable());
     }
 
     @Test
@@ -97,7 +103,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     {
         MutableSortedSet<String> set = this.newWith();
         MutableSortedSet<String> clone = set.clone();
-        Assert.assertSame(clone, set);
+        assertSame(clone, set);
     }
 
     @Override
@@ -105,7 +111,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     public void min()
     {
         super.min();
-        Assert.assertEquals("1", this.newWith("1", "3", "2").min(String::compareTo));
+        assertEquals("1", this.newWith("1", "3", "2").min(String::compareTo));
     }
 
     @Override
@@ -113,7 +119,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     public void max()
     {
         super.max();
-        Assert.assertEquals("3", this.newWith("1", "3", "2").max(String::compareTo));
+        assertEquals("3", this.newWith("1", "3", "2").max(String::compareTo));
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -149,7 +155,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     public void min_without_comparator()
     {
         super.min_without_comparator();
-        Assert.assertEquals("1", this.newWith("1", "3", "2").min());
+        assertEquals("1", this.newWith("1", "3", "2").min());
     }
 
     @Override
@@ -157,7 +163,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     public void max_without_comparator()
     {
         super.max_without_comparator();
-        Assert.assertEquals("3", this.newWith("1", "3", "2").max());
+        assertEquals("3", this.newWith("1", "3", "2").max());
     }
 
     @Override
@@ -165,7 +171,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     public void minBy()
     {
         super.minBy();
-        Assert.assertEquals("1", this.newWith("1", "3", "2").minBy(Functions.getStringToInteger()));
+        assertEquals("1", this.newWith("1", "3", "2").minBy(Functions.getStringToInteger()));
     }
 
     @Override
@@ -173,7 +179,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     public void maxBy()
     {
         super.maxBy();
-        Assert.assertEquals("3", this.newWith("1", "3", "2").maxBy(Functions.getStringToInteger()));
+        assertEquals("3", this.newWith("1", "3", "2").maxBy(Functions.getStringToInteger()));
     }
 
     @Override
@@ -253,7 +259,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
         super.testToString();
         MutableCollection<Object> collection = this.newWith(1, 2);
         String toString = collection.toString();
-        Assert.assertTrue("[1, 2]".equals(toString) || "[2, 1]".equals(toString));
+        assertTrue("[1, 2]".equals(toString) || "[2, 1]".equals(toString));
     }
 
     @Override
@@ -262,7 +268,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     {
         super.makeString();
         MutableCollection<Object> collection = this.newWith(1, 2, 3);
-        Assert.assertEquals(collection.toString(), '[' + collection.makeString() + ']');
+        assertEquals(collection.toString(), '[' + collection.makeString() + ']');
     }
 
     @Override
@@ -273,7 +279,7 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
         MutableCollection<Object> collection = this.newWith(1, 2, 3);
         Appendable builder = new StringBuilder();
         collection.appendString(builder);
-        Assert.assertEquals(collection.toString(), '[' + builder.toString() + ']');
+        assertEquals(collection.toString(), '[' + builder.toString() + ']');
     }
 
     @Override
@@ -281,8 +287,8 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     public void getFirst()
     {
         super.getFirst();
-        Assert.assertNotNull(this.newWith(1, 2, 3).getFirst());
-        Assert.assertNull(this.newWith().getFirst());
+        assertNotNull(this.newWith(1, 2, 3).getFirst());
+        assertNull(this.newWith().getFirst());
     }
 
     @Override
@@ -290,8 +296,8 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     public void getLast()
     {
         super.getLast();
-        Assert.assertNotNull(this.newWith(1, 2, 3).getLast());
-        Assert.assertNull(this.newWith().getLast());
+        assertNotNull(this.newWith(1, 2, 3).getLast());
+        assertNull(this.newWith().getLast());
     }
 
     @Override
@@ -360,14 +366,14 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     @Test(expected = UnsupportedOperationException.class)
     public void reverseForEach()
     {
-        this.newWith(1, 2, 3).reverseForEach(each -> Assert.fail("Should not be evaluated"));
+        this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated"));
     }
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void reverseForEachWithIndex()
     {
-        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> Assert.fail("Should not be evaluated"));
+        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated"));
     }
 
     @Override

@@ -21,8 +21,11 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CollectBooleanIterableTest
 {
@@ -42,21 +45,21 @@ public class CollectBooleanIterableTest
                 isTrueCount++;
             }
         }
-        Assert.assertEquals(3L, count);
-        Assert.assertEquals(2L, isTrueCount);
+        assertEquals(3L, count);
+        assertEquals(2L, isTrueCount);
     }
 
     @Test
     public void size()
     {
-        Assert.assertEquals(3, this.booleanIterable.size());
+        assertEquals(3, this.booleanIterable.size());
     }
 
     @Test
     public void empty()
     {
-        Assert.assertTrue(this.booleanIterable.notEmpty());
-        Assert.assertFalse(this.booleanIterable.isEmpty());
+        assertTrue(this.booleanIterable.notEmpty());
+        assertFalse(this.booleanIterable.isEmpty());
     }
 
     @Test
@@ -70,110 +73,110 @@ public class CollectBooleanIterableTest
                 value[1]++;
             }
         });
-        Assert.assertEquals(3, value[0]);
-        Assert.assertEquals(2, value[1]);
+        assertEquals(3, value[0]);
+        assertEquals(2, value[1]);
     }
 
     @Test
     public void count()
     {
-        Assert.assertEquals(2, this.booleanIterable.count(BooleanPredicates.equal(true)));
-        Assert.assertEquals(1, this.booleanIterable.count(BooleanPredicates.equal(false)));
+        assertEquals(2, this.booleanIterable.count(BooleanPredicates.equal(true)));
+        assertEquals(1, this.booleanIterable.count(BooleanPredicates.equal(false)));
     }
 
     @Test
     public void anySatisfy()
     {
-        Assert.assertTrue(this.booleanIterable.anySatisfy(BooleanPredicates.equal(true)));
+        assertTrue(this.booleanIterable.anySatisfy(BooleanPredicates.equal(true)));
     }
 
     @Test
     public void noneSatisfy()
     {
-        Assert.assertFalse(this.booleanIterable.noneSatisfy(BooleanPredicates.equal(true)));
+        assertFalse(this.booleanIterable.noneSatisfy(BooleanPredicates.equal(true)));
     }
 
     @Test
     public void allSatisfy()
     {
-        Assert.assertFalse(this.booleanIterable.allSatisfy(BooleanPredicates.equal(false)));
+        assertFalse(this.booleanIterable.allSatisfy(BooleanPredicates.equal(false)));
     }
 
     @Test
     public void select()
     {
-        Assert.assertEquals(2, this.booleanIterable.select(BooleanPredicates.equal(true)).size());
-        Assert.assertEquals(1, this.booleanIterable.select(BooleanPredicates.equal(false)).size());
+        assertEquals(2, this.booleanIterable.select(BooleanPredicates.equal(true)).size());
+        assertEquals(1, this.booleanIterable.select(BooleanPredicates.equal(false)).size());
     }
 
     @Test
     public void reject()
     {
-        Assert.assertEquals(1, this.booleanIterable.reject(BooleanPredicates.equal(true)).size());
-        Assert.assertEquals(2, this.booleanIterable.reject(BooleanPredicates.equal(false)).size());
+        assertEquals(1, this.booleanIterable.reject(BooleanPredicates.equal(true)).size());
+        assertEquals(2, this.booleanIterable.reject(BooleanPredicates.equal(false)).size());
     }
 
     @Test
     public void detectIfNone()
     {
-        Assert.assertTrue(this.booleanIterable.detectIfNone(BooleanPredicates.equal(true), false));
+        assertTrue(this.booleanIterable.detectIfNone(BooleanPredicates.equal(true), false));
     }
 
     @Test
     public void toArray()
     {
         boolean[] actual = Interval.zeroTo(2).collectBoolean(PrimitiveFunctions.integerIsPositive()).toArray();
-        Assert.assertEquals(3, actual.length);
-        Assert.assertFalse(actual[0]);
-        Assert.assertTrue(actual[1]);
-        Assert.assertTrue(actual[2]);
+        assertEquals(3, actual.length);
+        assertFalse(actual[0]);
+        assertTrue(actual[1]);
+        assertTrue(actual[2]);
     }
 
     @Test
     public void contains()
     {
-        Assert.assertFalse(Interval.fromTo(-4, 0).collectBoolean(PrimitiveFunctions.integerIsPositive()).contains(true));
-        Assert.assertTrue(Interval.fromTo(-2, 2).collectBoolean(PrimitiveFunctions.integerIsPositive()).contains(true));
+        assertFalse(Interval.fromTo(-4, 0).collectBoolean(PrimitiveFunctions.integerIsPositive()).contains(true));
+        assertTrue(Interval.fromTo(-2, 2).collectBoolean(PrimitiveFunctions.integerIsPositive()).contains(true));
     }
 
     @Test
     public void containsAllArray()
     {
         BooleanIterable booleanIterable = Interval.oneTo(3).collectBoolean(PrimitiveFunctions.integerIsPositive());
-        Assert.assertTrue(booleanIterable.containsAll(true));
-        Assert.assertTrue(booleanIterable.containsAll(true, true));
-        Assert.assertFalse(booleanIterable.containsAll(false));
-        Assert.assertFalse(booleanIterable.containsAll(false, false));
+        assertTrue(booleanIterable.containsAll(true));
+        assertTrue(booleanIterable.containsAll(true, true));
+        assertFalse(booleanIterable.containsAll(false));
+        assertFalse(booleanIterable.containsAll(false, false));
     }
 
     @Test
     public void containsAllIterable()
     {
         BooleanIterable booleanIterable = Interval.oneTo(3).collectBoolean(PrimitiveFunctions.integerIsPositive());
-        Assert.assertTrue(booleanIterable.containsAll(BooleanArrayList.newListWith(true)));
-        Assert.assertTrue(booleanIterable.containsAll(BooleanArrayList.newListWith(true, true)));
-        Assert.assertFalse(booleanIterable.containsAll(BooleanArrayList.newListWith(false)));
-        Assert.assertFalse(booleanIterable.containsAll(BooleanArrayList.newListWith(false, false)));
+        assertTrue(booleanIterable.containsAll(BooleanArrayList.newListWith(true)));
+        assertTrue(booleanIterable.containsAll(BooleanArrayList.newListWith(true, true)));
+        assertFalse(booleanIterable.containsAll(BooleanArrayList.newListWith(false)));
+        assertFalse(booleanIterable.containsAll(BooleanArrayList.newListWith(false, false)));
     }
 
     @Test
     public void collect()
     {
-        Assert.assertEquals(FastList.newListWith("false", "true", "true"), this.booleanIterable.collect(String::valueOf).toList());
+        assertEquals(FastList.newListWith("false", "true", "true"), this.booleanIterable.collect(String::valueOf).toList());
     }
 
     @Test
     public void testToString()
     {
-        Assert.assertEquals("[false, true, true]", this.booleanIterable.toString());
+        assertEquals("[false, true, true]", this.booleanIterable.toString());
     }
 
     @Test
     public void makeString()
     {
-        Assert.assertEquals("false, true, true", this.booleanIterable.makeString());
-        Assert.assertEquals("false/true/true", this.booleanIterable.makeString("/"));
-        Assert.assertEquals("[false, true, true]", this.booleanIterable.makeString("[", ", ", "]"));
+        assertEquals("false, true, true", this.booleanIterable.makeString());
+        assertEquals("false/true/true", this.booleanIterable.makeString("/"));
+        assertEquals("[false, true, true]", this.booleanIterable.makeString("[", ", ", "]"));
     }
 
     @Test
@@ -181,37 +184,37 @@ public class CollectBooleanIterableTest
     {
         StringBuilder appendable = new StringBuilder();
         this.booleanIterable.appendString(appendable);
-        Assert.assertEquals("false, true, true", appendable.toString());
+        assertEquals("false, true, true", appendable.toString());
         StringBuilder appendable2 = new StringBuilder();
         this.booleanIterable.appendString(appendable2, "/");
-        Assert.assertEquals("false/true/true", appendable2.toString());
+        assertEquals("false/true/true", appendable2.toString());
         StringBuilder appendable3 = new StringBuilder();
         this.booleanIterable.appendString(appendable3, "[", ", ", "]");
-        Assert.assertEquals(this.booleanIterable.toString(), appendable3.toString());
+        assertEquals(this.booleanIterable.toString(), appendable3.toString());
     }
 
     @Test
     public void toList()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(false, true, true), this.booleanIterable.toList());
+        assertEquals(BooleanArrayList.newListWith(false, true, true), this.booleanIterable.toList());
     }
 
     @Test
     public void toSet()
     {
-        Assert.assertEquals(BooleanHashSet.newSetWith(false, true), this.booleanIterable.toSet());
+        assertEquals(BooleanHashSet.newSetWith(false, true), this.booleanIterable.toSet());
     }
 
     @Test
     public void toBag()
     {
-        Assert.assertEquals(BooleanHashBag.newBagWith(false, true, true), this.booleanIterable.toBag());
+        assertEquals(BooleanHashBag.newBagWith(false, true, true), this.booleanIterable.toBag());
     }
 
     @Test
     public void asLazy()
     {
-        Assert.assertEquals(this.booleanIterable.toSet(), this.booleanIterable.asLazy().toSet());
+        assertEquals(this.booleanIterable.toSet(), this.booleanIterable.asLazy().toSet());
         Verify.assertInstanceOf(LazyBooleanIterable.class, this.booleanIterable.asLazy());
     }
 }

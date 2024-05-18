@@ -21,8 +21,12 @@ import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link RandomAccessListAdapter}.
@@ -62,10 +66,10 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
         MutableList<Integer> list1 = this.newWith(1, 2, 3);
         MutableList<Integer> list2 = this.newWith(1, 2, 3);
         MutableList<Integer> list3 = this.newWith(2, 3, 4);
-        Assert.assertNotEquals(list1, null);
+        assertNotEquals(list1, null);
         Verify.assertEqualsAndHashCode(list1, list1);
         Verify.assertEqualsAndHashCode(list1, list2);
-        Assert.assertNotEquals(list2, list3);
+        assertNotEquals(list2, list3);
     }
 
     @Test
@@ -85,7 +89,7 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
         sublist.remove("X");
         Verify.assertContainsAll(sublist, "B", "C");
         Verify.assertContainsAll(list, "A", "B", "C", "D");
-        Assert.assertEquals("C", sublist.set(1, "R"));
+        assertEquals("C", sublist.set(1, "R"));
         Verify.assertContainsAll(sublist, "B", "R");
         Verify.assertContainsAll(list, "A", "B", "R", "D");
         sublist.addAll(Arrays.asList("W", "G"));
@@ -104,7 +108,7 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
 
         MutableList<Integer> collection = this.newWith(1, 2, 3);
         Verify.assertContainsAll(collection, 1, 2, 3);
-        Assert.assertThrows(IllegalArgumentException.class, () -> new RandomAccessListAdapter<>(new LinkedList<>()));
+        assertThrows(IllegalArgumentException.class, () -> new RandomAccessListAdapter<>(new LinkedList<>()));
     }
 
     @Override
@@ -117,7 +121,7 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
         MutableList<Integer> deserializedCollection = SerializeTestHelper.serializeDeserialize(collection);
         Verify.assertSize(5, deserializedCollection);
         Verify.assertContainsAll(deserializedCollection, 1, 2, 3, 4, 5);
-        Assert.assertEquals(collection, deserializedCollection);
+        assertEquals(collection, deserializedCollection);
     }
 
     @Override
@@ -140,7 +144,7 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
         super.removeIf();
 
         MutableList<Integer> objects = this.newWith(1, 2, 3, null);
-        Assert.assertTrue(objects.removeIf(Predicates.isNull()));
+        assertTrue(objects.removeIf(Predicates.isNull()));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
     }
@@ -152,7 +156,7 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
         super.removeIf();
 
         MutableList<Integer> objects = this.newWith(1, 2, 3, null);
-        Assert.assertTrue(objects.removeIfWith(Predicates2.isNull(), null));
+        assertTrue(objects.removeIfWith(Predicates2.isNull(), null));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
     }
@@ -173,7 +177,7 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
         super.indexOf();
 
         MutableList<Integer> objects = this.newWith(1, 2, 3);
-        Assert.assertEquals(1, objects.indexOf(2));
+        assertEquals(1, objects.indexOf(2));
     }
 
     @Override
@@ -183,14 +187,14 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
         super.lastIndexOf();
 
         MutableList<Integer> objects = this.newWith(1, 2, 3);
-        Assert.assertEquals(1, objects.lastIndexOf(2));
+        assertEquals(1, objects.lastIndexOf(2));
     }
 
     @Test
     public void testSet()
     {
         MutableList<Integer> objects = this.newWith(1, 2, 3);
-        Assert.assertEquals(Integer.valueOf(2), objects.set(1, 4));
+        assertEquals(Integer.valueOf(2), objects.set(1, 4));
         Verify.assertItemAtIndex(4, 1, objects);
     }
 
@@ -232,8 +236,8 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
     @Test
     public void adaptNull()
     {
-        Assert.assertThrows(NullPointerException.class, () -> new RandomAccessListAdapter<>(null));
-        Assert.assertThrows(NullPointerException.class, () -> RandomAccessListAdapter.adapt(null));
+        assertThrows(NullPointerException.class, () -> new RandomAccessListAdapter<>(null));
+        assertThrows(NullPointerException.class, () -> RandomAccessListAdapter.adapt(null));
     }
 
     @Test

@@ -17,8 +17,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.collections.impl.list.Interval;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit test for {@link ParallelIterate}.
@@ -40,11 +41,11 @@ public class ParallelIterate2Test
 
         ExecutorService executorService1 = ParallelIterate.newPooledExecutor(4, "test pool 2 4", true);
         executorService1.invokeAll(tasks);
-        Assert.assertEquals(howManyTimes, counter.get());
+        assertEquals(howManyTimes, counter.get());
 
         counter.set(0);
         ExecutorService executorService2 = ParallelIterate.newPooledExecutor(2, "test pool 2", true);
         executorService2.invokeAll(tasks);
-        Assert.assertEquals(howManyTimes, counter.get());
+        assertEquals(howManyTimes, counter.get());
     }
 }

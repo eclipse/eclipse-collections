@@ -20,8 +20,12 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTestCase
 {
@@ -68,21 +72,21 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testRemove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
         this.assertUnchanged();
     }
 
     @Test
     public void testAddAtIndex()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
         this.assertUnchanged();
     }
 
     @Test
     public void testAdd()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
         this.assertUnchanged();
     }
 
@@ -98,27 +102,27 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     public void testGet()
     {
         Verify.assertStartsWith(this.list, "1", "2", "3", "4", "5");
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(5));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(5));
     }
 
     @Test
     public void testSet()
     {
         MutableList<String> list = Lists.fixedSize.of("1", "2", "3", "4", "5");
-        Assert.assertEquals("1", list.set(0, "5"));
-        Assert.assertEquals("2", list.set(1, "4"));
-        Assert.assertEquals("3", list.set(2, "3"));
-        Assert.assertEquals("4", list.set(3, "2"));
-        Assert.assertEquals("5", list.set(4, "1"));
-        Assert.assertEquals(FastList.newListWith("5", "4", "3", "2", "1"), list);
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.set(5, "0"));
+        assertEquals("1", list.set(0, "5"));
+        assertEquals("2", list.set(1, "4"));
+        assertEquals("3", list.set(2, "3"));
+        assertEquals("4", list.set(3, "2"));
+        assertEquals("5", list.set(4, "1"));
+        assertEquals(FastList.newListWith("5", "4", "3", "2", "1"), list);
+        assertThrows(IndexOutOfBoundsException.class, () -> list.set(5, "0"));
     }
 
     private void assertUnchanged()
     {
         Verify.assertSize(5, this.list);
         Verify.assertNotContains("6", this.list);
-        Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), this.list);
+        assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), this.list);
     }
 
     @Test
@@ -126,15 +130,15 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     {
         Verify.assertPostSerializedEqualsAndHashCode(this.list);
         MutableList<String> copyOfList = SerializeTestHelper.serializeDeserialize(this.list);
-        Assert.assertNotSame(this.list, copyOfList);
+        assertNotSame(this.list, copyOfList);
     }
 
     @Test
     public void testGetFirstGetLast()
     {
         MutableList<String> list5 = Lists.fixedSize.of("1", "2", "3", "4", "5");
-        Assert.assertEquals("1", list5.getFirst());
-        Assert.assertEquals("5", list5.getLast());
+        assertEquals("1", list5.getFirst());
+        assertEquals("5", list5.getLast());
     }
 
     @Test
@@ -143,7 +147,7 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
         MutableList<String> result = Lists.mutable.of();
         MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5");
         source.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), result);
+        assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), result);
     }
 
     @Test
@@ -157,8 +161,8 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
             result.add(each);
             indexSum[0] += index;
         });
-        Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), result);
-        Assert.assertEquals(10, indexSum[0]);
+        assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), result);
+        assertEquals(10, indexSum[0]);
     }
 
     @Test
@@ -167,7 +171,7 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
         MutableList<String> result = Lists.mutable.of();
         MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5");
         source.forEachWith(Procedures2.fromProcedure(result::add), null);
-        Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), result);
+        assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), result);
     }
 
     @Test
@@ -197,7 +201,7 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     public void without()
     {
         MutableList<Integer> list = new QuintupletonList<>(1, 2, 3, 2, 4);
-        Assert.assertSame(list, list.without(9));
+        assertSame(list, list.without(9));
         list = list.without(2);
         Verify.assertListsEqual(FastList.newListWith(1, 3, 2, 4), list);
         Verify.assertInstanceOf(QuadrupletonList.class, list);
@@ -206,6 +210,6 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testGetOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
+        assertThrows(IllegalStateException.class, () -> this.list.getOnly());
     }
 }

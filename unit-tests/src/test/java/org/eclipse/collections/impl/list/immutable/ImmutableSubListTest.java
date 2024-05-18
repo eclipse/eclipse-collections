@@ -14,8 +14,11 @@ import java.util.ListIterator;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ImmutableSubListTest extends AbstractImmutableListTestCase
 {
@@ -30,15 +33,15 @@ public class ImmutableSubListTest extends AbstractImmutableListTestCase
     {
         ImmutableList<Integer> subList = this.classUnderTest();
         ListIterator<Integer> iterator = subList.listIterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertFalse(iterator.hasPrevious());
-        Assert.assertEquals(Integer.valueOf(1), iterator.next());
-        Assert.assertEquals(Integer.valueOf(2), iterator.next());
-        Assert.assertEquals(Integer.valueOf(3), iterator.next());
-        Assert.assertTrue(iterator.hasPrevious());
-        Assert.assertEquals(Integer.valueOf(3), iterator.previous());
-        Assert.assertEquals(Integer.valueOf(2), iterator.previous());
-        Assert.assertEquals(Integer.valueOf(1), iterator.previous());
+        assertTrue(iterator.hasNext());
+        assertFalse(iterator.hasPrevious());
+        assertEquals(Integer.valueOf(1), iterator.next());
+        assertEquals(Integer.valueOf(2), iterator.next());
+        assertEquals(Integer.valueOf(3), iterator.next());
+        assertTrue(iterator.hasPrevious());
+        assertEquals(Integer.valueOf(3), iterator.previous());
+        assertEquals(Integer.valueOf(2), iterator.previous());
+        assertEquals(Integer.valueOf(1), iterator.previous());
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -69,7 +72,7 @@ public class ImmutableSubListTest extends AbstractImmutableListTestCase
     public void getOnly()
     {
         ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 2);
-        Assert.assertEquals(Integer.valueOf(2), list.getOnly());
+        assertEquals(Integer.valueOf(2), list.getOnly());
     }
 
     @Test(expected = IllegalStateException.class)

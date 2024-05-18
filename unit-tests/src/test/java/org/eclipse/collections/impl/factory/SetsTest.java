@@ -40,10 +40,16 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.mSet;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class SetsTest
 {
@@ -195,21 +201,21 @@ public class SetsTest
     public void unionAllUnique()
     {
         MutableSet<String> names = Sets.unionAll(this.uniqueSets.get(0), this.uniqueSets.get(1), this.uniqueSets.get(2));
-        Assert.assertEquals(UnifiedSet.newSetWith("Tom", "Dick", "Harry", "Jane", "Sarah", "Mary", "Fido", "Spike", "Spuds", null), names);
+        assertEquals(UnifiedSet.newSetWith("Tom", "Dick", "Harry", "Jane", "Sarah", "Mary", "Fido", "Spike", "Spuds", null), names);
     }
 
     @Test
     public void unionAllOverlapping()
     {
         MutableSet<String> names = Sets.unionAll(this.overlappingSets.get(0), this.overlappingSets.get(1), this.overlappingSets.get(2));
-        Assert.assertEquals(UnifiedSet.newSetWith("Tom", "Dick", "Harry", "Larry", "Paul", null), names);
+        assertEquals(UnifiedSet.newSetWith("Tom", "Dick", "Harry", "Larry", "Paul", null), names);
     }
 
     @Test
     public void unionAllIdentical()
     {
         MutableSet<String> names = Sets.unionAll(this.identicalSets.get(0), this.identicalSets.get(1), this.identicalSets.get(2));
-        Assert.assertEquals(UnifiedSet.newSetWith("Tom", "Dick", "Harry", null), names);
+        assertEquals(UnifiedSet.newSetWith("Tom", "Dick", "Harry", null), names);
     }
 
     @Test
@@ -306,21 +312,21 @@ public class SetsTest
     public void intersectAllUnique()
     {
         MutableSet<String> names = Sets.intersectAll(this.uniqueSets.get(0), this.uniqueSets.get(1), this.uniqueSets.get(2));
-        Assert.assertEquals(UnifiedSet.newSetWith(), names);
+        assertEquals(UnifiedSet.newSetWith(), names);
     }
 
     @Test
     public void intersectAllOverlapping()
     {
         MutableSet<String> names = Sets.intersectAll(this.overlappingSets.get(0), this.overlappingSets.get(1), this.overlappingSets.get(2));
-        Assert.assertEquals(UnifiedSet.newSetWith("Dick"), names);
+        assertEquals(UnifiedSet.newSetWith("Dick"), names);
     }
 
     @Test
     public void intersectAllIdentical()
     {
         MutableSet<String> names = Sets.intersectAll(this.identicalSets.get(0), this.identicalSets.get(1), this.identicalSets.get(2));
-        Assert.assertEquals(UnifiedSet.newSetWith("Tom", "Dick", "Harry", null), names);
+        assertEquals(UnifiedSet.newSetWith("Tom", "Dick", "Harry", null), names);
     }
 
     @Test
@@ -399,7 +405,7 @@ public class SetsTest
     public void differenceAllUnique()
     {
         MutableSet<String> names = Sets.differenceAll(this.uniqueSets.get(0), this.uniqueSets.get(1), this.uniqueSets.get(2));
-        Assert.assertEquals(UnifiedSet.newSetWith("Harry", "Tom", "Dick", null), names);
+        assertEquals(UnifiedSet.newSetWith("Harry", "Tom", "Dick", null), names);
         Verify.assertSetsEqual(
                 names,
                 Sets.difference(Sets.difference(this.uniqueSets.get(0), this.uniqueSets.get(1)), this.uniqueSets.get(2)));
@@ -409,7 +415,7 @@ public class SetsTest
     public void differenceAllOverlapping()
     {
         MutableSet<String> names = Sets.differenceAll(this.overlappingSets.get(0), this.overlappingSets.get(1), this.overlappingSets.get(2));
-        Assert.assertEquals(UnifiedSet.newSetWith("Harry"), names);
+        assertEquals(UnifiedSet.newSetWith("Harry"), names);
         Verify.assertSetsEqual(
                 names,
                 Sets.difference(Sets.difference(this.overlappingSets.get(0), this.overlappingSets.get(1)), this.overlappingSets.get(2)));
@@ -419,7 +425,7 @@ public class SetsTest
     public void differenceAllIdentical()
     {
         MutableSet<String> names = Sets.differenceAll(this.identicalSets.get(0), this.identicalSets.get(1), this.identicalSets.get(2));
-        Assert.assertEquals(UnifiedSet.newSetWith(), names);
+        assertEquals(UnifiedSet.newSetWith(), names);
         Verify.assertSetsEqual(
                 names,
                 Sets.difference(Sets.difference(this.identicalSets.get(0), this.identicalSets.get(1)), this.identicalSets.get(2)));
@@ -502,8 +508,8 @@ public class SetsTest
     {
         MutableSet<String> emptySet = mSet();
         MutableSet<String> singletonSet = mSet("Bertha");
-        Assert.assertTrue(Sets.isSubsetOf(emptySet, singletonSet));
-        Assert.assertFalse(Sets.isSubsetOf(singletonSet, emptySet));
+        assertTrue(Sets.isSubsetOf(emptySet, singletonSet));
+        assertFalse(Sets.isSubsetOf(singletonSet, emptySet));
     }
 
     @Test
@@ -511,8 +517,8 @@ public class SetsTest
     {
         MutableSet<String> singletonSet = UnifiedSet.newSetWith("Bertha");
         MutableSet<String> doubletonSet = UnifiedSet.newSetWith("Bertha", "Myra");
-        Assert.assertTrue(Sets.isSubsetOf(singletonSet, doubletonSet));
-        Assert.assertFalse(Sets.isSubsetOf(doubletonSet, singletonSet));
+        assertTrue(Sets.isSubsetOf(singletonSet, doubletonSet));
+        assertFalse(Sets.isSubsetOf(doubletonSet, singletonSet));
     }
 
     @Test
@@ -520,8 +526,8 @@ public class SetsTest
     {
         MutableSet<String> setA = UnifiedSet.newSetWith("Bertha", null, "Myra");
         MutableSet<String> setB = UnifiedSet.newSetWith("Myra", "Bertha", null);
-        Assert.assertTrue(Sets.isSubsetOf(setA, setB));
-        Assert.assertTrue(Sets.isSubsetOf(setB, setA));
+        assertTrue(Sets.isSubsetOf(setA, setB));
+        assertTrue(Sets.isSubsetOf(setB, setA));
     }
 
     @Test
@@ -529,8 +535,8 @@ public class SetsTest
     {
         MutableSet<String> emptySet = mSet();
         MutableSet<String> singletonSet = UnifiedSet.newSetWith("Bertha");
-        Assert.assertTrue(Sets.isProperSubsetOf(emptySet, singletonSet));
-        Assert.assertFalse(Sets.isProperSubsetOf(singletonSet, emptySet));
+        assertTrue(Sets.isProperSubsetOf(emptySet, singletonSet));
+        assertFalse(Sets.isProperSubsetOf(singletonSet, emptySet));
     }
 
     @Test
@@ -538,8 +544,8 @@ public class SetsTest
     {
         MutableSet<String> singletonSet = UnifiedSet.newSetWith("Bertha");
         MutableSet<String> doubletonSet = UnifiedSet.newSetWith("Bertha", "Myra");
-        Assert.assertTrue(Sets.isProperSubsetOf(singletonSet, doubletonSet));
-        Assert.assertFalse(Sets.isProperSubsetOf(doubletonSet, singletonSet));
+        assertTrue(Sets.isProperSubsetOf(singletonSet, doubletonSet));
+        assertFalse(Sets.isProperSubsetOf(doubletonSet, singletonSet));
     }
 
     @Test
@@ -547,8 +553,8 @@ public class SetsTest
     {
         MutableSet<String> setA = UnifiedSet.newSetWith("Bertha", null, "Myra");
         MutableSet<String> setB = UnifiedSet.newSetWith("Myra", "Bertha", null);
-        Assert.assertFalse(Sets.isProperSubsetOf(setA, setB));
-        Assert.assertFalse(Sets.isProperSubsetOf(setB, setA));
+        assertFalse(Sets.isProperSubsetOf(setA, setB));
+        assertFalse(Sets.isProperSubsetOf(setB, setA));
     }
 
     private <E> void assertUnionProperties(
@@ -654,7 +660,7 @@ public class SetsTest
     {
         Verify.assertSetsEqual(setA, setB);
         Object[] expectedItems = setB.toArray((E[]) new Object[setB.size()]);
-        Assert.assertEquals(Lists.mutable.with(expectedItems), FastList.newList(setA));
+        assertEquals(Lists.mutable.with(expectedItems), FastList.newList(setA));
     }
 
     private <E> void assertForwardAndBackward(
@@ -673,35 +679,35 @@ public class SetsTest
 
     private <E> Procedure2<Set<E>, E[]> containsExactlyProcedure()
     {
-        return (set, elements) -> Assert.assertEquals(UnifiedSet.newSetWith(elements), set);
+        return (set, elements) -> assertEquals(UnifiedSet.newSetWith(elements), set);
     }
 
     private <E> Procedure2<Set<E>, E[]> containsExactlyInOrderProcedure()
     {
-        return (set, elements) -> Assert.assertEquals(Lists.mutable.with((Object[]) elements), FastList.newList(set));
+        return (set, elements) -> assertEquals(Lists.mutable.with((Object[]) elements), FastList.newList(set));
     }
 
     @Test
     public void immutables()
     {
         ImmutableSetFactory setFactory = Sets.immutable;
-        Assert.assertEquals(UnifiedSet.newSet(), setFactory.empty());
-        Assert.assertEquals(UnifiedSet.newSet(), setFactory.of());
-        Assert.assertEquals(UnifiedSet.newSet(), setFactory.with());
+        assertEquals(UnifiedSet.newSet(), setFactory.empty());
+        assertEquals(UnifiedSet.newSet(), setFactory.of());
+        assertEquals(UnifiedSet.newSet(), setFactory.with());
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.of());
-        Assert.assertEquals(UnifiedSet.newSetWith(1), setFactory.of(1));
+        assertEquals(UnifiedSet.newSetWith(1), setFactory.of(1));
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.of(1));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2), setFactory.of(1, 2));
+        assertEquals(UnifiedSet.newSetWith(1, 2), setFactory.of(1, 2));
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.of(1, 2));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3), setFactory.of(1, 2, 3));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3), setFactory.of(1, 2, 3));
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.of(1, 2, 3));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.of(1, 2, 3, 4));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.of(1, 2, 3, 4));
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.of(1, 2, 3, 4));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.of(1, 2, 3, 4, 5));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.of(1, 2, 3, 4, 5));
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.of(1, 2, 3, 4, 5));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
     }
 
@@ -709,23 +715,23 @@ public class SetsTest
     public void mutables()
     {
         MutableSetFactory setFactory = Sets.mutable;
-        Assert.assertEquals(UnifiedSet.newSet(), setFactory.empty());
-        Assert.assertEquals(UnifiedSet.newSet(), setFactory.of());
-        Assert.assertEquals(UnifiedSet.newSet(), setFactory.with());
+        assertEquals(UnifiedSet.newSet(), setFactory.empty());
+        assertEquals(UnifiedSet.newSet(), setFactory.of());
+        assertEquals(UnifiedSet.newSet(), setFactory.with());
         Verify.assertInstanceOf(MutableSet.class, setFactory.of());
-        Assert.assertEquals(UnifiedSet.newSetWith(1), setFactory.of(1));
+        assertEquals(UnifiedSet.newSetWith(1), setFactory.of(1));
         Verify.assertInstanceOf(MutableSet.class, setFactory.of(1));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2), setFactory.of(1, 2));
+        assertEquals(UnifiedSet.newSetWith(1, 2), setFactory.of(1, 2));
         Verify.assertInstanceOf(MutableSet.class, setFactory.of(1, 2));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3), setFactory.of(1, 2, 3));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3), setFactory.of(1, 2, 3));
         Verify.assertInstanceOf(MutableSet.class, setFactory.of(1, 2, 3));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.of(1, 2, 3, 4));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.of(1, 2, 3, 4));
         Verify.assertInstanceOf(MutableSet.class, setFactory.of(1, 2, 3, 4));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.of(1, 2, 3, 4, 5));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.of(1, 2, 3, 4, 5));
         Verify.assertInstanceOf(MutableSet.class, setFactory.of(1, 2, 3, 4, 5));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
         Verify.assertInstanceOf(MutableSet.class, setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
         Verify.assertInstanceOf(MutableSet.class, setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
     }
 
@@ -733,23 +739,23 @@ public class SetsTest
     public void fixedSize()
     {
         FixedSizeSetFactory setFactory = Sets.fixedSize;
-        Assert.assertEquals(UnifiedSet.newSet(), setFactory.of());
-        Assert.assertEquals(UnifiedSet.newSet(), setFactory.with());
-        Assert.assertEquals(UnifiedSet.newSet(), setFactory.empty());
+        assertEquals(UnifiedSet.newSet(), setFactory.of());
+        assertEquals(UnifiedSet.newSet(), setFactory.with());
+        assertEquals(UnifiedSet.newSet(), setFactory.empty());
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of());
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.with());
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.empty());
-        Assert.assertEquals(UnifiedSet.newSetWith(1), setFactory.of(1));
+        assertEquals(UnifiedSet.newSetWith(1), setFactory.of(1));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2), setFactory.of(1, 2));
+        assertEquals(UnifiedSet.newSetWith(1, 2), setFactory.of(1, 2));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1, 2));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3), setFactory.of(1, 2, 3));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3), setFactory.of(1, 2, 3));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1, 2, 3));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.of(1, 2, 3, 4));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.of(1, 2, 3, 4));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1, 2, 3, 4));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.ofAll(Sets.mutable.of(1, 2, 3, 4)));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.ofAll(Sets.mutable.of(1, 2, 3, 4)));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.ofAll(Sets.mutable.of(1, 2, 3, 4)));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.fromStream(Stream.of(1, 2, 3, 4)));
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.fromStream(Stream.of(1, 2, 3, 4)));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.fromStream(Stream.of(1, 2, 3, 4)));
     }
 
@@ -762,18 +768,18 @@ public class SetsTest
 
     private void testMultiReaderApi(MultiReaderSetFactory setFactory)
     {
-        Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.of());
+        assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.of());
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.of());
-        Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.with());
+        assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.with());
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.with());
-        Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.ofInitialCapacity(1));
+        assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.ofInitialCapacity(1));
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.ofInitialCapacity(1));
-        Assert.assertThrows(IllegalArgumentException.class, () -> setFactory.ofInitialCapacity(-1));
-        Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1), setFactory.of(1));
+        assertThrows(IllegalArgumentException.class, () -> setFactory.ofInitialCapacity(-1));
+        assertEquals(MultiReaderUnifiedSet.newSetWith(1), setFactory.of(1));
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.of(1));
-        Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
+        assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
-        Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.fromStream(Stream.of(1, 2, 3)));
+        assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.fromStream(Stream.of(1, 2, 3)));
         Verify.assertInstanceOf(MultiReaderSet.class, setFactory.fromStream(Stream.of(1, 2, 3)));
     }
 
@@ -790,13 +796,13 @@ public class SetsTest
                 UnifiedSet.newSetWith(1, 3),
                 UnifiedSet.newSetWith(2, 3),
                 UnifiedSet.newSetWith(1, 2, 3));
-        Assert.assertEquals(expectedPowerSet, Sets.powerSet(set));
+        assertEquals(expectedPowerSet, Sets.powerSet(set));
     }
 
     @Test
     public void powerSet_empty()
     {
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedSet.newSetWith(UnifiedSet.newSet()),
                 Sets.powerSet(UnifiedSet.newSet()));
     }
@@ -813,7 +819,7 @@ public class SetsTest
                 Tuples.pair(2, 3),
                 Tuples.pair(1, 4),
                 Tuples.pair(2, 4));
-        Assert.assertEquals(expectedCartesianProduct1, Sets.cartesianProduct(set1, set2).toBag());
+        assertEquals(expectedCartesianProduct1, Sets.cartesianProduct(set1, set2).toBag());
         MutableBag<Pair<Integer, Integer>> expectedCartesianProduct2 = Bags.mutable.of(
                 Tuples.pair(2, 1),
                 Tuples.pair(3, 1),
@@ -821,7 +827,7 @@ public class SetsTest
                 Tuples.pair(2, 2),
                 Tuples.pair(3, 2),
                 Tuples.pair(4, 2));
-        Assert.assertEquals(expectedCartesianProduct2, Sets.cartesianProduct(set2, set1).toBag());
+        assertEquals(expectedCartesianProduct2, Sets.cartesianProduct(set2, set1).toBag());
     }
 
     @Test
@@ -834,7 +840,7 @@ public class SetsTest
                 Tuples.pair(1, 2),
                 Tuples.pair(2, 1),
                 Tuples.pair(2, 2));
-        Assert.assertEquals(expectedCartesianProduct, Sets.cartesianProduct(set1, set2).toBag());
+        assertEquals(expectedCartesianProduct, Sets.cartesianProduct(set1, set2).toBag());
     }
 
     @Test
@@ -849,7 +855,7 @@ public class SetsTest
                 Tuples.pair(2, 3),
                 Tuples.pair(1, 4),
                 Tuples.pair(2, 4));
-        Assert.assertEquals(expectedCartesianProduct, Sets.cartesianProduct(set1, set2, Tuples::pair).toBag());
+        assertEquals(expectedCartesianProduct, Sets.cartesianProduct(set1, set2, Tuples::pair).toBag());
         MutableBag<List<Integer>> expectedCartesianProduct2 = Bags.mutable.of(
                 Lists.mutable.with(2, 1),
                 Lists.mutable.with(3, 1),
@@ -857,7 +863,7 @@ public class SetsTest
                 Lists.mutable.with(2, 2),
                 Lists.mutable.with(3, 2),
                 Lists.mutable.with(4, 2));
-        Assert.assertEquals(
+        assertEquals(
                 expectedCartesianProduct2,
                 Sets.cartesianProduct(set2, set1, (one, two) -> Lists.mutable.with(one, two)).toBag());
     }
@@ -865,7 +871,7 @@ public class SetsTest
     @Test
     public void cartesianProduct_empty()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Bags.mutable.of(),
                 HashBag.newBag(Sets.cartesianProduct(
                         Sets.mutable.with(1, 2),
@@ -876,8 +882,8 @@ public class SetsTest
     public void castToSet()
     {
         Set<Object> set = Sets.immutable.of().castToSet();
-        Assert.assertNotNull(set);
-        Assert.assertSame(Sets.immutable.of(), set);
+        assertNotNull(set);
+        assertSame(Sets.immutable.of(), set);
     }
 
     @Test
@@ -888,7 +894,7 @@ public class SetsTest
         ImmutableSet<Integer> immutableSet = set.toImmutable();
         Verify.assertInstanceOf(ImmutableSet.class, Sets.immutable.ofAll(set));
         Verify.assertInstanceOf(ImmutableSet.class, Sets.immutable.ofAll(Sets.mutable.with(1, 2, 3, 4, 5)));
-        Assert.assertSame(Sets.immutable.ofAll(immutableSet.castToSet()), immutableSet);
+        assertSame(Sets.immutable.ofAll(immutableSet.castToSet()), immutableSet);
     }
 
     @Test
@@ -928,15 +934,15 @@ public class SetsTest
     @Test
     public void emptySet()
     {
-        Assert.assertTrue(Sets.immutable.empty().isEmpty());
-        Assert.assertSame(Sets.immutable.empty(), Sets.immutable.empty());
+        assertTrue(Sets.immutable.empty().isEmpty());
+        assertSame(Sets.immutable.empty(), Sets.immutable.empty());
         Verify.assertPostSerializedIdentity(Sets.immutable.empty());
     }
 
     @Test
     public void newSetWith()
     {
-        Assert.assertSame(Sets.immutable.empty(), Sets.immutable.of(Sets.immutable.empty().toArray()));
+        assertSame(Sets.immutable.empty(), Sets.immutable.of(Sets.immutable.empty().toArray()));
         Verify.assertSize(1, Sets.immutable.of(1).castToSet());
         Verify.assertSize(1, Sets.immutable.of(1, 1).castToSet());
         Verify.assertSize(1, Sets.immutable.of(1, 1, 1).castToSet());
@@ -974,35 +980,35 @@ public class SetsTest
         ImmutableSet<Key> set1 = Sets.immutable.of(key, duplicateKey1);
         Verify.assertSize(1, set1);
         Verify.assertContains(key, set1);
-        Assert.assertSame(key, set1.getFirst());
+        assertSame(key, set1.getFirst());
 
         Key duplicateKey2 = new Key("key");
         ImmutableSet<Key> set2 = Sets.immutable.of(key, duplicateKey1, duplicateKey2);
         Verify.assertSize(1, set2);
         Verify.assertContains(key, set2);
-        Assert.assertSame(key, set2.getFirst());
+        assertSame(key, set2.getFirst());
 
         Key duplicateKey3 = new Key("key");
         ImmutableSet<Key> set3 = Sets.immutable.of(key, new Key("not a dupe"), duplicateKey3);
         Verify.assertSize(2, set3);
         Verify.assertContainsAll("immutable set", set3, key, new Key("not a dupe"));
-        Assert.assertSame(key, set3.detect(key::equals));
+        assertSame(key, set3.detect(key::equals));
 
         Key duplicateKey4 = new Key("key");
         ImmutableSet<Key> set4 = Sets.immutable.of(key, new Key("not a dupe"), duplicateKey3, duplicateKey4);
         Verify.assertSize(2, set4);
         Verify.assertContainsAll("immutable set", set4, key, new Key("not a dupe"));
-        Assert.assertSame(key, set4.detect(key::equals));
+        assertSame(key, set4.detect(key::equals));
 
         ImmutableSet<Key> set5 = Sets.immutable.of(key, new Key("not a dupe"), new Key("me neither"), duplicateKey4);
         Verify.assertSize(3, set5);
         Verify.assertContainsAll("immutable set", set5, key, new Key("not a dupe"), new Key("me neither"));
-        Assert.assertSame(key, set5.detect(key::equals));
+        assertSame(key, set5.detect(key::equals));
 
         ImmutableSet<Key> set6 = Sets.immutable.of(key, duplicateKey2, duplicateKey3, duplicateKey4);
         Verify.assertSize(1, set6);
         Verify.assertContains(key, set6);
-        Assert.assertSame(key, set6.detect(key::equals));
+        assertSame(key, set6.detect(key::equals));
     }
 
     @Test
@@ -1032,7 +1038,7 @@ public class SetsTest
         MutableSet<String> set6 = Sets.mutable.ofInitialCapacity(65);
         this.assertPresizedSetSizeEquals(65, (UnifiedSet<String>) set6);
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.ofInitialCapacity(-12));
+        assertThrows(IllegalArgumentException.class, () -> Sets.mutable.ofInitialCapacity(-12));
     }
 
     @Test
@@ -1053,7 +1059,7 @@ public class SetsTest
         MutableSet<String> set5 = Sets.mutable.withInitialCapacity(32);
         this.assertPresizedSetSizeEquals(32, (UnifiedSet<String>) set5);
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.withInitialCapacity(-6));
+        assertThrows(IllegalArgumentException.class, () -> Sets.mutable.withInitialCapacity(-6));
     }
 
     private void assertPresizedSetSizeEquals(int initialCapacity, UnifiedSet<String> set)
@@ -1070,19 +1076,19 @@ public class SetsTest
             {
                 capacity <<= 1;
             }
-            Assert.assertEquals(capacity, table.length);
+            assertEquals(capacity, table.length);
         }
         catch (SecurityException ignored)
         {
-            Assert.fail("Unable to modify the visibility of the field 'table' on UnifiedSet");
+            fail("Unable to modify the visibility of the field 'table' on UnifiedSet");
         }
         catch (NoSuchFieldException ignored)
         {
-            Assert.fail("No field named 'table' in UnifiedSet");
+            fail("No field named 'table' in UnifiedSet");
         }
         catch (IllegalAccessException ignored)
         {
-            Assert.fail("No access to the field 'table' in UnifiedSet");
+            fail("No access to the field 'table' in UnifiedSet");
         }
     }
 
@@ -1092,7 +1098,7 @@ public class SetsTest
         ImmutableSet<Integer> empty = Sets.immutable.withAll(Collections.emptyList());
         ImmutableSet<Integer> integers = Sets.immutable.<Integer>empty().newWithAll(Lists.immutable.empty());
         ImmutableSet<Integer> empty2 = Sets.immutable.withAll(integers);
-        Assert.assertSame(Sets.immutable.empty(), empty);
-        Assert.assertSame(Sets.immutable.empty(), empty2);
+        assertSame(Sets.immutable.empty(), empty);
+        assertSame(Sets.immutable.empty(), empty2);
     }
 }

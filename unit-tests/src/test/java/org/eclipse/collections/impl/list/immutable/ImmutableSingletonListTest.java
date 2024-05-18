@@ -11,8 +11,9 @@
 package org.eclipse.collections.impl.list.immutable;
 
 import org.eclipse.collections.api.list.ImmutableList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ImmutableSingletonListTest extends AbstractImmutableListTestCase
 {
@@ -58,6 +59,6 @@ public class ImmutableSingletonListTest extends AbstractImmutableListTestCase
     public void getOnly()
     {
         ImmutableList<Integer> list = new ImmutableSingletonList<>(3);
-        Assert.assertEquals(Integer.valueOf(3), list.getOnly());
+        assertEquals(Integer.valueOf(3), list.getOnly());
     }
 }

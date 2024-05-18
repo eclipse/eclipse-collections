@@ -14,8 +14,9 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PartitionHashBagTest
 {
@@ -29,7 +30,7 @@ public class PartitionHashBagTest
         partitionMutableBag.getRejected().withAll(rejected);
 
         PartitionImmutableBag<Integer> partitionImmutableBag = partitionMutableBag.toImmutable();
-        Assert.assertEquals(selected, partitionImmutableBag.getSelected());
-        Assert.assertEquals(rejected, partitionImmutableBag.getRejected());
+        assertEquals(selected, partitionImmutableBag.getSelected());
+        assertEquals(rejected, partitionImmutableBag.getRejected());
     }
 }

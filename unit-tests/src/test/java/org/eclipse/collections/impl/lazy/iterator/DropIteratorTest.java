@@ -15,8 +15,12 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link DropIterator}.
@@ -48,23 +52,23 @@ public class DropIteratorTest
     {
         for (int i = count; i < size; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
-            Assert.assertEquals(Integer.valueOf(i + 1), iterator.next());
+            assertTrue(iterator.hasNext());
+            assertEquals(Integer.valueOf(i + 1), iterator.next());
         }
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
     }
 
     @Test
     public void remove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> new DropIterator<>(Lists.fixedSize.<Integer>of(), 0).remove());
+        assertThrows(UnsupportedOperationException.class, () -> new DropIterator<>(Lists.fixedSize.<Integer>of(), 0).remove());
     }
 
     @Test
     public void noSuchElementException()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> new DropIterator<>(Lists.fixedSize.<Integer>of(), 0).next());
+        assertThrows(NoSuchElementException.class, () -> new DropIterator<>(Lists.fixedSize.<Integer>of(), 0).next());
 
-        Assert.assertThrows(NoSuchElementException.class, () -> new DropIterator<>(Lists.fixedSize.of(1, 2, 3), 4).next());
+        assertThrows(NoSuchElementException.class, () -> new DropIterator<>(Lists.fixedSize.of(1, 2, 3), 4).next());
     }
 }

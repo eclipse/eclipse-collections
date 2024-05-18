@@ -14,8 +14,10 @@ import org.eclipse.collections.api.set.primitive.ByteSet;
 import org.eclipse.collections.api.set.primitive.ImmutableByteSet;
 import org.eclipse.collections.impl.map.mutable.primitive.ByteByteHashMap;
 import org.eclipse.collections.impl.set.immutable.primitive.AbstractImmutableByteHashSetTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link ImmutableByteSet} created from the freeze() method.
@@ -49,7 +51,7 @@ public class ImmutableByteByteMapKeySetTest extends AbstractImmutableByteHashSet
         ByteByteHashMap byteByteHashMap = ByteByteHashMap.newWithKeysValues(collision1, (byte) 0, collision2, (byte) 0);
         byteByteHashMap.removeKey(collision2);
         ByteSet byteSet = byteByteHashMap.keySet().freeze();
-        Assert.assertTrue(byteSet.contains(collision1));
-        Assert.assertFalse(byteSet.contains(collision2));
+        assertTrue(byteSet.contains(collision1));
+        assertFalse(byteSet.contains(collision2));
     }
 }

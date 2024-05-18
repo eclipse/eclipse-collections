@@ -15,8 +15,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.factory.Lists;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class DistinctIteratorTest
 {
@@ -40,14 +42,14 @@ public class DistinctIteratorTest
         {
             result.add(iterator.next());
         }
-        Assert.assertEquals(Lists.mutable.of(4, 1, 10, 100), result);
+        assertEquals(Lists.mutable.of(4, 1, 10, 100), result);
     }
 
     @Test(expected = NoSuchElementException.class)
     public void nextException()
     {
         Iterator<Integer> iterator = new DistinctIterator<>(Lists.mutable.empty());
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
         iterator.next();
     }
 }

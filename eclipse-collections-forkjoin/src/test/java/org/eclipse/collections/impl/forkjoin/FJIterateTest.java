@@ -63,9 +63,14 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class FJIterateTest
 {
@@ -141,25 +146,25 @@ public class FJIterateTest
         IntegerSum sum = new IntegerSum(0);
         MutableSet<Integer> set = Interval.toSet(1, 100);
         FJIterate.forEach(set, new SumProcedure(sum), new SumCombiner(sum));
-        Assert.assertEquals(5050, sum.getSum());
+        assertEquals(5050, sum.getSum());
 
         //Testing batch size 1
         IntegerSum sum2 = new IntegerSum(0);
         UnifiedSet<Integer> set2 = UnifiedSet.newSet(Interval.oneTo(100));
         FJIterate.forEach(set2, new SumProcedure(sum2), new SumCombiner(sum2), 1, set2.getBatchCount(set2.size()));
-        Assert.assertEquals(5050, sum2.getSum());
+        assertEquals(5050, sum2.getSum());
 
         //Testing an uneven batch size
         IntegerSum sum3 = new IntegerSum(0);
         UnifiedSet<Integer> set3 = UnifiedSet.newSet(Interval.oneTo(100));
         FJIterate.forEach(set3, new SumProcedure(sum3), new SumCombiner(sum3), 1, set3.getBatchCount(13));
-        Assert.assertEquals(5050, sum3.getSum());
+        assertEquals(5050, sum3.getSum());
 
         //Testing divideByZero exception by passing 1 as batchSize
         IntegerSum sum4 = new IntegerSum(0);
         UnifiedSet<Integer> set4 = UnifiedSet.newSet(Interval.oneTo(100));
         FJIterate.forEach(set4, new SumProcedure(sum4), new SumCombiner(sum4), 1);
-        Assert.assertEquals(5050, sum4.getSum());
+        assertEquals(5050, sum4.getSum());
     }
 
     @Test
@@ -169,19 +174,19 @@ public class FJIterateTest
         IntegerSum sum1 = new IntegerSum(0);
         MutableMap<String, Integer> map1 = Interval.fromTo(1, 100).toMap(Functions.getToString(), Functions.getIntegerPassThru());
         FJIterate.forEach(map1, new SumProcedure(sum1), new SumCombiner(sum1));
-        Assert.assertEquals(5050, sum1.getSum());
+        assertEquals(5050, sum1.getSum());
 
         //Testing batch size 1
         IntegerSum sum2 = new IntegerSum(0);
         UnifiedMap<String, Integer> map2 = (UnifiedMap<String, Integer>) Interval.fromTo(1, 100).toMap(Functions.getToString(), Functions.getIntegerPassThru());
         FJIterate.forEach(map2, new SumProcedure(sum2), new SumCombiner(sum2), 1, map2.getBatchCount(map2.size()));
-        Assert.assertEquals(5050, sum2.getSum());
+        assertEquals(5050, sum2.getSum());
 
         //Testing an uneven batch size
         IntegerSum sum3 = new IntegerSum(0);
         UnifiedMap<String, Integer> set3 = (UnifiedMap<String, Integer>) Interval.fromTo(1, 100).toMap(Functions.getToString(), Functions.getIntegerPassThru());
         FJIterate.forEach(set3, new SumProcedure(sum3), new SumCombiner(sum3), 1, set3.getBatchCount(13));
-        Assert.assertEquals(5050, sum3.getSum());
+        assertEquals(5050, sum3.getSum());
     }
 
     @Test
@@ -190,37 +195,37 @@ public class FJIterateTest
         IntegerSum sum1 = new IntegerSum(0);
         List<Integer> list1 = FJIterateTest.createIntegerList(16);
         FJIterate.forEach(list1, new SumProcedure(sum1), new SumCombiner(sum1), 1, list1.size() / 2);
-        Assert.assertEquals(16, sum1.getSum());
+        assertEquals(16, sum1.getSum());
 
         IntegerSum sum2 = new IntegerSum(0);
         List<Integer> list2 = FJIterateTest.createIntegerList(7);
         FJIterate.forEach(list2, new SumProcedure(sum2), new SumCombiner(sum2));
-        Assert.assertEquals(7, sum2.getSum());
+        assertEquals(7, sum2.getSum());
 
         IntegerSum sum3 = new IntegerSum(0);
         List<Integer> list3 = FJIterateTest.createIntegerList(15);
         FJIterate.forEach(list3, new SumProcedure(sum3), new SumCombiner(sum3), 1, list3.size() / 2);
-        Assert.assertEquals(15, sum3.getSum());
+        assertEquals(15, sum3.getSum());
 
         IntegerSum sum4 = new IntegerSum(0);
         List<Integer> list4 = FJIterateTest.createIntegerList(35);
         FJIterate.forEach(list4, new SumProcedure(sum4), new SumCombiner(sum4));
-        Assert.assertEquals(35, sum4.getSum());
+        assertEquals(35, sum4.getSum());
 
         IntegerSum sum5 = new IntegerSum(0);
         MutableList<Integer> list5 = FastList.newList(list4);
         FJIterate.forEach(list5, new SumProcedure(sum5), new SumCombiner(sum5));
-        Assert.assertEquals(35, sum5.getSum());
+        assertEquals(35, sum5.getSum());
 
         IntegerSum sum6 = new IntegerSum(0);
         List<Integer> list6 = FJIterateTest.createIntegerList(40);
         FJIterate.forEach(list6, new SumProcedure(sum6), new SumCombiner(sum6), 1, list6.size() / 2);
-        Assert.assertEquals(40, sum6.getSum());
+        assertEquals(40, sum6.getSum());
 
         IntegerSum sum7 = new IntegerSum(0);
         MutableList<Integer> list7 = FastList.newList(list6);
         FJIterate.forEach(list7, new SumProcedure(sum7), new SumCombiner(sum7), 1, list6.size() / 2);
-        Assert.assertEquals(40, sum7.getSum());
+        assertEquals(40, sum7.getSum());
     }
 
     @Test
@@ -229,43 +234,43 @@ public class FJIterateTest
         IntegerSum sum1 = new IntegerSum(0);
         ImmutableList<Integer> list1 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(16));
         FJIterate.forEach(list1, new SumProcedure(sum1), new SumCombiner(sum1), 1, list1.size() / 2);
-        Assert.assertEquals(16, sum1.getSum());
+        assertEquals(16, sum1.getSum());
 
         IntegerSum sum2 = new IntegerSum(0);
         ImmutableList<Integer> list2 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(7));
         FJIterate.forEach(list2, new SumProcedure(sum2), new SumCombiner(sum2));
-        Assert.assertEquals(7, sum2.getSum());
+        assertEquals(7, sum2.getSum());
 
         IntegerSum sum3 = new IntegerSum(0);
         ImmutableList<Integer> list3 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(15));
         FJIterate.forEach(list3, new SumProcedure(sum3), new SumCombiner(sum3), 1, list3.size() / 2);
-        Assert.assertEquals(15, sum3.getSum());
+        assertEquals(15, sum3.getSum());
 
         IntegerSum sum4 = new IntegerSum(0);
         ImmutableList<Integer> list4 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(35));
         FJIterate.forEach(list4, new SumProcedure(sum4), new SumCombiner(sum4));
-        Assert.assertEquals(35, sum4.getSum());
+        assertEquals(35, sum4.getSum());
 
         IntegerSum sum5 = new IntegerSum(0);
         ImmutableList<Integer> list5 = FastList.newList(list4).toImmutable();
         FJIterate.forEach(list5, new SumProcedure(sum5), new SumCombiner(sum5));
-        Assert.assertEquals(35, sum5.getSum());
+        assertEquals(35, sum5.getSum());
 
         IntegerSum sum6 = new IntegerSum(0);
         ImmutableList<Integer> list6 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(40));
         FJIterate.forEach(list6, new SumProcedure(sum6), new SumCombiner(sum6), 1, list6.size() / 2);
-        Assert.assertEquals(40, sum6.getSum());
+        assertEquals(40, sum6.getSum());
 
         IntegerSum sum7 = new IntegerSum(0);
         ImmutableList<Integer> list7 = FastList.newList(list6).toImmutable();
         FJIterate.forEach(list7, new SumProcedure(sum7), new SumCombiner(sum7), 1, list6.size() / 2);
-        Assert.assertEquals(40, sum7.getSum());
+        assertEquals(40, sum7.getSum());
     }
 
     @Test
     public void testForEachWithException()
     {
-        Assert.assertThrows(RuntimeException.class, () -> FJIterate.forEach(
+        assertThrows(RuntimeException.class, () -> FJIterate.forEach(
                 FJIterateTest.createIntegerList(5),
                 new PassThruProcedureFactory<>(EXCEPTION_PROCEDURE),
                 new PassThruCombiner<>(),
@@ -278,9 +283,9 @@ public class FJIterateTest
     {
         Integer[] array = new Integer[200];
         MutableList<Integer> list = new FastList<>(Interval.oneTo(200));
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
+        assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
     @Test
@@ -288,9 +293,9 @@ public class FJIterateTest
     {
         Integer[] array = new Integer[200];
         MutableList<Integer> list = new FastList<>(Interval.oneTo(200));
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
+        assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
     @Test
@@ -298,9 +303,9 @@ public class FJIterateTest
     {
         Integer[] array = new Integer[200];
         ImmutableList<Integer> list = Interval.oneTo(200).toList().toImmutable();
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
+        assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
     @Test
@@ -308,25 +313,25 @@ public class FJIterateTest
     {
         Integer[] array = new Integer[200];
         MutableList<Integer> list = FastList.newList(Interval.oneTo(200));
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
+        assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
     @Test
     public void testForEachWithIndexToArrayUsingFixedArrayList()
     {
         Integer[] array = new Integer[10];
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 1, 2);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[list.size()]));
+        assertArrayEquals(array, list.toArray(new Integer[list.size()]));
     }
 
     @Test
     public void testForEachWithIndexException()
     {
-        Assert.assertThrows(RuntimeException.class, () -> FJIterate.forEachWithIndex(
+        assertThrows(RuntimeException.class, () -> FJIterate.forEachWithIndex(
                 FJIterateTest.createIntegerList(5),
                 new PassThruObjectIntProcedureFactory<>(EXCEPTION_OBJECT_INT_PROCEDURE),
                 new PassThruCombiner<>(),
@@ -346,9 +351,9 @@ public class FJIterateTest
         Collection<Integer> actual2 = FJIterate.select(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = FJIterate.select(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.select(Predicates.greaterThan(100));
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
     }
 
     @Test
@@ -358,10 +363,10 @@ public class FJIterateTest
         Collection<Integer> actual1 = FJIterate.select(iterable, Predicates.greaterThan(100));
         Collection<Integer> actual2 = FJIterate.select(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.select(Predicates.greaterThan(100));
-        Assert.assertSame(expected.getClass(), actual1.getClass());
-        Assert.assertSame(expected.getClass(), actual2.getClass());
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
+        assertSame(expected.getClass(), actual1.getClass());
+        assertSame(expected.getClass(), actual2.getClass());
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
     }
 
     @Test
@@ -374,8 +379,8 @@ public class FJIterateTest
     {
         int actual1 = FJIterate.count(iterable, Predicates.greaterThan(100));
         int actual2 = FJIterate.count(iterable, Predicates.greaterThan(100), 6, this.executor);
-        Assert.assertEquals(100, actual1);
-        Assert.assertEquals(100, actual2);
+        assertEquals(100, actual1);
+        assertEquals(100, actual2);
     }
 
     @Test
@@ -390,9 +395,9 @@ public class FJIterateTest
         Collection<Integer> actual2 = FJIterate.reject(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = FJIterate.reject(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.reject(Predicates.greaterThan(100));
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
     }
 
     @Test
@@ -409,9 +414,9 @@ public class FJIterateTest
         RichIterable<String> expected = iterable.collect(Functions.getToString());
         Verify.assertSize(200, actual1);
         Verify.assertContains(String.valueOf(200), actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected.toBag(), HashBag.newBag(actual3));
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected.toBag(), HashBag.newBag(actual3));
     }
 
     @Test
@@ -431,9 +436,9 @@ public class FJIterateTest
         Verify.assertNotContains(String.valueOf(90), actual1);
         Verify.assertNotContains(String.valueOf(210), actual1);
         Verify.assertContains(String.valueOf(159), actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, HashBag.newBag(actual1));
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, HashBag.newBag(actual1));
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
     }
 
     @Test
@@ -451,15 +456,15 @@ public class FJIterateTest
         Multimap<String, Integer> result7 = FJIterate.groupBy(iterable.toBag(), Functions.getToString(), SynchronizedPutHashBagMultimap.newMultimap(), 100);
         Multimap<String, Integer> result8 = FJIterate.groupBy(iterable.toBag(), Functions.getToString(), SynchronizedPutHashBagMultimap.newMultimap());
         Multimap<String, Integer> result9 = FJIterate.groupBy(iterable.toList().toImmutable(), Functions.getToString());
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result1));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result2));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result9));
-        Assert.assertEquals(expectedAsSet, result3);
-        Assert.assertEquals(expectedAsSet, result4);
-        Assert.assertEquals(expectedAsSet, result5);
-        Assert.assertEquals(expectedAsSet, result6);
-        Assert.assertEquals(expected, result7);
-        Assert.assertEquals(expected, result8);
+        assertEquals(expected, HashBagMultimap.newMultimap(result1));
+        assertEquals(expected, HashBagMultimap.newMultimap(result2));
+        assertEquals(expected, HashBagMultimap.newMultimap(result9));
+        assertEquals(expectedAsSet, result3);
+        assertEquals(expectedAsSet, result4);
+        assertEquals(expectedAsSet, result5);
+        assertEquals(expectedAsSet, result6);
+        assertEquals(expected, result7);
+        assertEquals(expected, result8);
     }
 
     @Test
@@ -481,16 +486,16 @@ public class FJIterateTest
         expected.put('M', "Mary");
         expected.put('B', "Bob");
         expected.put('S', "Sara");
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result1));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result2));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result3));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result4));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result5));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result6));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result7));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result8));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result9));
-        Assert.assertThrows(IllegalArgumentException.class, () -> FJIterate.groupBy(null, null, 1));
+        assertEquals(expected, HashBagMultimap.newMultimap(result1));
+        assertEquals(expected, HashBagMultimap.newMultimap(result2));
+        assertEquals(expected, HashBagMultimap.newMultimap(result3));
+        assertEquals(expected, HashBagMultimap.newMultimap(result4));
+        assertEquals(expected, HashBagMultimap.newMultimap(result5));
+        assertEquals(expected, HashBagMultimap.newMultimap(result6));
+        assertEquals(expected, HashBagMultimap.newMultimap(result7));
+        assertEquals(expected, HashBagMultimap.newMultimap(result8));
+        assertEquals(expected, HashBagMultimap.newMultimap(result9));
+        assertThrows(IllegalArgumentException.class, () -> FJIterate.groupBy(null, null, 1));
     }
 
     @Test
@@ -500,11 +505,11 @@ public class FJIterateTest
         List<Integer> list = Interval.oneTo(2000);
         MutableMap<String, AtomicInteger> aggregation =
                 FJIterate.aggregateInPlaceBy(list, EVEN_OR_ODD, ATOMIC_INTEGER_NEW, countAggregator);
-        Assert.assertEquals(1000, aggregation.get("Even").intValue());
-        Assert.assertEquals(1000, aggregation.get("Odd").intValue());
+        assertEquals(1000, aggregation.get("Even").intValue());
+        assertEquals(1000, aggregation.get("Odd").intValue());
         FJIterate.aggregateInPlaceBy(list, EVEN_OR_ODD, ATOMIC_INTEGER_NEW, countAggregator, aggregation);
-        Assert.assertEquals(2000, aggregation.get("Even").intValue());
-        Assert.assertEquals(2000, aggregation.get("Odd").intValue());
+        assertEquals(2000, aggregation.get("Even").intValue());
+        assertEquals(2000, aggregation.get("Odd").intValue());
     }
 
     @Test
@@ -518,9 +523,9 @@ public class FJIterateTest
                 .shuffleThis();
         MapIterable<String, AtomicInteger> aggregation =
                 FJIterate.aggregateInPlaceBy(list, Functions.getToString(), ATOMIC_INTEGER_NEW, sumAggregator, 50);
-        Assert.assertEquals(100, aggregation.get("1").intValue());
-        Assert.assertEquals(400, aggregation.get("2").intValue());
-        Assert.assertEquals(900, aggregation.get("3").intValue());
+        assertEquals(100, aggregation.get("1").intValue());
+        assertEquals(400, aggregation.get("2").intValue());
+        assertEquals(900, aggregation.get("3").intValue());
     }
 
     @Test
@@ -530,11 +535,11 @@ public class FJIterateTest
         List<Integer> list = Interval.oneTo(20000);
         MutableMap<String, Integer> aggregation =
                 FJIterate.aggregateBy(list, EVEN_OR_ODD, INTEGER_NEW, countAggregator);
-        Assert.assertEquals(10000, aggregation.get("Even").intValue());
-        Assert.assertEquals(10000, aggregation.get("Odd").intValue());
+        assertEquals(10000, aggregation.get("Even").intValue());
+        assertEquals(10000, aggregation.get("Odd").intValue());
         FJIterate.aggregateBy(list, EVEN_OR_ODD, INTEGER_NEW, countAggregator, aggregation);
-        Assert.assertEquals(20000, aggregation.get("Even").intValue());
-        Assert.assertEquals(20000, aggregation.get("Odd").intValue());
+        assertEquals(20000, aggregation.get("Even").intValue());
+        assertEquals(20000, aggregation.get("Odd").intValue());
     }
 
     @Test
@@ -548,9 +553,9 @@ public class FJIterateTest
                 .shuffleThis();
         MapIterable<String, Integer> aggregation =
                 FJIterate.aggregateBy(list, Functions.getToString(), INTEGER_NEW, sumAggregator, 100);
-        Assert.assertEquals(1000, aggregation.get("1").intValue());
-        Assert.assertEquals(4000, aggregation.get("2").intValue());
-        Assert.assertEquals(9000, aggregation.get("3").intValue());
+        assertEquals(1000, aggregation.get("1").intValue());
+        assertEquals(4000, aggregation.get("2").intValue());
+        assertEquals(9000, aggregation.get("3").intValue());
     }
 
     private static List<Integer> createIntegerList(int size)
@@ -572,9 +577,9 @@ public class FJIterateTest
         RichIterable<String> expected1 = iterable.flatCollect(INT_TO_TWO_STRINGS);
         RichIterable<String> expected2 = iterable.flatCollect(INT_TO_TWO_STRINGS, HashBag.newBag());
         Verify.assertContains(String.valueOf(200), actual1);
-        Assert.assertEquals(expected1.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected1, actual1);
-        Assert.assertEquals(expected2.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected2, actual2);
-        Assert.assertEquals(expected1.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected1, actual3);
+        assertEquals(expected1.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected1, actual1);
+        assertEquals(expected2.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected2, actual2);
+        assertEquals(expected1.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected1, actual3);
     }
 
     public static final class IntegerSum

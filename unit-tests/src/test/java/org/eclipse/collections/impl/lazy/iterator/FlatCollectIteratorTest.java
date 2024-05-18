@@ -15,8 +15,9 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertSame;
 
 public class FlatCollectIteratorTest
 {
@@ -41,6 +42,6 @@ public class FlatCollectIteratorTest
                         Lists.fixedSize.of(),
                         Lists.fixedSize.of(expected)),
                 Functions.getPassThru());
-        Assert.assertSame(expected, flattenIterator.next());
+        assertSame(expected, flattenIterator.next());
     }
 }

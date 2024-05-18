@@ -14,8 +14,9 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.ParallelBag;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.lazy.parallel.ParallelIterableTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public abstract class ParallelBagTestCase extends ParallelIterableTestCase
 {
@@ -54,7 +55,7 @@ public abstract class ParallelBagTestCase extends ParallelIterableTestCase
     {
         MutableBag<Integer> actual = HashBag.<Integer>newBag().asSynchronized();
         this.classUnderTest().forEachWithOccurrences(actual::addOccurrences);
-        Assert.assertEquals(this.getExpected().toBag(), actual);
+        assertEquals(this.getExpected().toBag(), actual);
     }
 
     @Override

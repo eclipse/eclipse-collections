@@ -12,8 +12,11 @@ package org.eclipse.collections.impl.block.function.primitive;
 
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 public class BooleanCaseFunctionTest
 {
@@ -21,7 +24,7 @@ public class BooleanCaseFunctionTest
     public void noopCase()
     {
         BooleanToObjectFunction<Boolean> function = new BooleanCaseFunction<>();
-        Assert.assertNull(function.valueOf(true));
+        assertNull(function.valueOf(true));
     }
 
     @Test
@@ -29,7 +32,7 @@ public class BooleanCaseFunctionTest
     {
         BooleanCaseFunction<Boolean> function = new BooleanCaseFunction<>();
         function.addCase(value -> value, Boolean::valueOf);
-        Assert.assertEquals(Boolean.valueOf(true), function.valueOf(true));
+        assertEquals(Boolean.valueOf(true), function.valueOf(true));
     }
 
     @Test
@@ -38,12 +41,12 @@ public class BooleanCaseFunctionTest
         BooleanCaseFunction<String> function = new BooleanCaseFunction<>(e -> "Yow!")
                 .addCase(e -> e, e -> "Patience, grasshopper");
 
-        Assert.assertEquals("Yow!", function.valueOf(false));
+        assertEquals("Yow!", function.valueOf(false));
 
         BooleanCaseFunction<String> function1 = function.setDefault(i -> "Patience, young grasshopper");
-        Assert.assertSame(function, function1);
-        Assert.assertEquals("Patience, grasshopper", function.valueOf(true));
-        Assert.assertEquals("Patience, young grasshopper", function.valueOf(false));
+        assertSame(function, function1);
+        assertEquals("Patience, grasshopper", function.valueOf(true));
+        assertEquals("Patience, young grasshopper", function.valueOf(false));
 
         Verify.assertContains("BooleanCaseFunction", function.toString());
     }

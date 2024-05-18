@@ -31,8 +31,10 @@ import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * Test of {@link TreeBagMultimap}.
@@ -81,8 +83,8 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
     {
         SortedBagMultimap<String, Integer> multimap = this.newMultimapWithKeysValues("Less than 2", 1, "Less than 3", 1, "Less than 3", 2, "Less than 3", 2);
         BagMultimap<Integer, String> flipped = multimap.flip();
-        Assert.assertEquals(Bags.immutable.with("Less than 3", "Less than 3"), flipped.get(2));
-        Assert.assertEquals(Bags.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
+        assertEquals(Bags.immutable.with("Less than 3", "Less than 3"), flipped.get(2));
+        assertEquals(Bags.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
     }
 
     @Override
@@ -123,7 +125,7 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
         MutableSortedBagMultimap<String, Integer> expectedMultimap = this.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll("Two", FastList.newListWith(4, 2, 2));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, selectedMultimap);
-        Assert.assertSame(expectedMultimap.comparator(), selectedMultimap.comparator());
+        assertSame(expectedMultimap.comparator(), selectedMultimap.comparator());
     }
 
     @Override
@@ -137,7 +139,7 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
         MutableSortedBagMultimap<String, Integer> expectedMultimap = this.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll("One", FastList.newListWith(3, 1, 1));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, rejectedMultimap);
-        Assert.assertSame(expectedMultimap.comparator(), rejectedMultimap.comparator());
+        assertSame(expectedMultimap.comparator(), rejectedMultimap.comparator());
     }
 
     @Override
@@ -153,7 +155,7 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
         MutableSortedBagMultimap<Integer, Integer> expectedMultimap = this.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, selectedMultimap);
-        Assert.assertSame(expectedMultimap.comparator(), selectedMultimap.comparator());
+        assertSame(expectedMultimap.comparator(), selectedMultimap.comparator());
     }
 
     @Override
@@ -169,7 +171,7 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
         MutableSortedBagMultimap<Integer, Integer> expectedMultimap = this.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, selectedMultimap);
-        Assert.assertSame(expectedMultimap.comparator(), selectedMultimap.comparator());
+        assertSame(expectedMultimap.comparator(), selectedMultimap.comparator());
     }
 
     @Override

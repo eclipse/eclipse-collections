@@ -11,93 +11,95 @@
 package org.eclipse.collections.impl.block.factory.primitive;
 
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public final class BooleanPredicatesTest
 {
     @Test
     public void testEqual()
     {
-        Assert.assertTrue(BooleanPredicates.equal(true).accept(true));
-        Assert.assertTrue(BooleanPredicates.equal(false).accept(false));
-        Assert.assertFalse(BooleanPredicates.equal(true).accept(false));
-        Assert.assertFalse(BooleanPredicates.equal(false).accept(true));
+        assertTrue(BooleanPredicates.equal(true).accept(true));
+        assertTrue(BooleanPredicates.equal(false).accept(false));
+        assertFalse(BooleanPredicates.equal(true).accept(false));
+        assertFalse(BooleanPredicates.equal(false).accept(true));
     }
 
     @Test
     public void testIsTrue()
     {
-        Assert.assertTrue(BooleanPredicates.isTrue().accept(true));
-        Assert.assertFalse(BooleanPredicates.isTrue().accept(false));
+        assertTrue(BooleanPredicates.isTrue().accept(true));
+        assertFalse(BooleanPredicates.isTrue().accept(false));
     }
 
     @Test
     public void testIsFalse()
     {
-        Assert.assertTrue(BooleanPredicates.isFalse().accept(false));
-        Assert.assertFalse(BooleanPredicates.isFalse().accept(true));
+        assertTrue(BooleanPredicates.isFalse().accept(false));
+        assertFalse(BooleanPredicates.isFalse().accept(true));
     }
 
     @Test
     public void testAnd()
     {
-        Assert.assertFalse(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.equal(true)).accept(false));
-        Assert.assertFalse(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.equal(false)).accept(false));
-        Assert.assertFalse(BooleanPredicates.and(BooleanPredicates.isFalse(), BooleanPredicates.equal(true)).accept(false));
-        Assert.assertTrue(BooleanPredicates.and(BooleanPredicates.isFalse(), BooleanPredicates.equal(false)).accept(false));
+        assertFalse(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.equal(true)).accept(false));
+        assertFalse(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.equal(false)).accept(false));
+        assertFalse(BooleanPredicates.and(BooleanPredicates.isFalse(), BooleanPredicates.equal(true)).accept(false));
+        assertTrue(BooleanPredicates.and(BooleanPredicates.isFalse(), BooleanPredicates.equal(false)).accept(false));
 
-        Assert.assertTrue(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.equal(true)).accept(true));
-        Assert.assertFalse(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.equal(false)).accept(false));
-        Assert.assertFalse(BooleanPredicates.and(BooleanPredicates.isFalse(), BooleanPredicates.equal(true)).accept(true));
-        Assert.assertFalse(BooleanPredicates.and(BooleanPredicates.isFalse(), BooleanPredicates.equal(false)).accept(true));
+        assertTrue(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.equal(true)).accept(true));
+        assertFalse(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.equal(false)).accept(false));
+        assertFalse(BooleanPredicates.and(BooleanPredicates.isFalse(), BooleanPredicates.equal(true)).accept(true));
+        assertFalse(BooleanPredicates.and(BooleanPredicates.isFalse(), BooleanPredicates.equal(false)).accept(true));
 
-        Assert.assertFalse(BooleanPredicates.and(BooleanPredicates.isFalse(), value -> !value).accept(true));
-        Assert.assertTrue(BooleanPredicates.and(BooleanPredicates.isFalse(), value -> !value).accept(false));
+        assertFalse(BooleanPredicates.and(BooleanPredicates.isFalse(), value -> !value).accept(true));
+        assertTrue(BooleanPredicates.and(BooleanPredicates.isFalse(), value -> !value).accept(false));
     }
 
     @Test
     public void testOr()
     {
-        Assert.assertFalse(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.equal(true)).accept(false));
-        Assert.assertTrue(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.equal(false)).accept(false));
-        Assert.assertTrue(BooleanPredicates.or(BooleanPredicates.isFalse(), BooleanPredicates.equal(true)).accept(false));
-        Assert.assertTrue(BooleanPredicates.or(BooleanPredicates.isFalse(), BooleanPredicates.equal(false)).accept(false));
+        assertFalse(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.equal(true)).accept(false));
+        assertTrue(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.equal(false)).accept(false));
+        assertTrue(BooleanPredicates.or(BooleanPredicates.isFalse(), BooleanPredicates.equal(true)).accept(false));
+        assertTrue(BooleanPredicates.or(BooleanPredicates.isFalse(), BooleanPredicates.equal(false)).accept(false));
 
-        Assert.assertTrue(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.equal(true)).accept(true));
-        Assert.assertTrue(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.equal(false)).accept(true));
-        Assert.assertTrue(BooleanPredicates.or(BooleanPredicates.isFalse(), BooleanPredicates.equal(true)).accept(true));
-        Assert.assertFalse(BooleanPredicates.or(BooleanPredicates.isFalse(), BooleanPredicates.equal(false)).accept(true));
+        assertTrue(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.equal(true)).accept(true));
+        assertTrue(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.equal(false)).accept(true));
+        assertTrue(BooleanPredicates.or(BooleanPredicates.isFalse(), BooleanPredicates.equal(true)).accept(true));
+        assertFalse(BooleanPredicates.or(BooleanPredicates.isFalse(), BooleanPredicates.equal(false)).accept(true));
 
-        Assert.assertTrue(BooleanPredicates.or(BooleanPredicates.isFalse(), value -> !value).accept(false));
-        Assert.assertFalse(BooleanPredicates.or(BooleanPredicates.isFalse(), value -> !value).accept(true));
+        assertTrue(BooleanPredicates.or(BooleanPredicates.isFalse(), value -> !value).accept(false));
+        assertFalse(BooleanPredicates.or(BooleanPredicates.isFalse(), value -> !value).accept(true));
     }
 
     @Test
     public void testNot()
     {
-        Assert.assertTrue(BooleanPredicates.not(BooleanPredicates.isTrue()).accept(false));
-        Assert.assertFalse(BooleanPredicates.not(BooleanPredicates.isTrue()).accept(true));
-        Assert.assertTrue(BooleanPredicates.not(BooleanPredicates.isFalse()).accept(true));
-        Assert.assertFalse(BooleanPredicates.not(BooleanPredicates.isFalse()).accept(false));
-        Assert.assertTrue(BooleanPredicates.not(true).accept(false));
-        Assert.assertFalse(BooleanPredicates.not(true).accept(true));
-        Assert.assertTrue(BooleanPredicates.not(false).accept(true));
-        Assert.assertFalse(BooleanPredicates.not(false).accept(false));
+        assertTrue(BooleanPredicates.not(BooleanPredicates.isTrue()).accept(false));
+        assertFalse(BooleanPredicates.not(BooleanPredicates.isTrue()).accept(true));
+        assertTrue(BooleanPredicates.not(BooleanPredicates.isFalse()).accept(true));
+        assertFalse(BooleanPredicates.not(BooleanPredicates.isFalse()).accept(false));
+        assertTrue(BooleanPredicates.not(true).accept(false));
+        assertFalse(BooleanPredicates.not(true).accept(true));
+        assertTrue(BooleanPredicates.not(false).accept(true));
+        assertFalse(BooleanPredicates.not(false).accept(false));
     }
 
     @Test
     public void testAlwaysTrue()
     {
-        Assert.assertTrue(BooleanPredicates.alwaysTrue().accept(false));
-        Assert.assertTrue(BooleanPredicates.alwaysTrue().accept(true));
+        assertTrue(BooleanPredicates.alwaysTrue().accept(false));
+        assertTrue(BooleanPredicates.alwaysTrue().accept(true));
     }
 
     @Test
     public void testAlwaysFalse()
     {
-        Assert.assertFalse(BooleanPredicates.alwaysFalse().accept(false));
-        Assert.assertFalse(BooleanPredicates.alwaysFalse().accept(true));
+        assertFalse(BooleanPredicates.alwaysFalse().accept(false));
+        assertFalse(BooleanPredicates.alwaysFalse().accept(true));
     }
 
     @Test

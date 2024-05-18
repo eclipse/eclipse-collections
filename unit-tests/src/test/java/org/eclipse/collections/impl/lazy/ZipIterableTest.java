@@ -11,9 +11,10 @@
 package org.eclipse.collections.impl.lazy;
 
 import org.eclipse.collections.api.factory.Lists;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ZipIterableTest
 {
@@ -38,7 +39,7 @@ public class ZipIterableTest
             sb.append(index);
         });
 
-        Assert.assertEquals("|a00|b11|c22", sb.toString());
+        assertEquals("|a00|b11|c22", sb.toString());
     }
 
     @Test
@@ -51,6 +52,6 @@ public class ZipIterableTest
             sb.append(each.getTwo());
         }, "|");
 
-        Assert.assertEquals("|a0|b1|c2", sb.toString());
+        assertEquals("|a0|b1|c2", sb.toString());
     }
 }

@@ -10,8 +10,11 @@
 
 package org.eclipse.collections.impl.test;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.fail;
 
 public class SerializeTestHelperTest
 {
@@ -20,8 +23,8 @@ public class SerializeTestHelperTest
     {
         String input = "Test";
         String output = SerializeTestHelper.serializeDeserialize(input);
-        Assert.assertEquals(input, output);
-        Assert.assertNotSame(input, output);
+        assertEquals(input, output);
+        assertNotSame(input, output);
     }
 
     @Test
@@ -37,7 +40,7 @@ public class SerializeTestHelperTest
             return;
         }
 
-        Assert.fail();
+        fail();
     }
 
     @Test
@@ -53,7 +56,7 @@ public class SerializeTestHelperTest
             return;
         }
 
-        Assert.fail();
+        fail();
     }
 
     @Test

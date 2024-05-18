@@ -20,8 +20,11 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 
 public class ImmutableEmptySetTest extends AbstractImmutableEmptySetTestCase
 {
@@ -35,8 +38,8 @@ public class ImmutableEmptySetTest extends AbstractImmutableEmptySetTestCase
     @Test
     public void newWithout()
     {
-        Assert.assertSame(Sets.immutable.of(), Sets.immutable.of().newWithout(1));
-        Assert.assertSame(Sets.immutable.of(), Sets.immutable.of().newWithoutAll(Interval.oneTo(3)));
+        assertSame(Sets.immutable.of(), Sets.immutable.of().newWithout(1));
+        assertSame(Sets.immutable.of(), Sets.immutable.of().newWithoutAll(Interval.oneTo(3)));
     }
 
     @Override
@@ -47,19 +50,19 @@ public class ImmutableEmptySetTest extends AbstractImmutableEmptySetTestCase
         MutableSet<Integer> mutable = UnifiedSet.newSet(immutable);
         Verify.assertEqualsAndHashCode(mutable, immutable);
         Verify.assertPostSerializedIdentity(immutable);
-        Assert.assertNotEquals(FastList.newList(mutable), immutable);
+        assertNotEquals(FastList.newList(mutable), immutable);
     }
 
     @Test
     public void countByEach()
     {
-        Assert.assertEquals(Bags.immutable.empty(), this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
+        assertEquals(Bags.immutable.empty(), this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
     }
 
     @Test
     public void countByEach_target()
     {
         MutableBag<Integer> target = Bags.mutable.empty();
-        Assert.assertEquals(target, this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
+        assertEquals(target, this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
     }
 }

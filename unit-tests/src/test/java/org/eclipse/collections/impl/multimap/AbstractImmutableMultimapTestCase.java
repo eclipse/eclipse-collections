@@ -26,8 +26,12 @@ import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractImmutableMultimapTestCase
 {
@@ -70,13 +74,13 @@ public abstract class AbstractImmutableMultimapTestCase
     {
         ImmutableMultimap<String, String> empty = this.classUnderTest();
         Verify.assertEmpty(empty);
-        Assert.assertTrue(empty.isEmpty());
-        Assert.assertFalse(empty.notEmpty());
+        assertTrue(empty.isEmpty());
+        assertFalse(empty.notEmpty());
 
         ImmutableMultimap<String, String> notEmpty = empty.newWith("1", "1");
         Verify.assertNotEmpty(notEmpty);
-        Assert.assertTrue(notEmpty.notEmpty());
-        Assert.assertFalse(notEmpty.isEmpty());
+        assertTrue(notEmpty.notEmpty());
+        assertFalse(notEmpty.isEmpty());
     }
 
     @Test
@@ -88,7 +92,7 @@ public abstract class AbstractImmutableMultimapTestCase
                 .newWith("Two", 2)
                 .newWith("Three", 3);
         Verify.assertInstanceOf(UnmodifiableMutableSet.class, multimap.keySet());
-        Assert.assertEquals(Sets.mutable.of("One", "Two", "Three"), multimap.keySet());
+        assertEquals(Sets.mutable.of("One", "Two", "Three"), multimap.keySet());
     }
 
     @Test
@@ -101,19 +105,19 @@ public abstract class AbstractImmutableMultimapTestCase
         ImmutableMultimap<String, String> notEmpty = empty.newWith("1", "1");
         RichIterable<String> notEmptyView = notEmpty.get("1");
         Verify.assertIterableNotEmpty(notEmptyView);
-        Assert.assertEquals(FastList.newListWith("1"), notEmptyView.toList());
+        assertEquals(FastList.newListWith("1"), notEmptyView.toList());
     }
 
     @Test
     public void toMap()
     {
         ImmutableMultimap<String, String> empty = this.classUnderTest();
-        Assert.assertEquals(UnifiedMap.<String, RichIterable<String>>newMap(), empty.toMap());
+        assertEquals(UnifiedMap.<String, RichIterable<String>>newMap(), empty.toMap());
 
         ImmutableMultimap<String, String> notEmpty = empty.newWith("1", "1");
         MutableCollection<String> strings = this.mutableCollection();
         strings.add("1");
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedMap.newWithKeysValues("1", (RichIterable<String>) strings),
                 notEmpty.toMap());
     }
@@ -138,7 +142,7 @@ public abstract class AbstractImmutableMultimapTestCase
         ImmutableMultimap<String, String> notEmpty = empty.newWith("1", "1").newWith("1", "2");
         Verify.assertNotEmpty(notEmpty);
 
-        Assert.assertEquals(empty.newWithAll("1", FastList.newListWith("1", "2")), notEmpty);
+        assertEquals(empty.newWithAll("1", FastList.newListWith("1", "2")), notEmpty);
         Verify.assertEmpty(notEmpty.newWithoutAll("1"));
     }
 
@@ -146,7 +150,7 @@ public abstract class AbstractImmutableMultimapTestCase
     public void toImmutable()
     {
         ImmutableMultimap<String, String> empty = this.classUnderTest();
-        Assert.assertSame(empty, empty.toImmutable());
+        assertSame(empty, empty.toImmutable());
     }
 
     @Test
@@ -166,7 +170,7 @@ public abstract class AbstractImmutableMultimapTestCase
     {
         ImmutableMultimap<String, String> multimap = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "2");
         ImmutableMultimap<String, String> selectedMultimap = multimap.selectKeysValues((key, value) -> "Two".equals(key) && "2".equals(value));
-        Assert.assertEquals(this.classUnderTest().newWith("Two", "2"), selectedMultimap);
+        assertEquals(this.classUnderTest().newWith("Two", "2"), selectedMultimap);
     }
 
     @Test
@@ -174,7 +178,7 @@ public abstract class AbstractImmutableMultimapTestCase
     {
         ImmutableMultimap<String, String> multimap = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "2");
         ImmutableMultimap<String, String> rejectedMultimap = multimap.rejectKeysValues((key, value) -> "Two".equals(key) && "2".equals(value));
-        Assert.assertEquals(this.classUnderTest().newWith("One", "1"), rejectedMultimap);
+        assertEquals(this.classUnderTest().newWith("One", "1"), rejectedMultimap);
     }
 
     @Test
@@ -182,11 +186,11 @@ public abstract class AbstractImmutableMultimapTestCase
     {
         ImmutableMultimap<String, String> multimap1 = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "2").newWith("Two", "3");
         ImmutableMultimap<String, String> selectedMultimap1 = multimap1.selectKeysMultiValues((key, values) -> "Two".equals(key) && Iterate.contains(values, "2"));
-        Assert.assertEquals(this.classUnderTest().newWith("Two", "2").newWith("Two", "3"), selectedMultimap1);
+        assertEquals(this.classUnderTest().newWith("Two", "2").newWith("Two", "3"), selectedMultimap1);
 
         ImmutableMultimap<String, String> multimap2 = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "3");
         ImmutableMultimap<String, String> selectedMultimap2 = multimap2.selectKeysMultiValues((key, values) -> "Two".equals(key) && Iterate.contains(values, "2"));
-        Assert.assertEquals(this.classUnderTest(), selectedMultimap2);
+        assertEquals(this.classUnderTest(), selectedMultimap2);
     }
 
     @Test
@@ -194,11 +198,11 @@ public abstract class AbstractImmutableMultimapTestCase
     {
         ImmutableMultimap<String, String> multimap1 = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "2").newWith("Two", "3");
         ImmutableMultimap<String, String> rejectedMultimap1 = multimap1.rejectKeysMultiValues((key, values) -> "Two".equals(key) && Iterate.contains(values, "2"));
-        Assert.assertEquals(this.classUnderTest().newWith("One", "1"), rejectedMultimap1);
+        assertEquals(this.classUnderTest().newWith("One", "1"), rejectedMultimap1);
 
         ImmutableMultimap<String, String> multimap2 = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "3");
         ImmutableMultimap<String, String> rejectedMultimap2 = multimap2.rejectKeysMultiValues((key, values) -> "Two".equals(key) && Iterate.contains(values, "2"));
-        Assert.assertEquals(this.classUnderTest().newWith("One", "1"), rejectedMultimap2);
+        assertEquals(this.classUnderTest().newWith("One", "1"), rejectedMultimap2);
     }
 
     @Test
@@ -206,7 +210,7 @@ public abstract class AbstractImmutableMultimapTestCase
     {
         Multimap<String, String> multimap = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "2");
         Multimap<String, String> collectedMultimap = multimap.collectKeysValues((argument1, argument2) -> Tuples.pair(argument1 + "Key", argument2 + "Value"));
-        Assert.assertEquals(this.classUnderTest().newWith("OneKey", "1Value").newWith("TwoKey", "2Value"), collectedMultimap);
+        assertEquals(this.classUnderTest().newWith("OneKey", "1Value").newWith("TwoKey", "2Value"), collectedMultimap);
     }
 
     @Test
@@ -223,7 +227,7 @@ public abstract class AbstractImmutableMultimapTestCase
         expectedMultimap.putAll("Evens", Lists.mutable.with(3, 4, 5));
         ImmutableBagMultimap<String, Integer> expectedImmutableMultimap = expectedMultimap.toImmutable();
 
-        Assert.assertEquals(expectedImmutableMultimap, collectedMultimap);
+        assertEquals(expectedImmutableMultimap, collectedMultimap);
     }
 
     @Test
@@ -231,7 +235,7 @@ public abstract class AbstractImmutableMultimapTestCase
     {
         Multimap<String, String> multimap = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "2");
         Multimap<String, String> collectedMultimap = multimap.collectValues(value -> value + "Value");
-        Assert.assertEquals(this.classUnderTest().newWith("One", "1Value").newWith("Two", "2Value"), collectedMultimap);
+        assertEquals(this.classUnderTest().newWith("One", "1Value").newWith("Two", "2Value"), collectedMultimap);
     }
 
     @Test

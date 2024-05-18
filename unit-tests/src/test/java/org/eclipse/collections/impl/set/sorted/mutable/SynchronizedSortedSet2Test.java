@@ -15,8 +15,10 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test for {@link SynchronizedSortedSet}.
@@ -39,7 +41,7 @@ public class SynchronizedSortedSet2Test extends AbstractSortedSetTestCase
     public void asSynchronized()
     {
         MutableSortedSet<Object> synchronizedSet = this.newWith();
-        Assert.assertSame(synchronizedSet, synchronizedSet.asSynchronized());
+        assertSame(synchronizedSet, synchronizedSet.asSynchronized());
     }
 
     @Override
@@ -71,14 +73,14 @@ public class SynchronizedSortedSet2Test extends AbstractSortedSetTestCase
     @Test(expected = UnsupportedOperationException.class)
     public void reverseForEach()
     {
-        this.newWith(1, 2, 3).reverseForEach(each -> Assert.fail("Should not be evaluated"));
+        this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated"));
     }
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void reverseForEachWithIndex()
     {
-        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> Assert.fail("Should not be evaluated"));
+        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated"));
     }
 
     @Override

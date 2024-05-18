@@ -20,8 +20,10 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.immutable.AbstractImmutableEmptySetTestCase;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class ImmutableEmptySetWithHashingStrategyTest extends AbstractImmutableEmptySetTestCase
 {
@@ -49,10 +51,10 @@ public class ImmutableEmptySetWithHashingStrategyTest extends AbstractImmutableE
     @Test
     public void newWithout()
     {
-        Assert.assertEquals(
+        assertEquals(
                 HashingStrategySets.immutable.of(HASHING_STRATEGY),
                 HashingStrategySets.immutable.of(HASHING_STRATEGY).newWithout(1));
-        Assert.assertEquals(
+        assertEquals(
                 HashingStrategySets.immutable.of(HASHING_STRATEGY),
                 HashingStrategySets.immutable.of(HASHING_STRATEGY).newWithoutAll(Interval.oneTo(3)));
     }
@@ -65,6 +67,6 @@ public class ImmutableEmptySetWithHashingStrategyTest extends AbstractImmutableE
         MutableSet<Integer> mutable = UnifiedSet.newSet(immutable);
         Verify.assertEqualsAndHashCode(mutable, immutable);
         Verify.assertPostSerializedEqualsAndHashCode(immutable);
-        Assert.assertNotEquals(FastList.newList(mutable), immutable);
+        assertNotEquals(FastList.newList(mutable), immutable);
     }
 }

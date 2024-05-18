@@ -29,8 +29,10 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutableMultimapTestCase
 {
@@ -75,7 +77,7 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
         MutableSet<Pair<Integer, MutableSet<String>>> expected = Sets.mutable.with(
                 Tuples.pair(2, this.createCollection("2", "1")),
                 Tuples.pair(3, this.createCollection("3", "3")));
-        Assert.assertEquals(expected, collection);
+        assertEquals(expected, collection);
     }
 
     @Test
@@ -86,9 +88,9 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
 
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "2");
         MutableList<Pair<Integer, String>> pairs = Lists.mutable.of(Tuples.pair(1, "One"));
-        Assert.assertFalse(multimap.putAllPairs(pairs));
+        assertFalse(multimap.putAllPairs(pairs));
         MutableMultimap<Integer, String> expected = this.newMultimapWithKeysValues(1, "One", 2, "2");
-        Assert.assertEquals(expected, multimap);
+        assertEquals(expected, multimap);
     }
 
     @Override
@@ -97,8 +99,8 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
     {
         SetMultimap<String, Integer> multimap = this.newMultimapWithKeysValues("Less than 2", 1, "Less than 3", 1, "Less than 3", 2, "Less than 3", 2);
         SetMultimap<Integer, String> flipped = multimap.flip();
-        Assert.assertEquals(Sets.immutable.with("Less than 3"), flipped.get(2));
-        Assert.assertEquals(Sets.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
+        assertEquals(Sets.immutable.with("Less than 3"), flipped.get(2));
+        assertEquals(Sets.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
     }
 
     @Override
@@ -213,7 +215,7 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
                 value -> value % 2 == 0 ? value + 1 : value,
                 Multimaps.mutable.set.empty());
         SetMultimap<Integer, Integer> expectedMultimap3 = Multimaps.mutable.set.with(1, 1, 1, 13, 1, 3);
-        Assert.assertEquals(expectedMultimap3, collectedMultimap3);
+        assertEquals(expectedMultimap3, collectedMultimap3);
 
         Multimap<Integer, Integer> collectedMultimap4 = multimap2.collectKeyMultiValues(
                 key -> 1,
@@ -221,8 +223,8 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
                 Multimaps.mutable.list.empty());
         MutableListMultimap<Integer, Integer> expectedMultimap4 = Multimaps.mutable.list.with(1, 1, 1, 3, 1, 13);
         expectedMultimap4.put(1, 3);
-        Assert.assertEquals(expectedMultimap4.keySet(), collectedMultimap4.keySet());
-        Assert.assertEquals(expectedMultimap4.get(1).toBag(), collectedMultimap4.get(1).toBag());
+        assertEquals(expectedMultimap4.keySet(), collectedMultimap4.keySet());
+        assertEquals(expectedMultimap4.get(1).toBag(), collectedMultimap4.get(1).toBag());
     }
 
     @Override

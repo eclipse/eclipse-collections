@@ -19,8 +19,10 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class TreeSortedSetTest extends AbstractSortedSetTestCase
 {
@@ -56,7 +58,7 @@ public class TreeSortedSetTest extends AbstractSortedSetTestCase
         TreeSortedSet<Integer> sortedSetA = TreeSortedSet.newSet(Collections.reverseOrder());
         TreeSortedSet<Integer> sortedSetB = TreeSortedSet.newSet(sortedSetA.with(1).with(2, 3).with(4, 5, 6));
         Verify.assertSortedSetsEqual(sortedSetA, sortedSetB);
-        Assert.assertTrue(sortedSetA.first().equals(sortedSetB.first()) && sortedSetB.first() == 6);
+        assertTrue(sortedSetA.first().equals(sortedSetB.first()) && sortedSetB.first() == 6);
         Verify.assertSortedSetsEqual(sortedSetB, new TreeSortedSet<>(sortedSetB));
     }
 
@@ -94,14 +96,14 @@ public class TreeSortedSetTest extends AbstractSortedSetTestCase
     @Test(expected = UnsupportedOperationException.class)
     public void reverseForEach()
     {
-        this.newWith(1, 2, 3).reverseForEach(each -> Assert.fail("Should not be evaluated"));
+        this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated"));
     }
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void reverseForEachWithIndex()
     {
-        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> Assert.fail("Should not be evaluated"));
+        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated"));
     }
 
     @Override

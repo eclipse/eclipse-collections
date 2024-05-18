@@ -102,7 +102,6 @@ import org.eclipse.collections.impl.multimap.set.sorted.TreeSortedSetMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -110,6 +109,13 @@ import static org.eclipse.collections.impl.factory.Iterables.iBag;
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.eclipse.collections.impl.factory.Iterables.iSet;
 import static org.eclipse.collections.impl.factory.Iterables.mList;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class IterateTest
 {
@@ -146,7 +152,7 @@ public class IterateTest
         MutableList<Integer> sourceFastList = FastList.newListWith(1, 2, 3, 4, 5, 6);
         MutableList<Integer> removeFastList = FastList.newListWith(1, 3, 5);
         Iterate.removeAllFrom(removeFastList, sourceFastList);
-        Assert.assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList);
+        assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList);
     }
 
     @Test
@@ -173,7 +179,7 @@ public class IterateTest
         MutableList<Integer> sourceFastList = FastList.newListWith(1, 2, 3, 4, 5, 6);
         MutableList<Integer> removeFastList = FastList.newListWith(7, 8, 9);
         Iterate.removeAllFrom(removeFastList, sourceFastList);
-        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6), sourceFastList);
+        assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6), sourceFastList);
     }
 
     @Test
@@ -182,7 +188,7 @@ public class IterateTest
         MutableList<Integer> sourceFastList = FastList.newListWith(1, 2, 3, 4, 5, 6);
         MutableList<Integer> removeFastList = FastList.newList();
         Iterate.removeAllFrom(removeFastList, sourceFastList);
-        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6), sourceFastList);
+        assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6), sourceFastList);
     }
 
     @Test
@@ -190,17 +196,17 @@ public class IterateTest
     {
         MutableList<Integer> sourceFastList1 = FastList.newListWith(1, 2, 3, 4, 5, 6);
         MutableList<Integer> removeFastList1 = FastList.newListWith(1, 3, 5);
-        Assert.assertTrue(Iterate.removeAllIterable(removeFastList1, sourceFastList1));
-        Assert.assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList1);
-        Assert.assertFalse(Iterate.removeAllIterable(FastList.newListWith(0), sourceFastList1));
-        Assert.assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList1);
+        assertTrue(Iterate.removeAllIterable(removeFastList1, sourceFastList1));
+        assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList1);
+        assertFalse(Iterate.removeAllIterable(FastList.newListWith(0), sourceFastList1));
+        assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList1);
 
         MutableList<Integer> sourceFastList2 = FastList.newListWith(1, 2, 3, 4, 5, 6);
         MutableSetMultimap<Integer, Integer> multimap = UnifiedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(1, 3), Tuples.pair(1, 5));
-        Assert.assertTrue(Iterate.removeAllIterable(multimap.valuesView(), sourceFastList2));
-        Assert.assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList2);
-        Assert.assertFalse(Iterate.removeAllIterable(UnifiedSetMultimap.newMultimap(Tuples.pair(0, 0)).valuesView(), sourceFastList2));
-        Assert.assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList2);
+        assertTrue(Iterate.removeAllIterable(multimap.valuesView(), sourceFastList2));
+        assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList2);
+        assertFalse(Iterate.removeAllIterable(UnifiedSetMultimap.newMultimap(Tuples.pair(0, 0)).valuesView(), sourceFastList2));
+        assertEquals(Lists.immutable.with(2, 4, 6), sourceFastList2);
     }
 
     @Test
@@ -208,7 +214,7 @@ public class IterateTest
     {
         MutableList<Integer> sourceFastList = FastList.newListWith(1, 2, 3, 4, 5, 6);
         MutableList<Integer> removeFastList = FastList.newListWith(1, 2, 3, 4, 5, 6);
-        Assert.assertTrue(Iterate.removeAllIterable(removeFastList, sourceFastList));
+        assertTrue(Iterate.removeAllIterable(removeFastList, sourceFastList));
         Verify.assertEmpty(sourceFastList);
     }
 
@@ -217,7 +223,7 @@ public class IterateTest
     {
         MutableList<Integer> sourceFastList = FastList.newList();
         MutableList<Integer> removeFastList = FastList.newListWith(1, 2, 3, 4, 5, 6);
-        Assert.assertFalse(Iterate.removeAllIterable(removeFastList, sourceFastList));
+        assertFalse(Iterate.removeAllIterable(removeFastList, sourceFastList));
         Verify.assertEmpty(sourceFastList);
     }
 
@@ -226,8 +232,8 @@ public class IterateTest
     {
         MutableList<Integer> sourceFastList = FastList.newListWith(1, 2, 3, 4, 5, 6);
         MutableList<Integer> removeFastList = FastList.newListWith(7, 8, 9);
-        Assert.assertFalse(Iterate.removeAllIterable(removeFastList, sourceFastList));
-        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6), sourceFastList);
+        assertFalse(Iterate.removeAllIterable(removeFastList, sourceFastList));
+        assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6), sourceFastList);
     }
 
     @Test
@@ -235,29 +241,29 @@ public class IterateTest
     {
         MutableList<Integer> sourceFastList = FastList.newListWith(1, 2, 3, 4, 5, 6);
         MutableList<Integer> removeFastList = FastList.newList();
-        Assert.assertFalse(Iterate.removeAllIterable(removeFastList, sourceFastList));
-        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6), sourceFastList);
+        assertFalse(Iterate.removeAllIterable(removeFastList, sourceFastList));
+        assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6), sourceFastList);
     }
 
     @Test
     public void sizeOf()
     {
-        Assert.assertEquals(5, Iterate.sizeOf(Interval.oneTo(5)));
-        Assert.assertEquals(5, Iterate.sizeOf(Interval.oneTo(5).toList()));
-        Assert.assertEquals(5, Iterate.sizeOf(Interval.oneTo(5).asLazy()));
-        Assert.assertEquals(3, Iterate.sizeOf(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3)));
-        Assert.assertEquals(5, Iterate.sizeOf(new IterableAdapter<>(Interval.oneTo(5))));
+        assertEquals(5, Iterate.sizeOf(Interval.oneTo(5)));
+        assertEquals(5, Iterate.sizeOf(Interval.oneTo(5).toList()));
+        assertEquals(5, Iterate.sizeOf(Interval.oneTo(5).asLazy()));
+        assertEquals(3, Iterate.sizeOf(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3)));
+        assertEquals(5, Iterate.sizeOf(new IterableAdapter<>(Interval.oneTo(5))));
     }
 
     @Test
     public void toArray()
     {
         Object[] expected = {1, 2, 3, 4, 5};
-        Assert.assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5)));
-        Assert.assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).toList()));
-        Assert.assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).asLazy()));
-        Assert.assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).toSortedMap(a -> a, a -> a)));
-        Assert.assertArrayEquals(expected, Iterate.toArray(new IterableAdapter<>(Interval.oneTo(5))));
+        assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5)));
+        assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).toList()));
+        assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).asLazy()));
+        assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).toSortedMap(a -> a, a -> a)));
+        assertArrayEquals(expected, Iterate.toArray(new IterableAdapter<>(Interval.oneTo(5))));
     }
 
     @Test(expected = NullPointerException.class)
@@ -270,12 +276,12 @@ public class IterateTest
     public void toArray_with_array()
     {
         Object[] expected = {1, 2, 3, 4, 5};
-        Assert.assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5), new Object[5]));
-        Assert.assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).toList(), new Object[5]));
-        Assert.assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).asLazy(), new Object[5]));
-        Assert.assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).toSortedMap(a -> a, a -> a), new Object[5]));
-        Assert.assertArrayEquals(expected, Iterate.toArray(new IterableAdapter<>(Interval.oneTo(5)), new Object[5]));
-        Assert.assertArrayEquals(new Integer[]{1, 2, 3, 4, 5, 6, 7}, Iterate.toArray(new IterableAdapter<>(Interval.oneTo(7)), new Object[5]));
+        assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5), new Object[5]));
+        assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).toList(), new Object[5]));
+        assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).asLazy(), new Object[5]));
+        assertArrayEquals(expected, Iterate.toArray(Interval.oneTo(5).toSortedMap(a -> a, a -> a), new Object[5]));
+        assertArrayEquals(expected, Iterate.toArray(new IterableAdapter<>(Interval.oneTo(5)), new Object[5]));
+        assertArrayEquals(new Integer[]{1, 2, 3, 4, 5, 6, 7}, Iterate.toArray(new IterableAdapter<>(Interval.oneTo(7)), new Object[5]));
     }
 
     @Test
@@ -289,13 +295,13 @@ public class IterateTest
     @Test
     public void reduceInPlaceCollector()
     {
-        this.iterables.each(each -> Assert.assertEquals(
+        this.iterables.each(each -> assertEquals(
                 Iterate.toSortedList(each),
                 Iterate.reduceInPlace(each, Collectors2.toSortedList())));
-        this.iterables.each(each -> Assert.assertEquals(
+        this.iterables.each(each -> assertEquals(
                 Iterate.sumByInt(each, value -> value % 2, value -> value),
                 Iterate.reduceInPlace(each, Collectors2.sumByInt(value -> value % 2, value -> value))));
-        this.iterables.each(each -> Assert.assertEquals(
+        this.iterables.each(each -> assertEquals(
                 Iterate.groupBy(each, value -> value % 2, Multimaps.mutable.bag.empty()),
                 Iterate.reduceInPlace(each, Collectors2.toBagMultimap(value -> value % 2))));
     }
@@ -303,7 +309,7 @@ public class IterateTest
     @Test
     public void reduceInPlace()
     {
-        this.iterables.each(each -> Assert.assertEquals(
+        this.iterables.each(each -> assertEquals(
                 Iterate.toSortedList(each),
                 Iterate.reduceInPlace(each, FastList::new, FastList::add).sortThis()));
     }
@@ -311,59 +317,59 @@ public class IterateTest
     @Test
     public void injectInto()
     {
-        this.iterables.each(each -> Assert.assertEquals(Integer.valueOf(15), Iterate.injectInto(0, each, AddFunction.INTEGER)));
+        this.iterables.each(each -> assertEquals(Integer.valueOf(15), Iterate.injectInto(0, each, AddFunction.INTEGER)));
     }
 
     @Test
     public void injectIntoInt()
     {
-        this.iterables.each(each -> Assert.assertEquals(15, Iterate.injectInto(0, each, AddFunction.INTEGER_TO_INT)));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.injectInto(0, null, AddFunction.INTEGER_TO_INT));
+        this.iterables.each(each -> assertEquals(15, Iterate.injectInto(0, each, AddFunction.INTEGER_TO_INT)));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.injectInto(0, null, AddFunction.INTEGER_TO_INT));
     }
 
     @Test
     public void injectIntoLong()
     {
-        this.iterables.each(each -> Assert.assertEquals(15L, Iterate.injectInto(0L, each, AddFunction.INTEGER_TO_LONG)));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.injectInto(0L, null, AddFunction.INTEGER_TO_LONG));
+        this.iterables.each(each -> assertEquals(15L, Iterate.injectInto(0L, each, AddFunction.INTEGER_TO_LONG)));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.injectInto(0L, null, AddFunction.INTEGER_TO_LONG));
     }
 
     @Test
     public void injectIntoDouble()
     {
-        this.iterables.each(each -> Assert.assertEquals(15.0d, Iterate.injectInto(0.0d, each, AddFunction.INTEGER_TO_DOUBLE), 0.001));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.injectInto(0.0d, null, AddFunction.INTEGER_TO_DOUBLE));
+        this.iterables.each(each -> assertEquals(15.0d, Iterate.injectInto(0.0d, each, AddFunction.INTEGER_TO_DOUBLE), 0.001));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.injectInto(0.0d, null, AddFunction.INTEGER_TO_DOUBLE));
     }
 
     @Test
     public void injectIntoFloat()
     {
-        this.iterables.each(each -> Assert.assertEquals(15.0d, Iterate.injectInto(0.0f, each, AddFunction.INTEGER_TO_FLOAT), 0.001));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.injectInto(0.0f, null, AddFunction.INTEGER_TO_FLOAT));
+        this.iterables.each(each -> assertEquals(15.0d, Iterate.injectInto(0.0f, each, AddFunction.INTEGER_TO_FLOAT), 0.001));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.injectInto(0.0f, null, AddFunction.INTEGER_TO_FLOAT));
     }
 
     @Test
     public void injectInto2()
     {
-        Assert.assertEquals(new Double(7), Iterate.injectInto(1.0, iList(1.0, 2.0, 3.0), AddFunction.DOUBLE));
+        assertEquals(new Double(7), Iterate.injectInto(1.0, iList(1.0, 2.0, 3.0), AddFunction.DOUBLE));
     }
 
     @Test
     public void injectIntoString()
     {
-        Assert.assertEquals("0123", Iterate.injectInto("0", iList("1", "2", "3"), AddFunction.STRING));
+        assertEquals("0123", Iterate.injectInto("0", iList("1", "2", "3"), AddFunction.STRING));
     }
 
     @Test
     public void injectIntoMaxString()
     {
-        Assert.assertEquals(Integer.valueOf(3), Iterate.injectInto(Integer.MIN_VALUE, iList("1", "12", "123"), MaxSizeFunction.STRING));
+        assertEquals(Integer.valueOf(3), Iterate.injectInto(Integer.MIN_VALUE, iList("1", "12", "123"), MaxSizeFunction.STRING));
     }
 
     @Test
     public void injectIntoMinString()
     {
-        Assert.assertEquals(Integer.valueOf(1), Iterate.injectInto(Integer.MAX_VALUE, iList("1", "12", "123"), MinSizeFunction.STRING));
+        assertEquals(Integer.valueOf(1), Iterate.injectInto(Integer.MAX_VALUE, iList("1", "12", "123"), MinSizeFunction.STRING));
     }
 
     @Test
@@ -374,22 +380,22 @@ public class IterateTest
                 new ListContainer<>(Lists.mutable.of("Two-and-a-half", "Three", "Four")),
                 new ListContainer<>(Lists.mutable.of()),
                 new ListContainer<>(Lists.mutable.of("Five")));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(list, ListContainer.getListFunction()));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(Collections.synchronizedList(list), ListContainer.getListFunction()));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(Collections.synchronizedCollection(list), ListContainer.getListFunction()));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(LazyIterate.adapt(list), ListContainer.getListFunction()));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(new ArrayList<>(list), ListContainer.getListFunction()));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.flatCollect(null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.flatCollect(null, null));
     }
 
     @Test
@@ -400,22 +406,22 @@ public class IterateTest
                 new ListContainer<>(Lists.mutable.of("Two-and-a-half", "Three", "Four")),
                 new ListContainer<>(Lists.mutable.of()),
                 new ListContainer<>(Lists.mutable.of("Five")));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(list, ListContainer.getListFunction(), FastList.newList()));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(Collections.synchronizedList(list), ListContainer.getListFunction(), FastList.newList()));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(Collections.synchronizedCollection(list), ListContainer.getListFunction(), FastList.newList()));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(LazyIterate.adapt(list), ListContainer.getListFunction(), FastList.newList()));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(new ArrayList<>(list), ListContainer.getListFunction(), FastList.newList()));
-        Assert.assertEquals(
+        assertEquals(
                 iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"),
                 Iterate.flatCollect(new IterableAdapter<>(new ArrayList<>(list)), ListContainer.getListFunction(), FastList.newList()));
     }
@@ -437,8 +443,8 @@ public class IterateTest
         Function<ListContainer<String>, List<String>> function = ListContainer::getList;
         Collection<String> result = Iterate.flatCollect(list, function);
         FastList<String> result2 = Iterate.flatCollect(list, function, FastList.newList());
-        Assert.assertEquals(iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"), result);
-        Assert.assertEquals(iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"), result2);
+        assertEquals(iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"), result);
+        assertEquals(iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"), result2);
     }
 
     @Test
@@ -450,7 +456,7 @@ public class IterateTest
                 Lists.mutable.of(),
                 Lists.mutable.of("Five"));
         Collection<String> result = Iterate.flatten(list);
-        Assert.assertEquals(iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"), result);
+        assertEquals(iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"), result);
     }
 
     @Test
@@ -463,8 +469,8 @@ public class IterateTest
                 Lists.mutable.of("Five"));
         MutableList<String> target = Lists.mutable.of();
         Collection<String> result = Iterate.flatten(list, target);
-        Assert.assertSame(result, target);
-        Assert.assertEquals(iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"), result);
+        assertSame(result, target);
+        assertEquals(iList("One", "Two", "Two-and-a-half", "Three", "Four", "Five"), result);
     }
 
     @Test
@@ -482,12 +488,12 @@ public class IterateTest
         expected.put('M', "Mary");
         expected.put('B', "Bob");
         expected.put('S', "Sara");
-        Assert.assertEquals(expected, result1);
-        Assert.assertEquals(expected, result2);
-        Assert.assertEquals(expected, result3);
-        Assert.assertEquals(expected, result4);
-        Assert.assertEquals(expected, result5);
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.groupBy(null, null));
+        assertEquals(expected, result1);
+        assertEquals(expected, result2);
+        assertEquals(expected, result3);
+        assertEquals(expected, result4);
+        assertEquals(expected, result5);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.groupBy(null, null));
     }
 
     @Test
@@ -512,12 +518,12 @@ public class IterateTest
         expected.putAll('R', FastList.newListWith("Mary", "Sara"));
         expected.put('B', "Bob");
         expected.put('O', "Bob");
-        Assert.assertEquals(expected, result1);
-        Assert.assertEquals(expected, result2);
-        Assert.assertEquals(expected, result3);
-        Assert.assertEquals(expected, result4);
-        Assert.assertEquals(expected, result5);
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.groupByEach(null, null));
+        assertEquals(expected, result1);
+        assertEquals(expected, result2);
+        assertEquals(expected, result3);
+        assertEquals(expected, result4);
+        assertEquals(expected, result5);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.groupByEach(null, null));
     }
 
     @Test
@@ -535,12 +541,12 @@ public class IterateTest
         expected.put('M', "Mary");
         expected.put('B', "Bob");
         expected.put('S', "Sara");
-        Assert.assertEquals(expected, result1);
-        Assert.assertEquals(expected, result2);
-        Assert.assertEquals(expected, result3);
-        Assert.assertEquals(expected, result4);
-        Assert.assertEquals(expected, result5);
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.groupBy(null, null, null));
+        assertEquals(expected, result1);
+        assertEquals(expected, result2);
+        assertEquals(expected, result3);
+        assertEquals(expected, result4);
+        assertEquals(expected, result5);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.groupBy(null, null, null));
     }
 
     @Test
@@ -566,12 +572,12 @@ public class IterateTest
         expected.put('Y', "Mary");
         expected.put('B', "Bob");
         expected.put('O', "Bob");
-        Assert.assertEquals(expected, result1);
-        Assert.assertEquals(expected, result2);
-        Assert.assertEquals(expected, result3);
-        Assert.assertEquals(expected, result4);
-        Assert.assertEquals(expected, result5);
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.groupByEach(null, null, null));
+        assertEquals(expected, result1);
+        assertEquals(expected, result2);
+        assertEquals(expected, result3);
+        assertEquals(expected, result4);
+        assertEquals(expected, result5);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.groupByEach(null, null, null));
     }
 
     @Test
@@ -602,43 +608,43 @@ public class IterateTest
         expectedMultimap4.putAllPairs(expectedPairs);
         MutableSortedSetMultimap<String, String> actualMultimap4 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, Multimaps.mutable.sortedSet.with(Comparators.naturalOrder()));
         Verify.assertSortedSetMultimapsEqual(expectedMultimap4, actualMultimap4);
-        Assert.assertSame(expectedMultimap4.comparator(), actualMultimap4.comparator());
+        assertSame(expectedMultimap4.comparator(), actualMultimap4.comparator());
 
         MutableSortedSetMultimap<String, String> expectedMultimap5 = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap5.putAllPairs(expectedPairs);
         MutableSortedSetMultimap<String, String> actualMultimap5 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, Multimaps.mutable.sortedSet.with(Comparators.reverseNaturalOrder()));
         Verify.assertSortedSetMultimapsEqual(expectedMultimap5, actualMultimap5);
-        Assert.assertSame(expectedMultimap5.comparator(), actualMultimap5.comparator());
+        assertSame(expectedMultimap5.comparator(), actualMultimap5.comparator());
 
         MutableSortedBagMultimap<String, String> expectedMultimap6 = TreeBagMultimap.newMultimap(Comparators.naturalOrder());
         expectedMultimap6.putAllPairs(expectedPairs);
         MutableSortedBagMultimap<String, String> actualMultimap6 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, TreeBagMultimap.newMultimap(Comparators.naturalOrder()));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap6, actualMultimap6);
-        Assert.assertSame(expectedMultimap6.comparator(), actualMultimap6.comparator());
+        assertSame(expectedMultimap6.comparator(), actualMultimap6.comparator());
 
         MutableSortedBagMultimap<String, String> expectedMultimap7 = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap7.putAllPairs(expectedPairs);
         MutableSortedBagMultimap<String, String> actualMultimap7 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder()));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap7, actualMultimap7);
-        Assert.assertSame(expectedMultimap7.comparator(), actualMultimap7.comparator());
+        assertSame(expectedMultimap7.comparator(), actualMultimap7.comparator());
     }
 
     @Test
     public void toList()
     {
-        Assert.assertEquals(FastList.newListWith(1, 2, 3), FastList.newList(Interval.oneTo(3)));
+        assertEquals(FastList.newListWith(1, 2, 3), FastList.newList(Interval.oneTo(3)));
     }
 
     @Test
     public void contains()
     {
-        Assert.assertTrue(Iterate.contains(FastList.newListWith(1, 2, 3), 1));
-        Assert.assertFalse(Iterate.contains(FastList.newListWith(1, 2, 3), 4));
-        Assert.assertTrue(Iterate.contains(FastList.newListWith(1, 2, 3).asLazy(), 1));
-        Assert.assertTrue(Iterate.contains(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), 1));
-        Assert.assertFalse(Iterate.contains(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), 4));
-        Assert.assertTrue(Iterate.contains(Interval.oneTo(3), 1));
-        Assert.assertFalse(Iterate.contains(Interval.oneTo(3), 4));
+        assertTrue(Iterate.contains(FastList.newListWith(1, 2, 3), 1));
+        assertFalse(Iterate.contains(FastList.newListWith(1, 2, 3), 4));
+        assertTrue(Iterate.contains(FastList.newListWith(1, 2, 3).asLazy(), 1));
+        assertTrue(Iterate.contains(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), 1));
+        assertFalse(Iterate.contains(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), 4));
+        assertTrue(Iterate.contains(Interval.oneTo(3), 1));
+        assertFalse(Iterate.contains(Interval.oneTo(3), 4));
     }
 
     public static final class ListContainer<T>
@@ -665,12 +671,12 @@ public class IterateTest
     public void getFirstAndLast()
     {
         MutableList<Boolean> list = mList(Boolean.TRUE, null, Boolean.FALSE);
-        Assert.assertEquals(Boolean.TRUE, Iterate.getFirst(list));
-        Assert.assertEquals(Boolean.FALSE, Iterate.getLast(list));
-        Assert.assertEquals(Boolean.TRUE, Iterate.getFirst(Collections.unmodifiableList(list)));
-        Assert.assertEquals(Boolean.FALSE, Iterate.getLast(Collections.unmodifiableList(list)));
-        Assert.assertEquals(Boolean.TRUE, Iterate.getFirst(new IterableAdapter<>(list)));
-        Assert.assertEquals(Boolean.FALSE, Iterate.getLast(new IterableAdapter<>(list)));
+        assertEquals(Boolean.TRUE, Iterate.getFirst(list));
+        assertEquals(Boolean.FALSE, Iterate.getLast(list));
+        assertEquals(Boolean.TRUE, Iterate.getFirst(Collections.unmodifiableList(list)));
+        assertEquals(Boolean.FALSE, Iterate.getLast(Collections.unmodifiableList(list)));
+        assertEquals(Boolean.TRUE, Iterate.getFirst(new IterableAdapter<>(list)));
+        assertEquals(Boolean.FALSE, Iterate.getLast(new IterableAdapter<>(list)));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -688,39 +694,39 @@ public class IterateTest
     @Test
     public void getFirstAndLastInterval()
     {
-        Assert.assertEquals(Integer.valueOf(1), Iterate.getFirst(Interval.oneTo(5)));
-        Assert.assertEquals(Integer.valueOf(5), Iterate.getLast(Interval.oneTo(5)));
+        assertEquals(Integer.valueOf(1), Iterate.getFirst(Interval.oneTo(5)));
+        assertEquals(Integer.valueOf(5), Iterate.getLast(Interval.oneTo(5)));
     }
 
     @Test
     public void getFirstAndLastLinkedList()
     {
         List<Boolean> list = new LinkedList<>(mList(Boolean.TRUE, null, Boolean.FALSE));
-        Assert.assertEquals(Boolean.TRUE, Iterate.getFirst(list));
-        Assert.assertEquals(Boolean.FALSE, Iterate.getLast(list));
+        assertEquals(Boolean.TRUE, Iterate.getFirst(list));
+        assertEquals(Boolean.FALSE, Iterate.getLast(list));
     }
 
     @Test
     public void getFirstAndLastTreeSet()
     {
         Set<String> set = new TreeSet<>(mList("1", "2"));
-        Assert.assertEquals("1", Iterate.getFirst(set));
-        Assert.assertEquals("2", Iterate.getLast(set));
+        assertEquals("1", Iterate.getFirst(set));
+        assertEquals("2", Iterate.getLast(set));
     }
 
     @Test
     public void getFirstAndLastCollection()
     {
         Collection<Boolean> list = mList(Boolean.TRUE, null, Boolean.FALSE).asSynchronized();
-        Assert.assertEquals(Boolean.TRUE, Iterate.getFirst(list));
-        Assert.assertEquals(Boolean.FALSE, Iterate.getLast(list));
+        assertEquals(Boolean.TRUE, Iterate.getFirst(list));
+        assertEquals(Boolean.FALSE, Iterate.getLast(list));
     }
 
     @Test
     public void getFirstAndLastOnEmpty()
     {
-        Assert.assertNull(Iterate.getFirst(mList()));
-        Assert.assertNull(Iterate.getLast(mList()));
+        assertNull(Iterate.getFirst(mList()));
+        assertNull(Iterate.getLast(mList()));
     }
 
     @Test
@@ -730,16 +736,16 @@ public class IterateTest
         orderedSet.add(1);
         orderedSet.add(2);
         orderedSet.add(3);
-        Assert.assertEquals(Integer.valueOf(1), Iterate.getFirst(orderedSet));
-        Assert.assertEquals(Integer.valueOf(3), Iterate.getLast(orderedSet));
+        assertEquals(Integer.valueOf(1), Iterate.getFirst(orderedSet));
+        assertEquals(Integer.valueOf(3), Iterate.getLast(orderedSet));
     }
 
     @Test
     public void getFirstAndLastOnEmptyForSet()
     {
         MutableSet<Object> set = UnifiedSet.newSet();
-        Assert.assertNull(Iterate.getFirst(set));
-        Assert.assertNull(Iterate.getLast(set));
+        assertNull(Iterate.getFirst(set));
+        assertNull(Iterate.getLast(set));
     }
 
     private MutableSet<Integer> getIntegerSet()
@@ -752,7 +758,7 @@ public class IterateTest
     {
         MutableSet<Integer> set = this.getIntegerSet();
         List<Integer> list = Iterate.select(set, Integer.class::isInstance, new ArrayList<>());
-        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5), list);
+        assertEquals(FastList.newListWith(1, 2, 3, 4, 5), list);
     }
 
     @Test
@@ -766,7 +772,7 @@ public class IterateTest
     @Test
     public void count_empty()
     {
-        Assert.assertEquals(0, Iterate.count(iList(), ignored -> true));
+        assertEquals(0, Iterate.count(iList(), ignored -> true));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -873,25 +879,25 @@ public class IterateTest
         expectedMultimap4.putAllPairs(expectedPairs);
         MutableSortedSetMultimap<String, String> actualMultimap4 = Iterate.toMultimap(list, keyFunction, valuesFunction, Multimaps.mutable.sortedSet.with(Comparators.naturalOrder()));
         Verify.assertSortedSetMultimapsEqual(expectedMultimap4, actualMultimap4);
-        Assert.assertSame(expectedMultimap4.comparator(), actualMultimap4.comparator());
+        assertSame(expectedMultimap4.comparator(), actualMultimap4.comparator());
 
         MutableSortedSetMultimap<String, String> expectedMultimap5 = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap5.putAllPairs(expectedPairs);
         MutableSortedSetMultimap<String, String> actualMultimap5 = Iterate.toMultimap(list, keyFunction, valuesFunction, Multimaps.mutable.sortedSet.with(Comparators.reverseNaturalOrder()));
         Verify.assertSortedSetMultimapsEqual(expectedMultimap5, actualMultimap5);
-        Assert.assertSame(expectedMultimap5.comparator(), actualMultimap5.comparator());
+        assertSame(expectedMultimap5.comparator(), actualMultimap5.comparator());
 
         MutableSortedBagMultimap<String, String> expectedMultimap6 = TreeBagMultimap.newMultimap(Comparators.naturalOrder());
         expectedMultimap6.putAllPairs(expectedPairs);
         MutableSortedBagMultimap<String, String> actualMultimap6 = Iterate.toMultimap(list, keyFunction, valuesFunction, TreeBagMultimap.newMultimap(Comparators.naturalOrder()));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap6, actualMultimap6);
-        Assert.assertSame(expectedMultimap6.comparator(), actualMultimap6.comparator());
+        assertSame(expectedMultimap6.comparator(), actualMultimap6.comparator());
 
         MutableSortedBagMultimap<String, String> expectedMultimap7 = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap7.putAllPairs(expectedPairs);
         MutableSortedBagMultimap<String, String> actualMultimap7 = Iterate.toMultimap(list, keyFunction, valuesFunction, TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder()));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap7, actualMultimap7);
-        Assert.assertSame(expectedMultimap7.comparator(), actualMultimap7.comparator());
+        assertSame(expectedMultimap7.comparator(), actualMultimap7.comparator());
 
         // Below tests are for examples only. They do not add any coverage.
         BagMultimap<String, String> expectedMultimap8 = HashBagMultimap.newMultimap(
@@ -939,7 +945,7 @@ public class IterateTest
         this.iterables.each(each -> {
             UnifiedSet<Integer> set = UnifiedSet.newSet();
             Iterate.forEachWithIndex(each, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(set)));
-            Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), set);
+            assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), set);
         });
     }
 
@@ -965,7 +971,7 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Integer result = Iterate.detect(each, Predicates.instanceOf(Integer.class));
-            Assert.assertTrue(UnifiedSet.newSet(each).contains(result));
+            assertTrue(UnifiedSet.newSet(each).contains(result));
         });
     }
 
@@ -974,11 +980,11 @@ public class IterateTest
     {
         this.iterables.forEach(Procedures.cast(each -> {
             Optional<Integer> result = Iterate.detectOptional(each, Predicates.instanceOf(Integer.class));
-            Assert.assertTrue(result.isPresent());
+            assertTrue(result.isPresent());
             Verify.assertContains(result.get(), UnifiedSet.newSet(each));
 
             Optional<Integer> emptyResult = Iterate.detectOptional(each, Predicates.instanceOf(String.class));
-            Assert.assertFalse(emptyResult.isPresent());
+            assertFalse(emptyResult.isPresent());
         }));
     }
 
@@ -986,36 +992,36 @@ public class IterateTest
     public void detectIndex()
     {
         MutableList<Integer> list = Interval.toReverseList(1, 5);
-        Assert.assertEquals(4, Iterate.detectIndex(list, Integer.valueOf(1)::equals));
-        Assert.assertEquals(0, Iterate.detectIndex(list, Integer.valueOf(5)::equals));
-        Assert.assertEquals(-1, Iterate.detectIndex(Lists.immutable.of(), Integer.valueOf(1)::equals));
-        Assert.assertEquals(-1, Iterate.detectIndex(Sets.immutable.of(), Integer.valueOf(1)::equals));
+        assertEquals(4, Iterate.detectIndex(list, Integer.valueOf(1)::equals));
+        assertEquals(0, Iterate.detectIndex(list, Integer.valueOf(5)::equals));
+        assertEquals(-1, Iterate.detectIndex(Lists.immutable.of(), Integer.valueOf(1)::equals));
+        assertEquals(-1, Iterate.detectIndex(Sets.immutable.of(), Integer.valueOf(1)::equals));
     }
 
     @Test
     public void detectIndexWithTreeSet()
     {
         Set<Integer> treeSet = new TreeSet<>(Interval.toReverseList(1, 5));
-        Assert.assertEquals(0, Iterate.detectIndex(treeSet, Integer.valueOf(1)::equals));
-        Assert.assertEquals(4, Iterate.detectIndex(treeSet, Integer.valueOf(5)::equals));
+        assertEquals(0, Iterate.detectIndex(treeSet, Integer.valueOf(1)::equals));
+        assertEquals(4, Iterate.detectIndex(treeSet, Integer.valueOf(5)::equals));
     }
 
     @Test
     public void detectIndexWith()
     {
         MutableList<Integer> list = Interval.toReverseList(1, 5);
-        Assert.assertEquals(4, Iterate.detectIndexWith(list, Object::equals, 1));
-        Assert.assertEquals(0, Iterate.detectIndexWith(list, Object::equals, 5));
-        Assert.assertEquals(-1, Iterate.detectIndexWith(iList(), Object::equals, 5));
-        Assert.assertEquals(-1, Iterate.detectIndexWith(iSet(), Object::equals, 5));
+        assertEquals(4, Iterate.detectIndexWith(list, Object::equals, 1));
+        assertEquals(0, Iterate.detectIndexWith(list, Object::equals, 5));
+        assertEquals(-1, Iterate.detectIndexWith(iList(), Object::equals, 5));
+        assertEquals(-1, Iterate.detectIndexWith(iSet(), Object::equals, 5));
     }
 
     @Test
     public void detectIndexWithWithTreeSet()
     {
         Set<Integer> treeSet = new TreeSet<>(Interval.toReverseList(1, 5));
-        Assert.assertEquals(0, Iterate.detectIndexWith(treeSet, Object::equals, 1));
-        Assert.assertEquals(4, Iterate.detectIndexWith(treeSet, Object::equals, 5));
+        assertEquals(0, Iterate.detectIndexWith(treeSet, Object::equals, 1));
+        assertEquals(4, Iterate.detectIndexWith(treeSet, Object::equals, 5));
     }
 
     @Test
@@ -1032,9 +1038,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<Integer> result = Iterate.selectWith(each, Predicates2.greaterThan(), 3);
-            Assert.assertTrue(result.containsAll(FastList.newListWith(4, 5)));
+            assertTrue(result.containsAll(FastList.newListWith(4, 5)));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.selectWith(null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.selectWith(null, null, null));
     }
 
     @Test
@@ -1042,9 +1048,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<Integer> result = Iterate.selectWith(each, Predicates2.greaterThan(), 3, FastList.newList());
-            Assert.assertTrue(result.containsAll(FastList.newListWith(4, 5)));
+            assertTrue(result.containsAll(FastList.newListWith(4, 5)));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.selectWith(null, null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.selectWith(null, null, null, null));
     }
 
     @Test
@@ -1052,9 +1058,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<Integer> result = Iterate.rejectWith(each, Predicates2.greaterThan(), 3);
-            Assert.assertTrue(result.containsAll(FastList.newListWith(1, 2, 3)));
+            assertTrue(result.containsAll(FastList.newListWith(1, 2, 3)));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.rejectWith(null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.rejectWith(null, null, null));
     }
 
     @Test
@@ -1062,9 +1068,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<Integer> result = Iterate.rejectWith(each, Predicates2.greaterThan(), 3, FastList.newList());
-            Assert.assertTrue(result.containsAll(FastList.newListWith(1, 2, 3)));
+            assertTrue(result.containsAll(FastList.newListWith(1, 2, 3)));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.rejectWith(null, null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.rejectWith(null, null, null, null));
     }
 
     @Test
@@ -1072,8 +1078,8 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Twin<MutableList<Integer>> result = Iterate.selectAndRejectWith(each, Predicates2.greaterThan(), 3);
-            Assert.assertEquals(iBag(4, 5), result.getOne().toBag());
-            Assert.assertEquals(iBag(1, 2, 3), result.getTwo().toBag());
+            assertEquals(iBag(4, 5), result.getOne().toBag());
+            assertEquals(iBag(1, 2, 3), result.getTwo().toBag());
         });
     }
 
@@ -1082,8 +1088,8 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             PartitionIterable<Integer> result = Iterate.partition(each, Predicates.greaterThan(3));
-            Assert.assertEquals(iBag(4, 5), result.getSelected().toBag());
-            Assert.assertEquals(iBag(1, 2, 3), result.getRejected().toBag());
+            assertEquals(iBag(4, 5), result.getSelected().toBag());
+            assertEquals(iBag(1, 2, 3), result.getRejected().toBag());
         });
     }
 
@@ -1092,8 +1098,8 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             PartitionIterable<Integer> result = Iterate.partitionWith(each, Predicates2.greaterThan(), 3);
-            Assert.assertEquals(iBag(4, 5), result.getSelected().toBag());
-            Assert.assertEquals(iBag(1, 2, 3), result.getRejected().toBag());
+            assertEquals(iBag(4, 5), result.getSelected().toBag());
+            assertEquals(iBag(1, 2, 3), result.getRejected().toBag());
         });
     }
 
@@ -1132,37 +1138,37 @@ public class IterateTest
     @Test
     public void anySatisfy()
     {
-        this.iterables.each(each -> Assert.assertTrue(Iterate.anySatisfy(each, Integer.class::isInstance)));
+        this.iterables.each(each -> assertTrue(Iterate.anySatisfy(each, Integer.class::isInstance)));
     }
 
     @Test
     public void anySatisfyWith()
     {
-        this.iterables.each(each -> Assert.assertTrue(Iterate.anySatisfyWith(each, Predicates2.instanceOf(), Integer.class)));
+        this.iterables.each(each -> assertTrue(Iterate.anySatisfyWith(each, Predicates2.instanceOf(), Integer.class)));
     }
 
     @Test
     public void allSatisfy()
     {
-        this.iterables.each(each -> Assert.assertTrue(Iterate.allSatisfy(each, Integer.class::isInstance)));
+        this.iterables.each(each -> assertTrue(Iterate.allSatisfy(each, Integer.class::isInstance)));
     }
 
     @Test
     public void allSatisfyWith()
     {
-        this.iterables.each(each -> Assert.assertTrue(Iterate.allSatisfyWith(each, Predicates2.instanceOf(), Integer.class)));
+        this.iterables.each(each -> assertTrue(Iterate.allSatisfyWith(each, Predicates2.instanceOf(), Integer.class)));
     }
 
     @Test
     public void noneSatisfy()
     {
-        this.iterables.each(each -> Assert.assertTrue(Iterate.noneSatisfy(each, String.class::isInstance)));
+        this.iterables.each(each -> assertTrue(Iterate.noneSatisfy(each, String.class::isInstance)));
     }
 
     @Test
     public void noneSatisfyWith()
     {
-        this.iterables.each(each -> Assert.assertTrue(Iterate.noneSatisfyWith(each, Predicates2.instanceOf(), String.class)));
+        this.iterables.each(each -> assertTrue(Iterate.noneSatisfyWith(each, Predicates2.instanceOf(), String.class)));
     }
 
     @Test
@@ -1182,49 +1188,49 @@ public class IterateTest
     @Test
     public void detectWithSet()
     {
-        Assert.assertEquals(Integer.valueOf(1), Iterate.detectWith(this.getIntegerSet(), Object::equals, 1));
+        assertEquals(Integer.valueOf(1), Iterate.detectWith(this.getIntegerSet(), Object::equals, 1));
     }
 
     @Test
     public void detectWithRandomAccess()
     {
         List<Integer> list = Collections.synchronizedList(Interval.oneTo(5));
-        Assert.assertEquals(Integer.valueOf(1), Iterate.detectWith(list, Object::equals, 1));
+        assertEquals(Integer.valueOf(1), Iterate.detectWith(list, Object::equals, 1));
     }
 
     @Test
     public void detectWithOptionalSet()
     {
-        Assert.assertEquals(Optional.of(Integer.valueOf(1)), Iterate.detectWithOptional(this.getIntegerSet(), Object::equals, 1));
-        Assert.assertEquals(Optional.empty(), Iterate.detectWithOptional(this.getIntegerSet(), Object::equals, 10));
+        assertEquals(Optional.of(Integer.valueOf(1)), Iterate.detectWithOptional(this.getIntegerSet(), Object::equals, 1));
+        assertEquals(Optional.empty(), Iterate.detectWithOptional(this.getIntegerSet(), Object::equals, 10));
     }
 
     @Test
     public void detectWithOptionalRandomAccess()
     {
         List<Integer> list = Collections.synchronizedList(Interval.oneTo(5));
-        Assert.assertEquals(Optional.of(Integer.valueOf(1)), Iterate.detectWithOptional(list, Object::equals, 1));
-        Assert.assertEquals(Optional.empty(), Iterate.detectWithOptional(list, Object::equals, 10));
+        assertEquals(Optional.of(Integer.valueOf(1)), Iterate.detectWithOptional(list, Object::equals, 1));
+        assertEquals(Optional.empty(), Iterate.detectWithOptional(list, Object::equals, 10));
     }
 
     @Test
     public void anySatisfyWithSet()
     {
-        Assert.assertTrue(Iterate.anySatisfyWith(this.getIntegerSet(), Object::equals, 1));
+        assertTrue(Iterate.anySatisfyWith(this.getIntegerSet(), Object::equals, 1));
     }
 
     @Test
     public void allSatisfyWithSet()
     {
-        Assert.assertFalse(Iterate.allSatisfyWith(this.getIntegerSet(), Object::equals, 1));
-        Assert.assertTrue(Iterate.allSatisfyWith(this.getIntegerSet(), Predicates2.instanceOf(), Integer.class));
+        assertFalse(Iterate.allSatisfyWith(this.getIntegerSet(), Object::equals, 1));
+        assertTrue(Iterate.allSatisfyWith(this.getIntegerSet(), Predicates2.instanceOf(), Integer.class));
     }
 
     @Test
     public void noneSatisfyWithSet()
     {
-        Assert.assertTrue(Iterate.noneSatisfyWith(this.getIntegerSet(), Object::equals, 100));
-        Assert.assertFalse(Iterate.noneSatisfyWith(this.getIntegerSet(), Predicates2.instanceOf(), Integer.class));
+        assertTrue(Iterate.noneSatisfyWith(this.getIntegerSet(), Object::equals, 100));
+        assertFalse(Iterate.noneSatisfyWith(this.getIntegerSet(), Predicates2.instanceOf(), Integer.class));
     }
 
     @Test
@@ -1241,7 +1247,7 @@ public class IterateTest
         this.iterables.each(each -> {
             UnifiedSet<Integer> set = UnifiedSet.newSet();
             Iterate.forEach(each, Procedures.cast(set::add));
-            Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), set);
+            assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), set);
         });
     }
 
@@ -1250,9 +1256,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<String> result = Iterate.collectIf(each, Predicates.greaterThan(3), String::valueOf);
-            Assert.assertTrue(result.containsAll(FastList.newListWith("4", "5")));
+            assertTrue(result.containsAll(FastList.newListWith("4", "5")));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectIf(null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectIf(null, null, null));
     }
 
     @Test
@@ -1260,9 +1266,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<String> result = Iterate.collectIf(each, Predicates.greaterThan(3), String::valueOf, FastList.newList());
-            Assert.assertTrue(result.containsAll(FastList.newListWith("4", "5")));
+            assertTrue(result.containsAll(FastList.newListWith("4", "5")));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectIf(null, null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectIf(null, null, null, null));
     }
 
     @Test
@@ -1270,9 +1276,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<String> result = Iterate.collect(each, String::valueOf);
-            Assert.assertTrue(result.containsAll(FastList.newListWith("1", "2", "3", "4", "5")));
+            assertTrue(result.containsAll(FastList.newListWith("1", "2", "3", "4", "5")));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collect(null, a -> a));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collect(null, a -> a));
     }
 
     @Test
@@ -1280,9 +1286,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             MutableBooleanCollection result = Iterate.collectBoolean(each, PrimitiveFunctions.integerIsPositive());
-            Assert.assertTrue(result.containsAll(true, true, true, true, true));
+            assertTrue(result.containsAll(true, true, true, true, true));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectBoolean(null, PrimitiveFunctions.integerIsPositive()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectBoolean(null, PrimitiveFunctions.integerIsPositive()));
     }
 
     @Test
@@ -1291,10 +1297,10 @@ public class IterateTest
         this.iterables.each(each -> {
             MutableBooleanCollection expected = new BooleanArrayList();
             MutableBooleanCollection actual = Iterate.collectBoolean(each, PrimitiveFunctions.integerIsPositive(), expected);
-            Assert.assertTrue(expected.containsAll(true, true, true, true, true));
-            Assert.assertSame("Target list sent as parameter not returned", expected, actual);
+            assertTrue(expected.containsAll(true, true, true, true, true));
+            assertSame("Target list sent as parameter not returned", expected, actual);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectBoolean(null, PrimitiveFunctions.integerIsPositive(), new BooleanArrayList()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectBoolean(null, PrimitiveFunctions.integerIsPositive(), new BooleanArrayList()));
     }
 
     @Test
@@ -1302,9 +1308,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             MutableByteCollection result = Iterate.collectByte(each, PrimitiveFunctions.unboxIntegerToByte());
-            Assert.assertTrue(result.containsAll((byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5));
+            assertTrue(result.containsAll((byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectByte(null, PrimitiveFunctions.unboxIntegerToByte()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectByte(null, PrimitiveFunctions.unboxIntegerToByte()));
     }
 
     @Test
@@ -1313,10 +1319,10 @@ public class IterateTest
         this.iterables.each(each -> {
             MutableByteCollection expected = new ByteArrayList();
             MutableByteCollection actual = Iterate.collectByte(each, PrimitiveFunctions.unboxIntegerToByte(), expected);
-            Assert.assertTrue(actual.containsAll((byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5));
-            Assert.assertSame("Target list sent as parameter not returned", expected, actual);
+            assertTrue(actual.containsAll((byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5));
+            assertSame("Target list sent as parameter not returned", expected, actual);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectByte(null, PrimitiveFunctions.unboxIntegerToByte(), new ByteArrayList()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectByte(null, PrimitiveFunctions.unboxIntegerToByte(), new ByteArrayList()));
     }
 
     @Test
@@ -1324,9 +1330,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             MutableCharCollection result = Iterate.collectChar(each, PrimitiveFunctions.unboxIntegerToChar());
-            Assert.assertTrue(result.containsAll((char) 1, (char) 2, (char) 3, (char) 4, (char) 5));
+            assertTrue(result.containsAll((char) 1, (char) 2, (char) 3, (char) 4, (char) 5));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectChar(null, PrimitiveFunctions.unboxIntegerToChar()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectChar(null, PrimitiveFunctions.unboxIntegerToChar()));
     }
 
     @Test
@@ -1335,10 +1341,10 @@ public class IterateTest
         this.iterables.each(each -> {
             MutableCharCollection expected = new CharArrayList();
             MutableCharCollection actual = Iterate.collectChar(each, PrimitiveFunctions.unboxIntegerToChar(), expected);
-            Assert.assertTrue(actual.containsAll((char) 1, (char) 2, (char) 3, (char) 4, (char) 5));
-            Assert.assertSame("Target list sent as parameter not returned", expected, actual);
+            assertTrue(actual.containsAll((char) 1, (char) 2, (char) 3, (char) 4, (char) 5));
+            assertSame("Target list sent as parameter not returned", expected, actual);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectChar(null, PrimitiveFunctions.unboxIntegerToChar(), new CharArrayList()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectChar(null, PrimitiveFunctions.unboxIntegerToChar(), new CharArrayList()));
     }
 
     @Test
@@ -1346,9 +1352,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             MutableDoubleCollection result = Iterate.collectDouble(each, PrimitiveFunctions.unboxIntegerToDouble());
-            Assert.assertTrue(result.containsAll(1.0d, 2.0d, 3.0d, 4.0d, 5.0d));
+            assertTrue(result.containsAll(1.0d, 2.0d, 3.0d, 4.0d, 5.0d));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectDouble(null, PrimitiveFunctions.unboxIntegerToDouble()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectDouble(null, PrimitiveFunctions.unboxIntegerToDouble()));
     }
 
     @Test
@@ -1357,10 +1363,10 @@ public class IterateTest
         this.iterables.each(each -> {
             MutableDoubleCollection expected = new DoubleArrayList();
             MutableDoubleCollection actual = Iterate.collectDouble(each, PrimitiveFunctions.unboxIntegerToDouble(), expected);
-            Assert.assertTrue(actual.containsAll(1.0d, 2.0d, 3.0d, 4.0d, 5.0d));
-            Assert.assertSame("Target list sent as parameter not returned", expected, actual);
+            assertTrue(actual.containsAll(1.0d, 2.0d, 3.0d, 4.0d, 5.0d));
+            assertSame("Target list sent as parameter not returned", expected, actual);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectDouble(null, PrimitiveFunctions.unboxIntegerToDouble(), new DoubleArrayList()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectDouble(null, PrimitiveFunctions.unboxIntegerToDouble(), new DoubleArrayList()));
     }
 
     @Test
@@ -1368,9 +1374,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             MutableFloatCollection result = Iterate.collectFloat(each, PrimitiveFunctions.unboxIntegerToFloat());
-            Assert.assertTrue(result.containsAll(1.0f, 2.0f, 3.0f, 4.0f, 5.0f));
+            assertTrue(result.containsAll(1.0f, 2.0f, 3.0f, 4.0f, 5.0f));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectFloat(null, PrimitiveFunctions.unboxIntegerToFloat()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectFloat(null, PrimitiveFunctions.unboxIntegerToFloat()));
     }
 
     @Test
@@ -1379,10 +1385,10 @@ public class IterateTest
         this.iterables.each(each -> {
             MutableFloatCollection expected = new FloatArrayList();
             MutableFloatCollection actual = Iterate.collectFloat(each, PrimitiveFunctions.unboxIntegerToFloat(), expected);
-            Assert.assertTrue(actual.containsAll(1.0f, 2.0f, 3.0f, 4.0f, 5.0f));
-            Assert.assertSame("Target list sent as parameter not returned", expected, actual);
+            assertTrue(actual.containsAll(1.0f, 2.0f, 3.0f, 4.0f, 5.0f));
+            assertSame("Target list sent as parameter not returned", expected, actual);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectFloat(null, PrimitiveFunctions.unboxIntegerToFloat(), new FloatArrayList()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectFloat(null, PrimitiveFunctions.unboxIntegerToFloat(), new FloatArrayList()));
     }
 
     @Test
@@ -1390,9 +1396,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             MutableIntCollection result = Iterate.collectInt(each, PrimitiveFunctions.unboxIntegerToInt());
-            Assert.assertTrue(result.containsAll(1, 2, 3, 4, 5));
+            assertTrue(result.containsAll(1, 2, 3, 4, 5));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectInt(null, PrimitiveFunctions.unboxIntegerToInt()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectInt(null, PrimitiveFunctions.unboxIntegerToInt()));
     }
 
     @Test
@@ -1401,10 +1407,10 @@ public class IterateTest
         this.iterables.each(each -> {
             MutableIntCollection expected = new IntArrayList();
             MutableIntCollection actual = Iterate.collectInt(each, PrimitiveFunctions.unboxIntegerToInt(), expected);
-            Assert.assertTrue(actual.containsAll(1, 2, 3, 4, 5));
-            Assert.assertSame("Target list sent as parameter not returned", expected, actual);
+            assertTrue(actual.containsAll(1, 2, 3, 4, 5));
+            assertSame("Target list sent as parameter not returned", expected, actual);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectInt(null, PrimitiveFunctions.unboxIntegerToInt(), new IntArrayList()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectInt(null, PrimitiveFunctions.unboxIntegerToInt(), new IntArrayList()));
     }
 
     @Test
@@ -1412,9 +1418,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             MutableLongCollection result = Iterate.collectLong(each, PrimitiveFunctions.unboxIntegerToLong());
-            Assert.assertTrue(result.containsAll(1L, 2L, 3L, 4L, 5L));
+            assertTrue(result.containsAll(1L, 2L, 3L, 4L, 5L));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectLong(null, PrimitiveFunctions.unboxIntegerToLong()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectLong(null, PrimitiveFunctions.unboxIntegerToLong()));
     }
 
     @Test
@@ -1423,10 +1429,10 @@ public class IterateTest
         this.iterables.each(each -> {
             MutableLongCollection expected = new LongArrayList();
             MutableLongCollection actual = Iterate.collectLong(each, PrimitiveFunctions.unboxIntegerToLong(), expected);
-            Assert.assertTrue(actual.containsAll(1L, 2L, 3L, 4L, 5L));
-            Assert.assertSame("Target list sent as parameter not returned", expected, actual);
+            assertTrue(actual.containsAll(1L, 2L, 3L, 4L, 5L));
+            assertSame("Target list sent as parameter not returned", expected, actual);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectLong(null, PrimitiveFunctions.unboxIntegerToLong(), new LongArrayList()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectLong(null, PrimitiveFunctions.unboxIntegerToLong(), new LongArrayList()));
     }
 
     @Test
@@ -1434,9 +1440,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             MutableShortCollection result = Iterate.collectShort(each, PrimitiveFunctions.unboxIntegerToShort());
-            Assert.assertTrue(result.containsAll((short) 1, (short) 2, (short) 3, (short) 4, (short) 5));
+            assertTrue(result.containsAll((short) 1, (short) 2, (short) 3, (short) 4, (short) 5));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectShort(null, PrimitiveFunctions.unboxIntegerToShort()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectShort(null, PrimitiveFunctions.unboxIntegerToShort()));
     }
 
     @Test
@@ -1445,10 +1451,10 @@ public class IterateTest
         this.iterables.each(each -> {
             MutableShortCollection expected = new ShortArrayList();
             MutableShortCollection actual = Iterate.collectShort(each, PrimitiveFunctions.unboxIntegerToShort(), expected);
-            Assert.assertTrue(actual.containsAll((short) 1, (short) 2, (short) 3, (short) 4, (short) 5));
-            Assert.assertSame("Target list sent as parameter not returned", expected, actual);
+            assertTrue(actual.containsAll((short) 1, (short) 2, (short) 3, (short) 4, (short) 5));
+            assertSame("Target list sent as parameter not returned", expected, actual);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectShort(null, PrimitiveFunctions.unboxIntegerToShort(), new ShortArrayList()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectShort(null, PrimitiveFunctions.unboxIntegerToShort(), new ShortArrayList()));
     }
 
     @Test
@@ -1541,7 +1547,7 @@ public class IterateTest
         foos.add(new Foo(2));
         Collection<Bar> bars = Iterate.collect(foos, foo -> new Bar(foo.getValue()));
 
-        Assert.assertEquals(FastList.newListWith(new Bar(1), new Bar(2)), bars);
+        assertEquals(FastList.newListWith(new Bar(1), new Bar(2)), bars);
     }
 
     @Test
@@ -1549,9 +1555,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<String> result = Iterate.collect(each, String::valueOf, UnifiedSet.newSet());
-            Assert.assertTrue(result.containsAll(FastList.newListWith("1", "2", "3", "4", "5")));
+            assertTrue(result.containsAll(FastList.newListWith("1", "2", "3", "4", "5")));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collect(null, a -> a, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collect(null, a -> a, null));
     }
 
     @Test
@@ -1559,9 +1565,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<String> result = Iterate.collectWith(each, (each1, parm) -> each1 + parm, " ");
-            Assert.assertTrue(result.containsAll(FastList.newListWith("1 ", "2 ", "3 ", "4 ", "5 ")));
+            assertTrue(result.containsAll(FastList.newListWith("1 ", "2 ", "3 ", "4 ", "5 ")));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectWith(null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectWith(null, null, null));
     }
 
     @Test
@@ -1569,9 +1575,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<String> result = Iterate.collectWith(each, (each1, parm) -> each1 + parm, " ", UnifiedSet.newSet());
-            Assert.assertTrue(result.containsAll(FastList.newListWith("1 ", "2 ", "3 ", "4 ", "5 ")));
+            assertTrue(result.containsAll(FastList.newListWith("1 ", "2 ", "3 ", "4 ", "5 ")));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.collectWith(null, null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.collectWith(null, null, null, null));
     }
 
     @Test
@@ -1585,30 +1591,30 @@ public class IterateTest
 
         MutableList<Integer> integers3 = Interval.oneTo(5).toList();
         this.assertRemoveIfFromList(FastList.newList(integers3));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.removeIf(null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.removeIf(null, null));
     }
 
     @Test
     public void removeIfWith()
     {
         MutableList<Integer> objects = FastList.newList(Lists.fixedSize.of(1, 2, 3, null));
-        Assert.assertTrue(Iterate.removeIfWith(objects, (each1, ignored1) -> each1 == null, null));
+        assertTrue(Iterate.removeIfWith(objects, (each1, ignored1) -> each1 == null, null));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
 
         MutableList<Integer> objects2 = FastList.newList(Lists.fixedSize.of(null, 1, 2, 3));
-        Assert.assertTrue(Iterate.removeIfWith(objects2, (each, ignored) -> each == null, null));
+        assertTrue(Iterate.removeIfWith(objects2, (each, ignored) -> each == null, null));
         Verify.assertSize(3, objects2);
         Verify.assertContainsAll(objects2, 1, 2, 3);
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.removeIfWith(null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.removeIfWith(null, null, null));
     }
 
     private void assertRemoveIfFromList(List<Integer> newIntegers)
     {
-        Assert.assertTrue(Iterate.removeIf(newIntegers, IntegerPredicates.isEven()));
-        Assert.assertFalse(Iterate.removeIf(FastList.newListWith(1, 3, 5), IntegerPredicates.isEven()));
-        Assert.assertFalse(Iterate.removeIf(FastList.newList(), IntegerPredicates.isEven()));
+        assertTrue(Iterate.removeIf(newIntegers, IntegerPredicates.isEven()));
+        assertFalse(Iterate.removeIf(FastList.newListWith(1, 3, 5), IntegerPredicates.isEven()));
+        assertFalse(Iterate.removeIf(FastList.newList(), IntegerPredicates.isEven()));
         Verify.assertContainsAll(newIntegers, 1, 3, 5);
         Verify.assertSize(3, newIntegers);
     }
@@ -1624,7 +1630,7 @@ public class IterateTest
     public void removeIfAll()
     {
         MutableList<Integer> integers = Interval.oneTo(5).toList();
-        Assert.assertTrue(Iterate.removeIf(integers, ignored -> true));
+        assertTrue(Iterate.removeIf(integers, ignored -> true));
         Verify.assertSize(0, integers);
     }
 
@@ -1632,7 +1638,7 @@ public class IterateTest
     public void removeIfNone()
     {
         MutableList<Integer> integers = Interval.oneTo(5).toList();
-        Assert.assertFalse(Iterate.removeIf(integers, ignored -> false));
+        assertFalse(Iterate.removeIf(integers, ignored -> false));
         Verify.assertSize(5, integers);
     }
 
@@ -1640,7 +1646,7 @@ public class IterateTest
     public void removeIfFromSet()
     {
         MutableSet<Integer> integers = Interval.toSet(1, 5);
-        Assert.assertTrue(Iterate.removeIf(integers, IntegerPredicates.isEven()));
+        assertTrue(Iterate.removeIf(integers, IntegerPredicates.isEven()));
         Verify.assertContainsAll(integers, 1, 3, 5);
         Verify.assertSize(3, integers);
     }
@@ -1649,11 +1655,11 @@ public class IterateTest
     public void removeIfWithFastList()
     {
         MutableList<Integer> objects = FastList.newListWith(1, 2, 3, null);
-        Assert.assertTrue(Iterate.removeIfWith(objects, (each1, ignored1) -> each1 == null, null));
+        assertTrue(Iterate.removeIfWith(objects, (each1, ignored1) -> each1 == null, null));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
         MutableList<Integer> objects1 = FastList.newListWith(null, 1, 2, 3);
-        Assert.assertTrue(Iterate.removeIfWith(objects1, (each, ignored) -> each == null, null));
+        assertTrue(Iterate.removeIfWith(objects1, (each, ignored) -> each == null, null));
         Verify.assertSize(3, objects1);
         Verify.assertContainsAll(objects1, 1, 2, 3);
     }
@@ -1662,12 +1668,12 @@ public class IterateTest
     public void removeIfWithRandomAccess()
     {
         List<Integer> objects = Collections.synchronizedList(new ArrayList<>(Lists.fixedSize.of(1, 2, 3, null)));
-        Assert.assertTrue(Iterate.removeIfWith(objects, (each1, ignored1) -> each1 == null, null));
+        assertTrue(Iterate.removeIfWith(objects, (each1, ignored1) -> each1 == null, null));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
         List<Integer> objects1 =
                 Collections.synchronizedList(new ArrayList<>(Lists.fixedSize.of(null, 1, 2, 3)));
-        Assert.assertTrue(Iterate.removeIfWith(objects1, (each, ignored) -> each == null, null));
+        assertTrue(Iterate.removeIfWith(objects1, (each, ignored) -> each == null, null));
         Verify.assertSize(3, objects1);
         Verify.assertContainsAll(objects1, 1, 2, 3);
     }
@@ -1676,11 +1682,11 @@ public class IterateTest
     public void removeIfWithLinkedList()
     {
         List<Integer> objects = new LinkedList<>(Lists.fixedSize.of(1, 2, 3, null));
-        Assert.assertTrue(Iterate.removeIfWith(objects, (each1, ignored1) -> each1 == null, null));
+        assertTrue(Iterate.removeIfWith(objects, (each1, ignored1) -> each1 == null, null));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
         List<Integer> objects1 = new LinkedList<>(Lists.fixedSize.of(null, 1, 2, 3));
-        Assert.assertTrue(Iterate.removeIfWith(objects1, (each, ignored) -> each == null, null));
+        assertTrue(Iterate.removeIfWith(objects1, (each, ignored) -> each == null, null));
         Verify.assertSize(3, objects1);
         Verify.assertContainsAll(objects1, 1, 2, 3);
     }
@@ -1727,29 +1733,29 @@ public class IterateTest
     @Test
     public void isEmpty()
     {
-        Assert.assertTrue(Iterate.isEmpty(null));
-        Assert.assertTrue(Iterate.isEmpty(Lists.fixedSize.of()));
-        Assert.assertFalse(Iterate.isEmpty(Lists.fixedSize.of("1")));
-        Assert.assertTrue(Iterate.isEmpty(Maps.fixedSize.of()));
-        Assert.assertFalse(Iterate.isEmpty(Maps.fixedSize.of("1", "1")));
-        Assert.assertTrue(Iterate.isEmpty(new IterableAdapter<>(Lists.fixedSize.of())));
-        Assert.assertFalse(Iterate.isEmpty(new IterableAdapter<>(Lists.fixedSize.of("1"))));
-        Assert.assertTrue(Iterate.isEmpty(Lists.fixedSize.of().asLazy()));
-        Assert.assertFalse(Iterate.isEmpty(Lists.fixedSize.of("1").asLazy()));
+        assertTrue(Iterate.isEmpty(null));
+        assertTrue(Iterate.isEmpty(Lists.fixedSize.of()));
+        assertFalse(Iterate.isEmpty(Lists.fixedSize.of("1")));
+        assertTrue(Iterate.isEmpty(Maps.fixedSize.of()));
+        assertFalse(Iterate.isEmpty(Maps.fixedSize.of("1", "1")));
+        assertTrue(Iterate.isEmpty(new IterableAdapter<>(Lists.fixedSize.of())));
+        assertFalse(Iterate.isEmpty(new IterableAdapter<>(Lists.fixedSize.of("1"))));
+        assertTrue(Iterate.isEmpty(Lists.fixedSize.of().asLazy()));
+        assertFalse(Iterate.isEmpty(Lists.fixedSize.of("1").asLazy()));
     }
 
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(Iterate.notEmpty(null));
-        Assert.assertFalse(Iterate.notEmpty(Lists.fixedSize.of()));
-        Assert.assertTrue(Iterate.notEmpty(Lists.fixedSize.of("1")));
-        Assert.assertFalse(Iterate.notEmpty(Maps.fixedSize.of()));
-        Assert.assertTrue(Iterate.notEmpty(Maps.fixedSize.of("1", "1")));
-        Assert.assertFalse(Iterate.notEmpty(new IterableAdapter<>(Lists.fixedSize.of())));
-        Assert.assertTrue(Iterate.notEmpty(new IterableAdapter<>(Lists.fixedSize.of("1"))));
-        Assert.assertFalse(Iterate.notEmpty(Lists.fixedSize.of().asLazy()));
-        Assert.assertTrue(Iterate.notEmpty(Lists.fixedSize.of("1").asLazy()));
+        assertFalse(Iterate.notEmpty(null));
+        assertFalse(Iterate.notEmpty(Lists.fixedSize.of()));
+        assertTrue(Iterate.notEmpty(Lists.fixedSize.of("1")));
+        assertFalse(Iterate.notEmpty(Maps.fixedSize.of()));
+        assertTrue(Iterate.notEmpty(Maps.fixedSize.of("1", "1")));
+        assertFalse(Iterate.notEmpty(new IterableAdapter<>(Lists.fixedSize.of())));
+        assertTrue(Iterate.notEmpty(new IterableAdapter<>(Lists.fixedSize.of("1"))));
+        assertFalse(Iterate.notEmpty(Lists.fixedSize.of().asLazy()));
+        assertTrue(Iterate.notEmpty(Lists.fixedSize.of("1").asLazy()));
     }
 
     @Test
@@ -1773,9 +1779,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<Integer> result = Iterate.select(each, Predicates.greaterThan(3));
-            Assert.assertTrue(result.containsAll(FastList.newListWith(4, 5)));
+            assertTrue(result.containsAll(FastList.newListWith(4, 5)));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.select(null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.select(null, null));
     }
 
     @Test
@@ -1783,9 +1789,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<Integer> result = Iterate.select(each, Predicates.greaterThan(3), FastList.newList());
-            Assert.assertTrue(result.containsAll(FastList.newListWith(4, 5)));
+            assertTrue(result.containsAll(FastList.newListWith(4, 5)));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.select(null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.select(null, null, null));
     }
 
     @Test
@@ -1793,9 +1799,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<Integer> result = Iterate.reject(each, Predicates.greaterThan(3));
-            Assert.assertTrue(result.containsAll(FastList.newListWith(1, 2, 3)));
+            assertTrue(result.containsAll(FastList.newListWith(1, 2, 3)));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.reject(null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.reject(null, null));
     }
 
     @Test
@@ -1803,9 +1809,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             Collection<Integer> result = Iterate.reject(each, Predicates.greaterThan(3), FastList.newList());
-            Assert.assertTrue(result.containsAll(FastList.newListWith(1, 2, 3)));
+            assertTrue(result.containsAll(FastList.newListWith(1, 2, 3)));
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.reject(null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.reject(null, null, null));
     }
 
     @Test
@@ -1823,7 +1829,7 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             int result = Iterate.count(each, Predicates.greaterThan(3));
-            Assert.assertEquals(2, result);
+            assertEquals(2, result);
         });
     }
 
@@ -1838,7 +1844,7 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             int result = Iterate.countWith(each, Predicates2.greaterThan(), 3);
-            Assert.assertEquals(2, result);
+            assertEquals(2, result);
         });
     }
 
@@ -1870,7 +1876,7 @@ public class IterateTest
     {
         Function3<Sum, Integer, Integer, Sum> function = (sum, element, withValue) -> sum.add(element.intValue() * withValue.intValue());
         Sum sumOfDoubledValues = Iterate.injectIntoWith(newResult, newIntegers, function, newParameter);
-        Assert.assertEquals(30, sumOfDoubledValues.getValue().intValue());
+        assertEquals(30, sumOfDoubledValues.getValue().intValue());
     }
 
     @Test
@@ -1888,7 +1894,7 @@ public class IterateTest
         this.iterables.each(each -> {
             Sum result = new IntegerSum(0);
             Iterate.forEachWith(each, (integer, parm) -> result.add(integer.intValue() * parm.intValue()), 2);
-            Assert.assertEquals(30, result.getValue().intValue());
+            assertEquals(30, result.getValue().intValue());
         });
     }
 
@@ -1898,7 +1904,7 @@ public class IterateTest
         Sum result = new IntegerSum(0);
         MutableSet<Integer> integers = Interval.toSet(1, 5);
         Iterate.forEachWith(integers, (each, parm) -> result.add(each.intValue() * parm.intValue()), 2);
-        Assert.assertEquals(30, result.getValue().intValue());
+        assertEquals(30, result.getValue().intValue());
     }
 
     @Test
@@ -1912,7 +1918,7 @@ public class IterateTest
         List<Integer> listOfSizeOne = new LinkedList<>();
         listOfSizeOne.add(1);
         Iterate.sortThis(listOfSizeOne);
-        Assert.assertEquals(FastList.newListWith(1), listOfSizeOne);
+        assertEquals(FastList.newListWith(1), listOfSizeOne);
     }
 
     @Test
@@ -1939,8 +1945,8 @@ public class IterateTest
         Interval.oneTo(5).addAllTo(list);
         list.shuffleThis();
         MutableList<Integer> sortedList = Iterate.sortThisBy(list, String::valueOf);
-        Assert.assertSame(list, sortedList);
-        Assert.assertEquals(Lists.immutable.of(1, 1, 2, 2, 3, 3, 4, 4, 5, 5), list);
+        assertSame(list, sortedList);
+        assertEquals(Lists.immutable.of(1, 1, 2, 2, 3, 3, 4, 4, 5, 5), list);
     }
 
     @Test
@@ -2022,7 +2028,7 @@ public class IterateTest
     public void getOnlySingleton()
     {
         Object value = new Object();
-        Assert.assertSame(value, Iterate.getOnly(Lists.fixedSize.of(value)));
+        assertSame(value, Iterate.getOnly(Lists.fixedSize.of(value)));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -2062,18 +2068,18 @@ public class IterateTest
         this.zip(new HashSet<>(FastList.newListWith("1", "2", "3", "4", "5", "6", "7")));
         this.zip(FastList.newListWith("1", "2", "3", "4", "5", "6", "7").asLazy());
         this.zip(new ArrayList<>(Interval.oneTo(101).collect(String::valueOf).toList()));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.zip(null, null));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.zip(null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.zip(null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.zip(null, null, null));
     }
 
     private void zip(Iterable<String> iterable)
     {
         List<Object> nulls = Collections.nCopies(Iterate.sizeOf(iterable), null);
         Collection<Pair<String, Object>> pairs = Iterate.zip(iterable, nulls);
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedSet.newSet(iterable),
                 Iterate.collect(pairs, (Function<Pair<String, ?>, String>) Pair::getOne, UnifiedSet.newSet()));
-        Assert.assertEquals(
+        assertEquals(
                 nulls,
                 Iterate.collect(pairs, (Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
     }
@@ -2087,17 +2093,17 @@ public class IterateTest
         this.zipWithIndex(FastList.newListWith("1", "2", "3", "4", "5", "6", "7").asLazy());
         this.zipWithIndex(Lists.immutable.of("1", "2", "3", "4", "5", "6", "7"));
         this.zipWithIndex(new ArrayList<>(Interval.oneTo(101).collect(String::valueOf).toList()));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.zipWithIndex(null));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.zipWithIndex(null, null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.zipWithIndex(null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.zipWithIndex(null, null));
     }
 
     private void zipWithIndex(Iterable<String> iterable)
     {
         Collection<Pair<String, Integer>> pairs = Iterate.zipWithIndex(iterable);
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedSet.newSet(iterable),
                 Iterate.collect(pairs, (Function<Pair<String, ?>, String>) Pair::getOne, UnifiedSet.newSet()));
-        Assert.assertEquals(
+        assertEquals(
                 Interval.zeroTo(Iterate.sizeOf(iterable) - 1).toSet(),
                 Iterate.collect(pairs, (Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.newSet()));
     }
@@ -2108,23 +2114,23 @@ public class IterateTest
         MutableList<String> fastList = FastList.newListWith("1", "2", "3", "4", "5", "6", "7");
         RichIterable<RichIterable<String>> groups1 = Iterate.chunk(fastList, 2);
         RichIterable<Integer> sizes1 = groups1.collect(Functions.getSizeOf());
-        Assert.assertEquals(FastList.newListWith(2, 2, 2, 1), sizes1);
+        assertEquals(FastList.newListWith(2, 2, 2, 1), sizes1);
 
         List<String> arrayList = new ArrayList<>(fastList);
         RichIterable<RichIterable<String>> groups2 = Iterate.chunk(arrayList, 2);
         RichIterable<Integer> sizes2 = groups2.collect(Functions.getSizeOf());
-        Assert.assertEquals(FastList.newListWith(2, 2, 2, 1), sizes2);
+        assertEquals(FastList.newListWith(2, 2, 2, 1), sizes2);
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.chunk(null, 1));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.chunk(null, 1));
     }
 
     @Test
     public void getOnly()
     {
-        Assert.assertEquals("first", Iterate.getOnly(FastList.newListWith("first")));
-        Assert.assertEquals("first", Iterate.getOnly(FastList.newListWith("first").asLazy()));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.getOnly(FastList.newListWith("first", "second")));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.getOnly(null));
+        assertEquals("first", Iterate.getOnly(FastList.newListWith("first")));
+        assertEquals("first", Iterate.getOnly(FastList.newListWith("first").asLazy()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.getOnly(FastList.newListWith("first", "second")));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.getOnly(null));
     }
 
     private static class WordToItsLetters implements Function<String, Set<Character>>
@@ -2143,9 +2149,9 @@ public class IterateTest
     {
         this.iterables.each(each -> {
             String result = Iterate.makeString(each);
-            Assert.assertEquals("1, 2, 3, 4, 5", result);
+            assertEquals("1, 2, 3, 4, 5", result);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.makeString(null));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.makeString(null));
     }
 
     @Test
@@ -2155,9 +2161,9 @@ public class IterateTest
             StringBuilder stringBuilder = new StringBuilder();
             Iterate.appendString(each, stringBuilder);
             String result = stringBuilder.toString();
-            Assert.assertEquals("1, 2, 3, 4, 5", result);
+            assertEquals("1, 2, 3, 4, 5", result);
         });
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.appendString(null, new StringBuilder()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.appendString(null, new StringBuilder()));
     }
 
     @Test
@@ -2170,7 +2176,7 @@ public class IterateTest
         this.aggregateByMutableResult(new LinkedList<>(FastList.newListWith(1, 1, 1, 2, 2, 3)));
         this.aggregateByMutableResult(new ArrayList<>(FastList.newListWith(1, 1, 1, 2, 2, 3)));
         this.aggregateByMutableResult(Arrays.asList(1, 1, 1, 2, 2, 3));
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.aggregateByMutableResult(null));
+        assertThrows(IllegalArgumentException.class, () -> this.aggregateByMutableResult(null));
     }
 
     private void aggregateByMutableResult(Iterable<Integer> iterable)
@@ -2180,15 +2186,15 @@ public class IterateTest
         MapIterable<String, AtomicInteger> aggregation = Iterate.aggregateInPlaceBy(iterable, String::valueOf, valueCreator, sumAggregator);
         if (iterable instanceof Set)
         {
-            Assert.assertEquals(1, aggregation.get("1").intValue());
-            Assert.assertEquals(2, aggregation.get("2").intValue());
-            Assert.assertEquals(3, aggregation.get("3").intValue());
+            assertEquals(1, aggregation.get("1").intValue());
+            assertEquals(2, aggregation.get("2").intValue());
+            assertEquals(3, aggregation.get("3").intValue());
         }
         else
         {
-            Assert.assertEquals(3, aggregation.get("1").intValue());
-            Assert.assertEquals(4, aggregation.get("2").intValue());
-            Assert.assertEquals(3, aggregation.get("3").intValue());
+            assertEquals(3, aggregation.get("1").intValue());
+            assertEquals(4, aggregation.get("2").intValue());
+            assertEquals(3, aggregation.get("3").intValue());
         }
     }
 
@@ -2202,7 +2208,7 @@ public class IterateTest
         this.aggregateByImmutableResult(new LinkedList<>(FastList.newListWith(1, 1, 1, 2, 2, 3)));
         this.aggregateByImmutableResult(new ArrayList<>(FastList.newListWith(1, 1, 1, 2, 2, 3)));
         this.aggregateByImmutableResult(Arrays.asList(1, 1, 1, 2, 2, 3));
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.aggregateByImmutableResult(null));
+        assertThrows(IllegalArgumentException.class, () -> this.aggregateByImmutableResult(null));
     }
 
     private void aggregateByImmutableResult(Iterable<Integer> iterable)
@@ -2212,62 +2218,62 @@ public class IterateTest
         MapIterable<String, Integer> aggregation = Iterate.aggregateBy(iterable, String::valueOf, valueCreator, sumAggregator);
         if (iterable instanceof Set)
         {
-            Assert.assertEquals(1, aggregation.get("1").intValue());
-            Assert.assertEquals(2, aggregation.get("2").intValue());
-            Assert.assertEquals(3, aggregation.get("3").intValue());
+            assertEquals(1, aggregation.get("1").intValue());
+            assertEquals(2, aggregation.get("2").intValue());
+            assertEquals(3, aggregation.get("3").intValue());
         }
         else
         {
-            Assert.assertEquals(3, aggregation.get("1").intValue());
-            Assert.assertEquals(4, aggregation.get("2").intValue());
-            Assert.assertEquals(3, aggregation.get("3").intValue());
+            assertEquals(3, aggregation.get("1").intValue());
+            assertEquals(4, aggregation.get("2").intValue());
+            assertEquals(3, aggregation.get("3").intValue());
         }
     }
 
     @Test
     public void sumOfInt()
     {
-        this.iterables.each(each -> Assert.assertEquals(15L, Iterate.sumOfLong(each, value -> value)));
+        this.iterables.each(each -> assertEquals(15L, Iterate.sumOfLong(each, value -> value)));
         long result = Iterate.sumOfInt(FastList.newListWith(2_000_000_000, 2_000_000_000, 2_000_000_000), e -> e);
-        Assert.assertEquals(6_000_000_000L, result);
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfInt(null, null));
+        assertEquals(6_000_000_000L, result);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfInt(null, null));
     }
 
     @Test
     public void sumOfLong()
     {
-        this.iterables.each(each -> Assert.assertEquals(15L, Iterate.sumOfLong(each, Integer::longValue)));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfLong(null, null));
+        this.iterables.each(each -> assertEquals(15L, Iterate.sumOfLong(each, Integer::longValue)));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfLong(null, null));
     }
 
     @Test
     public void sumOfFloat()
     {
-        this.iterables.each(each -> Assert.assertEquals(15.0d, Iterate.sumOfFloat(each, Integer::floatValue), 0.0d));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfFloat(null, null));
+        this.iterables.each(each -> assertEquals(15.0d, Iterate.sumOfFloat(each, Integer::floatValue), 0.0d));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfFloat(null, null));
         double result = Iterate.sumOfFloat(FastList.newListWith(2_000_000_000, 2_000_000_000, 2_000_000_000), e -> e);
-        Assert.assertEquals((double) 6_000_000_000L, result, 0.0d);
+        assertEquals((double) 6_000_000_000L, result, 0.0d);
     }
 
     @Test
     public void sumOfDouble()
     {
-        this.iterables.each(each -> Assert.assertEquals(15.0d, Iterate.sumOfDouble(each, Integer::doubleValue), 0.0d));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfDouble(null, null));
+        this.iterables.each(each -> assertEquals(15.0d, Iterate.sumOfDouble(each, Integer::doubleValue), 0.0d));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfDouble(null, null));
     }
 
     @Test
     public void sumOfBigDecimal()
     {
-        this.iterables.each(each -> Assert.assertEquals(new BigDecimal(15), Iterate.sumOfBigDecimal(each, BigDecimal::new)));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfBigDecimal(null, null));
+        this.iterables.each(each -> assertEquals(new BigDecimal(15), Iterate.sumOfBigDecimal(each, BigDecimal::new)));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfBigDecimal(null, null));
     }
 
     @Test
     public void sumOfBigInteger()
     {
-        this.iterables.each(each -> Assert.assertEquals(new BigInteger("15"), Iterate.sumOfBigInteger(each, integer -> new BigInteger(integer.toString()))));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfBigDecimal(null, null));
+        this.iterables.each(each -> assertEquals(new BigInteger("15"), Iterate.sumOfBigInteger(each, integer -> new BigInteger(integer.toString()))));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.sumOfBigDecimal(null, null));
     }
 
     @Test
@@ -2276,8 +2282,8 @@ public class IterateTest
         this.iterables.each(each ->
         {
             MutableMap<Integer, BigDecimal> result = Iterate.sumByBigDecimal(each, e -> e % 2, BigDecimal::new);
-            Assert.assertEquals(new BigDecimal(9), result.get(1));
-            Assert.assertEquals(new BigDecimal(6), result.get(0));
+            assertEquals(new BigDecimal(9), result.get(1));
+            assertEquals(new BigDecimal(6), result.get(0));
         });
     }
 
@@ -2287,8 +2293,8 @@ public class IterateTest
         this.iterables.each(each ->
         {
             MutableMap<Integer, BigInteger> result = Iterate.sumByBigInteger(each, e -> e % 2, i -> new BigInteger(i.toString()));
-            Assert.assertEquals(new BigInteger("9"), result.get(1));
-            Assert.assertEquals(new BigInteger("6"), result.get(0));
+            assertEquals(new BigInteger("9"), result.get(1));
+            assertEquals(new BigInteger("6"), result.get(0));
         });
     }
 
@@ -2298,13 +2304,13 @@ public class IterateTest
         this.iterables.each(each ->
         {
             ObjectLongMap<Integer> result = Iterate.sumByInt(each, i -> i % 2, e -> e);
-            Assert.assertEquals(9, result.get(1));
-            Assert.assertEquals(6, result.get(0));
+            assertEquals(9, result.get(1));
+            assertEquals(6, result.get(0));
         });
         ObjectLongMap<Integer> map =
                 Iterate.sumByInt(FastList.newListWith(2_000_000_000, 2_000_000_001, 2_000_000_000, 2_000_000_001, 2_000_000_000), i -> i % 2, e -> e);
-        Assert.assertEquals(4_000_000_002L, map.get(1));
-        Assert.assertEquals(6_000_000_000L, map.get(0));
+        assertEquals(4_000_000_002L, map.get(1));
+        assertEquals(6_000_000_000L, map.get(0));
     }
 
     @Test
@@ -2313,13 +2319,13 @@ public class IterateTest
         this.iterables.each(each ->
         {
             ObjectDoubleMap<Integer> result = Iterate.sumByFloat(each, f -> f % 2, e -> e);
-            Assert.assertEquals(9.0d, result.get(1), 0.0);
-            Assert.assertEquals(6.0d, result.get(0), 0.0);
+            assertEquals(9.0d, result.get(1), 0.0);
+            assertEquals(6.0d, result.get(0), 0.0);
         });
         ObjectDoubleMap<Integer> map =
                 Iterate.sumByFloat(FastList.newListWith(2_000_000_000, 2_000_001, 2_000_000_000, 2_000_001, 2_000_000_000), i -> i % 2, e -> e);
-        Assert.assertEquals((double) 4_000_002L, map.get(1), 0.00001d);
-        Assert.assertEquals((double) 6_000_000_000L, map.get(0), 0.00001d);
+        assertEquals((double) 4_000_002L, map.get(1), 0.00001d);
+        assertEquals((double) 6_000_000_000L, map.get(0), 0.00001d);
     }
 
     @Test
@@ -2328,8 +2334,8 @@ public class IterateTest
         this.iterables.each(each ->
         {
             ObjectLongMap<Integer> result = Iterate.sumByLong(each, l -> l % 2, e -> e);
-            Assert.assertEquals(9, result.get(1));
-            Assert.assertEquals(6, result.get(0));
+            assertEquals(9, result.get(1));
+            assertEquals(6, result.get(0));
         });
     }
 
@@ -2339,31 +2345,31 @@ public class IterateTest
         this.iterables.each(each ->
         {
             ObjectDoubleMap<Integer> result = Iterate.sumByDouble(each, d -> d % 2, e -> e);
-            Assert.assertEquals(9.0d, result.get(1), 0.0);
-            Assert.assertEquals(6.0d, result.get(0), 0.0);
+            assertEquals(9.0d, result.get(1), 0.0);
+            assertEquals(6.0d, result.get(0), 0.0);
         });
     }
 
     @Test
     public void minBy()
     {
-        Assert.assertEquals(Integer.valueOf(1), Iterate.minBy(FastList.newListWith(1, 2, 3), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(1), Iterate.minBy(FastList.newListWith(3, 2, 1), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(1), Iterate.minBy(FastList.newListWith(1, 2, 3).asSynchronized(), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(1), Iterate.minBy(FastList.newListWith(3, 2, 1).asSynchronized(), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(1), Iterate.minBy(Arrays.asList(1, 2, 3), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(1), Iterate.minBy(Arrays.asList(3, 2, 1), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(1), Iterate.minBy(new LinkedList<>(Arrays.asList(1, 2, 3)), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(1), Iterate.minBy(new LinkedList<>(Arrays.asList(3, 2, 1)), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(1), Iterate.minBy(FastList.newListWith(1, 2, 3), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(1), Iterate.minBy(FastList.newListWith(3, 2, 1), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(1), Iterate.minBy(FastList.newListWith(1, 2, 3).asSynchronized(), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(1), Iterate.minBy(FastList.newListWith(3, 2, 1).asSynchronized(), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(1), Iterate.minBy(Arrays.asList(1, 2, 3), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(1), Iterate.minBy(Arrays.asList(3, 2, 1), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(1), Iterate.minBy(new LinkedList<>(Arrays.asList(1, 2, 3)), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(1), Iterate.minBy(new LinkedList<>(Arrays.asList(3, 2, 1)), Functions.getIntegerPassThru()));
     }
 
     @Test
     public void minByThrowsOnEmpty()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> Iterate.minBy(FastList.newList(), Functions.getIntegerPassThru()));
-        Assert.assertThrows(NoSuchElementException.class, () -> Iterate.minBy(FastList.<Integer>newList().asSynchronized(), Functions.getIntegerPassThru()));
-        Assert.assertThrows(NoSuchElementException.class, () -> Iterate.minBy(Arrays.asList(), Functions.getIntegerPassThru()));
-        Assert.assertThrows(NoSuchElementException.class, () -> Iterate.minBy(new LinkedList<>(), Functions.getIntegerPassThru()));
+        assertThrows(NoSuchElementException.class, () -> Iterate.minBy(FastList.newList(), Functions.getIntegerPassThru()));
+        assertThrows(NoSuchElementException.class, () -> Iterate.minBy(FastList.<Integer>newList().asSynchronized(), Functions.getIntegerPassThru()));
+        assertThrows(NoSuchElementException.class, () -> Iterate.minBy(Arrays.asList(), Functions.getIntegerPassThru()));
+        assertThrows(NoSuchElementException.class, () -> Iterate.minBy(new LinkedList<>(), Functions.getIntegerPassThru()));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -2375,23 +2381,23 @@ public class IterateTest
     @Test
     public void maxBy()
     {
-        Assert.assertEquals(Integer.valueOf(3), Iterate.maxBy(FastList.newListWith(1, 2, 3), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(3), Iterate.maxBy(FastList.newListWith(3, 2, 1), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(3), Iterate.maxBy(FastList.newListWith(1, 2, 3).asSynchronized(), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(3), Iterate.maxBy(FastList.newListWith(3, 2, 1).asSynchronized(), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(3), Iterate.maxBy(Arrays.asList(1, 2, 3), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(3), Iterate.maxBy(Arrays.asList(3, 2, 1), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(3), Iterate.maxBy(new LinkedList<>(Arrays.asList(1, 2, 3)), Functions.getIntegerPassThru()));
-        Assert.assertEquals(Integer.valueOf(3), Iterate.maxBy(new LinkedList<>(Arrays.asList(3, 2, 1)), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(3), Iterate.maxBy(FastList.newListWith(1, 2, 3), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(3), Iterate.maxBy(FastList.newListWith(3, 2, 1), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(3), Iterate.maxBy(FastList.newListWith(1, 2, 3).asSynchronized(), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(3), Iterate.maxBy(FastList.newListWith(3, 2, 1).asSynchronized(), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(3), Iterate.maxBy(Arrays.asList(1, 2, 3), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(3), Iterate.maxBy(Arrays.asList(3, 2, 1), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(3), Iterate.maxBy(new LinkedList<>(Arrays.asList(1, 2, 3)), Functions.getIntegerPassThru()));
+        assertEquals(Integer.valueOf(3), Iterate.maxBy(new LinkedList<>(Arrays.asList(3, 2, 1)), Functions.getIntegerPassThru()));
     }
 
     @Test
     public void maxByThrowsOnEmpty()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> Iterate.maxBy(FastList.newList(), Functions.getIntegerPassThru()));
-        Assert.assertThrows(NoSuchElementException.class, () -> Iterate.maxBy(FastList.<Integer>newList().asSynchronized(), Functions.getIntegerPassThru()));
-        Assert.assertThrows(NoSuchElementException.class, () -> Iterate.maxBy(Arrays.asList(), Functions.getIntegerPassThru()));
-        Assert.assertThrows(NoSuchElementException.class, () -> Iterate.maxBy(new LinkedList<>(), Functions.getIntegerPassThru()));
+        assertThrows(NoSuchElementException.class, () -> Iterate.maxBy(FastList.newList(), Functions.getIntegerPassThru()));
+        assertThrows(NoSuchElementException.class, () -> Iterate.maxBy(FastList.<Integer>newList().asSynchronized(), Functions.getIntegerPassThru()));
+        assertThrows(NoSuchElementException.class, () -> Iterate.maxBy(Arrays.asList(), Functions.getIntegerPassThru()));
+        assertThrows(NoSuchElementException.class, () -> Iterate.maxBy(new LinkedList<>(), Functions.getIntegerPassThru()));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -2409,7 +2415,7 @@ public class IterateTest
     @Test
     public void groupByUniqueKey()
     {
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), Iterate.groupByUniqueKey(FastList.newListWith(1, 2, 3), id -> id));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), Iterate.groupByUniqueKey(FastList.newListWith(1, 2, 3), id -> id));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -2421,7 +2427,7 @@ public class IterateTest
     @Test
     public void groupByUniqueKey_target()
     {
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3), Iterate.groupByUniqueKey(FastList.newListWith(1, 2, 3), id -> id, UnifiedMap.newWithKeysValues(0, 0)));
+        assertEquals(UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3), Iterate.groupByUniqueKey(FastList.newListWith(1, 2, 3), id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
     @Test(expected = IllegalArgumentException.class)

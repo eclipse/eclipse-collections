@@ -12,8 +12,9 @@ package org.eclipse.collections.impl.bag.immutable.primitive;
 
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ImmutableCharHashBagSerializationTest
 {
@@ -32,7 +33,7 @@ public class ImmutableCharHashBagSerializationTest
     public void deserialize()
     {
         ImmutableCharHashBag immutableCharHashBag = SerializeTestHelper.serializeDeserialize(ImmutableCharHashBag.newBagWith('a', 'b'));
-        Assert.assertEquals(ImmutableCharHashBag.newBagWith('a', 'b'), immutableCharHashBag);
+        assertEquals(ImmutableCharHashBag.newBagWith('a', 'b'), immutableCharHashBag);
     }
 
     @Test

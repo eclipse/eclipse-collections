@@ -21,8 +21,10 @@ import org.eclipse.collections.impl.set.immutable.AbstractImmutableUnifiedSetTes
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link ImmutableUnifiedSetWithHashingStrategy}.
@@ -78,7 +80,7 @@ public class ImmutableUnifiedSetWithHashingStrategyTest extends AbstractImmutabl
     {
         super.newCollection();
         ImmutableSet<Integer> set = ImmutableUnifiedSetWithHashingStrategy.newSet(HASHING_STRATEGY, UnifiedSet.newSet());
-        Assert.assertTrue(set.isEmpty());
+        assertTrue(set.isEmpty());
         Verify.assertSize(0, set);
     }
 
@@ -86,7 +88,7 @@ public class ImmutableUnifiedSetWithHashingStrategyTest extends AbstractImmutabl
     public void getBatchCount()
     {
         BatchIterable<Integer> integerBatchIterable = (BatchIterable<Integer>) this.newSet(1, 2, 3, 4, 5, 6);
-        Assert.assertEquals(2, integerBatchIterable.getBatchCount(3));
+        assertEquals(2, integerBatchIterable.getBatchCount(3));
     }
 
     @Test
@@ -95,7 +97,7 @@ public class ImmutableUnifiedSetWithHashingStrategyTest extends AbstractImmutabl
         Sum sum = new IntegerSum(0);
         BatchIterable<Integer> integerBatchIterable = (BatchIterable<Integer>) this.newSet(1, 2, 3, 4, 5);
         integerBatchIterable.batchForEach(new SumProcedure<>(sum), 0, 1);
-        Assert.assertEquals(15, sum.getValue());
+        assertEquals(15, sum.getValue());
     }
 
     @Override

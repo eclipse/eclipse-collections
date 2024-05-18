@@ -35,10 +35,16 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class FunctionsTest
 {
@@ -90,7 +96,7 @@ public class FunctionsTest
                             },
                             this::throwMyException).valueOf(null);
                 });
-        Assert.assertThrows(
+        assertThrows(
                 NullPointerException.class,
                 () ->
                 {
@@ -112,95 +118,95 @@ public class FunctionsTest
     public void getPassThru()
     {
         Object object = new Object();
-        Assert.assertSame(object, Functions.getPassThru().valueOf(object));
+        assertSame(object, Functions.getPassThru().valueOf(object));
     }
 
     @Test
     public void getFixedValue()
     {
-        Assert.assertEquals(Integer.valueOf(5), Functions.getFixedValue(5).valueOf(null));
+        assertEquals(Integer.valueOf(5), Functions.getFixedValue(5).valueOf(null));
     }
 
     @Test
     public void getToClass()
     {
-        Assert.assertSame(Integer.class, Functions.getToClass().valueOf(0));
+        assertSame(Integer.class, Functions.getToClass().valueOf(0));
     }
 
     @Test
     public void getMathSinFunction()
     {
         Function<Number, Double> function = Functions.getMathSinFunction();
-        Assert.assertEquals(Math.sin(1.0), function.valueOf(1), 0.0);
+        assertEquals(Math.sin(1.0), function.valueOf(1), 0.0);
     }
 
     @Test
     public void getNumberPassThru()
     {
         Function<Number, Number> function = Functions.getNumberPassThru();
-        Assert.assertEquals(1, function.valueOf(1));
+        assertEquals(1, function.valueOf(1));
     }
 
     @Test
     public void getIntegerPassThru()
     {
         Function<Integer, Integer> function = Functions.getIntegerPassThru();
-        Assert.assertEquals(Integer.valueOf(1), function.valueOf(1));
-        Assert.assertEquals("IntegerPassThruFunction", function.toString());
+        assertEquals(Integer.valueOf(1), function.valueOf(1));
+        assertEquals("IntegerPassThruFunction", function.toString());
     }
 
     @Test
     public void getLongPassThru()
     {
         Function<Long, Long> function = Functions.getLongPassThru();
-        Assert.assertEquals(Long.valueOf(1), function.valueOf(1L));
-        Assert.assertEquals(Long.valueOf(1L), Long.valueOf(((LongFunction<Long>) function).longValueOf(1L)));
-        Assert.assertEquals("LongPassThruFunction", function.toString());
+        assertEquals(Long.valueOf(1), function.valueOf(1L));
+        assertEquals(Long.valueOf(1L), Long.valueOf(((LongFunction<Long>) function).longValueOf(1L)));
+        assertEquals("LongPassThruFunction", function.toString());
     }
 
     @Test
     public void getDoublePassThru()
     {
         Function<Double, Double> function = Functions.getDoublePassThru();
-        Assert.assertEquals(Double.valueOf(1).doubleValue(), function.valueOf(1.0).doubleValue(), 0.0);
-        Assert.assertEquals(Double.valueOf(1).doubleValue(), ((DoubleFunction<Double>) function).doubleValueOf(1.0), 0.0);
-        Assert.assertEquals("DoublePassThruFunction", function.toString());
+        assertEquals(Double.valueOf(1).doubleValue(), function.valueOf(1.0).doubleValue(), 0.0);
+        assertEquals(Double.valueOf(1).doubleValue(), ((DoubleFunction<Double>) function).doubleValueOf(1.0), 0.0);
+        assertEquals("DoublePassThruFunction", function.toString());
     }
 
     @Test
     public void getStringPassThru()
     {
         Function<String, String> function = Functions.getStringPassThru();
-        Assert.assertEquals("hello", function.valueOf("hello"));
+        assertEquals("hello", function.valueOf("hello"));
     }
 
     @Test
     public void getStringTrim()
     {
-        Assert.assertEquals("hello", Functions.getStringTrim().valueOf(" hello  "));
+        assertEquals("hello", Functions.getStringTrim().valueOf(" hello  "));
     }
 
     @Test
     public void getToString()
     {
         Function<Object, String> function = Functions.getToString();
-        Assert.assertEquals("1", function.valueOf(1));
-        Assert.assertEquals("null", function.valueOf(null));
+        assertEquals("1", function.valueOf(1));
+        assertEquals("null", function.valueOf(null));
     }
 
     @Test
     public void getDefaultToString()
     {
         Function<Object, String> function = Functions.getNullSafeToString("N/A");
-        Assert.assertEquals("1", function.valueOf(1));
-        Assert.assertEquals("N/A", function.valueOf(null));
+        assertEquals("1", function.valueOf(1));
+        assertEquals("N/A", function.valueOf(null));
     }
 
     @Test
     public void getStringToInteger()
     {
         Function<String, Integer> function = Functions.getStringToInteger();
-        Assert.assertEquals(Integer.valueOf(1), function.valueOf("1"));
+        assertEquals(Integer.valueOf(1), function.valueOf("1"));
     }
 
     @Test
@@ -208,10 +214,10 @@ public class FunctionsTest
     {
         Function<Object, Integer> function1 =
                 Functions.firstNotNullValue(Functions.getFixedValue(null), Functions.getFixedValue(1), Functions.getFixedValue(2));
-        Assert.assertEquals(Integer.valueOf(1), function1.valueOf(null));
+        assertEquals(Integer.valueOf(1), function1.valueOf(null));
         Function<Object, Integer> function2 =
                 Functions.firstNotNullValue(Functions.getFixedValue(null), Functions.getFixedValue(null));
-        Assert.assertNull(function2.valueOf(null));
+        assertNull(function2.valueOf(null));
     }
 
     @Test
@@ -219,10 +225,10 @@ public class FunctionsTest
     {
         Function<Object, String> function1 =
                 Functions.firstNotEmptyStringValue(Functions.getFixedValue(""), Functions.getFixedValue("hello"), Functions.getFixedValue(""));
-        Assert.assertEquals("hello", function1.valueOf(null));
+        assertEquals("hello", function1.valueOf(null));
         Function<Object, String> function2 =
                 Functions.firstNotEmptyStringValue(Functions.getFixedValue(""), Functions.getFixedValue(""));
-        Assert.assertNull(function2.valueOf(null));
+        assertNull(function2.valueOf(null));
     }
 
     @Test
@@ -232,20 +238,20 @@ public class FunctionsTest
                 Functions.getFixedValue(Lists.immutable.of()),
                 Functions.getFixedValue(Lists.immutable.of("hello")),
                 Functions.getFixedValue(Lists.immutable.of()));
-        Assert.assertEquals(iList("hello"), function1.valueOf(null));
+        assertEquals(iList("hello"), function1.valueOf(null));
 
         Function<Object, ImmutableList<String>> function2 = Functions.firstNotEmptyCollectionValue(
                 Functions.getFixedValue(Lists.immutable.of()),
                 Functions.getFixedValue(Lists.immutable.of()));
-        Assert.assertNull(function2.valueOf(null));
+        assertNull(function2.valueOf(null));
     }
 
     @Test
     public void ifTrue()
     {
         String result = "1";
-        Assert.assertSame(result, Functions.ifTrue(Predicates.alwaysTrue(), Functions.getPassThru()).valueOf(result));
-        Assert.assertNull(result, Functions.ifTrue(Predicates.alwaysFalse(), Functions.getPassThru()).valueOf(result));
+        assertSame(result, Functions.ifTrue(Predicates.alwaysTrue(), Functions.getPassThru()).valueOf(result));
+        assertNull(result, Functions.ifTrue(Predicates.alwaysFalse(), Functions.getPassThru()).valueOf(result));
     }
 
     @Test
@@ -253,8 +259,8 @@ public class FunctionsTest
     {
         String result1 = "1";
         String result2 = "2";
-        Assert.assertSame(result1, Functions.ifElse(Predicates.alwaysTrue(), Functions.getFixedValue(result1), Functions.getFixedValue(result2)).valueOf(null));
-        Assert.assertSame(result2, Functions.ifElse(Predicates.alwaysFalse(), Functions.getFixedValue(result1), Functions.getFixedValue(result2)).valueOf(null));
+        assertSame(result1, Functions.ifElse(Predicates.alwaysTrue(), Functions.getFixedValue(result1), Functions.getFixedValue(result2)).valueOf(null));
+        assertSame(result2, Functions.ifElse(Predicates.alwaysFalse(), Functions.getFixedValue(result1), Functions.getFixedValue(result2)).valueOf(null));
         Verify.assertContains("IfFunction", Functions.ifElse(Predicates.alwaysTrue(), Functions.getFixedValue(result1), Functions.getFixedValue(result2)).toString());
     }
 
@@ -273,39 +279,39 @@ public class FunctionsTest
         Function<String, Integer> toInteger = Functions.getStringToInteger();
         Function<Object, String> toString = String::valueOf;
 
-        Assert.assertEquals("42", Functions.chain(toInteger, toString).valueOf("42"));
-        Assert.assertEquals(Integer.valueOf(42), Functions.chain(toString, toInteger).valueOf(42));
+        assertEquals("42", Functions.chain(toInteger, toString).valueOf("42"));
+        assertEquals(Integer.valueOf(42), Functions.chain(toString, toInteger).valueOf(42));
 
         Function<String, Integer> chain = Functions.chain(toInteger, toString).chain(toInteger);
-        Assert.assertEquals(Integer.valueOf(42), chain.valueOf("42"));
-        Assert.assertEquals("42", Functions.chain(toString, toInteger).chain(toString).valueOf(42));
+        assertEquals(Integer.valueOf(42), chain.valueOf("42"));
+        assertEquals("42", Functions.chain(toString, toInteger).chain(toString).valueOf(42));
 
-        Assert.assertEquals("42", Functions.chain(toInteger, toString).chain(toInteger).chain(toString).valueOf("42"));
-        Assert.assertEquals(Integer.valueOf(42), Functions.chain(toString, toInteger).chain(toString).chain(toInteger).valueOf(42));
+        assertEquals("42", Functions.chain(toInteger, toString).chain(toInteger).chain(toString).valueOf("42"));
+        assertEquals(Integer.valueOf(42), Functions.chain(toString, toInteger).chain(toString).chain(toInteger).valueOf(42));
 
-        Assert.assertEquals(Integer.valueOf(42), Functions.chain(toInteger, toString).chain(toInteger).chain(toString).chain(toInteger).valueOf("42"));
-        Assert.assertEquals(Integer.valueOf(42), Functions.chain(toString, toInteger).chain(toString).chain(toInteger).chain(toString).chain(toInteger).valueOf(42));
+        assertEquals(Integer.valueOf(42), Functions.chain(toInteger, toString).chain(toInteger).chain(toString).chain(toInteger).valueOf("42"));
+        assertEquals(Integer.valueOf(42), Functions.chain(toString, toInteger).chain(toString).chain(toInteger).chain(toString).chain(toInteger).valueOf(42));
     }
 
     @Test
     public void chain_two()
     {
         Function<Boolean, Integer> chain = Functions.chain(BOOLEAN_STRING, STRING_LENGTH);
-        Assert.assertEquals(Integer.valueOf(5), chain.valueOf(Boolean.FALSE));
+        assertEquals(Integer.valueOf(5), chain.valueOf(Boolean.FALSE));
     }
 
     @Test
     public void chain_three()
     {
         Function<String, String> chain = Functions.chain(STRING_LENGTH, IS_ODD).chain(BOOLEAN_STRING);
-        Assert.assertEquals("true", chain.valueOf("foo"));
+        assertEquals("true", chain.valueOf("foo"));
     }
 
     @Test
     public void chain_four()
     {
         Function<Integer, Boolean> chain = Functions.chain(IS_ODD, BOOLEAN_STRING).chain(STRING_LENGTH).chain(IS_ODD);
-        Assert.assertEquals(Boolean.TRUE, chain.valueOf(Integer.valueOf(4)));
+        assertEquals(Boolean.TRUE, chain.valueOf(Integer.valueOf(4)));
     }
 
     @Test
@@ -313,8 +319,8 @@ public class FunctionsTest
     {
         Function<String, Integer> toInteger = Functions.getStringToInteger();
         Functions.BooleanFunctionChain<String, Integer> booleanFunctionChain = Functions.chainBoolean(toInteger, integerObject -> integerObject.intValue() >= 0);
-        Assert.assertTrue(booleanFunctionChain.booleanValueOf("45"));
-        Assert.assertFalse(booleanFunctionChain.booleanValueOf("-45"));
+        assertTrue(booleanFunctionChain.booleanValueOf("45"));
+        assertFalse(booleanFunctionChain.booleanValueOf("-45"));
     }
 
     @Test
@@ -322,8 +328,8 @@ public class FunctionsTest
     {
         Function<String, Integer> toInteger = Functions.getStringToInteger();
         Functions.ByteFunctionChain<String, Integer> byteFunctionChain = Functions.chainByte(toInteger, Integer::byteValue);
-        Assert.assertEquals((byte) 45, byteFunctionChain.byteValueOf("45"));
-        Assert.assertEquals((byte) -45, byteFunctionChain.byteValueOf("-45"));
+        assertEquals((byte) 45, byteFunctionChain.byteValueOf("45"));
+        assertEquals((byte) -45, byteFunctionChain.byteValueOf("-45"));
     }
 
     @Test
@@ -331,8 +337,8 @@ public class FunctionsTest
     {
         Function<Object, String> toString = String::valueOf;
         Functions.CharFunctionChain<Object, String> charFunctionChain = Functions.chainChar(toString, stringObject -> stringObject.charAt(0));
-        Assert.assertEquals('e', charFunctionChain.charValueOf("example string"));
-        Assert.assertEquals('-', charFunctionChain.charValueOf("-4"));
+        assertEquals('e', charFunctionChain.charValueOf("example string"));
+        assertEquals('-', charFunctionChain.charValueOf("-4"));
     }
 
     @Test
@@ -340,16 +346,16 @@ public class FunctionsTest
     {
         Function<String, Integer> toInteger = Functions.getStringToInteger();
         Functions.DoubleFunctionChain<String, Integer> doubleFunctionChain = Functions.chainDouble(toInteger, Integer::doubleValue);
-        Assert.assertEquals(146.0, doubleFunctionChain.doubleValueOf("146"), 0.0);
-        Assert.assertEquals(-456.0, doubleFunctionChain.doubleValueOf("-456"), 0.0);
+        assertEquals(146.0, doubleFunctionChain.doubleValueOf("146"), 0.0);
+        assertEquals(-456.0, doubleFunctionChain.doubleValueOf("-456"), 0.0);
     }
 
     @Test
     public void chainFloat()
     {
         Functions.FloatFunctionChain<Integer, String> floatFunctionChain = Functions.chainFloat(String::valueOf, stringObject -> Float.valueOf(stringObject).floatValue());
-        Assert.assertEquals(146.0, floatFunctionChain.floatValueOf(146), 0.0);
-        Assert.assertEquals(-456.0, floatFunctionChain.floatValueOf(-456), 0.0);
+        assertEquals(146.0, floatFunctionChain.floatValueOf(146), 0.0);
+        assertEquals(-456.0, floatFunctionChain.floatValueOf(-456), 0.0);
     }
 
     @Test
@@ -365,8 +371,8 @@ public class FunctionsTest
             }
         };
         Functions.IntFunctionChain<Float, String> intFunctionChain = Functions.chainInt(toString, stringToLength);
-        Assert.assertEquals(5, intFunctionChain.intValueOf(Float.valueOf(145)));
-        Assert.assertEquals(6, intFunctionChain.intValueOf(Float.valueOf(-145)));
+        assertEquals(5, intFunctionChain.intValueOf(Float.valueOf(145)));
+        assertEquals(6, intFunctionChain.intValueOf(Float.valueOf(-145)));
     }
 
     @Test
@@ -376,16 +382,16 @@ public class FunctionsTest
 
         LongFunction<String> stringToLengthLong = stringObject -> Long.valueOf(stringObject.length()).longValue();
         Functions.LongFunctionChain<Float, String> longFunctionChain = Functions.chainLong(toString, stringToLengthLong);
-        Assert.assertEquals(5L, longFunctionChain.longValueOf(Float.valueOf(145)));
-        Assert.assertEquals(6L, longFunctionChain.longValueOf(Float.valueOf(-145)));
+        assertEquals(5L, longFunctionChain.longValueOf(Float.valueOf(145)));
+        assertEquals(6L, longFunctionChain.longValueOf(Float.valueOf(-145)));
     }
 
     @Test
     public void chainShort()
     {
         Functions.ShortFunctionChain<Integer, String> shortFunctionChain = Functions.chainShort(String::valueOf, stringObject -> Short.valueOf(stringObject).shortValue());
-        Assert.assertEquals((short) 145, shortFunctionChain.shortValueOf(145));
-        Assert.assertEquals((short) -145, shortFunctionChain.shortValueOf(-145));
+        assertEquals((short) 145, shortFunctionChain.shortValueOf(145));
+        assertEquals((short) -145, shortFunctionChain.shortValueOf(-145));
     }
 
     @Test
@@ -393,7 +399,7 @@ public class FunctionsTest
     {
         Functions.FunctionChain<Boolean, String, Integer> chain = Functions.chain(String::valueOf, STRING_LENGTH);
         Functions.BooleanFunctionChain<Boolean, Integer> booleanChain = chain.chainBoolean(integerObject -> integerObject.intValue() >= 0);
-        Assert.assertTrue(booleanChain.booleanValueOf(Boolean.TRUE));
+        assertTrue(booleanChain.booleanValueOf(Boolean.TRUE));
     }
 
     @Test
@@ -401,7 +407,7 @@ public class FunctionsTest
     {
         Functions.FunctionChain<Boolean, String, Integer> chain = Functions.chain(String::valueOf, STRING_LENGTH);
         Functions.ByteFunctionChain<Boolean, Integer> byteChain = chain.chainByte(Integer::byteValue);
-        Assert.assertEquals((byte) 5, byteChain.byteValueOf(Boolean.FALSE));
+        assertEquals((byte) 5, byteChain.byteValueOf(Boolean.FALSE));
     }
 
     @Test
@@ -409,7 +415,7 @@ public class FunctionsTest
     {
         Functions.FunctionChain<String, Boolean, String> chain = Functions.chain(STRING_LENGTH, IS_ODD).chain(BOOLEAN_STRING);
         Functions.CharFunctionChain<String, String> charChain = chain.chainChar(stringObject -> stringObject.charAt(0));
-        Assert.assertEquals('t', charChain.charValueOf("foo"));
+        assertEquals('t', charChain.charValueOf("foo"));
     }
 
     @Test
@@ -417,7 +423,7 @@ public class FunctionsTest
     {
         Functions.FunctionChain<Boolean, String, Integer> chain = Functions.chain(String::valueOf, STRING_LENGTH);
         Functions.DoubleFunctionChain<Boolean, Integer> doubleChain = chain.chainDouble(Integer::doubleValue);
-        Assert.assertEquals(4.0, doubleChain.doubleValueOf(Boolean.TRUE), 0.0);
+        assertEquals(4.0, doubleChain.doubleValueOf(Boolean.TRUE), 0.0);
     }
 
     @Test
@@ -425,7 +431,7 @@ public class FunctionsTest
     {
         Functions.FunctionChain<String, Boolean, String> chain = Functions.chain(STRING_LENGTH, IS_ODD).chain(BOOLEAN_STRING);
         Functions.FloatFunctionChain<String, String> floatChain = chain.chainFloat(stringObject -> Integer.valueOf(stringObject.length()).floatValue());
-        Assert.assertEquals(5.0, floatChain.floatValueOf("12.2"), 0);
+        assertEquals(5.0, floatChain.floatValueOf("12.2"), 0);
     }
 
     @Test
@@ -440,8 +446,8 @@ public class FunctionsTest
             }
         };
         Functions.IntFunctionChain<String, String> intChain = chain.chainInt(stringToLength);
-        Assert.assertEquals(4, intChain.intValueOf("abc"));
-        Assert.assertNotEquals(4, intChain.intValueOf("kata"));
+        assertEquals(4, intChain.intValueOf("abc"));
+        assertNotEquals(4, intChain.intValueOf("kata"));
     }
 
     @Test
@@ -450,8 +456,8 @@ public class FunctionsTest
         Functions.FunctionChain<String, Boolean, String> chain = Functions.chain(STRING_LENGTH, IS_ODD).chain(BOOLEAN_STRING);
         LongFunction<String> stringToLengthLong = stringObject -> Long.valueOf(stringObject.length()).longValue();
         Functions.LongFunctionChain<String, String> longChain = chain.chainLong(stringToLengthLong);
-        Assert.assertEquals(4L, longChain.longValueOf("abc"));
-        Assert.assertNotEquals(4L, longChain.longValueOf("kata"));
+        assertEquals(4L, longChain.longValueOf("abc"));
+        assertNotEquals(4L, longChain.longValueOf("kata"));
     }
 
     @Test
@@ -460,8 +466,8 @@ public class FunctionsTest
         Functions.FunctionChain<String, Boolean, String> chain = Functions.chain(STRING_LENGTH, IS_ODD).chain(BOOLEAN_STRING);
         ShortFunction<String> stringToShort = stringObject -> Integer.valueOf(stringObject.length()).shortValue();
         Functions.ShortFunctionChain<String, String> shortChain = chain.chainShort(stringToShort);
-        Assert.assertEquals((short) 4, shortChain.shortValueOf("abc"));
-        Assert.assertNotEquals((short) 4, shortChain.shortValueOf("kata"));
+        assertEquals((short) 4, shortChain.shortValueOf("abc"));
+        assertNotEquals((short) 4, shortChain.shortValueOf("kata"));
     }
 
     @Test
@@ -470,7 +476,7 @@ public class FunctionsTest
         MutableList<Integer> list = Interval.oneTo(100).toList().shuffleThis();
         Function<Integer, Integer> function = Integer::intValue;
         list.sortThis(Comparators.byFunction(function));
-        Assert.assertEquals(Interval.oneTo(100).toList(), list);
+        assertEquals(Interval.oneTo(100).toList(), list);
     }
 
     @Test
@@ -479,7 +485,7 @@ public class FunctionsTest
         MutableList<Double> list = FastList.newListWith(5.0, 4.0, 3.0, 2.0, 1.0).shuffleThis();
         Function<Double, Double> function = Double::doubleValue;
         list.sortThis(Comparators.byFunction(function));
-        Assert.assertEquals(FastList.newListWith(1.0, 2.0, 3.0, 4.0, 5.0), list);
+        assertEquals(FastList.newListWith(1.0, 2.0, 3.0, 4.0, 5.0), list);
     }
 
     @Test
@@ -493,25 +499,25 @@ public class FunctionsTest
                 return each.longValue();
             }
         }));
-        Assert.assertEquals(FastList.newListWith(1L, 2L, 3L, 4L, 5L), list);
+        assertEquals(FastList.newListWith(1L, 2L, 3L, 4L, 5L), list);
     }
 
     @Test
     public void classFunctionToString()
     {
-        Assert.assertEquals("object.getClass()", Functions.getToClass().toString());
+        assertEquals("object.getClass()", Functions.getToClass().toString());
     }
 
     @Test
     public void mathSinToString()
     {
-        Assert.assertEquals("Math.sin()", Functions.getMathSinFunction().toString());
+        assertEquals("Math.sin()", Functions.getMathSinFunction().toString());
     }
 
     @Test
     public void mathStringToIntegerToString()
     {
-        Assert.assertEquals("stringToInteger", Functions.getStringToInteger().toString());
+        assertEquals("stringToInteger", Functions.getStringToInteger().toString());
     }
 
     @Test
@@ -522,7 +528,7 @@ public class FunctionsTest
         Person johnDoe = new Person("John", "Doe");
         MutableList<Person> people = FastList.newListWith(john, jane, johnDoe);
         MutableList<Person> sorted = people.sortThisBy(Functions.pair(Person.TO_LAST, Person.TO_FIRST));
-        Assert.assertEquals(FastList.newListWith(johnDoe, jane, john), sorted);
+        assertEquals(FastList.newListWith(johnDoe, jane, john), sorted);
     }
 
     @Test
@@ -531,7 +537,7 @@ public class FunctionsTest
         MutableMap<String, Integer> map = UnifiedMap.newWithKeysValues("One", 1);
         MutableSet<Map.Entry<String, Integer>> entries = SetAdapter.adapt(map.entrySet());
         MutableSet<String> keys = entries.collect(Functions.getKeyFunction());
-        Assert.assertEquals(UnifiedSet.newSetWith("One"), keys);
+        assertEquals(UnifiedSet.newSetWith("One"), keys);
     }
 
     @Test
@@ -540,7 +546,7 @@ public class FunctionsTest
         MutableMap<String, Integer> map = UnifiedMap.newWithKeysValues("One", 1);
         MutableSet<Map.Entry<String, Integer>> entries = SetAdapter.adapt(map.entrySet());
         MutableSet<Integer> values = entries.collect(Functions.getValueFunction());
-        Assert.assertEquals(UnifiedSet.newSetWith(1), values);
+        assertEquals(UnifiedSet.newSetWith(1), values);
     }
 
     @Test
@@ -548,7 +554,7 @@ public class FunctionsTest
     {
         ImmutableList<ImmutableList<Integer>> list = Lists.immutable.of(Lists.immutable.of(1), Lists.immutable.of(1, 2), Lists.immutable.of(1, 2, 3));
         ImmutableList<Integer> sizes = list.collect(Functions.getSizeOf());
-        Assert.assertEquals(FastList.newListWith(1, 2, 3), sizes);
+        assertEquals(FastList.newListWith(1, 2, 3), sizes);
     }
 
     @Test
@@ -562,10 +568,10 @@ public class FunctionsTest
     public void withDefault()
     {
         Object expected = new Object();
-        Assert.assertSame(expected, Functions.withDefault(Functions.getFixedValue(null), expected).valueOf(new Object()));
+        assertSame(expected, Functions.withDefault(Functions.getFixedValue(null), expected).valueOf(new Object()));
 
         Object expected2 = new Object();
-        Assert.assertSame(expected2, Functions.withDefault(Functions.getFixedValue(expected2), expected).valueOf(new Object()));
+        assertSame(expected2, Functions.withDefault(Functions.getFixedValue(expected2), expected).valueOf(new Object()));
     }
 
     @Test
@@ -573,16 +579,16 @@ public class FunctionsTest
     {
         Object expected = new Object();
         Function<Object, Object> throwsFunction = new ThrowsFunction();
-        Assert.assertSame(expected, Functions.nullSafe(throwsFunction, expected).valueOf(null));
-        Assert.assertSame(expected, Functions.nullSafe(Functions.getFixedValue(expected)).valueOf(new Object()));
-        Assert.assertNull(Functions.nullSafe(throwsFunction).valueOf(null));
+        assertSame(expected, Functions.nullSafe(throwsFunction, expected).valueOf(null));
+        assertSame(expected, Functions.nullSafe(Functions.getFixedValue(expected)).valueOf(new Object()));
+        assertNull(Functions.nullSafe(throwsFunction).valueOf(null));
     }
 
     @Test
     public void classForName()
     {
         Class<?> objectClass = Functions.classForName().valueOf("java.lang.Object");
-        Assert.assertSame(Object.class, objectClass);
+        assertSame(Object.class, objectClass);
     }
 
     @Test
@@ -605,19 +611,19 @@ public class FunctionsTest
 
         MutableList<Pair<String, Integer>> expected = FastList.newListWith(Tuples.pair("One", 1), Tuples.pair("Two", 2), Tuples.pair("Three", 3), Tuples.pair("Four", 4));
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void getTrue()
     {
-        Assert.assertTrue(Functions.getTrue().valueOf(false));
+        assertTrue(Functions.getTrue().valueOf(false));
     }
 
     @Test
     public void getFalse()
     {
-        Assert.assertFalse(Functions.getFalse().valueOf(true));
+        assertFalse(Functions.getFalse().valueOf(true));
     }
 
     private static class ThrowsFunction implements Function<Object, Object>

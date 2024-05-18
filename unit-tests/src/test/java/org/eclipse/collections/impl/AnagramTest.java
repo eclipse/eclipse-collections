@@ -22,10 +22,11 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * This class tests various algorithms for calculating anagrams from a list of words.
@@ -133,7 +134,7 @@ public class AnagramTest
                         .sortThisByInt(iterable -> -iterable.size());
         Procedure<String> procedure = Procedures.cast(LOGGER::info);
         results.forEach(Functions.bind(procedure, iterable -> iterable.size() + ": " + iterable));
-        Assert.assertTrue(this.listContainsTestGroupAtElementsOneOrTwo(results));
+        assertTrue(this.listContainsTestGroupAtElementsOneOrTwo(results));
         Verify.assertSize(SIZE_THRESHOLD, results.getLast());
     }
 

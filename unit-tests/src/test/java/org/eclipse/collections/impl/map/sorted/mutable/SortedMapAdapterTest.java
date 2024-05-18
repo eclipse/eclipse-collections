@@ -17,8 +17,11 @@ import java.util.TreeMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link SortedMapAdapter}.
@@ -96,11 +99,11 @@ public class SortedMapAdapterTest extends MutableSortedMapTestCase
     {
         TreeSortedMap<Integer, String> sortedMap = TreeSortedMap.newMapWith(1, "1", 2, "2");
         MutableSortedMap<Integer, String> adapt = SortedMapAdapter.adapt(sortedMap);
-        Assert.assertSame(sortedMap, adapt);
+        assertSame(sortedMap, adapt);
 
         SortedMap<Integer, String> treeMap = new TreeMap<>(sortedMap);
         MutableSortedMap<Integer, String> treeAdapt = SortedMaps.adapt(treeMap);
-        Assert.assertNotSame(treeMap, treeAdapt);
-        Assert.assertEquals(treeMap, treeAdapt);
+        assertNotSame(treeMap, treeAdapt);
+        assertEquals(treeMap, treeAdapt);
     }
 }

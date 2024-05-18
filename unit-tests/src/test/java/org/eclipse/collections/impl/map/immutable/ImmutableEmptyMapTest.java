@@ -16,8 +16,12 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link ImmutableEmptyMap}.
@@ -41,7 +45,7 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
     public void testToString()
     {
         ImmutableMap<Integer, String> map = this.classUnderTest();
-        Assert.assertEquals("{}", map.toString());
+        assertEquals("{}", map.toString());
     }
 
     @Override
@@ -59,13 +63,13 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
         ImmutableMap<Integer, String> classUnderTest = this.classUnderTest();
 
         Integer absentKey = this.size() + 1;
-        Assert.assertNull(classUnderTest.get(absentKey));
+        assertNull(classUnderTest.get(absentKey));
 
         String absentValue = String.valueOf(absentKey);
-        Assert.assertFalse(classUnderTest.containsValue(absentValue));
+        assertFalse(classUnderTest.containsValue(absentValue));
 
         // Still unchanged
-        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+        assertEquals(this.equalUnifiedMap(), classUnderTest);
     }
 
     @Override
@@ -77,10 +81,10 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
 
         // Absent key behavior
         ImmutableMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertEquals(absentValue, classUnderTest.getIfAbsent(absentKey, new PassThruFunction0<>(absentValue)));
+        assertEquals(absentValue, classUnderTest.getIfAbsent(absentKey, new PassThruFunction0<>(absentValue)));
 
         // Still unchanged
-        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+        assertEquals(this.equalUnifiedMap(), classUnderTest);
     }
 
     @Override
@@ -94,10 +98,10 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
 
         // Absent key behavior
         ImmutableMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertEquals(absentValue, classUnderTest.getOrDefault(absentKey, absentValue));
+        assertEquals(absentValue, classUnderTest.getOrDefault(absentKey, absentValue));
 
         // Still unchanged
-        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+        assertEquals(this.equalUnifiedMap(), classUnderTest);
     }
 
     @Override
@@ -109,10 +113,10 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
 
         // Absent key behavior
         ImmutableMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertEquals(absentValue, classUnderTest.getIfAbsentValue(absentKey, absentValue));
+        assertEquals(absentValue, classUnderTest.getIfAbsentValue(absentKey, absentValue));
 
         // Still unchanged
-        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+        assertEquals(this.equalUnifiedMap(), classUnderTest);
     }
 
     @Override
@@ -124,10 +128,10 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
 
         // Absent key behavior
         ImmutableMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertEquals(absentValue, classUnderTest.getIfAbsentWith(absentKey, String::valueOf, absentValue));
+        assertEquals(absentValue, classUnderTest.getIfAbsentWith(absentKey, String::valueOf, absentValue));
 
         // Still unchanged
-        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+        assertEquals(this.equalUnifiedMap(), classUnderTest);
     }
 
     @Override
@@ -137,14 +141,14 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
         Integer absentKey = this.size() + 1;
 
         ImmutableMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertNull(classUnderTest.ifPresentApply(absentKey, Functions.getPassThru()));
+        assertNull(classUnderTest.ifPresentApply(absentKey, Functions.getPassThru()));
     }
 
     @Override
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(this.classUnderTest().notEmpty());
+        assertFalse(this.classUnderTest().notEmpty());
     }
 
     @Override
@@ -153,8 +157,8 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
     {
         ImmutableMap<String, String> map = new ImmutableEmptyMap<>();
 
-        Assert.assertTrue(map.allSatisfy(String.class::isInstance));
-        Assert.assertTrue(map.allSatisfy("Monkey"::equals));
+        assertTrue(map.allSatisfy(String.class::isInstance));
+        assertTrue(map.allSatisfy("Monkey"::equals));
     }
 
     @Override
@@ -163,8 +167,8 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
     {
         ImmutableMap<String, String> map = new ImmutableEmptyMap<>();
 
-        Assert.assertFalse(map.anySatisfy(String.class::isInstance));
-        Assert.assertFalse(map.anySatisfy("Monkey"::equals));
+        assertFalse(map.anySatisfy(String.class::isInstance));
+        assertFalse(map.anySatisfy("Monkey"::equals));
     }
 
     @Override
@@ -173,8 +177,8 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
     {
         ImmutableMap<String, String> map = new ImmutableEmptyMap<>();
 
-        Assert.assertTrue(map.noneSatisfy(String.class::isInstance));
-        Assert.assertTrue(map.noneSatisfy("Monkey"::equals));
+        assertTrue(map.noneSatisfy(String.class::isInstance));
+        assertTrue(map.noneSatisfy("Monkey"::equals));
     }
 
     @Override
@@ -239,7 +243,7 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
     public void detect()
     {
         ImmutableMap<Integer, String> map = this.classUnderTest();
-        Assert.assertNull(map.detect((ignored1, ignored2) -> true));
+        assertNull(map.detect((ignored1, ignored2) -> true));
     }
 
     @Override

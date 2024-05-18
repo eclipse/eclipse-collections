@@ -14,8 +14,11 @@ import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.api.stack.primitive.MutableBooleanStack;
 import org.eclipse.collections.impl.stack.primitive.AbstractBooleanStackTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link UnmodifiableBooleanStack}.
@@ -77,7 +80,7 @@ public class UnmodifiableBooleanStackTest extends AbstractBooleanStackTestCase
     public void asUnmodifiable()
     {
         MutableBooleanStack stack1 = new UnmodifiableBooleanStack(BooleanArrayStack.newStackWith(true, false, true));
-        Assert.assertSame(stack1, stack1.asUnmodifiable());
+        assertSame(stack1, stack1.asUnmodifiable());
     }
 
     @Test
@@ -91,16 +94,16 @@ public class UnmodifiableBooleanStackTest extends AbstractBooleanStackTestCase
     public void booleanIterator_with_remove()
     {
         MutableBooleanIterator booleanIterator = (MutableBooleanIterator) this.classUnderTest().booleanIterator();
-        Assert.assertTrue(booleanIterator.hasNext());
+        assertTrue(booleanIterator.hasNext());
         booleanIterator.next();
-        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 
     @Test
     public void iterator_throws_on_invocation_of_remove_before_next()
     {
         MutableBooleanIterator booleanIterator = (MutableBooleanIterator) this.classUnderTest().booleanIterator();
-        Assert.assertTrue(booleanIterator.hasNext());
-        Assert.assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
+        assertTrue(booleanIterator.hasNext());
+        assertThrows(UnsupportedOperationException.class, booleanIterator::remove);
     }
 }

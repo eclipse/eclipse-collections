@@ -16,8 +16,9 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class FunctionComparatorTest
 {
@@ -36,8 +37,8 @@ public class FunctionComparatorTest
                 Band.TO_NAME,
                 String::compareTo);
 
-        Assert.assertEquals(comparator.compare(ACDC, ZZTOP), ACDC.getName().compareTo(ZZTOP.getName()));
-        Assert.assertEquals(comparator.compare(ZZTOP, ACDC), ZZTOP.getName().compareTo(ACDC.getName()));
+        assertEquals(comparator.compare(ACDC, ZZTOP), ACDC.getName().compareTo(ZZTOP.getName()));
+        assertEquals(comparator.compare(ZZTOP, ACDC), ZZTOP.getName().compareTo(ACDC.getName()));
     }
 
     private MutableList<Band> createTestList()
@@ -50,7 +51,7 @@ public class FunctionComparatorTest
     {
         Comparator<Band> byName = (bandA, bandB) -> Band.TO_NAME.valueOf(bandA).compareTo(Band.TO_NAME.valueOf(bandB));
         MutableList<Band> sortedList = this.createTestList().sortThis(byName);
-        Assert.assertEquals(FastList.newListWith(BON_JOVI, METALLICA, SCORPIONS, VAN_HALEN), sortedList);
+        assertEquals(FastList.newListWith(BON_JOVI, METALLICA, SCORPIONS, VAN_HALEN), sortedList);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class FunctionComparatorTest
     {
         Comparator<Band> byName = Comparators.byFunction(Band.TO_NAME, String::compareTo);
         MutableList<Band> sortedList = this.createTestList().sortThis(byName);
-        Assert.assertEquals(FastList.newListWith(BON_JOVI, METALLICA, SCORPIONS, VAN_HALEN), sortedList);
+        assertEquals(FastList.newListWith(BON_JOVI, METALLICA, SCORPIONS, VAN_HALEN), sortedList);
     }
 
     private static final class Band

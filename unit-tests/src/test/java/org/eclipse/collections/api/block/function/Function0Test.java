@@ -11,8 +11,10 @@
 package org.eclipse.collections.api.block.function;
 
 import org.eclipse.collections.impl.block.factory.Functions0;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class Function0Test
 {
@@ -20,9 +22,9 @@ public class Function0Test
     public void get()
     {
         Function0<Boolean> alwaysTrueFunction = Functions0.getTrue();
-        Assert.assertTrue(alwaysTrueFunction.get());
+        assertTrue(alwaysTrueFunction.get());
 
         Function0<Boolean> alwaysFalseFunction = Functions0.getFalse();
-        Assert.assertFalse(alwaysFalseFunction.get());
+        assertFalse(alwaysFalseFunction.get());
     }
 }

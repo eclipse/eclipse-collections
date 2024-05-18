@@ -10,8 +10,9 @@
 
 package org.eclipse.collections.impl.block.function.primitive;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Junit test for {@link LongFunctionImpl}.
@@ -29,7 +30,7 @@ public class LongFunctionImplTest
             }
         };
 
-        Assert.assertEquals(1L, longFunction.longValueOf(1L));
-        Assert.assertEquals(1L, longFunction.valueOf(1L).longValue());
+        assertEquals(1L, longFunction.longValueOf(1L));
+        assertEquals(1L, longFunction.valueOf(1L).longValue());
     }
 }

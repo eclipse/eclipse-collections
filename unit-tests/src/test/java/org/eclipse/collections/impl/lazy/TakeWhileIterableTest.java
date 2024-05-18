@@ -21,9 +21,10 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TakeWhileIterableTest extends AbstractLazyIterableTestCase
 {
@@ -44,12 +45,12 @@ public class TakeWhileIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void basic()
     {
-        Assert.assertEquals(2, this.takeWhileIterable.size());
-        Assert.assertEquals(FastList.newListWith(1, 2), this.takeWhileIterable.toList());
+        assertEquals(2, this.takeWhileIterable.size());
+        assertEquals(FastList.newListWith(1, 2), this.takeWhileIterable.toList());
 
-        Assert.assertEquals(0, this.emptyListTakeWhileIterable.size());
-        Assert.assertEquals(0, this.alwaysFalseTakeWhileIterable.size());
-        Assert.assertEquals(5, this.alwaysTrueTakeWhileIterable.size());
+        assertEquals(0, this.emptyListTakeWhileIterable.size());
+        assertEquals(0, this.alwaysFalseTakeWhileIterable.size());
+        assertEquals(5, this.alwaysTrueTakeWhileIterable.size());
     }
 
     @Test
@@ -57,19 +58,19 @@ public class TakeWhileIterableTest extends AbstractLazyIterableTestCase
     {
         CountProcedure<Integer> cb1 = new CountProcedure<>();
         this.takeWhileIterable.forEach(cb1);
-        Assert.assertEquals(2, cb1.getCount());
+        assertEquals(2, cb1.getCount());
 
         CountProcedure<Integer> cb2 = new CountProcedure<>();
         this.emptyListTakeWhileIterable.forEach(cb2);
-        Assert.assertEquals(0, cb2.getCount());
+        assertEquals(0, cb2.getCount());
 
         CountProcedure<Integer> cb3 = new CountProcedure<>();
         this.alwaysFalseTakeWhileIterable.forEach(cb3);
-        Assert.assertEquals(0, cb3.getCount());
+        assertEquals(0, cb3.getCount());
 
         CountProcedure<Integer> cb5 = new CountProcedure<>();
         this.alwaysTrueTakeWhileIterable.forEach(cb5);
-        Assert.assertEquals(5, cb5.getCount());
+        assertEquals(5, cb5.getCount());
     }
 
     @Test
@@ -79,7 +80,7 @@ public class TakeWhileIterableTest extends AbstractLazyIterableTestCase
         ObjectIntProcedure<Integer> indexRecordingProcedure = (each, index) -> indices.add(index);
 
         this.takeWhileIterable.forEachWithIndex(indexRecordingProcedure);
-        Assert.assertEquals(FastList.newListWith(0, 1), indices);
+        assertEquals(FastList.newListWith(0, 1), indices);
 
         indices.clear();
         this.emptyListTakeWhileIterable.forEachWithIndex(indexRecordingProcedure);
@@ -91,7 +92,7 @@ public class TakeWhileIterableTest extends AbstractLazyIterableTestCase
 
         indices.clear();
         this.alwaysTrueTakeWhileIterable.forEachWithIndex(indexRecordingProcedure);
-        Assert.assertEquals(FastList.newListWith(0, 1, 2, 3, 4), indices);
+        assertEquals(FastList.newListWith(0, 1, 2, 3, 4), indices);
     }
 
     @Test
@@ -101,19 +102,19 @@ public class TakeWhileIterableTest extends AbstractLazyIterableTestCase
 
         Sum sum1 = new IntegerSum(0);
         this.takeWhileIterable.forEachWith(sumAdditionProcedure, sum1);
-        Assert.assertEquals(3, sum1.getValue().intValue());
+        assertEquals(3, sum1.getValue().intValue());
 
         Sum sum2 = new IntegerSum(0);
         this.emptyListTakeWhileIterable.forEachWith(sumAdditionProcedure, sum2);
-        Assert.assertEquals(0, sum2.getValue().intValue());
+        assertEquals(0, sum2.getValue().intValue());
 
         Sum sum3 = new IntegerSum(0);
         this.alwaysFalseTakeWhileIterable.forEachWith(sumAdditionProcedure, sum3);
-        Assert.assertEquals(0, sum3.getValue().intValue());
+        assertEquals(0, sum3.getValue().intValue());
 
         Sum sum5 = new IntegerSum(0);
         this.alwaysTrueTakeWhileIterable.forEachWith(sumAdditionProcedure, sum5);
-        Assert.assertEquals(15, sum5.getValue().intValue());
+        assertEquals(15, sum5.getValue().intValue());
     }
 
     @Override
@@ -125,28 +126,28 @@ public class TakeWhileIterableTest extends AbstractLazyIterableTestCase
         {
             sum1.add(each);
         }
-        Assert.assertEquals(3, sum1.getValue().intValue());
+        assertEquals(3, sum1.getValue().intValue());
 
         Sum sum2 = new IntegerSum(0);
         for (Integer each : this.emptyListTakeWhileIterable)
         {
             sum2.add(each);
         }
-        Assert.assertEquals(0, sum2.getValue().intValue());
+        assertEquals(0, sum2.getValue().intValue());
 
         Sum sum3 = new IntegerSum(0);
         for (Integer each : this.alwaysFalseTakeWhileIterable)
         {
             sum3.add(each);
         }
-        Assert.assertEquals(0, sum3.getValue().intValue());
+        assertEquals(0, sum3.getValue().intValue());
 
         Sum sum5 = new IntegerSum(0);
         for (Integer each : this.alwaysTrueTakeWhileIterable)
         {
             sum5.add(each);
         }
-        Assert.assertEquals(15, sum5.getValue().intValue());
+        assertEquals(15, sum5.getValue().intValue());
     }
 
     @Override
@@ -160,7 +161,7 @@ public class TakeWhileIterableTest extends AbstractLazyIterableTestCase
     public void distinct()
     {
         super.distinct();
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(3, 2, 4, 1),
                 new TakeWhileIterable<>(FastList.newListWith(3, 2, 2, 4, 1, 3, 1, 5), each -> each < 5).distinct().toList());
     }

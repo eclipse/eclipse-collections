@@ -22,8 +22,11 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link UnmodifiableTreeMap}.
@@ -127,7 +130,7 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     @Test
     public void removeAllKeys()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeAllKeys(null));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeAllKeys(null));
     }
 
     @Override
@@ -282,7 +285,7 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     public void clear()
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "2");
-        Assert.assertThrows(UnsupportedOperationException.class, map::clear);
+        assertThrows(UnsupportedOperationException.class, map::clear);
     }
 
     @Override
@@ -290,7 +293,7 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     public void asUnmodifiable()
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "2");
-        Assert.assertSame(map, map.asUnmodifiable());
+        assertSame(map, map.asUnmodifiable());
     }
 
     @Test
@@ -298,11 +301,11 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "2").asUnmodifiable();
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().remove(null));
+        assertThrows(UnsupportedOperationException.class, () -> map.entrySet().remove(null));
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> Iterate.getFirst(map.entrySet()).setValue("Three"));
+        assertThrows(UnsupportedOperationException.class, () -> Iterate.getFirst(map.entrySet()).setValue("Three"));
 
-        Assert.assertEquals(this.newMapWithKeysValues(1, "One", 2, "2"), map);
+        assertEquals(this.newMapWithKeysValues(1, "One", 2, "2"), map);
     }
 
     @Test
@@ -310,7 +313,7 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeyValue(1, "One").asUnmodifiable();
         Object[] entries = map.entrySet().toArray();
-        Assert.assertEquals(ImmutableEntry.of(1, "One"), entries[0]);
+        assertEquals(ImmutableEntry.of(1, "One"), entries[0]);
     }
 
     @Test
@@ -318,7 +321,7 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeyValue(1, "One").asUnmodifiable();
         Object[] entries = map.entrySet().toArray(new Object[]{});
-        Assert.assertEquals(ImmutableEntry.of(1, "One"), entries[0]);
+        assertEquals(ImmutableEntry.of(1, "One"), entries[0]);
     }
 
     @Override
@@ -353,105 +356,105 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     @Test
     public void withMap()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapEmptyAndTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapNull()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(null));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(null));
     }
 
     @Override
     @Test
     public void withMapIterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapIterableEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapIterableTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapIterableEmptyAndTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMapIterable(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMapIterable(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapIterableNull()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMapIterable(null));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMapIterable(null));
     }
 
     @Override
     @Test
     public void putAllMapIterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void putAllMapIterableEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void putAllMapIterableTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void putAllMapIterableEmptyAndTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void putAllMapIterableNull()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(null));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(null));
     }
 
     @Override
@@ -525,21 +528,21 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     public void testClone()
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4");
-        Assert.assertSame(map, map.clone());
+        assertSame(map, map.clone());
         Verify.assertInstanceOf(UnmodifiableTreeMap.class, map.clone());
     }
 
     private void checkMutability(MutableSortedMap<Integer, String> map)
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.put(3, "3"));
+        assertThrows(UnsupportedOperationException.class, () -> map.put(3, "3"));
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.putAll(TreeSortedMap.newMapWith(1, "1", 2, "2")));
+        assertThrows(UnsupportedOperationException.class, () -> map.putAll(TreeSortedMap.newMapWith(1, "1", 2, "2")));
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.remove(2));
+        assertThrows(UnsupportedOperationException.class, () -> map.remove(2));
 
-        Assert.assertThrows(UnsupportedOperationException.class, map::clear);
+        assertThrows(UnsupportedOperationException.class, map::clear);
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.with(Tuples.pair(1, "1")));
+        assertThrows(UnsupportedOperationException.class, () -> map.with(Tuples.pair(1, "1")));
     }
 
     @Override

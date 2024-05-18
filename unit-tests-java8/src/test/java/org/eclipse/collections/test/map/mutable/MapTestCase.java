@@ -20,7 +20,9 @@ import org.junit.Test;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public interface MapTestCase
 {
@@ -148,19 +150,19 @@ public interface MapTestCase
         Map<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
 
         // null value
-        Assert.assertThrows(NullPointerException.class, () -> map.merge(1, null, (v1, v2) -> {
-            Assert.fail("Expected no merge to be performed since the value is null");
+        assertThrows(NullPointerException.class, () -> map.merge(1, null, (v1, v2) -> {
+            fail("Expected no merge to be performed since the value is null");
             return null;
         }));
         Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
 
         // null remapping function
-        Assert.assertThrows(NullPointerException.class, () -> map.merge(1, "4", null));
+        assertThrows(NullPointerException.class, () -> map.merge(1, "4", null));
         Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
 
         // new key, remapping function isn't called
         String value1 = map.merge(4, "4", (v1, v2) -> {
-            Assert.fail("Expected no merge to be performed since the key is not present in the map");
+            fail("Expected no merge to be performed since the key is not present in the map");
             return null;
         });
         Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4"), map);
@@ -186,7 +188,7 @@ public interface MapTestCase
         Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4", 5, "5"), map);
 
         // existing key, remapping function throws exception
-        Assert.assertThrows(IllegalArgumentException.class, () -> map.merge(4, "Four", (v1, v2) -> {
+        assertThrows(IllegalArgumentException.class, () -> map.merge(4, "Four", (v1, v2) -> {
             throw new IllegalArgumentException();
         }));
         Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4", 5, "5"), map);

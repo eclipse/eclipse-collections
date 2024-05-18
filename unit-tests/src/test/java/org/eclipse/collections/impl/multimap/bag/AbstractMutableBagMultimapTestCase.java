@@ -22,8 +22,10 @@ import org.eclipse.collections.impl.multimap.AbstractMutableMultimapTestCase;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutableMultimapTestCase
 {
@@ -68,7 +70,7 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
         MutableBag<Pair<Integer, MutableCollection<String>>> expected = Bags.mutable.with(
                 Tuples.pair(2, this.createCollection("2", "1")),
                 Tuples.pair(3, this.createCollection("3", "3")));
-        Assert.assertEquals(expected, collection);
+        assertEquals(expected, collection);
     }
 
     @Override
@@ -77,8 +79,8 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
     {
         BagMultimap<String, Integer> multimap = this.newMultimapWithKeysValues("Less than 2", 1, "Less than 3", 1, "Less than 3", 2, "Less than 3", 2);
         BagMultimap<Integer, String> flipped = multimap.flip();
-        Assert.assertEquals(Bags.immutable.with("Less than 3", "Less than 3"), flipped.get(2));
-        Assert.assertEquals(Bags.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
+        assertEquals(Bags.immutable.with("Less than 3", "Less than 3"), flipped.get(2));
+        assertEquals(Bags.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
     }
 
     @Override
@@ -210,7 +212,7 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
     {
         MutableBagMultimap<String, String> multimap = this.newMultimap();
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> multimap.putOccurrences("1", "a", -1));
+        assertThrows(IllegalArgumentException.class, () -> multimap.putOccurrences("1", "a", -1));
 
         multimap.putOccurrences("1", "a", 0);
         Verify.assertEmpty(multimap);
@@ -227,7 +229,7 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
         Verify.assertSize(3, multimap);
         Verify.assertBagsEqual(HashBag.newBagWith("b", "b", "b"), multimap.get("2"));
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> multimap.putOccurrences("2", "b", -1));
+        assertThrows(IllegalArgumentException.class, () -> multimap.putOccurrences("2", "b", -1));
 
         multimap.putOccurrences("2", "c", 2);
         Verify.assertSize(5, multimap);

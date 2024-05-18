@@ -20,9 +20,10 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.math.SumProcedure;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class DropWhileIterableTest extends AbstractLazyIterableTestCase
 {
@@ -45,13 +46,13 @@ public class DropWhileIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void basic()
     {
-        Assert.assertEquals(3, this.dropWhileIterable.size());
-        Assert.assertEquals(FastList.newListWith(3, 4, 5), this.dropWhileIterable.toList());
+        assertEquals(3, this.dropWhileIterable.size());
+        assertEquals(FastList.newListWith(3, 4, 5), this.dropWhileIterable.toList());
 
-        Assert.assertEquals(0, this.emptyListDropWhileIterable.size());
-        Assert.assertEquals(5, this.alwaysFalseDropWhileIterable.size());
-        Assert.assertEquals(1, this.mostlyFalseDropWhileIterable.size());
-        Assert.assertEquals(0, this.alwaysTrueDropWhileIterable.size());
+        assertEquals(0, this.emptyListDropWhileIterable.size());
+        assertEquals(5, this.alwaysFalseDropWhileIterable.size());
+        assertEquals(1, this.mostlyFalseDropWhileIterable.size());
+        assertEquals(0, this.alwaysTrueDropWhileIterable.size());
     }
 
     @Test
@@ -59,23 +60,23 @@ public class DropWhileIterableTest extends AbstractLazyIterableTestCase
     {
         Sum sum1 = new IntegerSum(0);
         this.dropWhileIterable.forEach(new SumProcedure<>(sum1));
-        Assert.assertEquals(12, sum1.getValue().intValue());
+        assertEquals(12, sum1.getValue().intValue());
 
         Sum sum2 = new IntegerSum(0);
         this.emptyListDropWhileIterable.forEach(new SumProcedure<>(sum2));
-        Assert.assertEquals(0, sum2.getValue().intValue());
+        assertEquals(0, sum2.getValue().intValue());
 
         Sum sum3 = new IntegerSum(0);
         this.alwaysFalseDropWhileIterable.forEach(new SumProcedure<>(sum3));
-        Assert.assertEquals(15, sum3.getValue().intValue());
+        assertEquals(15, sum3.getValue().intValue());
 
         Sum sum5 = new IntegerSum(0);
         this.mostlyFalseDropWhileIterable.forEach(new SumProcedure<>(sum5));
-        Assert.assertEquals(5, sum5.getValue().intValue());
+        assertEquals(5, sum5.getValue().intValue());
 
         Sum sum6 = new IntegerSum(0);
         this.alwaysTrueDropWhileIterable.forEach(new SumProcedure<>(sum6));
-        Assert.assertEquals(0, sum6.getValue().intValue());
+        assertEquals(0, sum6.getValue().intValue());
     }
 
     @Test
@@ -89,30 +90,30 @@ public class DropWhileIterableTest extends AbstractLazyIterableTestCase
         };
 
         this.dropWhileIterable.forEachWithIndex(indexRecordingAndSumProcedure);
-        Assert.assertEquals(FastList.newListWith(0, 1, 2), indices);
-        Assert.assertEquals(12, sum.getValue().intValue());
+        assertEquals(FastList.newListWith(0, 1, 2), indices);
+        assertEquals(12, sum.getValue().intValue());
 
         indices.clear();
         sum.add(sum.getValue().intValue() * -1);
         this.emptyListDropWhileIterable.forEachWithIndex(indexRecordingAndSumProcedure);
-        Assert.assertEquals(0, indices.size());
+        assertEquals(0, indices.size());
 
         indices.clear();
         sum.add(sum.getValue().intValue() * -1);
         this.alwaysFalseDropWhileIterable.forEachWithIndex(indexRecordingAndSumProcedure);
-        Assert.assertEquals(FastList.newListWith(0, 1, 2, 3, 4), indices);
-        Assert.assertEquals(15, sum.getValue().intValue());
+        assertEquals(FastList.newListWith(0, 1, 2, 3, 4), indices);
+        assertEquals(15, sum.getValue().intValue());
 
         indices.clear();
         sum.add(sum.getValue().intValue() * -1);
         this.mostlyFalseDropWhileIterable.forEachWithIndex(indexRecordingAndSumProcedure);
-        Assert.assertEquals(FastList.newListWith(0), indices);
-        Assert.assertEquals(5, sum.getValue().intValue());
+        assertEquals(FastList.newListWith(0), indices);
+        assertEquals(5, sum.getValue().intValue());
 
         indices.clear();
         sum.add(sum.getValue().intValue() * -1);
         this.alwaysTrueDropWhileIterable.forEachWithIndex(indexRecordingAndSumProcedure);
-        Assert.assertEquals(0, indices.size());
+        assertEquals(0, indices.size());
     }
 
     @Test
@@ -122,23 +123,23 @@ public class DropWhileIterableTest extends AbstractLazyIterableTestCase
 
         Sum sum1 = new IntegerSum(0);
         this.dropWhileIterable.forEachWith(sumAdditionProcedure, sum1);
-        Assert.assertEquals(12, sum1.getValue().intValue());
+        assertEquals(12, sum1.getValue().intValue());
 
         Sum sum2 = new IntegerSum(0);
         this.emptyListDropWhileIterable.forEachWith(sumAdditionProcedure, sum2);
-        Assert.assertEquals(0, sum2.getValue().intValue());
+        assertEquals(0, sum2.getValue().intValue());
 
         Sum sum3 = new IntegerSum(0);
         this.alwaysFalseDropWhileIterable.forEachWith(sumAdditionProcedure, sum3);
-        Assert.assertEquals(15, sum3.getValue().intValue());
+        assertEquals(15, sum3.getValue().intValue());
 
         Sum sum5 = new IntegerSum(0);
         this.mostlyFalseDropWhileIterable.forEachWith(sumAdditionProcedure, sum5);
-        Assert.assertEquals(5, sum5.getValue().intValue());
+        assertEquals(5, sum5.getValue().intValue());
 
         Sum sum6 = new IntegerSum(0);
         this.alwaysTrueDropWhileIterable.forEachWith(sumAdditionProcedure, sum6);
-        Assert.assertEquals(0, sum6.getValue().intValue());
+        assertEquals(0, sum6.getValue().intValue());
     }
 
     @Override
@@ -150,35 +151,35 @@ public class DropWhileIterableTest extends AbstractLazyIterableTestCase
         {
             sum1.add(each);
         }
-        Assert.assertEquals(12, sum1.getValue().intValue());
+        assertEquals(12, sum1.getValue().intValue());
 
         Sum sum2 = new IntegerSum(0);
         for (Integer each : this.emptyListDropWhileIterable)
         {
             sum2.add(each);
         }
-        Assert.assertEquals(0, sum2.getValue().intValue());
+        assertEquals(0, sum2.getValue().intValue());
 
         Sum sum3 = new IntegerSum(0);
         for (Integer each : this.alwaysFalseDropWhileIterable)
         {
             sum3.add(each);
         }
-        Assert.assertEquals(15, sum3.getValue().intValue());
+        assertEquals(15, sum3.getValue().intValue());
 
         Sum sum5 = new IntegerSum(0);
         for (Integer each : this.mostlyFalseDropWhileIterable)
         {
             sum5.add(each);
         }
-        Assert.assertEquals(5, sum5.getValue().intValue());
+        assertEquals(5, sum5.getValue().intValue());
 
         Sum sum6 = new IntegerSum(0);
         for (Integer each : this.alwaysTrueDropWhileIterable)
         {
             sum6.add(each);
         }
-        Assert.assertEquals(0, sum6.getValue().intValue());
+        assertEquals(0, sum6.getValue().intValue());
     }
 
     @Override
@@ -192,7 +193,7 @@ public class DropWhileIterableTest extends AbstractLazyIterableTestCase
     public void distinct()
     {
         super.distinct();
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(2, 3, 4, 5),
                 new DropWhileIterable<>(FastList.newListWith(1, 1, 2, 3, 3, 3, 4, 5), each -> each % 2 != 0).distinct().toList());
     }

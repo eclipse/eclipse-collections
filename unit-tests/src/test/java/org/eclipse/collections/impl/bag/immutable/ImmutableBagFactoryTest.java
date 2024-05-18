@@ -15,8 +15,12 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class ImmutableBagFactoryTest
 {
@@ -27,8 +31,8 @@ public class ImmutableBagFactoryTest
         Verify.assertIterableSize(0, immutableBag);
         Verify.assertIterableSize(4, Bags.immutable.of(1, 2, 2, 3));
         ImmutableBag<Object> actual = Bags.immutable.ofAll(immutableBag);
-        Assert.assertSame(immutableBag, actual);
-        Assert.assertEquals(immutableBag, actual);
+        assertSame(immutableBag, actual);
+        assertEquals(immutableBag, actual);
     }
 
     private static class StringIntPair implements ObjectIntPair<String>
@@ -69,9 +73,9 @@ public class ImmutableBagFactoryTest
                 Bags.immutable.ofOccurrences(new StringIntPair("a", 5),
                         new StringIntPair("b", 10));
 
-        Assert.assertTrue(immutableBag.contains("a"));
-        Assert.assertTrue(immutableBag.contains("b"));
-        Assert.assertFalse(immutableBag.contains("c"));
+        assertTrue(immutableBag.contains("a"));
+        assertTrue(immutableBag.contains("b"));
+        assertFalse(immutableBag.contains("c"));
     }
 
     @Test
@@ -81,9 +85,9 @@ public class ImmutableBagFactoryTest
                 Bags.immutable.withOccurrences(new StringIntPair("a", 5),
                         new StringIntPair("b", 10));
 
-        Assert.assertTrue(immutableBag.contains("a"));
-        Assert.assertTrue(immutableBag.contains("b"));
-        Assert.assertFalse(immutableBag.contains("c"));
+        assertTrue(immutableBag.contains("a"));
+        assertTrue(immutableBag.contains("b"));
+        assertFalse(immutableBag.contains("c"));
     }
 
     @Test

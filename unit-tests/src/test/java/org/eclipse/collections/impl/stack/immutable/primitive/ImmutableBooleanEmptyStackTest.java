@@ -16,8 +16,12 @@ import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.stack.primitive.ImmutableBooleanStack;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link ImmutableBooleanEmptyStack}.
@@ -50,8 +54,8 @@ public class ImmutableBooleanEmptyStackTest extends AbstractImmutableBooleanStac
     {
         ImmutableBooleanStack stack = this.classUnderTest();
         ImmutableBooleanStack stack1 = stack.pop(0);
-        Assert.assertSame(stack1, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        assertSame(stack1, stack);
+        assertEquals(this.classUnderTest(), stack);
     }
 
     @Override
@@ -59,7 +63,7 @@ public class ImmutableBooleanEmptyStackTest extends AbstractImmutableBooleanStac
     public void booleanIterator()
     {
         BooleanIterator iterator = this.classUnderTest().booleanIterator();
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
     }
 
     @Override
@@ -72,8 +76,8 @@ public class ImmutableBooleanEmptyStackTest extends AbstractImmutableBooleanStac
     @Test
     public void peekWithCount()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(), this.classUnderTest().peek(0));
-        Assert.assertThrows(EmptyStackException.class, () -> this.classUnderTest().peek(1));
+        assertEquals(BooleanArrayList.newListWith(), this.classUnderTest().peek(0));
+        assertThrows(EmptyStackException.class, () -> this.classUnderTest().peek(1));
     }
 
     @Override
@@ -94,7 +98,7 @@ public class ImmutableBooleanEmptyStackTest extends AbstractImmutableBooleanStac
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(this.newWith().notEmpty());
+        assertFalse(this.newWith().notEmpty());
     }
 
     @Override

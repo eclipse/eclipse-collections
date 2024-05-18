@@ -22,9 +22,14 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test for {@link TripletonSet}.
@@ -63,9 +68,9 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         set.with(Tuples.twin("2", "2"));
         set.with(Tuples.twin("3", "3"));
 
-        Assert.assertSame(set.getFirst(), twin1);
-        Assert.assertSame(set.getSecond(), twin2);
-        Assert.assertSame(set.getLast(), twin3);
+        assertSame(set.getFirst(), twin1);
+        assertSame(set.getSecond(), twin2);
+        assertSame(set.getLast(), twin3);
     }
 
     @Override
@@ -92,7 +97,7 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         try
         {
             this.set.remove("1");
-            Assert.fail("Cannot remove from TripletonSet");
+            fail("Cannot remove from TripletonSet");
         }
         catch (UnsupportedOperationException ignored)
         {
@@ -106,7 +111,7 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         try
         {
             this.set.add("1");
-            Assert.fail("Cannot add to TripletonSet");
+            fail("Cannot add to TripletonSet");
         }
         catch (UnsupportedOperationException ignored)
         {
@@ -120,7 +125,7 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         try
         {
             this.set.add("4");
-            Assert.fail("Cannot add to TripletonSet");
+            fail("Cannot add to TripletonSet");
         }
         catch (UnsupportedOperationException ignored)
         {
@@ -146,7 +151,7 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         MutableSet<String> copyOfSet = SerializeTestHelper.serializeDeserialize(this.set);
         Verify.assertSetsEqual(this.set, copyOfSet);
-        Assert.assertNotSame(this.set, copyOfSet);
+        assertNotSame(this.set, copyOfSet);
     }
 
     @Override
@@ -166,7 +171,7 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
             }
         }
         MutableSet<String> cloneSet = this.set.clone();
-        Assert.assertNotSame(cloneSet, this.set);
+        assertNotSame(cloneSet, this.set);
         Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("1", "2", "3"), cloneSet);
     }
 
@@ -181,7 +186,7 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void getLast()
     {
-        Assert.assertEquals("3", this.set.getLast());
+        assertEquals("3", this.set.getLast());
     }
 
     @Test
@@ -190,7 +195,7 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         MutableList<String> result = Lists.mutable.of();
         MutableSet<String> source = Sets.fixedSize.of("1", "2", "3");
         source.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(FastList.newListWith("1", "2", "3"), result);
+        assertEquals(FastList.newListWith("1", "2", "3"), result);
     }
 
     @Test
@@ -204,8 +209,8 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
             result.add(each);
             indexSum[0] += index;
         });
-        Assert.assertEquals(FastList.newListWith("1", "2", "3"), result);
-        Assert.assertEquals(3, indexSum[0]);
+        assertEquals(FastList.newListWith("1", "2", "3"), result);
+        assertEquals(3, indexSum[0]);
     }
 
     @Test
@@ -214,20 +219,20 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         MutableList<String> result = Lists.mutable.of();
         MutableSet<String> source = Sets.fixedSize.of("1", "2", "3");
         source.forEachWith(Procedures2.fromProcedure(CollectionAddProcedure.on(result)), null);
-        Assert.assertEquals(FastList.newListWith("1", "2", "3"), result);
+        assertEquals(FastList.newListWith("1", "2", "3"), result);
     }
 
     @Test
     public void getFirstGetLast()
     {
         MutableSet<String> source = Sets.fixedSize.of("1", "2", "3");
-        Assert.assertEquals("1", source.getFirst());
-        Assert.assertEquals("3", source.getLast());
+        assertEquals("1", source.getFirst());
+        assertEquals("3", source.getLast());
     }
 
     @Test
     public void getOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.set.getOnly());
+        assertThrows(IllegalStateException.class, () -> this.set.getOnly());
     }
 }

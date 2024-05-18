@@ -10,15 +10,17 @@
 
 package org.eclipse.collections.impl.block.function.checked;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class CheckedFunction2Test
 {
     @Test
     public void value()
     {
-        Assert.assertEquals((Integer) 50, new CheckedFunction2<Integer, Integer, Integer>()
+        assertEquals((Integer) 50, new CheckedFunction2<Integer, Integer, Integer>()
         {
             @Override
             public Integer safeValue(Integer argument1, Integer argument2)
@@ -31,7 +33,7 @@ public class CheckedFunction2Test
     @Test
     public void exceptionHandling()
     {
-        Assert.assertThrows(RuntimeException.class, () -> new CheckedFunction2<Integer, Integer, Integer>()
+        assertThrows(RuntimeException.class, () -> new CheckedFunction2<Integer, Integer, Integer>()
         {
             @Override
             public Integer safeValue(Integer argument1, Integer argument2) throws Exception

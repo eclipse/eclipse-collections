@@ -13,8 +13,11 @@ package org.eclipse.collections.impl.block.procedure;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.impl.utility.StringIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class BagAddOccurrencesProcedureTest
 {
@@ -28,9 +31,9 @@ public class BagAddOccurrencesProcedureTest
         procedure.value("fred", 1);
         procedure.value("mary", 3);
 
-        Assert.assertEquals(2, procedure.getResult().occurrencesOf("fred"));
-        Assert.assertEquals(3, procedure.getResult().occurrencesOf("mary"));
-        Assert.assertEquals(0, procedure.getResult().occurrencesOf("other"));
+        assertEquals(2, procedure.getResult().occurrencesOf("fred"));
+        assertEquals(3, procedure.getResult().occurrencesOf("mary"));
+        assertEquals(0, procedure.getResult().occurrencesOf("other"));
     }
 
     @Test
@@ -43,9 +46,9 @@ public class BagAddOccurrencesProcedureTest
         procedure.value("fred", 1);
         procedure.value("mary", 3);
 
-        Assert.assertEquals(2, procedure.getResult().occurrencesOf("fred"));
-        Assert.assertEquals(3, procedure.getResult().occurrencesOf("mary"));
-        Assert.assertEquals(0, procedure.getResult().occurrencesOf("other"));
+        assertEquals(2, procedure.getResult().occurrencesOf("fred"));
+        assertEquals(3, procedure.getResult().occurrencesOf("mary"));
+        assertEquals(0, procedure.getResult().occurrencesOf("other"));
     }
 
     @Test
@@ -54,7 +57,7 @@ public class BagAddOccurrencesProcedureTest
         MutableBag<String> targetCollection = Bags.mutable.empty();
         BagAddOccurrencesProcedure<String> procedure = BagAddOccurrencesProcedure.on(targetCollection);
         String toString = procedure.toString();
-        Assert.assertNotNull(toString);
-        Assert.assertTrue(StringIterate.notEmptyOrWhitespace(toString));
+        assertNotNull(toString);
+        assertTrue(StringIterate.notEmptyOrWhitespace(toString));
     }
 }

@@ -18,6 +18,8 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class ImmutableUnifiedMapTest extends ImmutableMapTestCase
 {
     @Override
@@ -36,14 +38,14 @@ public class ImmutableUnifiedMapTest extends ImmutableMapTestCase
     @Override
     public void testToString()
     {
-        Assert.assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
+        assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
     }
 
     @Test
     public void getBatchCount()
     {
         BatchIterable<Integer> integerBatchIterable = (BatchIterable<Integer>) this.classUnderTest();
-        Assert.assertEquals(5, integerBatchIterable.getBatchCount(3));
+        assertEquals(5, integerBatchIterable.getBatchCount(3));
     }
 
     @Test
@@ -52,6 +54,6 @@ public class ImmutableUnifiedMapTest extends ImmutableMapTestCase
         Sum sum = new IntegerSum(0);
         BatchIterable<String> integerBatchIterable = (BatchIterable<String>) this.classUnderTest();
         integerBatchIterable.batchForEach(each -> sum.add(Integer.valueOf(each)), 0, 1);
-        Assert.assertEquals(10, sum.getValue());
+        assertEquals(10, sum.getValue());
     }
 }

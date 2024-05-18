@@ -11,8 +11,10 @@
 package org.eclipse.collections.impl.list.mutable.primitive;
 
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link SynchronizedBooleanList}.
@@ -38,9 +40,9 @@ public class SynchronizedBooleanListTest extends AbstractBooleanListTestCase
         super.asSynchronized();
         SynchronizedBooleanList list = this.classUnderTest();
         MutableBooleanList listWithLockObject = new SynchronizedBooleanList(BooleanArrayList.newListWith(true, false, true), new Object()).asSynchronized();
-        Assert.assertEquals(list, listWithLockObject);
-        Assert.assertSame(listWithLockObject, listWithLockObject.asSynchronized());
-        Assert.assertSame(list, list.asSynchronized());
-        Assert.assertEquals(list, list.asSynchronized());
+        assertEquals(list, listWithLockObject);
+        assertSame(listWithLockObject, listWithLockObject.asSynchronized());
+        assertSame(list, list.asSynchronized());
+        assertEquals(list, list.asSynchronized());
     }
 }

@@ -13,8 +13,11 @@ package org.eclipse.collections.impl.block.procedure;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.StringIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class CollectionRemoveProcedureTest
 {
@@ -34,8 +37,8 @@ public class CollectionRemoveProcedureTest
     {
         CollectionRemoveProcedure<Integer> procedure = CollectionRemoveProcedure.on(Lists.mutable.with(1, 2));
         String s = procedure.toString();
-        Assert.assertNotNull(s);
-        Assert.assertTrue(StringIterate.notEmptyOrWhitespace(s));
-        Assert.assertEquals("Collection.remove()", s);
+        assertNotNull(s);
+        assertTrue(StringIterate.notEmptyOrWhitespace(s));
+        assertEquals("Collection.remove()", s);
     }
 }

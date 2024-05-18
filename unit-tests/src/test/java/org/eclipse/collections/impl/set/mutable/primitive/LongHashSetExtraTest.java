@@ -15,8 +15,9 @@ import java.util.Random;
 
 import org.eclipse.collections.api.block.predicate.primitive.LongPredicate;
 import org.eclipse.collections.api.set.primitive.MutableLongSet;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 // extra tests not covered in the generated portion
 public class LongHashSetExtraTest
@@ -68,6 +69,6 @@ public class LongHashSetExtraTest
         }
         Field table = LongHashSet.class.getDeclaredField("table");
         table.setAccessible(true);
-        Assert.assertTrue(((long[]) table.get(set)).length < 10_000);
+        assertTrue(((long[]) table.get(set)).length < 10_000);
     }
 }

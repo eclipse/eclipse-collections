@@ -11,8 +11,11 @@
 package org.eclipse.collections.impl.collection.mutable;
 
 import org.eclipse.collections.api.collection.MutableCollection;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractSynchronizedCollectionTestCase extends AbstractCollectionTestCase
 {
@@ -22,7 +25,7 @@ public abstract class AbstractSynchronizedCollectionTestCase extends AbstractCol
     {
         MutableCollection<Object> collection = this.newWith(1, 2);
         String string = collection.toString();
-        Assert.assertTrue("[1, 2]".equals(string) || "[2, 1]".equals(string));
+        assertTrue("[1, 2]".equals(string) || "[2, 1]".equals(string));
     }
 
     @Override
@@ -30,7 +33,7 @@ public abstract class AbstractSynchronizedCollectionTestCase extends AbstractCol
     public void makeString()
     {
         MutableCollection<Object> collection = this.newWith(1, 2, 3);
-        Assert.assertEquals(collection.toString(), '[' + collection.makeString() + ']');
+        assertEquals(collection.toString(), '[' + collection.makeString() + ']');
     }
 
     @Override
@@ -40,7 +43,7 @@ public abstract class AbstractSynchronizedCollectionTestCase extends AbstractCol
         MutableCollection<Object> collection = this.newWith(1, 2, 3);
         Appendable builder = new StringBuilder();
         collection.appendString(builder);
-        Assert.assertEquals(collection.toString(), '[' + builder.toString() + ']');
+        assertEquals(collection.toString(), '[' + builder.toString() + ']');
     }
 
     @Override
@@ -48,6 +51,6 @@ public abstract class AbstractSynchronizedCollectionTestCase extends AbstractCol
     public void asSynchronized()
     {
         MutableCollection<Object> collection = this.newWith();
-        Assert.assertSame(collection, collection.asSynchronized());
+        assertSame(collection, collection.asSynchronized());
     }
 }

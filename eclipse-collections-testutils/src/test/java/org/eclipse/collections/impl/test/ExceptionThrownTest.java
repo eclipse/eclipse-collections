@@ -16,6 +16,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.function.ThrowingRunnable;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.fail;
+
 /**
  * JUnit test to make sure that methods like {@link Assert#assertThrows(Class, ThrowingRunnable)} really throw when
  * they ought to.
@@ -27,8 +30,8 @@ public class ExceptionThrownTest
     {
         try
         {
-            Verify.assertThrows(NullPointerException.class, new EmptyRunnable());
-            Assert.fail("AssertionError expected");
+            assertThrows(NullPointerException.class, new EmptyRunnable());
+            fail("AssertionError expected");
         }
         catch (AssertionError e)
         {
@@ -42,7 +45,7 @@ public class ExceptionThrownTest
         try
         {
             Verify.assertThrows(NullPointerException.class, new EmptyCallable());
-            Assert.fail("AssertionError expected");
+            fail("AssertionError expected");
         }
         catch (AssertionError e)
         {
@@ -62,7 +65,7 @@ public class ExceptionThrownTest
                     {
                         throw new IllegalStateException();
                     });
-            Assert.fail("AssertionError expected");
+            fail("AssertionError expected");
         }
         catch (AssertionError e)
         {

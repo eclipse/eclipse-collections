@@ -46,10 +46,16 @@ import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iBag;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class ImmutableEmptyBagTest extends ImmutableBagTestCase
 {
@@ -89,8 +95,8 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void anySatisfyWithOccurrences()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> true));
-        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> false));
+        assertFalse(bag.anySatisfyWithOccurrences((object, value) -> true));
+        assertFalse(bag.anySatisfyWithOccurrences((object, value) -> false));
     }
 
     @Override
@@ -98,8 +104,8 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void allSatisfyWithOccurrences()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> true));
-        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> false));
+        assertTrue(bag.allSatisfyWithOccurrences((object, value) -> true));
+        assertTrue(bag.allSatisfyWithOccurrences((object, value) -> false));
     }
 
     @Override
@@ -107,8 +113,8 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void noneSatisfyWithOccurrences()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> true));
-        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> false));
+        assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> true));
+        assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> false));
     }
 
     @Override
@@ -116,8 +122,8 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void detectWithOccurrences()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertNull(bag.detectWithOccurrences((object, value) -> true));
-        Assert.assertNull(bag.detectWithOccurrences((object, value) -> false));
+        assertNull(bag.detectWithOccurrences((object, value) -> true));
+        assertNull(bag.detectWithOccurrences((object, value) -> false));
     }
 
     @Test
@@ -126,19 +132,19 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     {
         ImmutableBag<String> bag = this.newBag();
         ImmutableBag<String> newBag = bag.newWith("1");
-        Assert.assertNotEquals(bag, newBag);
-        Assert.assertEquals(newBag.size(), bag.size() + 1);
+        assertNotEquals(bag, newBag);
+        assertEquals(newBag.size(), bag.size() + 1);
         ImmutableBag<String> newBag2 = bag.newWith("5");
-        Assert.assertNotEquals(bag, newBag2);
-        Assert.assertEquals(newBag2.size(), bag.size() + 1);
-        Assert.assertEquals(1, newBag2.sizeDistinct());
+        assertNotEquals(bag, newBag2);
+        assertEquals(newBag2.size(), bag.size() + 1);
+        assertEquals(1, newBag2.sizeDistinct());
     }
 
     @Override
     @Test
     public void selectDuplicates()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Bags.immutable.empty(),
                 this.newBag().selectDuplicates());
     }
@@ -170,12 +176,12 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         Bag<ObjectIntPair<String>> actual =
                 bag.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
         Bag<ObjectIntPair<String>> expected = Bags.immutable.empty();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
         Set<ObjectIntPair<String>> actual2 =
                 bag.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
         ImmutableSet<ObjectIntPair<String>> expected2 = Sets.immutable.empty();
-        Assert.assertEquals(expected2, actual2);
+        assertEquals(expected2, actual2);
     }
 
     @Override
@@ -199,9 +205,9 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void selectInstancesOf()
     {
         ImmutableBag<Number> numbers = Bags.immutable.of();
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Double.class));
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Number.class));
+        assertEquals(iBag(), numbers.selectInstancesOf(Integer.class));
+        assertEquals(iBag(), numbers.selectInstancesOf(Double.class));
+        assertEquals(iBag(), numbers.selectInstancesOf(Number.class));
     }
 
     @Override
@@ -209,7 +215,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void testToString()
     {
         super.testToString();
-        Assert.assertEquals("[]", this.newBag().toString());
+        assertEquals("[]", this.newBag().toString());
     }
 
     @Override
@@ -223,34 +229,34 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void newWithout()
     {
-        Assert.assertSame(this.newBag(), this.newBag().newWithout("1"));
+        assertSame(this.newBag(), this.newBag().newWithout("1"));
     }
 
     @Override
     public void toStringOfItemToCount()
     {
-        Assert.assertEquals("{}", Bags.immutable.of().toStringOfItemToCount());
+        assertEquals("{}", Bags.immutable.of().toStringOfItemToCount());
     }
 
     @Override
     @Test
     public void detect()
     {
-        Assert.assertNull(this.newBag().detect("1"::equals));
+        assertNull(this.newBag().detect("1"::equals));
     }
 
     @Override
     @Test
     public void detectWith()
     {
-        Assert.assertNull(this.newBag().detectWith(Predicates2.greaterThan(), "3"));
+        assertNull(this.newBag().detectWith(Predicates2.greaterThan(), "3"));
     }
 
     @Override
     @Test
     public void detectWithIfNone()
     {
-        Assert.assertEquals("Not Found", this.newBag().detectWithIfNone(Object::equals, "1", new PassThruFunction0<>("Not Found")));
+        assertEquals("Not Found", this.newBag().detectWithIfNone(Object::equals, "1", new PassThruFunction0<>("Not Found")));
     }
 
     @Override
@@ -258,7 +264,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     {
         super.detectIfNone();
 
-        Assert.assertEquals("Not Found", this.newBag().detectIfNone("2"::equals, new PassThruFunction0<>("Not Found")));
+        assertEquals("Not Found", this.newBag().detectIfNone("2"::equals, new PassThruFunction0<>("Not Found")));
     }
 
     @Override
@@ -266,7 +272,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void allSatisfy()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertTrue(strings.allSatisfy(ERROR_THROWING_PREDICATE));
+        assertTrue(strings.allSatisfy(ERROR_THROWING_PREDICATE));
     }
 
     @Override
@@ -274,7 +280,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void anySatisfy()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertFalse(strings.anySatisfy(ERROR_THROWING_PREDICATE));
+        assertFalse(strings.anySatisfy(ERROR_THROWING_PREDICATE));
     }
 
     @Override
@@ -282,7 +288,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void noneSatisfy()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertTrue(strings.noneSatisfy(ERROR_THROWING_PREDICATE));
+        assertTrue(strings.noneSatisfy(ERROR_THROWING_PREDICATE));
     }
 
     @Override
@@ -290,7 +296,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void allSatisfyWith()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertTrue(strings.allSatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
+        assertTrue(strings.allSatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
     }
 
     @Override
@@ -298,7 +304,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void anySatisfyWith()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertFalse(strings.anySatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
+        assertFalse(strings.anySatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
     }
 
     @Override
@@ -306,28 +312,28 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void noneSatisfyWith()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertTrue(strings.noneSatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
+        assertTrue(strings.noneSatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
     }
 
     @Override
     @Test
     public void getFirst()
     {
-        Assert.assertNull(this.newBag().getFirst());
+        assertNull(this.newBag().getFirst());
     }
 
     @Override
     @Test
     public void getLast()
     {
-        Assert.assertNull(this.newBag().getLast());
+        assertNull(this.newBag().getLast());
     }
 
     @Override
     @Test
     public void getOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.newBag().getOnly());
+        assertThrows(IllegalStateException.class, () -> this.newBag().getOnly());
     }
 
     @Override
@@ -335,8 +341,8 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void isEmpty()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertTrue(bag.isEmpty());
-        Assert.assertFalse(bag.notEmpty());
+        assertTrue(bag.isEmpty());
+        assertFalse(bag.notEmpty());
     }
 
     @Override
@@ -420,22 +426,22 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         List<Object> nullsPlusOne = Collections.nCopies(immutableBag.size() + 1, null);
 
         ImmutableBag<Pair<String, Object>> pairs = immutableBag.zip(nulls);
-        Assert.assertEquals(
+        assertEquals(
                 immutableBag,
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(
+        assertEquals(
                 HashBag.newBag(nulls),
                 pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
         ImmutableBag<Pair<String, Object>> pairsPlusOne = immutableBag.zip(nullsPlusOne);
-        Assert.assertEquals(
+        assertEquals(
                 immutableBag,
                 pairsPlusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(
+        assertEquals(
                 HashBag.newBag(nulls),
                 pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
-        Assert.assertEquals(immutableBag.zip(nulls), immutableBag.zip(nulls, HashBag.newBag()));
+        assertEquals(immutableBag.zip(nulls), immutableBag.zip(nulls, HashBag.newBag()));
     }
 
     @Override
@@ -445,17 +451,17 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         ImmutableBag<String> immutableBag = this.newBag();
         ImmutableSet<Pair<String, Integer>> pairs = immutableBag.zipWithIndex();
 
-        Assert.assertEquals(UnifiedSet.<String>newSet(), pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(UnifiedSet.<Integer>newSet(), pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
+        assertEquals(UnifiedSet.<String>newSet(), pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
+        assertEquals(UnifiedSet.<Integer>newSet(), pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
 
-        Assert.assertEquals(immutableBag.zipWithIndex(), immutableBag.zipWithIndex(UnifiedSet.newSet()));
+        assertEquals(immutableBag.zipWithIndex(), immutableBag.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Override
     @Test
     public void chunk()
     {
-        Assert.assertEquals(this.newBag(), this.newBag().chunk(2));
+        assertEquals(this.newBag(), this.newBag().chunk(2));
     }
 
     @Override
@@ -469,7 +475,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void chunk_large_size()
     {
-        Assert.assertEquals(this.newBag(), this.newBag().chunk(10));
+        assertEquals(this.newBag(), this.newBag().chunk(10));
         Verify.assertInstanceOf(ImmutableBag.class, this.newBag().chunk(10));
     }
 
@@ -490,7 +496,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
                 Functions.getStringPassThru(), Functions.getStringPassThru());
         Verify.assertEmpty(map);
         Verify.assertInstanceOf(TreeSortedMap.class, map);
-        Assert.assertEquals(Comparators.<String>reverseNaturalOrder(), map.comparator());
+        assertEquals(Comparators.<String>reverseNaturalOrder(), map.comparator());
     }
 
     @Override
@@ -516,9 +522,9 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void collectBoolean()
     {
         ImmutableBooleanBag result = this.newBag().collectBoolean("4"::equals);
-        Assert.assertEquals(0, result.sizeDistinct());
-        Assert.assertEquals(0, result.occurrencesOf(true));
-        Assert.assertEquals(0, result.occurrencesOf(false));
+        assertEquals(0, result.sizeDistinct());
+        assertEquals(0, result.occurrencesOf(true));
+        assertEquals(0, result.occurrencesOf(false));
     }
 
     @Override
@@ -527,10 +533,10 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     {
         BooleanHashBag target = new BooleanHashBag();
         BooleanHashBag result = this.newBag().collectBoolean("4"::equals, target);
-        Assert.assertSame("Target sent as parameter not returned", target, result);
-        Assert.assertEquals(0, result.sizeDistinct());
-        Assert.assertEquals(0, result.occurrencesOf(true));
-        Assert.assertEquals(0, result.occurrencesOf(false));
+        assertSame("Target sent as parameter not returned", target, result);
+        assertEquals(0, result.sizeDistinct());
+        assertEquals(0, result.occurrencesOf(true));
+        assertEquals(0, result.occurrencesOf(false));
     }
 
     @Override
@@ -542,8 +548,8 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         {
             throw new AssertionError();
         }, targetCollection);
-        Assert.assertEquals(targetCollection, actual);
-        Assert.assertSame(targetCollection, actual);
+        assertEquals(targetCollection, actual);
+        assertSame(targetCollection, actual);
     }
 
     @Override
@@ -555,15 +561,15 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         {
             throw new AssertionError();
         }, 1, targetCollection);
-        Assert.assertEquals(targetCollection, actual);
-        Assert.assertSame(targetCollection, actual);
+        assertEquals(targetCollection, actual);
+        assertSame(targetCollection, actual);
     }
 
     @Override
     @Test
     public void groupByUniqueKey()
     {
-        Assert.assertEquals(UnifiedMap.newMap().toImmutable(), this.newBag().groupByUniqueKey(id -> id));
+        assertEquals(UnifiedMap.newMap().toImmutable(), this.newBag().groupByUniqueKey(id -> id));
     }
 
     @Override
@@ -571,14 +577,14 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void groupByUniqueKey_throws()
     {
         super.groupByUniqueKey_throws();
-        Assert.assertEquals(UnifiedMap.newMap().toImmutable(), this.newBag().groupByUniqueKey(id -> id));
+        assertEquals(UnifiedMap.newMap().toImmutable(), this.newBag().groupByUniqueKey(id -> id));
     }
 
     @Override
     @Test
     public void groupByUniqueKey_target()
     {
-        Assert.assertEquals(UnifiedMap.newMap(), this.newBag().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
+        assertEquals(UnifiedMap.newMap(), this.newBag().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
     }
 
     @Override
@@ -586,20 +592,20 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void groupByUniqueKey_target_throws()
     {
         super.groupByUniqueKey_target_throws();
-        Assert.assertEquals(UnifiedMap.newMap(), this.newBag().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
+        assertEquals(UnifiedMap.newMap(), this.newBag().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
     }
 
     @Test
     public void countByEach()
     {
-        Assert.assertEquals(Bags.immutable.empty(), this.newBag().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
+        assertEquals(Bags.immutable.empty(), this.newBag().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
     }
 
     @Test
     public void countByEach_target()
     {
         MutableBag<String> target = Bags.mutable.empty();
-        Assert.assertEquals(target, this.newBag().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
+        assertEquals(target, this.newBag().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
     }
 
     @Override
@@ -668,6 +674,6 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         ImmutableBag<String> bag = this.newBag();
         ImmutableSet<String> expected = Sets.immutable.empty();
         ImmutableSet<String> actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

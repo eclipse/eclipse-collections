@@ -14,10 +14,12 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.factory.Lists;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CollectIteratorTest
 {
@@ -25,27 +27,27 @@ public class CollectIteratorTest
     public void iterator()
     {
         Iterator<String> iterator = new CollectIterator<>(iList(Boolean.TRUE), String::valueOf);
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals("true", iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertTrue(iterator.hasNext());
+        assertEquals("true", iterator.next());
+        assertFalse(iterator.hasNext());
     }
 
     @Test
     public void iteratorWithFunctionName()
     {
         Iterator<String> iterator = new CollectIterator<>(iList(Boolean.TRUE), String::valueOf);
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals("true", iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertTrue(iterator.hasNext());
+        assertEquals("true", iterator.next());
+        assertFalse(iterator.hasNext());
     }
 
     @Test
     public void iteratorWithFunctionNameAndIterator()
     {
         Iterator<String> iterator = new CollectIterator<>(iList(Boolean.TRUE).iterator(), String::valueOf);
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals("true", iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertTrue(iterator.hasNext());
+        assertEquals("true", iterator.next());
+        assertFalse(iterator.hasNext());
     }
 
     @Test(expected = NoSuchElementException.class)

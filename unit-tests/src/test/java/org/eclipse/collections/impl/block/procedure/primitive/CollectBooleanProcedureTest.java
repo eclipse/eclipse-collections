@@ -15,8 +15,9 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class CollectBooleanProcedureTest
 {
@@ -31,6 +32,6 @@ public class CollectBooleanProcedureTest
         procedure.value("00");
 
         ImmutableBooleanList expected = BooleanLists.immutable.with(true, false, false);
-        Assert.assertEquals(expected, targetList);
+        assertEquals(expected, targetList);
     }
 }

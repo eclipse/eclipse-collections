@@ -53,8 +53,17 @@ import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractImmutableSortedSetTestCase
 {
@@ -75,7 +84,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         MutableSortedSet<Integer> mutable = TreeSortedSet.newSet(immutable);
         Verify.assertEqualsAndHashCode(mutable, immutable);
         Verify.assertPostSerializedEqualsAndHashCode(immutable);
-        Assert.assertNotEquals(FastList.newList(mutable), immutable);
+        assertNotEquals(FastList.newList(mutable), immutable);
     }
 
     @Test
@@ -83,7 +92,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> immutable = this.classUnderTest();
         Verify.assertSortedSetsEqual(TreeSortedSet.newSet(Interval.fromTo(0, immutable.size())), immutable.newWith(0).castToSortedSet());
-        Assert.assertSame(immutable, immutable.newWith(immutable.size()));
+        assertSame(immutable, immutable.newWith(immutable.size()));
 
         ImmutableSortedSet<Integer> set = this.classUnderTest(Comparators.reverseNaturalOrder());
         Verify.assertSortedSetsEqual(
@@ -96,7 +105,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> immutable = this.classUnderTest();
         Verify.assertSortedSetsEqual(TreeSortedSet.newSet(Interval.oneTo(immutable.size() - 1)), immutable.newWithout(immutable.size()).castToSortedSet());
-        Assert.assertSame(immutable, immutable.newWithout(immutable.size() + 1));
+        assertSame(immutable, immutable.newWithout(immutable.size() + 1));
 
         ImmutableSortedSet<Integer> set = this.classUnderTest(Comparators.reverseNaturalOrder());
         Verify.assertSortedSetsEqual(
@@ -109,7 +118,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> set = this.classUnderTest(Collections.reverseOrder());
         ImmutableSortedSet<Integer> withAll = set.newWithAll(UnifiedSet.newSet(Interval.fromTo(1, set.size() + 1)));
-        Assert.assertNotEquals(set, withAll);
+        assertNotEquals(set, withAll);
         Verify.assertSortedSetsEqual(
                 TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.fromTo(1, set.size() + 1)),
                 withAll.castToSortedSet());
@@ -121,14 +130,14 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> set = this.classUnderTest();
         ImmutableSortedSet<Integer> withoutAll = set.newWithoutAll(set);
 
-        Assert.assertEquals(SortedSets.immutable.<Integer>of(), withoutAll);
-        Assert.assertEquals(Sets.immutable.<Integer>of(), withoutAll);
+        assertEquals(SortedSets.immutable.<Integer>of(), withoutAll);
+        assertEquals(Sets.immutable.<Integer>of(), withoutAll);
 
         ImmutableSortedSet<Integer> largeWithoutAll = set.newWithoutAll(Interval.fromTo(101, 150));
-        Assert.assertEquals(set, largeWithoutAll);
+        assertEquals(set, largeWithoutAll);
 
         ImmutableSortedSet<Integer> largeWithoutAll2 = set.newWithoutAll(UnifiedSet.newSet(Interval.fromTo(151, 199)));
-        Assert.assertEquals(set, largeWithoutAll2);
+        assertEquals(set, largeWithoutAll2);
     }
 
     @Test
@@ -143,14 +152,14 @@ public abstract class AbstractImmutableSortedSetTestCase
 
         SortedSet<Integer> set2 = new TreeSet<>(set1.castToSortedSet());
 
-        Assert.assertThrows(ClassCastException.class, () -> set1.contains(new Object()));
-        Assert.assertThrows(ClassCastException.class, () -> set2.contains(new Object()));
+        assertThrows(ClassCastException.class, () -> set1.contains(new Object()));
+        assertThrows(ClassCastException.class, () -> set2.contains(new Object()));
 
-        Assert.assertThrows(ClassCastException.class, () -> set1.contains("1"));
-        Assert.assertThrows(ClassCastException.class, () -> set2.contains("1"));
+        assertThrows(ClassCastException.class, () -> set1.contains("1"));
+        assertThrows(ClassCastException.class, () -> set2.contains("1"));
 
-        Assert.assertThrows(NullPointerException.class, () -> set1.contains(null));
-        Assert.assertThrows(NullPointerException.class, () -> set2.contains(null));
+        assertThrows(NullPointerException.class, () -> set1.contains(null));
+        assertThrows(NullPointerException.class, () -> set2.contains(null));
     }
 
     @Test
@@ -159,10 +168,10 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> set1 = this.classUnderTest();
         SortedSet<Integer> set2 = new TreeSet<>(set1.castToSortedSet());
 
-        Assert.assertTrue(set1.containsAllArguments(set1.toArray()));
+        assertTrue(set1.containsAllArguments(set1.toArray()));
 
-        Assert.assertThrows(NullPointerException.class, () -> set1.containsAllArguments(null, null));
-        Assert.assertThrows(NullPointerException.class, () -> set2.containsAll(FastList.newListWith(null, null)));
+        assertThrows(NullPointerException.class, () -> set1.containsAllArguments(null, null));
+        assertThrows(NullPointerException.class, () -> set2.containsAll(FastList.newListWith(null, null)));
     }
 
     @Test
@@ -171,10 +180,10 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> set1 = this.classUnderTest();
         SortedSet<Integer> set2 = new TreeSet<>(set1.castToSortedSet());
 
-        Assert.assertTrue(set1.containsAllIterable(Interval.oneTo(set1.size())));
+        assertTrue(set1.containsAllIterable(Interval.oneTo(set1.size())));
 
-        Assert.assertThrows(NullPointerException.class, () -> set1.containsAllIterable(FastList.newListWith(null, null)));
-        Assert.assertThrows(NullPointerException.class, () -> set2.containsAll(FastList.newListWith(null, null)));
+        assertThrows(NullPointerException.class, () -> set1.containsAllIterable(FastList.newListWith(null, null)));
+        assertThrows(NullPointerException.class, () -> set2.containsAll(FastList.newListWith(null, null)));
     }
 
     @Test
@@ -182,8 +191,8 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         MutableList<Integer> tapResult = Lists.mutable.of();
         ImmutableSortedSet<Integer> collection = this.classUnderTest();
-        Assert.assertSame(collection, collection.tap(tapResult::add));
-        Assert.assertEquals(collection.toList(), tapResult);
+        assertSame(collection, collection.tap(tapResult::add));
+        assertEquals(collection.toList(), tapResult);
     }
 
     @Test
@@ -192,7 +201,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         MutableSet<Integer> result = UnifiedSet.newSet();
         ImmutableSortedSet<Integer> collection = this.classUnderTest();
         collection.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(collection, result);
+        assertEquals(collection, result);
     }
 
     @Test
@@ -280,10 +289,10 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void selectInstancesOf()
     {
         ImmutableSortedSet<Integer> set = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(set, set.selectInstancesOf(Integer.class));
+        assertEquals(set, set.selectInstancesOf(Integer.class));
         Verify.assertIterableEmpty(set.selectInstancesOf(Double.class));
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), set.selectInstancesOf(Integer.class).comparator());
-        Assert.assertEquals(Collections.<Double>reverseOrder(), set.selectInstancesOf(Double.class).comparator());
+        assertEquals(Collections.<Integer>reverseOrder(), set.selectInstancesOf(Integer.class).comparator());
+        assertEquals(Collections.<Double>reverseOrder(), set.selectInstancesOf(Double.class).comparator());
     }
 
     @Test
@@ -292,9 +301,9 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         PartitionImmutableSortedSet<Integer> partition = integers.partition(Predicates.greaterThan(integers.size()));
         Verify.assertIterableEmpty(partition.getSelected());
-        Assert.assertEquals(integers, partition.getRejected());
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), partition.getSelected().comparator());
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), partition.getRejected().comparator());
+        assertEquals(integers, partition.getRejected());
+        assertEquals(Collections.<Integer>reverseOrder(), partition.getSelected().comparator());
+        assertEquals(Collections.<Integer>reverseOrder(), partition.getRejected().comparator());
     }
 
     @Test
@@ -303,9 +312,9 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         PartitionImmutableSortedSet<Integer> partition = integers.partitionWith(Predicates2.greaterThan(), integers.size());
         Verify.assertIterableEmpty(partition.getSelected());
-        Assert.assertEquals(integers, partition.getRejected());
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), partition.getSelected().comparator());
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), partition.getRejected().comparator());
+        assertEquals(integers, partition.getRejected());
+        assertEquals(Collections.<Integer>reverseOrder(), partition.getSelected().comparator());
+        assertEquals(Collections.<Integer>reverseOrder(), partition.getRejected().comparator());
     }
 
     @Test
@@ -314,12 +323,12 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         PartitionImmutableSortedSet<Integer> partition1 = integers.partitionWhile(Predicates.greaterThan(integers.size()));
         Verify.assertIterableEmpty(partition1.getSelected());
-        Assert.assertEquals(integers, partition1.getRejected());
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), partition1.getSelected().comparator());
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), partition1.getRejected().comparator());
+        assertEquals(integers, partition1.getRejected());
+        assertEquals(Collections.<Integer>reverseOrder(), partition1.getSelected().comparator());
+        assertEquals(Collections.<Integer>reverseOrder(), partition1.getRejected().comparator());
 
         PartitionImmutableSortedSet<Integer> partition2 = integers.partitionWhile(Predicates.lessThanOrEqualTo(integers.size()));
-        Assert.assertEquals(integers, partition2.getSelected());
+        assertEquals(integers, partition2.getSelected());
         Verify.assertIterableEmpty(partition2.getRejected());
     }
 
@@ -329,11 +338,11 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         ImmutableSortedSet<Integer> take1 = integers.takeWhile(Predicates.greaterThan(integers.size()));
         Verify.assertIterableEmpty(take1);
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), take1.comparator());
+        assertEquals(Collections.<Integer>reverseOrder(), take1.comparator());
 
         ImmutableSortedSet<Integer> take2 = integers.takeWhile(Predicates.lessThanOrEqualTo(integers.size()));
-        Assert.assertEquals(integers, take2);
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), take2.comparator());
+        assertEquals(integers, take2);
+        assertEquals(Collections.<Integer>reverseOrder(), take2.comparator());
     }
 
     @Test
@@ -341,12 +350,12 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         ImmutableSortedSet<Integer> drop1 = integers.dropWhile(Predicates.greaterThan(integers.size()));
-        Assert.assertEquals(integers, drop1);
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), drop1.comparator());
+        assertEquals(integers, drop1);
+        assertEquals(Collections.<Integer>reverseOrder(), drop1.comparator());
 
         ImmutableSortedSet<Integer> drop2 = integers.dropWhile(Predicates.lessThanOrEqualTo(integers.size()));
         Verify.assertIterableEmpty(drop2);
-        Assert.assertEquals(Collections.<Integer>reverseOrder(), drop2.comparator());
+        assertEquals(Collections.<Integer>reverseOrder(), drop2.comparator());
     }
 
     @Test
@@ -370,7 +379,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void collectWithIndex()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(4), 0),
                         PrimitiveTuples.pair(Integer.valueOf(3), 1),
@@ -386,7 +395,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void collectWithIndexWithTarget()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(4), 0),
                         PrimitiveTuples.pair(Integer.valueOf(3), 1),
@@ -402,7 +411,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void selectWithIndexWithTarget()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(4, 2),
                 integers.selectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
     }
@@ -414,7 +423,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void rejectWithIndexWithTarget()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(3, 1),
                 integers.rejectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
     }
@@ -423,7 +432,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void collectToTarget()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
-        Assert.assertEquals(integers, integers.collect(Functions.getIntegerPassThru(), UnifiedSet.newSet()));
+        assertEquals(integers, integers.collect(Functions.getIntegerPassThru(), UnifiedSet.newSet()));
         Verify.assertListsEqual(
                 integers.toList(),
                 integers.collect(Functions.getIntegerPassThru(), FastList.newList()));
@@ -434,7 +443,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableList<String> actual = this.classUnderTest(Collections.reverseOrder()).flatCollect(integer -> Lists.fixedSize.of(String.valueOf(integer)));
         ImmutableList<String> expected = this.classUnderTest(Collections.reverseOrder()).collect(String::valueOf);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
         Verify.assertListsEqual(expected.toList(), actual.toList());
     }
 
@@ -456,30 +465,30 @@ public abstract class AbstractImmutableSortedSetTestCase
         List<Object> nullsMinusOne = Collections.nCopies(immutableSet.size() - 1, null);
 
         ImmutableList<Pair<Integer, Object>> pairs = immutableSet.zip(nulls);
-        Assert.assertEquals(immutableSet.toList(), pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
+        assertEquals(immutableSet.toList(), pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
         Verify.assertListsEqual(FastList.newList(Interval.fromTo(immutableSet.size(), 1)), pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).toList());
-        Assert.assertEquals(FastList.newList(nulls), pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
+        assertEquals(FastList.newList(nulls), pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
         ImmutableList<Pair<Integer, Object>> pairsPlusOne = immutableSet.zip(nullsPlusOne);
-        Assert.assertEquals(immutableSet.toList(), pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
+        assertEquals(immutableSet.toList(), pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
         Verify.assertListsEqual(
                 FastList.newList(Interval.fromTo(immutableSet.size(), 1)),
                 pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).castToList());
-        Assert.assertEquals(FastList.newList(nulls), pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
+        assertEquals(FastList.newList(nulls), pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
         ImmutableList<Pair<Integer, Object>> pairsMinusOne = immutableSet.zip(nullsMinusOne);
         Verify.assertListsEqual(
                 FastList.newList(Interval.fromTo(immutableSet.size(), 2)),
                 pairsMinusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).castToList());
-        Assert.assertEquals(immutableSet.zip(nulls), immutableSet.zip(nulls, FastList.newList()));
+        assertEquals(immutableSet.zip(nulls), immutableSet.zip(nulls, FastList.newList()));
 
         FastList<Holder> holders = FastList.newListWith(new Holder(1), new Holder(2), new Holder(3));
         ImmutableList<Pair<Integer, Holder>> zipped = immutableSet.zip(holders);
         Verify.assertSize(3, zipped.castToList());
         AbstractImmutableSortedSetTestCase.Holder two = new Holder(-1);
         AbstractImmutableSortedSetTestCase.Holder two1 = new Holder(-1);
-        Assert.assertEquals(Tuples.pair(10, two1), zipped.newWith(Tuples.pair(10, two)).getLast());
-        Assert.assertEquals(Tuples.pair(1, new Holder(3)), this.classUnderTest().zip(holders.reverseThis()).getFirst());
+        assertEquals(Tuples.pair(10, two1), zipped.newWith(Tuples.pair(10, two)).getLast());
+        assertEquals(Tuples.pair(1, new Holder(3)), this.classUnderTest().zip(holders.reverseThis()).getFirst());
     }
 
     @Test
@@ -488,11 +497,11 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> immutableSet = this.classUnderTest(Collections.reverseOrder());
         ImmutableSortedSet<Pair<Integer, Integer>> pairs = immutableSet.zipWithIndex();
 
-        Assert.assertEquals(immutableSet.toList(), pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
-        Assert.assertEquals(
+        assertEquals(immutableSet.toList(), pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
+        assertEquals(
                 Interval.zeroTo(immutableSet.size() - 1).toList(),
                 pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
-        Assert.assertEquals(
+        assertEquals(
                 immutableSet.zipWithIndex(),
                 immutableSet.zipWithIndex(UnifiedSet.newSet()));
         Verify.assertListsEqual(
@@ -509,7 +518,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     @Test
     public void chunk_large_size()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().chunk(10).getFirst());
+        assertEquals(this.classUnderTest(), this.classUnderTest().chunk(10).getFirst());
         Verify.assertInstanceOf(ImmutableSortedSet.class, this.classUnderTest().chunk(10).getFirst());
     }
 
@@ -517,16 +526,16 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void detect()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
-        Assert.assertEquals(Integer.valueOf(1), integers.detect(Predicates.equal(1)));
-        Assert.assertNull(integers.detect(Predicates.equal(integers.size() + 1)));
+        assertEquals(Integer.valueOf(1), integers.detect(Predicates.equal(1)));
+        assertNull(integers.detect(Predicates.equal(integers.size() + 1)));
     }
 
     @Test
     public void detectWith()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
-        Assert.assertEquals(Integer.valueOf(1), integers.detectWith(Object::equals, Integer.valueOf(1)));
-        Assert.assertNull(integers.detectWith(Object::equals, Integer.valueOf(integers.size() + 1)));
+        assertEquals(Integer.valueOf(1), integers.detectWith(Object::equals, Integer.valueOf(1)));
+        assertNull(integers.detectWith(Object::equals, Integer.valueOf(integers.size() + 1)));
     }
 
     @Test
@@ -535,8 +544,8 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
         Function0<Integer> function = new PassThruFunction0<>(integers.size() + 1);
         Integer sum = Integer.valueOf(integers.size() + 1);
-        Assert.assertEquals(Integer.valueOf(1), integers.detectWithIfNone(Object::equals, Integer.valueOf(1), function));
-        Assert.assertEquals(Integer.valueOf(integers.size() + 1), integers.detectWithIfNone(Object::equals, sum, function));
+        assertEquals(Integer.valueOf(1), integers.detectWithIfNone(Object::equals, Integer.valueOf(1), function));
+        assertEquals(Integer.valueOf(integers.size() + 1), integers.detectWithIfNone(Object::equals, sum, function));
     }
 
     @Test
@@ -544,60 +553,60 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
         Function0<Integer> function = new PassThruFunction0<>(integers.size() + 1);
-        Assert.assertEquals(Integer.valueOf(1), integers.detectIfNone(Predicates.equal(1), function));
-        Assert.assertEquals(Integer.valueOf(integers.size() + 1), integers.detectIfNone(Predicates.equal(integers.size() + 1), function));
+        assertEquals(Integer.valueOf(1), integers.detectIfNone(Predicates.equal(1), function));
+        assertEquals(Integer.valueOf(integers.size() + 1), integers.detectIfNone(Predicates.equal(integers.size() + 1), function));
     }
 
     @Test
     public void detectIndex()
     {
         ImmutableSortedSet<Integer> integers1 = this.classUnderTest();
-        Assert.assertEquals(1, integers1.detectIndex(integer -> integer % 2 == 0));
-        Assert.assertEquals(0, integers1.detectIndex(integer -> integer % 2 != 0));
-        Assert.assertEquals(-1, integers1.detectIndex(integer -> integer % 5 == 0));
+        assertEquals(1, integers1.detectIndex(integer -> integer % 2 == 0));
+        assertEquals(0, integers1.detectIndex(integer -> integer % 2 != 0));
+        assertEquals(-1, integers1.detectIndex(integer -> integer % 5 == 0));
 
         ImmutableSortedSet<Integer> integers2 = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Assert.assertEquals(0, integers2.detectIndex(integer -> integer % 2 == 0));
-        Assert.assertEquals(1, integers2.detectIndex(integer -> integer % 2 != 0));
-        Assert.assertEquals(-1, integers2.detectIndex(integer -> integer % 5 == 0));
+        assertEquals(0, integers2.detectIndex(integer -> integer % 2 == 0));
+        assertEquals(1, integers2.detectIndex(integer -> integer % 2 != 0));
+        assertEquals(-1, integers2.detectIndex(integer -> integer % 5 == 0));
     }
 
     @Test
     public void corresponds()
     {
         ImmutableSortedSet<Integer> integers1 = this.classUnderTest();
-        Assert.assertFalse(integers1.corresponds(this.classUnderTest().newWith(100), Predicates2.alwaysTrue()));
+        assertFalse(integers1.corresponds(this.classUnderTest().newWith(100), Predicates2.alwaysTrue()));
 
         ImmutableList<Integer> integers2 = integers1.collect(integers -> integers + 1);
-        Assert.assertTrue(integers1.corresponds(integers2, Predicates2.lessThan()));
-        Assert.assertFalse(integers1.corresponds(integers2, Predicates2.greaterThan()));
+        assertTrue(integers1.corresponds(integers2, Predicates2.lessThan()));
+        assertFalse(integers1.corresponds(integers2, Predicates2.greaterThan()));
 
         ImmutableSortedSet<Integer> integers3 = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Assert.assertFalse(integers3.corresponds(integers1, Predicates2.equal()));
+        assertFalse(integers3.corresponds(integers1, Predicates2.equal()));
     }
 
     @Test
     public void allSatisfy()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
-        Assert.assertTrue(integers.allSatisfy(Integer.class::isInstance));
-        Assert.assertFalse(integers.allSatisfy(Integer.valueOf(0)::equals));
+        assertTrue(integers.allSatisfy(Integer.class::isInstance));
+        assertFalse(integers.allSatisfy(Integer.valueOf(0)::equals));
     }
 
     @Test
     public void anySatisfy()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
-        Assert.assertFalse(integers.anySatisfy(String.class::isInstance));
-        Assert.assertTrue(integers.anySatisfy(Integer.class::isInstance));
+        assertFalse(integers.anySatisfy(String.class::isInstance));
+        assertTrue(integers.anySatisfy(Integer.class::isInstance));
     }
 
     @Test
     public void count()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
-        Assert.assertEquals(integers.size(), integers.count(Integer.class::isInstance));
-        Assert.assertEquals(0, integers.count(String.class::isInstance));
+        assertEquals(integers.size(), integers.count(Integer.class::isInstance));
+        assertEquals(0, integers.count(String.class::isInstance));
     }
 
     @Test
@@ -618,26 +627,26 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void getFirst()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
-        Assert.assertEquals(Integer.valueOf(1), integers.getFirst());
+        assertEquals(Integer.valueOf(1), integers.getFirst());
         ImmutableSortedSet<Integer> revInt = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(Integer.valueOf(revInt.size()), revInt.getFirst());
+        assertEquals(Integer.valueOf(revInt.size()), revInt.getFirst());
     }
 
     @Test
     public void getLast()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
-        Assert.assertEquals(Integer.valueOf(integers.size()), integers.getLast());
+        assertEquals(Integer.valueOf(integers.size()), integers.getLast());
         ImmutableSortedSet<Integer> revInt = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(Integer.valueOf(1), revInt.getLast());
+        assertEquals(Integer.valueOf(1), revInt.getLast());
     }
 
     @Test
     public void isEmpty()
     {
         ImmutableSortedSet<Integer> set = this.classUnderTest();
-        Assert.assertFalse(set.isEmpty());
-        Assert.assertTrue(set.notEmpty());
+        assertFalse(set.isEmpty());
+        assertTrue(set.notEmpty());
     }
 
     @Test
@@ -648,12 +657,12 @@ public abstract class AbstractImmutableSortedSetTestCase
         for (int i = 0; iterator.hasNext(); i++)
         {
             Integer integer = iterator.next();
-            Assert.assertEquals(i + 1, integer.intValue());
+            assertEquals(i + 1, integer.intValue());
         }
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::next);
         Iterator<Integer> intItr = integers.iterator();
         intItr.next();
-        Assert.assertThrows(UnsupportedOperationException.class, intItr::remove);
+        assertThrows(UnsupportedOperationException.class, intItr::remove);
     }
 
     @Test
@@ -661,7 +670,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
         Integer result = integers.injectInto(0, AddFunction.INTEGER);
-        Assert.assertEquals(FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_INT), result.intValue());
+        assertEquals(FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_INT), result.intValue());
     }
 
     @Test
@@ -669,20 +678,20 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         MutableList<Integer> copy = FastList.newList(integers);
-        Assert.assertArrayEquals(integers.toArray(), copy.toArray());
-        Assert.assertArrayEquals(integers.toArray(new Integer[integers.size()]), copy.toArray(new Integer[integers.size()]));
+        assertArrayEquals(integers.toArray(), copy.toArray());
+        assertArrayEquals(integers.toArray(new Integer[integers.size()]), copy.toArray(new Integer[integers.size()]));
     }
 
     @Test
     public void testToString()
     {
-        Assert.assertEquals(FastList.newList(this.classUnderTest()).toString(), this.classUnderTest().toString());
+        assertEquals(FastList.newList(this.classUnderTest()).toString(), this.classUnderTest().toString());
     }
 
     @Test
     public void makeString()
     {
-        Assert.assertEquals(FastList.newList(this.classUnderTest()).makeString(), this.classUnderTest().makeString());
+        assertEquals(FastList.newList(this.classUnderTest()).makeString(), this.classUnderTest().makeString());
     }
 
     @Test
@@ -690,7 +699,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         Appendable builder = new StringBuilder();
         this.classUnderTest().appendString(builder);
-        Assert.assertEquals(FastList.newList(this.classUnderTest()).makeString(), builder.toString());
+        assertEquals(FastList.newList(this.classUnderTest()).makeString(), builder.toString());
     }
 
     @Test
@@ -707,7 +716,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
         MutableList<Integer> copy = FastList.newList(integers);
         MutableList<Integer> list = integers.toSortedList(Collections.reverseOrder());
-        Assert.assertEquals(copy.sortThis(Collections.reverseOrder()), list);
+        assertEquals(copy.sortThis(Collections.reverseOrder()), list);
         MutableList<Integer> list2 = integers.toSortedList();
         Verify.assertListsEqual(copy.sortThis(), list2);
     }
@@ -717,7 +726,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
         MutableList<Integer> list = integers.toSortedListBy(String::valueOf);
-        Assert.assertEquals(integers.toList(), list);
+        assertEquals(integers.toList(), list);
     }
 
     @Test
@@ -733,8 +742,8 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
         MutableSortedSet<Integer> set = integers.toSortedSet(Collections.reverseOrder());
-        Assert.assertEquals(integers.toSet(), set);
-        Assert.assertEquals(integers.toSortedList(Comparators.reverseNaturalOrder()), set.toList());
+        assertEquals(integers.toSet(), set);
+        assertEquals(integers.toSortedList(Comparators.reverseNaturalOrder()), set.toList());
     }
 
     @Test
@@ -780,7 +789,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> set = this.classUnderTest();
         for (Integer each : set)
         {
-            Assert.assertNotNull(each);
+            assertNotNull(each);
         }
     }
 
@@ -829,37 +838,37 @@ public abstract class AbstractImmutableSortedSetTestCase
     @Test
     public void min()
     {
-        Assert.assertEquals(Integer.valueOf(1), this.classUnderTest().min(Integer::compareTo));
+        assertEquals(Integer.valueOf(1), this.classUnderTest().min(Integer::compareTo));
     }
 
     @Test
     public void max()
     {
-        Assert.assertEquals(Integer.valueOf(1), this.classUnderTest().max(Comparators.reverse(Integer::compareTo)));
+        assertEquals(Integer.valueOf(1), this.classUnderTest().max(Comparators.reverse(Integer::compareTo)));
     }
 
     @Test
     public void min_without_comparator()
     {
-        Assert.assertEquals(Integer.valueOf(1), this.classUnderTest().min());
+        assertEquals(Integer.valueOf(1), this.classUnderTest().min());
     }
 
     @Test
     public void max_without_comparator()
     {
-        Assert.assertEquals(Integer.valueOf(this.classUnderTest().size()), this.classUnderTest().max());
+        assertEquals(Integer.valueOf(this.classUnderTest().size()), this.classUnderTest().max());
     }
 
     @Test
     public void minBy()
     {
-        Assert.assertEquals(Integer.valueOf(1), this.classUnderTest().minBy(String::valueOf));
+        assertEquals(Integer.valueOf(1), this.classUnderTest().minBy(String::valueOf));
     }
 
     @Test
     public void maxBy()
     {
-        Assert.assertEquals(Integer.valueOf(this.classUnderTest().size()), this.classUnderTest().maxBy(String::valueOf));
+        assertEquals(Integer.valueOf(this.classUnderTest().size()), this.classUnderTest().maxBy(String::valueOf));
     }
 
     @Test
@@ -868,7 +877,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> undertest = this.classUnderTest();
         ImmutableSortedSetMultimap<Integer, Integer> actual = undertest.groupBy(Functions.getPassThru());
         ImmutableSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupBy(Functions.getPassThru()).toImmutable();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -878,7 +887,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         NegativeIntervalFunction function = new NegativeIntervalFunction();
         ImmutableSortedSetMultimap<Integer, Integer> actual = undertest.groupByEach(function);
         ImmutableSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupByEach(function).toImmutable();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -887,7 +896,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> undertest = this.classUnderTest();
         TreeSortedSetMultimap<Integer, Integer> actual = undertest.groupBy(Functions.getPassThru(), TreeSortedSetMultimap.newMultimap());
         TreeSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupBy(Functions.getPassThru());
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -897,13 +906,13 @@ public abstract class AbstractImmutableSortedSetTestCase
         NegativeIntervalFunction function = new NegativeIntervalFunction();
         TreeSortedSetMultimap<Integer, Integer> actual = undertest.groupByEach(function, TreeSortedSetMultimap.newMultimap());
         TreeSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupByEach(function);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void groupByUniqueKey()
     {
-        Assert.assertEquals(
+        assertEquals(
                 this.classUnderTest().toBag().groupByUniqueKey(id -> id),
                 this.classUnderTest().groupByUniqueKey(id -> id));
     }
@@ -917,7 +926,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     @Test
     public void groupByUniqueKey_target()
     {
-        Assert.assertEquals(this.classUnderTest().groupByUniqueKey(id -> id), this.classUnderTest().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
+        assertEquals(this.classUnderTest().groupByUniqueKey(id -> id), this.classUnderTest().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
     }
 
     @Test(expected = IllegalStateException.class)
@@ -933,7 +942,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> union = set.union(UnifiedSet.newSet(Interval.fromTo(set.size(), set.size() + 3)));
         Verify.assertSize(set.size() + 3, union.castToSortedSet());
         Verify.assertSortedSetsEqual(TreeSortedSet.newSet(Interval.oneTo(set.size() + 3)), union.castToSortedSet());
-        Assert.assertEquals(set, set.union(UnifiedSet.newSet()));
+        assertEquals(set, set.union(UnifiedSet.newSet()));
     }
 
     @Test
@@ -942,8 +951,8 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> set = this.classUnderTest();
         MutableSet<Integer> union = set.unionInto(UnifiedSet.newSet(Interval.fromTo(set.size(), set.size() + 3)), UnifiedSet.newSet());
         Verify.assertSize(set.size() + 3, union);
-        Assert.assertTrue(union.containsAllIterable(Interval.oneTo(set.size() + 3)));
-        Assert.assertEquals(set, set.unionInto(UnifiedSet.newSetWith(), UnifiedSet.newSet()));
+        assertTrue(union.containsAllIterable(Interval.oneTo(set.size() + 3)));
+        assertEquals(set, set.unionInto(UnifiedSet.newSetWith(), UnifiedSet.newSet()));
     }
 
     @Test
@@ -961,7 +970,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> set = this.classUnderTest();
         MutableSet<Integer> intersect = set.intersectInto(UnifiedSet.newSet(Interval.oneTo(set.size() + 2)), UnifiedSet.newSet());
         Verify.assertSize(set.size(), intersect);
-        Assert.assertEquals(set, intersect);
+        assertEquals(set, intersect);
         Verify.assertEmpty(set.intersectInto(UnifiedSet.newSet(Interval.fromTo(set.size() + 1, set.size() + 4)), UnifiedSet.newSet()));
     }
 
@@ -1006,15 +1015,15 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void isSubsetOf()
     {
         ImmutableSortedSet<Integer> set = this.classUnderTest();
-        Assert.assertTrue(set.isSubsetOf(set));
+        assertTrue(set.isSubsetOf(set));
     }
 
     @Test
     public void isProperSubsetOf()
     {
         ImmutableSortedSet<Integer> set = this.classUnderTest();
-        Assert.assertTrue(set.isProperSubsetOf(Interval.oneTo(set.size() + 1).toSet()));
-        Assert.assertFalse(set.isProperSubsetOf(set));
+        assertTrue(set.isProperSubsetOf(Interval.oneTo(set.size() + 1).toSet()));
+        assertFalse(set.isProperSubsetOf(set));
     }
 
     @Test
@@ -1034,8 +1043,8 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> set = this.classUnderTest();
         LazyIterable<Pair<Integer, Integer>> cartesianProduct = set.cartesianProduct(UnifiedSet.newSet(Interval.oneTo(set.size())));
-        Assert.assertEquals(set.size() * set.size(), cartesianProduct.size());
-        Assert.assertEquals(set, cartesianProduct
+        assertEquals(set.size() * set.size(), cartesianProduct.size());
+        assertEquals(set, cartesianProduct
                 .select(Predicates.attributeEqual((Function<Pair<?, Integer>, Integer>) Pair::getTwo, 1))
                 .collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).toSet());
     }
@@ -1044,21 +1053,21 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void distinct()
     {
         ImmutableSortedSet<Integer> set1 = this.classUnderTest();
-        Assert.assertSame(set1, set1.distinct());
+        assertSame(set1, set1.distinct());
         ImmutableSortedSet<Integer> set2 = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Assert.assertSame(set2, set2.distinct());
+        assertSame(set2, set2.distinct());
     }
 
     @Test
     public void indexOf()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Assert.assertEquals(0, integers.indexOf(4));
-        Assert.assertEquals(1, integers.indexOf(3));
-        Assert.assertEquals(2, integers.indexOf(2));
-        Assert.assertEquals(3, integers.indexOf(1));
-        Assert.assertEquals(-1, integers.indexOf(0));
-        Assert.assertEquals(-1, integers.indexOf(5));
+        assertEquals(0, integers.indexOf(4));
+        assertEquals(1, integers.indexOf(3));
+        assertEquals(2, integers.indexOf(2));
+        assertEquals(3, integers.indexOf(1));
+        assertEquals(-1, integers.indexOf(0));
+        assertEquals(-1, integers.indexOf(5));
     }
 
     @Test
@@ -1067,16 +1076,16 @@ public abstract class AbstractImmutableSortedSetTestCase
         MutableList<Integer> result = FastList.newList();
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Comparators.reverseNaturalOrder());
         integers.forEach(1, 2, result::add);
-        Assert.assertEquals(Lists.immutable.with(3, 2), result);
+        assertEquals(Lists.immutable.with(3, 2), result);
 
         MutableList<Integer> result2 = FastList.newList();
         integers.forEach(0, 3, result2::add);
-        Assert.assertEquals(Lists.immutable.with(4, 3, 2, 1), result2);
+        assertEquals(Lists.immutable.with(4, 3, 2, 1), result2);
 
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(-1, 0, result::add));
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(0, -1, result::add));
+        assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(-1, 0, result::add));
+        assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(0, -1, result::add));
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> integers.forEach(2, 1, result::add));
+        assertThrows(IllegalArgumentException.class, () -> integers.forEach(2, 1, result::add));
     }
 
     @Test
@@ -1085,23 +1094,23 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Comparators.reverseNaturalOrder());
         StringBuilder builder = new StringBuilder();
         integers.forEachWithIndex(1, 2, (each, index) -> builder.append(each).append(index));
-        Assert.assertEquals("3122", builder.toString());
+        assertEquals("3122", builder.toString());
 
         MutableList<Integer> result2 = Lists.mutable.of();
         integers.forEachWithIndex(0, 3, new AddToList(result2));
-        Assert.assertEquals(Lists.immutable.with(4, 3, 2, 1), result2);
+        assertEquals(Lists.immutable.with(4, 3, 2, 1), result2);
 
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(-1, 0, new AddToList(result2)));
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(0, -1, new AddToList(result2)));
+        assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(-1, 0, new AddToList(result2)));
+        assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(0, -1, new AddToList(result2)));
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> integers.forEachWithIndex(2, 1, new AddToList(result2)));
+        assertThrows(IllegalArgumentException.class, () -> integers.forEachWithIndex(2, 1, new AddToList(result2)));
     }
 
     @Test
     public void toStack()
     {
         ImmutableSortedSet<Integer> set = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Assert.assertEquals(ArrayStack.newStackWith(4, 3, 2, 1), set.toStack());
+        assertEquals(ArrayStack.newStackWith(4, 3, 2, 1), set.toStack());
     }
 
     @Test
@@ -1109,24 +1118,24 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> set = this.classUnderTest();
         ImmutableSortedSet<Integer> actual = set.toImmutable();
-        Assert.assertEquals(set, actual);
-        Assert.assertSame(set, actual);
+        assertEquals(set, actual);
+        assertSame(set, actual);
     }
 
     @Test
     public void take()
     {
         ImmutableSortedSet<Integer> integers1 = this.classUnderTest();
-        Assert.assertEquals(SortedSets.immutable.of(integers1.comparator()), integers1.take(0));
-        Assert.assertSame(integers1.comparator(), integers1.take(0).comparator());
-        Assert.assertEquals(SortedSets.immutable.of(integers1.comparator(), 1, 2, 3), integers1.take(3));
-        Assert.assertSame(integers1.comparator(), integers1.take(3).comparator());
-        Assert.assertEquals(SortedSets.immutable.of(integers1.comparator(), 1, 2, 3), integers1.take(integers1.size() - 1));
+        assertEquals(SortedSets.immutable.of(integers1.comparator()), integers1.take(0));
+        assertSame(integers1.comparator(), integers1.take(0).comparator());
+        assertEquals(SortedSets.immutable.of(integers1.comparator(), 1, 2, 3), integers1.take(3));
+        assertSame(integers1.comparator(), integers1.take(3).comparator());
+        assertEquals(SortedSets.immutable.of(integers1.comparator(), 1, 2, 3), integers1.take(integers1.size() - 1));
 
         ImmutableSortedSet<Integer> integers2 = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Assert.assertSame(integers2, integers2.take(integers2.size()));
-        Assert.assertSame(integers2, integers2.take(10));
-        Assert.assertSame(integers2, integers2.take(Integer.MAX_VALUE));
+        assertSame(integers2, integers2.take(integers2.size()));
+        assertSame(integers2, integers2.take(10));
+        assertSame(integers2, integers2.take(Integer.MAX_VALUE));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -1139,17 +1148,17 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void drop()
     {
         ImmutableSortedSet<Integer> integers1 = this.classUnderTest();
-        Assert.assertSame(integers1, integers1.drop(0));
-        Assert.assertSame(integers1.comparator(), integers1.drop(0).comparator());
-        Assert.assertEquals(SortedSets.immutable.of(integers1.comparator(), 4), integers1.drop(3));
-        Assert.assertSame(integers1.comparator(), integers1.drop(3).comparator());
-        Assert.assertEquals(SortedSets.immutable.of(integers1.comparator(), 4), integers1.drop(integers1.size() - 1));
+        assertSame(integers1, integers1.drop(0));
+        assertSame(integers1.comparator(), integers1.drop(0).comparator());
+        assertEquals(SortedSets.immutable.of(integers1.comparator(), 4), integers1.drop(3));
+        assertSame(integers1.comparator(), integers1.drop(3).comparator());
+        assertEquals(SortedSets.immutable.of(integers1.comparator(), 4), integers1.drop(integers1.size() - 1));
 
         ImmutableSortedSet<Integer> expectedSet = SortedSets.immutable.of(Comparators.reverseNaturalOrder());
         ImmutableSortedSet<Integer> integers2 = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Assert.assertEquals(expectedSet, integers2.drop(integers2.size()));
-        Assert.assertEquals(expectedSet, integers2.drop(10));
-        Assert.assertEquals(expectedSet, integers2.drop(Integer.MAX_VALUE));
+        assertEquals(expectedSet, integers2.drop(integers2.size()));
+        assertEquals(expectedSet, integers2.drop(10));
+        assertEquals(expectedSet, integers2.drop(Integer.MAX_VALUE));
     }
 
     @Test(expected = IllegalArgumentException.class)

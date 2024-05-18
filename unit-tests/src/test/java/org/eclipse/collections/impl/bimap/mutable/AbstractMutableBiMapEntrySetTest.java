@@ -23,8 +23,14 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractMutableBiMapEntrySetTest
 {
@@ -71,8 +77,8 @@ public abstract class AbstractMutableBiMapEntrySetTest
         for (int i = 0; i < objects.length; i++)
         {
             Map.Entry<Integer, String> object = objects[i];
-            Assert.assertEquals(Integer.valueOf(i + 1), object.getKey());
-            Assert.assertEquals(String.valueOf(i + 1), object.getValue());
+            assertEquals(Integer.valueOf(i + 1), object.getKey());
+            assertEquals(String.valueOf(i + 1), object.getValue());
         }
 
         Map.Entry<Integer, String>[] smallArray = biMap.entrySet().toArray(new Map.Entry[2]);
@@ -82,8 +88,8 @@ public abstract class AbstractMutableBiMapEntrySetTest
         for (int i = 0; i < objects.length; i++)
         {
             Map.Entry<Integer, String> object = smallArray[i];
-            Assert.assertEquals(Integer.valueOf(i + 1), object.getKey());
-            Assert.assertEquals(String.valueOf(i + 1), object.getValue());
+            assertEquals(Integer.valueOf(i + 1), object.getKey());
+            assertEquals(String.valueOf(i + 1), object.getValue());
         }
 
         for (int i = 0; i < objects.length; i++)
@@ -91,8 +97,8 @@ public abstract class AbstractMutableBiMapEntrySetTest
             Map.Entry<Integer, String> object = objects[i];
             object.setValue(String.valueOf(i + 4));
         }
-        Assert.assertTrue(Arrays.equals(new Map.Entry[]{ImmutableEntry.of(1, "4"), ImmutableEntry.of(2, "5"), ImmutableEntry.of(3, "6")}, biMap.entrySet().toArray()));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "4", 2, "5", 3, "6"), biMap);
+        assertTrue(Arrays.equals(new Map.Entry[]{ImmutableEntry.of(1, "4"), ImmutableEntry.of(2, "5"), ImmutableEntry.of(3, "6")}, biMap.entrySet().toArray()));
+        assertEquals(HashBiMap.newWithKeysValues(1, "4", 2, "5", 3, "6"), biMap);
     }
 
     @Test
@@ -101,13 +107,13 @@ public abstract class AbstractMutableBiMapEntrySetTest
         MutableBiMap<Integer, String> biMap = this.newMapWithKeyValue(1, "One");
         Map.Entry<Integer, String> entry = Iterate.getFirst(biMap.entrySet());
         String value = "Ninety-Nine";
-        Assert.assertEquals("One", entry.setValue(value));
-        Assert.assertEquals(value, entry.getValue());
+        assertEquals("One", entry.setValue(value));
+        assertEquals(value, entry.getValue());
         Verify.assertContainsKeyValue(1, value, biMap);
 
         biMap.remove(1);
         Verify.assertEmpty(biMap);
-        Assert.assertNull(entry.setValue("Ignored"));
+        assertNull(entry.setValue("Ignored"));
     }
 
     @Test
@@ -116,7 +122,7 @@ public abstract class AbstractMutableBiMapEntrySetTest
         MutableBiMap<Integer, Character> biMap = this.newMapWithKeysValues(1, 'a', 2, 'b', 3, 'c');
         Map.Entry<Integer, Character> entry = Iterate.getFirst(biMap.entrySet());
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> entry.setValue('b'));
+        assertThrows(IllegalArgumentException.class, () -> entry.setValue('b'));
         Verify.assertContainsKeyValue(2, 'b', biMap);
     }
 
@@ -139,8 +145,8 @@ public abstract class AbstractMutableBiMapEntrySetTest
         Verify.assertSize(2, biMap.inverse());
         Verify.assertSize(2, biMap.entrySet());
 
-        Assert.assertEquals(HashBiMap.newWithKeysValues(3, "Three", 4, "Four"), biMap);
-        Assert.assertEquals(HashBiMap.newWithKeysValues(3, "Three", 4, "Four").inverse(), biMap.inverse());
+        assertEquals(HashBiMap.newWithKeysValues(3, "Three", 4, "Four"), biMap);
+        assertEquals(HashBiMap.newWithKeysValues(3, "Three", 4, "Four").inverse(), biMap.inverse());
 
         MutableBiMap<Integer, String> map1 = this.newMapWithKeysValues(1, null, 3, "Three", 4, "Four");
         Set<Map.Entry<Integer, String>> entries1 = map1.entrySet();
@@ -148,7 +154,7 @@ public abstract class AbstractMutableBiMapEntrySetTest
         Verify.assertSize(2, biMap);
         Verify.assertSize(2, biMap.inverse());
         Verify.assertSize(2, biMap.entrySet());
-        Assert.assertEquals(HashBiMap.newWithKeysValues(3, "Three", 4, "Four"), biMap);
+        assertEquals(HashBiMap.newWithKeysValues(3, "Three", 4, "Four"), biMap);
     }
 
     @Test
@@ -167,9 +173,9 @@ public abstract class AbstractMutableBiMapEntrySetTest
         // simple biMap, test for non-existent entries
         MutableBiMap<Integer, String> biMap = this.newMapWithKeysValues(1, "One", 3, "Three");
         Set<Map.Entry<Integer, String>> entries = biMap.entrySet();
-        Assert.assertFalse(entries.containsAll(FastList.newListWith(ImmutableEntry.of(2, "Two"))));
+        assertFalse(entries.containsAll(FastList.newListWith(ImmutableEntry.of(2, "Two"))));
 
-        Assert.assertTrue(entries.containsAll(FastList.newListWith(ImmutableEntry.of(1, "One"), ImmutableEntry.of(3, "Three"))));
+        assertTrue(entries.containsAll(FastList.newListWith(ImmutableEntry.of(1, "One"), ImmutableEntry.of(3, "Three"))));
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -192,14 +198,14 @@ public abstract class AbstractMutableBiMapEntrySetTest
     public void entrySet_equals()
     {
         MutableBiMap<Integer, String> biMap = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", null, null);
-        Assert.assertNotEquals(UnifiedSet.newSetWith(ImmutableEntry.of(5, "Five")), biMap.entrySet());
+        assertNotEquals(UnifiedSet.newSetWith(ImmutableEntry.of(5, "Five")), biMap.entrySet());
 
         UnifiedSet<ImmutableEntry<Integer, String>> expected = UnifiedSet.newSetWith(
                 ImmutableEntry.of(1, "One"),
                 ImmutableEntry.of(2, "Two"),
                 ImmutableEntry.of(3, "Three"),
                 ImmutableEntry.of(null, null));
-        Assert.assertEquals(expected, biMap.entrySet());
+        assertEquals(expected, biMap.entrySet());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -217,7 +223,7 @@ public abstract class AbstractMutableBiMapEntrySetTest
         MutableBiMap<Integer, String> biMap = this.newMapWithKeyValue(null, null);
         Map.Entry<Integer, String> entry = Iterate.getFirst(biMap.entrySet());
 
-        Assert.assertEquals(0, entry.hashCode());
+        assertEquals(0, entry.hashCode());
     }
 
     @Test
@@ -226,7 +232,7 @@ public abstract class AbstractMutableBiMapEntrySetTest
         MutableBiMap<Integer, String> biMap = this.newMapWithKeyValue(1, "a");
         Map.Entry<Integer, String> entry = Iterate.getFirst(biMap.entrySet());
 
-        Assert.assertEquals(entry, ImmutableEntry.of(1, "a"));
+        assertEquals(entry, ImmutableEntry.of(1, "a"));
     }
 
     @Test
@@ -235,7 +241,7 @@ public abstract class AbstractMutableBiMapEntrySetTest
         MutableBiMap<Integer, String> biMap = this.newMapWithKeyValue(null, null);
         Map.Entry<Integer, String> entry = Iterate.getFirst(biMap.entrySet());
 
-        Assert.assertNotEquals(entry, new Object());
+        assertNotEquals(entry, new Object());
     }
 
     @Test
@@ -244,6 +250,6 @@ public abstract class AbstractMutableBiMapEntrySetTest
         MutableBiMap<Integer, String> biMap = this.newMapWithKeyValue(1, "a");
         Map.Entry<Integer, String> entry = Iterate.getFirst(biMap.entrySet());
 
-        Assert.assertEquals("1=a", entry.toString());
+        assertEquals("1=a", entry.toString());
     }
 }

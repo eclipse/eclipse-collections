@@ -14,8 +14,9 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PartitionFastListTest
 {
@@ -28,7 +29,7 @@ public class PartitionFastListTest
         partitionedList.getSelected().addAll(selected);
         partitionedList.getRejected().addAll(rejected);
         PartitionImmutableList<Integer> immutable = partitionedList.toImmutable();
-        Assert.assertEquals(selected, immutable.getSelected());
-        Assert.assertEquals(rejected, immutable.getRejected());
+        assertEquals(selected, immutable.getSelected());
+        assertEquals(rejected, immutable.getRejected());
     }
 }

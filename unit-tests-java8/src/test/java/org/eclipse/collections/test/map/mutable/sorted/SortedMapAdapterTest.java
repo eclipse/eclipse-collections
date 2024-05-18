@@ -20,10 +20,10 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.map.sorted.mutable.SortedMapAdapter;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.Assert;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 @RunWith(Java8Runner.class)
@@ -62,6 +62,6 @@ public class SortedMapAdapterTest implements MutableSortedMapIterableTestCase
     public void MapIterable_flipUniqueValues()
     {
         MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
-        Assert.assertThrows(UnsupportedOperationException.class, map::flipUniqueValues);
+        assertThrows(UnsupportedOperationException.class, map::flipUniqueValues);
     }
 }

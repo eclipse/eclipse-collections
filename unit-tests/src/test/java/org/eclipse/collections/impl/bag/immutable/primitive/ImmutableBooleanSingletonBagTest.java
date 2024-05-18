@@ -15,8 +15,9 @@ import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit test for {@link ImmutableBooleanSingletonBag}.
@@ -36,7 +37,7 @@ public class ImmutableBooleanSingletonBagTest extends AbstractImmutableBooleanBa
         StringBuilder stringBuilder = new StringBuilder();
         this.classUnderTest().forEachWithOccurrences((argument1, argument2) -> stringBuilder.append(argument1).append(argument2));
         String string = stringBuilder.toString();
-        Assert.assertEquals("true1", string);
+        assertEquals("true1", string);
     }
 
     @Override
@@ -55,6 +56,6 @@ public class ImmutableBooleanSingletonBagTest extends AbstractImmutableBooleanBa
         ImmutableBooleanBag bag = this.classUnderTest();
         ImmutableBooleanSet expected = BooleanSets.immutable.with(true);
         ImmutableBooleanSet actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

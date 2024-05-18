@@ -14,8 +14,9 @@ import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class BooleanCaseProcedureTest
 {
@@ -29,7 +30,7 @@ public class BooleanCaseProcedureTest
         Verify.assertEmpty(result);
         procedure.setDefault(result::add);
         source.each(procedure);
-        Assert.assertEquals(result, source);
+        assertEquals(result, source);
         Verify.assertContains("BooleanCaseProcedure", procedure.toString());
     }
 
@@ -43,8 +44,8 @@ public class BooleanCaseProcedureTest
                 new BooleanCaseProcedure(defaultList::add)
                         .addCase(value -> value, ifOneList::add);
         list.each(procedure);
-        Assert.assertEquals(BooleanLists.mutable.with(true), ifOneList);
-        Assert.assertEquals(BooleanLists.mutable.with(false), defaultList);
+        assertEquals(BooleanLists.mutable.with(true), ifOneList);
+        assertEquals(BooleanLists.mutable.with(false), defaultList);
     }
 
     @Test
@@ -58,8 +59,8 @@ public class BooleanCaseProcedureTest
                         .addCase(value -> value, ifTrueList::add)
                         .addCase(value -> !value, ifFalseList::add);
         list.each(procedure);
-        Assert.assertEquals(BooleanLists.mutable.with(true), ifTrueList);
-        Assert.assertEquals(BooleanLists.mutable.with(false), ifFalseList);
+        assertEquals(BooleanLists.mutable.with(true), ifTrueList);
+        assertEquals(BooleanLists.mutable.with(false), ifFalseList);
         Verify.assertContains("BooleanCaseProcedure", procedure.toString());
     }
 
@@ -75,8 +76,8 @@ public class BooleanCaseProcedureTest
                         .addCase(value -> value, ifOneList::add)
                         .addCase(value -> !value, ifTwoList::add);
         list.each(procedure);
-        Assert.assertEquals(BooleanLists.mutable.with(true, true), ifOneList);
-        Assert.assertEquals(BooleanLists.mutable.with(false, false), ifTwoList);
-        Assert.assertEquals(BooleanLists.mutable.empty(), defaultList);
+        assertEquals(BooleanLists.mutable.with(true, true), ifOneList);
+        assertEquals(BooleanLists.mutable.with(false, false), ifTwoList);
+        assertEquals(BooleanLists.mutable.empty(), defaultList);
     }
 }

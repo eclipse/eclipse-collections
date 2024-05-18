@@ -22,8 +22,9 @@ import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test of {@link TreeBagMultimap}.
@@ -114,7 +115,7 @@ public class TreeBagMultimapTest extends org.eclipse.collections.impl.multimap.b
         bagMultimap.putAll(1, collection);
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 5, 5, 4, 3, 2, 1), collection);
         bagMultimap.put(1, 0);
-        Assert.assertEquals(Integer.valueOf(0), bagMultimap.get(1).getLast());
+        assertEquals(Integer.valueOf(0), bagMultimap.get(1).getLast());
         bagMultimap.putAll(2, FastList.newListWith(0, 1, 2, 3, 4, 5, 5));
         Verify.assertSortedBagsEqual(bagMultimap.get(1), bagMultimap.get(2));
     }

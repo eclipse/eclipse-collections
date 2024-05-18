@@ -12,8 +12,9 @@ package org.eclipse.collections.impl.utility.internal;
 
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.SetIterable;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class SetIterablesTest
 {
@@ -73,8 +74,8 @@ public class SetIterablesTest
     {
         SetIterable<? extends Number> actual1 = SetIterables.union(set1, set2);
         SetIterable<? extends Number> actual2 = SetIterables.union(set2, set1);
-        Assert.assertEquals(expected, actual1);
-        Assert.assertEquals(expected, actual2);
+        assertEquals(expected, actual1);
+        assertEquals(expected, actual2);
     }
 
     @Test
@@ -123,8 +124,8 @@ public class SetIterablesTest
     {
         SetIterable<? extends Number> actual1 = SetIterables.intersect(set1, set2);
         SetIterable<? extends Number> actual2 = SetIterables.intersect(set2, set1);
-        Assert.assertEquals(expected, actual1);
-        Assert.assertEquals(expected, actual2);
+        assertEquals(expected, actual1);
+        assertEquals(expected, actual2);
     }
 
     @Test
@@ -162,6 +163,6 @@ public class SetIterablesTest
             SetIterable<? extends Number> expected)
     {
         SetIterable<? extends Number> actual = SetIterables.difference(set1, set2);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

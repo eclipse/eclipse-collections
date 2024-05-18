@@ -16,10 +16,11 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.math.SumProcedure;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.Assert.assertEquals;
 
 public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
 {
@@ -37,7 +38,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
         LazyIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
         Sum sum = new IntegerSum(0);
         select.forEach(new SumProcedure<>(sum));
-        Assert.assertEquals(9, sum.getValue().intValue());
+        assertEquals(9, sum.getValue().intValue());
     }
 
     @Test
@@ -51,7 +52,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
 
             LOGGER.info("value={} index={}", object, index);
         });
-        Assert.assertEquals(12, sum.getValue().intValue());
+        assertEquals(12, sum.getValue().intValue());
     }
 
     @Override
@@ -64,7 +65,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
         {
             sum.add(each);
         }
-        Assert.assertEquals(9, sum.getValue().intValue());
+        assertEquals(9, sum.getValue().intValue());
     }
 
     @Test
@@ -73,7 +74,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
         LazyIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
         Sum sum = new IntegerSum(0);
         select.forEachWith((each, aSum) -> aSum.add(each), sum);
-        Assert.assertEquals(9, sum.getValue().intValue());
+        assertEquals(9, sum.getValue().intValue());
     }
 
     @Override
@@ -114,7 +115,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     {
         super.distinct();
         LazyIterable<Double> iterable = new SelectInstancesOfIterable<>(FastList.newListWith(3.0, 2.0, 3, 2.0, 4.0, 5, 1.0, 3.0, 1.0, 5.0), Double.class);
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(3.0, 2.0, 4.0, 1.0, 5.0),
                 iterable.distinct().toList());
     }

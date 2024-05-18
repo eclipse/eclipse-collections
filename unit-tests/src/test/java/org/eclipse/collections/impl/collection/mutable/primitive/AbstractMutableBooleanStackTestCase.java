@@ -19,8 +19,11 @@ import org.eclipse.collections.impl.stack.mutable.primitive.SynchronizedBooleanS
 import org.eclipse.collections.impl.stack.mutable.primitive.UnmodifiableBooleanStack;
 import org.eclipse.collections.impl.stack.primitive.AbstractBooleanStackTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Abstract JUnit test for {@link MutableBooleanStack}.
@@ -49,7 +52,7 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
         super.peekAtIndex();
         MutableBooleanStack stack = this.classUnderTest();
         stack.pop(2);
-        Assert.assertEquals((this.classUnderTest().size() & 1) != 0, stack.peekAt(0));
+        assertEquals((this.classUnderTest().size() & 1) != 0, stack.peekAt(0));
     }
 
     @Override
@@ -61,7 +64,7 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
         int size = this.classUnderTest().size();
         for (int i = 0; i < size; i++)
         {
-            Assert.assertEquals((i & 1) != 0, stack.peek());
+            assertEquals((i & 1) != 0, stack.peek());
             stack.pop();
         }
     }
@@ -70,9 +73,9 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
     public void peekWithCount()
     {
         MutableBooleanStack stack = this.classUnderTest();
-        Assert.assertEquals(BooleanArrayList.newListWith(false, true), stack.peek(2));
+        assertEquals(BooleanArrayList.newListWith(false, true), stack.peek(2));
         stack.pop(2);
-        Assert.assertEquals(BooleanArrayList.newListWith(false), stack.peek(1));
+        assertEquals(BooleanArrayList.newListWith(false), stack.peek(1));
     }
 
     @Test(expected = EmptyStackException.class)
@@ -85,38 +88,38 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
     public void testNewStackWithOrder()
     {
         MutableBooleanStack stack = this.newWith(true, false, true, true);
-        Assert.assertTrue(stack.pop());
-        Assert.assertTrue(stack.pop());
-        Assert.assertFalse(stack.pop());
-        Assert.assertTrue(stack.pop());
+        assertTrue(stack.pop());
+        assertTrue(stack.pop());
+        assertFalse(stack.pop());
+        assertTrue(stack.pop());
     }
 
     @Test
     public void testNewStackIterableOrder()
     {
         MutableBooleanStack stack = this.newWithIterable(BooleanArrayList.newListWith(true, false, true, true));
-        Assert.assertTrue(stack.pop());
-        Assert.assertTrue(stack.pop());
-        Assert.assertFalse(stack.pop());
-        Assert.assertTrue(stack.pop());
+        assertTrue(stack.pop());
+        assertTrue(stack.pop());
+        assertFalse(stack.pop());
+        assertTrue(stack.pop());
     }
 
     @Test
     public void testNewStackFromTopToBottomOrder()
     {
         MutableBooleanStack stack = this.newWithTopToBottom(false, true, true);
-        Assert.assertFalse(stack.pop());
-        Assert.assertTrue(stack.pop());
-        Assert.assertTrue(stack.pop());
+        assertFalse(stack.pop());
+        assertTrue(stack.pop());
+        assertTrue(stack.pop());
     }
 
     @Test
     public void testNewStackFromTopToBottomIterableOrder()
     {
         MutableBooleanStack stack = this.newWithIterableTopToBottom(BooleanArrayList.newListWith(false, true, true));
-        Assert.assertFalse(stack.pop());
-        Assert.assertTrue(stack.pop());
-        Assert.assertTrue(stack.pop());
+        assertFalse(stack.pop());
+        assertTrue(stack.pop());
+        assertTrue(stack.pop());
     }
 
     @Test
@@ -128,7 +131,7 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
         Verify.assertSize(size + 1, stack);
         stack.pop();
         Verify.assertSize(size, stack);
-        Assert.assertEquals(BooleanArrayList.newListWith(false, true), stack.peek(2));
+        assertEquals(BooleanArrayList.newListWith(false, true), stack.peek(2));
     }
 
     @Test
@@ -138,7 +141,7 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
         int size = stack.size();
         for (int i = 0; i < size; i++)
         {
-            Assert.assertEquals((i & 1) != 0, stack.pop());
+            assertEquals((i & 1) != 0, stack.pop());
             Verify.assertSize(size - i - 1, stack);
         }
     }
@@ -148,7 +151,7 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
     {
         MutableBooleanStack stack = this.classUnderTest();
         int size = this.classUnderTest().size();
-        Assert.assertEquals(BooleanArrayList.newListWith((size & 1) != 0, (size & 1) == 0), stack.pop(2));
+        assertEquals(BooleanArrayList.newListWith((size & 1) != 0, (size & 1) == 0), stack.pop(2));
         Verify.assertSize(size - 2, stack);
     }
 
@@ -186,13 +189,13 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
     public void asSynchronized()
     {
         Verify.assertInstanceOf(SynchronizedBooleanStack.class, this.classUnderTest().asSynchronized());
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().asSynchronized());
+        assertEquals(this.classUnderTest(), this.classUnderTest().asSynchronized());
     }
 
     @Test
     public void asUnmodifiable()
     {
         Verify.assertInstanceOf(UnmodifiableBooleanStack.class, this.classUnderTest().asUnmodifiable());
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().asUnmodifiable());
+        assertEquals(this.classUnderTest(), this.classUnderTest().asUnmodifiable());
     }
 }

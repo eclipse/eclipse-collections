@@ -17,8 +17,11 @@ import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.map.immutable.ImmutableMapIterableTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractImmutableBiMapTestCase extends ImmutableMapIterableTestCase
 {
@@ -43,44 +46,44 @@ public abstract class AbstractImmutableBiMapTestCase extends ImmutableMapIterabl
     @Test
     public void testToString()
     {
-        Assert.assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
+        assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
     }
 
     @Test
     public void testNewEmpty()
     {
-        Assert.assertTrue(this.newEmpty().isEmpty());
+        assertTrue(this.newEmpty().isEmpty());
     }
 
     @Test
     public void testNewWithMap()
     {
-        Assert.assertEquals(this.classUnderTest(), this.newWithMap());
+        assertEquals(this.classUnderTest(), this.newWithMap());
     }
 
     @Test
     public void testNewWithHashBiMap()
     {
-        Assert.assertEquals(this.classUnderTest(), this.newWithHashBiMap());
+        assertEquals(this.classUnderTest(), this.newWithHashBiMap());
     }
 
     @Test
     public void testNewWithImmutableMap()
     {
-        Assert.assertEquals(this.classUnderTest(), this.newWithImmutableMap());
+        assertEquals(this.classUnderTest(), this.newWithImmutableMap());
     }
 
     @Test
     public void containsKey()
     {
-        Assert.assertTrue(this.classUnderTest().containsKey(1));
-        Assert.assertFalse(this.classUnderTest().containsKey(5));
+        assertTrue(this.classUnderTest().containsKey(1));
+        assertFalse(this.classUnderTest().containsKey(5));
     }
 
     @Test
     public void toImmutable()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
+        assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
     }
 
     @Test
@@ -96,6 +99,6 @@ public abstract class AbstractImmutableBiMapTestCase extends ImmutableMapIterabl
 
         Map<String, String> actualMap = (Map<String, String>) immutableBiMap.toMap(Functions.getPassThru(), Functions.getPassThru(), expectedMap);
 
-        Assert.assertEquals(expectedMap, actualMap);
+        assertEquals(expectedMap, actualMap);
     }
 }

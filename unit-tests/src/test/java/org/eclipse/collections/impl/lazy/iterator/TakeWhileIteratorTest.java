@@ -16,8 +16,12 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.list.Interval;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link TakeWhileIterator}.
@@ -49,10 +53,10 @@ public class TakeWhileIteratorTest
     {
         for (int i = 0; i < count; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
-            Assert.assertEquals(Integer.valueOf(i + 1), iterator.next());
+            assertTrue(iterator.hasNext());
+            assertEquals(Integer.valueOf(i + 1), iterator.next());
         }
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
     }
 
     @Test
@@ -61,24 +65,24 @@ public class TakeWhileIteratorTest
         Interval list = Interval.oneTo(5);
 
         Iterator<Integer> iterator1 = new TakeWhileIterator<>(list.iterator(), each -> each <= 1);
-        Assert.assertTrue(iterator1.hasNext());
-        Assert.assertTrue(iterator1.hasNext());
+        assertTrue(iterator1.hasNext());
+        assertTrue(iterator1.hasNext());
 
         iterator1.next();
-        Assert.assertFalse(iterator1.hasNext());
+        assertFalse(iterator1.hasNext());
     }
 
     @Test
     public void remove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> new TakeWhileIterator<>(Lists.fixedSize.<Integer>of(), Predicates.alwaysTrue()).remove());
+        assertThrows(UnsupportedOperationException.class, () -> new TakeWhileIterator<>(Lists.fixedSize.<Integer>of(), Predicates.alwaysTrue()).remove());
     }
 
     @Test
     public void noSuchElementException()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> new TakeWhileIterator<>(Lists.fixedSize.<Integer>of(), Predicates.alwaysTrue()).next());
+        assertThrows(NoSuchElementException.class, () -> new TakeWhileIterator<>(Lists.fixedSize.<Integer>of(), Predicates.alwaysTrue()).next());
 
-        Assert.assertThrows(NoSuchElementException.class, () -> new TakeWhileIterator<>(Lists.fixedSize.of(1, 2, 3), Predicates.alwaysFalse()).next());
+        assertThrows(NoSuchElementException.class, () -> new TakeWhileIterator<>(Lists.fixedSize.of(1, 2, 3), Predicates.alwaysFalse()).next());
     }
 }

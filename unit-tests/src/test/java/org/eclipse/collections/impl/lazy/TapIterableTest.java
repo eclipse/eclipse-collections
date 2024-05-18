@@ -16,8 +16,9 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TapIterableTest extends AbstractLazyIterableTestCase
 {
@@ -38,7 +39,7 @@ public class TapIterableTest extends AbstractLazyIterableTestCase
         LazyIterable<Integer> tap = new TapIterable<>(Interval.oneTo(5), appendProcedure);
         Procedure<Integer> appendDouble = each -> builder.append(each * 2);
         tap.forEach(appendDouble);
-        Assert.assertEquals("12243648510", builder.toString());
+        assertEquals("12243648510", builder.toString());
     }
 
     @Test
@@ -51,7 +52,7 @@ public class TapIterableTest extends AbstractLazyIterableTestCase
             builder.append(each * 2);
             builder.append(index);
         });
-        Assert.assertEquals("1202413624835104", builder.toString());
+        assertEquals("1202413624835104", builder.toString());
     }
 
     @Override
@@ -65,7 +66,7 @@ public class TapIterableTest extends AbstractLazyIterableTestCase
         {
             builder.append(each + 1);
         }
-        Assert.assertEquals("1223344556", builder.toString());
+        assertEquals("1223344556", builder.toString());
     }
 
     @Test
@@ -75,6 +76,6 @@ public class TapIterableTest extends AbstractLazyIterableTestCase
         Procedure<Integer> appendProcedure = Procedures.append(builder);
         LazyIterable<Integer> tap = new TapIterable<>(Interval.oneTo(5), appendProcedure);
         tap.forEachWith((each, aBuilder) -> aBuilder.append(each - 1), builder);
-        Assert.assertEquals("1021324354", builder.toString());
+        assertEquals("1021324354", builder.toString());
     }
 }

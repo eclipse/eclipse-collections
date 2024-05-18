@@ -18,10 +18,11 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.math.SumProcedure;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.Assert.assertEquals;
 
 public class SelectIterableTest extends AbstractLazyIterableTestCase
 {
@@ -39,7 +40,7 @@ public class SelectIterableTest extends AbstractLazyIterableTestCase
         LazyIterable<Integer> select = new SelectIterable<>(Interval.oneTo(5), Predicates.lessThan(5));
         Sum sum = new IntegerSum(0);
         select.forEach(new SumProcedure<>(sum));
-        Assert.assertEquals(10, sum.getValue().intValue());
+        assertEquals(10, sum.getValue().intValue());
     }
 
     @Test
@@ -53,7 +54,7 @@ public class SelectIterableTest extends AbstractLazyIterableTestCase
 
             LOGGER.info("value={} index={}", object, index);
         });
-        Assert.assertEquals(13, sum.getValue().intValue());
+        assertEquals(13, sum.getValue().intValue());
     }
 
     @Override
@@ -66,7 +67,7 @@ public class SelectIterableTest extends AbstractLazyIterableTestCase
         {
             sum.add(each);
         }
-        Assert.assertEquals(10, sum.getValue().intValue());
+        assertEquals(10, sum.getValue().intValue());
     }
 
     @Test
@@ -75,7 +76,7 @@ public class SelectIterableTest extends AbstractLazyIterableTestCase
         LazyIterable<Integer> select = new SelectIterable<>(Interval.oneTo(5), Predicates.lessThan(5));
         Sum sum = new IntegerSum(0);
         select.forEachWith((each, aSum) -> aSum.add(each), sum);
-        Assert.assertEquals(10, sum.getValue().intValue());
+        assertEquals(10, sum.getValue().intValue());
     }
 
     @Override
@@ -84,7 +85,7 @@ public class SelectIterableTest extends AbstractLazyIterableTestCase
     {
         super.distinct();
         LazyIterable<Integer> iterable = new SelectIterable<>(FastList.newListWith(5, 3, 2, 2, 4, 1, 3, 1, 5), Predicates.lessThan(5));
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(3, 2, 4, 1),
                 iterable.distinct().toList());
     }

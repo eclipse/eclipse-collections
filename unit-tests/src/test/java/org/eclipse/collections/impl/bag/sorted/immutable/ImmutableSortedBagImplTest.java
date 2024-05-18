@@ -20,8 +20,10 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class ImmutableSortedBagImplTest extends AbstractImmutableSortedBagTestCase
 {
@@ -65,8 +67,8 @@ public class ImmutableSortedBagImplTest extends AbstractImmutableSortedBagTestCa
         ImmutableSortedBag<Integer> bag = this.classUnderTest(comparator);
         ImmutableSortedSet<Integer> expected = SortedSets.immutable.with(comparator, 2);
         ImmutableSortedSet<Integer> actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
-        Assert.assertEquals(expected.comparator(), actual.comparator());
+        assertEquals(expected, actual);
+        assertEquals(expected.comparator(), actual.comparator());
     }
 
     @Override
@@ -78,7 +80,7 @@ public class ImmutableSortedBagImplTest extends AbstractImmutableSortedBagTestCa
         RichIterable<Integer> expected = bag.toSortedSet(comparator);
         RichIterable<Integer> actual = bag.distinctView();
         // this assertion is a reminder to get rid of this test override once distinctView returns a set
-        Assert.assertNotEquals(expected, actual);
+        assertNotEquals(expected, actual);
         // test sorting
         Verify.assertIterablesEqual(expected, actual);
     }

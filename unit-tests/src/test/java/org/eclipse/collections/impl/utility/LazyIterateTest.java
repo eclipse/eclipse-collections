@@ -29,8 +29,9 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class LazyIterateTest
 {
@@ -39,7 +40,7 @@ public class LazyIterateTest
     {
         LazyIterable<Integer> select = LazyIterate.select(Interval.oneTo(5), Predicates.lessThan(5));
         int sum = select.injectInto(0, AddFunction.INTEGER_TO_INT);
-        Assert.assertEquals(10, sum);
+        assertEquals(10, sum);
     }
 
     @Test
@@ -51,7 +52,7 @@ public class LazyIterateTest
             sum.add(object);
             sum.add(index);
         });
-        Assert.assertEquals(16, sum.getValue().intValue());
+        assertEquals(16, sum.getValue().intValue());
     }
 
     @Test
@@ -63,7 +64,7 @@ public class LazyIterateTest
         {
             sum.add(each);
         }
-        Assert.assertEquals(10, sum.getValue().intValue());
+        assertEquals(10, sum.getValue().intValue());
     }
 
     @Test
@@ -72,7 +73,7 @@ public class LazyIterateTest
         LazyIterable<Integer> select = LazyIterate.select(Interval.oneTo(5), Predicates.lessThan(5));
         Sum sum = new IntegerSum(0);
         select.forEachWith((each, aSum) -> aSum.add(each), sum);
-        Assert.assertEquals(10, sum.getValue().intValue());
+        assertEquals(10, sum.getValue().intValue());
     }
 
     @Test
@@ -80,7 +81,7 @@ public class LazyIterateTest
     {
         LazyIterable<Integer> select = LazyIterate.reject(Interval.oneTo(5), Predicates.lessThan(5));
         int sum = select.injectInto(0, AddFunction.INTEGER_TO_INT);
-        Assert.assertEquals(5, sum);
+        assertEquals(5, sum);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class LazyIterateTest
             sum.add(object);
             sum.add(index);
         });
-        Assert.assertEquals(5, sum.getValue().intValue());
+        assertEquals(5, sum.getValue().intValue());
     }
 
     @Test
@@ -104,7 +105,7 @@ public class LazyIterateTest
         {
             sum.add(each);
         }
-        Assert.assertEquals(5, sum.getValue().intValue());
+        assertEquals(5, sum.getValue().intValue());
     }
 
     @Test
@@ -113,7 +114,7 @@ public class LazyIterateTest
         LazyIterable<Integer> select = LazyIterate.reject(Interval.oneTo(5), Predicates.lessThan(5));
         Sum sum = new IntegerSum(0);
         select.forEachWith((each, aSum) -> aSum.add(each), sum);
-        Assert.assertEquals(5, sum.getValue().intValue());
+        assertEquals(5, sum.getValue().intValue());
     }
 
     @Test
@@ -123,7 +124,7 @@ public class LazyIterateTest
         Appendable builder = new StringBuilder();
         Procedure<String> appendProcedure = Procedures.append(builder);
         select.forEach(appendProcedure);
-        Assert.assertEquals("12345", builder.toString());
+        assertEquals("12345", builder.toString());
     }
 
     @Test
@@ -135,7 +136,7 @@ public class LazyIterateTest
             builder.append(object);
             builder.append(index);
         });
-        Assert.assertEquals("1021324354", builder.toString());
+        assertEquals("1021324354", builder.toString());
     }
 
     @Test
@@ -147,7 +148,7 @@ public class LazyIterateTest
         {
             builder.append(each);
         }
-        Assert.assertEquals("12345", builder.toString());
+        assertEquals("12345", builder.toString());
     }
 
     @Test
@@ -156,7 +157,7 @@ public class LazyIterateTest
         LazyIterable<String> select = LazyIterate.collect(Interval.oneTo(5), String::valueOf);
         StringBuilder builder = new StringBuilder();
         select.forEachWith((each, aBuilder) -> aBuilder.append(each), builder);
-        Assert.assertEquals("12345", builder.toString());
+        assertEquals("12345", builder.toString());
     }
 
     @Test
@@ -171,14 +172,14 @@ public class LazyIterateTest
         MutableList<Integer> actual5 = actual2.asLazy().select(ignored -> true).toList();
         MutableList<Integer> actual6 = actual2.toImmutable().asLazy().toList();
         ImmutableList<Integer> actual7 = actual2.asLazy().toList().toImmutable();
-        Assert.assertEquals(expected, actual0);
-        Assert.assertEquals(expected, actual1);
-        Assert.assertEquals(expected, actual2);
-        Assert.assertEquals(expected, actual3);
-        Assert.assertEquals(expected, actual4);
-        Assert.assertEquals(expected, actual5);
-        Assert.assertEquals(expected, actual6);
-        Assert.assertEquals(expected, actual7);
+        assertEquals(expected, actual0);
+        assertEquals(expected, actual1);
+        assertEquals(expected, actual2);
+        assertEquals(expected, actual3);
+        assertEquals(expected, actual4);
+        assertEquals(expected, actual5);
+        assertEquals(expected, actual6);
+        assertEquals(expected, actual7);
     }
 
     @Test
@@ -199,7 +200,7 @@ public class LazyIterateTest
                 Tuples.pair(2, 3),
                 Tuples.pair(1, 4),
                 Tuples.pair(2, 4));
-        Assert.assertEquals(expectedCartesianProduct1, LazyIterate.cartesianProduct(iterable1, iterable2).toBag());
+        assertEquals(expectedCartesianProduct1, LazyIterate.cartesianProduct(iterable1, iterable2).toBag());
         MutableBag<Pair<Integer, Integer>> expectedCartesianProduct2 = Bags.mutable.with(
                 Tuples.pair(2, 1),
                 Tuples.pair(3, 1),
@@ -207,7 +208,7 @@ public class LazyIterateTest
                 Tuples.pair(2, 2),
                 Tuples.pair(3, 2),
                 Tuples.pair(4, 2));
-        Assert.assertEquals(expectedCartesianProduct2, LazyIterate.cartesianProduct(iterable2, iterable1).toBag());
+        assertEquals(expectedCartesianProduct2, LazyIterate.cartesianProduct(iterable2, iterable1).toBag());
     }
 
     @Test
@@ -220,15 +221,15 @@ public class LazyIterateTest
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2));
-        Assert.assertEquals(expectedBag, LazyIterate.cartesianProduct(iterable1, iterable2).toBag());
+        assertEquals(expectedBag, LazyIterate.cartesianProduct(iterable1, iterable2).toBag());
         MutableSet<Pair<Integer, Integer>> expectedSet = Sets.mutable.with(Tuples.pair(1, 2));
-        Assert.assertEquals(expectedSet, LazyIterate.cartesianProduct(iterable1, iterable2).toSet());
+        assertEquals(expectedSet, LazyIterate.cartesianProduct(iterable1, iterable2).toSet());
         MutableList<Pair<Integer, Integer>> expectedList = Lists.mutable.with(
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2));
-        Assert.assertEquals(expectedList, LazyIterate.cartesianProduct(iterable1, iterable2).toList());
+        assertEquals(expectedList, LazyIterate.cartesianProduct(iterable1, iterable2).toList());
     }
 
     @Test
@@ -243,7 +244,7 @@ public class LazyIterateTest
                 Tuples.pair(2, 3),
                 Tuples.pair(1, 4),
                 Tuples.pair(2, 4));
-        Assert.assertEquals(
+        assertEquals(
                 expectedCartesianProduct,
                 LazyIterate.cartesianProduct(iterable1, iterable2, Tuples::pair).toBag());
         MutableBag<MutableList<Integer>> expectedCartesianProduct2 = Bags.mutable.with(
@@ -253,7 +254,7 @@ public class LazyIterateTest
                 Lists.mutable.with(2, 2),
                 Lists.mutable.with(3, 2),
                 Lists.mutable.with(4, 2));
-        Assert.assertEquals(
+        assertEquals(
                 expectedCartesianProduct2,
                 LazyIterate.cartesianProduct(iterable2, iterable1, Lists.mutable::with).toBag());
     }
@@ -261,7 +262,7 @@ public class LazyIterateTest
     @Test
     public void cartesianProduct_empty()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Bags.mutable.empty(),
                 LazyIterate.cartesianProduct(
                         Lists.mutable.with(1, 2),

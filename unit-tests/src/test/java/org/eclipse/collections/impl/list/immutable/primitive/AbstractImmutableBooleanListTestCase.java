@@ -22,8 +22,14 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.math.MutableInteger;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Abstract JUnit test for {@link ImmutableBooleanList}.
@@ -60,11 +66,11 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
             sixtyFourElementCollection.add(true);
         }
         ImmutableBooleanList immutableBooleanList = sixtyFourElementCollection.toImmutable();
-        Assert.assertEquals(sixtyFourElementCollection, immutableBooleanList);
+        assertEquals(sixtyFourElementCollection, immutableBooleanList);
         ImmutableBooleanList newImmutableBooleanList = immutableBooleanList.newWith(false);
-        Assert.assertFalse(newImmutableBooleanList.get(64));
+        assertFalse(newImmutableBooleanList.get(64));
         ImmutableBooleanList newImmutableBooleanList1 = immutableBooleanList.newWith(true);
-        Assert.assertTrue(newImmutableBooleanList1.get(64));
+        assertTrue(newImmutableBooleanList1.get(64));
     }
 
     @Test
@@ -73,7 +79,7 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         ImmutableBooleanList list = this.classUnderTest();
         for (int i = 0; i < list.size(); i++)
         {
-            Assert.assertEquals((i & 1) == 0, list.get(i));
+            assertEquals((i & 1) == 0, list.get(i));
         }
     }
 
@@ -99,28 +105,28 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
     @Test
     public void getFirst()
     {
-        Assert.assertTrue(this.classUnderTest().getFirst());
+        assertTrue(this.classUnderTest().getFirst());
     }
 
     @Test
     public void getLast()
     {
-        Assert.assertEquals((this.classUnderTest().size() & 1) != 0, this.classUnderTest().getLast());
+        assertEquals((this.classUnderTest().size() & 1) != 0, this.classUnderTest().getLast());
     }
 
     @Test
     public void indexOf()
     {
         ImmutableBooleanList list = this.classUnderTest();
-        Assert.assertEquals(0L, list.indexOf(true));
-        Assert.assertEquals(list.size() > 2 ? 1L : -1L, list.indexOf(false));
+        assertEquals(0L, list.indexOf(true));
+        assertEquals(list.size() > 2 ? 1L : -1L, list.indexOf(false));
 
         MutableBooleanList mutableList = this.newMutableCollectionWith();
         for (int i = 0; i < list.size(); i++)
         {
             mutableList.add(false);
         }
-        Assert.assertEquals(-1L, mutableList.toImmutable().indexOf(true));
+        assertEquals(-1L, mutableList.toImmutable().indexOf(true));
     }
 
     @Test
@@ -128,15 +134,15 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
     {
         ImmutableBooleanList list = this.classUnderTest();
         int size = list.size();
-        Assert.assertEquals((size & 1) == 0 ? size - 2 : size - 1, list.lastIndexOf(true));
-        Assert.assertEquals((size & 1) == 0 ? size - 1 : size - 2, list.lastIndexOf(false));
+        assertEquals((size & 1) == 0 ? size - 2 : size - 1, list.lastIndexOf(true));
+        assertEquals((size & 1) == 0 ? size - 1 : size - 2, list.lastIndexOf(false));
 
         MutableBooleanList mutableList = this.newMutableCollectionWith();
         for (int i = 0; i < list.size(); i++)
         {
             mutableList.add(false);
         }
-        Assert.assertEquals(-1L, mutableList.toImmutable().lastIndexOf(true));
+        assertEquals(-1L, mutableList.toImmutable().lastIndexOf(true));
     }
 
     @Override
@@ -146,9 +152,9 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         BooleanIterator iterator = this.classUnderTest().booleanIterator();
         for (int i = 0; iterator.hasNext(); i++)
         {
-            Assert.assertEquals(i % 2 == 0, iterator.next());
+            assertEquals(i % 2 == 0, iterator.next());
         }
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
     }
 
     @Override
@@ -165,7 +171,7 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         {
             expectedString.append((i & 1) == 0);
         }
-        Assert.assertEquals(expectedString.toString(), sum[0]);
+        assertEquals(expectedString.toString(), sum[0]);
     }
 
     @Test
@@ -176,16 +182,16 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         sum[1] = "";
         this.classUnderTest().forEachWithIndex((each, index) -> sum[0] += index + ":" + each);
         this.newWith().forEachWithIndex((each, index) -> sum[1] += index + ":" + each);
-        Assert.assertEquals("0:true1:false2:true", sum[0]);
-        Assert.assertEquals("", sum[1]);
+        assertEquals("0:true1:false2:true", sum[0]);
+        assertEquals("", sum[1]);
     }
 
     @Test
     public void toReversed()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, false), this.newWith(false, false, true, true).toReversed());
+        assertEquals(BooleanArrayList.newListWith(true, true, false, false), this.newWith(false, false, true, true).toReversed());
         ImmutableBooleanList originalList = this.newWith(true, true, false, false);
-        Assert.assertNotSame(originalList, originalList.toReversed());
+        assertNotSame(originalList, originalList.toReversed());
     }
 
     @Override
@@ -194,10 +200,10 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
     {
         super.toArray();
         ImmutableBooleanList list = this.classUnderTest();
-        Assert.assertEquals(this.classUnderTest().size(), list.toArray().length);
+        assertEquals(this.classUnderTest().size(), list.toArray().length);
         for (int i = 0; i < this.classUnderTest().size(); i++)
         {
-            Assert.assertEquals((i & 1) == 0, list.toArray()[i]);
+            assertEquals((i & 1) == 0, list.toArray()[i]);
         }
     }
 
@@ -206,7 +212,7 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
     {
         ImmutableBooleanList list = this.newWith(true, false, true);
         MutableInteger result = list.injectIntoWithIndex(new MutableInteger(0), (object, value, index) -> object.add((value ? 1 : 0) + index));
-        Assert.assertEquals(new MutableInteger(5), result);
+        assertEquals(new MutableInteger(5), result);
     }
 
     @Override
@@ -216,7 +222,7 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         super.testEquals();
         ImmutableBooleanList list1 = this.newWith(true, false, true, true);
         ImmutableBooleanList list2 = this.newWith(true, true, false, true);
-        Assert.assertNotEquals(list1, list2);
+        assertNotEquals(list1, list2);
     }
 
     @Override
@@ -232,7 +238,7 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
             expectedString.append(i == size - 1 ? "" : ", ");
         }
         expectedString.append(']');
-        Assert.assertEquals(expectedString.toString(), this.classUnderTest().toString());
+        assertEquals(expectedString.toString(), this.classUnderTest().toString());
     }
 
     @Override
@@ -251,9 +257,9 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
             expectedString.append(i == size - 1 ? "" : ", ");
             expectedString1.append(i == size - 1 ? "" : "/");
         }
-        Assert.assertEquals(expectedString.toString(), this.classUnderTest().makeString());
-        Assert.assertEquals(expectedString1.toString(), this.classUnderTest().makeString("/"));
-        Assert.assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
+        assertEquals(expectedString.toString(), this.classUnderTest().makeString());
+        assertEquals(expectedString1.toString(), this.classUnderTest().makeString("/"));
+        assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
     }
 
     @Override
@@ -274,13 +280,13 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         }
         StringBuilder appendable2 = new StringBuilder();
         this.classUnderTest().appendString(appendable2);
-        Assert.assertEquals(expectedString.toString(), appendable2.toString());
+        assertEquals(expectedString.toString(), appendable2.toString());
         StringBuilder appendable3 = new StringBuilder();
         this.classUnderTest().appendString(appendable3, "/");
-        Assert.assertEquals(expectedString1.toString(), appendable3.toString());
+        assertEquals(expectedString1.toString(), appendable3.toString());
         StringBuilder appendable4 = new StringBuilder();
         this.classUnderTest().appendString(appendable4, "[", ", ", "]");
-        Assert.assertEquals(this.classUnderTest().toString(), appendable4.toString());
+        assertEquals(this.classUnderTest().toString(), appendable4.toString());
     }
 
     @Override
@@ -290,7 +296,7 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         super.toList();
         MutableBooleanList list = this.classUnderTest().toList();
         Verify.assertEqualsAndHashCode(this.classUnderTest(), list);
-        Assert.assertNotSame(this.classUnderTest(), list);
+        assertNotSame(this.classUnderTest(), list);
     }
 
     @Override
@@ -305,14 +311,14 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         ImmutableBooleanCollection collection2 = booleanCollection.newWith(true).newWith(false).newWith(true).newWith(false);
         ImmutableBooleanCollection collection3 = booleanCollection.newWith(true).newWith(false).newWith(true).newWith(false).newWith(true);
         ImmutableBooleanCollection collection4 = collection3.newWith(true).newWith(false).newWith(true).newWith(false).newWith(true);
-        Assert.assertEquals(list, booleanCollection);
-        Assert.assertEquals(list.with(true), collection);
-        Assert.assertEquals(list.with(false), collection0);
-        Assert.assertEquals(list.with(true), collection1);
-        Assert.assertEquals(list.with(false), collection2);
-        Assert.assertEquals(list.with(true), collection3);
+        assertEquals(list, booleanCollection);
+        assertEquals(list.with(true), collection);
+        assertEquals(list.with(false), collection0);
+        assertEquals(list.with(true), collection1);
+        assertEquals(list.with(false), collection2);
+        assertEquals(list.with(true), collection3);
         list.addAll(true, false, true, false, true);
-        Assert.assertEquals(list, collection4);
+        assertEquals(list, collection4);
     }
 
     @Override
@@ -327,14 +333,14 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         ImmutableBooleanCollection collection2 = booleanCollection.newWithAll(this.newMutableCollectionWith(true, false, true, false));
         ImmutableBooleanCollection collection3 = booleanCollection.newWithAll(this.newMutableCollectionWith(true, false, true, false, true));
         ImmutableBooleanCollection collection4 = collection3.newWithAll(this.newMutableCollectionWith(true, false, true, false, true));
-        Assert.assertEquals(list, booleanCollection);
-        Assert.assertEquals(list.with(true), collection);
-        Assert.assertEquals(list.with(false), collection0);
-        Assert.assertEquals(list.with(true), collection1);
-        Assert.assertEquals(list.with(false), collection2);
-        Assert.assertEquals(list.with(true), collection3);
+        assertEquals(list, booleanCollection);
+        assertEquals(list.with(true), collection);
+        assertEquals(list.with(false), collection0);
+        assertEquals(list.with(true), collection1);
+        assertEquals(list.with(false), collection2);
+        assertEquals(list.with(true), collection3);
         list.addAll(true, false, true, false, true);
-        Assert.assertEquals(list, collection4);
+        assertEquals(list, collection4);
     }
 
     @Override
@@ -342,15 +348,15 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
     public void newWithout()
     {
         ImmutableBooleanCollection trueCollection = this.getTrueCollection(this.classUnderTest()).toImmutable();
-        Assert.assertSame(trueCollection, trueCollection.newWithout(false));
-        Assert.assertNotSame(trueCollection, trueCollection.newWithout(true));
+        assertSame(trueCollection, trueCollection.newWithout(false));
+        assertNotSame(trueCollection, trueCollection.newWithout(true));
 
         ImmutableBooleanCollection collection = this.classUnderTest();
         MutableBooleanList list = collection.toList();
-        Assert.assertEquals(list.without(true), collection.newWithout(true));
+        assertEquals(list.without(true), collection.newWithout(true));
         MutableBooleanList list1 = collection.toList();
-        Assert.assertEquals(list1.without(false), collection.newWithout(false));
-        Assert.assertEquals(this.classUnderTest(), collection);
+        assertEquals(list1.without(false), collection.newWithout(false));
+        assertEquals(this.classUnderTest(), collection);
     }
 
     @Override
@@ -360,17 +366,17 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         ImmutableBooleanCollection immutableBooleanCollection = this.classUnderTest();
         MutableBooleanCollection mutableTrueCollection = this.getTrueCollection(immutableBooleanCollection);
         ImmutableBooleanCollection trueCollection = mutableTrueCollection.toImmutable();
-        Assert.assertEquals(this.newMutableCollectionWith(), trueCollection.newWithoutAll(this.newMutableCollectionWith(true, false)));
-        Assert.assertEquals(mutableTrueCollection, trueCollection);
+        assertEquals(this.newMutableCollectionWith(), trueCollection.newWithoutAll(this.newMutableCollectionWith(true, false)));
+        assertEquals(mutableTrueCollection, trueCollection);
 
         MutableBooleanList list = immutableBooleanCollection.toList();
         list.removeAll(true);
-        Assert.assertEquals(list, immutableBooleanCollection.newWithoutAll(this.newMutableCollectionWith(true)));
-        Assert.assertEquals(this.newMutableCollectionWith(), immutableBooleanCollection.newWithoutAll(this.newMutableCollectionWith(true, false)));
+        assertEquals(list, immutableBooleanCollection.newWithoutAll(this.newMutableCollectionWith(true)));
+        assertEquals(this.newMutableCollectionWith(), immutableBooleanCollection.newWithoutAll(this.newMutableCollectionWith(true, false)));
 
         ImmutableBooleanCollection collection = this.newWith(true, false, true, false, true);
-        Assert.assertEquals(this.newMutableCollectionWith(false, false), collection.newWithoutAll(this.newMutableCollectionWith(true, true)));
-        Assert.assertEquals(this.newMutableCollectionWith(), collection.newWithoutAll(this.newMutableCollectionWith(true, false)));
+        assertEquals(this.newMutableCollectionWith(false, false), collection.newWithoutAll(this.newMutableCollectionWith(true, true)));
+        assertEquals(this.newMutableCollectionWith(), collection.newWithoutAll(this.newMutableCollectionWith(true, false)));
     }
 
     private MutableBooleanCollection getTrueCollection(ImmutableBooleanCollection collection)

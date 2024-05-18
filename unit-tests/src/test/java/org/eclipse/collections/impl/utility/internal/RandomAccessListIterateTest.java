@@ -39,11 +39,17 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.eclipse.collections.impl.factory.Iterables.mList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class RandomAccessListIterateTest
 {
@@ -76,54 +82,54 @@ public class RandomAccessListIterateTest
     @Test
     public void removeIf()
     {
-        Assert.assertTrue(RandomAccessListIterate.removeIf(FastList.newListWith(1, 2, 3), Predicates.greaterThan(1)));
-        Assert.assertTrue(RandomAccessListIterate.removeIf(FastList.newListWith(1, 2, 3), Predicates.greaterThan(0)));
-        Assert.assertFalse(RandomAccessListIterate.removeIf(FastList.newListWith(1, 2, 3), Predicates.greaterThan(4)));
-        Assert.assertFalse(RandomAccessListIterate.removeIf(FastList.newList(), Predicates.greaterThan(4)));
+        assertTrue(RandomAccessListIterate.removeIf(FastList.newListWith(1, 2, 3), Predicates.greaterThan(1)));
+        assertTrue(RandomAccessListIterate.removeIf(FastList.newListWith(1, 2, 3), Predicates.greaterThan(0)));
+        assertFalse(RandomAccessListIterate.removeIf(FastList.newListWith(1, 2, 3), Predicates.greaterThan(4)));
+        assertFalse(RandomAccessListIterate.removeIf(FastList.newList(), Predicates.greaterThan(4)));
     }
 
     @Test
     public void removeIfWith()
     {
-        Assert.assertTrue(RandomAccessListIterate.removeIfWith(FastList.newListWith(1, 2, 3), Predicates2.greaterThan(), 1));
-        Assert.assertTrue(RandomAccessListIterate.removeIfWith(FastList.newListWith(1, 2, 3), Predicates2.greaterThan(), 0));
-        Assert.assertFalse(RandomAccessListIterate.removeIfWith(FastList.newListWith(1, 2, 3), Predicates2.greaterThan(), 4));
-        Assert.assertFalse(RandomAccessListIterate.removeIfWith(FastList.newList(), Predicates2.greaterThan(), 1));
+        assertTrue(RandomAccessListIterate.removeIfWith(FastList.newListWith(1, 2, 3), Predicates2.greaterThan(), 1));
+        assertTrue(RandomAccessListIterate.removeIfWith(FastList.newListWith(1, 2, 3), Predicates2.greaterThan(), 0));
+        assertFalse(RandomAccessListIterate.removeIfWith(FastList.newListWith(1, 2, 3), Predicates2.greaterThan(), 4));
+        assertFalse(RandomAccessListIterate.removeIfWith(FastList.newList(), Predicates2.greaterThan(), 1));
     }
 
     @Test
     public void injectInto()
     {
         MutableList<Integer> list = Lists.fixedSize.of(1, 2, 3);
-        Assert.assertEquals(Integer.valueOf(7), RandomAccessListIterate.injectInto(1, list, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(7), RandomAccessListIterate.injectInto(1, list, AddFunction.INTEGER));
     }
 
     @Test
     public void injectIntoInt()
     {
         MutableList<Integer> list = Lists.fixedSize.of(1, 2, 3);
-        Assert.assertEquals(7, RandomAccessListIterate.injectInto(1, list, AddFunction.INTEGER_TO_INT));
+        assertEquals(7, RandomAccessListIterate.injectInto(1, list, AddFunction.INTEGER_TO_INT));
     }
 
     @Test
     public void injectIntoLong()
     {
         MutableList<Integer> list = Lists.fixedSize.of(1, 2, 3);
-        Assert.assertEquals(7, RandomAccessListIterate.injectInto(1, list, AddFunction.INTEGER_TO_LONG));
+        assertEquals(7, RandomAccessListIterate.injectInto(1, list, AddFunction.INTEGER_TO_LONG));
     }
 
     @Test
     public void injectIntoDouble()
     {
         MutableList<Double> list = Lists.fixedSize.of(1.0, 2.0, 3.0);
-        Assert.assertEquals(7.0d, RandomAccessListIterate.injectInto(1.0, list, AddFunction.DOUBLE), 0.001);
+        assertEquals(7.0d, RandomAccessListIterate.injectInto(1.0, list, AddFunction.DOUBLE), 0.001);
     }
 
     @Test
     public void injectIntoString()
     {
         MutableList<String> list = Lists.fixedSize.of("1", "2", "3");
-        Assert.assertEquals("0123", RandomAccessListIterate.injectInto("0", list, AddFunction.STRING));
+        assertEquals("0123", RandomAccessListIterate.injectInto("0", list, AddFunction.STRING));
     }
 
     @Test
@@ -131,7 +137,7 @@ public class RandomAccessListIterateTest
     {
         MutableList<String> list = Lists.fixedSize.of("1", "12", "123");
         Function2<Integer, String, Integer> function = MaxSizeFunction.STRING;
-        Assert.assertEquals(Integer.valueOf(3), RandomAccessListIterate.injectInto(Integer.MIN_VALUE, list, function));
+        assertEquals(Integer.valueOf(3), RandomAccessListIterate.injectInto(Integer.MIN_VALUE, list, function));
     }
 
     @Test
@@ -139,13 +145,13 @@ public class RandomAccessListIterateTest
     {
         MutableList<String> list = Lists.fixedSize.of("1", "12", "123");
         Function2<Integer, String, Integer> function = MinSizeFunction.STRING;
-        Assert.assertEquals(Integer.valueOf(1), RandomAccessListIterate.injectInto(Integer.MAX_VALUE, list, function));
+        assertEquals(Integer.valueOf(1), RandomAccessListIterate.injectInto(Integer.MAX_VALUE, list, function));
     }
 
     @Test
     public void collect()
     {
-        Assert.assertEquals(
+        assertEquals(
                 iList("true", "false", "null"),
                 RandomAccessListIterate.collect(mList(true, false, null), String::valueOf));
     }
@@ -179,11 +185,11 @@ public class RandomAccessListIterateTest
     @Test
     public void collectReflective()
     {
-        Assert.assertEquals(
+        assertEquals(
                 iList("true", "false", "null"),
                 RandomAccessListIterate.collect(mList(true, false, null), String::valueOf));
 
-        Assert.assertEquals(
+        assertEquals(
                 iList("true", "false", "null"),
                 RandomAccessListIterate.collect(mList(true, false, null), String::valueOf, new ArrayList<>()));
     }
@@ -209,14 +215,14 @@ public class RandomAccessListIterateTest
     public void getLast()
     {
         MutableList<Boolean> list = Lists.fixedSize.of(true, null, false);
-        Assert.assertEquals(Boolean.FALSE, RandomAccessListIterate.getLast(list));
+        assertEquals(Boolean.FALSE, RandomAccessListIterate.getLast(list));
     }
 
     @Test
     public void getLastOnEmpty()
     {
         List<?> list = new ArrayList<>();
-        Assert.assertNull(RandomAccessListIterate.getLast(list));
+        assertNull(RandomAccessListIterate.getLast(list));
     }
 
     @Test
@@ -224,9 +230,9 @@ public class RandomAccessListIterateTest
     {
         MutableList<Integer> list = this.getIntegerList();
         int result = RandomAccessListIterate.count(list, Predicates.attributeEqual(Number::intValue, 3));
-        Assert.assertEquals(1, result);
+        assertEquals(1, result);
         int result2 = RandomAccessListIterate.count(list, Predicates.attributeEqual(Number::intValue, 6));
-        Assert.assertEquals(0, result2);
+        assertEquals(0, result2);
     }
 
     private MutableList<Integer> getIntegerList()
@@ -239,7 +245,7 @@ public class RandomAccessListIterateTest
     {
         MutableList<Integer> list = this.getIntegerList();
         Iterate.sortThis(list);
-        RandomAccessListIterate.forEachWithIndex(list, (object, index) -> Assert.assertEquals(index, object - 1));
+        RandomAccessListIterate.forEachWithIndex(list, (object, index) -> assertEquals(index, object - 1));
     }
 
     @Test
@@ -249,22 +255,22 @@ public class RandomAccessListIterateTest
 
         MutableList<Integer> result = Lists.mutable.empty();
         RandomAccessListIterate.forEach(integers, 5, 7, result::add);
-        Assert.assertEquals(Lists.immutable.with(3, 3, 2), result);
+        assertEquals(Lists.immutable.with(3, 3, 2), result);
 
         MutableList<Integer> result2 = Lists.mutable.empty();
         RandomAccessListIterate.forEach(integers, 5, 5, result2::add);
-        Assert.assertEquals(Lists.immutable.with(3), result2);
+        assertEquals(Lists.immutable.with(3), result2);
 
         MutableList<Integer> result3 = Lists.mutable.empty();
         RandomAccessListIterate.forEach(integers, 0, 9, result3::add);
-        Assert.assertEquals(Lists.immutable.with(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), result3);
+        assertEquals(Lists.immutable.with(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), result3);
 
         MutableList<Integer> result4 = Lists.mutable.empty();
         RandomAccessListIterate.forEach(integers, 7, 5, result4::add);
-        Assert.assertEquals(Lists.immutable.with(2, 3, 3), result4);
+        assertEquals(Lists.immutable.with(2, 3, 3), result4);
 
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(integers, -1, 0, result::add));
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(integers, 0, -1, result::add));
+        assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(integers, -1, 0, result::add));
+        assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(integers, 0, -1, result::add));
     }
 
     @Test
@@ -274,23 +280,23 @@ public class RandomAccessListIterateTest
 
         StringBuilder builder = new StringBuilder();
         RandomAccessListIterate.forEachWithIndex(integers, 5, 7, (each, index) -> builder.append(each).append(index));
-        Assert.assertEquals("353627", builder.toString());
+        assertEquals("353627", builder.toString());
 
         StringBuilder builder2 = new StringBuilder();
         RandomAccessListIterate.forEachWithIndex(integers, 5, 5, (each, index) -> builder2.append(each).append(index));
-        Assert.assertEquals("35", builder2.toString());
+        assertEquals("35", builder2.toString());
 
         StringBuilder builder3 = new StringBuilder();
         RandomAccessListIterate.forEachWithIndex(integers, 0, 9, (each, index) -> builder3.append(each).append(index));
-        Assert.assertEquals("40414243343536272819", builder3.toString());
+        assertEquals("40414243343536272819", builder3.toString());
 
         StringBuilder builder4 = new StringBuilder();
         RandomAccessListIterate.forEachWithIndex(integers, 7, 5, (each, index) -> builder4.append(each).append(index));
-        Assert.assertEquals("273635", builder4.toString());
+        assertEquals("273635", builder4.toString());
 
         MutableList<Integer> result = Lists.mutable.of();
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEachWithIndex(integers, -1, 0, new AddToList(result)));
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEachWithIndex(integers, 0, -1, new AddToList(result)));
+        assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEachWithIndex(integers, -1, 0, new AddToList(result)));
+        assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEachWithIndex(integers, 0, -1, new AddToList(result)));
     }
 
     @Test
@@ -300,16 +306,16 @@ public class RandomAccessListIterateTest
         MutableList<String> list2 = Lists.fixedSize.of("a", "b");
         List<Pair<String, String>> list = new ArrayList<>();
         RandomAccessListIterate.forEachInBoth(list1, list2, (argument1, argument2) -> list.add(Tuples.twin(argument1, argument2)));
-        Assert.assertEquals(FastList.newListWith(Tuples.twin("1", "a"), Tuples.twin("2", "b")), list);
+        assertEquals(FastList.newListWith(Tuples.twin("1", "a"), Tuples.twin("2", "b")), list);
     }
 
     @Test
     public void detectWith()
     {
         MutableList<Integer> list = this.getIntegerList();
-        Assert.assertEquals(Integer.valueOf(1), RandomAccessListIterate.detectWith(list, Object::equals, 1));
+        assertEquals(Integer.valueOf(1), RandomAccessListIterate.detectWith(list, Object::equals, 1));
         MutableList<Integer> list2 = Lists.fixedSize.of(1, 2, 2);
-        Assert.assertSame(list2.get(1), RandomAccessListIterate.detectWith(list2, Object::equals, 2));
+        assertSame(list2.get(1), RandomAccessListIterate.detectWith(list2, Object::equals, 2));
     }
 
     @Test
@@ -349,23 +355,23 @@ public class RandomAccessListIterateTest
     public void anySatisfyWith()
     {
         MutableList<Integer> list = this.getIntegerList();
-        Assert.assertTrue(RandomAccessListIterate.anySatisfyWith(list, Predicates2.instanceOf(), Integer.class));
-        Assert.assertFalse(RandomAccessListIterate.anySatisfyWith(list, Predicates2.instanceOf(), Double.class));
+        assertTrue(RandomAccessListIterate.anySatisfyWith(list, Predicates2.instanceOf(), Integer.class));
+        assertFalse(RandomAccessListIterate.anySatisfyWith(list, Predicates2.instanceOf(), Double.class));
     }
 
     @Test
     public void allSatisfyWith()
     {
         MutableList<Integer> list = this.getIntegerList();
-        Assert.assertTrue(RandomAccessListIterate.allSatisfyWith(list, Predicates2.instanceOf(), Integer.class));
+        assertTrue(RandomAccessListIterate.allSatisfyWith(list, Predicates2.instanceOf(), Integer.class));
         Predicate2<Integer, Integer> greaterThanPredicate = Predicates2.greaterThan();
-        Assert.assertFalse(RandomAccessListIterate.allSatisfyWith(list, greaterThanPredicate, 2));
+        assertFalse(RandomAccessListIterate.allSatisfyWith(list, greaterThanPredicate, 2));
     }
 
     @Test
     public void countWith()
     {
-        Assert.assertEquals(5, RandomAccessListIterate.countWith(this.getIntegerList(), Predicates2.instanceOf(), Integer.class));
+        assertEquals(5, RandomAccessListIterate.countWith(this.getIntegerList(), Predicates2.instanceOf(), Integer.class));
     }
 
     @Test
@@ -505,8 +511,8 @@ public class RandomAccessListIterateTest
                 Tuples.twin(1, 1),
                 Tuples.twin(2, 2),
                 Tuples.twin(3, 3));
-        Assert.assertEquals(expected, RandomAccessListIterate.zip(integers, integers));
-        Assert.assertEquals(expected, RandomAccessListIterate.zip(integers, integers::iterator));
+        assertEquals(expected, RandomAccessListIterate.zip(integers, integers));
+        assertEquals(expected, RandomAccessListIterate.zip(integers, integers::iterator));
     }
 
     private static class FailProcedure2 implements Procedure2<Object, Integer>
@@ -516,7 +522,7 @@ public class RandomAccessListIterateTest
         @Override
         public void value(Object argument1, Integer argument2)
         {
-            Assert.fail();
+            fail();
         }
     }
 

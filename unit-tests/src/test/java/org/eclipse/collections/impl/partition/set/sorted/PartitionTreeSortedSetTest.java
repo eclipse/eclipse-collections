@@ -15,8 +15,9 @@ import org.eclipse.collections.api.partition.set.sorted.PartitionImmutableSorted
 import org.eclipse.collections.api.partition.set.sorted.PartitionMutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PartitionTreeSortedSetTest
 {
@@ -30,7 +31,7 @@ public class PartitionTreeSortedSetTest
         partitionTreeSortedSet.getSelected().addAll(selected);
         partitionTreeSortedSet.getRejected().addAll(rejected);
         PartitionImmutableSortedSet<Integer> immutableSortedSet = partitionTreeSortedSet.toImmutable();
-        Assert.assertEquals(selected, immutableSortedSet.getSelected());
-        Assert.assertEquals(rejected, immutableSortedSet.getRejected());
+        assertEquals(selected, immutableSortedSet.getSelected());
+        assertEquals(rejected, immutableSortedSet.getRejected());
     }
 }

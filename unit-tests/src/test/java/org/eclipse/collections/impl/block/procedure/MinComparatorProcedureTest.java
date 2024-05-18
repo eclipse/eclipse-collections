@@ -11,8 +11,9 @@
 package org.eclipse.collections.impl.block.procedure;
 
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertSame;
 
 public class MinComparatorProcedureTest
 {
@@ -26,12 +27,12 @@ public class MinComparatorProcedureTest
         Integer fourth = new Integer(0);
 
         procedure.value(first);
-        Assert.assertSame(first, procedure.getResult());
+        assertSame(first, procedure.getResult());
         procedure.value(second);
-        Assert.assertSame(first, procedure.getResult());
+        assertSame(first, procedure.getResult());
         procedure.value(third);
-        Assert.assertSame(first, procedure.getResult());
+        assertSame(first, procedure.getResult());
         procedure.value(fourth);
-        Assert.assertSame(fourth, procedure.getResult());
+        assertSame(fourth, procedure.getResult());
     }
 }

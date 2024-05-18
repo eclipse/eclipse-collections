@@ -11,8 +11,10 @@
 package org.eclipse.collections.api.block.predicate;
 
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class Predicate2Test
 {
@@ -20,9 +22,9 @@ public class Predicate2Test
     public void test()
     {
         Predicate2<Object, Object> alwaysTruePredicate = Predicates2.alwaysTrue();
-        Assert.assertTrue(alwaysTruePredicate.test("A", "B"));
+        assertTrue(alwaysTruePredicate.test("A", "B"));
 
         Predicate2<Object, Object> alwaysFalsePredicate = Predicates2.alwaysFalse();
-        Assert.assertFalse(alwaysFalsePredicate.test("C", "D"));
+        assertFalse(alwaysFalsePredicate.test("C", "D"));
     }
 }

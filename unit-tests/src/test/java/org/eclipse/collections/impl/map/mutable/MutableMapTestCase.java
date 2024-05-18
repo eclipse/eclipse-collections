@@ -15,8 +15,9 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Abstract JUnit TestCase for {@link MutableMap}s.
@@ -53,7 +54,7 @@ public abstract class MutableMapTestCase extends MutableMapIterableTestCase
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two");
         MutableMap<Integer, String> clone = map.clone();
-        Assert.assertNotSame(map, clone);
+        assertNotSame(map, clone);
         Verify.assertEqualsAndHashCode(map, clone);
     }
 }

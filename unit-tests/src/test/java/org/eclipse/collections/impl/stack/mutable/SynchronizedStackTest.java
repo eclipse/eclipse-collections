@@ -11,8 +11,9 @@
 package org.eclipse.collections.impl.stack.mutable;
 
 import org.eclipse.collections.api.stack.MutableStack;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link SynchronizedStack}.
@@ -46,6 +47,6 @@ public class SynchronizedStackTest extends MutableStackTestCase
     @Test
     public void testNullStack()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> SynchronizedStack.of(null));
+        assertThrows(IllegalArgumentException.class, () -> SynchronizedStack.of(null));
     }
 }

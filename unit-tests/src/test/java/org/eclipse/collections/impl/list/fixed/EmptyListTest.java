@@ -22,8 +22,13 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 public class EmptyListTest
 {
@@ -36,42 +41,42 @@ public class EmptyListTest
     @Test
     public void contains()
     {
-        Assert.assertFalse(new EmptyList<>().contains(null));
-        Assert.assertFalse(new EmptyList<>().contains(new Object()));
+        assertFalse(new EmptyList<>().contains(null));
+        assertFalse(new EmptyList<>().contains(new Object()));
     }
 
     @Test
     public void get()
     {
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> new EmptyList<>().get(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> new EmptyList<>().get(0));
     }
 
     @Test
     public void set()
     {
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> new EmptyList<>().set(0, null));
+        assertThrows(IndexOutOfBoundsException.class, () -> new EmptyList<>().set(0, null));
     }
 
     @Test
     public void empty()
     {
         Verify.assertEmpty(new EmptyList<>());
-        Assert.assertFalse(new EmptyList<>().notEmpty());
+        assertFalse(new EmptyList<>().notEmpty());
         Verify.assertEmpty(Lists.fixedSize.of());
-        Assert.assertFalse(Lists.fixedSize.of().notEmpty());
+        assertFalse(Lists.fixedSize.of().notEmpty());
     }
 
     @Test
     public void getFirstLast()
     {
-        Assert.assertNull(new EmptyList<>().getFirst());
-        Assert.assertNull(new EmptyList<>().getLast());
+        assertNull(new EmptyList<>().getFirst());
+        assertNull(new EmptyList<>().getLast());
     }
 
     @Test
     public void getOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> new EmptyList<>().getOnly());
+        assertThrows(IllegalStateException.class, () -> new EmptyList<>().getOnly());
     }
 
     @Test
@@ -84,49 +89,49 @@ public class EmptyListTest
     @Test
     public void testClone()
     {
-        Assert.assertSame(Lists.fixedSize.of().clone(), Lists.fixedSize.of());
+        assertSame(Lists.fixedSize.of().clone(), Lists.fixedSize.of());
     }
 
     @Test
     public void min()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().min(Comparators.naturalOrder()));
+        assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().min(Comparators.naturalOrder()));
     }
 
     @Test
     public void max()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().max(Comparators.naturalOrder()));
+        assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().max(Comparators.naturalOrder()));
     }
 
     @Test
     public void min_without_comparator()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().min());
+        assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().min());
     }
 
     @Test
     public void max_without_comparator()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().max());
+        assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().max());
     }
 
     @Test
     public void minBy()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().minBy(String::valueOf));
+        assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().minBy(String::valueOf));
     }
 
     @Test
     public void maxBy()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().maxBy(String::valueOf));
+        assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().maxBy(String::valueOf));
     }
 
     @Test
     public void zip()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Lists.fixedSize.of(),
                 Lists.fixedSize.of().zip(FastList.newListWith(1, 2, 3)));
     }
@@ -134,7 +139,7 @@ public class EmptyListTest
     @Test
     public void zipWithIndex()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Lists.fixedSize.of(),
                 Lists.fixedSize.of().zipWithIndex());
     }
@@ -142,7 +147,7 @@ public class EmptyListTest
     @Test
     public void chunk_large_size()
     {
-        Assert.assertEquals(Lists.fixedSize.of(), Lists.fixedSize.of().chunk(10));
+        assertEquals(Lists.fixedSize.of(), Lists.fixedSize.of().chunk(10));
     }
 
     @Test
@@ -151,8 +156,8 @@ public class EmptyListTest
         MutableList<Object> expected = Lists.fixedSize.of();
         MutableList<Object> list = Lists.fixedSize.of();
         MutableList<Object> sortedList = list.sortThis();
-        Assert.assertEquals(expected, sortedList);
-        Assert.assertSame(sortedList, list);
+        assertEquals(expected, sortedList);
+        assertSame(sortedList, list);
     }
 
     @Test
@@ -161,8 +166,8 @@ public class EmptyListTest
         MutableList<Object> expected = Lists.fixedSize.of();
         MutableList<Object> list = Lists.fixedSize.of();
         MutableList<Object> sortedList = list.sortThisBy(String::valueOf);
-        Assert.assertEquals(expected, sortedList);
-        Assert.assertSame(sortedList, list);
+        assertEquals(expected, sortedList);
+        assertSame(sortedList, list);
     }
 
     @Test
@@ -170,22 +175,22 @@ public class EmptyListTest
     {
         MutableList<Object> expected = Lists.fixedSize.of();
         MutableList<Object> list = Lists.fixedSize.of();
-        Assert.assertEquals(expected, list.sortThisByBoolean(anObject -> true));
-        Assert.assertSame(list, list.sortThisByBoolean(anObject -> true));
-        Assert.assertEquals(expected, list.sortThisByByte(anObject -> (byte) 0));
-        Assert.assertSame(list, list.sortThisByByte(anObject -> (byte) 0));
-        Assert.assertEquals(expected, list.sortThisByChar(anObject -> (char) 0));
-        Assert.assertSame(list, list.sortThisByChar(anObject -> (char) 0));
-        Assert.assertEquals(expected, list.sortThisByDouble(anObject -> 0.0));
-        Assert.assertSame(list, list.sortThisByDouble(anObject -> 0.0));
-        Assert.assertEquals(expected, list.sortThisByFloat(anObject -> 0.0f));
-        Assert.assertSame(list, list.sortThisByFloat(anObject -> 0.0f));
-        Assert.assertEquals(expected, list.sortThisByInt(anObject -> 0));
-        Assert.assertSame(list, list.sortThisByInt(anObject -> 0));
-        Assert.assertEquals(expected, list.sortThisByLong(anObject -> 0L));
-        Assert.assertSame(list, list.sortThisByLong(anObject -> 0L));
-        Assert.assertEquals(expected, list.sortThisByShort(anObject -> (short) 0));
-        Assert.assertSame(list, list.sortThisByShort(anObject -> (short) 0));
+        assertEquals(expected, list.sortThisByBoolean(anObject -> true));
+        assertSame(list, list.sortThisByBoolean(anObject -> true));
+        assertEquals(expected, list.sortThisByByte(anObject -> (byte) 0));
+        assertSame(list, list.sortThisByByte(anObject -> (byte) 0));
+        assertEquals(expected, list.sortThisByChar(anObject -> (char) 0));
+        assertSame(list, list.sortThisByChar(anObject -> (char) 0));
+        assertEquals(expected, list.sortThisByDouble(anObject -> 0.0));
+        assertSame(list, list.sortThisByDouble(anObject -> 0.0));
+        assertEquals(expected, list.sortThisByFloat(anObject -> 0.0f));
+        assertSame(list, list.sortThisByFloat(anObject -> 0.0f));
+        assertEquals(expected, list.sortThisByInt(anObject -> 0));
+        assertSame(list, list.sortThisByInt(anObject -> 0));
+        assertEquals(expected, list.sortThisByLong(anObject -> 0L));
+        assertSame(list, list.sortThisByLong(anObject -> 0L));
+        assertEquals(expected, list.sortThisByShort(anObject -> (short) 0));
+        assertSame(list, list.sortThisByShort(anObject -> (short) 0));
     }
 
     @Test
@@ -208,14 +213,14 @@ public class EmptyListTest
     public void without()
     {
         MutableList<Integer> list = new EmptyList<>();
-        Assert.assertSame(list, list.without(2));
+        assertSame(list, list.without(2));
     }
 
     @Test
     public void withoutAll()
     {
         MutableList<Integer> list = new EmptyList<>();
-        Assert.assertEquals(list, list.withoutAll(FastList.newListWith(1, 2)));
+        assertEquals(list, list.withoutAll(FastList.newListWith(1, 2)));
     }
 
     @Test
@@ -253,7 +258,7 @@ public class EmptyListTest
     {
         AtomicInteger integer = new AtomicInteger();
         new EmptyList<>().each(each -> integer.incrementAndGet());
-        Assert.assertEquals(0, integer.get());
+        assertEquals(0, integer.get());
     }
 
     @Test
@@ -261,41 +266,41 @@ public class EmptyListTest
     {
         AtomicInteger integer = new AtomicInteger();
         new EmptyList<>().forEachWith((argument1, argument2) -> integer.incrementAndGet(), null);
-        Assert.assertEquals(0, integer.get());
+        assertEquals(0, integer.get());
     }
 
     @Test
     public void iterator()
     {
         Iterator<Object> iterator = new EmptyList<>().iterator();
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
     public void listIterator()
     {
         ListIterator<Object> iterator = new EmptyList<>().listIterator();
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertFalse(iterator.hasPrevious());
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
-        Assert.assertThrows(NoSuchElementException.class, iterator::previous);
+        assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasPrevious());
+        assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::previous);
     }
 
     @Test
     public void listIteratorWithIndex()
     {
         ListIterator<Object> iterator = new EmptyList<>().listIterator(0);
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertFalse(iterator.hasPrevious());
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
-        Assert.assertThrows(NoSuchElementException.class, iterator::previous);
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> new EmptyList<>().listIterator(1));
+        assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasPrevious());
+        assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::previous);
+        assertThrows(IndexOutOfBoundsException.class, () -> new EmptyList<>().listIterator(1));
     }
 
     @Test
     public void toImmutable()
     {
-        Assert.assertSame(Lists.immutable.empty(), new EmptyList<>().toImmutable());
+        assertSame(Lists.immutable.empty(), new EmptyList<>().toImmutable());
     }
 }

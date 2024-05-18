@@ -17,8 +17,13 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Abstract JUnit test to check that {@link AbstractMemoryEfficientMutableList}s are Unmodifiable.
@@ -33,43 +38,43 @@ public abstract class UnmodifiableMemoryEfficientListTestCase<T> extends Unmodif
     {
         MutableList<T> collection = this.getCollection();
         ListIterator<T> it = collection.listIterator();
-        Assert.assertFalse(it.hasPrevious());
-        Assert.assertEquals(-1, it.previousIndex());
-        Assert.assertEquals(0, it.nextIndex());
+        assertFalse(it.hasPrevious());
+        assertEquals(-1, it.previousIndex());
+        assertEquals(0, it.nextIndex());
         it.next();
-        Assert.assertEquals(1, it.nextIndex());
+        assertEquals(1, it.nextIndex());
 
-        Assert.assertThrows(UnsupportedOperationException.class, it::remove);
+        assertThrows(UnsupportedOperationException.class, it::remove);
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> it.add(null));
+        assertThrows(UnsupportedOperationException.class, () -> it.add(null));
 
         it.set(null);
-        Assert.assertNotEquals(this.getCollection(), collection);
+        assertNotEquals(this.getCollection(), collection);
     }
 
     @Test
     public void addAllAtIndex()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getCollection().addAll(0, FastList.<T>newList().with((T) null)));
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().addAll(0, FastList.<T>newList().with((T) null)));
     }
 
     @Test
     public void addAtIndex()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getCollection().add(0, null));
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().add(0, null));
     }
 
     @Test
     public void removeFromIndex()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getCollection().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().remove(0));
     }
 
     @Test
     public void subList()
     {
         MutableList<T> subList = this.getCollection().subList(0, 1);
-        Assert.assertThrows(UnsupportedOperationException.class, subList::clear);
+        assertThrows(UnsupportedOperationException.class, subList::clear);
     }
 
     @Override
@@ -86,27 +91,27 @@ public abstract class UnmodifiableMemoryEfficientListTestCase<T> extends Unmodif
     {
         MutableList<T> mutableList1 = this.getCollection();
         MutableList<Integer> mutableList2 = mutableList1.collect(element -> Integer.valueOf(element.toString()) + 1);
-        Assert.assertTrue(mutableList1.corresponds(mutableList2, (argument1, argument2) -> Integer.valueOf(argument1.toString()) < argument2));
-        Assert.assertFalse(mutableList1.corresponds(mutableList2, (argument1, argument2) -> Integer.valueOf(argument1.toString()) > argument2));
+        assertTrue(mutableList1.corresponds(mutableList2, (argument1, argument2) -> Integer.valueOf(argument1.toString()) < argument2));
+        assertFalse(mutableList1.corresponds(mutableList2, (argument1, argument2) -> Integer.valueOf(argument1.toString()) > argument2));
 
         MutableList<Integer> mutableList3 = this.getCollection().collect(element -> Integer.valueOf(element.toString()));
         mutableList3.add(0);
-        Assert.assertFalse(mutableList1.corresponds(mutableList3, Predicates2.alwaysTrue()));
+        assertFalse(mutableList1.corresponds(mutableList3, Predicates2.alwaysTrue()));
     }
 
     @Test
     public void detectIndex()
     {
         MutableList<T> mutableList = this.getCollection();
-        Assert.assertEquals(0, mutableList.detectIndex(element -> Integer.valueOf(element.toString()) == 1));
-        Assert.assertEquals(-1, mutableList.detectIndex(element -> Integer.valueOf(element.toString()) == 0));
+        assertEquals(0, mutableList.detectIndex(element -> Integer.valueOf(element.toString()) == 1));
+        assertEquals(-1, mutableList.detectIndex(element -> Integer.valueOf(element.toString()) == 0));
     }
 
     @Test
     public void detectLastIndex()
     {
         MutableList<T> mutableList = this.getCollection();
-        Assert.assertEquals(0, mutableList.detectLastIndex(element -> Integer.valueOf(element.toString()) == 1));
-        Assert.assertEquals(-1, mutableList.detectLastIndex(element -> Integer.valueOf(element.toString()) == 0));
+        assertEquals(0, mutableList.detectLastIndex(element -> Integer.valueOf(element.toString()) == 1));
+        assertEquals(-1, mutableList.detectLastIndex(element -> Integer.valueOf(element.toString()) == 0));
     }
 }

@@ -18,9 +18,14 @@ import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link UnmodifiableRichIterable}.
@@ -60,31 +65,31 @@ public class UnmodifiableRichIterableTest extends AbstractRichIterableTestCase
     @Test
     public void testDelegatingMethods()
     {
-        Assert.assertTrue(this.mutableCollection.notEmpty());
-        Assert.assertTrue(this.unmodifiableCollection.notEmpty());
-        Assert.assertFalse(this.mutableCollection.isEmpty());
-        Assert.assertFalse(this.unmodifiableCollection.isEmpty());
+        assertTrue(this.mutableCollection.notEmpty());
+        assertTrue(this.unmodifiableCollection.notEmpty());
+        assertFalse(this.mutableCollection.isEmpty());
+        assertFalse(this.unmodifiableCollection.isEmpty());
         Verify.assertIterableSize(this.mutableCollection.size(), this.unmodifiableCollection);
-        Assert.assertEquals(this.mutableCollection.getFirst(), this.unmodifiableCollection.getFirst());
-        Assert.assertEquals(this.mutableCollection.getLast(), this.unmodifiableCollection.getLast());
+        assertEquals(this.mutableCollection.getFirst(), this.unmodifiableCollection.getFirst());
+        assertEquals(this.mutableCollection.getLast(), this.unmodifiableCollection.getLast());
     }
 
     @Test
     public void converters()
     {
-        Assert.assertEquals(
+        assertEquals(
                 this.mutableCollection.toBag(),
                 this.unmodifiableCollection.toBag());
-        Assert.assertEquals(
+        assertEquals(
                 this.mutableCollection.asLazy().toBag(),
                 this.unmodifiableCollection.asLazy().toBag());
-        Assert.assertArrayEquals(
+        assertArrayEquals(
                 this.mutableCollection.toArray(),
                 this.unmodifiableCollection.toArray());
-        Assert.assertArrayEquals(
+        assertArrayEquals(
                 this.mutableCollection.toArray(EMPTY_STRING_ARRAY),
                 this.unmodifiableCollection.toArray(EMPTY_STRING_ARRAY));
-        Assert.assertEquals(this.mutableCollection.toList(), this.unmodifiableCollection.toList());
+        assertEquals(this.mutableCollection.toList(), this.unmodifiableCollection.toList());
         Verify.assertListsEqual(
                 Lists.mutable.of(BON_JOVI, EUROPE, METALLICA, SCORPIONS),
                 this.unmodifiableCollection.toSortedList());
@@ -108,8 +113,8 @@ public class UnmodifiableRichIterableTest extends AbstractRichIterableTestCase
     @Override
     public void equalsAndHashCode()
     {
-        Assert.assertNotEquals(this.newWith(1, 2, 3).hashCode(), this.newWith(1, 2, 3).hashCode());
-        Assert.assertNotEquals(this.newWith(1, 2, 3), this.newWith(1, 2, 3));
+        assertNotEquals(this.newWith(1, 2, 3).hashCode(), this.newWith(1, 2, 3).hashCode());
+        assertNotEquals(this.newWith(1, 2, 3), this.newWith(1, 2, 3));
     }
 
     @Test
@@ -118,8 +123,8 @@ public class UnmodifiableRichIterableTest extends AbstractRichIterableTestCase
     {
         PartitionIterable<String> partition = this.mutableCollection.partition(ignored -> true);
         PartitionIterable<String> unmodifiablePartition = this.unmodifiableCollection.partition(ignored -> true);
-        Assert.assertEquals(partition.getSelected(), unmodifiablePartition.getSelected());
-        Assert.assertEquals(partition.getRejected(), unmodifiablePartition.getRejected());
+        assertEquals(partition.getSelected(), unmodifiablePartition.getSelected());
+        assertEquals(partition.getRejected(), unmodifiablePartition.getRejected());
     }
 
     @Test
@@ -128,15 +133,15 @@ public class UnmodifiableRichIterableTest extends AbstractRichIterableTestCase
     {
         PartitionIterable<String> partition = this.mutableCollection.partitionWith((ignored1, ignored2) -> true, null);
         PartitionIterable<String> unmodifiablePartition = this.unmodifiableCollection.partitionWith((ignored1, ignored2) -> true, null);
-        Assert.assertEquals(partition.getSelected(), unmodifiablePartition.getSelected());
-        Assert.assertEquals(partition.getRejected(), unmodifiablePartition.getRejected());
+        assertEquals(partition.getSelected(), unmodifiablePartition.getSelected());
+        assertEquals(partition.getRejected(), unmodifiablePartition.getRejected());
     }
 
     @Test
     @Override
     public void groupBy()
     {
-        Assert.assertEquals(this.mutableCollection.groupBy(Functions.getStringPassThru()), this.unmodifiableCollection.groupBy(Functions.getStringPassThru()));
-        Assert.assertEquals(this.mutableCollection.groupBy(Functions.getStringPassThru(), FastListMultimap.newMultimap()), this.unmodifiableCollection.groupBy(Functions.getStringPassThru(), FastListMultimap.newMultimap()));
+        assertEquals(this.mutableCollection.groupBy(Functions.getStringPassThru()), this.unmodifiableCollection.groupBy(Functions.getStringPassThru()));
+        assertEquals(this.mutableCollection.groupBy(Functions.getStringPassThru(), FastListMultimap.newMultimap()), this.unmodifiableCollection.groupBy(Functions.getStringPassThru(), FastListMultimap.newMultimap()));
     }
 }

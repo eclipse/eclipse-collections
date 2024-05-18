@@ -32,8 +32,14 @@ import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.ArrayIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
 {
@@ -96,16 +102,16 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
         ImmutableSortedMap<String, Integer> immutableSortedMap = mutableSortedMap.toImmutable();
         MutableList<Map.Entry<String, Integer>> entries = FastList.newList(immutableSortedMap.castToSortedMap().entrySet());
         MutableList<Map.Entry<String, Integer>> sortedEntries = entries.toSortedListBy(Map.Entry::getKey);
-        Assert.assertEquals(sortedEntries, entries);
+        assertEquals(sortedEntries, entries);
     }
 
     @Override
     @Test
     public void testToString()
     {
-        Assert.assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
-        Assert.assertEquals("{4=4, 3=3, 2=2, 1=1}", this.classUnderTest(Comparators.reverseNaturalOrder()).toString());
-        Assert.assertEquals("{}", new ImmutableTreeMap<>(new TreeSortedMap<>()).toString());
+        assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
+        assertEquals("{4=4, 3=3, 2=2, 1=1}", this.classUnderTest(Comparators.reverseNaturalOrder()).toString());
+        assertEquals("{}", new ImmutableTreeMap<>(new TreeSortedMap<>()).toString());
     }
 
     @Test(expected = NullPointerException.class)
@@ -117,7 +123,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     @Test
     public void firstKey()
     {
-        Assert.assertEquals(Integer.valueOf(1), new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).firstKey());
+        assertEquals(Integer.valueOf(1), new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).firstKey());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -129,7 +135,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     @Test
     public void lastKey()
     {
-        Assert.assertEquals(Integer.valueOf(4), new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).lastKey());
+        assertEquals(Integer.valueOf(4), new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).lastKey());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -150,11 +156,11 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     {
         SortedMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
         Set<Integer> keySet = immutableSortedMap.keySet();
-        Assert.assertTrue(keySet.contains(1));
-        Assert.assertTrue(keySet.contains(2));
-        Assert.assertTrue(keySet.contains(4));
-        Assert.assertFalse(keySet.contains(0));
-        Assert.assertFalse(keySet.contains(5));
+        assertTrue(keySet.contains(1));
+        assertTrue(keySet.contains(2));
+        assertTrue(keySet.contains(4));
+        assertFalse(keySet.contains(0));
+        assertFalse(keySet.contains(5));
     }
 
     @Test
@@ -162,31 +168,31 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     {
         SortedMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
         Set<Integer> keySet = immutableSortedMap.keySet();
-        Assert.assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1, 2, 3, 4)));
-        Assert.assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1, 4)));
-        Assert.assertTrue(keySet.containsAll(UnifiedSet.newSetWith(2, 3)));
-        Assert.assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1, 2, 3)));
-        Assert.assertTrue(keySet.containsAll(UnifiedSet.newSetWith(2, 3, 4)));
-        Assert.assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1)));
-        Assert.assertTrue(keySet.containsAll(FastList.newListWith(1, 4, 1, 3, 4)));
-        Assert.assertFalse(keySet.containsAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
-        Assert.assertFalse(keySet.containsAll(UnifiedSet.newSetWith(0, 1, 2, 3, 4, 5)));
-        Assert.assertFalse(keySet.containsAll(FastList.newListWith(0, 1, 4, 1, 3, 4, 0)));
+        assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1, 2, 3, 4)));
+        assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1, 4)));
+        assertTrue(keySet.containsAll(UnifiedSet.newSetWith(2, 3)));
+        assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1, 2, 3)));
+        assertTrue(keySet.containsAll(UnifiedSet.newSetWith(2, 3, 4)));
+        assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1)));
+        assertTrue(keySet.containsAll(FastList.newListWith(1, 4, 1, 3, 4)));
+        assertFalse(keySet.containsAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
+        assertFalse(keySet.containsAll(UnifiedSet.newSetWith(0, 1, 2, 3, 4, 5)));
+        assertFalse(keySet.containsAll(FastList.newListWith(0, 1, 4, 1, 3, 4, 0)));
     }
 
     @Test
     public void keySetIsEmpty()
     {
-        Assert.assertFalse(new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().isEmpty());
-        Assert.assertTrue(new ImmutableTreeMap<Integer, String>(SortedMaps.mutable.of()).keySet().isEmpty());
+        assertFalse(new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().isEmpty());
+        assertTrue(new ImmutableTreeMap<Integer, String>(SortedMaps.mutable.of()).keySet().isEmpty());
     }
 
     @Test
     public void keySetToString()
     {
-        Assert.assertEquals("[1, 2, 3, 4]", new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().toString());
-        Assert.assertEquals("[1, 2, 3, 4]", new ImmutableTreeMap<>(SortedMaps.mutable.of(4, "4", 3, "3", 2, "2", 1, "1")).keySet().toString());
-        Assert.assertEquals("[4, 3, 2, 1]", new ImmutableTreeMap<>(SortedMaps.mutable.of(Comparators.reverseNaturalOrder(), 4, "4", 3, "3", 2, "2", 1, "1")).keySet().toString());
+        assertEquals("[1, 2, 3, 4]", new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().toString());
+        assertEquals("[1, 2, 3, 4]", new ImmutableTreeMap<>(SortedMaps.mutable.of(4, "4", 3, "3", 2, "2", 1, "1")).keySet().toString());
+        assertEquals("[4, 3, 2, 1]", new ImmutableTreeMap<>(SortedMaps.mutable.of(Comparators.reverseNaturalOrder(), 4, "4", 3, "3", 2, "2", 1, "1")).keySet().toString());
     }
 
     @Test
@@ -203,13 +209,13 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
         MutableList<Integer> expected = FastList.newListWith(1, 2, 3, 4).toSortedList();
         Set<Integer> keySet = immutableSortedMap.keySet();
         Object[] array = keySet.toArray();
-        Assert.assertEquals(expected, FastList.newListWith(keySet.toArray()).toSortedList());
-        Assert.assertNotSame(array, keySet.toArray());
+        assertEquals(expected, FastList.newListWith(keySet.toArray()).toSortedList());
+        assertNotSame(array, keySet.toArray());
         array[3] = 5;
-        Assert.assertEquals(expected, FastList.newListWith(keySet.toArray()).toSortedList());
-        Assert.assertEquals(FastList.newListWith(1, 2, 3, 5).toSortedList(), FastList.newListWith(array).toSortedList());
+        assertEquals(expected, FastList.newListWith(keySet.toArray()).toSortedList());
+        assertEquals(FastList.newListWith(1, 2, 3, 5).toSortedList(), FastList.newListWith(array).toSortedList());
 
-        Assert.assertEquals(expected, FastList.newListWith(keySet.toArray(new Integer[keySet.size()])).toSortedList());
+        assertEquals(expected, FastList.newListWith(keySet.toArray(new Integer[keySet.size()])).toSortedList());
     }
 
     @Test
@@ -219,7 +225,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
         Integer[] destination = new Integer[2]; // deliberately to small to force the method to allocate one of the correct size
         Integer[] result = immutableSortedMap.keySet().toArray(destination);
         Arrays.sort(result);
-        Assert.assertArrayEquals(new Integer[]{1, 2, 3, 4}, result);
+        assertArrayEquals(new Integer[]{1, 2, 3, 4}, result);
     }
 
     @Test
@@ -231,7 +237,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
         target[5] = 42;
         Integer[] result = immutableSortedMap.keySet().toArray(target);
         ArrayIterate.sort(result, result.length, Comparators.safeNullsHigh(Integer::compareTo));
-        Assert.assertArrayEquals(new Integer[]{1, 2, 3, 4, 42, null}, result);
+        assertArrayEquals(new Integer[]{1, 2, 3, 4, 42, null}, result);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -292,6 +298,6 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     public void ofSortedMap()
     {
         SortedMap<Integer, String> immutableMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
-        Assert.assertSame(immutableMap, SortedMaps.immutable.ofSortedMap(immutableMap));
+        assertSame(immutableMap, SortedMaps.immutable.ofSortedMap(immutableMap));
     }
 }

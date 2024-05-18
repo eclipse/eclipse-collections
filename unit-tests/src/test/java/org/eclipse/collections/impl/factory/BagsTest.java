@@ -28,8 +28,14 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class BagsTest
 {
@@ -53,7 +59,7 @@ public class BagsTest
         Bag<Integer> bag = HashBag.newBagWith(1, 2, 2, 3, 3, 3);
         Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 2, 3, 3, 3), bagFactory.ofAll(bag));
         Verify.assertInstanceOf(MutableBag.class, bagFactory.ofAll(bag));
-        Assert.assertNotSame(bagFactory.ofAll(bag), bag);
+        assertNotSame(bagFactory.ofAll(bag), bag);
         Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 2, 3, 3, 3), bagFactory.ofAll(FastList.newListWith(1, 2, 2, 3, 3, 3)));
         Verify.assertInstanceOf(MutableBag.class, bagFactory.ofAll(FastList.newListWith(1, 2, 2, 3, 3, 3)));
         Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 3, 4, 5), bagFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
@@ -75,65 +81,65 @@ public class BagsTest
     public void immutables()
     {
         ImmutableBagFactory bagFactory = Bags.immutable;
-        Assert.assertEquals(HashBag.newBag(), bagFactory.of());
+        assertEquals(HashBag.newBag(), bagFactory.of());
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of());
-        Assert.assertEquals(HashBag.newBagWith(1), bagFactory.of(1));
+        assertEquals(HashBag.newBagWith(1), bagFactory.of(1));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1));
-        Assert.assertEquals(HashBag.newBagWith(1, 2), bagFactory.of(1, 2));
+        assertEquals(HashBag.newBagWith(1, 2), bagFactory.of(1, 2));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1, 2));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3), bagFactory.of(1, 2, 3));
+        assertEquals(HashBag.newBagWith(1, 2, 3), bagFactory.of(1, 2, 3));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1, 2, 3));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4), bagFactory.of(1, 2, 3, 4));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4), bagFactory.of(1, 2, 3, 4));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1, 2, 3, 4));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5), bagFactory.of(1, 2, 3, 4, 5));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5), bagFactory.of(1, 2, 3, 4, 5));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1, 2, 3, 4, 5));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6), bagFactory.of(1, 2, 3, 4, 5, 6));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6), bagFactory.of(1, 2, 3, 4, 5, 6));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1, 2, 3, 4, 5, 6));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7), bagFactory.of(1, 2, 3, 4, 5, 6, 7));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7), bagFactory.of(1, 2, 3, 4, 5, 6, 7));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1, 2, 3, 4, 5, 6, 7));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8), bagFactory.of(1, 2, 3, 4, 5, 6, 7, 8));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8), bagFactory.of(1, 2, 3, 4, 5, 6, 7, 8));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1, 2, 3, 4, 5, 6, 7, 8));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8, 9), bagFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8, 9), bagFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), bagFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), bagFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-        Assert.assertEquals(HashBag.newBagWith(3, 2, 1), bagFactory.ofAll(HashBag.newBagWith(1, 2, 3)));
+        assertEquals(HashBag.newBagWith(3, 2, 1), bagFactory.ofAll(HashBag.newBagWith(1, 2, 3)));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.ofAll(HashBag.newBagWith(1, 2, 3)));
-        Assert.assertEquals(HashBag.newBagWith(3, 2, 1), bagFactory.fromStream(Stream.of(1, 2, 3)));
+        assertEquals(HashBag.newBagWith(3, 2, 1), bagFactory.fromStream(Stream.of(1, 2, 3)));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.fromStream(Stream.of(1, 2, 3)));
-        Assert.assertEquals(HashBag.newBagWith(1), bagFactory.ofOccurrences(1, 1));
+        assertEquals(HashBag.newBagWith(1), bagFactory.ofOccurrences(1, 1));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.ofOccurrences(1, 1));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 2), bagFactory.ofOccurrences(1, 1, 2, 2));
+        assertEquals(HashBag.newBagWith(1, 2, 2), bagFactory.ofOccurrences(1, 1, 2, 2));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.ofOccurrences(1, 1, 2, 2));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 2, 3, 3, 3), bagFactory.ofOccurrences(1, 1, 2, 2, 3, 3));
+        assertEquals(HashBag.newBagWith(1, 2, 2, 3, 3, 3), bagFactory.ofOccurrences(1, 1, 2, 2, 3, 3));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.ofOccurrences(1, 1, 2, 2, 3, 3));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), bagFactory.ofOccurrences(1, 1, 2, 2, 3, 3, 4, 4));
+        assertEquals(HashBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), bagFactory.ofOccurrences(1, 1, 2, 2, 3, 3, 4, 4));
         Verify.assertInstanceOf(ImmutableBag.class, bagFactory.ofOccurrences(1, 1, 2, 2, 3, 3, 4, 4));
     }
 
     @Test
     public void emptyBag()
     {
-        Assert.assertTrue(Bags.immutable.of().isEmpty());
+        assertTrue(Bags.immutable.of().isEmpty());
     }
 
     @Test
     public void newBagWith()
     {
         ImmutableBag<String> bag = Bags.immutable.of();
-        Assert.assertEquals(bag, Bags.immutable.of(bag.toArray()));
-        Assert.assertEquals(bag = bag.newWith("1"), Bags.immutable.of("1"));
-        Assert.assertEquals(bag = bag.newWith("2"), Bags.immutable.of("1", "2"));
-        Assert.assertEquals(bag = bag.newWith("3"), Bags.immutable.of("1", "2", "3"));
-        Assert.assertEquals(bag = bag.newWith("4"), Bags.immutable.of("1", "2", "3", "4"));
-        Assert.assertEquals(bag = bag.newWith("5"), Bags.immutable.of("1", "2", "3", "4", "5"));
-        Assert.assertEquals(bag = bag.newWith("6"), Bags.immutable.of("1", "2", "3", "4", "5", "6"));
-        Assert.assertEquals(bag = bag.newWith("7"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7"));
-        Assert.assertEquals(bag = bag.newWith("8"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8"));
-        Assert.assertEquals(bag = bag.newWith("9"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
-        Assert.assertEquals(bag = bag.newWith("10"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-        Assert.assertEquals(bag = bag.newWith("11"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
-        Assert.assertEquals(bag = bag.newWith("12"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
+        assertEquals(bag, Bags.immutable.of(bag.toArray()));
+        assertEquals(bag = bag.newWith("1"), Bags.immutable.of("1"));
+        assertEquals(bag = bag.newWith("2"), Bags.immutable.of("1", "2"));
+        assertEquals(bag = bag.newWith("3"), Bags.immutable.of("1", "2", "3"));
+        assertEquals(bag = bag.newWith("4"), Bags.immutable.of("1", "2", "3", "4"));
+        assertEquals(bag = bag.newWith("5"), Bags.immutable.of("1", "2", "3", "4", "5"));
+        assertEquals(bag = bag.newWith("6"), Bags.immutable.of("1", "2", "3", "4", "5", "6"));
+        assertEquals(bag = bag.newWith("7"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7"));
+        assertEquals(bag = bag.newWith("8"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8"));
+        assertEquals(bag = bag.newWith("9"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        assertEquals(bag = bag.newWith("10"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        assertEquals(bag = bag.newWith("11"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+        assertEquals(bag = bag.newWith("12"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
     }
 
     @Test
@@ -154,7 +160,7 @@ public class BagsTest
         MutableBag<String> bags5 = Bags.mutable.withInitialCapacity(32);
         this.assertPresizedBagEquals((HashBag<String>) bags5, 64L);
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Bags.mutable.withInitialCapacity(-6));
+        assertThrows(IllegalArgumentException.class, () -> Bags.mutable.withInitialCapacity(-6));
     }
 
     @Test
@@ -175,7 +181,7 @@ public class BagsTest
         MutableBag<String> bags5 = Bags.mutable.ofInitialCapacity(32);
         this.assertPresizedBagEquals((HashBag<String>) bags5, 64L);
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Bags.mutable.ofInitialCapacity(-6));
+        assertThrows(IllegalArgumentException.class, () -> Bags.mutable.ofInitialCapacity(-6));
     }
 
     private void assertPresizedBagEquals(HashBag<String> bag, long length)
@@ -191,20 +197,20 @@ public class BagsTest
             Field values = ObjectIntHashMap.class.getDeclaredField("values");
             values.setAccessible(true);
 
-            Assert.assertEquals(length, ((Object[]) keys.get(items)).length);
-            Assert.assertEquals(length, ((int[]) values.get(items)).length);
+            assertEquals(length, ((Object[]) keys.get(items)).length);
+            assertEquals(length, ((int[]) values.get(items)).length);
         }
         catch (SecurityException e)
         {
-            Assert.fail("Unable to modify the visibility of the field " + e.getMessage());
+            fail("Unable to modify the visibility of the field " + e.getMessage());
         }
         catch (NoSuchFieldException e)
         {
-            Assert.fail("No field named " + e.getMessage());
+            fail("No field named " + e.getMessage());
         }
         catch (IllegalAccessException e)
         {
-            Assert.fail("No access to the field " + e.getMessage());
+            fail("No access to the field " + e.getMessage());
         }
     }
 
@@ -213,17 +219,17 @@ public class BagsTest
     public void newBagWithArray()
     {
         ImmutableBag<String> bag = Bags.immutable.of();
-        Assert.assertEquals(bag = bag.newWith("1"), Bags.immutable.of(new String[]{"1"}));
-        Assert.assertEquals(bag = bag.newWith("2"), Bags.immutable.of(new String[]{"1", "2"}));
-        Assert.assertEquals(bag = bag.newWith("3"), Bags.immutable.of(new String[]{"1", "2", "3"}));
-        Assert.assertEquals(bag = bag.newWith("4"), Bags.immutable.of(new String[]{"1", "2", "3", "4"}));
-        Assert.assertEquals(bag = bag.newWith("5"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5"}));
-        Assert.assertEquals(bag = bag.newWith("6"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6"}));
-        Assert.assertEquals(bag = bag.newWith("7"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7"}));
-        Assert.assertEquals(bag = bag.newWith("8"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8"}));
-        Assert.assertEquals(bag = bag.newWith("9"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
-        Assert.assertEquals(bag = bag.newWith("10"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-        Assert.assertEquals(bag = bag.newWith("11"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+        assertEquals(bag = bag.newWith("1"), Bags.immutable.of(new String[]{"1"}));
+        assertEquals(bag = bag.newWith("2"), Bags.immutable.of(new String[]{"1", "2"}));
+        assertEquals(bag = bag.newWith("3"), Bags.immutable.of(new String[]{"1", "2", "3"}));
+        assertEquals(bag = bag.newWith("4"), Bags.immutable.of(new String[]{"1", "2", "3", "4"}));
+        assertEquals(bag = bag.newWith("5"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5"}));
+        assertEquals(bag = bag.newWith("6"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6"}));
+        assertEquals(bag = bag.newWith("7"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7"}));
+        assertEquals(bag = bag.newWith("8"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8"}));
+        assertEquals(bag = bag.newWith("9"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+        assertEquals(bag = bag.newWith("10"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+        assertEquals(bag = bag.newWith("11"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
     }
 
     @Test
@@ -231,27 +237,27 @@ public class BagsTest
     {
         ImmutableBag<String> bag = Bags.immutable.of();
         HashBag<String> hashBag = HashBag.newBagWith("1");
-        Assert.assertEquals(bag = bag.newWith("1"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("1"), hashBag.toImmutable());
         hashBag.add("2");
-        Assert.assertEquals(bag = bag.newWith("2"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("2"), hashBag.toImmutable());
         hashBag.add("3");
-        Assert.assertEquals(bag = bag.newWith("3"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("3"), hashBag.toImmutable());
         hashBag.add("4");
-        Assert.assertEquals(bag = bag.newWith("4"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("4"), hashBag.toImmutable());
         hashBag.add("5");
-        Assert.assertEquals(bag = bag.newWith("5"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("5"), hashBag.toImmutable());
         hashBag.add("6");
-        Assert.assertEquals(bag = bag.newWith("6"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("6"), hashBag.toImmutable());
         hashBag.add("7");
-        Assert.assertEquals(bag = bag.newWith("7"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("7"), hashBag.toImmutable());
         hashBag.add("8");
-        Assert.assertEquals(bag = bag.newWith("8"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("8"), hashBag.toImmutable());
         hashBag.add("9");
-        Assert.assertEquals(bag = bag.newWith("9"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("9"), hashBag.toImmutable());
         hashBag.add("10");
-        Assert.assertEquals(bag = bag.newWith("10"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("10"), hashBag.toImmutable());
         hashBag.add("11");
-        Assert.assertEquals(bag = bag.newWith("11"), hashBag.toImmutable());
+        assertEquals(bag = bag.newWith("11"), hashBag.toImmutable());
     }
 
     @Test
@@ -263,13 +269,13 @@ public class BagsTest
 
     private void testMultiReaderApi(MultiReaderBagFactory bagFactory)
     {
-        Assert.assertEquals(MultiReaderHashBag.newBag(), bagFactory.of());
+        assertEquals(MultiReaderHashBag.newBag(), bagFactory.of());
         Verify.assertInstanceOf(MultiReaderBag.class, bagFactory.of());
-        Assert.assertEquals(MultiReaderHashBag.newBag(), bagFactory.with());
+        assertEquals(MultiReaderHashBag.newBag(), bagFactory.with());
         Verify.assertInstanceOf(MultiReaderBag.class, bagFactory.with());
-        Assert.assertEquals(MultiReaderHashBag.newBagWith(1), bagFactory.of(1));
+        assertEquals(MultiReaderHashBag.newBagWith(1), bagFactory.of(1));
         Verify.assertInstanceOf(MultiReaderBag.class, bagFactory.of(1));
-        Assert.assertEquals(MultiReaderHashBag.newBagWith(1, 2, 3), bagFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
+        assertEquals(MultiReaderHashBag.newBagWith(1, 2, 3), bagFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
         Verify.assertInstanceOf(MultiReaderBag.class, bagFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
     }
 
@@ -285,7 +291,7 @@ public class BagsTest
         ImmutableBag<Integer> empty = Bags.immutable.withAll(Collections.emptyList());
         ImmutableBag<Integer> integers = Bags.immutable.<Integer>empty().newWithAll(Lists.immutable.empty());
         ImmutableBag<Integer> empty2 = Bags.immutable.withAll(integers);
-        Assert.assertSame(Bags.immutable.empty(), empty);
-        Assert.assertSame(Bags.immutable.empty(), empty2);
+        assertSame(Bags.immutable.empty(), empty);
+        assertSame(Bags.immutable.empty(), empty2);
     }
 }

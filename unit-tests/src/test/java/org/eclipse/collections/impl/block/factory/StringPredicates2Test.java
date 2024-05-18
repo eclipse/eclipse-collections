@@ -11,81 +11,84 @@
 package org.eclipse.collections.impl.block.factory;
 
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class StringPredicates2Test
 {
     @Test
     public void startsWith()
     {
-        Assert.assertFalse(StringPredicates2.startsWith().accept(null, "Hello"));
-        Assert.assertTrue(StringPredicates2.startsWith().accept("HelloWorld", "Hello"));
-        Assert.assertFalse(StringPredicates2.startsWith().accept("HelloWorld", "World"));
-        Assert.assertEquals("StringPredicates2.startsWith()", StringPredicates2.startsWith().toString());
+        assertFalse(StringPredicates2.startsWith().accept(null, "Hello"));
+        assertTrue(StringPredicates2.startsWith().accept("HelloWorld", "Hello"));
+        assertFalse(StringPredicates2.startsWith().accept("HelloWorld", "World"));
+        assertEquals("StringPredicates2.startsWith()", StringPredicates2.startsWith().toString());
     }
 
     @Test
     public void notStartsWith()
     {
-        Assert.assertTrue(StringPredicates2.notStartsWith().accept(null, "Hello"));
-        Assert.assertFalse(StringPredicates2.notStartsWith().accept("HelloWorld", "Hello"));
-        Assert.assertTrue(StringPredicates2.notStartsWith().accept("HelloWorld", "World"));
-        Assert.assertEquals("StringPredicates2.notStartsWith()", StringPredicates2.notStartsWith().toString());
+        assertTrue(StringPredicates2.notStartsWith().accept(null, "Hello"));
+        assertFalse(StringPredicates2.notStartsWith().accept("HelloWorld", "Hello"));
+        assertTrue(StringPredicates2.notStartsWith().accept("HelloWorld", "World"));
+        assertEquals("StringPredicates2.notStartsWith()", StringPredicates2.notStartsWith().toString());
     }
 
     @Test
     public void endsWith()
     {
-        Assert.assertFalse(StringPredicates2.endsWith().accept(null, "Hello"));
-        Assert.assertFalse(StringPredicates2.endsWith().accept("HelloWorld", "Hello"));
-        Assert.assertTrue(StringPredicates2.endsWith().accept("HelloWorld", "World"));
-        Assert.assertEquals("StringPredicates2.endsWith()", StringPredicates2.endsWith().toString());
+        assertFalse(StringPredicates2.endsWith().accept(null, "Hello"));
+        assertFalse(StringPredicates2.endsWith().accept("HelloWorld", "Hello"));
+        assertTrue(StringPredicates2.endsWith().accept("HelloWorld", "World"));
+        assertEquals("StringPredicates2.endsWith()", StringPredicates2.endsWith().toString());
     }
 
     @Test
     public void notEndsWith()
     {
-        Assert.assertTrue(StringPredicates2.notEndsWith().accept(null, "Hello"));
-        Assert.assertTrue(StringPredicates2.notEndsWith().accept("HelloWorld", "Hello"));
-        Assert.assertFalse(StringPredicates2.notEndsWith().accept("HelloWorld", "World"));
-        Assert.assertEquals("StringPredicates2.notEndsWith()", StringPredicates2.notEndsWith().toString());
+        assertTrue(StringPredicates2.notEndsWith().accept(null, "Hello"));
+        assertTrue(StringPredicates2.notEndsWith().accept("HelloWorld", "Hello"));
+        assertFalse(StringPredicates2.notEndsWith().accept("HelloWorld", "World"));
+        assertEquals("StringPredicates2.notEndsWith()", StringPredicates2.notEndsWith().toString());
     }
 
     @Test
     public void equalsIgnoreCase()
     {
-        Assert.assertFalse(StringPredicates2.equalsIgnoreCase().accept(null, "HELLO"));
-        Assert.assertTrue(StringPredicates2.equalsIgnoreCase().accept("hello", "HELLO"));
-        Assert.assertTrue(StringPredicates2.equalsIgnoreCase().accept("WORLD", "world"));
-        Assert.assertFalse(StringPredicates2.equalsIgnoreCase().accept("World", "Hello"));
-        Assert.assertEquals("StringPredicates2.equalsIgnoreCase()", StringPredicates2.equalsIgnoreCase().toString());
+        assertFalse(StringPredicates2.equalsIgnoreCase().accept(null, "HELLO"));
+        assertTrue(StringPredicates2.equalsIgnoreCase().accept("hello", "HELLO"));
+        assertTrue(StringPredicates2.equalsIgnoreCase().accept("WORLD", "world"));
+        assertFalse(StringPredicates2.equalsIgnoreCase().accept("World", "Hello"));
+        assertEquals("StringPredicates2.equalsIgnoreCase()", StringPredicates2.equalsIgnoreCase().toString());
     }
 
     @Test
     public void notEqualsIgnoreCase()
     {
-        Assert.assertTrue(StringPredicates2.notEqualsIgnoreCase().accept(null, "HELLO"));
-        Assert.assertFalse(StringPredicates2.notEqualsIgnoreCase().accept("hello", "HELLO"));
-        Assert.assertFalse(StringPredicates2.notEqualsIgnoreCase().accept("WORLD", "world"));
-        Assert.assertTrue(StringPredicates2.notEqualsIgnoreCase().accept("World", "Hello"));
-        Assert.assertEquals("StringPredicates2.notEqualsIgnoreCase()", StringPredicates2.notEqualsIgnoreCase().toString());
+        assertTrue(StringPredicates2.notEqualsIgnoreCase().accept(null, "HELLO"));
+        assertFalse(StringPredicates2.notEqualsIgnoreCase().accept("hello", "HELLO"));
+        assertFalse(StringPredicates2.notEqualsIgnoreCase().accept("WORLD", "world"));
+        assertTrue(StringPredicates2.notEqualsIgnoreCase().accept("World", "Hello"));
+        assertEquals("StringPredicates2.notEqualsIgnoreCase()", StringPredicates2.notEqualsIgnoreCase().toString());
     }
 
     @Test
     public void containsString()
     {
-        Assert.assertTrue(StringPredicates2.contains().accept("WorldHelloWorld", "Hello"));
-        Assert.assertFalse(StringPredicates2.contains().accept("WorldHelloWorld", "Goodbye"));
-        Assert.assertEquals("StringPredicates2.contains()", StringPredicates2.contains().toString());
+        assertTrue(StringPredicates2.contains().accept("WorldHelloWorld", "Hello"));
+        assertFalse(StringPredicates2.contains().accept("WorldHelloWorld", "Goodbye"));
+        assertEquals("StringPredicates2.contains()", StringPredicates2.contains().toString());
     }
 
     @Test
     public void matches()
     {
-        Assert.assertTrue(StringPredicates2.matches().accept("aaaaabbbbb", "a*b*"));
-        Assert.assertFalse(StringPredicates2.matches().accept("ba", "a*b"));
-        Assert.assertEquals("StringPredicates2.matches()", StringPredicates2.matches().toString());
+        assertTrue(StringPredicates2.matches().accept("aaaaabbbbb", "a*b*"));
+        assertFalse(StringPredicates2.matches().accept("ba", "a*b"));
+        assertEquals("StringPredicates2.matches()", StringPredicates2.matches().toString());
     }
 
     @Test

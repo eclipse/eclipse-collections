@@ -84,8 +84,16 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.StringIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 {
@@ -117,44 +125,44 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> immutable = this.newBag();
         MutableBag<String> mutable = HashBag.newBag(immutable);
         Verify.assertEqualsAndHashCode(immutable, mutable);
-        Assert.assertNotEquals(immutable, FastList.newList(mutable));
-        Assert.assertEquals(this.newBag().toMapOfItemToCount().hashCode(), this.newBag().hashCode());
-        Assert.assertNotEquals(immutable, mutable.with("5").without("1"));
+        assertNotEquals(immutable, FastList.newList(mutable));
+        assertEquals(this.newBag().toMapOfItemToCount().hashCode(), this.newBag().hashCode());
+        assertNotEquals(immutable, mutable.with("5").without("1"));
     }
 
     @Test
     public void anySatisfyWithOccurrences()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals("2")));
-        Assert.assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals("2") && value == 2));
-        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals("2") && value == 6));
-        Assert.assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals("20")));
+        assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals("2")));
+        assertTrue(bag.anySatisfyWithOccurrences((object, value) -> object.equals("2") && value == 2));
+        assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals("2") && value == 6));
+        assertFalse(bag.anySatisfyWithOccurrences((object, value) -> object.equals("20")));
     }
 
     @Test
     public void allSatisfyWithOccurrences()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertTrue(bag.allSatisfyWithOccurrences((object, value) -> Integer.parseInt(object) > 0));
-        Assert.assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals("1") && value == 1));
+        assertTrue(bag.allSatisfyWithOccurrences((object, value) -> Integer.parseInt(object) > 0));
+        assertFalse(bag.allSatisfyWithOccurrences((object, value) -> object.equals("1") && value == 1));
     }
 
     @Test
     public void noneSatisfyWithOccurrences()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> Integer.parseInt(object) > 100));
-        Assert.assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals("1") && value == 1));
+        assertTrue(bag.noneSatisfyWithOccurrences((object, value) -> Integer.parseInt(object) > 100));
+        assertFalse(bag.noneSatisfyWithOccurrences((object, value) -> object.equals("1") && value == 1));
     }
 
     @Test
     public void detectWithOccurrences()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertEquals("1", bag.detectWithOccurrences((object, value) -> object.equals("1") && value == 1));
-        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals("100")));
-        Assert.assertNull(bag.detectWithOccurrences((object, value) -> object.equals("1") && value == 100));
+        assertEquals("1", bag.detectWithOccurrences((object, value) -> object.equals("1") && value == 1));
+        assertNull(bag.detectWithOccurrences((object, value) -> object.equals("100")));
+        assertNull(bag.detectWithOccurrences((object, value) -> object.equals("1") && value == 100));
     }
 
     @Test
@@ -162,13 +170,13 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         ImmutableBag<String> bag = this.newBag();
         ImmutableBag<String> newBag = bag.newWith("1");
-        Assert.assertNotEquals(bag, newBag);
-        Assert.assertEquals(bag.size() + 1, newBag.size());
-        Assert.assertEquals(bag.sizeDistinct(), newBag.sizeDistinct());
+        assertNotEquals(bag, newBag);
+        assertEquals(bag.size() + 1, newBag.size());
+        assertEquals(bag.sizeDistinct(), newBag.sizeDistinct());
         ImmutableBag<String> newBag2 = bag.newWith("0");
-        Assert.assertNotEquals(bag, newBag2);
-        Assert.assertEquals(bag.size() + 1, newBag2.size());
-        Assert.assertEquals(newBag.sizeDistinct() + 1, newBag2.sizeDistinct());
+        assertNotEquals(bag, newBag2);
+        assertEquals(bag.size() + 1, newBag2.size());
+        assertEquals(newBag.sizeDistinct() + 1, newBag2.sizeDistinct());
     }
 
     @Test
@@ -176,13 +184,13 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         ImmutableBag<String> bag = this.newBag();
         ImmutableBag<String> newBag = bag.newWithout("1");
-        Assert.assertNotEquals(bag, newBag);
-        Assert.assertEquals(bag.size() - 1, newBag.size());
-        Assert.assertEquals(bag.sizeDistinct() - 1, newBag.sizeDistinct());
+        assertNotEquals(bag, newBag);
+        assertEquals(bag.size() - 1, newBag.size());
+        assertEquals(bag.sizeDistinct() - 1, newBag.sizeDistinct());
         ImmutableBag<String> newBag2 = bag.newWithout("0");
-        Assert.assertEquals(bag, newBag2);
-        Assert.assertEquals(bag.size(), newBag2.size());
-        Assert.assertEquals(bag.sizeDistinct(), newBag2.sizeDistinct());
+        assertEquals(bag, newBag2);
+        assertEquals(bag.size(), newBag2.size());
+        assertEquals(bag.sizeDistinct(), newBag2.sizeDistinct());
     }
 
     @Test
@@ -190,9 +198,9 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         ImmutableBag<String> bag = this.newBag();
         ImmutableBag<String> newBag = bag.newWithAll(Bags.mutable.of("0"));
-        Assert.assertNotEquals(bag, newBag);
-        Assert.assertEquals(HashBag.newBag(bag).with("0"), newBag);
-        Assert.assertEquals(newBag.size(), bag.size() + 1);
+        assertNotEquals(bag, newBag);
+        assertEquals(HashBag.newBag(bag).with("0"), newBag);
+        assertEquals(newBag.size(), bag.size() + 1);
     }
 
     @Test
@@ -203,13 +211,13 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         ImmutableBag<String> bag = this.newBag();
         ImmutableBag<String> withoutAll = bag.newWithoutAll(UnifiedSet.newSet(this.newBag()));
-        Assert.assertEquals(Bags.immutable.of(), withoutAll);
+        assertEquals(Bags.immutable.of(), withoutAll);
 
         ImmutableBag<String> newBag =
                 bag.newWithAll(Lists.fixedSize.of("0", "0", "0"))
                         .newWithoutAll(Lists.fixedSize.of("0"));
 
-        Assert.assertEquals(0, newBag.occurrencesOf("0"));
+        assertEquals(0, newBag.occurrencesOf("0"));
     }
 
     @Override
@@ -222,12 +230,12 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         for (int i = 1; i <= this.numKeys(); i++)
         {
             String key = String.valueOf(i);
-            Assert.assertTrue(bag.contains(key));
-            Assert.assertEquals(i, bag.occurrencesOf(key));
+            assertTrue(bag.contains(key));
+            assertEquals(i, bag.occurrencesOf(key));
         }
         String missingKey = "0";
-        Assert.assertFalse(bag.contains(missingKey));
-        Assert.assertEquals(0, bag.occurrencesOf(missingKey));
+        assertFalse(bag.contains(missingKey));
+        assertEquals(0, bag.occurrencesOf(missingKey));
     }
 
     @Override
@@ -236,7 +244,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         super.containsAllArray();
 
-        Assert.assertTrue(this.newBag().containsAllArguments(this.newBag().toArray()));
+        assertTrue(this.newBag().containsAllArguments(this.newBag().toArray()));
     }
 
     @Override
@@ -245,13 +253,13 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         super.containsAllIterable();
 
-        Assert.assertTrue(this.newBag().containsAllIterable(this.newBag()));
+        assertTrue(this.newBag().containsAllIterable(this.newBag()));
     }
 
     @Test
     public void add()
     {
-        Assert.assertThrows(
+        assertThrows(
                 UnsupportedOperationException.class,
                 () -> ((Collection<String>) this.newBag()).add("1"));
     }
@@ -259,7 +267,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     @Test
     public void remove()
     {
-        Assert.assertThrows(
+        assertThrows(
                 UnsupportedOperationException.class,
                 () -> ((Collection<String>) this.newBag()).remove("1"));
     }
@@ -267,7 +275,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     @Test
     public void addAll()
     {
-        Assert.assertThrows(
+        assertThrows(
                 UnsupportedOperationException.class,
                 () -> ((Collection<String>) this.newBag()).addAll(FastList.newListWith("1", "2", "3")));
     }
@@ -275,7 +283,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     @Test
     public void removeAll()
     {
-        Assert.assertThrows(
+        assertThrows(
                 UnsupportedOperationException.class,
                 () -> ((Collection<String>) this.newBag()).removeAll(FastList.newListWith("1", "2", "3")));
     }
@@ -283,7 +291,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     @Test
     public void retainAll()
     {
-        Assert.assertThrows(
+        assertThrows(
                 UnsupportedOperationException.class,
                 () -> ((Collection<String>) this.newBag()).retainAll(FastList.newListWith("1", "2", "3")));
     }
@@ -291,7 +299,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     @Test
     public void clear()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> ((Collection<String>) this.newBag()).clear());
+        assertThrows(UnsupportedOperationException.class, () -> ((Collection<String>) this.newBag()).clear());
     }
 
     @Override
@@ -302,8 +310,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         MutableList<String> tapResult = Lists.mutable.of();
         ImmutableBag<String> collection = this.newBag();
-        Assert.assertSame(collection, collection.tap(tapResult::add));
-        Assert.assertEquals(collection.toList(), tapResult);
+        assertSame(collection, collection.tap(tapResult::add));
+        assertEquals(collection.toList(), tapResult);
     }
 
     @Override
@@ -315,7 +323,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         MutableBag<String> result = Bags.mutable.of();
         ImmutableBag<String> collection = this.newBag();
         collection.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(collection, result);
+        assertEquals(collection, result);
     }
 
     @Override
@@ -327,7 +335,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         MutableBag<String> result = Bags.mutable.of();
         ImmutableBag<String> bag = this.newBag();
         bag.forEachWith((argument1, argument2) -> result.add(argument1 + argument2), "");
-        Assert.assertEquals(bag, result);
+        assertEquals(bag, result);
     }
 
     @Override
@@ -339,7 +347,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         MutableBag<String> result = Bags.mutable.of();
         ImmutableBag<String> strings = this.newBag();
         strings.forEachWithIndex(ObjectIntProcedures.fromProcedure(result::add));
-        Assert.assertEquals(strings, result);
+        assertEquals(strings, result);
     }
 
     /**
@@ -357,7 +365,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
                         PrimitiveTuples.pair("3", 3),
                         PrimitiveTuples.pair("2", 2),
                         PrimitiveTuples.pair("1", 1));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
         Set<ObjectIntPair<String>> actual2 =
                 bag.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
@@ -367,7 +375,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
                         PrimitiveTuples.pair("3", 3),
                         PrimitiveTuples.pair("2", 2),
                         PrimitiveTuples.pair("1", 1));
-        Assert.assertEquals(expected2, actual2);
+        assertEquals(expected2, actual2);
     }
 
     @Test
@@ -408,7 +416,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<String> strings = this.newBag();
 
-        Assert.assertEquals(strings, strings.selectWith(Predicates2.greaterThan(), "0"));
+        assertEquals(strings, strings.selectWith(Predicates2.greaterThan(), "0"));
     }
 
     @Test
@@ -416,7 +424,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         ImmutableBag<String> strings = this.newBag();
 
-        Assert.assertEquals(
+        assertEquals(
                 strings,
                 strings.selectWith(Predicates2.greaterThan(), "0", FastList.newList()).toBag());
     }
@@ -425,7 +433,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     public void selectToTarget()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals(strings, strings.select(Predicates.greaterThan("0"), FastList.newList()).toBag());
+        assertEquals(strings, strings.select(Predicates.greaterThan("0"), FastList.newList()).toBag());
         Verify.assertEmpty(strings.select(Predicates.lessThan("0"), FastList.newList()));
     }
 
@@ -437,7 +445,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<String> strings = this.newBag();
         Verify.assertIterableEmpty(strings.reject(Predicates.greaterThan("0")));
-        Assert.assertEquals(strings, strings.reject(Predicates.lessThan("0")));
+        assertEquals(strings, strings.reject(Predicates.lessThan("0")));
         Verify.assertIterableSize(strings.size() - 1, strings.reject(Predicates.lessThan("2")));
     }
 
@@ -449,14 +457,14 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<String> strings = this.newBag();
 
-        Assert.assertEquals(strings, strings.rejectWith(Predicates2.lessThan(), "0"));
+        assertEquals(strings, strings.rejectWith(Predicates2.lessThan(), "0"));
     }
 
     @Test
     public void rejectWithToTarget()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals(strings, strings.reject(Predicates.lessThan("0")));
+        assertEquals(strings, strings.reject(Predicates.lessThan("0")));
 
         Verify.assertEmpty(strings.rejectWith(Predicates2.greaterThan(), "0", FastList.newList()));
     }
@@ -465,7 +473,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     public void rejectToTarget()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals(strings, strings.reject(Predicates.lessThan("0"), FastList.newList()).toBag());
+        assertEquals(strings, strings.reject(Predicates.lessThan("0"), FastList.newList()).toBag());
         Verify.assertEmpty(strings.reject(Predicates.greaterThan("0"), FastList.newList()));
     }
 
@@ -477,7 +485,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<String> strings = this.newBag();
         PartitionImmutableBag<String> partition = strings.partition(Predicates.greaterThan("0"));
-        Assert.assertEquals(strings, partition.getSelected());
+        assertEquals(strings, partition.getSelected());
         Verify.assertIterableEmpty(partition.getRejected());
 
         Verify.assertIterableSize(strings.size() - 1, strings.partition(Predicates.greaterThan("1")).getSelected());
@@ -491,7 +499,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<String> strings = this.newBag();
         PartitionImmutableBag<String> partition = strings.partitionWith(Predicates2.greaterThan(), "0");
-        Assert.assertEquals(strings, partition.getSelected());
+        assertEquals(strings, partition.getSelected());
         Verify.assertIterableEmpty(partition.getRejected());
 
         Verify.assertIterableSize(strings.size() - 1, strings.partitionWith(Predicates2.greaterThan(), "1").getSelected());
@@ -503,7 +511,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         super.collect();
 
-        Assert.assertEquals(this.newBag(), this.newBag().collect(Functions.getStringPassThru()));
+        assertEquals(this.newBag(), this.newBag().collect(Functions.getStringPassThru()));
     }
 
     @Override
@@ -513,9 +521,9 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.collectBoolean();
 
         ImmutableBooleanBag result = this.newBag().collectBoolean("4"::equals);
-        Assert.assertEquals(2, result.sizeDistinct());
-        Assert.assertEquals(4, result.occurrencesOf(true));
-        Assert.assertEquals(6, result.occurrencesOf(false));
+        assertEquals(2, result.sizeDistinct());
+        assertEquals(4, result.occurrencesOf(true));
+        assertEquals(6, result.occurrencesOf(false));
     }
 
     @Override
@@ -526,10 +534,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         BooleanHashBag target = new BooleanHashBag();
         BooleanHashBag result = this.newBag().collectBoolean("4"::equals, target);
-        Assert.assertSame("Target sent as parameter not returned", target, result);
-        Assert.assertEquals(2, result.sizeDistinct());
-        Assert.assertEquals(4, result.occurrencesOf(true));
-        Assert.assertEquals(6, result.occurrencesOf(false));
+        assertSame("Target sent as parameter not returned", target, result);
+        assertEquals(2, result.sizeDistinct());
+        assertEquals(4, result.occurrencesOf(true));
+        assertEquals(6, result.occurrencesOf(false));
     }
 
     @Override
@@ -539,10 +547,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.collectByte();
 
         ImmutableByteBag result = this.newBag().collectByte(Byte::parseByte);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf((byte) i));
+            assertEquals(i, result.occurrencesOf((byte) i));
         }
     }
 
@@ -554,11 +562,11 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ByteHashBag target = new ByteHashBag();
         ByteHashBag result = this.newBag().collectByte(Byte::parseByte, target);
-        Assert.assertSame("Target sent as parameter not returned", target, result);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertSame("Target sent as parameter not returned", target, result);
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf((byte) i));
+            assertEquals(i, result.occurrencesOf((byte) i));
         }
     }
 
@@ -569,10 +577,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.collectChar();
 
         ImmutableCharBag result = this.newBag().collectChar((CharFunction<String>) string -> string.charAt(0));
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf((char) ('0' + i)));
+            assertEquals(i, result.occurrencesOf((char) ('0' + i)));
         }
     }
 
@@ -584,11 +592,11 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         CharHashBag target = new CharHashBag();
         CharHashBag result = this.newBag().collectChar((CharFunction<String>) string -> string.charAt(0), target);
-        Assert.assertSame("Target sent as parameter not returned", target, result);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertSame("Target sent as parameter not returned", target, result);
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf((char) ('0' + i)));
+            assertEquals(i, result.occurrencesOf((char) ('0' + i)));
         }
     }
 
@@ -599,10 +607,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.collectDouble();
 
         ImmutableDoubleBag result = this.newBag().collectDouble(Double::parseDouble);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf(i));
+            assertEquals(i, result.occurrencesOf(i));
         }
     }
 
@@ -614,11 +622,11 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         DoubleHashBag target = new DoubleHashBag();
         DoubleHashBag result = this.newBag().collectDouble(Double::parseDouble, target);
-        Assert.assertSame("Target sent as parameter not returned", target, result);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertSame("Target sent as parameter not returned", target, result);
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf(i));
+            assertEquals(i, result.occurrencesOf(i));
         }
     }
 
@@ -629,10 +637,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.collectFloat();
 
         ImmutableFloatBag result = this.newBag().collectFloat(Float::parseFloat);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf(i));
+            assertEquals(i, result.occurrencesOf(i));
         }
     }
 
@@ -644,11 +652,11 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         FloatHashBag target = new FloatHashBag();
         FloatHashBag result = this.newBag().collectFloat(Float::parseFloat, target);
-        Assert.assertSame("Target sent as parameter not returned", target, result);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertSame("Target sent as parameter not returned", target, result);
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf(i));
+            assertEquals(i, result.occurrencesOf(i));
         }
     }
 
@@ -659,10 +667,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.collectInt();
 
         ImmutableIntBag result = this.newBag().collectInt(Integer::parseInt);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf(i));
+            assertEquals(i, result.occurrencesOf(i));
         }
     }
 
@@ -674,11 +682,11 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         IntHashBag target = new IntHashBag();
         IntHashBag result = this.newBag().collectInt(Integer::parseInt, target);
-        Assert.assertSame("Target sent as parameter not returned", target, result);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertSame("Target sent as parameter not returned", target, result);
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf(i));
+            assertEquals(i, result.occurrencesOf(i));
         }
     }
 
@@ -689,10 +697,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.collectLong();
 
         ImmutableLongBag result = this.newBag().collectLong(Long::parseLong);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf(i));
+            assertEquals(i, result.occurrencesOf(i));
         }
     }
 
@@ -704,11 +712,11 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         LongHashBag target = new LongHashBag();
         LongHashBag result = this.newBag().collectLong(Long::parseLong, target);
-        Assert.assertSame("Target sent as parameter not returned", target, result);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertSame("Target sent as parameter not returned", target, result);
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf(i));
+            assertEquals(i, result.occurrencesOf(i));
         }
     }
 
@@ -719,10 +727,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.collectShort();
 
         ImmutableShortBag result = this.newBag().collectShort(Short::parseShort);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf((short) i));
+            assertEquals(i, result.occurrencesOf((short) i));
         }
     }
 
@@ -734,10 +742,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ShortHashBag target = new ShortHashBag();
         ShortHashBag result = this.newBag().collectShort(Short::parseShort, target);
-        Assert.assertEquals(this.numKeys(), result.sizeDistinct());
+        assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
-            Assert.assertEquals(i, result.occurrencesOf((short) i));
+            assertEquals(i, result.occurrencesOf((short) i));
         }
     }
 
@@ -745,7 +753,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         return (argument1, argument2) ->
         {
-            Assert.assertEquals(valueToAssert, argument2);
+            assertEquals(valueToAssert, argument2);
             return argument1;
         };
     }
@@ -759,7 +767,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> strings = this.newBag();
 
         String argument = "thing";
-        Assert.assertEquals(strings, strings.collectWith(this.generateAssertingPassThroughFunction2(argument), argument));
+        assertEquals(strings, strings.collectWith(this.generateAssertingPassThroughFunction2(argument), argument));
     }
 
     @Override
@@ -773,8 +781,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         String argument = "thing";
         HashBag<String> targetCollection = HashBag.newBag();
         HashBag<String> actual = strings.collectWith(this.generateAssertingPassThroughFunction2(argument), argument, targetCollection);
-        Assert.assertEquals(strings, actual);
-        Assert.assertSame(targetCollection, actual);
+        assertEquals(strings, actual);
+        assertSame(targetCollection, actual);
     }
 
     @Test
@@ -783,9 +791,9 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> strings = this.newBag();
         HashBag<String> target = HashBag.newBag();
         HashBag<String> actual = strings.collect(Functions.getStringPassThru(), target);
-        Assert.assertEquals(strings, actual);
-        Assert.assertSame(target, actual);
-        Assert.assertEquals(strings, strings.collect(Functions.getStringPassThru(), FastList.newList()).toBag());
+        assertEquals(strings, actual);
+        assertSame(target, actual);
+        assertEquals(strings, strings.collect(Functions.getStringPassThru(), FastList.newList()).toBag());
     }
 
     @Override
@@ -798,7 +806,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<String> expected = this.newBag().collect(String::valueOf);
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -808,7 +816,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<String> expected = this.newBag().collect(String::valueOf);
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Override
@@ -818,8 +826,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.detect();
 
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals("1", strings.detect("1"::equals));
-        Assert.assertNull(strings.detect(String.valueOf(this.numKeys() + 1)::equals));
+        assertEquals("1", strings.detect("1"::equals));
+        assertNull(strings.detect(String.valueOf(this.numKeys() + 1)::equals));
     }
 
     @Override
@@ -829,15 +837,15 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.detectWith();
 
         ImmutableBag<String> immutableStrings = this.newBag();
-        Assert.assertEquals("1", immutableStrings.detectWith(Object::equals, "1"));
+        assertEquals("1", immutableStrings.detectWith(Object::equals, "1"));
     }
 
     @Test
     public void detectWithIfNone()
     {
         ImmutableBag<String> immutableStrings = this.newBag();
-        Assert.assertEquals("1", immutableStrings.detectWithIfNone(Object::equals, "1", new PassThruFunction0<>("Not Found")));
-        Assert.assertEquals("Not Found", immutableStrings.detectWithIfNone(Object::equals, "10000", new PassThruFunction0<>("Not Found")));
+        assertEquals("1", immutableStrings.detectWithIfNone(Object::equals, "1", new PassThruFunction0<>("Not Found")));
+        assertEquals("Not Found", immutableStrings.detectWithIfNone(Object::equals, "10000", new PassThruFunction0<>("Not Found")));
     }
 
     @Override
@@ -852,26 +860,26 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         List<Object> nullsMinusOne = Collections.nCopies(immutableBag.size() - 1, null);
 
         ImmutableBag<Pair<String, Object>> pairs = immutableBag.zip(nulls);
-        Assert.assertEquals(
+        assertEquals(
                 immutableBag,
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(
+        assertEquals(
                 HashBag.newBag(nulls),
                 pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
         ImmutableBag<Pair<String, Object>> pairsPlusOne = immutableBag.zip(nullsPlusOne);
-        Assert.assertEquals(
+        assertEquals(
                 immutableBag,
                 pairsPlusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(
+        assertEquals(
                 HashBag.newBag(nulls),
                 pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
         ImmutableBag<Pair<String, Object>> pairsMinusOne = immutableBag.zip(nullsMinusOne);
-        Assert.assertEquals(immutableBag.size() - 1, pairsMinusOne.size());
-        Assert.assertTrue(immutableBag.containsAllIterable(pairsMinusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne)));
+        assertEquals(immutableBag.size() - 1, pairsMinusOne.size());
+        assertTrue(immutableBag.containsAllIterable(pairsMinusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne)));
 
-        Assert.assertEquals(immutableBag.zip(nulls), immutableBag.zip(nulls, HashBag.newBag()));
+        assertEquals(immutableBag.zip(nulls), immutableBag.zip(nulls, HashBag.newBag()));
     }
 
     @Override
@@ -883,10 +891,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> immutableBag = this.newBag();
         ImmutableSet<Pair<String, Integer>> pairs = immutableBag.zipWithIndex();
 
-        Assert.assertEquals(immutableBag, pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne, HashBag.newBag()));
-        Assert.assertEquals(Interval.zeroTo(immutableBag.size() - 1).toSet(), pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
+        assertEquals(immutableBag, pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne, HashBag.newBag()));
+        assertEquals(Interval.zeroTo(immutableBag.size() - 1).toSet(), pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
 
-        Assert.assertEquals(immutableBag.zipWithIndex(), immutableBag.zipWithIndex(UnifiedSet.newSet()));
+        assertEquals(immutableBag.zipWithIndex(), immutableBag.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Override
@@ -903,7 +911,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     public void chunk_large_size()
     {
         super.chunk_large_size();
-        Assert.assertEquals(this.newBag(), this.newBag().chunk(10).getOnly());
+        assertEquals(this.newBag(), this.newBag().chunk(10).getOnly());
         Verify.assertInstanceOf(ImmutableBag.class, this.newBag().chunk(10).getOnly());
     }
 
@@ -932,7 +940,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         super.min();
 
-        Assert.assertEquals("1", this.newBag().min(String::compareTo));
+        assertEquals("1", this.newBag().min(String::compareTo));
     }
 
     @Override
@@ -941,7 +949,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         super.max();
 
-        Assert.assertEquals(String.valueOf(this.numKeys()), this.newBag().max(String::compareTo));
+        assertEquals(String.valueOf(this.numKeys()), this.newBag().max(String::compareTo));
     }
 
     @Override
@@ -964,7 +972,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         super.min_without_comparator();
 
-        Assert.assertEquals("1", this.newBag().min());
+        assertEquals("1", this.newBag().min());
     }
 
     @Override
@@ -973,7 +981,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         super.max_without_comparator();
 
-        Assert.assertEquals(String.valueOf(this.numKeys()), this.newBag().max());
+        assertEquals(String.valueOf(this.numKeys()), this.newBag().max());
     }
 
     @Override
@@ -982,7 +990,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         super.minBy();
 
-        Assert.assertEquals("1", this.newBag().minBy(String::valueOf));
+        assertEquals("1", this.newBag().minBy(String::valueOf));
     }
 
     @Override
@@ -991,7 +999,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     {
         super.maxBy();
 
-        Assert.assertEquals(String.valueOf(this.numKeys()), this.newBag().maxBy(String::valueOf));
+        assertEquals(String.valueOf(this.numKeys()), this.newBag().maxBy(String::valueOf));
     }
 
     @Override
@@ -1002,8 +1010,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<String> strings = this.newBag();
         Function0<String> function = new PassThruFunction0<>(String.valueOf(this.numKeys() + 1));
-        Assert.assertEquals("1", strings.detectIfNone("1"::equals, function));
-        Assert.assertEquals(String.valueOf(this.numKeys() + 1), strings.detectIfNone(String.valueOf(this.numKeys() + 1)::equals, function));
+        assertEquals("1", strings.detectIfNone("1"::equals, function));
+        assertEquals(String.valueOf(this.numKeys() + 1), strings.detectIfNone(String.valueOf(this.numKeys() + 1)::equals, function));
     }
 
     @Override
@@ -1013,8 +1021,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.allSatisfy();
 
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertTrue(strings.allSatisfy(String.class::isInstance));
-        Assert.assertFalse(strings.allSatisfy("0"::equals));
+        assertTrue(strings.allSatisfy(String.class::isInstance));
+        assertFalse(strings.allSatisfy("0"::equals));
     }
 
     @Override
@@ -1024,8 +1032,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.anySatisfy();
 
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertFalse(strings.anySatisfy(Integer.class::isInstance));
-        Assert.assertTrue(strings.anySatisfy(String.class::isInstance));
+        assertFalse(strings.anySatisfy(Integer.class::isInstance));
+        assertTrue(strings.anySatisfy(String.class::isInstance));
     }
 
     @Override
@@ -1035,8 +1043,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.noneSatisfy();
 
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertTrue(strings.noneSatisfy(Integer.class::isInstance));
-        Assert.assertTrue(strings.noneSatisfy("0"::equals));
+        assertTrue(strings.noneSatisfy(Integer.class::isInstance));
+        assertTrue(strings.noneSatisfy("0"::equals));
     }
 
     @Override
@@ -1046,8 +1054,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.count();
 
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals(strings.size(), strings.count(String.class::isInstance));
-        Assert.assertEquals(0, strings.count(Integer.class::isInstance));
+        assertEquals(strings.size(), strings.count(String.class::isInstance));
+        assertEquals(0, strings.count(Integer.class::isInstance));
     }
 
     @Override
@@ -1057,8 +1065,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.countWith();
 
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals(strings.size(), strings.countWith(Predicates2.instanceOf(), String.class));
-        Assert.assertEquals(0, strings.countWith(Predicates2.instanceOf(), Integer.class));
+        assertEquals(strings.size(), strings.countWith(Predicates2.instanceOf(), String.class));
+        assertEquals(0, strings.countWith(Predicates2.instanceOf(), Integer.class));
     }
 
     @Override
@@ -1068,7 +1076,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.collectIf();
 
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals(
+        assertEquals(
                 strings,
                 strings.collectIf(
                         String.class::isInstance,
@@ -1079,7 +1087,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     public void collectIfWithTarget()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals(
+        assertEquals(
                 strings,
                 strings.collectIf(
                         String.class::isInstance,
@@ -1095,7 +1103,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         // Cannot assert much here since there's no order.
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertTrue(bag.contains(bag.getFirst()));
+        assertTrue(bag.contains(bag.getFirst()));
     }
 
     @Override
@@ -1106,7 +1114,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         // Cannot assert much here since there's no order.
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertTrue(bag.contains(bag.getLast()));
+        assertTrue(bag.contains(bag.getLast()));
     }
 
     @Override
@@ -1116,8 +1124,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.isEmpty();
 
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertFalse(bag.isEmpty());
-        Assert.assertTrue(bag.notEmpty());
+        assertFalse(bag.isEmpty());
+        assertTrue(bag.notEmpty());
     }
 
     @Override
@@ -1134,9 +1142,9 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
             String string = iterator.next();
             result.add(string);
         }
-        Assert.assertEquals(strings, result);
+        assertEquals(strings, result);
 
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -1147,9 +1155,9 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<Integer> integers = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         Integer result = integers.injectInto(0, AddFunction.INTEGER);
-        Assert.assertEquals(FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_INT), result.intValue());
+        assertEquals(FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_INT), result.intValue());
         String result1 = this.newBag().injectInto("0", String::concat);
-        Assert.assertEquals(FastList.newList(this.newBag()).injectInto("0", String::concat), result1);
+        assertEquals(FastList.newList(this.newBag()).injectInto("0", String::concat), result1);
     }
 
     @Override
@@ -1160,7 +1168,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<Integer> integers = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         int result = integers.injectInto(0, AddFunction.INTEGER_TO_INT);
-        Assert.assertEquals(FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_INT), result);
+        assertEquals(FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_INT), result);
     }
 
     @Override
@@ -1171,7 +1179,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<Integer> integers = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         long result = integers.injectInto(0, AddFunction.INTEGER_TO_LONG);
-        Assert.assertEquals(FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_INT), result);
+        assertEquals(FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_INT), result);
     }
 
     @Override
@@ -1183,7 +1191,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<Integer> integers = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         double result = integers.injectInto(0, AddFunction.INTEGER_TO_DOUBLE);
         double expected = FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_DOUBLE);
-        Assert.assertEquals(expected, result, 0.001);
+        assertEquals(expected, result, 0.001);
     }
 
     @Override
@@ -1195,7 +1203,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<Integer> integers = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         float result = integers.injectInto(0, AddFunction.INTEGER_TO_FLOAT);
         float expected = FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_FLOAT);
-        Assert.assertEquals(expected, result, 0.001);
+        assertEquals(expected, result, 0.001);
     }
 
     @Override
@@ -1207,7 +1215,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<Integer> integers = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         double result = integers.sumOfFloat(Integer::floatValue);
         float expected = FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_FLOAT);
-        Assert.assertEquals(expected, result, 0.001);
+        assertEquals(expected, result, 0.001);
     }
 
     @Override
@@ -1219,7 +1227,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<Integer> integers = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         double result = integers.sumOfDouble(Integer::doubleValue);
         double expected = FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_DOUBLE);
-        Assert.assertEquals(expected, result, 0.001);
+        assertEquals(expected, result, 0.001);
     }
 
     @Override
@@ -1231,7 +1239,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<Integer> integers = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         long result = integers.sumOfInt(integer -> integer);
         int expected = FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_INT);
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Override
@@ -1243,7 +1251,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<Integer> integers = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         long result = integers.sumOfLong(Integer::longValue);
         long expected = FastList.newList(integers).injectInto(0, AddFunction.INTEGER_TO_LONG);
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Override
@@ -1258,7 +1266,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         String[] array2 = bag.toArray(new String[bag.size() + 1]);
         Verify.assertSize(bag.size() + 1, array2);
-        Assert.assertNull(array2[bag.size()]);
+        assertNull(array2[bag.size()]);
     }
 
     @Override
@@ -1270,7 +1278,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         String string = this.newBag().toString();
         for (int i = 1; i < this.numKeys(); i++)
         {
-            Assert.assertEquals(i, StringIterate.occurrencesOf(string, String.valueOf(i)));
+            assertEquals(i, StringIterate.occurrencesOf(string, String.valueOf(i)));
         }
     }
 
@@ -1291,9 +1299,9 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> strings = this.newBag();
         MutableList<String> copy = FastList.newList(strings);
         MutableList<String> list = strings.toSortedList(Collections.reverseOrder());
-        Assert.assertEquals(copy.sortThis(Collections.reverseOrder()), list);
+        assertEquals(copy.sortThis(Collections.reverseOrder()), list);
         MutableList<String> list2 = strings.toSortedList();
-        Assert.assertEquals(copy.sortThis(), list2);
+        assertEquals(copy.sortThis(), list2);
     }
 
     @Override
@@ -1306,7 +1314,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         Collections.sort(expected);
         ImmutableBag<String> immutableBag = this.newBag();
         MutableList<String> sortedList = immutableBag.toSortedListBy(String::valueOf);
-        Assert.assertEquals(expected, sortedList);
+        assertEquals(expected, sortedList);
     }
 
     @Test
@@ -1315,14 +1323,14 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> bag = this.newBag();
         for (String each : bag)
         {
-            Assert.assertNotNull(each);
+            assertNotNull(each);
         }
     }
 
     @Test
     public void iteratorRemove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newBag().iterator().remove());
+        assertThrows(UnsupportedOperationException.class, () -> this.newBag().iterator().remove());
     }
 
     @Test
@@ -1333,20 +1341,20 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         for (int i = 1; i <= this.numKeys(); i++)
         {
             String key = String.valueOf(i);
-            Assert.assertTrue(mapOfItemToCount.containsKey(key));
-            Assert.assertEquals(Integer.valueOf(i), mapOfItemToCount.get(key));
+            assertTrue(mapOfItemToCount.containsKey(key));
+            assertEquals(Integer.valueOf(i), mapOfItemToCount.get(key));
         }
 
         String missingKey = "0";
-        Assert.assertFalse(mapOfItemToCount.containsKey(missingKey));
-        Assert.assertNull(mapOfItemToCount.get(missingKey));
+        assertFalse(mapOfItemToCount.containsKey(missingKey));
+        assertNull(mapOfItemToCount.get(missingKey));
     }
 
     @Test
     public void toImmutable()
     {
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertSame(bag, bag.toImmutable());
+        assertSame(bag, bag.toImmutable());
     }
 
     /**
@@ -1431,11 +1439,11 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         });
         Multimap<Integer, Integer> actual =
                 immutableBag.groupByEach(new NegativeIntervalFunction());
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
         Multimap<Integer, Integer> actualWithTarget =
                 immutableBag.groupByEach(new NegativeIntervalFunction(), HashBagMultimap.newMultimap());
-        Assert.assertEquals(expected, actualWithTarget);
+        assertEquals(expected, actualWithTarget);
     }
 
     private void groupByAssertions(ImmutableBagMultimap<Boolean, String> multimap)
@@ -1449,10 +1457,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
             String key = String.valueOf(i);
             ImmutableBag<String> containingBag = IntegerPredicates.isOdd().accept(i) ? odds : evens;
             ImmutableBag<String> nonContainingBag = IntegerPredicates.isOdd().accept(i) ? evens : odds;
-            Assert.assertTrue(containingBag.contains(key));
-            Assert.assertFalse(nonContainingBag.contains(key));
+            assertTrue(containingBag.contains(key));
+            assertFalse(nonContainingBag.contains(key));
 
-            Assert.assertEquals(i, containingBag.occurrencesOf(key));
+            assertEquals(i, containingBag.occurrencesOf(key));
         }
     }
 
@@ -1485,7 +1493,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         MutableSet<String> expectedSet = this.numKeys() == 0
                 ? UnifiedSet.newSet()
                 : Interval.oneTo(this.numKeys()).collect(String::valueOf).toSet();
-        Assert.assertEquals(expectedSet, this.newBag().toSet());
+        assertEquals(expectedSet, this.newBag().toSet());
     }
 
     @Override
@@ -1496,7 +1504,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ImmutableBag<String> immutableBag = this.newBag();
         MutableBag<String> mutableBag = immutableBag.toBag();
-        Assert.assertEquals(immutableBag, mutableBag);
+        assertEquals(immutableBag, mutableBag);
     }
 
     @Override
@@ -1510,13 +1518,13 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         for (int i = 1; i <= this.numKeys(); i++)
         {
             String key = String.valueOf(i);
-            Assert.assertTrue(map.containsKey(key));
-            Assert.assertEquals(key, map.get(key));
+            assertTrue(map.containsKey(key));
+            assertEquals(key, map.get(key));
         }
 
         String missingKey = "0";
-        Assert.assertFalse(map.containsKey(missingKey));
-        Assert.assertNull(map.get(missingKey));
+        assertFalse(map.containsKey(missingKey));
+        assertNull(map.get(missingKey));
     }
 
     @Override
@@ -1530,13 +1538,13 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         for (int i = 1; i <= this.numKeys(); i++)
         {
             String key = String.valueOf(i);
-            Assert.assertTrue(map.containsKey(key));
-            Assert.assertEquals(key, map.get(key));
+            assertTrue(map.containsKey(key));
+            assertEquals(key, map.get(key));
         }
 
         String missingKey = "0";
-        Assert.assertFalse(map.containsKey(missingKey));
-        Assert.assertNull(map.get(missingKey));
+        assertFalse(map.containsKey(missingKey));
+        assertNull(map.get(missingKey));
     }
 
     @Override
@@ -1583,7 +1591,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> bag = this.newBag();
         LazyIterable<String> lazyIterable = bag.asLazy();
         Verify.assertInstanceOf(LazyIterable.class, lazyIterable);
-        Assert.assertEquals(bag, lazyIterable.toBag());
+        assertEquals(bag, lazyIterable.toBag());
     }
 
     @Override
@@ -1593,10 +1601,10 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.makeString();
 
         ImmutableBag<String> bag = this.newBag();
-        Assert.assertEquals(FastList.newList(bag).makeString(), bag.makeString());
-        Assert.assertEquals(bag.toString(), '[' + bag.makeString() + ']');
-        Assert.assertEquals(bag.toString(), '[' + bag.makeString(", ") + ']');
-        Assert.assertEquals(bag.toString(), bag.makeString("[", ", ", "]"));
+        assertEquals(FastList.newList(bag).makeString(), bag.makeString());
+        assertEquals(bag.toString(), '[' + bag.makeString() + ']');
+        assertEquals(bag.toString(), '[' + bag.makeString(", ") + ']');
+        assertEquals(bag.toString(), bag.makeString("[", ", ", "]"));
     }
 
     @Override
@@ -1609,7 +1617,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         Appendable builder = new StringBuilder();
         bag.appendString(builder);
-        Assert.assertEquals(FastList.newList(bag).makeString(), builder.toString());
+        assertEquals(FastList.newList(bag).makeString(), builder.toString());
     }
 
     @Test
@@ -1619,7 +1627,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         Appendable builder = new StringBuilder();
         bag.appendString(builder, ", ");
-        Assert.assertEquals(bag.toString(), '[' + builder.toString() + ']');
+        assertEquals(bag.toString(), '[' + builder.toString() + ']');
     }
 
     @Test
@@ -1629,7 +1637,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         Appendable builder = new StringBuilder();
         bag.appendString(builder, "[", ", ", "]");
-        Assert.assertEquals(bag.toString(), builder.toString());
+        assertEquals(bag.toString(), builder.toString());
     }
 
     @Test
@@ -1669,7 +1677,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> bag = Bags.immutable.with("1", "2", "2", "3", "3", "3", "3", "4", "5", "5", "6");
         ImmutableSet<String> expected = Sets.immutable.with("1", "4", "6");
         ImmutableSet<String> actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -1678,6 +1686,6 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> bag = this.newBag();
         RichIterable<String> expected = bag.toSet();
         RichIterable<String> actual = bag.distinctView();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

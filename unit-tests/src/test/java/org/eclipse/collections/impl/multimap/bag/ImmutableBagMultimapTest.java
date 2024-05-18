@@ -22,8 +22,9 @@ import org.eclipse.collections.impl.multimap.AbstractImmutableMultimapTestCase;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ImmutableBagMultimapTest extends AbstractImmutableMultimapTestCase
 {
@@ -58,7 +59,7 @@ public class ImmutableBagMultimapTest extends AbstractImmutableMultimapTestCase
         MutableBag<Pair<String, MutableBag<Integer>>> expected = Bags.mutable.with(
                 Tuples.pair("Two", Bags.mutable.with(2, 1)),
                 Tuples.pair("Three", Bags.mutable.with(3, 3)));
-        Assert.assertEquals(expected, collection);
+        assertEquals(expected, collection);
     }
 
     @Test
@@ -74,7 +75,7 @@ public class ImmutableBagMultimapTest extends AbstractImmutableMultimapTestCase
         ImmutableBag<Pair<String, ImmutableBag<Integer>>> expected = Bags.immutable.with(
                 Tuples.pair("Two", Bags.immutable.with(2, 1)),
                 Tuples.pair("Three", Bags.immutable.with(3, 3)));
-        Assert.assertEquals(expected, collection);
+        assertEquals(expected, collection);
     }
 
     @Override
@@ -87,8 +88,8 @@ public class ImmutableBagMultimapTest extends AbstractImmutableMultimapTestCase
                 .newWith("Less than 3", 2)
                 .newWith("Less than 3", 2);
         ImmutableBagMultimap<Integer, String> flipped = multimap.flip();
-        Assert.assertEquals(Bags.immutable.with("Less than 3", "Less than 3"), flipped.get(2));
-        Assert.assertEquals(Bags.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
+        assertEquals(Bags.immutable.with("Less than 3", "Less than 3"), flipped.get(2));
+        assertEquals(Bags.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
     }
 
     @Override
