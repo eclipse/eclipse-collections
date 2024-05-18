@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2023 Goldman Sachs and others.
+  ~ Copyright (c) 2024 Goldman Sachs and others.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -461,8 +461,9 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.5</version>
                     <configuration>
                         <includes>
                             <include>**/*Test.java</include>
@@ -471,6 +472,28 @@
                         <runOrder>random</runOrder>
                         <!--<forkCount>2C</forkCount>-->
                     </configuration>
+                    <!-- Configure surefire to run JUnit 4 and 5 tests -->
+                    <!-- In maven 3.9.6 and 4.x, maven is able to auto-detect JUnit and these dependencies are not required -->
+                    <!-- In maven 3.9.5, there is an internal exception inside surefire without these declared -->
+                    <!-- Even with newer versions of maven, it is advantageous to keep these declarations -->
+                    <!-- Without them, maven may only run JUnit 5 tests, in a project with both JUnit 4 and 5 -->
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.junit.jupiter</groupId>
+                            <artifactId>junit-jupiter-engine</artifactId>
+                            <version>5.10.2</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.junit.platform</groupId>
+                            <artifactId>junit-platform-engine</artifactId>
+                            <version>1.10.2</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.junit.vintage</groupId>
+                            <artifactId>junit-vintage-engine</artifactId>
+                            <version>5.10.2</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
 
                 <plugin>
