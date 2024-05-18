@@ -32,10 +32,10 @@ jobs:
           echo "steps.download-jdk.outputs.archive = ${{ steps.download-jdk.outputs.archive }}"
           echo "steps.download-jdk.outputs.version = ${{ steps.download-jdk.outputs.version }}"
       - name: Set Maven Wrapper
-        run: mvn -N wrapper:wrapper -Dmaven=3.6.3 --no-transfer-progress
+        run: mvn -N wrapper:wrapper -Dmaven=3.6.3
       - name: 'JDK Version'
         run: java --version
       - name: Unit-Test
-        run: ./mvnw verify -pl '!p2-repository,!org.eclipse.collections:org.eclipse.collections' --no-transfer-progress
+        run: ./mvnw verify -pl '!p2-repository,!org.eclipse.collections:org.eclipse.collections'
         env:
           MAVEN_OPTS: "-Xmx2g"

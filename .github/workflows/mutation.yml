@@ -37,11 +37,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Maven Install
-        run: mvn clean install -DskipTests=true --no-transfer-progress
+        run: mvn clean install -DskipTests=true
         env:
           MAVEN_OPTS: "-Xmx1g"
       - name: Mutation Test
-        run: mvn eu.stamp-project:pitmp-maven-plugin:run -DwithHistory -DtimeoutConstant=8000 --no-transfer-progress
+        run: mvn eu.stamp-project:pitmp-maven-plugin:run -DwithHistory -DtimeoutConstant=8000
         env:
           MAVEN_OPTS: "-Xmx1g"
       - name: Archive pitest reports
