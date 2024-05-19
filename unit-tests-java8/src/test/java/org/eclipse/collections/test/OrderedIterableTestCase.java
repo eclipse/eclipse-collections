@@ -34,13 +34,16 @@ import static org.junit.Assert.assertThrows;
 
 public interface OrderedIterableTestCase extends RichIterableTestCase
 {
+    @Override
+    <T> OrderedIterable<T> newWith(T... elements);
+
     /**
      * @since 9.1.
      */
     @Test
     default void OrderedIterable_collectWithIndex()
     {
-        RichIterable<ObjectIntPair<Integer>> pairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
+        RichIterable<ObjectIntPair<Integer>> pairs = this.newWith(3, 2, 1, 0)
                 .collectWithIndex(PrimitiveTuples::pair);
         Assert.assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
@@ -56,7 +59,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_collectWithIndexWithTarget()
     {
-        RichIterable<ObjectIntPair<Integer>> pairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
+        RichIterable<ObjectIntPair<Integer>> pairs = this.newWith(3, 2, 1, 0)
                 .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
         Assert.assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
@@ -65,7 +68,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
                 Lists.mutable.with(3, 2, 1, 0),
                 pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
 
-        RichIterable<ObjectIntPair<Integer>> setOfPairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
+        RichIterable<ObjectIntPair<Integer>> setOfPairs = this.newWith(3, 2, 1, 0)
                 .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
         Assert.assertEquals(
                 IntSets.mutable.with(0, 1, 2, 3),
@@ -84,19 +87,19 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getFirstOptional_empty()
     {
-        assertSame(Optional.empty(), ((OrderedIterable<?>) this.newWith()).getFirstOptional());
+        assertSame(Optional.empty(), this.newWith().getFirstOptional());
     }
 
     @Test
     default void OrderedIterable_getFirstOptional()
     {
-        assertEquals(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getFirstOptional());
+        assertEquals(Optional.of(Integer.valueOf(3)), this.newWith(3, 3, 3, 2, 2, 1).getFirstOptional());
     }
 
     @Test
     default void OrderedIterable_getFirstOptional_null_element()
     {
-        assertThrows(NullPointerException.class, () -> ((OrderedIterable<?>) this.newWith(new Object[]{null})).getFirstOptional());
+        assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).getFirstOptional());
     }
 
     @Test
@@ -108,19 +111,19 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getLastOptional_empty()
     {
-        assertSame(Optional.empty(), ((OrderedIterable<?>) this.newWith()).getLastOptional());
+        assertSame(Optional.empty(), this.newWith().getLastOptional());
     }
 
     @Test
     default void OrderedIterable_getLastOptional()
     {
-        assertEquals(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getLastOptional());
+        assertEquals(Optional.of(Integer.valueOf(1)), this.newWith(3, 3, 3, 2, 2, 1).getLastOptional());
     }
 
     @Test(expected = NullPointerException.class)
     default void OrderedIterable_getLastOptional_null_element()
     {
-        ((OrderedIterable<?>) this.newWith(new Object[]{null})).getLastOptional();
+        this.newWith(new Object[]{null}).getLastOptional();
     }
 
     @Test
