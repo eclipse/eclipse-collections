@@ -52,8 +52,9 @@ import org.eclipse.collections.impl.factory.primitive.LongSets;
 import org.eclipse.collections.impl.factory.primitive.LongStacks;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.list.primitive.LongInterval;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @since 9.0
@@ -64,235 +65,235 @@ public class PrimitiveStreamsTest
     public void toIntList()
     {
         MutableIntList list = PrimitiveStreams.mIntList(IntStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10), list);
-        Assert.assertEquals(IntLists.immutable.ofAll(IntStream.rangeClosed(1, 10)), list);
+        assertEquals(IntInterval.oneTo(10), list);
+        assertEquals(IntLists.immutable.ofAll(IntStream.rangeClosed(1, 10)), list);
     }
 
     @Test
     public void toImmutableIntList()
     {
         ImmutableIntList list = PrimitiveStreams.iIntList(IntStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10), list);
-        Assert.assertEquals(IntLists.mutable.ofAll(IntStream.rangeClosed(1, 10)), list);
+        assertEquals(IntInterval.oneTo(10), list);
+        assertEquals(IntLists.mutable.ofAll(IntStream.rangeClosed(1, 10)), list);
     }
 
     @Test
     public void toIntSet()
     {
         MutableIntSet set = PrimitiveStreams.mIntSet(IntStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).toSet(), set);
-        Assert.assertEquals(IntSets.immutable.ofAll(IntStream.rangeClosed(1, 10)), set);
+        assertEquals(IntInterval.oneTo(10).toSet(), set);
+        assertEquals(IntSets.immutable.ofAll(IntStream.rangeClosed(1, 10)), set);
     }
 
     @Test
     public void toImmutableIntSet()
     {
         ImmutableIntSet set = PrimitiveStreams.iIntSet(IntStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).toSet(), set);
-        Assert.assertEquals(IntSets.mutable.ofAll(IntStream.rangeClosed(1, 10)), set);
+        assertEquals(IntInterval.oneTo(10).toSet(), set);
+        assertEquals(IntSets.mutable.ofAll(IntStream.rangeClosed(1, 10)), set);
     }
 
     @Test
     public void toIntBag()
     {
         MutableIntBag bag = PrimitiveStreams.mIntBag(IntStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).toBag(), bag);
-        Assert.assertEquals(IntBags.immutable.ofAll(IntStream.rangeClosed(1, 10)), bag);
+        assertEquals(IntInterval.oneTo(10).toBag(), bag);
+        assertEquals(IntBags.immutable.ofAll(IntStream.rangeClosed(1, 10)), bag);
     }
 
     @Test
     public void toImmutableIntBag()
     {
         ImmutableIntBag bag = PrimitiveStreams.iIntBag(IntStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).toBag(), bag);
-        Assert.assertEquals(IntBags.mutable.ofAll(IntStream.rangeClosed(1, 10)), bag);
+        assertEquals(IntInterval.oneTo(10).toBag(), bag);
+        assertEquals(IntBags.mutable.ofAll(IntStream.rangeClosed(1, 10)), bag);
     }
 
     @Test
     public void toEmptyImmutableIntBag()
     {
         ImmutableIntBag bag = PrimitiveStreams.iIntBag(IntStream.empty());
-        Assert.assertEquals(IntBags.immutable.empty(), bag);
+        assertEquals(IntBags.immutable.empty(), bag);
     }
 
     @Test
     public void toImmutableIntBagWithOneElement()
     {
         ImmutableIntBag bag = PrimitiveStreams.iIntBag(IntStream.rangeClosed(1, 1));
-        Assert.assertEquals(IntInterval.oneTo(1).toBag(), bag);
-        Assert.assertEquals(IntBags.mutable.ofAll(IntStream.rangeClosed(1, 1)), bag);
+        assertEquals(IntInterval.oneTo(1).toBag(), bag);
+        assertEquals(IntBags.mutable.ofAll(IntStream.rangeClosed(1, 1)), bag);
     }
 
     @Test
     public void toIntStack()
     {
         MutableIntStack stack = PrimitiveStreams.mIntStack(IntStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntStacks.mutable.withAll(IntInterval.oneTo(10)), stack);
-        Assert.assertEquals(IntStacks.immutable.ofAll(IntStream.rangeClosed(1, 10)), stack);
+        assertEquals(IntStacks.mutable.withAll(IntInterval.oneTo(10)), stack);
+        assertEquals(IntStacks.immutable.ofAll(IntStream.rangeClosed(1, 10)), stack);
     }
 
     @Test
     public void toImmutableIntStack()
     {
         ImmutableIntStack stack = PrimitiveStreams.iIntStack(IntStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntStacks.immutable.withAll(IntInterval.oneTo(10)), stack);
-        Assert.assertEquals(IntStacks.mutable.ofAll(IntStream.rangeClosed(1, 10)), stack);
+        assertEquals(IntStacks.immutable.withAll(IntInterval.oneTo(10)), stack);
+        assertEquals(IntStacks.mutable.ofAll(IntStream.rangeClosed(1, 10)), stack);
     }
 
     @Test
     public void toLongList()
     {
         MutableLongList list = PrimitiveStreams.mLongList(LongStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongLists.mutable.empty()), list);
-        Assert.assertEquals(LongLists.immutable.ofAll(LongStream.rangeClosed(1, 10)), list);
+        assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongLists.mutable.empty()), list);
+        assertEquals(LongLists.immutable.ofAll(LongStream.rangeClosed(1, 10)), list);
     }
 
     @Test
     public void toImmutableLongList()
     {
         ImmutableLongList list = PrimitiveStreams.iLongList(LongStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongLists.mutable.empty()), list);
-        Assert.assertEquals(LongLists.mutable.ofAll(LongStream.rangeClosed(1, 10)), list);
+        assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongLists.mutable.empty()), list);
+        assertEquals(LongLists.mutable.ofAll(LongStream.rangeClosed(1, 10)), list);
     }
 
     @Test
     public void toLongSet()
     {
         MutableLongSet set = PrimitiveStreams.mLongSet(LongStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongSets.mutable.empty()), set);
-        Assert.assertEquals(LongSets.immutable.ofAll(LongStream.rangeClosed(1, 10)), set);
+        assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongSets.mutable.empty()), set);
+        assertEquals(LongSets.immutable.ofAll(LongStream.rangeClosed(1, 10)), set);
     }
 
     @Test
     public void toImmutableLongSet()
     {
         ImmutableLongSet set = PrimitiveStreams.iLongSet(LongStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongSets.mutable.empty()), set);
-        Assert.assertEquals(LongSets.mutable.ofAll(LongStream.rangeClosed(1, 10)), set);
+        assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongSets.mutable.empty()), set);
+        assertEquals(LongSets.mutable.ofAll(LongStream.rangeClosed(1, 10)), set);
     }
 
     @Test
     public void toLongBag()
     {
         MutableLongBag bag = PrimitiveStreams.mLongBag(LongStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongBags.mutable.empty()), bag);
-        Assert.assertEquals(LongBags.immutable.ofAll(LongStream.rangeClosed(1, 10)), bag);
+        assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongBags.mutable.empty()), bag);
+        assertEquals(LongBags.immutable.ofAll(LongStream.rangeClosed(1, 10)), bag);
     }
 
     @Test
     public void toImmutableLongBag()
     {
         ImmutableLongBag bag = PrimitiveStreams.iLongBag(LongStream.rangeClosed(1, 10));
-        Assert.assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongBags.mutable.empty()), bag);
-        Assert.assertEquals(LongBags.mutable.ofAll(LongStream.rangeClosed(1, 10)), bag);
+        assertEquals(IntInterval.oneTo(10).collectLong(i -> (long) i, LongBags.mutable.empty()), bag);
+        assertEquals(LongBags.mutable.ofAll(LongStream.rangeClosed(1, 10)), bag);
     }
 
     @Test
     public void toEmptyImmutableLongBag()
     {
         ImmutableLongBag bag = PrimitiveStreams.iLongBag(LongStream.empty());
-        Assert.assertEquals(LongBags.immutable.empty(), bag);
+        assertEquals(LongBags.immutable.empty(), bag);
     }
 
     @Test
     public void toImmutableLongBagWithOneElement()
     {
         ImmutableLongBag bag = PrimitiveStreams.iLongBag(LongStream.rangeClosed(1, 1));
-        Assert.assertEquals(LongInterval.oneTo(1).toBag(), bag);
-        Assert.assertEquals(LongBags.mutable.ofAll(LongStream.rangeClosed(1, 1)), bag);
+        assertEquals(LongInterval.oneTo(1).toBag(), bag);
+        assertEquals(LongBags.mutable.ofAll(LongStream.rangeClosed(1, 1)), bag);
     }
 
     @Test
     public void toLongStack()
     {
         MutableLongStack stack = PrimitiveStreams.mLongStack(LongStream.rangeClosed(1, 10));
-        Assert.assertEquals(LongStacks.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectLong(i -> (long) i)), stack);
-        Assert.assertEquals(LongStacks.immutable.ofAll(LongStream.rangeClosed(1, 10)), stack);
+        assertEquals(LongStacks.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectLong(i -> (long) i)), stack);
+        assertEquals(LongStacks.immutable.ofAll(LongStream.rangeClosed(1, 10)), stack);
     }
 
     @Test
     public void toImmutableLongStack()
     {
         ImmutableLongStack stack = PrimitiveStreams.iLongStack(LongStream.rangeClosed(1, 10));
-        Assert.assertEquals(LongStacks.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectLong(i -> (long) i)), stack);
-        Assert.assertEquals(LongStacks.mutable.ofAll(LongStream.rangeClosed(1, 10)), stack);
+        assertEquals(LongStacks.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectLong(i -> (long) i)), stack);
+        assertEquals(LongStacks.mutable.ofAll(LongStream.rangeClosed(1, 10)), stack);
     }
 
     @Test
     public void toDoubleList()
     {
         MutableDoubleList list = PrimitiveStreams.mDoubleList(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
-        Assert.assertEquals(DoubleLists.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), list);
-        Assert.assertEquals(DoubleLists.immutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), list);
+        assertEquals(DoubleLists.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), list);
+        assertEquals(DoubleLists.immutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), list);
     }
 
     @Test
     public void toImmutableDoubleList()
     {
         ImmutableDoubleList list = PrimitiveStreams.iDoubleList(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
-        Assert.assertEquals(DoubleLists.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), list);
-        Assert.assertEquals(DoubleLists.mutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), list);
+        assertEquals(DoubleLists.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), list);
+        assertEquals(DoubleLists.mutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), list);
     }
 
     @Test
     public void toDoubleSet()
     {
         MutableDoubleSet set = PrimitiveStreams.mDoubleSet(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
-        Assert.assertEquals(DoubleSets.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), set);
-        Assert.assertEquals(DoubleSets.immutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), set);
+        assertEquals(DoubleSets.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), set);
+        assertEquals(DoubleSets.immutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), set);
     }
 
     @Test
     public void toImmutableDoubleSet()
     {
         ImmutableDoubleSet set = PrimitiveStreams.iDoubleSet(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
-        Assert.assertEquals(DoubleSets.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), set);
-        Assert.assertEquals(DoubleSets.mutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), set);
+        assertEquals(DoubleSets.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), set);
+        assertEquals(DoubleSets.mutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), set);
     }
 
     @Test
     public void toDoubleBag()
     {
         MutableDoubleBag bag = PrimitiveStreams.mDoubleBag(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
-        Assert.assertEquals(DoubleBags.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), bag);
-        Assert.assertEquals(DoubleBags.immutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), bag);
+        assertEquals(DoubleBags.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), bag);
+        assertEquals(DoubleBags.immutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), bag);
     }
 
     @Test
     public void toImmutableDoubleBag()
     {
         ImmutableDoubleBag bag = PrimitiveStreams.iDoubleBag(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
-        Assert.assertEquals(DoubleBags.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), bag);
-        Assert.assertEquals(DoubleBags.mutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), bag);
+        assertEquals(DoubleBags.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), bag);
+        assertEquals(DoubleBags.mutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), bag);
     }
 
     @Test
     public void toEmptyImmutableDoubleBag()
     {
         ImmutableDoubleBag bag = PrimitiveStreams.iDoubleBag(DoubleStream.empty());
-        Assert.assertEquals(DoubleBags.immutable.empty(), bag);
+        assertEquals(DoubleBags.immutable.empty(), bag);
     }
 
     @Test
     public void toImmutableDoubleBagWithOneElement()
     {
         ImmutableDoubleBag bag = PrimitiveStreams.iDoubleBag(DoubleStream.of(1.0));
-        Assert.assertEquals(DoubleBags.mutable.ofAll(DoubleStream.of(1.0)), bag);
+        assertEquals(DoubleBags.mutable.ofAll(DoubleStream.of(1.0)), bag);
     }
 
     @Test
     public void toDoubleStack()
     {
         MutableDoubleStack stack = PrimitiveStreams.mDoubleStack(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
-        Assert.assertEquals(DoubleStacks.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), stack);
-        Assert.assertEquals(DoubleStacks.immutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), stack);
+        assertEquals(DoubleStacks.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), stack);
+        assertEquals(DoubleStacks.immutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), stack);
     }
 
     @Test
     public void toImmutableDoubleStack()
     {
         ImmutableDoubleStack stack = PrimitiveStreams.iDoubleStack(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
-        Assert.assertEquals(DoubleStacks.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), stack);
-        Assert.assertEquals(DoubleStacks.mutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), stack);
+        assertEquals(DoubleStacks.mutable.ofAll(IntInterval.oneTo(10).asLazy().collectDouble(i -> (double) i)), stack);
+        assertEquals(DoubleStacks.mutable.ofAll(DoubleStream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)), stack);
     }
 }

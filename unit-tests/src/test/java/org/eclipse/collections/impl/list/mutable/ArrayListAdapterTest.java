@@ -22,10 +22,14 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link ArrayListAdapter}.
@@ -58,7 +62,7 @@ public class ArrayListAdapterTest extends AbstractListTestCase
         super.newListWithSize();
 
         MutableList<Integer> objects = ArrayListAdapter.<Integer>newList(4).with(1, 2, 3);
-        Assert.assertEquals(1, objects.indexOf(2));
+        assertEquals(1, objects.indexOf(2));
     }
 
     @Override
@@ -81,13 +85,13 @@ public class ArrayListAdapterTest extends AbstractListTestCase
         ByteArrayOutputStream stream1 = SerializeTestHelper.getByteArrayOutputStream(mutableArrayList);
         LOGGER.info("ArrayListAdapter size: {}", stream1.size());
         LOGGER.info("{}", stream1);
-        Assert.assertTrue(stream1.size() > 0);
+        assertTrue(stream1.size() > 0);
 
         List<Integer> arrayList = new ArrayList<>();
         ByteArrayOutputStream stream2 = SerializeTestHelper.getByteArrayOutputStream(arrayList);
         LOGGER.info("ArrayList size: {}", stream2.size());
         LOGGER.info("{}", stream2);
-        Assert.assertTrue(stream2.size() > 0);
+        assertTrue(stream2.size() > 0);
     }
 
     @Test
@@ -142,7 +146,7 @@ public class ArrayListAdapterTest extends AbstractListTestCase
         sublist.remove("X");
         Verify.assertContainsAll(sublist, "B", "C");
         Verify.assertContainsAll(list, "A", "B", "C", "D");
-        Assert.assertEquals("C", sublist.set(1, "R"));
+        assertEquals("C", sublist.set(1, "R"));
         Verify.assertContainsAll(sublist, "B", "R");
         Verify.assertContainsAll(list, "A", "B", "R", "D");
         sublist.addAll(Arrays.asList("W", "G"));
@@ -150,7 +154,7 @@ public class ArrayListAdapterTest extends AbstractListTestCase
         Verify.assertContainsAll(list, "A", "B", "R", "W", "G", "D");
         sublist.clear();
         Verify.assertEmpty(sublist);
-        Assert.assertFalse(sublist.remove("X"));
+        assertFalse(sublist.remove("X"));
         Verify.assertEmpty(sublist);
         Verify.assertContainsAll(list, "A", "D");
     }
@@ -158,6 +162,6 @@ public class ArrayListAdapterTest extends AbstractListTestCase
     @Test
     public void adapt_null()
     {
-        Assert.assertThrows(NullPointerException.class, () -> ArrayListAdapter.adapt(null));
+        assertThrows(NullPointerException.class, () -> ArrayListAdapter.adapt(null));
     }
 }

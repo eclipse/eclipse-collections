@@ -26,8 +26,9 @@ import org.eclipse.collections.impl.factory.primitive.FloatLists;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.factory.primitive.ShortLists;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class InternalArrayIterateTest
 {
@@ -39,7 +40,7 @@ public class InternalArrayIterateTest
         MutableBooleanList result = InternalArrayIterate.collectBoolean(
                 items, 3, anObject -> anObject % 2 == 0, BooleanLists.mutable.withInitialCapacity(3));
 
-        Assert.assertEquals(result, BooleanLists.mutable.of(false, true, false));
+        assertEquals(result, BooleanLists.mutable.of(false, true, false));
     }
 
     @Test
@@ -50,7 +51,7 @@ public class InternalArrayIterateTest
         MutableByteList result = InternalArrayIterate.collectByte(
                 items, 3, Integer::byteValue, ByteLists.mutable.withInitialCapacity(3));
 
-        Assert.assertEquals(result, ByteLists.mutable.of((byte) 1, (byte) 2, (byte) 3));
+        assertEquals(result, ByteLists.mutable.of((byte) 1, (byte) 2, (byte) 3));
     }
 
     @Test
@@ -61,7 +62,7 @@ public class InternalArrayIterateTest
         MutableCharList result = InternalArrayIterate.collectChar(
                 items, 3, Character::toUpperCase, CharLists.mutable.withInitialCapacity(3));
 
-        Assert.assertEquals(result, CharLists.mutable.of('A', 'B', 'C'));
+        assertEquals(result, CharLists.mutable.of('A', 'B', 'C'));
     }
 
     @Test
@@ -72,7 +73,7 @@ public class InternalArrayIterateTest
         MutableDoubleList result = InternalArrayIterate.collectDouble(
                 items, 3, Integer::doubleValue, DoubleLists.mutable.withInitialCapacity(3));
 
-        Assert.assertEquals(result, DoubleLists.mutable.of(1.0, 2.0, 3.0));
+        assertEquals(result, DoubleLists.mutable.of(1.0, 2.0, 3.0));
     }
 
     @Test
@@ -83,7 +84,7 @@ public class InternalArrayIterateTest
         MutableFloatList result = InternalArrayIterate.collectFloat(
                 items, 3, Integer::floatValue, FloatLists.mutable.withInitialCapacity(3));
 
-        Assert.assertEquals(result, FloatLists.mutable.of(1.0F, 2.0F, 3.0F));
+        assertEquals(result, FloatLists.mutable.of(1.0F, 2.0F, 3.0F));
     }
 
     @Test
@@ -94,7 +95,7 @@ public class InternalArrayIterateTest
         MutableIntList result = InternalArrayIterate.collectInt(
                 items, 3, anObject -> anObject + 1, IntLists.mutable.withInitialCapacity(3));
 
-        Assert.assertEquals(result, IntLists.mutable.of(2, 3, 4));
+        assertEquals(result, IntLists.mutable.of(2, 3, 4));
     }
 
     @Test
@@ -105,7 +106,7 @@ public class InternalArrayIterateTest
         MutableLongList result = InternalArrayIterate.collectLong(
                 items, 3, Integer::longValue, LongLists.mutable.withInitialCapacity(3));
 
-        Assert.assertEquals(result, LongLists.mutable.of(1L, 2L, 3L));
+        assertEquals(result, LongLists.mutable.of(1L, 2L, 3L));
     }
 
     @Test
@@ -116,6 +117,6 @@ public class InternalArrayIterateTest
         MutableShortList result = InternalArrayIterate.collectShort(
                 items, 3, Integer::shortValue, ShortLists.mutable.withInitialCapacity(3));
 
-        Assert.assertEquals(result, ShortLists.mutable.of((short) 1, (short) 2, (short) 3));
+        assertEquals(result, ShortLists.mutable.of((short) 1, (short) 2, (short) 3));
     }
 }

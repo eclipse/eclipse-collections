@@ -12,8 +12,9 @@ package org.eclipse.collections.impl.set.immutable;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertThrows;
 
 public class ImmutableTripletonSetTest
         extends AbstractImmutableSetTestCase
@@ -38,6 +39,6 @@ public class ImmutableTripletonSetTest
     @Test
     public void getOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 }

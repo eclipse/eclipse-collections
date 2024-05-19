@@ -19,8 +19,12 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 
 public class MultiReaderUnifiedSetAsWriteUntouchableTest extends AbstractCollectionTestCase
 {
@@ -33,15 +37,15 @@ public class MultiReaderUnifiedSetAsWriteUntouchableTest extends AbstractCollect
     @Override
     public void getLast()
     {
-        Assert.assertNotNull(this.newWith(1, 2, 3).getLast());
-        Assert.assertNull(this.newWith().getLast());
+        assertNotNull(this.newWith(1, 2, 3).getLast());
+        assertNull(this.newWith().getLast());
     }
 
     @Override
     @Test
     public void makeString()
     {
-        Assert.assertEquals("1, 2, 3", this.newWith(1, 2, 3).makeString());
+        assertEquals("1, 2, 3", this.newWith(1, 2, 3).makeString());
     }
 
     @Override
@@ -50,28 +54,28 @@ public class MultiReaderUnifiedSetAsWriteUntouchableTest extends AbstractCollect
     {
         Appendable builder = new StringBuilder();
         this.newWith(1, 2, 3).appendString(builder);
-        Assert.assertEquals("1, 2, 3", builder.toString());
+        assertEquals("1, 2, 3", builder.toString());
     }
 
     @Override
     @Test
     public void testToString()
     {
-        Assert.assertEquals("[1, 2, 3]", this.newWith(1, 2, 3).toString());
+        assertEquals("[1, 2, 3]", this.newWith(1, 2, 3).toString());
     }
 
     @Override
     @Test
     public void asSynchronized()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().asSynchronized());
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().asSynchronized());
     }
 
     @Override
     @Test
     public void asUnmodifiable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith().asUnmodifiable());
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().asUnmodifiable());
     }
 
     @Override

@@ -25,8 +25,10 @@ import org.eclipse.collections.impl.block.procedure.checked.ThrowingProcedure2;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class Procedures2Test
 {
@@ -50,7 +52,7 @@ public class Procedures2Test
                 PrimitiveTuples.pair(object.intValue(), parameter.intValue()));
 
         Procedures2.throwing(throwingProcedure2).value(2, 3);
-        Assert.assertEquals(Lists.mutable.of(PrimitiveTuples.pair(2, 3)), list);
+        assertEquals(Lists.mutable.of(PrimitiveTuples.pair(2, 3)), list);
     }
 
     @Test
@@ -74,7 +76,7 @@ public class Procedures2Test
                             throw new IOException();
                         },
                         this::throwMyException).value(null, null));
-        Assert.assertThrows(
+        assertThrows(
                 NullPointerException.class,
                 () -> Procedures2.throwing(
                         (one, two) ->
@@ -95,7 +97,7 @@ public class Procedures2Test
         CollectionAddProcedure<Integer> procedure = CollectionAddProcedure.on(FastList.newList());
         Procedure2<Integer, Object> procedure2 = Procedures2.fromProcedure(procedure);
         procedure2.value(1, null);
-        Assert.assertEquals(FastList.newListWith(1), procedure.getResult());
+        assertEquals(FastList.newListWith(1), procedure.getResult());
     }
 
     @Test
@@ -124,8 +126,8 @@ public class Procedures2Test
                 DoubleSummaryStatistics::new,
                 Procedures2.summarizeDouble(Double::doubleValue));
         Verify.assertSize(2, map);
-        Assert.assertEquals(6.0, map.get("2.0").getSum(), 0.0);
-        Assert.assertEquals(9.0, map.get("3.0").getSum(), 0.0);
+        assertEquals(6.0, map.get("2.0").getSum(), 0.0);
+        assertEquals(9.0, map.get("3.0").getSum(), 0.0);
     }
 
     /**
@@ -140,8 +142,8 @@ public class Procedures2Test
                 DoubleSummaryStatistics::new,
                 Procedures2.summarizeFloat(Float::floatValue));
         Verify.assertSize(2, map);
-        Assert.assertEquals(6.0, map.get("2.0").getSum(), 0.0);
-        Assert.assertEquals(9.0, map.get("3.0").getSum(), 0.0);
+        assertEquals(6.0, map.get("2.0").getSum(), 0.0);
+        assertEquals(9.0, map.get("3.0").getSum(), 0.0);
     }
 
     /**
@@ -156,8 +158,8 @@ public class Procedures2Test
                 LongSummaryStatistics::new,
                 Procedures2.summarizeLong(Long::longValue));
         Verify.assertSize(2, map);
-        Assert.assertEquals(6, map.get("2").getSum());
-        Assert.assertEquals(9, map.get("3").getSum());
+        assertEquals(6, map.get("2").getSum());
+        assertEquals(9, map.get("3").getSum());
     }
 
     /**
@@ -172,7 +174,7 @@ public class Procedures2Test
                 IntSummaryStatistics::new,
                 Procedures2.summarizeInt(Integer::intValue));
         Verify.assertSize(2, map);
-        Assert.assertEquals(6, map.get("2").getSum());
-        Assert.assertEquals(9, map.get("3").getSum());
+        assertEquals(6, map.get("2").getSum());
+        assertEquals(9, map.get("3").getSum());
     }
 }

@@ -22,8 +22,9 @@ import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingSt
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class HashingStrategyMapsTest
 {
@@ -31,15 +32,15 @@ public class HashingStrategyMapsTest
     public void immutable()
     {
         ImmutableHashingStrategyMapFactory factory = HashingStrategyMaps.immutable;
-        Assert.assertEquals(UnifiedMap.newMap(), factory.of(HashingStrategies.defaultStrategy()));
+        assertEquals(UnifiedMap.newMap(), factory.of(HashingStrategies.defaultStrategy()));
         Verify.assertInstanceOf(ImmutableMap.class, factory.of(HashingStrategies.defaultStrategy()));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2), factory.of(HashingStrategies.defaultStrategy(), 1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2), factory.of(HashingStrategies.defaultStrategy(), 1, 2));
         Verify.assertInstanceOf(ImmutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4));
         Verify.assertInstanceOf(ImmutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
         Verify.assertInstanceOf(ImmutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6, 7, 8), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6, 7, 8), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
         Verify.assertInstanceOf(ImmutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
     }
 
@@ -47,15 +48,15 @@ public class HashingStrategyMapsTest
     public void mutable()
     {
         MutableHashingStrategyMapFactory factory = HashingStrategyMaps.mutable;
-        Assert.assertEquals(UnifiedMap.newMap(), factory.of(HashingStrategies.defaultStrategy()));
+        assertEquals(UnifiedMap.newMap(), factory.of(HashingStrategies.defaultStrategy()));
         Verify.assertInstanceOf(MutableMap.class, factory.of(HashingStrategies.defaultStrategy()));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2), factory.of(HashingStrategies.defaultStrategy(), 1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2), factory.of(HashingStrategies.defaultStrategy(), 1, 2));
         Verify.assertInstanceOf(MutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4));
         Verify.assertInstanceOf(MutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
         Verify.assertInstanceOf(MutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6, 7, 8), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6, 7, 8), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
         Verify.assertInstanceOf(MutableMap.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
 
         MutableList<Pair<Person, String>> pairs = Lists.mutable.of(
@@ -63,11 +64,11 @@ public class HashingStrategyMapsTest
                 Tuples.pair(new Person("Alex", "Smith"), "B"),
                 Tuples.pair(new Person("Jeff", "Johnson"), "D"));
 
-        Assert.assertEquals(
+        assertEquals(
                 new UnifiedMapWithHashingStrategy<Person, String>(HashingStrategies.fromFunction(Person::getLastName)).withAllKeyValues(pairs),
                 factory.<Person, String, String>fromFunction(Person::getLastName).withAllKeyValues(pairs));
 
-        Assert.assertEquals(
+        assertEquals(
                 new UnifiedMapWithHashingStrategy<Person, String>(HashingStrategies.fromFunction(Person::getFirstName)).withAllKeyValues(pairs),
                 factory.<Person, String, String>fromFunction(Person::getFirstName).withAllKeyValues(pairs));
     }

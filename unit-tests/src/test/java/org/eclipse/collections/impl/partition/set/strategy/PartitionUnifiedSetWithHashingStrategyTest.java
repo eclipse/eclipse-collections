@@ -15,8 +15,9 @@ import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PartitionUnifiedSetWithHashingStrategyTest
 {
@@ -32,7 +33,7 @@ public class PartitionUnifiedSetWithHashingStrategyTest
         partitionMutableSet.getRejected().addAll(rejected);
 
         PartitionImmutableSet<Integer> partitionImmutableSet = partitionMutableSet.toImmutable();
-        Assert.assertEquals(selected, partitionImmutableSet.getSelected());
-        Assert.assertEquals(rejected, partitionImmutableSet.getRejected());
+        assertEquals(selected, partitionImmutableSet.getSelected());
+        assertEquals(rejected, partitionImmutableSet.getRejected());
     }
 }

@@ -27,8 +27,11 @@ import org.eclipse.collections.impl.factory.primitive.ShortLists;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link LazyByteIterableAdapter}.
@@ -46,7 +49,7 @@ public class LazyBooleanIterableAdapterTest
         {
             sum += iterator.next() ? 1 : 0;
         }
-        Assert.assertEquals(2, sum);
+        assertEquals(2, sum);
     }
 
     @Test
@@ -54,7 +57,7 @@ public class LazyBooleanIterableAdapterTest
     {
         int[] sum = new int[1];
         this.iterable.forEach(each -> sum[0] += each ? 1 : 0);
-        Assert.assertEquals(2, sum[0]);
+        assertEquals(2, sum[0]);
     }
 
     @Test
@@ -66,31 +69,31 @@ public class LazyBooleanIterableAdapterTest
     @Test
     public void empty()
     {
-        Assert.assertFalse(this.iterable.isEmpty());
-        Assert.assertTrue(this.iterable.notEmpty());
+        assertFalse(this.iterable.isEmpty());
+        assertTrue(this.iterable.notEmpty());
         Verify.assertNotEmpty(this.iterable);
     }
 
     @Test
     public void count()
     {
-        Assert.assertEquals(2, this.iterable.count(BooleanPredicates.isTrue()));
-        Assert.assertEquals(1, this.iterable.count(BooleanPredicates.isFalse()));
+        assertEquals(2, this.iterable.count(BooleanPredicates.isTrue()));
+        assertEquals(1, this.iterable.count(BooleanPredicates.isFalse()));
     }
 
     @Test
     public void anySatisfy()
     {
-        Assert.assertTrue(this.iterable.anySatisfy(BooleanPredicates.isTrue()));
-        Assert.assertTrue(this.iterable.anySatisfy(BooleanPredicates.isFalse()));
+        assertTrue(this.iterable.anySatisfy(BooleanPredicates.isTrue()));
+        assertTrue(this.iterable.anySatisfy(BooleanPredicates.isFalse()));
     }
 
     @Test
     public void allSatisfy()
     {
-        Assert.assertTrue(this.iterable.allSatisfy(value -> true));
-        Assert.assertFalse(this.iterable.allSatisfy(BooleanPredicates.isFalse()));
-        Assert.assertFalse(this.iterable.allSatisfy(BooleanPredicates.isTrue()));
+        assertTrue(this.iterable.allSatisfy(value -> true));
+        assertFalse(this.iterable.allSatisfy(BooleanPredicates.isFalse()));
+        assertFalse(this.iterable.allSatisfy(BooleanPredicates.isTrue()));
     }
 
     @Test
@@ -110,9 +113,9 @@ public class LazyBooleanIterableAdapterTest
     @Test
     public void detectIfNone()
     {
-        Assert.assertTrue(this.iterable.detectIfNone(BooleanPredicates.isTrue(), false));
-        Assert.assertFalse(this.iterable.detectIfNone(BooleanPredicates.isFalse(), true));
-        Assert.assertFalse(this.iterable.detectIfNone(value -> false, false));
+        assertTrue(this.iterable.detectIfNone(BooleanPredicates.isTrue(), false));
+        assertFalse(this.iterable.detectIfNone(BooleanPredicates.isFalse(), true));
+        assertFalse(this.iterable.detectIfNone(value -> false, false));
     }
 
     @Test
@@ -120,67 +123,67 @@ public class LazyBooleanIterableAdapterTest
     {
         RichIterable<String> collect = this.iterable.collect(String::valueOf);
         Verify.assertIterableSize(3, collect);
-        Assert.assertEquals("truefalsetrue", collect.makeString(""));
+        assertEquals("truefalsetrue", collect.makeString(""));
     }
 
     @Test
     public void lazyCollectPrimitives()
     {
-        Assert.assertEquals(BooleanLists.immutable.of(false, true, false), this.iterable.collectBoolean(e -> !e).toList());
-        Assert.assertEquals(CharLists.immutable.of((char) 1, (char) 0, (char) 1), this.iterable.asLazy().collectChar(e -> e ? (char) 1 : (char) 0).toList());
-        Assert.assertEquals(ByteLists.immutable.of((byte) 1, (byte) 0, (byte) 1), this.iterable.asLazy().collectByte(e -> e ? (byte) 1 : (byte) 0).toList());
-        Assert.assertEquals(ShortLists.immutable.of((short) 1, (short) 0, (short) 1), this.iterable.asLazy().collectShort(e -> e ? (short) 1 : (short) 0).toList());
-        Assert.assertEquals(IntLists.immutable.of(1, 0, 1), this.iterable.asLazy().collectInt(e -> e ? 1 : 0).toList());
-        Assert.assertEquals(FloatLists.immutable.of(1.0f, 0.0f, 1.0f), this.iterable.asLazy().collectFloat(e -> e ? 1.0f : 0.0f).toList());
-        Assert.assertEquals(LongLists.immutable.of(1L, 0L, 1L), this.iterable.asLazy().collectLong(e -> e ? 1L : 0L).toList());
-        Assert.assertEquals(DoubleLists.immutable.of(1.0, 0.0, 1.0), this.iterable.asLazy().collectDouble(e -> e ? 1.0 : 0.0).toList());
+        assertEquals(BooleanLists.immutable.of(false, true, false), this.iterable.collectBoolean(e -> !e).toList());
+        assertEquals(CharLists.immutable.of((char) 1, (char) 0, (char) 1), this.iterable.asLazy().collectChar(e -> e ? (char) 1 : (char) 0).toList());
+        assertEquals(ByteLists.immutable.of((byte) 1, (byte) 0, (byte) 1), this.iterable.asLazy().collectByte(e -> e ? (byte) 1 : (byte) 0).toList());
+        assertEquals(ShortLists.immutable.of((short) 1, (short) 0, (short) 1), this.iterable.asLazy().collectShort(e -> e ? (short) 1 : (short) 0).toList());
+        assertEquals(IntLists.immutable.of(1, 0, 1), this.iterable.asLazy().collectInt(e -> e ? 1 : 0).toList());
+        assertEquals(FloatLists.immutable.of(1.0f, 0.0f, 1.0f), this.iterable.asLazy().collectFloat(e -> e ? 1.0f : 0.0f).toList());
+        assertEquals(LongLists.immutable.of(1L, 0L, 1L), this.iterable.asLazy().collectLong(e -> e ? 1L : 0L).toList());
+        assertEquals(DoubleLists.immutable.of(1.0, 0.0, 1.0), this.iterable.asLazy().collectDouble(e -> e ? 1.0 : 0.0).toList());
     }
 
     @Test
     public void toArray()
     {
-        Assert.assertTrue(Arrays.equals(new boolean[]{true, false, true}, this.iterable.toArray()));
+        assertTrue(Arrays.equals(new boolean[]{true, false, true}, this.iterable.toArray()));
     }
 
     @Test
     public void contains()
     {
-        Assert.assertTrue(this.iterable.contains(true));
-        Assert.assertTrue(this.iterable.contains(false));
+        assertTrue(this.iterable.contains(true));
+        assertTrue(this.iterable.contains(false));
     }
 
     @Test
     public void containsAllArray()
     {
-        Assert.assertTrue(this.iterable.containsAll(true, false));
-        Assert.assertTrue(this.iterable.containsAll(false, true));
-        Assert.assertTrue(this.iterable.containsAll());
+        assertTrue(this.iterable.containsAll(true, false));
+        assertTrue(this.iterable.containsAll(false, true));
+        assertTrue(this.iterable.containsAll());
     }
 
     @Test
     public void containsAllIterable()
     {
-        Assert.assertTrue(this.iterable.containsAll(BooleanArrayList.newListWith(true)));
-        Assert.assertTrue(this.iterable.containsAll(BooleanArrayList.newListWith(false)));
-        Assert.assertTrue(this.iterable.containsAll(BooleanArrayList.newListWith(true, false)));
-        Assert.assertTrue(this.iterable.containsAll(BooleanArrayList.newListWith(false, true)));
+        assertTrue(this.iterable.containsAll(BooleanArrayList.newListWith(true)));
+        assertTrue(this.iterable.containsAll(BooleanArrayList.newListWith(false)));
+        assertTrue(this.iterable.containsAll(BooleanArrayList.newListWith(true, false)));
+        assertTrue(this.iterable.containsAll(BooleanArrayList.newListWith(false, true)));
     }
 
     @Test
     public void toList()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, true), this.iterable.toList());
+        assertEquals(BooleanArrayList.newListWith(true, false, true), this.iterable.toList());
     }
 
     @Test
     public void toSet()
     {
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), this.iterable.toSet());
+        assertEquals(BooleanHashSet.newSetWith(true, false), this.iterable.toSet());
     }
 
     @Test
     public void toBag()
     {
-        Assert.assertEquals(BooleanHashBag.newBagWith(false, true, true), this.iterable.toBag());
+        assertEquals(BooleanHashBag.newBagWith(false, true, true), this.iterable.toBag());
     }
 }

@@ -15,8 +15,9 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class FastListCollectProcedureTest
 {
@@ -30,6 +31,6 @@ public class FastListCollectProcedureTest
         procedure.value(Tuples.pair(2, "two"));
         procedure.value(Tuples.pair(3, "three"));
 
-        Assert.assertEquals(Lists.mutable.of(1, 2, 3), procedure.getFastList());
+        assertEquals(Lists.mutable.of(1, 2, 3), procedure.getFastList());
     }
 }

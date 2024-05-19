@@ -26,8 +26,12 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.fail;
 
 public class MapsTest
 {
@@ -35,15 +39,15 @@ public class MapsTest
     public void immutable()
     {
         ImmutableMapFactory factory = Maps.immutable;
-        Assert.assertEquals(UnifiedMap.newMap(), factory.of());
+        assertEquals(UnifiedMap.newMap(), factory.of());
         Verify.assertInstanceOf(ImmutableMap.class, factory.of());
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2), factory.of(1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2), factory.of(1, 2));
         Verify.assertInstanceOf(ImmutableMap.class, factory.of(1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), factory.of(1, 2, 3, 4));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), factory.of(1, 2, 3, 4));
         Verify.assertInstanceOf(ImmutableMap.class, factory.of(1, 2, 3, 4));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6), factory.of(1, 2, 3, 4, 5, 6));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6), factory.of(1, 2, 3, 4, 5, 6));
         Verify.assertInstanceOf(ImmutableMap.class, factory.of(1, 2, 3, 4, 5, 6));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6, 7, 8), factory.of(1, 2, 3, 4, 5, 6, 7, 8));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6, 7, 8), factory.of(1, 2, 3, 4, 5, 6, 7, 8));
         Verify.assertInstanceOf(ImmutableMap.class, factory.of(1, 2, 3, 4, 5, 6, 7, 8));
     }
 
@@ -51,24 +55,24 @@ public class MapsTest
     public void immutableWithDuplicateKeys()
     {
         ImmutableMapFactory factory = Maps.immutable;
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2), factory.of(1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 1, 2), factory.of(1, 2, 1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 1, 2), factory.of(1, 2, 3, 4, 1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 1, 2, 3, 4), factory.of(1, 2, 1, 2, 3, 4));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 3, 4), factory.of(1, 2, 3, 4, 3, 4));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2), factory.of(1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 1, 2), factory.of(1, 2, 1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 1, 2), factory.of(1, 2, 3, 4, 1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 1, 2, 3, 4), factory.of(1, 2, 1, 2, 3, 4));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 3, 4), factory.of(1, 2, 3, 4, 3, 4));
     }
 
     @Test
     public void fixedSize()
     {
         FixedSizeMapFactory undertest = Maps.fixedSize;
-        Assert.assertEquals(UnifiedMap.newMap(), undertest.of());
+        assertEquals(UnifiedMap.newMap(), undertest.of());
         Verify.assertInstanceOf(FixedSizeMap.class, undertest.of());
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2), undertest.of(1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2), undertest.of(1, 2));
         Verify.assertInstanceOf(FixedSizeMap.class, undertest.of(1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), undertest.of(1, 2, 3, 4));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), undertest.of(1, 2, 3, 4));
         Verify.assertInstanceOf(FixedSizeMap.class, undertest.of(1, 2, 3, 4));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6), undertest.of(1, 2, 3, 4, 5, 6));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 5, 6), undertest.of(1, 2, 3, 4, 5, 6));
         Verify.assertInstanceOf(FixedSizeMap.class, undertest.of(1, 2, 3, 4, 5, 6));
     }
 
@@ -76,26 +80,26 @@ public class MapsTest
     public void fixedSizeWithDuplicateKeys()
     {
         FixedSizeMapFactory undertest = Maps.fixedSize;
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2), undertest.of(1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 1, 2), undertest.of(1, 2, 1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 1, 2), undertest.of(1, 2, 3, 4, 1, 2));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 1, 2, 3, 4), undertest.of(1, 2, 1, 2, 3, 4));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 3, 4), undertest.of(1, 2, 3, 4, 3, 4));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2), undertest.of(1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 1, 2), undertest.of(1, 2, 1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 1, 2), undertest.of(1, 2, 3, 4, 1, 2));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 1, 2, 3, 4), undertest.of(1, 2, 1, 2, 3, 4));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4, 3, 4), undertest.of(1, 2, 3, 4, 3, 4));
     }
 
     @Test
     public void copyMap()
     {
-        Assert.assertEquals(Maps.fixedSize.of(1, "One"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One")));
+        assertEquals(Maps.fixedSize.of(1, "One"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One")));
         Verify.assertInstanceOf(ImmutableMap.class, Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One")));
 
-        Assert.assertEquals(Maps.fixedSize.of(1, "One", 2, "Dos"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos")));
+        assertEquals(Maps.fixedSize.of(1, "One", 2, "Dos"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos")));
         Verify.assertInstanceOf(ImmutableMap.class, Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos")));
 
-        Assert.assertEquals(Maps.fixedSize.of(1, "One", 2, "Dos", 3, "Drei"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei")));
+        assertEquals(Maps.fixedSize.of(1, "One", 2, "Dos", 3, "Drei"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei")));
         Verify.assertInstanceOf(ImmutableMap.class, Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei")));
 
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quatro"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quatro")));
+        assertEquals(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quatro"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quatro")));
         Verify.assertInstanceOf(ImmutableMap.class, Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quatro")));
     }
 
@@ -122,30 +126,30 @@ public class MapsTest
     @Test
     public void duplicates()
     {
-        Assert.assertEquals(Maps.immutable.of(0, 0), Maps.immutable.of(0, 0, 0, 0));
-        Assert.assertEquals(Maps.immutable.of(0, 0), Maps.immutable.of(0, 0, 0, 0, 0, 0));
-        Assert.assertEquals(Maps.immutable.of(0, 0), Maps.immutable.of(0, 0, 0, 0, 0, 0, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0), Maps.immutable.of(0, 0, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0), Maps.immutable.of(0, 0, 0, 0, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0), Maps.immutable.of(0, 0, 0, 0, 0, 0, 0, 0));
 
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1), Maps.immutable.of(1, 1, 0, 0, 0, 0));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 2, 2), Maps.immutable.of(0, 0, 2, 2, 0, 0));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 3, 3), Maps.immutable.of(0, 0, 0, 0, 3, 3));
+        assertEquals(Maps.immutable.of(0, 0, 1, 1), Maps.immutable.of(1, 1, 0, 0, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0, 2, 2), Maps.immutable.of(0, 0, 2, 2, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0, 3, 3), Maps.immutable.of(0, 0, 0, 0, 3, 3));
 
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1), Maps.immutable.of(1, 1, 0, 0, 0, 0, 0, 0));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 2, 2), Maps.immutable.of(0, 0, 2, 2, 0, 0, 0, 0));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 3, 3), Maps.immutable.of(0, 0, 0, 0, 3, 3, 0, 0));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 4, 4), Maps.immutable.of(0, 0, 0, 0, 0, 0, 4, 4));
+        assertEquals(Maps.immutable.of(0, 0, 1, 1), Maps.immutable.of(1, 1, 0, 0, 0, 0, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0, 2, 2), Maps.immutable.of(0, 0, 2, 2, 0, 0, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0, 3, 3), Maps.immutable.of(0, 0, 0, 0, 3, 3, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0, 4, 4), Maps.immutable.of(0, 0, 0, 0, 0, 0, 4, 4));
 
-        Assert.assertEquals(Maps.immutable.of(0, 0, 2, 2, 3, 3, 4, 4), Maps.immutable.of(0, 0, 2, 2, 3, 3, 4, 4));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1, 3, 3, 4, 4), Maps.immutable.of(1, 1, 0, 0, 3, 3, 4, 4));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2, 4, 4), Maps.immutable.of(1, 1, 2, 2, 0, 0, 4, 4));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2, 3, 3), Maps.immutable.of(1, 1, 2, 2, 3, 3, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0, 2, 2, 3, 3, 4, 4), Maps.immutable.of(0, 0, 2, 2, 3, 3, 4, 4));
+        assertEquals(Maps.immutable.of(0, 0, 1, 1, 3, 3, 4, 4), Maps.immutable.of(1, 1, 0, 0, 3, 3, 4, 4));
+        assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2, 4, 4), Maps.immutable.of(1, 1, 2, 2, 0, 0, 4, 4));
+        assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2, 3, 3), Maps.immutable.of(1, 1, 2, 2, 3, 3, 0, 0));
 
-        Assert.assertEquals(Maps.immutable.of(0, 0, 3, 3, 4, 4), Maps.immutable.of(0, 0, 0, 0, 3, 3, 4, 4));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 2, 2, 4, 4), Maps.immutable.of(0, 0, 2, 2, 0, 0, 4, 4));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 2, 2, 3, 3), Maps.immutable.of(0, 0, 2, 2, 3, 3, 0, 0));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1, 4, 4), Maps.immutable.of(1, 1, 0, 0, 0, 0, 4, 4));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1, 3, 3), Maps.immutable.of(1, 1, 0, 0, 3, 3, 0, 0));
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2), Maps.immutable.of(1, 1, 2, 2, 0, 0, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0, 3, 3, 4, 4), Maps.immutable.of(0, 0, 0, 0, 3, 3, 4, 4));
+        assertEquals(Maps.immutable.of(0, 0, 2, 2, 4, 4), Maps.immutable.of(0, 0, 2, 2, 0, 0, 4, 4));
+        assertEquals(Maps.immutable.of(0, 0, 2, 2, 3, 3), Maps.immutable.of(0, 0, 2, 2, 3, 3, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0, 1, 1, 4, 4), Maps.immutable.of(1, 1, 0, 0, 0, 0, 4, 4));
+        assertEquals(Maps.immutable.of(0, 0, 1, 1, 3, 3), Maps.immutable.of(1, 1, 0, 0, 3, 3, 0, 0));
+        assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2), Maps.immutable.of(1, 1, 2, 2, 0, 0, 0, 0));
     }
 
     @Test
@@ -157,26 +161,26 @@ public class MapsTest
         ImmutableMap<Key, Integer> map1 = Maps.immutable.of(key, 1, duplicateKey1, 2);
         Verify.assertSize(1, map1);
         Verify.assertContainsKeyValue(key, 2, map1);
-        Assert.assertSame(key, map1.keysView().getFirst());
+        assertSame(key, map1.keysView().getFirst());
 
         Key duplicateKey2 = new Key("key");
         ImmutableMap<Key, Integer> map2 = Maps.immutable.of(key, 1, duplicateKey1, 2, duplicateKey2, 3);
         Verify.assertSize(1, map2);
         Verify.assertContainsKeyValue(key, 3, map2);
-        Assert.assertSame(key, map2.keysView().getFirst());
+        assertSame(key, map2.keysView().getFirst());
 
         Key duplicateKey3 = new Key("key");
         ImmutableMap<Key, Integer> map3 = Maps.immutable.of(key, 1, new Key("not a dupe"), 2, duplicateKey3, 3);
         Verify.assertSize(2, map3);
         Verify.assertContainsAllKeyValues(map3, key, 3, new Key("not a dupe"), 2);
-        Assert.assertSame(key, map3.keysView().detect(key::equals));
+        assertSame(key, map3.keysView().detect(key::equals));
     }
 
     @Test
     public void sortedMaps()
     {
         MutableSortedMapFactory factory = SortedMaps.mutable;
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), factory.ofSortedMap(UnifiedMap.newWithKeysValues(1, 2, 3, 4)));
+        assertEquals(UnifiedMap.newWithKeysValues(1, 2, 3, 4), factory.ofSortedMap(UnifiedMap.newWithKeysValues(1, 2, 3, 4)));
     }
 
     @Test
@@ -197,7 +201,7 @@ public class MapsTest
         MutableMap<String, String> map3 = Maps.mutable.ofInitialCapacity(20);
         this.assertPresizedMapSizeEquals(20, (UnifiedMap<String, String>) map3);
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Maps.mutable.ofInitialCapacity(-12));
+        assertThrows(IllegalArgumentException.class, () -> Maps.mutable.ofInitialCapacity(-12));
     }
 
     @Test
@@ -218,7 +222,7 @@ public class MapsTest
         MutableMap<String, String> map5 = Maps.mutable.withInitialCapacity(17);
         this.assertPresizedMapSizeEquals(17, (UnifiedMap<String, String>) map5);
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Maps.mutable.ofInitialCapacity(-6));
+        assertThrows(IllegalArgumentException.class, () -> Maps.mutable.ofInitialCapacity(-6));
     }
 
     private void assertPresizedMapSizeEquals(int initialCapacity, UnifiedMap<String, String> map)
@@ -237,19 +241,19 @@ public class MapsTest
             }
             capacity <<= 1;
 
-            Assert.assertEquals(capacity, table.length);
+            assertEquals(capacity, table.length);
         }
         catch (SecurityException ignored)
         {
-            Assert.fail("Unable to modify the visibility of the table on UnifiedMap");
+            fail("Unable to modify the visibility of the table on UnifiedMap");
         }
         catch (NoSuchFieldException ignored)
         {
-            Assert.fail("No field named table UnifiedMap");
+            fail("No field named table UnifiedMap");
         }
         catch (IllegalAccessException ignored)
         {
-            Assert.fail("No access the field table in UnifiedMap");
+            fail("No access the field table in UnifiedMap");
         }
     }
 
@@ -258,16 +262,16 @@ public class MapsTest
     {
         MutableMapFactory factory = Maps.mutable;
 
-        Assert.assertEquals(UnifiedMap.newMap(), factory.ofMap(new HashMap<>()));
+        assertEquals(UnifiedMap.newMap(), factory.ofMap(new HashMap<>()));
         Verify.assertInstanceOf(UnifiedMap.class, factory.ofMap(new HashMap<>()));
 
-        Assert.assertEquals(UnifiedMap.newMap(), factory.ofMapIterable(Maps.immutable.with()));
+        assertEquals(UnifiedMap.newMap(), factory.ofMapIterable(Maps.immutable.with()));
         Verify.assertInstanceOf(UnifiedMap.class, factory.ofMapIterable(Maps.immutable.with()));
 
-        Assert.assertEquals(UnifiedMap.newMapWith(Tuples.pair(1, 1)), factory.ofMap(Maps.mutable.with(1, 1)));
+        assertEquals(UnifiedMap.newMapWith(Tuples.pair(1, 1)), factory.ofMap(Maps.mutable.with(1, 1)));
         Verify.assertInstanceOf(UnifiedMap.class, factory.ofMap(Maps.mutable.with(1, 1)));
 
-        Assert.assertEquals(UnifiedMap.newMapWith(Tuples.pair(1, 1)), factory.ofMapIterable(Maps.mutable.with(1, 1)));
+        assertEquals(UnifiedMap.newMapWith(Tuples.pair(1, 1)), factory.ofMapIterable(Maps.mutable.with(1, 1)));
         Verify.assertInstanceOf(UnifiedMap.class, factory.ofMapIterable(Maps.mutable.with(1, 1)));
     }
 
@@ -278,7 +282,7 @@ public class MapsTest
         Map<Integer, Integer> integers =
                 Maps.immutable.<Integer, Integer>empty().newWithMap(Maps.mutable.empty()).castToMap();
         ImmutableMap<Integer, Integer> empty2 = Maps.immutable.withAll(integers);
-        Assert.assertSame(Maps.immutable.empty(), empty);
-        Assert.assertSame(Maps.immutable.empty(), empty2);
+        assertSame(Maps.immutable.empty(), empty);
+        assertSame(Maps.immutable.empty(), empty2);
     }
 }

@@ -13,8 +13,9 @@ package org.eclipse.collections.impl.multimap.bag;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test of {@link SynchronizedPutHashBagMultimap}.
@@ -101,6 +102,6 @@ public class SynchronizedPutHashBagMultimapTest extends AbstractMutableBagMultim
         MutableMultimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "One", 2);
         String toString = multimap.toString();
-        Assert.assertTrue("{One=[1, 2]}".equals(toString) || "{One=[2, 1]}".equals(toString));
+        assertTrue("{One=[1, 2]}".equals(toString) || "{One=[2, 1]}".equals(toString));
     }
 }

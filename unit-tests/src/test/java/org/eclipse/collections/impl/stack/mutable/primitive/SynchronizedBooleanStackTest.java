@@ -13,8 +13,10 @@ package org.eclipse.collections.impl.stack.mutable.primitive;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.stack.primitive.MutableBooleanStack;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanStackTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link SynchronizedBooleanStack}.
@@ -62,7 +64,7 @@ public class SynchronizedBooleanStackTest extends AbstractMutableBooleanStackTes
     public void asSynchronized()
     {
         MutableBooleanStack stack1 = new SynchronizedBooleanStack(BooleanArrayStack.newStackWith(true, false, true), new Object());
-        Assert.assertSame(stack1, stack1.asSynchronized());
-        Assert.assertEquals(stack1, stack1.asSynchronized());
+        assertSame(stack1, stack1.asSynchronized());
+        assertEquals(stack1, stack1.asSynchronized());
     }
 }

@@ -16,8 +16,10 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class CaseProcedureTest
 {
@@ -29,9 +31,9 @@ public class CaseProcedureTest
         CaseProcedure<String> procedure = new CaseProcedure<>();
         strings.each(procedure);
         Verify.assertEmpty(result);
-        Verify.assertSame(procedure, procedure.setDefault(result::add));
+        assertSame(procedure, procedure.setDefault(result::add));
         strings.each(procedure);
-        Assert.assertEquals(result, strings);
+        assertEquals(result, strings);
         Verify.assertContains("CaseProcedure", procedure.toString());
     }
 
@@ -45,8 +47,8 @@ public class CaseProcedureTest
                 new CaseProcedure<String>(defaultList::add)
                         .addCase("1"::equals, ifOneList::add);
         list.each(procedure);
-        Assert.assertEquals(FastList.newListWith("1"), ifOneList);
-        Assert.assertEquals(FastList.newListWith("2"), defaultList);
+        assertEquals(FastList.newListWith("1"), ifOneList);
+        assertEquals(FastList.newListWith("2"), defaultList);
         Verify.assertContains("CaseProcedure", procedure.toString());
     }
 
@@ -61,8 +63,8 @@ public class CaseProcedureTest
                         .addCase("1"::equals, ifOneList::add)
                         .addCase("2"::equals, ifTwoList::add);
         list.each(procedure);
-        Assert.assertEquals(FastList.newListWith("1"), ifOneList);
-        Assert.assertEquals(FastList.newListWith("2"), ifTwoList);
+        assertEquals(FastList.newListWith("1"), ifOneList);
+        assertEquals(FastList.newListWith("2"), ifTwoList);
         Verify.assertContains("CaseProcedure", procedure.toString());
     }
 
@@ -78,9 +80,9 @@ public class CaseProcedureTest
                         .addCase("1"::equals, ifOneList::add)
                         .addCase("2"::equals, ifTwoList::add);
         list.each(procedure);
-        Assert.assertEquals(FastList.newListWith("1"), ifOneList);
-        Assert.assertEquals(FastList.newListWith("2"), ifTwoList);
-        Assert.assertEquals(FastList.newListWith("3", "4"), defaultList);
+        assertEquals(FastList.newListWith("1"), ifOneList);
+        assertEquals(FastList.newListWith("2"), ifTwoList);
+        assertEquals(FastList.newListWith("3", "4"), defaultList);
         Verify.assertContains("CaseProcedure", procedure.toString());
     }
 }

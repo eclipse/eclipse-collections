@@ -23,9 +23,14 @@ import org.eclipse.collections.impl.collection.mutable.AbstractCollectionTestCas
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link UnmodifiableMutableSet}.
@@ -127,7 +132,7 @@ public class UnmodifiableMutableSetTest extends AbstractCollectionTestCase
     {
         MutableCollection<Object> collection = this.newWith(1, 2);
         String string = collection.toString();
-        Assert.assertTrue("[1, 2]".equals(string) || "[2, 1]".equals(string));
+        assertTrue("[1, 2]".equals(string) || "[2, 1]".equals(string));
     }
 
     @Override
@@ -135,7 +140,7 @@ public class UnmodifiableMutableSetTest extends AbstractCollectionTestCase
     public void makeString()
     {
         MutableCollection<Object> collection = this.newWith(1, 2, 3);
-        Assert.assertEquals(collection.toString(), '[' + collection.makeString() + ']');
+        assertEquals(collection.toString(), '[' + collection.makeString() + ']');
     }
 
     @Override
@@ -145,23 +150,23 @@ public class UnmodifiableMutableSetTest extends AbstractCollectionTestCase
         MutableCollection<Object> collection = this.newWith(1, 2, 3);
         Appendable builder = new StringBuilder();
         collection.appendString(builder);
-        Assert.assertEquals(collection.toString(), '[' + builder.toString() + ']');
+        assertEquals(collection.toString(), '[' + builder.toString() + ']');
     }
 
     @Override
     @Test
     public void getFirst()
     {
-        Assert.assertNotNull(this.newWith(1, 2, 3).getFirst());
-        Assert.assertNull(this.newWith().getFirst());
+        assertNotNull(this.newWith(1, 2, 3).getFirst());
+        assertNull(this.newWith().getFirst());
     }
 
     @Override
     @Test
     public void getLast()
     {
-        Assert.assertNotNull(this.newWith(1, 2, 3).getLast());
-        Assert.assertNull(this.newWith().getLast());
+        assertNotNull(this.newWith(1, 2, 3).getLast());
+        assertNull(this.newWith().getLast());
     }
 
     @Override
@@ -199,7 +204,7 @@ public class UnmodifiableMutableSetTest extends AbstractCollectionTestCase
     {
         MutableSet<String> set = this.newWith();
         MutableSet<String> clone = set.clone();
-        Assert.assertSame(clone, set);
+        assertSame(clone, set);
     }
 
     @Test(expected = NoSuchElementException.class)

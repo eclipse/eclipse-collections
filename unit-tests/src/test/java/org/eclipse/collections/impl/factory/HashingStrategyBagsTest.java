@@ -19,8 +19,9 @@ import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class HashingStrategyBagsTest
 {
@@ -28,28 +29,28 @@ public class HashingStrategyBagsTest
     public void mutable()
     {
         MutableHashingStrategyBagFactory factory = HashingStrategyBags.mutable;
-        Assert.assertEquals(HashBag.newBag(), factory.of(HashingStrategies.defaultStrategy()));
+        assertEquals(HashBag.newBag(), factory.of(HashingStrategies.defaultStrategy()));
         Verify.assertInstanceOf(MutableBag.class, factory.of(HashingStrategies.defaultStrategy()));
-        Assert.assertEquals(HashBag.newBag(), factory.empty(HashingStrategies.defaultStrategy()));
+        assertEquals(HashBag.newBag(), factory.empty(HashingStrategies.defaultStrategy()));
         Verify.assertInstanceOf(MutableBag.class, factory.empty(HashingStrategies.defaultStrategy()));
-        Assert.assertEquals(HashBag.newBagWith(1, 2), factory.of(HashingStrategies.defaultStrategy(), 1, 2));
+        assertEquals(HashBag.newBagWith(1, 2), factory.of(HashingStrategies.defaultStrategy(), 1, 2));
         Verify.assertInstanceOf(MutableBag.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4));
         Verify.assertInstanceOf(MutableBag.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
         Verify.assertInstanceOf(MutableBag.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8), factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
         Verify.assertInstanceOf(MutableBag.class, factory.of(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(HashingStrategies.defaultStrategy(), FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8)));
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(HashingStrategies.defaultStrategy(), FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8)));
         Verify.assertInstanceOf(MutableBag.class, factory.of(HashingStrategies.defaultStrategy(), FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8)));
 
         MutableList<Person> people =
                 Lists.mutable.of(new Person("Alex", "Smith"), new Person("John", "Smith"), new Person("John", "Brown"));
 
-        Assert.assertEquals(HashBagWithHashingStrategy.newBagWith(HashingStrategies.fromFunction(Person::getLastName)).withAll(people),
+        assertEquals(HashBagWithHashingStrategy.newBagWith(HashingStrategies.fromFunction(Person::getLastName)).withAll(people),
                 factory.fromFunction(Person::getLastName).withAll(people));
 
-        Assert.assertEquals(HashBagWithHashingStrategy.newBagWith(HashingStrategies.fromFunction(Person::getFirstName)).withAll(people),
+        assertEquals(HashBagWithHashingStrategy.newBagWith(HashingStrategies.fromFunction(Person::getFirstName)).withAll(people),
                 factory.fromFunction(Person::getFirstName).withAll(people));
     }
 

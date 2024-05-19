@@ -17,8 +17,11 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.StringIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class ChainedProcedureTest
 {
@@ -34,8 +37,8 @@ public class ChainedProcedureTest
         MutableList<String> list = FastList.newListWith("1", "2");
         Iterate.forEach(list, chainedProcedure);
 
-        Assert.assertEquals(list, list1);
-        Assert.assertEquals(list, list2);
+        assertEquals(list, list1);
+        assertEquals(list, list2);
     }
 
     @Test
@@ -43,8 +46,8 @@ public class ChainedProcedureTest
     {
         Procedure<String> procedure = new CollectionAddProcedure<>(Lists.mutable.of());
         String s = procedure.toString();
-        Assert.assertNotNull(s);
-        Assert.assertTrue(StringIterate.notEmptyOrWhitespace(s));
+        assertNotNull(s);
+        assertTrue(StringIterate.notEmptyOrWhitespace(s));
         Verify.assertContains("ChainedProcedure.with", new ChainedProcedure<>().toString());
     }
 }

@@ -12,10 +12,11 @@ package org.eclipse.collections.impl.set.immutable;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iSet;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class ImmutableQuadrupletonSetTest
         extends AbstractImmutableSetTestCase
@@ -42,7 +43,7 @@ public class ImmutableQuadrupletonSetTest
     public void selectInstanceOf()
     {
         ImmutableSet<Number> numbers = new ImmutableQuadrupletonSet<>(1, 2.0, 3, 4.0);
-        Assert.assertEquals(
+        assertEquals(
                 iSet(1, 3),
                 numbers.selectInstancesOf(Integer.class));
     }
@@ -50,6 +51,6 @@ public class ImmutableQuadrupletonSetTest
     @Test
     public void getOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 }

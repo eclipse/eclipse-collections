@@ -52,11 +52,17 @@ import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.eclipse.collections.impl.factory.Iterables.iSet;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test for {@link AbstractMemoryEfficientMutableMap}.
@@ -213,7 +219,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
                 Verify.assertContainsAllKeyValues(result, "1", "enO", "2", "owT", "3", "eerhT");
                 break;
             default:
-                Assert.fail();
+                fail();
         }
     }
 
@@ -239,7 +245,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
                 Verify.assertContainsAllKeyValues(result, 1, "1:enO", 2, "2:owT", 3, "3:eerhT");
                 break;
             default:
-                Assert.fail();
+                fail();
         }
     }
 
@@ -258,8 +264,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<String, String> map = this.classUnderTest();
 
-        Assert.assertTrue(map.allSatisfy(String.class::isInstance));
-        Assert.assertFalse(map.allSatisfy("Monkey"::equals));
+        assertTrue(map.allSatisfy(String.class::isInstance));
+        assertFalse(map.allSatisfy("Monkey"::equals));
     }
 
     @Test
@@ -267,9 +273,9 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<String, String> map = this.classUnderTest();
 
-        Assert.assertTrue(map.noneSatisfy(Boolean.class::isInstance));
-        Assert.assertFalse(map.noneSatisfy(String.class::isInstance));
-        Assert.assertTrue(map.noneSatisfy("Monkey"::equals));
+        assertTrue(map.noneSatisfy(Boolean.class::isInstance));
+        assertFalse(map.noneSatisfy(String.class::isInstance));
+        assertTrue(map.noneSatisfy("Monkey"::equals));
     }
 
     @Test
@@ -277,8 +283,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<String, String> map = this.classUnderTest();
 
-        Assert.assertTrue(map.anySatisfy(String.class::isInstance));
-        Assert.assertFalse(map.anySatisfy("Monkey"::equals));
+        assertTrue(map.anySatisfy(String.class::isInstance));
+        assertFalse(map.anySatisfy("Monkey"::equals));
     }
 
     @Test
@@ -301,32 +307,32 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals("One", defaultString);
-                Assert.assertEquals("One", delimitedString);
-                Assert.assertEquals("{One}", wrappedString);
+                assertEquals("One", defaultString);
+                assertEquals("One", delimitedString);
+                assertEquals("{One}", wrappedString);
                 break;
             case 2:
-                Assert.assertEquals(8, defaultString.length());
-                Assert.assertEquals(7, delimitedString.length());
+                assertEquals(8, defaultString.length());
+                assertEquals(7, delimitedString.length());
                 Verify.assertContains("|", delimitedString);
-                Assert.assertEquals(9, wrappedString.length());
+                assertEquals(9, wrappedString.length());
                 Verify.assertContains("|", wrappedString);
-                Assert.assertTrue(wrappedString.startsWith("{"));
-                Assert.assertTrue(wrappedString.endsWith("}"));
+                assertTrue(wrappedString.startsWith("{"));
+                assertTrue(wrappedString.endsWith("}"));
                 break;
             case 3:
-                Assert.assertEquals(15, defaultString.length());
-                Assert.assertEquals(13, delimitedString.length());
+                assertEquals(15, defaultString.length());
+                assertEquals(13, delimitedString.length());
                 Verify.assertContains("|", delimitedString);
-                Assert.assertEquals(15, wrappedString.length());
+                assertEquals(15, wrappedString.length());
                 Verify.assertContains("|", wrappedString);
-                Assert.assertTrue(wrappedString.startsWith("{"));
-                Assert.assertTrue(wrappedString.endsWith("}"));
+                assertTrue(wrappedString.startsWith("{"));
+                assertTrue(wrappedString.endsWith("}"));
                 break;
             default:
-                Assert.assertEquals("", defaultString);
-                Assert.assertEquals("", delimitedString);
-                Assert.assertEquals("{}", wrappedString);
+                assertEquals("", defaultString);
+                assertEquals("", delimitedString);
+                assertEquals("{}", wrappedString);
                 break;
         }
     }
@@ -366,13 +372,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         Collection<String> values = map.values();
         multi.forEachKey(each -> Verify.assertContains(each, values));
 
-        Assert.assertEquals(multi.size(), map.size());
-        Assert.assertTrue(multi.sizeDistinct() <= map.size()); // should be the same or less since values are degenerate
+        assertEquals(multi.size(), map.size());
+        assertTrue(multi.sizeDistinct() <= map.size()); // should be the same or less since values are degenerate
 
         MutableMap<String, Integer> siMap = this.mixedTypeClassUnderTest();
         MutableMultimap<Integer, String> siMulti = siMap.flip();
-        Assert.assertEquals(siMulti.size(), siMap.size());
-        Assert.assertTrue(siMulti.sizeDistinct() <= siMap.size());
+        assertEquals(siMulti.size(), siMap.size());
+        assertTrue(siMulti.sizeDistinct() <= siMap.size());
     }
 
     @Test
@@ -431,13 +437,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(UnifiedMap.newWithKeysValues(3, "One"), actual);
+                assertEquals(UnifiedMap.newWithKeysValues(3, "One"), actual);
                 break;
             case 2:
-                Assert.assertEquals(UnifiedMap.newWithKeysValues(3, "One", 5, "Three"), actual);
+                assertEquals(UnifiedMap.newWithKeysValues(3, "One", 5, "Three"), actual);
                 break;
             case 3:
-                Assert.assertEquals(UnifiedMap.newWithKeysValues(3, "One", 5, "Three", 4, "Four"), actual);
+                assertEquals(UnifiedMap.newWithKeysValues(3, "One", 5, "Three", 4, "Four"), actual);
                 break;
             default:
                 Verify.assertEmpty(actual);
@@ -477,13 +483,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(iList(1), sorted);
+                assertEquals(iList(1), sorted);
                 break;
             case 2:
-                Assert.assertEquals(iList(1, 2), sorted);
+                assertEquals(iList(1, 2), sorted);
                 break;
             case 3:
-                Assert.assertEquals(iList(1, 2, 3), sorted);
+                assertEquals(iList(1, 2, 3), sorted);
                 break;
             default:
                 Verify.assertEmpty(sorted);
@@ -494,13 +500,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(iList(1), reverse);
+                assertEquals(iList(1), reverse);
                 break;
             case 2:
-                Assert.assertEquals(iList(2, 1), reverse);
+                assertEquals(iList(2, 1), reverse);
                 break;
             case 3:
-                Assert.assertEquals(iList(3, 2, 1), reverse);
+                assertEquals(iList(3, 2, 1), reverse);
                 break;
             default:
                 Verify.assertEmpty(reverse);
@@ -517,13 +523,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(iList(1), list);
+                assertEquals(iList(1), list);
                 break;
             case 2:
-                Assert.assertEquals(iList(1, 2), list);
+                assertEquals(iList(1, 2), list);
                 break;
             case 3:
-                Assert.assertEquals(iList(1, 2, 3), list);
+                assertEquals(iList(1, 2, 3), list);
                 break;
             default:
                 Verify.assertEmpty(list);
@@ -543,16 +549,16 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(iList(1), sizes);
+                assertEquals(iList(1), sizes);
                 break;
             case 2:
-                Assert.assertEquals(iList(2), sizes);
+                assertEquals(iList(2), sizes);
                 break;
             case 3:
-                Assert.assertEquals(iList(2, 1), sizes);
+                assertEquals(iList(2, 1), sizes);
                 break;
             default:
-                Assert.assertEquals(0, chunks.size());
+                assertEquals(0, chunks.size());
                 break;
         }
     }
@@ -622,13 +628,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(Bags.mutable.of(2), collectWith);
+                assertEquals(Bags.mutable.of(2), collectWith);
                 break;
             case 2:
-                Assert.assertEquals(Bags.mutable.of(2, 3), collectWith);
+                assertEquals(Bags.mutable.of(2, 3), collectWith);
                 break;
             case 3:
-                Assert.assertEquals(Bags.mutable.of(2, 3, 4), collectWith);
+                assertEquals(Bags.mutable.of(2, 3, 4), collectWith);
                 break;
             default:
                 Verify.assertEmpty(collectWith);
@@ -644,14 +650,14 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertTrue(map.contains("One"));
-                Assert.assertFalse(map.contains("Two"));
+                assertTrue(map.contains("One"));
+                assertFalse(map.contains("Two"));
                 break;
             case 2:
-                Assert.assertTrue(map.contains("Two"));
+                assertTrue(map.contains("Two"));
                 break;
             case 3:
-                Assert.assertTrue(map.contains("Two"));
+                assertTrue(map.contains("Two"));
                 break;
             default:
                 Verify.assertEmpty(map);
@@ -667,12 +673,12 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         if (map.isEmpty())
         {
             String value = map.getFirst();
-            Assert.assertNull(value);
+            assertNull(value);
         }
         else
         {
             String value = map.getFirst();
-            Assert.assertNotNull(value);
+            assertNotNull(value);
             Verify.assertContains(value, map.values());
         }
     }
@@ -685,12 +691,12 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         if (map.isEmpty())
         {
             String value = map.getLast();
-            Assert.assertNull(value);
+            assertNull(value);
         }
         else
         {
             String value = map.getLast();
-            Assert.assertNotNull(value);
+            assertNotNull(value);
             Verify.assertContains(value, map.values());
         }
     }
@@ -703,13 +709,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertTrue(map.containsAllIterable(iList("One")));
+                assertTrue(map.containsAllIterable(iList("One")));
                 break;
             case 2:
-                Assert.assertTrue(map.containsAllIterable(iList("One", "Two")));
+                assertTrue(map.containsAllIterable(iList("One", "Two")));
                 break;
             case 3:
-                Assert.assertTrue(map.containsAllIterable(iList("One", "Two", "Three")));
+                assertTrue(map.containsAllIterable(iList("One", "Two", "Three")));
                 break;
             default:
                 Verify.assertEmpty(map);
@@ -725,13 +731,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertTrue(map.containsAllArguments("One"));
+                assertTrue(map.containsAllArguments("One"));
                 break;
             case 2:
-                Assert.assertTrue(map.containsAllArguments("One", "Two"));
+                assertTrue(map.containsAllArguments("One", "Two"));
                 break;
             case 3:
-                Assert.assertTrue(map.containsAllArguments("One", "Two", "Three"));
+                assertTrue(map.containsAllArguments("One", "Two", "Three"));
                 break;
             default:
                 Verify.assertEmpty(map);
@@ -749,16 +755,16 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(1, actual);
+                assertEquals(1, actual);
                 break;
             case 2:
-                Assert.assertEquals(1, actual);
+                assertEquals(1, actual);
                 break;
             case 3:
-                Assert.assertEquals(2, actual);
+                assertEquals(2, actual);
                 break;
             default:
-                Assert.assertEquals(0, actual);
+                assertEquals(0, actual);
                 break;
         }
     }
@@ -771,15 +777,15 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         if (map.isEmpty())
         {
             String resultNotFound = map.detect(ignored -> true);
-            Assert.assertNull(resultNotFound);
+            assertNull(resultNotFound);
         }
         else
         {
             String resultFound = map.detect("One"::equals);
-            Assert.assertEquals("One", resultFound);
+            assertEquals("One", resultFound);
 
             String resultNotFound = map.detect("Four"::equals);
-            Assert.assertNull(resultNotFound);
+            assertNull(resultNotFound);
         }
     }
 
@@ -791,15 +797,15 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         if (map.isEmpty())
         {
             String resultNotFound = map.detectIfNone(ignored -> true, () -> "Zero");
-            Assert.assertEquals("Zero", resultNotFound);
+            assertEquals("Zero", resultNotFound);
         }
         else
         {
             String resultNotFound = map.detectIfNone("Four"::equals, () -> "Zero");
-            Assert.assertEquals("Zero", resultNotFound);
+            assertEquals("Zero", resultNotFound);
 
             String resultFound = map.detectIfNone("One"::equals, () -> "Zero");
-            Assert.assertEquals("One", resultFound);
+            assertEquals("One", resultFound);
         }
     }
 
@@ -828,25 +834,25 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertTrue(blob.containsAllArguments(
+                assertTrue(blob.containsAllArguments(
                         Character.valueOf('O'),
                         Character.valueOf('n'),
                         Character.valueOf('e')));
-                Assert.assertTrue(blobFromTarget.containsAllArguments(
+                assertTrue(blobFromTarget.containsAllArguments(
                         Character.valueOf('O'),
                         Character.valueOf('n'),
                         Character.valueOf('e')));
                 break;
             case 2:
             case 3:
-                Assert.assertTrue(blob.containsAllArguments(
+                assertTrue(blob.containsAllArguments(
                         Character.valueOf('O'),
                         Character.valueOf('n'),
                         Character.valueOf('e'),
                         Character.valueOf('T'),
                         Character.valueOf('w'),
                         Character.valueOf('o')));
-                Assert.assertTrue(blobFromTarget.containsAllArguments(
+                assertTrue(blobFromTarget.containsAllArguments(
                         Character.valueOf('O'),
                         Character.valueOf('n'),
                         Character.valueOf('e'),
@@ -855,8 +861,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
                         Character.valueOf('o')));
                 break;
             default:
-                Assert.assertEquals(0, blob.size());
-                Assert.assertEquals(0, blobFromTarget.size());
+                assertEquals(0, blob.size());
+                assertEquals(0, blobFromTarget.size());
                 break;
         }
     }
@@ -887,10 +893,10 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         }
 
         Multimap<Boolean, Integer> actual = map.groupBy(isOddFunction);
-        Assert.assertEquals(HashBagMultimap.newMultimap(expected), HashBagMultimap.newMultimap(actual));
+        assertEquals(HashBagMultimap.newMultimap(expected), HashBagMultimap.newMultimap(actual));
 
         Multimap<Boolean, Integer> actualFromTarget = map.groupBy(isOddFunction, FastListMultimap.newMultimap());
-        Assert.assertEquals(HashBagMultimap.newMultimap(expected), HashBagMultimap.newMultimap(actualFromTarget));
+        assertEquals(HashBagMultimap.newMultimap(expected), HashBagMultimap.newMultimap(actualFromTarget));
     }
 
     @Test
@@ -908,19 +914,19 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         Multimap<Integer, Integer> actual = map.groupByEach(function);
         expected.forEachKey(each ->
         {
-            Assert.assertTrue(actual.containsKey(each));
+            assertTrue(actual.containsKey(each));
             MutableList<Integer> values = actual.get(each).toList();
             Verify.assertNotEmpty(values);
-            Assert.assertTrue(expected.get(each).containsAllIterable(values));
+            assertTrue(expected.get(each).containsAllIterable(values));
         });
 
         Multimap<Integer, Integer> actualFromTarget = map.groupByEach(function, FastListMultimap.newMultimap());
         expected.forEachKey(each ->
         {
-            Assert.assertTrue(actualFromTarget.containsKey(each));
+            assertTrue(actualFromTarget.containsKey(each));
             MutableList<Integer> values = actualFromTarget.get(each).toList();
             Verify.assertNotEmpty(values);
-            Assert.assertTrue(expected.get(each).containsAllIterable(values));
+            assertTrue(expected.get(each).containsAllIterable(values));
         });
     }
 
@@ -953,10 +959,10 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         }
 
         Integer actual = map.injectInto(0, AddFunction.INTEGER);
-        Assert.assertEquals(expectedInteger, actual);
+        assertEquals(expectedInteger, actual);
 
         Sum sum = map.injectInto(new IntegerSum(0), SumProcedure.number());
-        Assert.assertEquals(expectedSum, sum);
+        assertEquals(expectedSum, sum);
     }
 
     @Test
@@ -971,32 +977,32 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals("One", defaultString);
-                Assert.assertEquals("One", delimitedString);
-                Assert.assertEquals("{One}", wrappedString);
+                assertEquals("One", defaultString);
+                assertEquals("One", delimitedString);
+                assertEquals("{One}", wrappedString);
                 break;
             case 2:
-                Assert.assertEquals(8, defaultString.length());
-                Assert.assertEquals(7, delimitedString.length());
+                assertEquals(8, defaultString.length());
+                assertEquals(7, delimitedString.length());
                 Verify.assertContains("|", delimitedString);
-                Assert.assertEquals(9, wrappedString.length());
+                assertEquals(9, wrappedString.length());
                 Verify.assertContains("|", wrappedString);
-                Assert.assertTrue(wrappedString.startsWith("{"));
-                Assert.assertTrue(wrappedString.endsWith("}"));
+                assertTrue(wrappedString.startsWith("{"));
+                assertTrue(wrappedString.endsWith("}"));
                 break;
             case 3:
-                Assert.assertEquals(15, defaultString.length());
-                Assert.assertEquals(13, delimitedString.length());
+                assertEquals(15, defaultString.length());
+                assertEquals(13, delimitedString.length());
                 Verify.assertContains("|", delimitedString);
-                Assert.assertEquals(15, wrappedString.length());
+                assertEquals(15, wrappedString.length());
                 Verify.assertContains("|", wrappedString);
-                Assert.assertTrue(wrappedString.startsWith("{"));
-                Assert.assertTrue(wrappedString.endsWith("}"));
+                assertTrue(wrappedString.startsWith("{"));
+                assertTrue(wrappedString.endsWith("}"));
                 break;
             default:
-                Assert.assertEquals("", defaultString);
-                Assert.assertEquals("", delimitedString);
-                Assert.assertEquals("{}", wrappedString);
+                assertEquals("", defaultString);
+                assertEquals("", delimitedString);
+                assertEquals("{}", wrappedString);
                 break;
         }
     }
@@ -1006,8 +1012,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
 
-        Assert.assertEquals(Integer.valueOf(1), map.min());
-        Assert.assertEquals(Integer.valueOf(1), map.min(Integer::compareTo));
+        assertEquals(Integer.valueOf(1), map.min());
+        assertEquals(Integer.valueOf(1), map.min(Integer::compareTo));
     }
 
     @Test
@@ -1032,8 +1038,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
                 throw new IllegalStateException("We should not get here, this test method should be overriden by the empty map.");
         }
 
-        Assert.assertEquals(max, map.max());
-        Assert.assertEquals(max, map.max(Integer::compareTo));
+        assertEquals(max, map.max());
+        assertEquals(max, map.max(Integer::compareTo));
     }
 
     @Test
@@ -1041,14 +1047,14 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
 
-        Assert.assertEquals(Integer.valueOf(1), map.minBy(String::valueOf));
+        assertEquals(Integer.valueOf(1), map.minBy(String::valueOf));
     }
 
     @Test
     public void maxBy()
     {
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
-        Assert.assertEquals(Integer.valueOf(map.size()), map.maxBy(String::valueOf));
+        assertEquals(Integer.valueOf(map.size()), map.maxBy(String::valueOf));
         Verify.assertContains(Integer.valueOf(map.size()), iList(1, 2, 3));
     }
 
@@ -1061,8 +1067,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         UnifiedSet<Integer> rejectedIntoTarget = map.reject(IntegerPredicates.isEven(), UnifiedSet.newSet());
 
         ImmutableSet<Integer> expected = this.expectReject(map.size());
-        Assert.assertEquals(expected, rejected);
-        Assert.assertEquals(expected, rejectedIntoTarget);
+        assertEquals(expected, rejected);
+        assertEquals(expected, rejectedIntoTarget);
     }
 
     private ImmutableSet<Integer> expectReject(int size)
@@ -1109,8 +1115,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
         ImmutableSet<Integer> expected = this.expectSelect(map.size());
 
-        Assert.assertEquals(expected, map.select(IntegerPredicates.isEven()).toSet());
-        Assert.assertEquals(expected, map.select(IntegerPredicates.isEven(), UnifiedSet.newSet()));
+        assertEquals(expected, map.select(IntegerPredicates.isEven()).toSet());
+        assertEquals(expected, map.select(IntegerPredicates.isEven(), UnifiedSet.newSet()));
     }
 
     private ImmutableSet<Integer> expectSelect(int size)
@@ -1156,8 +1162,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
         PartitionMutableCollection<Integer> partition = map.partition(IntegerPredicates.isEven());
 
-        Assert.assertEquals(this.expectSelect(map.size()), partition.getSelected().toSet());
-        Assert.assertEquals(this.expectReject(map.size()), partition.getRejected().toSet());
+        assertEquals(this.expectSelect(map.size()), partition.getSelected().toSet());
+        assertEquals(this.expectReject(map.size()), partition.getRejected().toSet());
     }
 
     @Test
@@ -1166,8 +1172,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
         PartitionMutableCollection<Integer> partition = map.partitionWith(Predicates2.in(), map.select(IntegerPredicates.isEven()));
 
-        Assert.assertEquals(this.expectSelect(map.size()), partition.getSelected().toSet());
-        Assert.assertEquals(this.expectReject(map.size()), partition.getRejected().toSet());
+        assertEquals(this.expectSelect(map.size()), partition.getSelected().toSet());
+        assertEquals(this.expectReject(map.size()), partition.getRejected().toSet());
     }
 
     @Test
@@ -1203,28 +1209,28 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         List<Object> nullsPlusOne = Collections.nCopies(map.size() + 1, null);
 
         RichIterable<Pair<String, Object>> pairs = map.zip(nulls);
-        Assert.assertEquals(
+        assertEquals(
                 map.toSet(),
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet());
-        Assert.assertEquals(
+        assertEquals(
                 nulls,
                 pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
 
         RichIterable<Pair<String, Object>> pairsPlusOne = map.zip(nullsPlusOne);
-        Assert.assertEquals(
+        assertEquals(
                 map.toSet(),
                 pairsPlusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet());
-        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
 
         if (map.notEmpty())
         {
             List<Object> nullsMinusOne = Collections.nCopies(map.size() - 1, null);
             RichIterable<Pair<String, Object>> pairsMinusOne = map.zip(nullsMinusOne);
-            Assert.assertEquals(map.size() - 1, pairsMinusOne.size());
-            Assert.assertTrue(map.values().containsAll(pairsMinusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet()));
+            assertEquals(map.size() - 1, pairsMinusOne.size());
+            assertTrue(map.values().containsAll(pairsMinusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet()));
         }
 
-        Assert.assertEquals(
+        assertEquals(
                 map.zip(nulls).toSet(),
                 map.zip(nulls, UnifiedSet.newSet()));
     }
@@ -1236,17 +1242,17 @@ public abstract class AbstractMemoryEfficientMutableMapTest
 
         RichIterable<Pair<String, Integer>> pairs = map.zipWithIndex();
 
-        Assert.assertEquals(
+        assertEquals(
                 map.toSet(),
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet());
         if (map.notEmpty())
         {
-            Assert.assertEquals(
+            assertEquals(
                     Interval.zeroTo(map.size() - 1).toSet(),
                     pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.newSet()));
         }
 
-        Assert.assertEquals(
+        assertEquals(
                 map.zipWithIndex().toSet(),
                 map.zipWithIndex(UnifiedSet.newSet()));
     }
@@ -1312,8 +1318,8 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableList<String> tapResult = Lists.mutable.of();
         MutableMap<String, String> map = this.classUnderTest();
-        Assert.assertSame(map, map.tap(tapResult::add));
-        Assert.assertEquals(map.toList(), tapResult);
+        assertSame(map, map.tap(tapResult::add));
+        assertEquals(map.toList(), tapResult);
     }
 
     @Test

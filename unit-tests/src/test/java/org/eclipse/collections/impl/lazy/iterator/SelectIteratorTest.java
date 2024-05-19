@@ -16,8 +16,12 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class SelectIteratorTest
 {
@@ -43,21 +47,21 @@ public class SelectIteratorTest
     {
         for (int i = 0; i < 4; i++)
         {
-            Assert.assertTrue(newIterator.hasNext());
-            Assert.assertEquals(Boolean.TRUE, newIterator.next());
+            assertTrue(newIterator.hasNext());
+            assertEquals(Boolean.TRUE, newIterator.next());
         }
-        Assert.assertFalse(newIterator.hasNext());
+        assertFalse(newIterator.hasNext());
     }
 
     @Test
     public void noSuchElementException()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> new SelectIterator<>(Lists.fixedSize.of(), ignored -> true).next());
+        assertThrows(NoSuchElementException.class, () -> new SelectIterator<>(Lists.fixedSize.of(), ignored -> true).next());
     }
 
     @Test
     public void remove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> new SelectIterator<>(Lists.fixedSize.of(), ignored -> true).remove());
+        assertThrows(UnsupportedOperationException.class, () -> new SelectIterator<>(Lists.fixedSize.of(), ignored -> true).remove());
     }
 }

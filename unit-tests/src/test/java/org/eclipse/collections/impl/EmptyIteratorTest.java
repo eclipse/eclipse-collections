@@ -12,9 +12,12 @@ package org.eclipse.collections.impl;
 
 import java.util.NoSuchElementException;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 
 public class EmptyIteratorTest
 {
@@ -29,36 +32,36 @@ public class EmptyIteratorTest
     @Test
     public void hasPrevious()
     {
-        Assert.assertFalse(this.emptyIterator.hasPrevious());
+        assertFalse(this.emptyIterator.hasPrevious());
     }
 
     @Test
     public void previous()
     {
-        Assert.assertThrows(NoSuchElementException.class, this.emptyIterator::previous);
+        assertThrows(NoSuchElementException.class, this.emptyIterator::previous);
     }
 
     @Test
     public void previousIndex()
     {
-        Assert.assertEquals(-1, this.emptyIterator.previousIndex());
+        assertEquals(-1, this.emptyIterator.previousIndex());
     }
 
     @Test
     public void set()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.emptyIterator.set(1));
+        assertThrows(UnsupportedOperationException.class, () -> this.emptyIterator.set(1));
     }
 
     @Test
     public void add()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.emptyIterator.add(1));
+        assertThrows(UnsupportedOperationException.class, () -> this.emptyIterator.add(1));
     }
 
     @Test
     public void nextIndex()
     {
-        Assert.assertEquals(0, (long) this.emptyIterator.nextIndex());
+        assertEquals(0, (long) this.emptyIterator.nextIndex());
     }
 }

@@ -17,8 +17,9 @@ import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ImmutableHashBiMapTest extends AbstractImmutableBiMapTestCase
 {
@@ -56,7 +57,7 @@ public class ImmutableHashBiMapTest extends AbstractImmutableBiMapTestCase
     @Test
     public void testToString()
     {
-        Assert.assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
+        assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
     }
 
     @Test

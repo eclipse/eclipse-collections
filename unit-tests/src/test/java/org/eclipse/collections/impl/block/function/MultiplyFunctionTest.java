@@ -11,27 +11,28 @@
 package org.eclipse.collections.impl.block.function;
 
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class MultiplyFunctionTest
 {
     @Test
     public void integerBlock()
     {
-        Assert.assertEquals(Integer.valueOf(20), MultiplyFunction.INTEGER.value(2, 10));
+        assertEquals(Integer.valueOf(20), MultiplyFunction.INTEGER.value(2, 10));
     }
 
     @Test
     public void doubleBlock()
     {
-        Assert.assertEquals(new Double(20), MultiplyFunction.DOUBLE.value(2.0, 10.0));
+        assertEquals(new Double(20), MultiplyFunction.DOUBLE.value(2.0, 10.0));
     }
 
     @Test
     public void longBlock()
     {
-        Assert.assertEquals(Long.valueOf(20), MultiplyFunction.LONG.value(2L, 10L));
+        assertEquals(Long.valueOf(20), MultiplyFunction.LONG.value(2L, 10L));
     }
 
     @Test

@@ -12,8 +12,9 @@ package org.eclipse.collections.impl.set.immutable;
 
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ImmutableSingletonSetTest
         extends AbstractImmutableSetTestCase
@@ -60,6 +61,6 @@ public class ImmutableSingletonSetTest
     public void getOnly()
     {
         ImmutableCollection<Integer> integers = this.classUnderTest();
-        Assert.assertEquals(Integer.valueOf(1), integers.getOnly());
+        assertEquals(Integer.valueOf(1), integers.getOnly());
     }
 }

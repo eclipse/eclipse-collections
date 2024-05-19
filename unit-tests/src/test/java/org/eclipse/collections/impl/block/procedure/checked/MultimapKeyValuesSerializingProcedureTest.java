@@ -18,8 +18,9 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class MultimapKeyValuesSerializingProcedureTest
 {
@@ -47,13 +48,13 @@ public class MultimapKeyValuesSerializingProcedureTest
         @Override
         public void writeObject(Object obj)
         {
-            Assert.assertEquals(this.iterator.next(), obj);
+            assertEquals(this.iterator.next(), obj);
         }
 
         @Override
         public void writeInt(int v)
         {
-            Assert.assertEquals(this.iterator.next(), v);
+            assertEquals(this.iterator.next(), v);
         }
 
         @Override

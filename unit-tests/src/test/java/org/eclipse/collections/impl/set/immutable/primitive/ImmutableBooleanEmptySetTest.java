@@ -22,8 +22,12 @@ import org.eclipse.collections.impl.collection.immutable.primitive.AbstractImmut
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link ImmutableBooleanEmptySet}.
@@ -58,7 +62,7 @@ public class ImmutableBooleanEmptySetTest extends AbstractImmutableBooleanCollec
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(this.classUnderTest().notEmpty());
+        assertFalse(this.classUnderTest().notEmpty());
     }
 
     @Override
@@ -79,14 +83,14 @@ public class ImmutableBooleanEmptySetTest extends AbstractImmutableBooleanCollec
     @Test
     public void testNewWith()
     {
-        Assert.assertEquals(BooleanSets.immutable.with(true), this.classUnderTest().newWith(true));
+        assertEquals(BooleanSets.immutable.with(true), this.classUnderTest().newWith(true));
     }
 
     @Override
     @Test
     public void newWithAll()
     {
-        Assert.assertEquals(BooleanSets.immutable.with(true), this.classUnderTest().newWithAll(BooleanSets.mutable.with(true)));
+        assertEquals(BooleanSets.immutable.with(true), this.classUnderTest().newWithAll(BooleanSets.mutable.with(true)));
     }
 
     @Override
@@ -95,8 +99,8 @@ public class ImmutableBooleanEmptySetTest extends AbstractImmutableBooleanCollec
     {
         Verify.assertEqualsAndHashCode(this.newMutableCollectionWith(), this.classUnderTest());
         Verify.assertPostSerializedIdentity(this.newWith());
-        Assert.assertNotEquals(this.classUnderTest(), this.newWith(false, false, false, true));
-        Assert.assertNotEquals(this.classUnderTest(), this.newWith(true));
+        assertNotEquals(this.classUnderTest(), this.newWith(false, false, false, true));
+        assertNotEquals(this.classUnderTest(), this.newWith(true));
     }
 
     @Override
@@ -118,7 +122,7 @@ public class ImmutableBooleanEmptySetTest extends AbstractImmutableBooleanCollec
     @Test
     public void newWithout()
     {
-        Assert.assertEquals(BooleanSets.mutable.empty(), this.classUnderTest().newWithout(true));
+        assertEquals(BooleanSets.mutable.empty(), this.classUnderTest().newWithout(true));
     }
 
     @Override
@@ -134,22 +138,22 @@ public class ImmutableBooleanEmptySetTest extends AbstractImmutableBooleanCollec
     @Test
     public void toBag()
     {
-        Assert.assertEquals(BooleanBags.mutable.empty(), this.classUnderTest().toBag());
+        assertEquals(BooleanBags.mutable.empty(), this.classUnderTest().toBag());
     }
 
     @Override
     @Test
     public void count()
     {
-        Assert.assertEquals(0, this.classUnderTest().count(BooleanPredicates.alwaysTrue()));
-        Assert.assertEquals(0, this.classUnderTest().count(BooleanPredicates.alwaysFalse()));
+        assertEquals(0, this.classUnderTest().count(BooleanPredicates.alwaysTrue()));
+        assertEquals(0, this.classUnderTest().count(BooleanPredicates.alwaysFalse()));
     }
 
     @Override
     @Test(expected = NoSuchElementException.class)
     public void booleanIterator()
     {
-        Assert.assertFalse(this.classUnderTest().booleanIterator().hasNext());
+        assertFalse(this.classUnderTest().booleanIterator().hasNext());
         this.classUnderTest().booleanIterator().next();
     }
 
@@ -157,16 +161,16 @@ public class ImmutableBooleanEmptySetTest extends AbstractImmutableBooleanCollec
     @Test
     public void noneSatisfy()
     {
-        Assert.assertTrue(this.classUnderTest().noneSatisfy(BooleanPredicates.alwaysTrue()));
-        Assert.assertTrue(this.classUnderTest().noneSatisfy(BooleanPredicates.alwaysFalse()));
+        assertTrue(this.classUnderTest().noneSatisfy(BooleanPredicates.alwaysTrue()));
+        assertTrue(this.classUnderTest().noneSatisfy(BooleanPredicates.alwaysFalse()));
     }
 
     @Test
     public void cartesianProduct()
     {
-        Assert.assertEquals(Sets.immutable.empty(), this.classUnderTest().cartesianProduct(BooleanSets.immutable.with(true)).toSet());
-        Assert.assertEquals(Sets.immutable.empty(), this.classUnderTest().cartesianProduct(BooleanSets.immutable.with(false)).toSet());
-        Assert.assertEquals(Sets.immutable.empty(), this.classUnderTest().cartesianProduct(BooleanSets.immutable.with(true, false)).toSet());
-        Assert.assertEquals(Sets.immutable.empty(), this.classUnderTest().cartesianProduct(BooleanSets.immutable.empty()).toSet());
+        assertEquals(Sets.immutable.empty(), this.classUnderTest().cartesianProduct(BooleanSets.immutable.with(true)).toSet());
+        assertEquals(Sets.immutable.empty(), this.classUnderTest().cartesianProduct(BooleanSets.immutable.with(false)).toSet());
+        assertEquals(Sets.immutable.empty(), this.classUnderTest().cartesianProduct(BooleanSets.immutable.with(true, false)).toSet());
+        assertEquals(Sets.immutable.empty(), this.classUnderTest().cartesianProduct(BooleanSets.immutable.empty()).toSet());
     }
 }

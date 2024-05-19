@@ -16,8 +16,11 @@ import java.util.BitSet;
 import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link BooleanArrayList}.
@@ -45,11 +48,11 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
         Verify.assertEmpty(arrayList);
         Field items = BooleanArrayList.class.getDeclaredField("items");
         items.setAccessible(true);
-        Assert.assertEquals(64L, ((BitSet) items.get(arrayList)).size());
+        assertEquals(64L, ((BitSet) items.get(arrayList)).size());
         BooleanArrayList arrayList1 = new BooleanArrayList(64);
-        Assert.assertEquals(64L, ((BitSet) items.get(arrayList1)).size());
+        assertEquals(64L, ((BitSet) items.get(arrayList1)).size());
         BooleanArrayList arrayList2 = new BooleanArrayList(65);
-        Assert.assertEquals(128L, ((BitSet) items.get(arrayList2)).size());
+        assertEquals(128L, ((BitSet) items.get(arrayList2)).size());
     }
 
     @Test
@@ -57,7 +60,7 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
     {
         BooleanArrayList booleanArrayList = this.classUnderTest();
         booleanArrayList.addAllAtIndex(0, false, true);
-        Assert.assertEquals(new BooleanArrayList(false, true, true, false, true), booleanArrayList);
+        assertEquals(new BooleanArrayList(false, true, true, false, true), booleanArrayList);
     }
 
     @Test
@@ -65,7 +68,7 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
     {
         BooleanArrayList booleanArrayList = this.classUnderTest();
         booleanArrayList.addAllAtIndex(1, false, true, true);
-        Assert.assertEquals(new BooleanArrayList(true, false, true, true, false, true), booleanArrayList);
+        assertEquals(new BooleanArrayList(true, false, true, true, false, true), booleanArrayList);
     }
 
     @Test
@@ -73,7 +76,7 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
     {
         BooleanArrayList booleanArrayList = this.classUnderTest();
         booleanArrayList.addAllAtIndex(2, false, true);
-        Assert.assertEquals(new BooleanArrayList(true, false, false, true, true), booleanArrayList);
+        assertEquals(new BooleanArrayList(true, false, false, true, true), booleanArrayList);
     }
 
     @Test
@@ -81,7 +84,7 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
     {
         BooleanArrayList booleanArrayList = this.classUnderTest();
         booleanArrayList.addAllAtIndex(3, false, true);
-        Assert.assertEquals(new BooleanArrayList(true, false, true, false, true), booleanArrayList);
+        assertEquals(new BooleanArrayList(true, false, true, false, true), booleanArrayList);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -102,7 +105,7 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
         listWithCapacity.addAtIndex(64, true);
         Field items = BooleanArrayList.class.getDeclaredField("items");
         items.setAccessible(true);
-        Assert.assertEquals(128L, ((BitSet) items.get(listWithCapacity)).size());
+        assertEquals(128L, ((BitSet) items.get(listWithCapacity)).size());
     }
 
     @Override
@@ -128,12 +131,12 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
         BooleanArrayList arrayList1 = new BooleanArrayList().with(true, true, false);
         BooleanArrayList arrayList2 = new BooleanArrayList().with(true, true, false, true);
         BooleanArrayList arrayList3 = new BooleanArrayList().with(true, true, false, true, false);
-        Assert.assertSame(emptyList, arrayList);
-        Assert.assertEquals(BooleanArrayList.newListWith(true), arrayList);
-        Assert.assertEquals(BooleanArrayList.newListWith(false, false), arrayList0);
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, false), arrayList1);
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, true), arrayList2);
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, true, false), arrayList3);
+        assertSame(emptyList, arrayList);
+        assertEquals(BooleanArrayList.newListWith(true), arrayList);
+        assertEquals(BooleanArrayList.newListWith(false, false), arrayList0);
+        assertEquals(BooleanArrayList.newListWith(true, true, false), arrayList1);
+        assertEquals(BooleanArrayList.newListWith(true, true, false, true), arrayList2);
+        assertEquals(BooleanArrayList.newListWith(true, true, false, true, false), arrayList3);
     }
 
     private static class LastValueBeforeFalseWasFalse
@@ -156,7 +159,7 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
     {
         MutableBooleanList list = this.newWith(true, true, false, false, true, false, true, false, false, false);
 
-        Assert.assertTrue(list.removeIf(new LastValueBeforeFalseWasFalse()));
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, true, false, true, false), list);
+        assertTrue(list.removeIf(new LastValueBeforeFalseWasFalse()));
+        assertEquals(BooleanArrayList.newListWith(true, true, false, true, false, true, false), list);
     }
 }

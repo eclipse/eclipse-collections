@@ -15,8 +15,9 @@ import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PartitionTreeBagTest
 {
@@ -29,7 +30,7 @@ public class PartitionTreeBagTest
         partitionTreeBag.getSelected().addAll(selected);
         partitionTreeBag.getRejected().addAll(rejected);
         PartitionImmutableSortedBag<Integer> immutableSortedBag = partitionTreeBag.toImmutable();
-        Assert.assertEquals(selected, immutableSortedBag.getSelected());
-        Assert.assertEquals(rejected, immutableSortedBag.getRejected());
+        assertEquals(selected, immutableSortedBag.getSelected());
+        assertEquals(rejected, immutableSortedBag.getRejected());
     }
 }

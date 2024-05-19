@@ -40,8 +40,15 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link MultiReaderHashBag}.
@@ -72,7 +79,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     @Test
     public void hashBagNewWith()
     {
-        Assert.assertEquals(
+        assertEquals(
                 HashBag.newBagWith("Alice", "Bob", "Bob", "Bob", "Cooper", "Dio"),
                 HashBag.newBagWith("Alice", "Bob", "Cooper", "Dio", "Bob", "Bob"));
     }
@@ -102,13 +109,13 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     public void addOccurrences()
     {
         MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2, 3);
-        Assert.assertEquals(2, bag.addOccurrences(1, 0));
-        Assert.assertEquals(4, bag.addOccurrences(1, 2));
-        Assert.assertEquals(0, bag.addOccurrences(4, 0));
-        Assert.assertEquals(2, bag.addOccurrences(4, 2));
-        Assert.assertEquals(2, bag.addOccurrences(2, 1));
+        assertEquals(2, bag.addOccurrences(1, 0));
+        assertEquals(4, bag.addOccurrences(1, 2));
+        assertEquals(0, bag.addOccurrences(4, 0));
+        assertEquals(2, bag.addOccurrences(4, 2));
+        assertEquals(2, bag.addOccurrences(2, 1));
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 3, 4, 4), bag);
-        Assert.assertEquals(3, bag.addOccurrences(2, 1));
+        assertEquals(3, bag.addOccurrences(2, 1));
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 2, 3, 4, 4), bag);
     }
 
@@ -118,13 +125,13 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2, 3);
         MultiReaderBag<Integer> withOccurrences = bag.withOccurrences(1, 0);
 
-        Assert.assertSame(bag, withOccurrences);
-        Assert.assertEquals(HashBag.newBagWith(1, 1, 2, 3), withOccurrences);
-        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 3), bag.withOccurrences(1, 2));
-        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 3), bag.withOccurrences(4, 0));
-        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 3, 4, 4), bag.withOccurrences(4, 2));
-        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 3, 4, 4), bag.withOccurrences(2, 1));
-        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 2, 3, 4, 4), bag.withOccurrences(2, 1));
+        assertSame(bag, withOccurrences);
+        assertEquals(HashBag.newBagWith(1, 1, 2, 3), withOccurrences);
+        assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 3), bag.withOccurrences(1, 2));
+        assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 3), bag.withOccurrences(4, 0));
+        assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 3, 4, 4), bag.withOccurrences(4, 2));
+        assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 3, 4, 4), bag.withOccurrences(2, 1));
+        assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 2, 3, 4, 4), bag.withOccurrences(2, 1));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -137,7 +144,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     public void removeOccurrences()
     {
         MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 1, 1, 2, 2, 3);
-        Assert.assertFalse(bag.removeOccurrences(4, 2));
+        assertFalse(bag.removeOccurrences(4, 2));
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 3), bag);
 
         bag.removeOccurrences(1, 3);
@@ -151,11 +158,11 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 1, 1, 2, 2, 3);
         MultiReaderBag<Integer> withoutOccurrences = bag.withoutOccurrences(4, 2);
 
-        Assert.assertSame(bag, withoutOccurrences);
-        Assert.assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 3), withoutOccurrences);
+        assertSame(bag, withoutOccurrences);
+        assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 3), withoutOccurrences);
 
         bag.withoutOccurrences(1, 3);
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 2), bag.withoutOccurrences(3, 1));
+        assertEquals(HashBag.newBagWith(1, 2, 2), bag.withoutOccurrences(3, 1));
     }
 
     @Test
@@ -163,10 +170,10 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     {
         MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2);
 
-        Assert.assertFalse(bag.setOccurrences(1, 2));
-        Assert.assertTrue(bag.setOccurrences(3, 3));
+        assertFalse(bag.setOccurrences(1, 2));
+        assertTrue(bag.setOccurrences(3, 3));
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 2, 3, 3, 3), bag);
-        Assert.assertTrue(bag.setOccurrences(2, 0));
+        assertTrue(bag.setOccurrences(2, 0));
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 3, 3, 3), bag);
     }
 
@@ -174,15 +181,15 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     public void occurrencesOf()
     {
         MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2);
-        Assert.assertEquals(2, bag.occurrencesOf(1));
-        Assert.assertEquals(1, bag.occurrencesOf(2));
+        assertEquals(2, bag.occurrencesOf(1));
+        assertEquals(1, bag.occurrencesOf(2));
     }
 
     @Test
     public void sizeDistinct()
     {
         MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2, 2, 3);
-        Assert.assertEquals(3, bag.sizeDistinct());
+        assertEquals(3, bag.sizeDistinct());
     }
 
     @Override
@@ -191,7 +198,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     {
         MutableBag<Boolean> bag = MultiReaderHashBag.newBagWith(Boolean.TRUE, Boolean.FALSE, null);
         MutableBag<String> newCollection = bag.collect(String::valueOf);
-        Assert.assertEquals(HashBag.newBagWith("true", "false", "null"), newCollection);
+        assertEquals(HashBag.newBagWith("true", "false", "null"), newCollection);
     }
 
     @Override
@@ -210,12 +217,12 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     @Test
     public void collectIf()
     {
-        Assert.assertEquals(
+        assertEquals(
                 HashBag.newBagWith("1", "1", "2", "3"),
                 MultiReaderHashBag.newBagWith(1, 1, 2, 3).collectIf(
                         Integer.class::isInstance,
                         String::valueOf));
-        Assert.assertEquals(
+        assertEquals(
                 HashBag.newBagWith("1", "1"),
                 MultiReaderHashBag.newBagWith(1, 1, 2, 3).collectIf(
                         Predicates.lessThan(2),
@@ -310,8 +317,8 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     {
         MutableBag<Integer> integers = MultiReaderHashBag.newBagWith(-3, -2, -1, 0, 1, 2, 2, 2, 3, 3, 4, 5);
         PartitionMutableCollection<Integer> result = integers.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(MultiReaderHashBag.newBagWith(-2, 0, 2, 2, 2, 4), result.getSelected());
-        Assert.assertEquals(MultiReaderHashBag.newBagWith(-3, -1, 1, 3, 3, 5), result.getRejected());
+        assertEquals(MultiReaderHashBag.newBagWith(-2, 0, 2, 2, 2, 4), result.getSelected());
+        assertEquals(MultiReaderHashBag.newBagWith(-3, -1, 1, 3, 3, 5), result.getRejected());
     }
 
     @Override
@@ -320,8 +327,8 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     {
         MutableBag<Integer> integers = MultiReaderHashBag.newBagWith(-3, -2, -1, 0, 1, 2, 2, 2, 3, 3, 4, 5);
         PartitionMutableCollection<Integer> result = integers.partitionWith(Predicates2.in(), integers.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(MultiReaderHashBag.newBagWith(-2, 0, 2, 2, 2, 4), result.getSelected());
-        Assert.assertEquals(MultiReaderHashBag.newBagWith(-3, -1, 1, 3, 3, 5), result.getRejected());
+        assertEquals(MultiReaderHashBag.newBagWith(-2, 0, 2, 2, 2, 4), result.getSelected());
+        assertEquals(MultiReaderHashBag.newBagWith(-3, -1, 1, 3, 3, 5), result.getRejected());
     }
 
     @Override
@@ -364,16 +371,16 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     public void toMapOfItemToCount()
     {
         MutableBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 2, 2, 3, 3, 3);
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), bag.toMapOfItemToCount());
+        assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), bag.toMapOfItemToCount());
     }
 
     @Test
     public void toStringOfItemToCount()
     {
-        Assert.assertEquals("{}", MultiReaderHashBag.newBagWith().toStringOfItemToCount());
-        Assert.assertEquals("{1=3}", MultiReaderHashBag.newBagWith(1, 1, 1).toStringOfItemToCount());
+        assertEquals("{}", MultiReaderHashBag.newBagWith().toStringOfItemToCount());
+        assertEquals("{1=3}", MultiReaderHashBag.newBagWith(1, 1, 1).toStringOfItemToCount());
         String actual = MultiReaderHashBag.newBagWith(1, 2, 2).toStringOfItemToCount();
-        Assert.assertTrue("{1=1, 2=2}".equals(actual) || "{2=2, 1=1}".equals(actual));
+        assertTrue("{1=1, 2=2}".equals(actual) || "{2=2, 1=1}".equals(actual));
     }
 
     @Test
@@ -389,7 +396,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
             }
         });
 
-        Assert.assertEquals(13, sum[0]);
+        assertEquals(13, sum[0]);
     }
 
     @Test
@@ -406,13 +413,13 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         Verify.assertPostSerializedEqualsAndHashCode(integers);
         Verify.assertEqualsAndHashCode(integers, integers2);
         Verify.assertEqualsAndHashCode(integers, randomAccessList);
-        Assert.assertNotEquals(integers, integers3);
-        Assert.assertNotEquals(integers, integers5);
-        Assert.assertNotEquals(integers, randomAccessList2);
-        Assert.assertNotEquals(integers, Sets.fixedSize.of());
+        assertNotEquals(integers, integers3);
+        assertNotEquals(integers, integers5);
+        assertNotEquals(integers, randomAccessList2);
+        assertNotEquals(integers, Sets.fixedSize.of());
         Verify.assertEqualsAndHashCode(integers3, integers4);
-        Assert.assertEquals(integers, integers2);
-        Assert.assertNotEquals(integers, integers3);
+        assertEquals(integers, integers2);
+        assertNotEquals(integers, integers3);
     }
 
     @Override
@@ -421,7 +428,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     {
         super.toSet();
         MutableBag<Integer> bag = MultiReaderHashBag.newBagWith(3, 3, 3, 2, 2, 1);
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3), bag.toSet());
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3), bag.toSet());
     }
 
     @Override
@@ -430,7 +437,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     {
         super.toList();
         MutableBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 1);
-        Assert.assertEquals(FastList.newListWith(1, 1, 1), bag.toList());
+        assertEquals(FastList.newListWith(1, 1, 1), bag.toList());
     }
 
     @Override
@@ -438,7 +445,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     public void injectInto()
     {
         MutableBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 3);
-        Assert.assertEquals(Integer.valueOf(6), bag.injectInto(1, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(6), bag.injectInto(1, AddFunction.INTEGER));
     }
 
     @Override
@@ -448,7 +455,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MutableBag<Integer> result = HashBag.newBag();
         MutableBag<Integer> collection = MultiReaderHashBag.newBagWith(1, 2, 3, 4, 4);
         collection.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 3, 4, 4), result);
+        assertEquals(HashBag.newBagWith(1, 2, 3, 4, 4), result);
     }
 
     @Override
@@ -465,13 +472,13 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MutableBag<Integer> collection = MultiReaderHashBag.newBagWith(1, 1, 3, 4, 5);
         MutableBag<Integer> deserializedCollection = SerializeTestHelper.serializeDeserialize(collection);
         Verify.assertSize(5, deserializedCollection);
-        Assert.assertEquals(collection, deserializedCollection);
+        assertEquals(collection, deserializedCollection);
     }
 
     private void verifyDelegateIsUnmodifiable(MutableBag<Integer> delegate)
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> delegate.add(2));
-        Assert.assertThrows(UnsupportedOperationException.class, () -> delegate.remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> delegate.add(2));
+        assertThrows(UnsupportedOperationException.class, () -> delegate.remove(0));
     }
 
     @Test
@@ -484,14 +491,14 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
             result[0] = delegate.getFirst();
             this.verifyDelegateIsUnmodifiable(delegate);
         });
-        Assert.assertNotNull(result[0]);
+        assertNotNull(result[0]);
     }
 
     @Override
     @Test
     public void makeString()
     {
-        Assert.assertEquals("[1, 1, 2, 3]", MultiReaderHashBag.newBagWith(1, 1, 2, 3).toString());
+        assertEquals("[1, 1, 2, 3]", MultiReaderHashBag.newBagWith(1, 1, 2, 3).toString());
     }
 
     @Override
@@ -500,14 +507,14 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     {
         Appendable builder = new StringBuilder();
         MultiReaderHashBag.newBagWith(1, 1, 2, 3).appendString(builder);
-        Assert.assertEquals("1, 1, 2, 3", builder.toString());
+        assertEquals("1, 1, 2, 3", builder.toString());
     }
 
     @Override
     @Test
     public void testToString()
     {
-        Assert.assertEquals("[1, 1, 2, 3]", MultiReaderHashBag.newBagWith(1, 1, 2, 3).toString());
+        assertEquals("[1, 1, 2, 3]", MultiReaderHashBag.newBagWith(1, 1, 2, 3).toString());
     }
 
     @Override
@@ -515,7 +522,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     public void iterator()
     {
         MultiReaderHashBag<Integer> integers = MultiReaderHashBag.newBagWith(1, 1, 2, 3, 4);
-        Assert.assertThrows(UnsupportedOperationException.class, integers::iterator);
+        assertThrows(UnsupportedOperationException.class, integers::iterator);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -540,11 +547,11 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
             delegateList.set(delegate);
             iterator.set(delegate.iterator());
         });
-        Assert.assertEquals(HashBag.newBagWith(1, 2, 2, 3, 4), bag);
+        assertEquals(HashBag.newBagWith(1, 2, 2, 3, 4), bag);
 
-        Assert.assertThrows(NullPointerException.class, () -> iterator.get().hasNext());
+        assertThrows(NullPointerException.class, () -> iterator.get().hasNext());
 
-        Assert.assertThrows(NullPointerException.class, () -> delegateList.get().iterator());
+        assertThrows(NullPointerException.class, () -> delegateList.get().iterator());
     }
 
     @Test
@@ -557,7 +564,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
             numbers.add(each);
             Verify.assertSize(1, numbers.select(each::equals));
             numbers.add(each);
-            Assert.assertEquals(2, numbers.count(each::equals));
+            assertEquals(2, numbers.count(each::equals));
             numbers.add(each);
             Integer[] removed = new Integer[1];
             numbers.withWriteLockAndDelegate(bag ->
@@ -568,10 +575,10 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
                 bag.add(removed[0]);
             });
             numbers.add(each);
-            Assert.assertEquals(4, numbers.count(each::equals));
+            assertEquals(4, numbers.count(each::equals));
         }, 1);
 
-        interval.forEach(Procedures.cast(each -> Assert.assertEquals(4, numbers.occurrencesOf(each))));
+        interval.forEach(Procedures.cast(each -> assertEquals(4, numbers.occurrencesOf(each))));
     }
 
     @Test
@@ -580,7 +587,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MultiReaderHashBag<String> numbers = this.newWith();
         Interval interval = Interval.oneTo(50000);
         ParallelIterate.collect(interval, String::valueOf, numbers, true);
-        Assert.assertEquals(numbers, interval.collect(String::valueOf).toBag());
+        assertEquals(numbers, interval.collect(String::valueOf).toBag());
     }
 
     @Test
@@ -589,7 +596,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MutableBag<String> bag = this.newWith("0", "1", "1", "1", "1", "2", "2", "2", "3", "3", "4", "5");
         MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -597,12 +604,12 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     {
         MultiReaderHashBag<Integer> numbers = this.newWith(1, 1, 1, 2, 2, 3, 3);
         MutableList<ObjectIntPair<Integer>> pairs = numbers.topOccurrences(1);
-        Assert.assertEquals(Integer.valueOf(1), pairs.getFirst().getOne());
-        Assert.assertEquals(3, pairs.getFirst().getTwo());
+        assertEquals(Integer.valueOf(1), pairs.getFirst().getOne());
+        assertEquals(3, pairs.getFirst().getTwo());
         numbers.withReadLockAndDelegate(bag ->
         {
-            Assert.assertEquals(Integer.valueOf(1), bag.topOccurrences(1).getFirst().getOne());
-            Assert.assertEquals(3, bag.topOccurrences(1).getFirst().getTwo());
+            assertEquals(Integer.valueOf(1), bag.topOccurrences(1).getFirst().getOne());
+            assertEquals(3, bag.topOccurrences(1).getFirst().getTwo());
         });
     }
 

@@ -16,8 +16,11 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class IfFunctionTest
 {
@@ -37,7 +40,7 @@ public class IfFunctionTest
                 (Integer ignored) -> 0);
         MutableList<Integer> result = map.valuesView().collect(function).toList();
 
-        Assert.assertEquals(FastList.newListWith(0, 1, 0, 1, 0), result);
+        assertEquals(FastList.newListWith(0, 1, 0, 1, 0), result);
     }
 
     @Test
@@ -47,7 +50,7 @@ public class IfFunctionTest
                 Predicates.greaterThan(5),
                 (Integer ignored) -> true);
 
-        Assert.assertTrue(function.valueOf(10));
+        assertTrue(function.valueOf(10));
     }
 
     @Test
@@ -58,6 +61,6 @@ public class IfFunctionTest
                 (Integer ignored) -> true,
                 (Integer ignored) -> false);
 
-        Assert.assertFalse(function.valueOf(1));
+        assertFalse(function.valueOf(1));
     }
 }

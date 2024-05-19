@@ -11,8 +11,10 @@
 package org.eclipse.collections.impl.block.predicate;
 
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PairPredicateTest
 {
@@ -28,8 +30,8 @@ public class PairPredicateTest
             }
         };
 
-        Assert.assertTrue(pairPredicate.accept(Tuples.pair("1", 1)));
-        Assert.assertFalse(pairPredicate.accept(Tuples.pair("2", 1)));
+        assertTrue(pairPredicate.accept(Tuples.pair("1", 1)));
+        assertFalse(pairPredicate.accept(Tuples.pair("2", 1)));
     }
 
     @Test
@@ -45,9 +47,9 @@ public class PairPredicateTest
         };
 
         PairPredicate<String, String> negatedPredicate = pairPredicate.negate();
-        Assert.assertFalse(negatedPredicate.accept(Tuples.pair("1", "1")));
-        Assert.assertFalse(negatedPredicate.accept("1", "1"));
-        Assert.assertTrue(negatedPredicate.accept(Tuples.pair("2", "1")));
-        Assert.assertTrue(negatedPredicate.accept("2", "1"));
+        assertFalse(negatedPredicate.accept(Tuples.pair("1", "1")));
+        assertFalse(negatedPredicate.accept("1", "1"));
+        assertTrue(negatedPredicate.accept(Tuples.pair("2", "1")));
+        assertTrue(negatedPredicate.accept("2", "1"));
     }
 }

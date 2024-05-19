@@ -20,8 +20,9 @@ import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.parallel.BatchIterable;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ImmutableUnifiedMapWithHashingStrategyTest extends ImmutableMapTestCase
 {
@@ -64,14 +65,14 @@ public class ImmutableUnifiedMapWithHashingStrategyTest extends ImmutableMapTest
     @Override
     public void testToString()
     {
-        Assert.assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
+        assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
     }
 
     @Test
     public void getBatchCount()
     {
         BatchIterable<Integer> integerBatchIterable = (BatchIterable<Integer>) this.classUnderTest();
-        Assert.assertEquals(5, integerBatchIterable.getBatchCount(3));
+        assertEquals(5, integerBatchIterable.getBatchCount(3));
     }
 
     @Test
@@ -80,6 +81,6 @@ public class ImmutableUnifiedMapWithHashingStrategyTest extends ImmutableMapTest
         Sum sum = new IntegerSum(0);
         BatchIterable<String> integerBatchIterable = (BatchIterable<String>) this.classUnderTest();
         integerBatchIterable.batchForEach(each -> sum.add(Integer.valueOf(each)), 0, 1);
-        Assert.assertEquals(10, sum.getValue());
+        assertEquals(10, sum.getValue());
     }
 }

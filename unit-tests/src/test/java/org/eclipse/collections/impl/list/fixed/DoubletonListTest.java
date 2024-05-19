@@ -21,8 +21,13 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link DoubletonList}.
@@ -52,27 +57,27 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void testContains()
     {
-        Assert.assertTrue(this.list.contains("1"));
-        Assert.assertTrue(this.list.contains("2"));
-        Assert.assertFalse(this.list.contains("3"));
+        assertTrue(this.list.contains("1"));
+        assertTrue(this.list.contains("2"));
+        assertFalse(this.list.contains("3"));
     }
 
     @Test
     public void testRemove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
     }
 
     @Test
     public void testAddAtIndex()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
     }
 
     @Test
     public void testAdd()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
     }
 
     @Test
@@ -87,16 +92,16 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
     public void testGet()
     {
         Verify.assertStartsWith(this.list, "1", "2");
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(2));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.list.get(2));
     }
 
     @Test
     public void testSet()
     {
-        Assert.assertEquals("1", this.list.set(0, "2"));
-        Assert.assertEquals("2", this.list.set(1, "1"));
-        Assert.assertEquals(FastList.newListWith("2", "1"), this.list);
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.list.set(2, "0"));
+        assertEquals("1", this.list.set(0, "2"));
+        assertEquals("2", this.list.set(1, "1"));
+        assertEquals(FastList.newListWith("2", "1"), this.list);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.list.set(2, "0"));
     }
 
     @Test
@@ -126,7 +131,7 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
         MutableList<String> result = Lists.mutable.of();
         MutableList<String> source = this.classUnderTest();
         source.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(FastList.newListWith("1", "2"), result);
+        assertEquals(FastList.newListWith("1", "2"), result);
     }
 
     @Test
@@ -140,8 +145,8 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
             result.add(each);
             indexSum[0] += index;
         });
-        Assert.assertEquals(FastList.newListWith("1", "2"), result);
-        Assert.assertEquals(1, indexSum[0]);
+        assertEquals(FastList.newListWith("1", "2"), result);
+        assertEquals(1, indexSum[0]);
     }
 
     @Test
@@ -149,14 +154,14 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
     {
         MutableList<String> result = Lists.mutable.of();
         this.list.forEachWith(Procedures2.fromProcedure(result::add), null);
-        Assert.assertEquals(FastList.newListWith("1", "2"), result);
+        assertEquals(FastList.newListWith("1", "2"), result);
     }
 
     @Test
     public void testGetFirstGetLast()
     {
-        Assert.assertEquals("1", this.list.getFirst());
-        Assert.assertEquals("2", this.list.getLast());
+        assertEquals("1", this.list.getFirst());
+        assertEquals("2", this.list.getLast());
     }
 
     @Test
@@ -180,21 +185,21 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
         {
             Verify.assertContains(each.toUpperCase(), upperList);
         }
-        Assert.assertEquals("one", subList.getFirst());
-        Assert.assertEquals("two", subList.getLast());
+        assertEquals("one", subList.getFirst());
+        assertEquals("two", subList.getLast());
         MutableList<String> subList2 = list.subList(1, 2);
-        Assert.assertEquals("two", subList2.getFirst());
-        Assert.assertEquals("two", subList2.getLast());
+        assertEquals("two", subList2.getFirst());
+        assertEquals("two", subList2.getLast());
         MutableList<String> subList3 = list.subList(0, 1);
-        Assert.assertEquals("one", subList3.getFirst());
-        Assert.assertEquals("one", subList3.getLast());
+        assertEquals("one", subList3.getFirst());
+        assertEquals("one", subList3.getLast());
     }
 
     @Test
     public void without()
     {
         MutableList<Integer> list = new DoubletonList<>(2, 2);
-        Assert.assertSame(list, list.without(9));
+        assertSame(list, list.without(9));
         list = list.without(2);
         Verify.assertListsEqual(FastList.newListWith(2), list);
         Verify.assertInstanceOf(SingletonList.class, list);
@@ -203,7 +208,7 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void testGetOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
+        assertThrows(IllegalStateException.class, () -> this.list.getOnly());
     }
 
     @Override
@@ -213,9 +218,9 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
         super.sort();
         MutableList<String> strings = this.classUnderTest().reverseThis();
         strings.sort(Comparator.naturalOrder());
-        Assert.assertEquals(this.classUnderTest(), strings);
+        assertEquals(this.classUnderTest(), strings);
         MutableList<String> strings2 = this.classUnderTest().reverseThis();
         strings2.sort(null);
-        Assert.assertEquals(this.classUnderTest(), strings2);
+        assertEquals(this.classUnderTest(), strings2);
     }
 }

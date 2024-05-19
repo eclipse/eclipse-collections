@@ -11,8 +11,10 @@
 package org.eclipse.collections.impl.set.mutable;
 
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 public class UnifiedSetAsPoolTest
 {
@@ -21,7 +23,7 @@ public class UnifiedSetAsPoolTest
     @Test
     public void getReturnsNullIfObjectIsNotPooled()
     {
-        Assert.assertNull(this.staticPool.get(1));
+        assertNull(this.staticPool.get(1));
     }
 
     @Test
@@ -29,7 +31,7 @@ public class UnifiedSetAsPoolTest
     {
         Integer firstPooledObject = 1;
         this.staticPool.put(firstPooledObject);
-        Assert.assertSame(firstPooledObject, this.staticPool.get(firstPooledObject));
+        assertSame(firstPooledObject, this.staticPool.get(firstPooledObject));
     }
 
     @Test
@@ -39,7 +41,7 @@ public class UnifiedSetAsPoolTest
         AlwaysEqual firstObject = new AlwaysEqual();
         pool.put(firstObject);
         AlwaysEqual equalObject = new AlwaysEqual();  // deliberate new instance
-        Assert.assertSame(firstObject, pool.get(equalObject));
+        assertSame(firstObject, pool.get(equalObject));
     }
 
     private static final class AlwaysEqual
@@ -62,7 +64,7 @@ public class UnifiedSetAsPoolTest
     {
         Integer firstObject = 1;
         Object returnedObject = this.staticPool.put(firstObject);
-        Assert.assertSame(returnedObject, firstObject);
+        assertSame(returnedObject, firstObject);
     }
 
     @Test
@@ -74,8 +76,8 @@ public class UnifiedSetAsPoolTest
         AlwaysEqual secondObject = new AlwaysEqual();  // deliberate new instance
         Object returnedObject = pool.put(secondObject);
 
-        Assert.assertSame(returnedObject, firstObject);
-        Assert.assertSame(firstObject, pool.get(secondObject));
+        assertSame(returnedObject, firstObject);
+        assertSame(firstObject, pool.get(secondObject));
     }
 
     @Test
@@ -86,7 +88,7 @@ public class UnifiedSetAsPoolTest
         this.staticPool.put(firstObject);
         Integer returnedObject = this.staticPool.removeFromPool(firstObject);
 
-        Assert.assertSame(returnedObject, firstObject);
+        assertSame(returnedObject, firstObject);
         Verify.assertEmpty(this.staticPool);
     }
 }

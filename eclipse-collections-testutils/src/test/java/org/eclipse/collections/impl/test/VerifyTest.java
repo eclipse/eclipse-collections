@@ -48,8 +48,10 @@ import org.eclipse.collections.impl.multimap.set.sorted.TreeSortedSetMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test for our extensions to JUnit. These tests make sure that methods in {@link Verify} really fail when they
@@ -338,7 +340,7 @@ public class VerifyTest
             {
             };
             Verify.assertShallowClone(unclonable);
-            Assert.fail("AssertionError expected");
+            fail("AssertionError expected");
         }
         catch (AssertionError e)
         {
@@ -378,7 +380,7 @@ public class VerifyTest
         try
         {
             Verify.assertEqualsAndHashCode(new ConstantHashCode(), new ConstantHashCode());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -388,7 +390,7 @@ public class VerifyTest
         try
         {
             Verify.assertEqualsAndHashCode(new AlwaysEqualWithHashCodeOf(1), new AlwaysEqualWithHashCodeOf(2));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -434,7 +436,7 @@ public class VerifyTest
         {
             MutableListMultimap<String, Integer> multimap = FastListMultimap.newMultimap(Tuples.pair("one", 1), Tuples.pair("two", 2));
             Verify.assertContainsAllEntries(multimap, "one", 1, "three", 3);
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -449,7 +451,7 @@ public class VerifyTest
         {
             MutableListMultimap<String, Integer> multimap = FastListMultimap.newMultimap(Tuples.pair("one", 1), Tuples.pair("two", 2));
             Verify.assertContainsAllEntries(multimap, "one", 1, "three");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -464,7 +466,7 @@ public class VerifyTest
         {
             Collection<String> list = FastList.newListWith("One", "Two", "Three");
             Verify.assertContainsAll(list, "Foo", "Bar", "Baz");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -478,7 +480,7 @@ public class VerifyTest
         try
         {
             Verify.assertInstanceOf(Integer.class, 1L);
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -494,7 +496,7 @@ public class VerifyTest
         try
         {
             Verify.assertNotInstanceOf(Integer.class, 1);
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -515,7 +517,7 @@ public class VerifyTest
         try
         {
             Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<>(FastList.newListWith()));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -525,7 +527,7 @@ public class VerifyTest
         try
         {
             Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), integers);
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -535,7 +537,7 @@ public class VerifyTest
         try
         {
             Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5), integers);
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -545,7 +547,7 @@ public class VerifyTest
         try
         {
             Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 3, 4), integers);
-            Assert.fail();
+            fail();
         }
         catch (AssertionError e)
         {
@@ -559,7 +561,7 @@ public class VerifyTest
         try
         {
             Verify.assertEmpty(FastList.newListWith("foo"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -574,7 +576,7 @@ public class VerifyTest
         try
         {
             Verify.assertEmpty(IntArrayList.newListWith(1));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -589,7 +591,7 @@ public class VerifyTest
         try
         {
             Verify.assertIterableEmpty(FastList.newListWith("foo"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -604,7 +606,7 @@ public class VerifyTest
         try
         {
             Verify.assertEmpty(UnifiedMap.newWithKeysValues("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -619,7 +621,7 @@ public class VerifyTest
         try
         {
             Verify.assertEmpty(Maps.immutable.of("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -634,7 +636,7 @@ public class VerifyTest
         try
         {
             Verify.assertEmpty(FastListMultimap.newMultimap(Tuples.pair("foo", "1"), Tuples.pair("foo", "2")));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -649,7 +651,7 @@ public class VerifyTest
         try
         {
             Verify.assertNotEmpty(Lists.mutable.of());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -664,7 +666,7 @@ public class VerifyTest
         try
         {
             Verify.assertNotEmpty(new IntArrayList());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -679,7 +681,7 @@ public class VerifyTest
         try
         {
             Verify.assertIterableNotEmpty(Lists.mutable.of());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -694,7 +696,7 @@ public class VerifyTest
         try
         {
             Verify.assertNotEmpty(UnifiedMap.newMap());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -709,7 +711,7 @@ public class VerifyTest
         try
         {
             Verify.assertNotEmpty(FastListMultimap.newMultimap());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -725,7 +727,7 @@ public class VerifyTest
         try
         {
             Verify.assertNotEmpty(new Object[0]);
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -740,7 +742,7 @@ public class VerifyTest
         try
         {
             Verify.assertSize(3, FastList.newListWith("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -755,7 +757,7 @@ public class VerifyTest
         try
         {
             Verify.assertSize(3, FastList.newListWith("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -770,7 +772,7 @@ public class VerifyTest
         try
         {
             Verify.assertSize(3, new Object[]{new Object()});
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -785,7 +787,7 @@ public class VerifyTest
         try
         {
             Verify.assertIterableSize(3, FastList.newListWith("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -800,7 +802,7 @@ public class VerifyTest
         try
         {
             Verify.assertSize(3, IntArrayList.newListWith(1, 2));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -815,7 +817,7 @@ public class VerifyTest
         try
         {
             Verify.assertSize(3, UnifiedMap.newWithKeysValues("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -830,7 +832,7 @@ public class VerifyTest
         try
         {
             Verify.assertSize(3, FastListMultimap.newMultimap());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -845,7 +847,7 @@ public class VerifyTest
         try
         {
             Verify.assertSize(3, Maps.immutable.of("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -860,7 +862,7 @@ public class VerifyTest
         try
         {
             Verify.assertSize(3, Sets.immutable.of("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -875,7 +877,7 @@ public class VerifyTest
         try
         {
             Verify.assertContains("foo", "bar");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -890,7 +892,7 @@ public class VerifyTest
         try
         {
             Verify.assertAllSatisfy(FastList.newListWith(1, 3), IntegerPredicates.isEven());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -905,7 +907,7 @@ public class VerifyTest
         try
         {
             Verify.assertAllSatisfy((Map<?, Integer>) UnifiedMap.newWithKeysValues(1, 1, 3, 3), IntegerPredicates.isEven());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -920,7 +922,7 @@ public class VerifyTest
         try
         {
             Verify.assertNoneSatisfy(FastList.newListWith(1, 3), IntegerPredicates.isOdd());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -935,7 +937,7 @@ public class VerifyTest
         try
         {
             Verify.assertNoneSatisfy((Map<?, Integer>) UnifiedMap.newWithKeysValues(1, 1, 3, 3), IntegerPredicates.isOdd());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -950,7 +952,7 @@ public class VerifyTest
         try
         {
             Verify.assertAnySatisfy(FastList.newListWith(1, 3), IntegerPredicates.isEven());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -965,7 +967,7 @@ public class VerifyTest
         try
         {
             Verify.assertAnySatisfy((Map<?, Integer>) UnifiedMap.newWithKeysValues(1, 1, 3, 3), IntegerPredicates.isEven());
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -980,7 +982,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsAllKeyValues(UnifiedMap.newWithKeysValues("foo", "bar"), "baz", "quaz");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -995,7 +997,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsAllKeyValues(UnifiedMap.newWithKeysValues("foo", "bar"), "foo", "quaz");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1010,7 +1012,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsAllKeyValues(UnifiedMap.newWithKeysValues("foo", "bar"), "baz");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1025,7 +1027,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsAllKeyValues(Maps.immutable.of("foo", "bar"), "baz", "quaz");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1040,7 +1042,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsAllKeyValues(Maps.immutable.of("foo", "bar"), "foo", "quaz");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1055,7 +1057,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsAllKeyValues(Maps.immutable.of("foo", "bar"), "baz");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1070,7 +1072,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsNone(FastList.newListWith("foo", "bar"), "foo", "bar");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1085,7 +1087,7 @@ public class VerifyTest
         try
         {
             Verify.denyContainsAny(FastList.newListWith("foo", "bar"), "foo", "bar");
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1100,7 +1102,7 @@ public class VerifyTest
         try
         {
             Verify.assertContains("baz", FastList.newListWith("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1115,7 +1117,7 @@ public class VerifyTest
         try
         {
             Verify.assertContains("bar", Sets.immutable.of("foo"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1130,7 +1132,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsEntry("foo", "bar", FastListMultimap.newMultimap(Tuples.pair("foo", "baz")));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1145,7 +1147,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsKey("foo", UnifiedMap.newWithKeysValues("foozle", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1160,7 +1162,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsKey("foo", Maps.immutable.of("foozle", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1175,7 +1177,7 @@ public class VerifyTest
         try
         {
             Verify.denyContainsKey("foo", UnifiedMap.newWithKeysValues("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1190,7 +1192,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsKeyValue("foo", "bar", UnifiedMap.newWithKeysValues("baz", "quaz"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1205,7 +1207,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsKeyValue("foo", "bar", UnifiedMap.newWithKeysValues("foo", "quaz"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1220,7 +1222,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsKeyValue("foo", "bar", Maps.immutable.of("baz", "quaz"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1235,7 +1237,7 @@ public class VerifyTest
         try
         {
             Verify.assertContainsKeyValue("foo", "bar", Maps.immutable.of("baz", "quaz"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1250,7 +1252,7 @@ public class VerifyTest
         try
         {
             Verify.assertNotContains("foo", FastList.newListWith("foo"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1265,7 +1267,7 @@ public class VerifyTest
         try
         {
             Verify.assertNotContains("foo", (Iterable<?>) FastList.newListWith("foo"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1280,7 +1282,7 @@ public class VerifyTest
         try
         {
             Verify.assertNotContainsKey("foo", UnifiedMap.newWithKeysValues("foo", "bar"));
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1297,7 +1299,7 @@ public class VerifyTest
         try
         {
             Verify.assertClassNonInstantiable(VerifyTest.class);
-            Assert.fail();
+            fail();
         }
         catch (AssertionError ex)
         {
@@ -1317,7 +1319,7 @@ public class VerifyTest
         }
         catch (AssertionError ex)
         {
-            Assert.assertEquals("Block did not throw an exception of type java.io.NotSerializableException", ex.getMessage());
+            assertEquals("Block did not throw an exception of type java.io.NotSerializableException", ex.getMessage());
             Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
         }
     }
@@ -1332,7 +1334,7 @@ public class VerifyTest
         }
         catch (AssertionError ex)
         {
-            Assert.assertEquals("Failed to marshal an object", ex.getMessage());
+            assertEquals("Failed to marshal an object", ex.getMessage());
             Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
         }
     }
@@ -1347,7 +1349,7 @@ public class VerifyTest
         }
         catch (AssertionError ex)
         {
-            Assert.assertEquals("Failed to marshal an object", ex.getMessage());
+            assertEquals("Failed to marshal an object", ex.getMessage());
             Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
         }
         try
@@ -1356,7 +1358,7 @@ public class VerifyTest
         }
         catch (AssertionError ex)
         {
-            Assert.assertEquals("not same toString", ex.getMessage());
+            assertEquals("not same toString", ex.getMessage());
             Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
         }
     }

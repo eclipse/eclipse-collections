@@ -12,8 +12,11 @@ package org.eclipse.collections.impl.list.mutable.primitive;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BoxedMutableBooleanListTest
 {
@@ -36,9 +39,9 @@ public class BoxedMutableBooleanListTest
     {
         BoxedMutableBooleanList list = this.classUnderTest();
         list.add(Boolean.FALSE);
-        Assert.assertEquals(Lists.mutable.of(true, true, false), list);
+        assertEquals(Lists.mutable.of(true, true, false), list);
         list.add(Boolean.TRUE);
-        Assert.assertEquals(Lists.mutable.of(true, true, false, true), list);
+        assertEquals(Lists.mutable.of(true, true, false, true), list);
     }
 
     @Test
@@ -46,16 +49,16 @@ public class BoxedMutableBooleanListTest
     {
         BooleanArrayList originalList = new BooleanArrayList(true, false);
         BoxedMutableBooleanList list = new BoxedMutableBooleanList(originalList);
-        Assert.assertEquals(list, Lists.mutable.of(Boolean.TRUE, Boolean.FALSE));
+        assertEquals(list, Lists.mutable.of(Boolean.TRUE, Boolean.FALSE));
 
         originalList.add(true);
-        Assert.assertEquals(list, Lists.mutable.of(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE));
+        assertEquals(list, Lists.mutable.of(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE));
 
         originalList.remove(true);
-        Assert.assertEquals(list, Lists.mutable.of(Boolean.FALSE, Boolean.TRUE));
+        assertEquals(list, Lists.mutable.of(Boolean.FALSE, Boolean.TRUE));
 
         originalList.addAllAtIndex(1, false);
-        Assert.assertEquals(list, Lists.mutable.of(Boolean.FALSE, Boolean.FALSE, Boolean.TRUE));
+        assertEquals(list, Lists.mutable.of(Boolean.FALSE, Boolean.FALSE, Boolean.TRUE));
 
         originalList.clear();
         Verify.assertEmpty(list);
@@ -66,10 +69,10 @@ public class BoxedMutableBooleanListTest
     {
         BoxedMutableBooleanList list = this.classUnderTest();
         list.addAll(0, Lists.mutable.of(Boolean.FALSE, Boolean.FALSE));
-        Assert.assertEquals(Lists.mutable.of(false, false, true, true), list);
+        assertEquals(Lists.mutable.of(false, false, true, true), list);
 
         list.addAll(4, Lists.mutable.of(Boolean.FALSE, Boolean.TRUE));
-        Assert.assertEquals(Lists.mutable.of(false, false, true, true, false, true), list);
+        assertEquals(Lists.mutable.of(false, false, true, true, false, true), list);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -97,8 +100,8 @@ public class BoxedMutableBooleanListTest
     {
         BoxedMutableBooleanList list = this.classUnderTest();
         list.add(Boolean.FALSE);
-        Assert.assertTrue(list.get(0));
-        Assert.assertFalse(list.get(2));
+        assertTrue(list.get(0));
+        assertFalse(list.get(2));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -112,10 +115,10 @@ public class BoxedMutableBooleanListTest
     {
         BoxedMutableBooleanList list = this.classUnderTest();
         list.set(0, Boolean.FALSE);
-        Assert.assertEquals(Lists.mutable.of(false, true), list);
+        assertEquals(Lists.mutable.of(false, true), list);
 
         list.set(1, Boolean.FALSE);
-        Assert.assertEquals(Lists.mutable.of(false, false), list);
+        assertEquals(Lists.mutable.of(false, false), list);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -129,13 +132,13 @@ public class BoxedMutableBooleanListTest
     {
         BoxedMutableBooleanList list = this.classUnderTest();
         list.add(0, Boolean.FALSE);
-        Assert.assertEquals(Lists.mutable.of(false, true, true), list);
+        assertEquals(Lists.mutable.of(false, true, true), list);
 
         list.add(1, Boolean.TRUE);
-        Assert.assertEquals(Lists.mutable.of(false, true, true, true), list);
+        assertEquals(Lists.mutable.of(false, true, true, true), list);
 
         list.add(4, Boolean.FALSE);
-        Assert.assertEquals(Lists.mutable.of(false, true, true, true, false), list);
+        assertEquals(Lists.mutable.of(false, true, true, true, false), list);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -149,8 +152,8 @@ public class BoxedMutableBooleanListTest
     {
         BoxedMutableBooleanList booleanList = this.classUnderTest();
         booleanList.add(Boolean.FALSE);
-        Assert.assertTrue(booleanList.remove(0));
-        Assert.assertFalse(booleanList.remove(1));
+        assertTrue(booleanList.remove(0));
+        assertFalse(booleanList.remove(1));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -163,18 +166,18 @@ public class BoxedMutableBooleanListTest
     public void indexOf()
     {
         BoxedMutableBooleanList booleanList = this.classUnderTest();
-        Assert.assertEquals(0, booleanList.indexOf(Boolean.TRUE));
-        Assert.assertEquals(-1, booleanList.indexOf(Boolean.FALSE));
-        Assert.assertEquals(-1, booleanList.indexOf("String"));
+        assertEquals(0, booleanList.indexOf(Boolean.TRUE));
+        assertEquals(-1, booleanList.indexOf(Boolean.FALSE));
+        assertEquals(-1, booleanList.indexOf("String"));
     }
 
     @Test
     public void lastIndexOf()
     {
         BoxedMutableBooleanList booleanList = this.classUnderTest();
-        Assert.assertEquals(1, booleanList.lastIndexOf(Boolean.TRUE));
-        Assert.assertEquals(-1, booleanList.lastIndexOf(Boolean.FALSE));
-        Assert.assertEquals(-1, booleanList.lastIndexOf("String"));
+        assertEquals(1, booleanList.lastIndexOf(Boolean.TRUE));
+        assertEquals(-1, booleanList.lastIndexOf(Boolean.FALSE));
+        assertEquals(-1, booleanList.lastIndexOf("String"));
     }
 
     @Test(expected = UnsupportedOperationException.class)

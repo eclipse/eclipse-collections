@@ -12,9 +12,10 @@ package org.eclipse.collections.impl.set.mutable;
 
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class SetLogicTest
 {
@@ -32,7 +33,7 @@ public class SetLogicTest
     public void inOnlyInAMutable()
     {
         MutableSet<Integer> onlyInA = this.setA.reject(Predicates.in(this.setB), UnifiedSet.newSet());
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2), onlyInA);
+        assertEquals(UnifiedSet.newSetWith(1, 2), onlyInA);
     }
 
     @Test
@@ -40,13 +41,13 @@ public class SetLogicTest
     {
         MutableSet<Integer> onlyInA = UnifiedSet.newSet(this.setA);
         onlyInA.removeAll(this.setB);
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2), onlyInA);
+        assertEquals(UnifiedSet.newSetWith(1, 2), onlyInA);
     }
 
     @Test
     public void inBothAAndBMutable()
     {
-        Assert.assertEquals(UnifiedSet.newSetWith(3, 4), this.setA.select(Predicates.in(this.setB)));
+        assertEquals(UnifiedSet.newSetWith(3, 4), this.setA.select(Predicates.in(this.setB)));
     }
 
     @Test
@@ -55,6 +56,6 @@ public class SetLogicTest
         MutableSet<Integer> nonOverlappingSet = UnifiedSet.newSet();
         this.setA.select(Predicates.notIn(this.setB), nonOverlappingSet);
         this.setB.select(Predicates.notIn(this.setA), nonOverlappingSet);
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 5, 6), nonOverlappingSet);
+        assertEquals(UnifiedSet.newSetWith(1, 2, 5, 6), nonOverlappingSet);
     }
 }

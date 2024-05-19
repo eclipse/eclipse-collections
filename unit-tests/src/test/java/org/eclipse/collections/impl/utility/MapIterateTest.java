@@ -58,8 +58,14 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class MapIterateTest
 {
@@ -67,18 +73,18 @@ public class MapIterateTest
     public void occurrencesOf()
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
-        Assert.assertEquals(0, MapIterate.occurrencesOf(map, -1));
-        Assert.assertEquals(1, MapIterate.occurrencesOf(map, 1));
-        Assert.assertEquals(1, MapIterate.occurrencesOf(map, 2));
+        assertEquals(0, MapIterate.occurrencesOf(map, -1));
+        assertEquals(1, MapIterate.occurrencesOf(map, 1));
+        assertEquals(1, MapIterate.occurrencesOf(map, 2));
     }
 
     @Test
     public void occurrencesOfAttribute()
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
-        Assert.assertEquals(0, MapIterate.occurrencesOfAttribute(map, String::valueOf, "-1"));
-        Assert.assertEquals(1, MapIterate.occurrencesOfAttribute(map, String::valueOf, "1"));
-        Assert.assertEquals(1, MapIterate.occurrencesOfAttribute(map, String::valueOf, "2"));
+        assertEquals(0, MapIterate.occurrencesOfAttribute(map, String::valueOf, "-1"));
+        assertEquals(1, MapIterate.occurrencesOfAttribute(map, String::valueOf, "1"));
+        assertEquals(1, MapIterate.occurrencesOfAttribute(map, String::valueOf, "2"));
     }
 
     @Test
@@ -98,7 +104,7 @@ public class MapIterateTest
     public void injectInto()
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
-        Assert.assertEquals(Integer.valueOf(1 + 2 + 3 + 4 + 5), MapIterate.injectInto(0, map, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(1 + 2 + 3 + 4 + 5), MapIterate.injectInto(0, map, AddFunction.INTEGER));
     }
 
     @Test
@@ -168,7 +174,7 @@ public class MapIterateTest
         MutableMap<String, Integer> integers = this.getIntegerMap();
         MutableList<Integer> list = MapIterate.toSortedList(integers, Collections.reverseOrder());
         MutableList<Integer> expected = FastList.newList(integers.values()).sortThis(Collections.reverseOrder());
-        Assert.assertEquals(expected, list);
+        assertEquals(expected, list);
     }
 
     @Test
@@ -200,14 +206,14 @@ public class MapIterateTest
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
         Collection<Integer> results = MapIterate.select(map, Integer.class::isInstance, FastList.newList());
-        Assert.assertEquals(Bags.mutable.of(1, 2, 3, 4, 5), HashBag.newBag(results));
+        assertEquals(Bags.mutable.of(1, 2, 3, 4, 5), HashBag.newBag(results));
     }
 
     @Test
     public void count()
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
-        Assert.assertEquals(5, MapIterate.count(map, Integer.class::isInstance));
+        assertEquals(5, MapIterate.count(map, Integer.class::isInstance));
     }
 
     @Test
@@ -228,7 +234,7 @@ public class MapIterateTest
         MapIterate.forEachValue(new HashMap<>(map), CollectionAddProcedure.on(list));
         MapIterate.forEachValue(new HashMap<>(), CollectionAddProcedure.on(list));
         Verify.assertSize(10, list);
-        Assert.assertEquals(30, list.injectInto(0, AddFunction.INTEGER_TO_INT));
+        assertEquals(30, list.injectInto(0, AddFunction.INTEGER_TO_INT));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -265,7 +271,7 @@ public class MapIterateTest
         MapIterate.forEachKey(map, CollectionAddProcedure.on(bag));
         MapIterate.forEachKey(new HashMap<>(map), CollectionAddProcedure.on(bag));
         MapIterate.forEachKey(new HashMap<>(), CollectionAddProcedure.on(bag));
-        Assert.assertEquals(HashBag.newBagWith("1", "1", "2", "2", "3", "3", "4", "4", "5", "5"), bag);
+        assertEquals(HashBag.newBagWith("1", "1", "2", "2", "3", "3", "4", "4", "5", "5"), bag);
     }
 
     @Test
@@ -294,12 +300,12 @@ public class MapIterateTest
         String value = "value";
         String value1 = MapIterate.getIfAbsentPut(unifiedMap, "key", () -> value);
         String value2 = MapIterate.getIfAbsentPut(unifiedMap, "key", () -> value);
-        Assert.assertEquals("value", value1);
-        Assert.assertSame(value1, value2);
+        assertEquals("value", value1);
+        assertSame(value1, value2);
         String value3 = MapIterate.getIfAbsentPut(hashMap, "key", () -> value);
         String value4 = MapIterate.getIfAbsentPut(hashMap, "key", () -> value);
-        Assert.assertEquals("value", value3);
-        Assert.assertSame(value3, value4);
+        assertEquals("value", value3);
+        assertSame(value3, value4);
     }
 
     @Test
@@ -309,7 +315,7 @@ public class MapIterateTest
         Function<String, String> function = object -> "value:" + object;
         String value1 = MapIterate.getIfAbsentPutWith(map, "key", function, "1");
         String value2 = MapIterate.getIfAbsentPutWith(map, "key", function, "2");
-        Assert.assertSame(value1, value2);
+        assertSame(value1, value2);
     }
 
     @Test
@@ -317,7 +323,7 @@ public class MapIterateTest
     {
         MutableMap<String, String> map = UnifiedMap.newMap();
         map.put("nullValueKey", null);
-        Assert.assertNull(MapIterate.getIfAbsentPut(map, "nullValueKey", () -> "aValue"));
+        assertNull(MapIterate.getIfAbsentPut(map, "nullValueKey", () -> "aValue"));
     }
 
     @SuppressWarnings("StringOperationCanBeSimplified")
@@ -329,21 +335,21 @@ public class MapIterateTest
         String value1 = MapIterate.getIfAbsent(unifiedMap, "key", () -> new String("value"));
         String value2 = MapIterate.getIfAbsent(unifiedMap, "key", () -> new String("value"));
         String value3 = MapIterate.getIfAbsent(hashMap, "key", () -> new String("value"));
-        Assert.assertEquals("value", value1);
-        Assert.assertEquals("value", value2);
-        Assert.assertEquals("value", value3);
-        Assert.assertNotSame(value1, value2);
-        Assert.assertNotSame(value1, value3);
-        Assert.assertEquals("key1Value", MapIterate.getIfAbsent(hashMap, "key1", () -> "value"));
-        Assert.assertEquals("key1Value", MapIterate.getIfAbsent(unifiedMap, "key1", () -> "value"));
+        assertEquals("value", value1);
+        assertEquals("value", value2);
+        assertEquals("value", value3);
+        assertNotSame(value1, value2);
+        assertNotSame(value1, value3);
+        assertEquals("key1Value", MapIterate.getIfAbsent(hashMap, "key1", () -> "value"));
+        assertEquals("key1Value", MapIterate.getIfAbsent(unifiedMap, "key1", () -> "value"));
     }
 
     @Test
     public void getIfAbsentDefault()
     {
         MutableMap<String, String> map = UnifiedMap.<String, String>newMap().withKeysValues("key", "value");
-        Assert.assertEquals("value", MapIterate.getIfAbsentDefault(map, "key", "defaultValue1"));
-        Assert.assertEquals("defaultValue2", MapIterate.getIfAbsentDefault(map, "noKey", "defaultValue2"));
+        assertEquals("value", MapIterate.getIfAbsentDefault(map, "key", "defaultValue1"));
+        assertEquals("defaultValue2", MapIterate.getIfAbsentDefault(map, "noKey", "defaultValue2"));
         Verify.assertNotContainsKey("noKey", map);
         Verify.assertSize(1, map);
     }
@@ -356,10 +362,10 @@ public class MapIterateTest
         Map<String, Integer> hashMap = new HashMap<>(unifiedMap);
         Function<Integer, Integer> function = Functions.getPassThru();
         Integer ifAbsentValue = Integer.valueOf(6);
-        Assert.assertEquals(ifAbsentValue, MapIterate.getIfAbsentWith(unifiedMap, "six", function, ifAbsentValue));
-        Assert.assertEquals(Integer.valueOf(5), MapIterate.getIfAbsentWith(unifiedMap, "5", function, ifAbsentValue));
-        Assert.assertEquals(ifAbsentValue, MapIterate.getIfAbsentWith(hashMap, "six", function, ifAbsentValue));
-        Assert.assertEquals(Integer.valueOf(5), MapIterate.getIfAbsentWith(hashMap, "5", function, ifAbsentValue));
+        assertEquals(ifAbsentValue, MapIterate.getIfAbsentWith(unifiedMap, "six", function, ifAbsentValue));
+        assertEquals(Integer.valueOf(5), MapIterate.getIfAbsentWith(unifiedMap, "5", function, ifAbsentValue));
+        assertEquals(ifAbsentValue, MapIterate.getIfAbsentWith(hashMap, "six", function, ifAbsentValue));
+        assertEquals(Integer.valueOf(5), MapIterate.getIfAbsentWith(hashMap, "5", function, ifAbsentValue));
     }
 
     @Test
@@ -367,9 +373,9 @@ public class MapIterateTest
     {
         MutableMap<String, String> map = UnifiedMap.newWithKeysValues("key", null);
         String value = "value";
-        Assert.assertNull(MapIterate.getIfAbsent(map, "key", () -> value));
-        Assert.assertNull(MapIterate.getIfAbsentPut(map, "key", () -> value));
-        Assert.assertEquals("result", MapIterate.ifPresentApply(map, "key", object -> "result"));
+        assertNull(MapIterate.getIfAbsent(map, "key", () -> value));
+        assertNull(MapIterate.getIfAbsentPut(map, "key", () -> value));
+        assertEquals("result", MapIterate.ifPresentApply(map, "key", object -> "result"));
     }
 
     @Test
@@ -377,8 +383,8 @@ public class MapIterateTest
     {
         MutableMap<String, String> unifiedMap = UnifiedMap.newWithKeysValues("testKey", "testValue");
         Map<String, String> hashMap = new HashMap<>(unifiedMap);
-        Assert.assertEquals("TESTVALUE", MapIterate.ifPresentApply(unifiedMap, "testKey", String::toUpperCase));
-        Assert.assertEquals("TESTVALUE", MapIterate.ifPresentApply(hashMap, "testKey", String::toUpperCase));
+        assertEquals("TESTVALUE", MapIterate.ifPresentApply(unifiedMap, "testKey", String::toUpperCase));
+        assertEquals("TESTVALUE", MapIterate.ifPresentApply(hashMap, "testKey", String::toUpperCase));
     }
 
     @Test
@@ -413,7 +419,7 @@ public class MapIterateTest
                 "1", "2",
                 "2", "1",
                 "3", "3");
-        Assert.assertEquals(FastList.newListWith("1"), MapIterate.select(map, "1"::equals));
+        assertEquals(FastList.newListWith("1"), MapIterate.select(map, "1"::equals));
     }
 
     @Test
@@ -441,7 +447,7 @@ public class MapIterateTest
                 "2", "1",
                 "3", "3");
         MutableMap<String, String> resultMap = MapIterate.selectMapOnKey(map, "1"::equals);
-        Assert.assertEquals(UnifiedMap.newWithKeysValues("1", "2"), resultMap);
+        assertEquals(UnifiedMap.newWithKeysValues("1", "2"), resultMap);
     }
 
     @Test
@@ -452,7 +458,7 @@ public class MapIterateTest
                 "2", "1",
                 "3", "3");
         MutableMap<String, String> resultMap = MapIterate.selectMapOnValue(map, "1"::equals);
-        Assert.assertEquals(UnifiedMap.newWithKeysValues("2", "1"), resultMap);
+        assertEquals(UnifiedMap.newWithKeysValues("2", "1"), resultMap);
     }
 
     @Test
@@ -463,9 +469,9 @@ public class MapIterateTest
                 "2", "1",
                 "3", "3");
         String resultFound = MapIterate.detect(map, "1"::equals);
-        Assert.assertEquals("1", resultFound);
+        assertEquals("1", resultFound);
         String resultNotFound = MapIterate.detect(map, "4"::equals);
-        Assert.assertNull(resultNotFound);
+        assertNull(resultNotFound);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -482,9 +488,9 @@ public class MapIterateTest
                 "2", "1",
                 "3", "3");
         String resultNotFound = MapIterate.detectIfNone(map, "4"::equals, "0");
-        Assert.assertEquals("0", resultNotFound);
+        assertEquals("0", resultNotFound);
         String resultFound = MapIterate.detectIfNone(map, "1"::equals, "0");
-        Assert.assertEquals("1", resultFound);
+        assertEquals("1", resultFound);
     }
 
     @Test
@@ -494,9 +500,9 @@ public class MapIterateTest
                 "1", "2",
                 "2", "1",
                 "3", "3");
-        Assert.assertTrue(MapIterate.anySatisfy(map, "1"::equals));
-        Assert.assertTrue(MapIterate.anySatisfy(map, "3"::equals));
-        Assert.assertFalse(MapIterate.anySatisfy(map, "4"::equals));
+        assertTrue(MapIterate.anySatisfy(map, "1"::equals));
+        assertTrue(MapIterate.anySatisfy(map, "3"::equals));
+        assertFalse(MapIterate.anySatisfy(map, "4"::equals));
     }
 
     @Test
@@ -506,9 +512,9 @@ public class MapIterateTest
                 "1", "2",
                 "2", "1",
                 "3", "3");
-        Assert.assertFalse(MapIterate.allSatisfy(map, Predicates.notEqual("1")));
-        Assert.assertFalse(MapIterate.allSatisfy(map, Predicates.notEqual("3")));
-        Assert.assertTrue(MapIterate.anySatisfy(map, Predicates.notEqual("4")));
+        assertFalse(MapIterate.allSatisfy(map, Predicates.notEqual("1")));
+        assertFalse(MapIterate.allSatisfy(map, Predicates.notEqual("3")));
+        assertTrue(MapIterate.anySatisfy(map, Predicates.notEqual("4")));
     }
 
     @Test
@@ -518,25 +524,25 @@ public class MapIterateTest
                 "1", "2",
                 "2", "1",
                 "3", "3");
-        Assert.assertFalse(MapIterate.noneSatisfy(map, "1"::equals));
-        Assert.assertFalse(MapIterate.noneSatisfy(map, "3"::equals));
-        Assert.assertTrue(MapIterate.noneSatisfy(map, "4"::equals));
+        assertFalse(MapIterate.noneSatisfy(map, "1"::equals));
+        assertFalse(MapIterate.noneSatisfy(map, "3"::equals));
+        assertTrue(MapIterate.noneSatisfy(map, "4"::equals));
     }
 
     @Test
     public void isEmpty()
     {
-        Assert.assertTrue(MapIterate.isEmpty(null));
-        Assert.assertTrue(MapIterate.isEmpty(UnifiedMap.newMap()));
-        Assert.assertFalse(MapIterate.isEmpty(Maps.fixedSize.of("1", "1")));
+        assertTrue(MapIterate.isEmpty(null));
+        assertTrue(MapIterate.isEmpty(UnifiedMap.newMap()));
+        assertFalse(MapIterate.isEmpty(Maps.fixedSize.of("1", "1")));
     }
 
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(MapIterate.notEmpty(null));
-        Assert.assertFalse(MapIterate.notEmpty(UnifiedMap.newMap()));
-        Assert.assertTrue(MapIterate.notEmpty(Maps.fixedSize.of("1", "1")));
+        assertFalse(MapIterate.notEmpty(null));
+        assertFalse(MapIterate.notEmpty(UnifiedMap.newMap()));
+        assertTrue(MapIterate.notEmpty(Maps.fixedSize.of("1", "1")));
     }
 
     @Test
@@ -545,7 +551,7 @@ public class MapIterateTest
         MutableList<Integer> result = MapIterate.reject(
                 newLittleMap(),
                 Predicates.greaterThanOrEqualTo(2));
-        Assert.assertEquals(FastList.newListWith(1), result);
+        assertEquals(FastList.newListWith(1), result);
     }
 
     private static MutableMap<Character, Integer> newLittleMap()
@@ -558,7 +564,7 @@ public class MapIterateTest
     {
         MutableList<Character> target = Lists.mutable.of();
         MapIterate.addAllKeysTo(newLittleMap(), target);
-        Assert.assertEquals(FastList.newListWith('a', 'b').toBag(), target.toBag());
+        assertEquals(FastList.newListWith('a', 'b').toBag(), target.toBag());
     }
 
     @Test
@@ -566,21 +572,21 @@ public class MapIterateTest
     {
         MutableList<Integer> target = Lists.mutable.of();
         MapIterate.addAllValuesTo(newLittleMap(), target);
-        Assert.assertEquals(FastList.newListWith(1, 2).toBag(), target.toBag());
+        assertEquals(FastList.newListWith(1, 2).toBag(), target.toBag());
     }
 
     @Test
     public void collect()
     {
         MutableList<String> result = MapIterate.collect(newLittleMap(), Functions.getToString());
-        Assert.assertEquals(FastList.newListWith("1", "2").toBag(), result.toBag());
+        assertEquals(FastList.newListWith("1", "2").toBag(), result.toBag());
     }
 
     @Test
     public void collectBoolean()
     {
         MutableBooleanCollection result = MapIterate.collectBoolean(MapIterateTest.newLittleMap(), PrimitiveFunctions.integerIsPositive());
-        Assert.assertEquals(BooleanHashBag.newBagWith(true, true), result.toBag());
+        assertEquals(BooleanHashBag.newBagWith(true, true), result.toBag());
     }
 
     @Test
@@ -588,15 +594,15 @@ public class MapIterateTest
     {
         BooleanHashBag target = new BooleanHashBag();
         BooleanHashBag result = MapIterate.collectBoolean(MapIterateTest.newLittleMap(), PrimitiveFunctions.integerIsPositive(), target);
-        Assert.assertEquals(BooleanHashBag.newBagWith(true, true), result.toBag());
-        Assert.assertSame("Target sent as parameter was not returned as result", target, result);
+        assertEquals(BooleanHashBag.newBagWith(true, true), result.toBag());
+        assertSame("Target sent as parameter was not returned as result", target, result);
     }
 
     @Test
     public void collectByte()
     {
         MutableByteCollection result = MapIterate.collectByte(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToByte());
-        Assert.assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2), result.toBag());
+        assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2), result.toBag());
     }
 
     @Test
@@ -604,15 +610,15 @@ public class MapIterateTest
     {
         ByteHashBag target = new ByteHashBag();
         ByteHashBag result = MapIterate.collectByte(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToByte(), target);
-        Assert.assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2), result.toBag());
-        Assert.assertSame("Target sent as parameter was not returned as result", target, result);
+        assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2), result.toBag());
+        assertSame("Target sent as parameter was not returned as result", target, result);
     }
 
     @Test
     public void collectChar()
     {
         MutableCharCollection result = MapIterate.collectChar(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToChar());
-        Assert.assertEquals(CharHashBag.newBagWith((char) 1, (char) 2), result.toBag());
+        assertEquals(CharHashBag.newBagWith((char) 1, (char) 2), result.toBag());
     }
 
     @Test
@@ -620,15 +626,15 @@ public class MapIterateTest
     {
         CharHashBag target = new CharHashBag();
         CharHashBag result = MapIterate.collectChar(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToChar(), target);
-        Assert.assertEquals(CharHashBag.newBagWith((char) 1, (char) 2), result.toBag());
-        Assert.assertSame("Target sent as parameter was not returned as result", target, result);
+        assertEquals(CharHashBag.newBagWith((char) 1, (char) 2), result.toBag());
+        assertSame("Target sent as parameter was not returned as result", target, result);
     }
 
     @Test
     public void collectDouble()
     {
         MutableDoubleCollection result = MapIterate.collectDouble(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToDouble());
-        Assert.assertEquals(DoubleHashBag.newBagWith(1, 2), result.toBag());
+        assertEquals(DoubleHashBag.newBagWith(1, 2), result.toBag());
     }
 
     @Test
@@ -636,15 +642,15 @@ public class MapIterateTest
     {
         DoubleHashBag target = new DoubleHashBag();
         DoubleHashBag result = MapIterate.collectDouble(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToDouble(), target);
-        Assert.assertEquals(DoubleHashBag.newBagWith(1, 2), result.toBag());
-        Assert.assertSame("Target sent as parameter was not returned as result", target, result);
+        assertEquals(DoubleHashBag.newBagWith(1, 2), result.toBag());
+        assertSame("Target sent as parameter was not returned as result", target, result);
     }
 
     @Test
     public void collectFloat()
     {
         MutableFloatCollection result = MapIterate.collectFloat(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToFloat());
-        Assert.assertEquals(FloatHashBag.newBagWith(1, 2), result.toBag());
+        assertEquals(FloatHashBag.newBagWith(1, 2), result.toBag());
     }
 
     @Test
@@ -652,15 +658,15 @@ public class MapIterateTest
     {
         FloatHashBag target = new FloatHashBag();
         FloatHashBag result = MapIterate.collectFloat(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToFloat(), target);
-        Assert.assertEquals(FloatHashBag.newBagWith(1, 2), result.toBag());
-        Assert.assertSame("Target sent as parameter was not returned as result", target, result);
+        assertEquals(FloatHashBag.newBagWith(1, 2), result.toBag());
+        assertSame("Target sent as parameter was not returned as result", target, result);
     }
 
     @Test
     public void collectInt()
     {
         MutableIntCollection result = MapIterate.collectInt(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToInt());
-        Assert.assertEquals(IntHashBag.newBagWith(1, 2), result.toBag());
+        assertEquals(IntHashBag.newBagWith(1, 2), result.toBag());
     }
 
     @Test
@@ -668,15 +674,15 @@ public class MapIterateTest
     {
         IntHashBag target = new IntHashBag();
         IntHashBag result = MapIterate.collectInt(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToInt(), target);
-        Assert.assertEquals(IntHashBag.newBagWith(1, 2), result.toBag());
-        Assert.assertSame("Target sent as parameter was not returned as result", target, result);
+        assertEquals(IntHashBag.newBagWith(1, 2), result.toBag());
+        assertSame("Target sent as parameter was not returned as result", target, result);
     }
 
     @Test
     public void collectLong()
     {
         MutableLongCollection result = MapIterate.collectLong(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToLong());
-        Assert.assertEquals(LongHashBag.newBagWith(1L, 2L), result.toBag());
+        assertEquals(LongHashBag.newBagWith(1L, 2L), result.toBag());
     }
 
     @Test
@@ -684,15 +690,15 @@ public class MapIterateTest
     {
         LongHashBag target = new LongHashBag();
         LongHashBag result = MapIterate.collectLong(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToLong(), target);
-        Assert.assertEquals(LongHashBag.newBagWith(1L, 2L), result.toBag());
-        Assert.assertSame("Target sent as parameter was not returned as result", target, result);
+        assertEquals(LongHashBag.newBagWith(1L, 2L), result.toBag());
+        assertSame("Target sent as parameter was not returned as result", target, result);
     }
 
     @Test
     public void collectShort()
     {
         MutableShortCollection result = MapIterate.collectShort(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToShort());
-        Assert.assertEquals(ShortHashBag.newBagWith((short) 1, (short) 2), result.toBag());
+        assertEquals(ShortHashBag.newBagWith((short) 1, (short) 2), result.toBag());
     }
 
     @Test
@@ -700,15 +706,15 @@ public class MapIterateTest
     {
         ShortHashBag target = new ShortHashBag();
         MutableShortCollection result = MapIterate.collectShort(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToShort(), target);
-        Assert.assertEquals(ShortHashBag.newBagWith((short) 1, (short) 2), result.toBag());
-        Assert.assertSame("Target sent as parameter was not returned as result", target, result);
+        assertEquals(ShortHashBag.newBagWith((short) 1, (short) 2), result.toBag());
+        assertSame("Target sent as parameter was not returned as result", target, result);
     }
 
     @Test
     public void collectValues()
     {
         MutableMap<Character, String> result = MapIterate.collectValues(newLittleMap(), (argument1, argument2) -> argument2.toString());
-        Assert.assertEquals(UnifiedMap.newWithKeysValues('a', "1", 'b', "2").toBag(), result.toBag());
+        assertEquals(UnifiedMap.newWithKeysValues('a', "1", 'b', "2").toBag(), result.toBag());
     }
 
     @Test
@@ -716,8 +722,8 @@ public class MapIterateTest
     {
         MutableList<String> target = Lists.mutable.of();
         MutableList<String> result = MapIterate.collect(newLittleMap(), String::valueOf, target);
-        Assert.assertEquals(FastList.newListWith("1", "2").toBag(), result.toBag());
-        Assert.assertSame(target, result);
+        assertEquals(FastList.newListWith("1", "2").toBag(), result.toBag());
+        assertSame(target, result);
     }
 
     @Test

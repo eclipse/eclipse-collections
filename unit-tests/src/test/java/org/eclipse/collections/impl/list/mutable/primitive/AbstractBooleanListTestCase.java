@@ -24,8 +24,14 @@ import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.math.MutableInteger;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Abstract JUnit test for {@link MutableBooleanList}.
@@ -54,9 +60,9 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void get()
     {
         MutableBooleanList list = this.classUnderTest();
-        Assert.assertTrue(list.get(0));
-        Assert.assertFalse(list.get(1));
-        Assert.assertTrue(list.get(2));
+        assertTrue(list.get(0));
+        assertFalse(list.get(1));
+        assertTrue(list.get(2));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -81,8 +87,8 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void getFirst()
     {
         MutableBooleanList singleItemList = this.newWith(true);
-        Assert.assertTrue(singleItemList.getFirst());
-        Assert.assertTrue(this.classUnderTest().getFirst());
+        assertTrue(singleItemList.getFirst());
+        assertTrue(this.classUnderTest().getFirst());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -95,9 +101,9 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void getLast()
     {
         MutableBooleanList singleItemList = this.newWith(true);
-        Assert.assertTrue(singleItemList.getLast());
-        Assert.assertTrue(this.classUnderTest().getLast());
-        Assert.assertFalse(this.newWith(true, true, false).getLast());
+        assertTrue(singleItemList.getLast());
+        assertTrue(this.classUnderTest().getLast());
+        assertFalse(this.newWith(true, true, false).getLast());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -116,31 +122,31 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void indexOf()
     {
         MutableBooleanList arrayList = this.newWith(true, false, true);
-        Assert.assertEquals(0L, arrayList.indexOf(true));
-        Assert.assertEquals(1L, arrayList.indexOf(false));
-        Assert.assertEquals(-1L, this.newWith(false, false).indexOf(true));
+        assertEquals(0L, arrayList.indexOf(true));
+        assertEquals(1L, arrayList.indexOf(false));
+        assertEquals(-1L, this.newWith(false, false).indexOf(true));
         MutableBooleanList emptyList = this.newWith();
-        Assert.assertEquals(-1L, emptyList.indexOf(true));
-        Assert.assertEquals(-1L, emptyList.indexOf(false));
+        assertEquals(-1L, emptyList.indexOf(true));
+        assertEquals(-1L, emptyList.indexOf(false));
     }
 
     @Test
     public void boxed()
     {
         MutableBooleanList list = this.newWith(true, false, true);
-        Assert.assertEquals(Lists.mutable.of(true, false, true), list.boxed());
+        assertEquals(Lists.mutable.of(true, false, true), list.boxed());
     }
 
     @Test
     public void lastIndexOf()
     {
         MutableBooleanList list = this.newWith(true, false, true);
-        Assert.assertEquals(2L, list.lastIndexOf(true));
-        Assert.assertEquals(1L, list.lastIndexOf(false));
-        Assert.assertEquals(-1L, this.newWith(false, false).lastIndexOf(true));
+        assertEquals(2L, list.lastIndexOf(true));
+        assertEquals(1L, list.lastIndexOf(false));
+        assertEquals(-1L, this.newWith(false, false).lastIndexOf(true));
         MutableBooleanList emptyList = this.newWith();
-        Assert.assertEquals(-1L, emptyList.lastIndexOf(true));
-        Assert.assertEquals(-1L, emptyList.lastIndexOf(false));
+        assertEquals(-1L, emptyList.lastIndexOf(true));
+        assertEquals(-1L, emptyList.lastIndexOf(false));
     }
 
     @Test
@@ -148,12 +154,12 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     {
         MutableBooleanList emptyList = this.newWith();
         emptyList.addAtIndex(0, false);
-        Assert.assertEquals(BooleanArrayList.newListWith(false), emptyList);
+        assertEquals(BooleanArrayList.newListWith(false), emptyList);
         MutableBooleanList list = this.classUnderTest();
         list.addAtIndex(3, true);
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, true, true), list);
+        assertEquals(BooleanArrayList.newListWith(true, false, true, true), list);
         list.addAtIndex(2, false);
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, false, true, true), list);
+        assertEquals(BooleanArrayList.newListWith(true, false, false, true, true), list);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -174,10 +180,10 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     {
         super.addAllArray();
         MutableBooleanList list = this.classUnderTest();
-        Assert.assertFalse(list.addAllAtIndex(1));
-        Assert.assertTrue(list.addAll(false, true, false));
-        Assert.assertTrue(list.addAllAtIndex(4, true, true));
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, true, false, true, true, true, false), list);
+        assertFalse(list.addAllAtIndex(1));
+        assertTrue(list.addAll(false, true, false));
+        assertTrue(list.addAllAtIndex(4, true, true));
+        assertEquals(BooleanArrayList.newListWith(true, false, true, false, true, true, true, false), list);
     }
 
     @Override
@@ -186,10 +192,10 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     {
         super.addAllIterable();
         MutableBooleanList list = this.classUnderTest();
-        Assert.assertFalse(list.addAllAtIndex(1, new BooleanArrayList()));
-        Assert.assertTrue(list.addAll(BooleanArrayList.newListWith(false, true, false)));
-        Assert.assertTrue(list.addAllAtIndex(4, BooleanArrayList.newListWith(true, true)));
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, true, false, true, true, true, false), list);
+        assertFalse(list.addAllAtIndex(1, new BooleanArrayList()));
+        assertTrue(list.addAll(BooleanArrayList.newListWith(false, true, false)));
+        assertTrue(list.addAllAtIndex(4, BooleanArrayList.newListWith(true, true)));
+        assertEquals(BooleanArrayList.newListWith(true, false, true, false, true, true, true, false), list);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -215,25 +221,25 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void remove()
     {
         super.remove();
-        Assert.assertFalse(this.newWith(true, true).remove(false));
+        assertFalse(this.newWith(true, true).remove(false));
         MutableBooleanList list = this.classUnderTest();
-        Assert.assertTrue(list.remove(true));
-        Assert.assertEquals(BooleanArrayList.newListWith(false, true), list);
+        assertTrue(list.remove(true));
+        assertEquals(BooleanArrayList.newListWith(false, true), list);
     }
 
     @Test
     public void removeIf()
     {
-        Assert.assertFalse(this.newWith(true, true).removeIf(b -> !b));
+        assertFalse(this.newWith(true, true).removeIf(b -> !b));
 
         MutableBooleanList list1 = this.classUnderTest();
-        Assert.assertTrue(list1.removeIf(b -> b));
-        Assert.assertEquals(BooleanArrayList.newListWith(false), list1);
+        assertTrue(list1.removeIf(b -> b));
+        assertEquals(BooleanArrayList.newListWith(false), list1);
 
         MutableBooleanList list2 = this.classUnderTest();
-        Assert.assertTrue(list2.removeIf(b -> !b));
+        assertTrue(list2.removeIf(b -> !b));
 
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true), list2);
+        assertEquals(BooleanArrayList.newListWith(true, true), list2);
     }
 
     @Test
@@ -241,11 +247,11 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     {
         MutableBooleanList list = this.classUnderTest();
         list.removeAtIndex(1);
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true), list);
+        assertEquals(BooleanArrayList.newListWith(true, true), list);
         list.removeAtIndex(1);
-        Assert.assertEquals(BooleanArrayList.newListWith(true), list);
+        assertEquals(BooleanArrayList.newListWith(true), list);
         list.removeAtIndex(0);
-        Assert.assertEquals(BooleanArrayList.newListWith(), list);
+        assertEquals(BooleanArrayList.newListWith(), list);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -265,9 +271,9 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     {
         MutableBooleanList list = this.classUnderTest();
         list.set(1, false);
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, true), list);
+        assertEquals(BooleanArrayList.newListWith(true, false, true), list);
         list.set(1, true);
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, true), list);
+        assertEquals(BooleanArrayList.newListWith(true, true, true), list);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -281,13 +287,13 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void booleanIterator()
     {
         BooleanIterator iterator = this.classUnderTest().booleanIterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertTrue(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertFalse(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertTrue(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertTrue(iterator.hasNext());
+        assertTrue(iterator.next());
+        assertTrue(iterator.hasNext());
+        assertFalse(iterator.next());
+        assertTrue(iterator.hasNext());
+        assertTrue(iterator.next());
+        assertFalse(iterator.hasNext());
     }
 
     @Override
@@ -300,8 +306,8 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         sum[1] = "";
         this.classUnderTest().forEach(each -> sum[0] += each + " ");
         this.newWith().forEach(each -> sum[1] += each);
-        Assert.assertEquals("true false true ", sum[0]);
-        Assert.assertEquals("", sum[1]);
+        assertEquals("true false true ", sum[0]);
+        assertEquals("", sum[1]);
     }
 
     @Override
@@ -318,39 +324,39 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     {
         super.toArray();
         MutableBooleanList list = this.classUnderTest();
-        Assert.assertEquals(3L, (long) list.toArray().length);
-        Assert.assertTrue(list.toArray()[0]);
-        Assert.assertFalse(list.toArray()[1]);
-        Assert.assertTrue(list.toArray()[2]);
+        assertEquals(3L, (long) list.toArray().length);
+        assertTrue(list.toArray()[0]);
+        assertFalse(list.toArray()[1]);
+        assertTrue(list.toArray()[2]);
     }
 
     @Test
     public void reverseThis()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, false), this.newWith(false, false, true, true).reverseThis());
+        assertEquals(BooleanArrayList.newListWith(true, true, false, false), this.newWith(false, false, true, true).reverseThis());
         MutableBooleanList originalList = this.newWith(true, true, false, false);
-        Assert.assertSame(originalList, originalList.reverseThis());
+        assertSame(originalList, originalList.reverseThis());
         MutableBooleanList originalList2 = this.newWith(true, false, false);
         originalList2.removeAtIndex(2);
-        Assert.assertEquals(originalList2, BooleanArrayList.newListWith(true, false));
-        Assert.assertEquals(originalList2.reverseThis(), BooleanArrayList.newListWith(false, true));
+        assertEquals(originalList2, BooleanArrayList.newListWith(true, false));
+        assertEquals(originalList2.reverseThis(), BooleanArrayList.newListWith(false, true));
     }
 
     @Test
     public void toReversed()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, false), this.newWith(false, false, true, true).toReversed());
+        assertEquals(BooleanArrayList.newListWith(true, true, false, false), this.newWith(false, false, true, true).toReversed());
         MutableBooleanList originalList = this.newWith(true, true, false, false);
-        Assert.assertNotSame(originalList, originalList.toReversed());
+        assertNotSame(originalList, originalList.toReversed());
     }
 
     @Test
     public void distinct()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false), this.newWith(true, true, false, false).distinct());
-        Assert.assertEquals(BooleanArrayList.newListWith(false, true), this.newWith(false, false, true, true).distinct());
-        Assert.assertEquals(BooleanArrayList.newListWith(false), this.newWith(false).distinct());
-        Assert.assertEquals(BooleanArrayList.newListWith(true), this.newWith(true).distinct());
+        assertEquals(BooleanArrayList.newListWith(true, false), this.newWith(true, true, false, false).distinct());
+        assertEquals(BooleanArrayList.newListWith(false, true), this.newWith(false, false, true, true).distinct());
+        assertEquals(BooleanArrayList.newListWith(false), this.newWith(false).distinct());
+        assertEquals(BooleanArrayList.newListWith(true), this.newWith(true).distinct());
     }
 
     @Test
@@ -358,7 +364,7 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     {
         MutableBooleanList list = this.newWith(true, false, true);
         MutableInteger result = list.injectIntoWithIndex(new MutableInteger(0), (object, value, index) -> object.add((value ? 1 : 0) + index));
-        Assert.assertEquals(new MutableInteger(5), result);
+        assertEquals(new MutableInteger(5), result);
     }
 
     @Test
@@ -369,8 +375,8 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         sum[1] = "";
         this.classUnderTest().forEachWithIndex((each, index) -> sum[0] += index + ":" + each);
         this.newWith().forEachWithIndex((each, index) -> sum[1] += index + ":" + each);
-        Assert.assertEquals("0:true1:false2:true", sum[0]);
-        Assert.assertEquals("", sum[1]);
+        assertEquals("0:true1:false2:true", sum[0]);
+        assertEquals("", sum[1]);
     }
 
     @Override
@@ -380,7 +386,7 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         super.testEquals();
         MutableBooleanList list1 = this.newWith(true, false, true, true);
         MutableBooleanList list2 = this.newWith(true, true, false, true);
-        Assert.assertNotEquals(list1, list2);
+        assertNotEquals(list1, list2);
     }
 
     @Override
@@ -388,8 +394,8 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void testToString()
     {
         super.testToString();
-        Assert.assertEquals("[true, false, true]", this.classUnderTest().toString());
-        Assert.assertEquals("[]", this.newWith().toString());
+        assertEquals("[true, false, true]", this.classUnderTest().toString());
+        assertEquals("[]", this.newWith().toString());
     }
 
     @Override
@@ -397,20 +403,20 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void makeString()
     {
         super.makeString();
-        Assert.assertEquals("true, false, true", this.classUnderTest().makeString());
-        Assert.assertEquals("true", this.newWith(true).makeString("/"));
-        Assert.assertEquals("true/false/true", this.classUnderTest().makeString("/"));
-        Assert.assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
-        Assert.assertEquals("", this.newWith().makeString());
+        assertEquals("true, false, true", this.classUnderTest().makeString());
+        assertEquals("true", this.newWith(true).makeString("/"));
+        assertEquals("true/false/true", this.classUnderTest().makeString("/"));
+        assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
+        assertEquals("", this.newWith().makeString());
     }
 
     @Test
     public void newWithNValues()
     {
-        Assert.assertEquals(this.newWith(true, true, true), BooleanArrayList.newWithNValues(3, true));
-        Assert.assertEquals(this.newWith(false, false), BooleanArrayList.newWithNValues(2, false));
-        Assert.assertEquals(this.newWith(), BooleanArrayList.newWithNValues(0, false));
-        Assert.assertEquals(this.newWith(), BooleanArrayList.newWithNValues(0, true));
+        assertEquals(this.newWith(true, true, true), BooleanArrayList.newWithNValues(3, true));
+        assertEquals(this.newWith(false, false), BooleanArrayList.newWithNValues(2, false));
+        assertEquals(this.newWith(), BooleanArrayList.newWithNValues(0, false));
+        assertEquals(this.newWith(), BooleanArrayList.newWithNValues(0, true));
     }
 
     @Test(expected = NegativeArraySizeException.class)
@@ -426,16 +432,16 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         super.appendString();
         StringBuilder appendable = new StringBuilder();
         this.newWith().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         StringBuilder appendable2 = new StringBuilder();
         this.classUnderTest().appendString(appendable2);
-        Assert.assertEquals("true, false, true", appendable2.toString());
+        assertEquals("true, false, true", appendable2.toString());
         StringBuilder appendable3 = new StringBuilder();
         this.classUnderTest().appendString(appendable3, "/");
-        Assert.assertEquals("true/false/true", appendable3.toString());
+        assertEquals("true/false/true", appendable3.toString());
         StringBuilder appendable4 = new StringBuilder();
         this.classUnderTest().appendString(appendable4, "[", ", ", "]");
-        Assert.assertEquals(this.classUnderTest().toString(), appendable4.toString());
+        assertEquals(this.classUnderTest().toString(), appendable4.toString());
     }
 
     @Override
@@ -443,14 +449,14 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void toList()
     {
         super.toList();
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, true), this.classUnderTest().toList());
+        assertEquals(BooleanArrayList.newListWith(true, false, true), this.classUnderTest().toList());
     }
 
     @Test
     public void toImmutable()
     {
         ImmutableBooleanList immutable = this.classUnderTest().toImmutable();
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, true), immutable);
+        assertEquals(BooleanArrayList.newListWith(true, false, true), immutable);
     }
 
     @Test
@@ -458,7 +464,7 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     {
         MutableBooleanList list = BooleanLists.mutable.empty();
         this.classUnderTest().tap(list::add);
-        Assert.assertEquals(this.classUnderTest(), list);
+        assertEquals(this.classUnderTest(), list);
     }
 
     @Test
@@ -467,8 +473,8 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         MutableList<BooleanIntPair> pairs =
                 this.classUnderTest().collectWithIndex(PrimitiveTuples::pair);
         MutableBooleanList list1 = pairs.collectBoolean(BooleanIntPair::getOne);
-        Assert.assertEquals(this.classUnderTest(), list1);
+        assertEquals(this.classUnderTest(), list1);
         MutableIntList list2 = pairs.collectInt(BooleanIntPair::getTwo);
-        Assert.assertEquals(IntInterval.zeroTo(this.classUnderTest().size() - 1), list2);
+        assertEquals(IntInterval.zeroTo(this.classUnderTest().size() - 1), list2);
     }
 }

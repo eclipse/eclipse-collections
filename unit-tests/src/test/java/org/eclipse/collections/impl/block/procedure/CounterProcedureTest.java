@@ -12,8 +12,12 @@ package org.eclipse.collections.impl.block.procedure;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.impl.utility.StringIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class CounterProcedureTest
 {
@@ -22,15 +26,15 @@ public class CounterProcedureTest
     {
         MockProcedure mockProcedure = new MockProcedure();
         CounterProcedure<Integer> procedure = new CounterProcedure<>(mockProcedure);
-        Assert.assertNull(mockProcedure.getValue());
-        Assert.assertEquals(0, procedure.getCount());
+        assertNull(mockProcedure.getValue());
+        assertEquals(0, procedure.getCount());
         procedure.value(1);
-        Assert.assertEquals(1, (int) mockProcedure.getValue());
-        Assert.assertEquals(1, procedure.getCount());
+        assertEquals(1, (int) mockProcedure.getValue());
+        assertEquals(1, procedure.getCount());
 
         procedure.value(2);
-        Assert.assertEquals(2, (int) mockProcedure.getValue());
-        Assert.assertEquals(2, procedure.getCount());
+        assertEquals(2, (int) mockProcedure.getValue());
+        assertEquals(2, procedure.getCount());
     }
 
     @Test
@@ -39,8 +43,8 @@ public class CounterProcedureTest
         MockProcedure mockProcedure = new MockProcedure();
         CounterProcedure<Integer> procedure = new CounterProcedure<>(mockProcedure);
         String s = procedure.toString();
-        Assert.assertNotNull(s);
-        Assert.assertTrue(StringIterate.notEmptyOrWhitespace(s));
+        assertNotNull(s);
+        assertTrue(StringIterate.notEmptyOrWhitespace(s));
     }
 
     private static class MockProcedure implements Procedure<Integer>

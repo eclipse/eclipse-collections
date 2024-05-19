@@ -11,8 +11,10 @@
 package org.eclipse.collections.impl.set.mutable.primitive;
 
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link SynchronizedBooleanSet}.
@@ -38,9 +40,9 @@ public class SynchronizedBooleanSetTest extends AbstractBooleanSetTestCase
         super.asSynchronized();
         SynchronizedBooleanSet set = this.classUnderTest();
         MutableBooleanSet setWithLockObject = new SynchronizedBooleanSet(BooleanHashSet.newSetWith(true, false, true), new Object()).asSynchronized();
-        Assert.assertEquals(set, setWithLockObject);
-        Assert.assertSame(setWithLockObject, setWithLockObject.asSynchronized());
-        Assert.assertSame(set, set.asSynchronized());
-        Assert.assertEquals(set, set.asSynchronized());
+        assertEquals(set, setWithLockObject);
+        assertSame(setWithLockObject, setWithLockObject.asSynchronized());
+        assertSame(set, set.asSynchronized());
+        assertEquals(set, set.asSynchronized());
     }
 }

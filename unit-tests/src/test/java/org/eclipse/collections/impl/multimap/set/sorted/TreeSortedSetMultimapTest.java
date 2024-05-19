@@ -23,8 +23,9 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test of {@link TreeSortedSetMultimap}.
@@ -166,7 +167,7 @@ public class TreeSortedSetMultimapTest extends AbstractMutableSortedSetMultimapT
         setMultimap.putAll(1, collection);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 5, 4, 3, 2, 1), collection);
         setMultimap.put(1, 0);
-        Assert.assertEquals(Integer.valueOf(0), setMultimap.get(1).getLast());
+        assertEquals(Integer.valueOf(0), setMultimap.get(1).getLast());
         setMultimap.putAll(2, FastList.newListWith(0, 1, 2, 4, 2, 1, 4, 5, 3, 4, 5));
         Verify.assertSortedSetsEqual(setMultimap.get(1), setMultimap.get(2));
     }

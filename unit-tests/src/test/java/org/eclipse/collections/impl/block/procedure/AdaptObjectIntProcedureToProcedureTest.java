@@ -12,8 +12,9 @@ package org.eclipse.collections.impl.block.procedure;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class AdaptObjectIntProcedureToProcedureTest
 {
@@ -24,16 +25,16 @@ public class AdaptObjectIntProcedureToProcedureTest
         Procedure<Integer> procedure =
                 new AdaptObjectIntProcedureToProcedure<>(mockObjectIntProcedure);
         procedure.value(1);
-        Assert.assertEquals(1, mockObjectIntProcedure.getEachValue());
-        Assert.assertEquals(0, mockObjectIntProcedure.getParameterValue());
+        assertEquals(1, mockObjectIntProcedure.getEachValue());
+        assertEquals(0, mockObjectIntProcedure.getParameterValue());
 
         procedure.value(2);
-        Assert.assertEquals(2, mockObjectIntProcedure.getEachValue());
-        Assert.assertEquals(1, mockObjectIntProcedure.getParameterValue());
+        assertEquals(2, mockObjectIntProcedure.getEachValue());
+        assertEquals(1, mockObjectIntProcedure.getParameterValue());
 
         procedure.value(3);
-        Assert.assertEquals(3, mockObjectIntProcedure.getEachValue());
-        Assert.assertEquals(2, mockObjectIntProcedure.getParameterValue());
+        assertEquals(3, mockObjectIntProcedure.getEachValue());
+        assertEquals(2, mockObjectIntProcedure.getParameterValue());
     }
 
     private static class MockObjectIntProcedure

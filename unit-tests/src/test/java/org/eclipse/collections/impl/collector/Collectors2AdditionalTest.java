@@ -49,8 +49,11 @@ import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /*
 Do not merge this test with Collectors2Test. Doing so will fail the build. This is due to a bug in ASM.
@@ -71,24 +74,24 @@ public class Collectors2AdditionalTest
     public void chunk()
     {
         MutableList<MutableList<Integer>> chunked0 = this.bigData.stream().collect(Collectors2.chunk(100));
-        Assert.assertEquals(LARGE_INTERVAL.toList().chunk(100), chunked0);
+        assertEquals(LARGE_INTERVAL.toList().chunk(100), chunked0);
         MutableList<MutableList<Integer>> chunked1 = this.bigData.stream().collect(Collectors2.chunk(333));
-        Assert.assertEquals(LARGE_INTERVAL.toList().chunk(333), chunked1);
+        assertEquals(LARGE_INTERVAL.toList().chunk(333), chunked1);
         MutableList<MutableList<Integer>> chunked2 = this.bigData.stream().collect(Collectors2.chunk(654));
-        Assert.assertEquals(LARGE_INTERVAL.toList().chunk(654), chunked2);
+        assertEquals(LARGE_INTERVAL.toList().chunk(654), chunked2);
         MutableList<MutableList<Integer>> chunked3 = this.smallData.stream().collect(Collectors2.chunk(SMALL_INTERVAL.size()));
-        Assert.assertEquals(SMALL_INTERVAL.toList().chunk(SMALL_INTERVAL.size()), chunked3);
+        assertEquals(SMALL_INTERVAL.toList().chunk(SMALL_INTERVAL.size()), chunked3);
         MutableList<MutableList<Integer>> chunked4 = this.smallData.stream().collect(Collectors2.chunk(SMALL_INTERVAL.size() - 1));
-        Assert.assertEquals(SMALL_INTERVAL.toList().chunk(SMALL_INTERVAL.size() - 1), chunked4);
-        Assert.assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(-10));
+        assertEquals(SMALL_INTERVAL.toList().chunk(SMALL_INTERVAL.size() - 1), chunked4);
+        assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(0));
+        assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(-10));
     }
 
     @Test
     public void chunkParallel()
     {
         MutableList<MutableList<Integer>> chunked = this.bigData.parallelStream().collect(Collectors2.chunk(100));
-        Assert.assertTrue(chunked.size() > 1);
+        assertTrue(chunked.size() > 1);
         Verify.assertAllSatisfy(chunked, each -> each.size() > 1 && each.size() <= 100);
     }
 
@@ -97,14 +100,14 @@ public class Collectors2AdditionalTest
     {
         MutableList<Integer> integers1 = Interval.oneTo(10).toList();
         MutableList<Integer> integers2 = Interval.oneTo(10).toList().toReversed();
-        Assert.assertEquals(
+        assertEquals(
                 integers1.zip(integers2),
                 integers1.stream().collect(Collectors2.zip(integers2)));
         MutableList<Integer> integers3 = Interval.oneTo(9).toList().toReversed();
-        Assert.assertEquals(
+        assertEquals(
                 integers1.zip(integers3),
                 integers1.stream().collect(Collectors2.zip(integers3)));
-        Assert.assertEquals(
+        assertEquals(
                 integers3.zip(integers1),
                 integers3.stream().collect(Collectors2.zip(integers1)));
     }
@@ -115,14 +118,14 @@ public class Collectors2AdditionalTest
         MutableList<Integer> integers1 = Interval.oneTo(10).toList();
         MutableList<Integer> integers2 = Interval.oneTo(10).toList().toReversed();
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zip(integers2)));
+        assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zip(integers2)));
     }
 
     @Test
     public void zipWithIndex()
     {
         MutableList<Integer> integers1 = Interval.oneTo(10).toList();
-        Assert.assertEquals(
+        assertEquals(
                 integers1.zipWithIndex().collect(each -> PrimitiveTuples.pair(each.getOne(), each.getTwo().intValue())),
                 integers1.stream().collect(Collectors2.zipWithIndex()));
     }
@@ -131,17 +134,17 @@ public class Collectors2AdditionalTest
     public void zipWithIndexParallel()
     {
         MutableList<Integer> integers1 = Interval.oneTo(10).toList();
-        Assert.assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zipWithIndex()));
+        assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zipWithIndex()));
     }
 
     @Test
     public void sumByInt()
     {
-        Assert.assertEquals(
+        assertEquals(
                 SMALL_INTERVAL.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue),
                 SMALL_INTERVAL.stream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue)));
 
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue),
                 LARGE_INTERVAL.stream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue)));
     }
@@ -149,7 +152,7 @@ public class Collectors2AdditionalTest
     @Test
     public void sumByIntParallel()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue),
                 LARGE_INTERVAL.parallelStream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue)));
     }
@@ -159,11 +162,11 @@ public class Collectors2AdditionalTest
     {
         MutableList<Long> smallLongs = SMALL_INTERVAL.collect(Long::valueOf).toList();
         MutableList<Long> largeLongs = LARGE_INTERVAL.collect(Long::valueOf).toList();
-        Assert.assertEquals(
+        assertEquals(
                 smallLongs.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue),
                 smallLongs.stream().collect(Collectors2.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue)));
 
-        Assert.assertEquals(
+        assertEquals(
                 largeLongs.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue),
                 largeLongs.stream().collect(Collectors2.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue)));
     }
@@ -172,7 +175,7 @@ public class Collectors2AdditionalTest
     public void sumByLongParallel()
     {
         MutableList<Long> largeLongs = LARGE_INTERVAL.collect(Long::valueOf).toList();
-        Assert.assertEquals(
+        assertEquals(
                 largeLongs.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue),
                 largeLongs.parallelStream().collect(Collectors2.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue)));
     }
@@ -182,11 +185,11 @@ public class Collectors2AdditionalTest
     {
         MutableList<Float> smallLongs = SMALL_INTERVAL.collect(Float::valueOf).toList();
         MutableList<Float> largeLongs = LARGE_INTERVAL.collect(Float::valueOf).toList();
-        Assert.assertEquals(
+        assertEquals(
                 smallLongs.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue),
                 smallLongs.stream().collect(Collectors2.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue)));
 
-        Assert.assertEquals(
+        assertEquals(
                 largeLongs.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue),
                 largeLongs.stream().collect(Collectors2.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue)));
     }
@@ -195,7 +198,7 @@ public class Collectors2AdditionalTest
     public void sumByFloatParallel()
     {
         MutableList<Float> largeLongs = LARGE_INTERVAL.collect(Float::valueOf).toList();
-        Assert.assertEquals(
+        assertEquals(
                 largeLongs.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue),
                 largeLongs.parallelStream().collect(Collectors2.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue)));
     }
@@ -205,11 +208,11 @@ public class Collectors2AdditionalTest
     {
         MutableList<Double> smallLongs = SMALL_INTERVAL.collect(Double::valueOf).toList();
         MutableList<Double> largeLongs = LARGE_INTERVAL.collect(Double::valueOf).toList();
-        Assert.assertEquals(
+        assertEquals(
                 smallLongs.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue),
                 smallLongs.stream().collect(Collectors2.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue)));
 
-        Assert.assertEquals(
+        assertEquals(
                 largeLongs.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue),
                 largeLongs.stream().collect(Collectors2.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue)));
     }
@@ -218,7 +221,7 @@ public class Collectors2AdditionalTest
     public void sumByDoubleParallel()
     {
         MutableList<Double> largeLongs = LARGE_INTERVAL.collect(Double::valueOf).toList();
-        Assert.assertEquals(
+        assertEquals(
                 largeLongs.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue),
                 largeLongs.parallelStream().collect(Collectors2.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue)));
     }
@@ -226,11 +229,11 @@ public class Collectors2AdditionalTest
     @Test
     public void sumByBigInteger()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Iterate.sumByBigInteger(SMALL_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue())),
                 SMALL_INTERVAL.stream().collect(Collectors2.sumByBigInteger(each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue()))));
 
-        Assert.assertEquals(
+        assertEquals(
                 Iterate.sumByBigInteger(LARGE_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue())),
                 LARGE_INTERVAL.stream().collect(Collectors2.sumByBigInteger(each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue()))));
     }
@@ -238,7 +241,7 @@ public class Collectors2AdditionalTest
     @Test
     public void sumByBigIntegerParallel()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Iterate.sumByBigInteger(LARGE_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue())),
                 LARGE_INTERVAL.parallelStream().collect(Collectors2.sumByBigInteger(each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue()))));
     }
@@ -246,11 +249,11 @@ public class Collectors2AdditionalTest
     @Test
     public void sumByBigDecimal()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Iterate.sumByBigDecimal(SMALL_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new),
                 SMALL_INTERVAL.stream().collect(Collectors2.sumByBigDecimal(each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new)));
 
-        Assert.assertEquals(
+        assertEquals(
                 Iterate.sumByBigDecimal(LARGE_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new),
                 LARGE_INTERVAL.stream().collect(Collectors2.sumByBigDecimal(each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new)));
     }
@@ -258,7 +261,7 @@ public class Collectors2AdditionalTest
     @Test
     public void sumByBigDecimalParallel()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Iterate.sumByBigDecimal(LARGE_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new),
                 LARGE_INTERVAL.parallelStream().collect(Collectors2.sumByBigDecimal(each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new)));
     }
@@ -266,13 +269,13 @@ public class Collectors2AdditionalTest
     @Test
     public void select()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().select(IntegerPredicates.isEven()),
                 this.bigData.stream().collect(Collectors2.select(IntegerPredicates.isEven(), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().select(IntegerPredicates.isEven()),
                 this.bigData.stream().collect(Collectors2.select(IntegerPredicates.isEven(), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().select(IntegerPredicates.isEven()),
                 this.bigData.stream().collect(Collectors2.select(IntegerPredicates.isEven(), Bags.mutable::empty)));
     }
@@ -280,13 +283,13 @@ public class Collectors2AdditionalTest
     @Test
     public void selectParallel()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().select(IntegerPredicates.isEven()),
                 this.bigData.parallelStream().collect(Collectors2.select(IntegerPredicates.isEven(), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().select(IntegerPredicates.isEven()),
                 this.bigData.parallelStream().collect(Collectors2.select(IntegerPredicates.isEven(), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().select(IntegerPredicates.isEven()),
                 this.bigData.parallelStream().collect(Collectors2.select(IntegerPredicates.isEven(), Bags.mutable::empty)));
     }
@@ -294,15 +297,15 @@ public class Collectors2AdditionalTest
     @Test
     public void selectWith()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().selectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.stream()
                         .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().selectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.stream()
                         .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().selectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.stream()
                         .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Bags.mutable::empty)));
@@ -311,15 +314,15 @@ public class Collectors2AdditionalTest
     @Test
     public void selectWithParallel()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().selectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.parallelStream()
                         .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().selectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.parallelStream()
                         .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().selectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.parallelStream()
                         .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Bags.mutable::empty)));
@@ -328,13 +331,13 @@ public class Collectors2AdditionalTest
     @Test
     public void reject()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().reject(IntegerPredicates.isEven()),
                 this.bigData.stream().collect(Collectors2.reject(IntegerPredicates.isEven(), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().reject(IntegerPredicates.isEven()),
                 this.bigData.stream().collect(Collectors2.reject(IntegerPredicates.isEven(), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().reject(IntegerPredicates.isEven()),
                 this.bigData.stream().collect(Collectors2.reject(IntegerPredicates.isEven(), Bags.mutable::empty)));
     }
@@ -342,13 +345,13 @@ public class Collectors2AdditionalTest
     @Test
     public void rejectParallel()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().reject(IntegerPredicates.isEven()),
                 this.bigData.parallelStream().collect(Collectors2.reject(IntegerPredicates.isEven(), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().reject(IntegerPredicates.isEven()),
                 this.bigData.parallelStream().collect(Collectors2.reject(IntegerPredicates.isEven(), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().reject(IntegerPredicates.isEven()),
                 this.bigData.parallelStream().collect(Collectors2.reject(IntegerPredicates.isEven(), Bags.mutable::empty)));
     }
@@ -356,15 +359,15 @@ public class Collectors2AdditionalTest
     @Test
     public void rejectWith()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.stream()
                         .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.stream()
                         .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.stream()
                         .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Bags.mutable::empty)));
@@ -373,15 +376,15 @@ public class Collectors2AdditionalTest
     @Test
     public void rejectWithParallel()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.parallelStream()
                         .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.parallelStream()
                         .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
                 this.bigData.parallelStream()
                         .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Bags.mutable::empty)));
@@ -393,18 +396,18 @@ public class Collectors2AdditionalTest
         PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList().partition(IntegerPredicates.isEven());
         PartitionMutableList<Integer> actualList = this.bigData.stream()
                 .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionFastList::new));
-        Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
-        Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
+        assertEquals(expectedList.getSelected(), actualList.getSelected());
+        assertEquals(expectedList.getRejected(), actualList.getRejected());
         PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet().partition(IntegerPredicates.isEven());
         PartitionMutableSet<Integer> actualSet = this.bigData.stream()
                 .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionUnifiedSet::new));
-        Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
-        Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
+        assertEquals(expectedSet.getSelected(), actualSet.getSelected());
+        assertEquals(expectedSet.getRejected(), actualSet.getRejected());
         PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag().partition(IntegerPredicates.isEven());
         PartitionMutableBag<Integer> actualBag = this.bigData.stream()
                 .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionHashBag::new));
-        Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
-        Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
+        assertEquals(expectedBag.getSelected(), actualBag.getSelected());
+        assertEquals(expectedBag.getRejected(), actualBag.getRejected());
     }
 
     @Test
@@ -413,18 +416,18 @@ public class Collectors2AdditionalTest
         PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList().partition(IntegerPredicates.isEven());
         PartitionMutableList<Integer> actualList = this.bigData.parallelStream()
                 .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionFastList::new));
-        Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
-        Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
+        assertEquals(expectedList.getSelected(), actualList.getSelected());
+        assertEquals(expectedList.getRejected(), actualList.getRejected());
         PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet().partition(IntegerPredicates.isEven());
         PartitionMutableSet<Integer> actualSet = this.bigData.parallelStream()
                 .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionUnifiedSet::new));
-        Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
-        Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
+        assertEquals(expectedSet.getSelected(), actualSet.getSelected());
+        assertEquals(expectedSet.getRejected(), actualSet.getRejected());
         PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag().partition(IntegerPredicates.isEven());
         PartitionMutableBag<Integer> actualBag = this.bigData.parallelStream()
                 .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionHashBag::new));
-        Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
-        Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
+        assertEquals(expectedBag.getSelected(), actualBag.getSelected());
+        assertEquals(expectedBag.getRejected(), actualBag.getRejected());
     }
 
     @Test
@@ -434,20 +437,20 @@ public class Collectors2AdditionalTest
                 .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableList<Integer> actualList = this.bigData.stream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionFastList::new));
-        Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
-        Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
+        assertEquals(expectedList.getSelected(), actualList.getSelected());
+        assertEquals(expectedList.getRejected(), actualList.getRejected());
         PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet()
                 .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableSet<Integer> actualSet = this.bigData.stream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionUnifiedSet::new));
-        Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
-        Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
+        assertEquals(expectedSet.getSelected(), actualSet.getSelected());
+        assertEquals(expectedSet.getRejected(), actualSet.getRejected());
         PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag()
                 .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableBag<Integer> actualBag = this.bigData.stream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionHashBag::new));
-        Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
-        Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
+        assertEquals(expectedBag.getSelected(), actualBag.getSelected());
+        assertEquals(expectedBag.getRejected(), actualBag.getRejected());
     }
 
     @Test
@@ -457,32 +460,32 @@ public class Collectors2AdditionalTest
                 .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableList<Integer> actualList = this.bigData.parallelStream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionFastList::new));
-        Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
-        Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
+        assertEquals(expectedList.getSelected(), actualList.getSelected());
+        assertEquals(expectedList.getRejected(), actualList.getRejected());
         PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet()
                 .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableSet<Integer> actualSet = this.bigData.parallelStream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionUnifiedSet::new));
-        Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
-        Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
+        assertEquals(expectedSet.getSelected(), actualSet.getSelected());
+        assertEquals(expectedSet.getRejected(), actualSet.getRejected());
         PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag()
                 .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableBag<Integer> actualBag = this.bigData.parallelStream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionHashBag::new));
-        Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
-        Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
+        assertEquals(expectedBag.getSelected(), actualBag.getSelected());
+        assertEquals(expectedBag.getRejected(), actualBag.getRejected());
     }
 
     @Test
     public void collect()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().collect(Functions.getToString()),
                 this.bigData.stream().collect(Collectors2.collect(Functions.getToString(), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().collect(Functions.getToString()),
                 this.bigData.stream().collect(Collectors2.collect(Functions.getToString(), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().collect(Functions.getToString()),
                 this.bigData.stream().collect(Collectors2.collect(Functions.getToString(), Bags.mutable::empty)));
     }
@@ -490,13 +493,13 @@ public class Collectors2AdditionalTest
     @Test
     public void collectParallel()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().collect(Functions.getToString()),
                 this.bigData.parallelStream().collect(Collectors2.collect(Functions.getToString(), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().collect(Functions.getToString()),
                 this.bigData.parallelStream().collect(Collectors2.collect(Functions.getToString(), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().collect(Functions.getToString()),
                 this.bigData.parallelStream().collect(Collectors2.collect(Functions.getToString(), Bags.mutable::empty)));
     }
@@ -505,16 +508,16 @@ public class Collectors2AdditionalTest
     public void flatCollect()
     {
         MutableList<Interval> list = Lists.mutable.with(SMALL_INTERVAL, SMALL_INTERVAL, SMALL_INTERVAL);
-        Assert.assertEquals(
+        assertEquals(
                 list.flatCollect(Functions.identity()),
                 list.stream().collect(Collectors2.flatCollect(Functions.identity(), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 list.flatCollect(Functions.identity()),
                 list.stream().collect(Collectors2.flatCollect(Functions.identity(), CompositeFastList::new)));
-        Assert.assertEquals(
+        assertEquals(
                 list.toSet().flatCollect(Functions.identity()),
                 list.stream().collect(Collectors2.flatCollect(Functions.identity(), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 list.toBag().flatCollect(Functions.identity()),
                 list.stream().collect(Collectors2.flatCollect(Functions.identity(), Bags.mutable::empty)));
         List<MutableList<String>> lists = Lists.mutable.with(
@@ -523,23 +526,23 @@ public class Collectors2AdditionalTest
                 Lists.mutable.with("e"));
         MutableList<String> flattened =
                 lists.stream().collect(Collectors2.flatCollect(l -> l, Lists.mutable::empty));
-        Assert.assertEquals(Lists.mutable.with("a", "b", "c", "d", "e"), flattened);
+        assertEquals(Lists.mutable.with("a", "b", "c", "d", "e"), flattened);
     }
 
     @Test
     public void flatCollectParallel()
     {
         MutableList<Interval> list = Lists.mutable.withNValues(20000, () -> SMALL_INTERVAL);
-        Assert.assertEquals(
+        assertEquals(
                 list.flatCollect(Functions.identity()),
                 list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 list.flatCollect(Functions.identity()),
                 list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), CompositeFastList::new)));
-        Assert.assertEquals(
+        assertEquals(
                 list.toSet().flatCollect(Functions.identity()),
                 list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 list.toBag().flatCollect(Functions.identity()),
                 list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Bags.mutable::empty)));
     }
@@ -547,15 +550,15 @@ public class Collectors2AdditionalTest
     @Test
     public void collectWith()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().collectWith(Integer::sum, Integer.valueOf(10)),
                 this.bigData.stream()
                         .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().collectWith(Integer::sum, Integer.valueOf(10)),
                 this.bigData.stream()
                         .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().collectWith(Integer::sum, Integer.valueOf(10)),
                 this.bigData.stream()
                         .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Bags.mutable::empty)));
@@ -564,15 +567,15 @@ public class Collectors2AdditionalTest
     @Test
     public void collectWithParallel()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toList().collectWith(Integer::sum, Integer.valueOf(10)),
                 this.bigData.parallelStream()
                         .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Lists.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toSet().collectWith(Integer::sum, Integer.valueOf(10)),
                 this.bigData.parallelStream()
                         .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Sets.mutable::empty)));
-        Assert.assertEquals(
+        assertEquals(
                 LARGE_INTERVAL.toBag().collectWith(Integer::sum, Integer.valueOf(10)),
                 this.bigData.parallelStream()
                         .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Bags.mutable::empty)));
@@ -585,7 +588,7 @@ public class Collectors2AdditionalTest
                 SMALL_INTERVAL.collectBoolean(each -> each % 2 == 0, BooleanLists.mutable.empty());
         BooleanList actual =
                 this.smallData.stream().collect(Collectors2.collectBoolean(each -> each % 2 == 0, BooleanLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -595,7 +598,7 @@ public class Collectors2AdditionalTest
                 LARGE_INTERVAL.collectBoolean(each -> each % 2 == 0, BooleanLists.mutable.empty());
         BooleanList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectBoolean(each -> each % 2 == 0, BooleanLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -605,7 +608,7 @@ public class Collectors2AdditionalTest
                 SMALL_INTERVAL.collectByte(each -> (byte) (each % Byte.MAX_VALUE), ByteLists.mutable.empty());
         ByteList actual =
                 this.smallData.stream().collect(Collectors2.collectByte(each -> (byte) (each % Byte.MAX_VALUE), ByteLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -615,7 +618,7 @@ public class Collectors2AdditionalTest
                 LARGE_INTERVAL.collectByte(each -> (byte) (each % Byte.MAX_VALUE), ByteLists.mutable.empty());
         ByteList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectByte(each -> (byte) (each % Byte.MAX_VALUE), ByteLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -625,7 +628,7 @@ public class Collectors2AdditionalTest
                 SMALL_INTERVAL.collectChar(each -> (char) (each % Character.MAX_VALUE), CharLists.mutable.empty());
         CharList actual =
                 this.smallData.stream().collect(Collectors2.collectChar(each -> (char) (each % Character.MAX_VALUE), CharLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -635,7 +638,7 @@ public class Collectors2AdditionalTest
                 LARGE_INTERVAL.collectChar(each -> (char) (each % Character.MAX_VALUE), CharLists.mutable.empty());
         CharList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectChar(each -> (char) (each % Character.MAX_VALUE), CharLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -645,7 +648,7 @@ public class Collectors2AdditionalTest
                 SMALL_INTERVAL.collectShort(each -> (short) (each % Short.MAX_VALUE), ShortLists.mutable.empty());
         ShortList actual =
                 this.smallData.stream().collect(Collectors2.collectShort(each -> (short) (each % Short.MAX_VALUE), ShortLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -655,7 +658,7 @@ public class Collectors2AdditionalTest
                 LARGE_INTERVAL.collectShort(each -> (short) (each % Short.MAX_VALUE), ShortLists.mutable.empty());
         ShortList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectShort(each -> (short) (each % Short.MAX_VALUE), ShortLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -665,7 +668,7 @@ public class Collectors2AdditionalTest
                 SMALL_INTERVAL.collectInt(Integer::intValue, IntLists.mutable.empty());
         IntList actual =
                 this.smallData.stream().collect(Collectors2.collectInt(each -> each, IntLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -675,7 +678,7 @@ public class Collectors2AdditionalTest
                 LARGE_INTERVAL.collectInt(Integer::intValue, IntLists.mutable.empty());
         IntList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectInt(each -> each, IntLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -685,7 +688,7 @@ public class Collectors2AdditionalTest
                 SMALL_INTERVAL.collectFloat(Integer::floatValue, FloatLists.mutable.empty());
         FloatList actual =
                 this.smallData.stream().collect(Collectors2.collectFloat(each -> (float) each, FloatLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -695,7 +698,7 @@ public class Collectors2AdditionalTest
                 LARGE_INTERVAL.collectFloat(Integer::floatValue, FloatLists.mutable.empty());
         FloatList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectFloat(each -> (float) each, FloatLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -705,7 +708,7 @@ public class Collectors2AdditionalTest
                 SMALL_INTERVAL.collectLong(Integer::longValue, LongLists.mutable.empty());
         LongList actual =
                 this.smallData.stream().collect(Collectors2.collectLong(each -> (long) each, LongLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -715,7 +718,7 @@ public class Collectors2AdditionalTest
                 LARGE_INTERVAL.collectLong(Integer::longValue, LongLists.mutable.empty());
         LongList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectLong(each -> (long) each, LongLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -725,7 +728,7 @@ public class Collectors2AdditionalTest
                 SMALL_INTERVAL.collectDouble(Integer::doubleValue, DoubleLists.mutable.empty());
         DoubleList actual =
                 this.smallData.stream().collect(Collectors2.collectDouble(each -> (double) each, DoubleLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -735,7 +738,7 @@ public class Collectors2AdditionalTest
                 LARGE_INTERVAL.collectDouble(Integer::doubleValue, DoubleLists.mutable.empty());
         DoubleList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectDouble(each -> (double) each, DoubleLists.mutable::empty));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -746,9 +749,9 @@ public class Collectors2AdditionalTest
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .stream()
                         .collect(Collectors2.summarizingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
-        Assert.assertEquals(BigDecimal.valueOf(2_500_000L), summaryStatistics.getSum());
-        Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMin());
-        Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMax());
+        assertEquals(BigDecimal.valueOf(2_500_000L), summaryStatistics.getSum());
+        assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMin());
+        assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMax());
     }
 
     @Test
@@ -759,9 +762,9 @@ public class Collectors2AdditionalTest
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .parallelStream()
                         .collect(Collectors2.summarizingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
-        Assert.assertEquals(BigDecimal.valueOf(2_500_000L), summaryStatistics.getSum());
-        Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMin());
-        Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMax());
+        assertEquals(BigDecimal.valueOf(2_500_000L), summaryStatistics.getSum());
+        assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMin());
+        assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMax());
     }
 
     @Test
@@ -772,7 +775,7 @@ public class Collectors2AdditionalTest
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .stream()
                         .collect(Collectors2.summingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
-        Assert.assertEquals(BigDecimal.valueOf(2_500_000L), sum);
+        assertEquals(BigDecimal.valueOf(2_500_000L), sum);
     }
 
     @Test
@@ -783,7 +786,7 @@ public class Collectors2AdditionalTest
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .parallelStream()
                         .collect(Collectors2.summingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
-        Assert.assertEquals(BigDecimal.valueOf(2_500_000L), sum);
+        assertEquals(BigDecimal.valueOf(2_500_000L), sum);
     }
 
     @Test
@@ -794,9 +797,9 @@ public class Collectors2AdditionalTest
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .stream()
                         .collect(Collectors2.summarizingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
-        Assert.assertEquals(BigInteger.valueOf(2_500_000L), summaryStatistics.getSum());
-        Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMin());
-        Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMax());
+        assertEquals(BigInteger.valueOf(2_500_000L), summaryStatistics.getSum());
+        assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMin());
+        assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMax());
     }
 
     @Test
@@ -807,9 +810,9 @@ public class Collectors2AdditionalTest
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .parallelStream()
                         .collect(Collectors2.summarizingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
-        Assert.assertEquals(BigInteger.valueOf(2_500_000L), summaryStatistics.getSum());
-        Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMin());
-        Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMax());
+        assertEquals(BigInteger.valueOf(2_500_000L), summaryStatistics.getSum());
+        assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMin());
+        assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMax());
     }
 
     @Test
@@ -820,7 +823,7 @@ public class Collectors2AdditionalTest
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .stream()
                         .collect(Collectors2.summingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
-        Assert.assertEquals(BigInteger.valueOf(2_500_000L), sum);
+        assertEquals(BigInteger.valueOf(2_500_000L), sum);
     }
 
     @Test
@@ -831,6 +834,6 @@ public class Collectors2AdditionalTest
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .parallelStream()
                         .collect(Collectors2.summingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
-        Assert.assertEquals(BigInteger.valueOf(2_500_000L), sum);
+        assertEquals(BigInteger.valueOf(2_500_000L), sum);
     }
 }

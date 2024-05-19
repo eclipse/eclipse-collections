@@ -14,8 +14,10 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ImmutableQuadrupletonListTest extends AbstractImmutableListTestCase
 {
@@ -32,9 +34,9 @@ public class ImmutableQuadrupletonListTest extends AbstractImmutableListTestCase
         super.distinct();
         ImmutableList<Integer> list = new ImmutableQuadrupletonList<>(2, 1, 1, 2);
         ImmutableList<Integer> distinctList = list.distinct();
-        Assert.assertFalse(distinctList.isEmpty());
+        assertFalse(distinctList.isEmpty());
         Verify.assertInstanceOf(ImmutableDoubletonList.class, distinctList);
-        Assert.assertEquals(FastList.newListWith(2, 1), distinctList);
+        assertEquals(FastList.newListWith(2, 1), distinctList);
     }
 
     @Test
@@ -42,8 +44,8 @@ public class ImmutableQuadrupletonListTest extends AbstractImmutableListTestCase
     {
         ImmutableList<String> list = new ImmutableQuadrupletonList<>("a", "a", "B", "c");
         ImmutableList<String> distinctList = list.distinct(HashingStrategies.fromFunction(String::toLowerCase));
-        Assert.assertFalse(distinctList.isEmpty());
-        Assert.assertEquals(FastList.newListWith("a", "B", "c"), distinctList);
+        assertFalse(distinctList.isEmpty());
+        assertEquals(FastList.newListWith("a", "B", "c"), distinctList);
     }
 
     @Test(expected = IllegalStateException.class)

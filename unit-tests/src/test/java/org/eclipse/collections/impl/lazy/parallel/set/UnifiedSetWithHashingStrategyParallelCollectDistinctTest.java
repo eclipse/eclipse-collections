@@ -17,8 +17,9 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class UnifiedSetWithHashingStrategyParallelCollectDistinctTest extends ParallelUnsortedSetIterableTestCase
 {
@@ -50,7 +51,7 @@ public class UnifiedSetWithHashingStrategyParallelCollectDistinctTest extends Pa
     {
         Function<Integer, Boolean> isOddFunction = object -> IntegerPredicates.isOdd().accept(object);
 
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpected().toSet().groupBy(isOddFunction),
                 this.classUnderTest().groupBy(isOddFunction));
     }
@@ -59,7 +60,7 @@ public class UnifiedSetWithHashingStrategyParallelCollectDistinctTest extends Pa
     @Override
     public void groupByEach()
     {
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpected().toSet().groupByEach(new NegativeIntervalFunction()),
                 this.classUnderTest().groupByEach(new NegativeIntervalFunction()));
     }

@@ -19,8 +19,10 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.lazy.iterator.DistinctIterator;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class DistinctIterableTest extends AbstractLazyIterableTestCase
 {
@@ -37,7 +39,7 @@ public class DistinctIterableTest extends AbstractLazyIterableTestCase
         Appendable builder = new StringBuilder();
         Procedure<Integer> appendProcedure = Procedures.append(builder);
         distinct.forEach(appendProcedure);
-        Assert.assertEquals("3124", builder.toString());
+        assertEquals("3124", builder.toString());
     }
 
     @Test
@@ -49,7 +51,7 @@ public class DistinctIterableTest extends AbstractLazyIterableTestCase
             builder.append(object);
             builder.append(index);
         });
-        Assert.assertEquals("102132435465768798", builder.toString());
+        assertEquals("102132435465768798", builder.toString());
     }
 
     @Override
@@ -62,7 +64,7 @@ public class DistinctIterableTest extends AbstractLazyIterableTestCase
         {
             builder.append(each);
         }
-        Assert.assertEquals("31245", builder.toString());
+        assertEquals("31245", builder.toString());
     }
 
     @Test
@@ -71,7 +73,7 @@ public class DistinctIterableTest extends AbstractLazyIterableTestCase
         LazyIterable<Integer> distinct = new DistinctIterable<>(FastList.newListWith(1, 3, 3, 2, 5, 4, 2, 5, 4));
         StringBuilder builder = new StringBuilder();
         distinct.forEachWith((each, aBuilder) -> aBuilder.append(each), builder);
-        Assert.assertEquals("13254", builder.toString());
+        assertEquals("13254", builder.toString());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -93,8 +95,8 @@ public class DistinctIterableTest extends AbstractLazyIterableTestCase
         super.distinct();
         LazyIterable<Integer> distinct = new DistinctIterable<>(FastList.newListWith(3, 2, 2, 4, 1, 3, 1, 5));
         LazyIterable<Integer> distinctDistinct = distinct.distinct();
-        Assert.assertSame(distinctDistinct, distinct);
-        Assert.assertEquals(
+        assertSame(distinctDistinct, distinct);
+        assertEquals(
                 FastList.newListWith(3, 2, 4, 1, 5),
                 distinctDistinct.toList());
     }

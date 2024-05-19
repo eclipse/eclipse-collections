@@ -16,8 +16,10 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class SelectInstancesOfIteratorTest
 {
@@ -36,18 +38,18 @@ public class SelectInstancesOfIteratorTest
         {
             result.add(iterator.next());
         }
-        Assert.assertEquals(FastList.newListWith(1, 3, 5), result);
+        assertEquals(FastList.newListWith(1, 3, 5), result);
     }
 
     @Test
     public void noSuchElementException()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> new SelectInstancesOfIterator<>(Lists.fixedSize.of(), Object.class).next());
+        assertThrows(NoSuchElementException.class, () -> new SelectInstancesOfIterator<>(Lists.fixedSize.of(), Object.class).next());
     }
 
     @Test
     public void remove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> new SelectInstancesOfIterator<>(Lists.fixedSize.of(), Object.class).remove());
+        assertThrows(UnsupportedOperationException.class, () -> new SelectInstancesOfIterator<>(Lists.fixedSize.of(), Object.class).remove());
     }
 }

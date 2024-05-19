@@ -17,8 +17,11 @@ import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class HashBagTest extends MutableBagTestCase
 {
@@ -50,7 +53,7 @@ public class HashBagTest extends MutableBagTestCase
         assertBagsEqual(HashBag.newBagWith("apple", "apple", "hope", "hope", "hope"), bag);
 
         bag.withAll(Collections.nCopies(5, "ubermench"));
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedMap.newWithKeysValues(
                         "apple", 2,
                         "hope", 3,
@@ -64,12 +67,12 @@ public class HashBagTest extends MutableBagTestCase
     {
         super.addAll();
         MutableBag<Integer> bag1 = this.newWith();
-        Assert.assertTrue(bag1.addAll(this.newWith(1, 1, 2, 3)));
+        assertTrue(bag1.addAll(this.newWith(1, 1, 2, 3)));
         Verify.assertContainsAll(bag1, 1, 2, 3);
 
-        Assert.assertTrue(bag1.addAll(this.newWith(1, 2, 3)));
+        assertTrue(bag1.addAll(this.newWith(1, 2, 3)));
         Verify.assertSize(7, bag1);
-        Assert.assertFalse(bag1.addAll(this.newWith()));
+        assertFalse(bag1.addAll(this.newWith()));
         Verify.assertContainsAll(bag1, 1, 2, 3);
 
         MutableBag<Integer> bag2 = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
@@ -94,7 +97,7 @@ public class HashBagTest extends MutableBagTestCase
     @Test
     public void newBagFromBag()
     {
-        Assert.assertEquals(
+        assertEquals(
                 HashBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
                 HashBag.newBag(HashBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4)));
     }

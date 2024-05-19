@@ -20,8 +20,10 @@ import org.eclipse.collections.impl.block.factory.Functions2;
 import org.eclipse.collections.impl.block.function.checked.ThrowingFunction2;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class Functions2Test
 {
@@ -43,25 +45,25 @@ public class Functions2Test
         ThrowingFunction2<String, String, String> throwingFunction2 =
                 (argument1, argument2) -> argument1.concat(argument2);
 
-        Assert.assertEquals("abcdef", Functions2.throwing(throwingFunction2).value("abc", "def"));
+        assertEquals("abcdef", Functions2.throwing(throwingFunction2).value("abc", "def"));
     }
 
     @Test
     public void min()
     {
         Function2<Integer, Integer, Integer> minFunction = Functions2.min(Comparators.naturalOrder());
-        Assert.assertEquals(Integer.valueOf(1), minFunction.value(5, 1));
-        Assert.assertEquals(Integer.valueOf(1), minFunction.value(1, 5));
-        Assert.assertEquals(Integer.valueOf(2), minFunction.value(2, 2));
+        assertEquals(Integer.valueOf(1), minFunction.value(5, 1));
+        assertEquals(Integer.valueOf(1), minFunction.value(1, 5));
+        assertEquals(Integer.valueOf(2), minFunction.value(2, 2));
     }
 
     @Test
     public void max()
     {
         Function2<Integer, Integer, Integer> maxFunction = Functions2.max(Comparators.naturalOrder());
-        Assert.assertEquals(Integer.valueOf(5), maxFunction.value(5, 1));
-        Assert.assertEquals(Integer.valueOf(5), maxFunction.value(1, 5));
-        Assert.assertEquals(Integer.valueOf(5), maxFunction.value(5, 5));
+        assertEquals(Integer.valueOf(5), maxFunction.value(5, 1));
+        assertEquals(Integer.valueOf(5), maxFunction.value(1, 5));
+        assertEquals(Integer.valueOf(5), maxFunction.value(5, 5));
     }
 
     @Test
@@ -70,9 +72,9 @@ public class Functions2Test
         Function2<Twin<Integer>, Twin<Integer>, Twin<Integer>> minBy = Functions2.minBy(Functions.firstOfPair());
         Twin<Integer> twinOne = Tuples.twin(1, 5);
         Twin<Integer> twinTwo = Tuples.twin(0, 10);
-        Assert.assertEquals(twinTwo, minBy.value(twinOne, twinTwo));
-        Assert.assertEquals(twinTwo, minBy.value(twinTwo, twinOne));
-        Assert.assertEquals(twinOne, minBy.value(twinOne, twinOne));
+        assertEquals(twinTwo, minBy.value(twinOne, twinTwo));
+        assertEquals(twinTwo, minBy.value(twinTwo, twinOne));
+        assertEquals(twinOne, minBy.value(twinOne, twinOne));
     }
 
     @Test
@@ -81,9 +83,9 @@ public class Functions2Test
         Function2<Twin<Integer>, Twin<Integer>, Twin<Integer>> minBy = Functions2.maxBy(Functions.firstOfPair());
         Twin<Integer> twinOne = Tuples.twin(1, 5);
         Twin<Integer> twinTwo = Tuples.twin(0, 10);
-        Assert.assertEquals(twinOne, minBy.value(twinOne, twinTwo));
-        Assert.assertEquals(twinOne, minBy.value(twinTwo, twinOne));
-        Assert.assertEquals(twinOne, minBy.value(twinOne, twinOne));
+        assertEquals(twinOne, minBy.value(twinOne, twinTwo));
+        assertEquals(twinOne, minBy.value(twinTwo, twinOne));
+        assertEquals(twinOne, minBy.value(twinOne, twinOne));
     }
 
     @Test
@@ -113,7 +115,7 @@ public class Functions2Test
                             },
                             this::throwMyException).value(null, null);
                 });
-        Assert.assertThrows(
+        assertThrows(
                 NullPointerException.class,
                 () ->
                 {
@@ -135,14 +137,14 @@ public class Functions2Test
     public void asFunction2Function()
     {
         Function2<Integer, Object, String> block = Functions2.fromFunction(String::valueOf);
-        Assert.assertEquals("1", block.value(1, null));
+        assertEquals("1", block.value(1, null));
     }
 
     @Test
     public void plusInteger()
     {
         Function2<Integer, Integer, Integer> plusInteger = Functions2.integerAddition();
-        Assert.assertEquals(Integer.valueOf(5), plusInteger.value(2, 3));
+        assertEquals(Integer.valueOf(5), plusInteger.value(2, 3));
     }
 
     @Test

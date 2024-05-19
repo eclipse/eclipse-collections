@@ -41,8 +41,15 @@ import org.eclipse.collections.impl.string.immutable.CodePointAdapter;
 import org.eclipse.collections.impl.string.immutable.CodePointList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test for {@link StringIterate}.
@@ -67,9 +74,9 @@ public class StringIterateTest
                         .reject(CharAdapter.adapt("LE")::contains)
                         .newWith('!');
 
-        Assert.assertEquals("OH!", answer.toString());
-        Assert.assertEquals("OH!", answer.toStringBuilder().toString());
-        Assert.assertEquals("OH!", answer.makeString(""));
+        assertEquals("OH!", answer.toString());
+        assertEquals("OH!", answer.toStringBuilder().toString());
+        assertEquals("OH!", answer.makeString(""));
 
         CharList charList = StringIterate.asCharAdapter("HelloHellow")
                 .asLazy()
@@ -81,44 +88,44 @@ public class StringIterateTest
                 .reject(CharAdapter.adapt("LE")::contains)
                 .with('!');
 
-        Assert.assertEquals("OH!", CharAdapter.from(charList).toString());
-        Assert.assertEquals("OH!", CharAdapter.from(CharAdapter.from(charList)).toString());
+        assertEquals("OH!", CharAdapter.from(charList).toString());
+        assertEquals("OH!", CharAdapter.from(CharAdapter.from(charList)).toString());
 
         String helloUppercase2 = StringIterate.asCharAdapter("Hello")
                 .asLazy()
                 .collectChar(Character::toUpperCase)
                 .makeString("");
-        Assert.assertEquals("HELLO", helloUppercase2);
+        assertEquals("HELLO", helloUppercase2);
 
         CharArrayList arraylist = new CharArrayList();
         StringIterate.asCharAdapter("Hello".toUpperCase())
                 .chars()
                 .sorted()
                 .forEach(e -> arraylist.add((char) e));
-        Assert.assertEquals(StringIterate.asCharAdapter("EHLLO"), arraylist);
+        assertEquals(StringIterate.asCharAdapter("EHLLO"), arraylist);
 
         ImmutableCharList arrayList2 =
                 StringIterate.asCharAdapter("Hello".toUpperCase())
                         .toSortedList()
                         .toImmutable();
 
-        Assert.assertEquals(StringIterate.asCharAdapter("EHLLO"), arrayList2);
+        assertEquals(StringIterate.asCharAdapter("EHLLO"), arrayList2);
 
-        Assert.assertEquals(StringIterate.asCharAdapter("HELLO"), CharAdapter.adapt("hello").collectChar(Character::toUpperCase));
+        assertEquals(StringIterate.asCharAdapter("HELLO"), CharAdapter.adapt("hello").collectChar(Character::toUpperCase));
     }
 
     @Test
     public void asCharAdapterExtra()
     {
-        Assert.assertEquals(
+        assertEquals(
                 9,
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(c -> !Character.isLetter(c)));
 
-        Assert.assertTrue(
+        assertTrue(
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG).anySatisfy(Character::isWhitespace));
 
-        Assert.assertEquals(
+        assertEquals(
                 8,
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(Character::isWhitespace));
@@ -132,17 +139,17 @@ public class StringIterateTest
 
         ImmutableCharSet alphaCharAdapter =
                 StringIterate.asCharAdapter(ALPHABET_LOWERCASE).toSet().toImmutable();
-        Assert.assertTrue(
+        assertTrue(
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG).containsAll(alphaCharAdapter));
-        Assert.assertEquals(
+        assertEquals(
                 CharSets.immutable.empty(),
                 alphaCharAdapter.newWithoutAll(StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG.toLowerCase())));
-        Assert.assertEquals(
+        assertEquals(
                 TQBFJOTLD_MINUS_HALF_ABET_1,
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG.toLowerCase())
                         .newWithoutAll(StringIterate.asCharAdapter(HALF_ABET.getOne()))
                         .toString());
-        Assert.assertEquals(
+        assertEquals(
                 TQBFJOTLD_MINUS_HALF_ABET_2,
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG.toLowerCase())
                         .newWithoutAll(StringIterate.asCharAdapter(HALF_ABET.getTwo()))
@@ -157,7 +164,7 @@ public class StringIterateTest
                 .newWithAll(StringIterate.asCharAdapter(HALF_ABET.getOne()))
                 .newWithAll(StringIterate.asCharAdapter(HALF_ABET.getTwo()))
                 .newWithout('a').toString();
-        Assert.assertEquals(ALPHABET_LOWERCASE, alphabet);
+        assertEquals(ALPHABET_LOWERCASE, alphabet);
     }
 
     @Test
@@ -172,9 +179,9 @@ public class StringIterateTest
                         .reject(CodePointAdapter.adapt("LE")::contains)
                         .newWith('!');
 
-        Assert.assertEquals("OH!", answer.toString());
-        Assert.assertEquals("OH!", answer.toStringBuilder().toString());
-        Assert.assertEquals("OH!", answer.makeString(""));
+        assertEquals("OH!", answer.toString());
+        assertEquals("OH!", answer.toStringBuilder().toString());
+        assertEquals("OH!", answer.makeString(""));
 
         IntList intList = StringIterate.asCodePointAdapter("HelloHellow")
                 .asLazy()
@@ -186,22 +193,22 @@ public class StringIterateTest
                 .reject(CodePointAdapter.adapt("LE")::contains)
                 .with('!');
 
-        Assert.assertEquals("OH!", CodePointAdapter.from(intList).toString());
-        Assert.assertEquals("OH!", CodePointAdapter.from(CodePointAdapter.from(intList)).toString());
+        assertEquals("OH!", CodePointAdapter.from(intList).toString());
+        assertEquals("OH!", CodePointAdapter.from(CodePointAdapter.from(intList)).toString());
     }
 
     @Test
     public void asCodePointAdapterExtra()
     {
-        Assert.assertEquals(
+        assertEquals(
                 9,
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(i -> !Character.isLetter(i)));
 
-        Assert.assertTrue(
+        assertTrue(
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG).anySatisfy(Character::isWhitespace));
 
-        Assert.assertEquals(
+        assertEquals(
                 8,
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(Character::isWhitespace));
@@ -215,17 +222,17 @@ public class StringIterateTest
 
         ImmutableIntSet alphaints =
                 StringIterate.asCodePointAdapter(ALPHABET_LOWERCASE).toSet().toImmutable();
-        Assert.assertTrue(
+        assertTrue(
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG).containsAll(alphaints));
-        Assert.assertEquals(
+        assertEquals(
                 IntSets.immutable.empty(),
                 alphaints.newWithoutAll(StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG.toLowerCase())));
-        Assert.assertEquals(
+        assertEquals(
                 TQBFJOTLD_MINUS_HALF_ABET_1,
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG.toLowerCase())
                         .newWithoutAll(StringIterate.asCodePointAdapter(HALF_ABET.getOne()))
                         .toString());
-        Assert.assertEquals(
+        assertEquals(
                 TQBFJOTLD_MINUS_HALF_ABET_2,
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG.toLowerCase())
                         .newWithoutAll(StringIterate.asCodePointAdapter(HALF_ABET.getTwo()))
@@ -244,9 +251,9 @@ public class StringIterateTest
                         .reject(CodePointList.from("LE")::contains)
                         .newWith('!');
 
-        Assert.assertEquals("OH!", answer.toString());
-        Assert.assertEquals("OH!", answer.toStringBuilder().toString());
-        Assert.assertEquals("OH!", answer.makeString(""));
+        assertEquals("OH!", answer.toString());
+        assertEquals("OH!", answer.toStringBuilder().toString());
+        assertEquals("OH!", answer.makeString(""));
 
         IntList intList = StringIterate.toCodePointList("HelloHellow")
                 .asLazy()
@@ -258,22 +265,22 @@ public class StringIterateTest
                 .reject(CodePointList.from("LE")::contains)
                 .with('!');
 
-        Assert.assertEquals("OH!", CodePointList.from(intList).toString());
-        Assert.assertEquals("OH!", CodePointList.from(CodePointList.from(intList)).toString());
+        assertEquals("OH!", CodePointList.from(intList).toString());
+        assertEquals("OH!", CodePointList.from(CodePointList.from(intList)).toString());
     }
 
     @Test
     public void toCodePointListExtra()
     {
-        Assert.assertEquals(
+        assertEquals(
                 9,
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(i -> !Character.isLetter(i)));
 
-        Assert.assertTrue(
+        assertTrue(
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG).anySatisfy(Character::isWhitespace));
 
-        Assert.assertEquals(
+        assertEquals(
                 8,
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(Character::isWhitespace));
@@ -287,20 +294,20 @@ public class StringIterateTest
 
         ImmutableIntSet alphaints =
                 StringIterate.toCodePointList(ALPHABET_LOWERCASE).toSet().toImmutable();
-        Assert.assertTrue(
+        assertTrue(
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG).containsAll(alphaints));
-        Assert.assertEquals(
+        assertEquals(
                 IntSets.immutable.empty(),
                 alphaints.newWithoutAll(StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG.toLowerCase())));
-        Assert.assertTrue(
+        assertTrue(
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .containsAll(StringIterate.toCodePointList(HALF_ABET.getOne())));
-        Assert.assertEquals(
+        assertEquals(
                 TQBFJOTLD_MINUS_HALF_ABET_1,
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG.toLowerCase())
                         .newWithoutAll(StringIterate.toCodePointList(HALF_ABET.getOne()))
                         .toString());
-        Assert.assertEquals(
+        assertEquals(
                 TQBFJOTLD_MINUS_HALF_ABET_2,
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG.toLowerCase())
                         .newWithoutAll(StringIterate.toCodePointList(HALF_ABET.getTwo()))
@@ -310,45 +317,45 @@ public class StringIterateTest
     @Test
     public void englishToUpperLowerCase()
     {
-        Assert.assertEquals("ABC", StringIterate.englishToUpperCase("abc"));
-        Assert.assertEquals("abc", StringIterate.englishToLowerCase("ABC"));
+        assertEquals("ABC", StringIterate.englishToUpperCase("abc"));
+        assertEquals("abc", StringIterate.englishToLowerCase("ABC"));
     }
 
     @Test
     public void collect()
     {
-        Assert.assertEquals("ABC", StringIterate.collect("abc", CharToCharFunctions.toUpperCase()));
-        Assert.assertEquals("abc", StringIterate.collect("abc", CharToCharFunctions.toLowerCase()));
+        assertEquals("ABC", StringIterate.collect("abc", CharToCharFunctions.toUpperCase()));
+        assertEquals("abc", StringIterate.collect("abc", CharToCharFunctions.toLowerCase()));
     }
 
     @Test
     public void collectCodePoint()
     {
-        Assert.assertEquals("ABC", StringIterate.collect("abc", CodePointFunction.TO_UPPERCASE));
-        Assert.assertEquals("abc", StringIterate.collect("abc", CodePointFunction.TO_LOWERCASE));
+        assertEquals("ABC", StringIterate.collect("abc", CodePointFunction.TO_UPPERCASE));
+        assertEquals("abc", StringIterate.collect("abc", CodePointFunction.TO_LOWERCASE));
     }
 
     @Test
     public void collectCodePointUnicode()
     {
-        Assert.assertEquals("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", StringIterate.collect("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", CodePointFunction.PASS_THRU));
-        Assert.assertEquals("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", StringIterate.collect("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", CodePointFunction.PASS_THRU));
+        assertEquals("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", StringIterate.collect("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", CodePointFunction.PASS_THRU));
+        assertEquals("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", StringIterate.collect("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", CodePointFunction.PASS_THRU));
     }
 
     @Test
     public void englishToUpperCase()
     {
-        Assert.assertEquals("ABC", StringIterate.englishToUpperCase("abc"));
-        Assert.assertEquals("A,B,C", StringIterate.englishToUpperCase("a,b,c"));
-        Assert.assertSame("A,B,C", StringIterate.englishToUpperCase("A,B,C"));
+        assertEquals("ABC", StringIterate.englishToUpperCase("abc"));
+        assertEquals("A,B,C", StringIterate.englishToUpperCase("a,b,c"));
+        assertSame("A,B,C", StringIterate.englishToUpperCase("A,B,C"));
     }
 
     @Test
     public void englishToLowerCase()
     {
-        Assert.assertEquals("abc", StringIterate.englishToLowerCase("ABC"));
-        Assert.assertEquals("a,b,c", StringIterate.englishToLowerCase("A,B,C"));
-        Assert.assertSame("a,b,c", StringIterate.englishToLowerCase("a,b,c"));
+        assertEquals("abc", StringIterate.englishToLowerCase("ABC"));
+        assertEquals("a,b,c", StringIterate.englishToLowerCase("A,B,C"));
+        assertSame("a,b,c", StringIterate.englishToLowerCase("a,b,c"));
     }
 
     @Test
@@ -357,135 +364,135 @@ public class StringIterateTest
         String allValues = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~`!@#$%^&*()_-+=[]{};<>,.?/|";
         String jdkUpper = allValues.toUpperCase();
         String upper = StringIterate.englishToUpperCase(allValues);
-        Assert.assertEquals(jdkUpper.length(), upper.length());
-        Assert.assertEquals(jdkUpper, upper);
+        assertEquals(jdkUpper.length(), upper.length());
+        assertEquals(jdkUpper, upper);
         String jdkLower = allValues.toLowerCase();
         String lower = StringIterate.englishToLowerCase(allValues);
-        Assert.assertEquals(jdkLower.length(), lower.length());
-        Assert.assertEquals(jdkLower, lower);
+        assertEquals(jdkLower.length(), lower.length());
+        assertEquals(jdkLower, lower);
     }
 
     @Test
     public void select()
     {
         String string = StringIterate.select("1a2a3", CharPredicates.isDigit());
-        Assert.assertEquals("123", string);
+        assertEquals("123", string);
     }
 
     @Test
     public void selectCodePoint()
     {
         String string = StringIterate.select("1a2a3", CodePointPredicate.IS_DIGIT);
-        Assert.assertEquals("123", string);
+        assertEquals("123", string);
     }
 
     @Test
     public void selectCodePointUnicode()
     {
         String string = StringIterate.select("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", CodePointPredicate.IS_BMP);
-        Assert.assertEquals("\u3042\u3044\u3046", string);
+        assertEquals("\u3042\u3044\u3046", string);
     }
 
     @Test
     public void detect()
     {
         char character = StringIterate.detect("1a2a3", CharPredicates.isLetter());
-        Assert.assertEquals('a', character);
+        assertEquals('a', character);
     }
 
     @Test
     public void detectIfNone()
     {
         char character = StringIterate.detectIfNone("123", CharPredicates.isLetter(), "b".charAt(0));
-        Assert.assertEquals('b', character);
+        assertEquals('b', character);
     }
 
     @Test
     public void detectIfNoneWithString()
     {
         char character = StringIterate.detectIfNone("123", CharPredicates.isLetter(), "b");
-        Assert.assertEquals('b', character);
+        assertEquals('b', character);
     }
 
     @Test
     public void allSatisfy()
     {
-        Assert.assertTrue(StringIterate.allSatisfy("MARY", CharPredicates.isUpperCase()));
-        Assert.assertFalse(StringIterate.allSatisfy("Mary", CharPredicates.isUpperCase()));
+        assertTrue(StringIterate.allSatisfy("MARY", CharPredicates.isUpperCase()));
+        assertFalse(StringIterate.allSatisfy("Mary", CharPredicates.isUpperCase()));
     }
 
     @Test
     public void allSatisfyCodePoint()
     {
-        Assert.assertTrue(StringIterate.allSatisfy("MARY", CodePointPredicate.IS_UPPERCASE));
-        Assert.assertFalse(StringIterate.allSatisfy("Mary", CodePointPredicate.IS_UPPERCASE));
+        assertTrue(StringIterate.allSatisfy("MARY", CodePointPredicate.IS_UPPERCASE));
+        assertFalse(StringIterate.allSatisfy("Mary", CodePointPredicate.IS_UPPERCASE));
     }
 
     @Test
     public void allSatisfyCodePointUnicode()
     {
-        Assert.assertTrue(StringIterate.allSatisfy("\u3042\u3044\u3046", CodePointPredicate.IS_BMP));
-        Assert.assertFalse(StringIterate.allSatisfy("\uD840\uDC00\uD840\uDC03\uD83D\uDE09", CodePointPredicate.IS_BMP));
+        assertTrue(StringIterate.allSatisfy("\u3042\u3044\u3046", CodePointPredicate.IS_BMP));
+        assertFalse(StringIterate.allSatisfy("\uD840\uDC00\uD840\uDC03\uD83D\uDE09", CodePointPredicate.IS_BMP));
     }
 
     @Test
     public void anySatisfy()
     {
-        Assert.assertTrue(StringIterate.anySatisfy("MARY", CharPredicates.isUpperCase()));
-        Assert.assertFalse(StringIterate.anySatisfy("mary", CharPredicates.isUpperCase()));
+        assertTrue(StringIterate.anySatisfy("MARY", CharPredicates.isUpperCase()));
+        assertFalse(StringIterate.anySatisfy("mary", CharPredicates.isUpperCase()));
     }
 
     @Test
     public void anySatisfyCodePoint()
     {
-        Assert.assertTrue(StringIterate.anySatisfy("MARY", CodePointPredicate.IS_UPPERCASE));
-        Assert.assertFalse(StringIterate.anySatisfy("mary", CodePointPredicate.IS_UPPERCASE));
+        assertTrue(StringIterate.anySatisfy("MARY", CodePointPredicate.IS_UPPERCASE));
+        assertFalse(StringIterate.anySatisfy("mary", CodePointPredicate.IS_UPPERCASE));
     }
 
     @Test
     public void anySatisfyCodePointUnicode()
     {
-        Assert.assertTrue(StringIterate.anySatisfy("\u3042\u3044\u3046", CodePointPredicate.IS_BMP));
-        Assert.assertFalse(StringIterate.anySatisfy("\uD840\uDC00\uD840\uDC03\uD83D\uDE09", CodePointPredicate.IS_BMP));
+        assertTrue(StringIterate.anySatisfy("\u3042\u3044\u3046", CodePointPredicate.IS_BMP));
+        assertFalse(StringIterate.anySatisfy("\uD840\uDC00\uD840\uDC03\uD83D\uDE09", CodePointPredicate.IS_BMP));
     }
 
     @Test
     public void noneSatisfy()
     {
-        Assert.assertFalse(StringIterate.noneSatisfy("MaRy", CharPredicates.isUpperCase()));
-        Assert.assertTrue(StringIterate.noneSatisfy("mary", CharPredicates.isUpperCase()));
+        assertFalse(StringIterate.noneSatisfy("MaRy", CharPredicates.isUpperCase()));
+        assertTrue(StringIterate.noneSatisfy("mary", CharPredicates.isUpperCase()));
     }
 
     @Test
     public void noneSatisfyCodePoint()
     {
-        Assert.assertFalse(StringIterate.noneSatisfy("MaRy", CodePointPredicate.IS_UPPERCASE));
-        Assert.assertTrue(StringIterate.noneSatisfy("mary", CodePointPredicate.IS_UPPERCASE));
+        assertFalse(StringIterate.noneSatisfy("MaRy", CodePointPredicate.IS_UPPERCASE));
+        assertTrue(StringIterate.noneSatisfy("mary", CodePointPredicate.IS_UPPERCASE));
     }
 
     @Test
     public void noneSatisfyCodePointUnicode()
     {
-        Assert.assertFalse(StringIterate.noneSatisfy("\u3042\u3044\u3046", CodePointPredicate.IS_BMP));
-        Assert.assertTrue(StringIterate.noneSatisfy("\uD840\uDC00\uD840\uDC03\uD83D\uDE09", CodePointPredicate.IS_BMP));
+        assertFalse(StringIterate.noneSatisfy("\u3042\u3044\u3046", CodePointPredicate.IS_BMP));
+        assertTrue(StringIterate.noneSatisfy("\uD840\uDC00\uD840\uDC03\uD83D\uDE09", CodePointPredicate.IS_BMP));
     }
 
     @Test
     public void isNumber()
     {
-        Assert.assertTrue(StringIterate.isNumber("123"));
-        Assert.assertFalse(StringIterate.isNumber("abc"));
-        Assert.assertFalse(StringIterate.isNumber(""));
+        assertTrue(StringIterate.isNumber("123"));
+        assertFalse(StringIterate.isNumber("abc"));
+        assertFalse(StringIterate.isNumber(""));
     }
 
     @Test
     public void isAlphaNumeric()
     {
-        Assert.assertTrue(StringIterate.isAlphaNumeric("123"));
-        Assert.assertTrue(StringIterate.isAlphaNumeric("abc"));
-        Assert.assertTrue(StringIterate.isAlphaNumeric("123abc"));
-        Assert.assertFalse(StringIterate.isAlphaNumeric("!@#"));
-        Assert.assertFalse(StringIterate.isAlphaNumeric(""));
+        assertTrue(StringIterate.isAlphaNumeric("123"));
+        assertTrue(StringIterate.isAlphaNumeric("abc"));
+        assertTrue(StringIterate.isAlphaNumeric("123abc"));
+        assertFalse(StringIterate.isAlphaNumeric("!@#"));
+        assertFalse(StringIterate.isAlphaNumeric(""));
     }
 
     @Test
@@ -557,35 +564,35 @@ public class StringIterateTest
     public void reject()
     {
         String string = StringIterate.reject("1a2b3c", CharPredicates.isDigit());
-        Assert.assertEquals("abc", string);
+        assertEquals("abc", string);
     }
 
     @Test
     public void rejectCodePoint()
     {
         String string = StringIterate.reject("1a2b3c", CodePointPredicate.IS_DIGIT);
-        Assert.assertEquals("abc", string);
+        assertEquals("abc", string);
     }
 
     @Test
     public void count()
     {
         int count = StringIterate.count("1a2a3", CharPredicates.isDigit());
-        Assert.assertEquals(3, count);
+        assertEquals(3, count);
     }
 
     @Test
     public void countCodePoint()
     {
         int count = StringIterate.count("1a2a3", CodePointPredicate.IS_DIGIT);
-        Assert.assertEquals(3, count);
+        assertEquals(3, count);
     }
 
     @Test
     public void occurrencesOf()
     {
         int count = StringIterate.occurrencesOf("1a2a3", 'a');
-        Assert.assertEquals(2, count);
+        assertEquals(2, count);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -598,28 +605,28 @@ public class StringIterateTest
     public void occurrencesOfCodePoint()
     {
         int count = StringIterate.occurrencesOf("1a2a3", "a".codePointAt(0));
-        Assert.assertEquals(2, count);
+        assertEquals(2, count);
     }
 
     @Test
     public void occurrencesOfString()
     {
         int count = StringIterate.occurrencesOf("1a2a3", "a");
-        Assert.assertEquals(2, count);
+        assertEquals(2, count);
     }
 
     @Test
     public void count2()
     {
         int count = StringIterate.count("1a2a3", CharPredicates.isUndefined());
-        Assert.assertEquals(0, count);
+        assertEquals(0, count);
     }
 
     @Test
     public void count2CodePoint()
     {
         int count = StringIterate.count("1a2a3", CodePointPredicate.IS_UNDEFINED);
-        Assert.assertEquals(0, count);
+        assertEquals(0, count);
     }
 
     @Test
@@ -627,7 +634,7 @@ public class StringIterateTest
     {
         StringBuilder builder = new StringBuilder();
         StringIterate.forEach("1a2b3c", (CharProcedure) builder::append);
-        Assert.assertEquals("1a2b3c", builder.toString());
+        assertEquals("1a2b3c", builder.toString());
     }
 
     @Test
@@ -635,7 +642,7 @@ public class StringIterateTest
     {
         StringBuilder builder = new StringBuilder();
         StringIterate.forEach("1a2b3c", (CodePointProcedure) builder::appendCodePoint);
-        Assert.assertEquals("1a2b3c", builder.toString());
+        assertEquals("1a2b3c", builder.toString());
     }
 
     @Test
@@ -643,7 +650,7 @@ public class StringIterateTest
     {
         StringBuilder builder = new StringBuilder();
         StringIterate.forEach("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", (CodePointProcedure) builder::appendCodePoint);
-        Assert.assertEquals("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", builder.toString());
+        assertEquals("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", builder.toString());
     }
 
     @Test
@@ -651,9 +658,9 @@ public class StringIterateTest
     {
         StringBuilder builder = new StringBuilder();
         StringIterate.reverseForEach("1a2b3c", (CharProcedure) builder::append);
-        Assert.assertEquals("c3b2a1", builder.toString());
+        assertEquals("c3b2a1", builder.toString());
 
-        StringIterate.reverseForEach("", (char character) -> Assert.fail());
+        StringIterate.reverseForEach("", (char character) -> fail());
     }
 
     @Test
@@ -661,9 +668,9 @@ public class StringIterateTest
     {
         StringBuilder builder = new StringBuilder();
         StringIterate.reverseForEach("1a2b3c", (CodePointProcedure) builder::appendCodePoint);
-        Assert.assertEquals("c3b2a1", builder.toString());
+        assertEquals("c3b2a1", builder.toString());
 
-        StringIterate.reverseForEach("", (int codePoint) -> Assert.fail());
+        StringIterate.reverseForEach("", (int codePoint) -> fail());
     }
 
     @Test
@@ -671,8 +678,8 @@ public class StringIterateTest
     {
         StringBuilder builder = new StringBuilder();
         StringIterate.reverseForEach("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046\uD83D\uDE09", (CodePointProcedure) builder::appendCodePoint);
-        Assert.assertEquals("\uD83D\uDE09\u3046\uD840\uDC03\u3044\uD840\uDC00\u3042", builder.toString());
-        StringIterate.reverseForEach("", (int codePoint) -> Assert.fail());
+        assertEquals("\uD83D\uDE09\u3046\uD840\uDC03\u3044\uD840\uDC00\u3042", builder.toString());
+        StringIterate.reverseForEach("", (int codePoint) -> fail());
     }
 
     @Test
@@ -680,17 +687,17 @@ public class StringIterateTest
     {
         StringBuilder builder = new StringBuilder();
         StringIterate.reverseForEach("\u3042\uDC00\uD840\u3044\uDC03\uD840\u3046\uDE09\uD83D", (CodePointProcedure) builder::appendCodePoint);
-        Assert.assertEquals("\uD83D\uDE09\u3046\uD840\uDC03\u3044\uD840\uDC00\u3042", builder.toString());
+        assertEquals("\uD83D\uDE09\u3046\uD840\uDC03\u3044\uD840\uDC00\u3042", builder.toString());
 
         StringBuilder builder2 = new StringBuilder();
         StringIterate.reverseForEach("\u3042\uD840\u3044\uD840\u3046\uD840", (CodePointProcedure) builder2::appendCodePoint);
-        Assert.assertEquals("\uD840\u3046\uD840\u3044\uD840\u3042", builder2.toString());
+        assertEquals("\uD840\u3046\uD840\u3044\uD840\u3042", builder2.toString());
 
         StringBuilder builder3 = new StringBuilder();
         StringIterate.reverseForEach("\u3042\uDC00\u3044\uDC03\u3046\uDC06", (CodePointProcedure) builder3::appendCodePoint);
-        Assert.assertEquals("\uDC06\u3046\uDC03\u3044\uDC00\u3042", builder3.toString());
+        assertEquals("\uDC06\u3046\uDC03\u3044\uDC00\u3042", builder3.toString());
 
-        StringIterate.reverseForEach("", (int codePoint) -> Assert.fail());
+        StringIterate.reverseForEach("", (int codePoint) -> fail());
     }
 
     @Test
@@ -719,108 +726,108 @@ public class StringIterateTest
     public void csvTrimmedTokenToList()
     {
         String tokens = " 1,2 ";
-        Assert.assertEquals(FastList.newListWith("1", "2"), StringIterate.csvTrimmedTokensToList(tokens));
+        assertEquals(FastList.newListWith("1", "2"), StringIterate.csvTrimmedTokensToList(tokens));
     }
 
     @Test
     public void injectIntoTokens()
     {
-        Assert.assertEquals("123", StringIterate.injectIntoTokens("1,2,3", ",", null, AddFunction.STRING));
+        assertEquals("123", StringIterate.injectIntoTokens("1,2,3", ",", null, AddFunction.STRING));
     }
 
     @Test
     public void getLastToken()
     {
-        Assert.assertEquals("charlie", StringIterate.getLastToken("alpha~|~beta~|~charlie", "~|~"));
-        Assert.assertEquals("123", StringIterate.getLastToken("123", "~|~"));
-        Assert.assertEquals("", StringIterate.getLastToken("", "~|~"));
-        Assert.assertNull(StringIterate.getLastToken(null, "~|~"));
-        Assert.assertEquals("", StringIterate.getLastToken("123~|~", "~|~"));
-        Assert.assertEquals("123", StringIterate.getLastToken("~|~123", "~|~"));
+        assertEquals("charlie", StringIterate.getLastToken("alpha~|~beta~|~charlie", "~|~"));
+        assertEquals("123", StringIterate.getLastToken("123", "~|~"));
+        assertEquals("", StringIterate.getLastToken("", "~|~"));
+        assertNull(StringIterate.getLastToken(null, "~|~"));
+        assertEquals("", StringIterate.getLastToken("123~|~", "~|~"));
+        assertEquals("123", StringIterate.getLastToken("~|~123", "~|~"));
     }
 
     @Test
     public void getFirstToken()
     {
-        Assert.assertEquals("alpha", StringIterate.getFirstToken("alpha~|~beta~|~charlie", "~|~"));
-        Assert.assertEquals("123", StringIterate.getFirstToken("123", "~|~"));
-        Assert.assertEquals("", StringIterate.getFirstToken("", "~|~"));
-        Assert.assertNull(StringIterate.getFirstToken(null, "~|~"));
-        Assert.assertEquals("123", StringIterate.getFirstToken("123~|~", "~|~"));
-        Assert.assertEquals("", StringIterate.getFirstToken("~|~123,", "~|~"));
+        assertEquals("alpha", StringIterate.getFirstToken("alpha~|~beta~|~charlie", "~|~"));
+        assertEquals("123", StringIterate.getFirstToken("123", "~|~"));
+        assertEquals("", StringIterate.getFirstToken("", "~|~"));
+        assertNull(StringIterate.getFirstToken(null, "~|~"));
+        assertEquals("123", StringIterate.getFirstToken("123~|~", "~|~"));
+        assertEquals("", StringIterate.getFirstToken("~|~123,", "~|~"));
     }
 
     @Test
     public void isEmptyOrWhitespace()
     {
-        Assert.assertTrue(StringIterate.isEmptyOrWhitespace("   "));
-        Assert.assertFalse(StringIterate.isEmptyOrWhitespace(" 1  "));
+        assertTrue(StringIterate.isEmptyOrWhitespace("   "));
+        assertFalse(StringIterate.isEmptyOrWhitespace(" 1  "));
     }
 
     @Test
     public void notEmptyOrWhitespace()
     {
-        Assert.assertFalse(StringIterate.notEmptyOrWhitespace("   "));
-        Assert.assertTrue(StringIterate.notEmptyOrWhitespace(" 1  "));
+        assertFalse(StringIterate.notEmptyOrWhitespace("   "));
+        assertTrue(StringIterate.notEmptyOrWhitespace(" 1  "));
     }
 
     @Test
     public void isEmpty()
     {
-        Assert.assertTrue(StringIterate.isEmpty(""));
-        Assert.assertFalse(StringIterate.isEmpty("   "));
-        Assert.assertFalse(StringIterate.isEmpty("1"));
+        assertTrue(StringIterate.isEmpty(""));
+        assertFalse(StringIterate.isEmpty("   "));
+        assertFalse(StringIterate.isEmpty("1"));
     }
 
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(StringIterate.notEmpty(""));
-        Assert.assertTrue(StringIterate.notEmpty("   "));
-        Assert.assertTrue(StringIterate.notEmpty("1"));
+        assertFalse(StringIterate.notEmpty(""));
+        assertTrue(StringIterate.notEmpty("   "));
+        assertTrue(StringIterate.notEmpty("1"));
     }
 
     @Test
     public void repeat()
     {
-        Assert.assertEquals("", StringIterate.repeat("", 42));
-        Assert.assertEquals("    ", StringIterate.repeat(' ', 4));
-        Assert.assertEquals("        ", StringIterate.repeat(" ", 8));
-        Assert.assertEquals("CubedCubedCubed", StringIterate.repeat("Cubed", 3));
+        assertEquals("", StringIterate.repeat("", 42));
+        assertEquals("    ", StringIterate.repeat(' ', 4));
+        assertEquals("        ", StringIterate.repeat(" ", 8));
+        assertEquals("CubedCubedCubed", StringIterate.repeat("Cubed", 3));
     }
 
     @Test
     public void padOrTrim()
     {
-        Assert.assertEquals("abcdefghijkl", StringIterate.padOrTrim("abcdefghijkl", 12));
-        Assert.assertEquals("this n", StringIterate.padOrTrim("this needs to be trimmed", 6));
-        Assert.assertEquals("pad this      ", StringIterate.padOrTrim("pad this", 14));
+        assertEquals("abcdefghijkl", StringIterate.padOrTrim("abcdefghijkl", 12));
+        assertEquals("this n", StringIterate.padOrTrim("this needs to be trimmed", 6));
+        assertEquals("pad this      ", StringIterate.padOrTrim("pad this", 14));
     }
 
     @Test
     public void string()
     {
-        Assert.assertEquals("Token2", StringIterate.getLastToken("Token1DelimiterToken2", "Delimiter"));
+        assertEquals("Token2", StringIterate.getLastToken("Token1DelimiterToken2", "Delimiter"));
     }
 
     @Test
     public void toList()
     {
-        Assert.assertEquals(FastList.newListWith('a', 'a', 'b', 'c', 'd', 'e'), StringIterate.toList("aabcde"));
+        assertEquals(FastList.newListWith('a', 'a', 'b', 'c', 'd', 'e'), StringIterate.toList("aabcde"));
     }
 
     @Test
     public void toLowercaseList()
     {
         MutableList<Character> set = StringIterate.toLowercaseList("America");
-        Assert.assertEquals(FastList.newListWith('a', 'm', 'e', 'r', 'i', 'c', 'a'), set);
+        assertEquals(FastList.newListWith('a', 'm', 'e', 'r', 'i', 'c', 'a'), set);
     }
 
     @Test
     public void toUppercaseList()
     {
         MutableList<Character> set = StringIterate.toUppercaseList("America");
-        Assert.assertEquals(FastList.newListWith('A', 'M', 'E', 'R', 'I', 'C', 'A'), set);
+        assertEquals(FastList.newListWith('A', 'M', 'E', 'R', 'I', 'C', 'A'), set);
     }
 
     @Test
@@ -832,27 +839,27 @@ public class StringIterateTest
     @Test
     public void chunk()
     {
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with("ab", "cd", "ef"),
                 StringIterate.chunk("abcdef", 2));
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with("abc", "def"),
                 StringIterate.chunk("abcdef", 3));
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with("abc", "def", "g"),
                 StringIterate.chunk("abcdefg", 3));
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with("abcdef"),
                 StringIterate.chunk("abcdef", 6));
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with("abcdef"),
                 StringIterate.chunk("abcdef", 7));
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(),
                 StringIterate.chunk("", 2));
     }
@@ -873,16 +880,16 @@ public class StringIterateTest
     public void toLowercaseSet()
     {
         MutableSet<Character> set = StringIterate.toLowercaseSet("America");
-        Assert.assertEquals(UnifiedSet.newSetWith('a', 'm', 'e', 'r', 'i', 'c'), set);
-        Assert.assertEquals(StringIterate.asLowercaseSet("America"), set);
+        assertEquals(UnifiedSet.newSetWith('a', 'm', 'e', 'r', 'i', 'c'), set);
+        assertEquals(StringIterate.asLowercaseSet("America"), set);
     }
 
     @Test
     public void toUppercaseSet()
     {
         MutableSet<Character> set = StringIterate.toUppercaseSet("America");
-        Assert.assertEquals(UnifiedSet.newSetWith('A', 'M', 'E', 'R', 'I', 'C'), set);
-        Assert.assertEquals(StringIterate.asUppercaseSet("America"), set);
+        assertEquals(UnifiedSet.newSetWith('A', 'M', 'E', 'R', 'I', 'C'), set);
+        assertEquals(StringIterate.asUppercaseSet("America"), set);
     }
 
     @Test
@@ -890,51 +897,51 @@ public class StringIterateTest
     {
         String oompaLoompa = "oompaloompa";
 
-        Assert.assertEquals(Tuples.twin("oompa", "loompa"), StringIterate.splitAtIndex(oompaLoompa, 5));
-        Assert.assertEquals(Tuples.twin("", oompaLoompa), StringIterate.splitAtIndex(oompaLoompa, 0));
-        Assert.assertEquals(Tuples.twin(oompaLoompa, ""), StringIterate.splitAtIndex(oompaLoompa, oompaLoompa.length()));
+        assertEquals(Tuples.twin("oompa", "loompa"), StringIterate.splitAtIndex(oompaLoompa, 5));
+        assertEquals(Tuples.twin("", oompaLoompa), StringIterate.splitAtIndex(oompaLoompa, 0));
+        assertEquals(Tuples.twin(oompaLoompa, ""), StringIterate.splitAtIndex(oompaLoompa, oompaLoompa.length()));
 
-        Assert.assertEquals(Tuples.twin("", ""), StringIterate.splitAtIndex("", 0));
+        assertEquals(Tuples.twin("", ""), StringIterate.splitAtIndex("", 0));
 
-        Assert.assertThrows(StringIndexOutOfBoundsException.class, () -> StringIterate.splitAtIndex(oompaLoompa, 17));
-        Assert.assertThrows(StringIndexOutOfBoundsException.class, () -> StringIterate.splitAtIndex(oompaLoompa, -8));
+        assertThrows(StringIndexOutOfBoundsException.class, () -> StringIterate.splitAtIndex(oompaLoompa, 17));
+        assertThrows(StringIndexOutOfBoundsException.class, () -> StringIterate.splitAtIndex(oompaLoompa, -8));
     }
 
     @Test
     public void toLowercaseBag()
     {
         MutableBag<Character> lowercaseBag = StringIterate.toLowercaseBag("America");
-        Assert.assertEquals(2, lowercaseBag.occurrencesOf(Character.valueOf('a')));
-        Assert.assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('m')));
-        Assert.assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('e')));
-        Assert.assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('r')));
-        Assert.assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('i')));
-        Assert.assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('c')));
+        assertEquals(2, lowercaseBag.occurrencesOf(Character.valueOf('a')));
+        assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('m')));
+        assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('e')));
+        assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('r')));
+        assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('i')));
+        assertEquals(1, lowercaseBag.occurrencesOf(Character.valueOf('c')));
     }
 
     @Test
     public void toUppercaseBag()
     {
         MutableBag<Character> uppercaseBag = StringIterate.toUppercaseBag("America");
-        Assert.assertEquals(2, uppercaseBag.occurrencesOf(Character.valueOf('A')));
-        Assert.assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('M')));
-        Assert.assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('E')));
-        Assert.assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('R')));
-        Assert.assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('I')));
-        Assert.assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('C')));
+        assertEquals(2, uppercaseBag.occurrencesOf(Character.valueOf('A')));
+        assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('M')));
+        assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('E')));
+        assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('R')));
+        assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('I')));
+        assertEquals(1, uppercaseBag.occurrencesOf(Character.valueOf('C')));
     }
 
     @Test
     public void toBag()
     {
         MutableBag<Character> bag = StringIterate.toBag("America");
-        Assert.assertEquals(1, bag.occurrencesOf(Character.valueOf('A')));
-        Assert.assertEquals(1, bag.occurrencesOf(Character.valueOf('m')));
-        Assert.assertEquals(1, bag.occurrencesOf(Character.valueOf('e')));
-        Assert.assertEquals(1, bag.occurrencesOf(Character.valueOf('r')));
-        Assert.assertEquals(1, bag.occurrencesOf(Character.valueOf('i')));
-        Assert.assertEquals(1, bag.occurrencesOf(Character.valueOf('c')));
-        Assert.assertEquals(1, bag.occurrencesOf(Character.valueOf('a')));
+        assertEquals(1, bag.occurrencesOf(Character.valueOf('A')));
+        assertEquals(1, bag.occurrencesOf(Character.valueOf('m')));
+        assertEquals(1, bag.occurrencesOf(Character.valueOf('e')));
+        assertEquals(1, bag.occurrencesOf(Character.valueOf('r')));
+        assertEquals(1, bag.occurrencesOf(Character.valueOf('i')));
+        assertEquals(1, bag.occurrencesOf(Character.valueOf('c')));
+        assertEquals(1, bag.occurrencesOf(Character.valueOf('a')));
     }
 
     @Test

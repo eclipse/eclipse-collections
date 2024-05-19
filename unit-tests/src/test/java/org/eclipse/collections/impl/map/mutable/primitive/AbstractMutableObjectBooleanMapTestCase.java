@@ -21,8 +21,13 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractObjectBooleanMapTestCase
 {
@@ -52,13 +57,13 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         super.get();
         MutableObjectBooleanMap<String> map1 = this.classUnderTest();
         map1.put("0", false);
-        Assert.assertFalse(map1.get("0"));
+        assertFalse(map1.get("0"));
 
         map1.put("5", true);
-        Assert.assertTrue(map1.get("5"));
+        assertTrue(map1.get("5"));
 
         map1.put(null, true);
-        Assert.assertTrue(map1.get(null));
+        assertTrue(map1.get(null));
     }
 
     @Override
@@ -67,17 +72,17 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         super.getIfAbsent();
         MutableObjectBooleanMap<String> map1 = this.classUnderTest();
         map1.removeKey("0");
-        Assert.assertTrue(map1.getIfAbsent("0", true));
-        Assert.assertFalse(map1.getIfAbsent("0", false));
+        assertTrue(map1.getIfAbsent("0", true));
+        assertFalse(map1.getIfAbsent("0", false));
 
         map1.put("0", false);
-        Assert.assertFalse(map1.getIfAbsent("0", true));
+        assertFalse(map1.getIfAbsent("0", true));
 
         map1.put("5", true);
-        Assert.assertTrue(map1.getIfAbsent("5", false));
+        assertTrue(map1.getIfAbsent("5", false));
 
         map1.put(null, false);
-        Assert.assertFalse(map1.getIfAbsent(null, true));
+        assertFalse(map1.getIfAbsent(null, true));
     }
 
     @Override
@@ -86,26 +91,26 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         super.getOrThrow();
         MutableObjectBooleanMap<String> map1 = this.classUnderTest();
         map1.removeKey("0");
-        Assert.assertThrows(IllegalStateException.class, () -> map1.getOrThrow("0"));
+        assertThrows(IllegalStateException.class, () -> map1.getOrThrow("0"));
         map1.put("0", false);
-        Assert.assertFalse(map1.getOrThrow("0"));
+        assertFalse(map1.getOrThrow("0"));
 
         map1.put("5", true);
-        Assert.assertTrue(map1.getOrThrow("5"));
+        assertTrue(map1.getOrThrow("5"));
 
         map1.put(null, false);
-        Assert.assertFalse(map1.getOrThrow(null));
+        assertFalse(map1.getOrThrow(null));
     }
 
     @Test
     public void getAndPut()
     {
         MutableObjectBooleanMap<Integer> map1 = this.getEmptyMap();
-        Assert.assertTrue(map1.getAndPut(Integer.valueOf(1), false, true));
-        Assert.assertFalse(map1.getAndPut(Integer.valueOf(2), false, false));
-        Assert.assertFalse(map1.getAndPut(Integer.valueOf(1), true, true));
+        assertTrue(map1.getAndPut(Integer.valueOf(1), false, true));
+        assertFalse(map1.getAndPut(Integer.valueOf(2), false, false));
+        assertFalse(map1.getAndPut(Integer.valueOf(1), true, true));
         map1.remove(Integer.valueOf(1));
-        Assert.assertFalse(map1.getAndPut(Integer.valueOf(1), true, false));
+        assertFalse(map1.getAndPut(Integer.valueOf(1), true, false));
     }
 
     @Override
@@ -114,27 +119,27 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         super.containsKey();
         MutableObjectBooleanMap<String> map1 = this.classUnderTest();
         map1.removeKey("0");
-        Assert.assertFalse(map1.containsKey("0"));
-        Assert.assertFalse(map1.get("0"));
+        assertFalse(map1.containsKey("0"));
+        assertFalse(map1.get("0"));
         map1.removeKey("0");
-        Assert.assertFalse(map1.containsKey("0"));
-        Assert.assertFalse(map1.get("0"));
+        assertFalse(map1.containsKey("0"));
+        assertFalse(map1.get("0"));
 
         map1.removeKey("1");
-        Assert.assertFalse(map1.containsKey("1"));
-        Assert.assertFalse(map1.get("1"));
+        assertFalse(map1.containsKey("1"));
+        assertFalse(map1.get("1"));
 
         map1.removeKey("2");
-        Assert.assertFalse(map1.containsKey("2"));
-        Assert.assertFalse(map1.get("2"));
+        assertFalse(map1.containsKey("2"));
+        assertFalse(map1.get("2"));
 
         map1.removeKey("3");
-        Assert.assertFalse(map1.containsKey("3"));
-        Assert.assertFalse(map1.get("3"));
+        assertFalse(map1.containsKey("3"));
+        assertFalse(map1.get("3"));
         map1.put(null, true);
-        Assert.assertTrue(map1.containsKey(null));
+        assertTrue(map1.containsKey(null));
         map1.removeKey(null);
-        Assert.assertFalse(map1.containsKey(null));
+        assertFalse(map1.containsKey(null));
     }
 
     @Override
@@ -144,10 +149,10 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         this.classUnderTest().clear();
 
         this.classUnderTest().put("5", true);
-        Assert.assertTrue(this.classUnderTest().containsValue(true));
+        assertTrue(this.classUnderTest().containsValue(true));
 
         this.classUnderTest().put(null, false);
-        Assert.assertTrue(this.classUnderTest().containsValue(false));
+        assertTrue(this.classUnderTest().containsValue(false));
     }
 
     @Override
@@ -170,17 +175,17 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         map1.clear();
 
         map1.put("5", true);
-        Assert.assertTrue(map1.contains(true));
+        assertTrue(map1.contains(true));
 
         map1.put(null, false);
-        Assert.assertTrue(map1.contains(false));
+        assertTrue(map1.contains(false));
 
         map1.removeKey("5");
-        Assert.assertFalse(map1.contains(true));
-        Assert.assertTrue(map1.contains(false));
+        assertFalse(map1.contains(true));
+        assertTrue(map1.contains(false));
 
         map1.removeKey(null);
-        Assert.assertFalse(map1.contains(false));
+        assertFalse(map1.contains(false));
     }
 
     @Override
@@ -191,21 +196,21 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         map1.clear();
 
         map1.put("5", true);
-        Assert.assertTrue(map1.containsAll(true));
-        Assert.assertFalse(map1.containsAll(true, false));
-        Assert.assertFalse(map1.containsAll(false, false));
+        assertTrue(map1.containsAll(true));
+        assertFalse(map1.containsAll(true, false));
+        assertFalse(map1.containsAll(false, false));
 
         map1.put(null, false);
-        Assert.assertTrue(map1.containsAll(false));
-        Assert.assertTrue(map1.containsAll(true, false));
+        assertTrue(map1.containsAll(false));
+        assertTrue(map1.containsAll(true, false));
 
         map1.removeKey("5");
-        Assert.assertFalse(map1.containsAll(true));
-        Assert.assertFalse(map1.containsAll(true, false));
-        Assert.assertTrue(map1.containsAll(false, false));
+        assertFalse(map1.containsAll(true));
+        assertFalse(map1.containsAll(true, false));
+        assertTrue(map1.containsAll(false, false));
 
         map1.removeKey(null);
-        Assert.assertFalse(map1.containsAll(false, true));
+        assertFalse(map1.containsAll(false, true));
     }
 
     @Override
@@ -216,21 +221,21 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         map1.clear();
 
         map1.put("5", true);
-        Assert.assertTrue(map1.containsAll(BooleanArrayList.newListWith(true)));
-        Assert.assertFalse(map1.containsAll(BooleanArrayList.newListWith(true, false)));
-        Assert.assertFalse(map1.containsAll(BooleanArrayList.newListWith(false, false)));
+        assertTrue(map1.containsAll(BooleanArrayList.newListWith(true)));
+        assertFalse(map1.containsAll(BooleanArrayList.newListWith(true, false)));
+        assertFalse(map1.containsAll(BooleanArrayList.newListWith(false, false)));
 
         map1.put(null, false);
-        Assert.assertTrue(map1.containsAll(BooleanArrayList.newListWith(false)));
-        Assert.assertTrue(map1.containsAll(BooleanArrayList.newListWith(true, false)));
+        assertTrue(map1.containsAll(BooleanArrayList.newListWith(false)));
+        assertTrue(map1.containsAll(BooleanArrayList.newListWith(true, false)));
 
         map1.removeKey("5");
-        Assert.assertFalse(map1.containsAll(BooleanArrayList.newListWith(true)));
-        Assert.assertFalse(map1.containsAll(BooleanArrayList.newListWith(true, false)));
-        Assert.assertTrue(map1.containsAll(BooleanArrayList.newListWith(false, false)));
+        assertFalse(map1.containsAll(BooleanArrayList.newListWith(true)));
+        assertFalse(map1.containsAll(BooleanArrayList.newListWith(true, false)));
+        assertTrue(map1.containsAll(BooleanArrayList.newListWith(false, false)));
 
         map1.removeKey(null);
-        Assert.assertFalse(map1.containsAll(BooleanArrayList.newListWith(false, true)));
+        assertFalse(map1.containsAll(BooleanArrayList.newListWith(false, true)));
     }
 
     protected static MutableList<String> generateCollisions()
@@ -253,15 +258,15 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         MutableObjectBooleanMap<String> hashMap = this.getEmptyMap();
         hashMap.put("0", true);
         hashMap.clear();
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), hashMap);
+        assertEquals(ObjectBooleanHashMap.newMap(), hashMap);
 
         hashMap.put("1", false);
         hashMap.clear();
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), hashMap);
+        assertEquals(ObjectBooleanHashMap.newMap(), hashMap);
 
         hashMap.put(null, true);
         hashMap.clear();
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), hashMap);
+        assertEquals(ObjectBooleanHashMap.newMap(), hashMap);
     }
 
     @Test
@@ -269,34 +274,34 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
     {
         MutableObjectBooleanMap<String> map0 = this.newWithKeysValues("0", true, "1", false);
         map0.removeKey("1");
-        Assert.assertEquals(this.newWithKeysValues("0", true), map0);
+        assertEquals(this.newWithKeysValues("0", true), map0);
         map0.removeKey("0");
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), map0);
+        assertEquals(ObjectBooleanHashMap.newMap(), map0);
 
         MutableObjectBooleanMap<String> map1 = this.newWithKeysValues("0", false, "1", true);
         map1.removeKey("0");
-        Assert.assertEquals(this.newWithKeysValues("1", true), map1);
+        assertEquals(this.newWithKeysValues("1", true), map1);
         map1.removeKey("1");
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), map1);
+        assertEquals(ObjectBooleanHashMap.newMap(), map1);
 
         this.map.removeKey("5");
-        Assert.assertEquals(this.newWithKeysValues("0", true, "1", true, "2", false), this.map);
+        assertEquals(this.newWithKeysValues("0", true, "1", true, "2", false), this.map);
         this.map.removeKey("0");
-        Assert.assertEquals(this.newWithKeysValues("1", true, "2", false), this.map);
+        assertEquals(this.newWithKeysValues("1", true, "2", false), this.map);
         this.map.removeKey("1");
-        Assert.assertEquals(this.newWithKeysValues("2", false), this.map);
+        assertEquals(this.newWithKeysValues("2", false), this.map);
         this.map.removeKey("2");
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), this.map);
+        assertEquals(ObjectBooleanHashMap.newMap(), this.map);
         this.map.removeKey("0");
         this.map.removeKey("1");
         this.map.removeKey("2");
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), this.map);
+        assertEquals(ObjectBooleanHashMap.newMap(), this.map);
         Verify.assertEmpty(this.map);
 
         this.map.put(null, true);
-        Assert.assertTrue(this.map.get(null));
+        assertTrue(this.map.get(null));
         this.map.removeKey(null);
-        Assert.assertFalse(this.map.get(null));
+        assertFalse(this.map.get(null));
     }
 
     @Test
@@ -306,15 +311,15 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         this.map.put("1", false);
         this.map.put("2", true);
         ObjectBooleanHashMap<String> expected = ObjectBooleanHashMap.newWithKeysValues("0", false, "1", false, "2", true);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         this.map.put("5", true);
         expected.put("5", true);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         this.map.put(null, false);
         expected.put(null, false);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
     }
 
     @Test
@@ -329,74 +334,74 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         hashMap.put(collision1, true);
         hashMap.put(collision2, false);
         hashMap.put(collision3, true);
-        Assert.assertFalse(hashMap.get(collision2));
+        assertFalse(hashMap.get(collision2));
         hashMap.removeKey(collision2);
         hashMap.put(collision4, false);
-        Assert.assertEquals(this.newWithKeysValues(collision1, true, collision3, true, collision4, false), hashMap);
+        assertEquals(this.newWithKeysValues(collision1, true, collision3, true, collision4, false), hashMap);
 
         MutableObjectBooleanMap<String> hashMap1 = this.getEmptyMap();
         hashMap1.put(collision1, false);
         hashMap1.put(collision2, false);
         hashMap1.put(collision3, true);
-        Assert.assertFalse(hashMap1.get(collision1));
+        assertFalse(hashMap1.get(collision1));
         hashMap1.removeKey(collision1);
         hashMap1.put(collision4, true);
-        Assert.assertEquals(this.newWithKeysValues(collision2, false, collision3, true, collision4, true), hashMap1);
+        assertEquals(this.newWithKeysValues(collision2, false, collision3, true, collision4, true), hashMap1);
 
         MutableObjectBooleanMap<String> hashMap2 = this.getEmptyMap();
         hashMap2.put(collision1, true);
         hashMap2.put(collision2, true);
         hashMap2.put(collision3, false);
-        Assert.assertFalse(hashMap2.get(collision3));
+        assertFalse(hashMap2.get(collision3));
         hashMap2.removeKey(collision3);
         hashMap2.put(collision4, false);
-        Assert.assertEquals(this.newWithKeysValues(collision1, true, collision2, true, collision4, false), hashMap2);
+        assertEquals(this.newWithKeysValues(collision1, true, collision2, true, collision4, false), hashMap2);
 
         MutableObjectBooleanMap<String> hashMap3 = this.getEmptyMap();
         hashMap3.put(collision1, true);
         hashMap3.put(collision2, true);
         hashMap3.put(collision3, false);
-        Assert.assertTrue(hashMap3.get(collision2));
-        Assert.assertFalse(hashMap3.get(collision3));
+        assertTrue(hashMap3.get(collision2));
+        assertFalse(hashMap3.get(collision3));
         hashMap3.removeKey(collision2);
         hashMap3.removeKey(collision3);
         hashMap3.put(collision4, false);
-        Assert.assertEquals(this.newWithKeysValues(collision1, true, collision4, false), hashMap3);
+        assertEquals(this.newWithKeysValues(collision1, true, collision4, false), hashMap3);
 
         MutableObjectBooleanMap<String> hashMap4 = this.getEmptyMap();
         hashMap4.put(null, false);
-        Assert.assertEquals(this.newWithKeysValues(null, false), hashMap4);
+        assertEquals(this.newWithKeysValues(null, false), hashMap4);
         hashMap4.put(null, true);
-        Assert.assertEquals(this.newWithKeysValues(null, true), hashMap4);
+        assertEquals(this.newWithKeysValues(null, true), hashMap4);
     }
 
     @Test
     public void getIfAbsentPut_Function()
     {
         MutableObjectBooleanMap<Integer> map1 = this.getEmptyMap();
-        Assert.assertTrue(map1.getIfAbsentPut(0, () -> true));
+        assertTrue(map1.getIfAbsentPut(0, () -> true));
         BooleanFunction0 factoryThrows = () ->
         {
             throw new AssertionError();
         };
-        Assert.assertTrue(map1.getIfAbsentPut(0, factoryThrows));
-        Assert.assertEquals(this.newWithKeysValues(0, true), map1);
-        Assert.assertTrue(map1.getIfAbsentPut(1, () -> true));
-        Assert.assertTrue(map1.getIfAbsentPut(1, factoryThrows));
-        Assert.assertEquals(this.newWithKeysValues(0, true, 1, true), map1);
+        assertTrue(map1.getIfAbsentPut(0, factoryThrows));
+        assertEquals(this.newWithKeysValues(0, true), map1);
+        assertTrue(map1.getIfAbsentPut(1, () -> true));
+        assertTrue(map1.getIfAbsentPut(1, factoryThrows));
+        assertEquals(this.newWithKeysValues(0, true, 1, true), map1);
 
         MutableObjectBooleanMap<Integer> map2 = this.getEmptyMap();
-        Assert.assertFalse(map2.getIfAbsentPut(1, () -> false));
-        Assert.assertFalse(map2.getIfAbsentPut(1, factoryThrows));
-        Assert.assertEquals(this.newWithKeysValues(1, false), map2);
-        Assert.assertFalse(map2.getIfAbsentPut(0, () -> false));
-        Assert.assertFalse(map2.getIfAbsentPut(0, factoryThrows));
-        Assert.assertEquals(this.newWithKeysValues(0, false, 1, false), map2);
+        assertFalse(map2.getIfAbsentPut(1, () -> false));
+        assertFalse(map2.getIfAbsentPut(1, factoryThrows));
+        assertEquals(this.newWithKeysValues(1, false), map2);
+        assertFalse(map2.getIfAbsentPut(0, () -> false));
+        assertFalse(map2.getIfAbsentPut(0, factoryThrows));
+        assertEquals(this.newWithKeysValues(0, false, 1, false), map2);
 
         MutableObjectBooleanMap<Integer> map3 = this.getEmptyMap();
-        Assert.assertTrue(map3.getIfAbsentPut(null, () -> true));
-        Assert.assertTrue(map3.getIfAbsentPut(null, factoryThrows));
-        Assert.assertEquals(this.newWithKeysValues(null, true), map3);
+        assertTrue(map3.getIfAbsentPut(null, () -> true));
+        assertTrue(map3.getIfAbsentPut(null, factoryThrows));
+        assertEquals(this.newWithKeysValues(null, true), map3);
     }
 
     @Test
@@ -405,29 +410,29 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         BooleanFunction<String> functionLengthEven = string -> (string.length() & 1) == 0;
 
         MutableObjectBooleanMap<Integer> map1 = this.getEmptyMap();
-        Assert.assertFalse(map1.getIfAbsentPutWith(0, functionLengthEven, "123456789"));
+        assertFalse(map1.getIfAbsentPutWith(0, functionLengthEven, "123456789"));
         BooleanFunction<String> functionThrows = string ->
         {
             throw new AssertionError();
         };
-        Assert.assertFalse(map1.getIfAbsentPutWith(0, functionThrows, "unused"));
-        Assert.assertEquals(this.newWithKeysValues(0, false), map1);
-        Assert.assertFalse(map1.getIfAbsentPutWith(1, functionLengthEven, "123456789"));
-        Assert.assertFalse(map1.getIfAbsentPutWith(1, functionThrows, "unused"));
-        Assert.assertEquals(this.newWithKeysValues(0, false, 1, false), map1);
+        assertFalse(map1.getIfAbsentPutWith(0, functionThrows, "unused"));
+        assertEquals(this.newWithKeysValues(0, false), map1);
+        assertFalse(map1.getIfAbsentPutWith(1, functionLengthEven, "123456789"));
+        assertFalse(map1.getIfAbsentPutWith(1, functionThrows, "unused"));
+        assertEquals(this.newWithKeysValues(0, false, 1, false), map1);
 
         MutableObjectBooleanMap<Integer> map2 = this.getEmptyMap();
-        Assert.assertTrue(map2.getIfAbsentPutWith(1, functionLengthEven, "1234567890"));
-        Assert.assertTrue(map2.getIfAbsentPutWith(1, functionThrows, "unused0"));
-        Assert.assertEquals(this.newWithKeysValues(1, true), map2);
-        Assert.assertTrue(map2.getIfAbsentPutWith(0, functionLengthEven, "1234567890"));
-        Assert.assertTrue(map2.getIfAbsentPutWith(0, functionThrows, "unused0"));
-        Assert.assertEquals(this.newWithKeysValues(0, true, 1, true), map2);
+        assertTrue(map2.getIfAbsentPutWith(1, functionLengthEven, "1234567890"));
+        assertTrue(map2.getIfAbsentPutWith(1, functionThrows, "unused0"));
+        assertEquals(this.newWithKeysValues(1, true), map2);
+        assertTrue(map2.getIfAbsentPutWith(0, functionLengthEven, "1234567890"));
+        assertTrue(map2.getIfAbsentPutWith(0, functionThrows, "unused0"));
+        assertEquals(this.newWithKeysValues(0, true, 1, true), map2);
 
         MutableObjectBooleanMap<Integer> map3 = this.getEmptyMap();
-        Assert.assertFalse(map3.getIfAbsentPutWith(null, functionLengthEven, "123456789"));
-        Assert.assertFalse(map3.getIfAbsentPutWith(null, functionThrows, "unused"));
-        Assert.assertEquals(this.newWithKeysValues(null, false), map3);
+        assertFalse(map3.getIfAbsentPutWith(null, functionLengthEven, "123456789"));
+        assertFalse(map3.getIfAbsentPutWith(null, functionThrows, "unused"));
+        assertEquals(this.newWithKeysValues(null, false), map3);
     }
 
     @Test
@@ -436,29 +441,29 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         BooleanFunction<Integer> function = anObject -> anObject == null || (anObject & 1) == 0;
 
         MutableObjectBooleanMap<Integer> map1 = this.getEmptyMap();
-        Assert.assertTrue(map1.getIfAbsentPutWithKey(0, function));
+        assertTrue(map1.getIfAbsentPutWithKey(0, function));
         BooleanFunction<Integer> functionThrows = anObject ->
         {
             throw new AssertionError();
         };
-        Assert.assertTrue(map1.getIfAbsentPutWithKey(0, functionThrows));
-        Assert.assertEquals(this.newWithKeysValues(0, true), map1);
-        Assert.assertFalse(map1.getIfAbsentPutWithKey(1, function));
-        Assert.assertFalse(map1.getIfAbsentPutWithKey(1, functionThrows));
-        Assert.assertEquals(this.newWithKeysValues(0, true, 1, false), map1);
+        assertTrue(map1.getIfAbsentPutWithKey(0, functionThrows));
+        assertEquals(this.newWithKeysValues(0, true), map1);
+        assertFalse(map1.getIfAbsentPutWithKey(1, function));
+        assertFalse(map1.getIfAbsentPutWithKey(1, functionThrows));
+        assertEquals(this.newWithKeysValues(0, true, 1, false), map1);
 
         MutableObjectBooleanMap<Integer> map2 = this.getEmptyMap();
-        Assert.assertFalse(map2.getIfAbsentPutWithKey(1, function));
-        Assert.assertFalse(map2.getIfAbsentPutWithKey(1, functionThrows));
-        Assert.assertEquals(this.newWithKeysValues(1, false), map2);
-        Assert.assertTrue(map2.getIfAbsentPutWithKey(0, function));
-        Assert.assertTrue(map2.getIfAbsentPutWithKey(0, functionThrows));
-        Assert.assertEquals(this.newWithKeysValues(0, true, 1, false), map2);
+        assertFalse(map2.getIfAbsentPutWithKey(1, function));
+        assertFalse(map2.getIfAbsentPutWithKey(1, functionThrows));
+        assertEquals(this.newWithKeysValues(1, false), map2);
+        assertTrue(map2.getIfAbsentPutWithKey(0, function));
+        assertTrue(map2.getIfAbsentPutWithKey(0, functionThrows));
+        assertEquals(this.newWithKeysValues(0, true, 1, false), map2);
 
         MutableObjectBooleanMap<Integer> map3 = this.getEmptyMap();
-        Assert.assertTrue(map3.getIfAbsentPutWithKey(null, function));
-        Assert.assertTrue(map3.getIfAbsentPutWithKey(null, functionThrows));
-        Assert.assertEquals(this.newWithKeysValues(null, true), map3);
+        assertTrue(map3.getIfAbsentPutWithKey(null, function));
+        assertTrue(map3.getIfAbsentPutWithKey(null, functionThrows));
+        assertEquals(this.newWithKeysValues(null, true), map3);
     }
 
     @Test
@@ -466,8 +471,8 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
     {
         MutableObjectBooleanMap<Integer> emptyMap = this.getEmptyMap();
         MutableObjectBooleanMap<Integer> hashMap = emptyMap.withKeyValue(1, true);
-        Assert.assertEquals(this.newWithKeysValues(1, true), hashMap);
-        Assert.assertSame(emptyMap, hashMap);
+        assertEquals(this.newWithKeysValues(1, true), hashMap);
+        assertSame(emptyMap, hashMap);
     }
 
     @Test
@@ -475,13 +480,13 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
     {
         MutableObjectBooleanMap<Integer> hashMap = this.newWithKeysValues(1, true, 2, true, 3, false, 4, false);
         MutableObjectBooleanMap<Integer> actual = hashMap.withoutKey(5);
-        Assert.assertSame(hashMap, actual);
-        Assert.assertEquals(this.newWithKeysValues(1, true, 2, true, 3, false, 4, false), actual);
-        Assert.assertEquals(this.newWithKeysValues(1, true, 2, true, 3, false), hashMap.withoutKey(4));
-        Assert.assertEquals(this.newWithKeysValues(1, true, 2, true), hashMap.withoutKey(3));
-        Assert.assertEquals(this.newWithKeysValues(1, true), hashMap.withoutKey(2));
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutKey(1));
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutKey(1));
+        assertSame(hashMap, actual);
+        assertEquals(this.newWithKeysValues(1, true, 2, true, 3, false, 4, false), actual);
+        assertEquals(this.newWithKeysValues(1, true, 2, true, 3, false), hashMap.withoutKey(4));
+        assertEquals(this.newWithKeysValues(1, true, 2, true), hashMap.withoutKey(3));
+        assertEquals(this.newWithKeysValues(1, true), hashMap.withoutKey(2));
+        assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutKey(1));
+        assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutKey(1));
     }
 
     @Test
@@ -489,12 +494,12 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
     {
         MutableObjectBooleanMap<Integer> hashMap = this.newWithKeysValues(1, true, 2, true, 3, false, 4, false);
         MutableObjectBooleanMap<Integer> actual = hashMap.withoutAllKeys(FastList.newListWith(5, 6, 7));
-        Assert.assertSame(hashMap, actual);
-        Assert.assertEquals(this.newWithKeysValues(1, true, 2, true, 3, false, 4, false), actual);
-        Assert.assertEquals(this.newWithKeysValues(1, true, 2, true), hashMap.withoutAllKeys(FastList.newListWith(5, 4, 3)));
-        Assert.assertEquals(this.newWithKeysValues(1, true), hashMap.withoutAllKeys(FastList.newListWith(2)));
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutAllKeys(FastList.newListWith(1)));
-        Assert.assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutAllKeys(FastList.newListWith(5, 6)));
+        assertSame(hashMap, actual);
+        assertEquals(this.newWithKeysValues(1, true, 2, true, 3, false, 4, false), actual);
+        assertEquals(this.newWithKeysValues(1, true, 2, true), hashMap.withoutAllKeys(FastList.newListWith(5, 4, 3)));
+        assertEquals(this.newWithKeysValues(1, true), hashMap.withoutAllKeys(FastList.newListWith(2)));
+        assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutAllKeys(FastList.newListWith(1)));
+        assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutAllKeys(FastList.newListWith(5, 6)));
     }
 
     @Test
@@ -509,29 +514,29 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         Iterable<ObjectBooleanPair<Integer>> completeIterable = Iterables.iList(
                 PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), true),
                 PrimitiveTuples.pair(Integer.valueOf(3), false), PrimitiveTuples.pair(Integer.valueOf(4), false));
-        Assert.assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
-        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
+        assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
+        assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
+        assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
+        assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
     }
 
     @Test
     public void asUnmodifiable()
     {
         Verify.assertInstanceOf(UnmodifiableObjectBooleanMap.class, this.map.asUnmodifiable());
-        Assert.assertEquals(new UnmodifiableObjectBooleanMap<>(this.map), this.map.asUnmodifiable());
+        assertEquals(new UnmodifiableObjectBooleanMap<>(this.map), this.map.asUnmodifiable());
     }
 
     @Test
     public void asSynchronized()
     {
         Verify.assertInstanceOf(SynchronizedObjectBooleanMap.class, this.map.asSynchronized());
-        Assert.assertEquals(new SynchronizedObjectBooleanMap<>(this.map), this.map.asSynchronized());
+        assertEquals(new SynchronizedObjectBooleanMap<>(this.map), this.map.asSynchronized());
     }
 
     @Test
@@ -555,10 +560,10 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         MutableObjectBooleanMap<String> map = this.classUnderTest();
         Verify.assertNotEmpty(map);
         MutableBooleanIterator booleanIterator = map.booleanIterator();
-        Assert.assertTrue(booleanIterator.hasNext());
+        assertTrue(booleanIterator.hasNext());
         booleanIterator.next();
         booleanIterator.remove();
-        Assert.assertThrows(IllegalStateException.class, booleanIterator::remove);
+        assertThrows(IllegalStateException.class, booleanIterator::remove);
     }
 
     @Test
@@ -566,7 +571,7 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
     {
         MutableObjectBooleanMap<String> map = this.classUnderTest();
         MutableBooleanIterator booleanIterator = map.booleanIterator();
-        Assert.assertTrue(booleanIterator.hasNext());
-        Assert.assertThrows(IllegalStateException.class, booleanIterator::remove);
+        assertTrue(booleanIterator.hasNext());
+        assertThrows(IllegalStateException.class, booleanIterator::remove);
     }
 }

@@ -33,8 +33,13 @@ import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.ShortHashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Abstract JUnit test for {@link UnmodifiableMap#entrySet()} .
@@ -134,7 +139,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     public void equalsAndHashCode()
     {
         Verify.assertEqualsAndHashCode(this.newWith(1, 2, 3), this.newWith(1, 2, 3));
-        Assert.assertNotEquals(this.newWith(1, 2, 3), this.newWith(1, 2));
+        assertNotEquals(this.newWith(1, 2, 3), this.newWith(1, 2));
     }
 
     @Override
@@ -144,7 +149,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
         MutableSet<Map.Entry<String, String>> collection = this.newCollection().newEmpty();
         Verify.assertEmpty(collection);
         Verify.assertSize(0, collection);
-        Assert.assertFalse(collection.notEmpty());
+        assertFalse(collection.notEmpty());
     }
 
     @Test
@@ -221,16 +226,16 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     public void containsAllIterable()
     {
         MutableSet<Map.Entry<Integer, Integer>> collection = this.newWith(1, 2, 3, 4);
-        Assert.assertTrue(collection.containsAllIterable(Lists.immutable.of(this.entry(1), this.entry(2))));
-        Assert.assertFalse(collection.containsAllIterable(Lists.immutable.of(this.entry(1), this.entry(5))));
+        assertTrue(collection.containsAllIterable(Lists.immutable.of(this.entry(1), this.entry(2))));
+        assertFalse(collection.containsAllIterable(Lists.immutable.of(this.entry(1), this.entry(5))));
     }
 
     @Test
     public void containsAllArray()
     {
         MutableSet<Map.Entry<Integer, Integer>> collection = this.newWith(1, 2, 3, 4);
-        Assert.assertTrue(collection.containsAllArguments(this.entry(1), this.entry(2)));
-        Assert.assertFalse(collection.containsAllArguments(this.entry(1), this.entry(5)));
+        assertTrue(collection.containsAllArguments(this.entry(1), this.entry(2)));
+        assertFalse(collection.containsAllArguments(this.entry(1), this.entry(5)));
     }
 
     @Test
@@ -248,7 +253,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     {
         Verify.assertEmpty(this.newCollection());
         Verify.assertNotEmpty(this.newWith(1, 2));
-        Assert.assertTrue(this.newWith(1, 2).notEmpty());
+        assertTrue(this.newWith(1, 2).notEmpty());
     }
 
     @Test
@@ -259,8 +264,8 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
         for (int i = objects.size(); i-- > 0; )
         {
             Map.Entry<Integer, Integer> entry = iterator.next();
-            Assert.assertEquals(ImmutableEntry.of(3 - i, 3 - i), entry);
-            Assert.assertThrows(UnsupportedOperationException.class, () -> entry.setValue(0));
+            assertEquals(ImmutableEntry.of(3 - i, 3 - i), entry);
+            assertThrows(UnsupportedOperationException.class, () -> entry.setValue(0));
         }
     }
 
@@ -283,7 +288,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Test
     public void collectBoolean()
     {
-        Assert.assertEquals(
+        assertEquals(
                 BooleanHashSet.newSetWith(false),
                 this.getCollection().collectBoolean(entry -> Boolean.parseBoolean(entry.getValue())));
     }
@@ -292,7 +297,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Test
     public void collectByte()
     {
-        Assert.assertEquals(
+        assertEquals(
                 ByteHashSet.newSetWith((byte) 1, (byte) 2),
                 this.getCollection().collectByte(entry -> Byte.parseByte(entry.getValue())));
     }
@@ -301,7 +306,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Test
     public void collectChar()
     {
-        Assert.assertEquals(
+        assertEquals(
                 CharHashSet.newSetWith((char) 1, (char) 2),
                 this.getCollection().collectChar(entry -> (char) Integer.parseInt(entry.getValue())));
     }
@@ -310,7 +315,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Test
     public void collectDouble()
     {
-        Assert.assertEquals(
+        assertEquals(
                 DoubleHashSet.newSetWith(1.0d, 2.0d),
                 this.getCollection().collectDouble(entry -> Double.parseDouble(entry.getValue())));
     }
@@ -319,7 +324,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Test
     public void collectFloat()
     {
-        Assert.assertEquals(
+        assertEquals(
                 FloatHashSet.newSetWith(1.0f, 2.0f),
                 this.getCollection().collectFloat(entry -> Float.parseFloat(entry.getValue())));
     }
@@ -328,7 +333,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Test
     public void collectInt()
     {
-        Assert.assertEquals(
+        assertEquals(
                 IntHashSet.newSetWith(1, 2),
                 this.getCollection().collectInt(entry -> Integer.parseInt(entry.getValue())));
     }
@@ -337,7 +342,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Test
     public void collectLong()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LongHashSet.newSetWith(1L, 2L),
                 this.getCollection().collectLong(entry -> Long.parseLong(entry.getValue())));
     }
@@ -346,7 +351,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Test
     public void collectShort()
     {
-        Assert.assertEquals(
+        assertEquals(
                 ShortHashSet.newSetWith((short) 1, (short) 2),
                 this.getCollection().collectShort(entry -> Short.parseShort(entry.getValue())));
     }

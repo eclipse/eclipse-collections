@@ -13,8 +13,10 @@ package org.eclipse.collections.impl.factory;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 public class FixedSizeMapFactoryTest
 {
@@ -101,19 +103,19 @@ public class FixedSizeMapFactoryTest
         MutableMap<Key, Integer> map1 = Maps.fixedSize.of(key, 1, duplicateKey1, 2);
         Verify.assertSize(1, map1);
         Verify.assertContainsKeyValue(key, 2, map1);
-        Assert.assertSame(key, map1.keysView().getFirst());
+        assertSame(key, map1.keysView().getFirst());
 
         Key duplicateKey2 = new Key("key");
         MutableMap<Key, Integer> map2 = Maps.fixedSize.of(key, 1, duplicateKey1, 2, duplicateKey2, 3);
         Verify.assertSize(1, map2);
         Verify.assertContainsKeyValue(key, 3, map2);
-        Assert.assertSame(key, map1.keysView().getFirst());
+        assertSame(key, map1.keysView().getFirst());
 
         Key duplicateKey3 = new Key("key");
         MutableMap<Key, Integer> map3 = Maps.fixedSize.of(key, 1, new Key("not a dupe"), 2, duplicateKey3, 3);
         Verify.assertSize(2, map3);
         Verify.assertContainsAllKeyValues(map3, key, 3, new Key("not a dupe"), 2);
-        Assert.assertSame(key, map3.keysView().detect(key::equals));
+        assertSame(key, map3.keysView().detect(key::equals));
     }
 
     @Test
@@ -121,6 +123,6 @@ public class FixedSizeMapFactoryTest
 
     {
         MutableMap<String, String> map = Maps.fixedSize.of("key1", "value1", "key2", "value2", "key3", "value3");
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.withMap(Maps.fixedSize.of("key4", "value4")));
+        assertThrows(UnsupportedOperationException.class, () -> map.withMap(Maps.fixedSize.of("key4", "value4")));
     }
 }

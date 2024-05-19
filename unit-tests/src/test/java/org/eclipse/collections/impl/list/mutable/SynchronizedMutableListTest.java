@@ -12,8 +12,9 @@ package org.eclipse.collections.impl.list.mutable;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit test for {@link SynchronizedMutableList}.
@@ -49,14 +50,14 @@ public class SynchronizedMutableListTest extends AbstractListTestCase
     public void testToString()
     {
         MutableList<Object> list = this.newWith(1, 2, 3);
-        Assert.assertEquals("[1, 2, 3]", list.toString());
+        assertEquals("[1, 2, 3]", list.toString());
     }
 
     @Override
     @Test
     public void makeString()
     {
-        Assert.assertEquals("1, 2, 3", this.newWith(1, 2, 3).makeString());
+        assertEquals("1, 2, 3", this.newWith(1, 2, 3).makeString());
     }
 
     @Override
@@ -65,6 +66,6 @@ public class SynchronizedMutableListTest extends AbstractListTestCase
     {
         Appendable builder = new StringBuilder();
         this.newWith(1, 2, 3).appendString(builder);
-        Assert.assertEquals("1, 2, 3", builder.toString());
+        assertEquals("1, 2, 3", builder.toString());
     }
 }

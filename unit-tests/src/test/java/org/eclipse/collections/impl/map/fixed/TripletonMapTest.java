@@ -28,8 +28,13 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link TripletonMap}.
@@ -60,26 +65,26 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableSetMultimap<Integer, String> flipOne = degenerateOne.flip();
         MutableSetMultimap<Integer, String> flipTwo = degenerateTwo.flip();
 
-        Assert.assertEquals(Multimaps.immutable.set.with(1, "A", 2, "B", 3, "C"), flipZero);
-        Assert.assertEquals(Multimaps.immutable.set.with(1, "A", 1, "B", 3, "C"), flipOne);
-        Assert.assertEquals(Multimaps.immutable.set.with(1, "A", 1, "B", 1, "C"), flipTwo);
+        assertEquals(Multimaps.immutable.set.with(1, "A", 2, "B", 3, "C"), flipZero);
+        assertEquals(Multimaps.immutable.set.with(1, "A", 1, "B", 3, "C"), flipOne);
+        assertEquals(Multimaps.immutable.set.with(1, "A", 1, "B", 1, "C"), flipTwo);
 
         MutableMap<String, Integer> nullValue = new TripletonMap<>("A", 1, "B", 1, "C", null);
         MutableSetMultimap<Integer, String> flipNull = nullValue.flip();
 
-        Assert.assertEquals(Multimaps.immutable.set.with(1, "A", 1, "B", null, "C"), flipNull);
+        assertEquals(Multimaps.immutable.set.with(1, "A", 1, "B", null, "C"), flipNull);
 
         MutableMap<String, Integer> nullValueAllNull = new TripletonMap<>("A", null, "B", null, "C", null);
         MutableSetMultimap<Integer, String> flipNullAllNull = nullValueAllNull.flip();
 
-        Assert.assertEquals(Multimaps.immutable.set.with(null, "A", null, "B", null, "C"), flipNullAllNull);
+        assertEquals(Multimaps.immutable.set.with(null, "A", null, "B", null, "C"), flipNullAllNull);
     }
 
     @Override
     @Test
     public void containsValue()
     {
-        Assert.assertTrue(this.classUnderTest().containsValue("One"));
+        assertTrue(this.classUnderTest().containsValue("One"));
     }
 
     @Override
@@ -89,7 +94,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableList<String> collection = Lists.mutable.of();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
         map.forEachKeyValue((key, value) -> collection.add(key + value));
-        Assert.assertEquals(FastList.newListWith("1One", "2Two", "3Three"), collection);
+        assertEquals(FastList.newListWith("1One", "2Two", "3Three"), collection);
     }
 
     @Test
@@ -98,11 +103,11 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
         MutableMap<String, Integer> flip = map.flipUniqueValues();
         Verify.assertInstanceOf(TripletonMap.class, flip);
-        Assert.assertEquals(UnifiedMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3), flip);
+        assertEquals(UnifiedMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3), flip);
 
-        Assert.assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "One", 3, "Three").flipUniqueValues());
-        Assert.assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "Three", 3, "Three").flipUniqueValues());
-        Assert.assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "Two", 3, "One").flipUniqueValues());
+        assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "One", 3, "Three").flipUniqueValues());
+        assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "Three", 3, "Three").flipUniqueValues());
+        assertThrows(IllegalStateException.class, () -> new TripletonMap<>(1, "One", 2, "Two", 3, "One").flipUniqueValues());
     }
 
     @Override
@@ -123,12 +128,12 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         Twin<String> twin6 = Tuples.twin("3", "3");
         map.withKeyValue(twin6, twin6);
 
-        Assert.assertSame(map.getKey1(), twin1);
-        Assert.assertSame(map.getKey2(), twin2);
-        Assert.assertSame(map.getKey3(), twin3);
-        Assert.assertSame(map.get(twin1), twin4);
-        Assert.assertSame(map.get(twin2), twin5);
-        Assert.assertSame(map.get(twin3), twin6);
+        assertSame(map.getKey1(), twin1);
+        assertSame(map.getKey2(), twin2);
+        assertSame(map.getKey3(), twin3);
+        assertSame(map.get(twin1), twin4);
+        assertSame(map.get(twin2), twin5);
+        assertSame(map.get(twin3), twin6);
     }
 
     @Override
@@ -141,7 +146,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableMap<Integer, String> map2 = new TripletonMap<>(1, "A", 2, "B", 3, "C");
         MutableMap<Integer, String> map2with = map2.withKeyValue(1, "AA");
         Verify.assertMapsEqual(UnifiedMap.newWithKeysValues(1, "AA", 2, "B", 3, "C"), map2with);
-        Assert.assertSame(map2, map2with);
+        assertSame(map2, map2with);
     }
 
     @Override
@@ -155,7 +160,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableMap<Integer, String> map2 = new TripletonMap<>(1, "A", 2, "B", 3, "C");
         MutableMap<Integer, String> map2with = map2.withAllKeyValueArguments(Tuples.pair(1, "AA"));
         Verify.assertMapsEqual(UnifiedMap.newWithKeysValues(1, "AA", 2, "B", 3, "C"), map2with);
-        Assert.assertSame(map2, map2with);
+        assertSame(map2, map2with);
     }
 
     @Override
@@ -163,7 +168,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "A", 2, "B", 3, "C");
         MutableMap<Integer, String> mapWithout1 = map.withoutKey(4);
-        Assert.assertSame(map, mapWithout1);
+        assertSame(map, mapWithout1);
         MutableMap<Integer, String> mapWithout2 = map.withoutKey(1);
         Verify.assertMapsEqual(UnifiedMap.newWithKeysValues(2, "B", 3, "C"), mapWithout2);
         Verify.assertInstanceOf(DoubletonMap.class, mapWithout2);
@@ -174,7 +179,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "A", 2, "B", 3, "C");
         MutableMap<Integer, String> mapWithout1 = map.withoutAllKeys(FastList.newListWith(4, 5));
-        Assert.assertSame(map, mapWithout1);
+        assertSame(map, mapWithout1);
         MutableMap<Integer, String> mapWithout2 = map.withoutAllKeys(FastList.newListWith(3, 4));
         Verify.assertMapsEqual(UnifiedMap.newWithKeysValues(1, "A", 2, "B"), mapWithout2);
         Verify.assertInstanceOf(DoubletonMap.class, mapWithout2);
@@ -187,7 +192,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableList<String> collection = Lists.mutable.of();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
         map.forEachValue(CollectionAddProcedure.on(collection));
-        Assert.assertEquals(FastList.newListWith("1", "2", "3"), collection);
+        assertEquals(FastList.newListWith("1", "2", "3"), collection);
     }
 
     @Override
@@ -197,7 +202,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableList<String> collection = Lists.mutable.of();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
         map.forEach(CollectionAddProcedure.on(collection));
-        Assert.assertEquals(FastList.newListWith("1", "2", "3"), collection);
+        assertEquals(FastList.newListWith("1", "2", "3"), collection);
     }
 
     @Override
@@ -207,7 +212,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableList<Integer> collection = Lists.mutable.of();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
         map.forEachKey(CollectionAddProcedure.on(collection));
-        Assert.assertEquals(FastList.newListWith(1, 2, 3), collection);
+        assertEquals(FastList.newListWith(1, 2, 3), collection);
     }
 
     @Override
@@ -215,8 +220,8 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsentPut()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, new PassThruFunction0<>("4")));
-        Assert.assertEquals("1", map.getIfAbsentPut(1, new PassThruFunction0<>("1")));
+        assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, new PassThruFunction0<>("4")));
+        assertEquals("1", map.getIfAbsentPut(1, new PassThruFunction0<>("1")));
     }
 
     @Override
@@ -224,8 +229,8 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsentPutWith()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, String::valueOf, 4));
-        Assert.assertEquals("1", map.getIfAbsentPutWith(1, String::valueOf, 1));
+        assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, String::valueOf, 4));
+        assertEquals("1", map.getIfAbsentPutWith(1, String::valueOf, 1));
     }
 
     @Override
@@ -233,9 +238,9 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsent_function()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Assert.assertNull(map.get(4));
-        Assert.assertEquals("4", map.getIfAbsent(4, new PassThruFunction0<>("4")));
-        Assert.assertNull(map.get(4));
+        assertNull(map.get(4));
+        assertEquals("4", map.getIfAbsent(4, new PassThruFunction0<>("4")));
+        assertNull(map.get(4));
     }
 
     @Override
@@ -243,10 +248,10 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getOrDefault()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Assert.assertNull(map.get(4));
-        Assert.assertEquals("1", map.getOrDefault(1, "4"));
-        Assert.assertEquals("4", map.getOrDefault(4, "4"));
-        Assert.assertNull(map.get(4));
+        assertNull(map.get(4));
+        assertEquals("1", map.getOrDefault(1, "4"));
+        assertEquals("4", map.getOrDefault(4, "4"));
+        assertNull(map.get(4));
     }
 
     @Override
@@ -254,10 +259,10 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsent()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Assert.assertNull(map.get(4));
-        Assert.assertEquals("1", map.getIfAbsentValue(1, "4"));
-        Assert.assertEquals("4", map.getIfAbsentValue(4, "4"));
-        Assert.assertNull(map.get(4));
+        assertNull(map.get(4));
+        assertEquals("1", map.getIfAbsentValue(1, "4"));
+        assertEquals("4", map.getIfAbsentValue(4, "4"));
+        assertNull(map.get(4));
     }
 
     @Override
@@ -265,9 +270,9 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsentWith()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Assert.assertNull(map.get(4));
-        Assert.assertEquals("4", map.getIfAbsentWith(4, String::valueOf, 4));
-        Assert.assertNull(map.get(4));
+        assertNull(map.get(4));
+        assertEquals("4", map.getIfAbsentWith(4, String::valueOf, 4));
+        assertNull(map.get(4));
     }
 
     @Override
@@ -275,17 +280,17 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void ifPresentApply()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Assert.assertNull(map.ifPresentApply(4, Functions.getPassThru()));
-        Assert.assertEquals("1", map.ifPresentApply(1, Functions.getPassThru()));
-        Assert.assertEquals("2", map.ifPresentApply(2, Functions.getPassThru()));
-        Assert.assertEquals("3", map.ifPresentApply(3, Functions.getPassThru()));
+        assertNull(map.ifPresentApply(4, Functions.getPassThru()));
+        assertEquals("1", map.ifPresentApply(1, Functions.getPassThru()));
+        assertEquals("2", map.ifPresentApply(2, Functions.getPassThru()));
+        assertEquals("3", map.ifPresentApply(3, Functions.getPassThru()));
     }
 
     @Override
     @Test
     public void notEmpty()
     {
-        Assert.assertTrue(new TripletonMap<>(1, "1", 2, "2", 3, "3").notEmpty());
+        assertTrue(new TripletonMap<>(1, "1", 2, "2", 3, "3").notEmpty());
     }
 
     @Override
@@ -295,7 +300,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableList<Integer> result = Lists.mutable.of();
         MutableMap<Integer, Integer> map = new TripletonMap<>(1, 1, 2, 2, 3, 3);
         map.forEachWith((argument1, argument2) -> result.add(argument1 + argument2), 10);
-        Assert.assertEquals(FastList.newListWith(11, 12, 13), result);
+        assertEquals(FastList.newListWith(11, 12, 13), result);
     }
 
     @Override
@@ -309,7 +314,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
             result.add(value);
             result.add(String.valueOf(index));
         });
-        Assert.assertEquals(FastList.newListWith("One", "0", "Two", "1", "Three", "2"), result);
+        assertEquals(FastList.newListWith("One", "0", "Two", "1", "Three", "2"), result);
     }
 
     @Override
@@ -322,7 +327,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         {
             result.add(entry.getValue());
         }
-        Assert.assertEquals(FastList.newListWith("One", "Two", "Three"), result);
+        assertEquals(FastList.newListWith("One", "Two", "Three"), result);
     }
 
     @Override
@@ -335,7 +340,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         {
             result.add(value);
         }
-        Assert.assertEquals(FastList.newListWith("One", "Two", "Three"), result);
+        assertEquals(FastList.newListWith("One", "Two", "Three"), result);
     }
 
     @Override
@@ -348,7 +353,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         {
             result.add(key);
         }
-        Assert.assertEquals(FastList.newListWith(1, 2, 3), result);
+        assertEquals(FastList.newListWith(1, 2, 3), result);
     }
 
     @Override
@@ -356,7 +361,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void testToString()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
-        Assert.assertEquals("{1=One, 2=Two, 3=Three}", map.toString());
+        assertEquals("{1=One, 2=Two, 3=Three}", map.toString());
     }
 
     @Override
@@ -398,31 +403,31 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
 
         MutableMap<String, String> full = map.select((ignored1, ignored2) -> true);
         Verify.assertInstanceOf(TripletonMap.class, full);
-        Assert.assertEquals(map, full);
+        assertEquals(map, full);
 
         MutableMap<String, String> one = map.select((argument1, argument2) -> "1".equals(argument1));
         Verify.assertInstanceOf(SingletonMap.class, one);
-        Assert.assertEquals(new SingletonMap<>("1", "One"), one);
+        assertEquals(new SingletonMap<>("1", "One"), one);
 
         MutableMap<String, String> two = map.select((argument1, argument2) -> "2".equals(argument1));
         Verify.assertInstanceOf(SingletonMap.class, two);
-        Assert.assertEquals(new SingletonMap<>("2", "Two"), two);
+        assertEquals(new SingletonMap<>("2", "Two"), two);
 
         MutableMap<String, String> three = map.select((argument1, argument2) -> "3".equals(argument1));
         Verify.assertInstanceOf(SingletonMap.class, three);
-        Assert.assertEquals(new SingletonMap<>("3", "Three"), three);
+        assertEquals(new SingletonMap<>("3", "Three"), three);
 
         MutableMap<String, String> oneAndThree = map.select((argument1, argument2) -> "1".equals(argument1) || "3".equals(argument1));
         Verify.assertInstanceOf(DoubletonMap.class, oneAndThree);
-        Assert.assertEquals(new DoubletonMap<>("1", "One", "3", "Three"), oneAndThree);
+        assertEquals(new DoubletonMap<>("1", "One", "3", "Three"), oneAndThree);
 
         MutableMap<String, String> oneAndTwo = map.select((argument1, argument2) -> "1".equals(argument1) || "2".equals(argument1));
         Verify.assertInstanceOf(DoubletonMap.class, oneAndTwo);
-        Assert.assertEquals(new DoubletonMap<>("1", "One", "2", "Two"), oneAndTwo);
+        assertEquals(new DoubletonMap<>("1", "One", "2", "Two"), oneAndTwo);
 
         MutableMap<String, String> twoAndThree = map.select((argument1, argument2) -> "2".equals(argument1) || "3".equals(argument1));
         Verify.assertInstanceOf(DoubletonMap.class, twoAndThree);
-        Assert.assertEquals(new DoubletonMap<>("2", "Two", "3", "Three"), twoAndThree);
+        assertEquals(new DoubletonMap<>("2", "Two", "3", "Three"), twoAndThree);
     }
 
     @Override
@@ -436,31 +441,31 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
 
         MutableMap<String, String> full = map.reject((ignored1, ignored2) -> false);
         Verify.assertInstanceOf(TripletonMap.class, full);
-        Assert.assertEquals(map, full);
+        assertEquals(map, full);
 
         MutableMap<String, String> one = map.reject((argument1, argument2) -> "2".equals(argument1) || "3".equals(argument1));
         Verify.assertInstanceOf(SingletonMap.class, one);
-        Assert.assertEquals(new SingletonMap<>("1", "One"), one);
+        assertEquals(new SingletonMap<>("1", "One"), one);
 
         MutableMap<String, String> two = map.reject((argument1, argument2) -> "1".equals(argument1) || "3".equals(argument1));
         Verify.assertInstanceOf(SingletonMap.class, two);
-        Assert.assertEquals(new SingletonMap<>("2", "Two"), two);
+        assertEquals(new SingletonMap<>("2", "Two"), two);
 
         MutableMap<String, String> three = map.reject((argument1, argument2) -> "1".equals(argument1) || "2".equals(argument1));
         Verify.assertInstanceOf(SingletonMap.class, three);
-        Assert.assertEquals(new SingletonMap<>("3", "Three"), three);
+        assertEquals(new SingletonMap<>("3", "Three"), three);
 
         MutableMap<String, String> oneAndThree = map.reject((argument1, argument2) -> "2".equals(argument1));
         Verify.assertInstanceOf(DoubletonMap.class, oneAndThree);
-        Assert.assertEquals(new DoubletonMap<>("1", "One", "3", "Three"), oneAndThree);
+        assertEquals(new DoubletonMap<>("1", "One", "3", "Three"), oneAndThree);
 
         MutableMap<String, String> oneAndTwo = map.reject((argument1, argument2) -> "3".equals(argument1));
         Verify.assertInstanceOf(DoubletonMap.class, oneAndTwo);
-        Assert.assertEquals(new DoubletonMap<>("1", "One", "2", "Two"), oneAndTwo);
+        assertEquals(new DoubletonMap<>("1", "One", "2", "Two"), oneAndTwo);
 
         MutableMap<String, String> twoAndThree = map.reject((argument1, argument2) -> "1".equals(argument1));
         Verify.assertInstanceOf(DoubletonMap.class, twoAndThree);
-        Assert.assertEquals(new DoubletonMap<>("2", "Two", "3", "Three"), twoAndThree);
+        assertEquals(new DoubletonMap<>("2", "Two", "3", "Three"), twoAndThree);
     }
 
     @Override
@@ -470,15 +475,15 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         MutableMap<String, String> map = this.classUnderTest();
 
         Pair<String, String> one = map.detect((ignored1, ignored2) -> true);
-        Assert.assertEquals(Tuples.pair("1", "One"), one);
+        assertEquals(Tuples.pair("1", "One"), one);
 
         Pair<String, String> two = map.detect((argument1, argument2) -> "2".equals(argument1));
-        Assert.assertEquals(Tuples.pair("2", "Two"), two);
+        assertEquals(Tuples.pair("2", "Two"), two);
 
         Pair<String, String> three = map.detect((argument1, argument2) -> "3".equals(argument1));
-        Assert.assertEquals(Tuples.pair("3", "Three"), three);
+        assertEquals(Tuples.pair("3", "Three"), three);
 
-        Assert.assertNull(map.detect((ignored1, ignored2) -> false));
+        assertNull(map.detect((ignored1, ignored2) -> false));
     }
 
     @Override
@@ -503,26 +508,26 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
         {
             collection.add(eachValue);
         }
-        Assert.assertEquals(FastList.newListWith("1", "2", "3"), collection);
+        assertEquals(FastList.newListWith("1", "2", "3"), collection);
     }
 
     @Override
     @Test
     public void asLazyKeys()
     {
-        Assert.assertEquals(FastList.newListWith("1", "2", "3"), this.classUnderTest().keysView().toSortedList());
+        assertEquals(FastList.newListWith("1", "2", "3"), this.classUnderTest().keysView().toSortedList());
     }
 
     @Override
     @Test
     public void asLazyValues()
     {
-        Assert.assertEquals(Bags.mutable.of("One", "Two", "Three"), this.classUnderTest().valuesView().toBag());
+        assertEquals(Bags.mutable.of("One", "Two", "Three"), this.classUnderTest().valuesView().toBag());
     }
 
     @Test
     public void getOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 }

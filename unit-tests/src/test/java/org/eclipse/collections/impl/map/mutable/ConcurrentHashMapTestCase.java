@@ -21,9 +21,10 @@ import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.parallel.ParallelIterate;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
 {
@@ -52,8 +53,8 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
 
         ConcurrentMutableMap<Integer, Integer> map = this.newMap();
         ParallelIterate.forEach(Interval.oneTo(100), each -> map.updateValue(each % 10, () -> 0, integer -> integer + 1), 1, this.executor);
-        Assert.assertEquals(Interval.zeroTo(9).toSet(), map.keySet());
-        Assert.assertEquals(FastList.newList(Collections.nCopies(10, 10)), FastList.newList(map.values()));
+        assertEquals(Interval.zeroTo(9).toSet(), map.keySet());
+        assertEquals(FastList.newList(Collections.nCopies(10, 10)), FastList.newList(map.values()));
     }
 
     @Override
@@ -65,8 +66,8 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
         ConcurrentMutableMap<Integer, Integer> map = this.newMap();
         MutableList<Integer> list = Interval.oneTo(100).toList().shuffleThis();
         ParallelIterate.forEach(list, each -> map.updateValue(each % 50, () -> 0, integer -> integer + 1), 1, this.executor);
-        Assert.assertEquals(Interval.zeroTo(49).toSet(), map.keySet());
-        Assert.assertEquals(
+        assertEquals(Interval.zeroTo(49).toSet(), map.keySet());
+        assertEquals(
                 HashBag.newBag(map.values()).toStringOfItemToCount(),
                 FastList.newList(Collections.nCopies(50, 2)),
                 FastList.newList(map.values()));
@@ -80,11 +81,11 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
 
         ConcurrentMutableMap<Integer, Integer> map = this.newMap();
         ParallelIterate.forEach(Interval.oneTo(100), each -> map.updateValueWith(each % 10, () -> 0, (integer, parameter) -> {
-            Assert.assertEquals("test", parameter);
+            assertEquals("test", parameter);
             return integer + 1;
         }, "test"), 1, this.executor);
-        Assert.assertEquals(Interval.zeroTo(9).toSet(), map.keySet());
-        Assert.assertEquals(FastList.newList(Collections.nCopies(10, 10)), FastList.newList(map.values()));
+        assertEquals(Interval.zeroTo(9).toSet(), map.keySet());
+        assertEquals(FastList.newList(Collections.nCopies(10, 10)), FastList.newList(map.values()));
     }
 
     @Override
@@ -96,11 +97,11 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
         ConcurrentMutableMap<Integer, Integer> map = this.newMap();
         MutableList<Integer> list = Interval.oneTo(200).toList().shuffleThis();
         ParallelIterate.forEach(list, each -> map.updateValueWith(each % 100, () -> 0, (integer, parameter) -> {
-            Assert.assertEquals("test", parameter);
+            assertEquals("test", parameter);
             return integer + 1;
         }, "test"), 1, this.executor);
-        Assert.assertEquals(Interval.zeroTo(99).toSet(), map.keySet());
-        Assert.assertEquals(
+        assertEquals(Interval.zeroTo(99).toSet(), map.keySet());
+        assertEquals(
                 HashBag.newBag(map.values()).toStringOfItemToCount(),
                 FastList.newList(Collections.nCopies(100, 2)),
                 FastList.newList(map.values()));

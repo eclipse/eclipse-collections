@@ -14,8 +14,12 @@ import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 
 public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListTestCase
 {
@@ -31,9 +35,9 @@ public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListT
     {
         ImmutableBooleanList emptyList = this.newWith();
         ImmutableBooleanList newList = emptyList.newWithout(true);
-        Assert.assertEquals(this.newWith(), newList);
-        Assert.assertSame(emptyList, newList);
-        Assert.assertEquals(this.newMutableCollectionWith(), emptyList);
+        assertEquals(this.newWith(), newList);
+        assertSame(emptyList, newList);
+        assertEquals(this.newMutableCollectionWith(), emptyList);
     }
 
     @Override
@@ -61,16 +65,16 @@ public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListT
     @Test
     public void indexOf()
     {
-        Assert.assertEquals(-1L, this.classUnderTest().indexOf(true));
-        Assert.assertEquals(-1L, this.classUnderTest().indexOf(false));
+        assertEquals(-1L, this.classUnderTest().indexOf(true));
+        assertEquals(-1L, this.classUnderTest().indexOf(false));
     }
 
     @Override
     @Test
     public void lastIndexOf()
     {
-        Assert.assertEquals(-1L, this.classUnderTest().lastIndexOf(true));
-        Assert.assertEquals(-1L, this.classUnderTest().lastIndexOf(false));
+        assertEquals(-1L, this.classUnderTest().lastIndexOf(true));
+        assertEquals(-1L, this.classUnderTest().lastIndexOf(false));
     }
 
     @Override
@@ -80,14 +84,14 @@ public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListT
         String[] sum = new String[2];
         sum[0] = "";
         this.classUnderTest().forEachWithIndex((each, index) -> sum[0] += index + ":" + each);
-        Assert.assertEquals("", sum[0]);
+        assertEquals("", sum[0]);
     }
 
     @Override
     @Test
     public void toReversed()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toReversed());
+        assertEquals(this.classUnderTest(), this.classUnderTest().toReversed());
     }
 
     @Override
@@ -101,7 +105,7 @@ public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListT
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(this.classUnderTest().notEmpty());
+        assertFalse(this.classUnderTest().notEmpty());
     }
 
     @Override
@@ -113,7 +117,7 @@ public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListT
         Verify.assertEmpty(iterable.select(BooleanPredicates.isTrue()));
         BooleanIterable booleanIterable = iterable.select(BooleanPredicates.isFalse());
         Verify.assertEmpty(booleanIterable);
-        Assert.assertSame(iterable, booleanIterable);
+        assertSame(iterable, booleanIterable);
     }
 
     @Override
@@ -125,7 +129,7 @@ public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListT
         Verify.assertEmpty(iterable.reject(BooleanPredicates.isTrue()));
         BooleanIterable booleanIterable = iterable.reject(BooleanPredicates.isFalse());
         Verify.assertEmpty(booleanIterable);
-        Assert.assertSame(iterable, booleanIterable);
+        assertSame(iterable, booleanIterable);
     }
 
     @Override
@@ -134,7 +138,7 @@ public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListT
     {
         Verify.assertEqualsAndHashCode(this.newMutableCollectionWith(), this.classUnderTest());
         Verify.assertPostSerializedIdentity(this.newWith());
-        Assert.assertNotEquals(this.classUnderTest(), this.newWith(false, false, false, true));
-        Assert.assertNotEquals(this.classUnderTest(), this.newWith(true));
+        assertNotEquals(this.classUnderTest(), this.newWith(false, false, false, true));
+        assertNotEquals(this.classUnderTest(), this.newWith(true));
     }
 }

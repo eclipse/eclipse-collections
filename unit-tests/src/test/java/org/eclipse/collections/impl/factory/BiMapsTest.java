@@ -21,8 +21,10 @@ import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class BiMapsTest
 {
@@ -30,27 +32,27 @@ public class BiMapsTest
     public void immutable()
     {
         ImmutableBiMapFactory factory = BiMaps.immutable;
-        Assert.assertEquals(HashBiMap.newMap(), factory.of());
+        assertEquals(HashBiMap.newMap(), factory.of());
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.of());
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2"), factory.of(1, "2"));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2"), factory.of(1, "2"));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.of(1, "2"));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4"), factory.of(1, "2", 3, "4"));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4"), factory.of(1, "2", 3, "4"));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.of(1, "2", 3, "4"));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6"), factory.of(1, "2", 3, "4", 5, "6"));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6"), factory.of(1, "2", 3, "4", 5, "6"));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.of(1, "2", 3, "4", 5, "6"));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.of(1, "2", 3, "4", 5, "6", 7, "8"));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.of(1, "2", 3, "4", 5, "6", 7, "8"));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.of(1, "2", 3, "4", 5, "6", 7, "8"));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(UnifiedMap.newMapWith(Tuples.pair(1, "2"), Tuples.pair(3, "4"), Tuples.pair(5, "6"), Tuples.pair(7, "8"))));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(UnifiedMap.newMapWith(Tuples.pair(1, "2"), Tuples.pair(3, "4"), Tuples.pair(5, "6"), Tuples.pair(7, "8"))));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.ofAll(UnifiedMap.newMapWith(Tuples.pair(1, "2"), Tuples.pair(3, "4"), Tuples.pair(5, "6"), Tuples.pair(7, 8))));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(Maps.immutable.ofAll(UnifiedMap.newMapWith(Tuples.pair(1, "2"), Tuples.pair(3, "4"), Tuples.pair(5, "6"), Tuples.pair(7, "8")))));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(Maps.immutable.ofAll(UnifiedMap.newMapWith(Tuples.pair(1, "2"), Tuples.pair(3, "4"), Tuples.pair(5, "6"), Tuples.pair(7, "8")))));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.ofAll(Maps.immutable.ofAll(UnifiedMap.newMapWith(Tuples.pair(1, "2"), Tuples.pair(3, "4"), Tuples.pair(5, "6"), Tuples.pair(7, "8")))));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8")));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8")));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.ofAll(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8")));
         Map<Integer, String> map1 = HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8");
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(map1));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(map1));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.ofAll(map1));
         ImmutableBiMap<Integer, String> map2 = BiMaps.immutable.with(1, "2", 3, "4", 5, "6", 7, "8");
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(map2.castToMap()));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.ofAll(map2.castToMap()));
         Verify.assertInstanceOf(ImmutableBiMap.class, factory.ofAll(map2.castToMap()));
     }
 
@@ -58,15 +60,15 @@ public class BiMapsTest
     public void mutable()
     {
         MutableBiMapFactory factory = BiMaps.mutable;
-        Assert.assertEquals(HashBiMap.newMap(), factory.of());
+        assertEquals(HashBiMap.newMap(), factory.of());
         Verify.assertInstanceOf(MutableBiMap.class, factory.of());
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2"), factory.of(1, "2"));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2"), factory.of(1, "2"));
         Verify.assertInstanceOf(MutableBiMap.class, factory.of(1, "2"));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4"), factory.of(1, "2", 3, "4"));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4"), factory.of(1, "2", 3, "4"));
         Verify.assertInstanceOf(MutableBiMap.class, factory.of(1, "2", 3, "4"));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6"), factory.of(1, "2", 3, "4", 5, "6"));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6"), factory.of(1, "2", 3, "4", 5, "6"));
         Verify.assertInstanceOf(MutableBiMap.class, factory.of(1, "2", 3, "4", 5, "6"));
-        Assert.assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.of(1, "2", 3, "4", 5, "6", 7, "8"));
+        assertEquals(HashBiMap.newWithKeysValues(1, "2", 3, "4", 5, "6", 7, "8"), factory.of(1, "2", 3, "4", 5, "6", 7, "8"));
         Verify.assertInstanceOf(MutableBiMap.class, factory.of(1, "2", 3, "4", 5, "6", 7, "8"));
     }
 
@@ -77,8 +79,8 @@ public class BiMapsTest
         Map<Integer, Integer> integers =
                 BiMaps.immutable.<Integer, Integer>empty().newWithMap(Maps.mutable.empty()).castToMap();
         ImmutableBiMap<Integer, Integer> empty2 = BiMaps.immutable.withAll(integers);
-        Assert.assertSame(BiMaps.immutable.empty(), empty);
-        Assert.assertSame(BiMaps.immutable.empty(), empty2);
+        assertSame(BiMaps.immutable.empty(), empty);
+        assertSame(BiMaps.immutable.empty(), empty2);
     }
 
     @Test

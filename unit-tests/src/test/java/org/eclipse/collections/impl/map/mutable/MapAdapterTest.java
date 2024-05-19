@@ -14,8 +14,10 @@ import java.util.HashMap;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.factory.Maps;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link MapAdapter}.
@@ -63,14 +65,14 @@ public class MapAdapterTest extends MutableMapTestCase
     public void adapt()
     {
         MutableMap<Integer, Integer> map = Maps.mutable.with(1, 1, 2, 2, 3, 3);
-        Assert.assertEquals(MapAdapter.adapt(new HashMap<>(map)), Maps.adapt(new HashMap<>(map)));
+        assertEquals(MapAdapter.adapt(new HashMap<>(map)), Maps.adapt(new HashMap<>(map)));
     }
 
     @Test
     public void adaptNull()
     {
-        Assert.assertThrows(NullPointerException.class, () -> new MapAdapter<>(null));
+        assertThrows(NullPointerException.class, () -> new MapAdapter<>(null));
 
-        Assert.assertThrows(NullPointerException.class, () -> MapAdapter.adapt(null));
+        assertThrows(NullPointerException.class, () -> MapAdapter.adapt(null));
     }
 }

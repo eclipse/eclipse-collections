@@ -18,8 +18,12 @@ import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class BooleanHashSetTest extends AbstractBooleanSetTestCase
 {
@@ -40,13 +44,13 @@ public class BooleanHashSetTest extends AbstractBooleanSetTestCase
     {
         Field table = BooleanHashSet.class.getDeclaredField("state");
         table.setAccessible(true);
-        Assert.assertEquals(0, table.get(new BooleanHashSet()));
+        assertEquals(0, table.get(new BooleanHashSet()));
     }
 
     @Test
     public void boxed()
     {
-        Assert.assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE), this.classUnderTest().boxed());
+        assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE), this.classUnderTest().boxed());
     }
 
     @Override
@@ -64,11 +68,11 @@ public class BooleanHashSetTest extends AbstractBooleanSetTestCase
         BooleanHashSet setFromSet1 = BooleanHashSet.newSet(set1);
         BooleanHashSet setFromSet2 = BooleanHashSet.newSet(set2);
         BooleanHashSet setFromSet3 = BooleanHashSet.newSet(set3);
-        Assert.assertEquals(set3, setFromList);
-        Assert.assertEquals(set0, setFromSet0);
-        Assert.assertEquals(set1, setFromSet1);
-        Assert.assertEquals(set2, setFromSet2);
-        Assert.assertEquals(set3, setFromSet3);
+        assertEquals(set3, setFromList);
+        assertEquals(set0, setFromSet0);
+        assertEquals(set1, setFromSet1);
+        assertEquals(set2, setFromSet2);
+        assertEquals(set3, setFromSet3);
     }
 
     @Override
@@ -79,25 +83,25 @@ public class BooleanHashSetTest extends AbstractBooleanSetTestCase
 
         BooleanHashSet falseSet = this.newWith(false);
         MutableBooleanIterator mutableBooleanIterator = falseSet.booleanIterator();
-        Assert.assertTrue(mutableBooleanIterator.hasNext());
-        Assert.assertFalse(mutableBooleanIterator.next());
+        assertTrue(mutableBooleanIterator.hasNext());
+        assertFalse(mutableBooleanIterator.next());
         mutableBooleanIterator.remove();
         Verify.assertEmpty(falseSet);
-        Assert.assertThrows(NoSuchElementException.class, mutableBooleanIterator::next);
-        Assert.assertThrows(IllegalStateException.class, mutableBooleanIterator::remove);
+        assertThrows(NoSuchElementException.class, mutableBooleanIterator::next);
+        assertThrows(IllegalStateException.class, mutableBooleanIterator::remove);
         BooleanHashSet trueSet = this.newWith(true);
         mutableBooleanIterator = trueSet.booleanIterator();
-        Assert.assertTrue(mutableBooleanIterator.hasNext());
-        Assert.assertTrue(mutableBooleanIterator.next());
+        assertTrue(mutableBooleanIterator.hasNext());
+        assertTrue(mutableBooleanIterator.next());
         mutableBooleanIterator.remove();
         Verify.assertEmpty(trueSet);
-        Assert.assertThrows(NoSuchElementException.class, mutableBooleanIterator::next);
-        Assert.assertThrows(IllegalStateException.class, mutableBooleanIterator::remove);
+        assertThrows(NoSuchElementException.class, mutableBooleanIterator::next);
+        assertThrows(IllegalStateException.class, mutableBooleanIterator::remove);
         MutableBooleanSet emptySet = new BooleanHashSet();
         mutableBooleanIterator = emptySet.booleanIterator();
-        Assert.assertFalse(mutableBooleanIterator.hasNext());
+        assertFalse(mutableBooleanIterator.hasNext());
         Verify.assertEmpty(emptySet);
-        Assert.assertThrows(NoSuchElementException.class, mutableBooleanIterator::next);
-        Assert.assertThrows(IllegalStateException.class, mutableBooleanIterator::remove);
+        assertThrows(NoSuchElementException.class, mutableBooleanIterator::next);
+        assertThrows(IllegalStateException.class, mutableBooleanIterator::remove);
     }
 }

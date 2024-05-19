@@ -15,8 +15,11 @@ import java.util.SortedSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.IntegerWithCast;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractUnifiedSetTestCase extends AbstractMutableSetTestCase
 {
@@ -28,9 +31,9 @@ public abstract class AbstractUnifiedSetTestCase extends AbstractMutableSetTestC
             return;
         }
         MutableSet<IntegerWithCast> mutableSet = this.newWith(new IntegerWithCast(0));
-        Assert.assertFalse(mutableSet.add(new IntegerWithCast(0)));
-        Assert.assertTrue(mutableSet.add(null));
-        Assert.assertFalse(mutableSet.add(null));
+        assertFalse(mutableSet.add(new IntegerWithCast(0)));
+        assertTrue(mutableSet.add(null));
+        assertFalse(mutableSet.add(null));
     }
 
     @Test
@@ -39,9 +42,9 @@ public abstract class AbstractUnifiedSetTestCase extends AbstractMutableSetTestC
         IntegerWithCast key = new IntegerWithCast(0);
         MutableSet<IntegerWithCast> mutableSet = this.newWith(null, key);
 
-        Assert.assertFalse(mutableSet.retainAll(FastList.newListWith(key, null)));
+        assertFalse(mutableSet.retainAll(FastList.newListWith(key, null)));
 
-        Assert.assertEquals(
+        assertEquals(
                 this.newWith(null, key),
                 mutableSet);
     }

@@ -15,8 +15,10 @@ import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * JUnit test for {@link ImmutableBooleanEmptyBag}.
@@ -33,7 +35,7 @@ public class ImmutableBooleanEmptyBagTest extends AbstractImmutableBooleanBagTes
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(this.classUnderTest().notEmpty());
+        assertFalse(this.classUnderTest().notEmpty());
     }
 
     @Override
@@ -57,14 +59,14 @@ public class ImmutableBooleanEmptyBagTest extends AbstractImmutableBooleanBagTes
         StringBuilder stringBuilder = new StringBuilder();
         this.classUnderTest().forEachWithOccurrences((argument1, argument2) -> stringBuilder.append(argument1).append(argument2));
         String string = stringBuilder.toString();
-        Assert.assertEquals("", string);
+        assertEquals("", string);
     }
 
     @Test
     public void occurrencesOf()
     {
-        Assert.assertEquals(0, this.classUnderTest().occurrencesOf(true));
-        Assert.assertEquals(0, this.classUnderTest().occurrencesOf(false));
+        assertEquals(0, this.classUnderTest().occurrencesOf(true));
+        assertEquals(0, this.classUnderTest().occurrencesOf(false));
     }
 
     @Override
@@ -76,6 +78,6 @@ public class ImmutableBooleanEmptyBagTest extends AbstractImmutableBooleanBagTes
         ImmutableBooleanBag bag = this.classUnderTest();
         ImmutableBooleanSet expected = BooleanSets.immutable.empty();
         ImmutableBooleanSet actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

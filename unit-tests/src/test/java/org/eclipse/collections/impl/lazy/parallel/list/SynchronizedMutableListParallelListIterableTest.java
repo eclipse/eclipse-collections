@@ -23,8 +23,11 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class SynchronizedMutableListParallelListIterableTest extends ParallelListIterableTestCase
 {
@@ -52,7 +55,7 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
         }
         catch (RuntimeException e)
         {
-            Assert.assertEquals("Execution exception", e.getMessage());
+            assertEquals("Execution exception", e.getMessage());
         }
     }
 
@@ -68,7 +71,7 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
         }
         catch (RuntimeException e)
         {
-            Assert.assertEquals("Execution exception", e.getMessage());
+            assertEquals("Execution exception", e.getMessage());
         }
     }
 
@@ -84,7 +87,7 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
         }
         catch (RuntimeException e)
         {
-            Assert.assertEquals("Execution exception", e.getMessage());
+            assertEquals("Execution exception", e.getMessage());
         }
     }
 
@@ -100,7 +103,7 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
         }
         catch (RuntimeException e)
         {
-            Assert.assertEquals("Execution exception", e.getMessage());
+            assertEquals("Execution exception", e.getMessage());
         }
     }
 
@@ -116,7 +119,7 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
         }
         catch (RuntimeException e)
         {
-            Assert.assertEquals("Execution exception", e.getMessage());
+            assertEquals("Execution exception", e.getMessage());
         }
     }
 
@@ -140,11 +143,11 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
                     }
                 }));
 
-        Assert.assertFalse(Thread.interrupted());
+        assertFalse(Thread.interrupted());
 
         MutableCollection<Integer> actual2 = HashBag.<Integer>newBag().asSynchronized();
         this.classUnderTest().forEach(CollectionAddProcedure.on(actual2));
-        Assert.assertEquals(this.getExpected().toBag(), actual2);
+        assertEquals(this.getExpected().toBag(), actual2);
     }
 
     @Override
@@ -162,9 +165,9 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
             }
         }));
 
-        Assert.assertFalse(Thread.interrupted());
+        assertFalse(Thread.interrupted());
 
-        Assert.assertFalse(this.classUnderTest().anySatisfy(Predicates.lessThan(1)));
+        assertFalse(this.classUnderTest().anySatisfy(Predicates.lessThan(1)));
     }
 
     @Override
@@ -182,9 +185,9 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
             }
         }));
 
-        Assert.assertFalse(Thread.interrupted());
+        assertFalse(Thread.interrupted());
 
-        Assert.assertTrue(this.classUnderTest().allSatisfy(Predicates.lessThan(5)));
+        assertTrue(this.classUnderTest().allSatisfy(Predicates.lessThan(5)));
     }
 
     @Override
@@ -202,9 +205,9 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
             }
         }));
 
-        Assert.assertFalse(Thread.interrupted());
+        assertFalse(Thread.interrupted());
 
-        Assert.assertEquals(Integer.valueOf(3), this.classUnderTest().detect(Integer.valueOf(3)::equals));
+        assertEquals(Integer.valueOf(3), this.classUnderTest().detect(Integer.valueOf(3)::equals));
     }
 
     @Override
@@ -222,10 +225,10 @@ public class SynchronizedMutableListParallelListIterableTest extends ParallelLis
             }
         }).toString());
 
-        Assert.assertFalse(Thread.interrupted());
+        assertFalse(Thread.interrupted());
 
         MutableCollection<Integer> actual = HashBag.<Integer>newBag().asSynchronized();
         this.classUnderTest().forEach(CollectionAddProcedure.on(actual));
-        Assert.assertEquals(this.getExpected().toBag(), actual);
+        assertEquals(this.getExpected().toBag(), actual);
     }
 }

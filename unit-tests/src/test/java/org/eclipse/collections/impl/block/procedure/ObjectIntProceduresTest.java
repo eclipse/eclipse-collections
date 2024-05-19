@@ -15,8 +15,9 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.ObjectIntProcedures;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ObjectIntProceduresTest
 {
@@ -26,7 +27,7 @@ public class ObjectIntProceduresTest
         MutableList<Integer> result = FastList.newList();
         ObjectIntProcedure<Integer> objectIntProcedure = ObjectIntProcedures.fromProcedure(result::add);
         objectIntProcedure.value(1, 0);
-        Assert.assertEquals(FastList.newListWith(1), result);
+        assertEquals(FastList.newListWith(1), result);
     }
 
     @Test

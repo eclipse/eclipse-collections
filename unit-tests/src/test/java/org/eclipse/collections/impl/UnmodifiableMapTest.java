@@ -17,9 +17,12 @@ import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class UnmodifiableMapTest
 {
@@ -42,7 +45,7 @@ public class UnmodifiableMapTest
     @Test
     public void testNullConstructorArgument()
     {
-        Assert.assertThrows(NullPointerException.class, () -> new UnmodifiableMap<>(null));
+        assertThrows(NullPointerException.class, () -> new UnmodifiableMap<>(null));
     }
 
     @Test
@@ -54,55 +57,55 @@ public class UnmodifiableMapTest
     @Test
     public void testIsEmpty()
     {
-        Assert.assertEquals(this.mutableMap.isEmpty(), this.unmodifiableMap.isEmpty());
+        assertEquals(this.mutableMap.isEmpty(), this.unmodifiableMap.isEmpty());
     }
 
     @Test
     public void testContainsKey()
     {
-        Assert.assertTrue(this.unmodifiableMap.containsKey(ROCK_OUT));
+        assertTrue(this.unmodifiableMap.containsKey(ROCK_OUT));
     }
 
     @Test
     public void testContainsValue()
     {
-        Assert.assertTrue(this.unmodifiableMap.containsValue(MASTERS_OF_ROCK));
+        assertTrue(this.unmodifiableMap.containsValue(MASTERS_OF_ROCK));
     }
 
     @Test
     public void testGet()
     {
-        Assert.assertEquals(MASTERS_OF_ROCK, this.unmodifiableMap.get(ROCK_OUT));
+        assertEquals(MASTERS_OF_ROCK, this.unmodifiableMap.get(ROCK_OUT));
     }
 
     @Test
     public void testPut()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.put("foo", Lists.mutable.of()));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.put("foo", Lists.mutable.of()));
     }
 
     @Test
     public void testRemove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.remove(ROCK_OUT));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.remove(ROCK_OUT));
     }
 
     @Test
     public void testPutAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.putAll(Maps.mutable.of()));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.putAll(Maps.mutable.of()));
     }
 
     @Test
     public void testClear()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, this.unmodifiableMap::clear);
+        assertThrows(UnsupportedOperationException.class, this.unmodifiableMap::clear);
     }
 
     @Test
     public void testKeySet()
     {
-        Assert.assertEquals(this.mutableMap.keySet(), this.unmodifiableMap.keySet());
+        assertEquals(this.mutableMap.keySet(), this.unmodifiableMap.keySet());
     }
 
     @Test
@@ -114,13 +117,13 @@ public class UnmodifiableMapTest
     @Test
     public void testEntrySet()
     {
-        Assert.assertEquals(this.mutableMap.entrySet(), this.unmodifiableMap.entrySet());
+        assertEquals(this.mutableMap.entrySet(), this.unmodifiableMap.entrySet());
     }
 
     @Test
     public void testToString()
     {
-        Assert.assertEquals(this.mutableMap.toString(), this.unmodifiableMap.toString());
+        assertEquals(this.mutableMap.toString(), this.unmodifiableMap.toString());
     }
 
     @Test

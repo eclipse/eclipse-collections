@@ -13,8 +13,9 @@ package org.eclipse.collections.impl.block.procedure;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class FastListSelectProcedureTest
 {
@@ -28,6 +29,6 @@ public class FastListSelectProcedureTest
         procedure.value(10);
         procedure.value(20);
 
-        Assert.assertEquals(Lists.mutable.of(10, 20), procedure.getFastList());
+        assertEquals(Lists.mutable.of(10, 20), procedure.getFastList());
     }
 }

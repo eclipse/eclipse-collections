@@ -15,8 +15,11 @@ import java.util.Set;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class SetIterateTest
 {
@@ -24,16 +27,16 @@ public class SetIterateTest
     public void removeAllIterableOne()
     {
         Set<Integer> set = this.newSet();
-        Assert.assertTrue(SetIterate.removeAllIterable(set, Sets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8, 9)));
-        Assert.assertEquals(Sets.mutable.of(25), set);
+        assertTrue(SetIterate.removeAllIterable(set, Sets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8, 9)));
+        assertEquals(Sets.mutable.of(25), set);
     }
 
     @Test
     public void removeAllIterableTwo()
     {
         Set<Integer> set = this.newSet();
-        Assert.assertFalse(SetIterate.removeAllIterable(set, Sets.mutable.of(31, 32, 33, 34, 35, 36, 37)));
-        Assert.assertEquals(this.newSet(), set);
+        assertFalse(SetIterate.removeAllIterable(set, Sets.mutable.of(31, 32, 33, 34, 35, 36, 37)));
+        assertEquals(this.newSet(), set);
     }
 
     private MutableSet<Integer> newSet()
@@ -45,31 +48,31 @@ public class SetIterateTest
     public void removeAllIterableThree()
     {
         Set<Integer> set = this.newSet();
-        Assert.assertTrue(SetIterate.removeAllIterable(set, Sets.mutable.of(25)));
-        Assert.assertEquals(Sets.mutable.of(5, 9), set);
+        assertTrue(SetIterate.removeAllIterable(set, Sets.mutable.of(25)));
+        assertEquals(Sets.mutable.of(5, 9), set);
     }
 
     @Test
     public void removeAllIterableFour()
     {
         Set<Integer> set = this.newSet();
-        Assert.assertFalse(SetIterate.removeAllIterable(set, Sets.mutable.of(250)));
-        Assert.assertEquals(this.newSet(), set);
+        assertFalse(SetIterate.removeAllIterable(set, Sets.mutable.of(250)));
+        assertEquals(this.newSet(), set);
     }
 
     @Test
     public void removeAllIterableFive()
     {
         Set<Integer> set = this.newSet();
-        Assert.assertTrue(SetIterate.removeAllIterable(set, Lists.mutable.of(5, 5, 5, 9, 9, 100, 200, 300)));
-        Assert.assertEquals(Sets.mutable.of(25), set);
+        assertTrue(SetIterate.removeAllIterable(set, Lists.mutable.of(5, 5, 5, 9, 9, 100, 200, 300)));
+        assertEquals(Sets.mutable.of(25), set);
     }
 
     @Test
     public void removeAllIterableSix()
     {
         Set<Integer> set = this.newSet();
-        Assert.assertFalse(SetIterate.removeAllIterable(set, Lists.mutable.of(90)));
-        Assert.assertEquals(this.newSet(), set);
+        assertFalse(SetIterate.removeAllIterable(set, Lists.mutable.of(90)));
+        assertEquals(this.newSet(), set);
     }
 }

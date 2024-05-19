@@ -32,8 +32,11 @@ import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 
 public class ImmutableTreeSetTest
         extends AbstractImmutableSortedSetTestCase
@@ -53,13 +56,13 @@ public class ImmutableTreeSetTest
     @Test
     public void constructWithNull()
     {
-        Assert.assertThrows(ClassCastException.class, () -> new TreeSet<>(Arrays.asList(new Object())));
-        Assert.assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList(null, null)));
-        Assert.assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList((Object) null)));
+        assertThrows(ClassCastException.class, () -> new TreeSet<>(Arrays.asList(new Object())));
+        assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList(null, null)));
+        assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList((Object) null)));
 
-        Assert.assertThrows(ClassCastException.class, () -> SortedSets.immutable.of(new Object()));
-        Assert.assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null, null));
-        Assert.assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null));
+        assertThrows(ClassCastException.class, () -> SortedSets.immutable.of(new Object()));
+        assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null, null));
+        assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null));
     }
 
     @Override
@@ -68,15 +71,15 @@ public class ImmutableTreeSetTest
     {
         super.equalsAndHashCode();
 
-        Assert.assertNotEquals(
+        assertNotEquals(
                 new TreeSet<>(Arrays.asList("1", "2", "3")),
                 new TreeSet<>(Arrays.asList(1, 2, 3)));
 
-        Assert.assertNotEquals(
+        assertNotEquals(
                 new TreeSet<>(Arrays.asList("1", "2", "3")),
                 Sets.immutable.of("1", "2", null));
 
-        Assert.assertNotEquals(
+        assertNotEquals(
                 SortedSets.immutable.of("1", "2", "3"),
                 SortedSets.immutable.of(1, 2, 3));
     }
@@ -131,12 +134,12 @@ public class ImmutableTreeSetTest
     public void compareTo()
     {
         ImmutableSortedSet<Integer> set = SortedSets.immutable.of(1, 2, 3);
-        Assert.assertEquals(0, set.compareTo(set));
-        Assert.assertEquals(-1, set.compareTo(SortedSets.immutable.of(1, 2, 3, 4)));
-        Assert.assertEquals(1, set.compareTo(SortedSets.immutable.of(1, 2)));
+        assertEquals(0, set.compareTo(set));
+        assertEquals(-1, set.compareTo(SortedSets.immutable.of(1, 2, 3, 4)));
+        assertEquals(1, set.compareTo(SortedSets.immutable.of(1, 2)));
 
-        Assert.assertEquals(-1, set.compareTo(SortedSets.immutable.of(1, 2, 4)));
-        Assert.assertEquals(1, set.compareTo(SortedSets.immutable.of(1, 2, 2)));
+        assertEquals(-1, set.compareTo(SortedSets.immutable.of(1, 2, 4)));
+        assertEquals(1, set.compareTo(SortedSets.immutable.of(1, 2, 2)));
     }
 
     @Override
@@ -144,7 +147,7 @@ public class ImmutableTreeSetTest
     public void collectBoolean()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, true, true), integers.collectBoolean(PrimitiveFunctions.integerIsPositive()));
+        assertEquals(BooleanArrayList.newListWith(true, true, true, true), integers.collectBoolean(PrimitiveFunctions.integerIsPositive()));
     }
 
     @Override
@@ -152,7 +155,7 @@ public class ImmutableTreeSetTest
     public void collectByte()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(ByteArrayList.newListWith((byte) 4, (byte) 3, (byte) 2, (byte) 1), integers.collectByte(PrimitiveFunctions.unboxIntegerToByte()));
+        assertEquals(ByteArrayList.newListWith((byte) 4, (byte) 3, (byte) 2, (byte) 1), integers.collectByte(PrimitiveFunctions.unboxIntegerToByte()));
     }
 
     @Override
@@ -160,7 +163,7 @@ public class ImmutableTreeSetTest
     public void collectChar()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(CharArrayList.newListWith('D', 'C', 'B', 'A'), integers.collectChar(integer -> (char) (integer.intValue() + 64)));
+        assertEquals(CharArrayList.newListWith('D', 'C', 'B', 'A'), integers.collectChar(integer -> (char) (integer.intValue() + 64)));
     }
 
     @Override
@@ -168,7 +171,7 @@ public class ImmutableTreeSetTest
     public void collectDouble()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(DoubleArrayList.newListWith(4.0d, 3.0d, 2.0d, 1.0d), integers.collectDouble(PrimitiveFunctions.unboxIntegerToDouble()));
+        assertEquals(DoubleArrayList.newListWith(4.0d, 3.0d, 2.0d, 1.0d), integers.collectDouble(PrimitiveFunctions.unboxIntegerToDouble()));
     }
 
     @Override
@@ -176,7 +179,7 @@ public class ImmutableTreeSetTest
     public void collectFloat()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(FloatArrayList.newListWith(4.0f, 3.0f, 2.0f, 1.0f), integers.collectFloat(PrimitiveFunctions.unboxIntegerToFloat()));
+        assertEquals(FloatArrayList.newListWith(4.0f, 3.0f, 2.0f, 1.0f), integers.collectFloat(PrimitiveFunctions.unboxIntegerToFloat()));
     }
 
     @Override
@@ -184,7 +187,7 @@ public class ImmutableTreeSetTest
     public void collectInt()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(IntArrayList.newListWith(4, 3, 2, 1), integers.collectInt(PrimitiveFunctions.unboxIntegerToInt()));
+        assertEquals(IntArrayList.newListWith(4, 3, 2, 1), integers.collectInt(PrimitiveFunctions.unboxIntegerToInt()));
     }
 
     @Override
@@ -192,7 +195,7 @@ public class ImmutableTreeSetTest
     public void collectLong()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(LongArrayList.newListWith(4, 3, 2, 1), integers.collectLong(PrimitiveFunctions.unboxIntegerToLong()));
+        assertEquals(LongArrayList.newListWith(4, 3, 2, 1), integers.collectLong(PrimitiveFunctions.unboxIntegerToLong()));
     }
 
     @Override
@@ -200,6 +203,6 @@ public class ImmutableTreeSetTest
     public void collectShort()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
-        Assert.assertEquals(ShortArrayList.newListWith((short) 4, (short) 3, (short) 2, (short) 1), integers.collectShort(PrimitiveFunctions.unboxIntegerToShort()));
+        assertEquals(ShortArrayList.newListWith((short) 4, (short) 3, (short) 2, (short) 1), integers.collectShort(PrimitiveFunctions.unboxIntegerToShort()));
     }
 }

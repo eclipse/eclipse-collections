@@ -13,8 +13,12 @@ package org.eclipse.collections.impl.iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.iterator.BooleanIterator;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class SingletonBooleanIteratorTest
 {
@@ -22,24 +26,24 @@ public class SingletonBooleanIteratorTest
     public void hasNext()
     {
         BooleanIterator iterator = new SingletonBooleanIterator(false);
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         iterator.next();
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
     }
 
     @Test
     public void next()
     {
         SingletonBooleanIterator iterator = new SingletonBooleanIterator(false);
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(false, iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertTrue(iterator.hasNext());
+        assertEquals(false, iterator.next());
+        assertFalse(iterator.hasNext());
         try
         {
             iterator.next();
-            Assert.fail("NoSuchElementException should have been thrown");
+            fail("NoSuchElementException should have been thrown");
         }
         catch (NoSuchElementException e)
         {

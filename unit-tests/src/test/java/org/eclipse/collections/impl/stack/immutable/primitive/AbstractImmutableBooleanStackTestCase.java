@@ -18,8 +18,12 @@ import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.stack.mutable.primitive.BooleanArrayStack;
 import org.eclipse.collections.impl.stack.primitive.AbstractBooleanStackTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Abstract JUnit test for {@link ImmutableBooleanStack}.
@@ -63,11 +67,11 @@ public abstract class AbstractImmutableBooleanStackTestCase extends AbstractBool
         ImmutableBooleanStack stack = this.classUnderTest();
         int size = stack.size();
         ImmutableBooleanStack modified = stack.push(true);
-        Assert.assertTrue(modified.peek());
+        assertTrue(modified.peek());
         Verify.assertSize(size + 1, modified);
         Verify.assertSize(size, stack);
-        Assert.assertNotSame(modified, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        assertNotSame(modified, stack);
+        assertEquals(this.classUnderTest(), stack);
     }
 
     @Test
@@ -76,11 +80,11 @@ public abstract class AbstractImmutableBooleanStackTestCase extends AbstractBool
         ImmutableBooleanStack stack = this.classUnderTest();
         int size = stack.size();
         ImmutableBooleanStack modified = stack.pop();
-        Assert.assertEquals((this.classUnderTest().size() & 1) == 0, modified.peek());
+        assertEquals((this.classUnderTest().size() & 1) == 0, modified.peek());
         Verify.assertSize(size - 1, modified);
         Verify.assertSize(size, stack);
-        Assert.assertNotSame(modified, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        assertNotSame(modified, stack);
+        assertEquals(this.classUnderTest(), stack);
     }
 
     @Test
@@ -88,15 +92,15 @@ public abstract class AbstractImmutableBooleanStackTestCase extends AbstractBool
     {
         ImmutableBooleanStack stack = this.classUnderTest();
         ImmutableBooleanStack stack1 = stack.pop(0);
-        Assert.assertSame(stack1, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        assertSame(stack1, stack);
+        assertEquals(this.classUnderTest(), stack);
         int size = stack.size();
         ImmutableBooleanStack modified = stack.pop(2);
-        Assert.assertEquals((this.classUnderTest().size() & 1) != 0, modified.peek());
+        assertEquals((this.classUnderTest().size() & 1) != 0, modified.peek());
         Verify.assertSize(size - 2, modified);
         Verify.assertSize(size, stack);
-        Assert.assertNotSame(modified, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        assertNotSame(modified, stack);
+        assertEquals(this.classUnderTest(), stack);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -115,16 +119,16 @@ public abstract class AbstractImmutableBooleanStackTestCase extends AbstractBool
     @Test
     public void testToString()
     {
-        Assert.assertEquals(this.createExpectedString("[", ", ", "]"), this.classUnderTest().toString());
+        assertEquals(this.createExpectedString("[", ", ", "]"), this.classUnderTest().toString());
     }
 
     @Override
     @Test
     public void makeString()
     {
-        Assert.assertEquals(this.createExpectedString("", ", ", ""), this.classUnderTest().makeString());
-        Assert.assertEquals(this.createExpectedString("", "|", ""), this.classUnderTest().makeString("|"));
-        Assert.assertEquals(this.createExpectedString("{", "|", "}"), this.classUnderTest().makeString("{", "|", "}"));
+        assertEquals(this.createExpectedString("", ", ", ""), this.classUnderTest().makeString());
+        assertEquals(this.createExpectedString("", "|", ""), this.classUnderTest().makeString("|"));
+        assertEquals(this.createExpectedString("{", "|", "}"), this.classUnderTest().makeString("{", "|", "}"));
     }
 
     @Override
@@ -133,15 +137,15 @@ public abstract class AbstractImmutableBooleanStackTestCase extends AbstractBool
     {
         StringBuilder appendable1 = new StringBuilder();
         this.classUnderTest().appendString(appendable1);
-        Assert.assertEquals(this.createExpectedString("", ", ", ""), appendable1.toString());
+        assertEquals(this.createExpectedString("", ", ", ""), appendable1.toString());
 
         StringBuilder appendable2 = new StringBuilder();
         this.classUnderTest().appendString(appendable2, "|");
-        Assert.assertEquals(this.createExpectedString("", "|", ""), appendable2.toString());
+        assertEquals(this.createExpectedString("", "|", ""), appendable2.toString());
 
         StringBuilder appendable3 = new StringBuilder();
         this.classUnderTest().appendString(appendable3, "{", "|", "}");
-        Assert.assertEquals(this.createExpectedString("{", "|", "}"), appendable3.toString());
+        assertEquals(this.createExpectedString("{", "|", "}"), appendable3.toString());
     }
 
     @Override
@@ -150,7 +154,7 @@ public abstract class AbstractImmutableBooleanStackTestCase extends AbstractBool
     {
         BooleanArrayList expected = BooleanArrayList.newListWith();
         this.classUnderTest().forEach(expected::add);
-        Assert.assertEquals(expected, this.classUnderTest().toList());
+        assertEquals(expected, this.classUnderTest().toList());
     }
 
     @Override
@@ -159,6 +163,6 @@ public abstract class AbstractImmutableBooleanStackTestCase extends AbstractBool
     {
         super.toImmutable();
         ImmutableBooleanStack expected = this.classUnderTest();
-        Assert.assertSame(expected, expected.toImmutable());
+        assertSame(expected, expected.toImmutable());
     }
 }

@@ -30,8 +30,12 @@ import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.fail;
 
 public class ProceduresTest
 {
@@ -50,7 +54,7 @@ public class ProceduresTest
         StringBuilder builder = new StringBuilder("a");
         ThrowingProcedure<StringBuilder> throwingProcedure = stringBuilder -> stringBuilder.append("Visited");
         Procedures.throwing(throwingProcedure).value(builder);
-        Assert.assertEquals("aVisited", builder.toString());
+        assertEquals("aVisited", builder.toString());
     }
 
     @Test
@@ -70,7 +74,7 @@ public class ProceduresTest
                         a -> { throw new IOException(); },
                         this::throwMyException)
                         .value(null));
-        Verify.assertThrows(
+        assertThrows(
                 NullPointerException.class,
                 () -> Procedures.throwing(
                         a -> { throw new NullPointerException(); },
@@ -104,8 +108,8 @@ public class ProceduresTest
         appender.value(1);
         appender.value(2);
         appender.value(3);
-        Assert.assertEquals("init123", appendable.toString());
-        Assert.assertEquals("init123", appender.toString());
+        assertEquals("init123", appendable.toString());
+        assertEquals("init123", appender.toString());
     }
 
     @Test(expected = RuntimeException.class)
@@ -145,7 +149,7 @@ public class ProceduresTest
         Procedure<String> procedure = Procedures.fromObjectIntProcedure(objectIntProcedure);
         numberStrings.forEach(procedure);
 
-        Assert.assertEquals(expectedResults, actualResults);
+        assertEquals(expectedResults, actualResults);
     }
 
     @Test
@@ -156,7 +160,7 @@ public class ProceduresTest
                 Procedures.fromObjectIntProcedure((each, parameter) -> list.add(PrimitiveTuples.pair(each, parameter)));
         procedure.value("strOne");
         procedure.value("strTwo");
-        Assert.assertEquals(Lists.mutable.of(PrimitiveTuples.pair("strOne", 0),
+        assertEquals(Lists.mutable.of(PrimitiveTuples.pair("strOne", 0),
                 PrimitiveTuples.pair("strTwo", 1)), list);
     }
 
@@ -165,7 +169,7 @@ public class ProceduresTest
     {
         Procedure<Object> noop = Procedures.noop();
         noop.value("abc");
-        Assert.assertNotNull(noop);
+        assertNotNull(noop);
     }
 
     @Test
@@ -175,7 +179,7 @@ public class ProceduresTest
         integers.add(null);
         MutableList<Integer> result = Lists.mutable.of();
         integers.forEach(Procedures.synchronizedEach(CollectionAddProcedure.on(result)));
-        Assert.assertEquals(result, integers);
+        assertEquals(result, integers);
     }
 
     @Test
@@ -197,7 +201,7 @@ public class ProceduresTest
     {
         Procedure<Object> defaultBlock = each -> { throw new BlockCalledException(); };
         CaseProcedure<Object> undertest = Procedures.caseDefault(defaultBlock);
-        Verify.assertThrows(BlockCalledException.class, () -> undertest.value(1));
+        assertThrows(BlockCalledException.class, () -> undertest.value(1));
     }
 
     @Test
@@ -205,7 +209,7 @@ public class ProceduresTest
     {
         Procedure<Object> caseBlock = each -> { throw new BlockCalledException(); };
         CaseProcedure<Object> undertest = Procedures.caseDefault(DoNothingProcedure.DO_NOTHING, ignored -> true, caseBlock);
-        Verify.assertThrows(BlockCalledException.class, () -> undertest.value(1));
+        assertThrows(BlockCalledException.class, () -> undertest.value(1));
     }
 
     private static final class TestPrintStream
@@ -227,7 +231,7 @@ public class ProceduresTest
             }
             catch (IOException ex)
             {
-                Assert.fail("Failed to marshal an object: " + ex.getMessage());
+                fail("Failed to marshal an object: " + ex.getMessage());
             }
             return null;
         }
@@ -236,7 +240,7 @@ public class ProceduresTest
         public void println(Object x)
         {
             super.println(x);
-            Assert.assertEquals(this.assertValues.remove(0), x);
+            assertEquals(this.assertValues.remove(0), x);
         }
 
         private void shutdown()

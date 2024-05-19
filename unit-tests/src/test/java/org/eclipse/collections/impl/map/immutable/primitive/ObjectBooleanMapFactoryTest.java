@@ -15,67 +15,70 @@ import org.eclipse.collections.api.map.primitive.ImmutableObjectBooleanMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
 import org.eclipse.collections.impl.factory.primitive.ObjectBooleanMaps;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMap;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class ObjectBooleanMapFactoryTest
 {
     @Test
     public void of()
     {
-        Assert.assertEquals(new ObjectBooleanHashMap<>(), ObjectBooleanMaps.mutable.of());
-        Assert.assertEquals(ObjectBooleanMaps.mutable.of(), ObjectBooleanMaps.mutable.empty());
-        Assert.assertEquals(ObjectBooleanMaps.mutable.empty().toImmutable(), ObjectBooleanMaps.immutable.empty());
-        Assert.assertEquals(ObjectBooleanMaps.mutable.empty().toImmutable(), ObjectBooleanMaps.immutable.of());
-        Assert.assertTrue(ObjectBooleanMaps.immutable.empty() instanceof ImmutableObjectBooleanEmptyMap);
-        Assert.assertEquals(ObjectBooleanHashMap.newWithKeysValues("2", true).toImmutable(), ObjectBooleanMaps.immutable.of("2", true));
-        Assert.assertTrue(ObjectBooleanMaps.immutable.of("2", true) instanceof ImmutableObjectBooleanSingletonMap);
+        assertEquals(new ObjectBooleanHashMap<>(), ObjectBooleanMaps.mutable.of());
+        assertEquals(ObjectBooleanMaps.mutable.of(), ObjectBooleanMaps.mutable.empty());
+        assertEquals(ObjectBooleanMaps.mutable.empty().toImmutable(), ObjectBooleanMaps.immutable.empty());
+        assertEquals(ObjectBooleanMaps.mutable.empty().toImmutable(), ObjectBooleanMaps.immutable.of());
+        assertTrue(ObjectBooleanMaps.immutable.empty() instanceof ImmutableObjectBooleanEmptyMap);
+        assertEquals(ObjectBooleanHashMap.newWithKeysValues("2", true).toImmutable(), ObjectBooleanMaps.immutable.of("2", true));
+        assertTrue(ObjectBooleanMaps.immutable.of("2", true) instanceof ImmutableObjectBooleanSingletonMap);
 
-        Assert.assertEquals(ObjectBooleanMaps.mutable.of("2", true), ObjectBooleanHashMap.newWithKeysValues("2", true));
-        Assert.assertEquals(ObjectBooleanMaps.mutable.of("2", true, 3, false),
+        assertEquals(ObjectBooleanMaps.mutable.of("2", true), ObjectBooleanHashMap.newWithKeysValues("2", true));
+        assertEquals(ObjectBooleanMaps.mutable.of("2", true, 3, false),
                 ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false));
-        Assert.assertEquals(ObjectBooleanMaps.mutable.of("2", true, 3, false, 4, false),
+        assertEquals(ObjectBooleanMaps.mutable.of("2", true, 3, false, 4, false),
                 ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false, 4, false));
-        Assert.assertEquals(ObjectBooleanMaps.mutable.of("2", true, 3, false, 4, false, 5, true),
+        assertEquals(ObjectBooleanMaps.mutable.of("2", true, 3, false, 4, false, 5, true),
                 ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false, 4, false, 5, true));
     }
 
     @Test
     public void with()
     {
-        Assert.assertEquals(ObjectBooleanMaps.mutable.with(), ObjectBooleanMaps.mutable.empty());
-        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", false), ObjectBooleanHashMap.newWithKeysValues("2", false));
-        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", true), ObjectBooleanHashMap.newWithKeysValues("2", true));
-        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", true, 3, false),
+        assertEquals(ObjectBooleanMaps.mutable.with(), ObjectBooleanMaps.mutable.empty());
+        assertEquals(ObjectBooleanMaps.mutable.with("2", false), ObjectBooleanHashMap.newWithKeysValues("2", false));
+        assertEquals(ObjectBooleanMaps.mutable.with("2", true), ObjectBooleanHashMap.newWithKeysValues("2", true));
+        assertEquals(ObjectBooleanMaps.mutable.with("2", true, 3, false),
                 ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false));
-        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", true, 3, false, 4, false),
+        assertEquals(ObjectBooleanMaps.mutable.with("2", true, 3, false, 4, false),
                 ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false, 4, false));
-        Assert.assertEquals(ObjectBooleanMaps.mutable.with("2", true, 3, false, 4, false, 5, true),
+        assertEquals(ObjectBooleanMaps.mutable.with("2", true, 3, false, 4, false, 5, true),
                 ObjectBooleanHashMap.newWithKeysValues("2", true, 3, false, 4, false, 5, true));
     }
 
     @Test
     public void ofAll()
     {
-        Assert.assertEquals(ObjectBooleanMaps.mutable.empty(), ObjectBooleanMaps.mutable.ofAll(ObjectBooleanMaps.mutable.empty()));
-        Assert.assertEquals(ObjectBooleanMaps.mutable.empty().toImmutable(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanMaps.mutable.empty()));
-        Assert.assertSame(ObjectBooleanMaps.immutable.empty(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanMaps.immutable.empty()));
-        Assert.assertEquals(ObjectBooleanHashMap.newWithKeysValues("2", true), ObjectBooleanMaps.mutable.ofAll(ObjectBooleanHashMap.newWithKeysValues("2", true)));
-        Assert.assertEquals(ObjectBooleanHashMap.newWithKeysValues("2", true).toImmutable(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanHashMap.newWithKeysValues("2", true)));
-        Assert.assertEquals(ObjectBooleanHashMap.newWithKeysValues("2", true, "3", false).toImmutable(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanHashMap.newWithKeysValues("2", true, "3", false)));
+        assertEquals(ObjectBooleanMaps.mutable.empty(), ObjectBooleanMaps.mutable.ofAll(ObjectBooleanMaps.mutable.empty()));
+        assertEquals(ObjectBooleanMaps.mutable.empty().toImmutable(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanMaps.mutable.empty()));
+        assertSame(ObjectBooleanMaps.immutable.empty(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanMaps.immutable.empty()));
+        assertEquals(ObjectBooleanHashMap.newWithKeysValues("2", true), ObjectBooleanMaps.mutable.ofAll(ObjectBooleanHashMap.newWithKeysValues("2", true)));
+        assertEquals(ObjectBooleanHashMap.newWithKeysValues("2", true).toImmutable(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanHashMap.newWithKeysValues("2", true)));
+        assertEquals(ObjectBooleanHashMap.newWithKeysValues("2", true, "3", false).toImmutable(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanHashMap.newWithKeysValues("2", true, "3", false)));
     }
 
     @Test
     public void from()
     {
         Iterable<String> iterable = Lists.mutable.with("1", "2", "3");
-        Assert.assertEquals(
+        assertEquals(
                 ObjectBooleanHashMap.newWithKeysValues("1", false, "2", true, "3", false),
                 ObjectBooleanMaps.mutable.from(iterable, each -> each, each -> Integer.valueOf(each) % 2 == 0));
-        Assert.assertTrue(ObjectBooleanMaps.mutable.from(iterable, each -> each, each -> Integer.valueOf(each) % 2 == 0) instanceof MutableObjectBooleanMap);
-        Assert.assertEquals(
+        assertTrue(ObjectBooleanMaps.mutable.from(iterable, each -> each, each -> Integer.valueOf(each) % 2 == 0) instanceof MutableObjectBooleanMap);
+        assertEquals(
                 ObjectBooleanHashMap.newWithKeysValues("1", false, "2", true, "3", false),
                 ObjectBooleanMaps.immutable.from(iterable, each -> each, each -> Integer.valueOf(each) % 2 == 0));
-        Assert.assertTrue(ObjectBooleanMaps.immutable.from(iterable, each -> each, each -> Integer.valueOf(each) % 2 == 0) instanceof ImmutableObjectBooleanMap);
+        assertTrue(ObjectBooleanMaps.immutable.from(iterable, each -> each, each -> Integer.valueOf(each) % 2 == 0) instanceof ImmutableObjectBooleanMap);
     }
 }

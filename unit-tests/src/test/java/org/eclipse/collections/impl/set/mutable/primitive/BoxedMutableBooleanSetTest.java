@@ -16,8 +16,11 @@ import java.util.HashSet;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BoxedMutableBooleanSetTest
 {
@@ -60,41 +63,41 @@ public class BoxedMutableBooleanSetTest
     {
         MutableSet<Boolean> result = Sets.mutable.empty();
         this.classUnderTest().forEach(result::add);
-        Assert.assertEquals(Sets.mutable.of(true, false), result);
+        assertEquals(Sets.mutable.of(true, false), result);
     }
 
     @Test
     public void add()
     {
         BoxedMutableBooleanSet set = new BoxedMutableBooleanSet(new BooleanHashSet(true));
-        Assert.assertTrue(set.add(Boolean.FALSE));
-        Assert.assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE), set);
+        assertTrue(set.add(Boolean.FALSE));
+        assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE), set);
 
-        Assert.assertFalse(set.add(Boolean.FALSE));
-        Assert.assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE), set);
+        assertFalse(set.add(Boolean.FALSE));
+        assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE), set);
     }
 
     @Test
     public void remove()
     {
         BoxedMutableBooleanSet set = this.classUnderTest();
-        Assert.assertFalse(set.remove("abc"));
-        Assert.assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE), set);
+        assertFalse(set.remove("abc"));
+        assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE), set);
 
-        Assert.assertTrue(set.remove(Boolean.TRUE));
-        Assert.assertEquals(Sets.mutable.of(Boolean.FALSE), set);
+        assertTrue(set.remove(Boolean.TRUE));
+        assertEquals(Sets.mutable.of(Boolean.FALSE), set);
 
-        Assert.assertFalse(set.remove(Boolean.TRUE));
-        Assert.assertEquals(Sets.mutable.of(Boolean.FALSE), set);
+        assertFalse(set.remove(Boolean.TRUE));
+        assertEquals(Sets.mutable.of(Boolean.FALSE), set);
     }
 
     @Test
     public void contains()
     {
         BoxedMutableBooleanSet set = new BoxedMutableBooleanSet(new BooleanHashSet(true));
-        Assert.assertTrue(set.contains(Boolean.TRUE));
-        Assert.assertFalse(set.contains(Boolean.FALSE));
-        Assert.assertFalse(set.contains("abc"));
+        assertTrue(set.contains(Boolean.TRUE));
+        assertFalse(set.contains(Boolean.FALSE));
+        assertFalse(set.contains("abc"));
     }
 
     @Test
@@ -102,7 +105,7 @@ public class BoxedMutableBooleanSetTest
     {
         MutableSet<Boolean> result = Sets.mutable.empty();
         this.classUnderTest().iterator().forEachRemaining(result::add);
-        Assert.assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE), result);
+        assertEquals(Sets.mutable.of(Boolean.TRUE, Boolean.FALSE), result);
     }
 
     @Test
@@ -134,12 +137,12 @@ public class BoxedMutableBooleanSetTest
         BoxedMutableBooleanSet set = new BoxedMutableBooleanSet(originalSet);
 
         originalSet.remove(true);
-        Assert.assertEquals(Sets.mutable.of(Boolean.FALSE), set);
+        assertEquals(Sets.mutable.of(Boolean.FALSE), set);
 
         originalSet.clear();
         Verify.assertEmpty(set);
 
         originalSet.add(true);
-        Assert.assertEquals(Sets.mutable.of(Boolean.TRUE), set);
+        assertEquals(Sets.mutable.of(Boolean.TRUE), set);
     }
 }

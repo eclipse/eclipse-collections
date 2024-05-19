@@ -12,238 +12,241 @@ package org.eclipse.collections.impl.block.factory;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class StringPredicatesTest
 {
     @Test
     public void startsWith()
     {
-        Assert.assertFalse(StringPredicates.startsWith("Hello").accept(null));
-        Assert.assertTrue(StringPredicates.startsWith("Hello").accept("HelloWorld"));
-        Assert.assertFalse(StringPredicates.startsWith("World").accept("HelloWorld"));
-        Assert.assertEquals("StringPredicates.startsWith(\"Hello\")", StringPredicates.startsWith("Hello").toString());
+        assertFalse(StringPredicates.startsWith("Hello").accept(null));
+        assertTrue(StringPredicates.startsWith("Hello").accept("HelloWorld"));
+        assertFalse(StringPredicates.startsWith("World").accept("HelloWorld"));
+        assertEquals("StringPredicates.startsWith(\"Hello\")", StringPredicates.startsWith("Hello").toString());
     }
 
     @Test
     public void endsWith()
     {
-        Assert.assertFalse(StringPredicates.endsWith("Hello").accept(null));
-        Assert.assertFalse(StringPredicates.endsWith("Hello").accept("HelloWorld"));
-        Assert.assertTrue(StringPredicates.endsWith("World").accept("HelloWorld"));
-        Assert.assertEquals("StringPredicates.endsWith(\"Hello\")", StringPredicates.endsWith("Hello").toString());
+        assertFalse(StringPredicates.endsWith("Hello").accept(null));
+        assertFalse(StringPredicates.endsWith("Hello").accept("HelloWorld"));
+        assertTrue(StringPredicates.endsWith("World").accept("HelloWorld"));
+        assertEquals("StringPredicates.endsWith(\"Hello\")", StringPredicates.endsWith("Hello").toString());
     }
 
     @Test
     public void equalsIgnoreCase()
     {
-        Assert.assertFalse(StringPredicates.equalsIgnoreCase("HELLO").accept(null));
-        Assert.assertTrue(StringPredicates.equalsIgnoreCase("HELLO").accept("hello"));
-        Assert.assertTrue(StringPredicates.equalsIgnoreCase("world").accept("WORLD"));
-        Assert.assertFalse(StringPredicates.equalsIgnoreCase("Hello").accept("World"));
-        Assert.assertEquals("StringPredicates.equalsIgnoreCase(\"Hello\")", StringPredicates.equalsIgnoreCase("Hello").toString());
+        assertFalse(StringPredicates.equalsIgnoreCase("HELLO").accept(null));
+        assertTrue(StringPredicates.equalsIgnoreCase("HELLO").accept("hello"));
+        assertTrue(StringPredicates.equalsIgnoreCase("world").accept("WORLD"));
+        assertFalse(StringPredicates.equalsIgnoreCase("Hello").accept("World"));
+        assertEquals("StringPredicates.equalsIgnoreCase(\"Hello\")", StringPredicates.equalsIgnoreCase("Hello").toString());
     }
 
     @Test
     public void containsString()
     {
-        Assert.assertTrue(StringPredicates.contains("Hello").accept("WorldHelloWorld"));
-        Assert.assertTrue(StringPredicates.contains("Hello").and(StringPredicates.contains("World")).accept("WorldHelloWorld"));
-        Assert.assertFalse(StringPredicates.contains("Goodbye").accept("WorldHelloWorld"));
-        Assert.assertEquals("StringPredicates.contains(\"Hello\")", StringPredicates.contains("Hello").toString());
+        assertTrue(StringPredicates.contains("Hello").accept("WorldHelloWorld"));
+        assertTrue(StringPredicates.contains("Hello").and(StringPredicates.contains("World")).accept("WorldHelloWorld"));
+        assertFalse(StringPredicates.contains("Goodbye").accept("WorldHelloWorld"));
+        assertEquals("StringPredicates.contains(\"Hello\")", StringPredicates.contains("Hello").toString());
     }
 
     @Test
     public void containsCharacter()
     {
-        Assert.assertTrue(StringPredicates.contains("H".charAt(0)).accept("WorldHelloWorld"));
-        Assert.assertFalse(StringPredicates.contains("B".charAt(0)).accept("WorldHelloWorld"));
-        Assert.assertEquals("StringPredicates.contains(\"H\")", StringPredicates.contains("H".charAt(0)).toString());
+        assertTrue(StringPredicates.contains("H".charAt(0)).accept("WorldHelloWorld"));
+        assertFalse(StringPredicates.contains("B".charAt(0)).accept("WorldHelloWorld"));
+        assertEquals("StringPredicates.contains(\"H\")", StringPredicates.contains("H".charAt(0)).toString());
     }
 
     @Test
     public void emptyAndNotEmpty()
     {
-        Assert.assertFalse(StringPredicates.empty().accept("WorldHelloWorld"));
-        Assert.assertEquals("StringPredicates.empty()", StringPredicates.empty().toString());
-        Assert.assertTrue(StringPredicates.notEmpty().accept("WorldHelloWorld"));
-        Assert.assertEquals("StringPredicates.notEmpty()", StringPredicates.notEmpty().toString());
-        Assert.assertTrue(StringPredicates.empty().accept(""));
-        Assert.assertFalse(StringPredicates.notEmpty().accept(""));
+        assertFalse(StringPredicates.empty().accept("WorldHelloWorld"));
+        assertEquals("StringPredicates.empty()", StringPredicates.empty().toString());
+        assertTrue(StringPredicates.notEmpty().accept("WorldHelloWorld"));
+        assertEquals("StringPredicates.notEmpty()", StringPredicates.notEmpty().toString());
+        assertTrue(StringPredicates.empty().accept(""));
+        assertFalse(StringPredicates.notEmpty().accept(""));
     }
 
     @Test
     public void lessThan()
     {
-        Assert.assertTrue(StringPredicates.lessThan("b").accept("a"));
-        Assert.assertFalse(StringPredicates.lessThan("b").accept("b"));
-        Assert.assertFalse(StringPredicates.lessThan("b").accept("c"));
-        Assert.assertEquals("StringPredicates.lessThan(\"b\")", StringPredicates.lessThan("b").toString());
+        assertTrue(StringPredicates.lessThan("b").accept("a"));
+        assertFalse(StringPredicates.lessThan("b").accept("b"));
+        assertFalse(StringPredicates.lessThan("b").accept("c"));
+        assertEquals("StringPredicates.lessThan(\"b\")", StringPredicates.lessThan("b").toString());
     }
 
     @Test
     public void lessThanOrEqualTo()
     {
-        Assert.assertTrue(StringPredicates.lessThanOrEqualTo("b").accept("a"));
-        Assert.assertTrue(StringPredicates.lessThanOrEqualTo("b").accept("b"));
-        Assert.assertFalse(StringPredicates.lessThanOrEqualTo("b").accept("c"));
-        Assert.assertEquals("StringPredicates.lessThanOrEqualTo(\"b\")", StringPredicates.lessThanOrEqualTo("b").toString());
+        assertTrue(StringPredicates.lessThanOrEqualTo("b").accept("a"));
+        assertTrue(StringPredicates.lessThanOrEqualTo("b").accept("b"));
+        assertFalse(StringPredicates.lessThanOrEqualTo("b").accept("c"));
+        assertEquals("StringPredicates.lessThanOrEqualTo(\"b\")", StringPredicates.lessThanOrEqualTo("b").toString());
     }
 
     @Test
     public void greaterThan()
     {
-        Assert.assertFalse(StringPredicates.greaterThan("b").accept("a"));
-        Assert.assertFalse(StringPredicates.greaterThan("b").accept("b"));
-        Assert.assertTrue(StringPredicates.greaterThan("b").accept("c"));
-        Assert.assertEquals("StringPredicates.greaterThan(\"b\")", StringPredicates.greaterThan("b").toString());
+        assertFalse(StringPredicates.greaterThan("b").accept("a"));
+        assertFalse(StringPredicates.greaterThan("b").accept("b"));
+        assertTrue(StringPredicates.greaterThan("b").accept("c"));
+        assertEquals("StringPredicates.greaterThan(\"b\")", StringPredicates.greaterThan("b").toString());
     }
 
     @Test
     public void greaterThanOrEqualTo()
     {
-        Assert.assertFalse(StringPredicates.greaterThanOrEqualTo("b").accept("a"));
-        Assert.assertTrue(StringPredicates.greaterThanOrEqualTo("b").accept("b"));
-        Assert.assertTrue(StringPredicates.greaterThanOrEqualTo("b").accept("c"));
-        Assert.assertEquals("StringPredicates.greaterThanOrEqualTo(\"b\")", StringPredicates.greaterThanOrEqualTo("b").toString());
+        assertFalse(StringPredicates.greaterThanOrEqualTo("b").accept("a"));
+        assertTrue(StringPredicates.greaterThanOrEqualTo("b").accept("b"));
+        assertTrue(StringPredicates.greaterThanOrEqualTo("b").accept("c"));
+        assertEquals("StringPredicates.greaterThanOrEqualTo(\"b\")", StringPredicates.greaterThanOrEqualTo("b").toString());
     }
 
     @Test
     public void matches()
     {
-        Assert.assertTrue(StringPredicates.matches("a*b*").accept("aaaaabbbbb"));
-        Assert.assertFalse(StringPredicates.matches("a*b").accept("ba"));
-        Assert.assertEquals("StringPredicates.matches(\"a*b\")", StringPredicates.matches("a*b").toString());
+        assertTrue(StringPredicates.matches("a*b*").accept("aaaaabbbbb"));
+        assertFalse(StringPredicates.matches("a*b").accept("ba"));
+        assertEquals("StringPredicates.matches(\"a*b\")", StringPredicates.matches("a*b").toString());
     }
 
     @Test
     public void size()
     {
-        Assert.assertTrue(StringPredicates.size(1).accept("a"));
-        Assert.assertFalse(StringPredicates.size(0).accept("a"));
-        Assert.assertTrue(StringPredicates.size(2).accept("ab"));
-        Assert.assertEquals("StringPredicates.size(2)", StringPredicates.size(2).toString());
+        assertTrue(StringPredicates.size(1).accept("a"));
+        assertFalse(StringPredicates.size(0).accept("a"));
+        assertTrue(StringPredicates.size(2).accept("ab"));
+        assertEquals("StringPredicates.size(2)", StringPredicates.size(2).toString());
     }
 
     @Test
     public void hasLetters()
     {
-        Assert.assertTrue(StringPredicates.hasLetters().accept("a2a"));
-        Assert.assertFalse(StringPredicates.hasLetters().accept("222"));
-        Assert.assertEquals("StringPredicates.hasLetters()", StringPredicates.hasLetters().toString());
+        assertTrue(StringPredicates.hasLetters().accept("a2a"));
+        assertFalse(StringPredicates.hasLetters().accept("222"));
+        assertEquals("StringPredicates.hasLetters()", StringPredicates.hasLetters().toString());
     }
 
     @Test
     public void hasDigits()
     {
-        Assert.assertFalse(StringPredicates.hasDigits().accept("aaa"));
-        Assert.assertTrue(StringPredicates.hasDigits().accept("a22"));
-        Assert.assertEquals("StringPredicates.hasDigits()", StringPredicates.hasDigits().toString());
+        assertFalse(StringPredicates.hasDigits().accept("aaa"));
+        assertTrue(StringPredicates.hasDigits().accept("a22"));
+        assertEquals("StringPredicates.hasDigits()", StringPredicates.hasDigits().toString());
     }
 
     @Test
     public void hasLettersAndDigits()
     {
         Predicate<String> predicate = StringPredicates.hasLettersAndDigits();
-        Assert.assertTrue(predicate.accept("a2a"));
-        Assert.assertFalse(predicate.accept("aaa"));
-        Assert.assertFalse(predicate.accept("222"));
-        Assert.assertEquals("StringPredicates.hasLettersAndDigits()", predicate.toString());
+        assertTrue(predicate.accept("a2a"));
+        assertFalse(predicate.accept("aaa"));
+        assertFalse(predicate.accept("222"));
+        assertEquals("StringPredicates.hasLettersAndDigits()", predicate.toString());
     }
 
     @Test
     public void hasLettersOrDigits()
     {
         Predicate<String> predicate = StringPredicates.hasLettersOrDigits();
-        Assert.assertTrue(predicate.accept("a2a"));
-        Assert.assertTrue(predicate.accept("aaa"));
-        Assert.assertTrue(predicate.accept("222"));
-        Assert.assertEquals("StringPredicates.hasLettersOrDigits()", predicate.toString());
+        assertTrue(predicate.accept("a2a"));
+        assertTrue(predicate.accept("aaa"));
+        assertTrue(predicate.accept("222"));
+        assertEquals("StringPredicates.hasLettersOrDigits()", predicate.toString());
     }
 
     @Test
     public void isAlpha()
     {
         Predicate<String> predicate = StringPredicates.isAlpha();
-        Assert.assertTrue(predicate.accept("aaa"));
-        Assert.assertFalse(predicate.accept("a2a"));
-        Assert.assertEquals("StringPredicates.isAlpha()", predicate.toString());
+        assertTrue(predicate.accept("aaa"));
+        assertFalse(predicate.accept("a2a"));
+        assertEquals("StringPredicates.isAlpha()", predicate.toString());
     }
 
     @Test
     public void isAlphaNumeric()
     {
         Predicate<String> predicate = StringPredicates.isAlphanumeric();
-        Assert.assertTrue(predicate.accept("aaa"));
-        Assert.assertTrue(predicate.accept("a2a"));
-        Assert.assertEquals("StringPredicates.isAlphanumeric()", predicate.toString());
+        assertTrue(predicate.accept("aaa"));
+        assertTrue(predicate.accept("a2a"));
+        assertEquals("StringPredicates.isAlphanumeric()", predicate.toString());
     }
 
     @Test
     public void isBlank()
     {
         Predicate<String> predicate = StringPredicates.isBlank();
-        Assert.assertTrue(predicate.accept(""));
-        Assert.assertTrue(predicate.accept(" "));
-        Assert.assertFalse(predicate.accept("a2a"));
-        Assert.assertEquals("StringPredicates.isBlank()", predicate.toString());
+        assertTrue(predicate.accept(""));
+        assertTrue(predicate.accept(" "));
+        assertFalse(predicate.accept("a2a"));
+        assertEquals("StringPredicates.isBlank()", predicate.toString());
     }
 
     @Test
     public void notBlank()
     {
         Predicate<String> predicate = StringPredicates.notBlank();
-        Assert.assertFalse(predicate.accept(""));
-        Assert.assertFalse(predicate.accept(" "));
-        Assert.assertTrue(predicate.accept("a2a"));
-        Assert.assertEquals("StringPredicates.notBlank()", predicate.toString());
+        assertFalse(predicate.accept(""));
+        assertFalse(predicate.accept(" "));
+        assertTrue(predicate.accept("a2a"));
+        assertEquals("StringPredicates.notBlank()", predicate.toString());
     }
 
     @Test
     public void isNumeric()
     {
         Predicate<String> predicate = StringPredicates.isNumeric();
-        Assert.assertTrue(predicate.accept("222"));
-        Assert.assertFalse(predicate.accept("a2a2a2"));
-        Assert.assertFalse(predicate.accept("aaa"));
-        Assert.assertEquals("StringPredicates.isNumeric()", predicate.toString());
+        assertTrue(predicate.accept("222"));
+        assertFalse(predicate.accept("a2a2a2"));
+        assertFalse(predicate.accept("aaa"));
+        assertEquals("StringPredicates.isNumeric()", predicate.toString());
     }
 
     @Test
     public void hasLowerCase()
     {
         Predicate<String> predicate = StringPredicates.hasLowerCase();
-        Assert.assertTrue(predicate.accept("aaa"));
-        Assert.assertFalse(predicate.accept("AAA"));
-        Assert.assertEquals("StringPredicates.hasLowerCase()", predicate.toString());
+        assertTrue(predicate.accept("aaa"));
+        assertFalse(predicate.accept("AAA"));
+        assertEquals("StringPredicates.hasLowerCase()", predicate.toString());
     }
 
     @Test
     public void hasUpperCase()
     {
         Predicate<String> predicate = StringPredicates.hasUpperCase();
-        Assert.assertFalse(predicate.accept("aaa"));
-        Assert.assertTrue(predicate.accept("AAA"));
-        Assert.assertEquals("StringPredicates.hasUpperCase()", predicate.toString());
+        assertFalse(predicate.accept("aaa"));
+        assertTrue(predicate.accept("AAA"));
+        assertEquals("StringPredicates.hasUpperCase()", predicate.toString());
     }
 
     @Test
     public void hasUndefined()
     {
         Predicate<String> predicate = StringPredicates.hasUndefined();
-        Assert.assertFalse(predicate.accept("aaa"));
-        Assert.assertEquals("StringPredicates.hasUndefined()", predicate.toString());
+        assertFalse(predicate.accept("aaa"));
+        assertEquals("StringPredicates.hasUndefined()", predicate.toString());
     }
 
     @Test
     public void hasSpaces()
     {
         Predicate<String> predicate = StringPredicates.hasSpaces();
-        Assert.assertTrue(predicate.accept("a a a"));
-        Assert.assertTrue(predicate.accept(" "));
-        Assert.assertFalse(predicate.accept("aaa"));
-        Assert.assertEquals("StringPredicates.hasSpaces()", predicate.toString());
+        assertTrue(predicate.accept("a a a"));
+        assertTrue(predicate.accept(" "));
+        assertFalse(predicate.accept("aaa"));
+        assertEquals("StringPredicates.hasSpaces()", predicate.toString());
     }
 
     @Test

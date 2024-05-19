@@ -19,8 +19,11 @@ import org.eclipse.collections.impl.collection.mutable.primitive.AbstractBoolean
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.primitive.SynchronizedBooleanIterable;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link SynchronizedBooleanIterable}s
@@ -66,13 +69,13 @@ public class SynchronizedBooleanIterableTest extends AbstractBooleanIterableTest
         BooleanIterator iterator = iterable.booleanIterator();
         for (int i = 0; i < 4; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
-            Assert.assertTrue(list.remove(iterator.next()));
+            assertTrue(iterator.hasNext());
+            assertTrue(list.remove(iterator.next()));
         }
         Verify.assertEmpty(list);
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
 
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override

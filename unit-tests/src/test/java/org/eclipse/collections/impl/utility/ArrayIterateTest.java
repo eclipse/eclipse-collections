@@ -62,10 +62,17 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class ArrayIterateTest
 {
@@ -75,7 +82,7 @@ public class ArrayIterateTest
     public void injectInto()
     {
         Integer[] objectArray = this.threeIntegerArray2();
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(7),
                 ArrayIterate.injectInto(1, objectArray, AddFunction.INTEGER));
     }
@@ -89,7 +96,7 @@ public class ArrayIterateTest
     public void injectIntoDouble()
     {
         Double[] objectArray = {(double) 1, (double) 2, (double) 3};
-        Assert.assertEquals(
+        assertEquals(
                 new Double(1 + 1 + 2 + 3),
                 ArrayIterate.injectInto((double) 1, objectArray, AddFunction.DOUBLE));
     }
@@ -98,17 +105,17 @@ public class ArrayIterateTest
     public void injectIntoPrimitives()
     {
         double doubleActual = ArrayIterate.injectInto(1.0d, new Double[]{1.0d, 2.0d, 3.0d}, (doubleParameter, objectParameter) -> doubleParameter + objectParameter);
-        Assert.assertEquals(7.0, doubleActual, 0.000001);
-        Assert.assertEquals(1.0, ArrayIterate.injectInto(1.0d, new Double[]{}, (doubleParameter, objectParameter) -> doubleParameter + objectParameter), 0.000001);
+        assertEquals(7.0, doubleActual, 0.000001);
+        assertEquals(1.0, ArrayIterate.injectInto(1.0d, new Double[]{}, (doubleParameter, objectParameter) -> doubleParameter + objectParameter), 0.000001);
         long longActual = ArrayIterate.injectInto(1L, new Long[]{1L, 2L, 3L}, (long longParameter, Long objectParameter) -> longParameter + objectParameter);
-        Assert.assertEquals(7L, longActual);
-        Assert.assertEquals(1L, ArrayIterate.injectInto(1L, new Long[]{}, (long longParameter, Long objectParameter) -> longParameter + objectParameter));
+        assertEquals(7L, longActual);
+        assertEquals(1L, ArrayIterate.injectInto(1L, new Long[]{}, (long longParameter, Long objectParameter) -> longParameter + objectParameter));
         int intActual = ArrayIterate.injectInto(1, new Integer[]{1, 2, 3}, (int intParameter, Integer objectParameter) -> intParameter + objectParameter);
-        Assert.assertEquals(7, intActual);
-        Assert.assertEquals(1, ArrayIterate.injectInto(1, new Integer[]{}, (int intParameter, Integer objectParameter) -> intParameter + objectParameter));
+        assertEquals(7, intActual);
+        assertEquals(1, ArrayIterate.injectInto(1, new Integer[]{}, (int intParameter, Integer objectParameter) -> intParameter + objectParameter));
         float floatActual = ArrayIterate.injectInto(1.0f, new Float[]{1.0f, 2.0f, 3.0f}, (float floatParameter, Float objectParameter) -> floatParameter + objectParameter);
-        Assert.assertEquals(7.0f, floatActual, 0.000001);
-        Assert.assertEquals(1.0f, ArrayIterate.injectInto(1.0f, new Float[]{}, (float floatParameter, Float objectParameter) -> floatParameter + objectParameter), 0.000001);
+        assertEquals(7.0f, floatActual, 0.000001);
+        assertEquals(1.0f, ArrayIterate.injectInto(1.0f, new Float[]{}, (float floatParameter, Float objectParameter) -> floatParameter + objectParameter), 0.000001);
     }
 
     @Test
@@ -116,11 +123,11 @@ public class ArrayIterateTest
     {
         Integer[] objectArray = this.threeIntegerArray2();
         Function3<Integer, Integer, Integer, Integer> function = (argument1, argument2, argument3) -> argument1 + argument2 + argument3;
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(10),
                 ArrayIterate.injectIntoWith(1, objectArray, function, 1));
         Integer[] emptyArray = {};
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(1),
                 ArrayIterate.injectIntoWith(1, emptyArray, function, 1));
     }
@@ -128,11 +135,11 @@ public class ArrayIterateTest
     @Test
     public void injectIntoThrowsOnNullArgument()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto(0, null, (int intParameter, Object objectParameter) -> 0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto(0L, null, (long longParameter, Object objectParameter) -> 0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto((double) 0, null, (doubleParameter, objectParameter) -> 0.0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto(null, null, null));
-        Assert.assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto(5.0f, null, (float floatParameter, Object objectParameter) -> 5.0f));
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto(0, null, (int intParameter, Object objectParameter) -> 0));
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto(0L, null, (long longParameter, Object objectParameter) -> 0));
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto((double) 0, null, (doubleParameter, objectParameter) -> 0.0));
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto(null, null, null));
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto(5.0f, null, (float floatParameter, Object objectParameter) -> 5.0f));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -296,8 +303,8 @@ public class ArrayIterateTest
     {
         PartitionIterable<Integer> result =
                 ArrayIterate.partition(new Integer[]{1, 2, 3, 3, 4, 4, 5, 5, 5, 2}, Predicates.greaterThan(3));
-        Assert.assertEquals(Lists.immutable.of(4, 4, 5, 5, 5), result.getSelected());
-        Assert.assertEquals(Lists.immutable.of(1, 2, 3, 3, 2), result.getRejected());
+        assertEquals(Lists.immutable.of(4, 4, 5, 5, 5), result.getSelected());
+        assertEquals(Lists.immutable.of(1, 2, 3, 3, 2), result.getRejected());
     }
 
     @Test
@@ -305,22 +312,22 @@ public class ArrayIterateTest
     {
         PartitionIterable<Integer> result =
                 ArrayIterate.partitionWith(new Integer[]{1, 2, 3, 3, 4, 4, 5, 5, 5, 2}, Predicates2.greaterThan(), 3);
-        Assert.assertEquals(Lists.immutable.of(4, 4, 5, 5, 5), result.getSelected());
-        Assert.assertEquals(Lists.immutable.of(1, 2, 3, 3, 2), result.getRejected());
+        assertEquals(Lists.immutable.of(4, 4, 5, 5, 5), result.getSelected());
+        assertEquals(Lists.immutable.of(1, 2, 3, 3, 2), result.getRejected());
     }
 
     @Test
     public void injectIntoString()
     {
         String[] objectArray1 = {"1", "2", "3"};
-        Assert.assertEquals("0123", ArrayIterate.injectInto("0", objectArray1, AddFunction.STRING));
+        assertEquals("0123", ArrayIterate.injectInto("0", objectArray1, AddFunction.STRING));
 
         String[] objectArray2 = {"A", "AB", "ABC", "ABCD"};
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(4),
                 ArrayIterate.injectInto(2, objectArray2, MaxSizeFunction.STRING));
 
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(1),
                 ArrayIterate.injectInto(2, objectArray2, MinSizeFunction.STRING));
     }
@@ -329,7 +336,7 @@ public class ArrayIterateTest
     public void collect()
     {
         Boolean[] objectArray = {true, false, null};
-        Assert.assertEquals(
+        assertEquals(
                 iList("true", "false", "null"),
                 ArrayIterate.collect(objectArray, String::valueOf));
     }
@@ -338,7 +345,7 @@ public class ArrayIterateTest
     public void collectBoolean()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpectedBooleanResults(),
                 ArrayIterate.collectBoolean(objectArray, PrimitiveFunctions.integerIsPositive()));
     }
@@ -349,8 +356,8 @@ public class ArrayIterateTest
         Integer[] objectArray = {-1, 0, 42};
         BooleanArrayList target = new BooleanArrayList();
         MutableBooleanList result = ArrayIterate.collectBoolean(objectArray, PrimitiveFunctions.integerIsPositive(), target);
-        Assert.assertEquals(this.getExpectedBooleanResults(), result);
-        Assert.assertSame("Target List not returned as result", target, result);
+        assertEquals(this.getExpectedBooleanResults(), result);
+        assertSame("Target List not returned as result", target, result);
     }
 
     private BooleanArrayList getExpectedBooleanResults()
@@ -362,7 +369,7 @@ public class ArrayIterateTest
     public void collectByte()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpectedByteResults(),
                 ArrayIterate.collectByte(objectArray, PrimitiveFunctions.unboxIntegerToByte()));
     }
@@ -373,8 +380,8 @@ public class ArrayIterateTest
         Integer[] objectArray = {-1, 0, 42};
         ByteArrayList target = new ByteArrayList();
         ByteArrayList result = ArrayIterate.collectByte(objectArray, PrimitiveFunctions.unboxIntegerToByte(), target);
-        Assert.assertEquals(this.getExpectedByteResults(), result);
-        Assert.assertSame("Target List not returned as result", target, result);
+        assertEquals(this.getExpectedByteResults(), result);
+        assertSame("Target List not returned as result", target, result);
     }
 
     private ByteArrayList getExpectedByteResults()
@@ -386,7 +393,7 @@ public class ArrayIterateTest
     public void collectChar()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpectedCharResults(),
                 ArrayIterate.collectChar(objectArray, PrimitiveFunctions.unboxIntegerToChar()));
     }
@@ -397,8 +404,8 @@ public class ArrayIterateTest
         Integer[] objectArray = {-1, 0, 42};
         CharArrayList target = new CharArrayList();
         CharArrayList result = ArrayIterate.collectChar(objectArray, PrimitiveFunctions.unboxIntegerToChar(), target);
-        Assert.assertEquals(this.getExpectedCharResults(), result);
-        Assert.assertSame("Target List not returned as result", target, result);
+        assertEquals(this.getExpectedCharResults(), result);
+        assertSame("Target List not returned as result", target, result);
     }
 
     private CharArrayList getExpectedCharResults()
@@ -410,7 +417,7 @@ public class ArrayIterateTest
     public void collectDouble()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpectedDoubleResults(),
                 ArrayIterate.collectDouble(objectArray, PrimitiveFunctions.unboxIntegerToDouble()));
     }
@@ -421,8 +428,8 @@ public class ArrayIterateTest
         Integer[] objectArray = {-1, 0, 42};
         DoubleArrayList target = new DoubleArrayList();
         DoubleArrayList result = ArrayIterate.collectDouble(objectArray, PrimitiveFunctions.unboxIntegerToDouble(), target);
-        Assert.assertEquals(this.getExpectedDoubleResults(), result);
-        Assert.assertSame("Target List not returned as result", target, result);
+        assertEquals(this.getExpectedDoubleResults(), result);
+        assertSame("Target List not returned as result", target, result);
     }
 
     private DoubleArrayList getExpectedDoubleResults()
@@ -434,7 +441,7 @@ public class ArrayIterateTest
     public void collectFloat()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpectedFloatResults(),
                 ArrayIterate.collectFloat(objectArray, PrimitiveFunctions.unboxIntegerToFloat()));
     }
@@ -445,8 +452,8 @@ public class ArrayIterateTest
         Integer[] objectArray = {-1, 0, 42};
         FloatArrayList target = new FloatArrayList();
         FloatArrayList result = ArrayIterate.collectFloat(objectArray, PrimitiveFunctions.unboxIntegerToFloat(), target);
-        Assert.assertEquals(this.getExpectedFloatResults(), result);
-        Assert.assertSame("Target List not returned as result", target, result);
+        assertEquals(this.getExpectedFloatResults(), result);
+        assertSame("Target List not returned as result", target, result);
     }
 
     private FloatArrayList getExpectedFloatResults()
@@ -458,7 +465,7 @@ public class ArrayIterateTest
     public void collectInt()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpectedIntResults(),
                 ArrayIterate.collectInt(objectArray, PrimitiveFunctions.unboxIntegerToInt()));
     }
@@ -469,8 +476,8 @@ public class ArrayIterateTest
         Integer[] objectArray = {-1, 0, 42};
         IntArrayList target = new IntArrayList();
         IntArrayList result = ArrayIterate.collectInt(objectArray, PrimitiveFunctions.unboxIntegerToInt(), target);
-        Assert.assertEquals(this.getExpectedIntResults(), result);
-        Assert.assertSame("Target List not returned as result", target, result);
+        assertEquals(this.getExpectedIntResults(), result);
+        assertSame("Target List not returned as result", target, result);
     }
 
     private IntArrayList getExpectedIntResults()
@@ -482,7 +489,7 @@ public class ArrayIterateTest
     public void collectLong()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpectedLongResults(),
                 ArrayIterate.collectLong(objectArray, PrimitiveFunctions.unboxIntegerToLong()));
     }
@@ -493,8 +500,8 @@ public class ArrayIterateTest
         Integer[] objectArray = {-1, 0, 42};
         LongArrayList target = new LongArrayList();
         LongArrayList result = ArrayIterate.collectLong(objectArray, PrimitiveFunctions.unboxIntegerToLong(), target);
-        Assert.assertEquals(this.getExpectedLongResults(), result);
-        Assert.assertSame("Target List not returned as result", target, result);
+        assertEquals(this.getExpectedLongResults(), result);
+        assertSame("Target List not returned as result", target, result);
     }
 
     private LongArrayList getExpectedLongResults()
@@ -506,7 +513,7 @@ public class ArrayIterateTest
     public void collectShort()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpectedShortResults(),
                 ArrayIterate.collectShort(objectArray, PrimitiveFunctions.unboxIntegerToShort()));
     }
@@ -517,8 +524,8 @@ public class ArrayIterateTest
         Integer[] objectArray = {-1, 0, 42};
         ShortArrayList target = new ShortArrayList();
         ShortArrayList result = ArrayIterate.collectShort(objectArray, PrimitiveFunctions.unboxIntegerToShort(), target);
-        Assert.assertEquals(this.getExpectedShortResults(), result);
-        Assert.assertSame("Target List not returned as result", target, result);
+        assertEquals(this.getExpectedShortResults(), result);
+        assertSame("Target List not returned as result", target, result);
     }
 
     private ShortArrayList getExpectedShortResults()
@@ -530,7 +537,7 @@ public class ArrayIterateTest
     public void collectWith()
     {
         Boolean[] objectArray = {true, false, null};
-        Assert.assertEquals(
+        assertEquals(
                 iList("true", "false", "null"),
                 ArrayIterate.collectWith(objectArray, Functions2.fromFunction(String::valueOf), null));
     }
@@ -541,11 +548,11 @@ public class ArrayIterateTest
         Integer[] objectArray = {1, 2, 3, 4};
         Function<Integer, Interval> function = Interval::zeroTo;
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(0, 1, 0, 1, 2, 0, 1, 2, 3, 0, 1, 2, 3, 4),
                 ArrayIterate.flatCollect(objectArray, function));
 
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(5, 0, 1, 0, 1, 2, 0, 1, 2, 3, 0, 1, 2, 3, 4),
                 ArrayIterate.flatCollect(objectArray, function, FastList.newListWith(5)));
     }
@@ -555,10 +562,10 @@ public class ArrayIterateTest
     {
         MutableList<Integer> result = Lists.mutable.of();
         ArrayIterate.addAllTo(new Integer[]{1, 2, 3}, result);
-        Assert.assertEquals(FastList.newListWith(1, 2, 3), result);
+        assertEquals(FastList.newListWith(1, 2, 3), result);
 
         MutableList<Integer> returnedResult = ArrayIterate.addAllTo(new Integer[]{4, 5, 6}, result);
-        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6), returnedResult);
+        assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6), returnedResult);
     }
 
     @Test
@@ -569,22 +576,22 @@ public class ArrayIterateTest
         list.add(null);
         list.add(Boolean.FALSE);
         Object[] objectArray = list.toArray();
-        Assert.assertEquals(Boolean.TRUE, ArrayIterate.getFirst(objectArray));
-        Assert.assertEquals(Boolean.FALSE, ArrayIterate.getLast(objectArray));
+        assertEquals(Boolean.TRUE, ArrayIterate.getFirst(objectArray));
+        assertEquals(Boolean.FALSE, ArrayIterate.getLast(objectArray));
     }
 
     @Test
     public void getFirstAndLastOnEmpty()
     {
         Object[] objectArray = {};
-        Assert.assertNull(ArrayIterate.getFirst(objectArray));
-        Assert.assertNull(ArrayIterate.getLast(objectArray));
+        assertNull(ArrayIterate.getFirst(objectArray));
+        assertNull(ArrayIterate.getLast(objectArray));
     }
 
     @Test
     public void select()
     {
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(5, 4, 3, 2, 1),
                 ArrayIterate.select(INTEGER_ARRAY, Integer.class::isInstance));
     }
@@ -592,7 +599,7 @@ public class ArrayIterateTest
     @Test
     public void reject()
     {
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(5, 4, 3, 2, 1),
                 ArrayIterate.reject(INTEGER_ARRAY, String.class::isInstance));
     }
@@ -602,13 +609,13 @@ public class ArrayIterateTest
     {
         List<Integer> result = FastList.newList();
         ArrayIterate.distinct(new Integer[]{5, 3, 1, 5, 7, 1}, result);
-        Assert.assertEquals(FastList.newListWith(5, 3, 1, 7), result);
+        assertEquals(FastList.newListWith(5, 3, 1, 7), result);
         result.clear();
         ArrayIterate.distinct(INTEGER_ARRAY, result);
-        Assert.assertEquals(FastList.newListWith(INTEGER_ARRAY), result);
+        assertEquals(FastList.newListWith(INTEGER_ARRAY), result);
 
         MutableList<Integer> list = ArrayIterate.distinct(new Integer[]{5, 3, 1, 5, 7, 1});
-        Assert.assertEquals(FastList.newListWith(5, 3, 1, 7), list);
+        assertEquals(FastList.newListWith(5, 3, 1, 7), list);
     }
 
     @Test
@@ -616,21 +623,21 @@ public class ArrayIterateTest
     {
         String[] objectArray = {"A", "a", "b", "c", "B", "D", "e", "e", "E", "D"};
         MutableList<String> objectArrayExpected = FastList.newListWith("A", "b", "c", "D", "e");
-        Assert.assertEquals(ArrayIterate.distinct(objectArray, HashingStrategies.fromFunction(String::toLowerCase)), objectArrayExpected);
+        assertEquals(ArrayIterate.distinct(objectArray, HashingStrategies.fromFunction(String::toLowerCase)), objectArrayExpected);
     }
 
     @Test
     public void distinct_throws()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> ArrayIterate.distinct(null));
-        Assert.assertThrows(IllegalArgumentException.class, () -> ArrayIterate.distinct(null, HashingStrategies.defaultStrategy()));
-        Assert.assertThrows(IllegalArgumentException.class, () -> ArrayIterate.distinct(null, FastList.newList()));
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.distinct(null));
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.distinct(null, HashingStrategies.defaultStrategy()));
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.distinct(null, FastList.newList()));
     }
 
     @Test
     public void selectWith()
     {
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(5, 4, 3, 2, 1),
                 ArrayIterate.selectWith(INTEGER_ARRAY, Predicates2.instanceOf(), Integer.class));
     }
@@ -638,7 +645,7 @@ public class ArrayIterateTest
     @Test
     public void selectInstancesOf()
     {
-        Assert.assertEquals(
+        assertEquals(
                 iList(1, 3, 5),
                 ArrayIterate.selectInstancesOf(new Number[]{1, 2.0, 3, 4.0, 5}, Integer.class));
     }
@@ -646,23 +653,23 @@ public class ArrayIterateTest
     @Test
     public void countOnNullOrEmptyArray()
     {
-        Assert.assertEquals(0, ArrayIterate.count(null, ignored1 -> true));
-        Assert.assertEquals(0, ArrayIterate.count(new Object[]{}, ignored -> true));
+        assertEquals(0, ArrayIterate.count(null, ignored1 -> true));
+        assertEquals(0, ArrayIterate.count(new Object[]{}, ignored -> true));
     }
 
     @Test
     public void count()
     {
-        Assert.assertEquals(3, ArrayIterate.count(INTEGER_ARRAY, Predicates.lessThan(4)));
+        assertEquals(3, ArrayIterate.count(INTEGER_ARRAY, Predicates.lessThan(4)));
     }
 
     @Test
     public void countWith()
     {
-        Assert.assertEquals(5, ArrayIterate.countWith(INTEGER_ARRAY, Predicates2.instanceOf(), Integer.class));
-        Assert.assertEquals(0, ArrayIterate.countWith(new Integer[]{}, Predicates2.instanceOf(), Integer.class));
-        Assert.assertEquals(1, ArrayIterate.countWith(new Object[]{"test", null, Integer.valueOf(2)}, Predicates2.instanceOf(), Integer.class));
-        Assert.assertEquals(0, ArrayIterate.countWith(null, Predicates2.instanceOf(), Integer.class));
+        assertEquals(5, ArrayIterate.countWith(INTEGER_ARRAY, Predicates2.instanceOf(), Integer.class));
+        assertEquals(0, ArrayIterate.countWith(new Integer[]{}, Predicates2.instanceOf(), Integer.class));
+        assertEquals(1, ArrayIterate.countWith(new Object[]{"test", null, Integer.valueOf(2)}, Predicates2.instanceOf(), Integer.class));
+        assertEquals(0, ArrayIterate.countWith(null, Predicates2.instanceOf(), Integer.class));
     }
 
     @Test
@@ -683,7 +690,7 @@ public class ArrayIterateTest
     @Test
     public void selectWithDifferentTargetCollection()
     {
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(5, 4, 3, 2, 1),
                 ArrayIterate.select(INTEGER_ARRAY, Integer.class::isInstance, new ArrayList<>()));
     }
@@ -736,96 +743,96 @@ public class ArrayIterateTest
     @Test
     public void contains()
     {
-        Assert.assertTrue(ArrayIterate.contains(INTEGER_ARRAY, 5));
-        Assert.assertFalse(ArrayIterate.contains(INTEGER_ARRAY, 6));
-        Assert.assertFalse(ArrayIterate.contains(INTEGER_ARRAY, null));
-        Assert.assertTrue(ArrayIterate.contains(new Object[]{null}, null));
+        assertTrue(ArrayIterate.contains(INTEGER_ARRAY, 5));
+        assertFalse(ArrayIterate.contains(INTEGER_ARRAY, 6));
+        assertFalse(ArrayIterate.contains(INTEGER_ARRAY, null));
+        assertTrue(ArrayIterate.contains(new Object[]{null}, null));
     }
 
     @Test
     public void containsInt()
     {
         int[] array = {1, 2, 3, 4, 5};
-        Assert.assertTrue(ArrayIterate.contains(array, 5));
-        Assert.assertFalse(ArrayIterate.contains(array, 6));
+        assertTrue(ArrayIterate.contains(array, 5));
+        assertFalse(ArrayIterate.contains(array, 6));
     }
 
     @Test
     public void containsLong()
     {
         long[] array = {1, 2, 3, 4, 5};
-        Assert.assertTrue(ArrayIterate.contains(array, 5));
-        Assert.assertFalse(ArrayIterate.contains(array, 6));
+        assertTrue(ArrayIterate.contains(array, 5));
+        assertFalse(ArrayIterate.contains(array, 6));
     }
 
     @Test
     public void containsDouble()
     {
         double[] array = {1, 2, 3, 4, 5};
-        Assert.assertTrue(ArrayIterate.contains(array, 5));
-        Assert.assertFalse(ArrayIterate.contains(array, 6));
+        assertTrue(ArrayIterate.contains(array, 5));
+        assertFalse(ArrayIterate.contains(array, 6));
     }
 
     @Test
     public void anySatisfy()
     {
-        Assert.assertTrue(ArrayIterate.anySatisfy(INTEGER_ARRAY, Integer.class::isInstance));
-        Assert.assertFalse(ArrayIterate.anySatisfy(INTEGER_ARRAY, Predicates.isNull()));
+        assertTrue(ArrayIterate.anySatisfy(INTEGER_ARRAY, Integer.class::isInstance));
+        assertFalse(ArrayIterate.anySatisfy(INTEGER_ARRAY, Predicates.isNull()));
     }
 
     @Test
     public void anySatisfyWith()
     {
-        Assert.assertTrue(ArrayIterate.anySatisfyWith(INTEGER_ARRAY, Predicates2.instanceOf(), Integer.class));
+        assertTrue(ArrayIterate.anySatisfyWith(INTEGER_ARRAY, Predicates2.instanceOf(), Integer.class));
     }
 
     @Test
     public void allSatisfy()
     {
-        Assert.assertTrue(ArrayIterate.allSatisfy(INTEGER_ARRAY, Integer.class::isInstance));
-        Assert.assertFalse(ArrayIterate.allSatisfy(INTEGER_ARRAY, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(INTEGER_ARRAY, Integer.class::isInstance));
+        assertFalse(ArrayIterate.allSatisfy(INTEGER_ARRAY, Predicates.isNull()));
     }
 
     @Test
     public void allSatisfyWith()
     {
-        Assert.assertTrue(ArrayIterate.allSatisfyWith(INTEGER_ARRAY, Predicates2.instanceOf(), Integer.class));
+        assertTrue(ArrayIterate.allSatisfyWith(INTEGER_ARRAY, Predicates2.instanceOf(), Integer.class));
     }
 
     @Test
     public void noneSatisfy()
     {
-        Assert.assertTrue(ArrayIterate.noneSatisfy(INTEGER_ARRAY, String.class::isInstance));
-        Assert.assertFalse(ArrayIterate.noneSatisfy(INTEGER_ARRAY, Predicates.notNull()));
+        assertTrue(ArrayIterate.noneSatisfy(INTEGER_ARRAY, String.class::isInstance));
+        assertFalse(ArrayIterate.noneSatisfy(INTEGER_ARRAY, Predicates.notNull()));
     }
 
     @Test
     public void noneSatisfyWith()
     {
-        Assert.assertTrue(ArrayIterate.noneSatisfyWith(INTEGER_ARRAY, Predicates2.instanceOf(), String.class));
+        assertTrue(ArrayIterate.noneSatisfyWith(INTEGER_ARRAY, Predicates2.instanceOf(), String.class));
     }
 
     @Test
     public void isEmpty()
     {
-        Assert.assertFalse(ArrayIterate.isEmpty(INTEGER_ARRAY));
-        Assert.assertTrue(ArrayIterate.isEmpty(new Object[]{}));
-        Assert.assertTrue(ArrayIterate.isEmpty(null));
+        assertFalse(ArrayIterate.isEmpty(INTEGER_ARRAY));
+        assertTrue(ArrayIterate.isEmpty(new Object[]{}));
+        assertTrue(ArrayIterate.isEmpty(null));
     }
 
     @Test
     public void notEmpty()
     {
-        Assert.assertTrue(ArrayIterate.notEmpty(new Integer[]{5, 4, 3, 2, 1}));
-        Assert.assertFalse(ArrayIterate.notEmpty(new Object[]{}));
-        Assert.assertFalse(ArrayIterate.notEmpty(null));
+        assertTrue(ArrayIterate.notEmpty(new Integer[]{5, 4, 3, 2, 1}));
+        assertFalse(ArrayIterate.notEmpty(new Object[]{}));
+        assertFalse(ArrayIterate.notEmpty(null));
     }
 
     @Test
     public void size()
     {
-        Assert.assertEquals(5, ArrayIterate.size(new Integer[]{5, 4, 3, 2, 1}));
-        Assert.assertEquals(0, ArrayIterate.size(null));
+        assertEquals(5, ArrayIterate.size(new Integer[]{5, 4, 3, 2, 1}));
+        assertEquals(0, ArrayIterate.size(null));
     }
 
     @Test
@@ -836,17 +843,17 @@ public class ArrayIterateTest
             MutableList<Integer> integers = Interval.oneTo(i).toList().shuffleThis();
             Integer[] array = integers.toArray(new Integer[i]);
             ArrayIterate.sort(array, array.length, null);
-            Assert.assertArrayEquals(array, Interval.oneTo(i).toArray());
+            assertArrayEquals(array, Interval.oneTo(i).toArray());
             ArrayIterate.sort(array, array.length, Comparator.reverseOrder());
             Integer[] expected = Interval.oneTo(i).reverseThis().toArray();
-            Assert.assertArrayEquals(array, expected);
+            assertArrayEquals(array, expected);
         }
     }
 
     @Test
     public void get()
     {
-        Assert.assertEquals(Integer.valueOf(1), new Integer[]{5, 4, 3, 2, 1}[4]);
+        assertEquals(Integer.valueOf(1), new Integer[]{5, 4, 3, 2, 1}[4]);
     }
 
     @Test
@@ -855,9 +862,9 @@ public class ArrayIterateTest
         FastList<String> target = FastList.newList();
         ArrayIterate.forEach(new String[]{"0", "1", "2", "3"}, 1, 2,
                 new FastListCollectProcedure<String, String>(Functions.getPassThru(), target));
-        Assert.assertEquals(Lists.mutable.of("1", "2"), target);
+        assertEquals(Lists.mutable.of("1", "2"), target);
 
-        Assert.assertThrows(IndexOutOfBoundsException.class,
+        assertThrows(IndexOutOfBoundsException.class,
                 () -> ArrayIterate.forEach(new String[]{"0", "1", "2", "3"}, 1, 5,
                         new FastListCollectProcedure<String, String>(Functions.getPassThru(), target)));
     }
@@ -870,30 +877,30 @@ public class ArrayIterateTest
                 new String[]{"1", "2", "3"},
                 new String[]{"a", "b", "c"},
                 new MapPutProcedure<>(map));
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedMap.newWithKeysValues(
                         "1", "a",
                         "2", "b",
                         "3", "c"),
                 map);
-        ArrayIterate.forEachInBoth(null, null, (argument1, argument2) -> Assert.fail());
+        ArrayIterate.forEachInBoth(null, null, (argument1, argument2) -> fail());
     }
 
     @Test(expected = RuntimeException.class)
     public void forEachInBothThrowsOnDifferentLengthArrays()
     {
-        ArrayIterate.forEachInBoth(new Integer[]{1, 2, 3}, new Integer[]{1, 2}, (argument1, argument2) -> Assert.fail());
+        ArrayIterate.forEachInBoth(new Integer[]{1, 2, 3}, new Integer[]{1, 2}, (argument1, argument2) -> fail());
     }
 
     @Test
     public void forEachWithIndex()
     {
         Integer[] objectArray = {1, 2, 3, 4};
-        ArrayIterate.forEachWithIndex(objectArray, (i, index) -> Assert.assertEquals(index, i - 1));
+        ArrayIterate.forEachWithIndex(objectArray, (i, index) -> assertEquals(index, i - 1));
 
         MutableList<Twin<Integer>> list = Lists.mutable.empty();
         ArrayIterate.forEachWithIndex(objectArray, (each, parameter) -> list.add(Tuples.twin(each, parameter)));
-        Assert.assertEquals(Lists.mutable.of(
+        assertEquals(Lists.mutable.of(
                 Tuples.twin(1, 0),
                 Tuples.twin(2, 1),
                 Tuples.twin(3, 2),
@@ -907,27 +914,27 @@ public class ArrayIterateTest
         Integer[] integers = {4, 4, 4, 4, 3, 3, 3, 2, 2, 1};
         StringBuilder builder = new StringBuilder();
         ArrayIterate.forEachWithIndex(integers, 5, 7, (each, index) -> builder.append(each).append(index));
-        Assert.assertEquals("353627", builder.toString());
+        assertEquals("353627", builder.toString());
 
         StringBuilder builder2 = new StringBuilder();
         ArrayIterate.forEachWithIndex(integers, 5, 5, (each, index) -> builder2.append(each).append(index));
-        Assert.assertEquals("35", builder2.toString());
+        assertEquals("35", builder2.toString());
 
         StringBuilder builder3 = new StringBuilder();
         ArrayIterate.forEachWithIndex(integers, 0, 9, (each, index) -> builder3.append(each).append(index));
-        Assert.assertEquals("40414243343536272819", builder3.toString());
+        assertEquals("40414243343536272819", builder3.toString());
 
         StringBuilder builder4 = new StringBuilder();
         ArrayIterate.forEachWithIndex(integers, 7, 5, (each, index) -> builder4.append(each).append(index));
-        Assert.assertEquals("273635", builder4.toString());
+        assertEquals("273635", builder4.toString());
 
         StringBuilder builder5 = new StringBuilder();
         ArrayIterate.forEachWithIndex(integers, 9, 0, (each, index) -> builder5.append(each).append(index));
-        Assert.assertEquals("19282736353443424140", builder5.toString());
+        assertEquals("19282736353443424140", builder5.toString());
 
         MutableList<Integer> result = Lists.mutable.of();
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> ArrayIterate.forEachWithIndex(integers, -1, 0, new AddToList(result)));
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> ArrayIterate.forEachWithIndex(integers, 0, -1, new AddToList(result)));
+        assertThrows(IndexOutOfBoundsException.class, () -> ArrayIterate.forEachWithIndex(integers, -1, 0, new AddToList(result)));
+        assertThrows(IndexOutOfBoundsException.class, () -> ArrayIterate.forEachWithIndex(integers, 0, -1, new AddToList(result)));
     }
 
     private Integer[] createIntegerArray(int size)
@@ -943,47 +950,47 @@ public class ArrayIterateTest
     @Test
     public void detectOptional()
     {
-        Assert.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> ArrayIterate.detectOptional(null, Predicates.alwaysTrue()));
 
         Integer[] array = {1, 2, 3, 4, 5};
-        Assert.assertFalse(ArrayIterate.detectOptional(array, Predicates.alwaysFalse()).isPresent());
+        assertFalse(ArrayIterate.detectOptional(array, Predicates.alwaysFalse()).isPresent());
 
         Optional<Integer> resultOptional = ArrayIterate.detectOptional(array, IntegerPredicates.isEven());
-        Assert.assertTrue(resultOptional.isPresent());
-        Assert.assertEquals((Integer) 2, resultOptional.get());
+        assertTrue(resultOptional.isPresent());
+        assertEquals((Integer) 2, resultOptional.get());
     }
 
     @Test
     public void detectWithOptional()
     {
-        Assert.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> ArrayIterate.detectWithOptional(null, Predicates2.alwaysTrue(), "param"));
 
         Integer[] array = {1, 2, 3, 4, 5};
-        Assert.assertFalse(ArrayIterate.detectWithOptional(array, Predicates2.alwaysFalse(), "param")
+        assertFalse(ArrayIterate.detectWithOptional(array, Predicates2.alwaysFalse(), "param")
                 .isPresent());
 
         Optional<Integer> resultOptional = ArrayIterate.detectWithOptional(array, Predicates2.greaterThan(), 2);
-        Assert.assertTrue(resultOptional.isPresent());
-        Assert.assertEquals((Integer) 3, resultOptional.get());
+        assertTrue(resultOptional.isPresent());
+        assertEquals((Integer) 3, resultOptional.get());
     }
 
     @Test
     public void detect()
     {
         Integer[] array = this.createIntegerArray(1);
-        Assert.assertEquals(Integer.valueOf(1), ArrayIterate.detect(array, integer -> integer == 1));
+        assertEquals(Integer.valueOf(1), ArrayIterate.detect(array, integer -> integer == 1));
     }
 
     @Test
     public void detectWith()
     {
         Integer[] array = this.createIntegerArray(1);
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(1),
                 ArrayIterate.detectWith(array, Predicates2.lessThan(), 2));
-        Assert.assertNull(
+        assertNull(
                 ArrayIterate.detectWith(new Integer[0], Predicates2.lessThan(), 2));
     }
 
@@ -991,18 +998,18 @@ public class ArrayIterateTest
     public void detectIfNone()
     {
         Integer[] array = this.createIntegerArray(1);
-        Assert.assertEquals(Integer.valueOf(7), ArrayIterate.detectIfNone(array, Integer.valueOf(2)::equals, 7));
-        Assert.assertEquals(Integer.valueOf(1), ArrayIterate.detectIfNone(array, Integer.valueOf(1)::equals, 7));
+        assertEquals(Integer.valueOf(7), ArrayIterate.detectIfNone(array, Integer.valueOf(2)::equals, 7));
+        assertEquals(Integer.valueOf(1), ArrayIterate.detectIfNone(array, Integer.valueOf(1)::equals, 7));
     }
 
     @Test
     public void detectWithIfNone()
     {
         Integer[] array = this.createIntegerArray(1);
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(7),
                 ArrayIterate.detectWithIfNone(array, Object::equals, 2, 7));
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(1),
                 ArrayIterate.detectWithIfNone(array, Object::equals, 1, 7));
     }
@@ -1011,29 +1018,29 @@ public class ArrayIterateTest
     public void indexOf()
     {
         String[] array = {"1", "2", "3", null};
-        Assert.assertEquals(0, ArrayIterate.indexOf(array, "1"));
-        Assert.assertEquals(1, ArrayIterate.indexOf(array, "2"));
-        Assert.assertEquals(2, ArrayIterate.indexOf(array, "3"));
-        Assert.assertEquals(3, ArrayIterate.indexOf(array, null));
-        Assert.assertEquals(-1, ArrayIterate.indexOf(array, "4"));
+        assertEquals(0, ArrayIterate.indexOf(array, "1"));
+        assertEquals(1, ArrayIterate.indexOf(array, "2"));
+        assertEquals(2, ArrayIterate.indexOf(array, "3"));
+        assertEquals(3, ArrayIterate.indexOf(array, null));
+        assertEquals(-1, ArrayIterate.indexOf(array, "4"));
     }
 
     @Test
     public void indexOfPredicates()
     {
         String[] array = {"1", "2", "3", null};
-        Assert.assertEquals(0, ArrayIterate.detectIndex(array, String.class::isInstance));
-        Assert.assertEquals(3, ArrayIterate.detectIndex(array, Predicates.isNull()));
-        Assert.assertEquals(0, ArrayIterate.detectIndexWith(array, Predicates2.instanceOf(), String.class));
+        assertEquals(0, ArrayIterate.detectIndex(array, String.class::isInstance));
+        assertEquals(3, ArrayIterate.detectIndex(array, Predicates.isNull()));
+        assertEquals(0, ArrayIterate.detectIndexWith(array, Predicates2.instanceOf(), String.class));
     }
 
     @Test
     public void detectLastIndex()
     {
         Integer[] array = {1, 2, 2, 3, 3, 3, 4, 2};
-        Assert.assertEquals(7, ArrayIterate.detectLastIndex(array, integer -> integer == 2));
-        Assert.assertEquals(6, ArrayIterate.detectLastIndex(array, integer -> integer != 2));
-        Assert.assertEquals(-1, ArrayIterate.detectLastIndex(array, integer -> integer == 5));
+        assertEquals(7, ArrayIterate.detectLastIndex(array, integer -> integer == 2));
+        assertEquals(6, ArrayIterate.detectLastIndex(array, integer -> integer != 2));
+        assertEquals(-1, ArrayIterate.detectLastIndex(array, integer -> integer == 5));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -1045,28 +1052,28 @@ public class ArrayIterateTest
     @Test
     public void take()
     {
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(0), 0),
                 ArrayIterate.take(Interval.zeroTo(0).toArray(), 0));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(5), 1),
                 ArrayIterate.take(Interval.zeroTo(5).toArray(), 1));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(5), 2),
                 ArrayIterate.take(Interval.zeroTo(5).toArray(), 2));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(0), 5),
                 ArrayIterate.take(Interval.zeroTo(0).toArray(), 5));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(5), 5),
                 ArrayIterate.take(Interval.zeroTo(5).toArray(), 5));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(10), 5),
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), 5));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(10), 15),
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), 15));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(10), Integer.MAX_VALUE),
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), Integer.MAX_VALUE));
     }
@@ -1080,22 +1087,22 @@ public class ArrayIterateTest
     @Test
     public void take_target()
     {
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(0), 0, FastList.newListWith(-1)),
                 ArrayIterate.take(Interval.zeroTo(0).toArray(), 0, FastList.newListWith(-1)));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(0), 5, FastList.newListWith(-1)),
                 ArrayIterate.take(Interval.zeroTo(0).toArray(), 5, FastList.newListWith(-1)));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(5), 5, FastList.newListWith(-1)),
                 ArrayIterate.take(Interval.zeroTo(5).toArray(), 5, FastList.newListWith(-1)));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(10), 5, FastList.newListWith(-1)),
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), 5, FastList.newListWith(-1)));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(10), 15, FastList.newListWith(-1)),
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), 15, FastList.newListWith(-1)));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.take(Interval.zeroTo(10), Integer.MAX_VALUE, FastList.newListWith(-1)),
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), Integer.MAX_VALUE, FastList.newListWith(-1)));
     }
@@ -1109,25 +1116,25 @@ public class ArrayIterateTest
     @Test
     public void drop()
     {
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(5).toList(), 0),
                 ArrayIterate.drop(Interval.zeroTo(5).toList().toArray(), 0));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(5).toList(), 1),
                 ArrayIterate.drop(Interval.zeroTo(5).toList().toArray(), 1));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(0).toList(), 5),
                 ArrayIterate.drop(Interval.zeroTo(0).toList().toArray(), 5));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(5), 5),
                 ArrayIterate.drop(Interval.zeroTo(5).toArray(), 5));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(10), 5),
                 ArrayIterate.drop(Interval.zeroTo(10).toArray(), 5));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(10), 15),
                 ArrayIterate.drop(Interval.zeroTo(10).toArray(), 15));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(10), Integer.MAX_VALUE),
                 ArrayIterate.drop(Interval.zeroTo(10).toArray(), Integer.MAX_VALUE));
     }
@@ -1141,19 +1148,19 @@ public class ArrayIterateTest
     @Test
     public void drop_target()
     {
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(0).toList(), 5, FastList.newListWith(-1)),
                 ArrayIterate.drop(Interval.zeroTo(0).toList().toArray(), 5, FastList.newListWith(-1)));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(5), 5, FastList.newListWith(-1)),
                 ArrayIterate.drop(Interval.zeroTo(5).toArray(), 5, FastList.newListWith(-1)));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(10), 5, FastList.newListWith(-1)),
                 ArrayIterate.drop(Interval.zeroTo(10).toArray(), 5, FastList.newListWith(-1)));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(10), 15, FastList.newListWith(-1)),
                 ArrayIterate.drop(Interval.zeroTo(10).toArray(), 15, FastList.newListWith(-1)));
-        Assert.assertEquals(
+        assertEquals(
                 ListIterate.drop(Interval.zeroTo(10), Integer.MAX_VALUE, FastList.newListWith(-1)),
                 ArrayIterate.drop(Interval.zeroTo(10).toArray(), Integer.MAX_VALUE, FastList.newListWith(-1)));
     }
@@ -1176,7 +1183,7 @@ public class ArrayIterateTest
                         Boolean.FALSE, FastList.newListWith(2, 4, 6));
 
         Multimap<Boolean, Integer> multimap = ArrayIterate.groupBy(array, isOddFunction);
-        Assert.assertEquals(expected, multimap.toMap());
+        assertEquals(expected, multimap.toMap());
     }
 
     @Test
@@ -1189,13 +1196,13 @@ public class ArrayIterateTest
         }
 
         Multimap<Integer, Integer> actual = ArrayIterate.groupByEach(new Integer[]{1, 2, 3, 4, 5, 6, 7}, new NegativeIntervalFunction());
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void groupByUniqueKey()
     {
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3),
                 ArrayIterate.groupByUniqueKey(new Integer[]{1, 2, 3}, id -> id));
     }
@@ -1215,7 +1222,7 @@ public class ArrayIterateTest
     @Test
     public void groupByUniqueKey_target()
     {
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3),
                 ArrayIterate.groupByUniqueKey(new Integer[]{1, 2, 3}, id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
@@ -1241,24 +1248,24 @@ public class ArrayIterateTest
         Object[] nullsMinusOne = Collections.nCopies(array.length - 1, null).toArray();
 
         MutableList<Pair<String, Object>> pairs = ArrayIterate.zip(array, nulls);
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(array),
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(nulls),
                 pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
 
         MutableList<Pair<String, Object>> pairsPlusOne = ArrayIterate.zip(array, nullsPlusOne);
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(array),
                 pairsPlusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(FastList.newListWith(nulls), pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        assertEquals(FastList.newListWith(nulls), pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
 
         MutableList<Pair<String, Object>> pairsMinusOne = ArrayIterate.zip(array, nullsMinusOne);
-        Assert.assertEquals(array.length - 1, pairsMinusOne.size());
-        Assert.assertTrue(FastList.newListWith(array).containsAll(pairsMinusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne)));
+        assertEquals(array.length - 1, pairsMinusOne.size());
+        assertTrue(FastList.newListWith(array).containsAll(pairsMinusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne)));
 
-        Assert.assertEquals(
+        assertEquals(
                 ArrayIterate.zip(array, nulls),
                 ArrayIterate.zip(array, nulls, FastList.newList()));
     }
@@ -1269,14 +1276,14 @@ public class ArrayIterateTest
         String[] array = {"1", "2", "3", "4", "5", "6", "7"};
         MutableList<Pair<String, Integer>> pairs = ArrayIterate.zipWithIndex(array);
 
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(array),
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(
+        assertEquals(
                 Interval.zeroTo(array.length - 1).toList(),
                 pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, FastList.newList()));
 
-        Assert.assertEquals(
+        assertEquals(
                 ArrayIterate.zipWithIndex(array),
                 ArrayIterate.zipWithIndex(array, FastList.newList()));
     }
@@ -1286,7 +1293,7 @@ public class ArrayIterateTest
     {
         String[] array = {"1", "2", "3", "4", "5", "6", "7"};
         RichIterable<RichIterable<String>> groups = ArrayIterate.chunk(array, 2);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         Lists.immutable.with("1", "2"),
                         Lists.immutable.with("3", "4"),
@@ -1306,14 +1313,14 @@ public class ArrayIterateTest
     public void chunk_large_size()
     {
         String[] array = {"1", "2", "3", "4", "5", "6", "7"};
-        Assert.assertEquals(FastList.newListWith(array), ArrayIterate.chunk(array, 10).getFirst());
+        assertEquals(FastList.newListWith(array), ArrayIterate.chunk(array, 10).getFirst());
     }
 
     @Test
     public void makeString()
     {
         String[] array = {"1", "2", "3", "4", "5"};
-        Assert.assertEquals("1, 2, 3, 4, 5", ArrayIterate.makeString(array));
+        assertEquals("1, 2, 3, 4, 5", ArrayIterate.makeString(array));
     }
 
     @Test
@@ -1322,11 +1329,11 @@ public class ArrayIterateTest
         String[] array = {"1", "2", "3", "4", "5"};
         StringBuilder stringBuilder = new StringBuilder();
         ArrayIterate.appendString(array, stringBuilder);
-        Assert.assertEquals("1, 2, 3, 4, 5", stringBuilder.toString());
+        assertEquals("1, 2, 3, 4, 5", stringBuilder.toString());
 
         String[] emptyArray = {};
         ArrayIterate.appendString(emptyArray, stringBuilder);
-        Assert.assertEquals("1, 2, 3, 4, 5", stringBuilder.toString());
+        assertEquals("1, 2, 3, 4, 5", stringBuilder.toString());
     }
 
     @Test(expected = RuntimeException.class)
@@ -1357,7 +1364,7 @@ public class ArrayIterateTest
         Integer[] objects = {1, 2, 3};
         float expected = ArrayIterate.injectInto(0.0f, objects, AddFunction.INTEGER_TO_FLOAT);
         double actual = ArrayIterate.sumOfFloat(objects, Integer::floatValue);
-        Assert.assertEquals(expected, actual, 0.001);
+        assertEquals(expected, actual, 0.001);
     }
 
     @Test
@@ -1366,7 +1373,7 @@ public class ArrayIterateTest
         Integer[] objects = {1, 2, 3};
         double expected = ArrayIterate.injectInto(0.0d, objects, AddFunction.INTEGER_TO_DOUBLE);
         double actual = ArrayIterate.sumOfDouble(objects, Integer::doubleValue);
-        Assert.assertEquals(expected, actual, 0.001);
+        assertEquals(expected, actual, 0.001);
     }
 
     @Test
@@ -1375,7 +1382,7 @@ public class ArrayIterateTest
         Integer[] objects = {1, 2, 3};
         long expected = ArrayIterate.injectInto(0, objects, AddFunction.INTEGER_TO_LONG);
         long actual = ArrayIterate.sumOfInt(objects, integer -> integer);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -1384,21 +1391,21 @@ public class ArrayIterateTest
         Integer[] objects = {1, 2, 3};
         long expected = ArrayIterate.injectInto(0L, objects, AddFunction.INTEGER_TO_LONG);
         long actual = ArrayIterate.sumOfLong(objects, Integer::longValue);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void sumOfBigDecimal()
     {
         Integer[] objects = {1, 2, 3, 4, 5};
-        Assert.assertEquals(new BigDecimal(15), ArrayIterate.sumOfBigDecimal(objects, BigDecimal::new));
+        assertEquals(new BigDecimal(15), ArrayIterate.sumOfBigDecimal(objects, BigDecimal::new));
     }
 
     @Test
     public void sumOfBigInteger()
     {
         Integer[] objects = {1, 2, 3, 4, 5};
-        Assert.assertEquals(new BigInteger("15"), ArrayIterate.sumOfBigInteger(objects, integer -> new BigInteger(integer.toString())));
+        assertEquals(new BigInteger("15"), ArrayIterate.sumOfBigInteger(objects, integer -> new BigInteger(integer.toString())));
     }
 
     @Test
@@ -1406,8 +1413,8 @@ public class ArrayIterateTest
     {
         Integer[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ObjectLongMap<Integer> result = ArrayIterate.sumByInt(values, i -> i % 2, e -> e);
-        Assert.assertEquals(25, result.get(1));
-        Assert.assertEquals(30, result.get(0));
+        assertEquals(25, result.get(1));
+        assertEquals(30, result.get(0));
     }
 
     @Test
@@ -1415,8 +1422,8 @@ public class ArrayIterateTest
     {
         Integer[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ObjectDoubleMap<Integer> result = ArrayIterate.sumByFloat(values, f -> f % 2, e -> e);
-        Assert.assertEquals(25.0f, result.get(1), 0.0);
-        Assert.assertEquals(30.0f, result.get(0), 0.0);
+        assertEquals(25.0f, result.get(1), 0.0);
+        assertEquals(30.0f, result.get(0), 0.0);
     }
 
     @Test
@@ -1424,8 +1431,8 @@ public class ArrayIterateTest
     {
         Integer[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ObjectLongMap<Integer> result = ArrayIterate.sumByLong(values, l -> l % 2, e -> e);
-        Assert.assertEquals(25, result.get(1));
-        Assert.assertEquals(30, result.get(0));
+        assertEquals(25, result.get(1));
+        assertEquals(30, result.get(0));
     }
 
     @Test
@@ -1433,8 +1440,8 @@ public class ArrayIterateTest
     {
         Integer[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ObjectDoubleMap<Integer> result = ArrayIterate.sumByDouble(values, d -> d % 2, e -> e);
-        Assert.assertEquals(25.0d, result.get(1), 0.0);
-        Assert.assertEquals(30.0d, result.get(0), 0.0);
+        assertEquals(25.0d, result.get(1), 0.0);
+        assertEquals(30.0d, result.get(0), 0.0);
     }
 
     @Test
@@ -1442,8 +1449,8 @@ public class ArrayIterateTest
     {
         Integer[] integers = {1, 2, 3, 4, 5};
         MutableMap<Integer, BigDecimal> result = ArrayIterate.sumByBigDecimal(integers, e -> e % 2, BigDecimal::new);
-        Assert.assertEquals(new BigDecimal(9), result.get(1));
-        Assert.assertEquals(new BigDecimal(6), result.get(0));
+        assertEquals(new BigDecimal(9), result.get(1));
+        assertEquals(new BigDecimal(6), result.get(0));
     }
 
     @Test
@@ -1451,8 +1458,8 @@ public class ArrayIterateTest
     {
         Integer[] integers = {1, 2, 3, 4, 5};
         MutableMap<Integer, BigInteger> result = ArrayIterate.sumByBigInteger(integers, e -> e % 2, i -> new BigInteger(i.toString()));
-        Assert.assertEquals(new BigInteger("9"), result.get(1));
-        Assert.assertEquals(new BigInteger("6"), result.get(0));
+        assertEquals(new BigInteger("9"), result.get(1));
+        assertEquals(new BigInteger("6"), result.get(0));
     }
 
     @Test
@@ -1467,8 +1474,8 @@ public class ArrayIterateTest
         Twin<Integer>[] integerTwins =
                 new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
 
-        Assert.assertEquals(Tuples.twin(7, 3), ArrayIterate.minBy(integerTwins, Functions.firstOfPair()));
-        Assert.assertEquals(Tuples.twin(9, 1), ArrayIterate.minBy(integerTwins, Functions.secondOfPair()));
+        assertEquals(Tuples.twin(7, 3), ArrayIterate.minBy(integerTwins, Functions.firstOfPair()));
+        assertEquals(Tuples.twin(9, 1), ArrayIterate.minBy(integerTwins, Functions.secondOfPair()));
     }
 
     @Test
@@ -1477,23 +1484,23 @@ public class ArrayIterateTest
         Twin<Integer>[] integerTwins =
                 new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
 
-        Assert.assertEquals(Tuples.twin(7, 3),
+        assertEquals(Tuples.twin(7, 3),
                 ArrayIterate.min(integerTwins, Comparators.byFunction(Functions.firstOfPair())));
 
-        Assert.assertEquals(Tuples.twin(9, 1),
+        assertEquals(Tuples.twin(9, 1),
                 ArrayIterate.min(integerTwins, Comparators.byFunction(Functions.secondOfPair())));
     }
 
     @Test
     public void min()
     {
-        Assert.assertEquals(Integer.valueOf(1), ArrayIterate.min(3, 1, 20));
+        assertEquals(Integer.valueOf(1), ArrayIterate.min(3, 1, 20));
     }
 
     @Test
     public void max()
     {
-        Assert.assertEquals(Integer.valueOf(20), ArrayIterate.max(3, 1, 20));
+        assertEquals(Integer.valueOf(20), ArrayIterate.max(3, 1, 20));
     }
 
     @Test
@@ -1502,8 +1509,8 @@ public class ArrayIterateTest
         Twin<Integer>[] integerTwins =
                 new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
 
-        Assert.assertEquals(Tuples.twin(9, 1), ArrayIterate.maxBy(integerTwins, Functions.firstOfPair()));
-        Assert.assertEquals(Tuples.twin(7, 3), ArrayIterate.maxBy(integerTwins, Functions.secondOfPair()));
+        assertEquals(Tuples.twin(9, 1), ArrayIterate.maxBy(integerTwins, Functions.firstOfPair()));
+        assertEquals(Tuples.twin(7, 3), ArrayIterate.maxBy(integerTwins, Functions.secondOfPair()));
     }
 
     @Test
@@ -1512,10 +1519,10 @@ public class ArrayIterateTest
         Twin<Integer>[] integerTwins =
                 new Twin[] {Tuples.twin(9, 1), Tuples.twin(7, 3), Tuples.twin(8, 2)};
 
-        Assert.assertEquals(Tuples.twin(9, 1),
+        assertEquals(Tuples.twin(9, 1),
                 ArrayIterate.max(integerTwins, Comparators.byFunction(Functions.firstOfPair())));
 
-        Assert.assertEquals(Tuples.twin(7, 3),
+        assertEquals(Tuples.twin(7, 3),
                 ArrayIterate.max(integerTwins, Comparators.byFunction(Functions.secondOfPair())));
     }
 }

@@ -22,21 +22,25 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class Functions0Test
 {
     @Test
     public void getTrue()
     {
-        Assert.assertTrue(Functions0.getTrue().value());
+        assertTrue(Functions0.getTrue().value());
     }
 
     @Test
     public void getFalse()
     {
-        Assert.assertFalse(Functions0.getFalse().value());
+        assertFalse(Functions0.getFalse().value());
     }
 
     @Test
@@ -54,7 +58,7 @@ public class Functions0Test
     @Test
     public void throwingWithSuccessfulCompletion()
     {
-        Assert.assertEquals("hello", Functions0.throwing(() -> "hello").value());
+        assertEquals("hello", Functions0.throwing(() -> "hello").value());
     }
 
     @Test
@@ -84,7 +88,7 @@ public class Functions0Test
                             },
                             this::throwMyException).value();
                 });
-        Assert.assertThrows(
+        assertThrows(
                 NullPointerException.class,
                 () ->
                 {
@@ -105,50 +109,50 @@ public class Functions0Test
     @Test
     public void newFastList()
     {
-        Assert.assertEquals(Lists.mutable.of(), Functions0.newFastList().value());
+        assertEquals(Lists.mutable.of(), Functions0.newFastList().value());
         Verify.assertInstanceOf(FastList.class, Functions0.newFastList().value());
     }
 
     @Test
     public void newUnifiedSet()
     {
-        Assert.assertEquals(UnifiedSet.newSet(), Functions0.newUnifiedSet().value());
+        assertEquals(UnifiedSet.newSet(), Functions0.newUnifiedSet().value());
         Verify.assertInstanceOf(UnifiedSet.class, Functions0.newUnifiedSet().value());
     }
 
     @Test
     public void newHashBag()
     {
-        Assert.assertEquals(Bags.mutable.of(), Functions0.newHashBag().value());
+        assertEquals(Bags.mutable.of(), Functions0.newHashBag().value());
         Verify.assertInstanceOf(HashBag.class, Functions0.newHashBag().value());
     }
 
     @Test
     public void newUnifiedMap()
     {
-        Assert.assertEquals(UnifiedMap.newMap(), Functions0.newUnifiedMap().value());
+        assertEquals(UnifiedMap.newMap(), Functions0.newUnifiedMap().value());
         Verify.assertInstanceOf(UnifiedMap.class, Functions0.newUnifiedMap().value());
     }
 
     @Test
     public void zeroInteger()
     {
-        Assert.assertEquals(Integer.valueOf(0), Functions0.zeroInteger().value());
-        Assert.assertEquals(Integer.valueOf(0), Functions0.value(0).value());
+        assertEquals(Integer.valueOf(0), Functions0.zeroInteger().value());
+        assertEquals(Integer.valueOf(0), Functions0.value(0).value());
     }
 
     @Test
     public void zeroAtomicInteger()
     {
         Verify.assertInstanceOf(AtomicInteger.class, Functions0.zeroAtomicInteger().value());
-        Assert.assertEquals(0, Functions0.zeroAtomicInteger().value().get());
+        assertEquals(0, Functions0.zeroAtomicInteger().value().get());
     }
 
     @Test
     public void zeroAtomicLong()
     {
         Verify.assertInstanceOf(AtomicLong.class, Functions0.zeroAtomicLong().value());
-        Assert.assertEquals(0, Functions0.zeroAtomicLong().value().get());
+        assertEquals(0, Functions0.zeroAtomicLong().value().get());
     }
 
     @Test

@@ -14,8 +14,9 @@ import java.io.Serializable;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
 
 public class MultiReaderFastListAsReadUntouchableTest extends UnmodifiableMutableListTestCase
 {
@@ -30,6 +31,6 @@ public class MultiReaderFastListAsReadUntouchableTest extends UnmodifiableMutabl
     public void serialization()
     {
         MutableCollection<Integer> collection = this.getCollection();
-        Assert.assertFalse(collection instanceof Serializable);
+        assertFalse(collection instanceof Serializable);
     }
 }

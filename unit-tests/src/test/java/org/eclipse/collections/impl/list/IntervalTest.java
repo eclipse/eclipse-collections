@@ -40,8 +40,14 @@ import org.eclipse.collections.impl.math.MutableLong;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class IntervalTest
 {
@@ -52,7 +58,7 @@ public class IntervalTest
                 .select(Predicates.lessThan(5))
                 .into(FastList.newList())
                 .injectInto(0, AddFunction.INTEGER_TO_INT);
-        Assert.assertEquals(10, sum);
+        assertEquals(10, sum);
     }
 
     @Test
@@ -75,7 +81,7 @@ public class IntervalTest
         Verify.assertEqualsAndHashCode(Interval.fromTo(-1, -10), Interval.fromToExclusive(-1, -11));
 
         // MIN Value should throw an error
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.fromToExclusive(Integer.MIN_VALUE, Integer.MIN_VALUE));
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromToExclusive(Integer.MIN_VALUE, Integer.MIN_VALUE));
 
         Verify.assertSize(Integer.MAX_VALUE, Interval.fromToExclusive(Integer.MIN_VALUE, -1));
         Verify.assertSize(Integer.MAX_VALUE, Interval.fromToExclusive(0, Integer.MAX_VALUE));
@@ -108,17 +114,17 @@ public class IntervalTest
         Verify.assertSize(Integer.MAX_VALUE, Interval.fromTo(1, Integer.MAX_VALUE));
         Verify.assertSize(21, Interval.from(10).to(-10).by(-1));
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.fromTo(Integer.MIN_VALUE, Integer.MAX_VALUE));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.fromTo(-1, Integer.MAX_VALUE));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.fromToBy(Integer.MIN_VALUE, Integer.MAX_VALUE, 2));
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromTo(Integer.MIN_VALUE, Integer.MAX_VALUE));
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromTo(-1, Integer.MAX_VALUE));
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromToBy(Integer.MIN_VALUE, Integer.MAX_VALUE, 2));
         Verify.assertSize(Interval.fromTo(Integer.MIN_VALUE + 1, -1).size(), Interval.oneTo(Integer.MAX_VALUE));
 
-        Assert.assertEquals(Lists.mutable.with(0), Interval.fromToBy(0, 2, 3));
-        Assert.assertEquals(Lists.mutable.with(0), Interval.fromToBy(0, -2, -3));
-        Assert.assertEquals(Lists.mutable.with(1_000_000_000), Interval.fromToBy(1_000_000_000, 2_000_000_000, 1_500_000_000));
-        Assert.assertEquals(Lists.mutable.with(-1_000_000_000), Interval.fromToBy(-1_000_000_000, -2_000_000_000, -1_500_000_000));
-        Assert.assertEquals(Lists.mutable.with(Integer.MIN_VALUE), Interval.fromToBy(Integer.MIN_VALUE, Integer.MIN_VALUE + 10, 20));
-        Assert.assertEquals(Lists.mutable.with(Integer.MAX_VALUE), Interval.fromToBy(Integer.MAX_VALUE, Integer.MAX_VALUE - 10, -20));
+        assertEquals(Lists.mutable.with(0), Interval.fromToBy(0, 2, 3));
+        assertEquals(Lists.mutable.with(0), Interval.fromToBy(0, -2, -3));
+        assertEquals(Lists.mutable.with(1_000_000_000), Interval.fromToBy(1_000_000_000, 2_000_000_000, 1_500_000_000));
+        assertEquals(Lists.mutable.with(-1_000_000_000), Interval.fromToBy(-1_000_000_000, -2_000_000_000, -1_500_000_000));
+        assertEquals(Lists.mutable.with(Integer.MIN_VALUE), Interval.fromToBy(Integer.MIN_VALUE, Integer.MIN_VALUE + 10, 20));
+        assertEquals(Lists.mutable.with(Integer.MAX_VALUE), Interval.fromToBy(Integer.MAX_VALUE, Integer.MAX_VALUE - 10, -20));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -130,8 +136,8 @@ public class IntervalTest
     @Test
     public void fromAndToAndBy_throws_step_is_incorrect()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.from(10).to(-10).by(1));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.from(-10).to(10).by(-1));
+        assertThrows(IllegalArgumentException.class, () -> Interval.from(10).to(-10).by(1));
+        assertThrows(IllegalArgumentException.class, () -> Interval.from(-10).to(10).by(-1));
     }
 
     @Test
@@ -163,25 +169,25 @@ public class IntervalTest
         Interval interval3 = Interval.zeroTo(5);
         Verify.assertPostSerializedEqualsAndHashCode(interval1);
         Verify.assertEqualsAndHashCode(interval1, interval2);
-        Assert.assertNotEquals(interval1, interval3);
-        Assert.assertNotEquals(interval3, interval1);
+        assertNotEquals(interval1, interval3);
+        assertNotEquals(interval3, interval1);
 
         Verify.assertEqualsAndHashCode(Interval.fromToBy(1, 5, 2), Interval.fromToBy(1, 6, 2));
         Verify.assertEqualsAndHashCode(FastList.newListWith(1, 2, 3), Interval.fromTo(1, 3));
         Verify.assertEqualsAndHashCode(FastList.newListWith(3, 2, 1), Interval.fromTo(3, 1));
 
-        Assert.assertNotEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromTo(1, 3));
-        Assert.assertNotEquals(FastList.newListWith(1, 2, 4), Interval.fromTo(1, 3));
-        Assert.assertNotEquals(FastList.newListWith(3, 2, 0), Interval.fromTo(3, 1));
+        assertNotEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromTo(1, 3));
+        assertNotEquals(FastList.newListWith(1, 2, 4), Interval.fromTo(1, 3));
+        assertNotEquals(FastList.newListWith(3, 2, 0), Interval.fromTo(3, 1));
 
         Verify.assertEqualsAndHashCode(FastList.newListWith(-1, -2, -3), Interval.fromTo(-1, -3));
 
         Verify.assertEqualsAndHashCode(FastList.newListWith(1, 2), Interval.fromToExclusive(1, 3));
         Verify.assertEqualsAndHashCode(FastList.newListWith(3, 2, 1), Interval.fromToExclusive(3, 0));
 
-        Assert.assertNotEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromToExclusive(1, 4));
-        Assert.assertNotEquals(FastList.newListWith(1, 2, 4), Interval.fromToExclusive(1, 2));
-        Assert.assertNotEquals(FastList.newListWith(3, 2, 0), Interval.fromToExclusive(3, 1));
+        assertNotEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromToExclusive(1, 4));
+        assertNotEquals(FastList.newListWith(1, 2, 4), Interval.fromToExclusive(1, 2));
+        assertNotEquals(FastList.newListWith(3, 2, 0), Interval.fromToExclusive(3, 1));
     }
 
     @Test
@@ -190,7 +196,7 @@ public class IntervalTest
         MutableList<Integer> result = Lists.mutable.of();
         Interval interval = Interval.oneTo(5);
         interval.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5), result);
+        assertEquals(FastList.newListWith(1, 2, 3, 4, 5), result);
     }
 
     @Test
@@ -199,7 +205,7 @@ public class IntervalTest
         MutableList<Integer> result = Lists.mutable.of();
         Interval interval = Interval.oneTo(5);
         interval.forEach(CollectionAddProcedure.on(result), Executors.newSingleThreadExecutor());
-        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5), result);
+        assertEquals(FastList.newListWith(1, 2, 3, 4, 5), result);
     }
 
     @Test
@@ -208,7 +214,7 @@ public class IntervalTest
         MutableList<Integer> result = Lists.mutable.of();
         Interval interval = Interval.fromToBy(5, 1, -1);
         interval.forEach(CollectionAddProcedure.on(result), Executors.newSingleThreadExecutor());
-        Assert.assertEquals(FastList.newListWith(5, 4, 3, 2, 1), result);
+        assertEquals(FastList.newListWith(5, 4, 3, 2, 1), result);
     }
 
     @Test
@@ -219,7 +225,7 @@ public class IntervalTest
         Interval.oneTo(3).run(() -> result.add(null), service);
         service.shutdown();
         service.awaitTermination(20, TimeUnit.SECONDS);
-        Assert.assertEquals(FastList.<String>newListWith(null, null, null), result);
+        assertEquals(FastList.<String>newListWith(null, null, null), result);
     }
 
     @Test
@@ -230,7 +236,7 @@ public class IntervalTest
         Interval.fromTo(3, 1).run(() -> result.add(null), service);
         service.shutdown();
         service.awaitTermination(20, TimeUnit.SECONDS);
-        Assert.assertEquals(FastList.<String>newListWith(null, null, null), result);
+        assertEquals(FastList.<String>newListWith(null, null, null), result);
     }
 
     @Test
@@ -242,16 +248,16 @@ public class IntervalTest
         Verify.assertSize(5, result);
         Verify.assertContains(1, result);
         Verify.assertContains(5, result);
-        Assert.assertEquals(Integer.valueOf(5), Iterate.getFirst(result));
-        Assert.assertEquals(Integer.valueOf(1), Iterate.getLast(result));
+        assertEquals(Integer.valueOf(5), Iterate.getFirst(result));
+        assertEquals(Integer.valueOf(1), Iterate.getLast(result));
 
         result.clear();
         interval.reverseThis().reverseForEach(result::add);
         Verify.assertSize(5, result);
         Verify.assertContains(1, result);
         Verify.assertContains(5, result);
-        Assert.assertEquals(Integer.valueOf(1), Iterate.getFirst(result));
-        Assert.assertEquals(Integer.valueOf(5), Iterate.getLast(result));
+        assertEquals(Integer.valueOf(1), Iterate.getFirst(result));
+        assertEquals(Integer.valueOf(5), Iterate.getLast(result));
     }
 
     @Test
@@ -282,8 +288,8 @@ public class IntervalTest
     public void injectIntoOnFromToByInterval()
     {
         Interval interval = Interval.oneTo(5);
-        Assert.assertEquals(Integer.valueOf(20), interval.injectInto(5, AddFunction.INTEGER));
-        Assert.assertEquals(Integer.valueOf(20), interval.reverseThis().injectInto(5, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(20), interval.injectInto(5, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(20), interval.reverseThis().injectInto(5, AddFunction.INTEGER));
     }
 
     @Test
@@ -291,30 +297,30 @@ public class IntervalTest
     {
         Interval interval = Interval.fromToBy(2, 2, -2);
 
-        Assert.assertEquals(Integer.valueOf(0), interval.injectInto(-2, AddFunction.INTEGER));
-        Assert.assertEquals(Integer.valueOf(0), interval.reverseThis().injectInto(-2, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(0), interval.injectInto(-2, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(0), interval.reverseThis().injectInto(-2, AddFunction.INTEGER));
     }
 
     @Test
     public void sumInterval()
     {
         int sum = Interval.oneTo(5).injectInto(0, AddFunction.INTEGER_TO_INT);
-        Assert.assertEquals(15, sum);
+        assertEquals(15, sum);
     }
 
     @Test
     public void maxInterval()
     {
         Integer value = Interval.oneTo(5).injectInto(0, Integer::max);
-        Assert.assertEquals(5, value.intValue());
+        assertEquals(5, value.intValue());
     }
 
     @Test
     public void reverseInjectIntoOnFromToByInterval()
     {
         Interval interval = Interval.oneTo(5);
-        Assert.assertEquals(Integer.valueOf(20), interval.reverseInjectInto(5, AddFunction.INTEGER));
-        Assert.assertEquals(Integer.valueOf(20), interval.reverseThis().reverseInjectInto(5, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(20), interval.reverseInjectInto(5, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(20), interval.reverseThis().reverseInjectInto(5, AddFunction.INTEGER));
     }
 
     @Test
@@ -340,16 +346,16 @@ public class IntervalTest
     public void selectOnFromToInterval()
     {
         Interval interval = Interval.oneTo(5);
-        Assert.assertEquals(FastList.newListWith(2, 4), interval.select(IntegerPredicates.isEven()).toList());
-        Assert.assertEquals(FastList.newListWith(4, 2), interval.reverseThis().select(IntegerPredicates.isEven()).toList());
+        assertEquals(FastList.newListWith(2, 4), interval.select(IntegerPredicates.isEven()).toList());
+        assertEquals(FastList.newListWith(4, 2), interval.reverseThis().select(IntegerPredicates.isEven()).toList());
     }
 
     @Test
     public void rejectOnFromToInterval()
     {
         Interval interval = Interval.oneTo(5);
-        Assert.assertEquals(FastList.newListWith(1, 3, 5), interval.reject(IntegerPredicates.isEven()).toList());
-        Assert.assertEquals(FastList.newListWith(5, 3, 1), interval.reverseThis().reject(IntegerPredicates.isEven()).toList());
+        assertEquals(FastList.newListWith(1, 3, 5), interval.reject(IntegerPredicates.isEven()).toList());
+        assertEquals(FastList.newListWith(5, 3, 1), interval.reverseThis().reject(IntegerPredicates.isEven()).toList());
     }
 
     @Test
@@ -359,23 +365,23 @@ public class IntervalTest
         Interval interval2 = interval.reverseThis();
         List<Integer> result = new ArrayList<>();
         interval2.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5), result);
+        assertEquals(FastList.newListWith(1, 2, 3, 4, 5), result);
     }
 
     @Test
     public void intervalAsArray()
     {
-        Assert.assertArrayEquals(new Integer[]{1, 2, 3, 4, 5}, Interval.toArray(1, 5));
+        assertArrayEquals(new Integer[]{1, 2, 3, 4, 5}, Interval.toArray(1, 5));
     }
 
     @Test
     public void intervalAsIntArray()
     {
-        Assert.assertArrayEquals(new int[]{1, 2, 3, 4, 5}, Interval.fromTo(1, 5).toIntArray());
-        Assert.assertArrayEquals(new int[]{1, 2, 3, 4}, Interval.fromToExclusive(1, 5).toIntArray());
-        Assert.assertArrayEquals(new int[]{5, 4, 3, 2}, Interval.fromToExclusive(5, 1).toIntArray());
-        Assert.assertArrayEquals(new int[]{-1, -2, -3, -4}, Interval.fromToExclusive(-1, -5).toIntArray());
-        Assert.assertArrayEquals(new int[]{-5, -4, -3, -2}, Interval.fromToExclusive(-5, -1).toIntArray());
+        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, Interval.fromTo(1, 5).toIntArray());
+        assertArrayEquals(new int[]{1, 2, 3, 4}, Interval.fromToExclusive(1, 5).toIntArray());
+        assertArrayEquals(new int[]{5, 4, 3, 2}, Interval.fromToExclusive(5, 1).toIntArray());
+        assertArrayEquals(new int[]{-1, -2, -3, -4}, Interval.fromToExclusive(-1, -5).toIntArray());
+        assertArrayEquals(new int[]{-5, -4, -3, -2}, Interval.fromToExclusive(-5, -1).toIntArray());
     }
 
     @Test
@@ -383,10 +389,10 @@ public class IntervalTest
     {
         Integer[] array = Interval.toReverseArray(1, 5);
         Verify.assertSize(5, array);
-        Assert.assertTrue(ArrayIterate.contains(array, 1));
-        Assert.assertTrue(ArrayIterate.contains(array, 5));
-        Assert.assertEquals(ArrayIterate.getFirst(array), Integer.valueOf(5));
-        Assert.assertEquals(ArrayIterate.getLast(array), Integer.valueOf(1));
+        assertTrue(ArrayIterate.contains(array, 1));
+        assertTrue(ArrayIterate.contains(array, 5));
+        assertEquals(ArrayIterate.getFirst(array), Integer.valueOf(5));
+        assertEquals(ArrayIterate.getLast(array), Integer.valueOf(1));
     }
 
     @Test
@@ -416,9 +422,9 @@ public class IntervalTest
     @Test
     public void invalidIntervals()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.fromToBy(5, 1, 2));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.fromToBy(5, 1, 0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.fromToBy(-5, 1, -1));
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromToBy(5, 1, 2));
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromToBy(5, 1, 0));
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromToBy(-5, 1, -1));
     }
 
     @Test
@@ -443,7 +449,7 @@ public class IntervalTest
     public void testToString()
     {
         Interval interval = Interval.evensFromTo(0, 10);
-        Assert.assertEquals("Interval from: 0 to: 10 step: 2 size: 6", interval.toString());
+        assertEquals("Interval from: 0 to: 10 step: 2 size: 6", interval.toString());
     }
 
     @Test
@@ -494,23 +500,23 @@ public class IntervalTest
     public void odds()
     {
         Interval interval1 = Interval.oddsFromTo(0, 10);
-        Assert.assertTrue(interval1.containsAll(1, 3, 5, 7, 9));
-        Assert.assertTrue(interval1.containsNone(2, 4, 6, 8));
+        assertTrue(interval1.containsAll(1, 3, 5, 7, 9));
+        assertTrue(interval1.containsNone(2, 4, 6, 8));
         Verify.assertSize(5, interval1);
 
         Interval reverseInterval1 = Interval.oddsFromTo(10, 0);
-        Assert.assertTrue(reverseInterval1.containsAll(1, 3, 5, 7, 9));
-        Assert.assertTrue(reverseInterval1.containsNone(0, 2, 4, 6, 8, 10));
+        assertTrue(reverseInterval1.containsAll(1, 3, 5, 7, 9));
+        assertTrue(reverseInterval1.containsNone(0, 2, 4, 6, 8, 10));
         Verify.assertSize(5, reverseInterval1);
 
         Interval interval2 = Interval.oddsFromTo(-5, 5);
-        Assert.assertTrue(interval2.containsAll(-5, -3, -1, 1, 3, 5));
-        Assert.assertTrue(interval2.containsNone(-4, -2, 0, 2, 4));
+        assertTrue(interval2.containsAll(-5, -3, -1, 1, 3, 5));
+        assertTrue(interval2.containsNone(-4, -2, 0, 2, 4));
         Verify.assertSize(6, interval2);
 
         Interval reverseInterval2 = Interval.oddsFromTo(5, -5);
-        Assert.assertTrue(reverseInterval2.containsAll(-5, -3, -1, 1, 3, 5));
-        Assert.assertTrue(reverseInterval2.containsNone(-4, -2, 0, 2, 4));
+        assertTrue(reverseInterval2.containsAll(-5, -3, -1, 1, 3, 5));
+        assertTrue(reverseInterval2.containsNone(-4, -2, 0, 2, 4));
         Verify.assertSize(6, reverseInterval2);
     }
 
@@ -578,13 +584,13 @@ public class IntervalTest
     public void contains()
     {
         Verify.assertContains(0, Interval.zero());
-        Assert.assertTrue(Interval.oneTo(5).containsAll(1, 5));
-        Assert.assertTrue(Interval.oneTo(5).containsNone(6, 7));
-        Assert.assertFalse(Interval.oneTo(5).containsAll(1, 6));
-        Assert.assertFalse(Interval.oneTo(5).containsNone(1, 6));
+        assertTrue(Interval.oneTo(5).containsAll(1, 5));
+        assertTrue(Interval.oneTo(5).containsNone(6, 7));
+        assertFalse(Interval.oneTo(5).containsAll(1, 6));
+        assertFalse(Interval.oneTo(5).containsNone(1, 6));
         Verify.assertNotContains(0, Interval.oneTo(5));
-        Assert.assertTrue(Interval.fromTo(-1, -5).containsAll(-1, -5));
-        Assert.assertTrue(Interval.fromToExclusive(-1, -5).containsAll(-1, -4));
+        assertTrue(Interval.fromTo(-1, -5).containsAll(-1, -5));
+        assertTrue(Interval.fromToExclusive(-1, -5).containsAll(-1, -4));
         Verify.assertNotContains(-5, Interval.fromToExclusive(-1, -5));
         Verify.assertNotContains(0, Interval.fromToExclusive(-1, -5));
         Verify.assertNotContains(1, Interval.fromTo(-1, -5));
@@ -597,16 +603,16 @@ public class IntervalTest
         Verify.assertNotContains(new Object(), Interval.zeroTo(5));
 
         Interval bigInterval = Interval.fromToBy(Integer.MIN_VALUE, Integer.MAX_VALUE, 1_000_000);
-        Assert.assertTrue(bigInterval.contains(Integer.MIN_VALUE + 1_000_000));
-        Assert.assertFalse(bigInterval.contains(Integer.MIN_VALUE + 1_000_001));
-        Assert.assertTrue(bigInterval.contains(Integer.MIN_VALUE + (1_000_000 * 10)));
-        Assert.assertFalse(bigInterval.contains(Integer.MIN_VALUE + (1_000_001 * 10)));
-        Assert.assertTrue(bigInterval.contains(Integer.MIN_VALUE + (1_000_000 * 100)));
-        Assert.assertFalse(bigInterval.contains(Integer.MIN_VALUE + (1_000_001 * 100)));
-        Assert.assertTrue(
+        assertTrue(bigInterval.contains(Integer.MIN_VALUE + 1_000_000));
+        assertFalse(bigInterval.contains(Integer.MIN_VALUE + 1_000_001));
+        assertTrue(bigInterval.contains(Integer.MIN_VALUE + (1_000_000 * 10)));
+        assertFalse(bigInterval.contains(Integer.MIN_VALUE + (1_000_001 * 10)));
+        assertTrue(bigInterval.contains(Integer.MIN_VALUE + (1_000_000 * 100)));
+        assertFalse(bigInterval.contains(Integer.MIN_VALUE + (1_000_001 * 100)));
+        assertTrue(
                 Interval.fromToBy(1_000_000_000, 2_000_000_000, 1_500_000_000)
                         .contains(1_000_000_000));
-        Assert.assertTrue(
+        assertTrue(
                 Interval.fromToBy(-1_000_000_000, -2_000_000_000, -1_500_000_000)
                         .contains(-1_000_000_000));
 
@@ -614,39 +620,39 @@ public class IntervalTest
         int maxValue = 1_000_000_000;
         Interval largeInterval = Interval.fromToBy(minValue, maxValue, 10);
 
-        Assert.assertTrue(largeInterval.containsAll(
+        assertTrue(largeInterval.containsAll(
                 maxValue - 10,
                 maxValue - 100,
                 maxValue - 1000,
                 maxValue - 10000));
-        Assert.assertTrue(largeInterval.contains(minValue + 10));
+        assertTrue(largeInterval.contains(minValue + 10));
     }
 
     @Test
     public void largeReverseUnderflowTest()
     {
         Interval reverse = Interval.fromToBy(Integer.MAX_VALUE, Integer.MIN_VALUE + 10, -10);
-        Assert.assertFalse(reverse.contains(Integer.MIN_VALUE + 10));
-        Assert.assertEquals(Integer.valueOf(Integer.MAX_VALUE), reverse.getFirst());
+        assertFalse(reverse.contains(Integer.MIN_VALUE + 10));
+        assertEquals(Integer.valueOf(Integer.MAX_VALUE), reverse.getFirst());
         Integer expectedLast = Integer.valueOf(-2_147_483_633);
-        Assert.assertEquals(expectedLast, reverse.getLast());
-        Assert.assertTrue(reverse.contains(Integer.MAX_VALUE));
-        Assert.assertTrue(reverse.contains(7));
-        Assert.assertTrue(reverse.contains(-3));
-        Assert.assertTrue(reverse.contains(expectedLast));
-        Assert.assertTrue(reverse.contains(expectedLast + 1000));
-        Assert.assertEquals(214_748_364, reverse.indexOf(Integer.valueOf(7)));
-        Assert.assertEquals(214_748_365, reverse.indexOf(Integer.valueOf(-3)));
-        Assert.assertEquals(429_496_728, reverse.indexOf(expectedLast));
-        Assert.assertEquals(429_496_728, reverse.lastIndexOf(expectedLast));
+        assertEquals(expectedLast, reverse.getLast());
+        assertTrue(reverse.contains(Integer.MAX_VALUE));
+        assertTrue(reverse.contains(7));
+        assertTrue(reverse.contains(-3));
+        assertTrue(reverse.contains(expectedLast));
+        assertTrue(reverse.contains(expectedLast + 1000));
+        assertEquals(214_748_364, reverse.indexOf(Integer.valueOf(7)));
+        assertEquals(214_748_365, reverse.indexOf(Integer.valueOf(-3)));
+        assertEquals(429_496_728, reverse.indexOf(expectedLast));
+        assertEquals(429_496_728, reverse.lastIndexOf(expectedLast));
         Integer expectedAtIndex300Million = Integer.valueOf(-852_516_353);
-        Assert.assertTrue(reverse.contains(expectedAtIndex300Million));
-        Assert.assertEquals(300_000_000, reverse.indexOf(expectedAtIndex300Million));
-        Assert.assertEquals(300_000_000, reverse.lastIndexOf(expectedAtIndex300Million));
+        assertTrue(reverse.contains(expectedAtIndex300Million));
+        assertEquals(300_000_000, reverse.indexOf(expectedAtIndex300Million));
+        assertEquals(300_000_000, reverse.lastIndexOf(expectedAtIndex300Million));
         Integer expectedAtIndex400Million = Integer.valueOf(-1_852_516_353);
-        Assert.assertTrue(reverse.contains(expectedAtIndex400Million));
-        Assert.assertEquals(400_000_000, reverse.indexOf(expectedAtIndex400Million));
-        Assert.assertEquals(400_000_000, reverse.lastIndexOf(expectedAtIndex400Million));
+        assertTrue(reverse.contains(expectedAtIndex400Million));
+        assertEquals(400_000_000, reverse.indexOf(expectedAtIndex400Million));
+        assertEquals(400_000_000, reverse.lastIndexOf(expectedAtIndex400Million));
     }
 
     @Test
@@ -657,27 +663,27 @@ public class IntervalTest
         long expected = from.longValue() + second.longValue();
         Interval interval = Interval.fromToBy(from, Integer.MAX_VALUE, 8);
         Verify.assertSize(2, interval);
-        Assert.assertEquals(Lists.mutable.with(from, second), interval);
-        Assert.assertEquals(1, interval.countWith(Objects::equals, second));
-        Assert.assertEquals(expected, interval.sumOfLong(Integer::longValue));
+        assertEquals(Lists.mutable.with(from, second), interval);
+        assertEquals(1, interval.countWith(Objects::equals, second));
+        assertEquals(expected, interval.sumOfLong(Integer::longValue));
         MutableLong result = new MutableLong();
         interval.each(each -> result.add(each.longValue()));
-        Assert.assertEquals(expected, result.longValue());
+        assertEquals(expected, result.longValue());
         result.clear();
-        Assert.assertEquals(
+        assertEquals(
                 expected,
                 interval.injectInto(new MutableLong(), MutableLong::add).longValue());
-        Assert.assertEquals(
+        assertEquals(
                 2,
                 interval.injectInto(0, (int value, Integer each) -> value + 1));
-        Assert.assertEquals(
+        assertEquals(
                 2L,
                 interval.injectInto(0L, (long value, Integer each) -> value + 1));
-        Assert.assertEquals(
+        assertEquals(
                 2.0,
                 interval.injectInto(0.0, (double value, Integer each) -> value + 1.0),
                 0.0);
-        Assert.assertEquals(
+        assertEquals(
                 2.0f,
                 interval.injectInto(0.0f, (float value, Integer each) -> value + 1.0f),
                 0.0f);
@@ -690,24 +696,24 @@ public class IntervalTest
         Integer second = Integer.valueOf(Integer.MIN_VALUE + 2);
         long expected = (long) from + (long) second;
         Interval interval = Interval.fromToBy(from, Integer.MIN_VALUE, -8);
-        Assert.assertEquals(2, interval.size());
-        Assert.assertEquals(Lists.mutable.with(from, second), interval);
-        Assert.assertEquals(1, interval.countWith(Objects::equals, second));
+        assertEquals(2, interval.size());
+        assertEquals(Lists.mutable.with(from, second), interval);
+        assertEquals(1, interval.countWith(Objects::equals, second));
         MutableLong result = new MutableLong();
         interval.each(each -> result.add(each.longValue()));
-        Assert.assertEquals(expected, result.longValue());
-        Assert.assertEquals(expected, interval.injectInto(new MutableLong(), MutableLong::add).longValue());
-        Assert.assertEquals(
+        assertEquals(expected, result.longValue());
+        assertEquals(expected, interval.injectInto(new MutableLong(), MutableLong::add).longValue());
+        assertEquals(
                 2,
                 interval.injectInto(0, (int value, Integer each) -> value + 1));
-        Assert.assertEquals(
+        assertEquals(
                 2L,
                 interval.injectInto(0L, (long value, Integer each) -> value + 1));
-        Assert.assertEquals(
+        assertEquals(
                 2.0,
                 interval.injectInto(0.0, (double value, Integer each) -> value + 1.0),
                 0.0);
-        Assert.assertEquals(
+        assertEquals(
                 2.0f,
                 interval.injectInto(0.0f, (float value, Integer each) -> value + 1.0f),
                 0.0f);
@@ -716,30 +722,30 @@ public class IntervalTest
     @Test
     public void factorial()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> Interval.fromTo(-1, -5).factorial());
-        Assert.assertEquals(1, Interval.zero().factorial().intValue());
-        Assert.assertEquals(1, Interval.oneTo(1).factorial().intValue());
-        Assert.assertEquals(6, Interval.oneTo(3).factorial().intValue());
-        Assert.assertEquals(2432902008176640000L, Interval.oneTo(20).factorial().longValue());
-        Assert.assertEquals(new BigInteger("51090942171709440000"), Interval.oneTo(21).factorial());
-        Assert.assertEquals(new BigInteger("1405006117752879898543142606244511569936384000000000"), Interval.oneTo(42).factorial());
+        assertThrows(IllegalStateException.class, () -> Interval.fromTo(-1, -5).factorial());
+        assertEquals(1, Interval.zero().factorial().intValue());
+        assertEquals(1, Interval.oneTo(1).factorial().intValue());
+        assertEquals(6, Interval.oneTo(3).factorial().intValue());
+        assertEquals(2432902008176640000L, Interval.oneTo(20).factorial().longValue());
+        assertEquals(new BigInteger("51090942171709440000"), Interval.oneTo(21).factorial());
+        assertEquals(new BigInteger("1405006117752879898543142606244511569936384000000000"), Interval.oneTo(42).factorial());
     }
 
     @Test
     public void product()
     {
-        Assert.assertEquals(0, Interval.zero().product().intValue());
-        Assert.assertEquals(0, Interval.fromTo(-1, 1).product().intValue());
-        Assert.assertEquals(2, Interval.fromTo(-2, -1).product().intValue());
-        Assert.assertEquals(-6, Interval.fromTo(-3, -1).product().intValue());
-        Assert.assertEquals(0, Interval.fromToExclusive(-1, 1).product().intValue());
-        Assert.assertEquals(-2, Interval.fromToExclusive(-2, -1).product().intValue());
-        Assert.assertEquals(6, Interval.fromToExclusive(-3, -1).product().intValue());
-        Assert.assertEquals(200, Interval.fromToBy(10, 20, 10).product().intValue());
-        Assert.assertEquals(200, Interval.fromToBy(-10, -20, -10).product().intValue());
-        Assert.assertEquals(-6000, Interval.fromToBy(-10, -30, -10).product().intValue());
-        Assert.assertEquals(6000, Interval.fromToBy(30, 10, -10).product().intValue());
-        Assert.assertEquals(6000, Interval.fromToBy(30, 10, -10).reverseThis().product().intValue());
+        assertEquals(0, Interval.zero().product().intValue());
+        assertEquals(0, Interval.fromTo(-1, 1).product().intValue());
+        assertEquals(2, Interval.fromTo(-2, -1).product().intValue());
+        assertEquals(-6, Interval.fromTo(-3, -1).product().intValue());
+        assertEquals(0, Interval.fromToExclusive(-1, 1).product().intValue());
+        assertEquals(-2, Interval.fromToExclusive(-2, -1).product().intValue());
+        assertEquals(6, Interval.fromToExclusive(-3, -1).product().intValue());
+        assertEquals(200, Interval.fromToBy(10, 20, 10).product().intValue());
+        assertEquals(200, Interval.fromToBy(-10, -20, -10).product().intValue());
+        assertEquals(-6000, Interval.fromToBy(-10, -30, -10).product().intValue());
+        assertEquals(6000, Interval.fromToBy(30, 10, -10).product().intValue());
+        assertEquals(6000, Interval.fromToBy(30, 10, -10).reverseThis().product().intValue());
     }
 
     @Test
@@ -747,26 +753,26 @@ public class IntervalTest
     {
         Interval zero = Interval.zero();
         Iterator<Integer> zeroIterator = zero.iterator();
-        Assert.assertTrue(zeroIterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(0), zeroIterator.next());
-        Assert.assertFalse(zeroIterator.hasNext());
+        assertTrue(zeroIterator.hasNext());
+        assertEquals(Integer.valueOf(0), zeroIterator.next());
+        assertFalse(zeroIterator.hasNext());
         Interval oneToFive = Interval.oneTo(5);
         Iterator<Integer> oneToFiveIterator = oneToFive.iterator();
         for (int i = 1; i < 6; i++)
         {
-            Assert.assertTrue(oneToFiveIterator.hasNext());
-            Assert.assertEquals(Integer.valueOf(i), oneToFiveIterator.next());
+            assertTrue(oneToFiveIterator.hasNext());
+            assertEquals(Integer.valueOf(i), oneToFiveIterator.next());
         }
-        Assert.assertThrows(NoSuchElementException.class, oneToFiveIterator::next);
+        assertThrows(NoSuchElementException.class, oneToFiveIterator::next);
         Interval threeToNegativeThree = Interval.fromTo(3, -3);
         Iterator<Integer> threeToNegativeThreeIterator = threeToNegativeThree.iterator();
         for (int i = 3; i > -4; i--)
         {
-            Assert.assertTrue(threeToNegativeThreeIterator.hasNext());
-            Assert.assertEquals(Integer.valueOf(i), threeToNegativeThreeIterator.next());
+            assertTrue(threeToNegativeThreeIterator.hasNext());
+            assertEquals(Integer.valueOf(i), threeToNegativeThreeIterator.next());
         }
-        Assert.assertThrows(NoSuchElementException.class, threeToNegativeThreeIterator::next);
-        Assert.assertThrows(UnsupportedOperationException.class, () -> Interval.zeroTo(10).iterator().remove());
+        assertThrows(NoSuchElementException.class, threeToNegativeThreeIterator::next);
+        assertThrows(UnsupportedOperationException.class, () -> Interval.zeroTo(10).iterator().remove());
     }
 
     @Test
@@ -774,12 +780,12 @@ public class IntervalTest
     {
         IntegerSum sum = new IntegerSum(0);
         Interval.oneTo(5).forEachWithIndex((ObjectIntProcedure<Integer>) (each, index) -> sum.add(each + index));
-        Assert.assertEquals(25, sum.getIntSum());
+        assertEquals(25, sum.getIntSum());
         IntegerSum zeroSum = new IntegerSum(0);
         Interval.fromTo(0, -4).forEachWithIndex((ObjectIntProcedure<Integer>) (each, index) -> zeroSum.add(each + index));
-        Assert.assertEquals(0, zeroSum.getIntSum());
+        assertEquals(0, zeroSum.getIntSum());
 
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> Interval.zeroTo(10).forEachWithIndex(null, -1, 10));
+        assertThrows(IndexOutOfBoundsException.class, () -> Interval.zeroTo(10).forEachWithIndex(null, -1, 10));
     }
 
     @Test
@@ -787,10 +793,10 @@ public class IntervalTest
     {
         IntegerSum sum = new IntegerSum(0);
         Interval.oneTo(5).run(() -> sum.add(1));
-        Assert.assertEquals(5, sum.getIntSum());
+        assertEquals(5, sum.getIntSum());
         IntegerSum sum2 = new IntegerSum(0);
         Interval.fromTo(5, 1).run(() -> sum2.add(1));
-        Assert.assertEquals(5, sum2.getIntSum());
+        assertEquals(5, sum2.getIntSum());
     }
 
     @Test
@@ -798,10 +804,10 @@ public class IntervalTest
     {
         IntegerSum sum = new IntegerSum(0);
         Interval.oneTo(5).forEachWith((Integer each, Integer parameter) -> sum.add(each + parameter), 0);
-        Assert.assertEquals(15, sum.getIntSum());
+        assertEquals(15, sum.getIntSum());
         IntegerSum sum2 = new IntegerSum(0);
         Interval.fromTo(5, 1).forEachWith((Integer each, Integer parameter) -> sum2.add(each + parameter), 0);
-        Assert.assertEquals(15, sum2.getIntSum());
+        assertEquals(15, sum2.getIntSum());
     }
 
     @Test
@@ -810,8 +816,8 @@ public class IntervalTest
         Interval interval = Interval.fromTo(10, -10).by(-5);
 
         MutableList<Integer> expected = FastList.newListWith(10, 0, -10);
-        Assert.assertEquals(expected, interval.select(IntegerPredicates.isEven()).toList());
-        Assert.assertEquals(expected, interval.select(IntegerPredicates.isEven(), FastList.newList()));
+        assertEquals(expected, interval.select(IntegerPredicates.isEven()).toList());
+        assertEquals(expected, interval.select(IntegerPredicates.isEven(), FastList.newList()));
     }
 
     @Test
@@ -820,7 +826,7 @@ public class IntervalTest
         Interval interval = Interval.fromTo(10, -10).by(-5);
 
         MutableList<Integer> expected = FastList.newListWith(5, -5);
-        Assert.assertEquals(expected, interval.reject(IntegerPredicates.isEven(), FastList.newList()));
+        assertEquals(expected, interval.reject(IntegerPredicates.isEven(), FastList.newList()));
     }
 
     @Test
@@ -829,26 +835,26 @@ public class IntervalTest
         Interval interval = Interval.fromTo(10, -10).by(-5);
 
         MutableList<String> expected = FastList.newListWith("10", "5", "0", "-5", "-10");
-        Assert.assertEquals(expected, interval.collect(String::valueOf).toList());
-        Assert.assertEquals(expected, interval.collect(String::valueOf, FastList.newList()));
+        assertEquals(expected, interval.collect(String::valueOf).toList());
+        assertEquals(expected, interval.collect(String::valueOf, FastList.newList()));
     }
 
     @Test
     public void getFirst()
     {
-        Assert.assertEquals(Integer.valueOf(10), Interval.fromTo(10, -10).by(-5).getFirst());
-        Assert.assertEquals(Integer.valueOf(-10), Interval.fromTo(-10, 10).by(5).getFirst());
-        Assert.assertEquals(Integer.valueOf(0), Interval.zero().getFirst());
+        assertEquals(Integer.valueOf(10), Interval.fromTo(10, -10).by(-5).getFirst());
+        assertEquals(Integer.valueOf(-10), Interval.fromTo(-10, 10).by(5).getFirst());
+        assertEquals(Integer.valueOf(0), Interval.zero().getFirst());
     }
 
     @Test
     public void getLast()
     {
-        Assert.assertEquals(Integer.valueOf(-10), Interval.fromTo(10, -10).by(-5).getLast());
-        Assert.assertEquals(Integer.valueOf(-10), Interval.fromTo(10, -12).by(-5).getLast());
-        Assert.assertEquals(Integer.valueOf(10), Interval.fromTo(-10, 10).by(5).getLast());
-        Assert.assertEquals(Integer.valueOf(10), Interval.fromTo(-10, 12).by(5).getLast());
-        Assert.assertEquals(Integer.valueOf(0), Interval.zero().getLast());
+        assertEquals(Integer.valueOf(-10), Interval.fromTo(10, -10).by(-5).getLast());
+        assertEquals(Integer.valueOf(-10), Interval.fromTo(10, -12).by(-5).getLast());
+        assertEquals(Integer.valueOf(10), Interval.fromTo(-10, 10).by(5).getLast());
+        assertEquals(Integer.valueOf(10), Interval.fromTo(-10, 12).by(5).getLast());
+        assertEquals(Integer.valueOf(0), Interval.zero().getLast());
     }
 
     @Test
@@ -858,13 +864,13 @@ public class IntervalTest
 
         MutableList<Integer> forwardResult = Lists.mutable.of();
         interval.forEach(CollectionAddProcedure.on(forwardResult), 1, 3);
-        Assert.assertEquals(FastList.newListWith(-5, 0, 5), forwardResult);
+        assertEquals(FastList.newListWith(-5, 0, 5), forwardResult);
 
         MutableList<Integer> backwardsResult = Lists.mutable.of();
         interval.forEach(CollectionAddProcedure.on(backwardsResult), 3, 1);
-        Assert.assertEquals(FastList.newListWith(5, 0, -5), backwardsResult);
+        assertEquals(FastList.newListWith(5, 0, -5), backwardsResult);
 
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> interval.forEach(null, -1, 3));
+        assertThrows(IndexOutOfBoundsException.class, () -> interval.forEach(null, -1, 3));
     }
 
     @Test
@@ -874,11 +880,11 @@ public class IntervalTest
 
         MutableList<Integer> forwardResult = Lists.mutable.of();
         interval.forEachWithIndex(new AddParametersProcedure(forwardResult), 1, 3);
-        Assert.assertEquals(FastList.newListWith(-4, 2, 8), forwardResult);
+        assertEquals(FastList.newListWith(-4, 2, 8), forwardResult);
 
         MutableList<Integer> backwardsResult = Lists.mutable.of();
         interval.forEachWithIndex(new AddParametersProcedure(backwardsResult), 3, 1);
-        Assert.assertEquals(FastList.newListWith(8, 2, -4), backwardsResult);
+        assertEquals(FastList.newListWith(8, 2, -4), backwardsResult);
     }
 
     @Test
@@ -889,68 +895,68 @@ public class IntervalTest
         MutableInteger counter = new MutableInteger(0);
         interval.forEach((Procedure<Integer>) each -> counter.add(1));
 
-        Assert.assertEquals(1, counter.toInteger().intValue());
+        assertEquals(1, counter.toInteger().intValue());
     }
 
     @Test
     public void indexOf()
     {
         Interval interval = Interval.fromTo(-10, 12).by(5);
-        Assert.assertEquals(0, interval.indexOf(-10));
-        Assert.assertEquals(1, interval.indexOf(-5));
-        Assert.assertEquals(2, interval.indexOf(0));
-        Assert.assertEquals(3, interval.indexOf(5));
-        Assert.assertEquals(4, interval.indexOf(10));
+        assertEquals(0, interval.indexOf(-10));
+        assertEquals(1, interval.indexOf(-5));
+        assertEquals(2, interval.indexOf(0));
+        assertEquals(3, interval.indexOf(5));
+        assertEquals(4, interval.indexOf(10));
 
-        Assert.assertEquals(-1, interval.indexOf(-15));
-        Assert.assertEquals(-1, interval.indexOf(-11));
-        Assert.assertEquals(-1, interval.indexOf(-9));
-        Assert.assertEquals(-1, interval.indexOf(11));
-        Assert.assertEquals(-1, interval.indexOf(15));
+        assertEquals(-1, interval.indexOf(-15));
+        assertEquals(-1, interval.indexOf(-11));
+        assertEquals(-1, interval.indexOf(-9));
+        assertEquals(-1, interval.indexOf(11));
+        assertEquals(-1, interval.indexOf(15));
 
         Interval backwardsInterval = Interval.fromTo(10, -12).by(-5);
-        Assert.assertEquals(0, backwardsInterval.indexOf(10));
-        Assert.assertEquals(1, backwardsInterval.indexOf(5));
-        Assert.assertEquals(2, backwardsInterval.indexOf(0));
-        Assert.assertEquals(3, backwardsInterval.indexOf(-5));
-        Assert.assertEquals(4, backwardsInterval.indexOf(-10));
+        assertEquals(0, backwardsInterval.indexOf(10));
+        assertEquals(1, backwardsInterval.indexOf(5));
+        assertEquals(2, backwardsInterval.indexOf(0));
+        assertEquals(3, backwardsInterval.indexOf(-5));
+        assertEquals(4, backwardsInterval.indexOf(-10));
 
-        Assert.assertEquals(-1, backwardsInterval.indexOf(15));
-        Assert.assertEquals(-1, backwardsInterval.indexOf(11));
-        Assert.assertEquals(-1, backwardsInterval.indexOf(9));
-        Assert.assertEquals(-1, backwardsInterval.indexOf(-11));
-        Assert.assertEquals(-1, backwardsInterval.indexOf(-15));
+        assertEquals(-1, backwardsInterval.indexOf(15));
+        assertEquals(-1, backwardsInterval.indexOf(11));
+        assertEquals(-1, backwardsInterval.indexOf(9));
+        assertEquals(-1, backwardsInterval.indexOf(-11));
+        assertEquals(-1, backwardsInterval.indexOf(-15));
     }
 
     @Test
     public void lastIndexOf()
     {
         Interval interval = Interval.fromTo(-10, 12).by(5);
-        Assert.assertEquals(0, interval.lastIndexOf(-10));
-        Assert.assertEquals(1, interval.lastIndexOf(-5));
-        Assert.assertEquals(2, interval.lastIndexOf(0));
-        Assert.assertEquals(3, interval.lastIndexOf(5));
-        Assert.assertEquals(4, interval.lastIndexOf(10));
+        assertEquals(0, interval.lastIndexOf(-10));
+        assertEquals(1, interval.lastIndexOf(-5));
+        assertEquals(2, interval.lastIndexOf(0));
+        assertEquals(3, interval.lastIndexOf(5));
+        assertEquals(4, interval.lastIndexOf(10));
 
-        Assert.assertEquals(-1, interval.lastIndexOf(-15));
-        Assert.assertEquals(-1, interval.lastIndexOf(-11));
-        Assert.assertEquals(-1, interval.lastIndexOf(-9));
-        Assert.assertEquals(-1, interval.lastIndexOf(11));
-        Assert.assertEquals(-1, interval.lastIndexOf(15));
-        Assert.assertEquals(-1, interval.lastIndexOf(new Object()));
+        assertEquals(-1, interval.lastIndexOf(-15));
+        assertEquals(-1, interval.lastIndexOf(-11));
+        assertEquals(-1, interval.lastIndexOf(-9));
+        assertEquals(-1, interval.lastIndexOf(11));
+        assertEquals(-1, interval.lastIndexOf(15));
+        assertEquals(-1, interval.lastIndexOf(new Object()));
 
         Interval backwardsInterval = Interval.fromTo(10, -12).by(-5);
-        Assert.assertEquals(0, backwardsInterval.lastIndexOf(10));
-        Assert.assertEquals(1, backwardsInterval.lastIndexOf(5));
-        Assert.assertEquals(2, backwardsInterval.lastIndexOf(0));
-        Assert.assertEquals(3, backwardsInterval.lastIndexOf(-5));
-        Assert.assertEquals(4, backwardsInterval.lastIndexOf(-10));
+        assertEquals(0, backwardsInterval.lastIndexOf(10));
+        assertEquals(1, backwardsInterval.lastIndexOf(5));
+        assertEquals(2, backwardsInterval.lastIndexOf(0));
+        assertEquals(3, backwardsInterval.lastIndexOf(-5));
+        assertEquals(4, backwardsInterval.lastIndexOf(-10));
 
-        Assert.assertEquals(-1, backwardsInterval.lastIndexOf(15));
-        Assert.assertEquals(-1, backwardsInterval.lastIndexOf(11));
-        Assert.assertEquals(-1, backwardsInterval.lastIndexOf(9));
-        Assert.assertEquals(-1, backwardsInterval.lastIndexOf(-11));
-        Assert.assertEquals(-1, backwardsInterval.lastIndexOf(-15));
+        assertEquals(-1, backwardsInterval.lastIndexOf(15));
+        assertEquals(-1, backwardsInterval.lastIndexOf(11));
+        assertEquals(-1, backwardsInterval.lastIndexOf(9));
+        assertEquals(-1, backwardsInterval.lastIndexOf(-11));
+        assertEquals(-1, backwardsInterval.lastIndexOf(-15));
     }
 
     @Test
@@ -963,22 +969,22 @@ public class IntervalTest
         Verify.assertItemAtIndex(Integer.valueOf(5), 3, interval);
         Verify.assertItemAtIndex(Integer.valueOf(10), 4, interval);
 
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> interval.get(-1));
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> interval.get(5));
+        assertThrows(IndexOutOfBoundsException.class, () -> interval.get(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> interval.get(5));
     }
 
     @Test
     public void subList()
     {
         Interval interval = Interval.fromTo(1, 5);
-        Assert.assertEquals(FastList.newListWith(2, 3), interval.subList(1, 3));
+        assertEquals(FastList.newListWith(2, 3), interval.subList(1, 3));
     }
 
     @Test
     public void containsAll()
     {
-        Assert.assertTrue(Interval.fromTo(1, 3).containsAll(FastList.newListWith(1, 2, 3)));
-        Assert.assertFalse(Interval.fromTo(1, 3).containsAll(FastList.newListWith(1, 2, 4)));
+        assertTrue(Interval.fromTo(1, 3).containsAll(FastList.newListWith(1, 2, 3)));
+        assertFalse(Interval.fromTo(1, 3).containsAll(FastList.newListWith(1, 2, 4)));
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -1045,40 +1051,40 @@ public class IntervalTest
     public void take()
     {
         Verify.assertIterableEmpty(Interval.fromTo(1, 3).take(0));
-        Assert.assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 3).take(2));
-        Assert.assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 2).take(3));
+        assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 3).take(2));
+        assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 2).take(3));
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.fromTo(1, 3).take(-1));
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromTo(1, 3).take(-1));
     }
 
     @Test
     public void drop()
     {
-        Assert.assertEquals(FastList.newListWith(3, 4), Interval.fromTo(1, 4).drop(2));
-        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromTo(1, 4).drop(0));
+        assertEquals(FastList.newListWith(3, 4), Interval.fromTo(1, 4).drop(2));
+        assertEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromTo(1, 4).drop(0));
         Verify.assertIterableEmpty(Interval.fromTo(1, 2).drop(3));
 
-        Assert.assertThrows(IllegalArgumentException.class, () -> Interval.fromTo(1, 3).drop(-1));
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromTo(1, 3).drop(-1));
     }
 
     @Test
     public void takeWhile()
     {
         Verify.assertIterableEmpty(Interval.fromTo(1, 3).takeWhile(Predicates.alwaysFalse()).toList());
-        Assert.assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 3).takeWhile(each -> each <= 2).toList());
-        Assert.assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 2).takeWhile(Predicates.alwaysTrue()).toList());
+        assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 3).takeWhile(each -> each <= 2).toList());
+        assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 2).takeWhile(Predicates.alwaysTrue()).toList());
 
-        Assert.assertThrows(IllegalStateException.class, () -> Interval.fromTo(1, 3).takeWhile(null));
+        assertThrows(IllegalStateException.class, () -> Interval.fromTo(1, 3).takeWhile(null));
     }
 
     @Test
     public void dropWhile()
     {
-        Assert.assertEquals(FastList.newListWith(3, 4), Interval.fromTo(1, 4).dropWhile(each -> each <= 2).toList());
-        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromTo(1, 4).dropWhile(Predicates.alwaysFalse()).toList());
+        assertEquals(FastList.newListWith(3, 4), Interval.fromTo(1, 4).dropWhile(each -> each <= 2).toList());
+        assertEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromTo(1, 4).dropWhile(Predicates.alwaysFalse()).toList());
         Verify.assertIterableEmpty(Interval.fromTo(1, 2).dropWhile(Predicates.alwaysTrue()).toList());
 
-        Assert.assertThrows(IllegalStateException.class, () -> Interval.fromTo(1, 3).dropWhile(null));
+        assertThrows(IllegalStateException.class, () -> Interval.fromTo(1, 3).dropWhile(null));
     }
 
     @Test
@@ -1086,14 +1092,14 @@ public class IntervalTest
     {
         LazyIterable<Integer> integers = Interval.oneTo(1000000000);
 
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(1, 2, 3, 4, 5),
                 integers.distinct().take(5).toList());
 
         LazyIterable<Integer> lazyInterval = Interval.oneTo(1000000).flatCollect(Interval::oneTo);
         LazyIterable<Integer> distinct = lazyInterval.distinct();
         LazyIterable<Integer> take = distinct.take(5);
-        Assert.assertEquals(Lists.immutable.of(1, 2, 3, 4, 5), take.toList());
+        assertEquals(Lists.immutable.of(1, 2, 3, 4, 5), take.toList());
     }
 
     private static final class AddParametersProcedure implements ObjectIntProcedure<Integer>
@@ -1121,21 +1127,21 @@ public class IntervalTest
         lazyTapIterable.each(x ->
         {
         }); //force evaluation
-        Assert.assertEquals(interval, tapResult);
+        assertEquals(interval, tapResult);
     }
 
     @Test
     public void appendStringThrows()
     {
-        Assert.assertThrows(
+        assertThrows(
                 RuntimeException.class,
                 () -> Interval.oneTo(5)
                         .appendString(new ThrowingAppendable()));
-        Assert.assertThrows(
+        assertThrows(
                 RuntimeException.class,
                 () -> Interval.oneTo(5)
                         .appendString(new ThrowingAppendable(), ", "));
-        Assert.assertThrows(
+        assertThrows(
                 RuntimeException.class,
                 () -> Interval.oneTo(5)
                         .appendString(new ThrowingAppendable(), "[", ", ", "]"));

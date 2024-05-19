@@ -16,8 +16,9 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test of {@link UnifiedSetMultimap}.
@@ -113,10 +114,10 @@ public class UnifiedSetMultimapTest extends AbstractMutableSetMultimapTestCase
 
         UnifiedSetMultimap<Integer, String> actual = UnifiedSetMultimap.newMultimap(testList);
 
-        Assert.assertEquals(FastList.newListWith(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(4)), actual.keysView().toList());
-        Assert.assertEquals(FastList.newListWith("OneOne", "One"), actual.get(Integer.valueOf(1)).toList());
-        Assert.assertEquals(FastList.newListWith("TwoTwo", "Two"), actual.get(Integer.valueOf(2)).toList());
-        Assert.assertEquals(FastList.newListWith("ThreeThree", "Three"), actual.get(Integer.valueOf(3)).toList());
-        Assert.assertEquals(FastList.newListWith("FourFour", "Four"), actual.get(Integer.valueOf(4)).toList());
+        assertEquals(FastList.newListWith(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(4)), actual.keysView().toList());
+        assertEquals(FastList.newListWith("OneOne", "One"), actual.get(Integer.valueOf(1)).toList());
+        assertEquals(FastList.newListWith("TwoTwo", "Two"), actual.get(Integer.valueOf(2)).toList());
+        assertEquals(FastList.newListWith("ThreeThree", "Three"), actual.get(Integer.valueOf(3)).toList());
+        assertEquals(FastList.newListWith("FourFour", "Four"), actual.get(Integer.valueOf(4)).toList());
     }
 }

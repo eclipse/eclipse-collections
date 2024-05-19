@@ -16,8 +16,10 @@ import java.util.LinkedList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link ListAdapter}.
@@ -48,7 +50,7 @@ public class ListAdapterTest extends AbstractListTestCase
     @Test
     public void adapt()
     {
-        Assert.assertEquals(ListAdapter.adapt(Arrays.asList(1, 2, 3)), Lists.adapt(Arrays.asList(1, 2, 3)));
+        assertEquals(ListAdapter.adapt(Arrays.asList(1, 2, 3)), Lists.adapt(Arrays.asList(1, 2, 3)));
     }
 
     @Test
@@ -70,7 +72,7 @@ public class ListAdapterTest extends AbstractListTestCase
         sublist.remove("X");
         Verify.assertContainsAll(sublist, "B", "C");
         Verify.assertContainsAll(list, "A", "B", "C", "D");
-        Assert.assertEquals("C", sublist.set(1, "R"));
+        assertEquals("C", sublist.set(1, "R"));
         Verify.assertContainsAll(sublist, "B", "R");
         Verify.assertContainsAll(list, "A", "B", "R", "D");
         sublist.addAll(Arrays.asList("W", "G"));
@@ -98,13 +100,13 @@ public class ListAdapterTest extends AbstractListTestCase
     {
         Object item = new Object();
 
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(item).get(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(item).get(-1));
     }
 
     @Test
     public void adaptNull()
     {
-        Assert.assertThrows(NullPointerException.class, () -> new ListAdapter<>(null));
-        Assert.assertThrows(NullPointerException.class, () -> ListAdapter.adapt(null));
+        assertThrows(NullPointerException.class, () -> new ListAdapter<>(null));
+        assertThrows(NullPointerException.class, () -> ListAdapter.adapt(null));
     }
 }

@@ -55,11 +55,13 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link UnmodifiableMutableCollection}.
@@ -81,12 +83,12 @@ public class UnmodifiableMutableCollectionTest
     @Test
     public void delegatingMethods()
     {
-        Assert.assertEquals(this.mutableCollection.notEmpty(), this.unmodifiableCollection.notEmpty());
-        Assert.assertEquals(this.mutableCollection.isEmpty(), this.unmodifiableCollection.isEmpty());
-        Assert.assertEquals(this.mutableCollection.size(), this.unmodifiableCollection.size());
-        Assert.assertEquals(this.mutableCollection.getFirst(), this.unmodifiableCollection.getFirst());
-        Assert.assertEquals(this.mutableCollection.getLast(), this.unmodifiableCollection.getLast());
-        Assert.assertEquals(
+        assertEquals(this.mutableCollection.notEmpty(), this.unmodifiableCollection.notEmpty());
+        assertEquals(this.mutableCollection.isEmpty(), this.unmodifiableCollection.isEmpty());
+        assertEquals(this.mutableCollection.size(), this.unmodifiableCollection.size());
+        assertEquals(this.mutableCollection.getFirst(), this.unmodifiableCollection.getFirst());
+        assertEquals(this.mutableCollection.getLast(), this.unmodifiableCollection.getLast());
+        assertEquals(
                 this.mutableCollection.count(ignored6 -> true),
                 this.unmodifiableCollection.count(ignored5 -> true));
         Verify.assertSize(4, this.unmodifiableCollection.select(ignored4 -> true));
@@ -127,22 +129,22 @@ public class UnmodifiableMutableCollectionTest
                         ignored1 -> true,
                         Functions.getStringPassThru(),
                         FastList.newList()));
-        Assert.assertEquals(METALLICA, this.unmodifiableCollection.detect(StringPredicates.contains("allic")));
-        Assert.assertEquals(
+        assertEquals(METALLICA, this.unmodifiableCollection.detect(StringPredicates.contains("allic")));
+        assertEquals(
                 "Not found",
                 this.unmodifiableCollection.detectIfNone(
                         StringPredicates.contains("donna"),
                         new PassThruFunction0<>("Not found")));
-        Assert.assertEquals(METALLICA, this.unmodifiableCollection.detectWith(Object::equals, METALLICA));
-        Assert.assertEquals("Not found", this.unmodifiableCollection.detectWithIfNone(Object::equals, "Madonna",
+        assertEquals(METALLICA, this.unmodifiableCollection.detectWith(Object::equals, METALLICA));
+        assertEquals("Not found", this.unmodifiableCollection.detectWithIfNone(Object::equals, "Madonna",
                 new PassThruFunction0<>("Not found")));
-        Assert.assertEquals(4, this.unmodifiableCollection.count(ignored -> true));
-        Assert.assertEquals(1, this.unmodifiableCollection.countWith(Object::equals, METALLICA));
-        Assert.assertTrue(this.unmodifiableCollection.anySatisfy(StringPredicates.contains("allic")));
-        Assert.assertTrue(this.unmodifiableCollection.anySatisfyWith(Object::equals, METALLICA));
-        Assert.assertTrue(this.unmodifiableCollection.allSatisfy(Predicates.notNull()));
-        Assert.assertTrue(this.unmodifiableCollection.allSatisfyWith((ignored1, ignored2) -> true, ""));
-        Assert.assertEquals(this.mutableCollection, this.unmodifiableCollection.toList());
+        assertEquals(4, this.unmodifiableCollection.count(ignored -> true));
+        assertEquals(1, this.unmodifiableCollection.countWith(Object::equals, METALLICA));
+        assertTrue(this.unmodifiableCollection.anySatisfy(StringPredicates.contains("allic")));
+        assertTrue(this.unmodifiableCollection.anySatisfyWith(Object::equals, METALLICA));
+        assertTrue(this.unmodifiableCollection.allSatisfy(Predicates.notNull()));
+        assertTrue(this.unmodifiableCollection.allSatisfyWith((ignored1, ignored2) -> true, ""));
+        assertEquals(this.mutableCollection, this.unmodifiableCollection.toList());
         Verify.assertListsEqual(
                 Lists.mutable.of("Bon Jovi", "Europe", METALLICA, "Scorpions"),
                 this.unmodifiableCollection.toSortedList());
@@ -160,78 +162,78 @@ public class UnmodifiableMutableCollectionTest
         MutableCollection<Integer> unmodifiable = new UnmodifiableMutableCollection<>(mutable);
 
         MutableBooleanCollection expectedBooleans = mutable.collectBoolean(PrimitiveFunctions.integerIsPositive());
-        Assert.assertEquals(expectedBooleans, unmodifiable.collectBoolean(PrimitiveFunctions.integerIsPositive()));
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true, true, true), expectedBooleans);
+        assertEquals(expectedBooleans, unmodifiable.collectBoolean(PrimitiveFunctions.integerIsPositive()));
+        assertEquals(BooleanArrayList.newListWith(true, true, true, true), expectedBooleans);
 
         MutableByteCollection expectedBytes = mutable.collectByte(PrimitiveFunctions.unboxIntegerToByte());
-        Assert.assertEquals(expectedBytes, unmodifiable.collectByte(PrimitiveFunctions.unboxIntegerToByte()));
-        Assert.assertEquals(ByteArrayList.newListWith((byte) 1, (byte) 2, (byte) 3, (byte) 4), expectedBytes);
+        assertEquals(expectedBytes, unmodifiable.collectByte(PrimitiveFunctions.unboxIntegerToByte()));
+        assertEquals(ByteArrayList.newListWith((byte) 1, (byte) 2, (byte) 3, (byte) 4), expectedBytes);
 
         MutableCharCollection expectedChars = mutable.collectChar(PrimitiveFunctions.unboxIntegerToChar());
-        Assert.assertEquals(expectedChars, unmodifiable.collectChar(PrimitiveFunctions.unboxIntegerToChar()));
-        Assert.assertEquals(CharArrayList.newListWith((char) 1, (char) 2, (char) 3, (char) 4), expectedChars);
+        assertEquals(expectedChars, unmodifiable.collectChar(PrimitiveFunctions.unboxIntegerToChar()));
+        assertEquals(CharArrayList.newListWith((char) 1, (char) 2, (char) 3, (char) 4), expectedChars);
 
         MutableDoubleCollection expectedDoubles = mutable.collectDouble(PrimitiveFunctions.unboxIntegerToDouble());
-        Assert.assertEquals(expectedDoubles, unmodifiable.collectDouble(PrimitiveFunctions.unboxIntegerToDouble()));
-        Assert.assertEquals(DoubleArrayList.newListWith(1.0d, 2.0d, 3.0d, 4.0d), expectedDoubles);
+        assertEquals(expectedDoubles, unmodifiable.collectDouble(PrimitiveFunctions.unboxIntegerToDouble()));
+        assertEquals(DoubleArrayList.newListWith(1.0d, 2.0d, 3.0d, 4.0d), expectedDoubles);
 
         MutableFloatCollection expectedFloats = mutable.collectFloat(PrimitiveFunctions.unboxIntegerToFloat());
-        Assert.assertEquals(expectedFloats, unmodifiable.collectFloat(PrimitiveFunctions.unboxIntegerToFloat()));
-        Assert.assertEquals(FloatArrayList.newListWith(1.0f, 2.0f, 3.0f, 4.0f), expectedFloats);
+        assertEquals(expectedFloats, unmodifiable.collectFloat(PrimitiveFunctions.unboxIntegerToFloat()));
+        assertEquals(FloatArrayList.newListWith(1.0f, 2.0f, 3.0f, 4.0f), expectedFloats);
 
         MutableIntCollection expectedInts = mutable.collectInt(PrimitiveFunctions.unboxIntegerToInt());
-        Assert.assertEquals(expectedInts, unmodifiable.collectInt(PrimitiveFunctions.unboxIntegerToInt()));
-        Assert.assertEquals(IntArrayList.newListWith(1, 2, 3, 4), expectedInts);
+        assertEquals(expectedInts, unmodifiable.collectInt(PrimitiveFunctions.unboxIntegerToInt()));
+        assertEquals(IntArrayList.newListWith(1, 2, 3, 4), expectedInts);
 
         MutableLongCollection expectedLongs = mutable.collectLong(PrimitiveFunctions.unboxIntegerToLong());
-        Assert.assertEquals(expectedLongs, unmodifiable.collectLong(PrimitiveFunctions.unboxIntegerToLong()));
-        Assert.assertEquals(LongArrayList.newListWith(1L, 2L, 3L, 4L), expectedLongs);
+        assertEquals(expectedLongs, unmodifiable.collectLong(PrimitiveFunctions.unboxIntegerToLong()));
+        assertEquals(LongArrayList.newListWith(1L, 2L, 3L, 4L), expectedLongs);
 
         MutableShortCollection expectedShorts = mutable.collectShort(PrimitiveFunctions.unboxIntegerToShort());
-        Assert.assertEquals(expectedShorts, unmodifiable.collectShort(PrimitiveFunctions.unboxIntegerToShort()));
-        Assert.assertEquals(ShortArrayList.newListWith((short) 1, (short) 2, (short) 3, (short) 4), expectedShorts);
+        assertEquals(expectedShorts, unmodifiable.collectShort(PrimitiveFunctions.unboxIntegerToShort()));
+        assertEquals(ShortArrayList.newListWith((short) 1, (short) 2, (short) 3, (short) 4), expectedShorts);
     }
 
     @Test
     public void nullCollection()
     {
-        Assert.assertThrows(NullPointerException.class, () -> new UnmodifiableMutableCollection<>(null));
+        assertThrows(NullPointerException.class, () -> new UnmodifiableMutableCollection<>(null));
     }
 
     @Test
     public void add()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.add("Madonna"));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.add("Madonna"));
     }
 
     @Test
     public void remove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.remove(METALLICA));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.remove(METALLICA));
     }
 
     @Test
     public void addAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.addAll(FastList.<String>newList().with("Madonna")));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.addAll(FastList.<String>newList().with("Madonna")));
     }
 
     @Test
     public void removeAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeAll(FastList.<String>newList().with(METALLICA)));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeAll(FastList.<String>newList().with(METALLICA)));
     }
 
     @Test
     public void retainAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.retainAll(FastList.<String>newList().with(METALLICA)));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.retainAll(FastList.<String>newList().with(METALLICA)));
     }
 
     @Test
     public void clear()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, this.unmodifiableCollection::clear);
+        assertThrows(UnsupportedOperationException.class, this.unmodifiableCollection::clear);
     }
 
     @Test
@@ -245,17 +247,17 @@ public class UnmodifiableMutableCollectionTest
     public void collectWith()
     {
         Function2<String, String, String> function = (band, parameter) -> parameter + band.charAt(0);
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(">M", ">B", ">E", ">S"),
                 this.unmodifiableCollection.collectWith(function, ">"));
-        Assert.assertEquals(FastList.newListWith("*M", "*B", "*E", "*S"), this.unmodifiableCollection.collectWith(function, "*", FastList.newList()));
+        assertEquals(FastList.newListWith("*M", "*B", "*E", "*S"), this.unmodifiableCollection.collectWith(function, "*", FastList.newList()));
     }
 
     @Test
     public void injectInto()
     {
         Function2<String, String, String> function = (injectValue, band) -> injectValue + band.charAt(0);
-        Assert.assertEquals(">MBES", this.unmodifiableCollection.injectInto(">", function));
+        assertEquals(">MBES", this.unmodifiableCollection.injectInto(">", function));
     }
 
     @Test
@@ -263,19 +265,19 @@ public class UnmodifiableMutableCollectionTest
     {
         Function3<String, String, String, String> function =
                 (injectValue, band, parameter) -> injectValue + band.charAt(0) + parameter;
-        Assert.assertEquals(">M*B*E*S*", this.unmodifiableCollection.injectIntoWith(">", function, "*"));
+        assertEquals(">M*B*E*S*", this.unmodifiableCollection.injectIntoWith(">", function, "*"));
     }
 
     @Test
     public void removeIf()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeIf(Predicates.notNull()));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeIf(Predicates.notNull()));
     }
 
     @Test
     public void removeIfWith()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeIfWith((ignored1, ignored2) -> true, METALLICA));
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeIfWith((ignored1, ignored2) -> true, METALLICA));
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -311,7 +313,7 @@ public class UnmodifiableMutableCollectionTest
             iterator.next();
             counter.increment();
         }
-        Assert.assertEquals(4, counter.getCount());
+        assertEquals(4, counter.getCount());
     }
 
     @Test
@@ -319,7 +321,7 @@ public class UnmodifiableMutableCollectionTest
     {
         Counter counter = new Counter();
         this.unmodifiableCollection.forEach(Procedures.cast(band -> counter.increment()));
-        Assert.assertEquals(4, counter.getCount());
+        assertEquals(4, counter.getCount());
     }
 
     @Test
@@ -327,7 +329,7 @@ public class UnmodifiableMutableCollectionTest
     {
         StringBuilder buf = new StringBuilder();
         this.unmodifiableCollection.forEachWith((band, param) -> buf.append(param).append('<').append(band).append('>'), "GreatBand");
-        Assert.assertEquals("GreatBand<Metallica>GreatBand<Bon Jovi>GreatBand<Europe>GreatBand<Scorpions>", buf.toString());
+        assertEquals("GreatBand<Metallica>GreatBand<Bon Jovi>GreatBand<Europe>GreatBand<Scorpions>", buf.toString());
     }
 
     @Test
@@ -335,7 +337,7 @@ public class UnmodifiableMutableCollectionTest
     {
         Counter counter = new Counter();
         this.unmodifiableCollection.forEachWithIndex((band, index) -> counter.add(index));
-        Assert.assertEquals(6, counter.getCount());
+        assertEquals(6, counter.getCount());
     }
 
     @Test
@@ -359,10 +361,10 @@ public class UnmodifiableMutableCollectionTest
                         Boolean.FALSE, FastList.newListWith(2, 4, 6));
 
         Multimap<Boolean, Integer> multimap = list.groupBy(isOddFunction);
-        Assert.assertEquals(expected, multimap.toMap());
+        assertEquals(expected, multimap.toMap());
 
         Multimap<Boolean, Integer> multimap2 = list.groupBy(isOddFunction, FastListMultimap.newMultimap());
-        Assert.assertEquals(expected, multimap2.toMap());
+        assertEquals(expected, multimap2.toMap());
     }
 
     private <T> UnmodifiableMutableCollection<T> newWith(T... elements)
@@ -398,7 +400,7 @@ public class UnmodifiableMutableCollectionTest
     public void selectInstancesOf()
     {
         MutableCollection<Number> numbers = UnmodifiableMutableCollection.of(FastList.newListWith(1, 2.0, 3, 4.0, 5));
-        Assert.assertEquals(iList(1, 3, 5), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iList(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
+        assertEquals(iList(1, 3, 5), numbers.selectInstancesOf(Integer.class));
+        assertEquals(iList(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
     }
 }

@@ -27,8 +27,14 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
 {
@@ -81,11 +87,11 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     @Test
     public void newMap_throws()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> new UnmodifiableBiMap<>(null));
+        assertThrows(IllegalArgumentException.class, () -> new UnmodifiableBiMap<>(null));
         MutableBiMap<String, String> biMap = null;
-        Assert.assertThrows(IllegalArgumentException.class, () -> UnmodifiableBiMap.of(biMap));
+        assertThrows(IllegalArgumentException.class, () -> UnmodifiableBiMap.of(biMap));
         Map<String, String> map = null;
-        Assert.assertThrows(IllegalArgumentException.class, () -> UnmodifiableBiMap.of(map));
+        assertThrows(IllegalArgumentException.class, () -> UnmodifiableBiMap.of(map));
     }
 
     @Override
@@ -94,10 +100,10 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     {
         MutableBiMap<Integer, Character> biMap = this.classUnderTest();
 
-        Assert.assertTrue(biMap.containsKey(1));
-        Assert.assertTrue(biMap.containsKey(null));
-        Assert.assertTrue(biMap.containsKey(3));
-        Assert.assertFalse(biMap.containsKey(4));
+        assertTrue(biMap.containsKey(1));
+        assertTrue(biMap.containsKey(null));
+        assertTrue(biMap.containsKey(3));
+        assertFalse(biMap.containsKey(4));
     }
 
     @Override
@@ -106,10 +112,10 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     {
         MutableBiMap<Integer, Character> biMap = this.classUnderTest();
 
-        Assert.assertTrue(biMap.containsValue(null));
-        Assert.assertTrue(biMap.containsValue('b'));
-        Assert.assertTrue(biMap.containsValue('c'));
-        Assert.assertFalse(biMap.containsValue('d'));
+        assertTrue(biMap.containsValue(null));
+        assertTrue(biMap.containsValue('b'));
+        assertTrue(biMap.containsValue('c'));
+        assertFalse(biMap.containsValue('d'));
     }
 
     @Override
@@ -117,10 +123,10 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void get()
     {
         MutableBiMap<Integer, Character> biMap = this.classUnderTest();
-        Assert.assertNull(biMap.get(1));
-        Assert.assertEquals(Character.valueOf('b'), biMap.get(null));
-        Assert.assertEquals(Character.valueOf('c'), biMap.get(3));
-        Assert.assertNull(biMap.get(4));
+        assertNull(biMap.get(1));
+        assertEquals(Character.valueOf('b'), biMap.get(null));
+        assertEquals(Character.valueOf('c'), biMap.get(3));
+        assertNull(biMap.get(4));
     }
 
     @Override
@@ -131,18 +137,18 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
         MutableSet<Character> actual = UnifiedSet.newSet();
         MutableBiMap<Integer, Character> biMap = this.classUnderTest();
         Iterator<Character> iterator = biMap.iterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertTrue(iterator.hasNext());
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
         Verify.assertSize(3, biMap);
         Verify.assertSize(3, biMap.inverse());
         for (int i = 0; i < 3; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
+            assertTrue(iterator.hasNext());
             actual.add(iterator.next());
         }
-        Assert.assertEquals(expected, actual);
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertEquals(expected, actual);
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -151,168 +157,168 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     {
         MutableBiMap<Object, Object> biMap = this.newMap();
         MutableBiMap<Object, Object> clone = biMap.clone();
-        Assert.assertSame(biMap, clone);
+        assertSame(biMap, clone);
     }
 
     @Override
     @Test
     public void withKeyValue()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withKeyValue(1, 'a'));
+        assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withKeyValue(1, 'a'));
     }
 
     @Override
     @Test
     public void withMap()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapEmptyAndTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withMap(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withMap(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapNull()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withMap(null));
+        assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withMap(null));
     }
 
     @Override
     @Test
     public void withMapIterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapIterableEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapIterableTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void withMapIterableEmptyAndTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withMapIterable(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withMapIterable(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void withMapIterableNull()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMapIterable(null));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMapIterable(null));
     }
 
     @Override
     @Test
     public void putAllMapIterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void putAllMapIterableEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void putAllMapIterableTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').putAllMapIterable(Maps.mutable.with(1, Character.valueOf('a'))));
     }
 
     @Override
     @Test
     public void putAllMapIterableEmptyAndTargetEmpty()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().putAllMapIterable(Maps.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().putAllMapIterable(Maps.mutable.empty()));
     }
 
     @Override
     @Test
     public void putAllMapIterableNull()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(null));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMap().putAllMapIterable(null));
     }
 
     @Override
     @Test
     public void withAllKeyValueArguments()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValueArguments(Tuples.pair("B", 22), Tuples.pair("C", 3)));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValueArguments(Tuples.pair("B", 22), Tuples.pair("C", 3)));
     }
 
     @Override
     @Test
     public void add()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue("A", 1).add(Tuples.pair("A", 3)));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue("A", 1).add(Tuples.pair("A", 3)));
     }
 
     @Override
     @Test
     public void put()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().put(4, 'd'));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().put(4, 'd'));
     }
 
     @Override
     @Test
     public void putPair()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().putPair(Tuples.pair(4, 'd')));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().putPair(Tuples.pair(4, 'd')));
     }
 
     @Override
     @Test
     public void putAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("key1", "value1", "key2", "value2").putAll(UnifiedMap.newMap()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("key1", "value1", "key2", "value2").putAll(UnifiedMap.newMap()));
     }
 
     @Override
     @Test
     public void forcePut()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("key1", "value1", "key2", "value2").forcePut("value2", "key1"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("key1", "value1", "key2", "value2").forcePut("value2", "key1"));
     }
 
     @Override
     @Test
     public void updateValue()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("key1", "value1", "key2", "value2").updateValue("key1", () -> "value3", String::toUpperCase));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("key1", "value1", "key2", "value2").updateValue("key1", () -> "value3", String::toUpperCase));
     }
 
     @Override
@@ -323,7 +329,7 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
         Function2<Character, Boolean, Character> toUpperOrLowerCase = (character, parameter) -> parameter
                 ? Character.toUpperCase(character)
                 : Character.toLowerCase(character);
-        Assert.assertThrows(UnsupportedOperationException.class, () -> biMap.updateValueWith(4, () -> 'd', toUpperOrLowerCase, true));
+        assertThrows(UnsupportedOperationException.class, () -> biMap.updateValueWith(4, () -> 'd', toUpperOrLowerCase, true));
     }
 
     @Override
@@ -331,8 +337,8 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void getIfAbsentPut()
     {
         MutableMapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, () -> "4"));
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, "4"));
+        assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, () -> "4"));
+        assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, "4"));
     }
 
     @Override
@@ -340,7 +346,7 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void getIfAbsentPutWith()
     {
         MutableMapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, object -> "4", null));
+        assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, object -> "4", null));
     }
 
     @Override
@@ -348,8 +354,8 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void getIfAbsentPutWithKey()
     {
         MutableMapIterable<Integer, Integer> map = this.newMapWithKeysValues(1, 1, 2, 2, 3, 3);
-        Assert.assertNull(map.get(4));
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWithKey(4, Functions.getIntegerPassThru()));
+        assertNull(map.get(4));
+        assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWithKey(4, Functions.getIntegerPassThru()));
     }
 
     @Override
@@ -357,29 +363,29 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void getIfAbsentPutValue()
     {
         MutableMapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
-        Assert.assertNull(map.get(4));
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, "4"));
+        assertNull(map.get(4));
+        assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut(4, "4"));
     }
 
     @Override
     @Test
     public void withoutKey()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2).withoutKey("B"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2).withoutKey("B"));
     }
 
     @Override
     @Test
     public void withoutAllKeys()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2, "C", 3).withoutAllKeys(FastList.newListWith("A", "C")));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2, "C", 3).withoutAllKeys(FastList.newListWith("A", "C")));
     }
 
     @Override
     @Test
     public void withAllKeyValues()
     {
-        Assert.assertThrows(
+        assertThrows(
                 UnsupportedOperationException.class,
                 () -> this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValues(
                         FastList.newListWith(Tuples.pair("B", 22), Tuples.pair("C", 3))));
@@ -389,49 +395,49 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     @Test
     public void clear()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
     @Override
     @Test
     public void clearEntrySet()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).entrySet().clear());
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).entrySet().clear());
     }
 
     @Override
     @Test
     public void clearKeySet()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).keySet().clear());
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).keySet().clear());
     }
 
     @Override
     @Test
     public void remove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("key1", "value1", "key2", "value2").remove("key1"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("key1", "value1", "key2", "value2").remove("key1"));
     }
 
     @Override
     @Test
     public void removeObject()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).remove("Two"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).remove("Two"));
     }
 
     @Override
     @Test
     public void removeFromEntrySet()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).entrySet().remove(ImmutableEntry.of("Two", 2)));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).entrySet().remove(ImmutableEntry.of("Two", 2)));
     }
 
     @Override
     @Test
     public void removeFromKeySet()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).keySet().remove("Four"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).keySet().remove("Four"));
     }
 
     @Override
@@ -439,28 +445,28 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void removeNullFromKeySet()
     {
         MutableBiMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.values().remove(null));
+        assertThrows(UnsupportedOperationException.class, () -> map.values().remove(null));
     }
 
     @Override
     @Test
     public void removeKey()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeKey(1));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeKey(1));
     }
 
     @Override
     @Test
     public void removeAllKeys()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeAllKeys(Sets.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeAllKeys(Sets.mutable.empty()));
     }
 
     @Override
     @Test
     public void removeIf()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeIf(null));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeIf(null));
     }
 
     @Override
@@ -468,14 +474,14 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void removeNullFromValues()
     {
         MutableBiMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.values().remove(null));
+        assertThrows(UnsupportedOperationException.class, () -> map.values().remove(null));
     }
 
     @Override
     @Test
     public void removeFromValues()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).values().remove(4));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).values().remove(4));
     }
 
     @Override
@@ -483,7 +489,7 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void retainAllFromEntrySet()
     {
         MutableMapIterable<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().retainAll(FastList.newListWith(
+        assertThrows(UnsupportedOperationException.class, () -> map.entrySet().retainAll(FastList.newListWith(
                 ImmutableEntry.of("One", 1),
                 ImmutableEntry.of("Two", 2),
                 ImmutableEntry.of("Three", 3),
@@ -494,14 +500,14 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     @Test
     public void retainAllFromKeySet()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).keySet().retainAll(FastList.newListWith("One", "Two", "Three", "Four")));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).keySet().retainAll(FastList.newListWith("One", "Two", "Three", "Four")));
     }
 
     @Override
     @Test
     public void retainAllFromValues()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).values().retainAll(FastList.newListWith(1, 2, 3, 4)));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).values().retainAll(FastList.newListWith(1, 2, 3, 4)));
     }
 
     @Override
@@ -509,7 +515,7 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void removeAllFromEntrySet()
     {
         MutableMapIterable<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
-        Assert.assertThrows(UnsupportedOperationException.class, () -> map.entrySet().removeAll(FastList.newListWith(
+        assertThrows(UnsupportedOperationException.class, () -> map.entrySet().removeAll(FastList.newListWith(
                 ImmutableEntry.of("One", 1),
                 ImmutableEntry.of("Three", 3))));
     }
@@ -518,14 +524,14 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     @Test
     public void removeAllFromKeySet()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).keySet().removeAll(FastList.newListWith("Four")));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).keySet().removeAll(FastList.newListWith("Four")));
     }
 
     @Override
     @Test
     public void removeAllFromValues()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).values().removeAll(FastList.newListWith(4)));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3).values().removeAll(FastList.newListWith(4)));
     }
 
     @Override

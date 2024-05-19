@@ -17,8 +17,10 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CollectBooleanToObjectIterableTest
 {
@@ -34,7 +36,7 @@ public class CollectBooleanToObjectIterableTest
         Appendable builder = new StringBuilder();
         Procedure<Boolean> appendProcedure = Procedures.append(builder);
         select.forEach(appendProcedure);
-        Assert.assertEquals("truefalsetruefalsetrue", builder.toString());
+        assertEquals("truefalsetruefalsetrue", builder.toString());
     }
 
     @Test
@@ -46,7 +48,7 @@ public class CollectBooleanToObjectIterableTest
             builder.append(object);
             builder.append(index);
         });
-        Assert.assertEquals("true0false1true2false3true4", builder.toString());
+        assertEquals("true0false1true2false3true4", builder.toString());
     }
 
     @Test
@@ -58,7 +60,7 @@ public class CollectBooleanToObjectIterableTest
         {
             builder.append(each);
         }
-        Assert.assertEquals("truefalsetruefalsetrue", builder.toString());
+        assertEquals("truefalsetruefalsetrue", builder.toString());
     }
 
     @Test
@@ -67,13 +69,13 @@ public class CollectBooleanToObjectIterableTest
         InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
         StringBuilder builder = new StringBuilder();
         select.forEachWith((each, aBuilder) -> aBuilder.append(each), builder);
-        Assert.assertEquals("truefalsetruefalsetrue", builder.toString());
+        assertEquals("truefalsetruefalsetrue", builder.toString());
     }
 
     @Test
     public void selectInstancesOf()
     {
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(true, false, true, false, true),
                 this.newPrimitiveWith(true, false, true, false, true).selectInstancesOf(Boolean.class).toList());
     }
@@ -83,7 +85,7 @@ public class CollectBooleanToObjectIterableTest
     {
         Verify.assertIterableSize(2, this.newPrimitiveWith(true, false));
         Verify.assertIterableEmpty(this.newPrimitiveWith());
-        Assert.assertTrue(this.newPrimitiveWith(true, false).notEmpty());
+        assertTrue(this.newPrimitiveWith(true, false).notEmpty());
     }
 
     @Test(expected = UnsupportedOperationException.class)

@@ -17,8 +17,12 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterableTestCase;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link ObjectBooleanHashMap#keysView()}.
@@ -44,16 +48,16 @@ public class ObjectBooleanHashMapKeysViewTest extends AbstractLazyIterableTestCa
         MutableSet<String> actual = UnifiedSet.newSet();
 
         Iterator<String> iterator = ObjectBooleanHashMap.newWithKeysValues("zero", true, "thirtyOne", false, "thirtyTwo", true).keysView().iterator();
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
-        Assert.assertTrue(iterator.hasNext());
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
 
-        Assert.assertEquals(expected, actual);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertEquals(expected, actual);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 }

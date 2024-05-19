@@ -10,8 +10,10 @@
 
 package org.eclipse.collections.impl.block.procedure;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CollectIfProcedureTest
 {
@@ -24,7 +26,7 @@ public class CollectIfProcedureTest
         CollectIfProcedure<Integer, String> underTestFalse = new CollectIfProcedure<>(10, String::valueOf, ignored -> false);
         underTestTrue.value(THE_ANSWER);
         underTestFalse.value(THE_ANSWER);
-        Assert.assertTrue(underTestTrue.getCollection().contains("42"));
-        Assert.assertFalse(underTestFalse.getCollection().contains("42"));
+        assertTrue(underTestTrue.getCollection().contains("42"));
+        assertFalse(underTestFalse.getCollection().contains("42"));
     }
 }

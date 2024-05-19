@@ -13,8 +13,9 @@ package org.eclipse.collections.impl.block.procedure;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.list.Interval;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class FlatCollectProcedureTest
 {
@@ -27,6 +28,6 @@ public class FlatCollectProcedureTest
         procedure.value(1);
         procedure.value(2);
         procedure.value(3);
-        Assert.assertEquals(Lists.mutable.of(0, 1, 0, 1, 2, 0, 1, 2, 3), procedure.getCollection());
+        assertEquals(Lists.mutable.of(0, 1, 0, 1, 2, 0, 1, 2, 3), procedure.getCollection());
     }
 }

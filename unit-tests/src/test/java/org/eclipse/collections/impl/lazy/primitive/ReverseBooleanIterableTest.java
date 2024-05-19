@@ -20,8 +20,11 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link ReverseBooleanIterable}.
@@ -40,19 +43,19 @@ public class ReverseBooleanIterableTest
     public void contains()
     {
         BooleanIterable iterable = BooleanArrayList.newListWith(false, false).asReversed();
-        Assert.assertTrue(iterable.contains(false));
-        Assert.assertFalse(iterable.contains(true));
+        assertTrue(iterable.contains(false));
+        assertFalse(iterable.contains(true));
     }
 
     @Test
     public void containsAll()
     {
         BooleanIterable iterable = BooleanArrayList.newListWith(true, false, true).asReversed();
-        Assert.assertTrue(iterable.containsAll(true));
-        Assert.assertTrue(iterable.containsAll(true, false));
-        Assert.assertFalse(BooleanArrayList.newListWith(false, false).asReversed().containsAll(true));
-        Assert.assertFalse(BooleanArrayList.newListWith(false, false).asReversed().containsAll(BooleanArrayList.newListWith(true, false)));
-        Assert.assertTrue(BooleanArrayList.newListWith(false, false, true).asReversed().containsAll(BooleanArrayList.newListWith(true, false)));
+        assertTrue(iterable.containsAll(true));
+        assertTrue(iterable.containsAll(true, false));
+        assertFalse(BooleanArrayList.newListWith(false, false).asReversed().containsAll(true));
+        assertFalse(BooleanArrayList.newListWith(false, false).asReversed().containsAll(BooleanArrayList.newListWith(true, false)));
+        assertTrue(BooleanArrayList.newListWith(false, false, true).asReversed().containsAll(BooleanArrayList.newListWith(true, false)));
     }
 
     @Test
@@ -60,12 +63,12 @@ public class ReverseBooleanIterableTest
     {
         BooleanIterable iterable = BooleanArrayList.newListWith(false, false, true).asReversed();
         BooleanIterator iterator = iterable.booleanIterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertTrue(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertFalse(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertFalse(iterator.next());
+        assertTrue(iterator.hasNext());
+        assertTrue(iterator.next());
+        assertTrue(iterator.hasNext());
+        assertFalse(iterator.next());
+        assertTrue(iterator.hasNext());
+        assertFalse(iterator.next());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -87,7 +90,7 @@ public class ReverseBooleanIterableTest
         boolean[] result = {true};
         iterable.forEach(each -> result[0] &= each);
 
-        Assert.assertFalse(result[0]);
+        assertFalse(result[0]);
     }
 
     @Test
@@ -102,35 +105,35 @@ public class ReverseBooleanIterableTest
     public void empty()
     {
         BooleanIterable iterable = BooleanArrayList.newListWith(false, false, true).asReversed();
-        Assert.assertTrue(iterable.notEmpty());
+        assertTrue(iterable.notEmpty());
         Verify.assertNotEmpty(iterable);
     }
 
     @Test
     public void count()
     {
-        Assert.assertEquals(2L, BooleanArrayList.newListWith(false, false, true).asReversed().count(BooleanPredicates.equal(false)));
+        assertEquals(2L, BooleanArrayList.newListWith(false, false, true).asReversed().count(BooleanPredicates.equal(false)));
     }
 
     @Test
     public void anySatisfy()
     {
-        Assert.assertTrue(BooleanArrayList.newListWith(true, false).asReversed().anySatisfy(BooleanPredicates.equal(false)));
-        Assert.assertFalse(BooleanArrayList.newListWith(true).asReversed().anySatisfy(BooleanPredicates.equal(false)));
+        assertTrue(BooleanArrayList.newListWith(true, false).asReversed().anySatisfy(BooleanPredicates.equal(false)));
+        assertFalse(BooleanArrayList.newListWith(true).asReversed().anySatisfy(BooleanPredicates.equal(false)));
     }
 
     @Test
     public void allSatisfy()
     {
-        Assert.assertFalse(BooleanArrayList.newListWith(true, false).asReversed().allSatisfy(BooleanPredicates.equal(false)));
-        Assert.assertTrue(BooleanArrayList.newListWith(false, false).asReversed().allSatisfy(BooleanPredicates.equal(false)));
+        assertFalse(BooleanArrayList.newListWith(true, false).asReversed().allSatisfy(BooleanPredicates.equal(false)));
+        assertTrue(BooleanArrayList.newListWith(false, false).asReversed().allSatisfy(BooleanPredicates.equal(false)));
     }
 
     @Test
     public void noneSatisfy()
     {
-        Assert.assertFalse(BooleanArrayList.newListWith(true, false).asReversed().noneSatisfy(BooleanPredicates.equal(false)));
-        Assert.assertTrue(BooleanArrayList.newListWith(false, false).asReversed().noneSatisfy(BooleanPredicates.equal(true)));
+        assertFalse(BooleanArrayList.newListWith(true, false).asReversed().noneSatisfy(BooleanPredicates.equal(false)));
+        assertTrue(BooleanArrayList.newListWith(false, false).asReversed().noneSatisfy(BooleanPredicates.equal(true)));
     }
 
     @Test
@@ -153,8 +156,8 @@ public class ReverseBooleanIterableTest
     public void detectIfNone()
     {
         BooleanIterable iterable = BooleanArrayList.newListWith(false, false).asReversed();
-        Assert.assertFalse(iterable.detectIfNone(BooleanPredicates.equal(false), true));
-        Assert.assertTrue(iterable.detectIfNone(BooleanPredicates.equal(true), true));
+        assertFalse(iterable.detectIfNone(BooleanPredicates.equal(false), true));
+        assertTrue(iterable.detectIfNone(BooleanPredicates.equal(true), true));
     }
 
     @Test
@@ -168,28 +171,28 @@ public class ReverseBooleanIterableTest
     public void toArray()
     {
         BooleanIterable iterable = BooleanArrayList.newListWith(false, false, true).asReversed();
-        Assert.assertTrue(iterable.toArray()[0]);
-        Assert.assertFalse(iterable.toArray()[1]);
-        Assert.assertFalse(iterable.toArray()[2]);
+        assertTrue(iterable.toArray()[0]);
+        assertFalse(iterable.toArray()[1]);
+        assertFalse(iterable.toArray()[2]);
     }
 
     @Test
     public void testToString()
     {
         BooleanIterable iterable = BooleanArrayList.newListWith(false, false, true).asReversed();
-        Assert.assertEquals("[true, false, false]", iterable.toString());
-        Assert.assertEquals("[]", new BooleanArrayList().asReversed().toString());
+        assertEquals("[true, false, false]", iterable.toString());
+        assertEquals("[]", new BooleanArrayList().asReversed().toString());
     }
 
     @Test
     public void makeString()
     {
         BooleanIterable iterable = BooleanArrayList.newListWith(false, false, true).asReversed();
-        Assert.assertEquals("true, false, false", iterable.makeString());
-        Assert.assertEquals("true", BooleanArrayList.newListWith(true).makeString("/"));
-        Assert.assertEquals("true/false/false", iterable.makeString("/"));
-        Assert.assertEquals(iterable.toString(), iterable.makeString("[", ", ", "]"));
-        Assert.assertEquals("", new BooleanArrayList().asReversed().makeString());
+        assertEquals("true, false, false", iterable.makeString());
+        assertEquals("true", BooleanArrayList.newListWith(true).makeString("/"));
+        assertEquals("true/false/false", iterable.makeString("/"));
+        assertEquals(iterable.toString(), iterable.makeString("[", ", ", "]"));
+        assertEquals("", new BooleanArrayList().asReversed().makeString());
     }
 
     @Test
@@ -198,39 +201,39 @@ public class ReverseBooleanIterableTest
         BooleanIterable iterable = BooleanArrayList.newListWith(false, false, true).asReversed();
         StringBuilder appendable = new StringBuilder();
         new BooleanArrayList().asReversed().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
         StringBuilder appendable2 = new StringBuilder();
         iterable.appendString(appendable2);
-        Assert.assertEquals("true, false, false", appendable2.toString());
+        assertEquals("true, false, false", appendable2.toString());
         StringBuilder appendable3 = new StringBuilder();
         iterable.appendString(appendable3, "/");
-        Assert.assertEquals("true/false/false", appendable3.toString());
+        assertEquals("true/false/false", appendable3.toString());
         StringBuilder appendable4 = new StringBuilder();
         iterable.appendString(appendable4, "[", ", ", "]");
-        Assert.assertEquals(iterable.toString(), appendable4.toString());
+        assertEquals(iterable.toString(), appendable4.toString());
     }
 
     @Test
     public void toList()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(false, true), BooleanArrayList.newListWith(true, false).asReversed().toList());
+        assertEquals(BooleanArrayList.newListWith(false, true), BooleanArrayList.newListWith(true, false).asReversed().toList());
     }
 
     @Test
     public void toSet()
     {
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanArrayList.newListWith(true, false).asReversed().toSet());
+        assertEquals(BooleanHashSet.newSetWith(true, false), BooleanArrayList.newListWith(true, false).asReversed().toSet());
     }
 
     @Test
     public void toBag()
     {
-        Assert.assertEquals(BooleanHashBag.newBagWith(true, false), BooleanArrayList.newListWith(true, false).asReversed().toBag());
+        assertEquals(BooleanHashBag.newBagWith(true, false), BooleanArrayList.newListWith(true, false).asReversed().toBag());
     }
 
     @Test
     public void asLazy()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(false, true), BooleanArrayList.newListWith(true, false).asReversed().asLazy().toList());
+        assertEquals(BooleanArrayList.newListWith(false, true), BooleanArrayList.newListWith(true, false).asReversed().asLazy().toList());
     }
 }

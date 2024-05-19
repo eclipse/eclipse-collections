@@ -21,8 +21,12 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIterableTestCase
 {
@@ -65,43 +69,43 @@ public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIte
     @Override
     public void allSatisfy()
     {
-        Assert.assertTrue(this.classUnderTest().allSatisfy(Predicates.lessThan(0)));
-        Assert.assertTrue(this.classUnderTest().allSatisfy(Predicates.greaterThanOrEqualTo(0)));
+        assertTrue(this.classUnderTest().allSatisfy(Predicates.lessThan(0)));
+        assertTrue(this.classUnderTest().allSatisfy(Predicates.greaterThanOrEqualTo(0)));
     }
 
     @Override
     public void allSatisfyWith()
     {
-        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.lessThan(), 0));
-        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.greaterThanOrEqualTo(), 0));
+        assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.lessThan(), 0));
+        assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.greaterThanOrEqualTo(), 0));
     }
 
     @Override
     public void anySatisfy()
     {
-        Assert.assertFalse(this.classUnderTest().anySatisfy(Predicates.lessThan(0)));
-        Assert.assertFalse(this.classUnderTest().anySatisfy(Predicates.greaterThanOrEqualTo(0)));
+        assertFalse(this.classUnderTest().anySatisfy(Predicates.lessThan(0)));
+        assertFalse(this.classUnderTest().anySatisfy(Predicates.greaterThanOrEqualTo(0)));
     }
 
     @Override
     public void anySatisfyWith()
     {
-        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.lessThan(), 0));
-        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.greaterThanOrEqualTo(), 0));
+        assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.lessThan(), 0));
+        assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.greaterThanOrEqualTo(), 0));
     }
 
     @Override
     public void noneSatisfy()
     {
-        Assert.assertTrue(this.classUnderTest().noneSatisfy(Predicates.lessThan(0)));
-        Assert.assertTrue(this.classUnderTest().noneSatisfy(Predicates.greaterThanOrEqualTo(0)));
+        assertTrue(this.classUnderTest().noneSatisfy(Predicates.lessThan(0)));
+        assertTrue(this.classUnderTest().noneSatisfy(Predicates.greaterThanOrEqualTo(0)));
     }
 
     @Override
     public void noneSatisfyWith()
     {
-        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.lessThan(), 0));
-        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.greaterThanOrEqualTo(), 0));
+        assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.lessThan(), 0));
+        assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.greaterThanOrEqualTo(), 0));
     }
 
     @Override
@@ -113,26 +117,26 @@ public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIte
     @Override
     public void detect()
     {
-        Assert.assertNull(this.classUnderTest().detect(Integer.valueOf(0)::equals));
+        assertNull(this.classUnderTest().detect(Integer.valueOf(0)::equals));
     }
 
     @Override
     public void detectIfNone()
     {
-        Assert.assertEquals(Integer.valueOf(10), this.classUnderTest().detectIfNone(Integer.valueOf(0)::equals, () -> 10));
+        assertEquals(Integer.valueOf(10), this.classUnderTest().detectIfNone(Integer.valueOf(0)::equals, () -> 10));
     }
 
     @Override
     public void detectWith()
     {
-        Assert.assertNull(this.classUnderTest().detectWith(Object::equals, Integer.valueOf(0)));
+        assertNull(this.classUnderTest().detectWith(Object::equals, Integer.valueOf(0)));
     }
 
     @Override
     public void detectWithIfNone()
     {
         Function0<Integer> function = new PassThruFunction0<>(Integer.valueOf(1000));
-        Assert.assertEquals(Integer.valueOf(1000), this.classUnderTest().detectWithIfNone(Object::equals, Integer.valueOf(0), function));
+        assertEquals(Integer.valueOf(1000), this.classUnderTest().detectWithIfNone(Object::equals, Integer.valueOf(0), function));
     }
 
     @Override

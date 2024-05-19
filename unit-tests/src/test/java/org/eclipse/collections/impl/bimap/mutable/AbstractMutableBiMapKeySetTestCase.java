@@ -19,8 +19,13 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractMutableBiMapKeySetTestCase
 {
@@ -45,15 +50,15 @@ public abstract class AbstractMutableBiMapKeySetTestCase
     {
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3, null, 4);
         Set<String> keySet = map.keySet();
-        Assert.assertTrue(keySet.contains("One"));
-        Assert.assertTrue(keySet.contains("Two"));
-        Assert.assertTrue(keySet.contains("Three"));
-        Assert.assertFalse(keySet.contains("Four"));
-        Assert.assertTrue(keySet.contains(null));
+        assertTrue(keySet.contains("One"));
+        assertTrue(keySet.contains("Two"));
+        assertTrue(keySet.contains("Three"));
+        assertFalse(keySet.contains("Four"));
+        assertTrue(keySet.contains(null));
         keySet.remove(null);
-        Assert.assertFalse(keySet.contains(null));
+        assertFalse(keySet.contains(null));
         map.remove("One");
-        Assert.assertFalse(keySet.contains("One"));
+        assertFalse(keySet.contains("One"));
     }
 
     @Test
@@ -61,17 +66,17 @@ public abstract class AbstractMutableBiMapKeySetTestCase
     {
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3, null, 4);
         Set<String> keySet = map.keySet();
-        Assert.assertTrue(keySet.containsAll(FastList.newListWith("One", "Two")));
-        Assert.assertTrue(keySet.containsAll(FastList.newListWith("One", "Two", "Three", null)));
-        Assert.assertTrue(keySet.containsAll(FastList.newListWith(null, null)));
-        Assert.assertFalse(keySet.containsAll(FastList.newListWith("One", "Four")));
-        Assert.assertFalse(keySet.containsAll(FastList.newListWith("Five", "Four")));
+        assertTrue(keySet.containsAll(FastList.newListWith("One", "Two")));
+        assertTrue(keySet.containsAll(FastList.newListWith("One", "Two", "Three", null)));
+        assertTrue(keySet.containsAll(FastList.newListWith(null, null)));
+        assertFalse(keySet.containsAll(FastList.newListWith("One", "Four")));
+        assertFalse(keySet.containsAll(FastList.newListWith("Five", "Four")));
         keySet.remove(null);
-        Assert.assertFalse(keySet.containsAll(FastList.newListWith("One", "Two", "Three", null)));
-        Assert.assertTrue(keySet.containsAll(FastList.newListWith("One", "Two", "Three")));
+        assertFalse(keySet.containsAll(FastList.newListWith("One", "Two", "Three", null)));
+        assertTrue(keySet.containsAll(FastList.newListWith("One", "Two", "Three")));
         map.remove("One");
-        Assert.assertFalse(keySet.containsAll(FastList.newListWith("One", "Two")));
-        Assert.assertTrue(keySet.containsAll(FastList.newListWith("Three", "Two")));
+        assertFalse(keySet.containsAll(FastList.newListWith("One", "Two")));
+        assertTrue(keySet.containsAll(FastList.newListWith("Three", "Two")));
     }
 
     @Test
@@ -79,12 +84,12 @@ public abstract class AbstractMutableBiMapKeySetTestCase
     {
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3, null, 4);
         Set<String> keySet = map.keySet();
-        Assert.assertFalse(keySet.isEmpty());
+        assertFalse(keySet.isEmpty());
         HashBiMap<String, Integer> map1 = HashBiMap.newMap();
         Set<String> keySet1 = map1.keySet();
-        Assert.assertTrue(keySet1.isEmpty());
+        assertTrue(keySet1.isEmpty());
         map1.put("One", 1);
-        Assert.assertFalse(keySet1.isEmpty());
+        assertFalse(keySet1.isEmpty());
     }
 
     @Test
@@ -114,29 +119,29 @@ public abstract class AbstractMutableBiMapKeySetTestCase
 
         HashBag<String> expected = HashBag.newBagWith("One", "Two", "Three", null);
         HashBag<String> actual = HashBag.newBag();
-        Assert.assertThrows(IllegalStateException.class, iterator::remove);
+        assertThrows(IllegalStateException.class, iterator::remove);
         for (int i = 0; i < 4; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
+            assertTrue(iterator.hasNext());
             actual.add(iterator.next());
         }
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
-        Assert.assertEquals(expected, actual);
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
+        assertEquals(expected, actual);
 
         Iterator<String> iterator1 = keySet.iterator();
         for (int i = 4; i > 0; i--)
         {
-            Assert.assertTrue(iterator1.hasNext());
+            assertTrue(iterator1.hasNext());
             iterator1.next();
             iterator1.remove();
-            Assert.assertThrows(IllegalStateException.class, iterator1::remove);
+            assertThrows(IllegalStateException.class, iterator1::remove);
             Verify.assertSize(i - 1, keySet);
             Verify.assertSize(i - 1, map);
             Verify.assertSize(i - 1, map.inverse());
         }
 
-        Assert.assertFalse(iterator1.hasNext());
+        assertFalse(iterator1.hasNext());
         Verify.assertEmpty(map);
         Verify.assertEmpty(map.inverse());
         Verify.assertEmpty(keySet);
@@ -146,55 +151,55 @@ public abstract class AbstractMutableBiMapKeySetTestCase
     public void removeFromKeySet()
     {
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
-        Assert.assertFalse(map.keySet().remove("Four"));
+        assertFalse(map.keySet().remove("Four"));
 
-        Assert.assertTrue(map.keySet().remove("Two"));
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3).inverse(), map.inverse());
-        Assert.assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
+        assertTrue(map.keySet().remove("Two"));
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3), map);
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3).inverse(), map.inverse());
+        assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
     }
 
     @Test
     public void removeNullFromKeySet()
     {
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
-        Assert.assertFalse(map.keySet().remove(null));
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3).inverse(), map.inverse());
-        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+        assertFalse(map.keySet().remove(null));
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3), map);
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3).inverse(), map.inverse());
+        assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
 
         map.put(null, 4);
-        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three", null), map.keySet());
-        Assert.assertTrue(map.keySet().remove(null));
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3).inverse(), map.inverse());
-        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+        assertEquals(UnifiedSet.newSetWith("One", "Two", "Three", null), map.keySet());
+        assertTrue(map.keySet().remove(null));
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3), map);
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Two", 2, "Three", 3).inverse(), map.inverse());
+        assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
     }
 
     @Test
     public void removeAllFromKeySet()
     {
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
-        Assert.assertFalse(map.keySet().removeAll(FastList.newListWith("Four")));
-        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+        assertFalse(map.keySet().removeAll(FastList.newListWith("Four")));
+        assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
 
-        Assert.assertTrue(map.keySet().removeAll(FastList.newListWith("Two", "Four")));
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3).inverse(), map.inverse());
-        Assert.assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
+        assertTrue(map.keySet().removeAll(FastList.newListWith("Two", "Four")));
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3), map);
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3).inverse(), map.inverse());
+        assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
     }
 
     @Test
     public void retainAllFromKeySet()
     {
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
-        Assert.assertFalse(map.keySet().retainAll(FastList.newListWith("One", "Two", "Three", "Four")));
-        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+        assertFalse(map.keySet().retainAll(FastList.newListWith("One", "Two", "Three", "Four")));
+        assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
 
-        Assert.assertTrue(map.keySet().retainAll(FastList.newListWith("One", "Three")));
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3), map);
-        Assert.assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3).inverse(), map.inverse());
-        Assert.assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
+        assertTrue(map.keySet().retainAll(FastList.newListWith("One", "Three")));
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3), map);
+        assertEquals(HashBiMap.newWithKeysValues("One", 1, "Three", 3).inverse(), map.inverse());
+        assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
     }
 
     @Test
@@ -212,8 +217,8 @@ public abstract class AbstractMutableBiMapKeySetTestCase
     {
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3, null, 0);
         Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("One", "Two", "Three", null), map.keySet());
-        Assert.assertNotEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
-        Assert.assertNotEquals(FastList.newListWith("One", "Two", "Three", null), map.keySet());
+        assertNotEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+        assertNotEquals(FastList.newListWith("One", "Two", "Three", null), map.keySet());
     }
 
     @Test
@@ -222,11 +227,11 @@ public abstract class AbstractMutableBiMapKeySetTestCase
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
         HashBag<String> expected = HashBag.newBagWith("One", "Two", "Three");
         Set<String> keySet = map.keySet();
-        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray()));
-        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[keySet.size()])));
-        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[0])));
+        assertEquals(expected, HashBag.newBagWith(keySet.toArray()));
+        assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[keySet.size()])));
+        assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[0])));
         expected.add(null);
-        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[keySet.size() + 1])));
+        assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[keySet.size() + 1])));
     }
 
     @Test

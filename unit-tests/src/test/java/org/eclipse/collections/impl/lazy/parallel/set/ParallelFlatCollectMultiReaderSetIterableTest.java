@@ -20,8 +20,9 @@ import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.lazy.parallel.ParallelIterableTestCase;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.MultiReaderUnifiedSet;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ParallelFlatCollectMultiReaderSetIterableTest extends ParallelIterableTestCase
 {
@@ -72,7 +73,7 @@ public class ParallelFlatCollectMultiReaderSetIterableTest extends ParallelItera
     {
         Function<Integer, Boolean> isOddFunction = object -> IntegerPredicates.isOdd().accept(object);
 
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpected().toBag().groupBy(isOddFunction),
                 this.classUnderTest().groupBy(isOddFunction));
     }
@@ -81,7 +82,7 @@ public class ParallelFlatCollectMultiReaderSetIterableTest extends ParallelItera
     @Override
     public void groupByEach()
     {
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpected().toBag().groupByEach(new NegativeIntervalFunction()),
                 this.classUnderTest().groupByEach(new NegativeIntervalFunction()));
     }

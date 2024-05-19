@@ -21,10 +21,11 @@ import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
 {
@@ -48,8 +49,8 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
     {
         RichIterable<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         PartitionIterable<Integer> result = integers.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
+        assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
     @Override
@@ -58,14 +59,14 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
     {
         RichIterable<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         PartitionIterable<Integer> result = integers.partitionWith(Predicates2.in(), FastList.newListWith(-2, 0, 2, 4, 6, 8));
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
+        assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
     @Override
     public void equalsAndHashCode()
     {
-        Assert.assertNotEquals(this.newWith(), this.newWith());
+        assertNotEquals(this.newWith(), this.newWith());
     }
 
     @Override
@@ -75,8 +76,8 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
         RichIterable<Integer> list = this.newWith(1, 2, 3, 4, 5, 6, 7);
         Multimap<Boolean, Integer> multimap = list.groupBy(object -> IntegerPredicates.isOdd().accept(object));
 
-        Assert.assertEquals(FastList.newListWith(1, 3, 5, 7), multimap.get(Boolean.TRUE));
-        Assert.assertEquals(FastList.newListWith(2, 4, 6), multimap.get(Boolean.FALSE));
+        assertEquals(FastList.newListWith(1, 3, 5, 7), multimap.get(Boolean.TRUE));
+        assertEquals(FastList.newListWith(2, 4, 6), multimap.get(Boolean.FALSE));
     }
 
     @Test
@@ -86,8 +87,8 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
         MutableMultimap<Boolean, Integer> multimap = new FastListMultimap<>();
         list.groupBy(object -> IntegerPredicates.isOdd().accept(object), multimap);
 
-        Assert.assertEquals(FastList.newListWith(1, 3, 5, 7), multimap.get(Boolean.TRUE));
-        Assert.assertEquals(FastList.newListWith(2, 4, 6), multimap.get(Boolean.FALSE));
+        assertEquals(FastList.newListWith(1, 3, 5, 7), multimap.get(Boolean.TRUE));
+        assertEquals(FastList.newListWith(2, 4, 6), multimap.get(Boolean.FALSE));
     }
 
     @Test
@@ -96,8 +97,8 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
         RichIterable<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9).asLazy();
         Verify.assertInstanceOf(LazyIterableAdapter.class, integers);
         PartitionIterable<Integer> result = integers.partitionWith(Predicates2.in(), FastList.newListWith(-2, 0, 2, 4, 6, 8));
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
+        assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
     @Test(expected = IllegalArgumentException.class)

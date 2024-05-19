@@ -25,8 +25,13 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link UnmodifiableSortedBag}.
@@ -78,7 +83,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
         collection.add(collection);
         String simpleName = collection.getClass().getSimpleName();
         String string = collection.toString();
-        Assert.assertTrue(
+        assertTrue(
                 ("[1, (this " + simpleName + ")]").equals(string)
                         || ("[(this " + simpleName + "), 1]").equals(string));
     }
@@ -91,7 +96,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
 
         MutableCollection<Object> collection = this.newWith(1, 2, 3);
         collection.add(collection);
-        Assert.assertEquals(collection.toString(), '[' + collection.makeString() + ']');
+        assertEquals(collection.toString(), '[' + collection.makeString() + ']');
     }
 
     @Override
@@ -104,7 +109,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
         collection.add(collection);
         Appendable builder = new StringBuilder();
         collection.appendString(builder);
-        Assert.assertEquals(collection.toString(), '[' + builder.toString() + ']');
+        assertEquals(collection.toString(), '[' + builder.toString() + ']');
     }
 
     @Override
@@ -127,36 +132,36 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     {
         MutableSortedBag<Integer> bag = this.newWith(-1, 0, 1, 1, 2);
         Iterator<Integer> iterator = bag.iterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(-1), iterator.next());
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(0), iterator.next());
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(1), iterator.next());
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(1), iterator.next());
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(2), iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertTrue(iterator.hasNext());
+        assertEquals(Integer.valueOf(-1), iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals(Integer.valueOf(0), iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals(Integer.valueOf(1), iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals(Integer.valueOf(1), iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals(Integer.valueOf(2), iterator.next());
+        assertFalse(iterator.hasNext());
 
         MutableSortedBag<Integer> revBag = this.newWith(Comparators.reverseNaturalOrder(), -1, 0, 1, 1, 2);
         Iterator<Integer> revIterator = revBag.iterator();
-        Assert.assertTrue(revIterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(2), revIterator.next());
-        Assert.assertTrue(revIterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(1), revIterator.next());
-        Assert.assertTrue(revIterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(1), revIterator.next());
-        Assert.assertTrue(revIterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(0), revIterator.next());
-        Assert.assertTrue(revIterator.hasNext());
-        Assert.assertEquals(Integer.valueOf(-1), revIterator.next());
-        Assert.assertFalse(revIterator.hasNext());
+        assertTrue(revIterator.hasNext());
+        assertEquals(Integer.valueOf(2), revIterator.next());
+        assertTrue(revIterator.hasNext());
+        assertEquals(Integer.valueOf(1), revIterator.next());
+        assertTrue(revIterator.hasNext());
+        assertEquals(Integer.valueOf(1), revIterator.next());
+        assertTrue(revIterator.hasNext());
+        assertEquals(Integer.valueOf(0), revIterator.next());
+        assertTrue(revIterator.hasNext());
+        assertEquals(Integer.valueOf(-1), revIterator.next());
+        assertFalse(revIterator.hasNext());
 
         Iterator<Integer> iterator3 = this.newWith(Comparators.reverseNaturalOrder(), 2, 1, 1, 0, -1).iterator();
-        Assert.assertThrows(UnsupportedOperationException.class, iterator3::remove);
-        Assert.assertEquals(Integer.valueOf(2), iterator3.next());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator3::remove);
+        assertThrows(UnsupportedOperationException.class, iterator3::remove);
+        assertEquals(Integer.valueOf(2), iterator3.next());
+        assertThrows(UnsupportedOperationException.class, iterator3::remove);
     }
 
     @Override
@@ -165,7 +170,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     {
         MutableSortedBag<Integer> bag = this.newWith(-1, 0, 1, 1, 2);
         Iterator<Integer> iterator = bag.iterator();
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -179,7 +184,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     {
         Verify.assertInstanceOf(UnmodifiableSortedBag.class, this.newWith().asUnmodifiable());
         MutableSortedBag<Object> bag = this.newWith();
-        Assert.assertSame(bag, bag.asUnmodifiable());
+        assertSame(bag, bag.asUnmodifiable());
     }
 
     @Override
@@ -370,7 +375,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     {
         MutableSortedBag<Integer> set = this.newWith(1, 2, 3);
         MutableSortedBag<Integer> clone = set.clone();
-        Assert.assertSame(set, clone);
+        assertSame(set, clone);
         Verify.assertSortedBagsEqual(set, clone);
     }
 
@@ -381,13 +386,13 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
         Bag<Integer> bag1 = this.newWith(3, 3, 3, 2, 2, 1);
         Bag<ObjectIntPair<Integer>> actual1 =
                 bag1.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
-        Assert.assertEquals(
+        assertEquals(
                 Bags.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1)),
                 actual1);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(1), 1),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
@@ -396,7 +401,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
 
         Set<ObjectIntPair<Integer>> actual2 =
                 bag1.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
-        Assert.assertEquals(
+        assertEquals(
                 Sets.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
@@ -404,7 +409,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
                 actual2);
 
         Bag<Integer> bag2 = this.newWith(3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 4, 5, 7);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(6, 5, 8, 5, 6, 8),
                 bag2.collectWithOccurrences((each, index) -> each + index));
     }

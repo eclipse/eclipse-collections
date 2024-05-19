@@ -24,8 +24,10 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedCollectionTestCase;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link SynchronizedMutableSet}.
@@ -52,7 +54,7 @@ public class SynchronizedMutableSetTest extends AbstractSynchronizedCollectionTe
     public void removeIf()
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3, 4);
-        Assert.assertTrue(objects.removeIf(Predicates.equal(2)));
+        assertTrue(objects.removeIf(Predicates.equal(2)));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 3, 4);
     }
@@ -62,7 +64,7 @@ public class SynchronizedMutableSetTest extends AbstractSynchronizedCollectionTe
     public void removeIfWith()
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3, 4);
-        Assert.assertTrue(objects.removeIfWith(Predicates2.equal(), 2));
+        assertTrue(objects.removeIfWith(Predicates2.equal(), 2));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 3, 4);
     }
@@ -80,8 +82,8 @@ public class SynchronizedMutableSetTest extends AbstractSynchronizedCollectionTe
     {
         MutableSet<Number> numbers = new SynchronizedMutableSet<Number>(SetAdapter.adapt(new TreeSet<>((o1, o2) -> Double.compare(o1.doubleValue(), o2.doubleValue())))).withAll(FastList.newListWith(1, 2.0, 3, 4.0, 5));
         MutableSet<Integer> integers = numbers.selectInstancesOf(Integer.class);
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 3, 5), integers);
-        Assert.assertEquals(FastList.newListWith(1, 3, 5), integers.toList());
+        assertEquals(UnifiedSet.newSetWith(1, 3, 5), integers);
+        assertEquals(FastList.newListWith(1, 3, 5), integers.toList());
     }
 
     @Override

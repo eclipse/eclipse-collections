@@ -28,8 +28,15 @@ import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link ImmutableEmptySortedMap}.
@@ -95,7 +102,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     public void testToString()
     {
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
-        Assert.assertEquals("{}", map.toString());
+        assertEquals("{}", map.toString());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -120,13 +127,13 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         ImmutableSortedMap<Integer, String> classUnderTest = this.classUnderTest();
 
         Integer absentKey = this.size() + 1;
-        Assert.assertNull(classUnderTest.get(absentKey));
+        assertNull(classUnderTest.get(absentKey));
 
         String absentValue = String.valueOf(absentKey);
-        Assert.assertFalse(classUnderTest.containsValue(absentValue));
+        assertFalse(classUnderTest.containsValue(absentValue));
 
         // Still unchanged
-        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+        assertEquals(this.equalUnifiedMap(), classUnderTest);
     }
 
     @Override
@@ -140,10 +147,10 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
 
         // Absent key behavior
         ImmutableSortedMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertEquals(absentValue, classUnderTest.getOrDefault(absentKey, absentValue));
+        assertEquals(absentValue, classUnderTest.getOrDefault(absentKey, absentValue));
 
         // Still unchanged
-        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+        assertEquals(this.equalUnifiedMap(), classUnderTest);
     }
 
     @Override
@@ -157,10 +164,10 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
 
         // Absent key behavior
         ImmutableSortedMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertEquals(absentValue, classUnderTest.getIfAbsent(absentKey, new PassThruFunction0<>(absentValue)));
+        assertEquals(absentValue, classUnderTest.getIfAbsent(absentKey, new PassThruFunction0<>(absentValue)));
 
         // Still unchanged
-        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+        assertEquals(this.equalUnifiedMap(), classUnderTest);
     }
 
     @Override
@@ -174,10 +181,10 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
 
         // Absent key behavior
         ImmutableSortedMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertEquals(absentValue, classUnderTest.getIfAbsentWith(absentKey, String::valueOf, absentValue));
+        assertEquals(absentValue, classUnderTest.getIfAbsentWith(absentKey, String::valueOf, absentValue));
 
         // Still unchanged
-        Assert.assertEquals(this.equalUnifiedMap(), classUnderTest);
+        assertEquals(this.equalUnifiedMap(), classUnderTest);
     }
 
     @Override
@@ -189,7 +196,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         Integer absentKey = this.size() + 1;
 
         ImmutableSortedMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertNull(classUnderTest.ifPresentApply(absentKey, Functions.getPassThru()));
+        assertNull(classUnderTest.ifPresentApply(absentKey, Functions.getPassThru()));
     }
 
     @Override
@@ -197,7 +204,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     public void notEmpty()
     {
         //Cannot call super.notEmpty() as map is empty.
-        Assert.assertFalse(this.classUnderTest().notEmpty());
+        assertFalse(this.classUnderTest().notEmpty());
     }
 
     @Override
@@ -208,8 +215,8 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
 
         ImmutableSortedMap<String, String> map = new ImmutableEmptySortedMap<>();
 
-        Assert.assertTrue(map.allSatisfy(String.class::isInstance));
-        Assert.assertTrue(map.allSatisfy("Monkey"::equals));
+        assertTrue(map.allSatisfy(String.class::isInstance));
+        assertTrue(map.allSatisfy("Monkey"::equals));
     }
 
     @Override
@@ -220,8 +227,8 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
 
         ImmutableSortedMap<String, String> map = new ImmutableEmptySortedMap<>();
 
-        Assert.assertTrue(map.noneSatisfy(Integer.class::isInstance));
-        Assert.assertTrue(map.noneSatisfy("Monkey"::equals));
+        assertTrue(map.noneSatisfy(Integer.class::isInstance));
+        assertTrue(map.noneSatisfy("Monkey"::equals));
     }
 
     @Override
@@ -232,8 +239,8 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
 
         ImmutableSortedMap<String, String> map = new ImmutableEmptySortedMap<>();
 
-        Assert.assertFalse(map.anySatisfy(String.class::isInstance));
-        Assert.assertFalse(map.anySatisfy("Monkey"::equals));
+        assertFalse(map.anySatisfy(String.class::isInstance));
+        assertFalse(map.anySatisfy("Monkey"::equals));
     }
 
     @Override
@@ -279,12 +286,12 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
         ImmutableSortedMap<Integer, String> actual = map.select((ignored1, ignored2) -> true);
         Verify.assertInstanceOf(ImmutableEmptySortedMap.class, actual);
-        Assert.assertSame(ImmutableEmptySortedMap.INSTANCE, actual);
+        assertSame(ImmutableEmptySortedMap.INSTANCE, actual);
 
         ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.reverseNaturalOrder());
         ImmutableSortedMap<Integer, String> revActual = revMap.select((ignored1, ignored2) -> true);
         Verify.assertInstanceOf(ImmutableEmptySortedMap.class, revActual);
-        Assert.assertSame(revMap.comparator(), revActual.comparator());
+        assertSame(revMap.comparator(), revActual.comparator());
     }
 
     @Override
@@ -294,12 +301,12 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
         ImmutableSortedMap<Integer, String> actual = map.reject((ignored1, ignored2) -> false);
         Verify.assertInstanceOf(ImmutableEmptySortedMap.class, actual);
-        Assert.assertSame(ImmutableEmptySortedMap.INSTANCE, actual);
+        assertSame(ImmutableEmptySortedMap.INSTANCE, actual);
 
         ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.reverseNaturalOrder());
         ImmutableSortedMap<Integer, String> revActual = revMap.reject((ignored1, ignored2) -> true);
         Verify.assertInstanceOf(ImmutableEmptySortedMap.class, revActual);
-        Assert.assertSame(revMap.comparator(), revActual.comparator());
+        assertSame(revMap.comparator(), revActual.comparator());
     }
 
     @Override
@@ -314,7 +321,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         ImmutableMap<Integer, String> revCollect = revMap.collect(alwaysTrueFunction);
 
         Verify.assertEmpty(collect);
-        Assert.assertSame(collect, revCollect);
+        assertSame(collect, revCollect);
     }
 
     /**
@@ -325,7 +332,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     public void collectWithIndex()
     {
         ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.empty(),
                 integers.collectWithIndex(PrimitiveTuples::pair));
     }
@@ -338,7 +345,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     public void collectWithIndexWithTarget()
     {
         ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.empty(),
                 integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
@@ -351,7 +358,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     public void selectWithIndexWithTarget()
     {
         ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.empty(),
                 integers.selectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
     }
@@ -364,7 +371,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     public void rejectWithIndexWithTarget()
     {
         ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.empty(),
                 integers.rejectWithIndex((each, index) -> index % 2 == 0, Lists.mutable.empty()));
     }
@@ -376,7 +383,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         super.detect();
 
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
-        Assert.assertNull(map.detect((ignored1, ignored2) -> true));
+        assertNull(map.detect((ignored1, ignored2) -> true));
     }
 
     @Override
@@ -387,8 +394,8 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
 
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
         ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Assert.assertFalse(map.containsKey(0));
-        Assert.assertFalse(revMap.containsKey(1));
+        assertFalse(map.containsKey(0));
+        assertFalse(revMap.containsKey(1));
     }
 
     @Test
@@ -400,11 +407,11 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
                 this.classUnderTest(Comparators.reverseNaturalOrder());
 
         Verify.assertEmpty(map.values());
-        Assert.assertSame(Lists.immutable.of(), map.values());
+        assertSame(Lists.immutable.of(), map.values());
 
         Verify.assertEmpty(revMap.values());
 
-        Assert.assertSame(Lists.immutable.of(), revMap.values());
+        assertSame(Lists.immutable.of(), revMap.values());
     }
 
     @Override
@@ -415,13 +422,13 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
 
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
         ImmutableSortedMap<Integer, String> deserialized = SerializeTestHelper.serializeDeserialize(map);
-        Assert.assertSame(ImmutableEmptySortedMap.INSTANCE, map);
-        Assert.assertSame(map, deserialized);
+        assertSame(ImmutableEmptySortedMap.INSTANCE, map);
+        assertSame(map, deserialized);
 
         ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.reverseNaturalOrder());
         ImmutableSortedMap<Integer, String> revDeserialized = SerializeTestHelper.serializeDeserialize(revMap);
         Verify.assertInstanceOf(ImmutableSortedMap.class, revDeserialized);
-        Assert.assertNotNull(revDeserialized.comparator());
+        assertNotNull(revDeserialized.comparator());
     }
 
     @Override
@@ -430,26 +437,26 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     {
         super.keyValuesView();
 
-        Assert.assertTrue(this.classUnderTest().keyValuesView().isEmpty());
+        assertTrue(this.classUnderTest().keyValuesView().isEmpty());
     }
 
     @Override
     @Test
     public void take()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().take(2));
+        assertEquals(this.classUnderTest(), this.classUnderTest().take(2));
     }
 
     @Override
     @Test
     public void drop()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().drop(2));
+        assertEquals(this.classUnderTest(), this.classUnderTest().drop(2));
     }
 
     @Test
     public void getOnly()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 }

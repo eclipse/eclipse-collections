@@ -12,8 +12,12 @@ package org.eclipse.collections.impl.block.procedure;
 
 import java.util.Optional;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class MinProcedureTest
 {
@@ -21,16 +25,16 @@ public class MinProcedureTest
     public void getResultOptional()
     {
         MinProcedure<Integer> procedure = new MinProcedure<>();
-        Assert.assertFalse(procedure.getResultOptional().isPresent());
+        assertFalse(procedure.getResultOptional().isPresent());
         procedure.value(2);
         Optional<Integer> resultOptional = procedure.getResultOptional();
-        Assert.assertTrue(resultOptional.isPresent());
-        Assert.assertEquals((Integer) 2, resultOptional.get());
+        assertTrue(resultOptional.isPresent());
+        assertEquals((Integer) 2, resultOptional.get());
 
         procedure.value(1);
         Optional<Integer> resultOptional2 = procedure.getResultOptional();
-        Assert.assertTrue(resultOptional2.isPresent());
-        Assert.assertEquals((Integer) 1, resultOptional2.get());
+        assertTrue(resultOptional2.isPresent());
+        assertEquals((Integer) 1, resultOptional2.get());
     }
 
     @Test
@@ -39,15 +43,15 @@ public class MinProcedureTest
         MinProcedure<Integer> procedure = new MinProcedure<>();
         Integer first = new Integer(1);
         procedure.value(first);
-        Assert.assertSame(first, procedure.getResult());
+        assertSame(first, procedure.getResult());
         Integer second = new Integer(1);
         procedure.value(second);
-        Assert.assertSame(first, procedure.getResult());
+        assertSame(first, procedure.getResult());
         Integer third = new Integer(3);
         procedure.value(third);
-        Assert.assertSame(first, procedure.getResult());
+        assertSame(first, procedure.getResult());
         Integer fourth = new Integer(0);
         procedure.value(fourth);
-        Assert.assertSame(fourth, procedure.getResult());
+        assertSame(fourth, procedure.getResult());
     }
 }

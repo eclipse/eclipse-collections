@@ -13,8 +13,9 @@ package org.eclipse.collections.impl.collection.immutable.primitive;
 import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractBooleanIterableTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Abstract JUnit test for {@link ImmutableBooleanCollection}s.
@@ -45,8 +46,8 @@ public abstract class AbstractImmutableBooleanCollectionTestCase extends Abstrac
                 falseCount++;
             }
         }
-        Assert.assertEquals(expectedTrueCount, trueCount);
-        Assert.assertEquals(expectedFalseCount, falseCount);
+        assertEquals(expectedTrueCount, trueCount);
+        assertEquals(expectedFalseCount, falseCount);
     }
 
     @Test

@@ -34,9 +34,16 @@ import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
@@ -51,30 +58,30 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void indexOf()
     {
-        Assert.assertEquals(-1, this.classUnderTest().indexOf(1));
-        Assert.assertEquals(-1, this.classUnderTest().indexOf(null));
+        assertEquals(-1, this.classUnderTest().indexOf(1));
+        assertEquals(-1, this.classUnderTest().indexOf(null));
         ImmutableList<Integer> immutableList = this.classUnderTest().newWith(null);
-        Assert.assertEquals(immutableList.size() - 1, immutableList.indexOf(null));
-        Assert.assertEquals(-1, this.classUnderTest().indexOf(Integer.MAX_VALUE));
+        assertEquals(immutableList.size() - 1, immutableList.indexOf(null));
+        assertEquals(-1, this.classUnderTest().indexOf(Integer.MAX_VALUE));
     }
 
     @Override
     @Test
     public void lastIndexOf()
     {
-        Assert.assertEquals(-1, this.classUnderTest().lastIndexOf(1));
-        Assert.assertEquals(-1, this.classUnderTest().lastIndexOf(null));
-        Assert.assertEquals(-1, this.classUnderTest().lastIndexOf(null));
+        assertEquals(-1, this.classUnderTest().lastIndexOf(1));
+        assertEquals(-1, this.classUnderTest().lastIndexOf(null));
+        assertEquals(-1, this.classUnderTest().lastIndexOf(null));
         ImmutableList<Integer> immutableList = this.classUnderTest().newWith(null);
-        Assert.assertEquals(immutableList.size() - 1, immutableList.lastIndexOf(null));
-        Assert.assertEquals(-1, this.classUnderTest().lastIndexOf(Integer.MAX_VALUE));
+        assertEquals(immutableList.size() - 1, immutableList.lastIndexOf(null));
+        assertEquals(-1, this.classUnderTest().lastIndexOf(Integer.MAX_VALUE));
     }
 
     @Test
     public void newWithout()
     {
-        Assert.assertSame(Lists.immutable.empty(), Lists.immutable.empty().newWithout(1));
-        Assert.assertSame(Lists.immutable.empty(), Lists.immutable.empty().newWithoutAll(Interval.oneTo(3)));
+        assertSame(Lists.immutable.empty(), Lists.immutable.empty().newWithout(1));
+        assertSame(Lists.immutable.empty(), Lists.immutable.empty().newWithoutAll(Interval.oneTo(3)));
     }
 
     @Override
@@ -84,7 +91,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         ImmutableList<Integer> list = Lists.immutable.empty();
         MutableList<Integer> result = Lists.mutable.empty();
         list.reverseForEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(list, result);
+        assertEquals(list, result);
     }
 
     @Override
@@ -102,8 +109,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         MutableList<Integer> result = Lists.mutable.empty();
         MutableList<Integer> reverseResult = Lists.mutable.empty();
         ImmutableList<Integer> list = this.classUnderTest();
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(0, list.size() - 1, CollectionAddProcedure.on(result)));
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(list.size() - 1, 0, CollectionAddProcedure.on(reverseResult)));
+        assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(0, list.size() - 1, CollectionAddProcedure.on(result)));
+        assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(list.size() - 1, 0, CollectionAddProcedure.on(reverseResult)));
     }
 
     @Override
@@ -113,8 +120,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         MutableList<Integer> result = Lists.mutable.empty();
         MutableList<Integer> reverseResult = Lists.mutable.empty();
         ImmutableList<Integer> list = this.classUnderTest();
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(0, list.size() - 1, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(result))));
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(list.size() - 1, 0, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(reverseResult))));
+        assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(0, list.size() - 1, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(result))));
+        assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(list.size() - 1, 0, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(reverseResult))));
     }
 
     @Override
@@ -122,7 +129,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void detect()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertNull(integers.detect(Integer.valueOf(1)::equals));
+        assertNull(integers.detect(Integer.valueOf(1)::equals));
     }
 
     @Override
@@ -130,7 +137,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void detectWith()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertNull(integers.detectWith(Object::equals, Integer.valueOf(1)));
+        assertNull(integers.detectWith(Object::equals, Integer.valueOf(1)));
     }
 
     @Override
@@ -138,8 +145,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void distinct()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertNotNull(integers.distinct());
-        Assert.assertTrue(integers.isEmpty());
+        assertNotNull(integers.distinct());
+        assertTrue(integers.isEmpty());
     }
 
     @Override
@@ -147,7 +154,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void countWith()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertEquals(0, integers.countWith(ERROR_THROWING_PREDICATE_2, Integer.class));
+        assertEquals(0, integers.countWith(ERROR_THROWING_PREDICATE_2, Integer.class));
     }
 
     @Override
@@ -156,10 +163,10 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     {
         //Evaluates true for all empty lists and false for all non-empty lists
 
-        Assert.assertTrue(this.classUnderTest().corresponds(Lists.mutable.empty(), Predicates2.alwaysFalse()));
+        assertTrue(this.classUnderTest().corresponds(Lists.mutable.empty(), Predicates2.alwaysFalse()));
 
         ImmutableList<Integer> integers = this.classUnderTest().newWith(Integer.valueOf(1));
-        Assert.assertFalse(this.classUnderTest().corresponds(integers, Predicates2.alwaysTrue()));
+        assertFalse(this.classUnderTest().corresponds(integers, Predicates2.alwaysTrue()));
     }
 
     @Override
@@ -167,28 +174,28 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void allSatisfy()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertTrue(integers.allSatisfy(ERROR_THROWING_PREDICATE));
+        assertTrue(integers.allSatisfy(ERROR_THROWING_PREDICATE));
     }
 
     @Override
     public void allSatisfyWith()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertTrue(integers.allSatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
+        assertTrue(integers.allSatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
     }
 
     @Override
     public void noneSatisfy()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertTrue(integers.noneSatisfy(ERROR_THROWING_PREDICATE));
+        assertTrue(integers.noneSatisfy(ERROR_THROWING_PREDICATE));
     }
 
     @Override
     public void noneSatisfyWith()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertTrue(integers.noneSatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
+        assertTrue(integers.noneSatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
     }
 
     @Override
@@ -196,14 +203,14 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void anySatisfy()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertFalse(integers.anySatisfy(ERROR_THROWING_PREDICATE));
+        assertFalse(integers.anySatisfy(ERROR_THROWING_PREDICATE));
     }
 
     @Override
     public void anySatisfyWith()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertFalse(integers.anySatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
+        assertFalse(integers.anySatisfyWith(ERROR_THROWING_PREDICATE_2, Integer.class));
     }
 
     @Override
@@ -211,7 +218,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void getFirst()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertNull(integers.getFirst());
+        assertNull(integers.getFirst());
     }
 
     @Override
@@ -219,7 +226,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void getLast()
     {
         ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertNull(integers.getLast());
+        assertNull(integers.getLast());
     }
 
     @Test(expected = IllegalStateException.class)
@@ -234,8 +241,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void isEmpty()
     {
         ImmutableList<Integer> list = this.classUnderTest();
-        Assert.assertTrue(list.isEmpty());
-        Assert.assertFalse(list.notEmpty());
+        assertTrue(list.isEmpty());
+        assertFalse(list.notEmpty());
     }
 
     @Override
@@ -328,14 +335,14 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         List<Object> nullsPlusOne = Collections.nCopies(immutableList.size() + 1, null);
 
         ImmutableList<Pair<Integer, Object>> pairs = immutableList.zip(nulls);
-        Assert.assertEquals(immutableList, pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
-        Assert.assertEquals(nulls, pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
+        assertEquals(immutableList, pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
+        assertEquals(nulls, pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
         ImmutableList<Pair<Integer, Object>> pairsPlusOne = immutableList.zip(nullsPlusOne);
-        Assert.assertEquals(immutableList, pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
-        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
+        assertEquals(immutableList, pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
+        assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
-        Assert.assertEquals(immutableList.zip(nulls), immutableList.zip(nulls, FastList.newList()));
+        assertEquals(immutableList.zip(nulls), immutableList.zip(nulls, FastList.newList()));
     }
 
     @Override
@@ -345,16 +352,16 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         ImmutableList<Integer> immutableList = this.classUnderTest();
         ImmutableList<Pair<Integer, Integer>> pairs = immutableList.zipWithIndex();
 
-        Assert.assertEquals(immutableList, pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
-        Assert.assertEquals(FastList.<Integer>newList(), pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
+        assertEquals(immutableList, pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
+        assertEquals(FastList.<Integer>newList(), pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
 
-        Assert.assertEquals(immutableList.zipWithIndex(), immutableList.zipWithIndex(FastList.newList()));
+        assertEquals(immutableList.zipWithIndex(), immutableList.zipWithIndex(FastList.newList()));
     }
 
     @Test
     public void chunk()
     {
-        Assert.assertEquals(Lists.mutable.empty(), this.classUnderTest().chunk(2));
+        assertEquals(Lists.mutable.empty(), this.classUnderTest().chunk(2));
     }
 
     @Override
@@ -368,7 +375,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void chunk_large_size()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().chunk(10));
+        assertEquals(this.classUnderTest(), this.classUnderTest().chunk(10));
         Verify.assertInstanceOf(ImmutableList.class, this.classUnderTest().chunk(10));
     }
 
@@ -380,7 +387,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         MutableList<Integer> mutable = FastList.newList(immutable);
         Verify.assertEqualsAndHashCode(immutable, mutable);
         Verify.assertPostSerializedIdentity(immutable);
-        Assert.assertNotEquals(immutable, UnifiedSet.newSet(mutable));
+        assertNotEquals(immutable, UnifiedSet.newSet(mutable));
     }
 
     @Override
@@ -388,17 +395,17 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void take()
     {
         ImmutableList<Integer> immutableList = this.classUnderTest();
-        Assert.assertSame(immutableList, immutableList.take(0));
-        Assert.assertSame(immutableList, immutableList.take(10));
-        Assert.assertSame(immutableList, immutableList.take(Integer.MAX_VALUE));
+        assertSame(immutableList, immutableList.take(0));
+        assertSame(immutableList, immutableList.take(10));
+        assertSame(immutableList, immutableList.take(Integer.MAX_VALUE));
     }
 
     @Override
     @Test
     public void takeWhile()
     {
-        Assert.assertEquals(Lists.immutable.empty(), this.classUnderTest().takeWhile(ignored -> true));
-        Assert.assertEquals(Lists.immutable.empty(), this.classUnderTest().takeWhile(ignored -> false));
+        assertEquals(Lists.immutable.empty(), this.classUnderTest().takeWhile(ignored -> true));
+        assertEquals(Lists.immutable.empty(), this.classUnderTest().takeWhile(ignored -> false));
     }
 
     @Override
@@ -408,9 +415,9 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         super.drop();
 
         ImmutableList<Integer> immutableList = this.classUnderTest();
-        Assert.assertSame(immutableList, immutableList.drop(10));
-        Assert.assertSame(immutableList, immutableList.drop(0));
-        Assert.assertSame(immutableList, immutableList.drop(Integer.MAX_VALUE));
+        assertSame(immutableList, immutableList.drop(10));
+        assertSame(immutableList, immutableList.drop(0));
+        assertSame(immutableList, immutableList.drop(Integer.MAX_VALUE));
     }
 
     @Override
@@ -419,8 +426,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     {
         super.dropWhile();
 
-        Assert.assertEquals(Lists.immutable.empty(), this.classUnderTest().dropWhile(ignored -> true));
-        Assert.assertEquals(Lists.immutable.empty(), this.classUnderTest().dropWhile(ignored -> false));
+        assertEquals(Lists.immutable.empty(), this.classUnderTest().dropWhile(ignored -> true));
+        assertEquals(Lists.immutable.empty(), this.classUnderTest().dropWhile(ignored -> false));
     }
 
     @Override
@@ -430,12 +437,12 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         super.partitionWhile();
 
         PartitionImmutableList<Integer> partition1 = this.classUnderTest().partitionWhile(ignored -> true);
-        Assert.assertEquals(Lists.immutable.empty(), partition1.getSelected());
-        Assert.assertEquals(Lists.immutable.empty(), partition1.getRejected());
+        assertEquals(Lists.immutable.empty(), partition1.getSelected());
+        assertEquals(Lists.immutable.empty(), partition1.getRejected());
 
         PartitionImmutableList<Integer> partiton2 = this.classUnderTest().partitionWhile(ignored -> false);
-        Assert.assertEquals(Lists.immutable.empty(), partiton2.getSelected());
-        Assert.assertEquals(Lists.immutable.empty(), partiton2.getRejected());
+        assertEquals(Lists.immutable.empty(), partiton2.getSelected());
+        assertEquals(Lists.immutable.empty(), partiton2.getRejected());
     }
 
     @Override
@@ -443,15 +450,15 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void listIterator()
     {
         ListIterator<Integer> it = this.classUnderTest().listIterator();
-        Assert.assertFalse(it.hasPrevious());
-        Assert.assertEquals(-1, it.previousIndex());
-        Assert.assertEquals(0, it.nextIndex());
+        assertFalse(it.hasPrevious());
+        assertEquals(-1, it.previousIndex());
+        assertEquals(0, it.nextIndex());
 
-        Assert.assertThrows(NoSuchElementException.class, it::next);
+        assertThrows(NoSuchElementException.class, it::next);
 
-        Assert.assertThrows(UnsupportedOperationException.class, it::remove);
+        assertThrows(UnsupportedOperationException.class, it::remove);
 
-        Assert.assertThrows(UnsupportedOperationException.class, () -> it.add(null));
+        assertThrows(UnsupportedOperationException.class, () -> it.add(null));
     }
 
     @Override
@@ -463,8 +470,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         {
             throw new AssertionError();
         }, targetCollection);
-        Assert.assertEquals(targetCollection, actual);
-        Assert.assertSame(targetCollection, actual);
+        assertEquals(targetCollection, actual);
+        assertSame(targetCollection, actual);
     }
 
     @Override
@@ -476,22 +483,22 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         {
             throw new AssertionError();
         }, 1, targetCollection);
-        Assert.assertEquals(targetCollection, actual);
-        Assert.assertSame(targetCollection, actual);
+        assertEquals(targetCollection, actual);
+        assertSame(targetCollection, actual);
     }
 
     @Test
     public void binarySearch()
     {
         ListIterable<Integer> sortedList = this.classUnderTest();
-        Assert.assertEquals(-1, sortedList.binarySearch(1));
+        assertEquals(-1, sortedList.binarySearch(1));
     }
 
     @Test
     public void binarySearchWithComparator()
     {
         ListIterable<Integer> sortedList = this.classUnderTest();
-        Assert.assertEquals(-1, sortedList.binarySearch(1, Integer::compareTo));
+        assertEquals(-1, sortedList.binarySearch(1, Integer::compareTo));
     }
 
     @Override
@@ -499,7 +506,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void detectIndex()
     {
         // any predicate will result in -1
-        Assert.assertEquals(-1, this.classUnderTest().detectIndex(Predicates.alwaysTrue()));
+        assertEquals(-1, this.classUnderTest().detectIndex(Predicates.alwaysTrue()));
     }
 
     @Override
@@ -507,7 +514,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void detectLastIndex()
     {
         // any predicate will result in -1
-        Assert.assertEquals(-1, this.classUnderTest().detectLastIndex(Predicates.alwaysTrue()));
+        assertEquals(-1, this.classUnderTest().detectLastIndex(Predicates.alwaysTrue()));
     }
 
     /**
@@ -533,13 +540,13 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void countByEach()
     {
-        Assert.assertEquals(Bags.immutable.empty(), this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
+        assertEquals(Bags.immutable.empty(), this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
     }
 
     @Test
     public void countByEach_target()
     {
         MutableBag<Integer> target = Bags.mutable.empty();
-        Assert.assertEquals(target, this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
+        assertEquals(target, this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
     }
 }

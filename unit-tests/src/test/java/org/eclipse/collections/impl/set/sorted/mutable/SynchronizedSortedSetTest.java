@@ -27,8 +27,11 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link SynchronizedSortedSet}.
@@ -55,7 +58,7 @@ public class SynchronizedSortedSetTest extends AbstractSynchronizedCollectionTes
     public void removeIf()
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3, 4);
-        Assert.assertTrue(objects.removeIf(Predicates.equal(2)));
+        assertTrue(objects.removeIf(Predicates.equal(2)));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 3, 4);
     }
@@ -64,7 +67,7 @@ public class SynchronizedSortedSetTest extends AbstractSynchronizedCollectionTes
     public void removeWithIf()
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3, 4);
-        Assert.assertTrue(objects.removeIfWith(Predicates2.equal(), 2));
+        assertTrue(objects.removeIfWith(Predicates2.equal(), 2));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 3, 4);
     }
@@ -83,8 +86,8 @@ public class SynchronizedSortedSetTest extends AbstractSynchronizedCollectionTes
         MutableSortedSet<Number> mutableSortedSet = SortedSetAdapter.adapt(new TreeSet<>((o1, o2) -> Double.compare(o1.doubleValue(), o2.doubleValue())));
         MutableSortedSet<Number> synchronizedSortedSet = new SynchronizedSortedSet<>(mutableSortedSet).withAll(FastList.newListWith(1, 2.0, 3, 4.0, 5));
         MutableSortedSet<Integer> integers = synchronizedSortedSet.selectInstancesOf(Integer.class);
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 3, 5), integers);
-        Assert.assertEquals(FastList.newListWith(1, 3, 5), integers.toList());
+        assertEquals(UnifiedSet.newSetWith(1, 3, 5), integers);
+        assertEquals(FastList.newListWith(1, 3, 5), integers.toList());
     }
 
     @Override
@@ -159,16 +162,16 @@ public class SynchronizedSortedSetTest extends AbstractSynchronizedCollectionTes
     @Test
     public void getFirstOptional()
     {
-        Assert.assertEquals(Integer.valueOf(1), this.newWith(1, 2).getFirstOptional().get());
-        Assert.assertTrue(this.newWith(1, 2).getFirstOptional().isPresent());
-        Assert.assertFalse(this.newWith().getFirstOptional().isPresent());
+        assertEquals(Integer.valueOf(1), this.newWith(1, 2).getFirstOptional().get());
+        assertTrue(this.newWith(1, 2).getFirstOptional().isPresent());
+        assertFalse(this.newWith().getFirstOptional().isPresent());
     }
 
     @Test
     public void getLastOptional()
     {
-        Assert.assertEquals(Integer.valueOf(2), this.newWith(1, 2).getLastOptional().get());
-        Assert.assertTrue(this.newWith(1, 2).getLastOptional().isPresent());
-        Assert.assertFalse(this.newWith().getLastOptional().isPresent());
+        assertEquals(Integer.valueOf(2), this.newWith(1, 2).getLastOptional().get());
+        assertTrue(this.newWith(1, 2).getLastOptional().isPresent());
+        assertFalse(this.newWith().getLastOptional().isPresent());
     }
 }

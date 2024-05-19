@@ -19,8 +19,9 @@ import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.map.MapIterableTestCase;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ImmutableHashBiMapInverse2Test extends MapIterableTestCase
 {
@@ -61,7 +62,7 @@ public class ImmutableHashBiMapInverse2Test extends MapIterableTestCase
         ImmutableBiMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
         ImmutableBiMap<String, Integer> result = map.flipUniqueValues();
         ImmutableBiMap<String, Integer> expectedMap = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
-        Assert.assertEquals(expectedMap, result);
+        assertEquals(expectedMap, result);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class ImmutableHashBiMapInverse2Test extends MapIterableTestCase
         ImmutableBiMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
         ImmutableSetMultimap<String, Integer> result = map.flip();
         UnifiedSetMultimap<String, Integer> expected = UnifiedSetMultimap.newMultimap(Tuples.pair("1", 1), Tuples.pair("2", 2), Tuples.pair("3", 3));
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Override
@@ -81,12 +82,12 @@ public class ImmutableHashBiMapInverse2Test extends MapIterableTestCase
         ImmutableBiMap<IntegerWithCast, String> map = this.newMapWithKeysValues(
                 new IntegerWithCast(0), "Test 2",
                 null, "Test 1");
-        Assert.assertEquals(
+        assertEquals(
                 this.newMapWithKeysValues(
                         new IntegerWithCast(0), "Test 2",
                         null, "Test 1"),
                 map);
-        Assert.assertEquals("Test 2", map.get(new IntegerWithCast(0)));
-        Assert.assertEquals("Test 1", map.get(null));
+        assertEquals("Test 2", map.get(new IntegerWithCast(0)));
+        assertEquals("Test 1", map.get(null));
     }
 }

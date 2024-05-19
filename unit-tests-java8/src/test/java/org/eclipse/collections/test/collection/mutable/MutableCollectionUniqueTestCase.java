@@ -17,8 +17,11 @@ import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public interface MutableCollectionUniqueTestCase extends MutableCollectionTestCase, RichIterableUniqueTestCase
 {
@@ -30,19 +33,19 @@ public interface MutableCollectionUniqueTestCase extends MutableCollectionTestCa
     default void MutableCollection_removeIf()
     {
         MutableCollection<Integer> collection1 = this.newWith(5, 4, 3, 2, 1);
-        Assert.assertTrue(collection1.removeIf(Predicates.cast(each -> each % 2 == 0)));
+        assertTrue(collection1.removeIf(Predicates.cast(each -> each % 2 == 0)));
         IterableTestCase.assertEquals(this.getExpectedFiltered(5, 3, 1), collection1);
 
         MutableCollection<Integer> collection2 = this.newWith(1, 2, 3, 4);
-        Assert.assertFalse(collection2.removeIf(Predicates.equal(5)));
-        Assert.assertTrue(collection2.removeIf(Predicates.greaterThan(0)));
-        Assert.assertFalse(collection2.removeIf(Predicates.greaterThan(2)));
+        assertFalse(collection2.removeIf(Predicates.equal(5)));
+        assertTrue(collection2.removeIf(Predicates.greaterThan(0)));
+        assertFalse(collection2.removeIf(Predicates.greaterThan(2)));
 
         MutableCollection<Integer> collection3 = this.newWith();
-        Assert.assertFalse(collection3.removeIf(Predicates.equal(5)));
+        assertFalse(collection3.removeIf(Predicates.equal(5)));
 
         Predicate<Object> predicate = null;
-        Assert.assertThrows(NullPointerException.class, () -> this.newWith(7, 4, 5, 1).removeIf(predicate));
+        assertThrows(NullPointerException.class, () -> this.newWith(7, 4, 5, 1).removeIf(predicate));
     }
 
     @Override
@@ -54,14 +57,14 @@ public interface MutableCollectionUniqueTestCase extends MutableCollectionTestCa
         IterableTestCase.assertEquals(this.getExpectedFiltered(4, 2), collection);
 
         MutableCollection<Integer> collection2 = this.newWith(1, 2, 3, 4);
-        Assert.assertFalse(collection2.removeIf(Predicates.equal(5)));
-        Assert.assertTrue(collection2.removeIf(Predicates.greaterThan(0)));
-        Assert.assertFalse(collection2.removeIf(Predicates.greaterThan(2)));
+        assertFalse(collection2.removeIf(Predicates.equal(5)));
+        assertTrue(collection2.removeIf(Predicates.greaterThan(0)));
+        assertFalse(collection2.removeIf(Predicates.greaterThan(2)));
 
         MutableCollection<Integer> collection3 = this.newWith();
-        Assert.assertFalse(collection3.removeIf(Predicates.equal(5)));
+        assertFalse(collection3.removeIf(Predicates.equal(5)));
 
-        Assert.assertThrows(NullPointerException.class, () -> this.newWith(7, 4, 5, 1).removeIf(Predicates.cast(null)));
+        assertThrows(NullPointerException.class, () -> this.newWith(7, 4, 5, 1).removeIf(Predicates.cast(null)));
     }
 
     @Override

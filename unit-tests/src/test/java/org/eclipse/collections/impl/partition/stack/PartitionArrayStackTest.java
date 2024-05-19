@@ -14,8 +14,9 @@ import org.eclipse.collections.api.partition.stack.PartitionImmutableStack;
 import org.eclipse.collections.api.partition.stack.PartitionMutableStack;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PartitionArrayStackTest
 {
@@ -32,7 +33,7 @@ public class PartitionArrayStackTest
                 ArrayStack.newStackFromTopToBottom(1, 2, 3, 4, 5, 6).partition(Predicates.lessThan(4));
 
         PartitionImmutableStack<Integer> partitionImmutableStack = partitionMutableStack.toImmutable();
-        Assert.assertEquals(ArrayStack.newStackFromTopToBottom(1, 2, 3), partitionImmutableStack.getSelected());
-        Assert.assertEquals(ArrayStack.newStackFromTopToBottom(4, 5, 6), partitionImmutableStack.getRejected());
+        assertEquals(ArrayStack.newStackFromTopToBottom(1, 2, 3), partitionImmutableStack.getSelected());
+        assertEquals(ArrayStack.newStackFromTopToBottom(4, 5, 6), partitionImmutableStack.getRejected());
     }
 }

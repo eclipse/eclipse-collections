@@ -21,8 +21,10 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class CollectIterableTest extends AbstractLazyIterableTestCase
 {
@@ -39,7 +41,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         Appendable builder = new StringBuilder();
         Procedure<String> appendProcedure = Procedures.append(builder);
         select.forEach(appendProcedure);
-        Assert.assertEquals("12345", builder.toString());
+        assertEquals("12345", builder.toString());
     }
 
     @Test
@@ -51,7 +53,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
             builder.append(object);
             builder.append(index);
         });
-        Assert.assertEquals("1021324354", builder.toString());
+        assertEquals("1021324354", builder.toString());
     }
 
     @Override
@@ -64,7 +66,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         {
             builder.append(each);
         }
-        Assert.assertEquals("12345", builder.toString());
+        assertEquals("12345", builder.toString());
     }
 
     @Test
@@ -73,7 +75,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         LazyIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
         StringBuilder builder = new StringBuilder();
         select.forEachWith((each, aBuilder) -> aBuilder.append(each), builder);
-        Assert.assertEquals("12345", builder.toString());
+        assertEquals("12345", builder.toString());
     }
 
     @Override
@@ -82,7 +84,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     {
         super.distinct();
         LazyIterable<String> collect = new CollectIterable<>(FastList.newListWith(3, 2, 2, 4, 1, 3, 1, 5), String::valueOf);
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith("3", "2", "4", "1", "5"),
                 collect.distinct().toList());
     }
@@ -92,7 +94,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     {
         CollectIterable<Integer, String> collect = new CollectIterable<>(FastList.newListWith(1, 2, 3, 4, 5), String::valueOf);
         int sum = collect.injectInto(0, (int value, String each) -> value + Integer.parseInt(each));
-        Assert.assertEquals(15, sum);
+        assertEquals(15, sum);
     }
 
     @Test
@@ -100,7 +102,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     {
         CollectIterable<Long, String> collect = new CollectIterable<>(FastList.newListWith(1L, 2L, 3L, 4L, 5L), String::valueOf);
         long sum = collect.injectInto(0L, (long value, String each) -> value + Long.parseLong(each));
-        Assert.assertEquals(15L, sum);
+        assertEquals(15L, sum);
     }
 
     @Test
@@ -108,7 +110,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     {
         CollectIterable<Double, String> collect = new CollectIterable<>(FastList.newListWith(1.1d, 1.2d, 1.3d, 1.4d), String::valueOf);
         double sum = collect.injectInto(2.2d, (value, each) -> value + Double.parseDouble(each));
-        Assert.assertEquals(7.2, sum, 0.1);
+        assertEquals(7.2, sum, 0.1);
     }
 
     @Test
@@ -116,21 +118,21 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     {
         CollectIterable<Float, String> collect = new CollectIterable<>(FastList.newListWith(1.1f, 1.2f, 1.3f, 1.4f), String::valueOf);
         float sum = collect.injectInto(2.2f, (float value, String each) -> value + Float.parseFloat(each));
-        Assert.assertEquals(7.2, sum, 0.1);
+        assertEquals(7.2, sum, 0.1);
     }
 
     @Test
     public void getFirstOnEmpty()
     {
         CollectIterable<Integer, String> collect = new CollectIterable<>(FastList.newList(), String::valueOf);
-        Assert.assertNull(collect.getFirst());
+        assertNull(collect.getFirst());
     }
 
     @Test
     public void getLastOnEmpty()
     {
         CollectIterable<Integer, String> collect = new CollectIterable<>(FastList.newList(), String::valueOf);
-        Assert.assertNull(collect.getLast());
+        assertNull(collect.getLast());
     }
 
     @Override
@@ -139,7 +141,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     {
         LazyIterable<String> stringNums = Interval.fromTo(0, 3).collect(Functions.getToString());
         stringNums.toArray();
-        Assert.assertEquals(Lists.immutable.of("0", "1", "2", "3"), Lists.immutable.ofAll(stringNums));
+        assertEquals(Lists.immutable.of("0", "1", "2", "3"), Lists.immutable.ofAll(stringNums));
     }
 
     @Override
@@ -150,8 +152,8 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         AtomicInteger functionCount = new AtomicInteger(0);
         MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
         CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
-        Assert.assertEquals(3L, collect.detect(each -> each.equals(3)).longValue());
-        Assert.assertNull(collect.detect(each -> each.equals(100)));
+        assertEquals(3L, collect.detect(each -> each.equals(3)).longValue());
+        assertNull(collect.detect(each -> each.equals(100)));
     }
 
     @Override
@@ -162,8 +164,8 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         AtomicInteger functionCount = new AtomicInteger(0);
         MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
         CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
-        Assert.assertEquals(3L, collect.detectIfNone(each -> each.equals(3), () -> Integer.valueOf(0)).longValue());
-        Assert.assertNull(collect.detectIfNone(each -> each.equals(100), () -> null));
+        assertEquals(3L, collect.detectIfNone(each -> each.equals(3), () -> Integer.valueOf(0)).longValue());
+        assertNull(collect.detectIfNone(each -> each.equals(100), () -> null));
     }
 
     @Override
@@ -174,8 +176,8 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         AtomicInteger functionCount = new AtomicInteger(0);
         MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
         LazyIterable<Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
-        Assert.assertEquals(3L, collect.detectWith((each, ignore) -> each.equals(3), null).longValue());
-        Assert.assertNull(collect.detectWith((each, ignore) -> each.equals(100), null));
+        assertEquals(3L, collect.detectWith((each, ignore) -> each.equals(3), null).longValue());
+        assertNull(collect.detectWith((each, ignore) -> each.equals(100), null));
     }
 
     @Override
@@ -186,8 +188,8 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         AtomicInteger functionCount = new AtomicInteger(0);
         MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
         LazyIterable<Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
-        Assert.assertEquals(3L, collect.detectWithIfNone((each, ignore) -> each.equals(3), null, () -> Integer.valueOf(0)).longValue());
-        Assert.assertNull(collect.detectWithIfNone((each, ignore) -> each.equals(100), null, () -> null));
+        assertEquals(3L, collect.detectWithIfNone((each, ignore) -> each.equals(3), null, () -> Integer.valueOf(0)).longValue());
+        assertNull(collect.detectWithIfNone((each, ignore) -> each.equals(100), null, () -> null));
     }
 
     @Override
@@ -198,8 +200,8 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         AtomicInteger functionCount = new AtomicInteger(0);
         MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
         CollectIterable<Integer, Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
-        Assert.assertEquals(3L, collect.detectOptional(each -> each.equals(3)).get().longValue());
-        Assert.assertNull(collect.detectOptional(each -> each.equals(100)).orElse(null));
+        assertEquals(3L, collect.detectOptional(each -> each.equals(3)).get().longValue());
+        assertNull(collect.detectOptional(each -> each.equals(100)).orElse(null));
     }
 
     @Override
@@ -210,7 +212,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         AtomicInteger functionCount = new AtomicInteger(0);
         MultiReaderList<Integer> integers = Lists.multiReader.withAll(Interval.oneTo(5));
         LazyIterable<Integer> collect = new CollectIterable<>(integers, functionCount::addAndGet);
-        Assert.assertEquals(3L, collect.detectWithOptional((each, ignore) -> each.equals(3), null).get().longValue());
-        Assert.assertNull(collect.detectWithOptional((each, ignore) -> each.equals(100), null).orElse(null));
+        assertEquals(3L, collect.detectWithOptional((each, ignore) -> each.equals(3), null).get().longValue());
+        assertNull(collect.detectWithOptional((each, ignore) -> each.equals(100), null).orElse(null));
     }
 }

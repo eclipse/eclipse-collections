@@ -28,8 +28,13 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test for {@link SortedSetAdapter}.
@@ -85,14 +90,14 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
     @Test(expected = UnsupportedOperationException.class)
     public void reverseForEach()
     {
-        this.newWith(1, 2, 3).reverseForEach(each -> Assert.fail("Should not be evaluated"));
+        this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated"));
     }
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void reverseForEachWithIndex()
     {
-        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> Assert.fail("Should not be evaluated"));
+        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated"));
     }
 
     @Override
@@ -159,11 +164,11 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
         MutableSortedSet<Integer> set4 = TreeSortedSet.newSetWith(2, 3, 4);
 
         Verify.assertEqualsAndHashCode(set1, set1);
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3), set1);
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3), set2);
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3), set1);
+        assertEquals(UnifiedSet.newSetWith(1, 2, 3), set2);
 
-        Assert.assertEquals(set1, set2);
-        Assert.assertNotEquals(set2, set3);
+        assertEquals(set1, set2);
+        assertNotEquals(set2, set3);
         Verify.assertEqualsAndHashCode(set3, set4);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 1, 2, 3), set2);
     }
@@ -194,9 +199,9 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
     public void getFirst()
     {
         super.getFirst();
-        Assert.assertEquals(Integer.valueOf(1), this.newWith(1, 2, 3).getFirst());
-        Assert.assertEquals(Integer.valueOf(3), this.newWith(Collections.reverseOrder(), 1, 2, 3).getFirst());
-        Assert.assertThrows(NoSuchElementException.class, () -> new SortedSetAdapter<>(new TreeSet<>()).getFirst());
+        assertEquals(Integer.valueOf(1), this.newWith(1, 2, 3).getFirst());
+        assertEquals(Integer.valueOf(3), this.newWith(Collections.reverseOrder(), 1, 2, 3).getFirst());
+        assertThrows(NoSuchElementException.class, () -> new SortedSetAdapter<>(new TreeSet<>()).getFirst());
     }
 
     @Override
@@ -204,10 +209,10 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
     public void getLast()
     {
         super.getLast();
-        Assert.assertNotNull(this.newWith(1, 2, 3).getLast());
-        Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3).getLast());
-        Assert.assertEquals(Integer.valueOf(1), this.newWith(Collections.reverseOrder(), 1, 2, 3).getLast());
-        Assert.assertThrows(NoSuchElementException.class, () -> new SortedSetAdapter<>(new TreeSet<>()).getLast());
+        assertNotNull(this.newWith(1, 2, 3).getLast());
+        assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3).getLast());
+        assertEquals(Integer.valueOf(1), this.newWith(Collections.reverseOrder(), 1, 2, 3).getLast());
+        assertThrows(NoSuchElementException.class, () -> new SortedSetAdapter<>(new TreeSet<>()).getLast());
     }
 
     @Override
@@ -247,7 +252,7 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
     @Test
     public void adaptNull()
     {
-        Assert.assertThrows(NullPointerException.class, () -> new SortedSetAdapter<>(null));
-        Assert.assertThrows(NullPointerException.class, () -> SortedSetAdapter.adapt(null));
+        assertThrows(NullPointerException.class, () -> new SortedSetAdapter<>(null));
+        assertThrows(NullPointerException.class, () -> SortedSetAdapter.adapt(null));
     }
 }

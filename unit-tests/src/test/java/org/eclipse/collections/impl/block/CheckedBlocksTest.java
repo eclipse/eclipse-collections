@@ -35,11 +35,12 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.MapIterate;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.eclipse.collections.impl.factory.Iterables.mList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class CheckedBlocksTest
 {
@@ -64,7 +65,7 @@ public class CheckedBlocksTest
     @Test
     public void checkedFunction2RuntimeException()
     {
-        Assert.assertThrows(LocalException.class, () ->
+        assertThrows(LocalException.class, () ->
         {
             Function2<String, String, String> block =
                     new CheckedFunction2<String, String, String>()
@@ -99,7 +100,7 @@ public class CheckedBlocksTest
     @Test
     public void checkedCodeBlockRuntimeException()
     {
-        Assert.assertThrows(LocalException.class, () ->
+        assertThrows(LocalException.class, () ->
         {
             Function0<String> function = new CheckedFunction0<String>()
             {
@@ -133,7 +134,7 @@ public class CheckedBlocksTest
     @Test
     public void checkedProcedureRuntimeException()
     {
-        Assert.assertThrows(LocalException.class, () ->
+        assertThrows(LocalException.class, () ->
         {
             Procedure<String> block = new CheckedProcedure<String>()
             {
@@ -167,7 +168,7 @@ public class CheckedBlocksTest
     @Test
     public void checkedObjectIntProcedureRuntimeException()
     {
-        Assert.assertThrows(LocalException.class, () ->
+        assertThrows(LocalException.class, () ->
         {
             ObjectIntProcedure<String> block = new CheckedObjectIntProcedure<String>()
             {
@@ -202,7 +203,7 @@ public class CheckedBlocksTest
     @Test
     public void checkedFunctionRuntimeException()
     {
-        Assert.assertThrows(LocalException.class, () ->
+        assertThrows(LocalException.class, () ->
         {
             Function<String, String> block =
                     new CheckedFunction<String, String>()
@@ -237,7 +238,7 @@ public class CheckedBlocksTest
     @Test
     public void checkedPredicateRuntimeException()
     {
-        Assert.assertThrows(LocalException.class, () ->
+        assertThrows(LocalException.class, () ->
         {
             Predicate<String> block = new CheckedPredicate<String>()
             {
@@ -272,7 +273,7 @@ public class CheckedBlocksTest
     @Test
     public void checkedPredicate2RuntimeException()
     {
-        Assert.assertThrows(LocalException.class, () ->
+        assertThrows(LocalException.class, () ->
         {
             Predicate2<String, String> block =
                     new CheckedPredicate2<String, String>()
@@ -307,7 +308,7 @@ public class CheckedBlocksTest
     @Test
     public void checkedProcedure2RuntimeException()
     {
-        Assert.assertThrows(LocalException.class, () ->
+        assertThrows(LocalException.class, () ->
         {
             Procedure2<String, String> block = new CheckedProcedure2<String, String>()
             {
@@ -540,7 +541,7 @@ public class CheckedBlocksTest
             }
         };
         ImmutableList<String> list = iList("test");
-        Assert.assertEquals(list, list.select(alwaysTrueBlock));
+        assertEquals(list, list.select(alwaysTrueBlock));
 
         Predicate<String> alwaysFalseBlock = new CheckedPredicate<String>()
         {
@@ -635,7 +636,7 @@ public class CheckedBlocksTest
             }
         };
         MutableList<String> list = mList("test");
-        Assert.assertEquals(list, list.selectWith(alwaysTrueBlock, null));
+        assertEquals(list, list.selectWith(alwaysTrueBlock, null));
 
         Predicate2<String, Object> alwaysFalseBlock = new CheckedPredicate2<String, Object>()
         {
@@ -659,6 +660,6 @@ public class CheckedBlocksTest
                 return argument1 + argument2;
             }
         };
-        Assert.assertEquals(Integer.valueOf(5), checkedFunction2.safeValue(2, 3));
+        assertEquals(Integer.valueOf(5), checkedFunction2.safeValue(2, 3));
     }
 }

@@ -23,8 +23,10 @@ import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class BooleanSetsTest
 {
@@ -37,29 +39,29 @@ public class BooleanSetsTest
 
     private void assertImmutableSetFactory(ImmutableBooleanSetFactory setFactory)
     {
-        Assert.assertEquals(new BooleanHashSet(), setFactory.with());
+        assertEquals(new BooleanHashSet(), setFactory.with());
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with());
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), setFactory.with(true));
+        assertEquals(BooleanHashSet.newSetWith(true), setFactory.with(true));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), setFactory.with(true, false));
+        assertEquals(BooleanHashSet.newSetWith(true, false), setFactory.with(true, false));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.with(true, false, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.with(true, false, true));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false), setFactory.with(true, false, true, false));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false), setFactory.with(true, false, true, false));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false, true, false));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true), setFactory.with(true, false, true, false, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true), setFactory.with(true, false, true, false, true));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false, true, false, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false), setFactory.with(true, false, true, false, true, false));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false), setFactory.with(true, false, true, false, true, false));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false, true, false, true, false));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true), setFactory.with(true, false, true, false, true, false, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true), setFactory.with(true, false, true, false, true, false, true));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true), setFactory.with(true, false, true, false, true, false, true, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true), setFactory.with(true, false, true, false, true, false, true, true));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true), setFactory.with(true, false, true, false, true, false, true, true, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true), setFactory.with(true, false, true, false, true, false, true, true, true));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true, false), setFactory.with(true, false, true, false, true, false, true, true, true, false));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true, false), setFactory.with(true, false, true, false, true, false, true, true, true, false));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true, true, false));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
         Verify.assertInstanceOf(ImmutableBooleanSet.class, setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
     }
 
@@ -72,29 +74,29 @@ public class BooleanSetsTest
 
     private void assertMutableSetFactory(MutableBooleanSetFactory setFactory)
     {
-        Assert.assertEquals(new BooleanHashSet(), setFactory.with());
+        assertEquals(new BooleanHashSet(), setFactory.with());
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with());
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), setFactory.with(true));
+        assertEquals(BooleanHashSet.newSetWith(true), setFactory.with(true));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), setFactory.with(true, false));
+        assertEquals(BooleanHashSet.newSetWith(true, false), setFactory.with(true, false));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.with(true, false, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.with(true, false, true));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false), setFactory.with(true, false, true, false));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false), setFactory.with(true, false, true, false));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true), setFactory.with(true, false, true, false, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true), setFactory.with(true, false, true, false, true));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false), setFactory.with(true, false, true, false, true, false));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false), setFactory.with(true, false, true, false, true, false));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true), setFactory.with(true, false, true, false, true, false, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true), setFactory.with(true, false, true, false, true, false, true));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true), setFactory.with(true, false, true, false, true, false, true, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true), setFactory.with(true, false, true, false, true, false, true, true));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true), setFactory.with(true, false, true, false, true, false, true, true, true));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true), setFactory.with(true, false, true, false, true, false, true, true, true));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true, true));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true, false), setFactory.with(true, false, true, false, true, false, true, true, true, false));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true, false, true, false, true, true, true, false), setFactory.with(true, false, true, false, true, false, true, true, true, false));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.with(true, false, true, false, true, false, true, true, true, false));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true), setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
         Verify.assertInstanceOf(MutableBooleanSet.class, setFactory.withAll(BooleanHashSet.newSetWith(true, false, true)));
     }
 
@@ -102,7 +104,7 @@ public class BooleanSetsTest
     public void emptySet()
     {
         Verify.assertEmpty(BooleanSets.immutable.with());
-        Assert.assertSame(BooleanSets.immutable.with(), BooleanSets.immutable.with());
+        assertSame(BooleanSets.immutable.with(), BooleanSets.immutable.with());
         Verify.assertPostSerializedIdentity(BooleanSets.immutable.with());
     }
 
@@ -110,19 +112,19 @@ public class BooleanSetsTest
     public void newSetWith()
     {
         ImmutableBooleanSet set = BooleanSets.immutable.with();
-        Assert.assertEquals(set, BooleanSets.immutable.with(set.toArray()));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true));
-        Assert.assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true));
-        Assert.assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false, true, false));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true));
-        Assert.assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false, true, false, true, false));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true, false, true));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true, false, true, true));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true, false, true, true, true));
-        Assert.assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false, true, false, true, false, true, true, true, false));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true, false, true, true, true, false, true));
-        Assert.assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false, true, false, true, false, true, true, true, false, true, false));
+        assertEquals(set, BooleanSets.immutable.with(set.toArray()));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true));
+        assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true));
+        assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false, true, false));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true));
+        assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false, true, false, true, false));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true, false, true));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true, false, true, true));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true, false, true, true, true));
+        assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false, true, false, true, false, true, true, true, false));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(true, false, true, false, true, false, true, true, true, false, true));
+        assertEquals(set = set.newWith(false), BooleanSets.immutable.with(true, false, true, false, true, false, true, true, true, false, true, false));
     }
 
     @SuppressWarnings("RedundantArrayCreation")
@@ -130,17 +132,17 @@ public class BooleanSetsTest
     public void newSetWithArray()
     {
         ImmutableBooleanSet set = BooleanSets.immutable.with();
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true}));
-        Assert.assertEquals(set = set.newWith(false), BooleanSets.immutable.with(new boolean[]{true, false}));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true}));
-        Assert.assertEquals(set = set.newWith(false), BooleanSets.immutable.with(new boolean[]{true, false, true, false}));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true}));
-        Assert.assertEquals(set = set.newWith(false), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false}));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true}));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true, true}));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true, true, true}));
-        Assert.assertEquals(set = set.newWith(false), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true, true, true, false}));
-        Assert.assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true, true, true, false, true}));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true}));
+        assertEquals(set = set.newWith(false), BooleanSets.immutable.with(new boolean[]{true, false}));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true}));
+        assertEquals(set = set.newWith(false), BooleanSets.immutable.with(new boolean[]{true, false, true, false}));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true}));
+        assertEquals(set = set.newWith(false), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false}));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true}));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true, true}));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true, true, true}));
+        assertEquals(set = set.newWith(false), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true, true, true, false}));
+        assertEquals(set = set.newWith(true), BooleanSets.immutable.with(new boolean[]{true, false, true, false, true, false, true, true, true, false, true}));
     }
 
     @Test
@@ -148,54 +150,54 @@ public class BooleanSetsTest
     {
         ImmutableBooleanSet set = BooleanSets.immutable.with();
         BooleanHashSet booleanHashSet = BooleanHashSet.newSetWith(true);
-        Assert.assertEquals(set = set.newWith(true), booleanHashSet.toImmutable());
-        Assert.assertEquals(set = set.newWith(false), booleanHashSet.with(false).toImmutable());
-        Assert.assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
-        Assert.assertEquals(set = set.newWith(false), booleanHashSet.with(false).toImmutable());
-        Assert.assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
-        Assert.assertEquals(set = set.newWith(false), booleanHashSet.with(false).toImmutable());
-        Assert.assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
-        Assert.assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
-        Assert.assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
-        Assert.assertEquals(set = set.newWith(false), booleanHashSet.with(false).toImmutable());
-        Assert.assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
+        assertEquals(set = set.newWith(true), booleanHashSet.toImmutable());
+        assertEquals(set = set.newWith(false), booleanHashSet.with(false).toImmutable());
+        assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
+        assertEquals(set = set.newWith(false), booleanHashSet.with(false).toImmutable());
+        assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
+        assertEquals(set = set.newWith(false), booleanHashSet.with(false).toImmutable());
+        assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
+        assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
+        assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
+        assertEquals(set = set.newWith(false), booleanHashSet.with(false).toImmutable());
+        assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());
     }
 
     @Test
     public void newSetWithWithSet()
     {
-        Assert.assertEquals(new BooleanHashSet(), BooleanSets.immutable.withAll(new BooleanHashSet()));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.immutable.withAll(BooleanHashSet.newSetWith(true)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.immutable.withAll(BooleanHashSet.newSetWith(true, false)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.immutable.withAll(BooleanHashSet.newSetWith(true, false, true)));
+        assertEquals(new BooleanHashSet(), BooleanSets.immutable.withAll(new BooleanHashSet()));
+        assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.immutable.withAll(BooleanHashSet.newSetWith(true)));
+        assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.immutable.withAll(BooleanHashSet.newSetWith(true, false)));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.immutable.withAll(BooleanHashSet.newSetWith(true, false, true)));
     }
 
     @Test
     public void ofAllBooleanIterable()
     {
-        Assert.assertEquals(new BooleanHashSet(), BooleanSets.immutable.ofAll(BooleanLists.mutable.empty()));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.immutable.ofAll(BooleanLists.mutable.with(true)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.immutable.ofAll(BooleanLists.mutable.with(true, false)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.immutable.ofAll(BooleanLists.mutable.with(true, false, true)));
+        assertEquals(new BooleanHashSet(), BooleanSets.immutable.ofAll(BooleanLists.mutable.empty()));
+        assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.immutable.ofAll(BooleanLists.mutable.with(true)));
+        assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.immutable.ofAll(BooleanLists.mutable.with(true, false)));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.immutable.ofAll(BooleanLists.mutable.with(true, false, true)));
 
-        Assert.assertEquals(new BooleanHashSet(), BooleanSets.mutable.ofAll(BooleanLists.mutable.empty()));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.mutable.ofAll(BooleanLists.mutable.with(true)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.mutable.ofAll(BooleanLists.mutable.with(true, false)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.mutable.ofAll(BooleanLists.mutable.with(true, false, true)));
+        assertEquals(new BooleanHashSet(), BooleanSets.mutable.ofAll(BooleanLists.mutable.empty()));
+        assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.mutable.ofAll(BooleanLists.mutable.with(true)));
+        assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.mutable.ofAll(BooleanLists.mutable.with(true, false)));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.mutable.ofAll(BooleanLists.mutable.with(true, false, true)));
     }
 
     @Test
     public void ofAllIterable()
     {
-        Assert.assertEquals(new BooleanHashSet(), BooleanSets.immutable.ofAll(Lists.mutable.empty()));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.immutable.ofAll(Lists.mutable.with(true)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.immutable.ofAll(Lists.mutable.with(true, false)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.immutable.ofAll(Lists.mutable.with(true, false, true)));
+        assertEquals(new BooleanHashSet(), BooleanSets.immutable.ofAll(Lists.mutable.empty()));
+        assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.immutable.ofAll(Lists.mutable.with(true)));
+        assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.immutable.ofAll(Lists.mutable.with(true, false)));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.immutable.ofAll(Lists.mutable.with(true, false, true)));
 
-        Assert.assertEquals(new BooleanHashSet(), BooleanSets.mutable.ofAll(Lists.mutable.empty()));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.mutable.ofAll(Lists.mutable.with(true)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.mutable.ofAll(Lists.mutable.with(true, false)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.mutable.ofAll(Lists.mutable.with(true, false, true)));
+        assertEquals(new BooleanHashSet(), BooleanSets.mutable.ofAll(Lists.mutable.empty()));
+        assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.mutable.ofAll(Lists.mutable.with(true)));
+        assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.mutable.ofAll(Lists.mutable.with(true, false)));
+        assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.mutable.ofAll(Lists.mutable.with(true, false, true)));
     }
 
     @Test
@@ -218,6 +220,6 @@ public class BooleanSetsTest
                 PrimitiveTuples.pair(false, true),
                 PrimitiveTuples.pair(false, false));
 
-        Assert.assertEquals(expected, booleanBooleanPairs.toSet());
+        assertEquals(expected, booleanBooleanPairs.toSet());
     }
 }

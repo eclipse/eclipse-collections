@@ -16,8 +16,11 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 public class CaseFunctionTest
 {
@@ -25,7 +28,7 @@ public class CaseFunctionTest
     public void noopCase()
     {
         Function<Integer, Integer> function = new CaseFunction<>();
-        Assert.assertNull(function.valueOf(42));
+        assertNull(function.valueOf(42));
     }
 
     @Test
@@ -34,7 +37,7 @@ public class CaseFunctionTest
         CaseFunction<Integer, Integer> function = new CaseFunction<>();
         function.addCase(ignored -> true, Functions.getIntegerPassThru());
         Integer fortyTwo = 42;
-        Assert.assertEquals(fortyTwo, function.valueOf(fortyTwo));
+        assertEquals(fortyTwo, function.valueOf(fortyTwo));
     }
 
     @Test
@@ -45,13 +48,13 @@ public class CaseFunctionTest
                 Predicates.attributeGreaterThan(Foo.TO_VALUE, 5.0D),
                 Functions.getFixedValue("Patience, grasshopper"));
 
-        Assert.assertEquals("Yow!", function.valueOf(new Foo("", 1.0D)));
+        assertEquals("Yow!", function.valueOf(new Foo("", 1.0D)));
 
         CaseFunction<Foo, String> function1 =
                 function.setDefault(Functions.getFixedValue("Patience, young grasshopper"));
-        Assert.assertSame(function, function1);
-        Assert.assertEquals("Patience, grasshopper", function.valueOf(new Foo("", 6.0D)));
-        Assert.assertEquals("Patience, young grasshopper", function.valueOf(new Foo("", 1.0D)));
+        assertSame(function, function1);
+        assertEquals("Patience, grasshopper", function.valueOf(new Foo("", 6.0D)));
+        assertEquals("Patience, young grasshopper", function.valueOf(new Foo("", 1.0D)));
 
         Verify.assertContains("CaseFunction", function.toString());
     }

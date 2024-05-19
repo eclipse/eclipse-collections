@@ -19,8 +19,9 @@ import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.stack.StackIterableTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public abstract class MutableStackTestCase extends StackIterableTestCase
 {
@@ -41,54 +42,54 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
     {
         MutableStack<String> stack = this.newStackWith();
         stack.push("1");
-        Assert.assertEquals("1", stack.peek());
-        Assert.assertEquals(this.newStackWith("1"), stack);
+        assertEquals("1", stack.peek());
+        assertEquals(this.newStackWith("1"), stack);
 
         stack.push("2");
-        Assert.assertEquals("2", stack.peek());
-        Assert.assertEquals(this.newStackWith("1", "2"), stack);
+        assertEquals("2", stack.peek());
+        assertEquals(this.newStackWith("1", "2"), stack);
 
         stack.push("3");
-        Assert.assertEquals("3", stack.peek());
-        Assert.assertEquals(this.newStackWith("1", "2", "3"), stack);
+        assertEquals("3", stack.peek());
+        assertEquals(this.newStackWith("1", "2", "3"), stack);
 
-        Assert.assertEquals("2", stack.peekAt(1));
-        Assert.assertEquals("3", stack.pop());
-        Assert.assertEquals("2", stack.peek());
-        Assert.assertEquals("2", stack.pop());
-        Assert.assertEquals("1", stack.peek());
-        Assert.assertEquals("1", stack.pop());
+        assertEquals("2", stack.peekAt(1));
+        assertEquals("3", stack.pop());
+        assertEquals("2", stack.peek());
+        assertEquals("2", stack.pop());
+        assertEquals("1", stack.peek());
+        assertEquals("1", stack.pop());
 
         MutableStack<Integer> stack2 = this.newStackFromTopToBottom(5, 4, 3, 2, 1);
         stack2.pop(2);
-        Assert.assertEquals(this.newStackFromTopToBottom(3, 2, 1), stack2);
-        Assert.assertEquals(FastList.newListWith(3, 2), stack2.peek(2));
+        assertEquals(this.newStackFromTopToBottom(3, 2, 1), stack2);
+        assertEquals(FastList.newListWith(3, 2), stack2.peek(2));
 
         MutableStack<Integer> stack3 = Stacks.mutable.ofReversed(1, 2, 3);
-        Assert.assertEquals(this.newStackFromTopToBottom(1, 2, 3), stack3);
+        assertEquals(this.newStackFromTopToBottom(1, 2, 3), stack3);
 
         MutableStack<Integer> stack4 = Stacks.mutable.ofAll(FastList.newListWith(1, 2, 3));
         MutableStack<Integer> stack5 = Stacks.mutable.ofAllReversed(FastList.newListWith(1, 2, 3));
 
-        Assert.assertEquals(this.newStackFromTopToBottom(3, 2, 1), stack4);
-        Assert.assertEquals(this.newStackFromTopToBottom(1, 2, 3), stack5);
+        assertEquals(this.newStackFromTopToBottom(3, 2, 1), stack4);
+        assertEquals(this.newStackFromTopToBottom(1, 2, 3), stack5);
 
         MutableStack<Integer> stack6 = this.newStackFromTopToBottom(1, 2, 3, 4);
-        Assert.assertEquals(FastList.newListWith(1, 2), stack6.pop(2, FastList.newList()));
+        assertEquals(FastList.newListWith(1, 2), stack6.pop(2, FastList.newList()));
 
         MutableStack<Integer> stack7 = this.newStackFromTopToBottom(1, 2, 3, 4);
-        Assert.assertEquals(ArrayStack.newStackFromTopToBottom(2, 1), stack7.pop(2, ArrayStack.newStack()));
+        assertEquals(ArrayStack.newStackFromTopToBottom(2, 1), stack7.pop(2, ArrayStack.newStack()));
 
         MutableStack<Integer> stack8 = this.newStackFromTopToBottom(1, 2, 3, 4);
         Verify.assertIterableEmpty(stack8.pop(0));
-        Assert.assertEquals(ArrayStack.newStackFromTopToBottom(1, 2, 3, 4), stack8);
-        Assert.assertEquals(FastList.newList(), stack8.peek(0));
+        assertEquals(ArrayStack.newStackFromTopToBottom(1, 2, 3, 4), stack8);
+        assertEquals(FastList.newList(), stack8.peek(0));
 
         MutableStack<Integer> stack9 = ArrayStack.newStack();
-        Assert.assertEquals(FastList.newList(), stack9.pop(0));
-        Assert.assertEquals(FastList.newList(), stack9.peek(0));
-        Assert.assertEquals(FastList.newList(), stack9.pop(0, FastList.newList()));
-        Assert.assertEquals(ArrayStack.newStack(), stack9.pop(0, ArrayStack.newStack()));
+        assertEquals(FastList.newList(), stack9.pop(0));
+        assertEquals(FastList.newList(), stack9.peek(0));
+        assertEquals(FastList.newList(), stack9.pop(0, FastList.newList()));
+        assertEquals(ArrayStack.newStack(), stack9.pop(0, ArrayStack.newStack()));
     }
 
     @Test
@@ -96,7 +97,7 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
     {
         MutableStack<Integer> stack = this.newStackFromTopToBottom(1, 2, 3);
         stack.clear();
-        Assert.assertEquals(ArrayStack.newStack(), stack);
+        assertEquals(ArrayStack.newStack(), stack);
         Verify.assertIterableEmpty(stack);
     }
 
@@ -104,36 +105,36 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
     public void testNewStackWithOrder()
     {
         MutableStack<String> stack = this.newStackWith("1", "2", "3");
-        Assert.assertEquals("3", stack.pop());
-        Assert.assertEquals("2", stack.pop());
-        Assert.assertEquals("1", stack.pop());
+        assertEquals("3", stack.pop());
+        assertEquals("2", stack.pop());
+        assertEquals("1", stack.pop());
     }
 
     @Test
     public void testNewStackIterableOrder()
     {
         MutableStack<String> stack = this.newStack(FastList.newListWith("1", "2", "3"));
-        Assert.assertEquals("3", stack.pop());
-        Assert.assertEquals("2", stack.pop());
-        Assert.assertEquals("1", stack.pop());
+        assertEquals("3", stack.pop());
+        assertEquals("2", stack.pop());
+        assertEquals("1", stack.pop());
     }
 
     @Test
     public void testNewStackFromTopToBottomOrder()
     {
         MutableStack<String> stack = this.newStackFromTopToBottom("3", "2", "1");
-        Assert.assertEquals("3", stack.pop());
-        Assert.assertEquals("2", stack.pop());
-        Assert.assertEquals("1", stack.pop());
+        assertEquals("3", stack.pop());
+        assertEquals("2", stack.pop());
+        assertEquals("1", stack.pop());
     }
 
     @Test
     public void testNewStackFromTopToBottomIterableOrder()
     {
         MutableStack<String> stack = this.newStackFromTopToBottom(FastList.newListWith("3", "2", "1"));
-        Assert.assertEquals("3", stack.pop());
-        Assert.assertEquals("2", stack.pop());
-        Assert.assertEquals("1", stack.pop());
+        assertEquals("3", stack.pop());
+        assertEquals("2", stack.pop());
+        assertEquals("1", stack.pop());
     }
 
     @Test(expected = EmptyStackException.class)
@@ -212,31 +213,31 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
     {
         MutableStack<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         MutableObjectLongMap<Integer> result = values.sumByInt(i -> i % 2, e -> e);
-        Assert.assertEquals(25, result.get(1));
-        Assert.assertEquals(30, result.get(0));
+        assertEquals(25, result.get(1));
+        assertEquals(30, result.get(0));
     }
 
     public void sumByFloat()
     {
         MutableStack<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         MutableObjectDoubleMap<Integer> result = values.sumByFloat(f -> f % 2, e -> e);
-        Assert.assertEquals(25.0f, result.get(1), 0.0);
-        Assert.assertEquals(30.0f, result.get(0), 0.0);
+        assertEquals(25.0f, result.get(1), 0.0);
+        assertEquals(30.0f, result.get(0), 0.0);
     }
 
     public void sumByLong()
     {
         MutableStack<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         MutableObjectLongMap<Integer> result = values.sumByLong(l -> l % 2, e -> e);
-        Assert.assertEquals(25, result.get(1));
-        Assert.assertEquals(30, result.get(0));
+        assertEquals(25, result.get(1));
+        assertEquals(30, result.get(0));
     }
 
     public void sumByDouble()
     {
         MutableStack<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         MutableObjectDoubleMap<Integer> result = values.sumByDouble(d -> d % 2, e -> e);
-        Assert.assertEquals(25.0d, result.get(1), 0.0);
-        Assert.assertEquals(30.0d, result.get(0), 0.0);
+        assertEquals(25.0d, result.get(1), 0.0);
+        assertEquals(30.0d, result.get(0), 0.0);
     }
 }

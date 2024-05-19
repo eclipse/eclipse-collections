@@ -20,8 +20,11 @@ import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Triplet;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ClassComparerTest
 {
@@ -31,12 +34,12 @@ public class ClassComparerTest
         ClassComparer comparer = new ClassComparer();
         MutableSortedSet<String> methods1 = comparer.getMethodNames(Runnable.class);
         MutableSortedSet<String> methods2 = comparer.getMethodNames(Callable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run"), methods1);
-        Assert.assertEquals(SortedSets.mutable.with("call"), methods2);
+        assertEquals(SortedSets.mutable.with("run"), methods1);
+        assertEquals(SortedSets.mutable.with("call"), methods2);
         MutableSortedSet<String> methods3 = comparer.getMethodNames(java.util.function.Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("identity", "apply", "compose", "andThen"), methods3);
+        assertEquals(SortedSets.mutable.with("identity", "apply", "compose", "andThen"), methods3);
         MutableSortedSet<String> methods4 = comparer.getMethodNames(Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("valueOf", "apply", "compose", "andThen"), methods4);
+        assertEquals(SortedSets.mutable.with("valueOf", "apply", "compose", "andThen"), methods4);
     }
 
     @Test
@@ -45,7 +48,7 @@ public class ClassComparerTest
         CollectingAppendable out1 = new CollectingAppendable();
         ClassComparer comparer1 = new ClassComparer(out1);
         MutableSortedSet<String> methods1 = comparer1.printClass(Runnable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run"), methods1);
+        assertEquals(SortedSets.mutable.with("run"), methods1);
         MutableList<Object> expectedOutput1 = Lists.mutable.with(
                 "Class: Runnable",
                 System.lineSeparator(),
@@ -54,12 +57,12 @@ public class ClassComparerTest
                 "r:[run]",
                 System.lineSeparator(),
                 System.lineSeparator());
-        Assert.assertEquals(expectedOutput1, out1.getContents());
+        assertEquals(expectedOutput1, out1.getContents());
 
         CollectingAppendable out2 = new CollectingAppendable();
         ClassComparer comparer2 = new ClassComparer(out2);
         MutableSortedSet<String> methods2 = comparer2.printClass(java.util.function.Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("identity", "apply", "compose", "andThen"), methods2);
+        assertEquals(SortedSets.mutable.with("identity", "apply", "compose", "andThen"), methods2);
         MutableList<Object> expectedOutput2 = Lists.mutable.with(
                 "Class: Function",
                 System.lineSeparator(),
@@ -72,7 +75,7 @@ public class ClassComparerTest
                 + "i:[identity]",
                 System.lineSeparator(),
                 System.lineSeparator());
-        Assert.assertEquals(expectedOutput2, out2.getContents());
+        assertEquals(expectedOutput2, out2.getContents());
     }
 
     @Test
@@ -81,7 +84,7 @@ public class ClassComparerTest
         CollectingAppendable out1 = new CollectingAppendable();
         ClassComparer comparer1 = new ClassComparer(out1, false, false, true);
         MutableSortedSet<String> methods1 = comparer1.printClass(Runnable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run"), methods1);
+        assertEquals(SortedSets.mutable.with("run"), methods1);
         MutableList<Object> expectedOutput1 = Lists.mutable.with(
                 "Class: java.lang.Runnable",
                 System.lineSeparator(),
@@ -90,7 +93,7 @@ public class ClassComparerTest
                 "r:[run]",
                 System.lineSeparator(),
                 System.lineSeparator());
-        Assert.assertEquals(expectedOutput1, out1.getContents());
+        assertEquals(expectedOutput1, out1.getContents());
     }
 
     @Test
@@ -99,12 +102,12 @@ public class ClassComparerTest
         ClassComparer comparer = new ClassComparer();
         MutableSortedSet<String> difference1 = comparer.difference(Runnable.class, Callable.class);
         MutableSortedSet<String> difference2 = comparer.difference(Callable.class, Runnable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run"), difference1);
-        Assert.assertEquals(SortedSets.mutable.with("call"), difference2);
+        assertEquals(SortedSets.mutable.with("run"), difference1);
+        assertEquals(SortedSets.mutable.with("call"), difference2);
         MutableSortedSet<String> difference3 = comparer.difference(java.util.function.Function.class, Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("identity"), difference3);
+        assertEquals(SortedSets.mutable.with("identity"), difference3);
         MutableSortedSet<String> difference4 = comparer.difference(Function.class, java.util.function.Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("valueOf"), difference4);
+        assertEquals(SortedSets.mutable.with("valueOf"), difference4);
     }
 
     @Test
@@ -113,7 +116,7 @@ public class ClassComparerTest
         CollectingAppendable out = new CollectingAppendable();
         ClassComparer comparer = new ClassComparer(out);
         MutableSortedSet<String> difference1 = comparer.printDifference(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run"), difference1);
+        assertEquals(SortedSets.mutable.with("run"), difference1);
         MutableList<Object> expectedOutput = Lists.mutable.with(
                 "Difference (Runnable, Callable)",
                 System.lineSeparator(),
@@ -122,7 +125,7 @@ public class ClassComparerTest
                 "r:[run]",
                 System.lineSeparator(),
                 System.lineSeparator());
-        Assert.assertEquals(expectedOutput, out.getContents());
+        assertEquals(expectedOutput, out.getContents());
     }
 
     @Test
@@ -131,7 +134,7 @@ public class ClassComparerTest
         CollectingAppendable out = new CollectingAppendable();
         ClassComparer comparer = new ClassComparer(out, false, false, true);
         MutableSortedSet<String> difference1 = comparer.printDifference(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run"), difference1);
+        assertEquals(SortedSets.mutable.with("run"), difference1);
         MutableList<Object> expectedOutput = Lists.mutable.with(
                 "Difference (java.lang.Runnable, java.util.concurrent.Callable)",
                 System.lineSeparator(),
@@ -140,7 +143,7 @@ public class ClassComparerTest
                 "r:[run]",
                 System.lineSeparator(),
                 System.lineSeparator());
-        Assert.assertEquals(expectedOutput, out.getContents());
+        assertEquals(expectedOutput, out.getContents());
     }
 
     @Test
@@ -149,12 +152,12 @@ public class ClassComparerTest
         ClassComparer comparer = new ClassComparer(true, false, false);
         MutableSortedSet<String> difference1 = comparer.difference(Runnable.class, Callable.class);
         MutableSortedSet<String> difference2 = comparer.difference(Callable.class, Runnable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run()"), difference1);
-        Assert.assertEquals(SortedSets.mutable.with("call()"), difference2);
+        assertEquals(SortedSets.mutable.with("run()"), difference1);
+        assertEquals(SortedSets.mutable.with("call()"), difference2);
         MutableSortedSet<String> difference3 = comparer.difference(java.util.function.Function.class, Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("identity()"), difference3);
+        assertEquals(SortedSets.mutable.with("identity()"), difference3);
         MutableSortedSet<String> difference4 = comparer.difference(Function.class, java.util.function.Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("valueOf(Object)"), difference4);
+        assertEquals(SortedSets.mutable.with("valueOf(Object)"), difference4);
     }
 
     @Test
@@ -163,12 +166,12 @@ public class ClassComparerTest
         ClassComparer comparer = new ClassComparer(true, true, false);
         MutableSortedSet<String> difference1 = comparer.difference(Runnable.class, Callable.class);
         MutableSortedSet<String> difference2 = comparer.difference(Callable.class, Runnable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run():void"), difference1);
-        Assert.assertEquals(SortedSets.mutable.with("call():Object"), difference2);
+        assertEquals(SortedSets.mutable.with("run():void"), difference1);
+        assertEquals(SortedSets.mutable.with("call():Object"), difference2);
         MutableSortedSet<String> difference3 = comparer.difference(java.util.function.Function.class, Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("identity():Function"), difference3);
+        assertEquals(SortedSets.mutable.with("identity():Function"), difference3);
         MutableSortedSet<String> difference4 = comparer.difference(Function.class, java.util.function.Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("valueOf(Object):Object"), difference4);
+        assertEquals(SortedSets.mutable.with("valueOf(Object):Object"), difference4);
     }
 
     @Test
@@ -176,7 +179,7 @@ public class ClassComparerTest
     {
         ClassComparer comparer = new ClassComparer();
         MutableSortedSet<String> symmetricDifference = comparer.symmetricDifference(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run", "call"), symmetricDifference);
+        assertEquals(SortedSets.mutable.with("run", "call"), symmetricDifference);
     }
 
     @Test
@@ -185,7 +188,7 @@ public class ClassComparerTest
         CollectingAppendable out = new CollectingAppendable();
         ClassComparer comparer = new ClassComparer(out);
         MutableSortedSet<String> symmetricDifference = comparer.printSymmetricDifference(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run", "call"), symmetricDifference);
+        assertEquals(SortedSets.mutable.with("run", "call"), symmetricDifference);
         MutableList<Object> expectedOutput = Lists.mutable.with(
                 "Symmetric Difference (Runnable, Callable)",
                 System.lineSeparator(),
@@ -194,7 +197,7 @@ public class ClassComparerTest
                 "c:[call]" + System.lineSeparator() + "r:[run]",
                 System.lineSeparator(),
                 System.lineSeparator());
-        Assert.assertEquals(expectedOutput, out.getContents());
+        assertEquals(expectedOutput, out.getContents());
     }
 
     @Test
@@ -202,7 +205,7 @@ public class ClassComparerTest
     {
         ClassComparer comparer = new ClassComparer(true, false, false);
         MutableSortedSet<String> symmetricDifference = comparer.symmetricDifference(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run()", "call()"), symmetricDifference);
+        assertEquals(SortedSets.mutable.with("run()", "call()"), symmetricDifference);
     }
 
     @Test
@@ -210,10 +213,10 @@ public class ClassComparerTest
     {
         ClassComparer comparer = new ClassComparer(true, true, false);
         MutableSortedSet<String> symmetricDifference = comparer.symmetricDifference(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.with("run():void", "call():Object"), symmetricDifference);
+        assertEquals(SortedSets.mutable.with("run():void", "call():Object"), symmetricDifference);
         MutableSortedSet<String> symmetricDifference2 =
                 comparer.symmetricDifference(java.util.function.Function.class, Function.class);
-        Assert.assertEquals(
+        assertEquals(
                 SortedSets.mutable.with("identity():Function", "valueOf(Object):Object"),
                 symmetricDifference2);
     }
@@ -223,9 +226,9 @@ public class ClassComparerTest
     {
         ClassComparer comparer = new ClassComparer();
         MutableSortedSet<String> intersection1 = comparer.intersect(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.empty(), intersection1);
+        assertEquals(SortedSets.mutable.empty(), intersection1);
         MutableSortedSet<String> intersection2 = comparer.intersect(java.util.function.Function.class, Function.class);
-        Assert.assertEquals(SortedSets.mutable.with("apply", "compose", "andThen"), intersection2);
+        assertEquals(SortedSets.mutable.with("apply", "compose", "andThen"), intersection2);
     }
 
     @Test
@@ -234,7 +237,7 @@ public class ClassComparerTest
         CollectingAppendable out = new CollectingAppendable();
         ClassComparer comparer = new ClassComparer(out);
         MutableSortedSet<String> intersection = comparer.printIntersection(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.empty(), intersection);
+        assertEquals(SortedSets.mutable.empty(), intersection);
         MutableList<Object> expectedOutput = Lists.mutable.with(
                 "Intersection (Runnable, Callable)",
                 System.lineSeparator(),
@@ -243,7 +246,7 @@ public class ClassComparerTest
                 "",
                 System.lineSeparator(),
                 System.lineSeparator());
-        Assert.assertEquals(expectedOutput, out.getContents());
+        assertEquals(expectedOutput, out.getContents());
     }
 
     @Test
@@ -251,9 +254,9 @@ public class ClassComparerTest
     {
         ClassComparer comparer = new ClassComparer(true, false, false);
         MutableSortedSet<String> intersection1 = comparer.intersect(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.empty(), intersection1);
+        assertEquals(SortedSets.mutable.empty(), intersection1);
         MutableSortedSet<String> intersection2 = comparer.intersect(java.util.function.Function.class, Function.class);
-        Assert.assertEquals(
+        assertEquals(
                 SortedSets.mutable.with("apply(Object)", "compose(Function)", "andThen(Function)"),
                 intersection2);
     }
@@ -263,9 +266,9 @@ public class ClassComparerTest
     {
         ClassComparer comparer = new ClassComparer(true, true, false);
         MutableSortedSet<String> intersection1 = comparer.intersect(Runnable.class, Callable.class);
-        Assert.assertEquals(SortedSets.mutable.empty(), intersection1);
+        assertEquals(SortedSets.mutable.empty(), intersection1);
         MutableSortedSet<String> intersection2 = comparer.intersect(java.util.function.Function.class, Function.class);
-        Assert.assertEquals(
+        assertEquals(
                 SortedSets.mutable.with(
                         "apply(Object):Object",
                         "compose(Function):Function",
@@ -278,9 +281,9 @@ public class ClassComparerTest
     {
         ClassComparer comparer = new ClassComparer();
         Triplet<MutableSortedSet<String>> compare = comparer.compare(java.util.function.Function.class, Function.class);
-        Assert.assertEquals(comparer.intersect(java.util.function.Function.class, Function.class), compare.getOne());
-        Assert.assertEquals(comparer.difference(java.util.function.Function.class, Function.class), compare.getTwo());
-        Assert.assertEquals(comparer.difference(Function.class, java.util.function.Function.class), compare.getThree());
+        assertEquals(comparer.intersect(java.util.function.Function.class, Function.class), compare.getOne());
+        assertEquals(comparer.difference(java.util.function.Function.class, Function.class), compare.getTwo());
+        assertEquals(comparer.difference(Function.class, java.util.function.Function.class), compare.getThree());
     }
 
     @Test
@@ -291,24 +294,24 @@ public class ClassComparerTest
         ClassComparer expected = new ClassComparer(expectedOut, true, true, false);
         ClassComparer actual = new ClassComparer(actualOut, true, true, false);
         Triplet<MutableSortedSet<String>> compare = actual.compareAndPrint(java.util.function.Function.class, Function.class);
-        Assert.assertEquals(expected.printIntersection(java.util.function.Function.class, Function.class), compare.getOne());
-        Assert.assertEquals(expected.printDifference(java.util.function.Function.class, Function.class), compare.getTwo());
-        Assert.assertEquals(expected.printDifference(Function.class, java.util.function.Function.class), compare.getThree());
-        Assert.assertEquals(expectedOut.getContents(), actualOut.getContents());
+        assertEquals(expected.printIntersection(java.util.function.Function.class, Function.class), compare.getOne());
+        assertEquals(expected.printDifference(java.util.function.Function.class, Function.class), compare.getTwo());
+        assertEquals(expected.printDifference(Function.class, java.util.function.Function.class), compare.getThree());
+        assertEquals(expectedOut.getContents(), actualOut.getContents());
     }
 
     @Test
     public void isProperSupersetOf()
     {
-        Assert.assertTrue(ClassComparer.isProperSupersetOf(Stack.class, Vector.class));
-        Assert.assertFalse(ClassComparer.isProperSupersetOf(Vector.class, Stack.class));
+        assertTrue(ClassComparer.isProperSupersetOf(Stack.class, Vector.class));
+        assertFalse(ClassComparer.isProperSupersetOf(Vector.class, Stack.class));
     }
 
     @Test
     public void isProperSubsetOf()
     {
-        Assert.assertTrue(ClassComparer.isProperSubsetOf(Vector.class, Stack.class));
-        Assert.assertFalse(ClassComparer.isProperSubsetOf(Stack.class, Vector.class));
+        assertTrue(ClassComparer.isProperSubsetOf(Vector.class, Stack.class));
+        assertFalse(ClassComparer.isProperSubsetOf(Stack.class, Vector.class));
     }
 
     private static class CollectingAppendable implements Appendable

@@ -13,8 +13,10 @@ package org.eclipse.collections.impl.block.procedure;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.StringIterate;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class CollectionAddProcedureTest
 {
@@ -23,8 +25,8 @@ public class CollectionAddProcedureTest
     {
         CollectionAddProcedure<Integer> procedure = new CollectionAddProcedure<>(Lists.mutable.empty());
         String s = procedure.toString();
-        Assert.assertNotNull(s);
-        Assert.assertTrue(StringIterate.notEmptyOrWhitespace(s));
+        assertNotNull(s);
+        assertTrue(StringIterate.notEmptyOrWhitespace(s));
     }
 
     @Test

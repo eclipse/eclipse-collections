@@ -18,7 +18,6 @@ import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.test.CollectionTestCase;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertPostSerializedEqualsAndHashCode;
@@ -28,6 +27,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 public interface SetTestCase extends CollectionTestCase
@@ -47,7 +47,7 @@ public interface SetTestCase extends CollectionTestCase
     {
         Iterable<Integer> iterable = this.newWith(3, 2, 1);
         Object deserialized = SerializeTestHelper.serializeDeserialize(iterable);
-        Assert.assertNotSame(iterable, deserialized);
+        assertNotSame(iterable, deserialized);
     }
 
     @Override

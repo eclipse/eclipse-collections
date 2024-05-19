@@ -25,8 +25,10 @@ import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.SynchronizedRichIterable;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link SynchronizedSortedBag}.
@@ -56,7 +58,7 @@ public class SynchronizedSortedBagTest extends AbstractMutableSortedBagTestCase
     public void asSynchronized()
     {
         MutableSortedBag<Object> synchronizedBag = this.newWith();
-        Assert.assertSame(synchronizedBag, synchronizedBag.asSynchronized());
+        assertSame(synchronizedBag, synchronizedBag.asSynchronized());
     }
 
     @Override
@@ -79,10 +81,10 @@ public class SynchronizedSortedBagTest extends AbstractMutableSortedBagTestCase
         MutableSortedBag<String> strings = mutable.asSynchronized();
         MutableList<ObjectIntPair<String>> top5 = strings.topOccurrences(5);
         Verify.assertSize(5, top5);
-        Assert.assertEquals("ten", top5.getFirst().getOne());
-        Assert.assertEquals(10, top5.getFirst().getTwo());
-        Assert.assertEquals("six", top5.getLast().getOne());
-        Assert.assertEquals(6, top5.getLast().getTwo());
+        assertEquals("ten", top5.getFirst().getOne());
+        assertEquals(10, top5.getFirst().getTwo());
+        assertEquals("six", top5.getLast().getOne());
+        assertEquals(6, top5.getLast().getTwo());
     }
 
     @Override
@@ -105,10 +107,10 @@ public class SynchronizedSortedBagTest extends AbstractMutableSortedBagTestCase
         MutableSortedBag<String> strings = mutable.asSynchronized();
         MutableList<ObjectIntPair<String>> bottom5 = strings.bottomOccurrences(5);
         Verify.assertSize(5, bottom5);
-        Assert.assertEquals("one", bottom5.getFirst().getOne());
-        Assert.assertEquals(1, bottom5.getFirst().getTwo());
-        Assert.assertEquals("five", bottom5.getLast().getOne());
-        Assert.assertEquals(5, bottom5.getLast().getTwo());
+        assertEquals("one", bottom5.getFirst().getOne());
+        assertEquals(1, bottom5.getFirst().getTwo());
+        assertEquals("five", bottom5.getLast().getOne());
+        assertEquals(5, bottom5.getLast().getTwo());
     }
 
     @Override
@@ -118,13 +120,13 @@ public class SynchronizedSortedBagTest extends AbstractMutableSortedBagTestCase
         Bag<Integer> bag1 = this.newWith(3, 3, 3, 2, 2, 1);
         Bag<ObjectIntPair<Integer>> actual1 =
                 bag1.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
-        Assert.assertEquals(
+        assertEquals(
                 Bags.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1)),
                 actual1);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(1), 1),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
@@ -133,7 +135,7 @@ public class SynchronizedSortedBagTest extends AbstractMutableSortedBagTestCase
 
         Set<ObjectIntPair<Integer>> actual2 =
                 bag1.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
-        Assert.assertEquals(
+        assertEquals(
                 Sets.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
@@ -141,7 +143,7 @@ public class SynchronizedSortedBagTest extends AbstractMutableSortedBagTestCase
                 actual2);
 
         Bag<Integer> bag2 = this.newWith(3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 4, 5, 7);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(6, 5, 8, 5, 6, 8),
                 bag2.collectWithOccurrences((each, index) -> each + index));
     }

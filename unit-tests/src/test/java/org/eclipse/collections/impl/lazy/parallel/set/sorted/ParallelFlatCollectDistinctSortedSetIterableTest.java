@@ -18,8 +18,9 @@ import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.lazy.parallel.set.ParallelUnsortedSetIterableTestCase;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ParallelFlatCollectDistinctSortedSetIterableTest extends ParallelUnsortedSetIterableTestCase
 {
@@ -45,7 +46,7 @@ public class ParallelFlatCollectDistinctSortedSetIterableTest extends ParallelUn
     {
         Function<Integer, Boolean> isOddFunction = object -> IntegerPredicates.isOdd().accept(object);
 
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpected().toSet().groupBy(isOddFunction),
                 this.classUnderTest().groupBy(isOddFunction));
     }
@@ -54,7 +55,7 @@ public class ParallelFlatCollectDistinctSortedSetIterableTest extends ParallelUn
     @Override
     public void groupByEach()
     {
-        Assert.assertEquals(
+        assertEquals(
                 this.getExpected().toSet().groupByEach(new NegativeIntervalFunction()),
                 this.classUnderTest().groupByEach(new NegativeIntervalFunction()));
     }

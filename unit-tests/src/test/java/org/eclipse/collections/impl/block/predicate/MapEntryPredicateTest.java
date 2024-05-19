@@ -12,8 +12,10 @@ package org.eclipse.collections.impl.block.predicate;
 
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class MapEntryPredicateTest
 {
@@ -49,7 +51,7 @@ public class MapEntryPredicateTest
                 return String.valueOf(argument2).equals(argument1);
             }
         };
-        Assert.assertTrue(mapEntryPredicate.accept(this.entry));
+        assertTrue(mapEntryPredicate.accept(this.entry));
     }
 
     @Test
@@ -63,9 +65,9 @@ public class MapEntryPredicateTest
                 return String.valueOf(argument2).equals(argument1);
             }
         };
-        Assert.assertFalse(mapEntryPredicate.negate().accept(this.entry));
-        Assert.assertFalse(mapEntryPredicate.negate().accept("1", 1));
-        Assert.assertTrue(mapEntryPredicate.negate().accept(new Map.Entry<String, Integer>()
+        assertFalse(mapEntryPredicate.negate().accept(this.entry));
+        assertFalse(mapEntryPredicate.negate().accept("1", 1));
+        assertTrue(mapEntryPredicate.negate().accept(new Map.Entry<String, Integer>()
         {
             @Override
             public String getKey()
@@ -85,6 +87,6 @@ public class MapEntryPredicateTest
                 return null;
             }
         }));
-        Assert.assertTrue(mapEntryPredicate.negate().accept("1", 2));
+        assertTrue(mapEntryPredicate.negate().accept("1", 2));
     }
 }

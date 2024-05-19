@@ -12,9 +12,10 @@ package org.eclipse.collections.impl.lazy;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ZipWithIndexIterableTest
 {
@@ -29,7 +30,7 @@ public class ZipWithIndexIterableTest
 
     private void assertBufferContains(String expected)
     {
-        Assert.assertEquals(expected, this.buffer.toString());
+        assertEquals(expected, this.buffer.toString());
     }
 
     @Test

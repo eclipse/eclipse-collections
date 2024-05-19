@@ -22,8 +22,14 @@ import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMap;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link ImmutableObjectBooleanSingletonMap}.
@@ -41,9 +47,9 @@ public class ImmutableObjectBooleanSingletonMapTest extends AbstractImmutableObj
     {
         ImmutableObjectBooleanMap<String> map1 = this.classUnderTest();
         ImmutableObjectBooleanMap<String> expected = ObjectBooleanHashMap.newWithKeysValues("1", true, "3", true).toImmutable();
-        Assert.assertEquals(expected, map1.newWithKeyValue("3", true));
-        Assert.assertNotSame(map1, map1.newWithKeyValue("3", true));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected, map1.newWithKeyValue("3", true));
+        assertNotSame(map1, map1.newWithKeyValue("3", true));
+        assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -51,13 +57,13 @@ public class ImmutableObjectBooleanSingletonMapTest extends AbstractImmutableObj
     {
         ImmutableObjectBooleanMap<String> map1 = this.classUnderTest();
         ImmutableObjectBooleanMap<String> expected1 = this.newWithKeysValues("1", true);
-        Assert.assertEquals(expected1, map1.newWithoutKey("2"));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected1, map1.newWithoutKey("2"));
+        assertEquals(this.classUnderTest(), map1);
 
         ImmutableObjectBooleanMap<String> expected2 = this.getEmptyMap();
-        Assert.assertEquals(expected2, map1.newWithoutKey("1"));
-        Assert.assertNotSame(map1, map1.newWithoutKey("1"));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected2, map1.newWithoutKey("1"));
+        assertNotSame(map1, map1.newWithoutKey("1"));
+        assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -65,33 +71,33 @@ public class ImmutableObjectBooleanSingletonMapTest extends AbstractImmutableObj
     {
         ImmutableObjectBooleanMap<String> map1 = this.classUnderTest();
         ImmutableObjectBooleanMap<String> expected1 = this.newWithKeysValues("1", true);
-        Assert.assertEquals(expected1, map1.newWithoutAllKeys(FastList.newListWith("2", "3")));
-        Assert.assertNotSame(map1, map1.newWithoutAllKeys(FastList.newListWith("2", "3")));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected1, map1.newWithoutAllKeys(FastList.newListWith("2", "3")));
+        assertNotSame(map1, map1.newWithoutAllKeys(FastList.newListWith("2", "3")));
+        assertEquals(this.classUnderTest(), map1);
 
         ImmutableObjectBooleanMap<String> expected2 = this.getEmptyMap();
-        Assert.assertEquals(expected2, map1.newWithoutAllKeys(FastList.newListWith("1", "3")));
-        Assert.assertNotSame(map1, map1.newWithoutAllKeys(FastList.newListWith("1", "3")));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected2, map1.newWithoutAllKeys(FastList.newListWith("1", "3")));
+        assertNotSame(map1, map1.newWithoutAllKeys(FastList.newListWith("1", "3")));
+        assertEquals(this.classUnderTest(), map1);
     }
 
     @Override
     @Test
     public void containsKey()
     {
-        Assert.assertFalse(this.classUnderTest().containsKey("0"));
-        Assert.assertTrue(this.classUnderTest().containsKey("1"));
-        Assert.assertFalse(this.classUnderTest().containsKey("2"));
-        Assert.assertFalse(this.classUnderTest().containsKey("3"));
-        Assert.assertFalse(this.classUnderTest().containsKey(null));
+        assertFalse(this.classUnderTest().containsKey("0"));
+        assertTrue(this.classUnderTest().containsKey("1"));
+        assertFalse(this.classUnderTest().containsKey("2"));
+        assertFalse(this.classUnderTest().containsKey("3"));
+        assertFalse(this.classUnderTest().containsKey(null));
     }
 
     @Override
     @Test
     public void containsValue()
     {
-        Assert.assertFalse(this.classUnderTest().containsValue(false));
-        Assert.assertTrue(this.classUnderTest().containsValue(true));
+        assertFalse(this.classUnderTest().containsValue(false));
+        assertTrue(this.classUnderTest().containsValue(true));
     }
 
     @Override
@@ -99,59 +105,59 @@ public class ImmutableObjectBooleanSingletonMapTest extends AbstractImmutableObj
     public void detectIfNone()
     {
         boolean detect = this.classUnderTest().detectIfNone(value -> true, false);
-        Assert.assertTrue(detect);
+        assertTrue(detect);
 
         boolean detect1 = this.classUnderTest().detectIfNone(value -> false, false);
-        Assert.assertFalse(detect1);
+        assertFalse(detect1);
     }
 
     @Override
     @Test
     public void getIfAbsent()
     {
-        Assert.assertTrue(this.classUnderTest().getIfAbsent("0", true));
-        Assert.assertTrue(this.classUnderTest().getIfAbsent("1", false));
-        Assert.assertFalse(this.classUnderTest().getIfAbsent("2", false));
-        Assert.assertFalse(this.classUnderTest().getIfAbsent("5", false));
-        Assert.assertTrue(this.classUnderTest().getIfAbsent("5", true));
+        assertTrue(this.classUnderTest().getIfAbsent("0", true));
+        assertTrue(this.classUnderTest().getIfAbsent("1", false));
+        assertFalse(this.classUnderTest().getIfAbsent("2", false));
+        assertFalse(this.classUnderTest().getIfAbsent("5", false));
+        assertTrue(this.classUnderTest().getIfAbsent("5", true));
 
-        Assert.assertTrue(this.classUnderTest().getIfAbsent(null, true));
-        Assert.assertFalse(this.classUnderTest().getIfAbsent(null, false));
+        assertTrue(this.classUnderTest().getIfAbsent(null, true));
+        assertFalse(this.classUnderTest().getIfAbsent(null, false));
     }
 
     @Override
     @Test
     public void allSatisfy()
     {
-        Assert.assertFalse(this.classUnderTest().allSatisfy(value1 -> false));
+        assertFalse(this.classUnderTest().allSatisfy(value1 -> false));
 
-        Assert.assertTrue(this.classUnderTest().allSatisfy(value -> true));
+        assertTrue(this.classUnderTest().allSatisfy(value -> true));
     }
 
     @Override
     @Test
     public void reject()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().reject((object1, value3) -> false));
+        assertEquals(this.classUnderTest(), this.classUnderTest().reject((object1, value3) -> false));
 
-        Assert.assertEquals(this.getEmptyMap(), this.classUnderTest().reject((object, value2) -> true));
+        assertEquals(this.getEmptyMap(), this.classUnderTest().reject((object, value2) -> true));
 
-        Assert.assertEquals(new BooleanHashBag(), this.classUnderTest().reject(value1 -> true).toBag());
+        assertEquals(new BooleanHashBag(), this.classUnderTest().reject(value1 -> true).toBag());
 
-        Assert.assertEquals(BooleanHashBag.newBagWith(true), this.classUnderTest().reject(value -> false).toBag());
+        assertEquals(BooleanHashBag.newBagWith(true), this.classUnderTest().reject(value -> false).toBag());
     }
 
     @Override
     @Test
     public void select()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().select((object1, value3) -> true));
+        assertEquals(this.classUnderTest(), this.classUnderTest().select((object1, value3) -> true));
 
-        Assert.assertEquals(this.getEmptyMap(), this.classUnderTest().select((object, value2) -> false));
+        assertEquals(this.getEmptyMap(), this.classUnderTest().select((object, value2) -> false));
 
-        Assert.assertEquals(new BooleanHashBag(), this.classUnderTest().select(value1 -> false).toBag());
+        assertEquals(new BooleanHashBag(), this.classUnderTest().select(value1 -> false).toBag());
 
-        Assert.assertEquals(BooleanHashBag.newBagWith(true), this.classUnderTest().select(value -> true).toBag());
+        assertEquals(BooleanHashBag.newBagWith(true), this.classUnderTest().select(value -> true).toBag());
     }
 
     @Override
@@ -159,90 +165,90 @@ public class ImmutableObjectBooleanSingletonMapTest extends AbstractImmutableObj
     public void iterator()
     {
         BooleanIterator iterator = this.classUnderTest().booleanIterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertTrue(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertTrue(iterator.hasNext());
+        assertTrue(iterator.next());
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
     @Test
     public void anySatisfy()
     {
-        Assert.assertTrue(this.classUnderTest().anySatisfy(BooleanPredicates.isTrue()));
-        Assert.assertFalse(this.classUnderTest().anySatisfy(BooleanPredicates.isFalse()));
-        Assert.assertTrue(this.classUnderTest().anySatisfy(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.isFalse())));
-        Assert.assertFalse(this.classUnderTest().anySatisfy(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.isFalse())));
+        assertTrue(this.classUnderTest().anySatisfy(BooleanPredicates.isTrue()));
+        assertFalse(this.classUnderTest().anySatisfy(BooleanPredicates.isFalse()));
+        assertTrue(this.classUnderTest().anySatisfy(BooleanPredicates.or(BooleanPredicates.isTrue(), BooleanPredicates.isFalse())));
+        assertFalse(this.classUnderTest().anySatisfy(BooleanPredicates.and(BooleanPredicates.isTrue(), BooleanPredicates.isFalse())));
     }
 
     @Override
     @Test
     public void contains()
     {
-        Assert.assertFalse(this.classUnderTest().contains(false));
-        Assert.assertTrue(this.classUnderTest().contains(true));
+        assertFalse(this.classUnderTest().contains(false));
+        assertTrue(this.classUnderTest().contains(true));
     }
 
     @Override
     @Test
     public void getOrThrow()
     {
-        Assert.assertTrue(this.classUnderTest().getOrThrow("1"));
-        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("5"));
-        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("0"));
-        Assert.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(null));
+        assertTrue(this.classUnderTest().getOrThrow("1"));
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("5"));
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("0"));
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(null));
     }
 
     @Override
     @Test
     public void get()
     {
-        Assert.assertFalse(this.classUnderTest().get("0"));
-        Assert.assertTrue(this.classUnderTest().get("1"));
-        Assert.assertFalse(this.classUnderTest().get(null));
+        assertFalse(this.classUnderTest().get("0"));
+        assertTrue(this.classUnderTest().get("1"));
+        assertFalse(this.classUnderTest().get(null));
     }
 
     @Override
     @Test
     public void count()
     {
-        Assert.assertEquals(1L, this.classUnderTest().count(value1 -> true));
+        assertEquals(1L, this.classUnderTest().count(value1 -> true));
 
-        Assert.assertEquals(0L, this.classUnderTest().count(value -> false));
+        assertEquals(0L, this.classUnderTest().count(value -> false));
     }
 
     @Override
     @Test
     public void toBag()
     {
-        Assert.assertEquals(BooleanHashBag.newBagWith(true), this.classUnderTest().toBag());
+        assertEquals(BooleanHashBag.newBagWith(true), this.classUnderTest().toBag());
     }
 
     @Override
     @Test
     public void toSet()
     {
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), this.classUnderTest().toSet());
+        assertEquals(BooleanHashSet.newSetWith(true), this.classUnderTest().toSet());
     }
 
     @Override
     @Test
     public void containsAll()
     {
-        Assert.assertFalse(this.classUnderTest().containsAll(false, false));
-        Assert.assertFalse(this.classUnderTest().containsAll(true, false));
-        Assert.assertTrue(this.classUnderTest().containsAll(true));
-        Assert.assertTrue(this.classUnderTest().containsAll());
+        assertFalse(this.classUnderTest().containsAll(false, false));
+        assertFalse(this.classUnderTest().containsAll(true, false));
+        assertTrue(this.classUnderTest().containsAll(true));
+        assertTrue(this.classUnderTest().containsAll());
     }
 
     @Override
     @Test
     public void containsAllIterable()
     {
-        Assert.assertFalse(this.classUnderTest().containsAll(BooleanArrayList.newListWith(false, false)));
-        Assert.assertFalse(this.classUnderTest().containsAll(BooleanArrayList.newListWith(true, false)));
-        Assert.assertTrue(this.classUnderTest().containsAll(BooleanArrayList.newListWith(true)));
-        Assert.assertTrue(this.classUnderTest().containsAll(new BooleanArrayList()));
+        assertFalse(this.classUnderTest().containsAll(BooleanArrayList.newListWith(false, false)));
+        assertFalse(this.classUnderTest().containsAll(BooleanArrayList.newListWith(true, false)));
+        assertTrue(this.classUnderTest().containsAll(BooleanArrayList.newListWith(true)));
+        assertTrue(this.classUnderTest().containsAll(new BooleanArrayList()));
     }
 
     @Override
@@ -253,8 +259,8 @@ public class ImmutableObjectBooleanSingletonMapTest extends AbstractImmutableObj
         ObjectBooleanMap<String> map2 = this.newWithKeysValues("0", false);
         ObjectBooleanMap<String> map3 = this.newWithKeysValues("0", false, "1", true);
 
-        Assert.assertNotEquals(this.classUnderTest(), map3);
-        Assert.assertNotEquals(this.classUnderTest(), map2);
+        assertNotEquals(this.classUnderTest(), map3);
+        assertNotEquals(this.classUnderTest(), map2);
         Verify.assertEqualsAndHashCode(this.classUnderTest(), map1);
         Verify.assertPostSerializedEqualsAndHashCode(this.classUnderTest());
     }
@@ -270,15 +276,15 @@ public class ImmutableObjectBooleanSingletonMapTest extends AbstractImmutableObj
     @Test
     public void notEmpty()
     {
-        Assert.assertTrue(this.classUnderTest().notEmpty());
+        assertTrue(this.classUnderTest().notEmpty());
     }
 
     @Override
     @Test
     public void noneSatisfy()
     {
-        Assert.assertFalse(this.classUnderTest().noneSatisfy(value1 -> true));
+        assertFalse(this.classUnderTest().noneSatisfy(value1 -> true));
 
-        Assert.assertTrue(this.classUnderTest().noneSatisfy(value -> false));
+        assertTrue(this.classUnderTest().noneSatisfy(value -> false));
     }
 }

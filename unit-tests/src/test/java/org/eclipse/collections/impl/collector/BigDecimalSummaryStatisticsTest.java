@@ -16,8 +16,11 @@ import java.util.List;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.list.Interval;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 public class BigDecimalSummaryStatisticsTest
 {
@@ -27,13 +30,13 @@ public class BigDecimalSummaryStatisticsTest
         BigDecimalSummaryStatistics statistics = new BigDecimalSummaryStatistics();
         List<BigDecimal> integers = Interval.oneTo(5).collect(i -> BigDecimal.valueOf((long) i)).toList();
         integers.forEach(statistics);
-        Assert.assertEquals(BigDecimal.valueOf(15L), statistics.getSum());
-        Assert.assertEquals(5L, statistics.getCount());
-        Assert.assertEquals(BigDecimal.valueOf(1L), statistics.getMin());
-        Assert.assertEquals(BigDecimal.valueOf(1L), statistics.getMinOptional().get());
-        Assert.assertEquals(BigDecimal.valueOf(5L), statistics.getMax());
-        Assert.assertEquals(BigDecimal.valueOf(5L), statistics.getMaxOptional().get());
-        Assert.assertEquals(BigDecimal.valueOf(3L), statistics.getAverage());
+        assertEquals(BigDecimal.valueOf(15L), statistics.getSum());
+        assertEquals(5L, statistics.getCount());
+        assertEquals(BigDecimal.valueOf(1L), statistics.getMin());
+        assertEquals(BigDecimal.valueOf(1L), statistics.getMinOptional().get());
+        assertEquals(BigDecimal.valueOf(5L), statistics.getMax());
+        assertEquals(BigDecimal.valueOf(5L), statistics.getMaxOptional().get());
+        assertEquals(BigDecimal.valueOf(3L), statistics.getAverage());
     }
 
     @Test
@@ -42,13 +45,13 @@ public class BigDecimalSummaryStatisticsTest
         BigDecimalSummaryStatistics statistics = new BigDecimalSummaryStatistics();
         MutableList<BigDecimal> integers = Interval.oneTo(5).collect(i -> BigDecimal.valueOf((long) i)).toList();
         integers.each(statistics);
-        Assert.assertEquals(BigDecimal.valueOf(15L), statistics.getSum());
-        Assert.assertEquals(5L, statistics.getCount());
-        Assert.assertEquals(BigDecimal.valueOf(1L), statistics.getMin());
-        Assert.assertEquals(BigDecimal.valueOf(1L), statistics.getMinOptional().get());
-        Assert.assertEquals(BigDecimal.valueOf(5L), statistics.getMax());
-        Assert.assertEquals(BigDecimal.valueOf(5L), statistics.getMaxOptional().get());
-        Assert.assertEquals(BigDecimal.valueOf(3L), statistics.getAverage());
+        assertEquals(BigDecimal.valueOf(15L), statistics.getSum());
+        assertEquals(5L, statistics.getCount());
+        assertEquals(BigDecimal.valueOf(1L), statistics.getMin());
+        assertEquals(BigDecimal.valueOf(1L), statistics.getMinOptional().get());
+        assertEquals(BigDecimal.valueOf(5L), statistics.getMax());
+        assertEquals(BigDecimal.valueOf(5L), statistics.getMaxOptional().get());
+        assertEquals(BigDecimal.valueOf(3L), statistics.getAverage());
     }
 
     @Test
@@ -60,25 +63,25 @@ public class BigDecimalSummaryStatisticsTest
         BigDecimalSummaryStatistics statistics2 = new BigDecimalSummaryStatistics();
         MutableList<BigDecimal> integers2 = Interval.fromTo(3, 5).collect(i -> BigDecimal.valueOf((long) i)).toList();
         integers2.each(statistics2);
-        Assert.assertSame(statistics1, statistics1.merge(statistics2));
-        Assert.assertEquals(BigDecimal.valueOf(15L), statistics1.getSum());
-        Assert.assertEquals(5L, statistics1.getCount());
-        Assert.assertEquals(BigDecimal.valueOf(1L), statistics1.getMin());
-        Assert.assertEquals(BigDecimal.valueOf(1L), statistics1.getMinOptional().get());
-        Assert.assertEquals(BigDecimal.valueOf(5L), statistics1.getMax());
-        Assert.assertEquals(BigDecimal.valueOf(5L), statistics1.getMaxOptional().get());
-        Assert.assertEquals(BigDecimal.valueOf(3L), statistics1.getAverage());
+        assertSame(statistics1, statistics1.merge(statistics2));
+        assertEquals(BigDecimal.valueOf(15L), statistics1.getSum());
+        assertEquals(5L, statistics1.getCount());
+        assertEquals(BigDecimal.valueOf(1L), statistics1.getMin());
+        assertEquals(BigDecimal.valueOf(1L), statistics1.getMinOptional().get());
+        assertEquals(BigDecimal.valueOf(5L), statistics1.getMax());
+        assertEquals(BigDecimal.valueOf(5L), statistics1.getMaxOptional().get());
+        assertEquals(BigDecimal.valueOf(3L), statistics1.getAverage());
     }
 
     @Test
     public void empty()
     {
         BigDecimalSummaryStatistics statistics = new BigDecimalSummaryStatistics();
-        Assert.assertEquals(0L, statistics.getCount());
-        Assert.assertEquals(BigDecimal.ZERO, statistics.getSum());
-        Assert.assertEquals(BigDecimal.ZERO, statistics.getAverage());
-        Assert.assertNull(statistics.getMin());
-        Assert.assertNull(statistics.getMax());
+        assertEquals(0L, statistics.getCount());
+        assertEquals(BigDecimal.ZERO, statistics.getSum());
+        assertEquals(BigDecimal.ZERO, statistics.getAverage());
+        assertNull(statistics.getMin());
+        assertNull(statistics.getMax());
     }
 
     @Test
@@ -86,19 +89,19 @@ public class BigDecimalSummaryStatisticsTest
     {
         BigDecimalSummaryStatistics statistics =
                 Interval.oneTo(5).stream().collect(Collectors2.summarizingBigDecimal(BigDecimal::new));
-        Assert.assertEquals(BigDecimal.valueOf(15L), statistics.getSum());
-        Assert.assertEquals(5L, statistics.getCount());
-        Assert.assertEquals(BigDecimal.valueOf(1L), statistics.getMin());
-        Assert.assertEquals(BigDecimal.valueOf(1L), statistics.getMinOptional().get());
-        Assert.assertEquals(BigDecimal.valueOf(5L), statistics.getMax());
-        Assert.assertEquals(BigDecimal.valueOf(5L), statistics.getMaxOptional().get());
-        Assert.assertEquals(BigDecimal.valueOf(3L), statistics.getAverage());
+        assertEquals(BigDecimal.valueOf(15L), statistics.getSum());
+        assertEquals(5L, statistics.getCount());
+        assertEquals(BigDecimal.valueOf(1L), statistics.getMin());
+        assertEquals(BigDecimal.valueOf(1L), statistics.getMinOptional().get());
+        assertEquals(BigDecimal.valueOf(5L), statistics.getMax());
+        assertEquals(BigDecimal.valueOf(5L), statistics.getMaxOptional().get());
+        assertEquals(BigDecimal.valueOf(3L), statistics.getAverage());
     }
 
     @Test
     public void average()
     {
-        Assert.assertEquals(
+        assertEquals(
                 new BigDecimal("3.333333333333333333333333333333333"),
                 IntLists.mutable.with(2, 2, 6)
                         .collect(Long::valueOf)
@@ -106,7 +109,7 @@ public class BigDecimalSummaryStatisticsTest
                         .collect(Collectors2.summarizingBigDecimal(BigDecimal::valueOf))
                         .getAverage());
 
-        Assert.assertEquals(
+        assertEquals(
                 new BigDecimal("3.666666666666666666666666666666667"),
                 IntLists.mutable.with(2, 3, 6)
                         .collect(Long::valueOf)
@@ -114,7 +117,7 @@ public class BigDecimalSummaryStatisticsTest
                         .collect(Collectors2.summarizingBigDecimal(BigDecimal::valueOf))
                         .getAverage());
 
-        Assert.assertEquals(
+        assertEquals(
                 new BigDecimal("1"),
                 IntLists.mutable.with(1, 1, 1)
                         .collect(Long::valueOf)
@@ -122,7 +125,7 @@ public class BigDecimalSummaryStatisticsTest
                         .collect(Collectors2.summarizingBigDecimal(BigDecimal::valueOf))
                         .getAverage());
 
-        Assert.assertEquals(
+        assertEquals(
                 new BigDecimal("4"),
                 IntLists.mutable.with(2, 3, 4, 5, 6)
                         .collect(Long::valueOf)
@@ -130,7 +133,7 @@ public class BigDecimalSummaryStatisticsTest
                         .collect(Collectors2.summarizingBigDecimal(BigDecimal::valueOf))
                         .getAverage());
 
-        Assert.assertEquals(
+        assertEquals(
                 new BigDecimal("3.8"),
                 IntLists.mutable.with(2, 3, 4, 5, 5)
                         .collect(Long::valueOf)

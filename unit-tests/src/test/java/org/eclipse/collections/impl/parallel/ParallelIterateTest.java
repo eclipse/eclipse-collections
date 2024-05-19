@@ -63,9 +63,14 @@ import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class ParallelIterateTest
 {
@@ -142,25 +147,25 @@ public class ParallelIterateTest
         IntegerSum sum = new IntegerSum(0);
         MutableSet<Integer> set = Interval.toSet(1, 100);
         ParallelIterate.forEach(set, new SumProcedure(sum), new SumCombiner(sum));
-        Assert.assertEquals(5050, sum.getSum());
+        assertEquals(5050, sum.getSum());
 
         //Testing batch size 1
         IntegerSum sum2 = new IntegerSum(0);
         UnifiedSet<Integer> set2 = UnifiedSet.newSet(Interval.oneTo(100));
         ParallelIterate.forEach(set2, new SumProcedure(sum2), new SumCombiner(sum2), 1, set2.getBatchCount(set2.size()));
-        Assert.assertEquals(5050, sum2.getSum());
+        assertEquals(5050, sum2.getSum());
 
         //Testing an uneven batch size
         IntegerSum sum3 = new IntegerSum(0);
         UnifiedSet<Integer> set3 = UnifiedSet.newSet(Interval.oneTo(100));
         ParallelIterate.forEach(set3, new SumProcedure(sum3), new SumCombiner(sum3), 1, set3.getBatchCount(13));
-        Assert.assertEquals(5050, sum3.getSum());
+        assertEquals(5050, sum3.getSum());
 
         //Testing divideByZero exception by passing 1 as batchSize
         IntegerSum sum4 = new IntegerSum(0);
         UnifiedSet<Integer> set4 = UnifiedSet.newSet(Interval.oneTo(100));
         ParallelIterate.forEach(set4, new SumProcedure(sum4), new SumCombiner(sum4), 1);
-        Assert.assertEquals(5050, sum4.getSum());
+        assertEquals(5050, sum4.getSum());
     }
 
     @Test
@@ -170,19 +175,19 @@ public class ParallelIterateTest
         IntegerSum sum1 = new IntegerSum(0);
         MutableMap<String, Integer> map1 = Interval.fromTo(1, 100).toMap(String::valueOf, Functions.getIntegerPassThru());
         ParallelIterate.forEach(map1, new SumProcedure(sum1), new SumCombiner(sum1));
-        Assert.assertEquals(5050, sum1.getSum());
+        assertEquals(5050, sum1.getSum());
 
         //Testing batch size 1
         IntegerSum sum2 = new IntegerSum(0);
         UnifiedMap<String, Integer> map2 = (UnifiedMap<String, Integer>) Interval.fromTo(1, 100).toMap(String::valueOf, Functions.getIntegerPassThru());
         ParallelIterate.forEach(map2, new SumProcedure(sum2), new SumCombiner(sum2), 1, map2.getBatchCount(map2.size()));
-        Assert.assertEquals(5050, sum2.getSum());
+        assertEquals(5050, sum2.getSum());
 
         //Testing an uneven batch size
         IntegerSum sum3 = new IntegerSum(0);
         UnifiedMap<String, Integer> set3 = (UnifiedMap<String, Integer>) Interval.fromTo(1, 100).toMap(String::valueOf, Functions.getIntegerPassThru());
         ParallelIterate.forEach(set3, new SumProcedure(sum3), new SumCombiner(sum3), 1, set3.getBatchCount(13));
-        Assert.assertEquals(5050, sum3.getSum());
+        assertEquals(5050, sum3.getSum());
     }
 
     @Test
@@ -191,37 +196,37 @@ public class ParallelIterateTest
         IntegerSum sum1 = new IntegerSum(0);
         List<Integer> list1 = ParallelIterateTest.createIntegerList(16);
         ParallelIterate.forEach(list1, new SumProcedure(sum1), new SumCombiner(sum1), 1, list1.size() / 2);
-        Assert.assertEquals(16, sum1.getSum());
+        assertEquals(16, sum1.getSum());
 
         IntegerSum sum2 = new IntegerSum(0);
         List<Integer> list2 = ParallelIterateTest.createIntegerList(7);
         ParallelIterate.forEach(list2, new SumProcedure(sum2), new SumCombiner(sum2));
-        Assert.assertEquals(7, sum2.getSum());
+        assertEquals(7, sum2.getSum());
 
         IntegerSum sum3 = new IntegerSum(0);
         List<Integer> list3 = ParallelIterateTest.createIntegerList(15);
         ParallelIterate.forEach(list3, new SumProcedure(sum3), new SumCombiner(sum3), 1, list3.size() / 2);
-        Assert.assertEquals(15, sum3.getSum());
+        assertEquals(15, sum3.getSum());
 
         IntegerSum sum4 = new IntegerSum(0);
         List<Integer> list4 = ParallelIterateTest.createIntegerList(35);
         ParallelIterate.forEach(list4, new SumProcedure(sum4), new SumCombiner(sum4));
-        Assert.assertEquals(35, sum4.getSum());
+        assertEquals(35, sum4.getSum());
 
         IntegerSum sum5 = new IntegerSum(0);
         MutableList<Integer> list5 = FastList.newList(list4);
         ParallelIterate.forEach(list5, new SumProcedure(sum5), new SumCombiner(sum5));
-        Assert.assertEquals(35, sum5.getSum());
+        assertEquals(35, sum5.getSum());
 
         IntegerSum sum6 = new IntegerSum(0);
         List<Integer> list6 = ParallelIterateTest.createIntegerList(40);
         ParallelIterate.forEach(list6, new SumProcedure(sum6), new SumCombiner(sum6), 1, list6.size() / 2);
-        Assert.assertEquals(40, sum6.getSum());
+        assertEquals(40, sum6.getSum());
 
         IntegerSum sum7 = new IntegerSum(0);
         MutableList<Integer> list7 = FastList.newList(list6);
         ParallelIterate.forEach(list7, new SumProcedure(sum7), new SumCombiner(sum7), 1, list6.size() / 2);
-        Assert.assertEquals(40, sum7.getSum());
+        assertEquals(40, sum7.getSum());
     }
 
     @Test
@@ -230,43 +235,43 @@ public class ParallelIterateTest
         IntegerSum sum1 = new IntegerSum(0);
         ImmutableList<Integer> list1 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(16));
         ParallelIterate.forEach(list1, new SumProcedure(sum1), new SumCombiner(sum1), 1, list1.size() / 2);
-        Assert.assertEquals(16, sum1.getSum());
+        assertEquals(16, sum1.getSum());
 
         IntegerSum sum2 = new IntegerSum(0);
         ImmutableList<Integer> list2 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(7));
         ParallelIterate.forEach(list2, new SumProcedure(sum2), new SumCombiner(sum2));
-        Assert.assertEquals(7, sum2.getSum());
+        assertEquals(7, sum2.getSum());
 
         IntegerSum sum3 = new IntegerSum(0);
         ImmutableList<Integer> list3 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(15));
         ParallelIterate.forEach(list3, new SumProcedure(sum3), new SumCombiner(sum3), 1, list3.size() / 2);
-        Assert.assertEquals(15, sum3.getSum());
+        assertEquals(15, sum3.getSum());
 
         IntegerSum sum4 = new IntegerSum(0);
         ImmutableList<Integer> list4 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(35));
         ParallelIterate.forEach(list4, new SumProcedure(sum4), new SumCombiner(sum4));
-        Assert.assertEquals(35, sum4.getSum());
+        assertEquals(35, sum4.getSum());
 
         IntegerSum sum5 = new IntegerSum(0);
         ImmutableList<Integer> list5 = FastList.newList(list4).toImmutable();
         ParallelIterate.forEach(list5, new SumProcedure(sum5), new SumCombiner(sum5));
-        Assert.assertEquals(35, sum5.getSum());
+        assertEquals(35, sum5.getSum());
 
         IntegerSum sum6 = new IntegerSum(0);
         ImmutableList<Integer> list6 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(40));
         ParallelIterate.forEach(list6, new SumProcedure(sum6), new SumCombiner(sum6), 1, list6.size() / 2);
-        Assert.assertEquals(40, sum6.getSum());
+        assertEquals(40, sum6.getSum());
 
         IntegerSum sum7 = new IntegerSum(0);
         ImmutableList<Integer> list7 = FastList.newList(list6).toImmutable();
         ParallelIterate.forEach(list7, new SumProcedure(sum7), new SumCombiner(sum7), 1, list6.size() / 2);
-        Assert.assertEquals(40, sum7.getSum());
+        assertEquals(40, sum7.getSum());
     }
 
     @Test
     public void testForEachWithException()
     {
-        Assert.assertThrows(
+        assertThrows(
                 RuntimeException.class,
                 () -> ParallelIterate.forEach(
                         ParallelIterateTest.createIntegerList(5),
@@ -281,9 +286,9 @@ public class ParallelIterateTest
     {
         Integer[] array = new Integer[200];
         MutableList<Integer> list = new FastList<>(Interval.oneTo(200));
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
+        assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
     @Test
@@ -291,9 +296,9 @@ public class ParallelIterateTest
     {
         Integer[] array = new Integer[200];
         MutableList<Integer> list = new FastList<>(Interval.oneTo(200));
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
+        assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
     @Test
@@ -301,9 +306,9 @@ public class ParallelIterateTest
     {
         Integer[] array = new Integer[200];
         ImmutableList<Integer> list = Interval.oneTo(200).toList().toImmutable();
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
+        assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
     @Test
@@ -311,25 +316,25 @@ public class ParallelIterateTest
     {
         Integer[] array = new Integer[200];
         List<Integer> list = new ArrayList<>(Interval.oneTo(200));
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
+        assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
     @Test
     public void testForEachWithIndexToArrayUsingFixedArrayList()
     {
         Integer[] array = new Integer[10];
-        Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 1, 2);
-        Assert.assertArrayEquals(array, list.toArray(new Integer[list.size()]));
+        assertArrayEquals(array, list.toArray(new Integer[list.size()]));
     }
 
     @Test
     public void testForEachWithIndexException()
     {
-        Assert.assertThrows(
+        assertThrows(
                 RuntimeException.class,
                 () -> ParallelIterate.forEachWithIndex(
                         ParallelIterateTest.createIntegerList(5),
@@ -351,9 +356,9 @@ public class ParallelIterateTest
         Collection<Integer> actual2 = ParallelIterate.select(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = ParallelIterate.select(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.select(Predicates.greaterThan(100));
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
     }
 
     @Test
@@ -363,10 +368,10 @@ public class ParallelIterateTest
         Collection<Integer> actual1 = ParallelIterate.select(iterable, Predicates.greaterThan(100));
         Collection<Integer> actual2 = ParallelIterate.select(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.select(Predicates.greaterThan(100));
-        Assert.assertSame(expected.getClass(), actual1.getClass());
-        Assert.assertSame(expected.getClass(), actual2.getClass());
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
+        assertSame(expected.getClass(), actual1.getClass());
+        assertSame(expected.getClass(), actual2.getClass());
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
     }
 
     @Test
@@ -379,8 +384,8 @@ public class ParallelIterateTest
     {
         int actual1 = ParallelIterate.count(iterable, Predicates.greaterThan(100));
         int actual2 = ParallelIterate.count(iterable, Predicates.greaterThan(100), 6, this.executor);
-        Assert.assertEquals(100, actual1);
-        Assert.assertEquals(100, actual2);
+        assertEquals(100, actual1);
+        assertEquals(100, actual2);
     }
 
     @Test
@@ -395,9 +400,9 @@ public class ParallelIterateTest
         Collection<Integer> actual2 = ParallelIterate.reject(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = ParallelIterate.reject(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.reject(Predicates.greaterThan(100));
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
     }
 
     @Test
@@ -414,9 +419,9 @@ public class ParallelIterateTest
         RichIterable<String> expected = iterable.collect(String::valueOf);
         Verify.assertSize(200, actual1);
         Verify.assertContains(String.valueOf(200), actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected.toBag(), HashBag.newBag(actual3));
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected.toBag(), HashBag.newBag(actual3));
     }
 
     @Test
@@ -436,9 +441,9 @@ public class ParallelIterateTest
         Verify.assertNotContains(String.valueOf(90), actual1);
         Verify.assertNotContains(String.valueOf(210), actual1);
         Verify.assertContains(String.valueOf(159), actual1);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, HashBag.newBag(actual1));
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
-        Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, HashBag.newBag(actual1));
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
+        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
     }
 
     @Test
@@ -456,15 +461,15 @@ public class ParallelIterateTest
         Multimap<String, Integer> result7 = ParallelIterate.groupBy(iterable.toBag(), String::valueOf, SynchronizedPutHashBagMultimap.newMultimap(), 100);
         Multimap<String, Integer> result8 = ParallelIterate.groupBy(iterable.toBag(), String::valueOf, SynchronizedPutHashBagMultimap.newMultimap());
         Multimap<String, Integer> result9 = ParallelIterate.groupBy(iterable.toList().toImmutable(), String::valueOf);
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result1));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result2));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result9));
-        Assert.assertEquals(expectedAsSet, result3);
-        Assert.assertEquals(expectedAsSet, result4);
-        Assert.assertEquals(expectedAsSet, result5);
-        Assert.assertEquals(expectedAsSet, result6);
-        Assert.assertEquals(expected, result7);
-        Assert.assertEquals(expected, result8);
+        assertEquals(expected, HashBagMultimap.newMultimap(result1));
+        assertEquals(expected, HashBagMultimap.newMultimap(result2));
+        assertEquals(expected, HashBagMultimap.newMultimap(result9));
+        assertEquals(expectedAsSet, result3);
+        assertEquals(expectedAsSet, result4);
+        assertEquals(expectedAsSet, result5);
+        assertEquals(expectedAsSet, result6);
+        assertEquals(expected, result7);
+        assertEquals(expected, result8);
     }
 
     @Test
@@ -486,16 +491,16 @@ public class ParallelIterateTest
         expected.put('M', "Mary");
         expected.put('B', "Bob");
         expected.put('S', "Sara");
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result1));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result2));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result3));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result4));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result5));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result6));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result7));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result8));
-        Assert.assertEquals(expected, HashBagMultimap.newMultimap(result9));
-        Assert.assertThrows(IllegalArgumentException.class, () -> ParallelIterate.groupBy(null, null, 1));
+        assertEquals(expected, HashBagMultimap.newMultimap(result1));
+        assertEquals(expected, HashBagMultimap.newMultimap(result2));
+        assertEquals(expected, HashBagMultimap.newMultimap(result3));
+        assertEquals(expected, HashBagMultimap.newMultimap(result4));
+        assertEquals(expected, HashBagMultimap.newMultimap(result5));
+        assertEquals(expected, HashBagMultimap.newMultimap(result6));
+        assertEquals(expected, HashBagMultimap.newMultimap(result7));
+        assertEquals(expected, HashBagMultimap.newMultimap(result8));
+        assertEquals(expected, HashBagMultimap.newMultimap(result9));
+        assertThrows(IllegalArgumentException.class, () -> ParallelIterate.groupBy(null, null, 1));
     }
 
     @Test
@@ -505,11 +510,11 @@ public class ParallelIterateTest
         List<Integer> list = Interval.oneTo(2000);
         MutableMap<String, AtomicInteger> aggregation =
                 ParallelIterate.aggregateInPlaceBy(list, EVEN_OR_ODD, AtomicInteger::new, countAggregator);
-        Assert.assertEquals(1000, aggregation.get("Even").intValue());
-        Assert.assertEquals(1000, aggregation.get("Odd").intValue());
+        assertEquals(1000, aggregation.get("Even").intValue());
+        assertEquals(1000, aggregation.get("Odd").intValue());
         ParallelIterate.aggregateInPlaceBy(list, EVEN_OR_ODD, AtomicInteger::new, countAggregator, aggregation);
-        Assert.assertEquals(2000, aggregation.get("Even").intValue());
-        Assert.assertEquals(2000, aggregation.get("Odd").intValue());
+        assertEquals(2000, aggregation.get("Even").intValue());
+        assertEquals(2000, aggregation.get("Odd").intValue());
     }
 
     @Test
@@ -522,9 +527,9 @@ public class ParallelIterateTest
                 .shuffleThis();
         MapIterable<String, AtomicInteger> aggregation =
                 ParallelIterate.aggregateInPlaceBy(list, String::valueOf, AtomicInteger::new, AtomicInteger::addAndGet, 50);
-        Assert.assertEquals(100, aggregation.get("1").intValue());
-        Assert.assertEquals(400, aggregation.get("2").intValue());
-        Assert.assertEquals(900, aggregation.get("3").intValue());
+        assertEquals(100, aggregation.get("1").intValue());
+        assertEquals(400, aggregation.get("2").intValue());
+        assertEquals(900, aggregation.get("3").intValue());
     }
 
     @Test
@@ -534,11 +539,11 @@ public class ParallelIterateTest
         List<Integer> list = Interval.oneTo(20000);
         MutableMap<String, Integer> aggregation =
                 ParallelIterate.aggregateBy(list, EVEN_OR_ODD, () -> 0, countAggregator);
-        Assert.assertEquals(10000, aggregation.get("Even").intValue());
-        Assert.assertEquals(10000, aggregation.get("Odd").intValue());
+        assertEquals(10000, aggregation.get("Even").intValue());
+        assertEquals(10000, aggregation.get("Odd").intValue());
         ParallelIterate.aggregateBy(list, EVEN_OR_ODD, () -> 0, countAggregator, aggregation);
-        Assert.assertEquals(20000, aggregation.get("Even").intValue());
-        Assert.assertEquals(20000, aggregation.get("Odd").intValue());
+        assertEquals(20000, aggregation.get("Even").intValue());
+        assertEquals(20000, aggregation.get("Odd").intValue());
     }
 
     @Test
@@ -546,21 +551,21 @@ public class ParallelIterateTest
     {
         Interval interval = Interval.oneTo(100000);
         ObjectDoubleMap<String> sumByCount = ParallelIterate.sumByDouble(interval, EVEN_OR_ODD, i -> 1.0d);
-        Assert.assertEquals(50000.0, sumByCount.get("Even"), 0.0);
-        Assert.assertEquals(50000.0, sumByCount.get("Odd"), 0.0);
+        assertEquals(50000.0, sumByCount.get("Even"), 0.0);
+        assertEquals(50000.0, sumByCount.get("Odd"), 0.0);
         ObjectDoubleMap<String> sumByValue = ParallelIterate.sumByDouble(interval, EVEN_OR_ODD, Integer::doubleValue);
-        Assert.assertEquals(interval.sumByDouble(EVEN_OR_ODD, Integer::doubleValue), sumByValue);
+        assertEquals(interval.sumByDouble(EVEN_OR_ODD, Integer::doubleValue), sumByValue);
         ObjectDoubleMap<Integer> sumByValue2 = ParallelIterate.sumByDouble(interval, i -> i % 1000, Integer::doubleValue);
-        Assert.assertEquals(interval.sumByDouble(i -> i % 1000, Integer::doubleValue), sumByValue2);
+        assertEquals(interval.sumByDouble(i -> i % 1000, Integer::doubleValue), sumByValue2);
         Interval interval2 = Interval.oneTo(UNEVEN_COUNT_FOR_SUMBY);
         ObjectDoubleMap<String> sumByValue3 = ParallelIterate.sumByDouble(interval2, EVEN_OR_ODD, Integer::doubleValue);
-        Assert.assertEquals(interval2.sumByDouble(EVEN_OR_ODD, Integer::doubleValue), sumByValue3);
+        assertEquals(interval2.sumByDouble(EVEN_OR_ODD, Integer::doubleValue), sumByValue3);
         ObjectDoubleMap<Integer> sumByValue4 = ParallelIterate.sumByDouble(interval2, i -> i % 1000, Integer::doubleValue);
-        Assert.assertEquals(interval2.sumByDouble(i -> i % 1000, Integer::doubleValue), sumByValue4);
+        assertEquals(interval2.sumByDouble(i -> i % 1000, Integer::doubleValue), sumByValue4);
         Interval small = Interval.oneTo(11);
         ObjectDoubleMap<String> smallSumByCount = ParallelIterate.sumByDouble(small, EVEN_OR_ODD, i -> 1.0d);
-        Assert.assertEquals(5.0, smallSumByCount.get("Even"), 0.0);
-        Assert.assertEquals(6.0, smallSumByCount.get("Odd"), 0.0);
+        assertEquals(5.0, smallSumByCount.get("Even"), 0.0);
+        assertEquals(6.0, smallSumByCount.get("Odd"), 0.0);
     }
 
     @Test
@@ -579,12 +584,12 @@ public class ParallelIterateTest
                     return 1.0d / (i.doubleValue() * i.doubleValue() * i.doubleValue() * i.doubleValue());
                 });
 
-        Assert.assertEquals(
+        assertEquals(
                 1.082323233711138,
                 result.get(1),
                 1.0e-15);
 
-        Assert.assertEquals(
+        assertEquals(
                 1.082323233711138,
                 result.get(2),
                 1.0e-15);
@@ -595,21 +600,21 @@ public class ParallelIterateTest
     {
         Interval interval = Interval.oneTo(100000);
         ObjectDoubleMap<String> sumByCount = ParallelIterate.sumByFloat(interval, EVEN_OR_ODD, i -> 1.0f);
-        Assert.assertEquals(50000.0, sumByCount.get("Even"), 0.0);
-        Assert.assertEquals(50000.0, sumByCount.get("Odd"), 0.0);
+        assertEquals(50000.0, sumByCount.get("Even"), 0.0);
+        assertEquals(50000.0, sumByCount.get("Odd"), 0.0);
         ObjectDoubleMap<String> sumByValue = ParallelIterate.sumByFloat(interval, EVEN_OR_ODD, Integer::floatValue);
-        Assert.assertEquals(interval.sumByFloat(EVEN_OR_ODD, Integer::floatValue), sumByValue);
+        assertEquals(interval.sumByFloat(EVEN_OR_ODD, Integer::floatValue), sumByValue);
         ObjectDoubleMap<Integer> sumByValue2 = ParallelIterate.sumByFloat(interval, i -> i % 1000, Integer::floatValue);
-        Assert.assertEquals(interval.sumByDouble(i -> i % 1000, Integer::doubleValue), sumByValue2);
+        assertEquals(interval.sumByDouble(i -> i % 1000, Integer::doubleValue), sumByValue2);
         Interval interval2 = Interval.oneTo(UNEVEN_COUNT_FOR_SUMBY);
         ObjectDoubleMap<String> sumByValue3 = ParallelIterate.sumByFloat(interval2, EVEN_OR_ODD, Integer::floatValue);
-        Assert.assertEquals(interval2.sumByFloat(EVEN_OR_ODD, Integer::floatValue), sumByValue3);
+        assertEquals(interval2.sumByFloat(EVEN_OR_ODD, Integer::floatValue), sumByValue3);
         ObjectDoubleMap<Integer> sumByValue4 = ParallelIterate.sumByFloat(interval2, i -> i % 1000, Integer::floatValue);
-        Assert.assertEquals(interval2.sumByFloat(i -> i % 1000, Integer::floatValue), sumByValue4);
+        assertEquals(interval2.sumByFloat(i -> i % 1000, Integer::floatValue), sumByValue4);
         Interval small = Interval.oneTo(11);
         ObjectDoubleMap<String> smallSumByCount = ParallelIterate.sumByFloat(small, EVEN_OR_ODD, i -> 1.0f);
-        Assert.assertEquals(5.0, smallSumByCount.get("Even"), 0.0);
-        Assert.assertEquals(6.0, smallSumByCount.get("Odd"), 0.0);
+        assertEquals(5.0, smallSumByCount.get("Even"), 0.0);
+        assertEquals(6.0, smallSumByCount.get("Odd"), 0.0);
     }
 
     @Test
@@ -630,12 +635,12 @@ public class ParallelIterateTest
 
         // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
         // Indeed, the lower bits of this calculation result are always incorrect due to the information loss of original float values.
-        Assert.assertEquals(
+        assertEquals(
                 1.082323233761663,
                 result.get(1),
                 1.0e-15);
 
-        Assert.assertEquals(
+        assertEquals(
                 1.082323233761663,
                 result.get(2),
                 1.0e-15);
@@ -646,21 +651,21 @@ public class ParallelIterateTest
     {
         Interval interval = Interval.oneTo(100000);
         ObjectLongMap<String> sumByCount = ParallelIterate.sumByLong(interval, EVEN_OR_ODD, i -> 1L);
-        Assert.assertEquals(50000, sumByCount.get("Even"));
-        Assert.assertEquals(50000, sumByCount.get("Odd"));
+        assertEquals(50000, sumByCount.get("Even"));
+        assertEquals(50000, sumByCount.get("Odd"));
         ObjectLongMap<String> sumByValue = ParallelIterate.sumByLong(interval, EVEN_OR_ODD, Integer::longValue);
-        Assert.assertEquals(interval.sumByLong(EVEN_OR_ODD, Integer::longValue), sumByValue);
+        assertEquals(interval.sumByLong(EVEN_OR_ODD, Integer::longValue), sumByValue);
         ObjectLongMap<Integer> sumByValue2 = ParallelIterate.sumByLong(interval, i -> i % 1000, Integer::longValue);
-        Assert.assertEquals(interval.sumByLong(i -> i % 1000, Integer::longValue), sumByValue2);
+        assertEquals(interval.sumByLong(i -> i % 1000, Integer::longValue), sumByValue2);
         Interval interval2 = Interval.oneTo(UNEVEN_COUNT_FOR_SUMBY);
         ObjectLongMap<String> sumByValue3 = ParallelIterate.sumByLong(interval2, EVEN_OR_ODD, Integer::longValue);
-        Assert.assertEquals(interval2.sumByLong(EVEN_OR_ODD, Integer::longValue), sumByValue3);
+        assertEquals(interval2.sumByLong(EVEN_OR_ODD, Integer::longValue), sumByValue3);
         ObjectLongMap<Integer> sumByValue4 = ParallelIterate.sumByLong(interval2, i -> i % 1000, Integer::longValue);
-        Assert.assertEquals(interval2.sumByLong(i -> i % 1000, Integer::longValue), sumByValue4);
+        assertEquals(interval2.sumByLong(i -> i % 1000, Integer::longValue), sumByValue4);
         Interval small = Interval.oneTo(11);
         ObjectLongMap<String> smallSumByCount = ParallelIterate.sumByLong(small, EVEN_OR_ODD, i -> 1L);
-        Assert.assertEquals(5.0, smallSumByCount.get("Even"), 0.0);
-        Assert.assertEquals(6.0, smallSumByCount.get("Odd"), 0.0);
+        assertEquals(5.0, smallSumByCount.get("Even"), 0.0);
+        assertEquals(6.0, smallSumByCount.get("Odd"), 0.0);
     }
 
     @Test
@@ -668,21 +673,21 @@ public class ParallelIterateTest
     {
         Interval interval = Interval.oneTo(100000);
         ObjectLongMap<String> sumByCount = ParallelIterate.sumByInt(interval, EVEN_OR_ODD, i -> 1);
-        Assert.assertEquals(50000, sumByCount.get("Even"));
-        Assert.assertEquals(50000, sumByCount.get("Odd"));
+        assertEquals(50000, sumByCount.get("Even"));
+        assertEquals(50000, sumByCount.get("Odd"));
         ObjectLongMap<String> sumByValue = ParallelIterate.sumByInt(interval, EVEN_OR_ODD, Integer::intValue);
-        Assert.assertEquals(interval.sumByInt(EVEN_OR_ODD, Integer::intValue), sumByValue);
+        assertEquals(interval.sumByInt(EVEN_OR_ODD, Integer::intValue), sumByValue);
         ObjectLongMap<Integer> sumByValue2 = ParallelIterate.sumByInt(interval, i -> i % 1000, Integer::intValue);
-        Assert.assertEquals(interval.sumByInt(i -> i % 1000, Integer::intValue), sumByValue2);
+        assertEquals(interval.sumByInt(i -> i % 1000, Integer::intValue), sumByValue2);
         Interval interval2 = Interval.oneTo(UNEVEN_COUNT_FOR_SUMBY);
         ObjectLongMap<String> sumByValue3 = ParallelIterate.sumByInt(interval2, EVEN_OR_ODD, Integer::intValue);
-        Assert.assertEquals(interval2.sumByInt(EVEN_OR_ODD, Integer::intValue), sumByValue3);
+        assertEquals(interval2.sumByInt(EVEN_OR_ODD, Integer::intValue), sumByValue3);
         ObjectLongMap<Integer> sumByValue4 = ParallelIterate.sumByInt(interval2, i -> i % 1000, Integer::intValue);
-        Assert.assertEquals(interval2.sumByInt(i -> i % 1000, Integer::intValue), sumByValue4);
+        assertEquals(interval2.sumByInt(i -> i % 1000, Integer::intValue), sumByValue4);
         Interval small = Interval.oneTo(11);
         ObjectLongMap<String> smallSumByCount = ParallelIterate.sumByInt(small, EVEN_OR_ODD, i -> 1);
-        Assert.assertEquals(5.0, smallSumByCount.get("Even"), 0.0);
-        Assert.assertEquals(6.0, smallSumByCount.get("Odd"), 0.0);
+        assertEquals(5.0, smallSumByCount.get("Even"), 0.0);
+        assertEquals(6.0, smallSumByCount.get("Odd"), 0.0);
     }
 
     @Test
@@ -690,21 +695,21 @@ public class ParallelIterateTest
     {
         MutableList<BigDecimal> list = Interval.oneTo(100000).collect(BigDecimal::new).toList().shuffleThis();
         MutableMap<String, BigDecimal> sumByCount = ParallelIterate.sumByBigDecimal(list, EVEN_OR_ODD_BD, bd -> new BigDecimal(1L));
-        Assert.assertEquals(BigDecimal.valueOf(50000L), sumByCount.get("Even"));
-        Assert.assertEquals(BigDecimal.valueOf(50000L), sumByCount.get("Odd"));
+        assertEquals(BigDecimal.valueOf(50000L), sumByCount.get("Even"));
+        assertEquals(BigDecimal.valueOf(50000L), sumByCount.get("Odd"));
         MutableMap<String, BigDecimal> sumByValue = ParallelIterate.sumByBigDecimal(list, EVEN_OR_ODD_BD, bd -> bd);
-        Assert.assertEquals(Iterate.sumByBigDecimal(list, EVEN_OR_ODD_BD, bd -> bd), sumByValue);
+        assertEquals(Iterate.sumByBigDecimal(list, EVEN_OR_ODD_BD, bd -> bd), sumByValue);
         MutableMap<Integer, BigDecimal> sumByValue2 = ParallelIterate.sumByBigDecimal(list, bd -> bd.intValue() % 1000, bd -> bd);
-        Assert.assertEquals(Iterate.sumByBigDecimal(list, bd -> bd.intValue() % 1000, bd -> bd), sumByValue2);
+        assertEquals(Iterate.sumByBigDecimal(list, bd -> bd.intValue() % 1000, bd -> bd), sumByValue2);
         MutableList<BigDecimal> list2 = Interval.oneTo(UNEVEN_COUNT_FOR_SUMBY).collect(BigDecimal::new).toList();
         MutableMap<String, BigDecimal> sumByValue3 = ParallelIterate.sumByBigDecimal(list2, EVEN_OR_ODD_BD, bd -> bd);
-        Assert.assertEquals(Iterate.sumByBigDecimal(list2, EVEN_OR_ODD_BD, bd -> bd), sumByValue3);
+        assertEquals(Iterate.sumByBigDecimal(list2, EVEN_OR_ODD_BD, bd -> bd), sumByValue3);
         MutableMap<Integer, BigDecimal> sumByValue4 = ParallelIterate.sumByBigDecimal(list2, bd -> bd.intValue() % 1000, bd -> bd);
-        Assert.assertEquals(Iterate.sumByBigDecimal(list2, bd -> bd.intValue() % 1000, bd -> bd), sumByValue4);
+        assertEquals(Iterate.sumByBigDecimal(list2, bd -> bd.intValue() % 1000, bd -> bd), sumByValue4);
         Interval small = Interval.oneTo(11);
         MutableMap<String, BigDecimal> smallSumByCount = ParallelIterate.sumByBigDecimal(small, EVEN_OR_ODD, i -> BigDecimal.valueOf(1L));
-        Assert.assertEquals(new BigDecimal(5), smallSumByCount.get("Even"));
-        Assert.assertEquals(new BigDecimal(6), smallSumByCount.get("Odd"));
+        assertEquals(new BigDecimal(5), smallSumByCount.get("Even"));
+        assertEquals(new BigDecimal(6), smallSumByCount.get("Odd"));
     }
 
     @Test
@@ -712,21 +717,21 @@ public class ParallelIterateTest
     {
         MutableList<BigInteger> list = Interval.oneTo(100000).collect(Object::toString).collect(BigInteger::new).toList().shuffleThis();
         MutableMap<String, BigInteger> sumByCount = ParallelIterate.sumByBigInteger(list, EVEN_OR_ODD_BI, bi -> BigInteger.valueOf(1L));
-        Assert.assertEquals(BigInteger.valueOf(50000L), sumByCount.get("Even"));
-        Assert.assertEquals(BigInteger.valueOf(50000L), sumByCount.get("Odd"));
+        assertEquals(BigInteger.valueOf(50000L), sumByCount.get("Even"));
+        assertEquals(BigInteger.valueOf(50000L), sumByCount.get("Odd"));
         MutableMap<String, BigInteger> sumByValue = ParallelIterate.sumByBigInteger(list, EVEN_OR_ODD_BI, bi -> bi);
-        Assert.assertEquals(Iterate.sumByBigInteger(list, EVEN_OR_ODD_BI, bi -> bi), sumByValue);
+        assertEquals(Iterate.sumByBigInteger(list, EVEN_OR_ODD_BI, bi -> bi), sumByValue);
         MutableMap<Integer, BigInteger> sumByValue2 = ParallelIterate.sumByBigInteger(list, bi -> bi.intValue() % 1000, bi -> bi);
-        Assert.assertEquals(Iterate.sumByBigInteger(list, bi -> bi.intValue() % 1000, bi -> bi), sumByValue2);
+        assertEquals(Iterate.sumByBigInteger(list, bi -> bi.intValue() % 1000, bi -> bi), sumByValue2);
         MutableList<BigInteger> list2 = Interval.oneTo(UNEVEN_COUNT_FOR_SUMBY).collect(Object::toString).collect(BigInteger::new).toList();
         MutableMap<String, BigInteger> sumByValue3 = ParallelIterate.sumByBigInteger(list2, EVEN_OR_ODD_BI, bi -> bi);
-        Assert.assertEquals(Iterate.sumByBigInteger(list2, EVEN_OR_ODD_BI, bi -> bi), sumByValue3);
+        assertEquals(Iterate.sumByBigInteger(list2, EVEN_OR_ODD_BI, bi -> bi), sumByValue3);
         MutableMap<Integer, BigInteger> sumByValue4 = ParallelIterate.sumByBigInteger(list2, bi -> bi.intValue() % 1000, bi -> bi);
-        Assert.assertEquals(Iterate.sumByBigInteger(list2, bi -> bi.intValue() % 1000, bi -> bi), sumByValue4);
+        assertEquals(Iterate.sumByBigInteger(list2, bi -> bi.intValue() % 1000, bi -> bi), sumByValue4);
         Interval small = Interval.oneTo(11);
         MutableMap<String, BigInteger> smallSumByCount = ParallelIterate.sumByBigInteger(small, EVEN_OR_ODD, i -> BigInteger.valueOf(1L));
-        Assert.assertEquals(new BigInteger("5"), smallSumByCount.get("Even"));
-        Assert.assertEquals(new BigInteger("6"), smallSumByCount.get("Odd"));
+        assertEquals(new BigInteger("5"), smallSumByCount.get("Even"));
+        assertEquals(new BigInteger("6"), smallSumByCount.get("Odd"));
     }
 
     @Test
@@ -740,9 +745,9 @@ public class ParallelIterateTest
                 .shuffleThis();
         MapIterable<String, Integer> aggregation =
                 ParallelIterate.aggregateBy(list, String::valueOf, () -> 0, sumAggregator, 100);
-        Assert.assertEquals(1000, aggregation.get("1").intValue());
-        Assert.assertEquals(4000, aggregation.get("2").intValue());
-        Assert.assertEquals(9000, aggregation.get("3").intValue());
+        assertEquals(1000, aggregation.get("1").intValue());
+        assertEquals(4000, aggregation.get("2").intValue());
+        assertEquals(9000, aggregation.get("3").intValue());
     }
 
     private static List<Integer> createIntegerList(int size)
@@ -764,9 +769,9 @@ public class ParallelIterateTest
         RichIterable<String> expected1 = iterable.flatCollect(INT_TO_TWO_STRINGS);
         RichIterable<String> expected2 = iterable.flatCollect(INT_TO_TWO_STRINGS, HashBag.newBag());
         Verify.assertContains(String.valueOf(200), actual1);
-        Assert.assertEquals(expected1.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected1, actual1);
-        Assert.assertEquals(expected2.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected2, actual2);
-        Assert.assertEquals(expected1.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected1, actual3);
+        assertEquals(expected1.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected1, actual1);
+        assertEquals(expected2.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected2, actual2);
+        assertEquals(expected1.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected1, actual3);
     }
 
     public static final class IntegerSum

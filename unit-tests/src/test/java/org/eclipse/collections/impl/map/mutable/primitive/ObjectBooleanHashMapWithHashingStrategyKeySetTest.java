@@ -17,8 +17,9 @@ import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit test for {@link ObjectBooleanHashMapWithHashingStrategy#keySet()}.
@@ -100,6 +101,6 @@ public class ObjectBooleanHashMapWithHashingStrategyKeySetTest extends ObjectBoo
         ObjectBooleanHashMapWithHashingStrategy<Person> map = ObjectBooleanHashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNDOE, true, JANEDOE, false, JOHNSMITH, true, JANESMITH, false);
         Set<Person> people = map.keySet();
         people.remove(JOHNDOE);
-        Assert.assertEquals(map, ObjectBooleanHashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNSMITH, false));
+        assertEquals(map, ObjectBooleanHashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNSMITH, false));
     }
 }
