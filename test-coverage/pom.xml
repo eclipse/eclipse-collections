@@ -67,28 +67,6 @@
 
     <build>
 
-        <plugins>
-
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default-report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report-aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-            </plugin>
-
-        </plugins>
-
         <pluginManagement>
             <plugins>
                 <!--This plugin's configuration is used to store Eclipse m2e
@@ -126,5 +104,33 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+
+        <!--region Phase 16: prepare-package-->
+        <profile>
+            <id>jacoco-maven-plugin</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>default-report</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>report-aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 16: prepare-package-->
+
+    </profiles>
 
 </project>
