@@ -625,6 +625,11 @@
                 <artifactId>maven-dependency-plugin</artifactId>
             </plugin>
 
+            <plugin>
+                <artifactId>maven-wrapper-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+
         </plugins>
 
     </build>
