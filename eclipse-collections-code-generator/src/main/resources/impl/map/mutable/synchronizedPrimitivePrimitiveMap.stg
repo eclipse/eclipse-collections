@@ -290,6 +290,17 @@ public class Synchronized<name1><name2>Map
         }
     }
 
+    /**
+     * @since 12.0
+     */
+    public boolean allSatisfyKeyValue(<name1><name2>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.allSatisfyKeyValue(predicate);
+        }
+    }
+
     @Override
     public Lazy<name1>Iterable keysView()
     {

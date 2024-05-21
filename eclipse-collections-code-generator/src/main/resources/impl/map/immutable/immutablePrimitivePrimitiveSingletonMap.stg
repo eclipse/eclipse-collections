@@ -135,6 +135,14 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
         procedure.value(this.key1, this.value1);
     }
 
+    /**
+     * @since 12.0
+     */
+    public boolean allSatisfyKeyValue(<name1><name2>Predicate predicate)
+    {
+        return predicate.accept(this.key1, this.value1);
+    }
+
     @Override
     public Lazy<name1>Iterable keysView()
     {

@@ -672,6 +672,18 @@ public abstract class Abstract<name1><name2>MapTestCase
     }
 
     @Test
+    public void allSatisfyKeyValue()
+    {
+        Assert.assertTrue(this.getEmptyMap().allSatisfyKeyValue((k, v) -> <name2>Predicates.equal(v).accept((<type2>) k)));
+        <name1><name2>Map map1 = this.newWithKeysValues(<["0", "1", "2", "3"]:keyValue(); separator=", ">);
+        Assert.assertTrue(map1.allSatisfyKeyValue((k, v) -> <name2>Predicates.equal(v).accept((<type2>) k)));
+        Assert.assertFalse(map1.allSatisfyKeyValue((k, v) -> <name2>Predicates.lessThan(v).accept((<type2>) k)));
+        <name1><name2>Map map2 = this.newWithKeysValues(<["0"]:keyValue(); separator=", ">);
+        Assert.assertTrue(map2.allSatisfyKeyValue((k, v) -> <name2>Predicates.equal(v).accept((<type2>) k)));
+        Assert.assertFalse(map2.allSatisfyKeyValue((k, v) -> <name2>Predicates.lessThan(v).accept((<type2>) k)));
+    }
+
+    @Test
     public void noneSatisfy()
     {
         <name1><name2>Map map = this.newWithKeysValues(<["0", "1", "2", "3"]:keyValue(); separator=", ">);

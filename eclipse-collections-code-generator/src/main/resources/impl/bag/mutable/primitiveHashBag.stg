@@ -576,8 +576,7 @@ public class <name>HashBag
             return false;
         }
 
-        return this.items.keysView().allSatisfy((<type> key) ->
-                <name>HashBag.this.occurrencesOf(key) == bag.occurrencesOf(key));
+        return this.items.allSatisfyKeyValue((key, count) -> bag.occurrencesOf(key) == count);
     }
 
     @Override

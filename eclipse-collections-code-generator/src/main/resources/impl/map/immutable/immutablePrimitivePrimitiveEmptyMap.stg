@@ -126,6 +126,14 @@ final class Immutable<name1><name2>EmptyMap implements Immutable<name1><name2>Ma
     {
     }
 
+    /**
+     * @since 12.0
+     */
+    public boolean allSatisfyKeyValue(<name1><name2>Predicate predicate)
+    {
+        return true;
+    }
+
     @Override
     public Lazy<name1>Iterable keysView()
     {
