@@ -128,6 +128,14 @@ final class Immutable<name1><name2>HashMap implements Immutable<name1><name2>Map
         this.delegate.forEachKeyValue(procedure);
     }
 
+    /**
+     * @since 12.0
+     */
+    public boolean allSatisfyKeyValue(<name1><name2>Predicate predicate)
+    {
+        return this.delegate.allSatisfyKeyValue(predicate);
+    }
+
     @Override
     public Lazy<name1>Iterable keysView()
     {

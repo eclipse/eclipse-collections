@@ -852,6 +852,41 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         <forEachKeyValue(template = {procedure.value(<key>, <value>)})>
     }
 
+    /**
+     * @since 12.0
+     */
+    public boolean allSatisfyKeyValue(<name1><name2>Predicate predicate)
+    {
+        if (this.sentinelValues != null)
+        {
+            if (this.sentinelValues.containsZeroKey)
+            {
+                if (!predicate.accept(EMPTY_KEY, this.sentinelValues.zeroValue))
+                {
+                    return false;
+                }
+            }
+            if (this.sentinelValues.containsOneKey)
+            {
+                if (!predicate.accept(REMOVED_KEY, this.sentinelValues.oneValue))
+                {
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i \< this.<keyArray>.length; i<increment>)
+        {
+            if (isNonSentinel(this.<keyArray>[i]))
+            {
+                if (!predicate.accept(this.<keyArray>[i], this.<valueArray>[i<valueIndex>]))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
     public Lazy<name1>Iterable keysView()
     {
