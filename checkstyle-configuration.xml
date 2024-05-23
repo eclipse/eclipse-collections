@@ -214,6 +214,21 @@
         <module name="NeedBraces" />
 
         <module name="RightCurly">
+            <property name="tokens" value="METHOD_DEF" />
+            <property name="tokens" value="CTOR_DEF" />
+            <property name="tokens" value="CLASS_DEF" />
+            <property name="tokens" value="INSTANCE_INIT" />
+            <property name="tokens" value="LITERAL_FOR" />
+            <property name="tokens" value="STATIC_INIT" />
+            <property name="tokens" value="LITERAL_WHILE" />
+            <property name="tokens" value="LITERAL_CATCH" />
+            <property name="tokens" value="LITERAL_ELSE" />
+            <property name="tokens" value="LITERAL_FINALLY" />
+            <property name="tokens" value="LITERAL_IF" />
+            <property name="tokens" value="LITERAL_TRY" />
+            <property name="tokens" value="LITERAL_DO" />
+            <property name="tokens" value="ANNOTATION_DEF" />
+            <property name="tokens" value="ENUM_DEF" />
             <property name="option" value="alone" />
         </module>
 
@@ -221,25 +236,45 @@
         <!-- See http://checkstyle.sf.net/config_coding.html -->
         <module name="EmptyStatement" />
         <module name="EmptyBlock">
-            <property name="tokens"
-                value="LITERAL_WHILE, LITERAL_TRY, LITERAL_FINALLY, LITERAL_DO, LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, INSTANCE_INIT, STATIC_INIT, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_CASE, LITERAL_DEFAULT" />
+            <property name="tokens" value="ARRAY_INIT"/>
+            <property name="tokens" value="LITERAL_DEFAULT" />
+            <property name="tokens" value="LITERAL_CASE" />
+            <property name="tokens" value="INSTANCE_INIT" />
+            <property name="tokens" value="LITERAL_DO" />
+            <property name="tokens" value="LITERAL_ELSE" />
+            <property name="tokens" value="LITERAL_FINALLY" />
+            <property name="tokens" value="LITERAL_FOR" />
+            <property name="tokens" value="LITERAL_IF" />
+            <property name="tokens" value="LITERAL_SWITCH" />
+            <property name="tokens" value="LITERAL_SYNCHRONIZED" />
+            <property name="tokens" value="LITERAL_TRY" />
+            <property name="tokens" value="LITERAL_WHILE" />
+            <property name="tokens" value="STATIC_INIT" />
         </module>
 
         <!-- Effective Java Item 8 - Always override hashCode when you override equals -->
         <module name="EqualsHashCode" />
 
         <module name="HiddenField">
-            <property name="severity" value="warning" />
-            <property name="ignoreSetter" value="true" />
             <property name="ignoreConstructorParameter" value="true" />
+            <property name="ignoreSetter" value="true" />
+            <property name="setterCanReturnItsClass" value="true" />
+            <property name="severity" value="warning" />
         </module>
 
         <!-- Effective Java Item 4 - Avoid creating duplicate objects -->
         <module name="IllegalInstantiation">
             <property name="severity" value="warning" />
-            <property
-                name="classes"
-                value="java.lang.Boolean,java.lang.Integer,java.lang.Long,java.lang.Short,java.lang.Character,java.lang.Byte,java.util.Timer,java.util.TimerTask" />
+            <property name="classes" value="java.lang.Boolean" />
+            <property name="classes" value="java.lang.Byte" />
+            <property name="classes" value="java.lang.Character" />
+            <property name="classes" value="java.lang.Integer" />
+            <property name="classes" value="java.lang.Long" />
+            <property name="classes" value="java.lang.Short" />
+            <property name="classes" value="java.lang.StringBuffer" />
+            <property name="classes" value="java.lang.String" />
+            <property name="classes" value="java.util.Timer" />
+            <property name="classes" value="java.util.TimerTask" />
         </module>
 
         <module name="SimplifyBooleanExpression" />
@@ -330,6 +365,14 @@
             <property name="id" value="AnnotationLocationVariables" />
             <property name="tokens" value="VARIABLE_DEF" />
             <property name="allowSamelineMultipleAnnotations" value="true" />
+        </module>
+        <module name="AnnotationLocation">
+            <property name="tokens" value="ANNOTATION_DEF" />
+            <property name="tokens" value="ANNOTATION_FIELD_DEF" />
+            <property name="tokens" value="PACKAGE_DEF" />
+            <property name="tokens" value="ENUM_CONSTANT_DEF" />
+            <property name="tokens" value="VARIABLE_DEF" />
+            <property name="allowSamelineSingleParameterlessAnnotation" value="false" />
         </module>
         <module name="EmptyCatchBlock">
             <property name="exceptionVariableName" value="ignored" />
