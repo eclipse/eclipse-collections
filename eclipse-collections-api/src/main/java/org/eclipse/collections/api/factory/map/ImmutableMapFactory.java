@@ -59,12 +59,12 @@ public interface ImmutableMapFactory
 
     <K, V> ImmutableMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4);
 
-    <K, V> ImmutableMap<K, V> ofMap(Map<K, V> map);
+    <K, V> ImmutableMap<K, V> ofMap(Map<? extends K, ? extends V> map);
 
     /**
      * Same as {@link #withAll(Map)}.
      */
-    <K, V> ImmutableMap<K, V> ofAll(Map<K, V> map);
+    <K, V> ImmutableMap<K, V> ofAll(Map<? extends K, ? extends V> map);
 
-    <K, V> ImmutableMap<K, V> withAll(Map<K, V> map);
+    <K, V> ImmutableMap<K, V> withAll(Map<? extends K, ? extends V> map);
 }

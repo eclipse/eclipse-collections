@@ -37,7 +37,7 @@ public class ImmutableUnifiedMap<K, V>
     private static final long serialVersionUID = 1L;
     private final UnifiedMap<K, V> delegate;
 
-    public ImmutableUnifiedMap(Map<K, V> delegate)
+    public ImmutableUnifiedMap(Map<? extends K, ? extends V> delegate)
     {
         this.delegate = UnifiedMap.newMap(delegate);
     }
