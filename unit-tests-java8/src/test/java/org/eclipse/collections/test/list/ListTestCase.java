@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface ListTestCase extends CollectionTestCase
@@ -171,5 +172,44 @@ public interface ListTestCase extends CollectionTestCase
         assertIterablesEqual(Lists.immutable.with("A", "B", "C", "J", "F"), list);
         assertIterablesEqual(Lists.immutable.with("J", "F"), sublist);
         assertIterablesEqual(Lists.immutable.with("J"), sublist2);
+    }
+
+    @Test
+    default void List_subList()
+    {
+        List<Integer> list = this.newWith(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+        IndexOutOfBoundsException indexOutOfBoundsException1 = assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> list.subList(-1, 10));
+        assertEquals("fromIndex = -1", indexOutOfBoundsException1.getMessage());
+
+        IndexOutOfBoundsException indexOutOfBoundsException2 = assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> list.subList(0, 11));
+        assertEquals("toIndex = 11", indexOutOfBoundsException2.getMessage());
+
+        IllegalArgumentException illegalArgumentException = assertThrows(
+                IllegalArgumentException.class,
+                () -> list.subList(6, 4));
+        assertEquals("fromIndex(6) > toIndex(4)", illegalArgumentException.getMessage());
+
+        List<Integer> fullSublist = list.subList(0, 10);
+        assertEquals(Lists.immutable.with(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), fullSublist);
+        assertNotSame(list, fullSublist);
+
+        assertEquals(Lists.immutable.with(), list.subList(4, 4));
+        assertEquals(Lists.immutable.with(4), list.subList(4, 5));
+
+        List<Integer> sublist = list.subList(1, 9);
+        assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6, 7, 8), sublist);
+
+        List<Integer> innerSublist1 = sublist.subList(1, 7);
+        assertEquals(Lists.immutable.with(2, 3, 4, 5, 6, 7), innerSublist1);
+
+        List<Integer> innerSublist2 = sublist.subList(0, 7);
+        assertEquals(Lists.immutable.with(1, 2, 3, 4, 5, 6, 7), innerSublist2);
+        List<Integer> innerSublist3 = sublist.subList(1, 8);
+        assertEquals(Lists.immutable.with(2, 3, 4, 5, 6, 7, 8), innerSublist3);
     }
 }
