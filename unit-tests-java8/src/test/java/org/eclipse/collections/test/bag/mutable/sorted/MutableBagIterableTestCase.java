@@ -13,6 +13,7 @@ package org.eclipse.collections.test.bag.mutable.sorted;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
@@ -37,6 +38,10 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
         assertThrows(
                 IllegalArgumentException.class,
                 () -> mutableBag.addOccurrences(4, -1));
+        assertEquals(Bags.immutable.with(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
+
+        Assert.assertEquals(-2147483647, mutableBag.addOccurrences(3, Integer.MAX_VALUE - 1));
+        Assert.assertEquals(-2147483638, mutableBag.size());
     }
 
     @Test
@@ -49,8 +54,8 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
         assertEquals(Bags.immutable.with(2, 2, 3, 3, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(3, 2));
         assertEquals(Bags.immutable.with(2, 2, 3), mutableBag);
-        assertTrue(mutableBag.removeOccurrences(2, 1));
-        assertEquals(Bags.immutable.with(2, 3), mutableBag);
+        assertTrue(mutableBag.removeOccurrences(2, 2));
+        assertEquals(Bags.immutable.with(3), mutableBag);
 
         assertThrows(
                 IllegalArgumentException.class,
