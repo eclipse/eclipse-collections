@@ -38,6 +38,10 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
         assertThrows(
                 IllegalArgumentException.class,
                 () -> mutableBag.addOccurrences(4, -1));
+        assertEquals(Bags.immutable.with(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
+
+        assertEquals(-2147483647, mutableBag.addOccurrences(3, Integer.MAX_VALUE - 1));
+        assertEquals(-2147483638, mutableBag.size());
     }
 
     @Test
@@ -50,8 +54,8 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
         assertIterablesEqual(Bags.immutable.with(2, 2, 3, 3, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(3, 2));
         assertIterablesEqual(Bags.immutable.with(2, 2, 3), mutableBag);
-        assertTrue(mutableBag.removeOccurrences(2, 1));
-        assertIterablesEqual(Bags.immutable.with(2, 3), mutableBag);
+        assertTrue(mutableBag.removeOccurrences(2, 2));
+        assertIterablesEqual(Bags.immutable.with(3), mutableBag);
 
         assertThrows(
                 IllegalArgumentException.class,
