@@ -202,7 +202,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
         MapIterable<Integer, String> result = map.flipUniqueValues();
 
-        // TODO: Set up methods like getExpectedTransformed, but for maps.
+        // TODO: Set up methods like getExpectedTransformed, but for maps. Delete overrides of this method.
         assertIterablesEqual(
                 UnifiedMap.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 result);

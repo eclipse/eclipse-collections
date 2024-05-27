@@ -750,7 +750,22 @@ public class OrderedMapAdapter<K, V>
     @Override
     public MutableOrderedMap<V, K> flipUniqueValues()
     {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".flipUniqueValues() not implemented yet");
+        MutableOrderedMap<V, K> result = OrderedMapAdapter.adapt(new LinkedHashMap<>(this.size()));
+
+        this.delegate.forEach((key, value) ->
+        {
+            K oldKey = result.put(value, key);
+            if (oldKey != null)
+            {
+                String detailMessage = String.format(
+                        "Duplicate value: %s found at key: %s and key: %s",
+                        value,
+                        oldKey,
+                        key);
+                throw new IllegalStateException(detailMessage);
+            }
+        });
+        return result;
     }
 
     @Override
