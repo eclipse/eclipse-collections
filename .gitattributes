@@ -25,3 +25,5 @@
 *.class         binary
 *.jar           binary
 *.zip           binary
+
+*.stg     linguist-language=StringTemplate
