@@ -10,20 +10,15 @@
 
 package org.eclipse.collections.test.map.mutable.sorted;
 
-import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
-import org.eclipse.collections.api.map.MapIterable;
-import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.map.sorted.mutable.SortedMapAdapter;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 @RunWith(Java8Runner.class)
@@ -43,25 +38,18 @@ public class SortedMapAdapterTest implements MutableSortedMapIterableTestCase
     }
 
     @Override
-    public <K, V> MutableOrderedMap<K, V> newWithKeysValues(Object... elements)
+    public <K, V> MutableSortedMap<K, V> newWithKeysValues(Object... elements)
     {
         if (elements.length % 2 != 0)
         {
             fail(String.valueOf(elements.length));
         }
 
-        MutableOrderedMap<K, V> result = OrderedMapAdapter.adapt(new LinkedHashMap<>());
+        MutableSortedMap<K, V> result = SortedMapAdapter.adapt(new TreeMap<>(Comparators.reverseNaturalOrder()));
         for (int i = 0; i < elements.length; i += 2)
         {
             assertNull(result.put((K) elements[i], (V) elements[i + 1]));
         }
         return result;
-    }
-
-    @Override
-    public void MapIterable_flipUniqueValues()
-    {
-        MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
-        assertThrows(UnsupportedOperationException.class, map::flipUniqueValues);
     }
 }
