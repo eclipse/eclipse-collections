@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
-import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
@@ -74,42 +73,24 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void toString_with_collection_containing_self()
     {
-        super.toString_with_collection_containing_self();
-
-        MutableCollection<Object> collection = this.newWith(1);
-        collection.add(collection);
-        String simpleName = collection.getClass().getSimpleName();
-        String string = collection.toString();
-        assertTrue(
-                ("[1, (this " + simpleName + ")]").equals(string)
-                        || ("[(this " + simpleName + "), 1]").equals(string));
+        // Not applicable for Unmodifiable*
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void makeString_with_collection_containing_self()
     {
-        super.makeString_with_collection_containing_self();
-
-        MutableCollection<Object> collection = this.newWith(1, 2, 3);
-        collection.add(collection);
-        assertEquals(collection.toString(), '[' + collection.makeString() + ']');
+        // Not applicable for Unmodifiable*
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void appendString_with_collection_containing_self()
     {
-        super.appendString_with_collection_containing_self();
-
-        MutableCollection<Object> collection = this.newWith(1, 2, 3);
-        collection.add(collection);
-        Appendable builder = new StringBuilder();
-        collection.appendString(builder);
-        assertEquals(collection.toString(), '[' + builder.toString() + ']');
+        // Not applicable for Unmodifiable*
     }
 
     @Override
@@ -188,185 +169,185 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIfWith()
     {
-        super.removeIfWith();
+        assertThrows(UnsupportedOperationException.class, super::removeIfWith);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        super.clear();
+        assertThrows(UnsupportedOperationException.class, super::clear);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        super.addAll();
+        assertThrows(UnsupportedOperationException.class, super::addAll);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        super.addAllIterable();
+        assertThrows(UnsupportedOperationException.class, super::addAllIterable);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIf()
     {
-        super.removeIf();
+        assertThrows(UnsupportedOperationException.class, super::removeIf);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        super.removeAll();
+        assertThrows(UnsupportedOperationException.class, super::removeAll);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAllIterable()
     {
-        super.removeAllIterable();
+        assertThrows(UnsupportedOperationException.class, super::removeAllIterable);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        super.retainAll();
+        assertThrows(UnsupportedOperationException.class, super::retainAll);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAllIterable()
     {
-        super.retainAllIterable();
+        assertThrows(UnsupportedOperationException.class, super::retainAllIterable);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        super.add();
+        assertThrows(UnsupportedOperationException.class, super::add);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addOccurrences()
     {
-        super.addOccurrences();
+        assertThrows(UnsupportedOperationException.class, super::addOccurrences);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withOccurrences()
     {
-        super.withOccurrences();
+        assertThrows(UnsupportedOperationException.class, super::withOccurrences);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addOccurrences_throws()
     {
-        super.addOccurrences_throws();
+        assertThrows(UnsupportedOperationException.class, super::addOccurrences_throws);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withOccurrences_throws()
     {
-        super.withOccurrences_throws();
+        assertThrows(UnsupportedOperationException.class, super::withOccurrences_throws);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeObject()
     {
-        super.removeObject();
+        assertThrows(UnsupportedOperationException.class, super::removeObject);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeOccurrences()
     {
-        super.removeOccurrences();
+        assertThrows(UnsupportedOperationException.class, super::removeOccurrences);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutOccurrences()
     {
-        super.withoutOccurrences();
+        assertThrows(UnsupportedOperationException.class, super::withoutOccurrences);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeOccurrences_throws()
     {
-        super.removeOccurrences_throws();
+        assertThrows(UnsupportedOperationException.class, super::removeOccurrences_throws);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutOccurrences_throws()
     {
-        super.withoutOccurrences_throws();
+        assertThrows(UnsupportedOperationException.class, super::withoutOccurrences_throws);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void setOccurrences()
     {
-        super.setOccurrences();
+        assertThrows(UnsupportedOperationException.class, super::setOccurrences);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void setOccurrences_throws()
     {
-        super.setOccurrences_throws();
+        assertThrows(UnsupportedOperationException.class, super::setOccurrences_throws);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void forEachWithOccurrences()
     {
-        super.forEachWithOccurrences();
+        assertThrows(UnsupportedOperationException.class, super::forEachWithOccurrences);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        super.with();
+        assertThrows(UnsupportedOperationException.class, super::with);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        super.withAll();
+        assertThrows(UnsupportedOperationException.class, super::withAll);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        super.without();
+        assertThrows(UnsupportedOperationException.class, super::without);
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        super.withoutAll();
+        assertThrows(UnsupportedOperationException.class, super::withoutAll);
     }
 
     @Override
