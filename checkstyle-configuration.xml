@@ -392,8 +392,15 @@
         <module name="CovariantEquals" />
 
         <module name="AvoidStaticImport">
-            <property name="excludes"
-                value="org.junit.Assert.*,org.junit.Assume.*,org.hamcrest.CoreMatchers.*,org.hamcrest.Matchers.*,org.hamcrest.MatcherAssert.*,org.eclipse.collections.impl.test.Verify.*,org.eclipse.collections.impl.factory.Iterables.*,org.eclipse.collections.test.IterableTestCase.*" />
+            <property name="excludes" value="org.hamcrest.MatcherAssert.*" />
+            <property name="excludes" value="org.hamcrest.Matchers.*" />
+            <property name="excludes" value="org.junit.Assert.*" />
+            <property name="excludes" value="org.junit.Assume.*" />
+            <property name="excludes" value="org.junit.jupiter.api.Assertions.*" />
+            <property name="excludes" value="org.assertj.core.api.Assertions.*" />
+            <property name="excludes" value="org.eclipse.collections.impl.test.Verify.*" />
+            <property name="excludes" value="org.eclipse.collections.impl.factory.Iterables.*" />
+            <property name="excludes" value="org.eclipse.collections.test.IterableTestCase.*" />
         </module>
 
         <module name="MissingDeprecated" />

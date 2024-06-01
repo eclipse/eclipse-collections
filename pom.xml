@@ -175,6 +175,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.10.2</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
@@ -319,6 +325,9 @@
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
                                         org.slf4j:slf4j-nop:jar
+                                    </ignoredUnusedDeclaredDependency>
+                                    <ignoredUnusedDeclaredDependency>
+                                        org.junit.jupiter:junit-jupiter-api:jar
                                     </ignoredUnusedDeclaredDependency>
                                 </ignoredUnusedDeclaredDependencies>
                             </configuration>
