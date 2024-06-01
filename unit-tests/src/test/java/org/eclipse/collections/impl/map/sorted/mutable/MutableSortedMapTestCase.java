@@ -913,10 +913,11 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         assertEquals(expectedMap, strings2.take(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4").take(-1);
+        assertThrows(IllegalArgumentException.class,
+                () -> this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4").take(-1));
     }
 
     @Test
@@ -937,9 +938,10 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         assertEquals(expectedMap, strings2.drop(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4").drop(-1);
+        assertThrows(IllegalArgumentException.class,
+                () -> this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4").drop(-1));
     }
 }

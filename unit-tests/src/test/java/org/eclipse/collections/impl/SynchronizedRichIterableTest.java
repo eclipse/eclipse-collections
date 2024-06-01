@@ -26,6 +26,7 @@ import org.junit.Test;
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 
 public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
 {
@@ -101,9 +102,9 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
         assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void nullCheck()
     {
-        SynchronizedRichIterable.of(null, null);
+        assertThrows(IllegalArgumentException.class, () -> SynchronizedRichIterable.of(null, null));
     }
 }
