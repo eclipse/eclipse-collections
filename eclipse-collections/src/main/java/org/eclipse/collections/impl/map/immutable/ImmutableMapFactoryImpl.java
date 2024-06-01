@@ -136,19 +136,19 @@ public class ImmutableMapFactoryImpl implements ImmutableMapFactory
      */
     @Override
     @Deprecated
-    public <K, V> ImmutableMap<K, V> ofMap(Map<K, V> map)
+    public <K, V> ImmutableMap<K, V> ofMap(Map<? extends K, ? extends V> map)
     {
         return this.ofAll(map);
     }
 
     @Override
-    public <K, V> ImmutableMap<K, V> ofAll(Map<K, V> map)
+    public <K, V> ImmutableMap<K, V> ofAll(Map<? extends K, ? extends V> map)
     {
         return this.withAll(map);
     }
 
     @Override
-    public <K, V> ImmutableMap<K, V> withAll(Map<K, V> map)
+    public <K, V> ImmutableMap<K, V> withAll(Map<? extends K, ? extends V> map)
     {
         if (map.isEmpty())
         {
