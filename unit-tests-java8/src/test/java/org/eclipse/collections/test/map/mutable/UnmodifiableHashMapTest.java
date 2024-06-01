@@ -10,37 +10,34 @@
 
 package org.eclipse.collections.test.map.mutable;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.collections.impl.test.junit.Java8Runner;
+import org.eclipse.collections.test.map.UnmodifiableMapTestCase;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 @RunWith(Java8Runner.class)
-public class JDKConcurrentHashMapTest implements MapTestCase
+public class UnmodifiableHashMapTest
+        implements UnmodifiableMapTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
-
-    @Override
-    public boolean supportsNullValues()
-    {
-        return false;
-    }
 
     @Override
     public <T> Map<Object, T> newWith(T... elements)
     {
         Random random = new Random(CURRENT_TIME_MILLIS);
-        Map<Object, T> result = new ConcurrentHashMap<>();
+        Map<Object, T> result = new HashMap<>();
         for (T each : elements)
         {
             assertNull(result.put(random.nextDouble(), each));
         }
-        return result;
+        return Collections.unmodifiableMap(result);
     }
 
     @Override
@@ -51,17 +48,11 @@ public class JDKConcurrentHashMapTest implements MapTestCase
             fail(String.valueOf(elements.length));
         }
 
-        Map<K, V> result = new ConcurrentHashMap<>();
+        Map<K, V> result = new HashMap<>();
         for (int i = 0; i < elements.length; i += 2)
         {
             assertNull(result.put((K) elements[i], (V) elements[i + 1]));
         }
-        return result;
-    }
-
-    @Override
-    public boolean supportsNullKeys()
-    {
-        return false;
+        return Collections.unmodifiableMap(result);
     }
 }

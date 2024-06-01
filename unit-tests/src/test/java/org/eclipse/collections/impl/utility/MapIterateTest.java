@@ -249,7 +249,7 @@ public class MapIterateTest
         MapIterate.forEachKey(null, null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void forEachKeyValueThrowsOnNull()
     {
         MapIterate.forEachKeyValue(null, null);

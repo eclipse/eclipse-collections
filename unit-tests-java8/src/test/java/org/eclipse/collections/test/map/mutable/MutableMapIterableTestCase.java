@@ -28,30 +28,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTestCase
+public interface MutableMapIterableTestCase extends MapIterableTestCase
 {
-    default boolean supportsNullKeys()
-    {
-        return true;
-    }
-
-    default boolean supportsNullValues()
-    {
-        return true;
-    }
-
     @Override
     <T> MutableMapIterable<Object, T> newWith(T... elements);
 
     @Override
     <K, V> MutableMapIterable<K, V> newWithKeysValues(Object... elements);
-
-    @Override
-    default void Iterable_toString()
-    {
-        MapTestCase.super.Iterable_toString();
-        MapIterableTestCase.super.Iterable_toString();
-    }
 
     @Test
     default void MutableMapIterable_removeKey()
