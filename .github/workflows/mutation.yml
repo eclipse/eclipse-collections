@@ -35,8 +35,8 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Maven Install
-        run: mvn clean install -DskipTests=true
+      - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
+      - run: ./mvnw --color=always install -DskipTests=true
         env:
           MAVEN_OPTS: "-Xmx1g"
       - name: Mutation Test

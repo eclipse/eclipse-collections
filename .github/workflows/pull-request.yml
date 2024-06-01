@@ -17,7 +17,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 11
-      - run: ./mvnw verify
+      - run: ./mvnw --color=always verify
         env:
           MAVEN_OPTS: "-Xmx1g"
 
@@ -36,7 +36,7 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java-version }}
       - name: Unit-Test
-        run: ./mvnw verify --projects '!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always verify --projects '!p2-repository,!org.eclipse.collections:org.eclipse.collections'
         env:
           MAVEN_OPTS: "-Xmx1g"
 
@@ -60,7 +60,7 @@ jobs:
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - run: java --version
       - name: Unit-Test
-        run: ./mvnw verify --projects '!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always verify --projects '!p2-repository,!org.eclipse.collections:org.eclipse.collections'
         env:
           MAVEN_OPTS: "-Xmx2g"
 
@@ -75,7 +75,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 11
-      - run: ./mvnw install --projects acceptance-tests --also-make --activate-profiles all
+      - run: ./mvnw --color=always install --projects acceptance-tests --also-make --activate-profiles all
         env:
           MAVEN_OPTS: "-Xmx1g"
 
@@ -91,7 +91,7 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - name: Performance Tests
-        run: ./mvnw install --projects performance-tests --also-make --activate-profiles all -DskipTests=true
+        run: ./mvnw --color=always install --projects performance-tests --also-make --activate-profiles all -DskipTests=true
         env:
           MAVEN_OPTS: "-Xmx1g"
 
@@ -107,7 +107,7 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - name: Checkstyle
-        run: ./mvnw install checkstyle:check --activate-profiles all -DskipTests=true
+        run: ./mvnw --color=always install checkstyle:check --activate-profiles all -DskipTests=true
         env:
           MAVEN_OPTS: "-Xmx1g"
 
@@ -123,11 +123,11 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - name: JavaDoc Aggregate
-        run: ./mvnw -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:aggregate --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:aggregate --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections'
         env:
           MAVEN_OPTS: "-Xmx1g"
       - name: JavaDoc Jar
-        run: ./mvnw -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:jar --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:jar --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections'
         env:
           MAVEN_OPTS: "-Xmx1g"
 
@@ -151,6 +151,6 @@ jobs:
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - run: java --version
       - name: Javadoc
-        run: ./mvnw -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:aggregate --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections'
+        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:aggregate --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage,!p2-repository,!org.eclipse.collections:org.eclipse.collections'
         env:
           MAVEN_OPTS: "-Xmx2g"
