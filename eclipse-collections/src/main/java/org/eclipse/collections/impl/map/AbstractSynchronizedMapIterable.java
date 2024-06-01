@@ -29,7 +29,6 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.MutableCollection;
-import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
@@ -329,7 +328,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
     }
 
     @Override
-    public <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator)
+    public <KK, VV> MutableMapIterable<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator)
     {
         synchronized (this.lock)
         {

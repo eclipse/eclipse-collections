@@ -577,6 +577,57 @@ public class OrderedMapAdapter<K, V>
     }
 
     @Override
+    public <KK, VV> MutableOrderedMap<KK, VV> aggregateInPlaceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Procedure2<? super VV, ? super V> mutatingAggregator)
+    {
+        MutableOrderedMap<KK, VV> result = (MutableOrderedMap<KK, VV>) this.newEmpty();
+        this.forEach(each ->
+        {
+            KK key = groupBy.valueOf(each);
+            VV value = result.getIfAbsentPut(key, zeroValueFactory);
+            mutatingAggregator.value(value, each);
+        });
+        return result;
+    }
+
+    @Override
+    public <KK, VV> MutableOrderedMap<KK, VV> aggregateBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    {
+        MutableOrderedMap<KK, VV> result = (MutableOrderedMap<KK, VV>) this.newEmpty();
+        return this.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator, result);
+    }
+
+    @Override
+    public <K1, V1, V2> MutableOrderedMap<K1, V2> aggregateBy(
+            Function<? super K, ? extends K1> keyFunction,
+            Function<? super V, ? extends V1> valueFunction,
+            Function0<? extends V2> zeroValueFactory,
+            Function2<? super V2, ? super V1, ? extends V2> nonMutatingAggregator)
+    {
+        MutableOrderedMap<K1, V2> result = (MutableOrderedMap<K1, V2>) this.newEmpty();
+        this.forEachKeyValue((key, value) -> result.updateValueWith(
+                keyFunction.valueOf(key),
+                zeroValueFactory,
+                nonMutatingAggregator,
+                valueFunction.valueOf(value)));
+        return result;
+    }
+
+    @Override
+    public <KK> MutableOrderedMap<KK, V> reduceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function2<? super V, ? super V, ? extends V> reduceFunction)
+    {
+        MutableOrderedMap<KK, V> result = (MutableOrderedMap<KK, V>) this.newEmpty();
+        return this.reduceBy(groupBy, reduceFunction, result);
+    }
+
+    @Override
     public int detectLastIndex(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");

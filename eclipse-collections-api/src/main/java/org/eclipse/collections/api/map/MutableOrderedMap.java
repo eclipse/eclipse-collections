@@ -13,6 +13,7 @@ package org.eclipse.collections.api.map;
 import java.util.Map;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -25,6 +26,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -40,6 +42,12 @@ import org.eclipse.collections.api.tuple.Pair;
 
 public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIterable<K, V>
 {
+    /**
+     * @since 12.0
+     */
+    @Override
+    MutableOrderedMap<K, V> newEmpty();
+
     @Override
     MutableOrderedMap<K, V> tap(Procedure<? super V> procedure);
 
@@ -162,6 +170,42 @@ public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIte
 
     @Override
     <V1> MutableOrderedMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
+
+    /**
+     * @since 12.0
+     */
+    @Override
+    <KK, VV> MutableOrderedMap<KK, VV> aggregateInPlaceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Procedure2<? super VV, ? super V> mutatingAggregator);
+
+    /**
+     * @since 12.0
+     */
+    @Override
+    <KK, VV> MutableOrderedMap<KK, VV> aggregateBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator);
+
+    /**
+     * @since 12.0
+     */
+    @Override
+    <K1, V1, V2> MutableOrderedMap<K1, V2> aggregateBy(
+            Function<? super K, ? extends K1> keyFunction,
+            Function<? super V, ? extends V1> valueFunction,
+            Function0<? extends V2> zeroValueFactory,
+            Function2<? super V2, ? super V1, ? extends V2> nonMutatingAggregator);
+
+    /**
+     * @since 12.0
+     */
+    @Override
+    <KK> MutableOrderedMap<KK, V> reduceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function2<? super V, ? super V, ? extends V> reduceFunction);
 
     @Override
     MutableOrderedMap<K, V> withKeyValue(K key, V value);

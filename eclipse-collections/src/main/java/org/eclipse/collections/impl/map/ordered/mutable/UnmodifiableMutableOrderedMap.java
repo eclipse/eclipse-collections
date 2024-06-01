@@ -1457,7 +1457,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(
+    public <KK, VV> MutableOrderedMap<KK, VV> aggregateInPlaceBy(
             Function<? super V, ? extends KK> groupBy,
             Function0<? extends VV> zeroValueFactory,
             Procedure2<? super VV, ? super V> mutatingAggregator)
@@ -1466,7 +1466,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public <KK, VV> MutableMapIterable<KK, VV> aggregateBy(
+    public <KK, VV> MutableOrderedMap<KK, VV> aggregateBy(
             Function<? super V, ? extends KK> groupBy,
             Function0<? extends VV> zeroValueFactory,
             Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
@@ -1475,7 +1475,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public <K1, V1, V2> MutableMapIterable<K1, V2> aggregateBy(
+    public <K1, V1, V2> MutableOrderedMap<K1, V2> aggregateBy(
             Function<? super K, ? extends K1> keyFunction,
             Function<? super V, ? extends V1> valueFunction,
             Function0<? extends V2> zeroValueFactory,
@@ -1485,7 +1485,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public <KK> MutableMapIterable<KK, V> reduceBy(
+    public <KK> MutableOrderedMap<KK, V> reduceBy(
             Function<? super V, ? extends KK> groupBy,
             Function2<? super V, ? super V, ? extends V> reduceFunction)
     {
@@ -1493,7 +1493,7 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
-    public MutableMapIterable<K, V> newEmpty()
+    public MutableOrderedMap<K, V> newEmpty()
     {
         return this.delegate.newEmpty();
     }
