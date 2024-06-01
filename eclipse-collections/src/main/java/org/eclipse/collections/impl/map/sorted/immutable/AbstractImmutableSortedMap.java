@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -137,6 +138,60 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
+    {
+        throw new UnsupportedOperationException("Cannot call merge() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)
+    {
+        throw new UnsupportedOperationException("Cannot call compute() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)
+    {
+        throw new UnsupportedOperationException("Cannot call computeIfPresent() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V computeIfAbsent(K key, java.util.function.Function<? super K, ? extends V> mappingFunction)
+    {
+        throw new UnsupportedOperationException("Cannot call computeIfAbsent() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V replace(K key, V value)
+    {
+        throw new UnsupportedOperationException("Cannot call replace() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public boolean replace(K key, V oldValue, V newValue)
+    {
+        throw new UnsupportedOperationException("Cannot call replace() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public boolean remove(Object key, Object value)
+    {
+        throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V putIfAbsent(K key, V value)
+    {
+        throw new UnsupportedOperationException("Cannot call putIfAbsent() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function)
+    {
+        throw new UnsupportedOperationException("Cannot call replaceAll() on " + this.getClass().getSimpleName());
     }
 
     @Override

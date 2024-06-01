@@ -11,9 +11,11 @@
 package org.eclipse.collections.test.bimap.mutable;
 
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
+import org.eclipse.collections.test.map.mutable.UnmodifiableMutableMapIterableTestCase;
 import org.junit.jupiter.api.Test;
 
-public interface UnmodifiableBiMapTestCase extends MutableBiMapTestCase, FixedSizeIterableTestCase
+public interface UnmodifiableBiMapTestCase
+        extends MutableBiMapTestCase, FixedSizeIterableTestCase, UnmodifiableMutableMapIterableTestCase
 {
     @Override
     @Test

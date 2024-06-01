@@ -16,7 +16,7 @@ import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
-import org.eclipse.collections.test.FixedSizeIterableTestCase;
+import org.eclipse.collections.test.map.UnmodifiableMapIterableTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public interface UnmodifiableMutableMapIterableTestCase
-        extends MutableMapIterableTestCase, FixedSizeIterableTestCase
+        extends MutableMapIterableTestCase, UnmodifiableMapIterableTestCase
 {
     @Override
     @Test
@@ -76,13 +76,6 @@ public interface UnmodifiableMutableMapIterableTestCase
     {
         MutableMapIterable<Object, String> map = this.newWith("Three", "Two", "One");
         assertThrows(UnsupportedOperationException.class, map::clear);
-    }
-
-    @Override
-    @Test
-    default void Iterable_remove()
-    {
-        FixedSizeIterableTestCase.super.Iterable_remove();
     }
 
     @Override

@@ -13,12 +13,17 @@ package org.eclipse.collections.test.bimap.immutable;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.test.ImmutableUnorderedIterableTestCase;
 import org.eclipse.collections.test.bimap.UnsortedBiMapTestCase;
+import org.eclipse.collections.test.map.UnmodifiableMapIterableTestCase;
 import org.junit.jupiter.api.Test;
 
-public interface ImmutableUnsortedBiMapTestCase extends UnsortedBiMapTestCase, ImmutableUnorderedIterableTestCase
+public interface ImmutableUnsortedBiMapTestCase
+        extends UnsortedBiMapTestCase, ImmutableUnorderedIterableTestCase, UnmodifiableMapIterableTestCase
 {
     @Override
     <T> ImmutableBiMap<Object, T> newWith(T... elements);
+
+    @Override
+    <K, V> ImmutableBiMap<K, V> newWithKeysValues(Object... elements);
 
     @Override
     @Test
