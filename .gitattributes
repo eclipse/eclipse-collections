@@ -25,3 +25,5 @@
 *.class         binary
 *.jar           binary
 *.zip           binary
+
+/.idea/** linguist-generated=false
