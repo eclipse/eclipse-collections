@@ -28,8 +28,9 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: ${{ matrix.java-version }}
+      - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - name: Generate Coverage Report
-        run: mvn clean verify
+        run: ./mvnw --color=always verify
       - name: Archive Jacoco reports
         uses: actions/upload-artifact@v4
         with:
