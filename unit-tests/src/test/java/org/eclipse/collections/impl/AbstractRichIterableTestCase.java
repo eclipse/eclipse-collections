@@ -892,28 +892,28 @@ public abstract class AbstractRichIterableTestCase
         assertThrows(NoSuchElementException.class, () -> this.newWith(1, 2, 3, 4, 5).detectOptional(Integer.valueOf(6)::equals).get());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws()
     {
-        this.<Integer>newWith().min(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.<Integer>newWith().min(Integer::compareTo));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws()
     {
-        this.<Integer>newWith().max(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.<Integer>newWith().max(Integer::compareTo));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws()
     {
-        this.newWith(1, null, 2).min(Integer::compareTo);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).min(Integer::compareTo));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws()
     {
-        this.newWith(1, null, 2).max(Integer::compareTo);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).max(Integer::compareTo));
     }
 
     @Test
@@ -958,16 +958,16 @@ public abstract class AbstractRichIterableTestCase
                 this.<Integer>newWith().maxOptional(Integer::compareTo).isPresent());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws_without_comparator()
     {
-        this.newWith(1, null, 2).min();
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).min());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws_without_comparator()
     {
-        this.newWith(1, null, 2).max();
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).max());
     }
 
     @Test
@@ -1024,16 +1024,16 @@ public abstract class AbstractRichIterableTestCase
         assertFalse(this.newWith().maxByOptional(String::valueOf).isPresent());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void minBy_null_throws()
     {
-        this.newWith(1, null, 2).minBy(Integer::valueOf);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).minBy(Integer::valueOf));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void maxBy_null_throws()
     {
-        this.newWith(1, null, 2).maxBy(Integer::valueOf);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).maxBy(Integer::valueOf));
     }
 
     @Test
@@ -1211,16 +1211,16 @@ public abstract class AbstractRichIterableTestCase
         assertNotEquals(Integer.valueOf(2), this.newWith(1).getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_not_only_one_throws()
     {
-        this.newWith(1, 2).getOnly();
+        assertThrows(IllegalStateException.class, () -> this.newWith(1, 2).getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_empty_throws()
     {
-        this.newWith().getOnly();
+        assertThrows(IllegalStateException.class, () -> this.newWith().getOnly());
     }
 
     @Test
@@ -1245,7 +1245,7 @@ public abstract class AbstractRichIterableTestCase
         assertFalse(iterator.hasNext());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         RichIterable<Integer> objects = this.newWith(1, 2, 3);
@@ -1256,7 +1256,7 @@ public abstract class AbstractRichIterableTestCase
             iterator.next();
         }
         assertFalse(iterator.hasNext());
-        iterator.next();
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -1621,10 +1621,10 @@ public abstract class AbstractRichIterableTestCase
         assertEquals(Lists.mutable.with(4, 3, 2, 1), list);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedList_with_null()
     {
-        this.newWith(2, 4, null, 1, 3).toSortedList();
+        assertThrows(NullPointerException.class, () -> this.newWith(2, 4, null, 1, 3).toSortedList());
     }
 
     @Test
@@ -1662,10 +1662,10 @@ public abstract class AbstractRichIterableTestCase
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 4, 3, 2, 2), bag);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedBag_with_null()
     {
-        this.newWith(2, 4, null, 1, 2).toSortedBag();
+        assertThrows(NullPointerException.class, () -> this.newWith(2, 4, null, 1, 2).toSortedBag());
     }
 
     @Test
@@ -1751,10 +1751,11 @@ public abstract class AbstractRichIterableTestCase
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3, 4), set.castToSortedSet());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedListBy_with_null()
     {
-        this.newWith(2, 4, null, 1, 3).toSortedListBy(Functions.getIntegerPassThru());
+        assertThrows(NullPointerException.class,
+                () -> this.newWith(2, 4, null, 1, 3).toSortedListBy(Functions.getIntegerPassThru()));
     }
 
     @Test
@@ -2063,11 +2064,11 @@ public abstract class AbstractRichIterableTestCase
         assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), collection.groupByUniqueKey(id -> id));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws_for_duplicate()
     {
         RichIterable<Integer> collection = this.newWith(1, 2, 3);
-        collection.groupByUniqueKey(id -> 2);
+        assertThrows(IllegalStateException.class, () -> collection.groupByUniqueKey(id -> 2));
     }
 
     @Test
@@ -2079,13 +2080,12 @@ public abstract class AbstractRichIterableTestCase
                 collection.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws_for_duplicate()
     {
         RichIterable<Integer> collection = this.newWith(1, 2, 3);
-        assertEquals(
-                UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3),
-                collection.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2)));
+        assertThrows(IllegalStateException.class,
+                () -> collection.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2)));
     }
 
     @Test
@@ -2162,11 +2162,11 @@ public abstract class AbstractRichIterableTestCase
         assertEquals(Lists.mutable.with(1), groups.collect(RichIterable::size));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
         RichIterable<String> collection = this.newWith("1", "2", "3", "4", "5", "6", "7");
-        collection.chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> collection.chunk(0));
     }
 
     @Test
