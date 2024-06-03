@@ -25,6 +25,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -103,10 +104,10 @@ public class UnmodifiableRichIterableTest extends AbstractRichIterableTestCase
         Verify.assertSize(4, this.unmodifiableCollection.toMap(Functions.getStringPassThru(), Functions.getStringPassThru()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void nullCheck()
     {
-        UnmodifiableRichIterable.of(null);
+        assertThrows(IllegalArgumentException.class, () -> UnmodifiableRichIterable.of(null));
     }
 
     @Test
