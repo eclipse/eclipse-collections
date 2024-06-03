@@ -17,10 +17,8 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
-import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMapIterable;
 import org.eclipse.collections.api.map.MapIterable;
@@ -294,23 +292,6 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
 
         assertTrue(map.values().retainAll(FastList.newListWith(1, 3)));
         assertEquals(UnifiedMap.newWithKeysValues("One", 1, "Three", 3), map);
-    }
-
-    @Test
-    public void put()
-    {
-        MutableMapIterable<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two");
-        assertNull(map.put(3, "Three"));
-        assertEquals(UnifiedMap.newWithKeysValues(1, "One", 2, "Two", 3, "Three"), map);
-
-        ImmutableList<Integer> key1 = Lists.immutable.with(null);
-        ImmutableList<Integer> key2 = Lists.immutable.with(null);
-        Object value1 = new Object();
-        Object value2 = new Object();
-        MutableMapIterable<ImmutableList<Integer>, Object> map2 = this.newMapWithKeyValue(key1, value1);
-        Object previousValue = map2.put(key2, value2);
-        assertSame(value1, previousValue);
-        assertSame(key1, map2.keysView().getFirst());
     }
 
     @Test

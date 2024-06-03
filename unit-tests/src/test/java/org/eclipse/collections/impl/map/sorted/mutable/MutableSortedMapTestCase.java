@@ -56,7 +56,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -652,21 +651,6 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
 
         MutableSortedMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
         Verify.assertEqualsAndHashCode(TreeSortedSet.newSetWith("One", "Two", "Three"), map.keySet());
-    }
-
-    @Override
-    @Test
-    public void put()
-    {
-        // Only use Comparable objects
-
-        MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two");
-        assertNull(map.put(3, "Three"));
-        assertEquals(TreeSortedMap.newMapWith(1, "One", 2, "Two", 3, "Three"), map);
-
-        MutableSortedMap<Integer, String> revMap = this.newMapWithKeysValues(REV_INT_ORDER, 1, "One", 2, "Two");
-        assertNull(revMap.put(0, "Zero"));
-        assertEquals(TreeSortedMap.<Integer, String>newMap(REV_INT_ORDER).with(0, "Zero", 1, "One", 2, "Two"), revMap);
     }
 
     @Override

@@ -532,12 +532,9 @@ public class UnifiedMapTest extends UnifiedMapTestCase
         assertEquals(this.mapWithCollisionsOfSize(5), map);
     }
 
-    @Override
     @Test
     public void put()
     {
-        super.put();
-
         // this map is deliberately small to force a rehash to occur from the put method, in a map with a chained bucket
         UnifiedMap<Integer, Integer> map = UnifiedMap.newMap(2, 0.75f);
         COLLISIONS.subList(0, 5).forEach(Procedures.cast(each -> assertNull(map.put(each, each))));

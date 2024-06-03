@@ -113,7 +113,6 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, null), actual);
     }
 
-    @Override
     @Test
     public void put()
     {

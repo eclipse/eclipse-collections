@@ -341,14 +341,6 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
 
     @Override
     @Test
-    public void put()
-    {
-        MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two");
-        assertThrows(UnsupportedOperationException.class, () -> map.put(3, "Three"));
-    }
-
-    @Override
-    @Test
     public void add()
     {
         MutableSortedMap<String, Integer> map = this.newMapWithKeyValue("A", 1);

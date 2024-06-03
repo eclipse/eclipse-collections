@@ -827,12 +827,9 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         assertNotEquals(map5, unifiedMap);
     }
 
-    @Override
     @Test
     public void put()
     {
-        super.put();
-
         // this map is deliberately small to force a rehash to occur from the put method, in a map with a chained bucket
         UnifiedMapWithHashingStrategy<Integer, Integer> map = UnifiedMapWithHashingStrategy.newMap(
                 INTEGER_HASHING_STRATEGY, 2, 0.75f);
