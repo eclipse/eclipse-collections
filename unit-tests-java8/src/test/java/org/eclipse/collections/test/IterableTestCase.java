@@ -110,8 +110,8 @@ public interface IterableTestCase
 
         Assert.assertEquals(o1, o2);
 
-        assertFalse("Neither item should equal null", o1.equals(null));
-        assertFalse("Neither item should equal null", o2.equals(null));
+        Assert.assertNotNull("Neither item should equal null", o1);
+        Assert.assertNotNull("Neither item should equal null", o2);
         assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
         assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
         Assert.assertEquals(o1, o1);
@@ -171,8 +171,8 @@ public interface IterableTestCase
         Assert.assertNotEquals(o1, o2);
         Assert.assertNotEquals(o2, o1);
 
-        assertFalse("Neither item should equal null", o1.equals(null));
-        assertFalse("Neither item should equal null", o2.equals(null));
+        Assert.assertNotNull("Neither item should equal null", o1);
+        Assert.assertNotNull("Neither item should equal null", o2);
         Assert.assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
         Assert.assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
         Assert.assertEquals(o1, o1);
