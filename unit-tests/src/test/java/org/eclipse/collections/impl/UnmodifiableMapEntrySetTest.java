@@ -58,73 +58,74 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void removeIf()
     {
-        this.getCollection().removeIf(Predicates.cast(null));
+        assertThrows(NullPointerException.class, () -> this.getCollection().removeIf(Predicates.cast(null)));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void removeIfWith()
     {
-        this.getCollection().removeIfWith(null, null);
+        assertThrows(NullPointerException.class,
+                () -> this.getCollection().removeIfWith(null, null));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void addAll()
     {
-        this.getCollection().addAll(null);
+        assertThrows(NullPointerException.class, () -> this.getCollection().addAll(null));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void addAllIterable()
     {
-        this.getCollection().addAllIterable(null);
+        assertThrows(NullPointerException.class, () -> this.getCollection().addAllIterable(null));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void removeAll()
     {
-        this.getCollection().removeAll(null);
+        assertThrows(NullPointerException.class, () -> this.getCollection().removeAll(null));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void removeAllIterable()
     {
-        this.getCollection().removeAllIterable(null);
+        assertThrows(NullPointerException.class, () -> this.getCollection().removeAllIterable(null));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void retainAll()
     {
-        this.getCollection().retainAll(null);
+        assertThrows(NullPointerException.class, () -> this.getCollection().retainAll(null));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void retainAllIterable()
     {
-        this.getCollection().retainAllIterable(null);
+        assertThrows(NullPointerException.class, () -> this.getCollection().retainAllIterable(null));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void withAll()
     {
-        this.getCollection().withAll(null);
+        assertThrows(NullPointerException.class, () -> this.getCollection().withAll(null));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void withoutAll()
     {
-        this.getCollection().withAll(null);
+        assertThrows(NullPointerException.class, () -> this.getCollection().withAll(null));
     }
 
     @Test

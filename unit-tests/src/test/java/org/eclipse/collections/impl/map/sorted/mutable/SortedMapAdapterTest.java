@@ -22,6 +22,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link SortedMapAdapter}.
@@ -88,10 +89,10 @@ public class SortedMapAdapterTest extends MutableSortedMapTestCase
         return SortedMapAdapter.adapt(new TreeMap<K, V>()).with(Tuples.pair(key1, value1), Tuples.pair(key2, value2), Tuples.pair(key3, value3), Tuples.pair(key4, value4));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testNewNull()
     {
-        SortedMapAdapter.adapt(null);
+        assertThrows(NullPointerException.class, () -> SortedMapAdapter.adapt(null));
     }
 
     @Test

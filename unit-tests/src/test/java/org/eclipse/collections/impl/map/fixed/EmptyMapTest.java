@@ -212,31 +212,31 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.classUnderTest().max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
-        this.classUnderTest().maxBy(Functions.getStringPassThru());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().maxBy(Functions.getStringPassThru()));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
-        this.classUnderTest().minBy(Functions.getStringPassThru());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().minBy(Functions.getStringPassThru()));
     }
 
     private static class StubProcedure<T>
