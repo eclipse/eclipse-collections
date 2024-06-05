@@ -11,6 +11,7 @@
 package org.eclipse.collections.test.list.mutable;
 
 import java.util.Collections;
+import java.util.ListIterator;
 import java.util.Random;
 
 import org.eclipse.collections.api.factory.Lists;
@@ -114,5 +115,40 @@ public interface MutableListTestCase extends MutableCollectionTestCase, ListTest
         assertEquals("B", sublist2.remove(1));
         assertEquals(Lists.immutable.with("A", "X", "C"), sublist);
         assertEquals(Lists.immutable.with("A", "X"), sublist2);
+    }
+
+    @Test
+    default void MutableList_subList_subList_iterator_add_remove()
+    {
+        MutableList<String> list = this.newWith("A", "B", "C", "D");
+        MutableList<String> sublist = list.subList(0, 3);
+        MutableList<String> sublist2 = sublist.subList(0, 2);
+
+        ListIterator<String> iterator = sublist2.listIterator();
+        iterator.add("X");
+        assertEquals(Lists.immutable.with("X", "A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("X", "A", "B"), sublist2);
+
+        ListIterator<String> iterator2 = sublist2.listIterator();
+        iterator2.next();
+        iterator2.remove();
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+    }
+
+    @Test
+    default void MutableList_subList_subList_addAll()
+    {
+        MutableList<String> list = this.newWith("A", "B", "C", "D");
+        MutableList<String> sublist = list.subList(0, 3);
+        MutableList<String> sublist2 = sublist.subList(0, 2);
+
+        sublist2.addAll(Lists.mutable.of("D", "E"));
+        assertEquals(Lists.immutable.with("A", "B", "D", "E", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B", "D", "E"), sublist2);
+
+        sublist2.clear();
+        assertEquals(Lists.immutable.with("C"), sublist);
+        assertEquals(Lists.immutable.with(), sublist2);
     }
 }

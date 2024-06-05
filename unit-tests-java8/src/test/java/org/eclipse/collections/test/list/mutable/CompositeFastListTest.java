@@ -32,4 +32,10 @@ public class CompositeFastListTest implements MutableListTestCase
         }
         return result;
     }
+
+    @Override
+    public void MutableList_subList_subList_addAll()
+    {
+        //Not applicable
+    }
 }

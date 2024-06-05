@@ -118,4 +118,16 @@ public class MultiReaderFastListTest implements MutableListTestCase, MultiReader
                 NoSuchElementException.class,
                 () -> iterable.withReadLockAndDelegate(delegate -> delegate.iterator().next()));
     }
+
+    @Override
+    public void MutableList_subList_subList_iterator_add_remove()
+    {
+        // Not applicable
+    }
+
+    @Override
+    public void MutableList_subList_subList_addAll()
+    {
+        //Not applicable
+    }
 }
