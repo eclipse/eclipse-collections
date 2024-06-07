@@ -605,7 +605,7 @@ public abstract class AbstractMutableList<T>
         // Not important since it uses writeReplace()
         private static final long serialVersionUID = 1L;
 
-        //always point to the first MutableList
+        // Always point to the first MutableList
         private final MutableList<T> original;
         private final SubList<T> parent;
         private final int offset;
@@ -621,7 +621,7 @@ public abstract class AbstractMutableList<T>
 
         protected SubList(SubList<T> parent, int fromIndex, int toIndex)
         {
-            //always point to the first MutableList
+            // Always point to the first MutableList
             this.original = parent.original;
             this.parent = parent;
             this.offset = parent.offset + fromIndex;

@@ -10,7 +10,14 @@
 
 package org.eclipse.collections.test.list;
 
+import java.util.List;
+import java.util.ListIterator;
+
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.test.FixedSizeCollectionTestCase;
+
+import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, ListTestCase
 {
@@ -18,5 +25,64 @@ public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, List
     default void Iterable_remove()
     {
         FixedSizeCollectionTestCase.super.Iterable_remove();
+    }
+
+    @Override
+    default void List_subList_subList_remove()
+    {
+        List<String> list = this.newWith("A", "B", "C", "D");
+        List<String> sublist = list.subList(0, 3);
+        List<String> sublist2 = sublist.subList(0, 2);
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        assertThrows(UnsupportedOperationException.class, () -> sublist2.remove(1));
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
+    }
+
+    @Override
+    default void List_subList_subList_iterator_add_remove()
+    {
+        List<String> list = this.newWith("A", "B", "C", "D");
+        List<String> sublist = list.subList(0, 3);
+        List<String> sublist2 = sublist.subList(0, 2);
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        ListIterator<String> iterator = sublist2.listIterator();
+        assertThrows(UnsupportedOperationException.class, () -> iterator.add("X"));
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        ListIterator<String> iterator2 = sublist2.listIterator();
+        iterator2.next();
+        assertThrows(UnsupportedOperationException.class, iterator2::remove);
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
+    }
+
+    @Override
+    default void List_subList_subList_addAll()
+    {
+        List<String> list = this.newWith("A", "B", "C", "D");
+        List<String> sublist = list.subList(0, 3);
+        List<String> sublist2 = sublist.subList(0, 2);
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        assertThrows(UnsupportedOperationException.class, () -> sublist2.addAll(Lists.mutable.of("D", "E")));
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        assertThrows(UnsupportedOperationException.class, sublist2::clear);
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
     }
 }

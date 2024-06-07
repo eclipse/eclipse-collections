@@ -50,23 +50,4 @@ public interface UnmodifiableMutableListTestCase extends UnmodifiableMutableColl
         assertThrows(UnsupportedOperationException.class, () ->
                 this.newWith(5, 1, 4, 2, 3).sortThis(Comparators.reverseNaturalOrder()));
     }
-
-    @Override
-    @Test
-    default void MutableList_subList_subList_remove()
-    {
-        assertThrows(UnsupportedOperationException.class, () -> this.newWith().subList(0, 0).remove(new Object()));
-    }
-
-    @Override
-    default void MutableList_subList_subList_addAll()
-    {
-        //Not applicable
-    }
-
-    @Override
-    default void MutableList_subList_subList_iterator_add_remove()
-    {
-        //Not applicable
-    }
 }

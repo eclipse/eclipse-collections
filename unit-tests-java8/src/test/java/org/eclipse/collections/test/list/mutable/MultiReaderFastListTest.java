@@ -11,9 +11,13 @@
 package org.eclipse.collections.test.list.mutable;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.list.MultiReaderList;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
@@ -120,14 +124,26 @@ public class MultiReaderFastListTest implements MutableListTestCase, MultiReader
     }
 
     @Override
-    public void MutableList_subList_subList_iterator_add_remove()
+    @Test
+    public void List_subList_subList_iterator_add_remove()
     {
-        // Not applicable
-    }
+        MultiReaderList<String> list = this.newWith("A", "B", "C", "D");
 
-    @Override
-    public void MutableList_subList_subList_addAll()
-    {
-        //Not applicable
+        list.withWriteLockAndDelegate(delegate -> {
+            List<String> sublist = delegate.subList(0, 3);
+            List<String> sublist2 = sublist.subList(0, 2);
+            ListIterator<String> iterator = sublist2.listIterator();
+            iterator.add("X");
+            assertEquals(Lists.immutable.with("X", "A", "B", "C"), sublist);
+            assertEquals(Lists.immutable.with("X", "A", "B"), sublist2);
+
+            ListIterator<String> iterator2 = sublist2.listIterator();
+            iterator2.next();
+            iterator2.remove();
+            assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+            assertEquals(Lists.immutable.with("A", "B"), sublist2);
+        });
+
+        assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
     }
 }

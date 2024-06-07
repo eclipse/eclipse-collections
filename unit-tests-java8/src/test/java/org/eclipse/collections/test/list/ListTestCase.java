@@ -12,7 +12,9 @@ package org.eclipse.collections.test.list;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.test.CollectionTestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -85,5 +87,69 @@ public interface ListTestCase extends CollectionTestCase
         assertEquals(this.newWith(4, 4, 4), list);
         assertThrows(IndexOutOfBoundsException.class, () -> list.set(3, 4));
         assertEquals(this.newWith(4, 4, 4), list);
+    }
+
+    @Test
+    default void List_subList_subList_remove()
+    {
+        List<String> list = this.newWith("A", "B", "C", "D");
+        List<String> sublist = list.subList(0, 3);
+        List<String> sublist2 = sublist.subList(0, 2);
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        sublist2.add("X");
+
+        assertEquals(Lists.immutable.with("A", "B", "X", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B", "X"), sublist2);
+
+        assertEquals("B", sublist2.remove(1));
+        assertEquals(Lists.immutable.with("A", "X", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "X"), sublist2);
+
+        assertEquals(Lists.immutable.with("A", "X", "C", "D"), list);
+    }
+
+    @Test
+    default void List_subList_subList_iterator_add_remove()
+    {
+        List<String> list = this.newWith("A", "B", "C", "D");
+        List<String> sublist = list.subList(0, 3);
+        List<String> sublist2 = sublist.subList(0, 2);
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        ListIterator<String> iterator = sublist2.listIterator();
+        iterator.add("X");
+        assertEquals(Lists.immutable.with("X", "A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("X", "A", "B"), sublist2);
+
+        ListIterator<String> iterator2 = sublist2.listIterator();
+        iterator2.next();
+        iterator2.remove();
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
+    }
+
+    @Test
+    default void List_subList_subList_addAll()
+    {
+        List<String> list = this.newWith("A", "B", "C", "D");
+        List<String> sublist = list.subList(0, 3);
+        List<String> sublist2 = sublist.subList(0, 2);
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        sublist2.addAll(Lists.mutable.of("D", "E"));
+        assertEquals(Lists.immutable.with("A", "B", "D", "E", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B", "D", "E"), sublist2);
+
+        sublist2.clear();
+        assertEquals(Lists.immutable.with("C"), sublist);
+        assertEquals(Lists.immutable.with(), sublist2);
+
+        assertEquals(Lists.immutable.with("C", "D"), list);
     }
 }
