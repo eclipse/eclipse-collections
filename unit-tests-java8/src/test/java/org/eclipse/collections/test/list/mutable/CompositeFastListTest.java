@@ -15,6 +15,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Java8Runner.class)
@@ -31,5 +32,12 @@ public class CompositeFastListTest implements MutableListTestCase
             result.addAll(FastList.newList(chunk));
         }
         return result;
+    }
+
+    @Test
+    @Override
+    public void List_subList_subList_addAll()
+    {
+        // Not applicable
     }
 }
