@@ -39,94 +39,94 @@ public class UnmodifiableBooleanSetTest extends AbstractBooleanSetTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.classUnderTest().clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.newWith().add(true);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().add(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllArray()
     {
-        this.classUnderTest().addAll(true, false, true);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(true, false, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        this.classUnderTest().addAll(this.newMutableCollectionWith());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(this.newMutableCollectionWith()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        this.classUnderTest().remove(false);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        this.classUnderTest().removeAll(true, false);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll(true, false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll_iterable()
     {
-        this.classUnderTest().removeAll(this.newMutableCollectionWith());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll(this.newMutableCollectionWith()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        this.classUnderTest().retainAll();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll_iterable()
     {
-        this.classUnderTest().retainAll(this.newMutableCollectionWith());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll(this.newMutableCollectionWith()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.newWith().with(true);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().with(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.newWith().withAll(this.newMutableCollectionWith(true));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().withAll(this.newMutableCollectionWith(true)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        this.newWith(true, false, true, false, true).without(true);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(true, false, true, false, true).without(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        this.newWith(true, false, true, false, true).withoutAll(this.newMutableCollectionWith(false, false));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(true, false, true, false, true).withoutAll(this.newMutableCollectionWith(false, false)));
     }
 
     @Override

@@ -32,6 +32,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThrows;
 
 /**
  * Abstract JUnit test for {@link BooleanIterable}s.
@@ -241,7 +242,7 @@ public abstract class AbstractBooleanIterableTestCase
         assertTrue(emptyIterable.containsNone(BooleanLists.mutable.with(false)));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         BooleanIterator iterator = this.classUnderTest().booleanIterator();
@@ -250,25 +251,25 @@ public abstract class AbstractBooleanIterableTestCase
             iterator.next();
         }
 
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws_non_empty_collection()
     {
         BooleanIterable iterable = this.newWith(true, true, true);
         BooleanIterator iterator = iterable.booleanIterator();
         while (iterator.hasNext())
         {
-            assertTrue(iterator.next());
+            iterator.next();
         }
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws_emptyList()
     {
-        this.newWith().booleanIterator().next();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().booleanIterator().next());
     }
 
     @Test
@@ -446,10 +447,10 @@ public abstract class AbstractBooleanIterableTestCase
         assertEquals(new MutableInteger(2), result);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void reduceOnEmptyThrows()
     {
-        this.newWith().reduce((boolean result, boolean value) -> result && value);
+        assertThrows(NoSuchElementException.class, () -> this.newWith().reduce((boolean result, boolean value) -> result && value));
     }
 
     @Test

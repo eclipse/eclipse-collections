@@ -49,31 +49,31 @@ public class UnmodifiableBooleanStackTest extends AbstractBooleanStackTestCase
         return new UnmodifiableBooleanStack(BooleanArrayStack.newStackFromTopToBottom(elements));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void push()
     {
         MutableBooleanStack stack = new UnmodifiableBooleanStack(BooleanArrayStack.newStackFromTopToBottom(true, true, false, true, false));
-        stack.push(true);
+        assertThrows(UnsupportedOperationException.class, () -> stack.push(true));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void pop()
     {
         MutableBooleanStack stack = new UnmodifiableBooleanStack(BooleanArrayStack.newStackFromTopToBottom(true, true, false, true, false));
-        stack.pop();
+        assertThrows(UnsupportedOperationException.class, () -> stack.pop());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void popWithCount()
     {
         MutableBooleanStack stack = new UnmodifiableBooleanStack(BooleanArrayStack.newStackFromTopToBottom(true, true, false, true, false));
-        stack.pop(2);
+        assertThrows(UnsupportedOperationException.class, () -> stack.pop(2));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.classUnderTest().clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
     @Test

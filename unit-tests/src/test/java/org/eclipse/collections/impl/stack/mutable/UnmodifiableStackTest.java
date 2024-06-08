@@ -95,10 +95,10 @@ public class UnmodifiableStackTest extends StackIterableTestCase
         assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).push(4));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testClear()
     {
-        this.newStackFromTopToBottom(1, 2, 3).clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).clear());
     }
 
     @Test

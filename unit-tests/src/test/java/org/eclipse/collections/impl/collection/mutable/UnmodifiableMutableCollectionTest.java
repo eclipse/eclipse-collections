@@ -280,28 +280,28 @@ public class UnmodifiableMutableCollectionTest
         assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.removeIfWith((ignored1, ignored2) -> true, METALLICA));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.unmodifiableCollection.with(METALLICA);
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.with(METALLICA));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.unmodifiableCollection.withAll(this.mutableCollection);
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.withAll(this.mutableCollection));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        this.unmodifiableCollection.without(METALLICA);
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.without(METALLICA));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        this.unmodifiableCollection.withoutAll(this.mutableCollection);
+        assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.withoutAll(this.mutableCollection));
     }
 
     @Test

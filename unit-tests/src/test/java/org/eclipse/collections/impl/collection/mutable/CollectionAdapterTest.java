@@ -47,6 +47,7 @@ import org.junit.Test;
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link CollectionAdapter}.
@@ -69,10 +70,10 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
         return new CollectionAdapter<>(FastList.newList());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void null_throws()
     {
-        new CollectionAdapter<>(null);
+        assertThrows(NullPointerException.class, () -> new CollectionAdapter<>(null));
     }
 
     @Override
