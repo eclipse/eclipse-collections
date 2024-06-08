@@ -24,6 +24,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThrows;
 
 /**
  * Abstract JUnit test for {@link MutableBooleanStack}.
@@ -78,10 +79,10 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
         assertEquals(BooleanArrayList.newListWith(false), stack.peek(1));
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void peek_empty_stack_throws_exception()
     {
-        this.newWith().peek();
+        assertThrows(EmptyStackException.class, () -> this.newWith().peek());
     }
 
     @Test
@@ -167,22 +168,22 @@ public abstract class AbstractMutableBooleanStackTestCase extends AbstractBoolea
         Verify.assertSize(0, stack1);
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void pop_empty_stack_throws_exception()
     {
-        this.newWith().pop();
+        assertThrows(EmptyStackException.class, () -> this.newWith().pop());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_with_negative_count_throws_exception()
     {
-        this.newWith(true).pop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(true).pop(-1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_with_count_greater_than_stack_size_throws_exception()
     {
-        this.newWith(false).pop(2);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(false).pop(2));
     }
 
     @Test

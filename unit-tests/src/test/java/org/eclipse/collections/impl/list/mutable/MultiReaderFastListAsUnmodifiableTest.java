@@ -38,4 +38,10 @@ public class MultiReaderFastListAsUnmodifiableTest extends UnmodifiableMutableLi
         ListIterator<Integer> it = this.getCollection().subList(0, 1).listIterator();
         it.next();
     }
+
+    @Test
+    public void iteratorRemove()
+    {
+        // Not applicable
+    }
 }

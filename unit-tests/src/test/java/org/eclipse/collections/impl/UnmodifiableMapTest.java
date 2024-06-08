@@ -139,10 +139,10 @@ public class UnmodifiableMapTest
         Verify.assertEqualsAndHashCode(this.mutableMap, this.unmodifiableMap);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void notNull()
     {
-        new UnmodifiableMap<>(null);
+        assertThrows(NullPointerException.class, () -> new UnmodifiableMap<>(null));
     }
 
     @Test

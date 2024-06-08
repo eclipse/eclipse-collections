@@ -41,6 +41,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -50,79 +51,79 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
 {
     protected abstract MutableCollection<T> getCollection();
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIfWith()
     {
-        this.getCollection().removeIfWith(null, null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().removeIfWith(null, null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIf()
     {
         Predicate<Object> predicate = null;
-        this.getCollection().removeIf(predicate);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().removeIf(predicate));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        this.getCollection().remove(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().remove(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void iteratorRemove()
     {
         Iterator<?> iterator = this.getCollection().iterator();
         iterator.next();
-        iterator.remove();
+        assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.getCollection().add(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().add(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        this.getCollection().addAll(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().addAll(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        this.getCollection().addAllIterable(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().addAllIterable(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        this.getCollection().removeAll(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().removeAll(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAllIterable()
     {
-        this.getCollection().removeAllIterable(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().removeAllIterable(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        this.getCollection().retainAll(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().retainAll(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAllIterable()
     {
-        this.getCollection().retainAllIterable(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().retainAllIterable(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.getCollection().clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().clear());
     }
 
     @Test
@@ -333,28 +334,28 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
                 collection.flatCollect((Function<Object, Iterable<Object>>) Lists.fixedSize::of).toBag());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.getCollection().with(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().with(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.getCollection().withAll(FastList.newList());
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().withAll(FastList.newList()));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        this.getCollection().without(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().without(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        this.getCollection().withoutAll(FastList.newList());
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().withoutAll(FastList.newList()));
     }
 
     @Test

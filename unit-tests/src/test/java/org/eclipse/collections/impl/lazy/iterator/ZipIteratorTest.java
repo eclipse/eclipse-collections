@@ -14,13 +14,15 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class ZipIteratorTest
 {
     private static final ImmutableList<Integer> EMPTY = Lists.immutable.of();
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testRemove()
     {
-        new ZipIterator<>(EMPTY, EMPTY).remove();
+        assertThrows(UnsupportedOperationException.class, () -> new ZipIterator<>(EMPTY, EMPTY).remove());
     }
 }

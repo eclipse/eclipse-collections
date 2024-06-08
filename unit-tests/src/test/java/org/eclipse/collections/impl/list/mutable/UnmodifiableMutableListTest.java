@@ -330,10 +330,10 @@ public class UnmodifiableMutableListTest
         assertNotSame(unmodifiableList, unmodifiableList.take(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5)).take(-1);
+        assertThrows(IllegalArgumentException.class, () -> UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5)).take(-1));
     }
 
     @Test
@@ -357,10 +357,10 @@ public class UnmodifiableMutableListTest
         assertEquals(iList(), unmodifiableList.drop(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5)).drop(-1);
+        assertThrows(IllegalArgumentException.class, () -> UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5)).drop(-1));
     }
 
     @Test

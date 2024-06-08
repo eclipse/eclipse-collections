@@ -65,67 +65,67 @@ public class UnmodifiableObjectBooleanMapTest extends AbstractMutableObjectBoole
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.map.clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.map.clear());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeKey()
     {
-        this.map.removeKey("0");
+        assertThrows(UnsupportedOperationException.class, () -> this.map.removeKey("0"));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void put()
     {
-        this.map.put("0", true);
+        assertThrows(UnsupportedOperationException.class, () -> this.map.put("0", true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getAndPut()
     {
-        this.map.getAndPut("0", true, false);
+        assertThrows(UnsupportedOperationException.class, () -> this.map.getAndPut("0", true, false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withKeysValues()
     {
-        this.map.withKeyValue("1", true);
+        assertThrows(UnsupportedOperationException.class, () -> this.map.withKeyValue("1", true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutKey()
     {
-        this.map.withoutKey("0");
+        assertThrows(UnsupportedOperationException.class, () -> this.map.withoutKey("0"));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAllKeys()
     {
-        this.map.withoutAllKeys(FastList.newListWith("0", "1"));
+        assertThrows(UnsupportedOperationException.class, () -> this.map.withoutAllKeys(FastList.newListWith("0", "1")));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAllKeyValues()
     {
-        this.map.withAllKeyValues(Iterables.iList(PrimitiveTuples.pair("1", true)));
+        assertThrows(UnsupportedOperationException.class, () -> this.map.withAllKeyValues(Iterables.iList(PrimitiveTuples.pair("1", true))));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void putDuplicateWithRemovedSlot()
     {
         String collision1 = AbstractMutableObjectBooleanMapTestCase.generateCollisions().getFirst();
-        this.getEmptyMap().put(collision1, true);
+        assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().put(collision1, true));
     }
 
     @Override
@@ -158,10 +158,10 @@ public class UnmodifiableObjectBooleanMapTest extends AbstractMutableObjectBoole
         assertTrue(this.map.getIfAbsentPut("0", () -> false));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPut_FunctionThrowsException()
     {
-        this.map.getIfAbsentPut("10", () -> false);
+        assertThrows(UnsupportedOperationException.class, () -> this.map.getIfAbsentPut("10", () -> false));
     }
 
     @Override
@@ -173,12 +173,12 @@ public class UnmodifiableObjectBooleanMapTest extends AbstractMutableObjectBoole
         assertTrue(this.map.getIfAbsentPutWith("0", functionLengthEven, "zeroValue"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutWithThrowsException()
     {
         BooleanFunction<String> functionLengthEven = string -> (string.length() & 1) == 0;
 
-        this.map.getIfAbsentPutWith("10", functionLengthEven, "zeroValue");
+        assertThrows(UnsupportedOperationException.class, () -> this.map.getIfAbsentPutWith("10", functionLengthEven, "zeroValue"));
     }
 
     @Override
@@ -190,12 +190,12 @@ public class UnmodifiableObjectBooleanMapTest extends AbstractMutableObjectBoole
         assertTrue(this.newWithKeysValues(0, true).getIfAbsentPutWithKey(0, function));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutWithKeyThrowsException()
     {
         BooleanFunction<Integer> function = anObject -> anObject == null || (anObject & 1) == 0;
 
-        this.<Integer>getEmptyMap().getIfAbsentPutWithKey(10, function);
+        assertThrows(UnsupportedOperationException.class, () -> this.<Integer>getEmptyMap().getIfAbsentPutWithKey(10, function));
     }
 
     @Override

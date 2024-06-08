@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.mutable;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
+import org.junit.Test;
 
 public class MultiReaderUnifiedSetAsUnmodifiableTest extends UnmodifiableMutableCollectionTestCase<Integer>
 {
@@ -19,5 +20,11 @@ public class MultiReaderUnifiedSetAsUnmodifiableTest extends UnmodifiableMutable
     protected MutableCollection<Integer> getCollection()
     {
         return MultiReaderUnifiedSet.newSetWith(1).asUnmodifiable();
+    }
+
+    @Test
+    public void iteratorRemove()
+    {
+        // Not applicable
     }
 }

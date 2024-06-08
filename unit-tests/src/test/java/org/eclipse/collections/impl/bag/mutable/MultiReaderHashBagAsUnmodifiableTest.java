@@ -35,4 +35,10 @@ public class MultiReaderHashBagAsUnmodifiableTest extends UnmodifiableMutableCol
         MutableSet<String> actual = bag.selectUnique();
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void iteratorRemove()
+    {
+        // Not applicable
+    }
 }

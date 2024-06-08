@@ -40,204 +40,204 @@ public class UnmodifiableBooleanListTest extends AbstractBooleanListTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAtIndex()
     {
-        new UnmodifiableBooleanList(new BooleanArrayList()).addAtIndex(0, true);
+        assertThrows(UnsupportedOperationException.class, () -> new UnmodifiableBooleanList(new BooleanArrayList()).addAtIndex(0, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAtIndex_throws_index_greater_than_size()
     {
-        new UnmodifiableBooleanList(new BooleanArrayList()).addAtIndex(1, false);
+        assertThrows(UnsupportedOperationException.class, () -> new UnmodifiableBooleanList(new BooleanArrayList()).addAtIndex(1, false));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void unmodifiableBoxed()
     {
-        this.newWith(true, false, true).asUnmodifiable().add(true);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(true, false, true).asUnmodifiable().add(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAtIndex_throws_index_negative()
     {
-        this.list.addAtIndex(-1, true);
+        assertThrows(UnsupportedOperationException.class, () -> this.list.addAtIndex(-1, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll_throws_index_negative()
     {
-        this.list.addAllAtIndex(-1, true, true);
+        assertThrows(UnsupportedOperationException.class, () -> this.list.addAllAtIndex(-1, true, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll_throws_index_greater_than_size()
     {
-        this.list.addAllAtIndex(5, true, true);
+        assertThrows(UnsupportedOperationException.class, () -> this.list.addAllAtIndex(5, true, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll_throws_index_greater_than_size_empty_list()
     {
-        this.newWith().addAllAtIndex(1, false);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().addAllAtIndex(1, false));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable_throws_index_negative()
     {
-        this.list.addAllAtIndex(-1, BooleanArrayList.newListWith(true, true));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.addAllAtIndex(-1, BooleanArrayList.newListWith(true, true)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable_throws_index_greater_than_size()
     {
-        this.list.addAllAtIndex(5, BooleanArrayList.newListWith(true, true));
+        assertThrows(UnsupportedOperationException.class, () -> this.list.addAllAtIndex(5, BooleanArrayList.newListWith(true, true)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAtIndex()
     {
-        this.list.removeAtIndex(1);
+        assertThrows(UnsupportedOperationException.class, () -> this.list.removeAtIndex(1));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAtIndex_throws_index_greater_than_size()
     {
         MutableBooleanList emptyList = new UnmodifiableBooleanList(new BooleanArrayList());
-        emptyList.removeAtIndex(1);
+        assertThrows(UnsupportedOperationException.class, () -> emptyList.removeAtIndex(1));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAtIndex_throws_index_negative()
     {
-        this.list.removeAtIndex(-1);
+        assertThrows(UnsupportedOperationException.class, () -> this.list.removeAtIndex(-1));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void set()
     {
-        this.list.set(1, true);
+        assertThrows(UnsupportedOperationException.class, () -> this.list.set(1, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void set_throws_index_greater_than_size()
     {
-        this.newWith().set(1, false);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().set(1, false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.classUnderTest().clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.newWith().add(true);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().add(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllArray()
     {
-        this.classUnderTest().addAll(true, false, true);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(true, false, true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        this.classUnderTest().addAll(this.newMutableCollectionWith());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(this.newMutableCollectionWith()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        this.classUnderTest().remove(false);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIf()
     {
-        this.classUnderTest().removeIf(b -> false);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeIf(b -> false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        this.classUnderTest().removeAll(true, false);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll(true, false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll_iterable()
     {
-        this.classUnderTest().removeAll(this.newMutableCollectionWith());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll(this.newMutableCollectionWith()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        this.classUnderTest().retainAll();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll_iterable()
     {
-        this.classUnderTest().retainAll(this.newMutableCollectionWith());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll(this.newMutableCollectionWith()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.newWith().with(true);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().with(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.newWith().withAll(this.newMutableCollectionWith(true));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().withAll(this.newMutableCollectionWith(true)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        this.newWith(true, false, true, false, true).without(true);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(true, false, true, false, true).without(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        this.newWith(true, false, true, false, true).withoutAll(this.newMutableCollectionWith(false, false));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(true, false, true, false, true).withoutAll(this.newMutableCollectionWith(false, false)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void reverseThis()
     {
-        this.newWith(false, false, true, true).reverseThis();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(false, false, true, true).reverseThis());
     }
 
     @Override
