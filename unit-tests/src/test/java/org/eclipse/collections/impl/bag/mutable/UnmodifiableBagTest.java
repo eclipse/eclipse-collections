@@ -45,6 +45,7 @@ import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iBag;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * Abstract JUnit test for {@link UnmodifiableBag}.
@@ -58,22 +59,22 @@ public class UnmodifiableBagTest
         return Bags.mutable.of("").asUnmodifiable();
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addOccurrences()
     {
-        this.getCollection().addOccurrences(null, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().addOccurrences(null, 1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeOccurrences()
     {
-        this.getCollection().removeOccurrences(null, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().removeOccurrences(null, 1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void setOccurrences()
     {
-        this.getCollection().setOccurrences(null, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().setOccurrences(null, 1));
     }
 
     @Test

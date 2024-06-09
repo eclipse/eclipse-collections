@@ -46,6 +46,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public abstract class UnifiedMapTestCase extends MutableMapTestCase
@@ -501,45 +502,45 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
         assertNotEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), map.keySet());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void keySet_add()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", 4, "Four");
-        map.keySet().add(5);
+        assertThrows(UnsupportedOperationException.class, () -> map.keySet().add(5));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void keySet_addAll()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", 4, "Four");
-        map.keySet().addAll(UnifiedSet.newSetWith(5, 6));
+        assertThrows(UnsupportedOperationException.class, () -> map.keySet().addAll(UnifiedSet.newSetWith(5, 6)));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void keySet_Iterator()
     {
         MutableMap<Integer, String> map = this.newMapWithKeyValue(1, "One");
         Iterator<Integer> iterator = map.keySet().iterator();
         iterator.next();
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void entrySet_Iterator_incrementPastEnd()
     {
         MutableMap<Integer, String> map = this.newMapWithKeyValue(1, "One");
         Iterator<Map.Entry<Integer, String>> iterator = map.entrySet().iterator();
         iterator.next();
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void keySet_Iterator_removeBeforeIncrement()
     {
         // remove w/o incrementing
         MutableMap<Integer, String> map = this.newMapWithKeyValue(1, "One");
         Iterator<Integer> iterator = map.keySet().iterator();
-        iterator.remove();
+        assertThrows(IllegalStateException.class, () -> iterator.remove());
     }
 
     @Test
@@ -654,20 +655,20 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
         assertTrue(entries.containsAll(FastList.newListWith(ImmutableEntry.of(1, "One"), ImmutableEntry.of(3, "Three"))));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void entrySet_add()
     {
         MutableMap<Integer, String> map = this.newMapWithKeyValue(1, "One");
         Set<Map.Entry<Integer, String>> entries = map.entrySet();
-        entries.add(ImmutableEntry.of(2, "Two"));
+        assertThrows(UnsupportedOperationException.class, () -> entries.add(ImmutableEntry.of(2, "Two")));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void entrySet_addAll()
     {
         MutableMap<Integer, String> map = this.newMapWithKeyValue(1, "One");
         Set<Map.Entry<Integer, String>> entries = map.entrySet();
-        entries.addAll(FastList.newListWith(ImmutableEntry.of(2, "Two")));
+        assertThrows(UnsupportedOperationException.class, () -> entries.addAll(FastList.newListWith(ImmutableEntry.of(2, "Two"))));
     }
 
     @Test
@@ -684,27 +685,27 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
         Verify.assertEqualsAndHashCode(expected, map.entrySet());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void valuesCollection_add()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", 4, "Four");
-        map.values().add("explosion!");
+        assertThrows(UnsupportedOperationException.class, () -> map.values().add("explosion!"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void valuesCollection_addAll()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", 4, "Four");
-        map.values().addAll(UnifiedSet.newSetWith("explosion!", "kaboom!"));
+        assertThrows(UnsupportedOperationException.class, () -> map.values().addAll(UnifiedSet.newSetWith("explosion!", "kaboom!")));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void valueCollection_Iterator()
     {
         MutableMap<Integer, String> map = this.newMapWithKeyValue(1, "One");
         Iterator<String> iterator = map.values().iterator();
         iterator.next();
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test

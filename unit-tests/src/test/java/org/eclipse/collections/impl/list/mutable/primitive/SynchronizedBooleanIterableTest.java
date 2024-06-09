@@ -54,10 +54,10 @@ public class SynchronizedBooleanIterableTest extends AbstractBooleanIterableTest
         return FastList.newListWith(elements);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void null_iterable_throws()
     {
-        SynchronizedBooleanIterable.of(null);
+        assertThrows(IllegalArgumentException.class, () -> SynchronizedBooleanIterable.of(null));
     }
 
     @Override

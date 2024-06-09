@@ -26,6 +26,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -122,32 +123,32 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
         assertEquals("3", this.newWith("1", "3", "2").max(String::compareTo));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws_without_comparator()
     {
-        this.newWith().min();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().min());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws_without_comparator()
     {
-        this.newWith().max();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().max());
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws_without_comparator()
     {
         super.min_null_throws_without_comparator();
-        this.newWith("1", null, "2").min();
+        assertThrows(NullPointerException.class, () -> this.newWith("1", null, "2").min());
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws_without_comparator()
     {
         super.max_null_throws_without_comparator();
-        this.newWith("1", null, "2").max();
+        assertThrows(NullPointerException.class, () -> this.newWith("1", null, "2").max());
     }
 
     @Override
@@ -183,73 +184,73 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeObject()
     {
-        super.removeObject();
+        assertThrows(UnsupportedOperationException.class, () -> super.removeObject());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIfWith()
     {
-        super.removeIfWith();
+        assertThrows(UnsupportedOperationException.class, () -> super.removeIfWith());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        super.clear();
+        assertThrows(UnsupportedOperationException.class, () -> super.clear());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        super.addAll();
+        assertThrows(UnsupportedOperationException.class, () -> super.addAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        super.addAllIterable();
+        assertThrows(UnsupportedOperationException.class, () -> super.addAllIterable());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIf()
     {
-        super.removeIf();
+        assertThrows(UnsupportedOperationException.class, () -> super.removeIf());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        super.removeAll();
+        assertThrows(UnsupportedOperationException.class, () -> super.removeAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAllIterable()
     {
-        super.removeAllIterable();
+        assertThrows(UnsupportedOperationException.class, () -> super.removeAllIterable());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        super.retainAll();
+        assertThrows(UnsupportedOperationException.class, () -> super.retainAll());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAllIterable()
     {
-        super.retainAllIterable();
+        assertThrows(UnsupportedOperationException.class, () -> super.retainAllIterable());
     }
 
     @Override
@@ -283,42 +284,42 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void getFirst()
     {
         super.getFirst();
         assertNotNull(this.newWith(1, 2, 3).getFirst());
-        assertNull(this.newWith().getFirst());
+        assertThrows(NoSuchElementException.class, () -> assertNull(this.newWith().getFirst()));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void getLast()
     {
         super.getLast();
         assertNotNull(this.newWith(1, 2, 3).getLast());
-        assertNull(this.newWith().getLast());
+        assertThrows(NoSuchElementException.class, () -> assertNull(this.newWith().getLast()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subSet()
     {
-        this.newWith(1, 2, 3).subSet(1, 3).clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).subSet(1, 3).clear());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void headSet()
     {
-        this.newWith(1, 2, 3, 4).headSet(3).add(4);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3, 4).headSet(3).add(4));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void tailSet()
     {
-        this.newWith(1, 2, 3, 4).tailSet(3).remove(1);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3, 4).tailSet(3).remove(1));
     }
 
     @Test
@@ -328,58 +329,58 @@ public class UnmodifiableSortedSetTest extends AbstractSortedSetTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.newWith().with(1);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().with(1));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.newWith().withAll(FastList.newListWith(1, 2));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().withAll(FastList.newListWith(1, 2)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        this.newWith().without(2);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().without(2));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        this.newWith().withoutAll(FastList.newListWith(1, 2));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().withoutAll(FastList.newListWith(1, 2)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void detectLastIndex()
     {
-        this.newWith(1, 2, 3).detectLastIndex(each -> each % 2 == 0);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).detectLastIndex(each -> each % 2 == 0));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void reverseForEach()
     {
-        this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated")));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void reverseForEachWithIndex()
     {
-        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated")));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void toReversed()
     {
-        this.newWith(1, 2, 3).toReversed();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).toReversed());
     }
 }

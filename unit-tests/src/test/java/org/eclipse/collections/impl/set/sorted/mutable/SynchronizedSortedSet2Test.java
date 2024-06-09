@@ -18,6 +18,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 /**
@@ -50,43 +51,43 @@ public class SynchronizedSortedSet2Test extends AbstractSortedSetTestCase
         Verify.assertInstanceOf(UnmodifiableSortedSet.class, this.newWith().asUnmodifiable());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws_without_comparator()
     {
-        this.newWith().min();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().min());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws_without_comparator()
     {
-        this.newWith().max();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().max());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void detectLastIndex()
     {
-        this.newWith(1, 2, 3).detectLastIndex(each -> each % 2 == 0);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).detectLastIndex(each -> each % 2 == 0));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void reverseForEach()
     {
-        this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated")));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void reverseForEachWithIndex()
     {
-        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated")));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void toReversed()
     {
-        this.newWith(1, 2, 3).toReversed();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).toReversed());
     }
 }

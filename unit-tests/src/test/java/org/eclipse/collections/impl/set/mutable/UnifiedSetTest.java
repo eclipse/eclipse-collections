@@ -578,16 +578,16 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
         assertEquals(UnifiedSet.newSetWith((Object) null), setWithNull);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void asParallelNullExecutorService()
     {
-        this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).asParallel(null, 2);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).asParallel(null, 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asParallelLessThanOneBatchSize()
     {
-        this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).asParallel(Executors.newFixedThreadPool(10), 0);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).asParallel(Executors.newFixedThreadPool(10), 0));
     }
 
     @Override

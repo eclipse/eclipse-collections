@@ -21,6 +21,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -86,30 +87,30 @@ public class TreeSortedSetTest extends AbstractSortedSetTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void detectLastIndex()
     {
-        this.newWith(1, 2, 3).detectLastIndex(each -> each % 2 == 0);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).detectLastIndex(each -> each % 2 == 0));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void reverseForEach()
     {
-        this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).reverseForEach(each -> fail("Should not be evaluated")));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void reverseForEachWithIndex()
     {
-        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> fail("Should not be evaluated")));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void toReversed()
     {
-        this.newWith(1, 2, 3).toReversed();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).toReversed());
     }
 }

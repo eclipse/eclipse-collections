@@ -31,6 +31,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -130,10 +131,10 @@ public class SynchronizedSortedSetTest extends AbstractSynchronizedCollectionTes
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedBag_with_null()
     {
-        this.newWith(3, 4, null, 1, 2).toSortedBag();
+        assertThrows(NullPointerException.class, () -> this.newWith(3, 4, null, 1, 2).toSortedBag());
     }
 
     @Override
@@ -146,17 +147,17 @@ public class SynchronizedSortedSetTest extends AbstractSynchronizedCollectionTes
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_safe()
     {
-        super.min_null_safe();
+        assertThrows(NullPointerException.class, () -> super.min_null_safe());
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_safe()
     {
-        super.max_null_safe();
+        assertThrows(NullPointerException.class, () -> super.max_null_safe());
     }
 
     @Test
