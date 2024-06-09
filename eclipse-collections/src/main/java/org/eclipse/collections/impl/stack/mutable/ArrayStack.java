@@ -1203,7 +1203,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public MutableStack<T> distinct()
     {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".distinct() not implemented yet");
+        return ArrayStack.newStackFromTopToBottom(this.delegate.asReversed().distinct());
     }
 
     @Override
