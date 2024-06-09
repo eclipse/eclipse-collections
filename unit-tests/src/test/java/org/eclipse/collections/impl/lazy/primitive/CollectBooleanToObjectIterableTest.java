@@ -20,6 +20,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class CollectBooleanToObjectIterableTest
@@ -88,9 +89,9 @@ public class CollectBooleanToObjectIterableTest
         assertTrue(this.newPrimitiveWith(true, false).notEmpty());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeThrows()
     {
-        this.newPrimitiveWith().iterator().remove();
+        assertThrows(UnsupportedOperationException.class, () -> this.newPrimitiveWith().iterator().remove());
     }
 }

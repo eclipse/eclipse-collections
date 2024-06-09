@@ -19,6 +19,7 @@ import org.junit.Test;
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class CollectIteratorTest
@@ -50,15 +51,15 @@ public class CollectIteratorTest
         assertFalse(iterator.hasNext());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void noSuchElementException()
     {
-        new CollectIterator<>(Lists.mutable.<Boolean>of(), String::valueOf).next();
+        assertThrows(NoSuchElementException.class, () -> new CollectIterator<>(Lists.mutable.<Boolean>of(), String::valueOf).next());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        new CollectIterator<>(Lists.mutable.<Boolean>of(), String::valueOf).remove();
+        assertThrows(UnsupportedOperationException.class, () -> new CollectIterator<>(Lists.mutable.<Boolean>of(), String::valueOf).remove());
     }
 }

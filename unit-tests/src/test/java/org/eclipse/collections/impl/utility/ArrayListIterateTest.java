@@ -1372,10 +1372,10 @@ public class ArrayListIterateTest
         Verify.assertListsEqual(FastList.newList(list1).take(Integer.MAX_VALUE), ArrayListIterate.take(list1, Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        ArrayListIterate.take(this.getIntegerList(), -1);
+        assertThrows(IllegalArgumentException.class, () -> ArrayListIterate.take(this.getIntegerList(), -1));
     }
 
     @Test
@@ -1410,10 +1410,10 @@ public class ArrayListIterateTest
         Verify.assertListsEqual(expected5, ArrayListIterate.take(list2, Integer.MAX_VALUE, FastList.newListWith(-1)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_target_throws()
     {
-        ArrayListIterate.take(this.getIntegerList(), -1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> ArrayListIterate.take(this.getIntegerList(), -1, FastList.newList()));
     }
 
     @Test
@@ -1456,10 +1456,10 @@ public class ArrayListIterateTest
         Verify.assertListsEqual(FastList.newList(list1).drop(Integer.MAX_VALUE), ArrayListIterate.drop(list1, Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        ArrayListIterate.drop(this.getIntegerList(), -1);
+        assertThrows(IllegalArgumentException.class, () -> ArrayListIterate.drop(this.getIntegerList(), -1));
     }
 
     @Test
@@ -1504,10 +1504,10 @@ public class ArrayListIterateTest
         Verify.assertListsEqual(FastList.newListWith(-1), ArrayListIterate.drop(list2, Integer.MAX_VALUE, FastList.newListWith(-1)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_target_throws()
     {
-        ArrayListIterate.drop(this.getIntegerList(), -1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> ArrayListIterate.drop(this.getIntegerList(), -1, FastList.newList()));
     }
 
     @Test
@@ -1643,18 +1643,18 @@ public class ArrayListIterateTest
                 ArrayListIterate.groupByUniqueKey(list2, id -> id));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void groupByUniqueKey_throws_for_null()
     {
-        ArrayListIterate.groupByUniqueKey(null, id -> id);
+        assertThrows(IllegalArgumentException.class, () -> ArrayListIterate.groupByUniqueKey(null, id -> id));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKeyUniqueKey_throws_for_duplicate()
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.toReverseList(1, 105));
         list.add(2);
-        ArrayListIterate.groupByUniqueKey(list, id -> id);
+        assertThrows(IllegalStateException.class, () -> ArrayListIterate.groupByUniqueKey(list, id -> id));
     }
 
     @Test
@@ -1671,17 +1671,17 @@ public class ArrayListIterateTest
                 ArrayListIterate.groupByUniqueKey(list2, id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void groupByUniqueKey_target_throws_for_null()
     {
-        ArrayListIterate.groupByUniqueKey(null, id -> id, UnifiedMap.newWithKeysValues(0, 0));
+        assertThrows(IllegalArgumentException.class, () -> ArrayListIterate.groupByUniqueKey(null, id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKeyUniqueKey_target_throws_for_duplicate()
     {
         ArrayList<Integer> list = new ArrayList<>(Interval.toReverseList(1, 105));
-        ArrayListIterate.groupByUniqueKey(list, id -> id, UnifiedMap.newWithKeysValues(2, 2));
+        assertThrows(IllegalStateException.class, () -> ArrayListIterate.groupByUniqueKey(list, id -> id, UnifiedMap.newWithKeysValues(2, 2)));
     }
 
     @Test

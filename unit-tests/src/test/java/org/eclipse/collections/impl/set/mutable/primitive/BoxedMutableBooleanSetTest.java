@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class BoxedMutableBooleanSetTest
@@ -29,10 +30,10 @@ public class BoxedMutableBooleanSetTest
         return new BoxedMutableBooleanSet(new BooleanHashSet(true, false));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void setCreationValidation()
     {
-        new BoxedMutableBooleanSet(null);
+        assertThrows(NullPointerException.class, () -> new BoxedMutableBooleanSet(null));
     }
 
     @Test
@@ -46,16 +47,16 @@ public class BoxedMutableBooleanSetTest
         Verify.assertSize(1, set);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getFirst()
     {
-        this.classUnderTest().getFirst();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().getFirst());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getLast()
     {
-        this.classUnderTest().getLast();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().getLast());
     }
 
     @Test
@@ -116,10 +117,10 @@ public class BoxedMutableBooleanSetTest
         Verify.assertEmpty(set);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void asParallel()
     {
-        this.classUnderTest().asParallel(null, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().asParallel(null, 1));
     }
 
     @Test

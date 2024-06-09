@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -87,11 +88,11 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
         assertEquals(new BooleanArrayList(true, false, true, false, true), booleanArrayList);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void addAlAtIndexOutOfBounds()
     {
         BooleanArrayList booleanArrayList = this.classUnderTest();
-        booleanArrayList.addAllAtIndex(4, false, true);
+        assertThrows(IndexOutOfBoundsException.class, () -> booleanArrayList.addAllAtIndex(4, false, true));
     }
 
     @Test

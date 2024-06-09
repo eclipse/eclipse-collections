@@ -19,13 +19,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 
 public class DistinctIteratorTest
 {
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        this.newDistinctIterator().remove();
+        assertThrows(UnsupportedOperationException.class, () -> this.newDistinctIterator().remove());
     }
 
     private DistinctIterator<Integer> newDistinctIterator()
@@ -45,11 +46,11 @@ public class DistinctIteratorTest
         assertEquals(Lists.mutable.of(4, 1, 10, 100), result);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void nextException()
     {
         Iterator<Integer> iterator = new DistinctIterator<>(Lists.mutable.empty());
         assertFalse(iterator.hasNext());
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 }

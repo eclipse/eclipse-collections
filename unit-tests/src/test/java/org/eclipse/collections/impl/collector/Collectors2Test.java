@@ -58,6 +58,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public final class Collectors2Test
 {
@@ -1453,10 +1454,10 @@ public final class Collectors2Test
         assertEquals(expectedMap, actualMap);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws_for_duplicate()
     {
-        SMALL_INTERVAL.stream().collect(Collectors2.groupByUniqueKey(id -> 1, Maps.mutable::empty));
+        assertThrows(IllegalStateException.class, () -> SMALL_INTERVAL.stream().collect(Collectors2.groupByUniqueKey(id -> 1, Maps.mutable::empty)));
     }
 
     @Test
@@ -1467,16 +1468,16 @@ public final class Collectors2Test
         assertEquals(expectedMap, actualMap);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_parallelStream_throws_for_duplicate()
     {
-        LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> 1, Maps.mutable::empty));
+        assertThrows(IllegalStateException.class, () -> LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> 1, Maps.mutable::empty)));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_parallelStream_duplicate_from_combiner()
     {
-        LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> id == 15000 ? 1 : id, Maps.mutable::empty));
+        assertThrows(IllegalStateException.class, () -> LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> id == 15000 ? 1 : id, Maps.mutable::empty)));
     }
 
     @Test

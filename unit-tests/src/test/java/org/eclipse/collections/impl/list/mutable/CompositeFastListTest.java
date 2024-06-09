@@ -536,10 +536,10 @@ public class CompositeFastListTest extends AbstractListTestCase
         assertEquals(FastList.newList(), undertest);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void removingFromIteratorIsUncoolFromEmptyIterator()
     {
-        new CompositeFastList<String>().iterator().remove();
+        assertThrows(IllegalStateException.class, () -> new CompositeFastList<String>().iterator().remove());
     }
 
     @Test

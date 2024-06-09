@@ -207,10 +207,10 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
         assertNotEquals(ConcurrentHashMap.newMap().withKeyValue(1, 1), ConcurrentHashMap.newMap().withKeyValue(1, 1).withKeyValue(2, 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void negativeInitialSize()
     {
-        ConcurrentHashMap.newMap(-1);
+        assertThrows(IllegalArgumentException.class, () -> ConcurrentHashMap.newMap(-1));
     }
 
     @Override
