@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class BoxedMutableBooleanListTest
@@ -75,16 +76,16 @@ public class BoxedMutableBooleanListTest
         assertEquals(Lists.mutable.of(false, false, true, true, false, true), list);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void addAllIndexOutOfBounds()
     {
-        this.classUnderTest().addAll(5, Lists.mutable.of(true));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().addAll(5, Lists.mutable.of(true)));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void addAllNegativeIndex()
     {
-        this.classUnderTest().addAll(-2, Lists.mutable.of(true));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().addAll(-2, Lists.mutable.of(true)));
     }
 
     @Test
@@ -104,10 +105,10 @@ public class BoxedMutableBooleanListTest
         assertFalse(list.get(2));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getIndexOutOfBounds()
     {
-        this.classUnderTest().get(2);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(2));
     }
 
     @Test
@@ -121,10 +122,10 @@ public class BoxedMutableBooleanListTest
         assertEquals(Lists.mutable.of(false, false), list);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void setIndexOutOfBounds()
     {
-        this.classUnderTest().set(2, Boolean.TRUE);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().set(2, Boolean.TRUE));
     }
 
     @Test
@@ -141,10 +142,10 @@ public class BoxedMutableBooleanListTest
         assertEquals(Lists.mutable.of(false, true, true, true, false), list);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void addAtIndexOutOfBounds()
     {
-        this.classUnderTest().add(3, Boolean.FALSE);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().add(3, Boolean.FALSE));
     }
 
     @Test
@@ -156,10 +157,10 @@ public class BoxedMutableBooleanListTest
         assertFalse(booleanList.remove(1));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void removeIndexOutOfBounds()
     {
-        this.classUnderTest().remove(10);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().remove(10));
     }
 
     @Test
@@ -180,9 +181,9 @@ public class BoxedMutableBooleanListTest
         assertEquals(-1, booleanList.lastIndexOf("String"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subList()
     {
-        this.classUnderTest().subList(0, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().subList(0, 1));
     }
 }

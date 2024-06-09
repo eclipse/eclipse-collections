@@ -142,160 +142,160 @@ public class ArrayIterateTest
         assertThrows(IllegalArgumentException.class, () -> ArrayIterate.injectInto(5.0f, null, (float floatParameter, Object objectParameter) -> 5.0f));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void allSatisfyThrowsOnNullArgument()
     {
-        ArrayIterate.allSatisfy(null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.allSatisfy(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void allSatisfyWithThrowsOnNullArgument()
     {
-        ArrayIterate.allSatisfyWith(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.allSatisfyWith(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void anySatisfyThrowsOnNullArgument()
     {
-        ArrayIterate.anySatisfy(null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.anySatisfy(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void anySatisfyWithThrowsOnNullArgument()
     {
-        ArrayIterate.anySatisfyWith(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.anySatisfyWith(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void noneSatisfyThrowsOnNullArgument()
     {
-        ArrayIterate.noneSatisfy(null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.noneSatisfy(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void noneSatisfyWithThrowsOnNullArgument()
     {
-        ArrayIterate.noneSatisfyWith(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.noneSatisfyWith(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void selectThrowsOnNullArgument()
     {
-        ArrayIterate.select(null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.select(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void selectWithTargetThrowsOnNullArgument()
     {
-        ArrayIterate.select(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.select(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void selectWithThrowsOnNullArgument()
     {
-        ArrayIterate.selectWith(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.selectWith(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void selectWithWithTargetThrowsOnNullArgument()
     {
-        ArrayIterate.selectWith(null, null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.selectWith(null, null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void rejectThrowsOnNullArgument()
     {
-        ArrayIterate.reject(null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.reject(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void rejectWithTargetThrowsOnNullArgument()
     {
-        ArrayIterate.reject(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.reject(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void rejectWithThrowsOnNullArgument()
     {
-        ArrayIterate.rejectWith(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.rejectWith(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void rejectWithWithTargetThrowsOnNullArgument()
     {
-        ArrayIterate.rejectWith(null, null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.rejectWith(null, null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void collectThrowsOnNullArgument()
     {
-        ArrayIterate.collect(null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.collect(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void collectIfThrowsOnNullArgument()
     {
-        ArrayIterate.collectIf(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.collectIf(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void collectWithTargetThrowsOnNullArgument()
     {
-        ArrayIterate.collect(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.collect(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void collectIfWithTargetThrowsOnNullArgument()
     {
-        ArrayIterate.collectIf(null, null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.collectIf(null, null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void collectWithThrowsOnNullArgument()
     {
-        ArrayIterate.collectWith(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.collectWith(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void collectWithWithTargetThrowsOnNullArgument()
     {
-        ArrayIterate.collectWith(null, null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.collectWith(null, null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void flatCollectThrowsOnNullArgument()
     {
-        ArrayIterate.flatCollect(null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.flatCollect(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void flatCollectWithTargetThrowsOnNullArgument()
     {
-        ArrayIterate.flatCollect(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.flatCollect(null, null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void forEachThrowsOnNullArgument()
     {
-        ArrayIterate.forEach(null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.forEach(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void forEachWithFromToThrowsOnNullArgument()
     {
-        ArrayIterate.forEach(null, 0, 0, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.forEach(null, 0, 0, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void forEachWithIndexThrowsOnNullArgument()
     {
-        ArrayIterate.forEachWithIndex(null, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.forEachWithIndex(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void forEachWithIndexWithFromToThrowsOnNullArgument()
     {
-        ArrayIterate.forEachWithIndex(null, 0, 0, null);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.forEachWithIndex(null, 0, 0, null));
     }
 
     @Test
@@ -886,10 +886,10 @@ public class ArrayIterateTest
         ArrayIterate.forEachInBoth(null, null, (argument1, argument2) -> fail());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void forEachInBothThrowsOnDifferentLengthArrays()
     {
-        ArrayIterate.forEachInBoth(new Integer[]{1, 2, 3}, new Integer[]{1, 2}, (argument1, argument2) -> fail());
+        assertThrows(RuntimeException.class, () -> ArrayIterate.forEachInBoth(new Integer[]{1, 2, 3}, new Integer[]{1, 2}, (argument1, argument2) -> fail()));
     }
 
     @Test
@@ -1043,10 +1043,10 @@ public class ArrayIterateTest
         assertEquals(-1, ArrayIterate.detectLastIndex(array, integer -> integer == 5));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void detectLastIndex_throws()
     {
-        ArrayIterate.detectLastIndex(null, Predicates.alwaysTrue());
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.detectLastIndex(null, Predicates.alwaysTrue()));
     }
 
     @Test
@@ -1078,10 +1078,10 @@ public class ArrayIterateTest
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_negative_throws()
     {
-        ArrayIterate.take(Interval.zeroTo(0).toArray(), -1);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.take(Interval.zeroTo(0).toArray(), -1));
     }
 
     @Test
@@ -1107,10 +1107,10 @@ public class ArrayIterateTest
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), Integer.MAX_VALUE, FastList.newListWith(-1)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_target_negative_throws()
     {
-        ArrayIterate.take(Interval.zeroTo(0).toArray(), -1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.take(Interval.zeroTo(0).toArray(), -1, FastList.newList()));
     }
 
     @Test
@@ -1139,10 +1139,10 @@ public class ArrayIterateTest
                 ArrayIterate.drop(Interval.zeroTo(10).toArray(), Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_negative_throws()
     {
-        ArrayIterate.drop(Interval.zeroTo(0).toArray(), -1);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.drop(Interval.zeroTo(0).toArray(), -1));
     }
 
     @Test
@@ -1165,10 +1165,10 @@ public class ArrayIterateTest
                 ArrayIterate.drop(Interval.zeroTo(10).toArray(), Integer.MAX_VALUE, FastList.newListWith(-1)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_target_negative_throws()
     {
-        ArrayIterate.drop(Interval.zeroTo(0).toArray(), -1, FastList.newListWith(-1));
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.drop(Interval.zeroTo(0).toArray(), -1, FastList.newListWith(-1)));
     }
 
     @Test
@@ -1207,16 +1207,16 @@ public class ArrayIterateTest
                 ArrayIterate.groupByUniqueKey(new Integer[]{1, 2, 3}, id -> id));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void groupByUniqueKey_throws_for_null()
     {
-        ArrayIterate.groupByUniqueKey(null, id -> id);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.groupByUniqueKey(null, id -> id));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws_for_duplicate()
     {
-        ArrayIterate.groupByUniqueKey(new Integer[]{1, 2, 3, 2}, id -> id);
+        assertThrows(IllegalStateException.class, () -> ArrayIterate.groupByUniqueKey(new Integer[]{1, 2, 3, 2}, id -> id));
     }
 
     @Test
@@ -1227,16 +1227,16 @@ public class ArrayIterateTest
                 ArrayIterate.groupByUniqueKey(new Integer[]{1, 2, 3}, id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void groupByUniqueKey_target_throws_for_null()
     {
-        ArrayIterate.groupByUniqueKey(null, id -> id, UnifiedMap.newMap());
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.groupByUniqueKey(null, id -> id, UnifiedMap.newMap()));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws_for_duplicate()
     {
-        ArrayIterate.groupByUniqueKey(new Integer[]{1, 2, 3}, id -> id, UnifiedMap.newWithKeysValues(2, 2));
+        assertThrows(IllegalStateException.class, () -> ArrayIterate.groupByUniqueKey(new Integer[]{1, 2, 3}, id -> id, UnifiedMap.newWithKeysValues(2, 2)));
     }
 
     @Test
@@ -1302,11 +1302,11 @@ public class ArrayIterateTest
                 groups);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
         String[] array = {"1", "2", "3", "4", "5", "6", "7"};
-        ArrayIterate.chunk(array, 0);
+        assertThrows(IllegalArgumentException.class, () -> ArrayIterate.chunk(array, 0));
     }
 
     @Test
@@ -1336,10 +1336,10 @@ public class ArrayIterateTest
         assertEquals("1, 2, 3, 4, 5", stringBuilder.toString());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void appendStringThrowsIOException()
     {
-        ArrayIterate.appendString(new String[]{"1", "2", "3"}, new Appendable()
+        assertThrows(RuntimeException.class, () -> ArrayIterate.appendString(new String[]{"1", "2", "3"}, new Appendable()
         {
             public Appendable append(CharSequence csq) throws IOException
             {
@@ -1355,7 +1355,7 @@ public class ArrayIterateTest
             {
                 throw new IOException();
             }
-        });
+        }));
     }
 
     @Test

@@ -878,10 +878,10 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedBag_with_null()
     {
-        this.newWith(3, 4, null, 1, 2).toSortedBag();
+        assertThrows(NullPointerException.class, () -> this.newWith(3, 4, null, 1, 2).toSortedBag());
     }
 
     @Override
@@ -894,17 +894,17 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_safe()
     {
-        super.min_null_safe();
+        assertThrows(NullPointerException.class, () -> super.min_null_safe());
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_safe()
     {
-        super.max_null_safe();
+        assertThrows(NullPointerException.class, () -> super.max_null_safe());
     }
 
     @Test
@@ -1041,10 +1041,10 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         assertEquals(expectedSet, integers2.take(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        this.newWith(1, 2, 3).take(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(1, 2, 3).take(-1));
     }
 
     @Test
@@ -1065,10 +1065,10 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         assertEquals(expectedSet, integers2.drop(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        this.newWith(1, 2, 3).drop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(1, 2, 3).drop(-1));
     }
 
     @Test

@@ -15,6 +15,7 @@ import org.eclipse.collections.impl.list.Interval;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class AtomicCountProcedureTest
 {
@@ -33,12 +34,12 @@ public class AtomicCountProcedureTest
         assertEquals(1, atomicCountProcedure.getCount());
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void predicateException()
     {
         Procedure<String> atomicCountProcedure = new AtomicCountProcedure<>(each -> STRING_LENGTH < each.length() / ZERO);
 
-        atomicCountProcedure.value("word");
+        assertThrows(ArithmeticException.class, () -> atomicCountProcedure.value("word"));
     }
 
     @Test

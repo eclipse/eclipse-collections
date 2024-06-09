@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 public class DistinctIterableTest extends AbstractLazyIterableTestCase
 {
@@ -76,16 +77,16 @@ public class DistinctIterableTest extends AbstractLazyIterableTestCase
         assertEquals("13254", builder.toString());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void noSuchElementException()
     {
-        new DistinctIterator<>(Lists.mutable.<Integer>of()).next();
+        assertThrows(NoSuchElementException.class, () -> new DistinctIterator<>(Lists.mutable.<Integer>of()).next());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        new DistinctIterator<>(Lists.mutable.<Integer>of()).remove();
+        assertThrows(UnsupportedOperationException.class, () -> new DistinctIterator<>(Lists.mutable.<Integer>of()).remove());
     }
 
     @Override

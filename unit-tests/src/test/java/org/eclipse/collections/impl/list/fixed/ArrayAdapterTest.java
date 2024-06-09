@@ -583,73 +583,73 @@ public class ArrayAdapterTest extends AbstractListTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.newArray().clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().clear());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAtIndex()
     {
-        this.newArray().add(0, null);
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().add(0, null));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllAtIndex()
     {
-        this.newArray().addAll(0, FastList.newList());
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().addAll(0, FastList.newList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        this.newArray().addAll(FastList.newList());
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().addAll(FastList.newList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        this.newArray().addAllIterable(FastList.newList());
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().addAllIterable(FastList.newList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeObject()
     {
-        this.newArray().remove(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().remove(null));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        this.newArray().removeAll(FastList.newList());
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().removeAll(FastList.newList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAllIterable()
     {
-        this.newArray().removeAllIterable(FastList.newList());
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().removeAllIterable(FastList.newList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        this.newArray().retainAll(FastList.newList());
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().retainAll(FastList.newList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAllIterable()
     {
-        this.newArray().retainAllIterable(FastList.newList());
+        assertThrows(UnsupportedOperationException.class, () -> this.newArray().retainAllIterable(FastList.newList()));
     }
 
     @Override

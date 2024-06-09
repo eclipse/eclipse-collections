@@ -23,6 +23,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -42,10 +43,10 @@ public class ByteHashSetTest extends AbstractByteSetTestCase
         return ByteHashSet.newSetWith(elements);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        new ByteHashSet(-1);
+        assertThrows(IllegalArgumentException.class, () -> new ByteHashSet(-1));
     }
 
     @Override
