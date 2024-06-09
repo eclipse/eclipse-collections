@@ -770,7 +770,7 @@ public final class MapIterate
     {
         if (map == null)
         {
-            throw new IllegalArgumentException("Cannot perform a forEachKeyValue on null");
+            throw new NullPointerException("Cannot perform a forEachKeyValue on null");
         }
 
         if (MapIterate.notEmpty(map))

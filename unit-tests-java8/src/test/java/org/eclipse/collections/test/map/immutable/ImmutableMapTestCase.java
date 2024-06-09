@@ -12,9 +12,11 @@ package org.eclipse.collections.test.map.immutable;
 
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.test.ImmutableUnorderedIterableTestCase;
+import org.eclipse.collections.test.map.UnmodifiableMapIterableTestCase;
 import org.eclipse.collections.test.map.UnsortedMapIterableTestCase;
 
-public interface ImmutableMapTestCase extends UnsortedMapIterableTestCase, ImmutableUnorderedIterableTestCase
+public interface ImmutableMapTestCase
+        extends UnsortedMapIterableTestCase, ImmutableUnorderedIterableTestCase, UnmodifiableMapIterableTestCase
 {
     @Override
     <T> ImmutableMap<Object, T> newWith(T... elements);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Two Sigma and others.
+ * Copyright (c) 2021 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -8,91 +8,36 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 
-package org.eclipse.collections.test.map.mutable.ordered;
+package org.eclipse.collections.test.map.mutable;
 
-import java.util.LinkedHashMap;
-
-import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MutableMapIterable;
-import org.eclipse.collections.api.map.MutableOrderedMap;
-import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
-import org.eclipse.collections.impl.map.ordered.mutable.UnmodifiableMutableOrderedMap;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.eclipse.collections.test.FixedSizeIterableTestCase;
+import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.test.map.UnmodifiableMapIterableTestCase;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.fail;
 
-@RunWith(Java8Runner.class)
-public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestCase, FixedSizeIterableTestCase,
-        UnmodifiableMapIterableTestCase
+public interface UnmodifiableMutableMapIterableTestCase
+        extends UnmodifiableMapIterableTestCase, MutableMapIterableTestCase
 {
     @Override
-    public <T> MutableOrderedMap<Object, T> newWith(T... elements)
-    {
-        int i = elements.length;
-        MutableOrderedMap<Object, T> result = OrderedMapAdapter.adapt(new LinkedHashMap<>());
-        for (T each : elements)
-        {
-            assertNull(result.put(i, each));
-            i--;
-        }
-
-        return UnmodifiableMutableOrderedMap.of(result);
-    }
-
-    @Override
-    public <K, V> MutableOrderedMap<K, V> newWithKeysValues(Object... elements)
-    {
-        if (elements.length % 2 != 0)
-        {
-            fail(String.valueOf(elements.length));
-        }
-
-        MutableOrderedMap<K, V> result = OrderedMapAdapter.adapt(new LinkedHashMap<>());
-        for (int i = 0; i < elements.length; i += 2)
-        {
-            assertNull(result.put((K) elements[i], (V) elements[i + 1]));
-        }
-        return UnmodifiableMutableOrderedMap.of(result);
-    }
-
-    @Override
-    public void MutableMapIterable_removeKey()
+    default void MutableMapIterable_removeKey()
     {
         MutableMapIterable<Object, Object> map = this.newWith();
         assertThrows(UnsupportedOperationException.class, () -> map.removeKey(2));
     }
 
     @Override
-    @Test
-    public void MutableOrderedMap_removeAllKeys()
+    default void MutableMapIterable_removeIf()
     {
-        MutableMapIterable<Object, Object> map = this.newWith();
-        assertThrows(UnsupportedOperationException.class, () -> map.removeAllKeys(Sets.mutable.empty()));
-    }
-
-    @Override
-    public void MutableMapIterable_removeIf()
-    {
-        MutableMapIterable<Object, Object> map = this.newWith();
-        assertThrows(UnsupportedOperationException.class, () -> map.removeIf(null));
-    }
-
-    @Override
-    public void Iterable_remove()
-    {
-        FixedSizeIterableTestCase.super.Iterable_remove();
+        MutableMapIterable<Object, String> map = this.newWith("Three", "Two", "One");
+        assertThrows(UnsupportedOperationException.class, () -> map.removeIf(Predicates2.alwaysFalse()));
     }
 
     @Override
     @Test
-    public void MutableMapIterable_getIfAbsentPut()
+    default void MutableMapIterable_getIfAbsentPut()
     {
         MutableMapIterable<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
         assertEquals(3, map.getIfAbsentPut("3", () -> {
@@ -125,7 +70,7 @@ public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestC
     }
 
     @Override
-    public void MutableMapIterable_updateValue()
+    default void MutableMapIterable_updateValue()
     {
         MutableMapIterable<String, Integer> map = this.newWithKeysValues("One", 1);
         assertThrows(
