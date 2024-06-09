@@ -447,7 +447,7 @@ final class ImmutableNotEmptyStack<T>
     @Override
     public ImmutableStack<T> distinct()
     {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".distinct() not implemented yet");
+        return Stacks.immutable.withAllReversed(this.asLazy().distinct().toList());
     }
 
     @Override

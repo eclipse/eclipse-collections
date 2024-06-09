@@ -67,13 +67,6 @@ public class ArrayStackTest extends MutableStackTestCase
     }
 
     @Test
-    public void distinct()
-    {
-        ArrayStack<Object> arrayStack = new ArrayStack<>();
-        assertThrows(UnsupportedOperationException.class, arrayStack::distinct);
-    }
-
-    @Test
     public void indexOf()
     {
         ArrayStack<Object> arrayStack = new ArrayStack<>();
