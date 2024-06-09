@@ -595,10 +595,10 @@ public class StringIterateTest
         assertEquals(2, count);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void occurrencesOf_multiple_character_string_throws()
     {
-        StringIterate.occurrencesOf("1a2a3", "abc");
+        assertThrows(IllegalArgumentException.class, () -> StringIterate.occurrencesOf("1a2a3", "abc"));
     }
 
     @Test
@@ -864,16 +864,16 @@ public class StringIterateTest
                 StringIterate.chunk("", 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunkWithZeroSize()
     {
-        StringIterate.chunk("abcdef", 0);
+        assertThrows(IllegalArgumentException.class, () -> StringIterate.chunk("abcdef", 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunkWithNegativeSize()
     {
-        StringIterate.chunk("abcdef", -42);
+        assertThrows(IllegalArgumentException.class, () -> StringIterate.chunk("abcdef", -42));
     }
 
     @Test

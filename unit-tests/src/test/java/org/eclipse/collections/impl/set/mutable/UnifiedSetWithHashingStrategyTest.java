@@ -890,16 +890,16 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
         Verify.assertEqualsAndHashCode(set, UnifiedSetWithHashingStrategy.newSet(INTEGER_HASHING_STRATEGY, set));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void newSet_null()
     {
-        UnifiedSetWithHashingStrategy.newSet((UnifiedSetWithHashingStrategy<Object>) null);
+        assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet((UnifiedSetWithHashingStrategy<Object>) null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newSet_null_hashingStrategy()
     {
-        UnifiedSetWithHashingStrategy.newSet((HashingStrategy<Object>) null);
+        assertThrows(IllegalArgumentException.class, () -> UnifiedSetWithHashingStrategy.newSet((HashingStrategy<Object>) null));
     }
 
     @Test

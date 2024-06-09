@@ -24,6 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class TakeIterableTest extends AbstractLazyIterableTestCase
 {
@@ -43,10 +44,10 @@ public class TakeIterableTest extends AbstractLazyIterableTestCase
         this.higherCountTakeIterable = new TakeIterable<>(Interval.oneTo(5), 10);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void negative_throws()
     {
-        new TakeIterable<>(Interval.oneTo(5), -1);
+        assertThrows(IllegalArgumentException.class, () -> new TakeIterable<>(Interval.oneTo(5), -1));
     }
 
     @Test
