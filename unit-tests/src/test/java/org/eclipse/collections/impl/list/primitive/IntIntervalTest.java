@@ -85,16 +85,16 @@ public class IntIntervalTest
         assertEquals(IntLists.mutable.with(Integer.MAX_VALUE), IntInterval.fromToBy(Integer.MAX_VALUE, Integer.MAX_VALUE - 10, -20));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void fromToBy_throws_step_size_zero()
     {
-        IntInterval.fromToBy(0, 0, 0);
+        assertThrows(IllegalArgumentException.class, () -> IntInterval.fromToBy(0, 0, 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void fromToBy_throws_on_illegal_step()
     {
-        IntInterval.fromToBy(5, 0, 1);
+        assertThrows(IllegalArgumentException.class, () -> IntInterval.fromToBy(5, 0, 1));
     }
 
     @Test
@@ -122,22 +122,22 @@ public class IntIntervalTest
         assertEquals(2, integers.getFirst());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void oneToBy_throws_step_size_zero()
     {
-        IntInterval.oneToBy(1, 0);
+        assertThrows(IllegalArgumentException.class, () -> IntInterval.oneToBy(1, 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void oneToBy_throws_count_size_zero()
     {
-        IntInterval.oneToBy(0, 1);
+        assertThrows(IllegalArgumentException.class, () -> IntInterval.oneToBy(0, 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void zeroToBy_throws_step_size_zero()
     {
-        IntInterval.zeroToBy(0, 0);
+        assertThrows(IllegalArgumentException.class, () -> IntInterval.zeroToBy(0, 0));
     }
 
     @Test
@@ -201,7 +201,7 @@ public class IntIntervalTest
         assertFalse(iterator.hasNext());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         IntIterator iterator = this.intInterval.intIterator();
@@ -209,8 +209,7 @@ public class IntIntervalTest
         {
             iterator.next();
         }
-
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test
@@ -383,11 +382,11 @@ public class IntIntervalTest
         assertEquals(14, this.intInterval.dotProduct(interval));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void dotProduct_throwsOnListsOfDifferentSizes()
     {
         IntInterval interval = IntInterval.oneTo(4);
-        this.intInterval.dotProduct(interval);
+        assertThrows(IllegalArgumentException.class, () -> this.intInterval.dotProduct(interval));
     }
 
     @Test

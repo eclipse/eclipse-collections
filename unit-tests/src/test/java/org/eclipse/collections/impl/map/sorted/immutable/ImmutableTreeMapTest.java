@@ -39,6 +39,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
@@ -114,10 +115,10 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
         assertEquals("{}", new ImmutableTreeMap<>(new TreeSortedMap<>()).toString());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void nullConstructor()
     {
-        new ImmutableTreeMap<Integer, Integer>(null);
+        assertThrows(NullPointerException.class, () -> new ImmutableTreeMap<Integer, Integer>(null));
     }
 
     @Test
@@ -126,10 +127,10 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
         assertEquals(Integer.valueOf(1), new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).firstKey());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void firstKey_throws()
     {
-        new ImmutableTreeMap<>(new TreeSortedMap<>()).firstKey();
+        assertThrows(NoSuchElementException.class, () -> new ImmutableTreeMap<>(new TreeSortedMap<>()).firstKey());
     }
 
     @Test
@@ -138,10 +139,10 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
         assertEquals(Integer.valueOf(4), new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).lastKey());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void lastKey_throws()
     {
-        new ImmutableTreeMap<>(new TreeSortedMap<>()).lastKey();
+        assertThrows(NoSuchElementException.class, () -> new ImmutableTreeMap<>(new TreeSortedMap<>()).lastKey());
     }
 
     @Test
@@ -240,58 +241,58 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
         assertArrayEquals(new Integer[]{1, 2, 3, 4, 42, null}, result);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addToKeySet()
     {
-        new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().add(5);
+        assertThrows(UnsupportedOperationException.class, () -> new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().add(5));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllToKeySet()
     {
-        new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().addAll(FastList.newListWith(5, 6, 7));
+        assertThrows(UnsupportedOperationException.class, () -> new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().addAll(FastList.newListWith(5, 6, 7)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeFromKeySet()
     {
-        new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().remove(1);
+        assertThrows(UnsupportedOperationException.class, () -> new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().remove(1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAllFromKeySet()
     {
-        new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().removeAll(FastList.newListWith(1, 2, 3));
+        assertThrows(UnsupportedOperationException.class, () -> new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().removeAll(FastList.newListWith(1, 2, 3)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAllFromKeySet()
     {
-        new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().retainAll(FastList.newListWith(1, 2, 3, 4));
+        assertThrows(UnsupportedOperationException.class, () -> new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().retainAll(FastList.newListWith(1, 2, 3, 4)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clearFromKeySet()
     {
-        new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().clear();
+        assertThrows(UnsupportedOperationException.class, () -> new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).keySet().clear());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subMap()
     {
-        new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).subMap(0, 1);
+        assertThrows(UnsupportedOperationException.class, () -> new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).subMap(0, 1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void headMap()
     {
-        new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).headMap(1);
+        assertThrows(UnsupportedOperationException.class, () -> new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).headMap(1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void tailMap()
     {
-        new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).tailMap(0);
+        assertThrows(UnsupportedOperationException.class, () -> new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")).tailMap(0));
     }
 
     @Test

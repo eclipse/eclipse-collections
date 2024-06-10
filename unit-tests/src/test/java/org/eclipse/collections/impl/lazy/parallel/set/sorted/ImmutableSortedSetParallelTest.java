@@ -15,6 +15,8 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class ImmutableSortedSetParallelTest extends ParallelSortedSetIterableTestCase
 {
     @Override
@@ -29,15 +31,15 @@ public class ImmutableSortedSetParallelTest extends ParallelSortedSetIterableTes
         return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), littleElements).asParallel(this.executorService, this.batchSize);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asParallel_small_batch()
     {
-        SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(this.executorService, 0);
+        assertThrows(IllegalArgumentException.class, () -> SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(this.executorService, 0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void asParallel_null_executorService()
     {
-        SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(null, 2);
+        assertThrows(NullPointerException.class, () -> SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(null, 2));
     }
 }

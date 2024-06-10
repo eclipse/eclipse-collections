@@ -127,10 +127,10 @@ public class IntervalTest
         assertEquals(Lists.mutable.with(Integer.MAX_VALUE), Interval.fromToBy(Integer.MAX_VALUE, Integer.MAX_VALUE - 10, -20));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void fromToBy_throws_step_size_zero()
     {
-        Interval.fromToBy(0, 0, 0);
+        assertThrows(IllegalArgumentException.class, () -> Interval.fromToBy(0, 0, 0));
     }
 
     @Test
@@ -149,16 +149,16 @@ public class IntervalTest
         Verify.assertContains(2, integers);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void oneToBy_throws_step_size_zero()
     {
-        Interval.oneToBy(1, 0);
+        assertThrows(IllegalArgumentException.class, () -> Interval.oneToBy(1, 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void zeroToBy_throws_step_size_zero()
     {
-        Interval.zeroToBy(0, 0);
+        assertThrows(IllegalArgumentException.class, () -> Interval.zeroToBy(0, 0));
     }
 
     @Test
@@ -987,64 +987,64 @@ public class IntervalTest
         assertFalse(Interval.fromTo(1, 3).containsAll(FastList.newListWith(1, 2, 4)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        Interval.fromTo(1, 3).add(4);
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).add(4));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add_at_index()
     {
-        Interval.fromTo(1, 3).add(0, 4);
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).add(0, 4));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        Interval.fromTo(1, 3).remove(Integer.valueOf(4));
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).remove(Integer.valueOf(4)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove_at_index()
     {
-        Interval.fromTo(1, 3).remove(0);
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).remove(0));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        Interval.fromTo(1, 3).addAll(FastList.newListWith(4, 5, 6));
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).addAll(FastList.newListWith(4, 5, 6)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll_at_index()
     {
-        Interval.fromTo(1, 3).addAll(0, FastList.newListWith(4, 5, 6));
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).addAll(0, FastList.newListWith(4, 5, 6)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        Interval.fromTo(1, 3).removeAll(FastList.newListWith(4, 5, 6));
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).removeAll(FastList.newListWith(4, 5, 6)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        Interval.fromTo(1, 3).retainAll(FastList.newListWith(4, 5, 6));
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).retainAll(FastList.newListWith(4, 5, 6)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        Interval.fromTo(1, 3).clear();
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).clear());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void set()
     {
-        Interval.fromTo(1, 3).set(0, 0);
+        assertThrows(UnsupportedOperationException.class, () -> Interval.fromTo(1, 3).set(0, 0));
     }
 
     @Test

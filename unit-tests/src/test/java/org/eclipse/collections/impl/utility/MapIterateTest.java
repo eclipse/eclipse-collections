@@ -65,6 +65,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class MapIterateTest
@@ -237,22 +238,22 @@ public class MapIterateTest
         assertEquals(30, list.injectInto(0, AddFunction.INTEGER_TO_INT));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void forEachValueThrowsOnNull()
     {
-        MapIterate.forEachValue(null, null);
+        assertThrows(IllegalArgumentException.class, () -> MapIterate.forEachValue(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void forEachKeyThrowsOnNull()
     {
-        MapIterate.forEachKey(null, null);
+        assertThrows(IllegalArgumentException.class, () -> MapIterate.forEachKey(null, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void forEachKeyValueThrowsOnNull()
     {
-        MapIterate.forEachKeyValue(null, null);
+        assertThrows(IllegalArgumentException.class, () -> MapIterate.forEachKeyValue(null, null));
     }
 
     @Test
@@ -474,10 +475,10 @@ public class MapIterateTest
         assertNull(resultNotFound);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void detectThrowsOnNull()
     {
-        MapIterate.detect(null, (Predicate2<? super Object, ? super Object>) null);
+        assertThrows(IllegalArgumentException.class, () -> MapIterate.detect(null, (Predicate2<? super Object, ? super Object>) null));
     }
 
     @Test

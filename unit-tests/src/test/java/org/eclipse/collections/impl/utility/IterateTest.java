@@ -266,10 +266,10 @@ public class IterateTest
         assertArrayEquals(expected, Iterate.toArray(new IterableAdapter<>(Interval.oneTo(5))));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toArray_NullParameter()
     {
-        Iterate.toArray(null);
+        assertThrows(NullPointerException.class, () -> Iterate.toArray(null));
     }
 
     @Test
@@ -426,10 +426,10 @@ public class IterateTest
                 Iterate.flatCollect(new IterableAdapter<>(new ArrayList<>(list)), ListContainer.getListFunction(), FastList.newList()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void flatCollectFromAttributesWithTarget_NullParameter()
     {
-        Iterate.flatCollect(null, null, UnifiedSet.newSet());
+        assertThrows(IllegalArgumentException.class, () -> Iterate.flatCollect(null, null, UnifiedSet.newSet()));
     }
 
     @Test
@@ -679,16 +679,16 @@ public class IterateTest
         assertEquals(Boolean.FALSE, Iterate.getLast(new IterableAdapter<>(list)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void getFirst_null_throws()
     {
-        Iterate.getFirst(null);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.getFirst(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void getList_null_throws()
     {
-        Iterate.getLast(null);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.getLast(null));
     }
 
     @Test
@@ -775,10 +775,10 @@ public class IterateTest
         assertEquals(0, Iterate.count(iList(), ignored -> true));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void count_null_throws()
     {
-        Iterate.count(null, ignored -> true);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.count(null, ignored -> true));
     }
 
     @Test
@@ -1833,10 +1833,10 @@ public class IterateTest
         });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void count_null_null_throws()
     {
-        Iterate.count(null, null);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.count(null, null));
     }
 
     @Test
@@ -1848,10 +1848,10 @@ public class IterateTest
         });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void countWith_null_throws()
     {
-        Iterate.countWith(null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.countWith(null, null, null));
     }
 
     @Test
@@ -1979,16 +1979,16 @@ public class IterateTest
         });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_null_throws()
     {
-        Iterate.take(null, 1);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.take(null, 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_negative_throws()
     {
-        Iterate.take(this.getIntegerSet(), -1);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.take(this.getIntegerSet(), -1));
     }
 
     @Test
@@ -2012,16 +2012,16 @@ public class IterateTest
         });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_null_throws()
     {
-        Iterate.drop(null, 1);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.drop(null, 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_negative_throws()
     {
-        Iterate.drop(this.getIntegerSet(), -1);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.drop(this.getIntegerSet(), -1));
     }
 
     @Test
@@ -2031,16 +2031,16 @@ public class IterateTest
         assertSame(value, Iterate.getOnly(Lists.fixedSize.of(value)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void getOnlyEmpty()
     {
-        Iterate.getOnly(Lists.fixedSize.<String>of());
+        assertThrows(IllegalArgumentException.class, () -> Iterate.getOnly(Lists.fixedSize.<String>of()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void getOnlyMultiple()
     {
-        Iterate.getOnly(Lists.fixedSize.of(new Object(), new Object()));
+        assertThrows(IllegalArgumentException.class, () -> Iterate.getOnly(Lists.fixedSize.of(new Object(), new Object())));
     }
 
     private static final class IterableAdapter<E>
@@ -2372,10 +2372,10 @@ public class IterateTest
         assertThrows(NoSuchElementException.class, () -> Iterate.minBy(new LinkedList<>(), Functions.getIntegerPassThru()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void minByThrowsOnNull()
     {
-        Iterate.minBy(null, null);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.minBy(null, null));
     }
 
     @Test
@@ -2400,10 +2400,10 @@ public class IterateTest
         assertThrows(NoSuchElementException.class, () -> Iterate.maxBy(new LinkedList<>(), Functions.getIntegerPassThru()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void maxByThrowsOnNull()
     {
-        Iterate.maxBy(null, null);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.maxBy(null, null));
     }
 
     @Test
@@ -2418,10 +2418,10 @@ public class IterateTest
         assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), Iterate.groupByUniqueKey(FastList.newListWith(1, 2, 3), id -> id));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void groupByUniqueKey_throws_for_null()
     {
-        Iterate.groupByUniqueKey(null, id -> id);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.groupByUniqueKey(null, id -> id));
     }
 
     @Test
@@ -2430,9 +2430,9 @@ public class IterateTest
         assertEquals(UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3), Iterate.groupByUniqueKey(FastList.newListWith(1, 2, 3), id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void groupByUniqueKey_target_throws_for_null()
     {
-        Iterate.groupByUniqueKey(null, id -> id, UnifiedMap.newMap());
+        assertThrows(IllegalArgumentException.class, () -> Iterate.groupByUniqueKey(null, id -> id, UnifiedMap.newMap()));
     }
 }

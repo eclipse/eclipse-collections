@@ -32,10 +32,10 @@ public class ListAdapterTest extends AbstractListTestCase
         return new ListAdapter<>(new LinkedList<>(FastList.newListWith(littleElements)));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void null_throws()
     {
-        new ListAdapter<>(null);
+        assertThrows(NullPointerException.class, () -> new ListAdapter<>(null));
     }
 
     @Override

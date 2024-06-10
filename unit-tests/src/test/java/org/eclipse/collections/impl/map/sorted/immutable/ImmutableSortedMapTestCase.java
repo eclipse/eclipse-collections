@@ -731,10 +731,10 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         assertSame(strings2, strings2.take(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        this.classUnderTest().take(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().take(-1));
     }
 
     @Test
@@ -754,10 +754,10 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         assertEquals(expectedMap, strings2.drop(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        this.classUnderTest().drop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().drop(-1));
     }
 
     protected MutableMap<Integer, String> equalUnifiedMap()

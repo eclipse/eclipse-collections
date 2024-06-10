@@ -654,16 +654,16 @@ public class IterableIterateTest
         Verify.assertEmpty(Iterate.take(new IterableAdapter<>(FastList.<Integer>newList()), 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_negative_throws()
     {
-        Iterate.take(new IterableAdapter<>(FastList.<Integer>newList()), -1);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.take(new IterableAdapter<>(FastList.<Integer>newList()), -1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_target_negative_throws()
     {
-        IterableIterate.take(new IterableAdapter<>(FastList.newList()), -1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> IterableIterate.take(new IterableAdapter<>(FastList.newList()), -1, FastList.newList()));
     }
 
     @Test
@@ -686,16 +686,16 @@ public class IterableIterateTest
         Verify.assertEmpty(Iterate.drop(new IterableAdapter<>(FastList.<Integer>newList()), 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_negative_throws()
     {
-        Iterate.drop(new IterableAdapter<>(FastList.<Integer>newList()), -1);
+        assertThrows(IllegalArgumentException.class, () -> Iterate.drop(new IterableAdapter<>(FastList.<Integer>newList()), -1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_target_negative_throws()
     {
-        IterableIterate.drop(new IterableAdapter<>(FastList.newList()), -1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> IterableIterate.drop(new IterableAdapter<>(FastList.newList()), -1, FastList.newList()));
     }
 
     private static final class IterableAdapter<E>

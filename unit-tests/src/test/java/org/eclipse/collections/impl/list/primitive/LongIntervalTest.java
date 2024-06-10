@@ -101,16 +101,16 @@ public class LongIntervalTest
                 LongInterval.fromToBy(minint, maxint * 2, maxint));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void fromToBy_throws_step_size_zero()
     {
-        LongInterval.fromToBy(0, 0, 0);
+        assertThrows(IllegalArgumentException.class, () -> LongInterval.fromToBy(0, 0, 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void fromToBy_throws_on_illegal_step()
     {
-        LongInterval.fromToBy(5, 0, 1);
+        assertThrows(IllegalArgumentException.class, () -> LongInterval.fromToBy(5, 0, 1));
     }
 
     @Test
@@ -138,22 +138,22 @@ public class LongIntervalTest
         assertEquals(2, integers.getFirst());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void oneToBy_throws_step_size_zero()
     {
-        LongInterval.oneToBy(1, 0);
+        assertThrows(IllegalArgumentException.class, () -> LongInterval.oneToBy(1, 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void oneToBy_throws_count_size_zero()
     {
-        LongInterval.oneToBy(0, 1);
+        assertThrows(IllegalArgumentException.class, () -> LongInterval.oneToBy(0, 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void zeroToBy_throws_step_size_zero()
     {
-        LongInterval.zeroToBy(0, 0);
+        assertThrows(IllegalArgumentException.class, () -> LongInterval.zeroToBy(0, 0));
     }
 
     @Test
@@ -217,7 +217,7 @@ public class LongIntervalTest
         assertFalse(iterator.hasNext());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         LongIterator iterator = this.longInterval.longIterator();
@@ -226,7 +226,7 @@ public class LongIntervalTest
             iterator.next();
         }
 
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test
@@ -385,10 +385,10 @@ public class LongIntervalTest
         Verify.assertSize(200_000_001, LongInterval.fromTo(1_000_000_000, -1_000_000_000).by(-10));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subList()
     {
-        this.longInterval.subList(0, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.longInterval.subList(0, 1));
     }
 
     @Test
@@ -398,11 +398,11 @@ public class LongIntervalTest
         assertEquals(14, this.longInterval.dotProduct(interval));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void dotProduct_throwsOnListsOfDifferentSizes()
     {
         LongInterval interval = LongInterval.oneTo(4);
-        this.longInterval.dotProduct(interval);
+        assertThrows(IllegalArgumentException.class, () -> this.longInterval.dotProduct(interval));
     }
 
     @Test
