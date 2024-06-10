@@ -18,6 +18,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class ImmutableSubListTest extends AbstractImmutableListTestCase
@@ -44,28 +45,28 @@ public class ImmutableSubListTest extends AbstractImmutableListTestCase
         assertEquals(Integer.valueOf(1), iterator.previous());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testSubListListIteratorSet_throws()
     {
         ImmutableList<Integer> subList = this.classUnderTest();
         ListIterator<Integer> iterator = subList.listIterator();
-        iterator.set(4);
+        assertThrows(UnsupportedOperationException.class, () -> iterator.set(4));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testSubListListIteratorRemove_throws()
     {
         ImmutableList<Integer> subList = this.classUnderTest();
         ListIterator<Integer> iterator = subList.listIterator();
-        iterator.remove();
+        assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testSubListListIteratorAdd_throws()
     {
         ImmutableList<Integer> subList = this.classUnderTest();
         ListIterator<Integer> iterator = subList.listIterator();
-        iterator.add(4);
+        assertThrows(UnsupportedOperationException.class, () -> iterator.add(4));
     }
 
     @Test
@@ -75,17 +76,17 @@ public class ImmutableSubListTest extends AbstractImmutableListTestCase
         assertEquals(Integer.valueOf(2), list.getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_exception_when_empty()
     {
         ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 1);
-        list.getOnly();
+        assertThrows(IllegalStateException.class, () -> list.getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_exception_when_multiple_items()
     {
         ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 3);
-        list.getOnly();
+        assertThrows(IllegalStateException.class, () -> list.getOnly());
     }
 }

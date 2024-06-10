@@ -16,6 +16,8 @@ import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class MemoryEfficientMutableSetParallelSetIterableTest extends ParallelUnsortedSetIterableTestCase
 {
     @Override
@@ -36,15 +38,15 @@ public class MemoryEfficientMutableSetParallelSetIterableTest extends ParallelUn
         return Sets.fixedSize.withAll(ArrayAdapter.adapt(littleElements));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asParallel_small_batch()
     {
-        Sets.fixedSize.with(1, 2, 3, 4).asParallel(this.executorService, 0);
+        assertThrows(IllegalArgumentException.class, () -> Sets.fixedSize.with(1, 2, 3, 4).asParallel(this.executorService, 0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void asParallel_null_executorService()
     {
-        Sets.fixedSize.with(1, 2, 3, 4).asParallel(null, 2);
+        assertThrows(NullPointerException.class, () -> Sets.fixedSize.with(1, 2, 3, 4).asParallel(null, 2));
     }
 }

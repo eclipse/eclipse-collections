@@ -92,24 +92,24 @@ public class ImmutableTreeSetTest
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subSet()
     {
-        this.classUnderTest().castToSortedSet().subSet(1, 4);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().subSet(1, 4));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void headSet()
     {
-        this.classUnderTest().castToSortedSet().headSet(4);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().headSet(4));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void tailSet()
     {
-        this.classUnderTest().castToSortedSet().tailSet(1);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().tailSet(1));
     }
 
     @Override

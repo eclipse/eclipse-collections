@@ -1030,16 +1030,16 @@ public abstract class MapIterableTestCase
         assertEquals("One", map.getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_throws_when_empty()
     {
-        this.newMap().getOnly();
+        assertThrows(IllegalStateException.class, () -> this.newMap().getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_throws_when_multiple_values()
     {
-        this.newMapWithKeysValues("1", "One", "2", "Two").getOnly();
+        assertThrows(IllegalStateException.class, () -> this.newMapWithKeysValues("1", "One", "2", "Two").getOnly());
     }
 
     @Test
@@ -1307,10 +1307,10 @@ public abstract class MapIterableTestCase
         assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), map.groupByUniqueKey(id -> id));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws()
     {
-        this.newMapWithKeysValues(1, 1, 2, 2, 3, 3).groupByUniqueKey(Functions.getFixedValue(1));
+        assertThrows(IllegalStateException.class, () -> this.newMapWithKeysValues(1, 1, 2, 2, 3, 3).groupByUniqueKey(Functions.getFixedValue(1)));
     }
 
     @Test
@@ -1321,10 +1321,10 @@ public abstract class MapIterableTestCase
         assertEquals(UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3), integers);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws()
     {
-        this.newMapWithKeysValues(1, 1, 2, 2, 3, 3).groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2));
+        assertThrows(IllegalStateException.class, () -> this.newMapWithKeysValues(1, 1, 2, 2, 3, 3).groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2)));
     }
 
     @Test

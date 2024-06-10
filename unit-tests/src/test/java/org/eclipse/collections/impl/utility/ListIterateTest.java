@@ -87,12 +87,12 @@ public class ListIterateTest
         assertArrayEquals(target2, new Integer[]{1, 2, 1, 2});
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test
     public void toArray_throws()
     {
         List<Integer> notAnArrayList = new LinkedList<>(Interval.oneTo(10));
         Integer[] target1 = {1, 2, null, null};
-        ListIterate.toArray(notAnArrayList, target1, 2, 10);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> ListIterate.toArray(notAnArrayList, target1, 2, 10));
     }
 
     @Test
@@ -661,10 +661,10 @@ public class ListIterateTest
         ListIterate.forEachInBoth(null, null, (argument1, argument2) -> fail());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void forEachInBothThrowsOnDifferentLengthLists()
     {
-        ListIterate.forEachInBoth(FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2), (argument1, argument2) -> fail());
+        assertThrows(RuntimeException.class, () -> ListIterate.forEachInBoth(FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2), (argument1, argument2) -> fail()));
     }
 
     private void assertForEachInBoth(List<String> list1, List<String> list2)
@@ -953,11 +953,11 @@ public class ListIterateTest
         Verify.assertEmpty(ListIterate.take(Lists.fixedSize.of(), 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        ListIterate.take(this.getIntegerList(), -1);
-        ListIterate.take(this.getIntegerList(), -1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> ListIterate.take(this.getIntegerList(), -1));
+        assertThrows(IllegalArgumentException.class, () -> ListIterate.take(this.getIntegerList(), -1, FastList.newList()));
     }
 
     @Test
@@ -989,11 +989,11 @@ public class ListIterateTest
         Verify.assertSize(0, ListIterate.drop(Lists.fixedSize.of(), 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        ListIterate.drop(this.getIntegerList(), -1);
-        ListIterate.drop(this.getIntegerList(), -1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> ListIterate.drop(this.getIntegerList(), -1));
+        assertThrows(IllegalArgumentException.class, () -> ListIterate.drop(this.getIntegerList(), -1, FastList.newList()));
     }
 
     @Test
@@ -1005,10 +1005,10 @@ public class ListIterateTest
         assertEquals(FastList.newListWith(2, 2, 2, 1), sizes);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunkWithIllegalSize()
     {
-        ListIterate.chunk(FastList.newList(), 0);
+        assertThrows(IllegalArgumentException.class, () -> ListIterate.chunk(FastList.newList(), 0));
     }
 
     @Test
