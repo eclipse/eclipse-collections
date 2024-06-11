@@ -14,6 +14,8 @@ import org.eclipse.collections.api.factory.map.sorted.ImmutableSortedMapFactory;
 import org.eclipse.collections.api.factory.map.sorted.MutableSortedMapFactory;
 
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = ImmutableSortedMapFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MutableSortedMapFactory.class)
 public final class SortedMaps
 {
     public static final ImmutableSortedMapFactory immutable = ServiceLoaderUtils.loadServiceClass(ImmutableSortedMapFactory.class);

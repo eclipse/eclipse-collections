@@ -8,10 +8,11 @@
       license-feature-version="1.0.1">
 
    <plugin
-         id="org.eclipse.collections"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         id="org.eclipse.collections.api"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.collections.impl"
+         version="0.0.0"/>
 
 </feature>

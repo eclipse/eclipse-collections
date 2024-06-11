@@ -26,6 +26,8 @@ import org.eclipse.collections.api.factory.map.primitive.Mutable<name>ObjectMapF
  * @since 11.1.
  */
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Immutable<name>ObjectMapFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Mutable<name>ObjectMapFactory.class)
 public final class <name>ObjectMaps
 {
     public static final Immutable<name>ObjectMapFactory immutable =

@@ -25,6 +25,7 @@ import org.eclipse.collections.impl.factory.primitive.<name>Lists;
  *
  * @since 3.2.
  */
+@aQute.bnd.annotation.spi.ServiceProvider(Immutable<name>ListFactory.class)
 public class Immutable<name>ListFactoryImpl implements Immutable<name>ListFactory
 {
     public static final Immutable<name>ListFactory INSTANCE = new Immutable<name>ListFactoryImpl();

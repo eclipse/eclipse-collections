@@ -51,6 +51,10 @@ import org.eclipse.collections.api.factory.list.MutableListFactory;
  * </pre>
  */
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = ImmutableListFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MutableListFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = FixedSizeListFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MultiReaderListFactory.class)
 public final class Lists
 {
     public static final ImmutableListFactory immutable =

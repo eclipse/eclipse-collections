@@ -14,6 +14,8 @@ import org.eclipse.collections.api.factory.bag.sorted.ImmutableSortedBagFactory;
 import org.eclipse.collections.api.factory.bag.sorted.MutableSortedBagFactory;
 
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MutableSortedBagFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = ImmutableSortedBagFactory.class)
 public final class SortedBags
 {
     public static final MutableSortedBagFactory mutable = ServiceLoaderUtils.loadServiceClass(MutableSortedBagFactory.class);

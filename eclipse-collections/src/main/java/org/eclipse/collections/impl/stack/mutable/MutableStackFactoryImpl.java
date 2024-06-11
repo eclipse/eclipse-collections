@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 import org.eclipse.collections.api.factory.stack.MutableStackFactory;
 import org.eclipse.collections.api.stack.MutableStack;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MutableStackFactory.class)
 public class MutableStackFactoryImpl implements MutableStackFactory
 {
     public static final MutableStackFactory INSTANCE = new MutableStackFactoryImpl();

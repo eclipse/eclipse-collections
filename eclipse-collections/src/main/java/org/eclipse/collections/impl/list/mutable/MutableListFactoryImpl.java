@@ -17,6 +17,7 @@ import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.factory.list.MutableListFactory;
 import org.eclipse.collections.api.list.MutableList;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MutableListFactory.class)
 public class MutableListFactoryImpl implements MutableListFactory
 {
     public static final MutableListFactory INSTANCE = new MutableListFactoryImpl();

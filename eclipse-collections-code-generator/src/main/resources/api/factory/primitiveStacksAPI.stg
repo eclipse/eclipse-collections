@@ -24,6 +24,8 @@ import org.eclipse.collections.api.factory.stack.primitive.Mutable<name>StackFac
  * @since 11.1.
  */
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Immutable<name>StackFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Mutable<name>StackFactory.class)
 public final class <name>Stacks
 {
     public static final Immutable<name>StackFactory immutable =

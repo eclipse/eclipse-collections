@@ -17,6 +17,7 @@ import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.factory.list.MultiReaderListFactory;
 import org.eclipse.collections.api.list.MultiReaderList;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MultiReaderListFactory.class)
 public class MultiReaderMutableListFactory implements MultiReaderListFactory
 {
     public static final MultiReaderListFactory INSTANCE = new MultiReaderMutableListFactory();

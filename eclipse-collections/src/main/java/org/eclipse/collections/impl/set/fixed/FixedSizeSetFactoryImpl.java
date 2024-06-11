@@ -19,6 +19,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
+@aQute.bnd.annotation.spi.ServiceProvider(FixedSizeSetFactory.class)
 public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
 {
     public static final FixedSizeSetFactory INSTANCE = new FixedSizeSetFactoryImpl();

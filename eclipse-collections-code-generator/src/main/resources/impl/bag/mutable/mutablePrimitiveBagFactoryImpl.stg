@@ -26,6 +26,7 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 6.0.
  */
+@aQute.bnd.annotation.spi.ServiceProvider(Mutable<name>BagFactory.class)
 public class Mutable<name>BagFactoryImpl implements Mutable<name>BagFactory
 {
     public static final Mutable<name>BagFactory INSTANCE = new Mutable<name>BagFactoryImpl();

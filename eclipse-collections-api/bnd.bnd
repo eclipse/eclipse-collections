@@ -1,6 +1,6 @@
-package-version=${version;===;${Bundle-Version}}
+package-version=${versionmask;===;${Bundle-Version}}
 
-Automatic-Module-Name: org.eclipse.collections.api
+-jpms-module-info: org.eclipse.collections.api;version="${package-version}"
 Bundle-SymbolicName: org.eclipse.collections.api
 Export-Package: \
-  *;version="${package-version}"
+  org.eclipse.collections.api.*;version="${package-version}"

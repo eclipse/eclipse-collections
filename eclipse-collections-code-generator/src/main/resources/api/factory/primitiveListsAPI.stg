@@ -24,6 +24,8 @@ import org.eclipse.collections.api.factory.list.primitive.Mutable<name>ListFacto
  * @since 11.1.
  */
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Immutable<name>ListFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = Mutable<name>ListFactory.class)
 public final class <name>Lists
 {
     public static final Immutable<name>ListFactory immutable =

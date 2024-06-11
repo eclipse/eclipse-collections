@@ -15,6 +15,7 @@ import java.util.Comparator;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.factory.bag.sorted.MutableSortedBagFactory;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MutableSortedBagFactory.class)
 public class MutableSortedBagFactoryImpl implements MutableSortedBagFactory
 {
     public static final MutableSortedBagFactory INSTANCE = new MutableSortedBagFactoryImpl();

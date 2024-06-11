@@ -26,6 +26,7 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 6.0.
  */
+@aQute.bnd.annotation.spi.ServiceProvider(Mutable<name>SetFactory.class)
 public class Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
 {
     public static final Mutable<name>SetFactory INSTANCE = new Mutable<name>SetFactoryImpl();

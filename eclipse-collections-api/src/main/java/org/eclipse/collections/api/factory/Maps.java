@@ -42,6 +42,9 @@ import org.eclipse.collections.api.factory.map.MutableMapFactory;
  * </pre>
  */
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = ImmutableMapFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = FixedSizeMapFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MutableMapFactory.class)
 public final class Maps
 {
     public static final ImmutableMapFactory immutable = ServiceLoaderUtils.loadServiceClass(ImmutableMapFactory.class);

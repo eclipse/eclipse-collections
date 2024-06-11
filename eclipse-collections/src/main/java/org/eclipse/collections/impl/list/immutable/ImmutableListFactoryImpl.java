@@ -20,6 +20,7 @@ import org.eclipse.collections.api.factory.list.ImmutableListFactory;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.utility.Iterate;
 
+@aQute.bnd.annotation.spi.ServiceProvider(ImmutableListFactory.class)
 public class ImmutableListFactoryImpl implements ImmutableListFactory
 {
     public static final ImmutableListFactory INSTANCE = new ImmutableListFactoryImpl();

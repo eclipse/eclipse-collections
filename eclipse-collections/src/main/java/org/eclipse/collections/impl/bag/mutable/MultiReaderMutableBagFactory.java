@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 import org.eclipse.collections.api.bag.MultiReaderBag;
 import org.eclipse.collections.api.factory.bag.MultiReaderBagFactory;
 
+@aQute.bnd.annotation.spi.ServiceProvider(MultiReaderBagFactory.class)
 public class MultiReaderMutableBagFactory implements MultiReaderBagFactory
 {
     public static final MultiReaderBagFactory INSTANCE = new MultiReaderMutableBagFactory();

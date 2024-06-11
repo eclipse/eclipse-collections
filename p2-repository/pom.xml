@@ -49,7 +49,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- versions used for plug-ins below -->
-        <tycho-version>1.7.0</tycho-version>
+        <tycho-version>4.0.7</tycho-version>
 
         <!-- versions of the EBR plug-in to use -->
         <ebr-version>1.3.0</ebr-version>
@@ -113,18 +113,6 @@
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-maven-plugin</artifactId>
                 <extensions>true</extensions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.eclipse.tycho</groupId>
-                        <artifactId>tycho-core</artifactId>
-                        <version>${tycho-version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.eclipse.tycho</groupId>
-                        <artifactId>tycho-p2-facade</artifactId>
-                        <version>${tycho-version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <!-- target platform configuration -->
@@ -230,11 +218,6 @@
                 <plugin>
                     <groupId>org.eclipse.tycho</groupId>
                     <artifactId>tycho-source-plugin</artifactId>
-                    <version>${tycho-version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.eclipse.tycho.extras</groupId>
-                    <artifactId>tycho-source-feature-plugin</artifactId>
                     <version>${tycho-version}</version>
                 </plugin>
                 <plugin>

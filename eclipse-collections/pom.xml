@@ -42,6 +42,14 @@
             <version>${project.version}</version>
         </dependency>
 
+		<dependency>
+		    <groupId>biz.aQute.bnd</groupId>
+		    <artifactId>biz.aQute.bnd.annotation</artifactId>
+		    <version>6.4.1</version>
+		    <scope>provided</scope>
+            <optional>true</optional>
+		</dependency>
+
     </dependencies>
 
     <build>
@@ -53,14 +61,6 @@
                 <artifactId>eclipse-collections-code-generator-maven-plugin</artifactId>
                 <version>${project.version}</version>
                 <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>generate-services</goal>
-                        </goals>
-                        <id>generate-services</id>
-                    </execution>
-
                     <execution>
                         <phase>generate-sources</phase>
                         <goals>

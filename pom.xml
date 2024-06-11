@@ -25,8 +25,8 @@
     <name>Eclipse Collections Parent Project</name>
 
     <description>Eclipse Collections is a collections framework for Java. It has JDK-compatible List, Set and Map
-        implementations with a rich API and set of utility classes that work with any JDK compatible Collections,
-        Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk collection framework.
+implementations with a rich API and set of utility classes that work with any JDK compatible Collections,
+Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk collection framework.
     </description>
 
     <url>https://github.com/eclipse/eclipse-collections</url>
@@ -111,7 +111,6 @@
         <module>junit-trait-runner</module>
         <module>unit-tests-java8</module>
         <module>test-coverage</module>
-        <module>p2-repository</module>
     </modules>
 
     <properties>
@@ -227,7 +226,6 @@
                             <param>eclipse-collections-code-generator</param>
                             <param>eclipse-collections-code-generator-maven-plugin</param>
                             <param>p2-feature</param>
-                            <param>p2-repository</param>
                             <param>p2-repository</param>
                         </skippedModules>
                         <avoidCallsTo>
@@ -573,7 +571,7 @@
                 <plugin>
                     <groupId>biz.aQute.bnd</groupId>
                     <artifactId>bnd-maven-plugin</artifactId>
-                    <version>5.1.1</version>
+                    <version>6.4.0</version>
                     <executions>
                         <execution>
                             <goals>
@@ -837,7 +835,7 @@
                     <plugin>
                         <groupId>org.eclipse.cbi.maven.plugins</groupId>
                         <artifactId>eclipse-jarsigner-plugin</artifactId>
-                        <version>1.3.2</version>
+                        <version>1.3.4</version>
                         <executions>
                             <execution>
                                 <id>jarsign</id>

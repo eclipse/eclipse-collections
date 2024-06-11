@@ -25,6 +25,7 @@ import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
  *
  * @since 4.0.
  */
+@aQute.bnd.annotation.spi.ServiceProvider(Immutable<name>StackFactory.class)
 public class Immutable<name>StackFactoryImpl implements Immutable<name>StackFactory
 {
     public static final Immutable<name>StackFactory INSTANCE = new Immutable<name>StackFactoryImpl();

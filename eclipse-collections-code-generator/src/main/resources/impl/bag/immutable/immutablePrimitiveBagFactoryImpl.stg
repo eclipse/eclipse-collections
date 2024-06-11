@@ -27,6 +27,7 @@ import org.eclipse.collections.impl.factory.primitive.<name>Bags;
  *
  * @since 4.0.
  */
+@aQute.bnd.annotation.spi.ServiceProvider(Immutable<name>BagFactory.class)
 public class Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
 {
     public static final Immutable<name>BagFactory INSTANCE = new Immutable<name>BagFactoryImpl();

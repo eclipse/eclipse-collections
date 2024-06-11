@@ -43,6 +43,9 @@ import org.eclipse.collections.api.factory.bag.MutableBagFactory;
  *
  */
 @SuppressWarnings("ConstantNamingConvention")
+@aQute.bnd.annotation.spi.ServiceConsumer(value = ImmutableBagFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MutableBagFactory.class)
+@aQute.bnd.annotation.spi.ServiceConsumer(value = MultiReaderBagFactory.class)
 public final class Bags
 {
     public static final ImmutableBagFactory immutable = ServiceLoaderUtils.loadServiceClass(ImmutableBagFactory.class);
