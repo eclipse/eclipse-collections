@@ -117,10 +117,10 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
         assertEquals(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getLastOptional());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     default void OrderedIterable_getLastOptional_null_element()
     {
-        ((OrderedIterable<?>) this.newWith(new Object[]{null})).getLastOptional();
+        assertThrows(NullPointerException.class, () -> ((OrderedIterable<?>) this.newWith(new Object[]{null})).getLastOptional());
     }
 
     @Test

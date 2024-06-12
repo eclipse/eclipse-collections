@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public abstract class ObjectBooleanHashMapTestCase extends AbstractMutableObjectBooleanMapTestCase
@@ -65,10 +66,10 @@ public abstract class ObjectBooleanHashMapTestCase extends AbstractMutableObject
         assertEquals(64L, ((BitSet) values.get(hashMap)).size());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        this.newMapWithInitialCapacity(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.newMapWithInitialCapacity(-1));
     }
 
     @Test

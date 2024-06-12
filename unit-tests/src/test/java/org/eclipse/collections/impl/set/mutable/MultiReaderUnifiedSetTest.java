@@ -50,10 +50,10 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void largeCollectionStreamToBagMultimap()
     {
-        super.largeCollectionStreamToBagMultimap();
+        assertThrows(UnsupportedOperationException.class, () -> super.largeCollectionStreamToBagMultimap());
     }
 
     @Override
@@ -407,10 +407,10 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedBag_with_null()
     {
-        this.newWith(3, 4, null, 1, 2).toSortedBag();
+        assertThrows(NullPointerException.class, () -> this.newWith(3, 4, null, 1, 2).toSortedBag());
     }
 
     @Override

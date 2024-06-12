@@ -66,52 +66,52 @@ public abstract class ObjectBooleanHashMapValuesTestCase extends AbstractMutable
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable()
     {
-        this.classUnderTest().addAll(new BooleanArrayList());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new BooleanArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.classUnderTest().add(true);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllArray()
     {
-        this.classUnderTest().addAll(true, false);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(true, false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void with()
     {
-        this.classUnderTest().with(false);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(false));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void without()
     {
-        this.classUnderTest().without(true);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().without(true));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAll()
     {
-        this.classUnderTest().withAll(new BooleanArrayList());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withAll(new BooleanArrayList()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAll()
     {
-        this.classUnderTest().withoutAll(new BooleanArrayList());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withoutAll(new BooleanArrayList()));
     }
 
     @Override

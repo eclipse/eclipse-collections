@@ -39,16 +39,16 @@ public abstract class ObjectBooleanHashMapKeySetTestCase
 
     public abstract MutableObjectBooleanMap<String> newEmptyMap();
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.newMapWithKeysValues("One", true, "Two", false, "Three", true).keySet().add("Four");
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", true, "Two", false, "Three", true).keySet().add("Four"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        this.newMapWithKeysValues("One", true, "Two", false, "Three", true).keySet().addAll(FastList.newListWith("Four"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("One", true, "Two", false, "Three", true).keySet().addAll(FastList.newListWith("Four")));
     }
 
     @Test

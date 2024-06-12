@@ -238,7 +238,7 @@ public abstract class AbstractByteSetTestCase extends AbstractMutableByteCollect
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void byteIterator_throws()
     {
         MutableByteSet set = this.newWith((byte) 0, (byte) 1, (byte) 31, (byte) -1, (byte) -31);
@@ -248,7 +248,7 @@ public abstract class AbstractByteSetTestCase extends AbstractMutableByteCollect
             iterator.next();
         }
 
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
