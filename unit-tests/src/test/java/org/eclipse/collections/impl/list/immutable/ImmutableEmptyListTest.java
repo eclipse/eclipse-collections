@@ -229,11 +229,11 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         assertNull(integers.getLast());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly()
     {
         ImmutableList<Integer> list = this.classUnderTest();
-        list.getOnly();
+        assertThrows(IllegalStateException.class, () -> list.getOnly());
     }
 
     @Override
@@ -246,17 +246,17 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.classUnderTest().min(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min(Integer::compareTo));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.classUnderTest().max(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max(Integer::compareTo));
     }
 
     @Test
@@ -264,7 +264,6 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void min_null_throws()
     {
         // Not applicable for empty collections
-        super.min_null_throws();
     }
 
     @Test
@@ -272,21 +271,20 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void max_null_throws()
     {
         // Not applicable for empty collections
-        super.max_null_throws();
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_without_comparator()
     {
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_without_comparator()
     {
-        this.classUnderTest().max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Test
@@ -294,7 +292,6 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void min_null_throws_without_comparator()
     {
         // Not applicable for empty collections
-        super.min_null_throws_without_comparator();
     }
 
     @Test
@@ -302,28 +299,27 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     public void max_null_throws_without_comparator()
     {
         // Not applicable for empty collections
-        super.max_null_throws_without_comparator();
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
-        this.classUnderTest().minBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().minBy(String::valueOf));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
-        this.classUnderTest().maxBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().maxBy(String::valueOf));
     }
 
     @Override
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void subList()
     {
-        this.classUnderTest().subList(0, 1);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().subList(0, 1));
     }
 
     @Override
@@ -365,10 +361,10 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
-        this.classUnderTest().chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
     }
 
     @Override

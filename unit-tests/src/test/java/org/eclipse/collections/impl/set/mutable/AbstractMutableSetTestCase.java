@@ -50,6 +50,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -830,20 +831,19 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
         }
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_increment_past_end()
     {
         MutableSet<Integer> set = this.newWith();
         Iterator<Integer> iterator = set.iterator();
-        iterator.next();
-        iterator.next();
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void iterator_remove_without_next()
     {
         Iterator<Integer> iterator = this.<Integer>newWith().iterator();
-        iterator.remove();
+        assertThrows(IllegalStateException.class, () -> iterator.remove());
     }
 
     @Override
@@ -889,10 +889,10 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedBag_with_null()
     {
-        this.newWith(3, 4, null, 1, 2).toSortedBag();
+        assertThrows(NullPointerException.class, () -> this.newWith(3, 4, null, 1, 2).toSortedBag());
     }
 
     @Override

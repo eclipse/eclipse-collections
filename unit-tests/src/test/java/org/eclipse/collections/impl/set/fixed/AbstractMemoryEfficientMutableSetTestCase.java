@@ -67,88 +67,88 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         Verify.assertInstanceOf(SynchronizedMutableSet.class, this.classUnderTest().asSynchronized());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.remove("1");
+        assertThrows(UnsupportedOperationException.class, () -> set.remove("1"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.addAll(null);
+        assertThrows(UnsupportedOperationException.class, () -> set.addAll(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAllIterable_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.addAllIterable(null);
+        assertThrows(UnsupportedOperationException.class, () -> set.addAllIterable(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add_duplicate_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.add("1");
+        assertThrows(UnsupportedOperationException.class, () -> set.add("1"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.add(null);
+        assertThrows(UnsupportedOperationException.class, () -> set.add(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.removeAll(mList("1", "2"));
+        assertThrows(UnsupportedOperationException.class, () -> set.removeAll(mList("1", "2")));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAllIterable_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.removeAllIterable(mList("1", "2"));
+        assertThrows(UnsupportedOperationException.class, () -> set.removeAllIterable(mList("1", "2")));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.retainAll(mList("1", "2"));
+        assertThrows(UnsupportedOperationException.class, () -> set.retainAll(mList("1", "2")));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAllIterable_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.retainAllIterable(mList("1", "2"));
+        assertThrows(UnsupportedOperationException.class, () -> set.retainAllIterable(mList("1", "2")));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.clear();
+        assertThrows(UnsupportedOperationException.class, () -> set.clear());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIf_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.removeIf(Predicates.equal("1"));
+        assertThrows(UnsupportedOperationException.class, () -> set.removeIf(Predicates.equal("1")));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIfWith_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.removeIfWith(Object::equals, "1");
+        assertThrows(UnsupportedOperationException.class, () -> set.removeIfWith(Object::equals, "1"));
     }
 
     @Test
@@ -167,35 +167,35 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         assertThrows(NoSuchElementException.class, iterator::next);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void iteratorRemove_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.iterator().remove();
+        assertThrows(UnsupportedOperationException.class, () -> set.iterator().remove());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws()
     {
-        this.classUnderTestWithNull().min(String::compareTo);
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().min(String::compareTo));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws()
     {
-        this.classUnderTestWithNull().max(String::compareTo);
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().max(String::compareTo));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws_without_comparator()
     {
-        this.classUnderTestWithNull().min();
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().min());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws_without_comparator()
     {
-        this.classUnderTestWithNull().max();
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().max());
     }
 
     protected abstract MutableSet<String> classUnderTestWithNull();
@@ -210,14 +210,15 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         }
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iteratorWillGetUpsetIfYouPushItTooFar()
     {
         Iterator<String> iterator = this.classUnderTest().iterator();
-        for (int i = 0; i < this.classUnderTest().size() + 1; i++)
+        for (int i = 0; i < this.classUnderTest().size(); i++)
         {
             iterator.next();
         }
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -372,10 +373,10 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         assertEquals(hashBag, sizes.toBag());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
-        this.classUnderTest().chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
     }
 
     @Test

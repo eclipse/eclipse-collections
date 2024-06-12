@@ -46,6 +46,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 /**
  * JUnit test for {@link SingletonSet}.
@@ -558,7 +559,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void min_null_throws()
     {
         // Collections with one element should not throw to emulate the JDK Collections behavior
-        super.min_null_throws();
+        assertDoesNotThrow(() -> this.classUnderTestWithNull().min(String::compareTo));
     }
 
     @Test
@@ -566,7 +567,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void max_null_throws()
     {
         // Collections with one element should not throw to emulate the JDK Collections behavior
-        super.max_null_throws();
+        assertDoesNotThrow(() -> this.classUnderTestWithNull().max(String::compareTo));
     }
 
     @Test
@@ -574,7 +575,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void min_null_throws_without_comparator()
     {
         // Collections with one element should not throw to emulate the JDK Collections behavior
-        super.min_null_throws_without_comparator();
+        assertDoesNotThrow(() -> this.classUnderTestWithNull().min());
     }
 
     @Test
@@ -582,6 +583,6 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void max_null_throws_without_comparator()
     {
         // Collections with one element should not throw to emulate the JDK Collections behavior
-        super.max_null_throws_without_comparator();
+        assertDoesNotThrow(() -> this.classUnderTestWithNull().max());
     }
 }

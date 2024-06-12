@@ -42,7 +42,6 @@ import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
@@ -838,16 +837,14 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
     @Test
     public void groupByUniqueKey_throws()
     {
-        super.groupByUniqueKey_throws();
-        assertEquals(UnifiedMap.newMap().toImmutable(), this.classUnderTest().groupByUniqueKey(id -> id));
+        // Not applicable for empty*
     }
 
     @Override
     @Test
     public void groupByUniqueKey_target_throws()
     {
-        super.groupByUniqueKey_target_throws();
-        assertEquals(UnifiedMap.newMap(), this.classUnderTest().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
+        // Not applicable for empty*
     }
 
     @Override

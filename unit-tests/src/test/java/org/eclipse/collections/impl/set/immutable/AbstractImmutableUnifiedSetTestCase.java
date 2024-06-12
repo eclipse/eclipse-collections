@@ -43,6 +43,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractImmutableUnifiedSetTestCase
@@ -245,16 +246,16 @@ public abstract class AbstractImmutableUnifiedSetTestCase
         assertEquals(Integer.valueOf(1), this.newSetWith(1).getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_throws_when_empty()
     {
-        this.newSet().getOnly();
+        assertThrows(IllegalStateException.class, () -> this.newSet().getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_throws_when_multiple_values()
     {
-        this.newSetWith(1, 2, 3).getOnly();
+        assertThrows(IllegalStateException.class, () -> this.newSetWith(1, 2, 3).getOnly());
     }
 
     @Test
@@ -483,10 +484,10 @@ public abstract class AbstractImmutableUnifiedSetTestCase
         assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), this.newSetWith(1, 2, 3).groupByUniqueKey(id -> id));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws()
     {
-        this.newSetWith(1, 2, 3).groupByUniqueKey(Functions.getFixedValue(1));
+        assertThrows(IllegalStateException.class, () -> this.newSetWith(1, 2, 3).groupByUniqueKey(Functions.getFixedValue(1)));
     }
 
     @Test
@@ -496,9 +497,9 @@ public abstract class AbstractImmutableUnifiedSetTestCase
         assertEquals(UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3), integers);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws()
     {
-        this.newSetWith(1, 2, 3).groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2));
+        assertThrows(IllegalStateException.class, () -> this.newSetWith(1, 2, 3).groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2)));
     }
 }

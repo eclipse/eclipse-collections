@@ -170,18 +170,18 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
         Verify.assertEqualsAndHashCode(collection, deserializedCollection);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void forEachWithIndexIllegalFrom()
     {
         MutableList<Integer> result = Lists.mutable.of();
-        this.newList(1, 2).forEachWithIndex(-1, 2, new AddToList(result));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newList(1, 2).forEachWithIndex(-1, 2, new AddToList(result)));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void forEachWithIndexIllegalTo()
     {
         MutableList<Integer> result = Lists.mutable.of();
-        this.newList(1, 2).forEachWithIndex(1, -2, new AddToList(result));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newList(1, 2).forEachWithIndex(1, -2, new AddToList(result)));
     }
 
     @Test
@@ -216,10 +216,10 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
                 this.classUnderTest().groupByUniqueKey(id -> id));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws()
     {
-        this.classUnderTest().groupByUniqueKey(Functions.getFixedValue(1));
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().groupByUniqueKey(Functions.getFixedValue(1)));
     }
 
     @Test
@@ -230,10 +230,10 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
         assertEquals(UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3), integers);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws()
     {
-        this.classUnderTest().groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2));
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2)));
     }
 
     @Test
@@ -243,17 +243,17 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
         assertEquals(Integer.valueOf(2), list.getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_exception_when_empty()
     {
         ImmutableList<Integer> list = this.newList();
-        list.getOnly();
+        assertThrows(IllegalStateException.class, () -> list.getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_exception_when_multiple_items()
     {
         ImmutableList<Integer> list = this.newList(1, 2, 3);
-        list.getOnly();
+        assertThrows(IllegalStateException.class, () -> list.getOnly());
     }
 }

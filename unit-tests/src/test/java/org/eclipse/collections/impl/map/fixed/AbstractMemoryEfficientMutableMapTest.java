@@ -61,6 +61,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -75,64 +76,64 @@ public abstract class AbstractMemoryEfficientMutableMapTest
 
     public abstract void containsValue();
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void put_throws()
     {
-        this.classUnderTest().put(null, null);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().put(null, null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove_throws()
     {
-        this.classUnderTest().remove(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void putAll_throws()
     {
-        this.classUnderTest().putAll(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().putAll(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear_throws()
     {
-        this.classUnderTest().clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeKey_throws()
     {
-        this.classUnderTest().removeKey(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeKey(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAllKeys_throws()
     {
-        this.classUnderTest().removeAllKeys(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAllKeys(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIf_throws()
     {
-        this.classUnderTest().removeIf(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeIf(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void collectKeysAndValues_throws()
     {
-        this.classUnderTest().collectKeysAndValues(null, null, null);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().collectKeysAndValues(null, null, null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void updateValue()
     {
-        this.classUnderTest().updateValue("1", () -> "", object -> object + object);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().updateValue("1", () -> "", object -> object + object));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void updateValueWith()
     {
-        this.classUnderTest().updateValueWith("1", () -> "", String::concat, "!");
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().updateValueWith("1", () -> "", String::concat, "!"));
     }
 
     @Test

@@ -113,10 +113,10 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
 
     protected abstract <T> ImmutableSortedBag<T> newWith(Comparator<? super T> comparator, T... elements);
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void noSupportForNull()
     {
-        this.classUnderTest().newWith(null);
+        assertThrows(NullPointerException.class, () -> this.classUnderTest().newWith(null));
     }
 
     @Test
@@ -717,10 +717,10 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
-        this.classUnderTest().chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
     }
 
     @Test
@@ -1514,10 +1514,10 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
         assertSame(integers2, integers2.take(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        this.classUnderTest().take(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().take(-1));
     }
 
     @Test
@@ -1532,10 +1532,10 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
         assertEquals(SortedBags.immutable.empty(integers1.comparator()), integers1.drop(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        this.classUnderTest().drop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().drop(-1));
     }
 
     @Test

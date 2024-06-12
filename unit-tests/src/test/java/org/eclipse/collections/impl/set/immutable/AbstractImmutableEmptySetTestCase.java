@@ -144,17 +144,17 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.classUnderTest().min(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min(Integer::compareTo));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.classUnderTest().max(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max(Integer::compareTo));
     }
 
     @Test
@@ -162,7 +162,6 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     public void min_null_throws()
     {
         // Not applicable for empty collections
-        super.min_null_throws();
     }
 
     @Test
@@ -170,21 +169,20 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     public void max_null_throws()
     {
         // Not applicable for empty collections
-        super.max_null_throws();
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_without_comparator()
     {
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_without_comparator()
     {
-        this.classUnderTest().max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Test
@@ -192,7 +190,6 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     public void min_null_throws_without_comparator()
     {
         // Not applicable for empty collections
-        super.min_null_throws_without_comparator();
     }
 
     @Test
@@ -200,21 +197,20 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     public void max_null_throws_without_comparator()
     {
         // Not applicable for empty collections
-        super.max_null_throws_without_comparator();
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
-        this.classUnderTest().minBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().minBy(String::valueOf));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
-        this.classUnderTest().maxBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().maxBy(String::valueOf));
     }
 
     @Override
@@ -260,10 +256,10 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
-        this.classUnderTest().chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
     }
 
     @Override

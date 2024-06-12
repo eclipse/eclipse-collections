@@ -178,20 +178,20 @@ public abstract class AbstractMutableBiMapEntrySetTest
         assertTrue(entries.containsAll(FastList.newListWith(ImmutableEntry.of(1, "One"), ImmutableEntry.of(3, "Three"))));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void entrySet_add()
     {
         MutableBiMap<Integer, String> biMap = this.newMapWithKeyValue(1, "One");
         Set<Map.Entry<Integer, String>> entries = biMap.entrySet();
-        entries.add(ImmutableEntry.of(2, "Two"));
+        assertThrows(UnsupportedOperationException.class, () -> entries.add(ImmutableEntry.of(2, "Two")));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void entrySet_addAll()
     {
         MutableBiMap<Integer, String> biMap = this.newMapWithKeyValue(1, "One");
         Set<Map.Entry<Integer, String>> entries = biMap.entrySet();
-        entries.addAll(FastList.newListWith(ImmutableEntry.of(2, "Two")));
+        assertThrows(UnsupportedOperationException.class, () -> entries.addAll(FastList.newListWith(ImmutableEntry.of(2, "Two"))));
     }
 
     @Test
@@ -208,13 +208,13 @@ public abstract class AbstractMutableBiMapEntrySetTest
         assertEquals(expected, biMap.entrySet());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void entrySet_Iterator_incrementPastEnd()
     {
         MutableBiMap<Integer, String> biMap = this.newMapWithKeyValue(1, "One");
         Iterator<Map.Entry<Integer, String>> iterator = biMap.entrySet().iterator();
         iterator.next();
-        iterator.next();
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Test

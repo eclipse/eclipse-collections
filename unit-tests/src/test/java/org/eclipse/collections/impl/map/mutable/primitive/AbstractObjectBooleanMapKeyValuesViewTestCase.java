@@ -236,16 +236,16 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
         assertNull(this.newWith(1, true, 2, false, 3, true).detect(PrimitiveTuples.pair(true, Integer.valueOf(4))::equals));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws()
     {
-        this.newWith().min(ObjectBooleanPair::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.newWith().min(ObjectBooleanPair::compareTo));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws()
     {
-        this.newWith().max(ObjectBooleanPair::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.newWith().max(ObjectBooleanPair::compareTo));
     }
 
     @Test
@@ -450,7 +450,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
         assertEquals(objects.toBag(), actual);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         RichIterable<ObjectBooleanPair<Integer>> objects = this.newWith(1, true, 2, false, 3, true);
@@ -461,7 +461,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
             iterator.next();
         }
         assertFalse(iterator.hasNext());
-        iterator.next();
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -806,11 +806,11 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
                 collection.chunk(1).toBag());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false, 3, true);
-        collection.chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> collection.chunk(0));
     }
 
     @Test
