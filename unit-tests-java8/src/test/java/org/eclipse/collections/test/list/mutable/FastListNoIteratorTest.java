@@ -10,16 +10,11 @@
 
 package org.eclipse.collections.test.list.mutable;
 
-import java.util.List;
-
-import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.NoIteratorTestCase;
 import org.junit.runner.RunWith;
-
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 
 @RunWith(Java8Runner.class)
 public class FastListNoIteratorTest implements MutableListTestCase, NoIteratorTestCase
@@ -43,22 +38,6 @@ public class FastListNoIteratorTest implements MutableListTestCase, NoIteratorTe
     public void List_subList_subList_iterator_add_remove()
     {
         // Not applicable
-    }
-
-    @Override
-    public void List_subList_subList_addAll()
-    {
-        List<String> list = this.newWith("A", "B", "C", "D");
-        List<String> sublist = list.subList(0, 3);
-        List<String> sublist2 = sublist.subList(0, 2);
-        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B"), sublist2);
-
-        sublist2.addAll(Lists.mutable.of("D", "E"));
-        assertEquals(Lists.immutable.with("A", "B", "D", "E", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B", "D", "E"), sublist2);
-
-        // TODO: Support FastList.subList().clear() without delegating to iterator()
     }
 
     @Override
