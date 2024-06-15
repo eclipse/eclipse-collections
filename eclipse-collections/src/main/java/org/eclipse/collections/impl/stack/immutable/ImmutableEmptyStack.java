@@ -190,7 +190,7 @@ final class ImmutableEmptyStack<T>
     @Override
     public T getLast()
     {
-        throw new UnsupportedOperationException("Cannot call getLast() on " + this.getClass().getSimpleName());
+        throw new EmptyStackException();
     }
 
     @Override

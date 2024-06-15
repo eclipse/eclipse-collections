@@ -16,7 +16,6 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.impl.block.factory.Procedures;
@@ -83,13 +82,6 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
 
     @Override
     @Test
-    default void RichIterable_getFirst_and_getLast()
-    {
-        assertThrows(UnsupportedOperationException.class, this.newWith()::getLast);
-    }
-
-    @Override
-    @Test
     default void RichIterable_getFirst_empty_null()
     {
         assertThrows(EmptyStackException.class, this.newWith()::getFirst);
@@ -99,37 +91,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     @Test
     default void RichIterable_getLast_empty_null()
     {
-        assertThrows(UnsupportedOperationException.class, this.newWith()::getLast);
-    }
-
-    @Override
-    @Test
-    default void RichIterable_getLast()
-    {
-        assertThrows(UnsupportedOperationException.class, this.newWith(3, 3, 3, 2, 2, 1)::getLast);
-    }
-
-    @Override
-    @Test
-    default void OrderedIterable_getLast()
-    {
-        assertThrows(UnsupportedOperationException.class, this.newWith(3, 3, 3, 2, 2, 1)::getLast);
-    }
-
-    @Override
-    @Test
-    default void OrderedIterable_getLastOptional()
-    {
-        assertThrows(UnsupportedOperationException.class, () ->
-                ((OrderedIterable<?>) this.newWith(3, 2, 1)).getLastOptional());
-    }
-
-    @Override
-    @Test
-    default void OrderedIterable_getLastOptional_null_element()
-    {
-        assertThrows(UnsupportedOperationException.class, () ->
-                ((OrderedIterable<?>) this.newWith(new Object[]{null})).getLastOptional());
+        assertThrows(EmptyStackException.class, () -> this.newWith().getLast());
     }
 
     @Test

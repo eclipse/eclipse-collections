@@ -319,7 +319,8 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public T getLast()
     {
-        throw new UnsupportedOperationException("Cannot call getLast() on " + this.getClass().getSimpleName());
+        this.checkEmptyStack();
+        return this.delegate.getFirst();
     }
 
     @Override

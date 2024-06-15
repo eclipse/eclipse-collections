@@ -280,7 +280,8 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     @Override
     public T getLast()
     {
-        throw new UnsupportedOperationException("Cannot call getLast() on " + this.getClass().getSimpleName());
+        this.checkEmptyStack();
+        return this.delegate.getFirst();
     }
 
     @Override

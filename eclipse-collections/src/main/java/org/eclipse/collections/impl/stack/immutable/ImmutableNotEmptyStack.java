@@ -193,7 +193,7 @@ final class ImmutableNotEmptyStack<T>
     @Override
     public T getLast()
     {
-        throw new UnsupportedOperationException("Cannot call getLast() on " + this.getClass().getSimpleName());
+        return this.peekAt(this.size() - 1);
     }
 
     @Override
