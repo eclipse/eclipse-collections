@@ -29,6 +29,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -83,23 +84,23 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
         }
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void get_throws_index_greater_than_size()
     {
         ImmutableBooleanList list = this.classUnderTest();
-        list.get(list.size());
+        assertThrows(IndexOutOfBoundsException.class, () -> list.get(list.size()));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void get_throws_index_negative()
     {
-        this.classUnderTest().get(-1);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(-1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subList()
     {
-        this.classUnderTest().subList(0, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().subList(0, 1));
     }
 
     @Test

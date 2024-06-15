@@ -301,16 +301,16 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
         assertEquals(HashBag.newBagWith("1", "2", "2", "2", "2", "2", "2", "3"), bag.withOccurrences("3", 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void addOccurrences_throws()
     {
-        this.newWith().addOccurrences(new Object(), -1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().addOccurrences(new Object(), -1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void withOccurrences_throws()
     {
-        this.newWith().withOccurrences(new Object(), -1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().withOccurrences(new Object(), -1));
     }
 
     @Test
@@ -353,16 +353,16 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
         MutableBagTestCase.assertBagsEqual(HashBag.<String>newBag(), bag.withoutOccurrences("betamax-tape", 10));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void removeOccurrences_throws()
     {
-        this.newWith().removeOccurrences(new Object(), -1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().removeOccurrences(new Object(), -1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void withoutOccurrences_throws()
     {
-        this.newWith().withoutOccurrences(new Object(), -1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().withoutOccurrences(new Object(), -1));
     }
 
     @Test
@@ -387,10 +387,10 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
         MutableBagTestCase.assertBagsEqual(HashBag.<String>newBag(), bag);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void setOccurrences_throws()
     {
-        this.newWith().setOccurrences(new Object(), -1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().setOccurrences(new Object(), -1));
     }
 
     protected static void assertBagsEqual(Bag<?> expected, Bag<?> actual)

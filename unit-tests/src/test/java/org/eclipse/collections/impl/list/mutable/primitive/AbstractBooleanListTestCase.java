@@ -31,6 +31,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -65,22 +66,22 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         assertTrue(list.get(2));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void get_throws_index_greater_than_size()
     {
-        this.classUnderTest().get(3);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(3));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void get_throws_empty_list()
     {
-        this.newWith().get(0);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith().get(0));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void get_throws_index_negative()
     {
-        this.classUnderTest().get(-1);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(-1));
     }
 
     @Test
@@ -91,10 +92,10 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         assertTrue(this.classUnderTest().getFirst());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getFirst_emptyList_throws()
     {
-        this.newWith().getFirst();
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith().getFirst());
     }
 
     @Test
@@ -106,16 +107,16 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         assertFalse(this.newWith(true, true, false).getLast());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getLast_emptyList_throws()
     {
-        this.newWith().getLast();
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith().getLast());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subList()
     {
-        this.classUnderTest().subList(0, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().subList(0, 1));
     }
 
     @Test
@@ -162,16 +163,16 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         assertEquals(BooleanArrayList.newListWith(true, false, false, true, true), list);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void addAtIndex_throws_index_greater_than_size()
     {
-        this.newWith().addAtIndex(1, false);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith().addAtIndex(1, false));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void addAtIndex_throws_index_negative()
     {
-        this.classUnderTest().addAtIndex(-1, true);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().addAtIndex(-1, true));
     }
 
     @Override
@@ -198,22 +199,22 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         assertEquals(BooleanArrayList.newListWith(true, false, true, false, true, true, true, false), list);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void addAll_throws_index_negative()
     {
-        this.classUnderTest().addAllAtIndex(-1, false, true);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().addAllAtIndex(-1, false, true));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void addAll_throws_index_greater_than_size()
     {
-        this.classUnderTest().addAllAtIndex(5, false, true);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().addAllAtIndex(5, false, true));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void addAll_throws_index_greater_than_size_empty_list()
     {
-        this.newWith().addAllAtIndex(1, false);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith().addAllAtIndex(1, false));
     }
 
     @Override
@@ -254,16 +255,16 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         assertEquals(BooleanArrayList.newListWith(), list);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void removeAtIndex_throws_index_greater_than_size()
     {
-        this.newWith().removeAtIndex(1);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith().removeAtIndex(1));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void removeAtIndex_throws_index_negative()
     {
-        this.classUnderTest().removeAtIndex(-1);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().removeAtIndex(-1));
     }
 
     @Test
@@ -276,10 +277,10 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         assertEquals(BooleanArrayList.newListWith(true, true, true), list);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void set_throws_index_greater_than_size()
     {
-        this.newWith().set(1, false);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith().set(1, false));
     }
 
     @Override
@@ -419,10 +420,10 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         assertEquals(this.newWith(), BooleanArrayList.newWithNValues(0, true));
     }
 
-    @Test(expected = NegativeArraySizeException.class)
+    @Test
     public void newWithNValues_throws_negative_size()
     {
-        BooleanArrayList.newWithNValues(-1, true);
+        assertThrows(NegativeArraySizeException.class, () -> BooleanArrayList.newWithNValues(-1, true));
     }
 
     @Override

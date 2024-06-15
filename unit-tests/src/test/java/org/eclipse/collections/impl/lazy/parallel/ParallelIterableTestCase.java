@@ -57,6 +57,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -362,16 +363,16 @@ public abstract class ParallelIterableTestCase
         assertEquals(Integer.valueOf(1000), this.classUnderTest().detectWithIfNone(Object::equals, Integer.valueOf(8), function));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws()
     {
-        this.classUnderTest().select(ignored -> false).min(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().select(ignored -> false).min(Integer::compareTo));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws()
     {
-        this.classUnderTest().select(ignored -> false).max(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().select(ignored -> false).max(Integer::compareTo));
     }
 
     @Test
@@ -398,16 +399,16 @@ public abstract class ParallelIterableTestCase
         assertEquals(Integer.valueOf(4), this.classUnderTest().maxBy(String::valueOf));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws_without_comparator()
     {
-        this.classUnderTest().select(ignored -> false).min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().select(ignored -> false).min());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws_without_comparator()
     {
-        this.classUnderTest().select(ignored -> false).max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().select(ignored -> false).max());
     }
 
     @Test
@@ -1129,27 +1130,27 @@ public abstract class ParallelIterableTestCase
         assertEquals(Integer.valueOf(4), this.classUnderTest().asUnique().max());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws()
     {
-        this.newWith(1, null, 2).min(Integer::compareTo);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).min(Integer::compareTo));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws()
     {
-        this.newWith(1, null, 2).max(Integer::compareTo);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).max(Integer::compareTo));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void minBy_null_throws()
     {
-        this.newWith(1, null, 2).minBy(Integer::valueOf);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).minBy(Integer::valueOf));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void maxBy_null_throws()
     {
-        this.newWith(1, null, 2).maxBy(Integer::valueOf);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).maxBy(Integer::valueOf));
     }
 }

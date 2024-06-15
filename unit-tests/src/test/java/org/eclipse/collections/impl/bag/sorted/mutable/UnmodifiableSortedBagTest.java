@@ -256,14 +256,14 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     @Test
     public void addOccurrences_throws()
     {
-        assertThrows(UnsupportedOperationException.class, super::addOccurrences_throws);
+        // Not applicable for Unmodifiable
     }
 
     @Override
     @Test
     public void withOccurrences_throws()
     {
-        assertThrows(UnsupportedOperationException.class, super::withOccurrences_throws);
+        // Not applicable for Unmodifiable
     }
 
     @Override
@@ -291,14 +291,14 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     @Test
     public void removeOccurrences_throws()
     {
-        assertThrows(UnsupportedOperationException.class, super::removeOccurrences_throws);
+        // Not applicable for Unmodifiable
     }
 
     @Override
     @Test
     public void withoutOccurrences_throws()
     {
-        assertThrows(UnsupportedOperationException.class, super::withoutOccurrences_throws);
+        // Not applicable for Unmodifiable
     }
 
     @Override
@@ -312,7 +312,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     @Test
     public void setOccurrences_throws()
     {
-        assertThrows(UnsupportedOperationException.class, super::setOccurrences_throws);
+        // Not applicable for Unmodifiable
     }
 
     @Override

@@ -14,6 +14,8 @@ import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class ParallelListIterableTest extends ParallelListIterableTestCase
 {
     @Override
@@ -28,15 +30,15 @@ public class ParallelListIterableTest extends ParallelListIterableTestCase
         return FastList.newListWith(littleElements).asParallel(this.executorService, this.batchSize);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asParallel_small_batch()
     {
-        FastList.newListWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(this.executorService, 0);
+        assertThrows(IllegalArgumentException.class, () -> FastList.newListWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(this.executorService, 0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void asParallel_null_executorService()
     {
-        FastList.newListWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2);
+        assertThrows(NullPointerException.class, () -> FastList.newListWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2));
     }
 }

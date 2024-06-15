@@ -15,6 +15,8 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class ParallelSortedSetIterableTest extends NonParallelSortedSetIterableTestCase
 {
     @Override
@@ -29,15 +31,15 @@ public class ParallelSortedSetIterableTest extends NonParallelSortedSetIterableT
         return TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), littleElements).asParallel(this.executorService, this.batchSize);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asParallel_small_batch()
     {
-        TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(this.executorService, 0);
+        assertThrows(IllegalArgumentException.class, () -> TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(this.executorService, 0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void asParallel_null_executorService()
     {
-        TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(null, 2);
+        assertThrows(NullPointerException.class, () -> TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(null, 2));
     }
 }

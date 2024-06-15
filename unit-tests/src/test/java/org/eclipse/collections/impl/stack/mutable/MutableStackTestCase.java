@@ -22,6 +22,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public abstract class MutableStackTestCase extends StackIterableTestCase
 {
@@ -137,64 +138,64 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
         assertEquals("1", stack.pop());
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void pop_empty_throws()
     {
-        this.newStackWith().pop();
+        assertThrows(EmptyStackException.class, () -> this.newStackWith().pop());
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void pop_int_empty_throws()
     {
-        this.newStackWith().pop(1);
+        assertThrows(EmptyStackException.class, () -> this.newStackWith().pop(1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_int_count_throws()
     {
-        this.newStackWith(1, 2, 3).pop(4);
+        assertThrows(IllegalArgumentException.class, () -> this.newStackWith(1, 2, 3).pop(4));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_int_neg_throws()
     {
-        this.newStackWith(1, 2, 3).pop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.newStackWith(1, 2, 3).pop(-1));
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void pop_target_empty_throws()
     {
-        this.newStackWith().pop(5, FastList.newList());
+        assertThrows(EmptyStackException.class, () -> this.newStackWith().pop(5, FastList.newList()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_target_count_throws()
     {
-        this.newStackWith(1, 2, 3).pop(5, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> this.newStackWith(1, 2, 3).pop(5, FastList.newList()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_target_neg_throws()
     {
-        this.newStackWith(1, 2, 3).pop(-1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> this.newStackWith(1, 2, 3).pop(-1, FastList.newList()));
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void pop_targetStack_empty_throws()
     {
-        this.newStackWith().pop(5, ArrayStack.newStack());
+        assertThrows(EmptyStackException.class, () -> this.newStackWith().pop(5, ArrayStack.newStack()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_targetStack_count_throws()
     {
-        this.newStackWith(1, 2, 3).pop(5, ArrayStack.newStack());
+        assertThrows(IllegalArgumentException.class, () -> this.newStackWith(1, 2, 3).pop(5, ArrayStack.newStack()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_targetStack_neg_throws()
     {
-        this.newStackWith(1, 2, 3).pop(-1, ArrayStack.newStack());
+        assertThrows(IllegalArgumentException.class, () -> this.newStackWith(1, 2, 3).pop(-1, ArrayStack.newStack()));
     }
 
     @Test

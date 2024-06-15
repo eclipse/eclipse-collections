@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -86,22 +87,22 @@ public abstract class AbstractBooleanStackTestCase extends AbstractBooleanIterab
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void peek_at_index_less_than_zero_throws_exception()
     {
-        this.classUnderTest().peekAt(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().peekAt(-1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void peek_at_index_greater_than_size_throws_exception()
     {
-        this.classUnderTest().peekAt(this.classUnderTest().size() + 1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().peekAt(this.classUnderTest().size() + 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void peek_at_index_equal_to_size_throws_exception()
     {
-        this.classUnderTest().peekAt(this.classUnderTest().size());
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().peekAt(this.classUnderTest().size()));
     }
 
     @Override

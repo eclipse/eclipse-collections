@@ -14,6 +14,8 @@ import org.eclipse.collections.api.bag.ParallelBag;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class ParallelBagTest extends ParallelBagTestCase
 {
     @Override
@@ -28,15 +30,15 @@ public class ParallelBagTest extends ParallelBagTestCase
         return HashBag.newBagWith(littleElements).asParallel(this.executorService, this.batchSize);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asParallel_small_batch()
     {
-        HashBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(this.executorService, 0);
+        assertThrows(IllegalArgumentException.class, () -> HashBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(this.executorService, 0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void asParallel_null_executorService()
     {
-        HashBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2);
+        assertThrows(NullPointerException.class, () -> HashBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2));
     }
 }

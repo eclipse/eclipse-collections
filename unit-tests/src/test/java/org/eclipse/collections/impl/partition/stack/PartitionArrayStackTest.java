@@ -17,13 +17,14 @@ import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class PartitionArrayStackTest
 {
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        new PartitionArrayStack<Integer>().add(4);
+        assertThrows(UnsupportedOperationException.class, () -> new PartitionArrayStack<Integer>().add(4));
     }
 
     @Test
