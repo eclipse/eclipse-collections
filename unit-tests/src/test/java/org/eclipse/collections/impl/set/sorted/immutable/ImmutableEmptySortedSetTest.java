@@ -173,23 +173,23 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void getFirst()
     {
-        this.classUnderTest().getFirst();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().getFirst());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void getLast()
     {
-        this.classUnderTest().getLast();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().getLast());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly()
     {
-        this.classUnderTest().getOnly();
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 
     @Override
@@ -201,45 +201,45 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.classUnderTest().min(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min(Integer::compareTo));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.classUnderTest().max(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max(Integer::compareTo));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_without_comparator()
     {
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_without_comparator()
     {
-        this.classUnderTest().max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
-        this.classUnderTest().minBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().minBy(String::valueOf));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
-        this.classUnderTest().maxBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().maxBy(String::valueOf));
     }
 
     @Override
@@ -283,10 +283,10 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
-        this.classUnderTest().chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
     }
 
     @Override
@@ -636,16 +636,16 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
         Verify.assertEmpty(set.toSortedSet());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void first()
     {
-        this.classUnderTest().castToSortedSet().first();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().castToSortedSet().first());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void last()
     {
-        this.classUnderTest().castToSortedSet().last();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().castToSortedSet().last());
     }
 
     @Test
@@ -749,24 +749,24 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subSet()
     {
-        this.classUnderTest().castToSortedSet().subSet(1, 4);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().subSet(1, 4));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void headSet()
     {
-        this.classUnderTest().castToSortedSet().headSet(4);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().headSet(4));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void tailSet()
     {
-        this.classUnderTest().castToSortedSet().tailSet(1);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().tailSet(1));
     }
 
     @Override

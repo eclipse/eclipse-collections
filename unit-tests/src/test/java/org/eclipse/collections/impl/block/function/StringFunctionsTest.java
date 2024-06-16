@@ -100,16 +100,16 @@ public final class StringFunctionsTest
         assertThrows(StringIndexOutOfBoundsException.class, () -> function4.valueOf(testString));
     }
 
-    @Test(expected = StringIndexOutOfBoundsException.class)
+    @Test
     public void subString_throws_on_short_string()
     {
-        StringFunctions.subString(2, 4).valueOf("hi");
+        assertThrows(StringIndexOutOfBoundsException.class, () -> StringFunctions.subString(2, 4).valueOf("hi"));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void subString_throws_on_null()
     {
-        StringFunctions.subString(2, 4).valueOf(null);
+        assertThrows(NullPointerException.class, () -> StringFunctions.subString(2, 4).valueOf(null));
     }
 
     @Test
@@ -137,10 +137,10 @@ public final class StringFunctionsTest
         assertEquals('A', StringFunctions.toPrimitiveChar().charValueOf("65"));
     }
 
-    @Test(expected = StringIndexOutOfBoundsException.class)
+    @Test
     public void toPrimitiveCharWithEmptyString()
     {
-        StringFunctions.toFirstChar().charValueOf("");
+        assertThrows(StringIndexOutOfBoundsException.class, () -> StringFunctions.toFirstChar().charValueOf(""));
     }
 
     @Test

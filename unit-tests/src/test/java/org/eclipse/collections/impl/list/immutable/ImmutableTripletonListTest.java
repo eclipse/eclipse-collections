@@ -13,6 +13,8 @@ package org.eclipse.collections.impl.list.immutable;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class ImmutableTripletonListTest extends AbstractImmutableListTestCase
 {
     @Override
@@ -21,10 +23,10 @@ public class ImmutableTripletonListTest extends AbstractImmutableListTestCase
         return new ImmutableTripletonList<>(1, 2, 3);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly()
     {
         ImmutableList<Integer> list = this.classUnderTest();
-        list.getOnly();
+        assertThrows(IllegalStateException.class, () -> list.getOnly());
     }
 }

@@ -24,6 +24,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -199,45 +200,45 @@ public class ImmutableEmptyMapWithHashingStrategyTest extends ImmutableMemoryEff
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
         ImmutableMap<Integer, String> map = this.classUnderTest();
 
-        map.max();
+        assertThrows(NoSuchElementException.class, () -> map.max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
         ImmutableMap<Integer, String> map = this.classUnderTest();
 
-        map.maxBy(Functions.getStringPassThru());
+        assertThrows(NoSuchElementException.class, () -> map.maxBy(Functions.getStringPassThru()));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
         ImmutableMap<Integer, String> map = this.classUnderTest();
 
-        map.min();
+        assertThrows(NoSuchElementException.class, () -> map.min());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
         ImmutableMap<Integer, String> map = this.classUnderTest();
 
-        map.minBy(Functions.getStringPassThru());
+        assertThrows(NoSuchElementException.class, () -> map.minBy(Functions.getStringPassThru()));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly()
     {
-        this.classUnderTest().getOnly();
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 
     @Override

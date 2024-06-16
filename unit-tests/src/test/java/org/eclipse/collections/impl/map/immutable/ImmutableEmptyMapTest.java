@@ -21,6 +21,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -182,45 +183,45 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
         ImmutableMap<String, String> map = new ImmutableEmptyMap<>();
 
-        map.max();
+        assertThrows(NoSuchElementException.class, () -> map.max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
         ImmutableMap<String, String> map = new ImmutableEmptyMap<>();
 
-        map.maxBy(Functions.getStringPassThru());
+        assertThrows(NoSuchElementException.class, () -> map.maxBy(Functions.getStringPassThru()));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
         ImmutableMap<String, String> map = new ImmutableEmptyMap<>();
 
-        map.min();
+        assertThrows(NoSuchElementException.class, () -> map.min());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
         ImmutableMap<String, String> map = new ImmutableEmptyMap<>();
 
-        map.minBy(Functions.getStringPassThru());
+        assertThrows(NoSuchElementException.class, () -> map.minBy(Functions.getStringPassThru()));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly()
     {
-        new ImmutableEmptyMap<>().getOnly();
+        assertThrows(IllegalStateException.class, () -> new ImmutableEmptyMap<>().getOnly());
     }
 
     @Override

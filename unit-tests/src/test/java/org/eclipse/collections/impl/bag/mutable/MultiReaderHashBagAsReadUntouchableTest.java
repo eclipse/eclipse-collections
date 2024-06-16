@@ -28,22 +28,22 @@ public class MultiReaderHashBagAsReadUntouchableTest extends UnmodifiableMutable
         return MultiReaderHashBag.newBagWith(1, 1).asReadUntouchable();
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addOccurrences()
     {
-        this.getCollection().addOccurrences(1, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().addOccurrences(1, 1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeOccurrences()
     {
-        this.getCollection().removeOccurrences(1, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().removeOccurrences(1, 1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void setOccurrences()
     {
-        this.getCollection().setOccurrences(1, 1);
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().setOccurrences(1, 1));
     }
 
     @Test

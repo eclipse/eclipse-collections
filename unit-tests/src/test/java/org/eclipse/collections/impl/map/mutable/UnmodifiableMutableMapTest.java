@@ -215,17 +215,17 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutWithKey()
     {
-        this.newMapWithKeysValues(1, 1, 2, 2, 3, 3).getIfAbsentPutWithKey(4, Functions.getIntegerPassThru());
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, 1, 2, 2, 3, 3).getIfAbsentPutWithKey(4, Functions.getIntegerPassThru()));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getIfAbsentPutWith()
     {
-        this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPutWith(4, String::valueOf, 4);
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPutWith(4, String::valueOf, 4));
     }
 
     @Override
@@ -267,24 +267,24 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.newMapWithKeysValues(1, "One", 2, "Two").add(null);
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "One", 2, "Two").add(null));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void putPair()
     {
-        this.newMapWithKeysValues(1, "One", 2, "Two").putPair(Tuples.pair(null, null));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "One", 2, "Two").putPair(Tuples.pair(null, null)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withKeyValue()
     {
-        this.newMapWithKeysValues(1, "One", 2, "2").withKeyValue(null, null);
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "One", 2, "2").withKeyValue(null, null));
     }
 
     @Override
@@ -393,32 +393,32 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAllKeyValues()
     {
-        this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValues(
-                FastList.newListWith(Tuples.pair("B", 22), Tuples.pair("C", 3)));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValues(
+                FastList.newListWith(Tuples.pair("B", 22), Tuples.pair("C", 3))));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withAllKeyValueArguments()
     {
-        this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValueArguments(Tuples.pair("B", 22), Tuples.pair("C", 3));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValueArguments(Tuples.pair("B", 22), Tuples.pair("C", 3)));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutKey()
     {
-        this.newMapWithKeysValues("A", 1, "B", 2).withoutKey("B");
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2).withoutKey("B"));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void withoutAllKeys()
     {
-        this.newMapWithKeysValues("A", 1, "B", 2, "C", 3).withoutAllKeys(FastList.newListWith("A", "C"));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2, "C", 3).withoutAllKeys(FastList.newListWith("A", "C")));
     }
 
     @Override
@@ -473,32 +473,32 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
         assertSame(map, clone);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     @Override
     public void updateValue()
     {
-        this.<Integer, Integer>newMap().updateValue(0, () -> 0, Functions.identity());
+        assertThrows(UnsupportedOperationException.class, () -> this.<Integer, Integer>newMap().updateValue(0, () -> 0, Functions.identity()));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     @Override
     public void updateValue_collisions()
     {
-        this.<Integer, Integer>newMap().updateValue(0, () -> 0, Functions.identity());
+        assertThrows(UnsupportedOperationException.class, () -> this.<Integer, Integer>newMap().updateValue(0, () -> 0, Functions.identity()));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     @Override
     public void updateValueWith()
     {
-        this.<Integer, Integer>newMap().updateValueWith(0, () -> 0, (integer, parameter) -> 0, "test");
+        assertThrows(UnsupportedOperationException.class, () -> this.<Integer, Integer>newMap().updateValueWith(0, () -> 0, (integer, parameter) -> 0, "test"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     @Override
     public void updateValueWith_collisions()
     {
-        this.<Integer, Integer>newMap().updateValueWith(0, () -> 0, (integer, parameter) -> 0, "test");
+        assertThrows(UnsupportedOperationException.class, () -> this.<Integer, Integer>newMap().updateValueWith(0, () -> 0, (integer, parameter) -> 0, "test"));
     }
 
     @Override

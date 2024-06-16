@@ -21,21 +21,22 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 public class TapIteratorTest
 {
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void nextIfDoesntHaveAnything()
     {
-        new TapIterator<>(Lists.immutable.of(), object -> {
-        }).next();
+        assertThrows(NoSuchElementException.class, () -> new TapIterator<>(Lists.immutable.of(), object -> {
+        }).next());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIsUnsupported()
     {
-        new TapIterator<>(Lists.immutable.of().iterator(), object -> {
-        }).remove();
+        assertThrows(UnsupportedOperationException.class, () -> new TapIterator<>(Lists.immutable.of().iterator(), object -> {
+        }).remove());
     }
 
     @Test
