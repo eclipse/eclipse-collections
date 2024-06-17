@@ -306,31 +306,6 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>3.1.2</version>
-                    <executions>
-                        <execution>
-                            <id>analyze</id>
-                            <goals>
-                                <goal>analyze-only</goal>
-                            </goals>
-                            <configuration>
-                                <failOnWarning>true</failOnWarning>
-                                <ignoredUnusedDeclaredDependencies>
-                                    <ignoredUnusedDeclaredDependency>
-                                        com.google.code.findbugs:jsr305:jar
-                                    </ignoredUnusedDeclaredDependency>
-                                    <ignoredUnusedDeclaredDependency>
-                                        ch.qos.logback:logback-classic:jar
-                                    </ignoredUnusedDeclaredDependency>
-                                    <ignoredUnusedDeclaredDependency>
-                                        org.slf4j:slf4j-nop:jar
-                                    </ignoredUnusedDeclaredDependency>
-                                    <ignoredUnusedDeclaredDependency>
-                                        org.junit.jupiter:junit-jupiter-api:jar
-                                    </ignoredUnusedDeclaredDependency>
-                                </ignoredUnusedDeclaredDependencies>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
 
                 <plugin>
@@ -350,7 +325,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
 
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.6.3</version>
                 </plugin>
 
                 <plugin>
@@ -375,47 +350,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
 
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.0</version>
-                    <executions>
-                        <execution>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>jar-no-fork</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.4.1</version>
-                    <executions>
-                        <execution>
-                            <id>enforce</id>
-                            <configuration>
-                                <rules>
-                                    <DependencyConvergence />
-                                    <requireJavaVersion>
-                                        <version>1.8.0</version>
-                                    </requireJavaVersion>
-                                    <requireMavenVersion>
-                                        <version>3.3.9</version>
-                                    </requireMavenVersion>
-                                    <requirePluginVersions>
-                                        <unCheckedPluginList>
-                                            org.eclipse.collections:eclipse-collections-code-generator-maven-plugin,
-                                            org.eclipse.ebr:ebr-maven-plugin,
-                                            org.eclipse.ebr:ebr-tycho-extras-plugin
-                                        </unCheckedPluginList>
-                                    </requirePluginVersions>
-                                </rules>
-                            </configuration>
-                            <goals>
-                                <goal>enforce</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <version>3.3.1</version>
                 </plugin>
 
                 <plugin>
@@ -448,26 +383,6 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                 </plugin>
 
                 <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>${jacoco.plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>report</id>
-                            <phase>prepare-package</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.2.5</version>
@@ -475,7 +390,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                         <includes>
                             <include>**/*Test.java</include>
                         </includes>
-                        <argLine>-XX:-OmitStackTraceInFastThrow -Xms1024m -Xmx2048m @{argLine}</argLine>
+                        <argLine>-XX:-OmitStackTraceInFastThrow -Xms1024m -Xmx2048m --add-opens java.base/java.lang=ALL-UNNAMED @{argLine}</argLine>
                         <runOrder>random</runOrder>
                         <!--<forkCount>2C</forkCount>-->
                     </configuration>
@@ -589,47 +504,8 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
             </plugin>
 
             <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <doctitle>Eclipse Collections - ${project.version}</doctitle>
-                    <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
-                    <show>public</show>
-                    <detectJavaApiLink>true</detectJavaApiLink>
-                    <links>
-                        <link>https://junit.org/junit4/javadoc/latest</link>
-                        <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
-                    </links>
-                    <destDir>${project.version}</destDir>
-                    <doclint>html,syntax,accessibility</doclint>
-                    <excludePackageNames>
-                        org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator.maven
-                    </excludePackageNames>
-
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>aggregate</id>
-                        <inherited>false</inherited>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-            </plugin>
-
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
             </plugin>
 
             <plugin>
@@ -846,10 +722,12 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                             </execution>
                         </executions>
                     </plugin>
+
+                    <!--region Phase 21: verify-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.1.0</version>
+                        <version>3.2.4</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -858,6 +736,8 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                                     <goal>sign</goal>
                                 </goals>
                                 <configuration>
+                                    <!-- Prevent `gpg` from using pinentry programs -->
+                                    <!-- https://github.com/samuelmeuli/action-maven-publish/issues/1 -->
                                     <gpgArguments>
                                         <arg>--pinentry-mode</arg>
                                         <arg>loopback</arg>
@@ -866,6 +746,23 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                             </execution>
                         </executions>
                     </plugin>
+                    <!--endregion Phase 21: verify-->
+
+                    <!--region Phase 17: package-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>create source jar</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--endregion Phase 17: package-->
                 </plugins>
             </build>
             <distributionManagement>
@@ -879,5 +776,185 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                 </repository>
             </distributionManagement>
         </profile>
+
+        <!--region Phase 1: validate-->
+        <profile>
+            <id>maven-enforcer-plugin</id>
+
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <version>3.4.1</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.codehaus.mojo</groupId>
+                                <artifactId>extra-enforcer-rules</artifactId>
+                                <version>1.8.0</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>enforce</id>
+                                <configuration>
+                                    <rules>
+                                        <dependencyConvergence />
+                                        <requireJavaVersion>
+                                            <version>1.8.0</version>
+                                        </requireJavaVersion>
+                                        <requirePluginVersions>
+                                            <banLatest>true</banLatest>
+                                            <banRelease>true</banRelease>
+                                            <unCheckedPluginList>
+                                                org.eclipse.collections:eclipse-collections-code-generator-maven-plugin,
+                                                org.eclipse.ebr:ebr-maven-plugin,
+                                                org.eclipse.ebr:ebr-tycho-extras-plugin,
+                                                org.apache.maven.plugins:maven-site-plugin,
+                                                org.apache.maven.plugins:maven-deploy-plugin
+                                            </unCheckedPluginList>
+                                        </requirePluginVersions>
+                                        <banDuplicatePomDependencyVersions />
+                                        <banDuplicateClasses>
+                                            <findAllDuplicates>true</findAllDuplicates>
+                                            <ignoreWhenIdentical>true</ignoreWhenIdentical>
+                                        </banDuplicateClasses>
+                                    </rules>
+                                </configuration>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 1: validate-->
+
+        <!--region Phase 16: prepare-package-->
+        <profile>
+            <id>jacoco-maven-plugin</id>
+
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jacoco</groupId>
+                            <artifactId>jacoco-maven-plugin</artifactId>
+                            <version>${jacoco.plugin.version}</version>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>prepare-agent</goal>
+                                    </goals>
+                                </execution>
+                                <execution>
+                                    <id>report</id>
+                                    <phase>prepare-package</phase>
+                                    <goals>
+                                        <goal>report</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+        <!--endregion Phase 16: prepare-package-->
+
+        <!--region Phase 17: package-->
+        <profile>
+            <id>maven-javadoc-plugin</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.6.3</version>
+                        <configuration>
+                            <source>1.8</source>
+                            <doctitle>Eclipse Collections - ${project.version}</doctitle>
+                            <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
+                            <show>public</show>
+                            <detectJavaApiLink>true</detectJavaApiLink>
+                            <links>
+                                <link>https://junit.org/junit4/javadoc/latest</link>
+                                <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
+                            </links>
+                            <destDir>${project.version}</destDir>
+                            <doclint>html,syntax,accessibility</doclint>
+                            <excludePackageNames>
+                                org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator.maven
+                            </excludePackageNames>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>aggregate</id>
+                                <inherited>false</inherited>
+                                <goals>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 17: package-->
+
+        <!--region Phase 21: verify-->
+        <profile>
+            <id>maven-dependency-plugin</id>
+
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-dependency-plugin</artifactId>
+                            <version>3.1.2</version>
+                            <configuration>
+                                <failOnWarning>true</failOnWarning>
+                                <ignoredUnusedDeclaredDependencies>
+                                    <ignoredUnusedDeclaredDependency>
+                                        com.google.code.findbugs:jsr305:jar
+                                    </ignoredUnusedDeclaredDependency>
+                                    <ignoredUnusedDeclaredDependency>
+                                        ch.qos.logback:logback-classic:jar
+                                    </ignoredUnusedDeclaredDependency>
+                                    <ignoredUnusedDeclaredDependency>
+                                        org.slf4j:slf4j-nop:jar
+                                    </ignoredUnusedDeclaredDependency>
+                                    <ignoredUnusedDeclaredDependency>
+                                        org.junit.jupiter:junit-jupiter-api:jar
+                                    </ignoredUnusedDeclaredDependency>
+                                </ignoredUnusedDeclaredDependencies>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>analyze</id>
+                                    <goals>
+                                        <goal>analyze-only</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 21: verify-->
+
     </profiles>
+
 </project>

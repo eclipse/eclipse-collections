@@ -70,10 +70,6 @@
             </plugin>
 
             <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-
-            <plugin>
                 <groupId>biz.aQute.bnd</groupId>
                 <artifactId>bnd-maven-plugin</artifactId>
             </plugin>
@@ -89,24 +85,6 @@
 
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doctitle>Eclipse Collections API - ${project.version}</doctitle>
-                    <windowtitle>Eclipse Collections API - ${project.version}</windowtitle>
-                    <show>public</show>
-                    <links>
-                        <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
-                    </links>
-                    <destDir>${project.version}</destDir>
-                    <doclint>none</doclint>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
 
             <plugin>
@@ -126,4 +104,27 @@
 
         </plugins>
     </build>
+
+    <profiles>
+        <!--region Phase 17: package-->
+        <profile>
+            <id>maven-javadoc-plugin</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.6.3</version>
+                        <configuration>
+                            <doctitle>Eclipse Collections API - ${project.version}</doctitle>
+                            <windowtitle>Eclipse Collections API - ${project.version}</windowtitle>
+                            <doclint>none</doclint>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 17: package-->
+    </profiles>
 </project>

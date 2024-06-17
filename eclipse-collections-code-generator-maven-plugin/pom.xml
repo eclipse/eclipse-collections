@@ -76,32 +76,7 @@
             </plugin>
 
             <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doctitle>Eclipse Collections - ${project.version}</doctitle>
-                    <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
-                    <show>public</show>
-                    <links>
-                        <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
-                    </links>
-                    <destDir>${project.version}</destDir>
-                    <doclint>none</doclint>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
 
             <plugin>
@@ -165,4 +140,46 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+
+        <!--region Phase 1: validate-->
+        <profile>
+            <id>maven-enforcer-plugin</id>
+
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 1: validate-->
+
+        <!--region Phase 17: package-->
+        <profile>
+            <id>maven-javadoc-plugin</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <doclint>none</doclint>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 17: package-->
+
+    </profiles>
 </project>

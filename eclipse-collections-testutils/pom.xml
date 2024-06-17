@@ -69,38 +69,11 @@
         <plugins>
 
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
 
             <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doctitle>Eclipse Collections Test Utilities - ${project.version}</doctitle>
-                    <windowtitle>Eclipse Collections Test Utilities - ${project.version}</windowtitle>
-                    <show>public</show>
-                    <links>
-                        <link>https://docs.oracle.com/en/java/javase/11/docs/api</link>
-                    </links>
-                    <destDir>${project.version}</destDir>
-                    <doclint>none</doclint>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
 
             <plugin>
@@ -120,4 +93,44 @@
 
         </plugins>
     </build>
+
+    <profiles>
+
+        <!--region Phase 16: prepare-package-->
+        <profile>
+            <id>jacoco-maven-plugin</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 16: prepare-package-->
+
+        <!--region Phase 17: package-->
+        <profile>
+            <id>maven-javadoc-plugin</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <doctitle>Eclipse Collections Test Utilities - ${project.version}</doctitle>
+                            <windowtitle>Eclipse Collections Test Utilities - ${project.version}</windowtitle>
+                            <doclint>none</doclint>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 17: package-->
+
+    </profiles>
+
 </project>

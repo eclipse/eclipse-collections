@@ -11,15 +11,83 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          key: maven-test-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: |
+            maven-test-
+            maven-
+
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - name: Set up Java 11
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
-      - run: ./mvnw --color=always verify
+      - run: ./mvnw --threads 2C --color=always verify
         env:
           MAVEN_OPTS: "-Xmx1g"
+
+      - name: 'Clean Maven cache'
+        run: rm -rf ~/.m2/repository/org/eclipse/collections
+
+  enforcer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          key: maven-enforcer-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: |
+            maven-enforcer-
+            maven-
+
+      - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
+      - name: Set up Java 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 11
+
+      - name: Run maven-enforcer-plugin
+        run: ./mvnw --threads 2C --color=always verify --activate-profiles maven-enforcer-plugin -DskipTests
+        env:
+          MAVEN_OPTS: "-Xmx1g"
+
+      - name: 'Clean Maven cache'
+        run: rm -rf ~/.m2/repository/org/eclipse/collections
+
+  dependency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          key: maven-dependency-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: |
+            maven-dependency-
+            maven-
+
+      - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
+      - name: Set up Java 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 11
+
+      - name: Run maven-dependency-plugin
+        run: ./mvnw --threads 2C --color=always verify --activate-profiles maven-dependency-plugin -DskipTests
+        env:
+          MAVEN_OPTS: "-Xmx1g"
+
+      - name: 'Clean Maven cache'
+        run: rm -rf ~/.m2/repository/org/eclipse/collections
 
   unit-tests-no-p2:
     name: Unit Tests ${{ matrix.java-version }}
@@ -29,6 +97,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          key: maven-test-no-p2-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: |
+            maven-test-no-p2-
+            maven-test-
+            maven-
+
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - name: Set up Java ${{ matrix.java-version }}
         uses: actions/setup-java@v4
@@ -40,11 +118,24 @@ jobs:
         env:
           MAVEN_OPTS: "-Xmx1g"
 
+      - name: 'Clean Maven cache'
+        run: rm -rf ~/.m2/repository/org/eclipse/collections
+
   unit-tests-early-access:
     name: Unit Test Early Access
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          key: maven-test-early-access-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: |
+            maven-test-early-access-
+            maven-test-
+            maven-
+
       - name: Download JDK 23 from jdk.java.net
         uses: oracle-actions/setup-java@v1
         id: download-jdk
@@ -69,6 +160,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          key: maven-acceptance-test-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: |
+            maven-acceptance-test-
+            maven-test-
+            maven-
+
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - name: Set up Java 11
         uses: actions/setup-java@v4
@@ -79,21 +180,36 @@ jobs:
         env:
           MAVEN_OPTS: "-Xmx1g"
 
+      - name: 'Clean Maven cache'
+        run: rm -rf ~/.m2/repository/org/eclipse/collections
+
   performance-tests:
     name: Performance Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          key: maven-performance-test-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: |
+            maven-performance-test-
+            maven-test-
+            maven-
+
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - name: Set up Java 11
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
-      - name: Performance Tests
-        run: ./mvnw --color=always install --projects performance-tests --also-make --activate-profiles all -DskipTests=true
+      - run: ./mvnw --color=always install --projects performance-tests --also-make --activate-profiles all -DskipTests=true
         env:
           MAVEN_OPTS: "-Xmx1g"
+
+      - name: 'Clean Maven cache'
+        run: rm -rf ~/.m2/repository/org/eclipse/collections
 
   checkstyle:
     name: Checkstyle
@@ -116,6 +232,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          key: maven-javadoc-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: |
+            maven-javadoc-
+            maven-
+
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - name: Set up Java 11
         uses: actions/setup-java@v4
@@ -125,19 +250,33 @@ jobs:
       - name: Build Generator
         run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin'
       - name: JavaDoc Aggregate
-        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
+        run: ./mvnw --color=always --activate-profiles maven-javadoc-plugin -DskipTests -Denforcer.skip=true clean javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
         env:
           MAVEN_OPTS: "-Xmx1g"
       - name: JavaDoc Jar
-        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install javadoc:jar --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
+        run: ./mvnw --color=always --activate-profiles maven-javadoc-plugin -DskipTests -Denforcer.skip=true clean install javadoc:jar --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
         env:
           MAVEN_OPTS: "-Xmx1g"
+
+      - name: 'Clean Maven cache'
+        run: rm -rf ~/.m2/repository/org/eclipse/collections
 
   javadoc-early-access:
     name: Javadoc Early Access
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          key: maven-javadoc-ea-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: |
+            maven-javadoc-ea-
+            maven-javadoc-
+            maven-
+
+      - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - name: Download JDK 23 from jdk.java.net
         uses: oracle-actions/setup-java@v1
         id: download-jdk
@@ -150,11 +289,12 @@ jobs:
           echo 'Outputs'
           echo "steps.download-jdk.outputs.archive = ${{ steps.download-jdk.outputs.archive }}"
           echo "steps.download-jdk.outputs.version = ${{ steps.download-jdk.outputs.version }}"
-      - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - run: java --version
       - name: Build Generator
-        run: ./mvnw -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin'
+        run: ./mvnw --threads 2C --color=always -DskipTests install --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin'
       - name: Javadoc
-        run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
+        run: ./mvnw --threads 2C --color=always --activate-profiles maven-javadoc-plugin -DskipTests javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
         env:
           MAVEN_OPTS: "-Xmx2g"
+      - name: 'Clean Maven cache'
+        run: rm -rf ~/.m2/repository/org/eclipse/collections
