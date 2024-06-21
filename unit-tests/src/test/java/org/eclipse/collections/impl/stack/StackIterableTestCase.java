@@ -195,7 +195,7 @@ public abstract class StackIterableTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getLast()
     {
         StackIterable<Integer> stack = this.newStackWith(1, 2, 3);
