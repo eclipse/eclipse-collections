@@ -1223,21 +1223,21 @@ public class FastListTest extends AbstractListTestCase
         Verify.assertIterablesEqual(immutableList, list);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws_without_comparator()
     {
-        this.newWith().min();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().min());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws_without_comparator()
     {
-        this.newWith().max();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().max());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testNegativeInitialCapacity()
     {
-        new FastList<>(-1);
+        assertThrows(IllegalArgumentException.class, () -> new FastList<>(-1));
     }
 }

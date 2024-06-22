@@ -23,6 +23,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -103,16 +104,16 @@ public abstract class AbstractImmutableBooleanStackTestCase extends AbstractBool
         assertEquals(this.classUnderTest(), stack);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_with_negative_count_throws_exception()
     {
-        this.classUnderTest().pop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().pop(-1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void pop_with_count_greater_than_stack_size_throws_exception()
     {
-        this.classUnderTest().pop(this.classUnderTest().size() + 1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().pop(this.classUnderTest().size() + 1));
     }
 
     @Override

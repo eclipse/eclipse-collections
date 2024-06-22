@@ -108,7 +108,7 @@ public abstract class AbstractImmutableByteHashSetTestCase extends AbstractImmut
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void byteIterator_throws()
     {
         ImmutableByteSet set = this.newWith((byte) 0, (byte) 1, (byte) 31);
@@ -117,8 +117,7 @@ public abstract class AbstractImmutableByteHashSetTestCase extends AbstractImmut
         {
             iterator.next();
         }
-
-        iterator.next();
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override

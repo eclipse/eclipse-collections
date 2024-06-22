@@ -95,10 +95,10 @@ public abstract class AbstractMutableBooleanBagTestCase extends AbstractMutableB
         assertEquals(BooleanHashBag.newBagWith(false, false, false, false, false, true), bag);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void addOccurrences_throws()
     {
-        this.newWith().addOccurrences(true, -1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().addOccurrences(true, -1));
     }
 
     @Test
@@ -129,10 +129,10 @@ public abstract class AbstractMutableBooleanBagTestCase extends AbstractMutableB
         assertEquals(new BooleanHashBag(), bag2);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void removeOccurrences_throws()
     {
-        this.newWith().removeOccurrences(true, -1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().removeOccurrences(true, -1));
     }
 
     @Test

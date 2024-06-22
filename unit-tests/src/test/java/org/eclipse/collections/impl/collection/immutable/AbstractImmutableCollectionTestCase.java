@@ -154,10 +154,10 @@ public abstract class AbstractImmutableCollectionTestCase
     /**
      * @since 9.0
      */
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void castToCollection()
     {
-        this.classUnderTest().castToCollection().add(0);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToCollection().add(0));
     }
 
     /**
@@ -612,10 +612,10 @@ public abstract class AbstractImmutableCollectionTestCase
         assertEquals(expected, actual);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
-        this.classUnderTest().chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
     }
 
     @Test
@@ -817,21 +817,21 @@ public abstract class AbstractImmutableCollectionTestCase
         }
     }
 
-    private ImmutableCollection<Integer> classUnderTestWithNull()
+    protected ImmutableCollection<Integer> classUnderTestWithNull()
     {
         return this.classUnderTest().reject(Integer.valueOf(1)::equals).newWith(null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws()
     {
-        this.classUnderTestWithNull().min(Integer::compareTo);
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().min(Integer::compareTo));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws()
     {
-        this.classUnderTestWithNull().max(Integer::compareTo);
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().max(Integer::compareTo));
     }
 
     @Test
@@ -846,16 +846,16 @@ public abstract class AbstractImmutableCollectionTestCase
         assertEquals(Integer.valueOf(1), this.classUnderTest().max(Comparators.reverse(Integer::compareTo)));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws_without_comparator()
     {
-        this.classUnderTestWithNull().min();
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().min());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws_without_comparator()
     {
-        this.classUnderTestWithNull().max();
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().max());
     }
 
     @Test

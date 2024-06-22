@@ -76,6 +76,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractLazyIterableTestCase
@@ -360,10 +361,10 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6, 7), lazyIterable.take(Integer.MAX_VALUE).toList());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_negative_throws()
     {
-        this.lazyIterable.take(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.lazyIterable.take(-1));
     }
 
     @Test
@@ -378,10 +379,10 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(FastList.newList(), lazyIterable.drop(Integer.MAX_VALUE).toList());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_negative_throws()
     {
-        this.lazyIterable.drop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.lazyIterable.drop(-1));
     }
 
     @Test
@@ -396,10 +397,10 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6, 7), lazyIterable.takeWhile(Predicates.alwaysTrue()).toList());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void takeWhile_null_throws()
     {
-        this.lazyIterable.takeWhile(null);
+        assertThrows(IllegalStateException.class, () -> this.lazyIterable.takeWhile(null));
     }
 
     @Test
@@ -413,10 +414,10 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(FastList.newList(), lazyIterable.dropWhile(Predicates.alwaysTrue()).toList());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void dropWhile_null_throws()
     {
-        this.lazyIterable.dropWhile(null);
+        assertThrows(IllegalStateException.class, () -> this.lazyIterable.dropWhile(null));
     }
 
     @Test
@@ -455,28 +456,28 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(Integer.valueOf(1000), this.lazyIterable.detectWithIfNone(Object::equals, Integer.valueOf(8), function));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws()
     {
-        this.<Integer>newWith().min(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.<Integer>newWith().min(Integer::compareTo));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws()
     {
-        this.<Integer>newWith().max(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.<Integer>newWith().max(Integer::compareTo));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws()
     {
-        this.newWith(1, null, 2).min(Integer::compareTo);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).min(Integer::compareTo));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws()
     {
-        this.newWith(1, null, 2).max(Integer::compareTo);
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).max(Integer::compareTo));
     }
 
     @Test
@@ -503,28 +504,28 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(Integer.valueOf(3), this.newWith(1, 3, 2).maxBy(String::valueOf));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_empty_throws_without_comparator()
     {
-        this.newWith().min();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().min());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_empty_throws_without_comparator()
     {
-        this.newWith().max();
+        assertThrows(NoSuchElementException.class, () -> this.newWith().max());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws_without_comparator()
     {
-        this.newWith(1, null, 2).min();
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).min());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws_without_comparator()
     {
-        this.newWith(1, null, 2).max();
+        assertThrows(NullPointerException.class, () -> this.newWith(1, null, 2).max());
     }
 
     @Test
@@ -636,16 +637,16 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(Integer.valueOf(1), this.newWith(1).getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_throws_when_empty()
     {
-        this.newWith().getOnly();
+        assertThrows(IllegalStateException.class, () -> this.newWith().getOnly());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly_throws_when_multiple_values()
     {
-        this.newWith(1, 2, 3).getOnly();
+        assertThrows(IllegalStateException.class, () -> this.newWith(1, 2, 3).getOnly());
     }
 
     @Test
@@ -827,10 +828,10 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3), this.newWith(1, 2, 3).groupByUniqueKey(id -> id));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws()
     {
-        this.newWith(1, 2, 3).groupByUniqueKey(Functions.getFixedValue(1));
+        assertThrows(IllegalStateException.class, () -> this.newWith(1, 2, 3).groupByUniqueKey(Functions.getFixedValue(1)));
     }
 
     @Test
@@ -840,10 +841,10 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(UnifiedMap.newWithKeysValues(0, 0, 1, 1, 2, 2, 3, 3), integers);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws()
     {
-        this.newWith(1, 2, 3).groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2));
+        assertThrows(IllegalStateException.class, () -> this.newWith(1, 2, 3).groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2)));
     }
 
     @Test
@@ -901,10 +902,10 @@ public abstract class AbstractLazyIterableTestCase
         assertEquals(Bags.mutable.of(2, 2, 2, 1), sizes.toBag());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
-        this.lazyIterable.chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.lazyIterable.chunk(0));
     }
 
     @Test

@@ -139,18 +139,18 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
         assertEquals(this.classUnderTest(), multimap.get(String.class));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     @Override
     public void min()
     {
-        this.classUnderTest().min(String::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min(String::compareTo));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     @Override
     public void max()
     {
-        this.classUnderTest().max(String::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max(String::compareTo));
     }
 
     @Test
@@ -167,18 +167,18 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
         // Not applicable for empty collections
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     @Override
     public void min_without_comparator()
     {
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     @Override
     public void max_without_comparator()
     {
-        this.classUnderTest().max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Test
@@ -196,17 +196,17 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
-        this.classUnderTest().minBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().minBy(String::valueOf));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
-        this.classUnderTest().maxBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().maxBy(String::valueOf));
     }
 
     @Override

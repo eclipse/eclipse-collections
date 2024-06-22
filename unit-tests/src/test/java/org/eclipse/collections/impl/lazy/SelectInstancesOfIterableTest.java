@@ -82,7 +82,6 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     public void min_null_throws()
     {
         // Impossible for SelectInstancesOfIterable to contain null
-        super.min_null_throws();
     }
 
     @Override
@@ -90,7 +89,6 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     public void max_null_throws()
     {
         // Impossible for SelectInstancesOfIterable to contain null
-        super.max_null_throws();
     }
 
     @Override
@@ -98,7 +96,6 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     public void min_null_throws_without_comparator()
     {
         // Impossible for SelectInstancesOfIterable to contain null
-        super.min_null_throws_without_comparator();
     }
 
     @Override
@@ -106,7 +103,6 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     public void max_null_throws_without_comparator()
     {
         // Impossible for SelectInstancesOfIterable to contain null
-        super.max_null_throws_without_comparator();
     }
 
     @Override

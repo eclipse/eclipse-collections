@@ -153,10 +153,10 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         assertEquals(expected, multimap);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test
     public void withKeyMultiValuesNullValueHandling()
     {
-        this.newMultimap().withKeyMultiValues(1, null);
+        assertThrows(NullPointerException.class, () -> this.newMultimap().withKeyMultiValues(1, null));
     }
 
     @Test

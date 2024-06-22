@@ -71,10 +71,10 @@ public abstract class AbstractImmutableSortedSetTestCase
 
     protected abstract ImmutableSortedSet<Integer> classUnderTest(Comparator<? super Integer> comparator);
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void noSupportForNull()
     {
-        this.classUnderTest().newWith(null);
+        assertThrows(NullPointerException.class, () -> this.classUnderTest().newWith(null));
     }
 
     @Test
@@ -509,10 +509,10 @@ public abstract class AbstractImmutableSortedSetTestCase
                 pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).toList());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
-        this.classUnderTest().chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
     }
 
     @Test
@@ -793,46 +793,46 @@ public abstract class AbstractImmutableSortedSetTestCase
         }
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void iteratorRemove()
     {
-        this.classUnderTest().iterator().remove();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().iterator().remove());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.classUnderTest().castToSortedSet().add(1);
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().add(1));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void remove()
     {
-        this.classUnderTest().castToSortedSet().remove(Integer.valueOf(1));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().remove(Integer.valueOf(1)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void clear()
     {
-        this.classUnderTest().castToSortedSet().clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().clear());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeAll()
     {
-        this.classUnderTest().castToSortedSet().removeAll(Lists.fixedSize.of());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().removeAll(Lists.fixedSize.of()));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void retainAll()
     {
-        this.classUnderTest().castToSortedSet().retainAll(Lists.fixedSize.of());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().retainAll(Lists.fixedSize.of()));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        this.classUnderTest().castToSortedSet().addAll(Lists.fixedSize.of());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToSortedSet().addAll(Lists.fixedSize.of()));
     }
 
     @Test
@@ -917,10 +917,10 @@ public abstract class AbstractImmutableSortedSetTestCase
                 this.classUnderTest().groupByUniqueKey(id -> id));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws()
     {
-        this.classUnderTest(Collections.reverseOrder()).groupByUniqueKey(Functions.getFixedValue(1));
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest(Collections.reverseOrder()).groupByUniqueKey(Functions.getFixedValue(1)));
     }
 
     @Test
@@ -929,10 +929,10 @@ public abstract class AbstractImmutableSortedSetTestCase
         assertEquals(this.classUnderTest().groupByUniqueKey(id -> id), this.classUnderTest().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws()
     {
-        this.classUnderTest(Collections.reverseOrder()).groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2));
+        assertThrows(IllegalStateException.class, () -> this.classUnderTest(Collections.reverseOrder()).groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2)));
     }
 
     @Test
@@ -1138,10 +1138,10 @@ public abstract class AbstractImmutableSortedSetTestCase
         assertSame(integers2, integers2.take(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        this.classUnderTest().take(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().take(-1));
     }
 
     @Test
@@ -1161,10 +1161,10 @@ public abstract class AbstractImmutableSortedSetTestCase
         assertEquals(expectedSet, integers2.drop(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        this.classUnderTest().drop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().drop(-1));
     }
 
     @Test

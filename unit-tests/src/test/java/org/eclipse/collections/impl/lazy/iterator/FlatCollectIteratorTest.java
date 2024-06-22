@@ -18,19 +18,20 @@ import org.eclipse.collections.impl.block.factory.Functions;
 import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 public class FlatCollectIteratorTest
 {
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void nextIfDoesntHaveAnything()
     {
-        new FlatCollectIterator<>(Lists.immutable.of(), object -> null).next();
+        assertThrows(NoSuchElementException.class, () -> new FlatCollectIterator<>(Lists.immutable.of(), object -> null).next());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeIsUnsupported()
     {
-        new FlatCollectIterator<>(Lists.immutable.of().iterator(), object -> null).remove();
+        assertThrows(UnsupportedOperationException.class, () -> new FlatCollectIterator<>(Lists.immutable.of().iterator(), object -> null).remove());
     }
 
     @Test

@@ -15,6 +15,7 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class ImmutableSingletonSetTest
         extends AbstractImmutableSetTestCase
@@ -30,7 +31,7 @@ public class ImmutableSingletonSetTest
     public void min_null_throws()
     {
         // Collections with one element should not throw to emulate the JDK Collections behavior
-        super.min_null_throws();
+        assertDoesNotThrow(() -> this.classUnderTestWithNull().min(Integer::compareTo));
     }
 
     @Test
@@ -38,7 +39,7 @@ public class ImmutableSingletonSetTest
     public void max_null_throws()
     {
         // Collections with one element should not throw to emulate the JDK Collections behavior
-        super.max_null_throws();
+        assertDoesNotThrow(() -> this.classUnderTestWithNull().max(Integer::compareTo));
     }
 
     @Test
@@ -46,7 +47,7 @@ public class ImmutableSingletonSetTest
     public void min_null_throws_without_comparator()
     {
         // Collections with one element should not throw to emulate the JDK Collections behavior
-        super.min_null_throws_without_comparator();
+        assertDoesNotThrow(() -> this.classUnderTestWithNull().min());
     }
 
     @Test
@@ -54,7 +55,7 @@ public class ImmutableSingletonSetTest
     public void max_null_throws_without_comparator()
     {
         // Collections with one element should not throw to emulate the JDK Collections behavior
-        super.max_null_throws_without_comparator();
+        assertDoesNotThrow(() -> this.classUnderTestWithNull().max());
     }
 
     @Test

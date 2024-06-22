@@ -35,16 +35,16 @@ public abstract class AbstractMutableBiMapValuesTestCase
 
     protected abstract MutableBiMap<Float, Integer> newMapWithKeysValues(float key1, Integer value1, float key2, Integer value2, float key3, Integer value3, float key4, Integer value4);
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void add()
     {
-        this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3).values().add(4);
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3).values().add(4));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void addAll()
     {
-        this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3).values().addAll(FastList.newListWith(4));
+        assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, 3).values().addAll(FastList.newListWith(4)));
     }
 
     @Test
