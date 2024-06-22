@@ -26,6 +26,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIterableTestCase
@@ -54,16 +55,16 @@ public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIte
         return SortedSets.immutable.with(Comparators.<Integer>reverseNaturalOrder()).asParallel(this.executorService, this.batchSize);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asParallel_small_batch()
     {
-        SortedSets.immutable.with(Comparators.reverseNaturalOrder()).asParallel(this.executorService, 0);
+        assertThrows(IllegalArgumentException.class, () -> SortedSets.immutable.with(Comparators.reverseNaturalOrder()).asParallel(this.executorService, 0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void asParallel_null_executorService()
     {
-        SortedSets.immutable.with(Comparators.reverseNaturalOrder()).asParallel(null, 2);
+        assertThrows(NullPointerException.class, () -> SortedSets.immutable.with(Comparators.reverseNaturalOrder()).asParallel(null, 2));
     }
 
     @Override
@@ -140,86 +141,86 @@ public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIte
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.classUnderTest().min(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min(Integer::compareTo));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.classUnderTest().max(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max(Integer::compareTo));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
-        this.classUnderTest().minBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().minBy(String::valueOf));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
-        this.classUnderTest().maxBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().maxBy(String::valueOf));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_without_comparator()
     {
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_without_comparator()
     {
-        this.classUnderTest().max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minWithEmptyBatch()
     {
-        super.minWithEmptyBatch();
+        assertThrows(NoSuchElementException.class, () -> super.minWithEmptyBatch());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxWithEmptyBatch()
     {
-        super.minWithEmptyBatch();
+        assertThrows(NoSuchElementException.class, () -> super.minWithEmptyBatch());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_null_throws()
     {
-        this.classUnderTest().min(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min(Integer::compareTo));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_null_throws()
     {
-        this.classUnderTest().max(Integer::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max(Integer::compareTo));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy_null_throws()
     {
-        this.classUnderTest().minBy(Integer::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().minBy(Integer::valueOf));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy_null_throws()
     {
-        this.classUnderTest().maxBy(Integer::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().maxBy(Integer::valueOf));
     }
 }

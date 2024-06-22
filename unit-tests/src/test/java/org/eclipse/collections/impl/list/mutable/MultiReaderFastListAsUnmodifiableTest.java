@@ -10,10 +10,10 @@
 
 package org.eclipse.collections.impl.list.mutable;
 
-import java.util.ListIterator;
-
 import org.eclipse.collections.api.list.MutableList;
 import org.junit.Test;
+
+import static org.junit.Assert.assertThrows;
 
 public class MultiReaderFastListAsUnmodifiableTest extends UnmodifiableMutableListTestCase
 {
@@ -24,19 +24,17 @@ public class MultiReaderFastListAsUnmodifiableTest extends UnmodifiableMutableLi
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void listIterator()
     {
-        ListIterator<Integer> it = this.getCollection().listIterator();
-        it.next();
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().listIterator());
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subListListIterator()
     {
-        ListIterator<Integer> it = this.getCollection().subList(0, 1).listIterator();
-        it.next();
+        assertThrows(UnsupportedOperationException.class, () -> this.getCollection().subList(0, 1).listIterator());
     }
 
     @Test

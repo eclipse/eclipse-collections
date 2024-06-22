@@ -62,10 +62,10 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void largeCollectionStreamToBagMultimap()
     {
-        super.largeCollectionStreamToBagMultimap();
+        assertThrows(UnsupportedOperationException.class, () -> super.largeCollectionStreamToBagMultimap());
     }
 
     @Override
@@ -134,10 +134,10 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         assertEquals(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 2, 3, 4, 4), bag.withOccurrences(2, 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void addOccurrences_throws()
     {
-        this.newWith().addOccurrences(new Object(), -1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().addOccurrences(new Object(), -1));
     }
 
     @Test
@@ -525,11 +525,11 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         assertThrows(UnsupportedOperationException.class, integers::iterator);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void listIterator()
     {
         MultiReaderHashBag<Integer> integers = MultiReaderHashBag.newBagWith(1, 1, 2, 3, 4);
-        integers.iterator();
+        assertThrows(UnsupportedOperationException.class, () -> integers.iterator());
     }
 
     @Test

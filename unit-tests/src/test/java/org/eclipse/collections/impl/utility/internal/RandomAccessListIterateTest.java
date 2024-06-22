@@ -53,16 +53,16 @@ import static org.junit.Assert.fail;
 
 public class RandomAccessListIterateTest
 {
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void forEachWithNegativeFroms()
     {
-        RandomAccessListIterate.forEach(FastList.newList(), -1, 1, DoNothingProcedure.DO_NOTHING);
+        assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(FastList.newList(), -1, 1, DoNothingProcedure.DO_NOTHING));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void forEachWithNegativeTos()
     {
-        RandomAccessListIterate.forEach(FastList.newList(), 1, -1, DoNothingProcedure.DO_NOTHING);
+        assertThrows(IndexOutOfBoundsException.class, () -> RandomAccessListIterate.forEach(FastList.newList(), 1, -1, DoNothingProcedure.DO_NOTHING));
     }
 
     @Test
@@ -72,11 +72,11 @@ public class RandomAccessListIterateTest
         RandomAccessListIterate.forEachInBoth(FastList.newListWith(1, 2, 3), null, new FailProcedure2());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void forEachInBothThrowsOnMisMatchedLists()
     {
-        RandomAccessListIterate.forEachInBoth(FastList.newListWith("1", 2), FastList.newListWith(1, 2, 3),
-                Procedures2.fromProcedure(DoNothingProcedure.DO_NOTHING));
+        assertThrows(IllegalArgumentException.class, () -> RandomAccessListIterate.forEachInBoth(FastList.newListWith("1", 2), FastList.newListWith(1, 2, 3),
+                Procedures2.fromProcedure(DoNothingProcedure.DO_NOTHING)));
     }
 
     @Test
@@ -399,10 +399,10 @@ public class RandomAccessListIterateTest
         Verify.assertListsEqual(FastList.newList(), RandomAccessListIterate.take(Lists.fixedSize.of(), 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        RandomAccessListIterate.take(this.getIntegerList(), -1);
+        assertThrows(IllegalArgumentException.class, () -> RandomAccessListIterate.take(this.getIntegerList(), -1));
     }
 
     @Test
@@ -432,10 +432,10 @@ public class RandomAccessListIterateTest
         Verify.assertListsEqual(FastList.newListWith(-1), RandomAccessListIterate.take(Lists.fixedSize.of(), 2, FastList.newListWith(-1)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take__target_throws()
     {
-        RandomAccessListIterate.take(this.getIntegerList(), -1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> RandomAccessListIterate.take(this.getIntegerList(), -1, FastList.newList()));
     }
 
     @Test
@@ -456,10 +456,10 @@ public class RandomAccessListIterateTest
         Verify.assertListsEqual(integers.drop(Integer.MAX_VALUE), RandomAccessListIterate.drop(integers, Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        RandomAccessListIterate.drop(this.getIntegerList(), -1);
+        assertThrows(IllegalArgumentException.class, () -> RandomAccessListIterate.drop(this.getIntegerList(), -1));
     }
 
     @Test
@@ -491,16 +491,16 @@ public class RandomAccessListIterateTest
         Verify.assertListsEqual(FastList.newListWith(-1), RandomAccessListIterate.drop(Lists.fixedSize.of(), 2, FastList.newListWith(-1)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_target_throws()
     {
-        RandomAccessListIterate.drop(this.getIntegerList(), -1, FastList.newList());
+        assertThrows(IllegalArgumentException.class, () -> RandomAccessListIterate.drop(this.getIntegerList(), -1, FastList.newList()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void corresponds_throws_nonRandomAccess()
     {
-        RandomAccessListIterate.corresponds(new LinkedList<>(), FastList.newList(), Predicates2.alwaysTrue());
+        assertThrows(IllegalArgumentException.class, () -> RandomAccessListIterate.corresponds(new LinkedList<>(), FastList.newList(), Predicates2.alwaysTrue()));
     }
 
     @Test

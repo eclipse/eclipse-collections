@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -71,7 +72,7 @@ public class ReverseBooleanIterableTest
         assertFalse(iterator.next());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         BooleanIterable iterable = BooleanArrayList.newListWith(false, false, true).asReversed();
@@ -80,7 +81,7 @@ public class ReverseBooleanIterableTest
         {
             iterator.next();
         }
-        iterator.next();
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test

@@ -147,11 +147,10 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
         assertFalse(this.classUnderTest(Comparator.reverseOrder()).contains(1));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void contains_null()
     {
-        this.classUnderTest().contains(null);
-        this.classUnderTest(Comparator.naturalOrder()).contains(null);
+        assertThrows(NullPointerException.class, () -> this.classUnderTest(Comparator.naturalOrder()).contains(null));
     }
 
     @Override
@@ -275,32 +274,30 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.classUnderTest(Comparators.reverseNaturalOrder()).max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest(Comparators.reverseNaturalOrder()).max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_without_comparator()
     {
-        this.classUnderTest().max();
-        this.classUnderTest().max(Comparator.naturalOrder());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max(Comparator.naturalOrder()));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_with_comparator()
     {
-        this.classUnderTest().max(Comparator.naturalOrder());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max(Comparator.naturalOrder()));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
-        this.classUnderTest().maxBy(Functions.getToString());
-        this.classUnderTest(Comparators.reverseNaturalOrder()).maxBy(Functions.getToString());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest(Comparators.reverseNaturalOrder()).maxBy(Functions.getToString()));
     }
 
     @Override
@@ -405,31 +402,30 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.classUnderTest(Comparator.reverseOrder()).min();
-        this.classUnderTest(Comparator.reverseOrder()).min(Comparator.naturalOrder());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest(Comparator.reverseOrder()).min(Comparator.naturalOrder()));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_without_comparator()
     {
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_with_comparator()
     {
-        this.classUnderTest().min(Comparator.naturalOrder());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min(Comparator.naturalOrder()));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
-        this.classUnderTest().minBy(Functions.getToString());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().minBy(Functions.getToString()));
     }
 
     @Override

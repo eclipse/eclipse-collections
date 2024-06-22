@@ -69,10 +69,10 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void largeCollectionStreamToBagMultimap()
     {
-        super.largeCollectionStreamToBagMultimap();
+        assertThrows(UnsupportedOperationException.class, () -> super.largeCollectionStreamToBagMultimap());
     }
 
     @Override
@@ -968,32 +968,32 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void listIterator()
     {
         MultiReaderFastList<Integer> integers = this.newWith(1, 2, 3, 4);
-        integers.listIterator();
+        assertThrows(UnsupportedOperationException.class, () -> integers.listIterator());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void listIteratorWithIndex()
     {
         MultiReaderFastList<Integer> integers = this.newWith(1, 2, 3, 4);
-        integers.listIterator(2);
+        assertThrows(UnsupportedOperationException.class, () -> integers.listIterator(2));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void listIteratorIndexTooSmall()
     {
-        this.newWith(1).listIterator(-1);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1).listIterator(-1));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void listIteratorIndexTooBig()
     {
-        this.newWith(1).listIterator(2);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1).listIterator(2));
     }
 
     @Test
@@ -1079,10 +1079,10 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void iterator_throws()
     {
-        this.newWith(1, 2, 3).iterator();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).iterator());
     }
 
     @Override

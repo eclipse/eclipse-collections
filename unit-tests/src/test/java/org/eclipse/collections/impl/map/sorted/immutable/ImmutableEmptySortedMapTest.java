@@ -105,16 +105,16 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         assertEquals("{}", map.toString());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void firstKey()
     {
-        new ImmutableEmptySortedMap<>().firstKey();
+        assertThrows(NoSuchElementException.class, () -> new ImmutableEmptySortedMap<>().firstKey());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void lastKey()
     {
-        new ImmutableEmptySortedMap<>().lastKey();
+        assertThrows(NoSuchElementException.class, () -> new ImmutableEmptySortedMap<>().lastKey());
     }
 
     @Override
@@ -244,39 +244,39 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
         super.max();
 
-        this.classUnderTest().max();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
         super.maxBy();
 
-        this.classUnderTest().maxBy(Functions.getStringPassThru());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().maxBy(Functions.getStringPassThru()));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
         super.min();
 
-        this.classUnderTest().min();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
         super.minBy();
 
-        this.classUnderTest().minBy(Functions.getStringPassThru());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().minBy(Functions.getStringPassThru()));
     }
 
     @Override

@@ -106,10 +106,10 @@ public class MultiReaderUnifiedSetAsWriteUntouchableTest extends AbstractCollect
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedBag_with_null()
     {
-        this.newWith(3, 4, null, 1, 2).toSortedBag();
+        assertThrows(NullPointerException.class, () -> this.newWith(3, 4, null, 1, 2).toSortedBag());
     }
 
     @Override

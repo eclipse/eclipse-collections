@@ -13,30 +13,32 @@ package org.eclipse.collections.impl.set.mutable;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionTestCase;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public abstract class MultiReaderMutableCollectionTestCase extends AbstractCollectionTestCase
 {
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void iterator_throws()
     {
-        this.newWith(1, 2, 3).iterator();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).iterator());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void spliterator_throws()
     {
-        this.newWith(1, 2, 3).spliterator();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).spliterator());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void stream_throws()
     {
-        this.newWith(1, 2, 3).stream();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).stream());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void parallelStream_throws()
     {
-        this.newWith(1, 2, 3).parallelStream();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).parallelStream());
     }
 }
