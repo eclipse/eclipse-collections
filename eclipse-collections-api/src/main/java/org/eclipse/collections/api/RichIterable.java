@@ -97,6 +97,7 @@ import org.eclipse.collections.api.tuple.Pair;
  *
  * @since 1.0
  */
+@SuppressWarnings("ClassReferencesSubclass")
 public interface RichIterable<T>
         extends InternalIterable<T>
 {
@@ -1054,6 +1055,8 @@ public interface RichIterable<T>
     }
 
     /**
+     * Same as flatCollect, only with a Function2 that is passed an extra parameter.
+     *
      * @since 9.2
      */
     default <P, V> RichIterable<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
@@ -1072,6 +1075,8 @@ public interface RichIterable<T>
     <V, R extends Collection<V>> R flatCollect(Function<? super T, ? extends Iterable<V>> function, R target);
 
     /**
+     * Same as flatCollectWith, only the results are collected into the target collection.
+     *
      * @since 9.2
      */
     default <P, V, R extends Collection<V>> R flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter, R target)
