@@ -28,6 +28,7 @@ public interface CharFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public char valueOf(char character)
         {
             return Character.toUpperCase(character);
@@ -38,6 +39,7 @@ public interface CharFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public char valueOf(char character)
         {
             return Character.toLowerCase(character);

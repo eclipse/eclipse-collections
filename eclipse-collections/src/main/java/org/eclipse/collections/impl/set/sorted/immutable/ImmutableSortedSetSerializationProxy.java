@@ -47,6 +47,7 @@ class ImmutableSortedSetSerializationProxy<T> implements Externalizable
         {
             this.set.forEach(new CheckedProcedure<T>()
             {
+                @Override
                 public void safeValue(T each) throws IOException
                 {
                     out.writeObject(each);

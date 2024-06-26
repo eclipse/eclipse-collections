@@ -1189,6 +1189,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
             {
                 this.stack.forEach(new CheckedProcedure<T>()
                 {
+                    @Override
                     public void safeValue(T object) throws IOException
                     {
                         out.writeObject(object);

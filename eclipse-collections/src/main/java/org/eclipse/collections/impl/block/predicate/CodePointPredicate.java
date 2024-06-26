@@ -23,6 +23,7 @@ public interface CodePointPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(int codePoint)
         {
             return Character.isUpperCase(codePoint);
@@ -33,6 +34,7 @@ public interface CodePointPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(int codePoint)
         {
             return Character.isLowerCase(codePoint);
@@ -43,6 +45,7 @@ public interface CodePointPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(int codePoint)
         {
             return Character.isDigit(codePoint);
@@ -53,6 +56,7 @@ public interface CodePointPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(int codePoint)
         {
             return Character.isLetter(codePoint);
@@ -63,6 +67,7 @@ public interface CodePointPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(int codePoint)
         {
             return Character.isLetterOrDigit(codePoint);
@@ -73,6 +78,7 @@ public interface CodePointPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(int codePoint)
         {
             return Character.isWhitespace(codePoint);
@@ -83,6 +89,7 @@ public interface CodePointPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(int codePoint)
         {
             return !Character.isDefined(codePoint);
@@ -93,6 +100,7 @@ public interface CodePointPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(int codePoint)
         {
             return Character.isBmpCodePoint(codePoint);

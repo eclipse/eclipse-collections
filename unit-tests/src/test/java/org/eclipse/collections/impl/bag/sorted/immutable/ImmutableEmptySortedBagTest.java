@@ -370,6 +370,7 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
                 bag.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
+    @Override
     @Test
     public void countByEach()
     {

@@ -267,6 +267,7 @@ final class ImmutableArrayList<T>
     /**
      * @since 11.0
      */
+    @Override
     public ImmutableList<T> selectWithIndex(ObjectIntPredicate<? super T> predicate)
     {
         return this.selectWithIndex(predicate, FastList.newList()).toImmutable();
@@ -275,6 +276,7 @@ final class ImmutableArrayList<T>
     /**
      * @since 11.0
      */
+    @Override
     public ImmutableList<T> rejectWithIndex(ObjectIntPredicate<? super T> predicate)
     {
         return this.rejectWithIndex(predicate, FastList.newList()).toImmutable();
@@ -283,6 +285,7 @@ final class ImmutableArrayList<T>
     /**
      * @since 11.0
      */
+    @Override
     public <R extends Collection<T>> R selectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
     {
         return InternalArrayIterate.selectWithIndex(this.items, this.items.length, predicate, target);
@@ -291,6 +294,7 @@ final class ImmutableArrayList<T>
     /**
      * @since 11.0
      */
+    @Override
     public <R extends Collection<T>> R rejectWithIndex(ObjectIntPredicate<? super T> predicate, R target)
     {
         return InternalArrayIterate.rejectWithIndex(this.items, this.items.length, predicate, target);

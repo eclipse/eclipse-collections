@@ -20,6 +20,7 @@ public class AbstractPredicateBasedCombinerSerializationTest
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public void combineOne(Procedure<Object> thingToCombine)
         {
         }
