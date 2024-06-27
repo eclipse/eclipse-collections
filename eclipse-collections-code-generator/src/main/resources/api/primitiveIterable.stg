@@ -70,7 +70,26 @@ public interface <name>Iterable extends PrimitiveIterable
     /**
      * Converts the <name>Iterable to a primitive <type> array.
      */
-    <type>[] toArray();
+    default <type>[] toArray()
+    {
+        return this.toSizedArray(this.size());
+    }
+
+    /**
+     * Converts the <name>Iterable to a primitive <type> array up to the specified size.
+     *
+     * @since 12.0
+     */
+    default <type>[] toSizedArray(int size)
+    {
+        <type>[] array = new <type>[size];
+        int i = 0;
+        for (<name>Iterator it = this.<type>Iterator(); it.hasNext() && size > i; )
+        {
+            array[i++] = it.next();
+        }
+        return array;
+    }
 
     /**
      * Converts the <name>Iterable to a primitive <type> array. If the collection fits into the provided array it is used

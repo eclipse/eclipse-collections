@@ -86,6 +86,11 @@ final class Immutable<name>ArrayList
         return new Immutable<name>ArrayList(iterable.toArray());
     }
 
+    public static Immutable<name>ArrayList newList(<name>Iterable iterable, int size)
+    {
+        return new Immutable<name>ArrayList(iterable.toSizedArray(size));
+    }
+
     public static Immutable<name>ArrayList newListWith(<type>... elements)
     {
         <type>[] newArray = new <type>[elements.length];

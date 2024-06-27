@@ -506,6 +506,19 @@ public abstract class AbstractBooleanIterableTestCase
     }
 
     @Test
+    public void toSizedArray()
+    {
+        assertEquals(0L, this.newWith().toSizedArray(0).length);
+        assertEquals(1L, this.newWith().toSizedArray(1).length);
+        assertEquals(0L, this.newWith(true).toSizedArray(0).length);
+        assertTrue(Arrays.equals(new boolean[]{true}, this.newWith(true).toSizedArray(1)));
+        assertTrue(Arrays.equals(new boolean[]{true, false}, this.newWith(true).toSizedArray(2))
+                || Arrays.equals(new boolean[]{false, true}, this.newWith(true).toSizedArray(2)));
+        assertTrue(Arrays.equals(new boolean[]{false, true}, this.newWith(true, false).toSizedArray(2))
+                || Arrays.equals(new boolean[]{true, false}, this.newWith(true, false).toSizedArray(2)));
+    }
+
+    @Test
     public void testEquals()
     {
         BooleanIterable iterable1 = this.newWith(true, false, true, false);
