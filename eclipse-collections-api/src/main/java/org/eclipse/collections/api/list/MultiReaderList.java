@@ -39,6 +39,7 @@ public interface MultiReaderList<T>
     @Override
     MultiReaderList<T> newEmpty();
 
+    @Override
     MultiReaderList<T> clone();
 
     @Override

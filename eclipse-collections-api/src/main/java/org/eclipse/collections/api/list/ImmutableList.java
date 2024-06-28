@@ -105,6 +105,7 @@ public interface ImmutableList<T>
      *
      * @since 11.0
      */
+    @Override
     default ImmutableList<T> selectWithIndex(ObjectIntPredicate<? super T> predicate)
     {
         int[] index = {0};
@@ -117,6 +118,7 @@ public interface ImmutableList<T>
      *
      * @since 11.0
      */
+    @Override
     default ImmutableList<T> rejectWithIndex(ObjectIntPredicate<? super T> predicate)
     {
         int[] index = {0};

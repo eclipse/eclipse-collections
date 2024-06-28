@@ -46,6 +46,7 @@ class ImmutableStackSerializationProxy<T> implements Externalizable
         {
             this.stack.forEach(new CheckedProcedure<T>()
             {
+                @Override
                 public void safeValue(T object) throws IOException
                 {
                     out.writeObject(object);

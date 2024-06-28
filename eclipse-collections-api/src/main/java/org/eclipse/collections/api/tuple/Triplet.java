@@ -12,5 +12,6 @@ package org.eclipse.collections.api.tuple;
 
 public interface Triplet<T> extends Triple<T, T, T>
 {
+    @Override
     Triplet<T> reverse();
 }

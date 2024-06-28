@@ -47,6 +47,7 @@ class ImmutableSetWithHashingStrategySerializationProxy<T> implements Externaliz
         {
             this.set.forEach(new CheckedProcedure<T>()
             {
+                @Override
                 public void safeValue(T value) throws IOException
                 {
                     out.writeObject(value);

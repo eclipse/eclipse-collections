@@ -53,6 +53,7 @@ public class ImmutableEmptySetTest extends AbstractImmutableEmptySetTestCase
         assertNotEquals(FastList.newList(mutable), immutable);
     }
 
+    @Override
     @Test
     public void countByEach()
     {

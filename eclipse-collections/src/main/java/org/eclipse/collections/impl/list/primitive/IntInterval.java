@@ -282,6 +282,7 @@ public final class IntInterval
     /**
      * Returns true if the IntInterval contains none of the specified int values.
      */
+    @Override
     public boolean containsNone(int... values)
     {
         for (int value : values)

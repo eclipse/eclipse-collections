@@ -26,6 +26,7 @@ public interface CharPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(char character)
         {
             return Character.isUpperCase(character);
@@ -36,6 +37,7 @@ public interface CharPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(char character)
         {
             return Character.isLowerCase(character);
@@ -46,6 +48,7 @@ public interface CharPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(char character)
         {
             return Character.isDigit(character);
@@ -56,6 +59,7 @@ public interface CharPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(char character)
         {
             return Character.isDigit(character) || character == '.';
@@ -66,6 +70,7 @@ public interface CharPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(char character)
         {
             return Character.isLetter(character);
@@ -76,6 +81,7 @@ public interface CharPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(char character)
         {
             return Character.isLetterOrDigit(character);
@@ -86,6 +92,7 @@ public interface CharPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(char character)
         {
             return Character.isWhitespace(character);
@@ -96,6 +103,7 @@ public interface CharPredicate
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(char character)
         {
             return !Character.isDefined(character);

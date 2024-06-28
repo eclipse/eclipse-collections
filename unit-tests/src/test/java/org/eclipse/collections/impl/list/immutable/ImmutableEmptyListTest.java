@@ -533,6 +533,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         Verify.assertEmpty(this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
+    @Override
     @Test
     public void countByEach()
     {

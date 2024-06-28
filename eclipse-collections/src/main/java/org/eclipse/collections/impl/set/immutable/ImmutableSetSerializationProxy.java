@@ -45,6 +45,7 @@ class ImmutableSetSerializationProxy<T> implements Externalizable
         {
             this.set.forEach(new CheckedProcedure<T>()
             {
+                @Override
                 public void safeValue(T value) throws IOException
                 {
                     out.writeObject(value);

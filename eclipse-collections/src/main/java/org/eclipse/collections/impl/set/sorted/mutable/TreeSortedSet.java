@@ -774,6 +774,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
         out.writeInt(this.size());
         this.forEach(new CheckedProcedure<T>()
         {
+            @Override
             public void safeValue(T each) throws Exception
             {
                 out.writeObject(each);

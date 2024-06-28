@@ -23,6 +23,7 @@ public interface CodePointFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int valueOf(int codePoint)
         {
             return Character.toUpperCase(codePoint);
@@ -33,6 +34,7 @@ public interface CodePointFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int valueOf(int codePoint)
         {
             return Character.toLowerCase(codePoint);
@@ -43,6 +45,7 @@ public interface CodePointFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int valueOf(int codePoint)
         {
             return codePoint;
