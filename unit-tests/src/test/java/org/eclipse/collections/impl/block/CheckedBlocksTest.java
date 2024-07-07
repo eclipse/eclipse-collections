@@ -332,7 +332,7 @@ public class CheckedBlocksTest
         }
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void codeBlockFailure()
     {
         Function0<Object> function = new CheckedFunction0<Object>()
@@ -344,10 +344,10 @@ public class CheckedBlocksTest
             }
         };
         MutableMap<String, Object> values = UnifiedMap.newMap();
-        MapIterate.getIfAbsentPut(values, "test", function);
+        assertThrows(RuntimeException.class, () -> MapIterate.getIfAbsentPut(values, "test", function));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void codeBlockRuntimeException()
     {
         Function0<Object> function = new CheckedFunction0<Object>()
@@ -359,7 +359,7 @@ public class CheckedBlocksTest
             }
         };
         MutableMap<String, Object> values = UnifiedMap.newMap();
-        MapIterate.getIfAbsentPut(values, "test", function);
+        assertThrows(RuntimeException.class, () -> MapIterate.getIfAbsentPut(values, "test", function));
     }
 
     @Test
@@ -377,7 +377,7 @@ public class CheckedBlocksTest
         MapIterate.getIfAbsentPut(values, "test", function);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void procedureFailure()
     {
         Procedure<Object> block = new CheckedProcedure<Object>()
@@ -388,10 +388,10 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        iList("test").forEach(block);
+        assertThrows(RuntimeException.class, () -> iList("test").forEach(block));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void procedureRuntimeException()
     {
         Procedure<Object> block = new CheckedProcedure<Object>()
@@ -402,7 +402,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        iList("test").forEach(block);
+        assertThrows(RuntimeException.class, () -> iList("test").forEach(block));
     }
 
     @Test
@@ -418,7 +418,7 @@ public class CheckedBlocksTest
         iList("test").forEach(block);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void objectIntProcedureFailure()
     {
         ObjectIntProcedure<Object> block = new CheckedObjectIntProcedure<Object>()
@@ -429,10 +429,10 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        iList("test").forEachWithIndex(block);
+        assertThrows(RuntimeException.class, () -> iList("test").forEachWithIndex(block));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void objectIntProcedureRuntimeException()
     {
         ObjectIntProcedure<Object> block = new CheckedObjectIntProcedure<Object>()
@@ -443,7 +443,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        iList("test").forEachWithIndex(block);
+        assertThrows(RuntimeException.class, () -> iList("test").forEachWithIndex(block));
     }
 
     @Test
@@ -459,7 +459,7 @@ public class CheckedBlocksTest
         iList("test").forEachWithIndex(block);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void functionFailure()
     {
         Function<Object, Object> block = new CheckedFunction<Object, Object>()
@@ -470,10 +470,10 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        iList("test").collect(block);
+        assertThrows(RuntimeException.class, () -> iList("test").collect(block));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void functionRuntimeException()
     {
         Function<Object, Object> block = new CheckedFunction<Object, Object>()
@@ -484,7 +484,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        iList("test").collect(block);
+        assertThrows(RuntimeException.class, () -> iList("test").collect(block));
     }
 
     @Test
@@ -501,7 +501,7 @@ public class CheckedBlocksTest
         iList("test").collect(block);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void predicateFailure()
     {
         Predicate<Object> block = new CheckedPredicate<Object>()
@@ -512,10 +512,10 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        iList("test").select(block);
+        assertThrows(RuntimeException.class, () -> iList("test").select(block));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void predicateRuntimeException()
     {
         Predicate<Object> block = new CheckedPredicate<Object>()
@@ -526,7 +526,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        iList("test").select(block);
+        assertThrows(RuntimeException.class, () -> iList("test").select(block));
     }
 
     @Test
@@ -554,7 +554,7 @@ public class CheckedBlocksTest
         Verify.assertEmpty(list.select(alwaysFalseBlock));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void procedure2Failure()
     {
         Procedure2<Object, Object> block = new CheckedProcedure2<Object, Object>()
@@ -565,10 +565,10 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        ListIterate.forEachInBoth(mList("test"), mList("test"), block);
+        assertThrows(RuntimeException.class, () -> ListIterate.forEachInBoth(mList("test"), mList("test"), block));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void procedure2RuntimeException()
     {
         Procedure2<Object, Object> block = new CheckedProcedure2<Object, Object>()
@@ -579,7 +579,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        ListIterate.forEachInBoth(mList("test"), mList("test"), block);
+        assertThrows(RuntimeException.class, () -> ListIterate.forEachInBoth(mList("test"), mList("test"), block));
     }
 
     @Test
@@ -596,7 +596,7 @@ public class CheckedBlocksTest
         ListIterate.forEachInBoth(mList("test"), mList("test"), block);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void predicate2Failure()
     {
         Predicate2<Object, Object> block = new CheckedPredicate2<Object, Object>()
@@ -607,10 +607,10 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        mList("test").selectWith(block, null);
+        assertThrows(RuntimeException.class, () -> mList("test").selectWith(block, null));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void predicate2RuntimeException()
     {
         Predicate2<Object, Object> block = new CheckedPredicate2<Object, Object>()
@@ -621,7 +621,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        mList("test").selectWith(block, null);
+        assertThrows(RuntimeException.class, () -> mList("test").selectWith(block, null));
     }
 
     @Test

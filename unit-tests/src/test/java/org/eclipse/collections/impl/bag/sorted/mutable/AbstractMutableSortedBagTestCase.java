@@ -121,34 +121,25 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         assertEquals(SortedBags.immutable.with(2, 2, 3), this.newWith(2, 2, 3).toImmutable());
     }
 
-    @Test(expected = ClassCastException.class)
+    @Test
     public void toString_with_collection_containing_self()
     {
         MutableCollection<Object> collection = this.newWith(1);
-        collection.add(collection);
-        String simpleName = collection.getClass().getSimpleName();
-        String string = collection.toString();
-        assertTrue(
-                ("[1, (this " + simpleName + ")]").equals(string)
-                        || ("[(this " + simpleName + "), 1]").equals(string));
+        assertThrows(ClassCastException.class, () -> collection.add(collection));
     }
 
-    @Test(expected = ClassCastException.class)
+    @Test
     public void makeString_with_collection_containing_self()
     {
         MutableCollection<Object> collection = this.newWith(1, 2, 3);
-        collection.add(collection);
-        assertEquals(collection.toString(), '[' + collection.makeString() + ']');
+        assertThrows(ClassCastException.class, () -> collection.add(collection));
     }
 
-    @Test(expected = ClassCastException.class)
+    @Test
     public void appendString_with_collection_containing_self()
     {
         MutableCollection<Object> collection = this.newWith(1, 2, 3);
-        collection.add(collection);
-        Appendable builder = new StringBuilder();
-        collection.appendString(builder);
-        assertEquals(collection.toString(), '[' + builder.toString() + ']');
+        assertThrows(ClassCastException.class, () -> collection.add(collection));
     }
 
     @Override
@@ -757,7 +748,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void iterator_throws()
     {
         super.iterator_throws();
@@ -775,7 +766,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         assertTrue(revIterator.hasNext());
         revIterator.next();
         assertFalse(revIterator.hasNext());
-        revIterator.next();
+        assertThrows(NoSuchElementException.class, () -> revIterator.next());
     }
 
     @Override
@@ -1866,17 +1857,17 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_safe()
     {
-        super.min_null_safe();
+        assertThrows(NullPointerException.class, () -> super.min_null_safe());
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_safe()
     {
-        super.max_null_safe();
+        assertThrows(NullPointerException.class, () -> super.max_null_safe());
     }
 
     @Test
@@ -1912,10 +1903,10 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         assertEquals(expectedBag, integers2.take(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        this.newWith(1, 2, 3).take(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(1, 2, 3).take(-1));
     }
 
     @Test
@@ -1931,10 +1922,10 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         assertEquals(SortedBags.mutable.empty(integers1.comparator()), integers1.drop(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        this.newWith(1, 2, 3).drop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(1, 2, 3).drop(-1));
     }
 
     @Override

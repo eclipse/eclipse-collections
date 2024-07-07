@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 
 public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListTestCase
 {
@@ -41,24 +42,24 @@ public class ImmutableBooleanEmptyListTest extends AbstractImmutableBooleanListT
     }
 
     @Override
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void get()
     {
-        this.classUnderTest().get(0);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(0));
     }
 
     @Override
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getFirst()
     {
-        this.classUnderTest().getFirst();
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().getFirst());
     }
 
     @Override
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getLast()
     {
-        this.classUnderTest().getLast();
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().getLast());
     }
 
     @Override

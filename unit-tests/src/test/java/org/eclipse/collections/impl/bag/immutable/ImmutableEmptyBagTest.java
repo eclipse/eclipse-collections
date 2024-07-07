@@ -346,45 +346,45 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min()
     {
-        this.newBag().min(String::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.newBag().min(String::compareTo));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max()
     {
-        this.newBag().max(String::compareTo);
+        assertThrows(NoSuchElementException.class, () -> this.newBag().max(String::compareTo));
     }
 
     @Test
     @Override
     public void min_null_throws()
     {
-        super.min_null_throws();
+        // Not applicable for empty collections
     }
 
     @Test
     @Override
     public void max_null_throws()
     {
-        super.max_null_throws();
+        // Not applicable for empty collections
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void min_without_comparator()
     {
-        this.newBag().min();
+        assertThrows(NoSuchElementException.class, () -> this.newBag().min());
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void max_without_comparator()
     {
-        this.newBag().max();
+        assertThrows(NoSuchElementException.class, () -> this.newBag().max());
     }
 
     @Test
@@ -392,7 +392,6 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void min_null_throws_without_comparator()
     {
         // Not applicable for empty collections
-        super.min_null_throws_without_comparator();
     }
 
     @Test
@@ -400,21 +399,20 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void max_null_throws_without_comparator()
     {
         // Not applicable for empty collections
-        super.max_null_throws_without_comparator();
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void minBy()
     {
-        this.newBag().minBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.newBag().minBy(String::valueOf));
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void maxBy()
     {
-        this.newBag().maxBy(String::valueOf);
+        assertThrows(NoSuchElementException.class, () -> this.newBag().maxBy(String::valueOf));
     }
 
     @Override
@@ -465,10 +463,10 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
-        this.newBag().chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.newBag().chunk(0));
     }
 
     @Override
@@ -576,7 +574,6 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void groupByUniqueKey_throws()
     {
-        super.groupByUniqueKey_throws();
         assertEquals(UnifiedMap.newMap().toImmutable(), this.newBag().groupByUniqueKey(id -> id));
     }
 
@@ -591,7 +588,6 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void groupByUniqueKey_target_throws()
     {
-        super.groupByUniqueKey_target_throws();
         assertEquals(UnifiedMap.newMap(), this.newBag().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
     }
 

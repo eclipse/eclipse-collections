@@ -898,12 +898,12 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void chunk_zero_throws()
     {
         super.chunk_zero_throws();
 
-        this.newBag().chunk(0);
+        assertThrows(IllegalArgumentException.class, () -> this.newBag().chunk(0));
     }
 
     @Override
@@ -921,17 +921,17 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws()
     {
-        this.classUnderTestWithNull().min(String::compareTo);
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().min(String::compareTo));
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws()
     {
-        this.classUnderTestWithNull().max(String::compareTo);
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().max(String::compareTo));
     }
 
     @Override
@@ -953,17 +953,17 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void min_null_throws_without_comparator()
     {
-        this.classUnderTestWithNull().min();
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().min());
     }
 
     @Override
-    @Test(expected = NullPointerException.class)
+    @Test
     public void max_null_throws_without_comparator()
     {
-        this.classUnderTestWithNull().max();
+        assertThrows(NullPointerException.class, () -> this.classUnderTestWithNull().max());
     }
 
     @Override
@@ -1465,23 +1465,23 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     }
 
     @Override
-    @Test(expected = IllegalStateException.class)
+    @Test
     public abstract void groupByUniqueKey();
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_throws()
     {
-        this.newBag().groupByUniqueKey(id -> id);
+        assertThrows(IllegalStateException.class, () -> this.newBag().groupByUniqueKey(id -> id));
     }
 
     @Override
-    @Test(expected = IllegalStateException.class)
+    @Test
     public abstract void groupByUniqueKey_target();
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void groupByUniqueKey_target_throws()
     {
-        this.newBag().groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues("1", "1"));
+        assertThrows(IllegalStateException.class, () -> this.newBag().groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues("1", "1")));
     }
 
     @Override
