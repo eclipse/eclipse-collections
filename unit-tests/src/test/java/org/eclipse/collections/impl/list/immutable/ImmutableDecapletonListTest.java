@@ -18,6 +18,7 @@ import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class ImmutableDecapletonListTest extends AbstractImmutableListTestCase
 {
@@ -45,10 +46,10 @@ public class ImmutableDecapletonListTest extends AbstractImmutableListTestCase
                 numbers.selectInstancesOf(Integer.class));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void getOnly()
     {
         ImmutableList<Integer> list = this.classUnderTest();
-        list.getOnly();
+        assertThrows(IllegalStateException.class, () -> list.getOnly());
     }
 }

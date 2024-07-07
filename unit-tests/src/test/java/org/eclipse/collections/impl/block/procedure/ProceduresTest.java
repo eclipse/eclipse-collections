@@ -112,10 +112,10 @@ public class ProceduresTest
         assertEquals("init123", appender.toString());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void appendWithException()
     {
-        Procedures.append(new Appendable()
+        assertThrows(RuntimeException.class, () -> Procedures.append(new Appendable()
         {
             @Override
             public Appendable append(CharSequence csq) throws IOException
@@ -134,7 +134,7 @@ public class ProceduresTest
             {
                 throw new IOException();
             }
-        }).value("abc");
+        }).value("abc"));
     }
 
     @Test

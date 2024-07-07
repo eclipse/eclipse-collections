@@ -15,6 +15,8 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class ImmutableUnifiedSetParallelSetIterableTest extends ParallelUnsortedSetIterableTestCase
 {
     @Override
@@ -35,15 +37,15 @@ public class ImmutableUnifiedSetParallelSetIterableTest extends ParallelUnsorted
         return Sets.immutable.with(littleElements).toSet();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asParallel_small_batch()
     {
-        Sets.immutable.with(1, 2, 3, 4).asParallel(this.executorService, 0);
+        assertThrows(IllegalArgumentException.class, () -> Sets.immutable.with(1, 2, 3, 4).asParallel(this.executorService, 0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void asParallel_null_executorService()
     {
-        Sets.immutable.with(1, 2, 3, 4).asParallel(null, 2);
+        assertThrows(NullPointerException.class, () -> Sets.immutable.with(1, 2, 3, 4).asParallel(null, 2));
     }
 }

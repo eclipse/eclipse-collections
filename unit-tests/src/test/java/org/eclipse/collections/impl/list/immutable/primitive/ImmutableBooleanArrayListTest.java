@@ -17,6 +17,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link ImmutableBooleanArrayList}.
@@ -29,16 +30,16 @@ public class ImmutableBooleanArrayListTest extends AbstractImmutableBooleanListT
         return ImmutableBooleanArrayList.newListWith(true, false, true);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newCollection_throws_empty()
     {
-        ImmutableBooleanArrayList.newListWith();
+        assertThrows(IllegalArgumentException.class, () -> ImmutableBooleanArrayList.newListWith());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void newCollection_throws_single()
     {
-        ImmutableBooleanArrayList.newListWith(true);
+        assertThrows(IllegalArgumentException.class, () -> ImmutableBooleanArrayList.newListWith(true));
     }
 
     @Override

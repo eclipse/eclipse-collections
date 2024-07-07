@@ -27,6 +27,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -150,11 +151,11 @@ public class ImmutableBooleanEmptySetTest extends AbstractImmutableBooleanCollec
     }
 
     @Override
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void booleanIterator()
     {
         assertFalse(this.classUnderTest().booleanIterator().hasNext());
-        this.classUnderTest().booleanIterator().next();
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().booleanIterator().next());
     }
 
     @Override

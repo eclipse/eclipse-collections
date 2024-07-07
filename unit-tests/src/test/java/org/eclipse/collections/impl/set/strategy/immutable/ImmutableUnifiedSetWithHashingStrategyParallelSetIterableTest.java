@@ -18,6 +18,8 @@ import org.eclipse.collections.impl.lazy.parallel.set.ParallelUnsortedSetIterabl
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class ImmutableUnifiedSetWithHashingStrategyParallelSetIterableTest extends ParallelUnsortedSetIterableTestCase
 {
     private static final HashingStrategy<Integer> INTEGER_TO_STRING_HASHING_STRATEGY = HashingStrategies.fromFunction(Integer::valueOf);
@@ -46,15 +48,15 @@ public class ImmutableUnifiedSetWithHashingStrategyParallelSetIterableTest exten
         return UnifiedSetWithHashingStrategy.newSetWith(INTEGER_TO_STRING_HASHING_STRATEGY, littleElements);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asParallel_small_batch()
     {
-        ImmutableUnifiedSetWithHashingStrategy.newSetWith(INTEGER_TO_STRING_HASHING_STRATEGY, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(this.executorService, 0);
+        assertThrows(IllegalArgumentException.class, () -> ImmutableUnifiedSetWithHashingStrategy.newSetWith(INTEGER_TO_STRING_HASHING_STRATEGY, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(this.executorService, 0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void asParallel_null_executorService()
     {
-        ImmutableUnifiedSetWithHashingStrategy.newSetWith(INTEGER_TO_STRING_HASHING_STRATEGY, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2);
+        assertThrows(NullPointerException.class, () -> ImmutableUnifiedSetWithHashingStrategy.newSetWith(INTEGER_TO_STRING_HASHING_STRATEGY, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2));
     }
 }

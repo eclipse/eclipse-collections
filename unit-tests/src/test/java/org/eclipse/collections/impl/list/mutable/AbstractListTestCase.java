@@ -848,32 +848,32 @@ public abstract class AbstractListTestCase
         assertEquals(FastList.newListWith(3, 2), result);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void sortThisWithNullWithNoComparator()
     {
         MutableList<Integer> integers = this.newWith(2, null, 3, 4, 1);
-        integers.sortThis();
+        assertThrows(NullPointerException.class, () -> integers.sortThis());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void sortThisWithNullWithNoComparatorOnListWithMoreThan10Elements()
     {
         MutableList<Integer> integers = this.newWith(2, null, 3, 4, 1, 5, 6, 7, 8, 9, 10, 11);
-        integers.sortThis();
+        assertThrows(NullPointerException.class, () -> integers.sortThis());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedListWithNullWithNoComparator()
     {
         MutableList<Integer> integers = this.newWith(2, null, 3, 4, 1);
-        integers.toSortedList();
+        assertThrows(NullPointerException.class, () -> integers.toSortedList());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void toSortedListWithNullWithNoComparatorOnListWithMoreThan10Elements()
     {
         MutableList<Integer> integers = this.newWith(2, null, 3, 4, 1, 5, 6, 7, 8, 9, 10, 11);
-        integers.toSortedList();
+        assertThrows(NullPointerException.class, () -> integers.toSortedList());
     }
 
     @Test
@@ -966,22 +966,22 @@ public abstract class AbstractListTestCase
         Verify.assertContainsAll(list, "A", "D");
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void subListFromOutOfBoundsException()
     {
-        this.newWith(1).subList(-1, 0);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(1).subList(-1, 0));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void subListToGreaterThanSizeException()
     {
-        this.newWith(1).subList(0, 2);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(1).subList(0, 2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void subListFromGreaterThanToException()
     {
-        this.newWith(1).subList(1, 0);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(1).subList(1, 0));
     }
 
     @Test
@@ -1026,16 +1026,16 @@ public abstract class AbstractListTestCase
         assertEquals(20, sum);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void listIteratorIndexTooSmall()
     {
-        this.newWith(1).listIterator(-1);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(1).listIterator(-1));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void listIteratorIndexTooBig()
     {
-        this.newWith(1).listIterator(2);
+        assertThrows(IndexOutOfBoundsException.class, () -> this.newWith(1).listIterator(2));
     }
 
     @Override
@@ -1077,10 +1077,10 @@ public abstract class AbstractListTestCase
         assertNotSame(mutableList, mutableList.take(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        this.newWith(1, 2, 3, 4, 5).take(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(1, 2, 3, 4, 5).take(-1));
     }
 
     @Test
@@ -1112,10 +1112,10 @@ public abstract class AbstractListTestCase
         assertEquals(iList(), mutableList.drop(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        this.newWith(1, 2, 3, 4, 5).drop(-1);
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(1, 2, 3, 4, 5).drop(-1));
     }
 
     @Test
@@ -1216,23 +1216,22 @@ public abstract class AbstractListTestCase
                 result);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void forEachInBothThrowsOnDifferentListSizes()
     {
         MutableList<Pair<Integer, String>> result = Lists.mutable.empty();
         ListIterable<Integer> integers = this.newWith(1, 2, 3);
         ImmutableList<String> strings = this.newWith("1", "2").toImmutable();
-        integers.forEachInBoth(
-                strings,
-                (integer, string) -> result.add(Tuples.pair(integer, string)));
+        assertThrows(IllegalArgumentException.class,
+                () -> integers.forEachInBoth(strings, (i, str) -> result.add(Tuples.pair(i, str))));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void forEachInBothThrowsOnNullList()
     {
         MutableList<Object> result = Lists.mutable.empty();
         ListIterable<Integer> integers = this.newWith(1, 2, 3);
-        integers.forEachInBoth(null, (a, b) -> result.add(b));
+        assertThrows(NullPointerException.class, () -> integers.forEachInBoth(null, (a, b) -> result.add(b)));
     }
 
     @Test

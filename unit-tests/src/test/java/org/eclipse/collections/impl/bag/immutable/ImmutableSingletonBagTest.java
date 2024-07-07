@@ -559,8 +559,6 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
     @Test
     public void groupByUniqueKey_throws()
     {
-        super.groupByUniqueKey_throws();
-
         assertEquals(UnifiedMap.newWithKeysValues("1", "1").toImmutable(), this.newBag().groupByUniqueKey(id -> id));
     }
 

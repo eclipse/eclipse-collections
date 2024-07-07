@@ -25,6 +25,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class FlatCollectBooleanToObjectIterableTest
@@ -93,10 +94,10 @@ public class FlatCollectBooleanToObjectIterableTest
         assertTrue(this.newPrimitiveWith(true, false).notEmpty());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeThrows()
     {
-        this.newPrimitiveWith().iterator().remove();
+        assertThrows(UnsupportedOperationException.class, () -> this.newPrimitiveWith().iterator().remove());
     }
 
     @Test
