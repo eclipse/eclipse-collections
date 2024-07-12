@@ -1014,7 +1014,7 @@ Assertions.assertEquals(expected, IntInterval.zeroToBy(4, 2));
 === Primitive sets
 
 The primitive set implementations are hash-table backed.
-They are named *{IntHashSet}*, *{FloatHashSet}* etc.
+They are named *{IntHashSet}*, *{FloatHashSet}*, etc.
 *{BooleanHashSet}* is implemented using a single integer to hold one of four possible states: ([], [F], [T], or [T, F]).
 All other sets use open addressing and quadratic probing.
 
@@ -1047,7 +1047,7 @@ MutableIntSet intHashSet = new IntHashSet(intIterable);
 MutableIntSet intHashSet5 = new IntHashSet(intHashSet2);
 ----
 
-Primitive sets can be created using factory classes, *IntSets*, *FloatSets* and *BooleanSets* are primitive factory classes which provides mutable & immutable ways of creating sets. factory classes provide different set of methods for creating sets like *with*, *withAll*, *empty* and *ofAll* with different set of arguments. Provided examples are with *IntSets* but all are valid for *FloatSets* and *BooleanSets* as well.
+Primitive sets can be created using factory classes. *IntSets*, *FloatSets* and *BooleanSets* are primitive factory classes that provide mutable & immutable ways of creating sets. Factory classes provide different sets of methods for creating sets like *with*, *withAll*, *empty* and *ofAll*, with different sets of arguments. Provided examples are with *IntSets* but all are valid for *FloatSets* and *BooleanSets* as well.
 
 *withInitialCapacity* is only available in mutable factories.
 [source, java]
