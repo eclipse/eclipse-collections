@@ -771,11 +771,11 @@ Return true if the **Predicate2** returns *true* for all elements of the collect
 
 ##### noneSatisfy(Predicate):\*\* boolean
 
-Return true if the **Predicate** returns *false* for all elements of the collection or if the collection is empty. Otherwise, return *false*.
+Return true if the **Predicate** returns *false* for all elements of the collection. Otherwise (or if the collection is empty), return *false*.
 
 ##### noneSatisfyWith(Predicate2, *parameter*): boolean
 
-Return true if the **Predicate2** returns *false* for all elements of the collection or if the collection is empty. Otherwise, return *false*.
+Return true if the **Predicate2** returns *false* for all elements of the collection. Otherwise (or if the collection is empty), return *false*.
 
 ### []() ForEach pattern
 
