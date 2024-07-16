@@ -747,8 +747,8 @@ The distinctive methods on *MutableStack* are *push*, *pop*, and *peek*.
 |`*pop(int count)*`            |Returns a *ListIterable* of the number of elements specified by the count, beginning with the top of the stack.
 |`*peek*`                      |Returns but does not remove the top element.
                                 Note that, on a stack, *getFirst* likewise returns the top element, and that *getLast* throws an exception.
-|`*peek(*int&nbsp;count*)*`    |Returns a *ListIterable* of the number of elements specified by the count, beginning with the top of the stack; does not remove the elements from the stack.
-|`*peekAt(*int&nbsp;index*)*`  |Returns the element at index.
+|`*peek(int count)*`           |Returns a *ListIterable* of the number of elements specified by the count, beginning with the top of the stack; does not remove the elements from the stack.
+|`*peekAt(int index)*`         |Returns the element at index.
 |===
 
 *ArrayStack* can replace *java.util.Stack*.
@@ -836,7 +836,7 @@ MutableListMultimap<Integer, String> multimap =
 ----
 ====
 
-.*MutableListMultimap* using groupBy* with a method reference
+.*MutableListMultimap* using groupBy with a method reference
 ====
 [source,java]
 ----
