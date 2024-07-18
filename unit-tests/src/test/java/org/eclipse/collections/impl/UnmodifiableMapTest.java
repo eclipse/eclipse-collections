@@ -17,12 +17,12 @@ import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UnmodifiableMapTest
 {
@@ -33,7 +33,7 @@ public class UnmodifiableMapTest
     private MutableMap<String, List<String>> mutableMap;
     private UnmodifiableMap<String, List<String>> unmodifiableMap;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.mutableMap = Maps.mutable.of(

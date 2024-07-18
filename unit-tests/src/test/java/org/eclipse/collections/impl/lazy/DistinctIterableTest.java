@@ -19,11 +19,11 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.lazy.iterator.DistinctIterator;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DistinctIterableTest extends AbstractLazyIterableTestCase
 {

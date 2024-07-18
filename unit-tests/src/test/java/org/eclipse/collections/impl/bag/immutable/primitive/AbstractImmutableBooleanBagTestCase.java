@@ -25,13 +25,13 @@ import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Abstract JUnit test for {@link ImmutableBooleanBag}.
@@ -210,9 +210,10 @@ public abstract class AbstractImmutableBooleanBagTestCase extends AbstractImmuta
         StringBuilder appendable2 = new StringBuilder();
         ImmutableBooleanBag bag1 = this.newWith(false, false, true);
         bag1.appendString(appendable2);
-        assertTrue(appendable2.toString(), "false, false, true".equals(appendable2.toString())
+        assertTrue("false, false, true".equals(appendable2.toString())
                 || "true, false, false".equals(appendable2.toString())
-                || "false, true, false".equals(appendable2.toString()));
+                || "false, true, false".equals(appendable2.toString()),
+                appendable2.toString());
     }
 
     @Override

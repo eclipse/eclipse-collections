@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Procedures2;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Procedure2Test
 {

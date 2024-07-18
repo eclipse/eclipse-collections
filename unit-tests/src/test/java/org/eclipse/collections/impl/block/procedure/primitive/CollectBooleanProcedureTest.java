@@ -15,9 +15,9 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CollectBooleanProcedureTest
 {

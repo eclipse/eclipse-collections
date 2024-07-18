@@ -89,18 +89,18 @@ import org.eclipse.collections.impl.string.immutable.CharAdapter;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iBag;
 import static org.eclipse.collections.impl.factory.Iterables.iSet;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class MapIterableTestCase
 {
@@ -362,7 +362,7 @@ public abstract class MapIterableTestCase
         BooleanHashBag target = new BooleanHashBag();
         MapIterable<String, String> map = this.newMapWithKeysValues("One", "true", "Two", "nah", "Three", "TrUe");
         BooleanHashBag result = map.collectBoolean(Boolean::parseBoolean, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(BooleanHashBag.newBagWith(true, false, true), result.toBag());
     }
 
@@ -380,7 +380,7 @@ public abstract class MapIterableTestCase
         ByteHashBag target = new ByteHashBag();
         MapIterable<String, String> map = this.newMapWithKeysValues("One", "1", "Two", "2", "Three", "3");
         ByteHashBag result = map.collectByte(Byte::parseByte, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2, (byte) 3), result.toBag());
     }
 
@@ -398,7 +398,7 @@ public abstract class MapIterableTestCase
         CharHashBag target = new CharHashBag();
         MapIterable<String, String> map = this.newMapWithKeysValues("One", "A1", "Two", "B", "Three", "C#++");
         CharHashBag result = map.collectChar((CharFunction<String>) string -> string.charAt(0), target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(CharHashBag.newBagWith('A', 'B', 'C'), result.toBag());
     }
 
@@ -416,7 +416,7 @@ public abstract class MapIterableTestCase
         DoubleHashBag target = new DoubleHashBag();
         MapIterable<String, String> map = this.newMapWithKeysValues("One", "1", "Two", "2", "Three", "3");
         DoubleHashBag result = map.collectDouble(Double::parseDouble, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(DoubleHashBag.newBagWith(1.0d, 2.0d, 3.0d), result.toBag());
     }
 
@@ -434,7 +434,7 @@ public abstract class MapIterableTestCase
         FloatHashBag target = new FloatHashBag();
         MapIterable<String, String> map = this.newMapWithKeysValues("One", "1", "Two", "2", "Three", "3");
         FloatHashBag result = map.collectFloat(Float::parseFloat, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(FloatHashBag.newBagWith(1.0f, 2.0f, 3.0f), result.toBag());
     }
 
@@ -452,7 +452,7 @@ public abstract class MapIterableTestCase
         IntHashBag target = new IntHashBag();
         MapIterable<String, String> map = this.newMapWithKeysValues("One", "1", "Two", "2", "Three", "3");
         IntHashBag result = map.collectInt(Integer::parseInt, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(IntHashBag.newBagWith(1, 2, 3), result.toBag());
     }
 
@@ -470,7 +470,7 @@ public abstract class MapIterableTestCase
         LongHashBag target = new LongHashBag();
         MapIterable<String, String> map = this.newMapWithKeysValues("One", "1", "Two", "2", "Three", "3");
         LongHashBag result = map.collectLong(Long::parseLong, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(LongHashBag.newBagWith(1L, 2L, 3L), result.toBag());
     }
 
@@ -488,7 +488,7 @@ public abstract class MapIterableTestCase
         ShortHashBag target = new ShortHashBag();
         MapIterable<String, String> map = this.newMapWithKeysValues("One", "1", "Two", "2", "Three", "3");
         ShortHashBag result = map.collectShort(Short::parseShort, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(ShortHashBag.newBagWith((short) 1, (short) 2, (short) 3), result.toBag());
     }
 
@@ -1005,7 +1005,7 @@ public abstract class MapIterableTestCase
 
         String value = map.getFirst();
         assertNotNull(value);
-        assertTrue(value, map.valuesView().contains(value));
+        assertTrue(map.valuesView().contains(value), value);
 
         assertNull(this.newMap().getFirst());
     }
@@ -1017,7 +1017,7 @@ public abstract class MapIterableTestCase
 
         String value = map.getLast();
         assertNotNull(value);
-        assertTrue(value, map.valuesView().contains(value));
+        assertTrue(map.valuesView().contains(value), value);
 
         assertNull(this.newMap().getLast());
     }

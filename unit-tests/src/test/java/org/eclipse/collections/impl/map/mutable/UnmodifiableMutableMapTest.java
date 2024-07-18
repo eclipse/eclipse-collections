@@ -19,11 +19,11 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit test for {@link UnmodifiableMutableMap}.
@@ -202,7 +202,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     @Test
     public void getIfAbsentPut()
     {
-        Assert.assertEquals("3", this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(3, (Function0<String>) () -> ""));
+        assertEquals("3", this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(3, (Function0<String>) () -> ""));
         assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(4, (Function0<String>) () -> ""));
     }
 
@@ -210,7 +210,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     @Test
     public void getIfAbsentPutValue()
     {
-        Assert.assertEquals("3", this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(3, ""));
+        assertEquals("3", this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(3, ""));
         assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "2", 3, "3").getIfAbsentPut(4, ""));
     }
 
@@ -438,7 +438,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
 
         assertThrows(UnsupportedOperationException.class, () -> Iterate.getFirst(map.entrySet()).setValue("Three"));
 
-        Assert.assertEquals(this.newMapWithKeysValues(1, "One", 2, "2"), map);
+        assertEquals(this.newMapWithKeysValues(1, "One", 2, "2"), map);
     }
 
     @Test
@@ -446,7 +446,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     {
         MutableMap<Integer, String> map = this.newMapWithKeyValue(1, "One").asUnmodifiable();
         Object[] entries = map.entrySet().toArray();
-        Assert.assertEquals(ImmutableEntry.of(1, "One"), entries[0]);
+        assertEquals(ImmutableEntry.of(1, "One"), entries[0]);
     }
 
     @Test
@@ -454,7 +454,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     {
         MutableMap<Integer, String> map = this.newMapWithKeyValue(1, "One").asUnmodifiable();
         Object[] entries = map.entrySet().toArray(new Object[]{});
-        Assert.assertEquals(ImmutableEntry.of(1, "One"), entries[0]);
+        assertEquals(ImmutableEntry.of(1, "One"), entries[0]);
     }
 
     @Override

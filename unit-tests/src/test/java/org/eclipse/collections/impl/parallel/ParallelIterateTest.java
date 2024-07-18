@@ -62,15 +62,15 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParallelIterateTest
 {
@@ -94,7 +94,7 @@ public class ParallelIterateTest
     private ImmutableList<RichIterable<Integer>> iterables;
     private final ExecutorService executor = Executors.newFixedThreadPool(2);
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         Interval interval = Interval.oneTo(200);
@@ -134,7 +134,7 @@ public class ParallelIterateTest
                 UnifiedSetWithHashingStrategy.<Integer>newSet(HashingStrategies.defaultStrategy()).withAll(interval).toImmutable());
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         this.executor.shutdown();
@@ -356,9 +356,9 @@ public class ParallelIterateTest
         Collection<Integer> actual2 = ParallelIterate.select(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = ParallelIterate.select(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.select(Predicates.greaterThan(100));
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
+        assertEquals(expected, actual1, expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName());
+        assertEquals(expected.toBag(), actual2, expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName());
+        assertEquals(expected, actual3, expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName());
     }
 
     @Test
@@ -370,8 +370,8 @@ public class ParallelIterateTest
         RichIterable<Integer> expected = iterable.select(Predicates.greaterThan(100));
         assertSame(expected.getClass(), actual1.getClass());
         assertSame(expected.getClass(), actual2.getClass());
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
+        assertEquals(expected, actual1, expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName());
+        assertEquals(expected, actual2, expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName());
     }
 
     @Test
@@ -400,9 +400,9 @@ public class ParallelIterateTest
         Collection<Integer> actual2 = ParallelIterate.reject(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = ParallelIterate.reject(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.reject(Predicates.greaterThan(100));
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
+        assertEquals(expected, actual1, expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName());
+        assertEquals(expected.toBag(), actual2, expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName());
+        assertEquals(expected, actual3, expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName());
     }
 
     @Test
@@ -419,9 +419,9 @@ public class ParallelIterateTest
         RichIterable<String> expected = iterable.collect(String::valueOf);
         Verify.assertSize(200, actual1);
         Verify.assertContains(String.valueOf(200), actual1);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected.toBag(), actual2);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected.toBag(), HashBag.newBag(actual3));
+        assertEquals(expected, actual1, expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName());
+        assertEquals(expected.toBag(), actual2, expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName());
+        assertEquals(expected.toBag(), HashBag.newBag(actual3), expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName());
     }
 
     @Test
@@ -441,9 +441,9 @@ public class ParallelIterateTest
         Verify.assertNotContains(String.valueOf(90), actual1);
         Verify.assertNotContains(String.valueOf(210), actual1);
         Verify.assertContains(String.valueOf(159), actual1);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, HashBag.newBag(actual1));
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected, actual2);
-        assertEquals(expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected, actual3);
+        assertEquals(expected, HashBag.newBag(actual1), expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName());
+        assertEquals(expected, actual2, expected.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName());
+        assertEquals(expected, actual3, expected.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName());
     }
 
     @Test
@@ -769,9 +769,9 @@ public class ParallelIterateTest
         RichIterable<String> expected1 = iterable.flatCollect(INT_TO_TWO_STRINGS);
         RichIterable<String> expected2 = iterable.flatCollect(INT_TO_TWO_STRINGS, HashBag.newBag());
         Verify.assertContains(String.valueOf(200), actual1);
-        assertEquals(expected1.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected1, actual1);
-        assertEquals(expected2.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected2, actual2);
-        assertEquals(expected1.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName(), expected1, actual3);
+        assertEquals(expected1, actual1, expected1.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName());
+        assertEquals(expected2, actual2, expected2.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName());
+        assertEquals(expected1, actual3, expected1.getClass().getSimpleName() + '/' + actual3.getClass().getSimpleName());
     }
 
     public static final class IntegerSum

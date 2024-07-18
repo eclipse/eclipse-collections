@@ -15,9 +15,9 @@ import org.eclipse.collections.api.partition.set.sorted.PartitionImmutableSorted
 import org.eclipse.collections.api.partition.set.sorted.PartitionMutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PartitionTreeSortedSetTest
 {

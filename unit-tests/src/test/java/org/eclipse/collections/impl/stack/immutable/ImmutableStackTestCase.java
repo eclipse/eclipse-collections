@@ -15,7 +15,7 @@ import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.impl.stack.StackIterableTestCase;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class ImmutableStackTestCase extends StackIterableTestCase
 {

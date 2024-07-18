@@ -12,9 +12,9 @@ package org.eclipse.collections.impl.set.immutable;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ImmutableDoubletonSetTest
         extends AbstractImmutableSetTestCase

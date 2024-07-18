@@ -17,12 +17,12 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterableTestCase;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * JUnit test for {@link ObjectBooleanHashMap#keysView()}.

@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.set.mutable;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MultiReaderUnifiedSetAsUnmodifiableTest extends UnmodifiableMutableCollectionTestCase<Integer>
 {

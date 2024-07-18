@@ -12,17 +12,17 @@ package org.eclipse.collections.impl.lazy;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ZipWithIndexIterableTest
 {
     private ZipWithIndexIterable<Integer> iterableUnderTest;
     private final StringBuilder buffer = new StringBuilder();
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.iterableUnderTest = new ZipWithIndexIterable<>(Lists.immutable.of(1, 2, 3, 4));

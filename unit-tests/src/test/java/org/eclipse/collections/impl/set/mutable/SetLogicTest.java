@@ -12,17 +12,17 @@ package org.eclipse.collections.impl.set.mutable;
 
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SetLogicTest
 {
     private MutableSet<Integer> setA;
     private MutableSet<Integer> setB;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.setA = UnifiedSet.newSetWith(1, 2, 3, 4).asUnmodifiable();

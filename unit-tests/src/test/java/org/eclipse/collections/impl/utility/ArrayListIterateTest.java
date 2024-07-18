@@ -58,19 +58,19 @@ import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.eclipse.collections.impl.factory.Iterables.mList;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * JUnit test for {@link ArrayListIterate}.
@@ -376,7 +376,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = this.createIntegerList();
         MutableBooleanList target = new BooleanArrayList();
         MutableBooleanList actual = ArrayListIterate.collectBoolean(list, PrimitiveFunctions.integerIsPositive(), target);
-        assertSame("Target list sent as parameter not returned", target, actual);
+        assertSame(target, actual, "Target list sent as parameter not returned");
         assertEquals(BooleanArrayList.newListWith(false, false, true), actual);
     }
 
@@ -407,7 +407,7 @@ public class ArrayListIterateTest
             expected.add(true);
         }
         assertEquals(expected, actual);
-        assertSame("Target sent as parameter was not returned as result", target, actual);
+        assertSame(target, actual, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -424,7 +424,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = this.createIntegerList();
         MutableByteList target = new ByteArrayList();
         MutableByteList actual = ArrayListIterate.collectByte(list, PrimitiveFunctions.unboxIntegerToByte(), target);
-        assertSame("Target list sent as parameter not returned", target, actual);
+        assertSame(target, actual, "Target list sent as parameter not returned");
         assertEquals(ByteArrayList.newListWith((byte) -1, (byte) 0, (byte) 4), actual);
     }
 
@@ -453,7 +453,7 @@ public class ArrayListIterateTest
             expected.add((byte) i);
         }
         assertEquals(expected, actual);
-        assertSame("Target sent as parameter was not returned as result", target, actual);
+        assertSame(target, actual, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -470,7 +470,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = this.createIntegerList();
         MutableCharList target = new CharArrayList();
         MutableCharList actual = ArrayListIterate.collectChar(list, PrimitiveFunctions.unboxIntegerToChar(), target);
-        assertSame("Target list sent as parameter not returned", target, actual);
+        assertSame(target, actual, "Target list sent as parameter not returned");
         assertEquals(CharArrayList.newListWith((char) -1, (char) 0, (char) 4), actual);
     }
 
@@ -499,7 +499,7 @@ public class ArrayListIterateTest
             expected.add((char) i);
         }
         assertEquals(expected, actual);
-        assertSame("Target sent as parameter was not returned as result", target, actual);
+        assertSame(target, actual, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -516,7 +516,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = this.createIntegerList();
         MutableDoubleList target = new DoubleArrayList();
         MutableDoubleList actual = ArrayListIterate.collectDouble(list, PrimitiveFunctions.unboxIntegerToDouble(), target);
-        assertSame("Target list sent as parameter not returned", target, actual);
+        assertSame(target, actual, "Target list sent as parameter not returned");
         assertEquals(DoubleArrayList.newListWith(-1.0d, 0.0d, 4.0d), actual);
     }
 
@@ -545,7 +545,7 @@ public class ArrayListIterateTest
             expected.add((double) i);
         }
         assertEquals(expected, actual);
-        assertSame("Target sent as parameter was not returned as result", target, actual);
+        assertSame(target, actual, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -562,7 +562,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = this.createIntegerList();
         MutableFloatList target = new FloatArrayList();
         MutableFloatList actual = ArrayListIterate.collectFloat(list, PrimitiveFunctions.unboxIntegerToFloat(), target);
-        assertSame("Target list sent as parameter not returned", target, actual);
+        assertSame(target, actual, "Target list sent as parameter not returned");
         assertEquals(FloatArrayList.newListWith(-1.0f, 0.0f, 4.0f), actual);
     }
 
@@ -591,7 +591,7 @@ public class ArrayListIterateTest
             expected.add((float) i);
         }
         assertEquals(expected, actual);
-        assertSame("Target sent as parameter was not returned as result", target, actual);
+        assertSame(target, actual, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -608,7 +608,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = this.createIntegerList();
         MutableIntList target = new IntArrayList();
         MutableIntList actual = ArrayListIterate.collectInt(list, PrimitiveFunctions.unboxIntegerToInt(), target);
-        assertSame("Target list sent as parameter not returned", target, actual);
+        assertSame(target, actual, "Target list sent as parameter not returned");
         assertEquals(IntArrayList.newListWith(-1, 0, 4), actual);
     }
 
@@ -637,7 +637,7 @@ public class ArrayListIterateTest
             expected.add(i);
         }
         assertEquals(expected, actual);
-        assertSame("Target sent as parameter was not returned as result", target, actual);
+        assertSame(target, actual, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -654,7 +654,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = this.createIntegerList();
         MutableLongList target = new LongArrayList();
         MutableLongList actual = ArrayListIterate.collectLong(list, PrimitiveFunctions.unboxIntegerToLong(), target);
-        assertSame("Target list sent as parameter not returned", target, actual);
+        assertSame(target, actual, "Target list sent as parameter not returned");
         assertEquals(LongArrayList.newListWith(-1L, 0L, 4L), actual);
     }
 
@@ -683,7 +683,7 @@ public class ArrayListIterateTest
             expected.add((long) i);
         }
         assertEquals(expected, actual);
-        assertSame("Target sent as parameter was not returned as result", target, actual);
+        assertSame(target, actual, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -700,7 +700,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> list = this.createIntegerList();
         MutableShortList target = new ShortArrayList();
         MutableShortList actual = ArrayListIterate.collectShort(list, PrimitiveFunctions.unboxIntegerToShort(), target);
-        assertSame("Target list sent as parameter not returned", target, actual);
+        assertSame(target, actual, "Target list sent as parameter not returned");
         assertEquals(ShortArrayList.newListWith((short) -1, (short) 0, (short) 4), actual);
     }
 
@@ -729,7 +729,7 @@ public class ArrayListIterateTest
             expected.add((short) i);
         }
         assertEquals(expected, actual);
-        assertSame("Target sent as parameter was not returned as result", target, actual);
+        assertSame(target, actual, "Target sent as parameter was not returned as result");
     }
 
     private ArrayList<Integer> createIntegerList()

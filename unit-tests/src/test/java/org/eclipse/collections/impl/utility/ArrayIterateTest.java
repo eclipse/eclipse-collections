@@ -62,17 +62,17 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ArrayIterateTest
 {
@@ -357,7 +357,7 @@ public class ArrayIterateTest
         BooleanArrayList target = new BooleanArrayList();
         MutableBooleanList result = ArrayIterate.collectBoolean(objectArray, PrimitiveFunctions.integerIsPositive(), target);
         assertEquals(this.getExpectedBooleanResults(), result);
-        assertSame("Target List not returned as result", target, result);
+        assertSame(target, result, "Target List not returned as result");
     }
 
     private BooleanArrayList getExpectedBooleanResults()
@@ -381,7 +381,7 @@ public class ArrayIterateTest
         ByteArrayList target = new ByteArrayList();
         ByteArrayList result = ArrayIterate.collectByte(objectArray, PrimitiveFunctions.unboxIntegerToByte(), target);
         assertEquals(this.getExpectedByteResults(), result);
-        assertSame("Target List not returned as result", target, result);
+        assertSame(target, result, "Target List not returned as result");
     }
 
     private ByteArrayList getExpectedByteResults()
@@ -405,7 +405,7 @@ public class ArrayIterateTest
         CharArrayList target = new CharArrayList();
         CharArrayList result = ArrayIterate.collectChar(objectArray, PrimitiveFunctions.unboxIntegerToChar(), target);
         assertEquals(this.getExpectedCharResults(), result);
-        assertSame("Target List not returned as result", target, result);
+        assertSame(target, result, "Target List not returned as result");
     }
 
     private CharArrayList getExpectedCharResults()
@@ -429,7 +429,7 @@ public class ArrayIterateTest
         DoubleArrayList target = new DoubleArrayList();
         DoubleArrayList result = ArrayIterate.collectDouble(objectArray, PrimitiveFunctions.unboxIntegerToDouble(), target);
         assertEquals(this.getExpectedDoubleResults(), result);
-        assertSame("Target List not returned as result", target, result);
+        assertSame(target, result, "Target List not returned as result");
     }
 
     private DoubleArrayList getExpectedDoubleResults()
@@ -453,7 +453,7 @@ public class ArrayIterateTest
         FloatArrayList target = new FloatArrayList();
         FloatArrayList result = ArrayIterate.collectFloat(objectArray, PrimitiveFunctions.unboxIntegerToFloat(), target);
         assertEquals(this.getExpectedFloatResults(), result);
-        assertSame("Target List not returned as result", target, result);
+        assertSame(target, result, "Target List not returned as result");
     }
 
     private FloatArrayList getExpectedFloatResults()
@@ -477,7 +477,7 @@ public class ArrayIterateTest
         IntArrayList target = new IntArrayList();
         IntArrayList result = ArrayIterate.collectInt(objectArray, PrimitiveFunctions.unboxIntegerToInt(), target);
         assertEquals(this.getExpectedIntResults(), result);
-        assertSame("Target List not returned as result", target, result);
+        assertSame(target, result, "Target List not returned as result");
     }
 
     private IntArrayList getExpectedIntResults()
@@ -501,7 +501,7 @@ public class ArrayIterateTest
         LongArrayList target = new LongArrayList();
         LongArrayList result = ArrayIterate.collectLong(objectArray, PrimitiveFunctions.unboxIntegerToLong(), target);
         assertEquals(this.getExpectedLongResults(), result);
-        assertSame("Target List not returned as result", target, result);
+        assertSame(target, result, "Target List not returned as result");
     }
 
     private LongArrayList getExpectedLongResults()
@@ -525,7 +525,7 @@ public class ArrayIterateTest
         ShortArrayList target = new ShortArrayList();
         ShortArrayList result = ArrayIterate.collectShort(objectArray, PrimitiveFunctions.unboxIntegerToShort(), target);
         assertEquals(this.getExpectedShortResults(), result);
-        assertSame("Target List not returned as result", target, result);
+        assertSame(target, result, "Target List not returned as result");
     }
 
     private ShortArrayList getExpectedShortResults()

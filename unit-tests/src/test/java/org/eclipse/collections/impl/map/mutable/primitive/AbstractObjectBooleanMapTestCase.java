@@ -23,13 +23,13 @@ import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class AbstractObjectBooleanMapTestCase
 {
@@ -174,21 +174,21 @@ public abstract class AbstractObjectBooleanMapTestCase
 
         ObjectBooleanMap<Integer> map1 = this.newWithKeysValues(0, true, 1, false);
         assertTrue(
-                map1.toString(),
                 "{0=true, 1=false}".equals(map1.toString())
-                        || "{1=false, 0=true}".equals(map1.toString()));
+                        || "{1=false, 0=true}".equals(map1.toString()),
+                map1.toString());
 
         ObjectBooleanMap<Integer> map2 = this.newWithKeysValues(1, false, null, true);
         assertTrue(
-                map2.toString(),
                 "{1=false, null=true}".equals(map2.toString())
-                        || "{null=true, 1=false}".equals(map2.toString()));
+                        || "{null=true, 1=false}".equals(map2.toString()),
+                map2.toString());
 
         ObjectBooleanMap<Integer> map3 = this.newWithKeysValues(1, true, null, true);
         assertTrue(
-                map3.toString(),
                 "{1=true, null=true}".equals(map3.toString())
-                        || "{null=true, 1=true}".equals(map3.toString()));
+                        || "{null=true, 1=true}".equals(map3.toString()),
+                map3.toString());
     }
 
     @Test
@@ -275,7 +275,7 @@ public abstract class AbstractObjectBooleanMapTestCase
             sumKey[0] += String.valueOf(eachKey);
             sumValue[0] += eachValue;
         });
-        assertTrue(sumKey[0], "3null".equals(sumKey[0]) || "null3".equals(sumKey[0]));
+        assertTrue("3null".equals(sumKey[0]) || "null3".equals(sumKey[0]), sumKey[0]);
         assertTrue("truefalse".equals(sumValue[0]) || "falsetrue".equals(sumValue[0]));
     }
 
@@ -289,14 +289,14 @@ public abstract class AbstractObjectBooleanMapTestCase
 
         ObjectBooleanMap<Integer> map2 = this.newWithKeysValues(1, true, 32, false);
         assertTrue(
-                map2.makeString("[", "/", "]"),
                 "[true/false]".equals(map2.makeString("[", "/", "]"))
-                        || "[false/true]".equals(map2.makeString("[", "/", "]")));
+                        || "[false/true]".equals(map2.makeString("[", "/", "]")),
+                map2.makeString("[", "/", "]"));
 
         assertTrue(
-                map2.makeString("/"),
                 "true/false".equals(map2.makeString("/"))
-                        || "false/true".equals(map2.makeString("/")));
+                        || "false/true".equals(map2.makeString("/")),
+                map2.makeString("/"));
     }
 
     @Test
@@ -322,23 +322,23 @@ public abstract class AbstractObjectBooleanMapTestCase
         ObjectBooleanMap<Integer> map1 = this.newWithKeysValues(0, true, 1, false);
         map1.appendString(appendable3);
         assertTrue(
-                appendable3.toString(),
                 "true, false".equals(appendable3.toString())
-                        || "false, true".equals(appendable3.toString()));
+                        || "false, true".equals(appendable3.toString()),
+                appendable3.toString());
 
         Appendable appendable4 = new StringBuilder();
         map1.appendString(appendable4, "/");
         assertTrue(
-                appendable4.toString(),
                 "true/false".equals(appendable4.toString())
-                        || "false/true".equals(appendable4.toString()));
+                        || "false/true".equals(appendable4.toString()),
+                appendable4.toString());
 
         Appendable appendable5 = new StringBuilder();
         map1.appendString(appendable5, "[", "/", "]");
         assertTrue(
-                appendable5.toString(),
                 "[true/false]".equals(appendable5.toString())
-                        || "[false/true]".equals(appendable5.toString()));
+                        || "[false/true]".equals(appendable5.toString()),
+                appendable5.toString());
     }
 
     @Test
@@ -482,8 +482,8 @@ public abstract class AbstractObjectBooleanMapTestCase
         ObjectBooleanMap<String> map2 = this.newWithKeysValues("0", true);
         ObjectBooleanMap<String> map3 = this.newWithKeysValues("0", false);
 
-        assertTrue(map1.toList().toString(), BooleanArrayList.newListWith(true, false).equals(map1.toList())
-                || BooleanArrayList.newListWith(false, true).equals(map1.toList()));
+        assertTrue(BooleanArrayList.newListWith(true, false).equals(map1.toList())
+                || BooleanArrayList.newListWith(false, true).equals(map1.toList()), map1.toList().toString());
         assertEquals(BooleanArrayList.newListWith(true), map2.toList());
         assertEquals(BooleanArrayList.newListWith(false), map3.toList());
     }

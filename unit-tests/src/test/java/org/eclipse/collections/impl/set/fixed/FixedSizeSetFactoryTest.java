@@ -22,17 +22,17 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class FixedSizeSetFactoryTest
 {
     private FixedSizeSetFactory setFactory;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.setFactory = FixedSizeSetFactoryImpl.INSTANCE;

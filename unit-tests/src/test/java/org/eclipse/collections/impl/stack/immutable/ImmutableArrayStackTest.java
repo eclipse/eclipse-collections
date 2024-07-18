@@ -18,12 +18,12 @@ import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ImmutableArrayStackTest extends ImmutableStackTestCase
 {

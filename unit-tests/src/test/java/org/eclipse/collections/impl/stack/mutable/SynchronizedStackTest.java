@@ -11,9 +11,9 @@
 package org.eclipse.collections.impl.stack.mutable;
 
 import org.eclipse.collections.api.stack.MutableStack;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit test for {@link SynchronizedStack}.

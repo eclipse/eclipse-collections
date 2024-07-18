@@ -12,10 +12,10 @@ package org.eclipse.collections.impl.list.immutable.primitive;
 
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ImmutableBooleanSingletonListTest extends AbstractImmutableBooleanListTestCase
 {

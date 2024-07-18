@@ -15,7 +15,7 @@ import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class QuadrupletonSetAsUnmodifiableTest extends UnmodifiableMutableCollectionTestCase<String>
 {

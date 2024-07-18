@@ -12,9 +12,9 @@ package org.eclipse.collections.impl.lazy.parallel.list;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ParallelListIterable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ImmutableListParallelListIterableTest extends ParallelListIterableTestCase
 {
