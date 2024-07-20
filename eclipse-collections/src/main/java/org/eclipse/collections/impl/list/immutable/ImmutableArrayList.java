@@ -603,10 +603,11 @@ final class ImmutableArrayList<T>
     @Override
     public ImmutableList<T> takeWhile(Predicate<? super T> predicate)
     {
-        int endIndex = this.detectNotIndex(predicate);
-        T[] result = (T[]) new Object[endIndex];
-        System.arraycopy(this.items, 0, result, 0, endIndex);
-        return new ImmutableArrayList<>(result);
+        int startIndex = this.detectNotIndex(predicate);
+        int resultSize = this.size() - startIndex;
+        T[] result = (T[]) new Object[resultSize];
+        System.arraycopy(this.items, startIndex, result, 0, resultSize);
+        return Lists.immutable.with(result);
     }
 
     @Override
@@ -626,7 +627,7 @@ final class ImmutableArrayList<T>
         int resultSize = this.size() - startIndex;
         T[] result = (T[]) new Object[resultSize];
         System.arraycopy(this.items, startIndex, result, 0, resultSize);
-        return new ImmutableArrayList<>(result);
+        return Lists.immutable.with(result);
     }
 
     @Override
