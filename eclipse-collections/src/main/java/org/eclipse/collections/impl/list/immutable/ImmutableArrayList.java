@@ -606,7 +606,7 @@ final class ImmutableArrayList<T>
         int endIndex = this.detectNotIndex(predicate);
         T[] result = (T[]) new Object[endIndex];
         System.arraycopy(this.items, 0, result, 0, endIndex);
-        return new ImmutableArrayList<>(result);
+        return Lists.immutable.with(result);
     }
 
     @Override
@@ -626,7 +626,7 @@ final class ImmutableArrayList<T>
         int resultSize = this.size() - startIndex;
         T[] result = (T[]) new Object[resultSize];
         System.arraycopy(this.items, startIndex, result, 0, resultSize);
-        return new ImmutableArrayList<>(result);
+        return Lists.immutable.with(result);
     }
 
     @Override
