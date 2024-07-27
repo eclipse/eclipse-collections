@@ -20,7 +20,7 @@ import java.util.RandomAccess;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.utility.ArrayIterate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class NullSafeSortingTest
 {

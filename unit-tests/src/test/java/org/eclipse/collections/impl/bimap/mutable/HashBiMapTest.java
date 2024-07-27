@@ -14,10 +14,10 @@ import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.domain.Key;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HashBiMapTest extends AbstractMutableBiMapTestCase
 {

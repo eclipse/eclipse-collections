@@ -12,9 +12,9 @@ package org.eclipse.collections.impl.lazy.parallel.set;
 
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParallelUnsortedSetIterableTest extends ParallelUnsortedSetIterableTestCase
 {

@@ -42,7 +42,7 @@ import org.eclipse.collections.impl.utility.internal.SortedSetIterables;
 import org.eclipse.collections.impl.utility.internal.primitive.BooleanIterableIterate;
 import org.eclipse.collections.impl.utility.internal.primitive.BooleanIteratorIterate;
 import org.eclipse.collections.impl.utility.primitive.LazyBooleanIterate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class NonInstantiableTest
 {

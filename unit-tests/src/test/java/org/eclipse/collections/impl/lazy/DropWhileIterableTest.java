@@ -20,10 +20,10 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.math.SumProcedure;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DropWhileIterableTest extends AbstractLazyIterableTestCase
 {
@@ -33,7 +33,7 @@ public class DropWhileIterableTest extends AbstractLazyIterableTestCase
     private DropWhileIterable<Integer> mostlyFalseDropWhileIterable;
     private DropWhileIterable<Integer> alwaysTrueDropWhileIterable;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.dropWhileIterable = new DropWhileIterable<>(Interval.oneTo(5), each -> each <= 2);

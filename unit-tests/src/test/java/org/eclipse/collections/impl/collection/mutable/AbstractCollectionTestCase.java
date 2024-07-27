@@ -28,15 +28,15 @@ import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.eclipse.collections.impl.factory.Iterables.mSet;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Abstract JUnit test for {@link MutableCollection}s.
@@ -109,11 +109,11 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
         boolean result = collection.addAll(FastList.newListWith(1, 2, 3));
         if (collection.size() == 3)
         {
-            assertFalse("addAll did not modify the collection", result);
+            assertFalse(result, "addAll did not modify the collection");
         }
         else
         {
-            assertTrue("addAll modified the collection", result);
+            assertTrue(result, "addAll modified the collection");
         }
         Verify.assertContainsAll(collection, 1, 2, 3);
     }
@@ -128,11 +128,11 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
         boolean result1 = collection1.addAllIterable(FastList.newListWith(1, 2, 3));
         if (collection1.size() == 3)
         {
-            assertFalse("addAllIterable did not modify the collection", result1);
+            assertFalse(result1, "addAllIterable did not modify the collection");
         }
         else
         {
-            assertTrue("addAllIterable modified the collection", result1);
+            assertTrue(result1, "addAllIterable modified the collection");
         }
         Verify.assertContainsAll(collection1, 1, 2, 3);
 
@@ -143,11 +143,11 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
         boolean result2 = collection2.addAllIterable(UnifiedSet.newSetWith(1, 2, 3));
         if (collection1.size() == 3)
         {
-            assertFalse("addAllIterable did not modify the collection", result2);
+            assertFalse(result2, "addAllIterable did not modify the collection");
         }
         else
         {
-            assertTrue("addAllIterable modified the collection", result2);
+            assertTrue(result2, "addAllIterable modified the collection");
         }
         Verify.assertContainsAll(collection2, 1, 2, 3);
     }

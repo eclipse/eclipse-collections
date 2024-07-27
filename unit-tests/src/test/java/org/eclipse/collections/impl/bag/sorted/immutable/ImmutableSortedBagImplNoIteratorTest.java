@@ -17,7 +17,7 @@ import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.factory.SortedBags;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ImmutableSortedBagImplNoIteratorTest extends ImmutableSortedBagImplTest
 {

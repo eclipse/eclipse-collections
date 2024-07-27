@@ -12,9 +12,9 @@ package org.eclipse.collections.impl.block.function;
 
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // This class is not a full test of AddFunction at present, but serves as a
 // holder for the addStringBlockHandlesNulls() test which had been put in the

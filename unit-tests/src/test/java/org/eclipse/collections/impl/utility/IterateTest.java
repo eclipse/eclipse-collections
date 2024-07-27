@@ -102,26 +102,26 @@ import org.eclipse.collections.impl.multimap.set.sorted.TreeSortedSetMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iBag;
 import static org.eclipse.collections.impl.factory.Iterables.iList;
 import static org.eclipse.collections.impl.factory.Iterables.iSet;
 import static org.eclipse.collections.impl.factory.Iterables.mList;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class IterateTest
 {
     private MutableList<Iterable<Integer>> iterables;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.iterables = Lists.mutable.of();
@@ -1298,7 +1298,7 @@ public class IterateTest
             MutableBooleanCollection expected = new BooleanArrayList();
             MutableBooleanCollection actual = Iterate.collectBoolean(each, PrimitiveFunctions.integerIsPositive(), expected);
             assertTrue(expected.containsAll(true, true, true, true, true));
-            assertSame("Target list sent as parameter not returned", expected, actual);
+            assertSame(expected, actual, "Target list sent as parameter not returned");
         });
         assertThrows(IllegalArgumentException.class, () -> Iterate.collectBoolean(null, PrimitiveFunctions.integerIsPositive(), new BooleanArrayList()));
     }
@@ -1320,7 +1320,7 @@ public class IterateTest
             MutableByteCollection expected = new ByteArrayList();
             MutableByteCollection actual = Iterate.collectByte(each, PrimitiveFunctions.unboxIntegerToByte(), expected);
             assertTrue(actual.containsAll((byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5));
-            assertSame("Target list sent as parameter not returned", expected, actual);
+            assertSame(expected, actual, "Target list sent as parameter not returned");
         });
         assertThrows(IllegalArgumentException.class, () -> Iterate.collectByte(null, PrimitiveFunctions.unboxIntegerToByte(), new ByteArrayList()));
     }
@@ -1342,7 +1342,7 @@ public class IterateTest
             MutableCharCollection expected = new CharArrayList();
             MutableCharCollection actual = Iterate.collectChar(each, PrimitiveFunctions.unboxIntegerToChar(), expected);
             assertTrue(actual.containsAll((char) 1, (char) 2, (char) 3, (char) 4, (char) 5));
-            assertSame("Target list sent as parameter not returned", expected, actual);
+            assertSame(expected, actual, "Target list sent as parameter not returned");
         });
         assertThrows(IllegalArgumentException.class, () -> Iterate.collectChar(null, PrimitiveFunctions.unboxIntegerToChar(), new CharArrayList()));
     }
@@ -1364,7 +1364,7 @@ public class IterateTest
             MutableDoubleCollection expected = new DoubleArrayList();
             MutableDoubleCollection actual = Iterate.collectDouble(each, PrimitiveFunctions.unboxIntegerToDouble(), expected);
             assertTrue(actual.containsAll(1.0d, 2.0d, 3.0d, 4.0d, 5.0d));
-            assertSame("Target list sent as parameter not returned", expected, actual);
+            assertSame(expected, actual, "Target list sent as parameter not returned");
         });
         assertThrows(IllegalArgumentException.class, () -> Iterate.collectDouble(null, PrimitiveFunctions.unboxIntegerToDouble(), new DoubleArrayList()));
     }
@@ -1386,7 +1386,7 @@ public class IterateTest
             MutableFloatCollection expected = new FloatArrayList();
             MutableFloatCollection actual = Iterate.collectFloat(each, PrimitiveFunctions.unboxIntegerToFloat(), expected);
             assertTrue(actual.containsAll(1.0f, 2.0f, 3.0f, 4.0f, 5.0f));
-            assertSame("Target list sent as parameter not returned", expected, actual);
+            assertSame(expected, actual, "Target list sent as parameter not returned");
         });
         assertThrows(IllegalArgumentException.class, () -> Iterate.collectFloat(null, PrimitiveFunctions.unboxIntegerToFloat(), new FloatArrayList()));
     }
@@ -1408,7 +1408,7 @@ public class IterateTest
             MutableIntCollection expected = new IntArrayList();
             MutableIntCollection actual = Iterate.collectInt(each, PrimitiveFunctions.unboxIntegerToInt(), expected);
             assertTrue(actual.containsAll(1, 2, 3, 4, 5));
-            assertSame("Target list sent as parameter not returned", expected, actual);
+            assertSame(expected, actual, "Target list sent as parameter not returned");
         });
         assertThrows(IllegalArgumentException.class, () -> Iterate.collectInt(null, PrimitiveFunctions.unboxIntegerToInt(), new IntArrayList()));
     }
@@ -1430,7 +1430,7 @@ public class IterateTest
             MutableLongCollection expected = new LongArrayList();
             MutableLongCollection actual = Iterate.collectLong(each, PrimitiveFunctions.unboxIntegerToLong(), expected);
             assertTrue(actual.containsAll(1L, 2L, 3L, 4L, 5L));
-            assertSame("Target list sent as parameter not returned", expected, actual);
+            assertSame(expected, actual, "Target list sent as parameter not returned");
         });
         assertThrows(IllegalArgumentException.class, () -> Iterate.collectLong(null, PrimitiveFunctions.unboxIntegerToLong(), new LongArrayList()));
     }
@@ -1452,7 +1452,7 @@ public class IterateTest
             MutableShortCollection expected = new ShortArrayList();
             MutableShortCollection actual = Iterate.collectShort(each, PrimitiveFunctions.unboxIntegerToShort(), expected);
             assertTrue(actual.containsAll((short) 1, (short) 2, (short) 3, (short) 4, (short) 5));
-            assertSame("Target list sent as parameter not returned", expected, actual);
+            assertSame(expected, actual, "Target list sent as parameter not returned");
         });
         assertThrows(IllegalArgumentException.class, () -> Iterate.collectShort(null, PrimitiveFunctions.unboxIntegerToShort(), new ShortArrayList()));
     }

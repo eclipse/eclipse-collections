@@ -20,12 +20,12 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class AbstractMutableBiMapValuesTestCase
 {
@@ -144,10 +144,10 @@ public abstract class AbstractMutableBiMapValuesTestCase
         assertThrows(IllegalStateException.class, iterator1::remove);
         iterator1.next();
         iterator1.remove();
-        assertTrue(map1.toString(), HashBiMap.newWithKeysValues(0.0f, "zero").equals(map1)
-                || HashBiMap.newWithKeysValues(1.0f, null).equals(map1));
-        assertTrue(map1.toString(), HashBiMap.newWithKeysValues(0.0f, "zero").inverse().equals(map1.inverse())
-                || HashBiMap.newWithKeysValues(1.0f, null).inverse().equals(map1.inverse()));
+        assertTrue(HashBiMap.newWithKeysValues(0.0f, "zero").equals(map1)
+                || HashBiMap.newWithKeysValues(1.0f, null).equals(map1), map1.toString());
+        assertTrue(HashBiMap.newWithKeysValues(0.0f, "zero").inverse().equals(map1.inverse())
+                || HashBiMap.newWithKeysValues(1.0f, null).inverse().equals(map1.inverse()), map1.toString());
         iterator1.next();
         iterator1.remove();
         assertEquals(HashBiMap.newMap(), map1);
@@ -158,10 +158,10 @@ public abstract class AbstractMutableBiMapValuesTestCase
         assertThrows(IllegalStateException.class, iterator2::remove);
         iterator2.next();
         iterator2.remove();
-        assertTrue(map2.toString(), HashBiMap.newWithKeysValues(0.0f, null).equals(map2)
-                || HashBiMap.newWithKeysValues(9.0f, "nine").equals(map2));
-        assertTrue(map2.toString(), HashBiMap.newWithKeysValues(0.0f, null).inverse().equals(map2.inverse())
-                || HashBiMap.newWithKeysValues(9.0f, "nine").inverse().equals(map2.inverse()));
+        assertTrue(HashBiMap.newWithKeysValues(0.0f, null).equals(map2)
+                || HashBiMap.newWithKeysValues(9.0f, "nine").equals(map2), map2.toString());
+        assertTrue(HashBiMap.newWithKeysValues(0.0f, null).inverse().equals(map2.inverse())
+                || HashBiMap.newWithKeysValues(9.0f, "nine").inverse().equals(map2.inverse()), map2.toString());
         iterator2.next();
         iterator2.remove();
         assertEquals(HashBiMap.newMap(), map2);
@@ -171,8 +171,8 @@ public abstract class AbstractMutableBiMapValuesTestCase
         assertThrows(IllegalStateException.class, iterator3::remove);
         iterator3.next();
         iterator3.remove();
-        assertTrue(map3.toString(), HashBiMap.newWithKeysValues(8.0f, "eight").equals(map3)
-                || HashBiMap.newWithKeysValues(9.0f, null).equals(map3));
+        assertTrue(HashBiMap.newWithKeysValues(8.0f, "eight").equals(map3)
+                || HashBiMap.newWithKeysValues(9.0f, null).equals(map3), map3.toString());
         iterator3.next();
         iterator3.remove();
         assertEquals(HashBiMap.newMap(), map3);

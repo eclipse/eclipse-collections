@@ -50,16 +50,16 @@ import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public abstract class ParallelIterableTestCase
 {
@@ -67,7 +67,7 @@ public abstract class ParallelIterableTestCase
     protected ExecutorService executorService;
     protected int batchSize = 2;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.executorService = Executors.newFixedThreadPool(10);
@@ -75,7 +75,7 @@ public abstract class ParallelIterableTestCase
         assertFalse(Thread.interrupted());
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         this.executorService.shutdownNow();
@@ -892,10 +892,10 @@ public abstract class ParallelIterableTestCase
 
             ParallelIterable<Integer> testCollection = this.newWith(list.toArray(new Integer[]{}));
             assertEquals(
-                    "Batch size: " + this.batchSize,
                     baseline,
                     testCollection.sumOfFloat(roundingSensitiveElementFunction),
-                    1.0e-15d);
+                    1.0e-15,
+                    "Batch size: " + this.batchSize);
         }
     }
 
@@ -923,10 +923,10 @@ public abstract class ParallelIterableTestCase
 
             ParallelIterable<Integer> testCollection = this.newWith(list.toArray(new Integer[]{}));
             assertEquals(
-                    "Batch size: " + this.batchSize,
                     baseline,
                     testCollection.sumOfDouble(roundingSensitiveElementFunction),
-                    1.0e-15d);
+                    1.0e-15d,
+                    "Batch size: " + this.batchSize);
         }
     }
 

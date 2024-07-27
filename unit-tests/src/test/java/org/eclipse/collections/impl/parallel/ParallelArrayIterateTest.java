@@ -19,10 +19,10 @@ import org.eclipse.collections.impl.math.SumCombiner;
 import org.eclipse.collections.impl.math.SumProcedure;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.ArrayIterate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParallelArrayIterateTest
 {

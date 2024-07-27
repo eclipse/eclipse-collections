@@ -19,11 +19,11 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.math.SumProcedure;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DropIterableTest extends AbstractLazyIterableTestCase
 {
@@ -34,7 +34,7 @@ public class DropIterableTest extends AbstractLazyIterableTestCase
     private DropIterable<Integer> sameCountDropIterable;
     private DropIterable<Integer> higherCountDropIterable;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.dropIterable = new DropIterable<>(Interval.oneTo(5), 2);

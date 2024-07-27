@@ -17,11 +17,11 @@ import org.eclipse.collections.impl.block.factory.StringPredicates;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.stack.StackIterableTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UnmodifiableStackTest extends StackIterableTestCase
 {
@@ -29,7 +29,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
     private MutableStack<Integer> unmodifiableStack;
     private MutableStack<String> unmodifiableStackString;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.mutableStack = ArrayStack.newStackFromTopToBottom(1, 2, 3);

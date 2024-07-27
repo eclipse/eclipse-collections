@@ -26,13 +26,13 @@ import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.math.MutableInteger;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Abstract JUnit test for {@link BooleanIterable}s.
@@ -561,10 +561,10 @@ public abstract class AbstractBooleanIterableTestCase
         BooleanIterable iterable = this.newWith(true, false);
         assertTrue("true, false".equals(iterable.makeString())
                 || "false, true".equals(iterable.makeString()));
-        assertTrue(iterable.makeString("/"), "true/false".equals(iterable.makeString("/"))
-                || "false/true".equals(iterable.makeString("/")));
-        assertTrue(iterable.makeString("[", "/", "]"), "[true/false]".equals(iterable.makeString("[", "/", "]"))
-                || "[false/true]".equals(iterable.makeString("[", "/", "]")));
+        assertTrue("true/false".equals(iterable.makeString("/"))
+                || "false/true".equals(iterable.makeString("/")), iterable.makeString("/"));
+        assertTrue("[true/false]".equals(iterable.makeString("[", "/", "]"))
+                || "[false/true]".equals(iterable.makeString("[", "/", "]")), iterable.makeString("[", "/", "]"));
     }
 
     @Test

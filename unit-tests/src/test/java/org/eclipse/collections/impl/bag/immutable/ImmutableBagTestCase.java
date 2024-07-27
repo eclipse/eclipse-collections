@@ -84,16 +84,16 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.StringIterate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 {
@@ -534,7 +534,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         BooleanHashBag target = new BooleanHashBag();
         BooleanHashBag result = this.newBag().collectBoolean("4"::equals, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(2, result.sizeDistinct());
         assertEquals(4, result.occurrencesOf(true));
         assertEquals(6, result.occurrencesOf(false));
@@ -562,7 +562,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         ByteHashBag target = new ByteHashBag();
         ByteHashBag result = this.newBag().collectByte(Byte::parseByte, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
@@ -592,7 +592,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         CharHashBag target = new CharHashBag();
         CharHashBag result = this.newBag().collectChar((CharFunction<String>) string -> string.charAt(0), target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
@@ -622,7 +622,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         DoubleHashBag target = new DoubleHashBag();
         DoubleHashBag result = this.newBag().collectDouble(Double::parseDouble, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
@@ -652,7 +652,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         FloatHashBag target = new FloatHashBag();
         FloatHashBag result = this.newBag().collectFloat(Float::parseFloat, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
@@ -682,7 +682,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         IntHashBag target = new IntHashBag();
         IntHashBag result = this.newBag().collectInt(Integer::parseInt, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {
@@ -712,7 +712,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         LongHashBag target = new LongHashBag();
         LongHashBag result = this.newBag().collectLong(Long::parseLong, target);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
         assertEquals(this.numKeys(), result.sizeDistinct());
         for (int i = 1; i <= this.numKeys(); i++)
         {

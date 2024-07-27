@@ -58,15 +58,15 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapIterateTest
 {
@@ -596,7 +596,7 @@ public class MapIterateTest
         BooleanHashBag target = new BooleanHashBag();
         BooleanHashBag result = MapIterate.collectBoolean(MapIterateTest.newLittleMap(), PrimitiveFunctions.integerIsPositive(), target);
         assertEquals(BooleanHashBag.newBagWith(true, true), result.toBag());
-        assertSame("Target sent as parameter was not returned as result", target, result);
+        assertSame(target, result, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -612,7 +612,7 @@ public class MapIterateTest
         ByteHashBag target = new ByteHashBag();
         ByteHashBag result = MapIterate.collectByte(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToByte(), target);
         assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2), result.toBag());
-        assertSame("Target sent as parameter was not returned as result", target, result);
+        assertSame(target, result, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -628,7 +628,7 @@ public class MapIterateTest
         CharHashBag target = new CharHashBag();
         CharHashBag result = MapIterate.collectChar(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToChar(), target);
         assertEquals(CharHashBag.newBagWith((char) 1, (char) 2), result.toBag());
-        assertSame("Target sent as parameter was not returned as result", target, result);
+        assertSame(target, result, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -644,7 +644,7 @@ public class MapIterateTest
         DoubleHashBag target = new DoubleHashBag();
         DoubleHashBag result = MapIterate.collectDouble(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToDouble(), target);
         assertEquals(DoubleHashBag.newBagWith(1, 2), result.toBag());
-        assertSame("Target sent as parameter was not returned as result", target, result);
+        assertSame(target, result, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -660,7 +660,7 @@ public class MapIterateTest
         FloatHashBag target = new FloatHashBag();
         FloatHashBag result = MapIterate.collectFloat(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToFloat(), target);
         assertEquals(FloatHashBag.newBagWith(1, 2), result.toBag());
-        assertSame("Target sent as parameter was not returned as result", target, result);
+        assertSame(target, result, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -676,7 +676,7 @@ public class MapIterateTest
         IntHashBag target = new IntHashBag();
         IntHashBag result = MapIterate.collectInt(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToInt(), target);
         assertEquals(IntHashBag.newBagWith(1, 2), result.toBag());
-        assertSame("Target sent as parameter was not returned as result", target, result);
+        assertSame(target, result, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -692,7 +692,7 @@ public class MapIterateTest
         LongHashBag target = new LongHashBag();
         LongHashBag result = MapIterate.collectLong(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToLong(), target);
         assertEquals(LongHashBag.newBagWith(1L, 2L), result.toBag());
-        assertSame("Target sent as parameter was not returned as result", target, result);
+        assertSame(target, result, "Target sent as parameter was not returned as result");
     }
 
     @Test
@@ -708,7 +708,7 @@ public class MapIterateTest
         ShortHashBag target = new ShortHashBag();
         MutableShortCollection result = MapIterate.collectShort(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToShort(), target);
         assertEquals(ShortHashBag.newBagWith((short) 1, (short) 2), result.toBag());
-        assertSame("Target sent as parameter was not returned as result", target, result);
+        assertSame(target, result, "Target sent as parameter was not returned as result");
     }
 
     @Test

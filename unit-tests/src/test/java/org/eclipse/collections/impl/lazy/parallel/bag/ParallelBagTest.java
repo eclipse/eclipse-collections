@@ -12,9 +12,9 @@ package org.eclipse.collections.impl.lazy.parallel.bag;
 
 import org.eclipse.collections.api.bag.ParallelBag;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParallelBagTest extends ParallelBagTestCase
 {

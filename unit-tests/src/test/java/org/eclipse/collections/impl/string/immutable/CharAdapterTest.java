@@ -16,11 +16,11 @@ import org.eclipse.collections.api.list.primitive.ImmutableCharList;
 import org.eclipse.collections.impl.factory.Strings;
 import org.eclipse.collections.impl.factory.primitive.CharBags;
 import org.eclipse.collections.impl.list.immutable.primitive.AbstractImmutableCharListTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CharAdapterTest extends AbstractImmutableCharListTestCase
 {

@@ -20,10 +20,10 @@ import org.eclipse.collections.impl.block.factory.Functions2;
 import org.eclipse.collections.impl.block.function.checked.ThrowingFunction2;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Functions2Test
 {

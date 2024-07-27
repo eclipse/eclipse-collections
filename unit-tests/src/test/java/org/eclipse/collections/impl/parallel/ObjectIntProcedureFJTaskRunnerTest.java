@@ -17,16 +17,16 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.block.factory.ObjectIntProcedures;
 import org.eclipse.collections.impl.block.procedure.DoNothingProcedure;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ObjectIntProcedureFJTaskRunnerTest
 {
     private ObjectIntProcedureFJTaskRunner<Integer, ObjectIntProcedure<Integer>> undertest;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.undertest = new ObjectIntProcedureFJTaskRunner<>(

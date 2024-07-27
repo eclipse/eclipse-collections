@@ -13,7 +13,7 @@ package org.eclipse.collections.impl.bimap.mutable;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class HashBiMapInverseTest extends AbstractMutableBiMapTestCase
 {

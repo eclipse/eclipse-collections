@@ -13,9 +13,9 @@ package org.eclipse.collections.impl.stack.immutable.primitive;
 import org.eclipse.collections.api.stack.primitive.ImmutableBooleanStack;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.stack.mutable.primitive.BooleanArrayStack;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * JUnit test for {@link ImmutableBooleanArrayStack}.
