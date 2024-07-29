@@ -14,7 +14,7 @@ import org.eclipse.collections.impl.block.factory.Functions2;
 import org.eclipse.collections.impl.block.factory.ObjectIntProcedures;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BlocksSerializationTest
 {

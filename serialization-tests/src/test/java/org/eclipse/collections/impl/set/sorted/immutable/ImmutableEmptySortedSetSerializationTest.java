@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.set.sorted.immutable;
 
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ImmutableEmptySortedSetSerializationTest
 {

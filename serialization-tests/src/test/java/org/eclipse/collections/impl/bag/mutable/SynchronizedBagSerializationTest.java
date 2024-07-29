@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.bag.mutable;
 
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @since 4.2

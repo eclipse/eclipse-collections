@@ -13,7 +13,7 @@ package org.eclipse.collections.impl.list.mutable;
 import java.util.LinkedList;
 
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class UnmodifiableMutableListSerializationTest
 {

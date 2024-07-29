@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 
 import org.eclipse.collections.impl.factory.OrderedMaps;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class UnmodifiableMutableOrderedMapSerializationTest
 {

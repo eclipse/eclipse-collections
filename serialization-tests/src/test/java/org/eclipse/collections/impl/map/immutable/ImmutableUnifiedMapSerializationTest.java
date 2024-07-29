@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.map.immutable;
 
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ImmutableUnifiedMapSerializationTest
 {
