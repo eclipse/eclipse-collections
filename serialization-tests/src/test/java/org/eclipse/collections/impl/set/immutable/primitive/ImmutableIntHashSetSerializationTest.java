@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.set.immutable.primitive;
 
 import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ImmutableIntHashSetSerializationTest
 {

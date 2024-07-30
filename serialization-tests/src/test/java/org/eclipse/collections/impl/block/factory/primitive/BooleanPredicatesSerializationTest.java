@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.block.factory.primitive;
 
 import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BooleanPredicatesSerializationTest
 {

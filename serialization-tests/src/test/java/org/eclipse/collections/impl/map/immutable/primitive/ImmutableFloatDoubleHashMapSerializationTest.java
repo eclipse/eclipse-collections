@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.map.immutable.primitive;
 
 import org.eclipse.collections.impl.map.mutable.primitive.FloatDoubleHashMap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ImmutableFloatDoubleHashMapSerializationTest
 {

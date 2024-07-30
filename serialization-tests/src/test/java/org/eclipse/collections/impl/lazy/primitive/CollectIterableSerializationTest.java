@@ -19,7 +19,7 @@ import org.eclipse.collections.api.LazyIntIterable;
 import org.eclipse.collections.api.LazyLongIterable;
 import org.eclipse.collections.api.LazyShortIterable;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CollectIterableSerializationTest
 {

@@ -11,7 +11,7 @@
 package org.eclipse.collections.impl.block.function.checked;
 
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CheckedFunction0SerializationTest
 {
