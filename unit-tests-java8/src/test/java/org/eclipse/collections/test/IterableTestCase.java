@@ -44,11 +44,12 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertIterablesEqual;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
@@ -60,65 +61,65 @@ public interface IterableTestCase
 
     boolean allowsDuplicates();
 
-    static void assertEquals(Object o1, Object o2)
+    static void assertIterablesEqual(Object o1, Object o2)
     {
         if (o1 instanceof ListIterable<?> && o2 instanceof LazyIterable<?>)
         {
-            IterableTestCase.assertEquals(o1, ((LazyIterable<?>) o2).toList());
+            assertIterablesEqual(o1, ((LazyIterable<?>) o2).toList());
             return;
         }
         if (o1 instanceof BooleanList && o2 instanceof LazyBooleanIterable)
         {
-            IterableTestCase.assertEquals(o1, ((LazyBooleanIterable) o2).toList());
+            assertIterablesEqual(o1, ((LazyBooleanIterable) o2).toList());
             return;
         }
         if (o1 instanceof ByteList && o2 instanceof LazyByteIterable)
         {
-            IterableTestCase.assertEquals(o1, ((LazyByteIterable) o2).toList());
+            assertIterablesEqual(o1, ((LazyByteIterable) o2).toList());
             return;
         }
         if (o1 instanceof CharList && o2 instanceof LazyCharIterable)
         {
-            IterableTestCase.assertEquals(o1, ((LazyCharIterable) o2).toList());
+            assertIterablesEqual(o1, ((LazyCharIterable) o2).toList());
             return;
         }
         if (o1 instanceof DoubleList && o2 instanceof LazyDoubleIterable)
         {
-            IterableTestCase.assertEquals(o1, ((LazyDoubleIterable) o2).toList());
+            assertIterablesEqual(o1, ((LazyDoubleIterable) o2).toList());
             return;
         }
         if (o1 instanceof FloatList && o2 instanceof LazyFloatIterable)
         {
-            IterableTestCase.assertEquals(o1, ((LazyFloatIterable) o2).toList());
+            assertIterablesEqual(o1, ((LazyFloatIterable) o2).toList());
             return;
         }
         if (o1 instanceof IntList && o2 instanceof LazyIntIterable)
         {
-            IterableTestCase.assertEquals(o1, ((LazyIntIterable) o2).toList());
+            assertIterablesEqual(o1, ((LazyIntIterable) o2).toList());
             return;
         }
         if (o1 instanceof LongList && o2 instanceof LazyLongIterable)
         {
-            IterableTestCase.assertEquals(o1, ((LazyLongIterable) o2).toList());
+            assertIterablesEqual(o1, ((LazyLongIterable) o2).toList());
             return;
         }
         if (o1 instanceof ShortList && o2 instanceof LazyShortIterable)
         {
-            IterableTestCase.assertEquals(o1, ((LazyShortIterable) o2).toList());
+            assertIterablesEqual(o1, ((LazyShortIterable) o2).toList());
             return;
         }
 
-        Assert.assertEquals(o1, o2);
+        assertEquals(o1, o2);
 
-        Assert.assertNotNull("Neither item should equal null", o1);
-        Assert.assertNotNull("Neither item should equal null", o2);
-        assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
-        assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
-        Assert.assertEquals(o1, o1);
-        Assert.assertEquals(o2, o2);
-        Assert.assertEquals(o1, o2);
-        Assert.assertEquals(o2, o1);
-        Assert.assertEquals(o1.hashCode(), o2.hashCode());
+        assertNotNull("Neither item should equal null", o1);
+        assertNotNull("Neither item should equal null", o2);
+        assertIterablesNotEqual("Neither item should equal new Object()", o1.equals(new Object()));
+        assertIterablesNotEqual("Neither item should equal new Object()", o2.equals(new Object()));
+        assertEquals(o1, o1);
+        assertEquals(o2, o2);
+        assertEquals(o1, o2);
+        assertEquals(o2, o1);
+        assertEquals(o1.hashCode(), o2.hashCode());
 
         checkNotSame(o1, o2);
 
@@ -131,7 +132,7 @@ public interface IterableTestCase
                 || o1 instanceof List<?> || o2 instanceof List<?>
                 || o1 instanceof SortedSet<?> || o2 instanceof SortedSet<?>)
         {
-            assertIterablesEqual((Iterable<?>) o1, (Iterable<?>) o2);
+            Verify.assertIterablesEqual((Iterable<?>) o1, (Iterable<?>) o2);
             if (o1 instanceof SortedIterable<?> || o2 instanceof SortedIterable<?>)
             {
                 Comparator<?> comparator1 = ((SortedIterable<?>) o1).comparator();
@@ -144,7 +145,7 @@ public interface IterableTestCase
         }
         else if (o1 instanceof SortedMap<?, ?> || o2 instanceof SortedMap<?, ?>)
         {
-            IterableTestCase.assertEquals(((SortedMap<?, ?>) o1).keySet(), ((SortedMap<?, ?>) o2).keySet());
+            assertIterablesEqual(((SortedMap<?, ?>) o1).keySet(), ((SortedMap<?, ?>) o2).keySet());
         }
     }
 
@@ -166,17 +167,17 @@ public interface IterableTestCase
         assertNotSame(o1, o2);
     }
 
-    static void assertNotEquals(Object o1, Object o2)
+    static void assertIterablesNotEqual(Object o1, Object o2)
     {
-        Assert.assertNotEquals(o1, o2);
-        Assert.assertNotEquals(o2, o1);
+        assertNotEquals(o1, o2);
+        assertNotEquals(o2, o1);
 
-        Assert.assertNotNull("Neither item should equal null", o1);
-        Assert.assertNotNull("Neither item should equal null", o2);
-        Assert.assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
-        Assert.assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
-        Assert.assertEquals(o1, o1);
-        Assert.assertEquals(o2, o2);
+        assertNotNull("Neither item should equal null", o1);
+        assertNotNull("Neither item should equal null", o2);
+        assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
+        assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
+        assertEquals(o1, o1);
+        assertEquals(o2, o2);
     }
 
     static <T> void addAllTo(T[] elements, MutableCollection<T> result)
@@ -203,17 +204,17 @@ public interface IterableTestCase
     {
         Verify.assertEqualsAndHashCode(this.newWith(3, 3, 3, 2, 2, 1), this.newWith(3, 3, 3, 2, 2, 1));
 
-        assertNotEquals(this.newWith(4, 3, 2, 1), this.newWith(3, 2, 1));
-        assertNotEquals(this.newWith(3, 2, 1), this.newWith(4, 3, 2, 1));
+        assertIterablesNotEqual(this.newWith(4, 3, 2, 1), this.newWith(3, 2, 1));
+        assertIterablesNotEqual(this.newWith(3, 2, 1), this.newWith(4, 3, 2, 1));
 
-        assertNotEquals(this.newWith(2, 1), this.newWith(3, 2, 1));
-        assertNotEquals(this.newWith(3, 2, 1), this.newWith(2, 1));
+        assertIterablesNotEqual(this.newWith(2, 1), this.newWith(3, 2, 1));
+        assertIterablesNotEqual(this.newWith(3, 2, 1), this.newWith(2, 1));
 
-        assertNotEquals(this.newWith(3, 3, 2, 1), this.newWith(3, 2, 1));
-        assertNotEquals(this.newWith(3, 2, 1), this.newWith(3, 3, 2, 1));
+        assertIterablesNotEqual(this.newWith(3, 3, 2, 1), this.newWith(3, 2, 1));
+        assertIterablesNotEqual(this.newWith(3, 2, 1), this.newWith(3, 3, 2, 1));
 
-        assertNotEquals(this.newWith(3, 3, 2, 1), this.newWith(3, 2, 2, 1));
-        assertNotEquals(this.newWith(3, 2, 2, 1), this.newWith(3, 3, 2, 1));
+        assertIterablesNotEqual(this.newWith(3, 3, 2, 1), this.newWith(3, 2, 2, 1));
+        assertIterablesNotEqual(this.newWith(3, 2, 2, 1), this.newWith(3, 3, 2, 1));
     }
 
     @Test
@@ -231,7 +232,7 @@ public interface IterableTestCase
         assertTrue(set.add(iterator.next()));
         assertTrue(set.add(iterator.next()));
         assertTrue(set.add(iterator.next()));
-        IterableTestCase.assertEquals(Sets.immutable.with(3, 2, 1), set);
+        assertIterablesEqual(Sets.immutable.with(3, 2, 1), set);
 
         assertThrows(NoSuchElementException.class, () -> this.newWith().iterator().next());
 

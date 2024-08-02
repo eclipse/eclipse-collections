@@ -25,10 +25,10 @@ import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 
@@ -42,10 +42,10 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     {
         RichIterable<ObjectIntPair<Integer>> pairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
                 .collectWithIndex(PrimitiveTuples::pair);
-        Assert.assertEquals(
+        assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(3, 2, 1, 0),
                 pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
     }
@@ -58,19 +58,19 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     {
         RichIterable<ObjectIntPair<Integer>> pairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
                 .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
-        Assert.assertEquals(
+        assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 Lists.mutable.with(3, 2, 1, 0),
                 pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
 
         RichIterable<ObjectIntPair<Integer>> setOfPairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
                 .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
-        Assert.assertEquals(
+        assertEquals(
                 IntSets.mutable.with(0, 1, 2, 3),
                 setOfPairs.collectInt(ObjectIntPair::getTwo, IntSets.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 Sets.mutable.with(3, 2, 1, 0),
                 setOfPairs.collect(ObjectIntPair::getOne, Sets.mutable.empty()));
     }
@@ -78,7 +78,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getFirst()
     {
-        assertEquals(Integer.valueOf(3), this.newWith(3, 3, 3, 2, 2, 1).getFirst());
+        assertIterablesEqual(Integer.valueOf(3), this.newWith(3, 3, 3, 2, 2, 1).getFirst());
     }
 
     @Test
@@ -90,7 +90,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getFirstOptional()
     {
-        assertEquals(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getFirstOptional());
+        assertIterablesEqual(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getFirstOptional());
     }
 
     @Test
@@ -102,7 +102,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getLast()
     {
-        assertEquals(Integer.valueOf(1), this.newWith(3, 3, 3, 2, 2, 1).getLast());
+        assertIterablesEqual(Integer.valueOf(1), this.newWith(3, 3, 3, 2, 2, 1).getLast());
     }
 
     @Test
@@ -114,7 +114,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getLastOptional()
     {
-        assertEquals(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getLastOptional());
+        assertIterablesEqual(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getLastOptional());
     }
 
     @Test
@@ -127,9 +127,9 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     default void OrderedIterable_next()
     {
         Iterator<Integer> iterator = this.newWith(3, 2, 1).iterator();
-        assertEquals(Integer.valueOf(3), iterator.next());
-        assertEquals(Integer.valueOf(2), iterator.next());
-        assertEquals(Integer.valueOf(1), iterator.next());
+        assertIterablesEqual(Integer.valueOf(3), iterator.next());
+        assertIterablesEqual(Integer.valueOf(2), iterator.next());
+        assertIterablesEqual(Integer.valueOf(1), iterator.next());
     }
 
     @Test
@@ -168,7 +168,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     default void OrderedIterable_zipWithIndex()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         Tuples.pair(4, 0),
                         Tuples.pair(4, 1),
@@ -189,7 +189,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         MutableList<Pair<Integer, Integer>> target = Lists.mutable.empty();
         MutableList<Pair<Integer, Integer>> result = iterable.zipWithIndex(target);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         Tuples.pair(4, 0),
                         Tuples.pair(4, 1),

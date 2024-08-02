@@ -19,7 +19,7 @@ import org.eclipse.collections.test.MutableSortedNaturalOrderTestCase;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.addAllTo;
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -46,8 +46,8 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
     @Test
     default void Bag_toStringOfItemToCount()
     {
-        assertEquals("{}", this.newWith().toStringOfItemToCount());
-        assertEquals("{1=1, 2=2, 3=3}", this.newWith(3, 3, 3, 2, 2, 1).toStringOfItemToCount());
+        assertIterablesEqual("{}", this.newWith().toStringOfItemToCount());
+        assertIterablesEqual("{1=1, 2=2, 3=3}", this.newWith(3, 3, 3, 2, 2, 1).toStringOfItemToCount());
     }
 
     @Override
@@ -55,12 +55,12 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
     default void MutableBagIterable_addOccurrences()
     {
         MutableSortedBag<Integer> mutableSortedBag = this.newWith(1, 2, 2, 3, 3, 3);
-        assertEquals(4, mutableSortedBag.addOccurrences(4, 4));
-        assertEquals(TreeBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
-        assertEquals(3, mutableSortedBag.addOccurrences(1, 2));
-        assertEquals(TreeBag.newBagWith(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
-        assertEquals(3, mutableSortedBag.addOccurrences(1, 0));
-        assertEquals(TreeBag.newBagWith(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
+        assertIterablesEqual(4, mutableSortedBag.addOccurrences(4, 4));
+        assertIterablesEqual(TreeBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
+        assertIterablesEqual(3, mutableSortedBag.addOccurrences(1, 2));
+        assertIterablesEqual(TreeBag.newBagWith(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
+        assertIterablesEqual(3, mutableSortedBag.addOccurrences(1, 0));
+        assertIterablesEqual(TreeBag.newBagWith(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
     }
 
     @Override
@@ -69,17 +69,17 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
     {
         MutableSortedBag<Integer> mutableBag = this.newWith(1, 2, 2, 3, 3, 3);
         assertFalse(mutableBag.removeOccurrences(4, 4));
-        assertEquals(TreeBag.newBagWith(1, 2, 2, 3, 3, 3), mutableBag);
+        assertIterablesEqual(TreeBag.newBagWith(1, 2, 2, 3, 3, 3), mutableBag);
         assertFalse(mutableBag.removeOccurrences(3, 0));
-        assertEquals(TreeBag.newBagWith(1, 2, 2, 3, 3, 3), mutableBag);
+        assertIterablesEqual(TreeBag.newBagWith(1, 2, 2, 3, 3, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(1, 2));
-        assertEquals(TreeBag.newBagWith(2, 2, 3, 3, 3), mutableBag);
+        assertIterablesEqual(TreeBag.newBagWith(2, 2, 3, 3, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(3, 2));
-        assertEquals(TreeBag.newBagWith(2, 2, 3), mutableBag);
+        assertIterablesEqual(TreeBag.newBagWith(2, 2, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(2, 1));
-        assertEquals(TreeBag.newBagWith(2, 3), mutableBag);
+        assertIterablesEqual(TreeBag.newBagWith(2, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(2, 2));
-        assertEquals(TreeBag.newBagWith(3), mutableBag);
+        assertIterablesEqual(TreeBag.newBagWith(3), mutableBag);
     }
 
     @Override
@@ -92,7 +92,7 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
             result.add(argument1);
             result.add(argument2);
         }, 0);
-        assertEquals(Lists.immutable.with(1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 3, 0), result);
+        assertIterablesEqual(Lists.immutable.with(1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 3, 0), result);
     }
 
     @Override

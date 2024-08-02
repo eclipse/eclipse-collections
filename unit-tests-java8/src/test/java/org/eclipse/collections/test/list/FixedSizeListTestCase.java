@@ -16,7 +16,7 @@ import java.util.ListIterator;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.test.FixedSizeCollectionTestCase;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.Assert.assertThrows;
 
 public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, ListTestCase
@@ -33,14 +33,14 @@ public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, List
         List<String> list = this.newWith("A", "B", "C", "D");
         List<String> sublist = list.subList(0, 3);
         List<String> sublist2 = sublist.subList(0, 2);
-        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C"), sublist);
+        assertIterablesEqual(Lists.immutable.with("A", "B"), sublist2);
 
         assertThrows(UnsupportedOperationException.class, () -> sublist2.remove(1));
-        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C"), sublist);
+        assertIterablesEqual(Lists.immutable.with("A", "B"), sublist2);
 
-        assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C", "D"), list);
     }
 
     @Override
@@ -49,21 +49,21 @@ public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, List
         List<String> list = this.newWith("A", "B", "C", "D");
         List<String> sublist = list.subList(0, 3);
         List<String> sublist2 = sublist.subList(0, 2);
-        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C"), sublist);
+        assertIterablesEqual(Lists.immutable.with("A", "B"), sublist2);
 
         ListIterator<String> iterator = sublist2.listIterator();
         assertThrows(UnsupportedOperationException.class, () -> iterator.add("X"));
-        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C"), sublist);
+        assertIterablesEqual(Lists.immutable.with("A", "B"), sublist2);
 
         ListIterator<String> iterator2 = sublist2.listIterator();
         iterator2.next();
         assertThrows(UnsupportedOperationException.class, iterator2::remove);
-        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C"), sublist);
+        assertIterablesEqual(Lists.immutable.with("A", "B"), sublist2);
 
-        assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C", "D"), list);
     }
 
     @Override
@@ -72,18 +72,18 @@ public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, List
         List<String> list = this.newWith("A", "B", "C", "D");
         List<String> sublist = list.subList(0, 3);
         List<String> sublist2 = sublist.subList(0, 2);
-        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C"), sublist);
+        assertIterablesEqual(Lists.immutable.with("A", "B"), sublist2);
 
         assertThrows(UnsupportedOperationException.class, () -> sublist2.addAll(Lists.mutable.of("D", "E")));
-        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C"), sublist);
+        assertIterablesEqual(Lists.immutable.with("A", "B"), sublist2);
 
         assertThrows(UnsupportedOperationException.class, sublist2::clear);
-        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C"), sublist);
+        assertIterablesEqual(Lists.immutable.with("A", "B"), sublist2);
 
-        assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C", "D"), list);
     }
 
     @Override
@@ -92,12 +92,12 @@ public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, List
         List<String> list = this.newWith("A", "B", "C", "D", "E", "F");
         List<String> sublist = list.subList(3, 6);
         List<String> sublist2 = sublist.subList(0, 2);
-        assertEquals(Lists.immutable.with("D", "E", "F"), sublist);
-        assertEquals(Lists.immutable.with("D", "E"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("D", "E", "F"), sublist);
+        assertIterablesEqual(Lists.immutable.with("D", "E"), sublist2);
 
         assertThrows(UnsupportedOperationException.class, sublist2::clear);
-        assertEquals(Lists.immutable.with("A", "B", "C", "D", "E", "F"), list);
-        assertEquals(Lists.immutable.with("D", "E", "F"), sublist);
-        assertEquals(Lists.immutable.with("D", "E"), sublist2);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C", "D", "E", "F"), list);
+        assertIterablesEqual(Lists.immutable.with("D", "E", "F"), sublist);
+        assertIterablesEqual(Lists.immutable.with("D", "E"), sublist2);
     }
 }

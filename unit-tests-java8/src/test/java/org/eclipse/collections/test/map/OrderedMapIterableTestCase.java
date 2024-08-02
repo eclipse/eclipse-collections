@@ -19,7 +19,7 @@ import org.eclipse.collections.test.OrderedIterableTestCase;
 import org.eclipse.collections.test.list.TransformsToListTrait;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.Assert.assertThrows;
 
 public interface OrderedMapIterableTestCase extends MapIterableTestCase, OrderedIterableTestCase, TransformsToListTrait
@@ -46,12 +46,12 @@ public interface OrderedMapIterableTestCase extends MapIterableTestCase, Ordered
     default void take()
     {
         OrderedMap<Integer, String> orderedMap = this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three");
-        assertEquals(this.newWithKeysValues(), orderedMap.take(0));
-        assertEquals(this.newWithKeysValues(3, "Three"), orderedMap.take(1));
-        assertEquals(this.newWithKeysValues(3, "Three", 2, "Two"), orderedMap.take(2));
-        assertEquals(this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three"), orderedMap.take(3));
-        assertEquals(this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three"), orderedMap.take(4));
-        assertEquals(this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three"), orderedMap.take(Integer.MAX_VALUE));
+        assertIterablesEqual(this.newWithKeysValues(), orderedMap.take(0));
+        assertIterablesEqual(this.newWithKeysValues(3, "Three"), orderedMap.take(1));
+        assertIterablesEqual(this.newWithKeysValues(3, "Three", 2, "Two"), orderedMap.take(2));
+        assertIterablesEqual(this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three"), orderedMap.take(3));
+        assertIterablesEqual(this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three"), orderedMap.take(4));
+        assertIterablesEqual(this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three"), orderedMap.take(Integer.MAX_VALUE));
         assertThrows(IllegalArgumentException.class, () -> orderedMap.take(-1));
     }
 
@@ -59,12 +59,12 @@ public interface OrderedMapIterableTestCase extends MapIterableTestCase, Ordered
     default void drop()
     {
         OrderedMap<Integer, String> orderedMap = this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three");
-        assertEquals(this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three"), orderedMap.drop(0));
-        assertEquals(this.newWithKeysValues(2, "Two", 1, "Three"), orderedMap.drop(1));
-        assertEquals(this.newWithKeysValues(1, "Three"), orderedMap.drop(2));
-        assertEquals(this.newWithKeysValues(), orderedMap.drop(3));
-        assertEquals(this.newWithKeysValues(), orderedMap.drop(4));
-        assertEquals(this.newWithKeysValues(), orderedMap.drop(Integer.MAX_VALUE));
+        assertIterablesEqual(this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three"), orderedMap.drop(0));
+        assertIterablesEqual(this.newWithKeysValues(2, "Two", 1, "Three"), orderedMap.drop(1));
+        assertIterablesEqual(this.newWithKeysValues(1, "Three"), orderedMap.drop(2));
+        assertIterablesEqual(this.newWithKeysValues(), orderedMap.drop(3));
+        assertIterablesEqual(this.newWithKeysValues(), orderedMap.drop(4));
+        assertIterablesEqual(this.newWithKeysValues(), orderedMap.drop(Integer.MAX_VALUE));
         assertThrows(IllegalArgumentException.class, () -> orderedMap.drop(-1));
     }
 

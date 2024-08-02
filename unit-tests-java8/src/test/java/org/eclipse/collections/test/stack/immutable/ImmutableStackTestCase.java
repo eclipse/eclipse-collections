@@ -19,7 +19,7 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.test.stack.StackIterableTestCase;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 
@@ -43,8 +43,8 @@ public interface ImmutableStackTestCase extends StackIterableTestCase
     {
         ImmutableStack<Integer> immutableStack = this.newWith(5, 1, 4, 2, 3);
         ImmutableStack<Integer> poppedStack = immutableStack.pop();
-        assertEquals(Stacks.immutable.withReversed(1, 4, 2, 3), poppedStack);
-        assertEquals(Stacks.immutable.withReversed(5, 1, 4, 2, 3), immutableStack);
+        assertIterablesEqual(Stacks.immutable.withReversed(1, 4, 2, 3), poppedStack);
+        assertIterablesEqual(Stacks.immutable.withReversed(5, 1, 4, 2, 3), immutableStack);
     }
 
     @Test
@@ -63,9 +63,9 @@ public interface ImmutableStackTestCase extends StackIterableTestCase
         Pair<Integer, ImmutableStack<Integer>> elementAndStack = immutableStack.peekAndPop();
         Integer poppedElement = elementAndStack.getOne();
         ImmutableStack<Integer> poppedStack = elementAndStack.getTwo();
-        assertEquals(5, poppedElement);
-        assertEquals(Stacks.immutable.withReversed(1, 4, 2, 3), poppedStack);
-        assertEquals(Stacks.immutable.withReversed(5, 1, 4, 2, 3), immutableStack);
+        assertIterablesEqual(5, poppedElement);
+        assertIterablesEqual(Stacks.immutable.withReversed(1, 4, 2, 3), poppedStack);
+        assertIterablesEqual(Stacks.immutable.withReversed(5, 1, 4, 2, 3), immutableStack);
     }
 
     @Test

@@ -22,7 +22,7 @@ import org.eclipse.collections.test.collection.mutable.MultiReaderMutableCollect
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -85,7 +85,7 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
 
         // TODO Report to JetBrains
         // assertEquals(MultiReaderMutableCollectionTestCase.super.expectedIterationOrder(), iterationOrder);
-        assertEquals(expectedIterationOrder, iterationOrder);
+        assertIterablesEqual(expectedIterationOrder, iterationOrder);
     }
 
     @Test
@@ -103,7 +103,7 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
                 mutableCollection.add(integer);
             }
 
-            assertEquals(this.getExpectedFiltered(3, 3, 3, 2, 2, 1), mutableCollection);
+            assertIterablesEqual(this.getExpectedFiltered(3, 3, 3, 2, 2, 1), mutableCollection);
             assertFalse(iterator.hasNext());
         });
 

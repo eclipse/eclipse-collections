@@ -21,7 +21,7 @@ import org.eclipse.collections.test.map.immutable.ImmutableMapTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
@@ -69,6 +69,6 @@ public class ImmutableUnifiedMapWithHashingStrategyTest implements ImmutableMapT
     @Test
     public void sanity()
     {
-        assertEquals("ImmutableUnifiedMapWithHashingStrategy", this.newWith(1, 2, 3, 4, 5).getClass().getSimpleName());
+        assertIterablesEqual("ImmutableUnifiedMapWithHashingStrategy", this.newWith(1, 2, 3, 4, 5).getClass().getSimpleName());
     }
 }

@@ -14,10 +14,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
-import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
@@ -43,9 +43,9 @@ public interface MapTestCase
     default void Iterable_toString()
     {
         Map<String, Integer> map = this.newWithKeysValues("Two", 2, "One", 1);
-        Assert.assertEquals("[Two, One]", map.keySet().toString());
-        Assert.assertEquals("[2, 1]", map.values().toString());
-        Assert.assertEquals("[Two=2, One=1]", map.entrySet().toString());
+        assertEquals("[Two, One]", map.keySet().toString());
+        assertEquals("[2, 1]", map.values().toString());
+        assertEquals("[Two=2, One=1]", map.entrySet().toString());
     }
 
     @Test
@@ -53,32 +53,32 @@ public interface MapTestCase
     {
         Map<Object, String> map = this.newWith("Three", "Two", "One");
         map.clear();
-        assertEquals(this.newWith(), map);
+        assertIterablesEqual(this.newWith(), map);
 
         Map<Object, Object> map2 = this.newWith();
         map2.clear();
-        assertEquals(this.newWith(), map2);
+        assertIterablesEqual(this.newWith(), map2);
     }
 
     @Test
     default void Map_remove()
     {
         Map<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
-        assertEquals("Two", map.remove(2));
-        assertEquals(
+        assertIterablesEqual("Two", map.remove(2));
+        assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 1, "One"),
                 map);
 
         if (this.supportsNullKeys())
         {
             assertNull(map.remove(null));
-            assertEquals(
+            assertIterablesEqual(
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map);
 
             Map<Integer, String> map2 = this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
-            assertEquals("Two", map2.remove(null));
-            assertEquals(
+            assertIterablesEqual("Two", map2.remove(null));
+            assertIterablesEqual(
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map2);
         }
@@ -89,25 +89,25 @@ public interface MapTestCase
     {
         Map<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertTrue(map.entrySet().remove(ImmutableEntry.of(2, "Two")));
-        assertEquals(
+        assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 1, "One"),
                 map);
 
         assertFalse(map.entrySet().remove(ImmutableEntry.of(4, "Four")));
-        assertEquals(
+        assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 1, "One"),
                 map);
 
         if (this.supportsNullKeys())
         {
             assertFalse(map.entrySet().remove(null));
-            assertEquals(
+            assertIterablesEqual(
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map);
 
             Map<Integer, String> map2 = this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
             assertTrue(map2.entrySet().remove(ImmutableEntry.of(null, "Two")));
-            assertEquals(
+            assertIterablesEqual(
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map2);
         }
@@ -130,7 +130,7 @@ public interface MapTestCase
                 2, "Two",
                 1, "One");
 
-        assertEquals(expected, map);
+        assertIterablesEqual(expected, map);
 
         //Testing JDK map
         Map<Integer, String> map2 = this.newWithKeysValues(
@@ -141,7 +141,7 @@ public interface MapTestCase
         hashMaptoAdd.put(1, "One");
         map2.putAll(hashMaptoAdd);
 
-        assertEquals(expected, map2);
+        assertIterablesEqual(expected, map2);
     }
 
     @Test
@@ -154,43 +154,43 @@ public interface MapTestCase
             fail("Expected no merge to be performed since the value is null");
             return null;
         }));
-        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
 
         // null remapping function
         assertThrows(NullPointerException.class, () -> map.merge(1, "4", null));
-        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
 
         // new key, remapping function isn't called
         String value1 = map.merge(4, "4", (v1, v2) -> {
             fail("Expected no merge to be performed since the key is not present in the map");
             return null;
         });
-        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4"), map);
-        assertEquals("4", value1);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4"), map);
+        assertIterablesEqual("4", value1);
 
         // exiting key
         String value2 = map.merge(2, "Two", (v1, v2) -> {
-            assertEquals("2", v1);
-            assertEquals("Two", v2);
+            assertIterablesEqual("2", v1);
+            assertIterablesEqual("Two", v2);
             return v1 + v2;
         });
-        Assert.assertEquals("2Two", value2);
-        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 3, "3", 4, "4"), map);
+        assertEquals("2Two", value2);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 3, "3", 4, "4"), map);
 
         // existing key, null returned from remapping function, removes key
         String value3 = map.merge(3, "Three", (v1, v2) -> null);
         assertNull(value3);
-        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4"), map);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4"), map);
 
         // new key, null returned from remapping function
         String value4 = map.merge(5, "5", (v1, v2) -> null);
-        Assert.assertEquals("5", value4);
-        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4", 5, "5"), map);
+        assertEquals("5", value4);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4", 5, "5"), map);
 
         // existing key, remapping function throws exception
         assertThrows(IllegalArgumentException.class, () -> map.merge(4, "Four", (v1, v2) -> {
             throw new IllegalArgumentException();
         }));
-        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4", 5, "5"), map);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2Two", 4, "4", 5, "5"), map);
     }
 }
