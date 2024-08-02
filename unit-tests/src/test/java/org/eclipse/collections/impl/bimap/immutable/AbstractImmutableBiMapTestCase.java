@@ -17,11 +17,11 @@ import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.map.immutable.ImmutableMapIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class AbstractImmutableBiMapTestCase extends ImmutableMapIterableTestCase
 {

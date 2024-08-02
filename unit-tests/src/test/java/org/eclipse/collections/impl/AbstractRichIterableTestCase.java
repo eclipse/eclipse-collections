@@ -171,16 +171,16 @@ import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class AbstractRichIterableTestCase
 {
@@ -502,7 +502,7 @@ public abstract class AbstractRichIterableTestCase
     {
         MutableBooleanCollection target = new BooleanArrayList();
         BooleanIterable result = this.newWith(1, 0).collectBoolean(PrimitiveFunctions.integerIsPositive(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(BooleanBags.mutable.of(true, false), result.toBag());
     }
 
@@ -511,7 +511,7 @@ public abstract class AbstractRichIterableTestCase
     {
         BooleanHashBag target = new BooleanHashBag();
         BooleanHashBag result = this.newWith(1, 0).collectBoolean(PrimitiveFunctions.integerIsPositive(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(BooleanHashBag.newBagWith(true, false), result);
     }
 
@@ -528,7 +528,7 @@ public abstract class AbstractRichIterableTestCase
     {
         MutableByteCollection target = new ByteArrayList();
         ByteIterable result = this.newWith(1, 2, 3, 4).collectByte(PrimitiveFunctions.unboxIntegerToByte(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2, (byte) 3, (byte) 4), result.toBag());
     }
 
@@ -537,7 +537,7 @@ public abstract class AbstractRichIterableTestCase
     {
         ByteHashBag target = new ByteHashBag();
         ByteHashBag result = this.newWith(1, 2, 3, 4).collectByte(PrimitiveFunctions.unboxIntegerToByte(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2, (byte) 3, (byte) 4), result);
     }
 
@@ -554,7 +554,7 @@ public abstract class AbstractRichIterableTestCase
     {
         MutableCharCollection target = new CharArrayList();
         CharIterable result = this.newWith(1, 2, 3, 4).collectChar(PrimitiveFunctions.unboxIntegerToChar(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(CharHashBag.newBagWith((char) 1, (char) 2, (char) 3, (char) 4), result.toBag());
     }
 
@@ -563,7 +563,7 @@ public abstract class AbstractRichIterableTestCase
     {
         CharHashBag target = new CharHashBag();
         CharHashBag result = this.newWith(1, 2, 3, 4).collectChar(PrimitiveFunctions.unboxIntegerToChar(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(CharHashBag.newBagWith((char) 1, (char) 2, (char) 3, (char) 4), result);
     }
 
@@ -580,7 +580,7 @@ public abstract class AbstractRichIterableTestCase
     {
         MutableDoubleCollection target = new DoubleArrayList();
         DoubleIterable result = this.newWith(1, 2, 3, 4).collectDouble(PrimitiveFunctions.unboxIntegerToDouble(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(DoubleHashBag.newBagWith(1.0d, 2.0d, 3.0d, 4.0d), result.toBag());
     }
 
@@ -589,7 +589,7 @@ public abstract class AbstractRichIterableTestCase
     {
         DoubleHashBag target = new DoubleHashBag();
         DoubleHashBag result = this.newWith(1, 2, 3, 4).collectDouble(PrimitiveFunctions.unboxIntegerToDouble(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(DoubleHashBag.newBagWith(1.0d, 2.0d, 3.0d, 4.0d), result);
     }
 
@@ -606,7 +606,7 @@ public abstract class AbstractRichIterableTestCase
     {
         MutableFloatCollection target = new FloatArrayList();
         FloatIterable result = this.newWith(1, 2, 3, 4).collectFloat(PrimitiveFunctions.unboxIntegerToFloat(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(FloatHashBag.newBagWith(1.0f, 2.0f, 3.0f, 4.0f), result.toBag());
     }
 
@@ -615,7 +615,7 @@ public abstract class AbstractRichIterableTestCase
     {
         FloatHashBag target = new FloatHashBag();
         FloatHashBag result = this.newWith(1, 2, 3, 4).collectFloat(PrimitiveFunctions.unboxIntegerToFloat(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(FloatHashBag.newBagWith(1.0f, 2.0f, 3.0f, 4.0f), result);
     }
 
@@ -632,7 +632,7 @@ public abstract class AbstractRichIterableTestCase
     {
         MutableIntCollection target = new IntArrayList();
         IntIterable result = this.newWith(1, 2, 3, 4).collectInt(PrimitiveFunctions.unboxIntegerToInt(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(IntHashBag.newBagWith(1, 2, 3, 4), result.toBag());
     }
 
@@ -641,7 +641,7 @@ public abstract class AbstractRichIterableTestCase
     {
         IntHashBag target = new IntHashBag();
         IntHashBag result = this.newWith(1, 2, 3, 4).collectInt(PrimitiveFunctions.unboxIntegerToInt(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(IntHashBag.newBagWith(1, 2, 3, 4), result);
     }
 
@@ -658,7 +658,7 @@ public abstract class AbstractRichIterableTestCase
     {
         MutableLongCollection target = new LongArrayList();
         LongIterable result = this.newWith(1, 2, 3, 4).collectLong(PrimitiveFunctions.unboxIntegerToLong(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(LongHashBag.newBagWith(1, 2, 3, 4), result.toBag());
     }
 
@@ -667,7 +667,7 @@ public abstract class AbstractRichIterableTestCase
     {
         LongHashBag target = new LongHashBag();
         LongHashBag result = this.newWith(1, 2, 3, 4).collectLong(PrimitiveFunctions.unboxIntegerToLong(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(LongHashBag.newBagWith(1, 2, 3, 4), result);
     }
 
@@ -684,7 +684,7 @@ public abstract class AbstractRichIterableTestCase
     {
         MutableShortCollection target = new ShortArrayList();
         ShortIterable result = this.newWith(1, 2, 3, 4).collectShort(PrimitiveFunctions.unboxIntegerToShort(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(ShortHashBag.newBagWith((short) 1, (short) 2, (short) 3, (short) 4), result.toBag());
     }
 
@@ -693,7 +693,7 @@ public abstract class AbstractRichIterableTestCase
     {
         ShortHashBag target = new ShortHashBag();
         ShortHashBag result = this.newWith(1, 2, 3, 4).collectShort(PrimitiveFunctions.unboxIntegerToShort(), target);
-        assertSame("Target list sent as parameter not returned", target, result);
+        assertSame(target, result, "Target list sent as parameter not returned");
         assertEquals(ShortHashBag.newBagWith((short) 1, (short) 2, (short) 3, (short) 4), result);
     }
 

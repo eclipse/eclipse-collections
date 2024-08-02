@@ -12,17 +12,17 @@ package org.eclipse.collections.impl.lazy;
 
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ChunkIterableTest
 {
     private final StringBuffer buffer = new StringBuffer();
     private ChunkIterable<Integer> undertest;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.undertest = new ChunkIterable<>(FastList.newListWith(1, 2, 3, 4, 5), 2);

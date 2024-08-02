@@ -74,11 +74,11 @@ import org.eclipse.collections.api.tuple.primitive.ShortFloatPair;
 import org.eclipse.collections.api.tuple.primitive.ShortIntPair;
 import org.eclipse.collections.api.tuple.primitive.ShortLongPair;
 import org.eclipse.collections.api.tuple.primitive.ShortObjectPair;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PrimitiveTuplesTest
 {

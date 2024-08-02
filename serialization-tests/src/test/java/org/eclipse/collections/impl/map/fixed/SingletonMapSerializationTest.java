@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.map.fixed;
 
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SingletonMapSerializationTest
 {

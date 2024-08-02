@@ -30,15 +30,15 @@ import org.eclipse.collections.impl.math.MutableInteger;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanCollectionTestCase
 {
@@ -65,7 +65,7 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
         return UnifiedSet.newSetWith(elements);
     }
 
-    @Before
+    @BeforeEach
     public void setup()
     {
         this.emptySet = this.newWith();
@@ -771,14 +771,14 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
         assertEquals("", this.emptySet.makeString("/"));
         assertEquals("false", this.setWithFalse.makeString("/"));
         assertEquals("true", this.setWithTrue.makeString("/"));
-        assertTrue(this.setWithTrueFalse.makeString("/"), "true/false".equals(this.setWithTrueFalse.makeString("/"))
-                || "false/true".equals(this.setWithTrueFalse.makeString("/")));
+        assertTrue("true/false".equals(this.setWithTrueFalse.makeString("/"))
+                || "false/true".equals(this.setWithTrueFalse.makeString("/")), this.setWithTrueFalse.makeString("/"));
 
         assertEquals("[]", this.emptySet.makeString("[", "/", "]"));
         assertEquals("[false]", this.setWithFalse.makeString("[", "/", "]"));
         assertEquals("[true]", this.setWithTrue.makeString("[", "/", "]"));
-        assertTrue(this.setWithTrueFalse.makeString("[", "/", "]"), "[true/false]".equals(this.setWithTrueFalse.makeString("[", "/", "]"))
-                || "[false/true]".equals(this.setWithTrueFalse.makeString("[", "/", "]")));
+        assertTrue("[true/false]".equals(this.setWithTrueFalse.makeString("[", "/", "]"))
+                || "[false/true]".equals(this.setWithTrueFalse.makeString("[", "/", "]")), this.setWithTrueFalse.makeString("[", "/", "]"));
     }
 
     @Override

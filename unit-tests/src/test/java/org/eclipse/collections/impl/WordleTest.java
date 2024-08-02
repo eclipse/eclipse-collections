@@ -22,7 +22,7 @@ import org.eclipse.collections.impl.factory.primitive.CharBags;
 import org.eclipse.collections.impl.string.immutable.CharAdapter;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class WordleTest
 {

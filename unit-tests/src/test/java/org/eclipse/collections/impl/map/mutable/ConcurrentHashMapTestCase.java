@@ -20,23 +20,23 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.parallel.ParallelIterate;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
 {
     protected ExecutorService executor;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.executor = Executors.newFixedThreadPool(20);
     }
 
-    @After
+    @AfterEach
     public void tearDown()
     {
         this.executor.shutdown();
@@ -68,9 +68,9 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
         ParallelIterate.forEach(list, each -> map.updateValue(each % 50, () -> 0, integer -> integer + 1), 1, this.executor);
         assertEquals(Interval.zeroTo(49).toSet(), map.keySet());
         assertEquals(
-                HashBag.newBag(map.values()).toStringOfItemToCount(),
                 FastList.newList(Collections.nCopies(50, 2)),
-                FastList.newList(map.values()));
+                FastList.newList(map.values()),
+                HashBag.newBag(map.values()).toStringOfItemToCount());
     }
 
     @Override
@@ -102,8 +102,8 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
         }, "test"), 1, this.executor);
         assertEquals(Interval.zeroTo(99).toSet(), map.keySet());
         assertEquals(
-                HashBag.newBag(map.values()).toStringOfItemToCount(),
                 FastList.newList(Collections.nCopies(100, 2)),
-                FastList.newList(map.values()));
+                FastList.newList(map.values()),
+                HashBag.newBag(map.values()).toStringOfItemToCount());
     }
 }

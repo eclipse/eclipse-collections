@@ -16,9 +16,9 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.impl.list.mutable.ArrayListAdapter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UnmodifiableMutableListParallelListIterableTest extends ParallelListIterableTestCase
 {

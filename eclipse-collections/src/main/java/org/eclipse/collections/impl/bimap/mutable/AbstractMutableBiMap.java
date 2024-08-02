@@ -268,11 +268,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
-        Set<? extends Map.Entry<? extends K, ? extends V>> entries = map.entrySet();
-        for (Map.Entry<? extends K, ? extends V> entry : entries)
-        {
-            this.put(entry.getKey(), entry.getValue());
-        }
+        map.forEach(this::put);
     }
 
     @Override

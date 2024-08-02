@@ -14,9 +14,9 @@ import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MultiReaderFastListParallelListIterableTest extends ParallelListIterableTestCase
 {

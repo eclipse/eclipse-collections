@@ -12,14 +12,14 @@ package org.eclipse.collections.impl.multimap;
 
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class MutableMultimapSerializationTestCase
         extends MultimapSerializationTestCase
 {
     private MutableMultimap<String, String> mutableMultimap;
 
-    @Before
+    @BeforeEach
     public void buildUnderTest()
     {
         this.mutableMultimap = this.createEmpty();

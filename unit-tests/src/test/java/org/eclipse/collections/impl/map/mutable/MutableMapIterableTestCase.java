@@ -40,17 +40,17 @@ import org.eclipse.collections.impl.test.domain.Key;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iMap;
 import static org.eclipse.collections.impl.factory.Iterables.mList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Abstract JUnit TestCase for {@link MutableMapIterable}s.
@@ -789,9 +789,9 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
         Iterate.forEach(list, each -> map.updateValue(each % 1000, () -> 0, integer -> integer + 1));
         assertEquals(Interval.zeroTo(999).toSet(), map.keySet());
         assertEquals(
-                HashBag.newBag(map.values()).toStringOfItemToCount(),
                 FastList.newList(Collections.nCopies(1000, 2)),
-                FastList.newList(map.values()));
+                FastList.newList(map.values()),
+                HashBag.newBag(map.values()).toStringOfItemToCount());
     }
 
     @Test
@@ -819,8 +819,8 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
         }, "test"));
         assertEquals(Interval.zeroTo(999).toSet(), map.keySet());
         assertEquals(
-                HashBag.newBag(map.values()).toStringOfItemToCount(),
                 FastList.newList(Collections.nCopies(1000, 2)),
-                FastList.newList(map.values()));
+                FastList.newList(map.values()),
+                HashBag.newBag(map.values()).toStringOfItemToCount());
     }
 }

@@ -78,16 +78,16 @@ import org.eclipse.collections.impl.stack.mutable.primitive.ShortArrayStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class StackIterableTestCase
         extends AbstractRichIterableTestCase
@@ -306,7 +306,7 @@ public abstract class StackIterableTestCase
         StackIterable<String> stack = this.newStackFromTopToBottom("true", "nah", "TrUe", "false");
         BooleanHashSet result = stack.collectBoolean(Boolean::parseBoolean, target);
         assertEquals(BooleanHashSet.newSetWith(true, false, true, false), result);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
     }
 
     @Override
@@ -325,7 +325,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackFromTopToBottom(1, 2, 3);
         ByteHashSet result = stack.collectByte(PrimitiveFunctions.unboxIntegerToByte(), target);
         assertEquals(ByteHashSet.newSetWith((byte) 1, (byte) 2, (byte) 3), result);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
     }
 
     @Override
@@ -344,7 +344,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackFromTopToBottom(1, 2, 3);
         CharHashSet result = stack.collectChar(PrimitiveFunctions.unboxIntegerToChar(), target);
         assertEquals(CharHashSet.newSetWith((char) 1, (char) 2, (char) 3), result);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
     }
 
     @Override
@@ -363,7 +363,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackFromTopToBottom(1, 2, 3);
         DoubleHashSet result = stack.collectDouble(PrimitiveFunctions.unboxIntegerToDouble(), target);
         assertEquals(DoubleHashSet.newSetWith(1, 2, 3), result);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
     }
 
     @Override
@@ -382,7 +382,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackFromTopToBottom(1, 2, 3);
         FloatHashSet result = stack.collectFloat(PrimitiveFunctions.unboxIntegerToFloat(), target);
         assertEquals(FloatHashSet.newSetWith(1, 2, 3), result);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
     }
 
     @Override
@@ -401,7 +401,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackFromTopToBottom(1, 2, 3);
         IntHashSet result = stack.collectInt(PrimitiveFunctions.unboxIntegerToInt(), target);
         assertEquals(IntHashSet.newSetWith(1, 2, 3), result);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
     }
 
     @Override
@@ -420,7 +420,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackFromTopToBottom(1, 2, 3);
         LongHashSet result = stack.collectLong(PrimitiveFunctions.unboxIntegerToLong(), target);
         assertEquals(LongHashSet.newSetWith(1, 2, 3), result);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
     }
 
     @Override
@@ -439,7 +439,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackFromTopToBottom(1, 2, 3);
         ShortHashSet result = stack.collectShort(PrimitiveFunctions.unboxIntegerToShort(), target);
         assertEquals(ShortHashSet.newSetWith((short) 1, (short) 2, (short) 3), result);
-        assertSame("Target sent as parameter not returned", target, result);
+        assertSame(target, result, "Target sent as parameter not returned");
     }
 
     @Override

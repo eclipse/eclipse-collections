@@ -20,11 +20,11 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TakeIterableTest extends AbstractLazyIterableTestCase
 {
@@ -34,7 +34,7 @@ public class TakeIterableTest extends AbstractLazyIterableTestCase
     private TakeIterable<Integer> sameCountTakeIterable;
     private TakeIterable<Integer> higherCountTakeIterable;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         this.takeIterable = new TakeIterable<>(Interval.oneTo(5), 2);

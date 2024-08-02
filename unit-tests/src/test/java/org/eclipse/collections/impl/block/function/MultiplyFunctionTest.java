@@ -11,9 +11,9 @@
 package org.eclipse.collections.impl.block.function;
 
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MultiplyFunctionTest
 {

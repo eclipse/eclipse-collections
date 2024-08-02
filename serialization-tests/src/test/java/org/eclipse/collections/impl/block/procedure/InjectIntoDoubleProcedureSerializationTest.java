@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.block.procedure;
 
 import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoDoubleProcedure;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class InjectIntoDoubleProcedureSerializationTest
 {

@@ -13,7 +13,7 @@ package org.eclipse.collections.impl.multimap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public abstract class MultimapSerializationTestCase
 {

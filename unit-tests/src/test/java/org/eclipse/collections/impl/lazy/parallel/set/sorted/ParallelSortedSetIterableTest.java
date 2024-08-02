@@ -13,9 +13,9 @@ package org.eclipse.collections.impl.lazy.parallel.set.sorted;
 import org.eclipse.collections.api.set.sorted.ParallelSortedSetIterable;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParallelSortedSetIterableTest extends NonParallelSortedSetIterableTestCase
 {
