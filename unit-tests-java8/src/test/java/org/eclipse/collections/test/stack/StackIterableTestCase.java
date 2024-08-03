@@ -22,7 +22,7 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.test.OrderedIterableWithDuplicatesTestCase;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
@@ -56,7 +56,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
         RichIterable<Integer> integers = this.newWith(3, 3, 3, 2, 2, 1);
         MutableStack<Integer> result = Stacks.mutable.with();
         integers.forEach(Procedures.cast(result::push));
-        assertEquals(this.newWith(1, 2, 2, 3, 3, 3), result);
+        assertIterablesEqual(this.newWith(1, 2, 2, 3, 3, 3), result);
     }
 
     @Override
@@ -66,7 +66,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
         MutableStack<Integer> result = Stacks.mutable.with();
         iterable.tap(result::push).forEach(Procedures.noop());
-        assertEquals(this.newWith(1, 2, 2, 3, 3, 3), result);
+        assertIterablesEqual(this.newWith(1, 2, 2, 3, 3, 3), result);
 
         this.newWith().tap(Procedures.cast(each -> fail()));
     }
@@ -77,7 +77,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
         MutableStack<Integer> result = Stacks.mutable.with();
         iterable.forEachWith((argument1, argument2) -> result.push(argument1 + argument2), 10);
-        assertEquals(this.getExpectedFiltered(11, 12, 12, 13, 13, 13), result);
+        assertIterablesEqual(this.getExpectedFiltered(11, 12, 12, 13, 13, 13), result);
     }
 
     @Override
@@ -97,7 +97,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     @Test
     default void StackIterable_peek()
     {
-        assertEquals(Integer.valueOf(5), this.newWith(5, 1, 4, 2, 3).peek());
+        assertIterablesEqual(Integer.valueOf(5), this.newWith(5, 1, 4, 2, 3).peek());
     }
 
     @Test
@@ -109,11 +109,11 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     @Test
     default void StackIterable_peekAt()
     {
-        assertEquals(Integer.valueOf(5), this.newWith(5, 1, 4, 2, 3).peekAt(0));
-        assertEquals(Integer.valueOf(1), this.newWith(5, 1, 4, 2, 3).peekAt(1));
-        assertEquals(Integer.valueOf(4), this.newWith(5, 1, 4, 2, 3).peekAt(2));
-        assertEquals(Integer.valueOf(2), this.newWith(5, 1, 4, 2, 3).peekAt(3));
-        assertEquals(Integer.valueOf(3), this.newWith(5, 1, 4, 2, 3).peekAt(4));
+        assertIterablesEqual(Integer.valueOf(5), this.newWith(5, 1, 4, 2, 3).peekAt(0));
+        assertIterablesEqual(Integer.valueOf(1), this.newWith(5, 1, 4, 2, 3).peekAt(1));
+        assertIterablesEqual(Integer.valueOf(4), this.newWith(5, 1, 4, 2, 3).peekAt(2));
+        assertIterablesEqual(Integer.valueOf(2), this.newWith(5, 1, 4, 2, 3).peekAt(3));
+        assertIterablesEqual(Integer.valueOf(3), this.newWith(5, 1, 4, 2, 3).peekAt(4));
     }
 
     @Test

@@ -21,7 +21,7 @@ import org.eclipse.collections.test.collection.mutable.MultiReaderMutableCollect
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -79,7 +79,7 @@ public class MultiReaderUnifiedSetTest implements MutableSetTestCase, MultiReade
                 iterationOrder.add(iterator.next());
             }
         });
-        assertEquals(this.expectedIterationOrder(), iterationOrder);
+        assertIterablesEqual(this.expectedIterationOrder(), iterationOrder);
     }
 
     @Test
@@ -97,7 +97,7 @@ public class MultiReaderUnifiedSetTest implements MutableSetTestCase, MultiReade
                 mutableCollection.add(integer);
             }
 
-            assertEquals(this.getExpectedFiltered(3, 2, 1), mutableCollection);
+            assertIterablesEqual(this.getExpectedFiltered(3, 2, 1), mutableCollection);
             assertFalse(iterator.hasNext());
         });
     }

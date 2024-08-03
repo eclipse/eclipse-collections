@@ -22,7 +22,7 @@ import org.eclipse.collections.test.UnorderedIterableTestCase;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
 
@@ -92,7 +92,7 @@ public interface UnsortedMapIterableTestCase
 
         MutableList<Integer> target = Lists.mutable.empty();
         iterable.each(target::add);
-        assertEquals(
+        assertIterablesEqual(
                 target,
                 iterable.toList());
     }

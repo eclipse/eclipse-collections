@@ -18,7 +18,7 @@ import org.eclipse.collections.test.collection.immutable.ImmutableCollectionUniq
 import org.eclipse.collections.test.set.UnsortedSetIterableTestCase;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
@@ -42,13 +42,13 @@ public interface ImmutableSetTestCase extends ImmutableCollectionUniqueTestCase,
         ImmutableCollection<Integer> immutableCollection = this.newWith(3, 2, 1);
         ImmutableCollection<Integer> newWith = immutableCollection.newWith(4);
 
-        assertEquals(this.newWith(3, 2, 1, 4), newWith);
+        assertIterablesEqual(this.newWith(3, 2, 1, 4), newWith);
         assertNotSame(immutableCollection, newWith);
         assertThat(newWith, instanceOf(ImmutableCollection.class));
 
         ImmutableCollection<Integer> newWith2 = newWith.newWith(4);
 
-        assertEquals(this.newWith(3, 2, 1, 4), newWith2);
+        assertIterablesEqual(this.newWith(3, 2, 1, 4), newWith2);
         assertSame(newWith, newWith2);
     }
 

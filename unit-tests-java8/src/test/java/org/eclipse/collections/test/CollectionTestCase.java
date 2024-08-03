@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertContains;
 import static org.eclipse.collections.impl.test.Verify.assertNotContains;
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -71,15 +71,15 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
         assertTrue(collection.contains(3));
         assertTrue(collection.contains(2));
         assertTrue(collection.contains(1));
-        assertEquals(this.allowsDuplicates(), collection.add(4));
+        assertIterablesEqual(this.allowsDuplicates(), collection.add(4));
         assertTrue(collection.contains(4));
         if (this.allowsDuplicates())
         {
-            assertEquals(this.newWith(3, 2, 1, 4, 4), collection);
+            assertIterablesEqual(this.newWith(3, 2, 1, 4, 4), collection);
         }
         else
         {
-            assertEquals(this.newWith(3, 2, 1, 4), collection);
+            assertIterablesEqual(this.newWith(3, 2, 1, 4), collection);
         }
 
         Collection<Integer> collection2 = this.newWith();
@@ -88,7 +88,7 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
             assertFalse(collection2.contains(each));
             assertTrue(collection2.add(each));
             assertTrue(collection2.contains(each));
-            assertEquals(this.allowsDuplicates(), collection2.add(each));
+            assertIterablesEqual(this.allowsDuplicates(), collection2.add(each));
             assertTrue(collection2.contains(each));
         }
     }
@@ -99,13 +99,13 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
         {
             Collection<Integer> collection = this.newWith(3, 2, 1);
             assertFalse(collection.remove(4));
-            assertEquals(this.newWith(3, 2, 1), collection);
+            assertIterablesEqual(this.newWith(3, 2, 1), collection);
             assertTrue(collection.remove(3));
-            assertEquals(this.newWith(2, 1), collection);
+            assertIterablesEqual(this.newWith(2, 1), collection);
             assertTrue(collection.remove(2));
-            assertEquals(this.newWith(1), collection);
+            assertIterablesEqual(this.newWith(1), collection);
             assertTrue(collection.remove(1));
-            assertEquals(this.newWith(), collection);
+            assertIterablesEqual(this.newWith(), collection);
         }
 
         if (this.allowsDuplicates())
@@ -114,22 +114,22 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
             assertTrue(collection.remove(3));
             assertTrue(collection.remove(2));
             assertTrue(collection.remove(1));
-            assertEquals(this.newWith(3, 3, 2), collection);
+            assertIterablesEqual(this.newWith(3, 3, 2), collection);
 
             assertTrue(collection.remove(3));
             assertTrue(collection.remove(2));
             assertFalse(collection.remove(1));
-            assertEquals(this.newWith(3), collection);
+            assertIterablesEqual(this.newWith(3), collection);
 
             assertTrue(collection.remove(3));
             assertFalse(collection.remove(2));
             assertFalse(collection.remove(1));
-            assertEquals(this.newWith(), collection);
+            assertIterablesEqual(this.newWith(), collection);
 
             assertFalse(collection.remove(3));
             assertFalse(collection.remove(2));
             assertFalse(collection.remove(1));
-            assertEquals(this.newWith(), collection);
+            assertIterablesEqual(this.newWith(), collection);
         }
 
         Integer[] array = COLLISIONS.toArray(new Integer[]{});
@@ -164,19 +164,19 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
         {
             Collection<Integer> collection = this.newWith(3, 2, 1);
             assertTrue(collection.removeAll(Lists.mutable.with(1, 2, 4)));
-            assertEquals(this.newWith(3), collection);
+            assertIterablesEqual(this.newWith(3), collection);
 
             Collection<Integer> collection2 = this.newWith(3, 2, 1);
             assertFalse(collection2.removeAll(Lists.mutable.with(5, 4)));
-            assertEquals(this.newWith(3, 2, 1), collection2);
+            assertIterablesEqual(this.newWith(3, 2, 1), collection2);
 
             Collection<Integer> collection3 = this.newWith(3, 2, 1);
             assertFalse(collection2.removeAll(Lists.mutable.with()));
-            assertEquals(this.newWith(3, 2, 1), collection3);
+            assertIterablesEqual(this.newWith(3, 2, 1), collection3);
 
             Collection<Integer> collection4 = this.newWith(5, 4, 3, 2, 1);
             assertTrue(collection4.removeAll(Lists.mutable.with(4, 2)));
-            assertEquals(this.newWith(5, 3, 1), collection4);
+            assertIterablesEqual(this.newWith(5, 3, 1), collection4);
         }
 
         if (this.allowsDuplicates())
@@ -184,7 +184,7 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
             Collection<Integer> collection = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
             assertTrue(collection.removeAll(Lists.mutable.with(3, 1)));
             assertFalse(collection.removeAll(Lists.mutable.with(3, 1)));
-            assertEquals(this.newWith(4, 4, 4, 4, 2, 2), collection);
+            assertIterablesEqual(this.newWith(4, 4, 4, 4, 2, 2), collection);
         }
     }
 

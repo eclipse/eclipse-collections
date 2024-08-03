@@ -25,7 +25,7 @@ import org.eclipse.collections.test.collection.mutable.MultiReaderMutableCollect
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -62,7 +62,7 @@ public class MultiReaderFastListTest implements MutableListTestCase, MultiReader
                 iterationOrder.add(iterator.next());
             }
         });
-        assertEquals(this.expectedIterationOrder(), iterationOrder);
+        assertIterablesEqual(this.expectedIterationOrder(), iterationOrder);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class MultiReaderFastListTest implements MutableListTestCase, MultiReader
                 mutableCollection.add(integer);
             }
 
-            assertEquals(this.getExpectedFiltered(3, 3, 3, 2, 2, 1), mutableCollection);
+            assertIterablesEqual(this.getExpectedFiltered(3, 3, 3, 2, 2, 1), mutableCollection);
             assertFalse(iterator.hasNext());
         });
     }
@@ -134,16 +134,16 @@ public class MultiReaderFastListTest implements MutableListTestCase, MultiReader
             List<String> sublist2 = sublist.subList(0, 2);
             ListIterator<String> iterator = sublist2.listIterator();
             iterator.add("X");
-            assertEquals(Lists.immutable.with("X", "A", "B", "C"), sublist);
-            assertEquals(Lists.immutable.with("X", "A", "B"), sublist2);
+            assertIterablesEqual(Lists.immutable.with("X", "A", "B", "C"), sublist);
+            assertIterablesEqual(Lists.immutable.with("X", "A", "B"), sublist2);
 
             ListIterator<String> iterator2 = sublist2.listIterator();
             iterator2.next();
             iterator2.remove();
-            assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
-            assertEquals(Lists.immutable.with("A", "B"), sublist2);
+            assertIterablesEqual(Lists.immutable.with("A", "B", "C"), sublist);
+            assertIterablesEqual(Lists.immutable.with("A", "B"), sublist2);
         });
 
-        assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
+        assertIterablesEqual(Lists.immutable.with("A", "B", "C", "D"), list);
     }
 }

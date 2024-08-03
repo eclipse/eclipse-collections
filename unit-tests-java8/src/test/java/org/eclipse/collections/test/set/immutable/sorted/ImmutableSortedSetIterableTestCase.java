@@ -15,7 +15,7 @@ import org.eclipse.collections.test.collection.immutable.ImmutableCollectionTest
 import org.eclipse.collections.test.set.sorted.SortedSetIterableTestCase;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
@@ -33,12 +33,12 @@ public interface ImmutableSortedSetIterableTestCase extends SortedSetIterableTes
         ImmutableSortedSet<Integer> immutableCollection = this.newWith(3, 2, 1);
         ImmutableSortedSet<Integer> newWith = immutableCollection.newWith(4);
 
-        assertEquals(this.newWith(4, 3, 2, 1).castToSortedSet(), newWith.castToSortedSet());
+        assertIterablesEqual(this.newWith(4, 3, 2, 1).castToSortedSet(), newWith.castToSortedSet());
         assertNotSame(immutableCollection, newWith);
         assertThat(newWith, instanceOf(ImmutableSortedSet.class));
 
         ImmutableSortedSet<Integer> newWith2 = newWith.newWith(4);
         assertSame(newWith, newWith2);
-        assertEquals(this.newWith(4, 3, 2, 1).castToSortedSet(), newWith2.castToSortedSet());
+        assertIterablesEqual(this.newWith(4, 3, 2, 1).castToSortedSet(), newWith2.castToSortedSet());
     }
 }

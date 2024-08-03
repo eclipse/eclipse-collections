@@ -16,10 +16,10 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
 import org.eclipse.collections.test.map.MapIterableTestCase;
-import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.Assert.assertEquals;
 
 public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTestCase
 {
@@ -47,22 +47,22 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
         RichIterableUniqueTestCase.super.Iterable_toString();
 
         BiMap<String, Integer> bimap = this.newWithKeysValues("Two", 2, "One", 1);
-        Assert.assertEquals("{Two=2, One=1}", bimap.toString());
-        Assert.assertEquals("[Two, One]", bimap.keysView().toString());
-        Assert.assertEquals("[2, 1]", bimap.valuesView().toString());
-        Assert.assertEquals("[Two:2, One:1]", bimap.keyValuesView().toString());
-        Assert.assertEquals("[2, 1]", bimap.asLazy().toString());
+        assertEquals("{Two=2, One=1}", bimap.toString());
+        assertEquals("[Two, One]", bimap.keysView().toString());
+        assertEquals("[2, 1]", bimap.valuesView().toString());
+        assertEquals("[Two:2, One:1]", bimap.keyValuesView().toString());
+        assertEquals("[2, 1]", bimap.asLazy().toString());
 
-        Assert.assertEquals(
+        assertEquals(
                 "{10=4, 9=4, 8=4, 7=4, 6=3, 5=3, 4=3, 3=2, 2=2, 1=1}",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toString());
-        Assert.assertEquals(
+        assertEquals(
                 "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keysView().toString());
-        Assert.assertEquals(
+        assertEquals(
                 "[4, 4, 4, 4, 3, 3, 3, 2, 2, 1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).valuesView().toString());
-        Assert.assertEquals(
+        assertEquals(
                 "[10:4, 9:4, 8:4, 7:4, 6:3, 5:3, 4:3, 3:2, 2:2, 1:1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keyValuesView().toString());
     }
@@ -73,20 +73,20 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
         BiMap<Object, Integer> bimap = this.newWith(3, 2, 1);
         MutableCollection<Integer> forEachKeyValue = this.newMutableForFilter();
         bimap.forEachKeyValue((key, value) -> forEachKeyValue.add(value + 10));
-        assertEquals(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEachKeyValue);
+        assertIterablesEqual(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEachKeyValue);
 
         BiMap<Integer, String> bimap2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         MutableCollection<String> forEachKeyValue2 = this.newMutableForFilter();
         bimap2.forEachKeyValue((key, value) -> forEachKeyValue2.add(key + value));
-        assertEquals(this.newMutableForFilter("3Three", "2Two", "1One"), forEachKeyValue2);
+        assertIterablesEqual(this.newMutableForFilter("3Three", "2Two", "1One"), forEachKeyValue2);
 
         MutableCollection<Integer> forEachValue = this.newMutableForFilter();
         bimap.forEachValue(value -> forEachValue.add(value + 10));
-        assertEquals(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEachValue);
+        assertIterablesEqual(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEachValue);
 
         MutableCollection<Object> forEachKey = this.newMutableForFilter();
         bimap2.forEachKey(key -> forEachKey.add(key + 1));
-        assertEquals(this.newMutableForFilter(4, 3, 2), forEachKey);
+        assertIterablesEqual(this.newMutableForFilter(4, 3, 2), forEachKey);
     }
 
     @Override
@@ -95,7 +95,7 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
         BiMap<String, Integer> bimap = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
         BiMap<Integer, String> result = bimap.flipUniqueValues();
 
-        assertEquals(
+        assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 result);
     }
@@ -113,14 +113,14 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
         {
             MutableList<Integer> target = Lists.mutable.empty();
             iterable.forEachValue(target::add);
-            assertEquals(
+            assertIterablesEqual(
                     target,
                     iterable.toList());
         }
 
         MutableList<Integer> target = Lists.mutable.empty();
         iterable.forEachKeyValue((key, value) -> target.add(value));
-        assertEquals(
+        assertIterablesEqual(
                 target,
                 iterable.toList());
     }
@@ -131,11 +131,11 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
         BiMap<Object, Integer> bimap = this.newWith(3, 2, 1);
         MutableCollection<Integer> forEach = this.newMutableForFilter();
         bimap.forEach((key, value) -> forEach.add(value + 10));
-        assertEquals(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEach);
+        assertIterablesEqual(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEach);
 
         BiMap<Integer, String> bimap2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         MutableCollection<String> forEach2 = this.newMutableForFilter();
         bimap2.forEach((key, value) -> forEach2.add(key + value));
-        assertEquals(this.newMutableForFilter("3Three", "2Two", "1One"), forEach2);
+        assertIterablesEqual(this.newMutableForFilter("3Three", "2Two", "1One"), forEach2);
     }
 }

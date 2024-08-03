@@ -20,11 +20,11 @@ import org.eclipse.collections.impl.map.mutable.UnmodifiableMutableMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
@@ -121,31 +121,31 @@ public class UnmodifiableMutableMapTest implements MutableMapTestCase, FixedSize
     public void MutableMapIterable_getIfAbsentPut()
     {
         MutableMapIterable<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
-        assertEquals(3, map.getIfAbsentPut("3", () -> {
+        assertIterablesEqual(3, map.getIfAbsentPut("3", () -> {
             throw new AssertionError();
         }));
-        assertEquals(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
+        assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
 
         assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut("4", () -> {
             throw new AssertionError();
         }));
 
-        assertEquals(3, map.getIfAbsentPut("3", 4));
-        assertEquals(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
+        assertIterablesEqual(3, map.getIfAbsentPut("3", 4));
+        assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
 
         assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut("4", 4));
 
-        assertEquals(3, map.getIfAbsentPutWithKey("3", key -> {
+        assertIterablesEqual(3, map.getIfAbsentPutWithKey("3", key -> {
             throw new AssertionError();
         }));
-        assertEquals(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
+        assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
 
         assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWithKey("4", key -> {
             throw new AssertionError();
         }));
 
-        assertEquals(3, map.getIfAbsentPutWith("3", x -> x + 10, 4));
-        assertEquals(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
+        assertIterablesEqual(3, map.getIfAbsentPutWith("3", x -> x + 10, 4));
+        assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
 
         assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith("4", x -> x + 10, 4));
     }
@@ -189,6 +189,6 @@ public class UnmodifiableMutableMapTest implements MutableMapTestCase, FixedSize
             fail("Expected lambda not to be called on unmodifiable map");
             return null;
         }));
-        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
     }
 }

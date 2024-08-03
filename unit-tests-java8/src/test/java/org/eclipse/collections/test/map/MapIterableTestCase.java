@@ -24,10 +24,10 @@ import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.test.RichIterableWithDuplicatesTestCase;
-import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
@@ -56,29 +56,29 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     {
         MapIterable<Object, String> original = this.newWith("Three", "Two", "One");
         MapIterable<Object, String> copy = SerializeTestHelper.serializeDeserialize(original);
-        assertEquals(copy, original);
+        assertIterablesEqual(copy, original);
     }
 
     @Override
     default void Iterable_toString()
     {
         MapIterable<String, Integer> map = this.newWithKeysValues("Two", 2, "One", 1);
-        Assert.assertEquals("{Two=2, One=1}", map.toString());
-        Assert.assertEquals("[Two, One]", map.keysView().toString());
-        Assert.assertEquals("[2, 1]", map.valuesView().toString());
-        Assert.assertEquals("[Two:2, One:1]", map.keyValuesView().toString());
-        Assert.assertEquals("[2, 1]", map.asLazy().toString());
+        assertEquals("{Two=2, One=1}", map.toString());
+        assertEquals("[Two, One]", map.keysView().toString());
+        assertEquals("[2, 1]", map.valuesView().toString());
+        assertEquals("[Two:2, One:1]", map.keyValuesView().toString());
+        assertEquals("[2, 1]", map.asLazy().toString());
 
-        Assert.assertEquals(
+        assertEquals(
                 "{10=4, 9=4, 8=4, 7=4, 6=3, 5=3, 4=3, 3=2, 2=2, 1=1}",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toString());
-        Assert.assertEquals(
+        assertEquals(
                 "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keysView().toString());
-        Assert.assertEquals(
+        assertEquals(
                 "[4, 4, 4, 4, 3, 3, 3, 2, 2, 1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).valuesView().toString());
-        Assert.assertEquals(
+        assertEquals(
                 "[10:4, 9:4, 8:4, 7:4, 6:3, 5:3, 4:3, 3:2, 2:2, 1:1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keyValuesView().toString());
     }
@@ -87,11 +87,11 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     default void MapIterable_ifPresentApply()
     {
         MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
-        assertEquals(13, map.ifPresentApply("Three", x -> x + 10));
-        assertEquals(12, map.ifPresentApply("Two", x -> x + 10));
-        assertEquals(11, map.ifPresentApply("One", x -> x + 10));
+        assertIterablesEqual(13, map.ifPresentApply("Three", x -> x + 10));
+        assertIterablesEqual(12, map.ifPresentApply("Two", x -> x + 10));
+        assertIterablesEqual(11, map.ifPresentApply("One", x -> x + 10));
         assertNull(map.ifPresentApply("Zero", x -> x + 10));
-        assertEquals(map, this.newWithKeysValues("Three", 3, "Two", 2, "One", 1));
+        assertIterablesEqual(map, this.newWithKeysValues("Three", 3, "Two", 2, "One", 1));
     }
 
     @Test
@@ -118,30 +118,30 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<String, Long> expected =
                 Maps.mutable.with(lessThanTen, Interval.fromTo(1, 9).sumOfInt(Integer::intValue),
                         greaterOrEqualsToTen, Interval.fromTo(10, 20).sumOfInt(Integer::intValue));
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test
     default void MapIterable_getIfAbsent()
     {
         MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
-        assertEquals(3, map.getIfAbsentValue("Three", 0));
-        assertEquals(2, map.getIfAbsentValue("Two", 0));
-        assertEquals(1, map.getIfAbsentValue("One", 0));
-        assertEquals(0, map.getIfAbsentValue("Zero", 0));
-        assertEquals(map, this.newWithKeysValues("Three", 3, "Two", 2, "One", 1));
+        assertIterablesEqual(3, map.getIfAbsentValue("Three", 0));
+        assertIterablesEqual(2, map.getIfAbsentValue("Two", 0));
+        assertIterablesEqual(1, map.getIfAbsentValue("One", 0));
+        assertIterablesEqual(0, map.getIfAbsentValue("Zero", 0));
+        assertIterablesEqual(map, this.newWithKeysValues("Three", 3, "Two", 2, "One", 1));
 
-        assertEquals(3, map.getIfAbsent("Three", () -> 0));
-        assertEquals(2, map.getIfAbsent("Two", () -> 0));
-        assertEquals(1, map.getIfAbsent("One", () -> 0));
-        assertEquals(0, map.getIfAbsent("Zero", () -> 0));
-        assertEquals(map, this.newWithKeysValues("Three", 3, "Two", 2, "One", 1));
+        assertIterablesEqual(3, map.getIfAbsent("Three", () -> 0));
+        assertIterablesEqual(2, map.getIfAbsent("Two", () -> 0));
+        assertIterablesEqual(1, map.getIfAbsent("One", () -> 0));
+        assertIterablesEqual(0, map.getIfAbsent("Zero", () -> 0));
+        assertIterablesEqual(map, this.newWithKeysValues("Three", 3, "Two", 2, "One", 1));
 
-        assertEquals(3, map.getIfAbsentWith("Three", x -> x + 1, 13));
-        assertEquals(2, map.getIfAbsentWith("Two", x -> x + 1, 12));
-        assertEquals(1, map.getIfAbsentWith("One", x -> x + 1, 11));
-        assertEquals(11, map.getIfAbsentWith("Zero", x -> x + 1, 10));
-        assertEquals(map, this.newWithKeysValues("Three", 3, "Two", 2, "One", 1));
+        assertIterablesEqual(3, map.getIfAbsentWith("Three", x -> x + 1, 13));
+        assertIterablesEqual(2, map.getIfAbsentWith("Two", x -> x + 1, 12));
+        assertIterablesEqual(1, map.getIfAbsentWith("One", x -> x + 1, 11));
+        assertIterablesEqual(11, map.getIfAbsentWith("Zero", x -> x + 1, 10));
+        assertIterablesEqual(map, this.newWithKeysValues("Three", 3, "Two", 2, "One", 1));
     }
 
     @Test
@@ -168,20 +168,20 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<Object, Integer> map = this.newWith(3, 3, 3, 2, 2, 1);
         MutableCollection<Integer> forEachKeyValue = this.newMutableForFilter();
         map.forEachKeyValue((key, value) -> forEachKeyValue.add(value + 10));
-        assertEquals(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEachKeyValue);
+        assertIterablesEqual(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEachKeyValue);
 
         MapIterable<Integer, String> map2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three");
         MutableCollection<String> forEachKeyValue2 = this.newMutableForFilter();
         map2.forEachKeyValue((key, value) -> forEachKeyValue2.add(key + value));
-        assertEquals(this.newMutableForFilter("3Three", "2Two", "1Three"), forEachKeyValue2);
+        assertIterablesEqual(this.newMutableForFilter("3Three", "2Two", "1Three"), forEachKeyValue2);
 
         MutableCollection<Integer> forEachValue = this.newMutableForFilter();
         map.forEachValue(value -> forEachValue.add(value + 10));
-        assertEquals(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEachValue);
+        assertIterablesEqual(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEachValue);
 
         MutableCollection<Object> forEachKey = this.newMutableForFilter();
         map2.forEachKey(key -> forEachKey.add(key + 1));
-        assertEquals(this.newMutableForFilter(4, 3, 2), forEachKey);
+        assertIterablesEqual(this.newMutableForFilter(4, 3, 2), forEachKey);
     }
 
     @Test
@@ -189,11 +189,11 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     {
         MapIterable<Integer, Integer> map1 = this.newWithKeysValues(3, 3, 2, 2, 1, 1);
         Integer sum1 = map1.injectIntoKeyValue(0, (sum, key, value) -> sum + key + value);
-        assertEquals(12, sum1);
+        assertIterablesEqual(12, sum1);
 
         MutableMap<Integer, String> result = map1.injectIntoKeyValue(Maps.mutable.empty(),
                 (map, key, value) -> map.withKeyValue(key, value.toString()));
-        assertEquals(Maps.mutable.with(3, "3", 2, "2", 1, "1"), result);
+        assertIterablesEqual(Maps.mutable.with(3, "3", 2, "2", 1, "1"), result);
     }
 
     @Test
@@ -203,7 +203,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<Integer, String> result = map.flipUniqueValues();
 
         // TODO: Set up methods like getExpectedTransformed, but for maps.
-        assertEquals(
+        assertIterablesEqual(
                 UnifiedMap.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 result);
 
@@ -219,7 +219,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         MapIterable<Integer, String> actual = map.collect((key, value) -> Tuples.pair(key + 1, key + value));
         // TODO: Use IterableTestCase.assertEquals instead, after setting up methods like getExpectedTransformed, but for maps.
-        Assert.assertEquals(Maps.mutable.with(4, "3Three", 3, "2Two", 2, "1One"), actual);
+        assertEquals(Maps.mutable.with(4, "3Three", 3, "2Two", 2, "1One"), actual);
     }
 
     @Test
@@ -227,7 +227,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     {
         MapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         MapIterable<Integer, String> actual = map.collectValues((argument1, argument2) -> new StringBuilder(argument2).reverse().toString());
-        assertEquals(
+        assertIterablesEqual(
                 this.newWithKeysValues(3, "eerhT", 2, "owT", 1, "enO"),
                 actual);
     }
@@ -238,11 +238,11 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         MapIterable<Object, Object> expected = this.newWithKeysValues(2, "Two", 1, "One");
 
-        assertEquals(
+        assertIterablesEqual(
                 expected,
                 map.select((key1, value1) -> key1.equals(1) || value1.equals("Two")));
 
-        assertEquals(
+        assertIterablesEqual(
                 expected,
                 map.reject((key, value) -> !key.equals(1) && !value.equals("Two")));
     }
@@ -251,8 +251,8 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     default void MapIterable_detect()
     {
         MapIterable<String, String> map = this.newWithKeysValues("1", "One", "2", "Two", "3", "Three");
-        assertEquals(Tuples.pair("1", "One"), map.detect((key1, value1) -> "1".equals(key1)));
-        assertEquals(Tuples.pair("2", "Two"), map.detect((key1, value1) -> "Two".equals(value1)));
+        assertIterablesEqual(Tuples.pair("1", "One"), map.detect((key1, value1) -> "1".equals(key1)));
+        assertIterablesEqual(Tuples.pair("2", "Two"), map.detect((key1, value1) -> "Two".equals(value1)));
         assertNull(map.detect((ignored1, ignored2) -> false));
 
         MutableCollection<Integer> expectedIterationOrder = this.expectedIterationOrder();
@@ -262,15 +262,15 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
             detectIterationOrder.add(value);
             return false;
         });
-        assertEquals(expectedIterationOrder, detectIterationOrder);
+        assertIterablesEqual(expectedIterationOrder, detectIterationOrder);
     }
 
     @Test
     default void MapIterable_detectOptional()
     {
         MapIterable<String, String> map = this.newWithKeysValues("1", "One", "2", "Two", "3", "Three");
-        assertEquals(Optional.of(Tuples.pair("1", "One")), map.detectOptional((key1, value1) -> "1".equals(key1)));
-        assertEquals(Optional.of(Tuples.pair("2", "Two")), map.detectOptional((key1, value1) -> "Two".equals(value1)));
+        assertIterablesEqual(Optional.of(Tuples.pair("1", "One")), map.detectOptional((key1, value1) -> "1".equals(key1)));
+        assertIterablesEqual(Optional.of(Tuples.pair("2", "Two")), map.detectOptional((key1, value1) -> "Two".equals(value1)));
         assertSame(Optional.empty(), map.detectOptional((ignored1, ignored2) -> false));
 
         MutableCollection<Integer> expectedIterationOrder = this.expectedIterationOrder();
@@ -280,7 +280,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
             detectOptionalIterationOrder.add(value);
             return false;
         });
-        assertEquals(expectedIterationOrder, detectOptionalIterationOrder);
+        assertIterablesEqual(expectedIterationOrder, detectOptionalIterationOrder);
     }
 
     @Test
@@ -326,11 +326,11 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<Object, Integer> map = this.newWith(3, 3, 3, 2, 2, 1);
         MutableCollection<Integer> forEach = this.newMutableForFilter();
         map.forEach((key, value) -> forEach.add(value + 10));
-        assertEquals(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEach);
+        assertIterablesEqual(this.newMutableForFilter(13, 13, 13, 12, 12, 11), forEach);
 
         MapIterable<Integer, String> map2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "Three");
         MutableCollection<String> forEach2 = this.newMutableForFilter();
         map2.forEach((key, value) -> forEach2.add(key + value));
-        assertEquals(this.newMutableForFilter("3Three", "2Two", "1Three"), forEach2);
+        assertIterablesEqual(this.newMutableForFilter("3Three", "2Two", "1Three"), forEach2);
     }
 }

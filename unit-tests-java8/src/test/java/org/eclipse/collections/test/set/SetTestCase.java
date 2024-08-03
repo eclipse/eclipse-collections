@@ -21,7 +21,7 @@ import org.eclipse.collections.test.CollectionTestCase;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertPostSerializedEqualsAndHashCode;
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.isOneOf;
@@ -89,7 +89,7 @@ public interface SetTestCase extends CollectionTestCase
             assertTrue(mutableSet.add(integer));
         }
 
-        assertEquals(iterable, mutableSet);
+        assertIterablesEqual(iterable, mutableSet);
         assertFalse(iterator.hasNext());
     }
 
