@@ -10,12 +10,7 @@
 
 package org.eclipse.collections.api;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.RandomAccess;
-import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -34,9 +29,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
-import org.eclipse.collections.api.factory.list.ImmutableListFactory;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.set.ImmutableSet;
