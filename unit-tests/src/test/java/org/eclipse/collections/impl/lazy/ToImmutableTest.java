@@ -23,8 +23,8 @@ import org.eclipse.collections.impl.list.Interval;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class ToImmutableTest {
-
+public class ToImmutableTest
+{
     @Test
     public void perfIssueInLazyIterableToImmutableList()
     {
