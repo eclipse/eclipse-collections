@@ -20,6 +20,7 @@ import org.eclipse.collections.test.stack.StackIterableTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -63,7 +64,7 @@ public interface ImmutableStackTestCase extends StackIterableTestCase
         Pair<Integer, ImmutableStack<Integer>> elementAndStack = immutableStack.peekAndPop();
         Integer poppedElement = elementAndStack.getOne();
         ImmutableStack<Integer> poppedStack = elementAndStack.getTwo();
-        assertIterablesEqual(5, poppedElement);
+        assertEquals(Integer.valueOf(5), poppedElement);
         assertIterablesEqual(Stacks.immutable.withReversed(1, 4, 2, 3), poppedStack);
         assertIterablesEqual(Stacks.immutable.withReversed(5, 1, 4, 2, 3), immutableStack);
     }

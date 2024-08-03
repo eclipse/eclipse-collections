@@ -28,6 +28,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.isOneOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, UnorderedIterableTestCase
@@ -78,7 +79,7 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
         RichIterable<Integer> integers = this.newWith(3, 2, 1);
         Integer first = integers.getFirst();
         assertThat(first, isOneOf(3, 2, 1));
-        assertIterablesEqual(integers.iterator().next(), first);
+        assertEquals(integers.iterator().next(), first);
     }
 
     @Override

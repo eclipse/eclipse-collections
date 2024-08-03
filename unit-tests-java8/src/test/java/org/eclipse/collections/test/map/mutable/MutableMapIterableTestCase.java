@@ -26,6 +26,7 @@ import org.eclipse.collections.test.map.MapIterableTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -63,7 +64,7 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTest
     default void MutableMapIterable_removeKey()
     {
         MutableMapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
-        assertIterablesEqual("Two", map.removeKey(2));
+        assertEquals("Two", map.removeKey(2));
         assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 1, "One"),
                 map);
@@ -76,7 +77,7 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTest
                     map);
 
             MutableMapIterable<Integer, String> map2 = this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
-            assertIterablesEqual("Two", map2.removeKey(null));
+            assertEquals("Two", map2.removeKey(null));
             assertIterablesEqual(
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map2);
@@ -145,35 +146,35 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTest
     default void MutableMapIterable_getIfAbsentPut()
     {
         MutableMapIterable<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
-        assertIterablesEqual(3, map.getIfAbsentPut("3", () -> {
+        assertEquals(Integer.valueOf(3), map.getIfAbsentPut("3", () -> {
             throw new AssertionError();
         }));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
 
-        assertIterablesEqual(4, map.getIfAbsentPut("4", () -> 4));
+        assertEquals(Integer.valueOf(4), map.getIfAbsentPut("4", () -> 4));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1, "4", 4), map);
 
         MutableMapIterable<String, Integer> map2 = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
-        assertIterablesEqual(3, map2.getIfAbsentPut("3", 4));
+        assertEquals(Integer.valueOf(3), map2.getIfAbsentPut("3", 4));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map2);
 
-        assertIterablesEqual(4, map2.getIfAbsentPut("4", 4));
+        assertEquals(Integer.valueOf(4), map2.getIfAbsentPut("4", 4));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1, "4", 4), map2);
 
         MutableMapIterable<String, Integer> map3 = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
-        assertIterablesEqual(3, map3.getIfAbsentPutWithKey("3", key -> {
+        assertEquals(Integer.valueOf(3), map3.getIfAbsentPutWithKey("3", key -> {
             throw new AssertionError();
         }));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map3);
 
-        assertIterablesEqual(14, map3.getIfAbsentPutWithKey("4", key -> Integer.parseInt(key) + 10));
+        assertEquals(Integer.valueOf(14), map3.getIfAbsentPutWithKey("4", key -> Integer.parseInt(key) + 10));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1, "4", 14), map3);
 
         MutableMapIterable<String, Integer> map4 = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
-        assertIterablesEqual(3, map4.getIfAbsentPutWith("3", x -> x + 10, 4));
+        assertEquals(Integer.valueOf(3), map4.getIfAbsentPutWith("3", x -> x + 10, 4));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map4);
 
-        assertIterablesEqual(14, map4.getIfAbsentPutWith("4", x -> x + 10, 4));
+        assertEquals(Integer.valueOf(14), map4.getIfAbsentPutWith("4", x -> x + 10, 4));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1, "4", 14), map4);
     }
 
@@ -196,7 +197,7 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTest
 
         MutableMapIterable<Integer, Integer> map3 = this.newWithKeysValues();
         Function2<Integer, String, Integer> increment = (integer, parameter) -> {
-            assertIterablesEqual("test", parameter);
+            assertEquals("test", parameter);
             return integer + 1;
         };
 

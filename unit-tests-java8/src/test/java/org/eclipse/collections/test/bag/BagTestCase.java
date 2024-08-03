@@ -109,9 +109,9 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
     default void Bag_detectWithOccurrences()
     {
         Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(3, bag.detectWithOccurrences((object, value) -> object.equals(3) && value == 3));
-        assertIterablesEqual(3, bag.detectWithOccurrences((object, value) -> object.equals(3)));
-        assertIterablesEqual(1, bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 1));
+        assertEquals(Integer.valueOf(3), bag.detectWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        assertEquals(Integer.valueOf(3), bag.detectWithOccurrences((object, value) -> object.equals(3)));
+        assertEquals(Integer.valueOf(1), bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 1));
         assertNull(bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 10));
         assertNull(bag.detectWithOccurrences((object, value) -> object.equals(10) && value == 5));
         assertNull(bag.detectWithOccurrences((object, value) -> object.equals(100)));
@@ -121,23 +121,23 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
     default void Bag_sizeDistinct()
     {
         Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(3, bag.sizeDistinct());
+        assertEquals(3, bag.sizeDistinct());
     }
 
     @Test
     default void Bag_occurrencesOf()
     {
         Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(0, bag.occurrencesOf(0));
-        assertIterablesEqual(1, bag.occurrencesOf(1));
-        assertIterablesEqual(2, bag.occurrencesOf(2));
-        assertIterablesEqual(3, bag.occurrencesOf(3));
+        assertEquals(0, bag.occurrencesOf(0));
+        assertEquals(1, bag.occurrencesOf(1));
+        assertEquals(2, bag.occurrencesOf(2));
+        assertEquals(3, bag.occurrencesOf(3));
     }
 
     @Test
     default void Bag_toStringOfItemToCount()
     {
-        assertIterablesEqual("{}", this.newWith().toStringOfItemToCount());
+        assertEquals("{}", this.newWith().toStringOfItemToCount());
         assertThat(this.newWith(2, 2, 1).toStringOfItemToCount(), isOneOf("{1=1, 2=2}", "{2=2, 1=1}"));
     }
 

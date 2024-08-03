@@ -19,7 +19,7 @@ import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.test.IterableTestCase;
 import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -38,25 +38,25 @@ public class TreeBagNoComparatorTest implements MutableSortedBagNoComparatorTest
     @Test
     public void OrderedIterable_getFirstOptional()
     {
-        assertIterablesEqual(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getFirstOptional());
+        assertEquals(Optional.of(1), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getFirstOptional());
     }
 
     @Override
     @Test
     public void OrderedIterable_getLastOptional()
     {
-        assertIterablesEqual(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getLastOptional());
+        assertEquals(Optional.of(3), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getLastOptional());
     }
 
     @Override
     @Test
     public void RichIterable_minByOptional_maxByOptional()
     {
-        assertIterablesEqual(Optional.of("ca"), this.newWith("ed", "da", "ca", "bc", "ab").minByOptional(string -> string.charAt(string.length() - 1)));
+        assertEquals(Optional.of("ca"), this.newWith("ed", "da", "ca", "bc", "ab").minByOptional(string -> string.charAt(string.length() - 1)));
         assertSame(Optional.empty(), this.<String>newWith().minByOptional(string -> string.charAt(string.length() - 1)));
         assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).minByOptional(Objects::isNull));
 
-        assertIterablesEqual(Optional.of("cz"), this.newWith("ew", "dz", "cz", "bx", "ay").maxByOptional(string -> string.charAt(string.length() - 1)));
+        assertEquals(Optional.of("cz"), this.newWith("ew", "dz", "cz", "bx", "ay").maxByOptional(string -> string.charAt(string.length() - 1)));
         assertSame(Optional.empty(), this.<String>newWith().maxByOptional(string -> string.charAt(string.length() - 1)));
         assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).maxByOptional(Objects::isNull));
     }

@@ -27,7 +27,6 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -78,7 +77,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getFirst()
     {
-        assertIterablesEqual(Integer.valueOf(3), this.newWith(3, 3, 3, 2, 2, 1).getFirst());
+        assertEquals(Integer.valueOf(3), this.newWith(3, 3, 3, 2, 2, 1).getFirst());
     }
 
     @Test
@@ -90,7 +89,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getFirstOptional()
     {
-        assertIterablesEqual(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getFirstOptional());
+        assertEquals(Optional.of(3), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getFirstOptional());
     }
 
     @Test
@@ -102,7 +101,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getLast()
     {
-        assertIterablesEqual(Integer.valueOf(1), this.newWith(3, 3, 3, 2, 2, 1).getLast());
+        assertEquals(Integer.valueOf(1), this.newWith(3, 3, 3, 2, 2, 1).getLast());
     }
 
     @Test
@@ -114,7 +113,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     @Test
     default void OrderedIterable_getLastOptional()
     {
-        assertIterablesEqual(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getLastOptional());
+        assertEquals(Optional.of(1), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getLastOptional());
     }
 
     @Test
@@ -127,9 +126,9 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     default void OrderedIterable_next()
     {
         Iterator<Integer> iterator = this.newWith(3, 2, 1).iterator();
-        assertIterablesEqual(Integer.valueOf(3), iterator.next());
-        assertIterablesEqual(Integer.valueOf(2), iterator.next());
-        assertIterablesEqual(Integer.valueOf(1), iterator.next());
+        assertEquals(Integer.valueOf(3), iterator.next());
+        assertEquals(Integer.valueOf(2), iterator.next());
+        assertEquals(Integer.valueOf(1), iterator.next());
     }
 
     @Test

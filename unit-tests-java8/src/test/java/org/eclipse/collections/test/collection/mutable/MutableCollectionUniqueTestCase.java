@@ -19,6 +19,7 @@ import org.eclipse.collections.test.RichIterableUniqueTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -72,6 +73,6 @@ public interface MutableCollectionUniqueTestCase extends MutableCollectionTestCa
     default void MutableCollection_injectIntoWith()
     {
         MutableCollection<Integer> collection = this.newWith(4, 3, 2, 1);
-        assertIterablesEqual(Integer.valueOf(51), collection.injectIntoWith(1, (argument1, argument2, argument3) -> argument1 + argument2 + argument3, 10));
+        assertEquals(Integer.valueOf(51), collection.injectIntoWith(1, (argument1, argument2, argument3) -> argument1 + argument2 + argument3, 10));
     }
 }

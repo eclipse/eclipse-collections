@@ -65,7 +65,7 @@ public interface MapTestCase
     default void Map_remove()
     {
         Map<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
-        assertIterablesEqual("Two", map.remove(2));
+        assertEquals("Two", map.remove(2));
         assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 1, "One"),
                 map);
@@ -78,7 +78,7 @@ public interface MapTestCase
                     map);
 
             Map<Integer, String> map2 = this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
-            assertIterablesEqual("Two", map2.remove(null));
+            assertEquals("Two", map2.remove(null));
             assertIterablesEqual(
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map2);
@@ -122,7 +122,7 @@ public interface MapTestCase
         assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, "Four"),
                 map);
-        assertIterablesEqual("Three", map.put(3, "Three3"));
+        assertEquals("Three", map.put(3, "Three3"));
         assertIterablesEqual(
                 this.newWithKeysValues(3, "Three3", 2, "Two", 1, "One", 4, "Four"),
                 map);
@@ -145,7 +145,7 @@ public interface MapTestCase
             assertIterablesEqual(
                     this.newWithKeysValues(3, "Three3", 2, "Two", 1, "One", 4, "Four", 5, "Five", null, "Six"),
                     map);
-            assertIterablesEqual("Six", map.put(null, "Seven"));
+            assertEquals("Six", map.put(null, "Seven"));
             assertIterablesEqual(
                     this.newWithKeysValues(3, "Three3", 2, "Two", 1, "One", 4, "Four", 5, "Five", null, "Seven"),
                     map);
@@ -218,12 +218,12 @@ public interface MapTestCase
             return null;
         });
         assertIterablesEqual(this.newWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4"), map);
-        assertIterablesEqual("4", value1);
+        assertEquals("4", value1);
 
         // existing key
         String value2 = map.merge(2, "Two", (v1, v2) -> {
-            assertIterablesEqual("2", v1);
-            assertIterablesEqual("Two", v2);
+            assertEquals("2", v1);
+            assertEquals("Two", v2);
             return v1 + v2;
         });
         assertEquals("2Two", value2);

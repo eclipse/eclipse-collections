@@ -57,9 +57,9 @@ public interface ListTestCase extends CollectionTestCase
     default void List_get()
     {
         List<Integer> list = this.newWith(1, 2, 3);
-        assertIterablesEqual(Integer.valueOf(1), list.get(0));
-        assertIterablesEqual(Integer.valueOf(2), list.get(1));
-        assertIterablesEqual(Integer.valueOf(3), list.get(2));
+        assertEquals(Integer.valueOf(1), list.get(0));
+        assertEquals(Integer.valueOf(2), list.get(1));
+        assertEquals(Integer.valueOf(3), list.get(2));
     }
 
     @Test
@@ -78,11 +78,11 @@ public interface ListTestCase extends CollectionTestCase
     default void List_set()
     {
         List<Integer> list = this.newWith(3, 2, 1);
-        assertIterablesEqual(3, list.set(0, 4));
+        assertEquals(Integer.valueOf(3), list.set(0, 4));
         assertIterablesEqual(this.newWith(4, 2, 1), list);
-        assertIterablesEqual(2, list.set(1, 4));
+        assertEquals(Integer.valueOf(2), list.set(1, 4));
         assertIterablesEqual(this.newWith(4, 4, 1), list);
-        assertIterablesEqual(1, list.set(2, 4));
+        assertEquals(Integer.valueOf(1), list.set(2, 4));
         assertIterablesEqual(this.newWith(4, 4, 4), list);
 
         assertThrows(IndexOutOfBoundsException.class, () -> list.set(-1, 4));
@@ -105,7 +105,7 @@ public interface ListTestCase extends CollectionTestCase
         assertIterablesEqual(Lists.immutable.with("A", "B", "X", "C"), sublist);
         assertIterablesEqual(Lists.immutable.with("A", "B", "X"), sublist2);
 
-        assertIterablesEqual("B", sublist2.remove(1));
+        assertEquals("B", sublist2.remove(1));
         assertIterablesEqual(Lists.immutable.with("A", "X", "C"), sublist);
         assertIterablesEqual(Lists.immutable.with("A", "X"), sublist2);
 

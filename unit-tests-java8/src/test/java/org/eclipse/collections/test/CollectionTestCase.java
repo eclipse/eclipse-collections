@@ -24,6 +24,7 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -71,7 +72,7 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
         assertTrue(collection.contains(3));
         assertTrue(collection.contains(2));
         assertTrue(collection.contains(1));
-        assertIterablesEqual(this.allowsDuplicates(), collection.add(4));
+        assertEquals(this.allowsDuplicates(), collection.add(4));
         assertTrue(collection.contains(4));
         if (this.allowsDuplicates())
         {
@@ -88,7 +89,7 @@ public interface CollectionTestCase extends IterableTestCase, CollisionsTestCase
             assertFalse(collection2.contains(each));
             assertTrue(collection2.add(each));
             assertTrue(collection2.contains(each));
-            assertIterablesEqual(this.allowsDuplicates(), collection2.add(each));
+            assertEquals(this.allowsDuplicates(), collection2.add(each));
             assertTrue(collection2.contains(each));
         }
     }

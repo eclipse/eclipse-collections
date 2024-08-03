@@ -25,6 +25,7 @@ import org.eclipse.collections.test.list.TransformsToListTrait;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // TODO linked bag
 public interface SortedBagTestCase extends SortedIterableTestCase, BagTestCase, TransformsToListTrait
@@ -72,7 +73,7 @@ public interface SortedBagTestCase extends SortedIterableTestCase, BagTestCase, 
     default void Bag_sizeDistinct()
     {
         SortedBag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(3, bag.sizeDistinct());
+        assertEquals(3, bag.sizeDistinct());
     }
 
     @Override
@@ -80,18 +81,18 @@ public interface SortedBagTestCase extends SortedIterableTestCase, BagTestCase, 
     default void Bag_occurrencesOf()
     {
         SortedBag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(0, bag.occurrencesOf(0));
-        assertIterablesEqual(1, bag.occurrencesOf(1));
-        assertIterablesEqual(2, bag.occurrencesOf(2));
-        assertIterablesEqual(3, bag.occurrencesOf(3));
+        assertEquals(0, bag.occurrencesOf(0));
+        assertEquals(1, bag.occurrencesOf(1));
+        assertEquals(2, bag.occurrencesOf(2));
+        assertEquals(3, bag.occurrencesOf(3));
     }
 
     @Override
     @Test
     default void Bag_toStringOfItemToCount()
     {
-        assertIterablesEqual("{}", this.newWith().toStringOfItemToCount());
-        assertIterablesEqual("{3=3, 2=2, 1=1}", this.newWith(3, 3, 3, 2, 2, 1).toStringOfItemToCount());
+        assertEquals("{}", this.newWith().toStringOfItemToCount());
+        assertEquals("{3=3, 2=2, 1=1}", this.newWith(3, 3, 3, 2, 2, 1).toStringOfItemToCount());
     }
 
     @Test

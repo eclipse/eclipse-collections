@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -61,8 +62,8 @@ public interface MutableCollectionTestCase extends CollectionTestCase, RichItera
 
         MutableCollection<String> collection = this.newWith();
         assertTrue(collection.add(s));
-        assertIterablesEqual(this.allowsDuplicates(), collection.add(s));
-        assertIterablesEqual(this.allowsDuplicates() ? 2 : 1, collection.size());
+        assertEquals(this.allowsDuplicates(), collection.add(s));
+        assertEquals(this.allowsDuplicates() ? 2 : 1, collection.size());
     }
 
     @Test
@@ -120,6 +121,6 @@ public interface MutableCollectionTestCase extends CollectionTestCase, RichItera
     default void MutableCollection_injectIntoWith()
     {
         MutableCollection<Integer> collection = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(Integer.valueOf(81), collection.injectIntoWith(1, (a, b, c) -> a + b + c, 5));
+        assertEquals(Integer.valueOf(81), collection.injectIntoWith(1, (a, b, c) -> a + b + c, 5));
     }
 }

@@ -23,6 +23,7 @@ import org.eclipse.collections.test.OrderedIterableWithDuplicatesTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -99,7 +100,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     @Test
     default void StackIterable_peek()
     {
-        assertIterablesEqual(Integer.valueOf(5), this.newWith(5, 1, 4, 2, 3).peek());
+        assertEquals(Integer.valueOf(5), this.newWith(5, 1, 4, 2, 3).peek());
     }
 
     @Test
@@ -111,11 +112,11 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     @Test
     default void StackIterable_peekAt()
     {
-        assertIterablesEqual(Integer.valueOf(5), this.newWith(5, 1, 4, 2, 3).peekAt(0));
-        assertIterablesEqual(Integer.valueOf(1), this.newWith(5, 1, 4, 2, 3).peekAt(1));
-        assertIterablesEqual(Integer.valueOf(4), this.newWith(5, 1, 4, 2, 3).peekAt(2));
-        assertIterablesEqual(Integer.valueOf(2), this.newWith(5, 1, 4, 2, 3).peekAt(3));
-        assertIterablesEqual(Integer.valueOf(3), this.newWith(5, 1, 4, 2, 3).peekAt(4));
+        assertEquals(Integer.valueOf(5), this.newWith(5, 1, 4, 2, 3).peekAt(0));
+        assertEquals(Integer.valueOf(1), this.newWith(5, 1, 4, 2, 3).peekAt(1));
+        assertEquals(Integer.valueOf(4), this.newWith(5, 1, 4, 2, 3).peekAt(2));
+        assertEquals(Integer.valueOf(2), this.newWith(5, 1, 4, 2, 3).peekAt(3));
+        assertEquals(Integer.valueOf(3), this.newWith(5, 1, 4, 2, 3).peekAt(4));
     }
 
     @Test

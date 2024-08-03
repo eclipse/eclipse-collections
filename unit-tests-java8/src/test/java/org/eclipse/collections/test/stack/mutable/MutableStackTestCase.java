@@ -19,6 +19,7 @@ import org.eclipse.collections.test.stack.StackIterableTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface MutableStackTestCase extends StackIterableTestCase
@@ -40,7 +41,7 @@ public interface MutableStackTestCase extends StackIterableTestCase
     default void MutableStack_pop()
     {
         MutableStack<Integer> mutableStack = this.newWith(5, 1, 4, 2, 3);
-        assertIterablesEqual(Integer.valueOf(5), mutableStack.pop());
+        assertEquals(Integer.valueOf(5), mutableStack.pop());
         assertIterablesEqual(Stacks.immutable.withReversed(1, 4, 2, 3), mutableStack);
     }
 
@@ -48,11 +49,11 @@ public interface MutableStackTestCase extends StackIterableTestCase
     default void MutableStack_pop_throws()
     {
         MutableStack<Integer> mutableStack = this.newWith(5, 1, 4, 2, 3);
-        assertIterablesEqual(Integer.valueOf(5), mutableStack.pop());
-        assertIterablesEqual(Integer.valueOf(1), mutableStack.pop());
-        assertIterablesEqual(Integer.valueOf(4), mutableStack.pop());
-        assertIterablesEqual(Integer.valueOf(2), mutableStack.pop());
-        assertIterablesEqual(Integer.valueOf(3), mutableStack.pop());
+        assertEquals(Integer.valueOf(5), mutableStack.pop());
+        assertEquals(Integer.valueOf(1), mutableStack.pop());
+        assertEquals(Integer.valueOf(4), mutableStack.pop());
+        assertEquals(Integer.valueOf(2), mutableStack.pop());
+        assertEquals(Integer.valueOf(3), mutableStack.pop());
         assertThrows(EmptyStackException.class, mutableStack::pop);
     }
 }

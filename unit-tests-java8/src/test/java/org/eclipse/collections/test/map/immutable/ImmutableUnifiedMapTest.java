@@ -18,7 +18,6 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -76,6 +75,6 @@ public class ImmutableUnifiedMapTest implements ImmutableMapTestCase
     @Test
     public void sanity()
     {
-        assertIterablesEqual("ImmutableUnifiedMap", this.newWith(1, 2, 3, 4, 5).getClass().getSimpleName());
+        assertEquals("ImmutableUnifiedMap", this.newWith(1, 2, 3, 4, 5).getClass().getSimpleName());
     }
 }

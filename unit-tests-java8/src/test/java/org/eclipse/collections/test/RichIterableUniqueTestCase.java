@@ -177,7 +177,7 @@ public interface RichIterableUniqueTestCase
     @Test
     default void RichIterable_size()
     {
-        assertIterablesEqual(3, this.newWith(3, 2, 1).size());
+        assertEquals(3, this.newWith(3, 2, 1).size());
     }
 
     @Override
@@ -743,18 +743,18 @@ public interface RichIterableUniqueTestCase
     {
         RichIterable<Integer> iterable = this.newWith(3, 2, 1);
 
-        assertIterablesEqual(1, iterable.count(Integer.valueOf(3)::equals));
-        assertIterablesEqual(1, iterable.count(Integer.valueOf(2)::equals));
-        assertIterablesEqual(1, iterable.count(Integer.valueOf(1)::equals));
-        assertIterablesEqual(0, iterable.count(Integer.valueOf(0)::equals));
-        assertIterablesEqual(2, iterable.count(i -> i % 2 != 0));
-        assertIterablesEqual(3, iterable.count(i -> i > 0));
+        assertEquals(1, iterable.count(Integer.valueOf(3)::equals));
+        assertEquals(1, iterable.count(Integer.valueOf(2)::equals));
+        assertEquals(1, iterable.count(Integer.valueOf(1)::equals));
+        assertEquals(0, iterable.count(Integer.valueOf(0)::equals));
+        assertEquals(2, iterable.count(i -> i % 2 != 0));
+        assertEquals(3, iterable.count(i -> i > 0));
 
-        assertIterablesEqual(1, iterable.countWith(Object::equals, 3));
-        assertIterablesEqual(1, iterable.countWith(Object::equals, 2));
-        assertIterablesEqual(1, iterable.countWith(Object::equals, 1));
-        assertIterablesEqual(0, iterable.countWith(Object::equals, 0));
-        assertIterablesEqual(3, iterable.countWith(Predicates2.greaterThan(), 0));
+        assertEquals(1, iterable.countWith(Object::equals, 3));
+        assertEquals(1, iterable.countWith(Object::equals, 2));
+        assertEquals(1, iterable.countWith(Object::equals, 1));
+        assertEquals(0, iterable.countWith(Object::equals, 0));
+        assertEquals(3, iterable.countWith(Predicates2.greaterThan(), 0));
     }
 
     @Override
@@ -805,28 +805,28 @@ public interface RichIterableUniqueTestCase
                 () -> 0,
                 (integer1, integer2) -> integer1 + integer2);
 
-        assertIterablesEqual(4, aggregateBy.get("4").intValue());
-        assertIterablesEqual(3, aggregateBy.get("3").intValue());
-        assertIterablesEqual(2, aggregateBy.get("2").intValue());
-        assertIterablesEqual(1, aggregateBy.get("1").intValue());
+        assertEquals(4, aggregateBy.get("4").intValue());
+        assertEquals(3, aggregateBy.get("3").intValue());
+        assertEquals(2, aggregateBy.get("2").intValue());
+        assertEquals(1, aggregateBy.get("1").intValue());
 
         MapIterable<String, AtomicInteger> aggregateInPlaceBy = iterable.aggregateInPlaceBy(
                 String::valueOf,
                 AtomicInteger::new,
                 AtomicInteger::addAndGet);
-        assertIterablesEqual(4, aggregateInPlaceBy.get("4").intValue());
-        assertIterablesEqual(3, aggregateInPlaceBy.get("3").intValue());
-        assertIterablesEqual(2, aggregateInPlaceBy.get("2").intValue());
-        assertIterablesEqual(1, aggregateInPlaceBy.get("1").intValue());
+        assertEquals(4, aggregateInPlaceBy.get("4").intValue());
+        assertEquals(3, aggregateInPlaceBy.get("3").intValue());
+        assertEquals(2, aggregateInPlaceBy.get("2").intValue());
+        assertEquals(1, aggregateInPlaceBy.get("1").intValue());
 
         MapIterable<String, Integer> reduceBy = iterable.reduceBy(
                 Object::toString,
                 (integer1, integer2) -> integer1 + integer2);
 
-        assertIterablesEqual(4, reduceBy.get("4").intValue());
-        assertIterablesEqual(3, reduceBy.get("3").intValue());
-        assertIterablesEqual(2, reduceBy.get("2").intValue());
-        assertIterablesEqual(1, reduceBy.get("1").intValue());
+        assertEquals(4, reduceBy.get("4").intValue());
+        assertEquals(3, reduceBy.get("3").intValue());
+        assertEquals(2, reduceBy.get("2").intValue());
+        assertEquals(1, reduceBy.get("1").intValue());
     }
 
     @Override
@@ -961,7 +961,7 @@ public interface RichIterableUniqueTestCase
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
 
-        assertIterablesEqual(Integer.valueOf(11), iterable.injectInto(1, new Function2<Integer, Integer, Integer>()
+        assertEquals(Integer.valueOf(11), iterable.injectInto(1, new Function2<Integer, Integer, Integer>()
         {
             private static final long serialVersionUID = 1L;
 
@@ -970,7 +970,7 @@ public interface RichIterableUniqueTestCase
                 return argument1 + argument2;
             }
         }));
-        assertIterablesEqual(Integer.valueOf(10), iterable.injectInto(0, new Function2<Integer, Integer, Integer>()
+        assertEquals(Integer.valueOf(10), iterable.injectInto(0, new Function2<Integer, Integer, Integer>()
         {
             private static final long serialVersionUID = 1L;
 
@@ -1006,21 +1006,21 @@ public interface RichIterableUniqueTestCase
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
 
-        assertIterablesEqual("4, 3, 2, 1", iterable.makeString());
-        assertIterablesEqual("4/3/2/1", iterable.makeString("/"));
-        assertIterablesEqual("[4/3/2/1]", iterable.makeString("[", "/", "]"));
+        assertEquals("4, 3, 2, 1", iterable.makeString());
+        assertEquals("4/3/2/1", iterable.makeString("/"));
+        assertEquals("[4/3/2/1]", iterable.makeString("[", "/", "]"));
 
         StringBuilder stringBuilder1 = new StringBuilder();
         iterable.appendString(stringBuilder1);
-        assertIterablesEqual("4, 3, 2, 1", stringBuilder1.toString());
+        assertEquals("4, 3, 2, 1", stringBuilder1.toString());
 
         StringBuilder stringBuilder2 = new StringBuilder();
         iterable.appendString(stringBuilder2, "/");
-        assertIterablesEqual("4/3/2/1", stringBuilder2.toString());
+        assertEquals("4/3/2/1", stringBuilder2.toString());
 
         StringBuilder stringBuilder3 = new StringBuilder();
         iterable.appendString(stringBuilder3, "[", "/", "]");
-        assertIterablesEqual("[4/3/2/1]", stringBuilder3.toString());
+        assertEquals("[4/3/2/1]", stringBuilder3.toString());
     }
 
     @Override

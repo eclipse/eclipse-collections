@@ -246,7 +246,7 @@ public interface RichIterableTestCase extends IterableTestCase
     @Test
     default void RichIterable_size_empty()
     {
-        assertIterablesEqual(0, this.newWith().size());
+        assertEquals(0, this.newWith().size());
     }
 
     @Test
@@ -281,7 +281,7 @@ public interface RichIterableTestCase extends IterableTestCase
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
         Integer first = iterable.getFirst();
         assertThat(first, isOneOf(3, 2, 1));
-        assertIterablesEqual(iterable.iterator().next(), first);
+        assertEquals(iterable.iterator().next(), first);
     }
 
     @Test
@@ -296,7 +296,7 @@ public interface RichIterableTestCase extends IterableTestCase
         {
             iteratorLast = iterator.next();
         }
-        assertIterablesEqual(iteratorLast, last);
+        assertEquals(iteratorLast, last);
     }
 
     @Test
@@ -1049,21 +1049,21 @@ public interface RichIterableTestCase extends IterableTestCase
             toSortedListCount.increment();
             return 0;
         });
-        assertIterablesEqual(expectedIterationOrder.size() - 1, toSortedListCount.getCount());
+        assertEquals(expectedIterationOrder.size() - 1, toSortedListCount.getCount());
 
         Counter toSortedSetCount = new Counter();
         this.getInstanceUnderTest().toSortedSet((o1, o2) -> {
             toSortedSetCount.increment();
             return 0;
         });
-        assertIterablesEqual(expectedIterationOrder.size(), toSortedSetCount.getCount());
+        assertEquals(expectedIterationOrder.size(), toSortedSetCount.getCount());
 
         Counter toSortedBagCount = new Counter();
         this.getInstanceUnderTest().toSortedBag((o1, o2) -> {
             toSortedBagCount.increment();
             return 0;
         });
-        assertIterablesEqual(expectedIterationOrder.size(), toSortedBagCount.getCount());
+        assertEquals(expectedIterationOrder.size(), toSortedBagCount.getCount());
 
         MutableCollection<Integer> summarizeIntOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().summarizeInt(each -> {
@@ -1427,18 +1427,18 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
 
-        assertIterablesEqual(3, iterable.count(Integer.valueOf(3)::equals));
-        assertIterablesEqual(2, iterable.count(Integer.valueOf(2)::equals));
-        assertIterablesEqual(1, iterable.count(Integer.valueOf(1)::equals));
-        assertIterablesEqual(0, iterable.count(Integer.valueOf(0)::equals));
-        assertIterablesEqual(4, iterable.count(i -> i % 2 != 0));
-        assertIterablesEqual(6, iterable.count(i -> i > 0));
+        assertEquals(3, iterable.count(Integer.valueOf(3)::equals));
+        assertEquals(2, iterable.count(Integer.valueOf(2)::equals));
+        assertEquals(1, iterable.count(Integer.valueOf(1)::equals));
+        assertEquals(0, iterable.count(Integer.valueOf(0)::equals));
+        assertEquals(4, iterable.count(i -> i % 2 != 0));
+        assertEquals(6, iterable.count(i -> i > 0));
 
-        assertIterablesEqual(3, iterable.countWith(Object::equals, 3));
-        assertIterablesEqual(2, iterable.countWith(Object::equals, 2));
-        assertIterablesEqual(1, iterable.countWith(Object::equals, 1));
-        assertIterablesEqual(0, iterable.countWith(Object::equals, 0));
-        assertIterablesEqual(6, iterable.countWith(Predicates2.greaterThan(), 0));
+        assertEquals(3, iterable.countWith(Object::equals, 3));
+        assertEquals(2, iterable.countWith(Object::equals, 2));
+        assertEquals(1, iterable.countWith(Object::equals, 1));
+        assertEquals(0, iterable.countWith(Object::equals, 0));
+        assertEquals(6, iterable.countWith(Predicates2.greaterThan(), 0));
     }
 
     @Test
@@ -1625,20 +1625,20 @@ public interface RichIterableTestCase extends IterableTestCase
     @Test
     default void RichIterable_min_max()
     {
-        assertIterablesEqual(Integer.valueOf(-1), this.newWith(-1, 0, 1).min());
-        assertIterablesEqual(Integer.valueOf(-1), this.newWith(1, 0, -1).min());
+        assertEquals(Integer.valueOf(-1), this.newWith(-1, 0, 1).min());
+        assertEquals(Integer.valueOf(-1), this.newWith(1, 0, -1).min());
         assertThrows(NoSuchElementException.class, () -> this.newWith().min());
 
-        assertIterablesEqual(Integer.valueOf(1), this.newWith(-1, 0, 1).max());
-        assertIterablesEqual(Integer.valueOf(1), this.newWith(1, 0, -1).max());
+        assertEquals(Integer.valueOf(1), this.newWith(-1, 0, 1).max());
+        assertEquals(Integer.valueOf(1), this.newWith(1, 0, -1).max());
         assertThrows(NoSuchElementException.class, () -> this.newWith().max());
 
-        assertIterablesEqual(Integer.valueOf(1), this.newWith(-1, 0, 1).min(Comparators.reverseNaturalOrder()));
-        assertIterablesEqual(Integer.valueOf(1), this.newWith(1, 0, -1).min(Comparators.reverseNaturalOrder()));
+        assertEquals(Integer.valueOf(1), this.newWith(-1, 0, 1).min(Comparators.reverseNaturalOrder()));
+        assertEquals(Integer.valueOf(1), this.newWith(1, 0, -1).min(Comparators.reverseNaturalOrder()));
         assertThrows(NoSuchElementException.class, () -> this.newWith().min(Comparators.reverseNaturalOrder()));
 
-        assertIterablesEqual(Integer.valueOf(-1), this.newWith(-1, 0, 1).max(Comparators.reverseNaturalOrder()));
-        assertIterablesEqual(Integer.valueOf(-1), this.newWith(1, 0, -1).max(Comparators.reverseNaturalOrder()));
+        assertEquals(Integer.valueOf(-1), this.newWith(-1, 0, 1).max(Comparators.reverseNaturalOrder()));
+        assertEquals(Integer.valueOf(-1), this.newWith(1, 0, -1).max(Comparators.reverseNaturalOrder()));
         assertThrows(NoSuchElementException.class, () -> this.newWith().max(Comparators.reverseNaturalOrder()));
     }
 
@@ -1663,23 +1663,23 @@ public interface RichIterableTestCase extends IterableTestCase
     @Test
     default void RichIterable_minOptional_maxOptional()
     {
-        assertIterablesEqual(Optional.of(Integer.valueOf(-1)), this.newWith(-1, 0, 1).minOptional());
-        assertIterablesEqual(Optional.of(Integer.valueOf(-1)), this.newWith(1, 0, -1).minOptional());
+        assertEquals(Optional.of(-1), this.newWith(-1, 0, 1).minOptional());
+        assertEquals(Optional.of(-1), this.newWith(1, 0, -1).minOptional());
         assertSame(Optional.empty(), this.newWith().minOptional());
         assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).minOptional());
 
-        assertIterablesEqual(Optional.of(Integer.valueOf(1)), this.newWith(-1, 0, 1).maxOptional());
-        assertIterablesEqual(Optional.of(Integer.valueOf(1)), this.newWith(1, 0, -1).maxOptional());
+        assertEquals(Optional.of(1), this.newWith(-1, 0, 1).maxOptional());
+        assertEquals(Optional.of(1), this.newWith(1, 0, -1).maxOptional());
         assertSame(Optional.empty(), this.newWith().maxOptional());
         assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).maxOptional());
 
-        assertIterablesEqual(Optional.of(Integer.valueOf(1)), this.newWith(-1, 0, 1).minOptional(Comparators.reverseNaturalOrder()));
-        assertIterablesEqual(Optional.of(Integer.valueOf(1)), this.newWith(1, 0, -1).minOptional(Comparators.reverseNaturalOrder()));
+        assertEquals(Optional.of(1), this.newWith(-1, 0, 1).minOptional(Comparators.reverseNaturalOrder()));
+        assertEquals(Optional.of(1), this.newWith(1, 0, -1).minOptional(Comparators.reverseNaturalOrder()));
         assertSame(Optional.empty(), this.newWith().minOptional(Comparators.reverseNaturalOrder()));
         assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).minOptional(Comparators.reverseNaturalOrder()));
 
-        assertIterablesEqual(Optional.of(Integer.valueOf(-1)), this.newWith(-1, 0, 1).maxOptional(Comparators.reverseNaturalOrder()));
-        assertIterablesEqual(Optional.of(Integer.valueOf(-1)), this.newWith(1, 0, -1).maxOptional(Comparators.reverseNaturalOrder()));
+        assertEquals(Optional.of(-1), this.newWith(-1, 0, 1).maxOptional(Comparators.reverseNaturalOrder()));
+        assertEquals(Optional.of(-1), this.newWith(1, 0, -1).maxOptional(Comparators.reverseNaturalOrder()));
         assertSame(Optional.empty(), this.newWith().maxOptional(Comparators.reverseNaturalOrder()));
         assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).maxOptional(Comparators.reverseNaturalOrder()));
     }
@@ -1689,37 +1689,37 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         Object sentinel = new Object();
 
-        assertIterablesEqual(Optional.of(sentinel), this.newWith(sentinel).minOptional());
+        assertEquals(Optional.of(sentinel), this.newWith(sentinel).minOptional());
         assertThrows(ClassCastException.class, () -> this.newWith(new Object(), new Object()).minOptional());
 
-        assertIterablesEqual(Optional.of(sentinel), this.newWith(sentinel).maxOptional());
+        assertEquals(Optional.of(sentinel), this.newWith(sentinel).maxOptional());
         assertThrows(ClassCastException.class, () -> this.newWith(new Object(), new Object()).maxOptional());
 
-        assertIterablesEqual(Optional.of(sentinel), this.newWith(sentinel).minOptional(Comparators.reverseNaturalOrder()));
+        assertEquals(Optional.of(sentinel), this.newWith(sentinel).minOptional(Comparators.reverseNaturalOrder()));
         assertThrows(ClassCastException.class, () -> this.newWith(new Object(), new Object()).minOptional(Comparators.reverseNaturalOrder()));
 
-        assertIterablesEqual(Optional.of(sentinel), this.newWith(sentinel).maxOptional(Comparators.reverseNaturalOrder()));
+        assertEquals(Optional.of(sentinel), this.newWith(sentinel).maxOptional(Comparators.reverseNaturalOrder()));
         assertThrows(ClassCastException.class, () -> this.newWith(new Object(), new Object()).maxOptional(Comparators.reverseNaturalOrder()));
     }
 
     @Test
     default void RichIterable_minBy_maxBy()
     {
-        assertIterablesEqual("da", this.newWith("ed", "da", "ca", "bc", "ab").minBy(string -> string.charAt(string.length() - 1)));
+        assertEquals("da", this.newWith("ed", "da", "ca", "bc", "ab").minBy(string -> string.charAt(string.length() - 1)));
         assertThrows(NoSuchElementException.class, () -> this.<String>newWith().minBy(string -> string.charAt(string.length() - 1)));
 
-        assertIterablesEqual("dz", this.newWith("ew", "dz", "cz", "bx", "ay").maxBy(string -> string.charAt(string.length() - 1)));
+        assertEquals("dz", this.newWith("ew", "dz", "cz", "bx", "ay").maxBy(string -> string.charAt(string.length() - 1)));
         assertThrows(NoSuchElementException.class, () -> this.<String>newWith().maxBy(string -> string.charAt(string.length() - 1)));
     }
 
     @Test
     default void RichIterable_minByOptional_maxByOptional()
     {
-        assertIterablesEqual(Optional.of("da"), this.newWith("ed", "da", "ca", "bc", "ab").minByOptional(string -> string.charAt(string.length() - 1)));
+        assertEquals(Optional.of("da"), this.newWith("ed", "da", "ca", "bc", "ab").minByOptional(string -> string.charAt(string.length() - 1)));
         assertSame(Optional.empty(), this.<String>newWith().minByOptional(string -> string.charAt(string.length() - 1)));
         assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).minByOptional(Objects::isNull));
 
-        assertIterablesEqual(Optional.of("dz"), this.newWith("ew", "dz", "cz", "bx", "ay").maxByOptional(string -> string.charAt(string.length() - 1)));
+        assertEquals(Optional.of("dz"), this.newWith("ew", "dz", "cz", "bx", "ay").maxByOptional(string -> string.charAt(string.length() - 1)));
         assertSame(Optional.empty(), this.<String>newWith().maxByOptional(string -> string.charAt(string.length() - 1)));
         assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).maxByOptional(Objects::isNull));
     }
@@ -1798,17 +1798,17 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> integerList = this.newWith(1, 2, 4);
         Bag<Integer> integerBag1 = integerList.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i));
-        assertIterablesEqual(1, integerBag1.occurrencesOf(1));
-        assertIterablesEqual(2, integerBag1.occurrencesOf(2));
-        assertIterablesEqual(3, integerBag1.occurrencesOf(4));
-        assertIterablesEqual(2, integerBag1.occurrencesOf(8));
-        assertIterablesEqual(1, integerBag1.occurrencesOf(12));
+        assertEquals(1, integerBag1.occurrencesOf(1));
+        assertEquals(2, integerBag1.occurrencesOf(2));
+        assertEquals(3, integerBag1.occurrencesOf(4));
+        assertEquals(2, integerBag1.occurrencesOf(8));
+        assertEquals(1, integerBag1.occurrencesOf(12));
         Bag<Integer> integerBag2 = integerList.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i), Bags.mutable.empty());
-        assertIterablesEqual(1, integerBag2.occurrencesOf(1));
-        assertIterablesEqual(2, integerBag2.occurrencesOf(2));
-        assertIterablesEqual(3, integerBag2.occurrencesOf(4));
-        assertIterablesEqual(2, integerBag2.occurrencesOf(8));
-        assertIterablesEqual(1, integerBag2.occurrencesOf(12));
+        assertEquals(1, integerBag2.occurrencesOf(1));
+        assertEquals(2, integerBag2.occurrencesOf(2));
+        assertEquals(3, integerBag2.occurrencesOf(4));
+        assertEquals(2, integerBag2.occurrencesOf(8));
+        assertEquals(1, integerBag2.occurrencesOf(12));
     }
 
     @Test
@@ -1821,28 +1821,28 @@ public interface RichIterableTestCase extends IterableTestCase
                 () -> 0,
                 (integer1, integer2) -> integer1 + integer2);
 
-        assertIterablesEqual(16, aggregateBy.get("4").intValue());
-        assertIterablesEqual(9, aggregateBy.get("3").intValue());
-        assertIterablesEqual(4, aggregateBy.get("2").intValue());
-        assertIterablesEqual(1, aggregateBy.get("1").intValue());
+        assertEquals(16, aggregateBy.get("4").intValue());
+        assertEquals(9, aggregateBy.get("3").intValue());
+        assertEquals(4, aggregateBy.get("2").intValue());
+        assertEquals(1, aggregateBy.get("1").intValue());
 
         MapIterable<String, AtomicInteger> aggregateInPlaceBy = iterable.aggregateInPlaceBy(
                 String::valueOf,
                 AtomicInteger::new,
                 AtomicInteger::addAndGet);
-        assertIterablesEqual(16, aggregateInPlaceBy.get("4").intValue());
-        assertIterablesEqual(9, aggregateInPlaceBy.get("3").intValue());
-        assertIterablesEqual(4, aggregateInPlaceBy.get("2").intValue());
-        assertIterablesEqual(1, aggregateInPlaceBy.get("1").intValue());
+        assertEquals(16, aggregateInPlaceBy.get("4").intValue());
+        assertEquals(9, aggregateInPlaceBy.get("3").intValue());
+        assertEquals(4, aggregateInPlaceBy.get("2").intValue());
+        assertEquals(1, aggregateInPlaceBy.get("1").intValue());
 
         MapIterable<String, Integer> reduceBy = iterable.reduceBy(
                 Object::toString,
                 (integer1, integer2) -> integer1 + integer2);
 
-        assertIterablesEqual(16, reduceBy.get("4").intValue());
-        assertIterablesEqual(9, reduceBy.get("3").intValue());
-        assertIterablesEqual(4, reduceBy.get("2").intValue());
-        assertIterablesEqual(1, reduceBy.get("1").intValue());
+        assertEquals(16, reduceBy.get("4").intValue());
+        assertEquals(9, reduceBy.get("3").intValue());
+        assertEquals(4, reduceBy.get("2").intValue());
+        assertEquals(1, reduceBy.get("1").intValue());
     }
 
     @Test
@@ -1997,8 +1997,8 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
 
-        assertIterablesEqual(Integer.valueOf(31), iterable.injectInto(1, AddFunction.INTEGER));
-        assertIterablesEqual(Integer.valueOf(30), iterable.injectInto(0, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(31), iterable.injectInto(1, AddFunction.INTEGER));
+        assertEquals(Integer.valueOf(30), iterable.injectInto(0, AddFunction.INTEGER));
     }
 
     @Test
@@ -2024,7 +2024,7 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(0, 1, 8);
 
-        assertIterablesEqual(
+        assertEquals(
                 iterable.asLazy().collect(Integer::toUnsignedString).makeString("[", ",", "]"),
                 iterable.makeString(Integer::toUnsignedString, "[", ",", "]"));
     }
@@ -2033,45 +2033,45 @@ public interface RichIterableTestCase extends IterableTestCase
     default void RichIterable_makeString_appendString()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(
+        assertEquals(
                 "4, 4, 4, 4, 3, 3, 3, 2, 2, 1",
                 iterable.makeString());
 
-        assertIterablesEqual(
+        assertEquals(
                 iterable.makeString(),
                 iterable.reduceInPlace(Collectors2.makeString()));
 
-        assertIterablesEqual(
+        assertEquals(
                 "4/4/4/4/3/3/3/2/2/1",
                 iterable.makeString("/"));
 
-        assertIterablesEqual(
+        assertEquals(
                 iterable.makeString("/"),
                 iterable.reduceInPlace(Collectors2.makeString("/")));
 
-        assertIterablesEqual(
+        assertEquals(
                 "[4/4/4/4/3/3/3/2/2/1]",
                 iterable.makeString("[", "/", "]"));
 
-        assertIterablesEqual(
+        assertEquals(
                 iterable.makeString("[", "/", "]"),
                 iterable.reduceInPlace(Collectors2.makeString("[", "/", "]")));
 
         StringBuilder builder1 = new StringBuilder();
         iterable.appendString(builder1);
-        assertIterablesEqual(
+        assertEquals(
                 "4, 4, 4, 4, 3, 3, 3, 2, 2, 1",
                 builder1.toString());
 
         StringBuilder builder2 = new StringBuilder();
         iterable.appendString(builder2, "/");
-        assertIterablesEqual(
+        assertEquals(
                 "4/4/4/4/3/3/3/2/2/1",
                 builder2.toString());
 
         StringBuilder builder3 = new StringBuilder();
         iterable.appendString(builder3, "[", "/", "]");
-        assertIterablesEqual(
+        assertEquals(
                 "[4/4/4/4/3/3/3/2/2/1]",
                 builder3.toString());
     }
@@ -2081,10 +2081,10 @@ public interface RichIterableTestCase extends IterableTestCase
     default void Iterable_toString()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(
+        assertEquals(
                 "[4, 4, 4, 4, 3, 3, 3, 2, 2, 1]",
                 iterable.toString());
-        assertIterablesEqual(
+        assertEquals(
                 "[4, 4, 4, 4, 3, 3, 3, 2, 2, 1]",
                 iterable.asLazy().toString());
     }
