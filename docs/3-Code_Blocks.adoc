@@ -209,7 +209,7 @@ _(transformer)_ |Evaluates each element of a collection as  the argument to the 
 |*{Functions}*        |*getToClass*, *getToString*, *getPassThru*
 |*{Functions0}*       |*newFastList*, *newHashBag*, *newUnifiedMap*, *newUnifiedSet*, *nullValue*, *value*
 |*{Functions2}*       |*fromFunction*
-|*{StringFunctions}*  |*firstLetter*, *length*, *subString*, *toFirstChar*, *toInteger*, *toLowerCase*, *toPrimitive* [type], toUpperCase, trim, *firstLetter*
+|*{StringFunctions}*  |*firstLetter*, *length*, *subString*, *toFirstChar*, *toInteger*, *toLowerCase*, *toPrimitive* [type], toUpperCase, trim
 |===
 
 
