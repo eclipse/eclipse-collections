@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.SortedMap;
+import java.util.Set;
 import java.util.SortedSet;
 
 import org.eclipse.collections.api.LazyBooleanIterable;
@@ -26,6 +26,8 @@ import org.eclipse.collections.api.LazyIntIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.LazyLongIterable;
 import org.eclipse.collections.api.LazyShortIterable;
+import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Sets;
@@ -127,6 +129,7 @@ public interface IterableTestCase
         {
             return;
         }
+
         if (o1 instanceof SortedIterable<?> || o2 instanceof SortedIterable<?>
                 || o1 instanceof ReversibleIterable<?> || o2 instanceof ReversibleIterable<?>
                 || o1 instanceof List<?> || o2 instanceof List<?>
@@ -143,9 +146,23 @@ public interface IterableTestCase
                 }
             }
         }
-        else if (o1 instanceof SortedMap<?, ?> || o2 instanceof SortedMap<?, ?>)
+
+        if (o1 instanceof Set<?> || o2 instanceof Set<?>)
         {
-            assertIterablesEqual(((SortedMap<?, ?>) o1).keySet(), ((SortedMap<?, ?>) o2).keySet());
+            Verify.assertSetsEqual((Set<?>) o1, (Set<?>) o2);
+            if (o1 instanceof SortedSet<?> || o2 instanceof SortedSet<?>)
+            {
+                Verify.assertSortedSetsEqual((SortedSet<?>) o1, (SortedSet<?>) o2);
+            }
+        }
+
+        if (o1 instanceof Bag<?> || o2 instanceof Bag<?>)
+        {
+            Verify.assertBagsEqual((Bag<?>) o1, (Bag<?>) o2);
+            if (o1 instanceof SortedBag<?> || o2 instanceof SortedBag<?>)
+            {
+                Verify.assertSortedBagsEqual((SortedBag<?>) o1, (SortedBag<?>) o2);
+            }
         }
     }
 
