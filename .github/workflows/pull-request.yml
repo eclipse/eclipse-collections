@@ -28,7 +28,7 @@ jobs:
           java-version: 11
       - run: ./mvnw --threads 2C --color=always verify
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
         run: rm -rf ~/.m2/repository/org/eclipse/collections
@@ -56,7 +56,7 @@ jobs:
       - name: Run maven-enforcer-plugin
         run: ./mvnw --threads 2C --color=always verify --activate-profiles maven-enforcer-plugin -DskipTests
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
         run: rm -rf ~/.m2/repository/org/eclipse/collections
@@ -84,7 +84,7 @@ jobs:
       - name: Run maven-dependency-plugin
         run: ./mvnw --threads 2C --color=always verify --activate-profiles maven-dependency-plugin -DskipTests
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
         run: rm -rf ~/.m2/repository/org/eclipse/collections
@@ -93,7 +93,7 @@ jobs:
     name: Unit Tests ${{ matrix.java-version }}
     strategy:
       matrix:
-        java-version: [ 17, 21, 22 ]
+        java-version: [17, 21, 22]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -116,7 +116,7 @@ jobs:
       - name: Unit-Test
         run: ./mvnw --color=always verify
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
         run: rm -rf ~/.m2/repository/org/eclipse/collections
@@ -153,7 +153,7 @@ jobs:
       - name: Unit-Test
         run: ./mvnw --color=always verify
         env:
-          MAVEN_OPTS: "-Xmx2g"
+          MAVEN_OPTS: '-Xmx2g'
 
   acceptance-tests:
     name: Acceptance Tests
@@ -178,7 +178,7 @@ jobs:
           java-version: 11
       - run: ./mvnw --color=always install --projects acceptance-tests --also-make --activate-profiles all
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
         run: rm -rf ~/.m2/repository/org/eclipse/collections
@@ -206,7 +206,7 @@ jobs:
           java-version: 11
       - run: ./mvnw --color=always install --projects performance-tests --also-make --activate-profiles all -DskipTests=true
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
         run: rm -rf ~/.m2/repository/org/eclipse/collections
@@ -225,7 +225,7 @@ jobs:
       - name: Checkstyle
         run: ./mvnw --color=always install checkstyle:check --activate-profiles all -DskipTests=true
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
 
   javadoc:
     name: Javadoc 11
@@ -252,11 +252,11 @@ jobs:
       - name: JavaDoc Aggregate
         run: ./mvnw --color=always --activate-profiles maven-javadoc-plugin -DskipTests -Denforcer.skip=true clean javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!unit-tests-java8,!test-coverage'
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
       - name: JavaDoc Jar
         run: ./mvnw --color=always --activate-profiles maven-javadoc-plugin -DskipTests -Denforcer.skip=true clean install javadoc:jar --projects '!unit-tests,!serialization-tests,!jcstress-tests,!unit-tests-java8,!test-coverage'
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
         run: rm -rf ~/.m2/repository/org/eclipse/collections
@@ -295,6 +295,6 @@ jobs:
       - name: Javadoc
         run: ./mvnw --threads 2C --color=always --activate-profiles maven-javadoc-plugin -DskipTests javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!unit-tests-java8,!test-coverage'
         env:
-          MAVEN_OPTS: "-Xmx2g"
+          MAVEN_OPTS: '-Xmx2g'
       - name: 'Clean Maven cache'
         run: rm -rf ~/.m2/repository/org/eclipse/collections
