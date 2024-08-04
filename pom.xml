@@ -135,6 +135,8 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
         <maven.compiler.meminitial>2048m</maven.compiler.meminitial>
         <maven.compiler.maxmem>2048m</maven.compiler.maxmem>
 
+        <spotless.check.skip>true</spotless.check.skip>
+
         <argLine></argLine>
 
         <project.previous.version>11.0.0</project.previous.version>
@@ -513,6 +515,17 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                 <version>3.3.1</version>
             </plugin>
 
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>2.43.0</version>
+                <configuration>
+                    <upToDateChecking>
+                        <enabled>true</enabled>
+                    </upToDateChecking>
+                </configuration>
+            </plugin>
+
         </plugins>
 
     </build>
@@ -829,6 +842,224 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                         </executions>
                     </plugin>
 
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>spotless-check</id>
+
+            <properties>
+                <spotless.check.skip>false</spotless.check.skip>
+            </properties>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <phase>validate</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>spotless-apply</id>
+
+            <properties>
+                <spotless.check.skip>false</spotless.check.skip>
+            </properties>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>apply</goal>
+                                </goals>
+                                <phase>verify</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>spotless-java-sort-imports</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <configuration>
+                            <java>
+                                <toggleOffOn>
+                                    <off>@formatter:off</off>
+                                    <on>@formatter:on</on>
+                                </toggleOffOn>
+
+                                <importOrder>
+                                    <!-- use an empty string for all the imports not specified explicitly, '|' to join group without blank line, and '\#` prefix for static imports. -->
+                                    <order>java,javax,,\#java|\#javax,\#</order>
+                                </importOrder>
+
+                                <removeUnusedImports />
+                            </java>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>spotless-java-unused-imports</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <configuration>
+                            <java>
+                                <toggleOffOn>
+                                    <off>@formatter:off</off>
+                                    <on>@formatter:on</on>
+                                </toggleOffOn>
+
+                                <removeUnusedImports />
+                            </java>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>spotless-java-cleanthat</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <configuration>
+                            <java>
+                                <toggleOffOn>
+                                    <off>@formatter:off</off>
+                                    <on>@formatter:on</on>
+                                </toggleOffOn>
+
+                                <!-- Cleanthat will refactor code, but it may break style: apply it before formatter -->
+                                <cleanthat />
+                            </java>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>spotless-pom</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <configuration>
+                            <pom>
+                                <toggleOffOn />
+
+                                <sortPom>
+                                    <expandEmptyElements>false</expandEmptyElements>
+                                    <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
+                                    <keepBlankLines>true</keepBlankLines>
+                                    <nrOfIndentSpace>4</nrOfIndentSpace>
+
+                                    <!-- Sort order of elements: https://github.com/Ekryd/sortpom/wiki/PredefinedSortOrderProfiles-->
+                                    <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
+
+                                    <!-- Custom sort order of elements: https://raw.githubusercontent.com/Ekryd/sortpom/master/sorter/src/main/resources/custom_1.xml -->
+                                    <sortOrderFile />
+                                </sortPom>
+                            </pom>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>spotless-markdown</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <configuration>
+                            <markdown>
+                                <toggleOffOn />
+
+                                <includes>
+                                    <include>**/*.md</include>
+                                </includes>
+
+                                <excludes>
+                                    <exclude>**/target/**/*.md</exclude>
+                                </excludes>
+
+                                <flexmark />
+                            </markdown>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>spotless-yaml</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <configuration>
+                            <yaml>
+                                <toggleOffOn />
+
+                                <includes>
+                                    <include>**/*.yaml</include>
+                                    <include>**/*.yml</include>
+                                </includes>
+
+                                <excludes>
+                                    <exclude>**/target/**/*.yaml</exclude>
+                                    <exclude>**/target/**/*.yml</exclude>
+                                </excludes>
+
+                                <prettier>
+                                    <config>
+                                        <singleQuote>false</singleQuote>
+                                    </config>
+                                </prettier>
+                            </yaml>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
