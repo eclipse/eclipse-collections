@@ -10,9 +10,14 @@
 
 package org.eclipse.collections.test.map.mutable;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.junit.jupiter.api.Test;
 
@@ -83,6 +88,46 @@ public interface MapTestCase
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map2);
         }
+    }
+
+    @Test
+    default void Map_keySet_equals()
+    {
+        Map<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Set<Integer> expected = new HashSetNoIterator<>();
+        expected.add(3);
+        expected.add(2);
+        expected.add(1);
+        assertEquals(expected, map.keySet());
+    }
+
+    @Test
+    default void Map_keySet_forEach()
+    {
+        Map<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        MutableSet<Integer> actual = Sets.mutable.with();
+        map.keySet().forEach(actual::add);
+        assertEquals(Sets.immutable.with(3, 2, 1), actual);
+    }
+
+    @Test
+    default void Map_entrySet_equals()
+    {
+        Map<Integer, String> map = this.newWithKeysValues(1, "One", 2, "Two", 3, "Three");
+        Set<Map.Entry<Integer, String>> expected = new HashSetNoIterator<>();
+        expected.add(ImmutableEntry.of(1, "One"));
+        expected.add(ImmutableEntry.of(2, "Two"));
+        expected.add(ImmutableEntry.of(3, "Three"));
+        assertEquals(expected, map.entrySet());
+    }
+
+    @Test
+    default void Map_entrySet_forEach()
+    {
+        Map<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        MutableSet<String> actual = Sets.mutable.with();
+        map.entrySet().forEach(each -> actual.add(each.getValue()));
+        assertEquals(Sets.immutable.with("Three", "Two", "One"), actual);
     }
 
     @Test
@@ -265,6 +310,15 @@ public interface MapTestCase
         public int compareTo(AlwaysEqual o)
         {
             return 0;
+        }
+    }
+
+    class HashSetNoIterator<T> extends HashSet<T>
+    {
+        @Override
+        public Iterator<T> iterator()
+        {
+            throw new AssertionError();
         }
     }
 }
