@@ -26,6 +26,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
@@ -2375,6 +2376,12 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         }
 
         @Override
+        public void forEach(Consumer<? super K> action)
+        {
+            UnifiedMapWithHashingStrategy.this.forEachKey(action::accept);
+        }
+
+        @Override
         public void forEach(Procedure<? super K> procedure)
         {
             UnifiedMapWithHashingStrategy.this.forEachKey(procedure);
@@ -2694,6 +2701,12 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
     {
         private static final long serialVersionUID = 1L;
         private transient WeakReference<UnifiedMapWithHashingStrategy<K, V>> holder = new WeakReference<>(UnifiedMapWithHashingStrategy.this);
+
+        @Override
+        public void forEach(Consumer<? super Entry<K, V>> action)
+        {
+            this.forEach(action::accept);
+        }
 
         @Override
         public boolean add(Entry<K, V> entry)
