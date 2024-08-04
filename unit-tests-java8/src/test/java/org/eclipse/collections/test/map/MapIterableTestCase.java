@@ -10,18 +10,25 @@
 
 package org.eclipse.collections.test.map;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.test.RichIterableWithDuplicatesTestCase;
 import org.junit.jupiter.api.Test;
@@ -333,5 +340,54 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MutableCollection<String> forEach2 = this.newMutableForFilter();
         map2.forEach((key, value) -> forEach2.add(key + value));
         assertIterablesEqual(this.newMutableForFilter("3Three", "2Two", "1Three"), forEach2);
+    }
+
+    @Test
+    default void MapIterable_keySet_equals()
+    {
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Set<Integer> expected = new HashSetNoIterator<>();
+        expected.add(3);
+        expected.add(2);
+        expected.add(1);
+        assertEquals(expected, map.keySet());
+    }
+
+    @Test
+    default void MapIterable_keySet_forEach()
+    {
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        MutableSet<Integer> actual = Sets.mutable.with();
+        map.keySet().forEach(actual::add);
+        assertEquals(Sets.immutable.with(3, 2, 1), actual);
+    }
+
+    @Test
+    default void MapIterable_entrySet_equals()
+    {
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(1, "One", 2, "Two", 3, "Three");
+        Set<Map.Entry<Integer, String>> expected = new HashSetNoIterator<>();
+        expected.add(ImmutableEntry.of(1, "One"));
+        expected.add(ImmutableEntry.of(2, "Two"));
+        expected.add(ImmutableEntry.of(3, "Three"));
+        assertEquals(expected, map.entrySet());
+    }
+
+    @Test
+    default void MapIterable_entrySet_forEach()
+    {
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        MutableSet<String> actual = Sets.mutable.with();
+        map.entrySet().forEach(each -> actual.add(each.getValue()));
+        assertEquals(Sets.immutable.with("Three", "Two", "One"), actual);
+    }
+
+    class HashSetNoIterator<T> extends HashSet<T>
+    {
+        @Override
+        public Iterator<T> iterator()
+        {
+            throw new AssertionError();
+        }
     }
 }
