@@ -190,4 +190,20 @@ public interface UnmodifiableMutableMapIterableTestCase
         }));
         assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
     }
+
+    @Override
+    @Test
+    default void Map_entrySet_setValue()
+    {
+        Map<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
+        map.entrySet().forEach(each -> assertThrows(UnsupportedOperationException.class, () -> each.setValue(each.getValue() + 1)));
+        assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
+    }
+
+    @Override
+    @Test
+    default void MutableMapIterable_entrySet_setValue()
+    {
+        this.Map_entrySet_setValue();
+    }
 }
