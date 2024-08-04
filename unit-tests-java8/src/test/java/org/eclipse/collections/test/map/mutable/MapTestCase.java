@@ -115,6 +115,14 @@ public interface MapTestCase
     }
 
     @Test
+    default void Map_entrySet_setValue()
+    {
+        Map<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
+        map.entrySet().forEach(each -> each.setValue(each.getValue() + 1));
+        assertIterablesEqual(this.newWithKeysValues("3", 4, "2", 3, "1", 2), map);
+    }
+
+    @Test
     default void Map_put()
     {
         Map<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
