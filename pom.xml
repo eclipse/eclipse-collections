@@ -484,19 +484,6 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                         </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
-
-                <plugin>
-                    <groupId>biz.aQute.bnd</groupId>
-                    <artifactId>bnd-maven-plugin</artifactId>
-                    <version>6.4.0</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>bnd-process</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -1064,6 +1051,36 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
             </build>
         </profile>
         <!--endregion Phase 1: validate-->
+
+        <!--region Phase 8: process-classes-->
+        <profile>
+            <id>bnd-maven-plugin</id>
+
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>biz.aQute.bnd</groupId>
+                        <artifactId>bnd-maven-plugin</artifactId>
+                        <version>6.4.0</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>bnd-process</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--endregion Phase 8: process-classes-->
 
         <!--region Phase 16: prepare-package-->
         <profile>
