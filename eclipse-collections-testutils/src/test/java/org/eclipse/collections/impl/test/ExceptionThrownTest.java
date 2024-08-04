@@ -49,7 +49,7 @@ public class ExceptionThrownTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(ExceptionThrownTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains(ExceptionThrownTest.class.getName(), e.getStackTrace()[2].toString());
         }
     }
 
@@ -69,7 +69,7 @@ public class ExceptionThrownTest
         }
         catch (AssertionError e)
         {
-            Verify.assertContains(ExceptionThrownTest.class.getName(), e.getStackTrace()[0].toString());
+            Verify.assertContains(ExceptionThrownTest.class.getName(), e.getStackTrace()[4].toString());
         }
     }
 
