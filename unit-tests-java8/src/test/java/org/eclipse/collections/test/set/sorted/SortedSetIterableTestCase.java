@@ -29,11 +29,11 @@ import org.eclipse.collections.test.domain.B;
 import org.eclipse.collections.test.domain.C;
 import org.eclipse.collections.test.list.TransformsToListTrait;
 import org.eclipse.collections.test.set.SetIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIterableTestCase, TransformsToListTrait
 {

@@ -12,10 +12,7 @@ package org.eclipse.collections.test.stack.mutable;
 
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class ArrayStackTest implements MutableStackTestCase
 {
     @SafeVarargs

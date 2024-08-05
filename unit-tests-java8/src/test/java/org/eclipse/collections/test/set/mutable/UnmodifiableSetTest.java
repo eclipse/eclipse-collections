@@ -15,11 +15,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.set.UnmodifiableSetTestCase;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class UnmodifiableSetTest
         implements UnmodifiableSetTestCase
 {

@@ -11,7 +11,7 @@
 package org.eclipse.collections.test.set.sorted;
 
 import org.eclipse.collections.test.FixedSizeCollectionTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public interface UnmodifiableSortedSetTestCase extends FixedSizeCollectionTestCase, SortedSetTestCase
 {

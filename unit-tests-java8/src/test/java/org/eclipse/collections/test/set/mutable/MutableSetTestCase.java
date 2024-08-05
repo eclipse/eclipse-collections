@@ -14,7 +14,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionUniqueTestCase;
 import org.eclipse.collections.test.set.SetTestCase;
 import org.eclipse.collections.test.set.UnsortedSetIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 

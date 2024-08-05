@@ -16,10 +16,10 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
 import org.eclipse.collections.test.map.MapIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTestCase
 {

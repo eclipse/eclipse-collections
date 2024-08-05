@@ -13,13 +13,10 @@ package org.eclipse.collections.test.map.mutable.sorted;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
-@RunWith(Java8Runner.class)
 public class TreeSortedMapTest implements MutableSortedMapIterableTestCase
 {
     @Override

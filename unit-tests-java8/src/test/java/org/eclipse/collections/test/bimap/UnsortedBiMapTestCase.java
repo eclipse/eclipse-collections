@@ -17,7 +17,7 @@ import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
 import org.eclipse.collections.test.set.UnsortedSetLikeTestTrait;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;

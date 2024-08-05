@@ -44,16 +44,16 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface IterableTestCase
 {
@@ -111,8 +111,8 @@ public interface IterableTestCase
 
         assertEquals(o1, o2);
 
-        assertNotNull("Neither item should equal null", o1);
-        assertNotNull("Neither item should equal null", o2);
+        assertNotNull(o1, "Neither item should equal null");
+        assertNotNull(o2, "Neither item should equal null");
         assertIterablesNotEqual("Neither item should equal new Object()", o1.equals(new Object()));
         assertIterablesNotEqual("Neither item should equal new Object()", o2.equals(new Object()));
         assertEquals(o1, o1);
@@ -172,8 +172,8 @@ public interface IterableTestCase
         assertNotEquals(o1, o2);
         assertNotEquals(o2, o1);
 
-        assertNotNull("Neither item should equal null", o1);
-        assertNotNull("Neither item should equal null", o2);
+        assertNotNull(o1, "Neither item should equal null");
+        assertNotNull(o2, "Neither item should equal null");
         assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
         assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
         assertEquals(o1, o1);

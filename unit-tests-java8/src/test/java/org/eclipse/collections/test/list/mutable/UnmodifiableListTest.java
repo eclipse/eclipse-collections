@@ -15,11 +15,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.list.UnmodifiableListTestCase;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class UnmodifiableListTest
         implements UnmodifiableListTestCase
 {

@@ -17,12 +17,12 @@ import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.test.CollisionsTestCase;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesNotEqual;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public interface SetIterableTestCase extends RichIterableUniqueTestCase, CollisionsTestCase
 {

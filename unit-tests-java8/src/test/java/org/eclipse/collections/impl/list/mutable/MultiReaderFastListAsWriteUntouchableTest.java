@@ -11,15 +11,12 @@
 package org.eclipse.collections.impl.list.mutable;
 
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.list.mutable.MutableListTestCase;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertNotSerializable;
 
-@RunWith(Java8Runner.class)
 public class MultiReaderFastListAsWriteUntouchableTest implements MutableListTestCase
 {
     @SafeVarargs

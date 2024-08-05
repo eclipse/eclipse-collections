@@ -14,11 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.list.mutable.MutableListTestCase;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class RandomAccessListAdapterTest implements MutableListTestCase
 {
     @SafeVarargs

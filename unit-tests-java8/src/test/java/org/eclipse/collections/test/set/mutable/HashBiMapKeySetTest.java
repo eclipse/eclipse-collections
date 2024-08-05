@@ -14,14 +14,11 @@ import java.util.Set;
 
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.set.SetTestCase;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@RunWith(Java8Runner.class)
 public class HashBiMapKeySetTest implements SetTestCase
 {
     @SafeVarargs

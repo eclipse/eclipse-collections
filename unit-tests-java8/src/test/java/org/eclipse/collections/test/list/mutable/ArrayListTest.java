@@ -14,11 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.list.ListTestCase;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class ArrayListTest implements ListTestCase
 {
     @SafeVarargs

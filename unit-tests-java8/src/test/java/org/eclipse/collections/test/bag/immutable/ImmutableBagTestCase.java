@@ -13,7 +13,7 @@ package org.eclipse.collections.test.bag.immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.test.bag.UnsortedBagTestCase;
 import org.eclipse.collections.test.collection.immutable.ImmutableCollectionTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public interface ImmutableBagTestCase extends ImmutableCollectionTestCase, UnsortedBagTestCase
 {

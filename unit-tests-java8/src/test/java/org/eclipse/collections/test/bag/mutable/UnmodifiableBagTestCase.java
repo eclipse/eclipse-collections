@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.test.bag.mutable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public interface UnmodifiableBagTestCase extends MutableBagTestCase, UnmodifiableBagIterableTestCase
 {
