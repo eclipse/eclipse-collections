@@ -14,6 +14,8 @@ import java.util.Collections;
 
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.impl.block.factory.Predicates2;
@@ -26,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTestCase
@@ -75,6 +78,30 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTest
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map2);
         }
+    }
+
+    @Test
+    default void MutableMapIterable_removeAllKeys()
+    {
+        MutableMapIterable<Integer, String> map = this.newWithKeysValues(1, "1", 2, "Two", 3, "Three");
+
+        assertThrows(NullPointerException.class, () -> map.removeAllKeys(null));
+        assertFalse(map.removeAllKeys(Sets.mutable.empty()));
+        assertFalse(map.removeAllKeys(Sets.mutable.with(4)));
+        assertFalse(map.removeAllKeys(Sets.mutable.with(4, 5, 6)));
+        assertFalse(map.removeAllKeys(Sets.mutable.with(4, 5, 6, 7, 8, 9)));
+        assertIterablesEqual(this.newWithKeysValues(1, "1", 2, "Two", 3, "Three"), map);
+
+        assertTrue(map.removeAllKeys(Sets.mutable.with(1)));
+        assertIterablesEqual(this.newWithKeysValues(2, "Two", 3, "Three"), map);
+        assertTrue(map.removeAllKeys(Sets.mutable.with(3, 4, 5, 6, 7)));
+        assertIterablesEqual(this.newWithKeysValues(2, "Two"), map);
+
+        map.putAll(Maps.mutable.with(4, "Four", 5, "Five", 6, "Six", 7, "Seven"));
+        assertTrue(map.removeAllKeys(Sets.mutable.with(2, 3, 9, 10)));
+        assertIterablesEqual(this.newWithKeysValues(4, "Four", 5, "Five", 6, "Six", 7, "Seven"), map);
+        assertTrue(map.removeAllKeys(Sets.mutable.with(5, 3, 7, 8, 9)));
+        assertIterablesEqual(Maps.mutable.with(4, "Four", 6, "Six"), map);
     }
 
     @Test
