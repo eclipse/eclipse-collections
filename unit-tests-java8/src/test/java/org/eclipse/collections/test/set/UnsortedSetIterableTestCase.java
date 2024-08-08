@@ -13,7 +13,7 @@ package org.eclipse.collections.test.set;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public interface UnsortedSetIterableTestCase extends SetIterableTestCase, TransformsToUnsortedSetTrait, UnsortedSetLikeTestTrait
 {

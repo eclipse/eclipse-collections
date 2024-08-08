@@ -16,17 +16,14 @@ import java.util.Optional;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.lazy.SelectInstancesOfIterable;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.LazyNoIteratorTestCase;
 import org.eclipse.collections.test.NoDetectOptionalNullTestCase;
 import org.eclipse.collections.test.list.mutable.FastListNoIterator;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
-@RunWith(Java8Runner.class)
 public class SelectInstancesOfIterableTestNoIteratorTest implements LazyNoIteratorTestCase, NoDetectOptionalNullTestCase
 {
     @Override

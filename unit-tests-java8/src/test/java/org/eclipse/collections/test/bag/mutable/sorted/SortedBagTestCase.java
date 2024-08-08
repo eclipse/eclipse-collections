@@ -22,7 +22,7 @@ import org.eclipse.collections.test.domain.A;
 import org.eclipse.collections.test.domain.B;
 import org.eclipse.collections.test.domain.C;
 import org.eclipse.collections.test.list.TransformsToListTrait;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 

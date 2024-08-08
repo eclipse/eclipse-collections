@@ -14,14 +14,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.collections.api.factory.Lists;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.list.FixedSizeListTestCase;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@RunWith(Java8Runner.class)
 public class ArraysAsListTest
         implements FixedSizeListTestCase
 {

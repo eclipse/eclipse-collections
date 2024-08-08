@@ -13,11 +13,11 @@ package org.eclipse.collections.test;
 import java.util.Iterator;
 
 import org.eclipse.collections.impl.utility.Iterate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
-import static org.junit.Assert.assertThat;
 
 public interface MutableUnorderedIterableTestCase extends UnorderedIterableTestCase
 {

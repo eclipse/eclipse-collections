@@ -13,10 +13,7 @@ package org.eclipse.collections.test.bag.immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.impl.bag.immutable.ImmutableHashBag;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class ImmutableHashBagTest implements ImmutableBagTestCase
 {
     @SafeVarargs

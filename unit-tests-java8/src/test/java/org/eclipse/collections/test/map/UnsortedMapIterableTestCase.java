@@ -20,7 +20,7 @@ import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.UnsortedMapIterable;
 import org.eclipse.collections.test.UnorderedIterableTestCase;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;

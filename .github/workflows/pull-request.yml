@@ -250,11 +250,11 @@ jobs:
       - name: Build Generator
         run: ./mvnw --color=always -Dsurefire.useFile=false -DskipTests -Denforcer.skip=true clean install --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin'
       - name: JavaDoc Aggregate
-        run: ./mvnw --color=always --activate-profiles maven-javadoc-plugin -DskipTests -Denforcer.skip=true clean javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
+        run: ./mvnw --color=always --activate-profiles maven-javadoc-plugin -DskipTests -Denforcer.skip=true clean javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!unit-tests-java8,!test-coverage'
         env:
           MAVEN_OPTS: "-Xmx1g"
       - name: JavaDoc Jar
-        run: ./mvnw --color=always --activate-profiles maven-javadoc-plugin -DskipTests -Denforcer.skip=true clean install javadoc:jar --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
+        run: ./mvnw --color=always --activate-profiles maven-javadoc-plugin -DskipTests -Denforcer.skip=true clean install javadoc:jar --projects '!unit-tests,!serialization-tests,!jcstress-tests,!unit-tests-java8,!test-coverage'
         env:
           MAVEN_OPTS: "-Xmx1g"
 
@@ -293,7 +293,7 @@ jobs:
       - name: Build Generator
         run: ./mvnw --threads 2C --color=always -DskipTests install --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin'
       - name: Javadoc
-        run: ./mvnw --threads 2C --color=always --activate-profiles maven-javadoc-plugin -DskipTests javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!junit-trait-runner,!unit-tests-java8,!test-coverage'
+        run: ./mvnw --threads 2C --color=always --activate-profiles maven-javadoc-plugin -DskipTests javadoc:aggregate install --projects '!unit-tests,!serialization-tests,!jcstress-tests,!unit-tests-java8,!test-coverage'
         env:
           MAVEN_OPTS: "-Xmx2g"
       - name: 'Clean Maven cache'

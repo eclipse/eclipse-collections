@@ -14,11 +14,8 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
-@RunWith(Java8Runner.class)
 public class CompositeFastListTest implements MutableListTestCase
 {
     @SafeVarargs

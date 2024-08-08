@@ -14,12 +14,9 @@ import java.util.Iterator;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.NoIteratorTestCase;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class HashBagNoIteratorTest implements MutableBagTestCase, NoIteratorTestCase
 {
     @SafeVarargs

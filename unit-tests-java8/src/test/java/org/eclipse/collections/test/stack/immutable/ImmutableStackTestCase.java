@@ -17,11 +17,11 @@ import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.test.stack.StackIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface ImmutableStackTestCase extends StackIterableTestCase
 {

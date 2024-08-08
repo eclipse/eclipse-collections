@@ -16,16 +16,13 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.map.immutable.ImmutableMapTestCase;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
-@RunWith(Java8Runner.class)
 public class ImmutableUnifiedMapWithHashingStrategyTest implements ImmutableMapTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();

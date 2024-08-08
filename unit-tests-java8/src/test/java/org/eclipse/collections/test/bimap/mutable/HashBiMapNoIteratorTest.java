@@ -17,14 +17,11 @@ import java.util.Set;
 
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.NoIteratorTestCase;
-import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
-@RunWith(Java8Runner.class)
 public class HashBiMapNoIteratorTest implements MutableBiMapTestCase, NoIteratorTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();

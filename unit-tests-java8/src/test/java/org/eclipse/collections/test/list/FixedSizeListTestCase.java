@@ -17,7 +17,7 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.test.FixedSizeCollectionTestCase;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, ListTestCase
 {

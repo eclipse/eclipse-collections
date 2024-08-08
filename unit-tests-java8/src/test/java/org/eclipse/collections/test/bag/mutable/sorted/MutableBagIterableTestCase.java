@@ -13,12 +13,12 @@ package org.eclipse.collections.test.bag.mutable.sorted;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface MutableBagIterableTestCase extends MutableCollectionTestCase
 {

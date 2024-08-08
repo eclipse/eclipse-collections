@@ -14,13 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-
-@RunWith(Java8Runner.class)
 public class HashMapTest implements MapTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();

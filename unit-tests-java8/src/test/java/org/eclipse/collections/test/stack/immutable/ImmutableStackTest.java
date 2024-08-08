@@ -12,10 +12,7 @@ package org.eclipse.collections.test.stack.immutable;
 
 import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class ImmutableStackTest implements ImmutableStackTestCase
 {
     @SafeVarargs

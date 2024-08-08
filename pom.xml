@@ -108,7 +108,6 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
         <module>unit-tests</module>
         <module>serialization-tests</module>
         <module>jcstress-tests</module>
-        <module>junit-trait-runner</module>
         <module>unit-tests-java8</module>
         <module>test-coverage</module>
     </modules>

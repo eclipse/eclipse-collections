@@ -16,14 +16,11 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.impl.lazy.FlatCollectIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.LazyNoIteratorTestCase;
 import org.eclipse.collections.test.list.mutable.FastListNoIterator;
-import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@RunWith(Java8Runner.class)
 public class FlatCollectIterableTestNoIteratorTest implements LazyNoIteratorTestCase
 {
     @Override
