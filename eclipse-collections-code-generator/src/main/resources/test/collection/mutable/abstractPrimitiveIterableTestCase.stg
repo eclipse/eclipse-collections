@@ -917,6 +917,27 @@ public void sumConsistentRounding()
     }
 
     @Test
+    public void toSizedArray()
+    {
+        <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
+        <type>[] sizeThree = iterable.toSizedArray(3);
+        Assert.assertTrue(Arrays.equals(new <type>[]{<["1", "2", "0"]:(literal.(type))(); separator=", ">}, sizeThree)
+                || Arrays.equals(new <type>[]{<["2", "1", "0"]:(literal.(type))(); separator=", ">}, sizeThree)
+                || Arrays.equals(new <type>[]{<["0", "1", "2"]:(literal.(type))(); separator=", ">}, sizeThree)
+                || Arrays.equals(new <type>[]{<["0", "2", "1"]:(literal.(type))(); separator=", ">}, sizeThree)
+                || Arrays.equals(new <type>[]{<["2", "0", "1"]:(literal.(type))(); separator=", ">}, sizeThree)
+                || Arrays.equals(new <type>[]{<["1", "0", "2"]:(literal.(type))(); separator=", ">}, sizeThree));
+        <type>[] sizeTwo = iterable.toSizedArray(2);
+        Assert.assertTrue(Arrays.equals(new <type>[]{<["1", "2"]:(literal.(type))(); separator=", ">}, sizeTwo)
+                || Arrays.equals(new <type>[]{<["2", "1"]:(literal.(type))(); separator=", ">}, sizeTwo));
+        <type>[] sizeOne = iterable.toSizedArray(1);
+        Assert.assertTrue(Arrays.equals(new <type>[]{<["1"]:(literal.(type))(); separator=", ">}, sizeOne)
+                || Arrays.equals(new <type>[]{<["2"]:(literal.(type))(); separator=", ">}, sizeOne));
+        <type>[] sizeZero = iterable.toSizedArray(0);
+        Assert.assertTrue(Arrays.equals(new <type>[]{}, sizeZero));
+    }
+
+    @Test
     public void toArrayWithTargetArray()
     {
         <type>[] originalAsSortedArray = this.classUnderTest().toSortedArray();
