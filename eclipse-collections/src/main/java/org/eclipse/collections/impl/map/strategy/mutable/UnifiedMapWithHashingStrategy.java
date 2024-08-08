@@ -26,6 +26,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
@@ -2442,17 +2443,63 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         }
 
         @Override
-        public boolean equals(Object obj)
+        public boolean equals(Object object)
         {
-            if (obj instanceof Set)
+            if (this == object)
             {
-                Set<?> other = (Set<?>) obj;
-                if (other.size() == this.size())
+                return true;
+            }
+
+            if (!(object instanceof Set))
+            {
+                return false;
+            }
+
+            Set<?> other = (Set<?>) object;
+            if (this.size() != other.size())
+            {
+                return false;
+            }
+
+            for (int i = 0; i < UnifiedMapWithHashingStrategy.this.table.length; i += 2)
+            {
+                Object cur = UnifiedMapWithHashingStrategy.this.table[i];
+                if (cur == CHAINED_KEY)
                 {
-                    return this.containsAll(other);
+                    if (!this.chainedEquals((Object[]) UnifiedMapWithHashingStrategy.this.table[i + 1], other))
+                    {
+                        return false;
+                    }
+                }
+                else if (cur != null)
+                {
+                    K key = UnifiedMapWithHashingStrategy.this.nonSentinel(cur);
+                    if (!other.contains(key))
+                    {
+                        return false;
+                    }
                 }
             }
-            return false;
+
+            return true;
+        }
+
+        private boolean chainedEquals(Object[] chain, Set<?> other)
+        {
+            for (int i = 0; i < chain.length; i += 2)
+            {
+                Object cur = chain[i];
+                if (cur == null)
+                {
+                    return true;
+                }
+                K key = UnifiedMapWithHashingStrategy.this.nonSentinel(cur);
+                if (!other.contains(key))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         @Override
@@ -2694,6 +2741,12 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
     {
         private static final long serialVersionUID = 1L;
         private transient WeakReference<UnifiedMapWithHashingStrategy<K, V>> holder = new WeakReference<>(UnifiedMapWithHashingStrategy.this);
+
+        @Override
+        public void forEach(Consumer<? super Entry<K, V>> action)
+        {
+            this.forEach((Procedure<Entry<K, V>>) action::accept);
+        }
 
         @Override
         public boolean add(Entry<K, V> entry)
@@ -3024,17 +3077,65 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         }
 
         @Override
-        public boolean equals(Object obj)
+        public boolean equals(Object object)
         {
-            if (obj instanceof Set)
+            if (this == object)
             {
-                Set<?> other = (Set<?>) obj;
-                if (other.size() == this.size())
+                return true;
+            }
+
+            if (!(object instanceof Set))
+            {
+                return false;
+            }
+
+            Set<?> other = (Set<?>) object;
+            if (this.size() != other.size())
+            {
+                return false;
+            }
+
+            for (int i = 0; i < UnifiedMapWithHashingStrategy.this.table.length; i += 2)
+            {
+                Object cur = UnifiedMapWithHashingStrategy.this.table[i];
+                if (cur == CHAINED_KEY)
                 {
-                    return this.containsAll(other);
+                    if (!this.chainedEquals((Object[]) UnifiedMapWithHashingStrategy.this.table[i + 1], other))
+                    {
+                        return false;
+                    }
+                }
+                else if (cur != null)
+                {
+                    K key = UnifiedMapWithHashingStrategy.this.nonSentinel(cur);
+                    V value = (V) UnifiedMapWithHashingStrategy.this.table[i + 1];
+                    if (!other.contains(ImmutableEntry.of(key, value)))
+                    {
+                        return false;
+                    }
                 }
             }
-            return false;
+
+            return true;
+        }
+
+        private boolean chainedEquals(Object[] chain, Set<?> other)
+        {
+            for (int i = 0; i < chain.length; i += 2)
+            {
+                Object cur = chain[i];
+                if (cur == null)
+                {
+                    return true;
+                }
+                K key = UnifiedMapWithHashingStrategy.this.nonSentinel(cur);
+                V value = (V) chain[i + 1];
+                if (!other.contains(ImmutableEntry.of(key, value)))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         @Override
