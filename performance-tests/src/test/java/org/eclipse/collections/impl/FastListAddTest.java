@@ -13,8 +13,8 @@ package org.eclipse.collections.impl;
 import java.util.Random;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class FastListAddTest
     private static final Logger LOGGER = LoggerFactory.getLogger(FastListAddTest.class);
 
     @Test
-    @Category(PerformanceTests.class)
+    @Tag(JunitTags.PERFORMANCE_TEST_TAG)
     public void runFastListAdd()
     {
         this.runIntegerFastListAdd("integer");

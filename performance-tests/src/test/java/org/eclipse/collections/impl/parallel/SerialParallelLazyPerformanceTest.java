@@ -32,7 +32,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.impl.ParallelTests;
+import org.eclipse.collections.impl.JunitTags;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Procedures;
@@ -46,8 +46,8 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -169,42 +169,42 @@ public class SerialParallelLazyPerformanceTest
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void forEach()
     {
         this.measureAlgorithmForIntegerIterable("forEach", each -> this.forEach(each.value()), true);
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void toList()
     {
         this.measureAlgorithmForIntegerIterable("toList", each -> this.toList(each.value()), true);
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void select()
     {
         this.measureAlgorithmForIntegerIterable("Select", each -> this.select(each.value()), true);
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void reject()
     {
         this.measureAlgorithmForIntegerIterable("Reject", each -> this.reject(each.value()), true);
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void anySatisfyShortCircuitInBeginning()
     {
         this.measureAlgorithmForIntegerIterable("AnySatisfy Short Circuit In The Beginning", each -> this.anySatisfy(each.value(), 2, true), false);
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void anySatisfyShortCircuitInMiddle()
     {
         this.measureAlgorithmForIntegerIterable(
@@ -214,7 +214,7 @@ public class SerialParallelLazyPerformanceTest
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void anySatisfyShortCircuitInEnd()
     {
         this.measureAlgorithmForIntegerIterable(
@@ -224,7 +224,7 @@ public class SerialParallelLazyPerformanceTest
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void detectShortCircuitInBeginning()
     {
         this.measureAlgorithmForIntegerIterable(
@@ -234,7 +234,7 @@ public class SerialParallelLazyPerformanceTest
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void detectShortCircuitInMiddle()
     {
         this.measureAlgorithmForIntegerIterable(
@@ -244,7 +244,7 @@ public class SerialParallelLazyPerformanceTest
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void detectShortCircuitInEnd()
     {
         this.measureAlgorithmForIntegerIterable(
@@ -254,14 +254,14 @@ public class SerialParallelLazyPerformanceTest
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void collect()
     {
         this.measureAlgorithmForIntegerIterable("Collect", each -> this.collect(each.value()), true);
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void groupBy()
     {
         this.measureAlgorithmForRandomStringIterable("GroupBy", each -> this.groupBy(each.value()));
