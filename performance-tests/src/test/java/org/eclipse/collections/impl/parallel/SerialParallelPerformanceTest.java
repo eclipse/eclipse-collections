@@ -24,7 +24,7 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.ParallelTests;
+import org.eclipse.collections.impl.JunitTags;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Procedures;
@@ -40,8 +40,8 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,56 +72,56 @@ public class SerialParallelPerformanceTest
     private static final Function2<Integer, String, Integer> COUNT_AGGREGATOR = (aggregate, word) -> aggregate + 1;
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void select()
     {
         this.measureAlgorithmForIntegerIterable("Select", each -> this.select(each.value()));
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void reject()
     {
         this.measureAlgorithmForIntegerIterable("Reject", each -> this.reject(each.value()));
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void count()
     {
         this.measureAlgorithmForIntegerIterable("Count", each -> this.count(each.value()));
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void collectIf()
     {
         this.measureAlgorithmForIntegerIterable("CollectIf", each -> this.collectIf(each.value()));
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void collect()
     {
         this.measureAlgorithmForIntegerIterable("Collect", each -> this.collect(each.value()));
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void groupBy()
     {
         this.measureAlgorithmForRandomStringIterable("GroupBy", each -> this.groupBy(each.value()));
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void aggregateBy()
     {
         this.measureAlgorithmForRandomStringIterable("AggregateBy", each -> this.aggregateBy(each.value()));
     }
 
     @Test
-    @Category(ParallelTests.class)
+    @Tag(JunitTags.PARALLEL_TEST_TAG)
     public void aggregateInPlaceBy()
     {
         this.measureAlgorithmForRandomStringIterable(
