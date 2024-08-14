@@ -23,8 +23,10 @@ import java.util.stream.StreamSupport;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link BoxedMutable<name>List}.
@@ -61,27 +63,27 @@ public class BoxedMutable<name>ListTest
         BoxedMutable<name>List list = this.classUnderTest();
         list.add(<(literal.(type))("4")>);
         list.add(<(literal.(type))("7")>);
-        Assert.assertEquals(new BoxedMutable<name>List(new <name>ArrayList(<["1", "2", "3", "4", "7"]:(literal.(type))(); separator=", ">)), list);
+        assertEquals(new BoxedMutable<name>List(new <name>ArrayList(<["1", "2", "3", "4", "7"]:(literal.(type))(); separator=", ">)), list);
     }
 
     @Test
     public void remove()
     {
-        Assert.assertEquals(<(literal.(type))("2")>, (<type>) this.classUnderTest().remove(1)<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("2")>, (<type>) this.classUnderTest().remove(1)<wideDelta.(type)>);
     }
 
     @Test
     public void removeIndexOutOfBounds()
     {
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().remove(10));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().remove(10));
     }
 
     @Test
     public void indexOf()
     {
         BoxedMutable<name>List list = this.classUnderTest();
-        Assert.assertEquals(1, list.indexOf(<(literal.(type))("2")>));
-        Assert.assertEquals(-1, list.indexOf(<(literal.(type))("5")>));
+        assertEquals(1, list.indexOf(<(literal.(type))("2")>));
+        assertEquals(-1, list.indexOf(<(literal.(type))("5")>));
     }
 
     @Test
@@ -89,20 +91,20 @@ public class BoxedMutable<name>ListTest
     {
         BoxedMutable<name>List list = this.classUnderTest();
         list.add(<(literal.(type))("1")>);
-        Assert.assertEquals(3, list.lastIndexOf(<(literal.(type))("1")>));
-        Assert.assertEquals(1, list.lastIndexOf(<(literal.(type))("2")>));
-        Assert.assertEquals(-1, list.indexOf(<(literal.(type))("5")>));
+        assertEquals(3, list.lastIndexOf(<(literal.(type))("1")>));
+        assertEquals(1, list.lastIndexOf(<(literal.(type))("2")>));
+        assertEquals(-1, list.indexOf(<(literal.(type))("5")>));
     }
 
     @Test
     public void set()
     {
         BoxedMutable<name>List list = this.classUnderTest();
-        Assert.assertEquals(<(literal.(type))("2")>, (<type>) list.set(1, <(literal.(type))("5")>)<wideDelta.(type)>);
-        Assert.assertEquals(new BoxedMutable<name>List(new <name>ArrayList(<["1", "5", "3"]:(literal.(type))(); separator=", ">)), list);
+        assertEquals(<(literal.(type))("2")>, (<type>) list.set(1, <(literal.(type))("5")>)<wideDelta.(type)>);
+        assertEquals(new BoxedMutable<name>List(new <name>ArrayList(<["1", "5", "3"]:(literal.(type))(); separator=", ">)), list);
 
-        Assert.assertEquals(<(literal.(type))("5")>, (<type>) list.set(1, <(literal.(type))("7")>)<wideDelta.(type)>);
-        Assert.assertEquals(new BoxedMutable<name>List(new <name>ArrayList(<["1", "7", "3"]:(literal.(type))(); separator=", ">)), list);
+        assertEquals(<(literal.(type))("5")>, (<type>) list.set(1, <(literal.(type))("7")>)<wideDelta.(type)>);
+        assertEquals(new BoxedMutable<name>List(new <name>ArrayList(<["1", "7", "3"]:(literal.(type))(); separator=", ">)), list);
     }
 
     @Test
@@ -110,16 +112,16 @@ public class BoxedMutable<name>ListTest
     {
         <name>ArrayList originalList = new <name>ArrayList(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         BoxedMutable<name>List list = new BoxedMutable<name>List(originalList);
-        Assert.assertEquals(list, Lists.mutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        assertEquals(list, Lists.mutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
 
         originalList.add(<(literal.(type))("4")>);
-        Assert.assertEquals(list, Lists.mutable.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        assertEquals(list, Lists.mutable.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
 
         originalList.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(list, Lists.mutable.of(<["1", "3", "4"]:(literal.(type))(); separator=", ">));
+        assertEquals(list, Lists.mutable.of(<["1", "3", "4"]:(literal.(type))(); separator=", ">));
 
         originalList.addAllAtIndex(1, <["7", "8", "9"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(list, Lists.mutable.of(<["1", "7", "8", "9", "3", "4"]:(literal.(type))(); separator=", ">));
+        assertEquals(list, Lists.mutable.of(<["1", "7", "8", "9", "3", "4"]:(literal.(type))(); separator=", ">));
 
         originalList.clear();
         Verify.assertEmpty(list);
@@ -128,21 +130,21 @@ public class BoxedMutable<name>ListTest
     @Test
     public void setIndexOutOfBounds()
     {
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().set(5, <(literal.(type))("5")>));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().set(5, <(literal.(type))("5")>));
     }
 
     @Test
     public void get()
     {
         BoxedMutable<name>List list = this.classUnderTest();
-        Assert.assertEquals(<(literal.(type))("1")>, (<type>) list.get(0)<wideDelta.(type)>);
-        Assert.assertEquals(<(literal.(type))("2")>, (<type>) list.get(1)<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("1")>, (<type>) list.get(0)<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("2")>, (<type>) list.get(1)<wideDelta.(type)>);
     }
 
     @Test
     public void getIndexOutOfBounds()
     {
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(5));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.classUnderTest().get(5));
     }
 
     @Test
@@ -150,20 +152,20 @@ public class BoxedMutable<name>ListTest
     {
         BoxedMutable<name>List list = this.classUnderTest();
         list.addAll(1, Lists.mutable.of(<(literal.(type))("7")>, <(literal.(type))("9")>));
-        Assert.assertEquals(Lists.mutable.of(<["1", "7", "9", "2", "3"]:(literal.(type))(); separator=", ">), list);
+        assertEquals(Lists.mutable.of(<["1", "7", "9", "2", "3"]:(literal.(type))(); separator=", ">), list);
     }
 
     @Test
     public void addAllIndexOutOfBounds()
     {
-        Assert.assertThrows(IndexOutOfBoundsException.class, () ->
+        assertThrows(IndexOutOfBoundsException.class, () ->
                 this.classUnderTest().addAll(5, Lists.mutable.of(<(literal.(type))("7")>, <(literal.(type))("9")>)));
     }
 
     @Test
     public void subList()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().subList(1, 3));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().subList(1, 3));
     }
 
     @Test

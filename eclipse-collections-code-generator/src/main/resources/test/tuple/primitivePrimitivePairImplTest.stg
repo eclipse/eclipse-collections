@@ -24,8 +24,10 @@ package org.eclipse.collections.impl.tuple.primitive;
 
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * JUnit test for {@link <name1><name2>PairImpl}.
@@ -38,37 +40,37 @@ public class <name1><name2>PairImplTest
     public void testEqualsAndHashCode()
     {
         Verify.assertEqualsAndHashCode(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>), PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
-        Assert.assertNotEquals(PrimitiveTuples.pair(<(literal.(type1))("8")>, <(literal.(type2))("2")>), PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
-        Assert.assertEquals(Tuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).hashCode(), PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).hashCode());
+        assertNotEquals(PrimitiveTuples.pair(<(literal.(type1))("8")>, <(literal.(type2))("2")>), PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
+        assertEquals(Tuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).hashCode(), PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).hashCode());
     }
 
     @Test
     public void getOne()
     {
-        Assert.assertEquals(<(literal.(type1))("1")>, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).getOne(), <(literal.(type1))("0")>);
-        Assert.assertEquals(<(literal.(type1))("12")>, PrimitiveTuples.pair(<(literal.(type1))("12")>, <(literal.(type2))("2")>).getOne(), <(literal.(type1))("0")>);
+        assertEquals(<(literal.(type1))("1")>, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).getOne(), <(literal.(type1))("0")>);
+        assertEquals(<(literal.(type1))("12")>, PrimitiveTuples.pair(<(literal.(type1))("12")>, <(literal.(type2))("2")>).getOne(), <(literal.(type1))("0")>);
     }
 
     @Test
     public void getTwo()
     {
-        Assert.assertEquals(<(literal.(type2))("2")>, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).getTwo(), <(literal.(type1))("0")>);
-        Assert.assertEquals(<(literal.(type2))("0")>, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("0")>).getTwo(), <(literal.(type1))("0")>);
+        assertEquals(<(literal.(type2))("2")>, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).getTwo(), <(literal.(type1))("0")>);
+        assertEquals(<(literal.(type2))("0")>, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("0")>).getTwo(), <(literal.(type1))("0")>);
     }
 
     @Test
     public void testToString()
     {
-        Assert.assertEquals("<(toStringLiteral.(type1))("1")>:<(toStringLiteral.(type2))("2")>", PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).toString());
-        Assert.assertEquals("<(toStringLiteral.(type1))("2")>:<(toStringLiteral.(type2))("8")>", PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("8")>).toString());
+        assertEquals("<(toStringLiteral.(type1))("1")>:<(toStringLiteral.(type2))("2")>", PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).toString());
+        assertEquals("<(toStringLiteral.(type1))("2")>:<(toStringLiteral.(type2))("8")>", PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("8")>).toString());
     }
 
     @Test
     public void compareTo()
     {
-        Assert.assertEquals(1, PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("2")>).compareTo(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>)));
-        Assert.assertEquals(0, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).compareTo(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>)));
-        Assert.assertEquals(-1, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).compareTo(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("3")>)));
+        assertEquals(1, PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("2")>).compareTo(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>)));
+        assertEquals(0, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).compareTo(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>)));
+        assertEquals(-1, PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>).compareTo(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("3")>)));
     }
 }
 

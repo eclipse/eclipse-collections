@@ -22,8 +22,10 @@ package org.eclipse.collections.impl.map.immutable.primitive;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * JUnit test for {@link Immutable<name>ObjectHashMap}.
@@ -42,9 +44,9 @@ public class Immutable<name>ObjectHashMapTest extends AbstractImmutable<name>Obj
     {
         Immutable<name>ObjectMap\<String> map1 = this.classUnderTest();
         Immutable<name>ObjectMap\<String> expected = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo").withKeyValue(<(literal.(type))("33")>, "thirtyThree").toImmutable();
-        Assert.assertEquals(expected, map1.newWithKeyValue(<(literal.(type))("33")>, "thirtyThree"));
-        Assert.assertNotSame(map1, map1.newWithKeyValue(<(literal.(type))("33")>, "thirtyThree"));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected, map1.newWithKeyValue(<(literal.(type))("33")>, "thirtyThree"));
+        assertNotSame(map1, map1.newWithKeyValue(<(literal.(type))("33")>, "thirtyThree"));
+        assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -52,9 +54,9 @@ public class Immutable<name>ObjectHashMapTest extends AbstractImmutable<name>Obj
     {
         Immutable<name>ObjectMap\<String> map1 = this.classUnderTest();
         Immutable<name>ObjectMap\<String> expected = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne");
-        Assert.assertEquals(expected, map1.newWithoutKey(<(literal.(type))("32")>));
-        Assert.assertNotSame(map1, map1.newWithoutKey(<(literal.(type))("32")>));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected, map1.newWithoutKey(<(literal.(type))("32")>));
+        assertNotSame(map1, map1.newWithoutKey(<(literal.(type))("32")>));
+        assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -62,9 +64,9 @@ public class Immutable<name>ObjectHashMapTest extends AbstractImmutable<name>Obj
     {
         Immutable<name>ObjectMap\<String> map1 = this.classUnderTest();
         Immutable<name>ObjectMap\<String> expected = this.newWithKeysValues(<(literal.(type))("31")>, "thirtyOne");
-        Assert.assertEquals(expected, map1.newWithoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>)));
-        Assert.assertNotSame(map1, map1.newWithoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>)));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected, map1.newWithoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>)));
+        assertNotSame(map1, map1.newWithoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>)));
+        assertEquals(this.classUnderTest(), map1);
     }
 }
 

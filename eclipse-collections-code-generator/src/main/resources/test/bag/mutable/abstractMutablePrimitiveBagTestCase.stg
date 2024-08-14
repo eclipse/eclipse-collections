@@ -33,12 +33,17 @@ import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name>CollectionTestCase;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * JUnit test for {@link Mutable<name>Bag}.
@@ -67,9 +72,9 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     @Test
     public void sizeDistinct()
     {
-        Assert.assertEquals(0L, this.newWith().sizeDistinct());
-        Assert.assertEquals(3L, this.newWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).sizeDistinct());
-        Assert.assertEquals(3L, this.newWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">).sizeDistinct());
+        assertEquals(0L, this.newWith().sizeDistinct());
+        assertEquals(3L, this.newWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).sizeDistinct());
+        assertEquals(3L, this.newWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">).sizeDistinct());
     }
 
     @Test
@@ -77,14 +82,14 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     {
         Mutable<name>Bag bag = this.newWith(<["100", "100", "100", "50", "50"]:(literal.(type))(); separator=", ">);
         Mutable<name>Bag filtered = bag.selectByOccurrences(i -> i > 2);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), filtered);
+        assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), filtered);
     }
 
     @Test
     public void selectDuplicates()
     {
         Mutable<name>Bag bag = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), bag.selectDuplicates());
+        assertEquals(<name>HashBag.newBagWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), bag.selectDuplicates());
     }
 
     @Test
@@ -93,7 +98,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Mutable<name>Bag bag = this.newWith(<["1", "2", "2", "3", "3", "3", "3", "4", "5", "5", "6"]:(literal.(type))(); separator=", ">);
         Mutable<name>Set expected = <name>Sets.mutable.with(<["1", "4", "6"]:(literal.(type))(); separator=", ">);
         Mutable<name>Set actual = bag.selectUnique();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     protected Mutable<name>Bag newWithOccurrences(<name>IntPair... elementsWithOccurrences)
@@ -123,8 +128,8 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
                 PrimitiveTuples.pair(<(literal.(type))("10")>, 10));
         MutableList\<<name>IntPair> top5 = bag.topOccurrences(5);
         Verify.assertSize(5, top5);
-        Assert.assertEquals(10, top5.getFirst().getTwo());
-        Assert.assertEquals(6, top5.getLast().getTwo());
+        assertEquals(10, top5.getFirst().getTwo());
+        assertEquals(6, top5.getLast().getTwo());
         Verify.assertSize(0, this.newWith(<(literal.(type))("1")>).topOccurrences(0));
         Verify.assertSize(0, this.newWith().topOccurrences(5));
         Verify.assertSize(3, this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).topOccurrences(5));
@@ -134,7 +139,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Verify.assertSize(2, this.newWith(<["1", "1", "2", "2", "3"]:(literal.(type))(); separator=", ">).topOccurrences(1));
         Verify.assertSize(3, this.newWith(<["1", "1", "2", "2", "3", "3"]:(literal.(type))(); separator=", ">).topOccurrences(1));
         Verify.assertSize(0, this.newWith().topOccurrences(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith().topOccurrences(-1));
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().topOccurrences(-1));
     }
 
     @Test
@@ -153,8 +158,8 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
                 PrimitiveTuples.pair(<(literal.(type))("10")>, 10));
         MutableList\<<name>IntPair> bottom5 = bag.bottomOccurrences(5);
         Verify.assertSize(5, bottom5);
-        Assert.assertEquals(1, bottom5.getFirst().getTwo());
-        Assert.assertEquals(5, bottom5.getLast().getTwo());
+        assertEquals(1, bottom5.getFirst().getTwo());
+        assertEquals(5, bottom5.getLast().getTwo());
         Verify.assertSize(0, this.newWith(<(literal.(type))("1")>).bottomOccurrences(0));
         Verify.assertSize(0, this.newWith().bottomOccurrences(5));
         Verify.assertSize(3, this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(5));
@@ -164,7 +169,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Verify.assertSize(3, this.newWith(<["1", "1", "2", "2", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(2));
         Verify.assertSize(3, this.newWith(<["1", "1", "2", "2", "3", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(1));
         Verify.assertSize(0, this.newWith().bottomOccurrences(0));
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith().bottomOccurrences(-1));
+        assertThrows(IllegalArgumentException.class, () -> this.newWith().bottomOccurrences(-1));
     }
 
     @Test
@@ -172,11 +177,11 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     {
         Mutable<name>Bag bag = this.newWith();
         bag.addOccurrences(<(literal.(type))("100")>, 3);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
+        assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
         bag.addOccurrences(<(literal.(type))("100")>, 2);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
+        assertEquals(<name>HashBag.newBagWith(<["100", "100", "100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
         bag.addOccurrences(<(literal.(type))("100")>, 0);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
+        assertEquals(<name>HashBag.newBagWith(<["100", "100", "100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
     }
 
     @Test
@@ -189,16 +194,16 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     public void removeOccurrences()
     {
         Mutable<name>Bag bag = this.newWith();
-        Assert.assertFalse(bag.removeOccurrences(<(literal.(type))("100")>, 2));
+        assertFalse(bag.removeOccurrences(<(literal.(type))("100")>, 2));
         bag.addOccurrences(<(literal.(type))("100")>, 5);
-        Assert.assertTrue(bag.removeOccurrences(<(literal.(type))("100")>, 2));
-        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
-        Assert.assertFalse(bag.removeOccurrences(<(literal.(type))("100")>, 0));
-        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
-        Assert.assertTrue(bag.removeOccurrences(<(literal.(type))("100")>, 5));
-        Assert.assertEquals(new <name>HashBag(), bag);
-        Assert.assertFalse(bag.removeOccurrences(<(literal.(type))("100")>, 5));
-        Assert.assertEquals(new <name>HashBag(), bag);
+        assertTrue(bag.removeOccurrences(<(literal.(type))("100")>, 2));
+        assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
+        assertFalse(bag.removeOccurrences(<(literal.(type))("100")>, 0));
+        assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), bag);
+        assertTrue(bag.removeOccurrences(<(literal.(type))("100")>, 5));
+        assertEquals(new <name>HashBag(), bag);
+        assertFalse(bag.removeOccurrences(<(literal.(type))("100")>, 5));
+        assertEquals(new <name>HashBag(), bag);
     }
 
     @Test
@@ -214,7 +219,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         StringBuilder stringBuilder = new StringBuilder();
         this.newWith(<["1", "1", "2"]:(literal.(type))(); separator=", ">).forEachWithOccurrences((<type> argument1, int argument2) -> stringBuilder.append(argument1).append(argument2));
         String string = stringBuilder.toString();
-        Assert.assertTrue("<(toStringLiteral.(type))("1")>2<(toStringLiteral.(type))("2")>1".equals(string)
+        assertTrue("<(toStringLiteral.(type))("1")>2<(toStringLiteral.(type))("2")>1".equals(string)
                 || "<(toStringLiteral.(type))("2")>1<(toStringLiteral.(type))("1")>2".equals(string));
     }
 
@@ -224,10 +229,10 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     {
         super.add();
         Mutable<name>Bag bag = this.newWith();
-        Assert.assertTrue(bag.add(<(literal.(type))("100")>));
-        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("100")>), bag);
-        Assert.assertTrue(bag.add(<(literal.(type))("100")>));
-        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100"]:(literal.(type))(); separator=", ">), bag);
+        assertTrue(bag.add(<(literal.(type))("100")>));
+        assertEquals(<name>HashBag.newBagWith(<(literal.(type))("100")>), bag);
+        assertTrue(bag.add(<(literal.(type))("100")>));
+        assertEquals(<name>HashBag.newBagWith(<["100", "100"]:(literal.(type))(); separator=", ">), bag);
     }
 
     @Test
@@ -236,11 +241,11 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     {
         super.addAllIterable();
         Mutable<name>Bag bag = this.newWith();
-        Assert.assertTrue(bag.addAll(<name>ArrayList.newListWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">)));
-        Assert.assertFalse(bag.addAll(new <name>ArrayList()));
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), bag);
-        Assert.assertTrue(bag.addAll(<name>HashBag.newBagWith(<["4", "4", "4", "4"]:(literal.(type))(); separator=", ">)));
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "2", "3", "3", "3", "4", "4", "4", "4"]:(literal.(type))(); separator=", ">), bag);
+        assertTrue(bag.addAll(<name>ArrayList.newListWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">)));
+        assertFalse(bag.addAll(new <name>ArrayList()));
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), bag);
+        assertTrue(bag.addAll(<name>HashBag.newBagWith(<["4", "4", "4", "4"]:(literal.(type))(); separator=", ">)));
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "2", "3", "3", "3", "4", "4", "4", "4"]:(literal.(type))(); separator=", ">), bag);
     }
 
     @Test
@@ -249,19 +254,19 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     {
         super.remove();
         Mutable<name>Bag bag = this.newWith();
-        Assert.assertFalse(bag.remove(<(literal.(type))("100")>));
+        assertFalse(bag.remove(<(literal.(type))("100")>));
         Verify.assertSize(0, bag);
-        Assert.assertEquals(new <name>HashBag(), bag);
-        Assert.assertTrue(bag.add(<(literal.(type))("100")>));
+        assertEquals(new <name>HashBag(), bag);
+        assertTrue(bag.add(<(literal.(type))("100")>));
         Verify.assertSize(1, bag);
-        Assert.assertTrue(bag.add(<(literal.(type))("100")>));
+        assertTrue(bag.add(<(literal.(type))("100")>));
         Verify.assertSize(2, bag);
-        Assert.assertTrue(bag.remove(<(literal.(type))("100")>));
+        assertTrue(bag.remove(<(literal.(type))("100")>));
         Verify.assertSize(1, bag);
-        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("100")>), bag);
-        Assert.assertTrue(bag.remove(<(literal.(type))("100")>));
+        assertEquals(<name>HashBag.newBagWith(<(literal.(type))("100")>), bag);
+        assertTrue(bag.remove(<(literal.(type))("100")>));
         Verify.assertSize(0, bag);
-        Assert.assertEquals(new <name>HashBag(), bag);
+        assertEquals(new <name>HashBag(), bag);
     }
 
     @Test
@@ -273,13 +278,13 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         <name>Iterator iterator = bag.<type>Iterator();
         for (int i = 0; i \< 6; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
-            Assert.assertTrue(list.remove(iterator.next()));
+            assertTrue(iterator.hasNext());
+            assertTrue(list.remove(iterator.next()));
         }
         Verify.assertEmpty(list);
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
 
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -292,13 +297,13 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Mutable<name>Iterator iterator = bag.<type>Iterator();
         for (int i = 0; i \< 6; i++)
         {
-            Assert.assertTrue(iterator.hasNext());
+            assertTrue(iterator.hasNext());
             iterator.next();
             iterator.remove();
         }
 
         Verify.assertEmpty(bag);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
@@ -309,7 +314,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         <wideType.(type)>[] sum = new <wideType.(type)>[1];
         this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).forEach((<type> each) -> sum[0] += each);
 
-        Assert.assertEquals(14L, sum[0]<(delta.(type))>);
+        assertEquals(14L, sum[0]<(delta.(type))>);
     }
 
     @Test
@@ -318,9 +323,9 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     {
         super.count();
         Mutable<name>Bag bag = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(5L, bag.count(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
-        Assert.assertEquals(1L, bag.count(<name>Predicates.lessThan(<(literal.(type))("2")>)));
-        Assert.assertEquals(0L, bag.count(<name>Predicates.greaterThan(<(literal.(type))("4")>)));
+        assertEquals(5L, bag.count(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+        assertEquals(1L, bag.count(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        assertEquals(0L, bag.count(<name>Predicates.greaterThan(<(literal.(type))("4")>)));
     }
 
     @Test
@@ -328,7 +333,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     public void sum()
     {
         super.sum();
-        Assert.assertEquals(<(wideLiteral.(type))("14")>, this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).sum()<wideDelta.(type)>);
+        assertEquals(<(wideLiteral.(type))("14")>, this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).sum()<wideDelta.(type)>);
     }
 
     @Test
@@ -340,8 +345,8 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         Mutable<name>Bag bag2 = this.newWith(<["0", "2", "1", "2", "1", "2"]:(literal.(type))(); separator=", ">);
         Mutable<name>Bag bag3 = this.newWith(<["0", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">);
         Verify.assertEqualsAndHashCode(bag1, bag2);
-        Assert.assertNotEquals(bag1, bag3);
-        Assert.assertNotEquals(bag2, bag3);
+        assertNotEquals(bag1, bag3);
+        assertNotEquals(bag2, bag3);
     }
 
     @Test
@@ -349,7 +354,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     public void testToString()
     {
         super.testToString();
-        Assert.assertEquals("[<["1", "1", "1"]:(toStringLiteral.(type))(); separator=", ">]", this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).toString());
+        assertEquals("[<["1", "1", "1"]:(toStringLiteral.(type))(); separator=", ">]", this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).toString());
     }
 
     @Test
@@ -357,7 +362,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     public void makeString()
     {
         super.makeString();
-        Assert.assertEquals("<["1", "1", "1"]:(toStringLiteral.(type))(); separator=", ">", this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).makeString());
+        assertEquals("<["1", "1", "1"]:(toStringLiteral.(type))(); separator=", ">", this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).makeString());
     }
 
     @Test
@@ -367,7 +372,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         super.appendString();
         StringBuilder appendable1 = new StringBuilder();
         this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).appendString(appendable1);
-        Assert.assertEquals("<["1", "1", "1"]:(toStringLiteral.(type))(); separator=", ">", appendable1.toString());
+        assertEquals("<["1", "1", "1"]:(toStringLiteral.(type))(); separator=", ">", appendable1.toString());
     }
 
     @Test
@@ -375,7 +380,7 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     public void toList()
     {
         super.toList();
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).toList());
+        assertEquals(<name>ArrayList.newListWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).toList());
     }
 
     @Test
@@ -383,14 +388,14 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     public void toSortedList()
     {
         super.toSortedList();
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).toSortedList());
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).toSortedList());
     }
 
     @Test
     public void toImmutable()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
-        Assert.assertNotSame(this.classUnderTest(), this.classUnderTest().toImmutable());
+        assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
+        assertNotSame(this.classUnderTest(), this.classUnderTest().toImmutable());
         Verify.assertInstanceOf(Immutable<name>Bag.class, this.classUnderTest().toImmutable());
     }
 
@@ -398,10 +403,10 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     public void toStringOfItemToCount()
     {
         Mutable<name>Bag empty = this.newWith();
-        Assert.assertEquals("{}", empty.toStringOfItemToCount());
-        Assert.assertEquals("{" + <(literal.(type))("100")> + "=3}", this.newWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">).toStringOfItemToCount());
+        assertEquals("{}", empty.toStringOfItemToCount());
+        assertEquals("{" + <(literal.(type))("100")> + "=3}", this.newWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">).toStringOfItemToCount());
         String actual = this.newWith(<["100", "101", "101"]:(literal.(type))(); separator=", ">).toStringOfItemToCount();
-        Assert.assertTrue(("{" + <(literal.(type))("100")> + "=1, " + <(literal.(type))("101")> + "=2}").equals(actual) || ("{" + <(literal.(type))("101")> + "=2, " + <(literal.(type))("100")> + "=1}").equals(actual));
+        assertTrue(("{" + <(literal.(type))("100")> + "=1, " + <(literal.(type))("101")> + "=2}").equals(actual) || ("{" + <(literal.(type))("101")> + "=2, " + <(literal.(type))("100")> + "=1}").equals(actual));
     }
 }
 

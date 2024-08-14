@@ -25,8 +25,13 @@ import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.internal.primitive.<name>IterableIterate;
 import org.eclipse.collections.impl.utility.internal.primitive.<name>IteratorIterate;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * JUnit test for {@link <name>ArrayList}.
@@ -55,7 +60,7 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
         Verify.assertEmpty(arrayList);
         Field items = <name>ArrayList.class.getDeclaredField("items");
         items.setAccessible(true);
-        Assert.assertEquals(7L, ((<type>[]) items.get(arrayList)).length);
+        assertEquals(7L, ((<type>[]) items.get(arrayList)).length);
     }
 
     @Test
@@ -63,7 +68,7 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
     {
         <name>ArrayList newList = <name>ArrayList.newWithNValues(5, <(literal.(type))("42")>);
         Verify.assertSize(5, newList);
-        Assert.assertEquals(<name>ArrayList.newListWith(<["42", "42", "42", "42", "42"]:(literal.(type))(); separator=", ">), newList);
+        assertEquals(<name>ArrayList.newListWith(<["42", "42", "42", "42", "42"]:(literal.(type))(); separator=", ">), newList);
 
         <name>ArrayList newList2 = <name>ArrayList.newWithNValues(0, <(literal.(type))("2")>);
         Verify.assertSize(0, newList2);
@@ -72,7 +77,7 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
     @Test
     public void newWithNValues_throws_negative_size()
     {
-        Assert.assertThrows(NegativeArraySizeException.class, () -> <name>ArrayList.newWithNValues(-5, <(literal.(type))("42")>));
+        assertThrows(NegativeArraySizeException.class, () -> <name>ArrayList.newWithNValues(-5, <(literal.(type))("42")>));
     }
 
     @Test
@@ -81,7 +86,7 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
         <type>[] array = {<(literal.(type))("0")>, <(literal.(type))("1")>};
         <name>ArrayList list = <name>ArrayList.wrapCopy(array);
         array[0] = <(literal.(type))("1")>;
-        Assert.assertTrue(list.get(0) \< <(literal.(type))("1")>);
+        assertTrue(list.get(0) \< <(literal.(type))("1")>);
     }
 
     @Test
@@ -91,7 +96,7 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
         listWithCapacity.addAtIndex(3, <(literal.(type))("5")>);
         Field items = <name>ArrayList.class.getDeclaredField("items");
         items.setAccessible(true);
-        Assert.assertEquals(7L, ((<type>[]) items.get(listWithCapacity)).length);
+        assertEquals(7L, ((<type>[]) items.get(listWithCapacity)).length);
     }
 
     @Test
@@ -100,10 +105,10 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
         Field items = <name>ArrayList.class.getDeclaredField("items");
         items.setAccessible(true);
         <name>ArrayList arrayList = new <name>ArrayList().with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(10L, ((<type>[]) items.get(arrayList)).length);
-        Assert.assertArrayEquals(new <type>[]{<["1", "2", "3", "0", "0", "0", "0", "0", "0", "0"]:(literal.(type))(); separator=", ">}, (<type>[]) items.get(arrayList)<(delta.(type))>);
+        assertEquals(10L, ((<type>[]) items.get(arrayList)).length);
+        assertArrayEquals(new <type>[]{<["1", "2", "3", "0", "0", "0", "0", "0", "0", "0"]:(literal.(type))(); separator=", ">}, (<type>[]) items.get(arrayList)<(delta.(type))>);
         arrayList.trimToSize();
-        Assert.assertArrayEquals(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}, (<type>[]) items.get(arrayList)<(delta.(type))>);
+        assertArrayEquals(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}, (<type>[]) items.get(arrayList)<(delta.(type))>);
     }
 
     @Override
@@ -122,7 +127,7 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
     {
         <name>ArrayList list1 = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         <name>ArrayList list2 = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<(wideLiteral.(type))("14")>, list1.dotProduct(list2)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("14")>, list1.dotProduct(list2)<(wideDelta.(type))>);
     }
 
     @Override
@@ -131,7 +136,7 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
     {
         <name>ArrayList list1 = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         <name>ArrayList list2 = <name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">);
-        Assert.assertThrows(IllegalArgumentException.class, () -> list1.dotProduct(list2));
+        assertThrows(IllegalArgumentException.class, () -> list1.dotProduct(list2));
     }
 
     @Override
@@ -145,12 +150,12 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
         <name>ArrayList arrayList1 = new <name>ArrayList().with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         <name>ArrayList arrayList2 = new <name>ArrayList().with(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
         <name>ArrayList arrayList3 = new <name>ArrayList().with(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">);
-        Assert.assertSame(emptyList, arrayList);
-        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), arrayList);
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">), arrayList0);
-        Assert.assertEquals(this.list, arrayList1);
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), arrayList2);
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), arrayList3);
+        assertSame(emptyList, arrayList);
+        assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), arrayList);
+        assertEquals(<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">), arrayList0);
+        assertEquals(this.list, arrayList1);
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), arrayList2);
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), arrayList3);
     }
 
     @Test
@@ -166,17 +171,17 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
     {
         super.toImmutable();
         <name>ArrayList list = new <name>ArrayList(1);
-        Assert.assertEquals(list, list.toImmutable());
+        assertEquals(list, list.toImmutable());
         list.add(<(literal.(type))("5")>);
         list.removeAtIndex(0);
-        Assert.assertEquals(list, list.toImmutable());
+        assertEquals(list, list.toImmutable());
     }
 
     @Test
     public void toStack()
     {
         Mutable<name>Stack stack = <name>Stacks.mutable.withAll(this.classUnderTest());
-        Assert.assertEquals(stack, this.classUnderTest().toStack());
+        assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 

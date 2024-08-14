@@ -58,8 +58,14 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.StringIterate;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNull;
 
 /**
  * JUnit test for {@link Immutable<name>ObjectSingletonMap}.
@@ -77,68 +83,68 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void containsValue()
     {
-        Assert.assertFalse(this.classUnderTest().containsValue(null));
-        Assert.assertTrue(this.classUnderTest().containsValue("zero"));
-        Assert.assertFalse(this.classUnderTest().containsValue("thirtyOne"));
-        Assert.assertFalse(this.classUnderTest().containsValue("thirtyTwo"));
+        assertFalse(this.classUnderTest().containsValue(null));
+        assertTrue(this.classUnderTest().containsValue("zero"));
+        assertFalse(this.classUnderTest().containsValue("thirtyOne"));
+        assertFalse(this.classUnderTest().containsValue("thirtyTwo"));
     }
 
     @Override
     @Test
     public void contains()
     {
-        Assert.assertFalse(this.classUnderTest().contains(null));
-        Assert.assertTrue(this.classUnderTest().contains("zero"));
-        Assert.assertFalse(this.classUnderTest().contains("thirtyOne"));
-        Assert.assertFalse(this.classUnderTest().contains("thirtyTwo"));
+        assertFalse(this.classUnderTest().contains(null));
+        assertTrue(this.classUnderTest().contains("zero"));
+        assertFalse(this.classUnderTest().contains("thirtyOne"));
+        assertFalse(this.classUnderTest().contains("thirtyTwo"));
     }
 
     @Override
     @Test
     public void containsAllIterable()
     {
-        Assert.assertTrue(this.classUnderTest().containsAllIterable(FastList.newListWith("zero")));
-        Assert.assertTrue(this.classUnderTest().containsAllIterable(FastList.newListWith()));
-        Assert.assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "thirtyOne")));
-        Assert.assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "one", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("two", "one", "nine")));
+        assertTrue(this.classUnderTest().containsAllIterable(FastList.newListWith("zero")));
+        assertTrue(this.classUnderTest().containsAllIterable(FastList.newListWith()));
+        assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "thirtyOne")));
+        assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "one", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("two", "one", "nine")));
     }
 
     @Override
     @Test
     public void containsAll()
     {
-        Assert.assertTrue(this.classUnderTest().containsAll(FastList.newListWith()));
-        Assert.assertTrue(this.classUnderTest().containsAll(FastList.newListWith("zero")));
-        Assert.assertFalse(this.classUnderTest().containsAll(FastList.newListWith("zero", "thirtyOne")));
-        Assert.assertFalse(this.classUnderTest().containsAll(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAll(FastList.newListWith("zero", "one", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAll(FastList.newListWith("two", "one", "nine")));
+        assertTrue(this.classUnderTest().containsAll(FastList.newListWith()));
+        assertTrue(this.classUnderTest().containsAll(FastList.newListWith("zero")));
+        assertFalse(this.classUnderTest().containsAll(FastList.newListWith("zero", "thirtyOne")));
+        assertFalse(this.classUnderTest().containsAll(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAll(FastList.newListWith("zero", "one", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAll(FastList.newListWith("two", "one", "nine")));
     }
 
     @Override
     @Test
     public void containsAllArguments()
     {
-        Assert.assertTrue(this.classUnderTest().containsAllArguments());
-        Assert.assertTrue(this.classUnderTest().containsAllArguments("zero"));
-        Assert.assertFalse(this.classUnderTest().containsAllArguments("zero", "thirtyOne"));
-        Assert.assertFalse(this.classUnderTest().containsAllArguments("zero", "thirtyOne", "thirtyTwo"));
-        Assert.assertFalse(this.classUnderTest().containsAllArguments("zero", "one", "thirtyTwo"));
-        Assert.assertFalse(this.classUnderTest().containsAllArguments("two", "one", "nine"));
+        assertTrue(this.classUnderTest().containsAllArguments());
+        assertTrue(this.classUnderTest().containsAllArguments("zero"));
+        assertFalse(this.classUnderTest().containsAllArguments("zero", "thirtyOne"));
+        assertFalse(this.classUnderTest().containsAllArguments("zero", "thirtyOne", "thirtyTwo"));
+        assertFalse(this.classUnderTest().containsAllArguments("zero", "one", "thirtyTwo"));
+        assertFalse(this.classUnderTest().containsAllArguments("two", "one", "nine"));
     }
 
     @Override
     @Test
     public void containsKey()
     {
-        Assert.assertTrue(this.classUnderTest().containsKey(<(literal.(type))("0")>));
-        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("31")>));
-        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("32")>));
-        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("1")>));
-        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("5")>));
-        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("35")>));
+        assertTrue(this.classUnderTest().containsKey(<(literal.(type))("0")>));
+        assertFalse(this.classUnderTest().containsKey(<(literal.(type))("31")>));
+        assertFalse(this.classUnderTest().containsKey(<(literal.(type))("32")>));
+        assertFalse(this.classUnderTest().containsKey(<(literal.(type))("1")>));
+        assertFalse(this.classUnderTest().containsKey(<(literal.(type))("5")>));
+        assertFalse(this.classUnderTest().containsKey(<(literal.(type))("35")>));
     }
 
     @Override
@@ -147,23 +153,23 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     {
         Function0\<String> ifAbsent = () -> "ifAbsent";
 
-        Assert.assertEquals("zero", this.classUnderTest().getIfAbsent(<(literal.(type))("0")>, ifAbsent));
-        Assert.assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("31")>, ifAbsent));
-        Assert.assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("32")>, ifAbsent));
+        assertEquals("zero", this.classUnderTest().getIfAbsent(<(literal.(type))("0")>, ifAbsent));
+        assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("31")>, ifAbsent));
+        assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("32")>, ifAbsent));
 
-        Assert.assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("1")>, ifAbsent));
-        Assert.assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("33")>, ifAbsent));
+        assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("1")>, ifAbsent));
+        assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("33")>, ifAbsent));
     }
 
     @Override
     @Test
     public void get()
     {
-        Assert.assertEquals("zero", this.classUnderTest().get(<(literal.(type))("0")>));
-        Assert.assertNull(this.classUnderTest().get(<(literal.(type))("31")>));
-        Assert.assertNull(this.classUnderTest().get(<(literal.(type))("32")>));
-        Assert.assertNull(this.classUnderTest().get(<(literal.(type))("1")>));
-        Assert.assertNull(this.classUnderTest().get(<(literal.(type))("33")>));
+        assertEquals("zero", this.classUnderTest().get(<(literal.(type))("0")>));
+        assertNull(this.classUnderTest().get(<(literal.(type))("31")>));
+        assertNull(this.classUnderTest().get(<(literal.(type))("32")>));
+        assertNull(this.classUnderTest().get(<(literal.(type))("1")>));
+        assertNull(this.classUnderTest().get(<(literal.(type))("33")>));
     }
 
     @Override
@@ -171,32 +177,32 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void iterator()
     {
         Iterator\<String> iterator = this.classUnderTest().iterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals("zero", iterator.next());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertTrue(iterator.hasNext());
+        assertEquals("zero", iterator.next());
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
     @Test
     public void getFirst()
     {
-        Assert.assertEquals("zero", this.classUnderTest().getFirst());
+        assertEquals("zero", this.classUnderTest().getFirst());
     }
 
     @Override
     @Test
     public void getLast()
     {
-        Assert.assertEquals("zero", this.classUnderTest().getLast());
+        assertEquals("zero", this.classUnderTest().getLast());
     }
 
     @Override
     @Test
     public void getOnly()
     {
-        Assert.assertEquals("zero", this.classUnderTest().getOnly());
+        assertEquals("zero", this.classUnderTest().getOnly());
     }
 
     @Override
@@ -205,8 +211,8 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     {
         StringBuilder concat = new StringBuilder();
         Immutable<name>ObjectMap\<String> map = this.classUnderTest();
-        Assert.assertSame(map, map.tap(concat::append));
-        Assert.assertEquals("zero", concat.toString());
+        assertSame(map, map.tap(concat::append));
+        assertEquals("zero", concat.toString());
     }
 
     @Override
@@ -217,7 +223,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
 
         this.classUnderTest().forEach(Procedures.cast(each -> concat[0] += each));
 
-        Assert.assertEquals("zero", concat[0]);
+        assertEquals("zero", concat[0]);
     }
 
     @Override
@@ -232,7 +238,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
             concat[0] += parameter;
         });
 
-        Assert.assertEquals("zero0", concat[0]);
+        assertEquals("zero0", concat[0]);
     }
 
     @Override
@@ -247,7 +253,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
             concat[0] += argument2;
         }, "-");
 
-        Assert.assertEquals("zero-", concat[0]);
+        assertEquals("zero-", concat[0]);
     }
 
     @Override
@@ -258,7 +264,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
 
         this.classUnderTest().forEachValue((String each) -> concat[0] += each);
 
-        Assert.assertEquals("zero", concat[0]);
+        assertEquals("zero", concat[0]);
     }
 
     @Override
@@ -269,7 +275,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
 
         this.classUnderTest().forEachKey((<type> each) -> sum[0] += each);
 
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, sum[0]<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("0")>, sum[0]<(wideDelta.(type))>);
     }
 
     @Override
@@ -284,42 +290,42 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
             concat[0] += parameter;
         });
 
-        Assert.assertEquals("<(toStringLiteral.(type))("0")>zero", concat[0]);
+        assertEquals("<(toStringLiteral.(type))("0")>zero", concat[0]);
     }
 
     @Override
     @Test
     public void select()
     {
-        Assert.assertEquals(
+        assertEquals(
                 <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"),
                 this.classUnderTest().select((<type> value, String object) -> value == 0));
 
         Verify.assertIterableEmpty(this.classUnderTest().select((<type> value, String object) -> value != 0));
 
-        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().select(Predicates.equal("zero")));
+        assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().select(Predicates.equal("zero")));
         Verify.assertIterableEmpty(this.classUnderTest().select(Predicates.equal("one")));
 
         MutableBag\<String> target = HashBag.newBag();
-        Assert.assertSame(target, this.classUnderTest().select(Predicates.equal("zero"), target));
-        Assert.assertEquals(HashBag.newBagWith("zero"), target);
+        assertSame(target, this.classUnderTest().select(Predicates.equal("zero"), target));
+        assertEquals(HashBag.newBagWith("zero"), target);
     }
 
     @Override
     public void selectWith()
     {
-        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().selectWith(Object::equals, "zero"));
+        assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().selectWith(Object::equals, "zero"));
 
         MutableBag\<String> target = HashBag.newBag();
-        Assert.assertSame(target, this.classUnderTest().selectWith(Object::equals, "zero", target));
-        Assert.assertEquals(HashBag.newBagWith("zero"), target);
+        assertSame(target, this.classUnderTest().selectWith(Object::equals, "zero", target));
+        assertEquals(HashBag.newBagWith("zero"), target);
     }
 
     @Override
     @Test
     public void selectInstancesOf()
     {
-        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().selectInstancesOf(String.class));
+        assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().selectInstancesOf(String.class));
         Verify.assertIterableEmpty(this.classUnderTest().selectInstancesOf(Integer.class));
     }
 
@@ -327,94 +333,94 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void reject()
     {
-        Assert.assertEquals(
+        assertEquals(
                 <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"),
                 this.classUnderTest().reject((value, object) -> value != 0));
 
         Verify.assertIterableEmpty(this.classUnderTest().reject((value, object) -> value == 0));
 
-        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().reject(Predicates.equal("one")));
+        assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().reject(Predicates.equal("one")));
         Verify.assertIterableEmpty(this.classUnderTest().reject(Predicates.equal("zero")));
 
         MutableBag\<String> target = HashBag.newBag();
-        Assert.assertSame(target, this.classUnderTest().reject(Predicates.equal("one"), target));
-        Assert.assertEquals(HashBag.newBagWith("zero"), target);
+        assertSame(target, this.classUnderTest().reject(Predicates.equal("one"), target));
+        assertEquals(HashBag.newBagWith("zero"), target);
     }
 
     @Override
     @Test
     public void rejectWith()
     {
-        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().rejectWith(Object::equals, "one"));
+        assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().rejectWith(Object::equals, "one"));
         Verify.assertIterableEmpty(this.classUnderTest().rejectWith(Object::equals, "zero"));
 
         MutableBag\<String> target = HashBag.newBag();
-        Assert.assertSame(target, this.classUnderTest().rejectWith(Object::equals, "one", target));
-        Assert.assertEquals(HashBag.newBagWith("zero"), target);
+        assertSame(target, this.classUnderTest().rejectWith(Object::equals, "one", target));
+        assertEquals(HashBag.newBagWith("zero"), target);
     }
 
     @Override
     @Test
     public void detect()
     {
-        Assert.assertEquals("zero", this.classUnderTest().detect(Predicates.equal("zero")));
-        Assert.assertNull(this.classUnderTest().detect(Predicates.equal("one")));
+        assertEquals("zero", this.classUnderTest().detect(Predicates.equal("zero")));
+        assertNull(this.classUnderTest().detect(Predicates.equal("one")));
     }
 
     @Override
     @Test
     public void detectWith()
     {
-        Assert.assertEquals("zero", this.classUnderTest().detectWith(Object::equals, "zero"));
-        Assert.assertNull(this.classUnderTest().detectWith(Object::equals, "one"));
+        assertEquals("zero", this.classUnderTest().detectWith(Object::equals, "zero"));
+        assertNull(this.classUnderTest().detectWith(Object::equals, "one"));
     }
 
     @Override
     @Test
     public void detectOptional()
     {
-        Assert.assertEquals(Optional.of("zero"), this.classUnderTest().detectOptional(Predicates.equal("zero")));
-        Assert.assertEquals(Optional.empty(), this.classUnderTest().detectOptional(Predicates.equal("one")));
+        assertEquals(Optional.of("zero"), this.classUnderTest().detectOptional(Predicates.equal("zero")));
+        assertEquals(Optional.empty(), this.classUnderTest().detectOptional(Predicates.equal("one")));
     }
 
     @Override
     @Test
     public void detectWithOptional()
     {
-        Assert.assertEquals(Optional.of("zero"), this.classUnderTest().detectWithOptional(Object::equals, "zero"));
-        Assert.assertEquals(Optional.empty(), this.classUnderTest().detectWithOptional(Object::equals, "one"));
+        assertEquals(Optional.of("zero"), this.classUnderTest().detectWithOptional(Object::equals, "zero"));
+        assertEquals(Optional.empty(), this.classUnderTest().detectWithOptional(Object::equals, "one"));
     }
 
     @Override
     @Test
     public void detectIfNone()
     {
-        Assert.assertEquals("zero", this.classUnderTest().detectIfNone(Predicates.equal("zero"), Functions0.value("default")));
-        Assert.assertEquals("default", this.classUnderTest().detectIfNone(Predicates.equal("one"), Functions0.value("default")));
+        assertEquals("zero", this.classUnderTest().detectIfNone(Predicates.equal("zero"), Functions0.value("default")));
+        assertEquals("default", this.classUnderTest().detectIfNone(Predicates.equal("one"), Functions0.value("default")));
     }
 
     @Override
     @Test
     public void detectWithIfNone()
     {
-        Assert.assertEquals("zero", this.classUnderTest().detectWithIfNone(Object::equals, "zero", Functions0.value("default")));
-        Assert.assertEquals("default", this.classUnderTest().detectWithIfNone(Object::equals, "one", Functions0.value("default")));
+        assertEquals("zero", this.classUnderTest().detectWithIfNone(Object::equals, "zero", Functions0.value("default")));
+        assertEquals("default", this.classUnderTest().detectWithIfNone(Object::equals, "one", Functions0.value("default")));
     }
 
     @Override
     @Test
     public void count()
     {
-        Assert.assertEquals(1, this.classUnderTest().count(Predicates.equal("zero")));
-        Assert.assertEquals(0, this.classUnderTest().count(Predicates.equal("one")));
+        assertEquals(1, this.classUnderTest().count(Predicates.equal("zero")));
+        assertEquals(0, this.classUnderTest().count(Predicates.equal("one")));
     }
 
     @Override
     @Test
     public void countWith()
     {
-        Assert.assertEquals(1, this.classUnderTest().countWith(Object::equals, "zero"));
-        Assert.assertEquals(0, this.classUnderTest().countWith(Object::equals, "one"));
+        assertEquals(1, this.classUnderTest().countWith(Object::equals, "zero"));
+        assertEquals(0, this.classUnderTest().countWith(Object::equals, "one"));
     }
 
     @Override
@@ -422,47 +428,47 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void anySatisfy()
     {
         Verify.assertAnySatisfy(this.classUnderTest(), StringPredicates.endsWith("o"));
-        Assert.assertFalse(this.classUnderTest().anySatisfy(Predicates.equal("ten")));
+        assertFalse(this.classUnderTest().anySatisfy(Predicates.equal("ten")));
     }
 
     @Override
     @Test
     public void anySatisfyWith()
     {
-        Assert.assertTrue(this.classUnderTest().anySatisfyWith(StringPredicates2.endsWith(), "o"));
-        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Object::equals, "ten"));
+        assertTrue(this.classUnderTest().anySatisfyWith(StringPredicates2.endsWith(), "o"));
+        assertFalse(this.classUnderTest().anySatisfyWith(Object::equals, "ten"));
     }
 
     @Override
     @Test
     public void allSatisfy()
     {
-        Assert.assertTrue(this.classUnderTest().allSatisfy(StringPredicates.endsWith("o")));
-        Assert.assertFalse(this.classUnderTest().allSatisfy(Predicates.equal("nine")));
+        assertTrue(this.classUnderTest().allSatisfy(StringPredicates.endsWith("o")));
+        assertFalse(this.classUnderTest().allSatisfy(Predicates.equal("nine")));
     }
 
     @Override
     @Test
     public void allSatisfyWith()
     {
-        Assert.assertTrue(this.classUnderTest().allSatisfyWith(StringPredicates2.contains(), "o"));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Object::equals, "nine"));
+        assertTrue(this.classUnderTest().allSatisfyWith(StringPredicates2.contains(), "o"));
+        assertFalse(this.classUnderTest().allSatisfyWith(Object::equals, "nine"));
     }
 
     @Override
     @Test
     public void noneSatisfy()
     {
-        Assert.assertFalse(this.classUnderTest().noneSatisfy(StringPredicates.endsWith("o")));
-        Assert.assertTrue(this.classUnderTest().noneSatisfy(Predicates.equal("ten")));
+        assertFalse(this.classUnderTest().noneSatisfy(StringPredicates.endsWith("o")));
+        assertTrue(this.classUnderTest().noneSatisfy(Predicates.equal("ten")));
     }
 
     @Override
     @Test
     public void noneSatisfyWith()
     {
-        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(StringPredicates2.notContains(), "e"));
-        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(StringPredicates2.endsWith(), "o"));
+        assertTrue(this.classUnderTest().noneSatisfyWith(StringPredicates2.notContains(), "e"));
+        assertFalse(this.classUnderTest().noneSatisfyWith(StringPredicates2.endsWith(), "o"));
     }
 
     @Override
@@ -471,7 +477,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     {
         PartitionIterable\<String> result = this.classUnderTest().partition(StringPredicates.endsWith("ne"));
         Verify.assertIterableEmpty(result.getSelected());
-        Assert.assertEquals(HashBag.newBagWith("zero"), result.getRejected());
+        assertEquals(HashBag.newBagWith("zero"), result.getRejected());
     }
 
     @Override
@@ -479,91 +485,91 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void partitionWith()
     {
         PartitionIterable\<String> result = this.classUnderTest().partitionWith(StringPredicates2.endsWith(), "ro");
-        Assert.assertEquals(HashBag.newBagWith("zero"), result.getSelected());
+        assertEquals(HashBag.newBagWith("zero"), result.getSelected());
         Verify.assertIterableEmpty(result.getRejected());
     }
 
     @Test
     public void min_withComparator()
     {
-        Assert.assertEquals("zero", this.classUnderTest().min(Comparators.naturalOrder()));
+        assertEquals("zero", this.classUnderTest().min(Comparators.naturalOrder()));
     }
 
     @Test
     public void max_withComparator()
     {
-        Assert.assertEquals("zero", this.classUnderTest().max(Comparators.naturalOrder()));
+        assertEquals("zero", this.classUnderTest().max(Comparators.naturalOrder()));
     }
 
     @Override
     @Test
     public void minBy()
     {
-        Assert.assertEquals("zero", this.classUnderTest().minBy(String::valueOf));
+        assertEquals("zero", this.classUnderTest().minBy(String::valueOf));
     }
 
     @Override
     @Test
     public void maxBy()
     {
-        Assert.assertEquals("zero", this.classUnderTest().maxBy(String::valueOf));
+        assertEquals("zero", this.classUnderTest().maxBy(String::valueOf));
     }
 
     @Override
     @Test
     public void min()
     {
-        Assert.assertEquals("zero", this.classUnderTest().min());
+        assertEquals("zero", this.classUnderTest().min());
     }
 
     @Override
     @Test
     public void max()
     {
-        Assert.assertEquals("zero", this.classUnderTest().max());
+        assertEquals("zero", this.classUnderTest().max());
     }
 
     @Override
     @Test
     public void sumOfInt()
     {
-        Assert.assertEquals(4L, this.classUnderTest().sumOfInt(String::length));
+        assertEquals(4L, this.classUnderTest().sumOfInt(String::length));
     }
 
     @Override
     @Test
     public void sumOfFloat()
     {
-        Assert.assertEquals(4.0d, this.classUnderTest().sumOfFloat(value -> (float) value.length()), 0.0d);
+        assertEquals(4.0d, this.classUnderTest().sumOfFloat(value -> (float) value.length()), 0.0d);
     }
 
     @Override
     @Test
     public void sumOfLong()
     {
-        Assert.assertEquals(4L, this.classUnderTest().sumOfLong(value -> (long) value.length()));
+        assertEquals(4L, this.classUnderTest().sumOfLong(value -> (long) value.length()));
     }
 
     @Override
     @Test
     public void sumOfDouble()
     {
-        Assert.assertEquals(4.0d, this.classUnderTest().sumOfDouble(value -> (double) value.length()), 0.0d);
+        assertEquals(4.0d, this.classUnderTest().sumOfDouble(value -> (double) value.length()), 0.0d);
     }
 
     @Override
     @Test
     public void collectIf()
     {
-        Assert.assertEquals(
+        assertEquals(
                 HashBag.newBagWith("ZERO"),
                 this.classUnderTest().collectIf(StringPredicates.endsWith("ro"), StringFunctions.toUpperCase()));
         Verify.assertIterableEmpty(this.classUnderTest().collectIf(StringPredicates.endsWith("ne"), StringFunctions.toUpperCase()));
         MutableBag\<String> target = HashBag.newBag();
-        Assert.assertSame(
+        assertSame(
                 target,
                 this.classUnderTest().collectIf(StringPredicates.endsWith("ro"), StringFunctions.toUpperCase(), target));
-        Assert.assertEquals(HashBag.newBagWith("ZERO"), target);
+        assertEquals(HashBag.newBagWith("ZERO"), target);
     }
 
     @Override
@@ -572,7 +578,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     {
         Verify.assertBagsEqual(HashBag.newBagWith('z', 'e', 'r', 'o'), this.classUnderTest().flatCollect(StringIterate::toSet));
         MutableBag\<Character> target = HashBag.newBag();
-        Assert.assertSame(target, this.classUnderTest().flatCollect(StringIterate::toSet, target));
+        assertSame(target, this.classUnderTest().flatCollect(StringIterate::toSet, target));
         Verify.assertBagsEqual(HashBag.newBagWith('z', 'e', 'r', 'o'), target);
     }
 
@@ -580,11 +586,11 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void collect()
     {
-        Assert.assertEquals(HashBag.newBagWith("ZERO"), this.classUnderTest().collect(StringFunctions.toUpperCase()));
+        assertEquals(HashBag.newBagWith("ZERO"), this.classUnderTest().collect(StringFunctions.toUpperCase()));
 
         MutableBag\<String> target = HashBag.newBag();
-        Assert.assertSame(target, this.classUnderTest().collect(StringFunctions.toUpperCase(), target));
-        Assert.assertEquals(HashBag.newBagWith("ZERO"), target);
+        assertSame(target, this.classUnderTest().collect(StringFunctions.toUpperCase(), target));
+        assertEquals(HashBag.newBagWith("ZERO"), target);
     }
 
     @Override
@@ -592,18 +598,18 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectWith()
     {
         Function2\<String, String, String> function = (String each, String param) -> each.toUpperCase() + param;
-        Assert.assertEquals(HashBag.newBagWith("ZERO!"), this.classUnderTest().collectWith(function, "!"));
+        assertEquals(HashBag.newBagWith("ZERO!"), this.classUnderTest().collectWith(function, "!"));
 
         MutableBag\<String> target = HashBag.newBag();
-        Assert.assertSame(target, this.classUnderTest().collectWith(function, "!", target));
-        Assert.assertEquals(HashBag.newBagWith("ZERO!"), target);
+        assertSame(target, this.classUnderTest().collectWith(function, "!", target));
+        assertEquals(HashBag.newBagWith("ZERO!"), target);
     }
 
     @Override
     @Test
     public void collectBoolean()
     {
-        Assert.assertEquals(
+        assertEquals(
                 BooleanHashBag.newBagWith(true),
                 this.newWithKeysValues(<(literal.(type))("0")>, "true").collectBoolean(StringFunctions.toPrimitiveBoolean()));
     }
@@ -613,15 +619,15 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectBoolean_withTarget()
     {
         MutableBooleanBag target = new BooleanHashBag();
-        Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "true").collectBoolean(StringFunctions.toPrimitiveBoolean(), target));
-        Assert.assertEquals(BooleanHashBag.newBagWith(true), target);
+        assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "true").collectBoolean(StringFunctions.toPrimitiveBoolean(), target));
+        assertEquals(BooleanHashBag.newBagWith(true), target);
     }
 
     @Override
     @Test
     public void collectByte()
     {
-        Assert.assertEquals(
+        assertEquals(
                 ByteHashBag.newBagWith((byte) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectByte(Byte::parseByte));
     }
@@ -631,15 +637,15 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectByte_withTarget()
     {
         MutableByteBag target = new ByteHashBag();
-        Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectByte(Byte::parseByte, target));
-        Assert.assertEquals(ByteHashBag.newBagWith((byte) 0), target);
+        assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectByte(Byte::parseByte, target));
+        assertEquals(ByteHashBag.newBagWith((byte) 0), target);
     }
 
     @Override
     @Test
     public void collectChar()
     {
-        Assert.assertEquals(
+        assertEquals(
                 CharHashBag.newBagWith((char) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectChar(StringFunctions.toPrimitiveChar()));
     }
@@ -649,15 +655,15 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectChar_withTarget()
     {
         MutableCharBag target = new CharHashBag();
-        Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectChar(StringFunctions.toPrimitiveChar(), target));
-        Assert.assertEquals(CharHashBag.newBagWith((char) 0), target);
+        assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectChar(StringFunctions.toPrimitiveChar(), target));
+        assertEquals(CharHashBag.newBagWith((char) 0), target);
     }
 
     @Override
     @Test
     public void collectDouble()
     {
-        Assert.assertEquals(
+        assertEquals(
                 DoubleHashBag.newBagWith((double) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectDouble(Double::parseDouble));
     }
@@ -667,15 +673,15 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectDouble_withTarget()
     {
         MutableDoubleBag target = new DoubleHashBag();
-        Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectDouble(Double::parseDouble, target));
-        Assert.assertEquals(DoubleHashBag.newBagWith((double) 0), target);
+        assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectDouble(Double::parseDouble, target));
+        assertEquals(DoubleHashBag.newBagWith((double) 0), target);
     }
 
     @Override
     @Test
     public void collectFloat()
     {
-        Assert.assertEquals(
+        assertEquals(
                 FloatHashBag.newBagWith((float) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectFloat(Float::parseFloat));
     }
@@ -685,15 +691,15 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectFloat_withTarget()
     {
         MutableFloatBag target = new FloatHashBag();
-        Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectFloat(Float::parseFloat, target));
-        Assert.assertEquals(FloatHashBag.newBagWith((float) 0), target);
+        assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectFloat(Float::parseFloat, target));
+        assertEquals(FloatHashBag.newBagWith((float) 0), target);
     }
 
     @Override
     @Test
     public void collectInt()
     {
-        Assert.assertEquals(
+        assertEquals(
                 IntHashBag.newBagWith((int) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectInt(Integer::parseInt));
     }
@@ -703,15 +709,15 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectInt_withTarget()
     {
         MutableIntBag target = new IntHashBag();
-        Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectInt(Integer::parseInt, target));
-        Assert.assertEquals(IntHashBag.newBagWith((int) 0), target);
+        assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectInt(Integer::parseInt, target));
+        assertEquals(IntHashBag.newBagWith((int) 0), target);
     }
 
     @Override
     @Test
     public void collectLong()
     {
-        Assert.assertEquals(
+        assertEquals(
                 LongHashBag.newBagWith(0L),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectLong(Long::parseLong));
     }
@@ -721,15 +727,15 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectLong_withTarget()
     {
         MutableLongBag target = new LongHashBag();
-        Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectLong(Long::parseLong, target));
-        Assert.assertEquals(LongHashBag.newBagWith(0L), target);
+        assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectLong(Long::parseLong, target));
+        assertEquals(LongHashBag.newBagWith(0L), target);
     }
 
     @Override
     @Test
     public void collectShort()
     {
-        Assert.assertEquals(
+        assertEquals(
                 ShortHashBag.newBagWith((short) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectShort(Short::parseShort));
     }
@@ -739,8 +745,8 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectShort_withTarget()
     {
         MutableShortBag target = new ShortHashBag();
-        Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectShort(Short::parseShort, target));
-        Assert.assertEquals(ShortHashBag.newBagWith((short) 0), target);
+        assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectShort(Short::parseShort, target));
+        assertEquals(ShortHashBag.newBagWith((short) 0), target);
     }
 
     @Override

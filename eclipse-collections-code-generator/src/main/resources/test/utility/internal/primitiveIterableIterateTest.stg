@@ -25,8 +25,9 @@ import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit test for {@link <name>IterableIterate}.
@@ -41,7 +42,7 @@ public class <name>IterableIterateTest
     {
         <wideType.(type)>[] sum = new <wideType.(type)>[1];
         <name>IterableIterate.forEach(this.iterable, (<type> each) -> sum[0] += each);
-        Assert.assertEquals(<(wideLiteral.(type))("6")>, sum[0]<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("6")>, sum[0]<(wideDelta.(type))>);
     }
 
     @Test

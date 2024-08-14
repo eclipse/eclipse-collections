@@ -21,8 +21,10 @@ import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import static org.junit.Assert.assertThrows;
 
@@ -43,7 +45,7 @@ public class Immutable<name>SingletonListTest extends AbstractImmutable<name>Lis
     public void testEquals()
     {
         super.testEquals();
-        Assert.assertNotEquals(this.newWith(<(literal.(type))("1")>), this.newWith());
+        assertNotEquals(this.newWith(<(literal.(type))("1")>), this.newWith());
     }
 
     @Test
@@ -51,7 +53,7 @@ public class Immutable<name>SingletonListTest extends AbstractImmutable<name>Lis
     {
         Immutable<name>SingletonList list1 = new Immutable<name>SingletonList(<(literal.(type))("3")>);
         Immutable<name>SingletonList list2 = new Immutable<name>SingletonList(<(literal.(type))("3")>);
-        Assert.assertEquals(<(wideLiteral.(type))("9")>, list1.dotProduct(list2)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("9")>, list1.dotProduct(list2)<(wideDelta.(type))>);
     }
 
     @Test
@@ -69,7 +71,7 @@ public class Immutable<name>SingletonListTest extends AbstractImmutable<name>Lis
 
         Immutable<name>SingletonList iterable = new Immutable<name>SingletonList(<(literal.(type))("1")>);
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("1")>), Mutable<wrapperName>::add);
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("2")>), result);
+        assertEquals(new Mutable<wrapperName>(<(literal.(type))("2")>), result);
     }
 
     @Override
@@ -79,14 +81,14 @@ public class Immutable<name>SingletonListTest extends AbstractImmutable<name>Lis
         Immutable<name>List list1 = this.newWith(<["1"]:(literal.(type))(); separator=", ">);
         Immutable<name>List list2 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Mutable<wrapperName> result = list1.injectIntoWithIndex(new Mutable<wrapperName>(<(literal.(type))("0")>), (Mutable<wrapperName> object, <type> value, int index) -> object.add(<(castIntToNarrowTypeWithParens.(type))("value * list2.get(index)")>));
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("1")>), result);
+        assertEquals(new Mutable<wrapperName>(<(literal.(type))("1")>), result);
     }
 
     @Override
     @Test
     public void toReversed()
     {
-        Assert.assertEquals(<name>Lists.immutable.of(<(literal.(type))("1")>), this.classUnderTest().toReversed());
+        assertEquals(<name>Lists.immutable.of(<(literal.(type))("1")>), this.classUnderTest().toReversed());
     }
 
     @Override
@@ -96,22 +98,22 @@ public class Immutable<name>SingletonListTest extends AbstractImmutable<name>Lis
         <wideType.(type)>[] sum = new <wideType.(type)>[1];
         this.classUnderTest().forEachWithIndex((<type> each, int index) -> sum[0] += each + index);
 
-        Assert.assertEquals(1, sum[0], <(literal.(type))("0")>);
+        assertEquals(1, sum[0], <(literal.(type))("0")>);
     }
 
     @Test
     public void binarySearch()
     {
-        Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("0")>));
-        Assert.assertEquals(0, this.classUnderTest().binarySearch(<(literal.(type))("1")>));
-        Assert.assertEquals(-2, this.classUnderTest().binarySearch(<(literal.(type))("5")>));
+        assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("0")>));
+        assertEquals(0, this.classUnderTest().binarySearch(<(literal.(type))("1")>));
+        assertEquals(-2, this.classUnderTest().binarySearch(<(literal.(type))("5")>));
     }
 
     @Test
     public void toStack()
     {
         Mutable<name>Stack stack = this.classUnderTest().toStack();
-        Assert.assertEquals(<name>Stacks.mutable.with(<(literal.(type))("1")>), stack);
+        assertEquals(<name>Stacks.mutable.with(<(literal.(type))("1")>), stack);
     }
 }
 

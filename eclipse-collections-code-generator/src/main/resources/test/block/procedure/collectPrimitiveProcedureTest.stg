@@ -21,8 +21,9 @@ import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * This file was automatically generated from template file CollectPrimitiveProcedureTest.stg.
@@ -40,7 +41,7 @@ public class Collect<name>ProcedureTest
         procedure.value("00");
 
         Immutable<name>List expected = <name>Lists.immutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(expected, targetList);
+        assertEquals(expected, targetList);
     }
 }
 

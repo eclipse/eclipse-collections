@@ -18,8 +18,10 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.bag.mutable.primitive;
 
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link Synchronized<name>Bag}.
@@ -46,10 +48,10 @@ public class Synchronized<name>BagTest extends AbstractMutable<name>BagTestCase
         super.asSynchronized();
         Synchronized<name>Bag bag = this.classUnderTest();
         Mutable<name>Bag bagWithLockObject = new Synchronized<name>Bag(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), new Object());
-        Assert.assertEquals(bag, bagWithLockObject);
-        Assert.assertSame(bagWithLockObject, bagWithLockObject.asSynchronized());
-        Assert.assertSame(bag, bag.asSynchronized());
-        Assert.assertEquals(bag, bag.asSynchronized());
+        assertEquals(bag, bagWithLockObject);
+        assertSame(bagWithLockObject, bagWithLockObject.asSynchronized());
+        assertSame(bag, bag.asSynchronized());
+        assertEquals(bag, bag.asSynchronized());
     }
 }
 

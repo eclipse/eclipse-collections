@@ -27,8 +27,11 @@ import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * JUnit test for {@link Object<name>HashMapWithHashingStrategy#keySet()}.
@@ -112,7 +115,7 @@ public class Object<name>HashMapWithHashingStrategyKeySetTest extends Object<nam
         MutableObject<name>Map\<Person> map = Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, <allPeople()>);
         Set\<Person> people = map.keySet();
         people.remove(JOHNDOE);
-        Assert.assertEquals(map, Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNSMITH, <(literal.(type))("4")>));
+        assertEquals(map, Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNSMITH, <(literal.(type))("4")>));
     }
 
     @Override
@@ -124,7 +127,7 @@ public class Object<name>HashMapWithHashingStrategyKeySetTest extends Object<nam
         Set\<Person> people1 = Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNDOE, <(literal.(type))("1")>, JOHNSMITH, <(literal.(type))("3")>).keySet();
         Set\<Person> people2 = Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JANEDOE, <(literal.(type))("2")>, JANESMITH, <(literal.(type))("4")>).keySet();
 
-        Assert.assertTrue(people1.hashCode() == people2.hashCode());
+        assertTrue(people1.hashCode() == people2.hashCode());
     }
 
     @Override
@@ -135,9 +138,9 @@ public class Object<name>HashMapWithHashingStrategyKeySetTest extends Object<nam
 
         Set\<Person> people = Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, <allPeople()>).keySet();
         Object[] keys1 = {JOHNDOE, JOHNSMITH};
-        Assert.assertArrayEquals(people.toArray(), keys1);
+        assertArrayEquals(people.toArray(), keys1);
         Person[] keys2 = new Person[2];
-        Assert.assertArrayEquals(people.toArray(keys2), keys1);
+        assertArrayEquals(people.toArray(keys2), keys1);
     }
 }
 

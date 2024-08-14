@@ -30,10 +30,15 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * JUnit test for {@link Tap<name>Iterable}.
@@ -54,8 +59,8 @@ public class Tap<name>IterableTest
         {
             sum += iterator.next();
         }
-        Assert.assertEquals(<(wideLiteral.(type))("15")>, sum<(wideDelta.(type))>);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<(wideLiteral.(type))("15")>, sum<(wideDelta.(type))>);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -66,8 +71,8 @@ public class Tap<name>IterableTest
 
         <wideType.(type)>[] sum = new <wideType.(type)>[1];
         iterable.forEach((<type> each) -> sum[0] += each);
-        Assert.assertEquals(<(wideLiteral.(type))("15")>, sum[0]<(wideDelta.(type))>);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<(wideLiteral.(type))("15")>, sum[0]<(wideDelta.(type))>);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -77,7 +82,7 @@ public class Tap<name>IterableTest
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
         Verify.assertSize(5, iterable);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -86,9 +91,9 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertTrue(iterable.notEmpty());
+        assertTrue(iterable.notEmpty());
         Verify.assertNotEmpty(iterable);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -97,8 +102,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(1L, iterable.count(<name>Predicates.lessThan(<(literal.(type))("2")>)));
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(1L, iterable.count(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -107,8 +112,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertTrue(iterable.anySatisfy(<name>Predicates.lessThan(<(literal.(type))("2")>)));
-        Assert.assertTrue(iterable.anySatisfy(<name>Predicates.greaterThan(<(literal.(type))("4")>)));
+        assertTrue(iterable.anySatisfy(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        assertTrue(iterable.anySatisfy(<name>Predicates.greaterThan(<(literal.(type))("4")>)));
     }
 
     @Test
@@ -117,10 +122,10 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertTrue(iterable.allSatisfy(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
-        Assert.assertFalse(iterable.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("2")>)));
-        Assert.assertFalse(iterable.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("1")>)));
-        Assert.assertFalse(iterable.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("4")>)));
+        assertTrue(iterable.allSatisfy(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
+        assertFalse(iterable.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        assertFalse(iterable.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("1")>)));
+        assertFalse(iterable.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("4")>)));
     }
 
     @Test
@@ -129,10 +134,10 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertTrue(iterable.noneSatisfy(<name>Predicates.lessThan(<(literal.(type))("0")>)));
-        Assert.assertFalse(iterable.noneSatisfy(<name>Predicates.lessThan(<(literal.(type))("2")>)));
-        Assert.assertTrue(iterable.noneSatisfy(<name>Predicates.lessThan(<(literal.(type))("1")>)));
-        Assert.assertFalse(iterable.noneSatisfy(<name>Predicates.greaterThan(<(literal.(type))("4")>)));
+        assertTrue(iterable.noneSatisfy(<name>Predicates.lessThan(<(literal.(type))("0")>)));
+        assertFalse(iterable.noneSatisfy(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        assertTrue(iterable.noneSatisfy(<name>Predicates.lessThan(<(literal.(type))("1")>)));
+        assertFalse(iterable.noneSatisfy(<name>Predicates.greaterThan(<(literal.(type))("4")>)));
     }
 
     @Test
@@ -161,8 +166,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<(wideLiteral.(type))("1")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("4")>, iterable.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("1")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("4")>, iterable.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<(wideDelta.(type))>);
     }
 
     @Test
@@ -172,7 +177,7 @@ public class Tap<name>IterableTest
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
         Verify.assertIterableSize(5, iterable.collect(String::valueOf));
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -181,8 +186,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<(wideLiteral.(type))("15")>, iterable.sum()<(wideDelta.(type))>);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<(wideLiteral.(type))("15")>, iterable.sum()<(wideDelta.(type))>);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -191,8 +196,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<(literal.(type))("5")>, iterable.max()<(wideDelta.(type))>);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<(literal.(type))("5")>, iterable.max()<(wideDelta.(type))>);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -201,8 +206,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<(literal.(type))("1")>, iterable.min()<(wideDelta.(type))>);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<(literal.(type))("1")>, iterable.min()<(wideDelta.(type))>);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -211,8 +216,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<(literal.(type))("1")>, iterable.minIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<(literal.(type))("1")>, iterable.minIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -221,8 +226,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<(literal.(type))("5")>, iterable.maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<(literal.(type))("5")>, iterable.maxIfEmpty(<(literal.(type))("0")>)<(wideDelta.(type))>);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -245,8 +250,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(3.0d, iterable.average(), 0.0);
-        Assert.assertEquals(list.makeString("") + list.makeString(""), builder.toString());
+        assertEquals(3.0d, iterable.average(), 0.0);
+        assertEquals(list.makeString("") + list.makeString(""), builder.toString());
     }
 
     @Test
@@ -262,8 +267,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(3.0d, iterable.median(), 0.0);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(3.0d, iterable.median(), 0.0);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -278,8 +283,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertArrayEquals(new <type>[]{1, 2, 3, 4, 5}, iterable.toArray()<(delta.(type))>);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertArrayEquals(new <type>[]{1, 2, 3, 4, 5}, iterable.toArray()<(delta.(type))>);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -288,9 +293,9 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertTrue(iterable.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(iterable.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(iterable.contains(<(literal.(type))("6")>));
+        assertTrue(iterable.contains(<(literal.(type))("1")>));
+        assertTrue(iterable.contains(<(literal.(type))("2")>));
+        assertFalse(iterable.contains(<(literal.(type))("6")>));
     }
 
     @Test
@@ -299,11 +304,11 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertTrue(iterable.containsAll(<["1"]:(literal.(type))(); separator=", ">));
-        Assert.assertTrue(iterable.containsAll(<["2"]:(literal.(type))(); separator=", ">));
-        Assert.assertTrue(iterable.containsAll(<["1", "2"]:(literal.(type))(); separator=", ">));
-        Assert.assertTrue(iterable.containsAll(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
-        Assert.assertFalse(iterable.containsAll(<["4", "5", "6"]:(literal.(type))(); separator=", ">));
+        assertTrue(iterable.containsAll(<["1"]:(literal.(type))(); separator=", ">));
+        assertTrue(iterable.containsAll(<["2"]:(literal.(type))(); separator=", ">));
+        assertTrue(iterable.containsAll(<["1", "2"]:(literal.(type))(); separator=", ">));
+        assertTrue(iterable.containsAll(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        assertFalse(iterable.containsAll(<["4", "5", "6"]:(literal.(type))(); separator=", ">));
     }
 
     @Test
@@ -312,11 +317,11 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertTrue(iterable.containsAll(<name>ArrayList.newListWith(<["1"]:(literal.(type))(); separator=", ">)));
-        Assert.assertTrue(iterable.containsAll(<name>ArrayList.newListWith(<["2"]:(literal.(type))(); separator=", ">)));
-        Assert.assertTrue(iterable.containsAll(<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">)));
-        Assert.assertTrue(iterable.containsAll(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
-        Assert.assertFalse(iterable.containsAll(<name>ArrayList.newListWith(<["4", "5", "6"]:(literal.(type))(); separator=", ">)));
+        assertTrue(iterable.containsAll(<name>ArrayList.newListWith(<["1"]:(literal.(type))(); separator=", ">)));
+        assertTrue(iterable.containsAll(<name>ArrayList.newListWith(<["2"]:(literal.(type))(); separator=", ">)));
+        assertTrue(iterable.containsAll(<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        assertTrue(iterable.containsAll(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        assertFalse(iterable.containsAll(<name>ArrayList.newListWith(<["4", "5", "6"]:(literal.(type))(); separator=", ">)));
     }
 
     @Test
@@ -325,8 +330,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertArrayEquals(new <type>[]{1, 2, 3, 4, 5}, iterable.toSortedArray()<(delta.(type))>);
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertArrayEquals(new <type>[]{1, 2, 3, 4, 5}, iterable.toSortedArray()<(delta.(type))>);
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -335,8 +340,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), iterable.toList());
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), iterable.toList());
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -345,8 +350,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), iterable.toSortedList());
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), iterable.toSortedList());
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -355,8 +360,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), iterable.toSet());
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<name>HashSet.newSetWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), iterable.toSet());
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -365,8 +370,8 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), iterable.toBag());
-        Assert.assertEquals(list.makeString(""), builder.toString());
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), iterable.toBag());
+        assertEquals(list.makeString(""), builder.toString());
     }
 
     @Test
@@ -375,9 +380,9 @@ public class Tap<name>IterableTest
         StringBuilder builder = new StringBuilder();
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
-        Assert.assertEquals(iterable.toSet(), iterable.asLazy().toSet());
+        assertEquals(iterable.toSet(), iterable.asLazy().toSet());
         Verify.assertInstanceOf(Lazy<name>Iterable.class, iterable.asLazy());
-        Assert.assertSame(iterable, iterable.asLazy());
+        assertSame(iterable, iterable.asLazy());
     }
 
     @Test
@@ -387,7 +392,7 @@ public class Tap<name>IterableTest
         Tap<name>Iterable iterable = new Tap<name>Iterable(this.list, builder::append);
 
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("15")>), result);
+        assertEquals(new Mutable<wrapperName>(<(literal.(type))("15")>), result);
     }
 }
 

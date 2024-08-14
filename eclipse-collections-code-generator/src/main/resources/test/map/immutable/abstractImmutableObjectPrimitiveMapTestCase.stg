@@ -27,8 +27,11 @@ import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
 import org.eclipse.collections.impl.map.primitive.AbstractObject<name>MapTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
 
 /**
  * Abstract JUnit test for {@link ImmutableObject<name>HashMap}.
@@ -75,7 +78,7 @@ public abstract class AbstractImmutableObject<name>MapTestCase extends AbstractO
     {
         super.toImmutable();
         ImmutableObject<name>Map\<String> map = this.classUnderTest();
-        Assert.assertSame(map, map.toImmutable());
+        assertSame(map, map.toImmutable());
     }
 
     @Override
@@ -83,29 +86,29 @@ public abstract class AbstractImmutableObject<name>MapTestCase extends AbstractO
     public void keySet()
     {
         super.keySet();
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().keySet().remove("0"));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().keySet().remove("0"));
     }
 
     @Override
     public void values()
     {
         super.values();
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().values().remove(<(literal.(type))("0")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().values().remove(<(literal.(type))("0")>));
     }
 
     @Test
     public void flipUniqueValues()
     {
-        Assert.assertEquals(<name>ObjectMaps.immutable.empty(), Object<name>Maps.immutable.empty().flipUniqueValues());
+        assertEquals(<name>ObjectMaps.immutable.empty(), Object<name>Maps.immutable.empty().flipUniqueValues());
         Verify.assertInstanceOf(Immutable<name>ObjectEmptyMap.class, Object<name>Maps.immutable.empty().flipUniqueValues());
 
-        Assert.assertEquals(<name>ObjectMaps.immutable.with(<(literal.(type))("2")>, "1"), this.newWithKeysValues("1", <(literal.(type))("2")>).flipUniqueValues());
+        assertEquals(<name>ObjectMaps.immutable.with(<(literal.(type))("2")>, "1"), this.newWithKeysValues("1", <(literal.(type))("2")>).flipUniqueValues());
 
-        Assert.assertEquals(
+        assertEquals(
                 <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, "1", <(literal.(type))("3")>, "2").toImmutable(),
                 this.newWithKeysValues("1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>).flipUniqueValues());
 
-        Assert.assertThrows(IllegalStateException.class, () -> this.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("1")>).flipUniqueValues());
+        assertThrows(IllegalStateException.class, () -> this.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("1")>).flipUniqueValues());
     }
 }
 

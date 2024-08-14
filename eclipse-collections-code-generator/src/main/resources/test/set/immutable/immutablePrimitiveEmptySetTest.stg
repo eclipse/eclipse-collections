@@ -23,8 +23,11 @@ import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertFalse;
 
 /**
  * JUnit test for {@link Immutable<name>EmptySet}.
@@ -48,49 +51,49 @@ public class Immutable<name>EmptySetTest extends AbstractImmutable<name>HashSetT
     @Test
     public void average()
     {
-        Assert.assertThrows(ArithmeticException.class, () -> this.classUnderTest().average());
+        assertThrows(ArithmeticException.class, () -> this.classUnderTest().average());
     }
 
     @Override
     @Test
     public void averageIfEmpty()
     {
-        Assert.assertEquals(1.2, this.classUnderTest().averageIfEmpty(1.2), 0.0);
+        assertEquals(1.2, this.classUnderTest().averageIfEmpty(1.2), 0.0);
     }
 
     @Override
     @Test
     public void median()
     {
-        Assert.assertThrows(ArithmeticException.class, () -> this.classUnderTest().median());
+        assertThrows(ArithmeticException.class, () -> this.classUnderTest().median());
     }
 
     @Override
     @Test
     public void medianIfEmpty()
     {
-        Assert.assertEquals(1.2, this.classUnderTest().medianIfEmpty(1.2), 0.0);
+        assertEquals(1.2, this.classUnderTest().medianIfEmpty(1.2), 0.0);
     }
 
     @Override
     @Test
     public void max()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().max());
     }
 
     @Override
     @Test
     public void min()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
+        assertThrows(NoSuchElementException.class, () -> this.classUnderTest().min());
     }
 
     @Override
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(this.classUnderTest().notEmpty());
+        assertFalse(this.classUnderTest().notEmpty());
     }
 
     @Override
@@ -104,7 +107,7 @@ public class Immutable<name>EmptySetTest extends AbstractImmutable<name>HashSetT
     @Test
     public void toBag()
     {
-        Assert.assertEquals(<name>Bags.immutable.empty(), this.classUnderTest().toBag());
+        assertEquals(<name>Bags.immutable.empty(), this.classUnderTest().toBag());
     }
 }
 

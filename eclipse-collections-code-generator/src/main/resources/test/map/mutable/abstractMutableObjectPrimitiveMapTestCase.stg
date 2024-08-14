@@ -32,8 +32,13 @@ import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.map.primitive.AbstractObject<name>MapTestCase;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
 
 /**
  * This file was automatically generated from template file abstractMutableObjectPrimitiveMapTestCase.stg.
@@ -80,15 +85,15 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         MutableObject<name>Map\<String> hashMap = this.getEmptyMap();
         hashMap.put("0", <(literal.(type))("0")>);
         hashMap.clear();
-        Assert.assertEquals(Object<name>HashMap.newMap(), hashMap);
+        assertEquals(Object<name>HashMap.newMap(), hashMap);
 
         hashMap.put("1", <(literal.(type))("0")>);
         hashMap.clear();
-        Assert.assertEquals(Object<name>HashMap.newMap(), hashMap);
+        assertEquals(Object<name>HashMap.newMap(), hashMap);
 
         hashMap.put(null, <(literal.(type))("0")>);
         hashMap.clear();
-        Assert.assertEquals(Object<name>HashMap.newMap(), hashMap);
+        assertEquals(Object<name>HashMap.newMap(), hashMap);
     }
 
     @Test
@@ -96,45 +101,45 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
     {
         MutableObject<name>Map\<String> map0 = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>);
         map0.removeKey("1");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>), map0);
+        assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>), map0);
         map0.removeKey("0");
-        Assert.assertEquals(Object<name>HashMap.newMap(), map0);
+        assertEquals(Object<name>HashMap.newMap(), map0);
 
         MutableObject<name>Map\<String> map1 = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>);
         map1.removeKey("0");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>), map1);
+        assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>), map1);
         map1.removeKey("1");
-        Assert.assertEquals(Object<name>HashMap.newMap(), map1);
+        assertEquals(Object<name>HashMap.newMap(), map1);
 
         this.map.removeKey("5");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
+        assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
         this.map.removeKey("0");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
+        assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
         this.map.removeKey("1");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("2")>), this.map);
+        assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("2")>), this.map);
         this.map.removeKey("2");
-        Assert.assertEquals(Object<name>HashMap.newMap(), this.map);
+        assertEquals(Object<name>HashMap.newMap(), this.map);
         this.map.removeKey("0");
         this.map.removeKey("1");
         this.map.removeKey("2");
-        Assert.assertEquals(Object<name>HashMap.newMap(), this.map);
+        assertEquals(Object<name>HashMap.newMap(), this.map);
         Verify.assertEmpty(this.map);
 
         this.map.put(AbstractMutableObject<name>MapTestCase.generateCollisions().get(0), <(literal.(type))("1")>);
         this.map.put(AbstractMutableObject<name>MapTestCase.generateCollisions().get(1), <(literal.(type))("2")>);
 
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.get(generateCollisions().get(0))<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.get(generateCollisions().get(0))<delta.(type)>);
         this.map.removeKey(AbstractMutableObject<name>MapTestCase.generateCollisions().get(0));
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get(generateCollisions().get(0))<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.get(generateCollisions().get(0))<delta.(type)>);
 
-        Assert.assertEquals(<(literal.(type))("2")>, this.map.get(generateCollisions().get(1))<delta.(type)>);
+        assertEquals(<(literal.(type))("2")>, this.map.get(generateCollisions().get(1))<delta.(type)>);
         this.map.removeKey(AbstractMutableObject<name>MapTestCase.generateCollisions().get(1));
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get(generateCollisions().get(1))<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.get(generateCollisions().get(1))<delta.(type)>);
 
         this.map.put(null, <(literal.(type))("3")>);
-        Assert.assertEquals(<(literal.(type))("3")>, this.map.get(null)<delta.(type)>);
+        assertEquals(<(literal.(type))("3")>, this.map.get(null)<delta.(type)>);
         this.map.removeKey(null);
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get(null)<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.get(null)<delta.(type)>);
     }
 
     @Test
@@ -142,45 +147,45 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
     {
         MutableObject<name>Map\<String> map0 = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>);
         map0.remove("1");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>), map0);
+        assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>), map0);
         map0.remove("0");
-        Assert.assertEquals(Object<name>HashMap.newMap(), map0);
+        assertEquals(Object<name>HashMap.newMap(), map0);
 
         MutableObject<name>Map\<String> map1 = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>);
         map1.remove("0");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>), map1);
+        assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>), map1);
         map1.remove("1");
-        Assert.assertEquals(Object<name>HashMap.newMap(), map1);
+        assertEquals(Object<name>HashMap.newMap(), map1);
 
         this.map.remove("5");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
+        assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
         this.map.remove("0");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
+        assertEquals(Object<name>HashMap.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
         this.map.remove("1");
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("2")>), this.map);
+        assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("2")>), this.map);
         this.map.remove("2");
-        Assert.assertEquals(Object<name>HashMap.newMap(), this.map);
+        assertEquals(Object<name>HashMap.newMap(), this.map);
         this.map.remove("0");
         this.map.remove("1");
         this.map.remove("2");
-        Assert.assertEquals(Object<name>HashMap.newMap(), this.map);
+        assertEquals(Object<name>HashMap.newMap(), this.map);
         Verify.assertEmpty(this.map);
 
         this.map.put(AbstractMutableObject<name>MapTestCase.generateCollisions().get(0), <(literal.(type))("1")>);
         this.map.put(AbstractMutableObject<name>MapTestCase.generateCollisions().get(1), <(literal.(type))("2")>);
 
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.get(generateCollisions().get(0))<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.get(generateCollisions().get(0))<delta.(type)>);
         this.map.remove(AbstractMutableObject<name>MapTestCase.generateCollisions().get(0));
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get(generateCollisions().get(0))<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.get(generateCollisions().get(0))<delta.(type)>);
 
-        Assert.assertEquals(<(literal.(type))("2")>, this.map.get(generateCollisions().get(1))<delta.(type)>);
+        assertEquals(<(literal.(type))("2")>, this.map.get(generateCollisions().get(1))<delta.(type)>);
         this.map.remove(AbstractMutableObject<name>MapTestCase.generateCollisions().get(1));
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get(generateCollisions().get(1))<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.get(generateCollisions().get(1))<delta.(type)>);
 
         this.map.put(null, <(literal.(type))("3")>);
-        Assert.assertEquals(<(literal.(type))("3")>, this.map.get(null)<delta.(type)>);
+        assertEquals(<(literal.(type))("3")>, this.map.get(null)<delta.(type)>);
         this.map.remove(null);
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get(null)<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.get(null)<delta.(type)>);
     }
 
     @Test
@@ -190,15 +195,15 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         this.map.put("1", <(literal.(type))("2")>);
         this.map.put("2", <(literal.(type))("3")>);
         Object<name>HashMap\<String> expected = Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         this.map.put("5", <(literal.(type))("6")>);
         expected.put("5", <(literal.(type))("6")>);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         this.map.put(null, <(literal.(type))("7")>);
         expected.put(null, <(literal.(type))("7")>);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
     }
 
     @Test
@@ -207,17 +212,17 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         MutableObject<name>Map\<String> map1 = this.newWithKeysValues("0", <(literal.(type))("11")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
         map1.updateValues((k, v) -> v);
         MutableObject<name>Map\<String> expected1 = this.newWithKeysValues("0", <(literal.(type))("11")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
-        Assert.assertEquals(expected1, map1);
+        assertEquals(expected1, map1);
 
         MutableObject<name>Map\<String> map2 = this.newWithKeysValues("0", <(literal.(type))("11")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
         map2.updateValues((k, v) -> <(castIntToNarrowTypeWithParens.(type))({v + <(literal.(type))("1")>})>);
         MutableObject<name>Map\<String> expected2 = this.newWithKeysValues("0", <(literal.(type))("12")>, "1", <(literal.(type))("13")>, "2", <(literal.(type))("14")>);
-        Assert.assertEquals(expected2, map2);
+        assertEquals(expected2, map2);
 
         MutableObject<name>Map\<String> map3 = this.newWithKeysValues("0", <(literal.(type))("11")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
         map3.updateValues((k, v) -> k.equals("0") ? <(literal.(type))("10")> : v);
         MutableObject<name>Map\<String> expected3 = this.newWithKeysValues("0", <(literal.(type))("10")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
-        Assert.assertEquals(expected3, map3);
+        assertEquals(expected3, map3);
     }
 
     @Test
@@ -227,15 +232,15 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         this.map.putPair(PrimitiveTuples.pair("1", <(literal.(type))("2")>));
         this.map.putPair(PrimitiveTuples.pair("2", <(literal.(type))("3")>));
         Object<name>HashMap\<String> expected = Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         this.map.putPair(PrimitiveTuples.pair("5", <(literal.(type))("6")>));
         expected.put("5", <(literal.(type))("6")>);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         this.map.putPair(PrimitiveTuples.pair(null, <(literal.(type))("7")>));
         expected.put(null, <(literal.(type))("7")>);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
     }
 
     @Test
@@ -250,34 +255,34 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         hashMap.put(collision1, <(literal.(type))("1")>);
         hashMap.put(collision2, <(literal.(type))("2")>);
         hashMap.put(collision3, <(literal.(type))("3")>);
-        Assert.assertEquals(<(literal.(type))("2")>, hashMap.get(collision2)<delta.(type)>);
+        assertEquals(<(literal.(type))("2")>, hashMap.get(collision2)<delta.(type)>);
         hashMap.removeKey(collision2);
         hashMap.put(collision4, <(literal.(type))("4")>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(collision1, <(literal.(type))("1")>, collision3, <(literal.(type))("3")>, collision4, <(literal.(type))("4")>), hashMap);
+        assertEquals(Object<name>HashMap.newWithKeysValues(collision1, <(literal.(type))("1")>, collision3, <(literal.(type))("3")>, collision4, <(literal.(type))("4")>), hashMap);
 
         MutableObject<name>Map\<String> hashMap1 = this.getEmptyMap();
         hashMap1.put(collision1, <(literal.(type))("1")>);
         hashMap1.put(collision2, <(literal.(type))("2")>);
         hashMap1.put(collision3, <(literal.(type))("3")>);
-        Assert.assertEquals(<(literal.(type))("1")>, hashMap1.get(collision1)<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, hashMap1.get(collision1)<delta.(type)>);
         hashMap1.removeKey(collision1);
         hashMap1.put(collision4, <(literal.(type))("4")>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(collision2, <(literal.(type))("2")>, collision3, <(literal.(type))("3")>, collision4, <(literal.(type))("4")>), hashMap1);
+        assertEquals(Object<name>HashMap.newWithKeysValues(collision2, <(literal.(type))("2")>, collision3, <(literal.(type))("3")>, collision4, <(literal.(type))("4")>), hashMap1);
 
         MutableObject<name>Map\<String> hashMap2 = this.getEmptyMap();
         hashMap2.put(collision1, <(literal.(type))("1")>);
         hashMap2.put(collision2, <(literal.(type))("2")>);
         hashMap2.put(collision3, <(literal.(type))("3")>);
-        Assert.assertEquals(<(literal.(type))("3")>, hashMap2.get(collision3)<delta.(type)>);
+        assertEquals(<(literal.(type))("3")>, hashMap2.get(collision3)<delta.(type)>);
         hashMap2.removeKey(collision3);
         hashMap2.put(collision4, <(literal.(type))("4")>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(collision1, <(literal.(type))("1")>, collision2, <(literal.(type))("2")>, collision4, <(literal.(type))("4")>), hashMap2);
+        assertEquals(Object<name>HashMap.newWithKeysValues(collision1, <(literal.(type))("1")>, collision2, <(literal.(type))("2")>, collision4, <(literal.(type))("4")>), hashMap2);
 
         MutableObject<name>Map\<String> hashMap3 = this.getEmptyMap();
         hashMap3.put(null, <(literal.(type))("1")>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("1")>), hashMap3);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("1")>), hashMap3);
         hashMap3.put(null, <(literal.(type))("2")>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("2")>), hashMap3);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("2")>), hashMap3);
     }
 
     @Override
@@ -286,16 +291,16 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
     {
         super.get();
 
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get("5")<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.get("5")<delta.(type)>);
 
         this.map.put("0", <(literal.(type))("1")>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.get("0")<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.get("0")<delta.(type)>);
 
         this.map.put("5", <(literal.(type))("5")>);
-        Assert.assertEquals(<(literal.(type))("5")>, this.map.get("5")<delta.(type)>);
+        assertEquals(<(literal.(type))("5")>, this.map.get("5")<delta.(type)>);
 
         this.map.put(null, <(literal.(type))("6")>);
-        Assert.assertEquals(<(literal.(type))("6")>, this.map.get(null)<delta.(type)>);
+        assertEquals(<(literal.(type))("6")>, this.map.get(null)<delta.(type)>);
     }
 
     @Override
@@ -305,16 +310,16 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         super.getOrThrow();
 
         this.map.removeKey("0");
-        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow("0"));
+        assertThrows(IllegalStateException.class, () -> this.map.getOrThrow("0"));
 
         this.map.put("0", <(literal.(type))("1")>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.getOrThrow("0")<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.getOrThrow("0")<delta.(type)>);
 
         this.map.put("5", <(literal.(type))("5")>);
-        Assert.assertEquals(<(literal.(type))("5")>, this.map.getOrThrow("5")<delta.(type)>);
+        assertEquals(<(literal.(type))("5")>, this.map.getOrThrow("5")<delta.(type)>);
 
         this.map.put(null, <(literal.(type))("6")>);
-        Assert.assertEquals(<(literal.(type))("6")>, this.map.getOrThrow(null)<delta.(type)>);
+        assertEquals(<(literal.(type))("6")>, this.map.getOrThrow(null)<delta.(type)>);
     }
 
     @Override
@@ -324,57 +329,57 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         super.getIfAbsent();
 
         this.map.removeKey("0");
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("0", <(literal.(type))("1")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("5")>, this.map.getIfAbsent("0", <(literal.(type))("5")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("0", <(literal.(type))("1")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("5")>, this.map.getIfAbsent("0", <(literal.(type))("5")>)<delta.(type)>);
 
         this.map.put("0", <(literal.(type))("1")>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("0", <(literal.(type))("5")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("0", <(literal.(type))("5")>)<delta.(type)>);
 
         this.map.put("5", <(literal.(type))("5")>);
-        Assert.assertEquals(<(literal.(type))("5")>, this.map.getIfAbsent("5", <(literal.(type))("0")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("5")>, this.map.getIfAbsent("5", <(literal.(type))("0")>)<delta.(type)>);
 
         this.map.put(null, <(literal.(type))("6")>);
-        Assert.assertEquals(<(literal.(type))("6")>, this.map.getIfAbsent(null, <(literal.(type))("5")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("6")>, this.map.getIfAbsent(null, <(literal.(type))("5")>)<delta.(type)>);
     }
 
     @Test
     public void getIfAbsentPut_Value()
     {
         MutableObject<name>Map\<Integer> map1 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("50")>, map1.getIfAbsentPut(0, <(literal.(type))("50")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("50")>, map1.getIfAbsentPut(0, <(literal.(type))("100")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("50")>), map1);
-        Assert.assertEquals(<(literal.(type))("50")>, map1.getIfAbsentPut(1, <(literal.(type))("50")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("50")>, map1.getIfAbsentPut(1, <(literal.(type))("100")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("50")>, 1, <(literal.(type))("50")>), map1);
+        assertEquals(<(literal.(type))("50")>, map1.getIfAbsentPut(0, <(literal.(type))("50")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("50")>, map1.getIfAbsentPut(0, <(literal.(type))("100")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("50")>), map1);
+        assertEquals(<(literal.(type))("50")>, map1.getIfAbsentPut(1, <(literal.(type))("50")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("50")>, map1.getIfAbsentPut(1, <(literal.(type))("100")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("50")>, 1, <(literal.(type))("50")>), map1);
 
         MutableObject<name>Map\<Integer> map2 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("50")>, map2.getIfAbsentPut(1, <(literal.(type))("50")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("50")>, map2.getIfAbsentPut(1, <(literal.(type))("100")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("50")>), map2);
-        Assert.assertEquals(<(literal.(type))("50")>, map2.getIfAbsentPut(0, <(literal.(type))("50")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("50")>, map2.getIfAbsentPut(0, <(literal.(type))("100")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("50")>, 1, <(literal.(type))("50")>), map2);
+        assertEquals(<(literal.(type))("50")>, map2.getIfAbsentPut(1, <(literal.(type))("50")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("50")>, map2.getIfAbsentPut(1, <(literal.(type))("100")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("50")>), map2);
+        assertEquals(<(literal.(type))("50")>, map2.getIfAbsentPut(0, <(literal.(type))("50")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("50")>, map2.getIfAbsentPut(0, <(literal.(type))("100")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("50")>, 1, <(literal.(type))("50")>), map2);
 
         MutableObject<name>Map\<Integer> map3 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("50")>, map3.getIfAbsentPut(null, <(literal.(type))("50")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("50")>, map3.getIfAbsentPut(null, <(literal.(type))("100")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("50")>), map3);
+        assertEquals(<(literal.(type))("50")>, map3.getIfAbsentPut(null, <(literal.(type))("50")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("50")>, map3.getIfAbsentPut(null, <(literal.(type))("100")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("50")>), map3);
     }
 
     @Test
     public void getAndPut()
     {
         MutableObject<name>Map\<Integer> map1 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("20")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("100")>, <(literal.(type))("20")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("100")>, map1.get(Integer.valueOf(5))<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("100")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("70")>, <(literal.(type))("50")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("70")>, map1.get(Integer.valueOf(5))<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("70")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("77")>, <(literal.(type))("50")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("77")>, map1.get(Integer.valueOf(5))<delta.(type)>);
+        assertEquals(<(literal.(type))("20")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("100")>, <(literal.(type))("20")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("100")>, map1.get(Integer.valueOf(5))<delta.(type)>);
+        assertEquals(<(literal.(type))("100")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("70")>, <(literal.(type))("50")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("70")>, map1.get(Integer.valueOf(5))<delta.(type)>);
+        assertEquals(<(literal.(type))("70")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("77")>, <(literal.(type))("50")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("77")>, map1.get(Integer.valueOf(5))<delta.(type)>);
         map1.removeKey(Integer.valueOf(5));
-        Assert.assertEquals(<(literal.(type))("20")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("100")>, <(literal.(type))("20")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("100")>, map1.get(Integer.valueOf(5))<delta.(type)>);
+        assertEquals(<(literal.(type))("20")>, map1.getAndPut(Integer.valueOf(5), <(literal.(type))("100")>, <(literal.(type))("20")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("100")>, map1.get(Integer.valueOf(5))<delta.(type)>);
     }
 
     @Test
@@ -383,31 +388,31 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         <name>Function0 factory = () -> <(literal.(type))("100")>;
 
         MutableObject<name>Map\<Integer> map1 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("100")>, map1.getIfAbsentPut(0, factory)<delta.(type)>);
+        assertEquals(<(literal.(type))("100")>, map1.getIfAbsentPut(0, factory)<delta.(type)>);
 
         <name>Function0 factoryThrows = () ->
         {
             throw new AssertionError();
         };
 
-        Assert.assertEquals(<(literal.(type))("100")>, map1.getIfAbsentPut(0, factoryThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("100")>), map1);
-        Assert.assertEquals(<(literal.(type))("100")>, map1.getIfAbsentPut(1, factory)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("100")>, map1.getIfAbsentPut(1, factoryThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("100")>, 1, <(literal.(type))("100")>), map1);
+        assertEquals(<(literal.(type))("100")>, map1.getIfAbsentPut(0, factoryThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("100")>), map1);
+        assertEquals(<(literal.(type))("100")>, map1.getIfAbsentPut(1, factory)<delta.(type)>);
+        assertEquals(<(literal.(type))("100")>, map1.getIfAbsentPut(1, factoryThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("100")>, 1, <(literal.(type))("100")>), map1);
 
         MutableObject<name>Map\<Integer> map2 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("100")>, map2.getIfAbsentPut(1, factory)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("100")>, map2.getIfAbsentPut(1, factoryThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("100")>), map2);
-        Assert.assertEquals(<(literal.(type))("100")>, map2.getIfAbsentPut(0, factory)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("100")>, map2.getIfAbsentPut(0, factoryThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("100")>, 1, <(literal.(type))("100")>), map2);
+        assertEquals(<(literal.(type))("100")>, map2.getIfAbsentPut(1, factory)<delta.(type)>);
+        assertEquals(<(literal.(type))("100")>, map2.getIfAbsentPut(1, factoryThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("100")>), map2);
+        assertEquals(<(literal.(type))("100")>, map2.getIfAbsentPut(0, factory)<delta.(type)>);
+        assertEquals(<(literal.(type))("100")>, map2.getIfAbsentPut(0, factoryThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("100")>, 1, <(literal.(type))("100")>), map2);
 
         MutableObject<name>Map\<Integer> map3 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("100")>, map3.getIfAbsentPut(null, factory)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("100")>, map3.getIfAbsentPut(null, factoryThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("100")>), map3);
+        assertEquals(<(literal.(type))("100")>, map3.getIfAbsentPut(null, factory)<delta.(type)>);
+        assertEquals(<(literal.(type))("100")>, map3.getIfAbsentPut(null, factoryThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("100")>), map3);
     }
 
     @Test
@@ -416,29 +421,29 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         <name>Function\<String> functionLength = (String string) -> <(castIntToNarrowType.(type))("string.length()")>;
 
         MutableObject<name>Map\<Integer> map1 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("9")>, map1.getIfAbsentPutWith(0, functionLength, "123456789")<delta.(type)>);
+        assertEquals(<(literal.(type))("9")>, map1.getIfAbsentPutWith(0, functionLength, "123456789")<delta.(type)>);
         <name>Function\<String> functionThrows = (String each) ->
         {
             throw new AssertionError();
         };
-        Assert.assertEquals(<(literal.(type))("9")>, map1.getIfAbsentPutWith(0, functionThrows, "unused")<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("9")>), map1);
-        Assert.assertEquals(<(literal.(type))("9")>, map1.getIfAbsentPutWith(1, functionLength, "123456789")<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("9")>, map1.getIfAbsentPutWith(1, functionThrows, "unused")<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("9")>, 1, <(literal.(type))("9")>), map1);
+        assertEquals(<(literal.(type))("9")>, map1.getIfAbsentPutWith(0, functionThrows, "unused")<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("9")>), map1);
+        assertEquals(<(literal.(type))("9")>, map1.getIfAbsentPutWith(1, functionLength, "123456789")<delta.(type)>);
+        assertEquals(<(literal.(type))("9")>, map1.getIfAbsentPutWith(1, functionThrows, "unused")<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("9")>, 1, <(literal.(type))("9")>), map1);
 
         MutableObject<name>Map\<Integer> map2 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("9")>, map2.getIfAbsentPutWith(1, functionLength, "123456789")<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("9")>, map2.getIfAbsentPutWith(1, functionThrows, "unused")<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("9")>), map2);
-        Assert.assertEquals(<(literal.(type))("9")>, map2.getIfAbsentPutWith(0, functionLength, "123456789")<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("9")>, map2.getIfAbsentPutWith(0, functionThrows, "unused")<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("9")>, 1, <(literal.(type))("9")>), map2);
+        assertEquals(<(literal.(type))("9")>, map2.getIfAbsentPutWith(1, functionLength, "123456789")<delta.(type)>);
+        assertEquals(<(literal.(type))("9")>, map2.getIfAbsentPutWith(1, functionThrows, "unused")<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("9")>), map2);
+        assertEquals(<(literal.(type))("9")>, map2.getIfAbsentPutWith(0, functionLength, "123456789")<delta.(type)>);
+        assertEquals(<(literal.(type))("9")>, map2.getIfAbsentPutWith(0, functionThrows, "unused")<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("9")>, 1, <(literal.(type))("9")>), map2);
 
         MutableObject<name>Map\<Integer> map3 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("9")>, map3.getIfAbsentPutWith(null, functionLength, "123456789")<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("9")>, map3.getIfAbsentPutWith(null, functionThrows, "unused")<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("9")>), map3);
+        assertEquals(<(literal.(type))("9")>, map3.getIfAbsentPutWith(null, functionLength, "123456789")<delta.(type)>);
+        assertEquals(<(literal.(type))("9")>, map3.getIfAbsentPutWith(null, functionThrows, "unused")<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("9")>), map3);
     }
 
     @Test
@@ -447,29 +452,29 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         <name>Function\<Integer> function = (Integer anObject) -> anObject == null ? <(literal.(type))("32")> : <(castIntToNarrowType.(type))("anObject.intValue()")>;
 
         MutableObject<name>Map\<Integer> map1 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("0")>, map1.getIfAbsentPutWithKey(0, function)<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, map1.getIfAbsentPutWithKey(0, function)<delta.(type)>);
         <name>Function\<Integer> functionThrows = (Integer <type>Parameter) ->
         {
             throw new AssertionError();
         };
-        Assert.assertEquals(<(literal.(type))("0")>, map1.getIfAbsentPutWithKey(0, functionThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("0")>), map1);
-        Assert.assertEquals(<(literal.(type))("1")>, map1.getIfAbsentPutWithKey(1, function)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, map1.getIfAbsentPutWithKey(1, functionThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>), map1);
+        assertEquals(<(literal.(type))("0")>, map1.getIfAbsentPutWithKey(0, functionThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("0")>), map1);
+        assertEquals(<(literal.(type))("1")>, map1.getIfAbsentPutWithKey(1, function)<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, map1.getIfAbsentPutWithKey(1, functionThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>), map1);
 
         MutableObject<name>Map\<Integer> map2 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("1")>, map2.getIfAbsentPutWithKey(1, function)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, map2.getIfAbsentPutWithKey(1, functionThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("1")>), map2);
-        Assert.assertEquals(<(literal.(type))("0")>, map2.getIfAbsentPutWithKey(0, function)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("0")>, map2.getIfAbsentPutWithKey(0, functionThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>), map2);
+        assertEquals(<(literal.(type))("1")>, map2.getIfAbsentPutWithKey(1, function)<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, map2.getIfAbsentPutWithKey(1, functionThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("1")>), map2);
+        assertEquals(<(literal.(type))("0")>, map2.getIfAbsentPutWithKey(0, function)<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, map2.getIfAbsentPutWithKey(0, functionThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>), map2);
 
         MutableObject<name>Map\<Integer> map3 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("32")>, map3.getIfAbsentPutWithKey(null, function)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("32")>, map3.getIfAbsentPutWithKey(null, functionThrows)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("32")>), map3);
+        assertEquals(<(literal.(type))("32")>, map3.getIfAbsentPutWithKey(null, function)<delta.(type)>);
+        assertEquals(<(literal.(type))("32")>, map3.getIfAbsentPutWithKey(null, functionThrows)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("32")>), map3);
     }
 
     @Test
@@ -478,56 +483,56 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         <name>To<name>Function incrementFunction = (<type> value) -> <(castIntToNarrowTypeWithParens.(type))("value + 1")>;
 
         MutableObject<name>Map\<Integer> map1 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("1")>, map1.updateValue(0, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("1")>), map1);
-        Assert.assertEquals(<(literal.(type))("2")>, map1.updateValue(0, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("2")>), map1);
-        Assert.assertEquals(<(literal.(type))("1")>, map1.updateValue(1, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("2")>, 1, <(literal.(type))("1")>), map1);
-        Assert.assertEquals(<(literal.(type))("2")>, map1.updateValue(1, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("2")>, 1, <(literal.(type))("2")>), map1);
+        assertEquals(<(literal.(type))("1")>, map1.updateValue(0, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("1")>), map1);
+        assertEquals(<(literal.(type))("2")>, map1.updateValue(0, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("2")>), map1);
+        assertEquals(<(literal.(type))("1")>, map1.updateValue(1, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("2")>, 1, <(literal.(type))("1")>), map1);
+        assertEquals(<(literal.(type))("2")>, map1.updateValue(1, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("2")>, 1, <(literal.(type))("2")>), map1);
 
         MutableObject<name>Map\<Integer> map2 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("1")>, map2.updateValue(1, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("1")>), map2);
-        Assert.assertEquals(<(literal.(type))("2")>, map2.updateValue(1, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("2")>), map2);
-        Assert.assertEquals(<(literal.(type))("1")>, map2.updateValue(0, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("1")>, 1, <(literal.(type))("2")>), map2);
-        Assert.assertEquals(<(literal.(type))("2")>, map2.updateValue(0, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("2")>, 1, <(literal.(type))("2")>), map2);
+        assertEquals(<(literal.(type))("1")>, map2.updateValue(1, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("1")>), map2);
+        assertEquals(<(literal.(type))("2")>, map2.updateValue(1, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("2")>), map2);
+        assertEquals(<(literal.(type))("1")>, map2.updateValue(0, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("1")>, 1, <(literal.(type))("2")>), map2);
+        assertEquals(<(literal.(type))("2")>, map2.updateValue(0, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("2")>, 1, <(literal.(type))("2")>), map2);
 
         MutableObject<name>Map\<Integer> map3 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("1")>, map3.updateValue(null, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("1")>), map3);
-        Assert.assertEquals(<(literal.(type))("2")>, map3.updateValue(null, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("2")>), map3);
+        assertEquals(<(literal.(type))("1")>, map3.updateValue(null, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("1")>), map3);
+        assertEquals(<(literal.(type))("2")>, map3.updateValue(null, <(literal.(type))("0")>, incrementFunction)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("2")>), map3);
     }
 
     @Test
     public void addToValue()
     {
         MutableObject<name>Map\<Integer> map1 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("1")>, map1.addToValue(0, <(literal.(type))("1")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("1")>), map1);
-        Assert.assertEquals(<(literal.(type))("5")>, map1.addToValue(0, <(literal.(type))("4")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("5")>), map1);
-        Assert.assertEquals(<(literal.(type))("2")>, map1.addToValue(1, <(literal.(type))("2")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("5")>, 1, <(literal.(type))("2")>), map1);
-        Assert.assertEquals(<(literal.(type))("10")>, map1.addToValue(1, <(literal.(type))("8")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("5")>, 1, <(literal.(type))("10")>), map1);
+        assertEquals(<(literal.(type))("1")>, map1.addToValue(0, <(literal.(type))("1")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("1")>), map1);
+        assertEquals(<(literal.(type))("5")>, map1.addToValue(0, <(literal.(type))("4")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("5")>), map1);
+        assertEquals(<(literal.(type))("2")>, map1.addToValue(1, <(literal.(type))("2")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("5")>, 1, <(literal.(type))("2")>), map1);
+        assertEquals(<(literal.(type))("10")>, map1.addToValue(1, <(literal.(type))("8")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("5")>, 1, <(literal.(type))("10")>), map1);
 
         MutableObject<name>Map\<Integer> map2 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type))("1")>, map2.addToValue(null, <(literal.(type))("1")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("1")>), map2);
-        Assert.assertEquals(<(literal.(type))("5")>, map2.addToValue(null, <(literal.(type))("4")>)<delta.(type)>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("5")>), map2);
+        assertEquals(<(literal.(type))("1")>, map2.addToValue(null, <(literal.(type))("1")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("1")>), map2);
+        assertEquals(<(literal.(type))("5")>, map2.addToValue(null, <(literal.(type))("4")>)<delta.(type)>);
+        assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("5")>), map2);
 
         MutableObject<name>Map\<String> map3 = this.getEmptyMap();
         IntInterval.zeroTo(10).forEachWithIndex((each, index) ->
         {
             <type> v = <(castIntToNarrowTypeWithParens.(type))("each + index")>;
-            Assert.assertEquals("Key:" + each, v, map3.addToValue(String.valueOf(each), v)<delta.(type)>);
+            assertEquals("Key:" + each, v, map3.addToValue(String.valueOf(each), v)<delta.(type)>);
         });
     }
 
@@ -538,26 +543,26 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         super.containsKey();
 
         this.map.removeKey("0");
-        Assert.assertFalse(this.map.containsKey("0"));
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get("0")<delta.(type)>);
+        assertFalse(this.map.containsKey("0"));
+        assertEquals(<(literal.(type))("0")>, this.map.get("0")<delta.(type)>);
         this.map.removeKey("0");
-        Assert.assertFalse(this.map.containsKey("0"));
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get("0")<delta.(type)>);
+        assertFalse(this.map.containsKey("0"));
+        assertEquals(<(literal.(type))("0")>, this.map.get("0")<delta.(type)>);
 
         this.map.removeKey("1");
-        Assert.assertFalse(this.map.containsKey("1"));
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get("1")<delta.(type)>);
+        assertFalse(this.map.containsKey("1"));
+        assertEquals(<(literal.(type))("0")>, this.map.get("1")<delta.(type)>);
 
         this.map.removeKey("2");
-        Assert.assertFalse(this.map.containsKey("2"));
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get("2")<delta.(type)>);
+        assertFalse(this.map.containsKey("2"));
+        assertEquals(<(literal.(type))("0")>, this.map.get("2")<delta.(type)>);
 
         this.map.removeKey("3");
-        Assert.assertFalse(this.map.containsKey("3"));
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get("3")<delta.(type)>);
+        assertFalse(this.map.containsKey("3"));
+        assertEquals(<(literal.(type))("0")>, this.map.get("3")<delta.(type)>);
 
         this.map.put(null, <(literal.(type))("5")>);
-        Assert.assertTrue(this.map.containsKey(null));
+        assertTrue(this.map.containsKey(null));
     }
 
     @Override
@@ -566,13 +571,13 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
     {
         super.containsValue();
         this.map.put("5", <(literal.(type))("5")>);
-        Assert.assertTrue(this.map.containsValue(<(literal.(type))("5")>));
+        assertTrue(this.map.containsValue(<(literal.(type))("5")>));
 
         this.map.put(null, <(literal.(type))("6")>);
-        Assert.assertTrue(this.map.containsValue(<(literal.(type))("6")>));
+        assertTrue(this.map.containsValue(<(literal.(type))("6")>));
 
         this.map.removeKey("0");
-        Assert.assertFalse(this.map.containsValue(<(literal.(type))("0")>));
+        assertFalse(this.map.containsValue(<(literal.(type))("0")>));
     }
 
     @Override
@@ -597,8 +602,8 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
     {
         MutableObject<name>Map\<Integer> emptyMap = this.getEmptyMap();
         MutableObject<name>Map\<Integer> hashMap = emptyMap.withKeyValue(1, <(literal.(type))("1")>);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("1")>), hashMap);
-        Assert.assertSame(emptyMap, hashMap);
+        assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("1")>), hashMap);
+        assertSame(emptyMap, hashMap);
     }
 
     @Test
@@ -606,8 +611,8 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
     {
         MutableObject<name>Map\<Integer> map = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>);
         MutableObject<name>Map\<Integer> mapWithout = map.withoutKey(3);
-        Assert.assertSame(map, mapWithout);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>, 2, <(literal.(type))("2")>), mapWithout);
+        assertSame(map, mapWithout);
+        assertEquals(Object<name>HashMap.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>, 2, <(literal.(type))("2")>), mapWithout);
     }
 
     @Test
@@ -615,8 +620,8 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
     {
         MutableObject<name>Map\<Integer> map = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>);
         MutableObject<name>Map\<Integer> mapWithout = map.withoutAllKeys(FastList.newListWith(0, 3));
-        Assert.assertSame(map, mapWithout);
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("1")>, 2, <(literal.(type))("2")>), mapWithout);
+        assertSame(map, mapWithout);
+        assertEquals(Object<name>HashMap.newWithKeysValues(1, <(literal.(type))("1")>, 2, <(literal.(type))("2")>), mapWithout);
     }
 
     @Test
@@ -628,15 +633,15 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         Iterable\<Object<name>Pair\<String>\> emptyIterable = Iterables.iList();
         Iterable\<Object<name>Pair\<String>\> partialIterable = Iterables.iList(PrimitiveTuples.pair("one", <(literal.(type))("1")>), PrimitiveTuples.pair("three", <(literal.(type))("3")>));
         Iterable\<Object<name>Pair\<String>\> completeIterable = Iterables.iList(PrimitiveTuples.pair("one", <(literal.(type))("1")>), PrimitiveTuples.pair("two", <(literal.(type))("2")>), PrimitiveTuples.pair("three", <(literal.(type))("3")>));
-        Assert.assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
-        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
+        assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
+        assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
+        assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
+        assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
     }
 
     @Override
@@ -646,37 +651,37 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         super.contains();
 
         this.map.put("5", <(literal.(type))("5")>);
-        Assert.assertTrue(this.map.contains(<(literal.(type))("5")>));
+        assertTrue(this.map.contains(<(literal.(type))("5")>));
 
         this.map.put(null, <(literal.(type))("6")>);
-        Assert.assertTrue(this.map.contains(<(literal.(type))("6")>));
+        assertTrue(this.map.contains(<(literal.(type))("6")>));
 
         this.map.removeKey("0");
-        Assert.assertFalse(this.map.contains(<(literal.(type))("0")>));
+        assertFalse(this.map.contains(<(literal.(type))("0")>));
     }
 
     @Test
     public void asUnmodifiable()
     {
         Verify.assertInstanceOf(UnmodifiableObject<name>Map.class, this.map.asUnmodifiable());
-        Assert.assertEquals(new UnmodifiableObject<name>Map\<>(this.map), this.map.asUnmodifiable());
+        assertEquals(new UnmodifiableObject<name>Map\<>(this.map), this.map.asUnmodifiable());
     }
 
     @Test
     public void asSynchronized()
     {
         Verify.assertInstanceOf(SynchronizedObject<name>Map.class, this.map.asSynchronized());
-        Assert.assertEquals(new SynchronizedObject<name>Map\<>(this.map), this.map.asSynchronized());
+        assertEquals(new SynchronizedObject<name>Map\<>(this.map), this.map.asSynchronized());
     }
 
     @Test
     public void flipUniqueValues()
     {
         MutableObject<name>Map\<String> map = this.newWithKeysValues("1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>);
-        Assert.assertEquals(
+        assertEquals(
                 <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, "1", <(literal.(type))("3")>, "2"),
                 map.flipUniqueValues());
-        Assert.assertThrows(
+        assertThrows(
                 IllegalStateException.class,
                 () -> this.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("1")>).flipUniqueValues());
     }

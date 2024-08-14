@@ -24,8 +24,9 @@ import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit test for {@link <name>ArrayStack}.
@@ -80,37 +81,37 @@ public class <name>ArrayStackTest extends AbstractMutable<name>StackTestCase
     {
         <name>ArrayStack stack = <name>ArrayStack.newStackFromTopToBottom();
         stack.push(<["1"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<["1"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
-        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1"]:(literal.(type))(); separator=", ">), stack);
+        assertEquals(<["1"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
+        assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1"]:(literal.(type))(); separator=", ">), stack);
 
         stack.push(<["2"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<["2"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
-        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["2"]:(literal.(type))(); separator=", ">, <["1"]:(literal.(type))(); separator=", ">), stack);
+        assertEquals(<["2"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
+        assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["2"]:(literal.(type))(); separator=", ">, <["1"]:(literal.(type))(); separator=", ">), stack);
 
         stack.push(<["3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<["3"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
-        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["3"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">, <["1"]:(literal.(type))(); separator=", ">), stack);
+        assertEquals(<["3"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
+        assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["3"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">, <["1"]:(literal.(type))(); separator=", ">), stack);
 
-        Assert.assertEquals(<["2"]:(literal.(type))(); separator=", ">, stack.peekAt(1)<(delta.(type))>);
-        Assert.assertEquals(<["3"]:(literal.(type))(); separator=", ">, stack.pop()<(delta.(type))>);
-        Assert.assertEquals(<["2"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
-        Assert.assertEquals(<["2"]:(literal.(type))(); separator=", ">, stack.pop()<(delta.(type))>);
-        Assert.assertEquals(<["1"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
-        Assert.assertEquals(<["1"]:(literal.(type))(); separator=", ">, stack.pop()<(delta.(type))>);
+        assertEquals(<["2"]:(literal.(type))(); separator=", ">, stack.peekAt(1)<(delta.(type))>);
+        assertEquals(<["3"]:(literal.(type))(); separator=", ">, stack.pop()<(delta.(type))>);
+        assertEquals(<["2"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
+        assertEquals(<["2"]:(literal.(type))(); separator=", ">, stack.pop()<(delta.(type))>);
+        assertEquals(<["1"]:(literal.(type))(); separator=", ">, stack.peek()<(delta.(type))>);
+        assertEquals(<["1"]:(literal.(type))(); separator=", ">, stack.pop()<(delta.(type))>);
 
         <name>ArrayStack stack2 = <name>ArrayStack.newStackFromTopToBottom(<["5"]:(literal.(type))(); separator=", ">, <["4"]:(literal.(type))(); separator=", ">, <["3"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">, <["1"]:(literal.(type))(); separator=", ">);
         stack2.pop(2);
-        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["3"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">, <["1"]:(literal.(type))(); separator=", ">), stack2);
-        Assert.assertEquals(<name>ArrayList.newListWith(<["3"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">), stack2.peek(2));
+        assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["3"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">, <["1"]:(literal.(type))(); separator=", ">), stack2);
+        assertEquals(<name>ArrayList.newListWith(<["3"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">), stack2.peek(2));
 
         <name>ArrayStack stack8 = <name>ArrayStack.newStackFromTopToBottom(<["1"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">, <["3"]:(literal.(type))(); separator=", ">, <["4"]:(literal.(type))(); separator=", ">);
         Verify.assertSize(0, stack8.pop(0));
-        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">, <["3"]:(literal.(type))(); separator=", ">, <["4"]:(literal.(type))(); separator=", ">), stack8);
-        Assert.assertEquals(new <name>ArrayList(), stack8.peek(0));
+        assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1"]:(literal.(type))(); separator=", ">, <["2"]:(literal.(type))(); separator=", ">, <["3"]:(literal.(type))(); separator=", ">, <["4"]:(literal.(type))(); separator=", ">), stack8);
+        assertEquals(new <name>ArrayList(), stack8.peek(0));
 
         <name>ArrayStack stack9 = <name>ArrayStack.newStackFromTopToBottom();
-        Assert.assertEquals(new <name>ArrayList(), stack9.pop(0));
-        Assert.assertEquals(new <name>ArrayList(), stack9.peek(0));
+        assertEquals(new <name>ArrayList(), stack9.pop(0));
+        assertEquals(new <name>ArrayList(), stack9.peek(0));
     }
 
     @Test
@@ -123,7 +124,7 @@ public class <name>ArrayStackTest extends AbstractMutable<name>StackTestCase
     public void toStack()
     {
         Mutable<name>Stack stack = <name>Stacks.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(stack, this.classUnderTest().toStack());
+        assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 

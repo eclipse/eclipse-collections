@@ -21,8 +21,10 @@ package org.eclipse.collections.impl.collection.immutable.primitive;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Abstract<name>IterableTestCase;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Abstract JUnit test for {@link Immutable<name>Collection}s.
@@ -41,10 +43,10 @@ public abstract class AbstractImmutable<name>CollectionTestCase extends Abstract
 
     protected void assertSizeAndContains(Immutable<name>Collection collection, <type>... elements)
     {
-        Assert.assertEquals(elements.length, collection.size());
+        assertEquals(elements.length, collection.size());
         for (<type> i: elements)
         {
-            Assert.assertTrue(collection.contains(i));
+            assertTrue(collection.contains(i));
         }
     }
 

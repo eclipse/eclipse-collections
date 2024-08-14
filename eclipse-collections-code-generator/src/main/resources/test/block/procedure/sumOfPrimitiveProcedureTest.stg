@@ -20,8 +20,9 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.block.procedure;
 
 import org.eclipse.collections.api.block.function.primitive.<name>Function;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link SumOf<name>Procedure}.
@@ -41,7 +42,7 @@ public class SumOf<name>ProcedureTest
         <type> actual = (<type>) procedure.getResult();
         <type> expected = (<type>) 6;
 
-        Assert.assertTrue(<(equals.(type))("actual", "expected")>);
+        assertTrue(<(equals.(type))("actual", "expected")>);
     }
 }
 

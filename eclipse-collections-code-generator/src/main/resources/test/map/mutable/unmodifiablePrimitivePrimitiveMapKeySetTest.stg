@@ -29,8 +29,13 @@ import org.eclipse.collections.impl.block.factory.primitive.<name1>Predicates;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.Abstract<name1>SetTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 
 /**
  * JUnit test for {@link Unmodifiable<name1><name2>Map#keySet()}.
@@ -60,14 +65,14 @@ public class Unmodifiable<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     @Test
     public void addAllIterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name1>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(new <name1>ArrayList()));
     }
 
     @Override
     @Test
     public void add()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type1))("0")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().add(<(literal.(type1))("0")>));
     }
 
     <if(primitive1.floatingPoint)><NaNTests()><endif>
@@ -75,49 +80,49 @@ public class Unmodifiable<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     @Test
     public void addAllArray()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type1))(); separator=", ">));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().addAll(<["0", "1"]:(literal.(type1))(); separator=", ">));
     }
 
     @Override
     @Test
     public void with()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type1))("0")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().with(<(literal.(type1))("0")>));
     }
 
     @Override
     @Test
     public void without()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().without(<(literal.(type1))("0")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().without(<(literal.(type1))("0")>));
     }
 
     @Override
     @Test
     public void withAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withAll(new <name1>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withAll(new <name1>ArrayList()));
     }
 
     @Override
     @Test
     public void withoutAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withoutAll(new <name1>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().withoutAll(new <name1>ArrayList()));
     }
 
     @Override
     @Test
     public void remove()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(<(literal.(type1))("1")>));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().remove(<(literal.(type1))("1")>));
     }
 
     @Override
     @Test
     public void removeIf()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                 this.classUnderTest().removeIf(<name1>Predicates.equal(<(literal.(type1))("1")>)));
     }
 
@@ -125,42 +130,42 @@ public class Unmodifiable<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     @Test
     public void removeAll_iterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll(new <name1>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll(new <name1>ArrayList()));
     }
 
     @Override
     @Test
     public void removeAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().removeAll());
     }
 
     @Override
     @Test
     public void retainAll_iterable()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll(new <name1>ArrayList()));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll(new <name1>ArrayList()));
     }
 
     @Override
     @Test
     public void retainAll()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().retainAll());
     }
 
     @Override
     @Test
     public void clear()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().clear());
     }
 
     @Override
     @Test
     public void contains()
     {
-        Assert.assertTrue(this.classUnderTest().contains(<(literal.(type1))("1")>));
+        assertTrue(this.classUnderTest().contains(<(literal.(type1))("1")>));
     }
 
     @Override
@@ -176,7 +181,7 @@ public class Unmodifiable<name1><name2>MapKeySetTest extends Abstract<name1>SetT
         Verify.assertEqualsAndHashCode(set1, set4);
         Verify.assertEqualsAndHashCode(set2, set3);
         Verify.assertEqualsAndHashCode(set2, set4);
-        Assert.assertNotEquals(set1, set5);
+        assertNotEquals(set1, set5);
     }
 
     @Override
@@ -184,7 +189,7 @@ public class Unmodifiable<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     public void noneSatisfy()
     {
         super.noneSatisfy();
-        Assert.assertFalse(this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).noneSatisfy(<name1>Predicates.equal(<(literal.(type1))("0")>)));
+        assertFalse(this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).noneSatisfy(<name1>Predicates.equal(<(literal.(type1))("0")>)));
     }
 
     @Override
@@ -192,7 +197,7 @@ public class Unmodifiable<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     public void sum()
     {
         super.sum();
-        Assert.assertEquals(<(wideLiteral.(type1))("3")>, this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).sum()<wideDelta.(type1)>);
+        assertEquals(<(wideLiteral.(type1))("3")>, this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).sum()<wideDelta.(type1)>);
     }
 
     <if(primitive1.floatPrimitive)>@Test
@@ -206,7 +211,7 @@ public void sumConsistentRounding()
 
     // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
     // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
-    Assert.assertEquals(
+    assertEquals(
             1.082323233761663,
             set.sum(),
             1.0e-15);
@@ -221,7 +226,7 @@ public void sumConsistentRounding()
             .collect<name1>(i -> <["1.0"]:(decimalLiteral.(type1))()> / (i.<type1>Value() * i.<type1>Value() * i.<type1>Value() * i.<type1>Value()))
             .toArray());
 
-    Assert.assertEquals(
+    assertEquals(
             1.082323233711138,
             set.sum(),
             1.0e-15);
@@ -233,25 +238,25 @@ public void sumConsistentRounding()
     {
         Mutable<name1>Set set1 = this.newWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">);
         Mutable<name1>Set set2 = this.newWith(<["32", "31", "1", "0"]:(literal.(type1))(); separator=", ">);
-        Assert.assertEquals(set1.hashCode(), set2.hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">).hashCode(), set1.hashCode());
+        assertEquals(set1.hashCode(), set2.hashCode());
+        assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">).hashCode(), set1.hashCode());
     }
 
     @Override
     public void <type1>Iterator_with_remove()
     {
         Mutable<name1>Iterator iterator = this.classUnderTest().<type1>Iterator();
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         iterator.next();
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
     public void <type1>Iterator_throws_for_remove_before_next()
     {
         Mutable<name1>Iterator iterator = this.classUnderTest().<type1>Iterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertTrue(iterator.hasNext());
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -272,14 +277,14 @@ NaNTests() ::= <<
 @Test
 public void add_NaN()
 {
-    Assert.assertThrows(UnsupportedOperationException.class, () -> this.newWith(<wrapperName1>.NaN).add(<wrapperName1>.NaN));
+    assertThrows(UnsupportedOperationException.class, () -> this.newWith(<wrapperName1>.NaN).add(<wrapperName1>.NaN));
 }
 
 @Override
 @Test
 public void add_POSITIVE_INFINITY()
 {
-    Assert.assertThrows(UnsupportedOperationException.class, () ->
+    assertThrows(UnsupportedOperationException.class, () ->
             this.newWith(<wrapperName1>.POSITIVE_INFINITY).add(<wrapperName1>.POSITIVE_INFINITY));
 }
 
@@ -287,7 +292,7 @@ public void add_POSITIVE_INFINITY()
 @Test
 public void add_NEGATIVE_INFINITY()
 {
-    Assert.assertThrows(UnsupportedOperationException.class, () ->
+    assertThrows(UnsupportedOperationException.class, () ->
             this.newWith(<wrapperName1>.NEGATIVE_INFINITY).add(<wrapperName1>.NEGATIVE_INFINITY));
 }
 
