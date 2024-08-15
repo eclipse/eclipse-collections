@@ -11,9 +11,9 @@
 package org.eclipse.collections.test;
 
 import org.eclipse.collections.api.factory.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface FixedSizeCollectionTestCase extends CollectionTestCase, FixedSizeIterableTestCase
 {

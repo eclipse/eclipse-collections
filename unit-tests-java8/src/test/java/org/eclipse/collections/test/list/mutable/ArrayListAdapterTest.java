@@ -15,10 +15,7 @@ import java.util.Arrays;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class ArrayListAdapterTest implements MutableListTestCase
 {
     @SafeVarargs

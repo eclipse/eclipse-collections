@@ -17,9 +17,9 @@ import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
 import org.eclipse.collections.test.set.UnsortedSetLikeTestTrait;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
 
@@ -48,7 +48,7 @@ public interface UnsortedBiMapTestCase extends BiMapTestCase, TransformsToBagTra
         Iterator<Integer> iterator = iterable.iterator();
         iterator.next();
         iterator.remove();
-        assertEquals(2, iterable.size());
+        assertIterablesEqual(2, iterable.size());
         MutableSet<Integer> valuesSet = iterable.inverse().keysView().toSet();
         assertThat(
                 valuesSet,

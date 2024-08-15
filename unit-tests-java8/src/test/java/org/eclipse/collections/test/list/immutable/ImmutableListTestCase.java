@@ -15,9 +15,9 @@ import java.util.List;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.test.collection.immutable.ImmutableCollectionTestCase;
 import org.eclipse.collections.test.list.ListIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public interface ImmutableListTestCase extends ImmutableCollectionTestCase, ListIterableTestCase
 {

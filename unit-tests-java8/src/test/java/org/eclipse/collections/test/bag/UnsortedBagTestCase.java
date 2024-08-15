@@ -17,12 +17,12 @@ import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.test.UnorderedIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public interface UnsortedBagTestCase extends UnorderedIterableTestCase, BagTestCase, TransformsToBagTrait
 {
@@ -51,7 +51,7 @@ public interface UnsortedBagTestCase extends UnorderedIterableTestCase, BagTestC
             result.add(argument1);
             assertSame(sentinel, argument2);
         }, sentinel);
-        assertEquals(Bags.immutable.with(3, 3, 3, 2, 2, 1), result);
+        assertIterablesEqual(Bags.immutable.with(3, 3, 3, 2, 2, 1), result);
     }
 
     @Override
@@ -90,7 +90,7 @@ public interface UnsortedBagTestCase extends UnorderedIterableTestCase, BagTestC
 
         MutableList<Integer> target = Lists.mutable.empty();
         iterable.each(target::add);
-        assertEquals(
+        assertIterablesEqual(
                 target,
                 iterable.toList());
     }

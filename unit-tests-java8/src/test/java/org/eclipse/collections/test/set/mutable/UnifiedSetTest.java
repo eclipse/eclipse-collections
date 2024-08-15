@@ -12,11 +12,8 @@ package org.eclipse.collections.test.set.mutable;
 
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class UnifiedSetTest implements MutableSetTestCase
 {
     @SafeVarargs

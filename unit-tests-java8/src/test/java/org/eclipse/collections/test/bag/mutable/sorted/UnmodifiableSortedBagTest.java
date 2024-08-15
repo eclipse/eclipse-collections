@@ -14,12 +14,9 @@ import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.UnmodifiableSortedBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.bag.mutable.UnmodifiableBagIterableTestCase;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class UnmodifiableSortedBagTest implements MutableSortedBagTestCase, UnmodifiableBagIterableTestCase
 {
     @Override

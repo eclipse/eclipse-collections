@@ -17,7 +17,7 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.test.MutableUnorderedIterableTestCase;
 import org.eclipse.collections.test.map.UnsortedMapIterableTestCase;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
 
@@ -47,7 +47,7 @@ public interface MutableMapTestCase extends UnsortedMapIterableTestCase, Mutable
         Iterator<Integer> iterator = iterable.iterator();
         iterator.next();
         iterator.remove();
-        assertEquals(this.allowsDuplicates() ? 5 : 2, Iterate.sizeOf(iterable));
+        assertIterablesEqual(this.allowsDuplicates() ? 5 : 2, Iterate.sizeOf(iterable));
         assertThat(iterable.toBag(), isOneOf(
                 this.getExpectedFiltered(3, 3, 3, 2, 2),
                 this.getExpectedFiltered(3, 3, 3, 2, 1),

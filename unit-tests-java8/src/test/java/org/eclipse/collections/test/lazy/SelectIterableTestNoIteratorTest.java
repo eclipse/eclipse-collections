@@ -12,12 +12,9 @@ package org.eclipse.collections.test.lazy;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.impl.lazy.SelectIterable;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.LazyNoIteratorTestCase;
 import org.eclipse.collections.test.list.mutable.FastListNoIterator;
-import org.junit.runner.RunWith;
 
-@RunWith(Java8Runner.class)
 public class SelectIterableTestNoIteratorTest implements LazyNoIteratorTestCase
 {
     @Override

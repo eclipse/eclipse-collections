@@ -13,8 +13,8 @@ package org.eclipse.collections.impl;
 import java.util.Random;
 
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,14 +23,14 @@ public class UnifiedSetAddTest
     private static final Logger LOGGER = LoggerFactory.getLogger(UnifiedSetAddTest.class);
 
     @Test
-    @Category(PerformanceTests.class)
+    @Tag(JunitTags.PERFORMANCE_TEST_TAG)
     public void testUnifiedPutMonomorphic()
     {
         this.runIntegerUnifiedPut("monomorphic");
     }
 
     @Test
-    @Category(PerformanceTests.class)
+    @Tag(JunitTags.PERFORMANCE_TEST_TAG)
     public void testUnifiedPutPolymorphic()
     {
         this.runIntegerUnifiedPut("monomorphic");

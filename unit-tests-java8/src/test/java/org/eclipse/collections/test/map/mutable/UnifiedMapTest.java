@@ -14,13 +14,10 @@ import java.util.Random;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
-@RunWith(Java8Runner.class)
 public class UnifiedMapTest implements MutableMapTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();

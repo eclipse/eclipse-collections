@@ -12,9 +12,9 @@ package org.eclipse.collections.test;
 
 import java.util.Iterator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 
 public interface MutableOrderedIterableTestCase extends OrderedIterableTestCase
 {
@@ -26,6 +26,6 @@ public interface MutableOrderedIterableTestCase extends OrderedIterableTestCase
         Iterator<Integer> iterator = iterable.iterator();
         iterator.next();
         iterator.remove();
-        assertEquals(this.newWith(3, 3, 2, 2, 1), iterable);
+        assertIterablesEqual(this.newWith(3, 3, 2, 2, 1), iterable);
     }
 }

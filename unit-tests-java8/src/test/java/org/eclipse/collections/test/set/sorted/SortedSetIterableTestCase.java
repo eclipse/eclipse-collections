@@ -29,11 +29,11 @@ import org.eclipse.collections.test.domain.B;
 import org.eclipse.collections.test.domain.C;
 import org.eclipse.collections.test.list.TransformsToListTrait;
 import org.eclipse.collections.test.set.SetIterableTestCase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIterableTestCase, TransformsToListTrait
 {
@@ -62,21 +62,21 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     default void SortedSetIterable_union()
     {
         SortedSetIterable<Integer> union = this.newWith(1, 2, 3).union(this.newWith(3, 4, 5));
-        assertEquals(SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 5, 4, 3, 2, 1), union);
+        assertIterablesEqual(SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 5, 4, 3, 2, 1), union);
     }
 
     @Override
     @Test
     default void RichIterable_getFirst_empty_null()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().getFirst());
+        assertThrows(NoSuchElementException.class, () -> this.newWith().getFirst());
     }
 
     @Override
     @Test
     default void RichIterable_getLast_empty_null()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().getLast());
+        assertThrows(NoSuchElementException.class, () -> this.newWith().getLast());
     }
 
     @Override
@@ -86,46 +86,46 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
         // Must test with two classes that are mutually Comparable
 
         SortedSetIterable<A> numbers = this.newWith(new C(4.0), new B(3), new C(2.0), new B(1));
-        assertEquals(this.getExpectedFiltered(new B(3), new B(1)), numbers.selectInstancesOf(B.class));
-        assertEquals(this.getExpectedFiltered(new C(4.0), new B(3), new C(2.0), new B(1)), numbers.selectInstancesOf(A.class));
+        assertIterablesEqual(this.getExpectedFiltered(new B(3), new B(1)), numbers.selectInstancesOf(B.class));
+        assertIterablesEqual(this.getExpectedFiltered(new C(4.0), new B(3), new C(2.0), new B(1)), numbers.selectInstancesOf(A.class));
     }
 
     @Override
     default void OrderedIterable_getFirst()
     {
-        assertEquals(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
+        assertIterablesEqual(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
     }
 
     @Override
     @Test
     default void OrderedIterable_getFirstOptional()
     {
-        assertEquals(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getFirstOptional());
+        assertIterablesEqual(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getFirstOptional());
     }
 
     @Override
     default void OrderedIterable_getLast()
     {
-        assertEquals(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
+        assertIterablesEqual(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
     }
 
     @Override
     @Test
     default void OrderedIterable_getLastOptional()
     {
-        assertEquals(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getLastOptional());
+        assertIterablesEqual(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getLastOptional());
     }
 
     @Override
     default void RichIterable_getFirst()
     {
-        assertEquals(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
+        assertIterablesEqual(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
     }
 
     @Override
     default void RichIterable_getLast()
     {
-        assertEquals(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
+        assertIterablesEqual(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
     }
 
     @Override
@@ -157,7 +157,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     default void OrderedIterable_zipWithIndex()
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         Tuples.pair(4, 0),
                         Tuples.pair(3, 1),
@@ -171,7 +171,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     default void OrderedIterable_zipWithIndex_target()
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         Tuples.pair(4, 0),
                         Tuples.pair(3, 1),
@@ -187,23 +187,23 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
 
         MutableList<Integer> result = Lists.mutable.empty();
         integers.forEach(5, 7, result::add);
-        assertEquals(Lists.immutable.with(4, 3, 2), result);
+        assertIterablesEqual(Lists.immutable.with(4, 3, 2), result);
 
         MutableList<Integer> result2 = Lists.mutable.empty();
         integers.forEach(5, 5, result2::add);
-        assertEquals(Lists.immutable.with(4), result2);
+        assertIterablesEqual(Lists.immutable.with(4), result2);
 
         MutableList<Integer> result3 = Lists.mutable.empty();
         integers.forEach(0, 9, result3::add);
-        assertEquals(Lists.immutable.with(9, 8, 7, 6, 5, 4, 3, 2, 1, 0), result3);
+        assertIterablesEqual(Lists.immutable.with(9, 8, 7, 6, 5, 4, 3, 2, 1, 0), result3);
 
         MutableList<Integer> result4 = Lists.mutable.empty();
         integers.forEach(0, 0, result4::add);
-        assertEquals(Lists.immutable.with(9), result4);
+        assertIterablesEqual(Lists.immutable.with(9), result4);
 
         MutableList<Integer> result5 = Lists.mutable.empty();
         integers.forEach(9, 9, result5::add);
-        assertEquals(Lists.immutable.with(0), result5);
+        assertIterablesEqual(Lists.immutable.with(0), result5);
 
         assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(-1, 0, result::add));
         assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(0, -1, result::add));

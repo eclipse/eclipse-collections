@@ -18,15 +18,16 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface UnorderedIterableTestCase extends RichIterableTestCase
 {
@@ -45,7 +46,7 @@ public interface UnorderedIterableTestCase extends RichIterableTestCase
             mutableCollection.add(integer);
         }
 
-        IterableTestCase.assertEquals(this.getExpectedFiltered(3, 3, 3, 2, 2, 1), mutableCollection);
+        assertIterablesEqual(this.getExpectedFiltered(3, 3, 3, 2, 2, 1), mutableCollection);
         assertFalse(iterator.hasNext());
     }
 
@@ -63,7 +64,7 @@ public interface UnorderedIterableTestCase extends RichIterableTestCase
         RichIterable<Integer> integers = this.newWith(3, 2, 1);
         Integer first = integers.getFirst();
         assertThat(first, isOneOf(3, 2, 1));
-        IterableTestCase.assertEquals(integers.iterator().next(), first);
+        assertIterablesEqual(integers.iterator().next(), first);
 
         assertNotEquals(integers.getLast(), first);
     }
@@ -82,7 +83,7 @@ public interface UnorderedIterableTestCase extends RichIterableTestCase
         {
             iteratorLast = iterator.next();
         }
-        IterableTestCase.assertEquals(iteratorLast, last);
+        assertIterablesEqual(iteratorLast, last);
 
         assertNotEquals(integers.getFirst(), last);
     }
@@ -162,7 +163,7 @@ public interface UnorderedIterableTestCase extends RichIterableTestCase
         RichIterable<String> minIterable = this.newWith("ed", "da", "ca", "bc", "ab");
         String actualMin = minIterable.minBy(string -> string.charAt(string.length() - 1));
         assertThat(actualMin, isOneOf("ca", "da"));
-        IterableTestCase.assertEquals(minIterable.detect(each -> each.equals("ca") || each.equals("da")), actualMin);
+        assertIterablesEqual(minIterable.detect(each -> each.equals("ca") || each.equals("da")), actualMin);
 
         assertThrows(NoSuchElementException.class, () -> this.<String>newWith().minBy(string -> string.charAt(string.length() - 1)));
 
@@ -170,7 +171,7 @@ public interface UnorderedIterableTestCase extends RichIterableTestCase
         RichIterable<String> maxIterable = this.newWith("ew", "dz", "cz", "bx", "ay");
         String actualMax = maxIterable.maxBy(string -> string.charAt(string.length() - 1));
         assertThat(actualMax, isOneOf("cz", "dz"));
-        IterableTestCase.assertEquals(maxIterable.detect(each -> each.equals("cz") || each.equals("dz")), actualMax);
+        assertIterablesEqual(maxIterable.detect(each -> each.equals("cz") || each.equals("dz")), actualMax);
 
         assertThrows(NoSuchElementException.class, () -> this.<String>newWith().maxBy(string -> string.charAt(string.length() - 1)));
     }
@@ -183,7 +184,7 @@ public interface UnorderedIterableTestCase extends RichIterableTestCase
         RichIterable<String> minIterable = this.newWith("ed", "da", "ca", "bc", "ab");
         String actualMin = minIterable.minByOptional(string -> string.charAt(string.length() - 1)).get();
         assertThat(actualMin, isOneOf("ca", "da"));
-        IterableTestCase.assertEquals(minIterable.detect(each -> each.equals("ca") || each.equals("da")), actualMin);
+        assertIterablesEqual(minIterable.detect(each -> each.equals("ca") || each.equals("da")), actualMin);
 
         assertThat(this.<String>newWith().minByOptional(string -> string.charAt(string.length() - 1)), is(Optional.empty()));
 
@@ -191,7 +192,7 @@ public interface UnorderedIterableTestCase extends RichIterableTestCase
         RichIterable<String> maxIterable = this.newWith("ew", "dz", "cz", "bx", "ay");
         String actualMax = maxIterable.maxByOptional(string -> string.charAt(string.length() - 1)).get();
         assertThat(actualMax, isOneOf("cz", "dz"));
-        IterableTestCase.assertEquals(maxIterable.detect(each -> each.equals("cz") || each.equals("dz")), actualMax);
+        assertIterablesEqual(maxIterable.detect(each -> each.equals("cz") || each.equals("dz")), actualMax);
 
         assertThat(this.<String>newWith().maxByOptional(string -> string.charAt(string.length() - 1)), is(Optional.empty()));
     }

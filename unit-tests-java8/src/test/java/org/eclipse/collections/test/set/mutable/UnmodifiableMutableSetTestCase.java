@@ -12,7 +12,7 @@ package org.eclipse.collections.test.set.mutable;
 
 import org.eclipse.collections.test.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.test.set.UnmodifiableSetTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public interface UnmodifiableMutableSetTestCase extends UnmodifiableMutableCollectionTestCase, UnmodifiableSetTestCase, MutableSetTestCase
 {

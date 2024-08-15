@@ -12,7 +12,7 @@ package org.eclipse.collections.test;
 
 import java.util.Iterator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 

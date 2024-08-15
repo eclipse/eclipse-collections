@@ -14,13 +14,10 @@ import java.util.LinkedHashMap;
 
 import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
-@RunWith(Java8Runner.class)
 public class OrderedMapAdapterTest implements MutableOrderedMapTestCase
 {
     @Override

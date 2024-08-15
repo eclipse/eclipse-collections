@@ -17,12 +17,12 @@ import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.test.CollisionsTestCase;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
-import static org.eclipse.collections.test.IterableTestCase.assertNotEquals;
-import static org.junit.Assert.assertArrayEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesNotEqual;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public interface SetIterableTestCase extends RichIterableUniqueTestCase, CollisionsTestCase
 {
@@ -46,33 +46,33 @@ public interface SetIterableTestCase extends RichIterableUniqueTestCase, Collisi
         for (Integer collision : COLLISIONS)
         {
             list.add(collision);
-            assertEquals(
+            assertIterablesEqual(
                     this.newWith(list.toArray()),
                     this.newWith(list.toArray()));
         }
 
         Verify.assertEqualsAndHashCode(this.newWith(), this.newWith());
 
-        assertNotEquals(this.newWith(1, 2, 3, 4, 5), this.newWith(1, 2, 3, 4));
-        assertNotEquals(this.newWith(1, 2, 3, 4), this.newWith(1, 2, 3));
-        assertNotEquals(this.newWith(1, 2, 3), this.newWith(1, 2));
-        assertNotEquals(this.newWith(1, 2), this.newWith(1));
-        assertNotEquals(this.newWith(1), this.newWith());
+        assertIterablesNotEqual(this.newWith(1, 2, 3, 4, 5), this.newWith(1, 2, 3, 4));
+        assertIterablesNotEqual(this.newWith(1, 2, 3, 4), this.newWith(1, 2, 3));
+        assertIterablesNotEqual(this.newWith(1, 2, 3), this.newWith(1, 2));
+        assertIterablesNotEqual(this.newWith(1, 2), this.newWith(1));
+        assertIterablesNotEqual(this.newWith(1), this.newWith());
 
         SetIterable<Integer> expected = Sets.mutable.with(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4);
-        assertNotEquals(expected, this.newWith(COLLISION_2, COLLISION_3, COLLISION_4, COLLISION_5));
-        assertNotEquals(expected, this.newWith(COLLISION_1, COLLISION_3, COLLISION_4, COLLISION_5));
-        assertNotEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_4, COLLISION_5));
-        assertNotEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_5));
+        assertIterablesNotEqual(expected, this.newWith(COLLISION_2, COLLISION_3, COLLISION_4, COLLISION_5));
+        assertIterablesNotEqual(expected, this.newWith(COLLISION_1, COLLISION_3, COLLISION_4, COLLISION_5));
+        assertIterablesNotEqual(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_4, COLLISION_5));
+        assertIterablesNotEqual(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_5));
 
-        Assert.assertEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4));
+        assertEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4));
 
         if (this.allowsNull())
         {
-            assertEquals(this.newWith(null, COLLISION_1, COLLISION_2, COLLISION_3), this.newWith(null, COLLISION_1, COLLISION_2, COLLISION_3));
-            assertEquals(this.newWith(COLLISION_1, null, COLLISION_2, COLLISION_3), this.newWith(COLLISION_1, null, COLLISION_2, COLLISION_3));
-            assertEquals(this.newWith(COLLISION_1, COLLISION_2, null, COLLISION_3), this.newWith(COLLISION_1, COLLISION_2, null, COLLISION_3));
-            assertEquals(this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, null), this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, null));
+            assertIterablesEqual(this.newWith(null, COLLISION_1, COLLISION_2, COLLISION_3), this.newWith(null, COLLISION_1, COLLISION_2, COLLISION_3));
+            assertIterablesEqual(this.newWith(COLLISION_1, null, COLLISION_2, COLLISION_3), this.newWith(COLLISION_1, null, COLLISION_2, COLLISION_3));
+            assertIterablesEqual(this.newWith(COLLISION_1, COLLISION_2, null, COLLISION_3), this.newWith(COLLISION_1, COLLISION_2, null, COLLISION_3));
+            assertIterablesEqual(this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, null), this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, null));
         }
     }
 
@@ -88,6 +88,6 @@ public interface SetIterableTestCase extends RichIterableUniqueTestCase, Collisi
     default void SetIterable_union()
     {
         SetIterable<Integer> union = this.newWith(3, 2, 1).union(this.newWith(5, 4, 3));
-        assertEquals(this.newWith(5, 4, 3, 2, 1), union);
+        assertIterablesEqual(this.newWith(5, 4, 3, 2, 1), union);
     }
 }

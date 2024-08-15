@@ -14,14 +14,14 @@ import java.util.Iterator;
 
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.test.RichIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface ImmutableCollectionTestCase extends RichIterableTestCase
 {
@@ -34,7 +34,7 @@ public interface ImmutableCollectionTestCase extends RichIterableTestCase
         String s = "";
         if (this.allowsDuplicates())
         {
-            assertEquals(2, this.newWith(s, s).size());
+            assertIterablesEqual(2, this.newWith(s, s).size());
         }
         else
         {
@@ -45,12 +45,12 @@ public interface ImmutableCollectionTestCase extends RichIterableTestCase
         ImmutableCollection<String> newCollection = collection.newWith(s);
         if (this.allowsDuplicates())
         {
-            assertEquals(2, newCollection.size());
-            assertEquals(this.newWith(s, s), newCollection);
+            assertIterablesEqual(2, newCollection.size());
+            assertIterablesEqual(this.newWith(s, s), newCollection);
         }
         else
         {
-            assertEquals(1, newCollection.size());
+            assertIterablesEqual(1, newCollection.size());
             assertSame(collection, newCollection);
         }
     }
@@ -71,12 +71,12 @@ public interface ImmutableCollectionTestCase extends RichIterableTestCase
         ImmutableCollection<Integer> immutableCollection = this.newWith(3, 3, 3, 2, 2, 1);
         ImmutableCollection<Integer> newWith = immutableCollection.newWith(4);
 
-        assertEquals(this.newWith(3, 3, 3, 2, 2, 1, 4), newWith);
+        assertIterablesEqual(this.newWith(3, 3, 3, 2, 2, 1, 4), newWith);
         assertNotSame(immutableCollection, newWith);
         assertThat(newWith, instanceOf(ImmutableCollection.class));
 
         ImmutableCollection<Integer> newWith2 = newWith.newWith(4);
 
-        assertEquals(this.newWith(3, 3, 3, 2, 2, 1, 4, 4), newWith2);
+        assertIterablesEqual(this.newWith(3, 3, 3, 2, 2, 1, 4, 4), newWith2);
     }
 }

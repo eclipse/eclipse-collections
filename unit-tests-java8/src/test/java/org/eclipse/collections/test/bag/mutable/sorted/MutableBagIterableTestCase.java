@@ -13,12 +13,12 @@ package org.eclipse.collections.test.bag.mutable.sorted;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface MutableBagIterableTestCase extends MutableCollectionTestCase
 {
@@ -29,10 +29,10 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     default void MutableBagIterable_addOccurrences()
     {
         MutableBagIterable<Integer> mutableBag = this.newWith(1, 2, 2, 3, 3, 3);
-        assertEquals(4, mutableBag.addOccurrences(4, 4));
-        assertEquals(Bags.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
-        assertEquals(3, mutableBag.addOccurrences(1, 2));
-        assertEquals(Bags.immutable.with(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
+        assertIterablesEqual(4, mutableBag.addOccurrences(4, 4));
+        assertIterablesEqual(Bags.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
+        assertIterablesEqual(3, mutableBag.addOccurrences(1, 2));
+        assertIterablesEqual(Bags.immutable.with(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
 
         assertThrows(
                 IllegalArgumentException.class,
@@ -44,13 +44,13 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     {
         MutableBagIterable<Integer> mutableBag = this.newWith(1, 2, 2, 3, 3, 3);
         assertFalse(mutableBag.removeOccurrences(4, 4));
-        assertEquals(Bags.immutable.with(1, 2, 2, 3, 3, 3), mutableBag);
+        assertIterablesEqual(Bags.immutable.with(1, 2, 2, 3, 3, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(1, 2));
-        assertEquals(Bags.immutable.with(2, 2, 3, 3, 3), mutableBag);
+        assertIterablesEqual(Bags.immutable.with(2, 2, 3, 3, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(3, 2));
-        assertEquals(Bags.immutable.with(2, 2, 3), mutableBag);
+        assertIterablesEqual(Bags.immutable.with(2, 2, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(2, 1));
-        assertEquals(Bags.immutable.with(2, 3), mutableBag);
+        assertIterablesEqual(Bags.immutable.with(2, 3), mutableBag);
 
         assertThrows(
                 IllegalArgumentException.class,

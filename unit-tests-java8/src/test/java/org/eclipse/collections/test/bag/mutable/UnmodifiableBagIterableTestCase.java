@@ -12,9 +12,9 @@ package org.eclipse.collections.test.bag.mutable;
 
 import org.eclipse.collections.test.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.test.bag.mutable.sorted.MutableBagIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface UnmodifiableBagIterableTestCase extends UnmodifiableMutableCollectionTestCase, MutableBagIterableTestCase
 {

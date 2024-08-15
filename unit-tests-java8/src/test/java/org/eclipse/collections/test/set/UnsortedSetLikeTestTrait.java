@@ -21,14 +21,14 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
 import org.eclipse.collections.test.UnorderedIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.isOneOf;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, UnorderedIterableTestCase
 {
@@ -66,7 +66,7 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
             mutableCollection.add(integer);
         }
 
-        assertEquals(this.getExpectedFiltered(3, 2, 1), mutableCollection);
+        assertIterablesEqual(this.getExpectedFiltered(3, 2, 1), mutableCollection);
         assertFalse(iterator.hasNext());
     }
 
@@ -77,7 +77,7 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
         RichIterable<Integer> integers = this.newWith(3, 2, 1);
         Integer first = integers.getFirst();
         assertThat(first, isOneOf(3, 2, 1));
-        assertEquals(integers.iterator().next(), first);
+        assertIterablesEqual(integers.iterator().next(), first);
     }
 
     @Override
@@ -178,7 +178,7 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
 
         MutableList<Integer> target = Lists.mutable.empty();
         iterable.each(target::add);
-        assertEquals(
+        assertIterablesEqual(
                 target,
                 iterable.toList());
     }

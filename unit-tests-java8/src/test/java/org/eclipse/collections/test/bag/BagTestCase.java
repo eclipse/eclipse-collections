@@ -21,15 +21,15 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.test.RichIterableWithDuplicatesTestCase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface BagTestCase extends RichIterableWithDuplicatesTestCase
 {
@@ -54,15 +54,15 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
         {
             iterationOrder.add(iterator.next());
         }
-        assertEquals(RichIterableWithDuplicatesTestCase.super.expectedIterationOrder(), iterationOrder);
+        assertIterablesEqual(RichIterableWithDuplicatesTestCase.super.expectedIterationOrder(), iterationOrder);
 
         MutableCollection<Integer> forEachWithIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().forEachWith((each, param) -> forEachWithIterationOrder.add(each), null);
-        assertEquals(RichIterableWithDuplicatesTestCase.super.expectedIterationOrder(), forEachWithIterationOrder);
+        assertIterablesEqual(RichIterableWithDuplicatesTestCase.super.expectedIterationOrder(), forEachWithIterationOrder);
 
         MutableCollection<Integer> forEachWithIndexIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().forEachWithIndex((each, index) -> forEachWithIndexIterationOrder.add(each));
-        assertEquals(RichIterableWithDuplicatesTestCase.super.expectedIterationOrder(), forEachWithIndexIterationOrder);
+        assertIterablesEqual(RichIterableWithDuplicatesTestCase.super.expectedIterationOrder(), forEachWithIndexIterationOrder);
     }
 
     @Test
@@ -108,9 +108,9 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
     default void Bag_detectWithOccurrences()
     {
         Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertEquals(3, bag.detectWithOccurrences((object, value) -> object.equals(3) && value == 3));
-        assertEquals(3, bag.detectWithOccurrences((object, value) -> object.equals(3)));
-        assertEquals(1, bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 1));
+        assertIterablesEqual(3, bag.detectWithOccurrences((object, value) -> object.equals(3) && value == 3));
+        assertIterablesEqual(3, bag.detectWithOccurrences((object, value) -> object.equals(3)));
+        assertIterablesEqual(1, bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 1));
         assertNull(bag.detectWithOccurrences((object, value) -> object.equals(1) && value == 10));
         assertNull(bag.detectWithOccurrences((object, value) -> object.equals(10) && value == 5));
         assertNull(bag.detectWithOccurrences((object, value) -> object.equals(100)));
@@ -120,23 +120,23 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
     default void Bag_sizeDistinct()
     {
         Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertEquals(3, bag.sizeDistinct());
+        assertIterablesEqual(3, bag.sizeDistinct());
     }
 
     @Test
     default void Bag_occurrencesOf()
     {
         Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertEquals(0, bag.occurrencesOf(0));
-        assertEquals(1, bag.occurrencesOf(1));
-        assertEquals(2, bag.occurrencesOf(2));
-        assertEquals(3, bag.occurrencesOf(3));
+        assertIterablesEqual(0, bag.occurrencesOf(0));
+        assertIterablesEqual(1, bag.occurrencesOf(1));
+        assertIterablesEqual(2, bag.occurrencesOf(2));
+        assertIterablesEqual(3, bag.occurrencesOf(3));
     }
 
     @Test
     default void Bag_toStringOfItemToCount()
     {
-        assertEquals("{}", this.newWith().toStringOfItemToCount());
+        assertIterablesEqual("{}", this.newWith().toStringOfItemToCount());
         assertThat(this.newWith(2, 2, 1).toStringOfItemToCount(), isOneOf("{1=1, 2=2}", "{2=2, 1=1}"));
     }
 
@@ -154,7 +154,7 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1));
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
         Set<ObjectIntPair<Integer>> actual2 =
                 bag.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
@@ -163,6 +163,6 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1));
-        Assert.assertEquals(expected2, actual2);
+        assertEquals(expected2, actual2);
     }
 }

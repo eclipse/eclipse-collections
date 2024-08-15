@@ -16,14 +16,11 @@ import java.util.Iterator;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.NoIteratorTestCase;
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore("Requires scapegoat tree implementation")
-@RunWith(Java8Runner.class)
+@Disabled("Requires scapegoat tree implementation")
 public class TreeSortedSetNoIteratorTest implements MutableSortedSetTestCase, NoIteratorTestCase
 {
     @SafeVarargs

@@ -10,7 +10,9 @@
 
 package org.eclipse.collections.test;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 
 public interface RichIterableWithDuplicatesTestCase extends RichIterableTestCase
 {
@@ -26,12 +28,12 @@ public interface RichIterableWithDuplicatesTestCase extends RichIterableTestCase
         String s = "";
         Iterable<String> oneCopy = this.newWith(s);
         Iterable<String> twoCopies = this.newWith(s, s);
-        IterableTestCase.assertEquals(!this.allowsDuplicates(), twoCopies.equals(oneCopy));
+        assertIterablesEqual(!this.allowsDuplicates(), twoCopies.equals(oneCopy));
     }
 
     @Test
     default void RichIterable_size()
     {
-        IterableTestCase.assertEquals(6, this.newWith(3, 3, 3, 2, 2, 1).size());
+        assertIterablesEqual(6, this.newWith(3, 3, 3, 2, 2, 1).size());
     }
 }

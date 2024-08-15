@@ -16,14 +16,14 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.test.CollectionTestCase;
-import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.RichIterableTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface MutableCollectionTestCase extends CollectionTestCase, RichIterableTestCase
 {
@@ -42,7 +42,7 @@ public interface MutableCollectionTestCase extends CollectionTestCase, RichItera
                     return 0;
                 },
                 0);
-        IterableTestCase.assertEquals(this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), injectIntoWithIterationOrder);
+        assertIterablesEqual(this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), injectIntoWithIterationOrder);
     }
 
     // TODO try to make the return type of newWith and getInstanceUnderTest a generic parameter
@@ -61,8 +61,8 @@ public interface MutableCollectionTestCase extends CollectionTestCase, RichItera
 
         MutableCollection<String> collection = this.newWith();
         assertTrue(collection.add(s));
-        IterableTestCase.assertEquals(this.allowsDuplicates(), collection.add(s));
-        IterableTestCase.assertEquals(this.allowsDuplicates() ? 2 : 1, collection.size());
+        assertIterablesEqual(this.allowsDuplicates(), collection.add(s));
+        assertIterablesEqual(this.allowsDuplicates() ? 2 : 1, collection.size());
     }
 
     @Test
@@ -77,20 +77,20 @@ public interface MutableCollectionTestCase extends CollectionTestCase, RichItera
     {
         MutableCollection<Integer> collection1 = this.newWith(5, 5, 4, 4, 3, 3, 2, 2, 1, 1);
         assertTrue(collection1.removeIf(Predicates.cast(each -> each % 2 == 0)));
-        IterableTestCase.assertEquals(this.getExpectedFiltered(5, 5, 3, 3, 1, 1), collection1);
+        assertIterablesEqual(this.getExpectedFiltered(5, 5, 3, 3, 1, 1), collection1);
 
         MutableCollection<Integer> collection2 = this.newWith(1, 2, 3);
         assertFalse(collection2.removeIf(Predicates.cast(each -> each > 4)));
-        IterableTestCase.assertEquals(this.getExpectedFiltered(1, 2, 3), collection2);
+        assertIterablesEqual(this.getExpectedFiltered(1, 2, 3), collection2);
         assertTrue(collection2.removeIf(Predicates.cast(each -> each > 0)));
 
         MutableCollection<Integer> collection3 = this.newWith();
         assertFalse(collection3.removeIf(Predicates.cast(each -> each % 2 == 0)));
-        IterableTestCase.assertEquals(this.getExpectedFiltered(), collection3);
+        assertIterablesEqual(this.getExpectedFiltered(), collection3);
 
         MutableCollection<Integer> collection4 = this.newWith(2, 2, 4, 6);
         assertTrue(collection4.removeIf(Predicates.cast(each -> each % 2 == 0)));
-        IterableTestCase.assertEquals(this.getExpectedFiltered(), collection4);
+        assertIterablesEqual(this.getExpectedFiltered(), collection4);
         assertFalse(collection4.removeIf(Predicates.cast(each -> each % 2 == 0)));
     }
 
@@ -99,20 +99,20 @@ public interface MutableCollectionTestCase extends CollectionTestCase, RichItera
     {
         MutableCollection<Integer> collection1 = this.newWith(5, 5, 4, 4, 3, 3, 2, 2, 1, 1);
         assertTrue(collection1.removeIfWith(Predicates2.in(), Lists.immutable.with(5, 3, 1)));
-        IterableTestCase.assertEquals(this.getExpectedFiltered(4, 4, 2, 2), collection1);
+        assertIterablesEqual(this.getExpectedFiltered(4, 4, 2, 2), collection1);
 
         MutableCollection<Integer> collection2 = this.newWith(1, 2, 3);
         assertFalse(collection2.removeIfWith(Predicates2.in(), Lists.immutable.with(4)));
-        IterableTestCase.assertEquals(this.getExpectedFiltered(1, 2, 3), collection2);
+        assertIterablesEqual(this.getExpectedFiltered(1, 2, 3), collection2);
         assertTrue(collection2.removeIfWith(Predicates2.in(), Lists.immutable.with(1, 2, 3)));
 
         MutableCollection<Integer> collection3 = this.newWith();
         assertFalse(collection3.removeIfWith(Predicates2.in(), Lists.immutable.with()));
-        IterableTestCase.assertEquals(this.getExpectedFiltered(), collection3);
+        assertIterablesEqual(this.getExpectedFiltered(), collection3);
 
         MutableCollection<Integer> collection4 = this.newWith(2, 2, 4, 6);
         assertTrue(collection4.removeIfWith(Predicates2.greaterThan(), 1));
-        IterableTestCase.assertEquals(this.getExpectedFiltered(), collection4);
+        assertIterablesEqual(this.getExpectedFiltered(), collection4);
         assertFalse(collection4.removeIfWith(Predicates2.greaterThan(), 1));
     }
 
@@ -120,6 +120,6 @@ public interface MutableCollectionTestCase extends CollectionTestCase, RichItera
     default void MutableCollection_injectIntoWith()
     {
         MutableCollection<Integer> collection = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
-        IterableTestCase.assertEquals(Integer.valueOf(81), collection.injectIntoWith(1, (a, b, c) -> a + b + c, 5));
+        assertIterablesEqual(Integer.valueOf(81), collection.injectIntoWith(1, (a, b, c) -> a + b + c, 5));
     }
 }

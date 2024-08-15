@@ -15,16 +15,14 @@ import java.util.Set;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.set.SetTestCase;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 // TODO MapIterable.keySet() should return SetIterable, and use SetIterableTestCase here
-@RunWith(Java8Runner.class)
+
 public class UnifiedMapKeySetTest implements SetTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();

@@ -16,13 +16,13 @@ import java.util.Set;
 import java.util.SortedSet;
 
 import org.eclipse.collections.test.CollectionTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface SortedSetTestCase extends CollectionTestCase
 {
@@ -37,11 +37,11 @@ public interface SortedSetTestCase extends CollectionTestCase
 
         Iterator<Integer> iterator = iterable.iterator();
         assertTrue(iterator.hasNext());
-        assertEquals(Integer.valueOf(3), iterator.next());
+        assertIterablesEqual(Integer.valueOf(3), iterator.next());
         assertTrue(iterator.hasNext());
-        assertEquals(Integer.valueOf(2), iterator.next());
+        assertIterablesEqual(Integer.valueOf(2), iterator.next());
         assertTrue(iterator.hasNext());
-        assertEquals(Integer.valueOf(1), iterator.next());
+        assertIterablesEqual(Integer.valueOf(1), iterator.next());
         assertFalse(iterator.hasNext());
     }
 
@@ -51,9 +51,9 @@ public interface SortedSetTestCase extends CollectionTestCase
     {
         Iterable<Integer> iterable = this.newWith(3, 2, 1);
         Iterator<Integer> iterator = iterable.iterator();
-        assertEquals(Integer.valueOf(3), iterator.next());
+        assertIterablesEqual(Integer.valueOf(3), iterator.next());
         iterator.remove();
-        assertEquals(this.newWith(2, 1), iterable);
+        assertIterablesEqual(this.newWith(2, 1), iterable);
     }
 
     @Override
