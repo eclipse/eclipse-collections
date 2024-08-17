@@ -17,8 +17,10 @@ body(type, name) ::= <<
 package org.eclipse.collections.impl.block.factory.primitive;
 
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Provides a set of common tests of predicates for <type> values.
@@ -29,58 +31,58 @@ public final class <name>PredicatesTest
     @Test
     public void testEqual()
     {
-        Assert.assertTrue(<name>Predicates.equal(<(literal.(type))("5")>).accept(<(literal.(type))("5")>));
-        Assert.assertFalse(<name>Predicates.equal(<(literal.(type))("5")>).accept(<(literal.(type))("6")>));
+        assertTrue(<name>Predicates.equal(<(literal.(type))("5")>).accept(<(literal.(type))("5")>));
+        assertFalse(<name>Predicates.equal(<(literal.(type))("5")>).accept(<(literal.(type))("6")>));
     }
 
     @Test
     public void testLessThan()
     {
-        Assert.assertTrue(<name>Predicates.lessThan(<(literal.(type))("5")>).accept(<(literal.(type))("4")>));
-        Assert.assertFalse(<name>Predicates.lessThan(<(literal.(type))("5")>).accept(<(literal.(type))("6")>));
+        assertTrue(<name>Predicates.lessThan(<(literal.(type))("5")>).accept(<(literal.(type))("4")>));
+        assertFalse(<name>Predicates.lessThan(<(literal.(type))("5")>).accept(<(literal.(type))("6")>));
     }
 
     @Test
     public void testGreaterThan()
     {
-        Assert.assertTrue(<name>Predicates.greaterThan(<(literal.(type))("5")>).accept(<(literal.(type))("6")>));
-        Assert.assertFalse(<name>Predicates.greaterThan(<(literal.(type))("5")>).accept(<(literal.(type))("4")>));
+        assertTrue(<name>Predicates.greaterThan(<(literal.(type))("5")>).accept(<(literal.(type))("6")>));
+        assertFalse(<name>Predicates.greaterThan(<(literal.(type))("5")>).accept(<(literal.(type))("4")>));
     }
 
     @Test
     public void alwaysTrue()
     {
-        Assert.assertTrue(<name>Predicates.alwaysTrue().accept(<(literal.(type))("5")>));
+        assertTrue(<name>Predicates.alwaysTrue().accept(<(literal.(type))("5")>));
     }
 
     @Test
     public void alwaysFalse()
     {
-        Assert.assertFalse(<name>Predicates.alwaysFalse().accept(<(literal.(type))("5")>));
+        assertFalse(<name>Predicates.alwaysFalse().accept(<(literal.(type))("5")>));
     }
 
     <(predicatesTest.(type))()>
     @Test
     public void testAnd()
     {
-        Assert.assertTrue(<name>Predicates.and(<name>Predicates.greaterThan(<(literal.(type))("5")>), <name>Predicates.lessThan(<(literal.(type))("7")>)).accept(<(literal.(type))("6")>));
-        Assert.assertFalse(<name>Predicates.and(<name>Predicates.greaterThan(<(literal.(type))("5")>), <name>Predicates.lessThan(<(literal.(type))("7")>)).accept(<(literal.(type))("8")>));
-        Assert.assertFalse(<name>Predicates.and(<name>Predicates.greaterThan(<(literal.(type))("5")>), <name>Predicates.lessThan(<(literal.(type))("7")>)).accept(<(literal.(type))("4")>));
+        assertTrue(<name>Predicates.and(<name>Predicates.greaterThan(<(literal.(type))("5")>), <name>Predicates.lessThan(<(literal.(type))("7")>)).accept(<(literal.(type))("6")>));
+        assertFalse(<name>Predicates.and(<name>Predicates.greaterThan(<(literal.(type))("5")>), <name>Predicates.lessThan(<(literal.(type))("7")>)).accept(<(literal.(type))("8")>));
+        assertFalse(<name>Predicates.and(<name>Predicates.greaterThan(<(literal.(type))("5")>), <name>Predicates.lessThan(<(literal.(type))("7")>)).accept(<(literal.(type))("4")>));
     }
 
     @Test
     public void testOr()
     {
-        Assert.assertFalse(<name>Predicates.or(<name>Predicates.lessThan(<(literal.(type))("5")>), <name>Predicates.greaterThan(<(literal.(type))("7")>)).accept(<(literal.(type))("6")>));
-        Assert.assertTrue(<name>Predicates.or(<name>Predicates.lessThan(<(literal.(type))("5")>), <name>Predicates.greaterThan(<(literal.(type))("7")>)).accept(<(literal.(type))("4")>));
-        Assert.assertTrue(<name>Predicates.or(<name>Predicates.lessThan(<(literal.(type))("5")>), <name>Predicates.greaterThan(<(literal.(type))("7")>)).accept(<(literal.(type))("8")>));
+        assertFalse(<name>Predicates.or(<name>Predicates.lessThan(<(literal.(type))("5")>), <name>Predicates.greaterThan(<(literal.(type))("7")>)).accept(<(literal.(type))("6")>));
+        assertTrue(<name>Predicates.or(<name>Predicates.lessThan(<(literal.(type))("5")>), <name>Predicates.greaterThan(<(literal.(type))("7")>)).accept(<(literal.(type))("4")>));
+        assertTrue(<name>Predicates.or(<name>Predicates.lessThan(<(literal.(type))("5")>), <name>Predicates.greaterThan(<(literal.(type))("7")>)).accept(<(literal.(type))("8")>));
     }
 
     @Test
     public void testNot()
     {
-        Assert.assertFalse(<name>Predicates.not(<name>Predicates.equal(<(literal.(type))("5")>)).accept(<(literal.(type))("5")>));
-        Assert.assertTrue(<name>Predicates.not(<name>Predicates.equal(<(literal.(type))("5")>)).accept(<(literal.(type))("6")>));
+        assertFalse(<name>Predicates.not(<name>Predicates.equal(<(literal.(type))("5")>)).accept(<(literal.(type))("5")>));
+        assertTrue(<name>Predicates.not(<name>Predicates.equal(<(literal.(type))("5")>)).accept(<(literal.(type))("6")>));
     }
 
     @Test
@@ -109,15 +111,15 @@ allIntPredicateTests() ::= <<
 @Test
 public void testIsOdd()
 {
-    Assert.assertTrue(<name>Predicates.isOdd().accept(<(literal.(type))("5")>));
-    Assert.assertFalse(<name>Predicates.isOdd().accept(<(literal.(type))("6")>));
+    assertTrue(<name>Predicates.isOdd().accept(<(literal.(type))("5")>));
+    assertFalse(<name>Predicates.isOdd().accept(<(literal.(type))("6")>));
 }
 
 @Test
 public void testIsEven()
 {
-    Assert.assertTrue(<name>Predicates.isEven().accept(<(literal.(type))("6")>));
-    Assert.assertFalse(<name>Predicates.isEven().accept(<(literal.(type))("5")>));
+    assertTrue(<name>Predicates.isEven().accept(<(literal.(type))("6")>));
+    assertFalse(<name>Predicates.isEven().accept(<(literal.(type))("5")>));
 }
 
 >>
@@ -126,66 +128,66 @@ allCharPredicateTests() ::= <<
 @Test
 public void testIsUpperCase()
 {
-    Assert.assertTrue(CharPredicates.isUpperCase().accept('A'));
-    Assert.assertFalse(CharPredicates.isUpperCase().accept('a'));
+    assertTrue(CharPredicates.isUpperCase().accept('A'));
+    assertFalse(CharPredicates.isUpperCase().accept('a'));
 }
 
 @Test
 public void testIsLowerCase()
 {
-    Assert.assertTrue(CharPredicates.isLowerCase().accept('a'));
-    Assert.assertFalse(CharPredicates.isLowerCase().accept('A'));
+    assertTrue(CharPredicates.isLowerCase().accept('a'));
+    assertFalse(CharPredicates.isLowerCase().accept('A'));
 }
 
 @Test
 public void testIsDigit()
 {
-    Assert.assertTrue(CharPredicates.isDigit().accept('5'));
-    Assert.assertFalse(CharPredicates.isDigit().accept('a'));
+    assertTrue(CharPredicates.isDigit().accept('5'));
+    assertFalse(CharPredicates.isDigit().accept('a'));
 }
 
 @Test
 public void testIsDigitOrDot()
 {
-    Assert.assertTrue(CharPredicates.isDigitOrDot().accept('5'));
-    Assert.assertTrue(CharPredicates.isDigitOrDot().accept('.'));
-    Assert.assertFalse(CharPredicates.isDigitOrDot().accept('a'));
+    assertTrue(CharPredicates.isDigitOrDot().accept('5'));
+    assertTrue(CharPredicates.isDigitOrDot().accept('.'));
+    assertFalse(CharPredicates.isDigitOrDot().accept('a'));
 }
 
 @Test
 public void testIsLetter()
 {
-    Assert.assertTrue(CharPredicates.isLetter().accept('a'));
-    Assert.assertTrue(CharPredicates.isLetter().accept('A'));
-    Assert.assertFalse(CharPredicates.isLetter().accept('5'));
+    assertTrue(CharPredicates.isLetter().accept('a'));
+    assertTrue(CharPredicates.isLetter().accept('A'));
+    assertFalse(CharPredicates.isLetter().accept('5'));
 }
 
 @Test
 public void testIsLetterOrDigit()
 {
-    Assert.assertTrue(CharPredicates.isLetterOrDigit().accept('a'));
-    Assert.assertTrue(CharPredicates.isLetterOrDigit().accept('A'));
-    Assert.assertTrue(CharPredicates.isLetterOrDigit().accept('5'));
-    Assert.assertFalse(CharPredicates.isLetterOrDigit().accept('.'));
-    Assert.assertFalse(CharPredicates.isLetterOrDigit().accept('#'));
+    assertTrue(CharPredicates.isLetterOrDigit().accept('a'));
+    assertTrue(CharPredicates.isLetterOrDigit().accept('A'));
+    assertTrue(CharPredicates.isLetterOrDigit().accept('5'));
+    assertFalse(CharPredicates.isLetterOrDigit().accept('.'));
+    assertFalse(CharPredicates.isLetterOrDigit().accept('#'));
 }
 
 @Test
 public void testisWhitespace()
 {
-    Assert.assertTrue(CharPredicates.isWhitespace().accept(' '));
-    Assert.assertTrue(CharPredicates.isWhitespace().accept('\n'));
-    Assert.assertFalse(CharPredicates.isWhitespace().accept('A'));
-    Assert.assertFalse(CharPredicates.isWhitespace().accept('5'));
-    Assert.assertFalse(CharPredicates.isWhitespace().accept('.'));
-    Assert.assertFalse(CharPredicates.isWhitespace().accept('#'));
+    assertTrue(CharPredicates.isWhitespace().accept(' '));
+    assertTrue(CharPredicates.isWhitespace().accept('\n'));
+    assertFalse(CharPredicates.isWhitespace().accept('A'));
+    assertFalse(CharPredicates.isWhitespace().accept('5'));
+    assertFalse(CharPredicates.isWhitespace().accept('.'));
+    assertFalse(CharPredicates.isWhitespace().accept('#'));
 }
 
 @Test
 public void testIsUndefined()
 {
-    Assert.assertTrue(CharPredicates.isUndefined().accept((char) 888));
-    Assert.assertFalse(CharPredicates.isUndefined().accept('a'));
+    assertTrue(CharPredicates.isUndefined().accept((char) 888));
+    assertFalse(CharPredicates.isUndefined().accept('a'));
 }
 
 >>
@@ -194,10 +196,10 @@ allDoublePredicateTests() ::= <<
 @Test
 public void equalWithDelta()
 {
-    Assert.assertFalse(DoublePredicates.not(DoublePredicates.equal(5.0, Double.valueOf("1e-15"))).accept(5.0));
-    Assert.assertFalse(DoublePredicates.not(DoublePredicates.equal(5.0, 2.0)).accept(6.0));
-    Assert.assertTrue(DoublePredicates.not(DoublePredicates.equal(5.0, Double.valueOf("1e-15"))).accept(6.0));
-    Assert.assertTrue(DoublePredicates.not(DoublePredicates.equal(5.0, 1.0)).accept(7.0));
+    assertFalse(DoublePredicates.not(DoublePredicates.equal(5.0, Double.valueOf("1e-15"))).accept(5.0));
+    assertFalse(DoublePredicates.not(DoublePredicates.equal(5.0, 2.0)).accept(6.0));
+    assertTrue(DoublePredicates.not(DoublePredicates.equal(5.0, Double.valueOf("1e-15"))).accept(6.0));
+    assertTrue(DoublePredicates.not(DoublePredicates.equal(5.0, 1.0)).accept(7.0));
 }
 
 >>
@@ -206,10 +208,10 @@ allFloatPredicateTests() ::= <<
 @Test
 public void equalWithDelta()
 {
-    Assert.assertFalse(FloatPredicates.not(FloatPredicates.equal(5.0f, Float.valueOf("1e-15"))).accept(5.0f));
-    Assert.assertFalse(FloatPredicates.not(FloatPredicates.equal(5.0f, 2.0f)).accept(6.0f));
-    Assert.assertTrue(FloatPredicates.not(FloatPredicates.equal(5.0f, Float.valueOf("1e-15"))).accept(6.0f));
-    Assert.assertTrue(FloatPredicates.not(FloatPredicates.equal(5.0f, 1.0f)).accept(7.0f));
+    assertFalse(FloatPredicates.not(FloatPredicates.equal(5.0f, Float.valueOf("1e-15"))).accept(5.0f));
+    assertFalse(FloatPredicates.not(FloatPredicates.equal(5.0f, 2.0f)).accept(6.0f));
+    assertTrue(FloatPredicates.not(FloatPredicates.equal(5.0f, Float.valueOf("1e-15"))).accept(6.0f));
+    assertTrue(FloatPredicates.not(FloatPredicates.equal(5.0f, 1.0f)).accept(7.0f));
 }
 
 >>

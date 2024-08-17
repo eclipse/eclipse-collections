@@ -25,10 +25,14 @@ import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
-import org.junit.Assert;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link Unmodifiable<name>Bag}.
@@ -203,24 +207,24 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     public void contains()
     {
         Unmodifiable<name>Bag collection = this.newWith(<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertFalse(collection.contains(<(literal.(type))("29")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("49")>));
+        assertFalse(collection.contains(<(literal.(type))("29")>));
+        assertFalse(collection.contains(<(literal.(type))("49")>));
 
         <type>[] numbers = {<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">};
         for (<type> number : numbers)
         {
-            Assert.assertTrue(collection.contains(number));
+            assertTrue(collection.contains(number));
         }
 
-        Assert.assertFalse(collection.contains(<(literal.(type))("-1")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("29")>));
-        Assert.assertFalse(collection.contains(<(literal.(type))("49")>));
+        assertFalse(collection.contains(<(literal.(type))("-1")>));
+        assertFalse(collection.contains(<(literal.(type))("29")>));
+        assertFalse(collection.contains(<(literal.(type))("49")>));
 
         Unmodifiable<name>Bag collection1 = this.newWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">);
-        Assert.assertTrue(collection1.contains(<(literal.(type))("0")>));
-        Assert.assertTrue(collection1.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(collection1.contains(<(literal.(type))("2")>));
-        Assert.assertFalse(collection1.contains(<(literal.(type))("3")>));
+        assertTrue(collection1.contains(<(literal.(type))("0")>));
+        assertTrue(collection1.contains(<(literal.(type))("1")>));
+        assertTrue(collection1.contains(<(literal.(type))("2")>));
+        assertFalse(collection1.contains(<(literal.(type))("3")>));
     }
 
     @Override
@@ -241,8 +245,8 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     public void asUnmodifiable()
     {
         super.asUnmodifiable();
-        Assert.assertSame(this.bag, this.bag.asUnmodifiable());
-        Assert.assertEquals(this.bag, this.bag.asUnmodifiable());
+        assertSame(this.bag, this.bag.asUnmodifiable());
+        assertEquals(this.bag, this.bag.asUnmodifiable());
     }
 
     @Override
@@ -251,9 +255,9 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     {
         Unmodifiable<name>Bag unmodifiable<name>Bag = this.classUnderTest();
         Mutable<name>Iterator iterator = unmodifiable<name>Bag.<type>Iterator();
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         iterator.next();
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override
@@ -262,8 +266,8 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     {
         Unmodifiable<name>Bag unmodifiable<name>Bag = this.classUnderTest();
         Mutable<name>Iterator iterator = unmodifiable<name>Bag.<type>Iterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertTrue(iterator.hasNext());
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Override

@@ -37,8 +37,14 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.impl.factory.Sets;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * Abstract JUnit test for {@link Immutable<name>Set}.
@@ -82,28 +88,28 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     public void isEmpty()
     {
         super.isEmpty();
-        Assert.assertFalse(this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1)).isEmpty());
+        assertFalse(this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1)).isEmpty());
     }
 
     @Override
     @Test
     public void notEmpty()
     {
-        Assert.assertTrue(this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1)).notEmpty());
+        assertTrue(this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1)).notEmpty());
     }
 
     @Test
     public void freeze()
     {
         Immutable<name>Set immutable<name>Set = this.classUnderTest();
-        Assert.assertSame(immutable<name>Set, immutable<name>Set.freeze());
+        assertSame(immutable<name>Set, immutable<name>Set.freeze());
     }
 
     @Test
     public void toImmutable()
     {
         Immutable<name>Set immutable<name>Set = this.classUnderTest();
-        Assert.assertSame(immutable<name>Set, immutable<name>Set.toImmutable());
+        assertSame(immutable<name>Set, immutable<name>Set.toImmutable());
     }
 
     @Override
@@ -114,19 +120,19 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
         MutableSet\<<wrapperName>\> actual = UnifiedSet.newSet();
         Immutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1));
         <name>Iterator iterator = set.<type>Iterator();
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertEquals(expected, actual);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertFalse(iterator.hasNext());
+        assertEquals(expected, actual);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Override
@@ -140,7 +146,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
             iterator.next();
         }
 
-        Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
     }
 
     @Override
@@ -152,7 +158,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
         Immutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1));
         set.forEach((<type> each) -> sum[0] += each);
 
-        Assert.assertEquals(32L + AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst() + AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1), sum[0]<(delta.(type))>);
+        assertEquals(32L + AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst() + AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1), sum[0]<(delta.(type))>);
     }
 
     @Override
@@ -161,9 +167,9 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     {
         super.count();
         Immutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1));
-        Assert.assertEquals(4L, set.count(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
-        Assert.assertEquals(3L, set.count(<name>Predicates.lessThan(<(literal.(type))("32")>)));
-        Assert.assertEquals(1L, set.count(<name>Predicates.greaterThan(<(literal.(type))("32")>)));
+        assertEquals(4L, set.count(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
+        assertEquals(3L, set.count(<name>Predicates.lessThan(<(literal.(type))("32")>)));
+        assertEquals(1L, set.count(<name>Predicates.greaterThan(<(literal.(type))("32")>)));
     }
 
     @Override
@@ -192,9 +198,9 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     {
         super.detectIfNone();
         Immutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1));
-        Assert.assertEquals(<(literal.(type))("0")>, set.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("1")>), <(literal.(type))("9")>)<(delta.(type))>);
-        Assert.assertEquals(AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1), set.detectIfNone(<name>Predicates.greaterThan(AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst()), <(literal.(type))("9")>)<(delta.(type))>);
-        Assert.assertEquals(<(literal.(type))("9")>, set.detectIfNone(<name>Predicates.greaterThan(AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1)), <(literal.(type))("9")>)<(delta.(type))>);
+        assertEquals(<(literal.(type))("0")>, set.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("1")>), <(literal.(type))("9")>)<(delta.(type))>);
+        assertEquals(AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1), set.detectIfNone(<name>Predicates.greaterThan(AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst()), <(literal.(type))("9")>)<(delta.(type))>);
+        assertEquals(<(literal.(type))("9")>, set.detectIfNone(<name>Predicates.greaterThan(AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1)), <(literal.(type))("9")>)<(delta.(type))>);
     }
 
     @Override
@@ -203,7 +209,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     {
         super.collect();
         Immutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1));
-        Assert.assertEquals(UnifiedSet.newSetWith(<["-1", "0", "30"]:(literal.(type))(); separator=", ">, <(castIntToNarrowTypeWithParens.(type))({AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst() - 1})>, <(castIntToNarrowTypeWithParens.(type))({AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1) - 1})>),
+        assertEquals(UnifiedSet.newSetWith(<["-1", "0", "30"]:(literal.(type))(); separator=", ">, <(castIntToNarrowTypeWithParens.(type))({AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst() - 1})>, <(castIntToNarrowTypeWithParens.(type))({AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1) - 1})>),
                 set.collect(byteParameter -> <(castIntToNarrowTypeWithParens.(type))("byteParameter - 1")>));
     }
 
@@ -213,7 +219,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     {
         super.toSortedArray();
         Immutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1));
-        Assert.assertArrayEquals(new <type>[]{<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1)}, set.toSortedArray()<(delta.(type))>);
+        assertArrayEquals(new <type>[]{<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1)}, set.toSortedArray()<(delta.(type))>);
     }
 
     @Override
@@ -239,16 +245,16 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
         super.testHashCode();
         Immutable<name>Set set1 = this.newWith(<["1", "31", "32"]:(literal.(type))(); separator=", ">);
         Immutable<name>Set set2 = this.newWith(<["32", "31", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(set1.hashCode(), set2.hashCode());
+        assertEquals(set1.hashCode(), set2.hashCode());
     }
 
     @Override
     @Test
     public void toBag()
     {
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toBag());
-        Assert.assertEquals(<name>HashBag.newBagWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).toBag());
-        Assert.assertEquals(<name>HashBag.newBagWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).toBag());
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toBag());
+        assertEquals(<name>HashBag.newBagWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">).toBag());
+        assertEquals(<name>HashBag.newBagWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">), this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).toBag());
     }
 
     @Override
@@ -257,7 +263,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     {
         super.asLazy();
         Immutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1));
-        Assert.assertEquals(set.toSet(), set.asLazy().toSet());
+        assertEquals(set.toSet(), set.asLazy().toSet());
         Verify.assertInstanceOf(Lazy<name>Iterable.class, set.asLazy());
     }
 
@@ -298,7 +304,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     private void assertUnion(Immutable<name>Set set1, Immutable<name>Set set2, Immutable<name>Set expected)
     {
         Immutable<name>Set actual = set1.union(set2);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -338,7 +344,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     private void assertIntersect(Immutable<name>Set set1, Immutable<name>Set set2, Immutable<name>Set expected)
     {
         Immutable<name>Set actual = set1.intersect(set2);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -373,7 +379,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     private void assertDifference(Immutable<name>Set set1, Immutable<name>Set set2, Immutable<name>Set expected)
     {
         Immutable<name>Set actual = set1.difference(set2);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -408,7 +414,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     private void assertSymmetricDifference(Immutable<name>Set set1, Immutable<name>Set set2, Immutable<name>Set expected)
     {
         Immutable<name>Set actual = set1.symmetricDifference(set2);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -448,7 +454,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     private void assertIsSubsetOf(Immutable<name>Set set1, Immutable<name>Set set2, boolean expected)
     {
         boolean actual = set1.isSubsetOf(set2);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -488,7 +494,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     private void assertIsProperSubsetOf(Immutable<name>Set set1, Immutable<name>Set set2, boolean expected)
     {
         boolean actual = set1.isProperSubsetOf(set2);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -526,7 +532,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
     private void assertCartesianProduct(Immutable<name>Set set1, Immutable<name>Set set2, ImmutableSet\<<name><name>Pair> expected)
     {
         ImmutableSet\<<name><name>Pair> actual = set1.cartesianProduct(set2).toSet().toImmutable();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }
 

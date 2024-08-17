@@ -34,8 +34,13 @@ import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNull;
 
 /**
  * JUnit test for {@link <name>ObjectHashMap}.
@@ -82,8 +87,8 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         values.setAccessible(true);
 
         <name>ObjectHashMap\<Object> hashMap = new <name>ObjectHashMap\<>();
-        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((Object[]) values.get(hashMap)).length);
+        assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        assertEquals(16L, ((Object[]) values.get(hashMap)).length);
     }
 
     @Test
@@ -95,18 +100,18 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         values.setAccessible(true);
 
         <name>ObjectHashMap\<Object> hashMap = new <name>ObjectHashMap\<>(3);
-        Assert.assertEquals(8L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(8L, ((Object[]) values.get(hashMap)).length);
+        assertEquals(8L, ((<type>[]) keys.get(hashMap)).length);
+        assertEquals(8L, ((Object[]) values.get(hashMap)).length);
 
         <name>ObjectHashMap\<?> hashMap2 = new <name>ObjectHashMap\<>(15);
-        Assert.assertEquals(32L, ((<type>[]) keys.get(hashMap2)).length);
-        Assert.assertEquals(32L, ((Object[]) values.get(hashMap2)).length);
+        assertEquals(32L, ((<type>[]) keys.get(hashMap2)).length);
+        assertEquals(32L, ((Object[]) values.get(hashMap2)).length);
     }
 
     @Test
     public void newWithInitialCapacity_negative_throws()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> new <name>ObjectHashMap\<>(-1));
+        assertThrows(IllegalArgumentException.class, () -> new <name>ObjectHashMap\<>(-1));
     }
 
     @Test
@@ -118,9 +123,9 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         values.setAccessible(true);
 
         <name>ObjectHashMap\<Object> hashMap = <name>ObjectHashMap.newMap();
-        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((Object[]) values.get(hashMap)).length);
-        Assert.assertEquals(new <name>ObjectHashMap\<>(), hashMap);
+        assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        assertEquals(16L, ((Object[]) values.get(hashMap)).length);
+        assertEquals(new <name>ObjectHashMap\<>(), hashMap);
     }
 
     @Test
@@ -134,15 +139,15 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         <name>ObjectHashMap\<Object> map = <name>ObjectHashMap.newMap();
 
         <name>ObjectHashMap\<Object> hashMap = <name>ObjectHashMap.newMap(map);
-        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((Object[]) values.get(hashMap)).length);
-        Assert.assertEquals(new <name>ObjectHashMap\<>(), hashMap);
+        assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        assertEquals(16L, ((Object[]) values.get(hashMap)).length);
+        assertEquals(new <name>ObjectHashMap\<>(), hashMap);
 
         map.put(<(literal.(type))("1")>, "one");
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), <name>ObjectHashMap.newMap(map));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), <name>ObjectHashMap.newMap(map));
 
         map.put(<(literal.(type))("2")>, "two");
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"), <name>ObjectHashMap.newMap(map));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"), <name>ObjectHashMap.newMap(map));
     }
 
     @Test
@@ -151,30 +156,30 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         <name>ObjectHashMap\<String> hashMap = <name>ObjectHashMap.newMap();
         for (<type> i = <(literal.(type))("2")>; i \< <(literal.(type))("10")>; i++)
         {
-            Assert.assertNull(hashMap.put(i, String.valueOf(i)));
+            assertNull(hashMap.put(i, String.valueOf(i)));
         }
 
         Field keys = <name>ObjectHashMap.class.getDeclaredField("keys");
         Field values = <name>ObjectHashMap.class.getDeclaredField("values");
         keys.setAccessible(true);
         values.setAccessible(true);
-        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((Object[]) values.get(hashMap)).length);
-        Assert.assertEquals(8, hashMap.size());
+        assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        assertEquals(16L, ((Object[]) values.get(hashMap)).length);
+        assertEquals(8, hashMap.size());
         for (<type> i = <(literal.(type))("2")>; i \< <(literal.(type))("10")>; i++)
         {
-            Assert.assertTrue(hashMap.containsKey(i));
-            Assert.assertTrue(hashMap.containsValue(String.valueOf(i)));
+            assertTrue(hashMap.containsKey(i));
+            assertTrue(hashMap.containsValue(String.valueOf(i)));
         }
 
         Field occupiedWithData = <name>ObjectHashMap.class.getDeclaredField("occupiedWithData");
         occupiedWithData.setAccessible(true);
-        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+        assertEquals(8, occupiedWithData.get(hashMap));
 
-        Assert.assertNull(hashMap.put(<(literal.(type))("10")>, "10"));
-        Assert.assertEquals(32L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(32L, ((Object[]) values.get(hashMap)).length);
-        Assert.assertEquals(9, occupiedWithData.get(hashMap));
+        assertNull(hashMap.put(<(literal.(type))("10")>, "10"));
+        assertEquals(32L, ((<type>[]) keys.get(hashMap)).length);
+        assertEquals(32L, ((Object[]) values.get(hashMap)).length);
+        assertEquals(9, occupiedWithData.get(hashMap));
     }
 
     @Test
@@ -190,29 +195,29 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         Field values = <name>ObjectHashMap.class.getDeclaredField("values");
         keys.setAccessible(true);
         values.setAccessible(true);
-        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((Object[]) values.get(hashMap)).length);
+        assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        assertEquals(16L, ((Object[]) values.get(hashMap)).length);
 
         Field occupiedWithData = <name>ObjectHashMap.class.getDeclaredField("occupiedWithData");
         occupiedWithData.setAccessible(true);
-        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+        assertEquals(8, occupiedWithData.get(hashMap));
 
         Field occupiedWithSentinels = <name>ObjectHashMap.class.getDeclaredField("occupiedWithSentinels");
         occupiedWithSentinels.setAccessible(true);
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         for (int i = 0; i \< 4; i++)
         {
             hashMap.remove(<(castIntToNarrowTypeWithParens.(type))("i + 2")>);
-            Assert.assertEquals(7 - i, occupiedWithData.get(hashMap));
-            Assert.assertEquals(i + 1, occupiedWithSentinels.get(hashMap));
+            assertEquals(7 - i, occupiedWithData.get(hashMap));
+            assertEquals(i + 1, occupiedWithSentinels.get(hashMap));
         }
 
         hashMap.remove(<(literal.(type))("6")>);
-        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
-        Assert.assertEquals(16L, ((Object[]) values.get(hashMap)).length);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(5, occupiedWithSentinels.get(hashMap));
+        assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        assertEquals(16L, ((Object[]) values.get(hashMap)).length);
+        assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(5, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -224,16 +229,16 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         occupiedWithSentinels.setAccessible(true);
         <name>ObjectHashMap\<Float> hashMap = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, 2.0f, <(literal.(type))("3")>, 3.0f);
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(2, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(1, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(1, occupiedWithData.get(hashMap));
 
         hashMap.clear();
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(0, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(0, occupiedWithData.get(hashMap));
     }
 
     @Test
@@ -245,20 +250,20 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         occupiedWithSentinels.setAccessible(true);
         <name>ObjectHashMap\<Float> hashMap = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, 2.0f, <(literal.(type))("3")>, 3.0f, <(literal.(type))("4")>, 4.0f);
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(2, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(2, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type))("5")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(2, occupiedWithData.get(hashMap));
     }
 
     @Test
@@ -270,28 +275,28 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         occupiedWithSentinels.setAccessible(true);
         <name>ObjectHashMap\<Float> hashMap = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, 2.0f, <(literal.(type))("3")>, 3.0f, <(literal.(type))("4")>, 4.0f);
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
 
         Function\<Float, Float> function = Functions.getPassThru();
 
         Function0\<Float> function0 = Functions0.value(0.0f);
 
         hashMap.updateValue(<(literal.(type))("2")>, function0, function);
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
 
         hashMap.updateValue(<(literal.(type))("5")>, function0, function);
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
 
         hashMap.updateValue(<(literal.(type))("2")>, function0, function); // putting in a slot marked REMOVED
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
     }
 
     @Test
@@ -303,28 +308,28 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         occupiedWithSentinels.setAccessible(true);
         <name>ObjectHashMap\<Float> hashMap = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, 2.0f, <(literal.(type))("3")>, 3.0f, <(literal.(type))("4")>, 4.0f);
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
 
         Function2\<Float, Float, Float> function = Functions2.fromFunction(Functions.\<Float>getPassThru());
 
         Function0\<Float> function0 = Functions0.value(0.0f);
 
         hashMap.updateValueWith(<(literal.(type))("2")>, function0, function, 0.0f);
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
 
         hashMap.updateValueWith(<(literal.(type))("5")>, function0, function, 0.0f);
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
 
         hashMap.updateValueWith(<(literal.(type))("2")>, function0, function, 0.0f); // putting in a slot marked REMOVED
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
     }
 
     @Test
@@ -335,23 +340,23 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         occupiedWithData.setAccessible(true);
         occupiedWithSentinels.setAccessible(true);
         <name>ObjectHashMap\<Float> hashMap = new <name>ObjectHashMap\<>();
-        Assert.assertEquals(0, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(0, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         for (<type> i = 2; i \< 10; i++)
         {
             hashMap.put(<(castFromInt.(type))("i")>, (float) i);
         }
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(7, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(7, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.put(<(literal.(type))("2")>, 9.0f); // putting in a slot marked REMOVED
-        Assert.assertEquals(8, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(8, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -364,20 +369,20 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         <name>ObjectHashMap\<Float> hashMap = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, 2.0f, <(literal.(type))("3")>, 3.0f, <(literal.(type))("4")>, 4.0f);
 
         hashMap.getIfAbsentPut(<(literal.(type))("2")>, 5.0f);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPut(<(literal.(type))("5")>, 5.0f);
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPut(<(literal.(type))("2")>, 5.0f); //putting in a slot marked REMOVED
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -392,20 +397,20 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         Function0\<Float> function = Functions0.value(5.0f);
 
         hashMap.getIfAbsentPut(<(literal.(type))("2")>, function);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPut(<(literal.(type))("5")>, function);
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPut(<(literal.(type))("2")>, function); //putting in a slot marked REMOVED
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -420,20 +425,20 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         Function\<Float, Float> function = Functions.getPassThru();
 
         hashMap.getIfAbsentPutWith(<(literal.(type))("2")>, function, Float.valueOf(5.0f));
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPutWith(<(literal.(type))("5")>, function, Float.valueOf(5.0f));
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPutWith(<(literal.(type))("2")>, function, Float.valueOf(5.0f)); //putting in a slot marked REMOVED
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -448,20 +453,20 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         <name>ToObjectFunction\<Float> function = (<type> <type>Parameter) -> (float) <type>Parameter;
 
         hashMap.getIfAbsentPutWithKey(<(literal.(type))("2")>, function);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPutWithKey(<(literal.(type))("5")>, function);
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(3, occupiedWithData.get(hashMap));
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(3, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
 
         hashMap.getIfAbsentPutWithKey(<(literal.(type))("2")>, function); //putting in a slot marked REMOVED
-        Assert.assertEquals(4, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(4, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
 
     @Test
@@ -472,8 +477,8 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         occupiedWithData.setAccessible(true);
         occupiedWithSentinels.setAccessible(true);
         <name>ObjectHashMap\<Float> hashMap = new <name>ObjectHashMap\<>();
-        Assert.assertEquals(0, occupiedWithData.get(hashMap));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(0, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
 
         for (<type> i = 2; i \< 10; i++)
         {
@@ -481,13 +486,13 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         }
 
         hashMap.remove(<(literal.(type))("2")>);
-        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(7, occupiedWithData.get(hashMap));
+        assertEquals(1, occupiedWithSentinels.get(hashMap));
+        assertEquals(7, occupiedWithData.get(hashMap));
 
         hashMap.put(<(literal.(type))("2")>, 3.0f); //putting in a slot marked as REMOVED
 
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
-        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+        assertEquals(0, occupiedWithSentinels.get(hashMap));
+        assertEquals(8, occupiedWithData.get(hashMap));
     }
 
     @Override
@@ -497,12 +502,12 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         super.withKeysValues();
 
         <name>ObjectHashMap\<String> hashMap0 = new <name>ObjectHashMap\<>();
-        Assert.assertSame(hashMap0.withKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"), hashMap0);
+        assertSame(hashMap0.withKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"), hashMap0);
         <name>ObjectHashMap\<String> hashMap1 = new <name>ObjectHashMap\<String>().withKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three");
         <name>ObjectHashMap\<String> hashMap2 = new <name>ObjectHashMap\<String>().withKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three", <(literal.(type))("4")>, "four");
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"), hashMap0);
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"), hashMap1);
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three").withKeyValue(<(literal.(type))("4")>, "four"), hashMap2);
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two"), hashMap0);
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three"), hashMap1);
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three").withKeyValue(<(literal.(type))("4")>, "four"), hashMap2);
     }
 
     @Test
@@ -511,9 +516,9 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         Mutable<name>ObjectMap\<String> hashMap = this.getEmptyMap();
         for (<type> i = <(literal.(type))("2")>; i \< <(literal.(type))("100")>; i++)
         {
-            Assert.assertNull(hashMap.get(i));
-            Assert.assertNull(hashMap.put(i, String.valueOf(i)));
-            Assert.assertEquals(String.valueOf(i), hashMap.remove(i));
+            assertNull(hashMap.get(i));
+            assertNull(hashMap.put(i, String.valueOf(i)));
+            assertEquals(String.valueOf(i), hashMap.remove(i));
         }
     }
 
@@ -523,8 +528,8 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         Mutable<name>ObjectMap\<String> hashMap = this.getEmptyMap();
         for (<type> i = <(literal.(type))("2")>; i \< <(literal.(type))("100")>; i++)
         {
-            Assert.assertNull(hashMap.get(i));
-            Assert.assertEquals("value", hashMap.getIfAbsentPut(i, Functions0.value("value")));
+            assertNull(hashMap.get(i));
+            assertEquals("value", hashMap.getIfAbsentPut(i, Functions0.value("value")));
         }
     }
 
@@ -536,8 +541,8 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
         Mutable<name>ObjectMap\<String> hashMap = this.getEmptyMap();
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertNull(hashMap.get(each));
-            Assert.assertEquals("VALUE", hashMap.getIfAbsentPutWith(each, toUpperCase, "value"));
+            assertNull(hashMap.get(each));
+            assertEquals("VALUE", hashMap.getIfAbsentPutWith(each, toUpperCase, "value"));
         }
     }
 
@@ -548,8 +553,8 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
 
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertNull(hashMap.get(each));
-            Assert.assertEquals(<wrapperName>.valueOf(each), hashMap.getIfAbsentPutWithKey(each, <wrapperName>::valueOf));
+            assertNull(hashMap.get(each));
+            assertEquals(<wrapperName>.valueOf(each), hashMap.getIfAbsentPutWithKey(each, <wrapperName>::valueOf));
         }
     }
 
@@ -562,8 +567,8 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
 
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertNull(hashMap.get(each));
-            Assert.assertEquals(1L, hashMap.updateValue(each, Functions0.value(0), incrementFunction).intValue());
+            assertNull(hashMap.get(each));
+            assertEquals(1L, hashMap.updateValue(each, Functions0.value(0), incrementFunction).intValue());
         }
     }
 
@@ -576,8 +581,8 @@ public class <name>ObjectHashMapTest extends AbstractMutable<name>ObjectMapTestC
 
         for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
         {
-            Assert.assertNull(hashMap.get(each));
-            Assert.assertEquals(1L, hashMap.updateValueWith(each, Functions0.value(0), incrementFunction, 1).longValue());
+            assertNull(hashMap.get(each));
+            assertEquals(1L, hashMap.updateValueWith(each, Functions0.value(0), incrementFunction, 1).longValue());
         }
     }
 
@@ -613,7 +618,7 @@ public void sumOfFloatConsistentRounding()
 
     // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
     // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
-    Assert.assertEquals(
+    assertEquals(
             <(floatResults.(type))()>,
             result,
             1.0e-15);
@@ -630,7 +635,7 @@ public void sumOfDoubleConsistentRounding()
     randomIntegers.each(i -> hashMap.put(<if(primitive.charPrimitive)>(char) i.intValue()<else>i.<type>Value()<endif>, i));
     double result = hashMap.sumOfDouble(i -> 1.0d / (i.doubleValue() * i.doubleValue() * i.doubleValue() * i.doubleValue()));
 
-    Assert.assertEquals(
+    assertEquals(
             <(doubleResults.(type))()>,
             result,
             1.0e-15);
@@ -668,7 +673,7 @@ public void sumOfFloatConsistentRounding()
 
     // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
     // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
-    Assert.assertEquals(
+    assertEquals(
             1.082323233761663,
             result,
             1.0e-15);
@@ -682,7 +687,7 @@ public void sumOfDoubleConsistentRounding()
     randomIntegers.each(i -> hashMap.put(i.<type>Value(), i));
     double result = hashMap.sumOfDouble(i -> 1.0d / (i.doubleValue() * i.doubleValue() * i.doubleValue() * i.doubleValue()));
 
-    Assert.assertEquals(
+    assertEquals(
             1.082323233711138,
             result,
             1.0e-15);

@@ -26,8 +26,11 @@ import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
 import org.eclipse.collections.impl.math.Mutable<primitive2.wrapperName>;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * JUnit test for {@link Immutable<name1><name2>HashMap}.
@@ -41,7 +44,7 @@ public class Immutable<name1><name2>HashMapTest extends AbstractImmutable<name1>
     {
         super.toImmutable();
         Immutable<name1><name2>Map map1 = this.classUnderTest();
-        Assert.assertSame(map1, map1.toImmutable());
+        assertSame(map1, map1.toImmutable());
     }
 
     @Test
@@ -49,9 +52,9 @@ public class Immutable<name1><name2>HashMapTest extends AbstractImmutable<name1>
     {
         Immutable<name1><name2>Map map1 = this.classUnderTest();
         Immutable<name1><name2>Map expected = this.newWithKeysValues(<["0", "31", "32", "33"]:keyValue(); separator=", ">);
-        Assert.assertEquals(expected, map1.newWithKeyValue(<["33"]:keyValue(); separator=", ">));
-        Assert.assertNotSame(map1, map1.newWithKeyValue(<["33"]:keyValue(); separator=", ">));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected, map1.newWithKeyValue(<["33"]:keyValue(); separator=", ">));
+        assertNotSame(map1, map1.newWithKeyValue(<["33"]:keyValue(); separator=", ">));
+        assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -59,9 +62,9 @@ public class Immutable<name1><name2>HashMapTest extends AbstractImmutable<name1>
     {
         Immutable<name1><name2>Map map1 = this.classUnderTest();
         Immutable<name1><name2>Map expected = this.newWithKeysValues(<["0", "31"]:keyValue(); separator=", ">);
-        Assert.assertEquals(expected, map1.newWithoutKey(<(literal.(type1))("32")>));
-        Assert.assertNotSame(map1, map1.newWithoutKey(<(literal.(type1))("32")>));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected, map1.newWithoutKey(<(literal.(type1))("32")>));
+        assertNotSame(map1, map1.newWithoutKey(<(literal.(type1))("32")>));
+        assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -69,9 +72,9 @@ public class Immutable<name1><name2>HashMapTest extends AbstractImmutable<name1>
     {
         Immutable<name1><name2>Map map1 = this.classUnderTest();
         Immutable<name1><name2>Map expected = this.newWithKeysValues(<["31"]:keyValue(); separator=", ">);
-        Assert.assertEquals(expected, map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
-        Assert.assertNotSame(map1, map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
-        Assert.assertEquals(this.classUnderTest(), map1);
+        assertEquals(expected, map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
+        assertNotSame(map1, map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
+        assertEquals(this.classUnderTest(), map1);
     }
 
     @Test
@@ -79,7 +82,7 @@ public class Immutable<name1><name2>HashMapTest extends AbstractImmutable<name1>
     {
         Immutable<name1><name2>HashMap iterable = new Immutable<name1><name2>HashMap(<name1><name2>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">));
         Mutable<primitive2.wrapperName> result = iterable.injectInto(new Mutable<primitive2.wrapperName>(<(literal.(type2))("0")>), Mutable<primitive2.wrapperName>::add);
-        Assert.assertEquals(new Mutable<primitive2.wrapperName>(<(literal.(type2))("6")>), result);
+        assertEquals(new Mutable<primitive2.wrapperName>(<(literal.(type2))("6")>), result);
     }
 }
 

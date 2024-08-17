@@ -22,8 +22,9 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 
-import org.junit.Assert;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link Lazy<name>Iterate}.
@@ -36,19 +37,19 @@ public class Lazy<name>IterateTest
     @Test
     public void adapt()
     {
-        Assert.assertEquals(this.iterable, Lazy<name>Iterate.adapt(this.iterable).toList());
+        assertEquals(this.iterable, Lazy<name>Iterate.adapt(this.iterable).toList());
     }
 
     @Test
     public void collectIf()
     {
-        Assert.assertEquals(this.iterable.collect(each -> each), Lazy<name>Iterate.collectIf(this.iterable, each -> true, each -> each).toList());
+        assertEquals(this.iterable.collect(each -> each), Lazy<name>Iterate.collectIf(this.iterable, each -> true, each -> each).toList());
     }
 
     @Test
     public void empty()
     {
-        Assert.assertTrue(Lazy<name>Iterate.empty().isEmpty());
+        assertTrue(Lazy<name>Iterate.empty().isEmpty());
     }
 
     @Test
@@ -56,8 +57,8 @@ public class Lazy<name>IterateTest
     {
         Mutable<name>List list = <name>Lists.mutable.empty();
         Lazy<name>Iterable <type>Iterable = Lazy<name>Iterate.tap(this.iterable, (<name>Procedure) list::add);
-        Assert.assertEquals(this.iterable, <name>Lists.mutable.ofAll(<type>Iterable));
-        Assert.assertEquals(this.iterable, list);
+        assertEquals(this.iterable, <name>Lists.mutable.ofAll(<type>Iterable));
+        assertEquals(this.iterable, list);
     }
 }
 

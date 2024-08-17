@@ -39,8 +39,14 @@ import org.eclipse.collections.impl.map.primitive.Abstract<name>ObjectMapTestCas
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNull;
 
 /**
  * This file was automatically generated from template file abstractMutablePrimitiveObjectMapTestCase.stg.
@@ -84,187 +90,187 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         Mutable<name>ObjectMap\<Object> hashMap = this.getEmptyMap();
         hashMap.put(<(literal.(type))("0")>, new Object());
         hashMap.clear();
-        Assert.assertEquals(new <name>ObjectHashMap\<>(), hashMap);
+        assertEquals(new <name>ObjectHashMap\<>(), hashMap);
 
         hashMap.put(<(literal.(type))("1")>, new Object());
         hashMap.clear();
-        Assert.assertEquals(new <name>ObjectHashMap\<>(), hashMap);
+        assertEquals(new <name>ObjectHashMap\<>(), hashMap);
 
         hashMap.put(<(literal.(type))("33")>, new Object());
         hashMap.clear();
-        Assert.assertEquals(new <name>ObjectHashMap\<>(), hashMap);
+        assertEquals(new <name>ObjectHashMap\<>(), hashMap);
     }
 
     @Test
     public void removeKey()
     {
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("5")>));
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("50")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map);
-        Assert.assertEquals("zero", this.map.removeKey(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map);
-        Assert.assertEquals("thirtyOne", this.map.removeKey(<(literal.(type))("31")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo"), this.map);
-        Assert.assertEquals("thirtyTwo", this.map.removeKey(<(literal.(type))("32")>));
-        Assert.assertEquals(new <name>ObjectHashMap\<String>(), this.map);
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("0")>));
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("1")>));
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("31")>));
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("32")>));
-        Assert.assertEquals(new <name>ObjectHashMap\<String>(), this.map);
-        Assert.assertTrue(this.map.isEmpty());
+        assertNull(this.map.removeKey(<(literal.(type))("5")>));
+        assertNull(this.map.removeKey(<(literal.(type))("50")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map);
+        assertEquals("zero", this.map.removeKey(<(literal.(type))("0")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map);
+        assertEquals("thirtyOne", this.map.removeKey(<(literal.(type))("31")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo"), this.map);
+        assertEquals("thirtyTwo", this.map.removeKey(<(literal.(type))("32")>));
+        assertEquals(new <name>ObjectHashMap\<String>(), this.map);
+        assertNull(this.map.removeKey(<(literal.(type))("0")>));
+        assertNull(this.map.removeKey(<(literal.(type))("1")>));
+        assertNull(this.map.removeKey(<(literal.(type))("31")>));
+        assertNull(this.map.removeKey(<(literal.(type))("32")>));
+        assertEquals(new <name>ObjectHashMap\<String>(), this.map);
+        assertTrue(this.map.isEmpty());
 
-        Assert.assertNull(this.map.put(<(literal.(type))("1")>, null));
-        Assert.assertTrue(this.map.containsValue(null));
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("1")>));
-        Assert.assertFalse(this.map.containsValue(null));
+        assertNull(this.map.put(<(literal.(type))("1")>, null));
+        assertTrue(this.map.containsValue(null));
+        assertNull(this.map.removeKey(<(literal.(type))("1")>));
+        assertFalse(this.map.containsValue(null));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("0")>, null));
-        Assert.assertTrue(this.map.containsValue(null));
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("0")>));
-        Assert.assertFalse(this.map.containsValue(null));
+        assertNull(this.map.put(<(literal.(type))("0")>, null));
+        assertTrue(this.map.containsValue(null));
+        assertNull(this.map.removeKey(<(literal.(type))("0")>));
+        assertFalse(this.map.containsValue(null));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("35")>, null));
-        Assert.assertTrue(this.map.containsValue(null));
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("35")>));
-        Assert.assertFalse(this.map.containsValue(null));
+        assertNull(this.map.put(<(literal.(type))("35")>, null));
+        assertTrue(this.map.containsValue(null));
+        assertNull(this.map.removeKey(<(literal.(type))("35")>));
+        assertFalse(this.map.containsValue(null));
 
-        Assert.assertNull(this.map.put(AbstractMutable<name>ObjectMapTestCase.generateCollisions().getFirst(), "collision1"));
-        Assert.assertNull(this.map.put(AbstractMutable<name>ObjectMapTestCase.generateCollisions().get(1), "collision2"));
-        Assert.assertEquals("collision2", this.map.removeKey(AbstractMutable<name>ObjectMapTestCase.generateCollisions().get(1)));
-        Assert.assertEquals("collision1", this.map.removeKey(AbstractMutable<name>ObjectMapTestCase.generateCollisions().getFirst()));
+        assertNull(this.map.put(AbstractMutable<name>ObjectMapTestCase.generateCollisions().getFirst(), "collision1"));
+        assertNull(this.map.put(AbstractMutable<name>ObjectMapTestCase.generateCollisions().get(1), "collision2"));
+        assertEquals("collision2", this.map.removeKey(AbstractMutable<name>ObjectMapTestCase.generateCollisions().get(1)));
+        assertEquals("collision1", this.map.removeKey(AbstractMutable<name>ObjectMapTestCase.generateCollisions().getFirst()));
 
         Mutable<name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
-        Assert.assertEquals("zero", map1.removeKey(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), map1);
-        Assert.assertEquals("one", map1.removeKey(<(literal.(type))("1")>));
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), map1);
+        assertEquals("zero", map1.removeKey(<(literal.(type))("0")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), map1);
+        assertEquals("one", map1.removeKey(<(literal.(type))("1")>));
+        assertEquals(<name>ObjectHashMap.newMap(), map1);
     }
 
     @Test
     public void remove()
     {
-        Assert.assertNull(this.map.remove(<(literal.(type))("5")>));
-        Assert.assertNull(this.map.remove(<(literal.(type))("50")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map);
-        Assert.assertEquals("zero", this.map.remove(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map);
-        Assert.assertEquals("thirtyOne", this.map.remove(<(literal.(type))("31")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo"), this.map);
-        Assert.assertEquals("thirtyTwo", this.map.remove(<(literal.(type))("32")>));
-        Assert.assertEquals(new <name>ObjectHashMap\<String>(), this.map);
-        Assert.assertNull(this.map.remove(<(literal.(type))("0")>));
-        Assert.assertNull(this.map.remove(<(literal.(type))("1")>));
-        Assert.assertNull(this.map.remove(<(literal.(type))("31")>));
-        Assert.assertNull(this.map.remove(<(literal.(type))("32")>));
-        Assert.assertEquals(new <name>ObjectHashMap\<String>(), this.map);
-        Assert.assertTrue(this.map.isEmpty());
+        assertNull(this.map.remove(<(literal.(type))("5")>));
+        assertNull(this.map.remove(<(literal.(type))("50")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map);
+        assertEquals("zero", this.map.remove(<(literal.(type))("0")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map);
+        assertEquals("thirtyOne", this.map.remove(<(literal.(type))("31")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo"), this.map);
+        assertEquals("thirtyTwo", this.map.remove(<(literal.(type))("32")>));
+        assertEquals(new <name>ObjectHashMap\<String>(), this.map);
+        assertNull(this.map.remove(<(literal.(type))("0")>));
+        assertNull(this.map.remove(<(literal.(type))("1")>));
+        assertNull(this.map.remove(<(literal.(type))("31")>));
+        assertNull(this.map.remove(<(literal.(type))("32")>));
+        assertEquals(new <name>ObjectHashMap\<String>(), this.map);
+        assertTrue(this.map.isEmpty());
 
-        Assert.assertNull(this.map.put(<(literal.(type))("1")>, null));
-        Assert.assertTrue(this.map.containsValue(null));
-        Assert.assertNull(this.map.remove(<(literal.(type))("1")>));
-        Assert.assertFalse(this.map.containsValue(null));
+        assertNull(this.map.put(<(literal.(type))("1")>, null));
+        assertTrue(this.map.containsValue(null));
+        assertNull(this.map.remove(<(literal.(type))("1")>));
+        assertFalse(this.map.containsValue(null));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("0")>, null));
-        Assert.assertTrue(this.map.containsValue(null));
-        Assert.assertNull(this.map.remove(<(literal.(type))("0")>));
-        Assert.assertFalse(this.map.containsValue(null));
+        assertNull(this.map.put(<(literal.(type))("0")>, null));
+        assertTrue(this.map.containsValue(null));
+        assertNull(this.map.remove(<(literal.(type))("0")>));
+        assertFalse(this.map.containsValue(null));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("35")>, null));
-        Assert.assertTrue(this.map.containsValue(null));
-        Assert.assertNull(this.map.remove(<(literal.(type))("35")>));
-        Assert.assertFalse(this.map.containsValue(null));
+        assertNull(this.map.put(<(literal.(type))("35")>, null));
+        assertTrue(this.map.containsValue(null));
+        assertNull(this.map.remove(<(literal.(type))("35")>));
+        assertFalse(this.map.containsValue(null));
 
-        Assert.assertNull(this.map.put(AbstractMutable<name>ObjectMapTestCase.generateCollisions().getFirst(), "collision1"));
-        Assert.assertNull(this.map.put(AbstractMutable<name>ObjectMapTestCase.generateCollisions().get(1), "collision2"));
-        Assert.assertEquals("collision2", this.map.remove(AbstractMutable<name>ObjectMapTestCase.generateCollisions().get(1)));
-        Assert.assertEquals("collision1", this.map.remove(AbstractMutable<name>ObjectMapTestCase.generateCollisions().getFirst()));
+        assertNull(this.map.put(AbstractMutable<name>ObjectMapTestCase.generateCollisions().getFirst(), "collision1"));
+        assertNull(this.map.put(AbstractMutable<name>ObjectMapTestCase.generateCollisions().get(1), "collision2"));
+        assertEquals("collision2", this.map.remove(AbstractMutable<name>ObjectMapTestCase.generateCollisions().get(1)));
+        assertEquals("collision1", this.map.remove(AbstractMutable<name>ObjectMapTestCase.generateCollisions().getFirst()));
 
         Mutable<name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
-        Assert.assertEquals("zero", map1.remove(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), map1);
-        Assert.assertEquals("one", map1.remove(<(literal.(type))("1")>));
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), map1);
+        assertEquals("zero", map1.remove(<(literal.(type))("0")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), map1);
+        assertEquals("one", map1.remove(<(literal.(type))("1")>));
+        assertEquals(<name>ObjectHashMap.newMap(), map1);
     }
 
     @Test
     public void put()
     {
-        Assert.assertEquals("zero", this.map.put(<(literal.(type))("0")>, "one"));
-        Assert.assertEquals("thirtyOne", this.map.put(<(literal.(type))("31")>, "thirtyTwo"));
-        Assert.assertEquals("thirtyTwo", this.map.put(<(literal.(type))("32")>, "thirtyThree"));
+        assertEquals("zero", this.map.put(<(literal.(type))("0")>, "one"));
+        assertEquals("thirtyOne", this.map.put(<(literal.(type))("31")>, "thirtyTwo"));
+        assertEquals("thirtyTwo", this.map.put(<(literal.(type))("32")>, "thirtyThree"));
         <name>ObjectHashMap\<String> expected = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "one", <(literal.(type))("31")>, "thirtyTwo", <(literal.(type))("32")>, "thirtyThree");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.put(<(literal.(type))("1")>, "two"));
-        Assert.assertEquals("two", this.map.put(<(literal.(type))("1")>, "two"));
+        assertNull(this.map.put(<(literal.(type))("1")>, "two"));
+        assertEquals("two", this.map.put(<(literal.(type))("1")>, "two"));
         expected.put(<(literal.(type))("1")>, "two");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.put(<(literal.(type))("33")>, "thirtyFour"));
+        assertNull(this.map.put(<(literal.(type))("33")>, "thirtyFour"));
         expected.put(<(literal.(type))("33")>, "thirtyFour");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.put(<(literal.(type))("30")>, "thirtyOne"));
+        assertNull(this.map.put(<(literal.(type))("30")>, "thirtyOne"));
         expected.put(<(literal.(type))("30")>, "thirtyOne");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.put(<(literal.(type))("5")>, null));
+        assertNull(this.map.put(<(literal.(type))("5")>, null));
         expected.put(<(literal.(type))("5")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.put(<(literal.(type))("50")>, null));
+        assertNull(this.map.put(<(literal.(type))("50")>, null));
         expected.put(<(literal.(type))("50")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         Mutable<name>ObjectMap\<String> emptyMap = <name>ObjectHashMap.newMap();
-        Assert.assertNull(emptyMap.put(<(literal.(type))("0")>, "zero"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"), emptyMap);
+        assertNull(emptyMap.put(<(literal.(type))("0")>, "zero"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"), emptyMap);
         Mutable<name>ObjectMap\<String> emptyMap1 = <name>ObjectHashMap.newMap();
-        Assert.assertNull(emptyMap1.put(<(literal.(type))("1")>, "one"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), emptyMap1);
-        Assert.assertNull(emptyMap1.put(<(literal.(type))("0")>, "zero"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), emptyMap1);
+        assertNull(emptyMap1.put(<(literal.(type))("1")>, "one"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), emptyMap1);
+        assertNull(emptyMap1.put(<(literal.(type))("0")>, "zero"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), emptyMap1);
     }
 
     @Test
     public void putPair()
     {
-        Assert.assertEquals("zero", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "one")));
-        Assert.assertEquals("thirtyOne", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("31")>, "thirtyTwo")));
-        Assert.assertEquals("thirtyTwo", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("32")>, "thirtyThree")));
+        assertEquals("zero", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "one")));
+        assertEquals("thirtyOne", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("31")>, "thirtyTwo")));
+        assertEquals("thirtyTwo", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("32")>, "thirtyThree")));
         <name>ObjectHashMap\<String> expected = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "one", <(literal.(type))("31")>, "thirtyTwo", <(literal.(type))("32")>, "thirtyThree");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("1")>, "two")));
-        Assert.assertEquals("two", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("1")>, "two")));
+        assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("1")>, "two")));
+        assertEquals("two", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("1")>, "two")));
         expected.put(<(literal.(type))("1")>, "two");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("33")>, "thirtyFour")));
+        assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("33")>, "thirtyFour")));
         expected.put(<(literal.(type))("33")>, "thirtyFour");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("30")>, "thirtyOne")));
+        assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("30")>, "thirtyOne")));
         expected.put(<(literal.(type))("30")>, "thirtyOne");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("5")>, null)));
+        assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("5")>, null)));
         expected.put(<(literal.(type))("5")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("50")>, null)));
+        assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("50")>, null)));
         expected.put(<(literal.(type))("50")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         Mutable<name>ObjectMap\<String> emptyMap = <name>ObjectHashMap.newMap();
-        Assert.assertNull(emptyMap.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "zero")));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"), emptyMap);
+        assertNull(emptyMap.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "zero")));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"), emptyMap);
         Mutable<name>ObjectMap\<String> emptyMap1 = <name>ObjectHashMap.newMap();
-        Assert.assertNull(emptyMap1.putPair(PrimitiveTuples.pair(<(literal.(type))("1")>, "one")));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), emptyMap1);
-        Assert.assertNull(emptyMap1.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "zero")));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), emptyMap1);
+        assertNull(emptyMap1.putPair(PrimitiveTuples.pair(<(literal.(type))("1")>, "one")));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), emptyMap1);
+        assertNull(emptyMap1.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "zero")));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), emptyMap1);
     }
 
 <if(primitive.floatingPoint)>
@@ -282,28 +288,28 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         <type> collision4 = AbstractMutable<name>ObjectMapTestCase.generateCollisions().get(3);
 
         Mutable<name>ObjectMap\<String> hashMap = <name>ObjectHashMap.newMap();
-        Assert.assertNull(hashMap.put(collision1, "collision1"));
-        Assert.assertNull(hashMap.put(collision2, "collision2"));
-        Assert.assertNull(hashMap.put(collision3, "collision3"));
-        Assert.assertEquals("collision2", hashMap.removeKey(collision2));
-        Assert.assertNull(hashMap.put(collision4, "collision4"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(collision1, "collision1", collision3, "collision3", collision4, "collision4"), hashMap);
+        assertNull(hashMap.put(collision1, "collision1"));
+        assertNull(hashMap.put(collision2, "collision2"));
+        assertNull(hashMap.put(collision3, "collision3"));
+        assertEquals("collision2", hashMap.removeKey(collision2));
+        assertNull(hashMap.put(collision4, "collision4"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(collision1, "collision1", collision3, "collision3", collision4, "collision4"), hashMap);
 
         Mutable<name>ObjectMap\<String> hashMap1 = <name>ObjectHashMap.newMap();
-        Assert.assertNull(hashMap1.put(collision1, "collision1"));
-        Assert.assertNull(hashMap1.put(collision2, "collision2"));
-        Assert.assertNull(hashMap1.put(collision3, "collision3"));
-        Assert.assertEquals("collision1", hashMap1.removeKey(collision1));
-        Assert.assertNull(hashMap1.put(collision4, "collision4"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(collision2, "collision2", collision3, "collision3", collision4, "collision4"), hashMap1);
+        assertNull(hashMap1.put(collision1, "collision1"));
+        assertNull(hashMap1.put(collision2, "collision2"));
+        assertNull(hashMap1.put(collision3, "collision3"));
+        assertEquals("collision1", hashMap1.removeKey(collision1));
+        assertNull(hashMap1.put(collision4, "collision4"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(collision2, "collision2", collision3, "collision3", collision4, "collision4"), hashMap1);
 
         Mutable<name>ObjectMap\<String> hashMap2 = <name>ObjectHashMap.newMap();
-        Assert.assertNull(hashMap2.put(collision1, "collision1"));
-        Assert.assertNull(hashMap2.put(collision2, "collision2"));
-        Assert.assertNull(hashMap2.put(collision3, "collision3"));
-        Assert.assertEquals("collision3", hashMap2.removeKey(collision3));
-        Assert.assertNull(hashMap2.put(collision4, "collision4"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(collision1, "collision1", collision2, "collision2", collision4, "collision4"), hashMap2);
+        assertNull(hashMap2.put(collision1, "collision1"));
+        assertNull(hashMap2.put(collision2, "collision2"));
+        assertNull(hashMap2.put(collision3, "collision3"));
+        assertEquals("collision3", hashMap2.removeKey(collision3));
+        assertNull(hashMap2.put(collision4, "collision4"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(collision1, "collision1", collision2, "collision2", collision4, "collision4"), hashMap2);
     }
 
     @Test
@@ -314,160 +320,160 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
 
         for (<type> i = <(literal.(type))("1")>; i \< <(literal.(type))("10")>; i++)
         {
-            Assert.assertFalse(copyMap.containsKey(i));
+            assertFalse(copyMap.containsKey(i));
             copyMap.put(i, String.valueOf(i));
         }
 
-        Assert.assertEquals(9, copyMap.size());
-        Assert.assertEquals(0, hashMap.size());
+        assertEquals(9, copyMap.size());
+        assertEquals(0, hashMap.size());
 
         hashMap.putAll(copyMap);
-        Assert.assertEquals(9, hashMap.size());
+        assertEquals(9, hashMap.size());
 
         for (<type> i = <(literal.(type))("1")>; i \< <(literal.(type))("10")>; i++)
         {
-            Assert.assertTrue(hashMap.containsKey(i));
+            assertTrue(hashMap.containsKey(i));
         }
 
-        Assert.assertEquals(hashMap, copyMap);
+        assertEquals(hashMap, copyMap);
     }
 
     @Test
     public void getIfAbsentPut_Value()
     {
-        Assert.assertEquals("zero", this.map.getIfAbsentPut(<(literal.(type))("0")>, "zeroValue"));
+        assertEquals("zero", this.map.getIfAbsentPut(<(literal.(type))("0")>, "zeroValue"));
         Mutable<name>ObjectMap\<String> expected = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("oneValue", this.map.getIfAbsentPut(<(literal.(type))("1")>, "oneValue"));
+        assertEquals("oneValue", this.map.getIfAbsentPut(<(literal.(type))("1")>, "oneValue"));
         expected.put(<(literal.(type))("1")>, "oneValue");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.getIfAbsentPut(<(literal.(type))("2")>, () -> null));
+        assertNull(this.map.getIfAbsentPut(<(literal.(type))("2")>, () -> null));
         expected.put(<(literal.(type))("2")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("thirtyTwo", this.map.getIfAbsentPut(<(literal.(type))("32")>, "thirtyTwoValue"));
-        Assert.assertEquals(expected, this.map);
+        assertEquals("thirtyTwo", this.map.getIfAbsentPut(<(literal.(type))("32")>, "thirtyTwoValue"));
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("thirtyThreeValue", this.map.getIfAbsentPut(<(literal.(type))("33")>, "thirtyThreeValue"));
+        assertEquals("thirtyThreeValue", this.map.getIfAbsentPut(<(literal.(type))("33")>, "thirtyThreeValue"));
         expected.put(<(literal.(type))("33")>, "thirtyThreeValue");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.getIfAbsentPut(<(literal.(type))("34")>, () -> null));
+        assertNull(this.map.getIfAbsentPut(<(literal.(type))("34")>, () -> null));
         expected.put(<(literal.(type))("34")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         Mutable<name>ObjectMap\<String> emptyMap = <name>ObjectHashMap.newMap();
-        Assert.assertEquals("zeroValue", emptyMap.getIfAbsentPut(<(literal.(type))("0")>, "zeroValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue"), emptyMap);
+        assertEquals("zeroValue", emptyMap.getIfAbsentPut(<(literal.(type))("0")>, "zeroValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue"), emptyMap);
 
-        Assert.assertEquals("oneValue", emptyMap.getIfAbsentPut(<(literal.(type))("1")>, "oneValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
+        assertEquals("oneValue", emptyMap.getIfAbsentPut(<(literal.(type))("1")>, "oneValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
 
-        Assert.assertEquals("oneValue", emptyMap.getIfAbsentPut(<(literal.(type))("1")>, "twoValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
-        Assert.assertEquals("zeroValue", emptyMap.removeKey(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "oneValue"), emptyMap);
-        Assert.assertEquals("zeroValue", emptyMap.getIfAbsentPut(<(literal.(type))("0")>, "zeroValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
+        assertEquals("oneValue", emptyMap.getIfAbsentPut(<(literal.(type))("1")>, "twoValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
+        assertEquals("zeroValue", emptyMap.removeKey(<(literal.(type))("0")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "oneValue"), emptyMap);
+        assertEquals("zeroValue", emptyMap.getIfAbsentPut(<(literal.(type))("0")>, "zeroValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
 
         Mutable<name>ObjectMap\<String> emptyMap1 = <name>ObjectHashMap.newMap();
-        Assert.assertEquals("oneValue", emptyMap1.getIfAbsentPut(<(literal.(type))("1")>, "oneValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "oneValue"), emptyMap1);
+        assertEquals("oneValue", emptyMap1.getIfAbsentPut(<(literal.(type))("1")>, "oneValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "oneValue"), emptyMap1);
     }
 
     @Test
     public void getIfAbsentPut_Function()
     {
-        Assert.assertEquals("zero", this.map.getIfAbsentPut(<(literal.(type))("0")>, () -> "zeroValue"));
+        assertEquals("zero", this.map.getIfAbsentPut(<(literal.(type))("0")>, () -> "zeroValue"));
         Mutable<name>ObjectMap\<String> expected = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("oneValue", this.map.getIfAbsentPut(<(literal.(type))("1")>, () -> "oneValue"));
+        assertEquals("oneValue", this.map.getIfAbsentPut(<(literal.(type))("1")>, () -> "oneValue"));
         expected.put(<(literal.(type))("1")>, "oneValue");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.getIfAbsentPut(<(literal.(type))("2")>, () -> null));
+        assertNull(this.map.getIfAbsentPut(<(literal.(type))("2")>, () -> null));
         expected.put(<(literal.(type))("2")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("thirtyTwo", this.map.getIfAbsentPut(<(literal.(type))("32")>, () -> "thirtyTwoValue"));
-        Assert.assertEquals(expected, this.map);
+        assertEquals("thirtyTwo", this.map.getIfAbsentPut(<(literal.(type))("32")>, () -> "thirtyTwoValue"));
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("thirtyThreeValue", this.map.getIfAbsentPut(<(literal.(type))("33")>, () -> "thirtyThreeValue"));
+        assertEquals("thirtyThreeValue", this.map.getIfAbsentPut(<(literal.(type))("33")>, () -> "thirtyThreeValue"));
         expected.put(<(literal.(type))("33")>, "thirtyThreeValue");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.getIfAbsentPut(<(literal.(type))("34")>, () -> null));
+        assertNull(this.map.getIfAbsentPut(<(literal.(type))("34")>, () -> null));
         expected.put(<(literal.(type))("34")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         Mutable<name>ObjectMap\<String> emptyMap = <name>ObjectHashMap.newMap();
-        Assert.assertEquals("zeroValue", emptyMap.getIfAbsentPut(<(literal.(type))("0")>, () -> "zeroValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue"), emptyMap);
+        assertEquals("zeroValue", emptyMap.getIfAbsentPut(<(literal.(type))("0")>, () -> "zeroValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue"), emptyMap);
 
-        Assert.assertEquals("oneValue", emptyMap.getIfAbsentPut(<(literal.(type))("1")>, () -> "oneValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
+        assertEquals("oneValue", emptyMap.getIfAbsentPut(<(literal.(type))("1")>, () -> "oneValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
 
-        Assert.assertEquals("oneValue", emptyMap.getIfAbsentPut(<(literal.(type))("1")>, () -> "twoValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
-        Assert.assertEquals("zeroValue", emptyMap.removeKey(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "oneValue"), emptyMap);
-        Assert.assertEquals("zeroValue", emptyMap.getIfAbsentPut(<(literal.(type))("0")>, () -> "zeroValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
+        assertEquals("oneValue", emptyMap.getIfAbsentPut(<(literal.(type))("1")>, () -> "twoValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
+        assertEquals("zeroValue", emptyMap.removeKey(<(literal.(type))("0")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "oneValue"), emptyMap);
+        assertEquals("zeroValue", emptyMap.getIfAbsentPut(<(literal.(type))("0")>, () -> "zeroValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zeroValue", <(literal.(type))("1")>, "oneValue"), emptyMap);
 
         Mutable<name>ObjectMap\<String> emptyMap1 = <name>ObjectHashMap.newMap();
-        Assert.assertEquals("oneValue", emptyMap1.getIfAbsentPut(<(literal.(type))("1")>, () -> "oneValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "oneValue"), emptyMap1);
+        assertEquals("oneValue", emptyMap1.getIfAbsentPut(<(literal.(type))("1")>, () -> "oneValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "oneValue"), emptyMap1);
     }
 
     @Test
     public void getIfAbsentPutWith()
     {
         Function\<String, String> toUpperCase = StringFunctions.toUpperCase();
-        Assert.assertEquals("zero", this.map.getIfAbsentPutWith(<(literal.(type))("0")>, toUpperCase, "zeroValue"));
+        assertEquals("zero", this.map.getIfAbsentPutWith(<(literal.(type))("0")>, toUpperCase, "zeroValue"));
         <name>ObjectHashMap\<String> expected = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("ONEVALUE", this.map.getIfAbsentPutWith(<(literal.(type))("1")>, toUpperCase, "oneValue"));
+        assertEquals("ONEVALUE", this.map.getIfAbsentPutWith(<(literal.(type))("1")>, toUpperCase, "oneValue"));
         expected.put(<(literal.(type))("1")>, "ONEVALUE");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.getIfAbsentPutWith(<(literal.(type))("2")>, string -> null, ""));
+        assertNull(this.map.getIfAbsentPutWith(<(literal.(type))("2")>, string -> null, ""));
         expected.put(<(literal.(type))("2")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("thirtyTwo", this.map.getIfAbsentPutWith(<(literal.(type))("32")>, toUpperCase, "thirtyTwoValue"));
-        Assert.assertEquals(expected, this.map);
+        assertEquals("thirtyTwo", this.map.getIfAbsentPutWith(<(literal.(type))("32")>, toUpperCase, "thirtyTwoValue"));
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("THIRTYTHREEVALUE", this.map.getIfAbsentPutWith(<(literal.(type))("33")>, toUpperCase, "thirtyThreeValue"));
+        assertEquals("THIRTYTHREEVALUE", this.map.getIfAbsentPutWith(<(literal.(type))("33")>, toUpperCase, "thirtyThreeValue"));
         expected.put(<(literal.(type))("33")>, "THIRTYTHREEVALUE");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.getIfAbsentPutWith(<(literal.(type))("34")>, string -> null, ""));
+        assertNull(this.map.getIfAbsentPutWith(<(literal.(type))("34")>, string -> null, ""));
         expected.put(<(literal.(type))("34")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         Mutable<name>ObjectMap\<String> emptyMap = <name>ObjectHashMap.newMap();
-        Assert.assertEquals("ZEROVALUE", emptyMap.getIfAbsentPutWith(<(literal.(type))("0")>, toUpperCase, "zeroValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "ZEROVALUE"), emptyMap);
+        assertEquals("ZEROVALUE", emptyMap.getIfAbsentPutWith(<(literal.(type))("0")>, toUpperCase, "zeroValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "ZEROVALUE"), emptyMap);
 
-        Assert.assertEquals("ONEVALUE", emptyMap.getIfAbsentPutWith(<(literal.(type))("1")>, toUpperCase, "oneValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "ZEROVALUE", <(literal.(type))("1")>, "ONEVALUE"), emptyMap);
+        assertEquals("ONEVALUE", emptyMap.getIfAbsentPutWith(<(literal.(type))("1")>, toUpperCase, "oneValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "ZEROVALUE", <(literal.(type))("1")>, "ONEVALUE"), emptyMap);
 
-        Assert.assertEquals("ONEVALUE", emptyMap.getIfAbsentPutWith(<(literal.(type))("1")>, toUpperCase, "twoValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "ZEROVALUE", <(literal.(type))("1")>, "ONEVALUE"), emptyMap);
+        assertEquals("ONEVALUE", emptyMap.getIfAbsentPutWith(<(literal.(type))("1")>, toUpperCase, "twoValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "ZEROVALUE", <(literal.(type))("1")>, "ONEVALUE"), emptyMap);
 
-        Assert.assertEquals("ZEROVALUE", emptyMap.removeKey(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "ONEVALUE"), emptyMap);
+        assertEquals("ZEROVALUE", emptyMap.removeKey(<(literal.(type))("0")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "ONEVALUE"), emptyMap);
 
-        Assert.assertEquals("ZEROVALUE", emptyMap.getIfAbsentPutWith(<(literal.(type))("0")>, toUpperCase, "zeroValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "ZEROVALUE", <(literal.(type))("1")>, "ONEVALUE"), emptyMap);
+        assertEquals("ZEROVALUE", emptyMap.getIfAbsentPutWith(<(literal.(type))("0")>, toUpperCase, "zeroValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "ZEROVALUE", <(literal.(type))("1")>, "ONEVALUE"), emptyMap);
 
         Mutable<name>ObjectMap\<String> emptyMap1 = <name>ObjectHashMap.newMap();
-        Assert.assertEquals("ONEVALUE", emptyMap1.getIfAbsentPutWith(<(literal.(type))("1")>, toUpperCase, "oneValue"));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "ONEVALUE"), emptyMap1);
+        assertEquals("ONEVALUE", emptyMap1.getIfAbsentPutWith(<(literal.(type))("1")>, toUpperCase, "oneValue"));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "ONEVALUE"), emptyMap1);
     }
 
     @Test
@@ -475,64 +481,64 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
     {
         <name>ToObjectFunction\<String> toString = String::valueOf;
 
-        Assert.assertEquals("zero", this.map.getIfAbsentPutWithKey(<(literal.(type))("0")>, toString));
+        assertEquals("zero", this.map.getIfAbsentPutWithKey(<(literal.(type))("0")>, toString));
         <name>ObjectHashMap\<String> expected = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", this.map.getIfAbsentPutWithKey(<(literal.(type))("1")>, toString));
+        assertEquals("<(toStringLiteral.(type))("1")>", this.map.getIfAbsentPutWithKey(<(literal.(type))("1")>, toString));
         expected.put(<(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.getIfAbsentPutWithKey(<(literal.(type))("2")>, (<type> <type>Parameter) -> null));
+        assertNull(this.map.getIfAbsentPutWithKey(<(literal.(type))("2")>, (<type> <type>Parameter) -> null));
         expected.put(<(literal.(type))("2")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("thirtyTwo", this.map.getIfAbsentPutWithKey(<(literal.(type))("32")>, toString));
-        Assert.assertEquals(expected, this.map);
+        assertEquals("thirtyTwo", this.map.getIfAbsentPutWithKey(<(literal.(type))("32")>, toString));
+        assertEquals(expected, this.map);
 
-        Assert.assertEquals("<(toStringLiteral.(type))("33")>", this.map.getIfAbsentPutWithKey(<(literal.(type))("33")>, toString));
+        assertEquals("<(toStringLiteral.(type))("33")>", this.map.getIfAbsentPutWithKey(<(literal.(type))("33")>, toString));
         expected.put(<(literal.(type))("33")>, "<(toStringLiteral.(type))("33")>");
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
-        Assert.assertNull(this.map.getIfAbsentPutWithKey(<(literal.(type))("34")>, (<type> <type>Parameter) -> null));
+        assertNull(this.map.getIfAbsentPutWithKey(<(literal.(type))("34")>, (<type> <type>Parameter) -> null));
         expected.put(<(literal.(type))("34")>, null);
-        Assert.assertEquals(expected, this.map);
+        assertEquals(expected, this.map);
 
         Mutable<name>ObjectMap\<String> emptyMap = <name>ObjectHashMap.newMap();
-        Assert.assertEquals("<(toStringLiteral.(type))("0")>", emptyMap.getIfAbsentPutWithKey(<(literal.(type))("0")>, toString));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "<(toStringLiteral.(type))("0")>"), emptyMap);
+        assertEquals("<(toStringLiteral.(type))("0")>", emptyMap.getIfAbsentPutWithKey(<(literal.(type))("0")>, toString));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "<(toStringLiteral.(type))("0")>"), emptyMap);
 
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", emptyMap.getIfAbsentPutWithKey(<(literal.(type))("1")>, toString));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "<(toStringLiteral.(type))("0")>", <(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap);
+        assertEquals("<(toStringLiteral.(type))("1")>", emptyMap.getIfAbsentPutWithKey(<(literal.(type))("1")>, toString));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "<(toStringLiteral.(type))("0")>", <(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap);
 
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", emptyMap.getIfAbsentPutWithKey(<(literal.(type))("1")>, toString));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "<(toStringLiteral.(type))("0")>", <(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap);
+        assertEquals("<(toStringLiteral.(type))("1")>", emptyMap.getIfAbsentPutWithKey(<(literal.(type))("1")>, toString));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "<(toStringLiteral.(type))("0")>", <(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap);
 
-        Assert.assertEquals("<(toStringLiteral.(type))("0")>", emptyMap.removeKey(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap);
-        Assert.assertEquals("<(toStringLiteral.(type))("0")>", emptyMap.getIfAbsentPutWithKey(<(literal.(type))("0")>, toString));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "<(toStringLiteral.(type))("0")>", <(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap);
+        assertEquals("<(toStringLiteral.(type))("0")>", emptyMap.removeKey(<(literal.(type))("0")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap);
+        assertEquals("<(toStringLiteral.(type))("0")>", emptyMap.getIfAbsentPutWithKey(<(literal.(type))("0")>, toString));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "<(toStringLiteral.(type))("0")>", <(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap);
 
         Mutable<name>ObjectMap\<String> emptyMap1 = <name>ObjectHashMap.newMap();
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", emptyMap1.getIfAbsentPutWithKey(<(literal.(type))("1")>, toString));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap1);
+        assertEquals("<(toStringLiteral.(type))("1")>", emptyMap1.getIfAbsentPutWithKey(<(literal.(type))("1")>, toString));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "<(toStringLiteral.(type))("1")>"), emptyMap1);
     }
 
     @Test
     public void removeIf()
     {
         this.map.removeIf((k, v) -> true);
-        Assert.assertTrue(this.map.isEmpty());
+        assertTrue(this.map.isEmpty());
 
         Mutable<name>ObjectMap\<String> testMap = this.classUnderTest();
         testMap.put(<(literal.(type))("1")>, "one");
         testMap.removeIf((k, v) -> true);
-        Assert.assertTrue(testMap.isEmpty());
+        assertTrue(testMap.isEmpty());
 
         testMap = this.classUnderTest();
         testMap.put(<(literal.(type))("1")>, "one");
         testMap.removeIf((k, v) -> k % 2 == 0);
-        Assert.assertEquals(2, testMap.size());
+        assertEquals(2, testMap.size());
     }
 
     @Test
@@ -542,30 +548,30 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         Function0\<Integer> zeroFactory = Functions0.value(0);
 
         Mutable<name>ObjectMap\<Integer> map1 = this.getEmptyMap();
-        Assert.assertEquals(Integer.valueOf(1), map1.updateValue(<(literal.(type))("0")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 1), map1);
-        Assert.assertEquals(Integer.valueOf(2), map1.updateValue(<(literal.(type))("0")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2), map1);
-        Assert.assertEquals(Integer.valueOf(1), map1.updateValue(<(literal.(type))("1")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 1), map1);
-        Assert.assertEquals(Integer.valueOf(2), map1.updateValue(<(literal.(type))("1")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 2), map1);
+        assertEquals(Integer.valueOf(1), map1.updateValue(<(literal.(type))("0")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 1), map1);
+        assertEquals(Integer.valueOf(2), map1.updateValue(<(literal.(type))("0")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2), map1);
+        assertEquals(Integer.valueOf(1), map1.updateValue(<(literal.(type))("1")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 1), map1);
+        assertEquals(Integer.valueOf(2), map1.updateValue(<(literal.(type))("1")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 2), map1);
 
         Mutable<name>ObjectMap\<Integer> map2 = this.getEmptyMap();
-        Assert.assertEquals(Integer.valueOf(1), map2.updateValue(<(literal.(type))("1")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1), map2);
-        Assert.assertEquals(Integer.valueOf(2), map2.updateValue(<(literal.(type))("1")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 2), map2);
-        Assert.assertEquals(Integer.valueOf(1), map2.updateValue(<(literal.(type))("0")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 1, <(literal.(type))("1")>, 2), map2);
-        Assert.assertEquals(Integer.valueOf(2), map2.updateValue(<(literal.(type))("0")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 2), map2);
+        assertEquals(Integer.valueOf(1), map2.updateValue(<(literal.(type))("1")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1), map2);
+        assertEquals(Integer.valueOf(2), map2.updateValue(<(literal.(type))("1")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 2), map2);
+        assertEquals(Integer.valueOf(1), map2.updateValue(<(literal.(type))("0")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 1, <(literal.(type))("1")>, 2), map2);
+        assertEquals(Integer.valueOf(2), map2.updateValue(<(literal.(type))("0")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 2), map2);
 
         Mutable<name>ObjectMap\<Integer> map3 = this.getEmptyMap();
-        Assert.assertEquals(Integer.valueOf(1), map3.updateValue(<(literal.(type))("33")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("33")>, 1), map3);
-        Assert.assertEquals(Integer.valueOf(2), map3.updateValue(<(literal.(type))("33")>, zeroFactory, incrementFunction));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("33")>, 2), map3);
+        assertEquals(Integer.valueOf(1), map3.updateValue(<(literal.(type))("33")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("33")>, 1), map3);
+        assertEquals(Integer.valueOf(2), map3.updateValue(<(literal.(type))("33")>, zeroFactory, incrementFunction));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("33")>, 2), map3);
     }
 
     @Test
@@ -575,30 +581,30 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         Function0\<Integer> zeroFactory = Functions0.value(0);
 
         Mutable<name>ObjectMap\<Integer> map1 = this.getEmptyMap();
-        Assert.assertEquals(Integer.valueOf(1), map1.updateValueWith(<(literal.(type))("0")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 1), map1);
-        Assert.assertEquals(Integer.valueOf(2), map1.updateValueWith(<(literal.(type))("0")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2), map1);
-        Assert.assertEquals(Integer.valueOf(1), map1.updateValueWith(<(literal.(type))("1")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 1), map1);
-        Assert.assertEquals(Integer.valueOf(2), map1.updateValueWith(<(literal.(type))("1")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 2), map1);
+        assertEquals(Integer.valueOf(1), map1.updateValueWith(<(literal.(type))("0")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 1), map1);
+        assertEquals(Integer.valueOf(2), map1.updateValueWith(<(literal.(type))("0")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2), map1);
+        assertEquals(Integer.valueOf(1), map1.updateValueWith(<(literal.(type))("1")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 1), map1);
+        assertEquals(Integer.valueOf(2), map1.updateValueWith(<(literal.(type))("1")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 2), map1);
 
         Mutable<name>ObjectMap\<Integer> map2 = this.getEmptyMap();
-        Assert.assertEquals(Integer.valueOf(1), map2.updateValueWith(<(literal.(type))("1")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1), map2);
-        Assert.assertEquals(Integer.valueOf(2), map2.updateValueWith(<(literal.(type))("1")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 2), map2);
-        Assert.assertEquals(Integer.valueOf(1), map2.updateValueWith(<(literal.(type))("0")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 1, <(literal.(type))("1")>, 2), map2);
-        Assert.assertEquals(Integer.valueOf(2), map2.updateValueWith(<(literal.(type))("0")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 2), map2);
+        assertEquals(Integer.valueOf(1), map2.updateValueWith(<(literal.(type))("1")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1), map2);
+        assertEquals(Integer.valueOf(2), map2.updateValueWith(<(literal.(type))("1")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 2), map2);
+        assertEquals(Integer.valueOf(1), map2.updateValueWith(<(literal.(type))("0")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 1, <(literal.(type))("1")>, 2), map2);
+        assertEquals(Integer.valueOf(2), map2.updateValueWith(<(literal.(type))("0")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, 2, <(literal.(type))("1")>, 2), map2);
 
         Mutable<name>ObjectMap\<Integer> map3 = this.getEmptyMap();
-        Assert.assertEquals(Integer.valueOf(1), map3.updateValueWith(<(literal.(type))("33")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("33")>, 1), map3);
-        Assert.assertEquals(Integer.valueOf(2), map3.updateValueWith(<(literal.(type))("33")>, zeroFactory, incrementFunction, 1));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("33")>, 2), map3);
+        assertEquals(Integer.valueOf(1), map3.updateValueWith(<(literal.(type))("33")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("33")>, 1), map3);
+        assertEquals(Integer.valueOf(2), map3.updateValueWith(<(literal.(type))("33")>, zeroFactory, incrementFunction, 1));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("33")>, 2), map3);
     }
 
     @Test
@@ -607,52 +613,52 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         Mutable<name>ObjectMap\<String> mutable<name>ObjectMap = this.classUnderTest();
         <name>Set frozenSet = mutable<name>ObjectMap.keySet().freeze();
         <name>Set frozenSetCopy = <name>HashSet.newSetWith(mutable<name>ObjectMap.keySet().toArray());
-        Assert.assertEquals(frozenSet, frozenSetCopy);
-        Assert.assertEquals(frozenSetCopy, mutable<name>ObjectMap.keySet().freeze());
+        assertEquals(frozenSet, frozenSetCopy);
+        assertEquals(frozenSetCopy, mutable<name>ObjectMap.keySet().freeze());
         for (int i = 0; i \< 32; i++)
         {
             mutable<name>ObjectMap.put((<type>) i, "!");
-            Assert.assertEquals(frozenSet, frozenSetCopy);
+            assertEquals(frozenSet, frozenSetCopy);
         }
 
         <name>Set frozenSetForRemove = mutable<name>ObjectMap.keySet().freeze();
         <name>Set frozenSetCopyForRemove = <name>HashSet.newSetWith(mutable<name>ObjectMap.keySet().toArray());
-        Assert.assertEquals(frozenSetForRemove, frozenSetCopyForRemove);
-        Assert.assertEquals(frozenSetCopyForRemove, mutable<name>ObjectMap.keySet().freeze());
+        assertEquals(frozenSetForRemove, frozenSetCopyForRemove);
+        assertEquals(frozenSetCopyForRemove, mutable<name>ObjectMap.keySet().freeze());
         for (int i = 0; i \< 32; i++)
         {
             mutable<name>ObjectMap.remove((<type>) i);
-            Assert.assertEquals(frozenSetForRemove, frozenSetCopyForRemove);
+            assertEquals(frozenSetForRemove, frozenSetCopyForRemove);
         }
 
         Mutable<name>ObjectMap\<String> mutable<name>ObjectMapForClear = this.classUnderTest();
         <name>Set frozenSetForClear = mutable<name>ObjectMapForClear.keySet().freeze();
         <name>Set frozenSetCopyForClear = <name>HashSet.newSetWith(mutable<name>ObjectMapForClear.keySet().toArray());
         mutable<name>ObjectMapForClear.clear();
-        Assert.assertEquals(frozenSetForClear, frozenSetCopyForClear);
+        assertEquals(frozenSetForClear, frozenSetCopyForClear);
     }
 
     @Test
     public void withoutKey()
     {
         Mutable<name>ObjectMap\<String> actual = this.map.withoutKey(<(literal.(type))("55")>);
-        Assert.assertSame(this.map, actual);
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), actual);
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map.withoutKey(<(literal.(type))("0")>));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo"), this.map.withoutKey(<(literal.(type))("31")>));
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutKey(<(literal.(type))("32")>));
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutKey(<(literal.(type))("1")>));
+        assertSame(this.map, actual);
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), actual);
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), this.map.withoutKey(<(literal.(type))("0")>));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo"), this.map.withoutKey(<(literal.(type))("31")>));
+        assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutKey(<(literal.(type))("32")>));
+        assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutKey(<(literal.(type))("1")>));
     }
 
     @Test
     public void withoutAllKeys()
     {
         Mutable<name>ObjectMap\<String> actual = this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("55")>, <(literal.(type))("1")>));
-        Assert.assertSame(this.map, actual);
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), actual);
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo"), this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("31")>)));
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("31")>, <(literal.(type))("32")>)));
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("1")>)));
+        assertSame(this.map, actual);
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"), actual);
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo"), this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("31")>)));
+        assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("31")>, <(literal.(type))("32")>)));
+        assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("1")>)));
     }
 
     @Test
@@ -664,15 +670,15 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         Iterable\<<name>ObjectPair\<String>\> emptyIterable = Iterables.iList();
         Iterable\<<name>ObjectPair\<String>\> partialIterable = Iterables.iList(PrimitiveTuples.pair(<(literal.(type))("1")>, "one"), PrimitiveTuples.pair(<(literal.(type))("3")>, "three"));
         Iterable\<<name>ObjectPair\<String>\> completeIterable = Iterables.iList(PrimitiveTuples.pair(<(literal.(type))("1")>, "one"), PrimitiveTuples.pair(<(literal.(type))("2")>, "two"), PrimitiveTuples.pair(<(literal.(type))("3")>, "three"));
-        Assert.assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
-        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
+        assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
+        assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
+        assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
+        assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
     }
 
     @Override
@@ -681,20 +687,20 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
     {
         super.get();
 
-        Assert.assertEquals("zero", this.map.put(<(literal.(type))("0")>, "one"));
-        Assert.assertEquals("one", this.map.get(<(literal.(type))("0")>));
+        assertEquals("zero", this.map.put(<(literal.(type))("0")>, "one"));
+        assertEquals("one", this.map.get(<(literal.(type))("0")>));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("5")>, "five"));
-        Assert.assertEquals("five", this.map.get(<(literal.(type))("5")>));
+        assertNull(this.map.put(<(literal.(type))("5")>, "five"));
+        assertEquals("five", this.map.get(<(literal.(type))("5")>));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("35")>, "thirtyFive"));
-        Assert.assertEquals("thirtyFive", this.map.get(<(literal.(type))("35")>));
+        assertNull(this.map.put(<(literal.(type))("35")>, "thirtyFive"));
+        assertEquals("thirtyFive", this.map.get(<(literal.(type))("35")>));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("6")>, null));
-        Assert.assertNull(this.map.get(<(literal.(type))("6")>));
+        assertNull(this.map.put(<(literal.(type))("6")>, null));
+        assertNull(this.map.get(<(literal.(type))("6")>));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("36")>, null));
-        Assert.assertNull(this.map.get(<(literal.(type))("36")>));
+        assertNull(this.map.put(<(literal.(type))("36")>, null));
+        assertNull(this.map.get(<(literal.(type))("36")>));
     }
 
     @Override
@@ -705,20 +711,20 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
 
         Function0\<String> ifAbsent = () -> "ifAbsent";
 
-        Assert.assertEquals("zero", this.map.put(<(literal.(type))("0")>, "one"));
-        Assert.assertEquals("one", this.map.getIfAbsent(<(literal.(type))("0")>, ifAbsent));
+        assertEquals("zero", this.map.put(<(literal.(type))("0")>, "one"));
+        assertEquals("one", this.map.getIfAbsent(<(literal.(type))("0")>, ifAbsent));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("5")>, "five"));
-        Assert.assertEquals("five", this.map.getIfAbsent(<(literal.(type))("5")>, ifAbsent));
+        assertNull(this.map.put(<(literal.(type))("5")>, "five"));
+        assertEquals("five", this.map.getIfAbsent(<(literal.(type))("5")>, ifAbsent));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("35")>, "thirtyFive"));
-        Assert.assertEquals("thirtyFive", this.map.getIfAbsent(<(literal.(type))("35")>, ifAbsent));
+        assertNull(this.map.put(<(literal.(type))("35")>, "thirtyFive"));
+        assertEquals("thirtyFive", this.map.getIfAbsent(<(literal.(type))("35")>, ifAbsent));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("6")>, null));
-        Assert.assertNull(this.map.getIfAbsent(<(literal.(type))("6")>, ifAbsent));
+        assertNull(this.map.put(<(literal.(type))("6")>, null));
+        assertNull(this.map.getIfAbsent(<(literal.(type))("6")>, ifAbsent));
 
-        Assert.assertNull(this.map.put(<(literal.(type))("36")>, null));
-        Assert.assertNull(this.map.getIfAbsent(<(literal.(type))("36")>, ifAbsent));
+        assertNull(this.map.put(<(literal.(type))("36")>, null));
+        assertNull(this.map.getIfAbsent(<(literal.(type))("36")>, ifAbsent));
     }
 
     @Override
@@ -727,12 +733,12 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
     {
         super.containsKey();
 
-        Assert.assertEquals("zero", this.map.removeKey(<(literal.(type))("0")>));
-        Assert.assertFalse(this.map.containsKey(<(literal.(type))("0")>));
-        Assert.assertEquals("thirtyOne", this.map.removeKey(<(literal.(type))("31")>));
-        Assert.assertFalse(this.map.containsKey(<(literal.(type))("31")>));
-        Assert.assertEquals("thirtyTwo", this.map.removeKey(<(literal.(type))("32")>));
-        Assert.assertFalse(this.map.containsKey(<(literal.(type))("32")>));
+        assertEquals("zero", this.map.removeKey(<(literal.(type))("0")>));
+        assertFalse(this.map.containsKey(<(literal.(type))("0")>));
+        assertEquals("thirtyOne", this.map.removeKey(<(literal.(type))("31")>));
+        assertFalse(this.map.containsKey(<(literal.(type))("31")>));
+        assertEquals("thirtyTwo", this.map.removeKey(<(literal.(type))("32")>));
+        assertFalse(this.map.containsKey(<(literal.(type))("32")>));
     }
 
     @Override
@@ -741,12 +747,12 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
     {
         super.containsValue();
 
-        Assert.assertNull(this.map.put(<(literal.(type))("5")>, null));
-        Assert.assertTrue(this.map.containsValue(null));
+        assertNull(this.map.put(<(literal.(type))("5")>, null));
+        assertTrue(this.map.containsValue(null));
 
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("5")>));
-        Assert.assertNull(this.map.put(<(literal.(type))("35")>, null));
-        Assert.assertTrue(this.map.containsValue(null));
+        assertNull(this.map.removeKey(<(literal.(type))("5")>));
+        assertNull(this.map.put(<(literal.(type))("35")>, null));
+        assertTrue(this.map.containsValue(null));
     }
 
     @Override
@@ -754,20 +760,20 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
     public void size()
     {
         super.size();
-        Assert.assertEquals(0, this.getEmptyMap().size());
-        Assert.assertEquals(1, this.getEmptyMap().withKeyValue(<(literal.(type))("0")>, "zero").size());
-        Assert.assertEquals(1, this.getEmptyMap().withKeyValue(<(literal.(type))("1")>, "one").size());
+        assertEquals(0, this.getEmptyMap().size());
+        assertEquals(1, this.getEmptyMap().withKeyValue(<(literal.(type))("0")>, "zero").size());
+        assertEquals(1, this.getEmptyMap().withKeyValue(<(literal.(type))("1")>, "one").size());
 
         Mutable<name>ObjectMap\<String> hashMap1 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("0")>, "zero");
-        Assert.assertEquals(2, hashMap1.size());
+        assertEquals(2, hashMap1.size());
         hashMap1.removeKey(<(literal.(type))("1")>);
-        Assert.assertEquals(1, hashMap1.size());
+        assertEquals(1, hashMap1.size());
         hashMap1.removeKey(<(literal.(type))("0")>);
-        Assert.assertEquals(0, hashMap1.size());
+        assertEquals(0, hashMap1.size());
 
         Mutable<name>ObjectMap\<String> hashMap = this.newWithKeysValues(<(literal.(type))("6")>, "six", <(literal.(type))("5")>, "five");
         hashMap.removeKey(<(literal.(type))("5")>);
-        Assert.assertEquals(1, hashMap.size());
+        assertEquals(1, hashMap.size());
     }
 
     @Override
@@ -775,12 +781,12 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
     public void contains()
     {
         super.contains();
-        Assert.assertNull(this.map.put(<(literal.(type))("1")>, null));
-        Assert.assertTrue(this.map.contains(null));
+        assertNull(this.map.put(<(literal.(type))("1")>, null));
+        assertTrue(this.map.contains(null));
 
-        Assert.assertNull(this.map.removeKey(<(literal.(type))("5")>));
-        Assert.assertNull(this.map.put(<(literal.(type))("35")>, null));
-        Assert.assertTrue(this.map.contains(null));
+        assertNull(this.map.removeKey(<(literal.(type))("5")>));
+        assertNull(this.map.put(<(literal.(type))("35")>, null));
+        assertTrue(this.map.contains(null));
     }
 
     @Test
@@ -788,8 +794,8 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
     {
         Mutable<name>ObjectMap\<String> emptyMap = this.getEmptyMap();
         Mutable<name>ObjectMap\<String> hashMap = emptyMap.withKeyValue(<(literal.(type))("1")>, "one");
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), hashMap);
-        Assert.assertSame(emptyMap, hashMap);
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), hashMap);
+        assertSame(emptyMap, hashMap);
     }
 
     @Override
@@ -800,61 +806,61 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
 
         Mutable<name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
         Iterator\<String> iterator1 = map1.iterator();
-        Assert.assertThrows(IllegalStateException.class, iterator1::remove);
+        assertThrows(IllegalStateException.class, iterator1::remove);
         iterator1.next();
         iterator1.remove();
-        Assert.assertTrue(map1.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map1)
+        assertTrue(map1.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map1)
                 || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one").equals(map1));
         iterator1.next();
         iterator1.remove();
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), map1);
-        Assert.assertThrows(IllegalStateException.class, iterator1::remove);
+        assertEquals(<name>ObjectHashMap.newMap(), map1);
+        assertThrows(IllegalStateException.class, iterator1::remove);
 
         Mutable<name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("9")>, "nine");
         Iterator\<String> iterator2 = map2.iterator();
-        Assert.assertThrows(IllegalStateException.class, iterator2::remove);
+        assertThrows(IllegalStateException.class, iterator2::remove);
         iterator2.next();
         iterator2.remove();
-        Assert.assertTrue(map2.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map2)
+        assertTrue(map2.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map2)
                 || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, "nine").equals(map2));
         iterator2.next();
         iterator2.remove();
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), map2);
+        assertEquals(<name>ObjectHashMap.newMap(), map2);
 
         Mutable<name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("8")>, "eight", <(literal.(type))("9")>, "nine");
         Iterator\<String> iterator3 = map3.iterator();
-        Assert.assertThrows(IllegalStateException.class, iterator3::remove);
+        assertThrows(IllegalStateException.class, iterator3::remove);
         iterator3.next();
         iterator3.remove();
-        Assert.assertTrue(map3.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("8")>, "eight").equals(map3)
+        assertTrue(map3.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("8")>, "eight").equals(map3)
                 || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, "nine").equals(map3));
         iterator3.next();
         iterator3.remove();
-        Assert.assertEquals(<name>ObjectHashMap.newMap(), map3);
+        assertEquals(<name>ObjectHashMap.newMap(), map3);
     }
 
     @Test
     public void asUnmodifiable()
     {
         Verify.assertInstanceOf(Unmodifiable<name>ObjectMap.class, this.map.asUnmodifiable());
-        Assert.assertEquals(new Unmodifiable<name>ObjectMap\<>(this.map), this.map.asUnmodifiable());
+        assertEquals(new Unmodifiable<name>ObjectMap\<>(this.map), this.map.asUnmodifiable());
     }
 
     @Test
     public void asSynchronized()
     {
         Verify.assertInstanceOf(Synchronized<name>ObjectMap.class, this.map.asSynchronized());
-        Assert.assertEquals(new Synchronized<name>ObjectMap\<>(this.map), this.map.asSynchronized());
+        assertEquals(new Synchronized<name>ObjectMap\<>(this.map), this.map.asSynchronized());
     }
 
     @Test
     public void flipUniqueValues()
     {
         Mutable<name>ObjectMap\<String> map = this.newWithKeysValues(<(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3");
-        Assert.assertEquals(
+        assertEquals(
                 Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "3", <(literal.(type))("2")>),
                 map.flipUniqueValues());
-        Assert.assertThrows(
+        assertThrows(
                 IllegalStateException.class,
                 () -> this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "1").flipUniqueValues());
     }
@@ -870,14 +876,14 @@ public void put_<key>()
     Map\<<wrapperName>, String> hashmap = new HashMap\<>();
     hashmap.put(<wrapperName>.<key>, "one");
 
-    Assert.assertTrue(hashmap.containsKey(<wrapperName>.<key>));
-    Assert.assertTrue(map.containsKey(<wrapperName>.<key>));
+    assertTrue(hashmap.containsKey(<wrapperName>.<key>));
+    assertTrue(map.containsKey(<wrapperName>.<key>));
 
-    Assert.assertEquals("one", hashmap.get(<wrapperName>.<key>));
-    Assert.assertEquals("one", map.get(<wrapperName>.<key>));
+    assertEquals("one", hashmap.get(<wrapperName>.<key>));
+    assertEquals("one", map.get(<wrapperName>.<key>));
 
-    Assert.assertEquals("one", hashmap.put(<wrapperName>.<key>, "two"));
-    Assert.assertEquals("one", map.put(<wrapperName>.<key>, "two"));
+    assertEquals("one", hashmap.put(<wrapperName>.<key>, "two"));
+    assertEquals("one", map.put(<wrapperName>.<key>, "two"));
     Verify.assertIterableSize(hashmap.size(), map);
 }
 
@@ -891,20 +897,20 @@ public void put_zero()
     Map\<<wrapperName>, String> hashmap = new HashMap\<>();
     hashmap.put(<(literal.(type))("0")>, "one");
 
-    Assert.assertTrue(hashmap.containsKey(<(literal.(type))("0")>));
-    Assert.assertFalse(hashmap.containsKey(-<(literal.(type))("0")>));
-    Assert.assertTrue(map.containsKey(<(literal.(type))("0")>));
-    Assert.assertFalse(map.containsKey(-<(literal.(type))("0")>));
+    assertTrue(hashmap.containsKey(<(literal.(type))("0")>));
+    assertFalse(hashmap.containsKey(-<(literal.(type))("0")>));
+    assertTrue(map.containsKey(<(literal.(type))("0")>));
+    assertFalse(map.containsKey(-<(literal.(type))("0")>));
 
-    Assert.assertEquals("one", hashmap.get(<(literal.(type))("0")>));
-    Assert.assertNull(hashmap.get(-<(literal.(type))("0")>));
-    Assert.assertEquals("one", map.get(<(literal.(type))("0")>));
-    Assert.assertNull(map.get(-<(literal.(type))("0")>));
+    assertEquals("one", hashmap.get(<(literal.(type))("0")>));
+    assertNull(hashmap.get(-<(literal.(type))("0")>));
+    assertEquals("one", map.get(<(literal.(type))("0")>));
+    assertNull(map.get(-<(literal.(type))("0")>));
 
-    Assert.assertEquals("one", hashmap.put(<(literal.(type))("0")>, "two"));
-    Assert.assertNull(hashmap.put(-<(literal.(type))("0")>, "two"));
-    Assert.assertEquals("one", map.put(<(literal.(type))("0")>, "two"));
-    Assert.assertNull(map.put(-<(literal.(type))("0")>, "two"));
+    assertEquals("one", hashmap.put(<(literal.(type))("0")>, "two"));
+    assertNull(hashmap.put(-<(literal.(type))("0")>, "two"));
+    assertEquals("one", map.put(<(literal.(type))("0")>, "two"));
+    assertNull(map.put(-<(literal.(type))("0")>, "two"));
     Verify.assertIterableSize(hashmap.size(), map);
 }
 
@@ -919,14 +925,14 @@ public void put_different_NaNs()
     Map\<<wrapperName>, String> hashMap = new HashMap\<<wrapperName>, String>();
     hashMap.put(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan1), "one");
     <bitsType.(type)> nan2 = <NaNBits2.(type)>;
-    Assert.assertTrue(hashMap.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)));
-    Assert.assertTrue(map.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)));
+    assertTrue(hashMap.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)));
+    assertTrue(map.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)));
 
-    Assert.assertEquals("one", hashMap.put(nan2, "two"));
-    Assert.assertEquals("one", map.put(nan2, "two"));
+    assertEquals("one", hashMap.put(nan2, "two"));
+    assertEquals("one", map.put(nan2, "two"));
 
-    Assert.assertTrue(hashMap.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan1)));
-    Assert.assertTrue(map.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan1)));
+    assertTrue(hashMap.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan1)));
+    assertTrue(map.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan1)));
 }
 
 >>

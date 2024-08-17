@@ -40,8 +40,15 @@ import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * This file was automatically generated from template file abstractObjectPrimitiveMapTestCase.stg.
@@ -66,8 +73,8 @@ public abstract class AbstractObject<name>MapTestCase
     public void keySet()
     {
         Verify.assertEmpty(this.getEmptyMap().keySet());
-        Assert.assertEquals(UnifiedSet.newSetWith("0"), this.newWithKeysValues("0", <(literal.(type))("0")>).keySet());
-        Assert.assertEquals(UnifiedSet.newSetWith("0", "1", "2"),
+        assertEquals(UnifiedSet.newSetWith("0"), this.newWithKeysValues("0", <(literal.(type))("0")>).keySet());
+        assertEquals(UnifiedSet.newSetWith("0", "1", "2"),
                 this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>).keySet());
     }
 
@@ -78,49 +85,49 @@ public abstract class AbstractObject<name>MapTestCase
 
         Object<name>Map\<String> map = this.newWithKeysValues("0", <(literal.(type))("0")>);
         Verify.assertSize(1, map.values());
-        Assert.assertTrue(map.values().contains(<(literal.(type))("0")>));
+        assertTrue(map.values().contains(<(literal.(type))("0")>));
 
         Object<name>Map\<String> map1 = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>);
         Verify.assertSize(3, map1.values());
-        Assert.assertTrue(map1.values().contains(<(literal.(type))("0")>));
-        Assert.assertTrue(map1.values().contains(<(literal.(type))("1")>));
-        Assert.assertTrue(map1.values().contains(<(literal.(type))("2")>));
+        assertTrue(map1.values().contains(<(literal.(type))("0")>));
+        assertTrue(map1.values().contains(<(literal.(type))("1")>));
+        assertTrue(map1.values().contains(<(literal.(type))("2")>));
     }
 
     @Test
     public void get()
     {
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.get("0")<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.get("1")<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("2")>, this.map.get("2")<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.get("0")<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.get("1")<delta.(type)>);
+        assertEquals(<(literal.(type))("2")>, this.map.get("2")<delta.(type)>);
     }
 
     @Test
     public void getOrThrow()
     {
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.getOrThrow("0")<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.getOrThrow("1")<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("2")>, this.map.getOrThrow("2")<delta.(type)>);
-        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow("5"));
-        Assert.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(null));
+        assertEquals(<(literal.(type))("0")>, this.map.getOrThrow("0")<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.getOrThrow("1")<delta.(type)>);
+        assertEquals(<(literal.(type))("2")>, this.map.getOrThrow("2")<delta.(type)>);
+        assertThrows(IllegalStateException.class, () -> this.map.getOrThrow("5"));
+        assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(null));
     }
 
     @Test
     public void containsKey()
     {
-        Assert.assertTrue(this.map.containsKey("0"));
-        Assert.assertTrue(this.map.containsKey("1"));
-        Assert.assertTrue(this.map.containsKey("2"));
-        Assert.assertFalse(this.map.containsKey("3"));
-        Assert.assertFalse(this.map.containsKey(null));
+        assertTrue(this.map.containsKey("0"));
+        assertTrue(this.map.containsKey("1"));
+        assertTrue(this.map.containsKey("2"));
+        assertFalse(this.map.containsKey("3"));
+        assertFalse(this.map.containsKey(null));
     }
 
     @Test
     public void containsValue()
     {
-        Assert.assertTrue(this.map.containsValue(<(literal.(type))("0")>));
-        Assert.assertTrue(this.map.containsValue(<(literal.(type))("1")>));
-        Assert.assertTrue(this.map.containsValue(<(literal.(type))("2")>));
+        assertTrue(this.map.containsValue(<(literal.(type))("0")>));
+        assertTrue(this.map.containsValue(<(literal.(type))("1")>));
+        assertTrue(this.map.containsValue(<(literal.(type))("2")>));
     }
 
     @Test
@@ -140,42 +147,42 @@ public abstract class AbstractObject<name>MapTestCase
     public void isEmpty()
     {
         Verify.assertEmpty(this.getEmptyMap());
-        Assert.assertFalse(this.map.isEmpty());
-        Assert.assertFalse(this.newWithKeysValues(null, <(literal.(type))("1")>).isEmpty());
-        Assert.assertFalse(this.newWithKeysValues(1, <(literal.(type))("1")>).isEmpty());
-        Assert.assertFalse(this.newWithKeysValues(0, <(literal.(type))("0")>).isEmpty());
-        Assert.assertFalse(this.newWithKeysValues(50, <(literal.(type))("50")>).isEmpty());
+        assertFalse(this.map.isEmpty());
+        assertFalse(this.newWithKeysValues(null, <(literal.(type))("1")>).isEmpty());
+        assertFalse(this.newWithKeysValues(1, <(literal.(type))("1")>).isEmpty());
+        assertFalse(this.newWithKeysValues(0, <(literal.(type))("0")>).isEmpty());
+        assertFalse(this.newWithKeysValues(50, <(literal.(type))("50")>).isEmpty());
     }
 
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(this.getEmptyMap().notEmpty());
-        Assert.assertTrue(this.map.notEmpty());
-        Assert.assertTrue(this.newWithKeysValues(1, <(literal.(type))("1")>).notEmpty());
-        Assert.assertTrue(this.newWithKeysValues(null, <(literal.(type))("1")>).notEmpty());
-        Assert.assertTrue(this.newWithKeysValues(0, <(literal.(type))("0")>).notEmpty());
-        Assert.assertTrue(this.newWithKeysValues(50, <(literal.(type))("50")>).notEmpty());
+        assertFalse(this.getEmptyMap().notEmpty());
+        assertTrue(this.map.notEmpty());
+        assertTrue(this.newWithKeysValues(1, <(literal.(type))("1")>).notEmpty());
+        assertTrue(this.newWithKeysValues(null, <(literal.(type))("1")>).notEmpty());
+        assertTrue(this.newWithKeysValues(0, <(literal.(type))("0")>).notEmpty());
+        assertTrue(this.newWithKeysValues(50, <(literal.(type))("50")>).notEmpty());
     }
 
     @Test
     public void asLazy()
     {
         Verify.assertSize(this.map.toList().size(), this.map.asLazy().toList());
-        Assert.assertTrue(this.map.asLazy().toList().containsAll(this.map.toList()));
+        assertTrue(this.map.asLazy().toList().containsAll(this.map.toList()));
     }
 
     @Test
     public void getIfAbsent()
     {
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.getIfAbsent("0", <(literal.(type))("1")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("1", <(literal.(type))("2")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("2")>, this.map.getIfAbsent("2", <(literal.(type))("3")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("5", <(literal.(type))("1")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.getIfAbsent("5", <(literal.(type))("0")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.getIfAbsent("0", <(literal.(type))("1")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("1", <(literal.(type))("2")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("2")>, this.map.getIfAbsent("2", <(literal.(type))("3")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("5", <(literal.(type))("1")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.getIfAbsent("5", <(literal.(type))("0")>)<delta.(type)>);
 
-        Assert.assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent(null, <(literal.(type))("1")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.getIfAbsent(null, <(literal.(type))("0")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent(null, <(literal.(type))("1")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.getIfAbsent(null, <(literal.(type))("0")>)<delta.(type)>);
     }
 
     @Test
@@ -189,40 +196,40 @@ public abstract class AbstractObject<name>MapTestCase
 
         Verify.assertEqualsAndHashCode(map1, map2);
         Verify.assertPostSerializedEqualsAndHashCode(map1);
-        Assert.assertNotEquals(map1, map3);
-        Assert.assertNotEquals(map1, map5);
-        Assert.assertNotEquals(map1, map7);
+        assertNotEquals(map1, map3);
+        assertNotEquals(map1, map5);
+        assertNotEquals(map1, map7);
 
-        Assert.assertEquals(map1, Object<name>Maps.mutable.ofAll(map1));
-        Assert.assertEquals(map1, Object<name>Maps.immutable.ofAll(map1));
+        assertEquals(map1, Object<name>Maps.mutable.ofAll(map1));
+        assertEquals(map1, Object<name>Maps.immutable.ofAll(map1));
     }
 
     @Test
     public void testHashCode()
     {
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedMap.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>).hashCode(),
                 this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>).hashCode());
-        Assert.assertEquals(
+        assertEquals(
                 UnifiedMap.newWithKeysValues(50, <(literal.(type))("0")>, null, <(literal.(type))("1")>).hashCode(),
                 this.newWithKeysValues(50, <(literal.(type))("0")>, null, <(literal.(type))("1")>).hashCode());
-        Assert.assertEquals(UnifiedMap.newMap().hashCode(), this.getEmptyMap().hashCode());
+        assertEquals(UnifiedMap.newMap().hashCode(), this.getEmptyMap().hashCode());
     }
 
     @Test
     public void testToString()
     {
-        Assert.assertEquals("{}", this.\<Integer>getEmptyMap().toString());
-        Assert.assertEquals("{0=<(toStringLiteral.(type))("0")>}", this.newWithKeysValues(0, <(literal.(type))("0")>).toString());
+        assertEquals("{}", this.\<Integer>getEmptyMap().toString());
+        assertEquals("{0=<(toStringLiteral.(type))("0")>}", this.newWithKeysValues(0, <(literal.(type))("0")>).toString());
 
         Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
-        Assert.assertTrue(
+        assertTrue(
                 map1.toString(),
                 "{0=<(toStringLiteral.(type))("0")>, 1=<(toStringLiteral.(type))("1")>}".equals(map1.toString())
                         || "{1=<(toStringLiteral.(type))("1")>, 0=<(toStringLiteral.(type))("0")>}".equals(map1.toString()));
 
         Object<name>Map\<Integer> map2 = this.newWithKeysValues(1, <(literal.(type))("1")>, null, <(literal.(type))("0")>);
-        Assert.assertTrue(
+        assertTrue(
                 map2.toString(),
                 "{1=<(toStringLiteral.(type))("1")>, null=<(toStringLiteral.(type))("0")>}".equals(map2.toString())
                         || "{null=<(toStringLiteral.(type))("0")>, 1=<(toStringLiteral.(type))("1")>}".equals(map2.toString()));
@@ -235,17 +242,17 @@ public abstract class AbstractObject<name>MapTestCase
         Mutable<name>Set actual = <name>HashSet.newSetWith();
 
         <name>Iterator iterator = this.map.<type>Iterator();
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
 
-        Assert.assertEquals(expected, actual);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
-        Assert.assertThrows(NoSuchElementException.class, () ->
+        assertEquals(expected, actual);
+        assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, () ->
         {
             this.getEmptyMap().<type>Iterator().next();
         });
@@ -260,7 +267,7 @@ public abstract class AbstractObject<name>MapTestCase
         {
             sum01[0] += each;
         });
-        Assert.assertEquals(<(literal.(type))("3")>, sum01[0]<delta.(type)>);
+        assertEquals(<(literal.(type))("3")>, sum01[0]<delta.(type)>);
 
         Object<name>Map\<Integer> map = this.newWithKeysValues(3, <(literal.(type))("4")>, 4, <(literal.(type))("5")>);
         <type>[] sum = new <type>[1];
@@ -268,7 +275,7 @@ public abstract class AbstractObject<name>MapTestCase
         {
             sum[0] += each;
         });
-        Assert.assertEquals(<(literal.(type))("9")>, sum[0]<delta.(type)>);
+        assertEquals(<(literal.(type))("9")>, sum[0]<delta.(type)>);
 
         Object<name>Map\<Integer> map1 = this.newWithKeysValues(3, <(literal.(type))("4")>, null, <(literal.(type))("5")>);
         <type>[] sum1 = new <type>[1];
@@ -276,7 +283,7 @@ public abstract class AbstractObject<name>MapTestCase
         {
             sum1[0] += each;
         });
-        Assert.assertEquals(<(literal.(type))("9")>, sum1[0]<delta.(type)>);
+        assertEquals(<(literal.(type))("9")>, sum1[0]<delta.(type)>);
     }
 
     @Test
@@ -285,12 +292,12 @@ public abstract class AbstractObject<name>MapTestCase
         Object<name>Map\<Integer> map01 = this.newWithKeysValues(0, <(literal.(type))("1")>, 1, <(literal.(type))("2")>);
         <type>[] sum01 = new <type>[1];
         map01.forEachValue((<type> each) -> sum01[0] += each);
-        Assert.assertEquals(<(literal.(type))("3")>, sum01[0]<delta.(type)>);
+        assertEquals(<(literal.(type))("3")>, sum01[0]<delta.(type)>);
 
         Object<name>Map\<Integer> map = this.newWithKeysValues(3, <(literal.(type))("4")>, null, <(literal.(type))("5")>);
         <type>[] sum = new <type>[1];
         map.forEachValue((<type> each) -> sum[0] += each);
-        Assert.assertEquals(<(literal.(type))("9")>, sum[0]<delta.(type)>);
+        assertEquals(<(literal.(type))("9")>, sum[0]<delta.(type)>);
     }
 
     @Test
@@ -299,13 +306,13 @@ public abstract class AbstractObject<name>MapTestCase
         Object<name>Map\<Integer> map01 = this.newWithKeysValues(0, <(literal.(type))("1")>, 1, <(literal.(type))("2")>);
         int[] sum01 = new int[1];
         map01.forEachKey((Integer each) -> sum01[0] += each);
-        Assert.assertEquals(1, sum01[0]);
+        assertEquals(1, sum01[0]);
 
         Object<name>Map\<Integer> map = this.newWithKeysValues(3, <(literal.(type))("4")>, null, <(literal.(type))("5")>);
         String[] sum = new String[1];
         sum[0] = "";
         map.forEachKey(each -> sum[0] += String.valueOf(each));
-        Assert.assertTrue("3null".equals(sum[0]) || "null3".equals(sum[0]));
+        assertTrue("3null".equals(sum[0]) || "null3".equals(sum[0]));
     }
 
     @Test
@@ -319,8 +326,8 @@ public abstract class AbstractObject<name>MapTestCase
             sumKey01[0] += eachKey;
             sumValue01[0] += eachValue;
         });
-        Assert.assertEquals(1, sumKey01[0]);
-        Assert.assertEquals(<(literal.(type))("3")>, sumValue01[0]<delta.(type)>);
+        assertEquals(1, sumKey01[0]);
+        assertEquals(<(literal.(type))("3")>, sumValue01[0]<delta.(type)>);
 
         Object<name>Map\<Integer> map = this.newWithKeysValues(3, <(literal.(type))("4")>, null, <(literal.(type))("5")>);
         String[] sumKey = new String[1];
@@ -331,8 +338,8 @@ public abstract class AbstractObject<name>MapTestCase
             sumKey[0] += String.valueOf(eachKey);
             sumValue[0] += eachValue;
         });
-        Assert.assertTrue("3null".equals(sumKey[0]) || "null3".equals(sumKey[0]));
-        Assert.assertEquals(<(literal.(type))("9")>, sumValue[0]<delta.(type)>);
+        assertTrue("3null".equals(sumKey[0]) || "null3".equals(sumKey[0]));
+        assertEquals(<(literal.(type))("9")>, sumValue[0]<delta.(type)>);
     }
 
     @Test
@@ -341,27 +348,27 @@ public abstract class AbstractObject<name>MapTestCase
         Object<name>Map\<String> map0 = this.newWithKeysValues("2", <(literal.(type))("3")>, "4", <(literal.(type))("5")>);
 
         String result0 = map0.injectIntoKeyValue(new String("1"), (result, eachKey, eachValue) -> result + eachKey + String.valueOf(eachValue));
-        Assert.assertTrue(result0, "12<(toStringLiteral.(type))("3")>4<(toStringLiteral.(type))("5")>".equals(result0) || "14<(toStringLiteral.(type))("5")>2<(toStringLiteral.(type))("3")>".equals(result0));
+        assertTrue(result0, "12<(toStringLiteral.(type))("3")>4<(toStringLiteral.(type))("5")>".equals(result0) || "14<(toStringLiteral.(type))("5")>2<(toStringLiteral.(type))("3")>".equals(result0));
 
         Object<name>Map copy = map0.injectIntoKeyValue(Object<name>Maps.mutable.empty(), MutableObject<name>Map::withKeyValue);
-        Assert.assertEquals(map0, copy);
+        assertEquals(map0, copy);
     }
 
     @Test
     public void makeString()
     {
-        Assert.assertEquals("", this.\<String>getEmptyMap().makeString());
-        Assert.assertEquals("<(toStringLiteral.(type))("0")>", this.newWithKeysValues(0, <(literal.(type))("0")>).makeString());
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", this.newWithKeysValues(1, <(literal.(type))("1")>).makeString());
-        Assert.assertEquals("<(toStringLiteral.(type))("5")>", this.newWithKeysValues(null, <(literal.(type))("5")>).makeString());
+        assertEquals("", this.\<String>getEmptyMap().makeString());
+        assertEquals("<(toStringLiteral.(type))("0")>", this.newWithKeysValues(0, <(literal.(type))("0")>).makeString());
+        assertEquals("<(toStringLiteral.(type))("1")>", this.newWithKeysValues(1, <(literal.(type))("1")>).makeString());
+        assertEquals("<(toStringLiteral.(type))("5")>", this.newWithKeysValues(null, <(literal.(type))("5")>).makeString());
 
         Object<name>Map\<Integer> map2 = this.newWithKeysValues(1, <(literal.(type))("1")>, 32, <(literal.(type))("32")>);
-        Assert.assertTrue(
+        assertTrue(
                 map2.makeString("[", "/", "]"),
                 "[<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("32")>]".equals(map2.makeString("[", "/", "]"))
                         || "[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("1")>]".equals(map2.makeString("[", "/", "]")));
 
-        Assert.assertTrue(
+        assertTrue(
                 map2.makeString("/"),
                 "<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("32")>".equals(map2.makeString("/"))
                         || "<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("1")>".equals(map2.makeString("/")));
@@ -372,38 +379,38 @@ public abstract class AbstractObject<name>MapTestCase
     {
         Appendable appendable = new StringBuilder();
         this.getEmptyMap().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
 
         Appendable appendable0 = new StringBuilder();
         this.newWithKeysValues(0, <(literal.(type))("0")>).appendString(appendable0);
-        Assert.assertEquals("<(toStringLiteral.(type))("0")>", appendable0.toString());
+        assertEquals("<(toStringLiteral.(type))("0")>", appendable0.toString());
 
         Appendable appendable1 = new StringBuilder();
         this.newWithKeysValues(1, <(literal.(type))("1")>).appendString(appendable1);
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>", appendable1.toString());
+        assertEquals("<(toStringLiteral.(type))("1")>", appendable1.toString());
 
         Appendable appendable2 = new StringBuilder();
         this.newWithKeysValues(null, <(literal.(type))("5")>).appendString(appendable2);
-        Assert.assertEquals("<(toStringLiteral.(type))("5")>", appendable2.toString());
+        assertEquals("<(toStringLiteral.(type))("5")>", appendable2.toString());
 
         Appendable appendable3 = new StringBuilder();
         Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
         map1.appendString(appendable3);
-        Assert.assertTrue(
+        assertTrue(
                 appendable3.toString(),
                 "<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("1")>".equals(appendable3.toString())
                         || "<(toStringLiteral.(type))("1")>, <(toStringLiteral.(type))("0")>".equals(appendable3.toString()));
 
         Appendable appendable4 = new StringBuilder();
         map1.appendString(appendable4, "/");
-        Assert.assertTrue(
+        assertTrue(
                 appendable4.toString(),
                 "<(toStringLiteral.(type))("0")>/<(toStringLiteral.(type))("1")>".equals(appendable4.toString())
                         || "<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("0")>".equals(appendable4.toString()));
 
         Appendable appendable5 = new StringBuilder();
         map1.appendString(appendable5, "[", "/", "]");
-        Assert.assertTrue(
+        assertTrue(
                 appendable5.toString(),
                 "[<(toStringLiteral.(type))("0")>/<(toStringLiteral.(type))("1")>]".equals(appendable5.toString())
                         || "[<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("0")>]".equals(appendable5.toString()));
@@ -412,36 +419,36 @@ public abstract class AbstractObject<name>MapTestCase
     @Test
     public void select()
     {
-        Assert.assertEquals(this.map, this.map.select((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) == 0));
+        assertEquals(this.map, this.map.select((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) == 0));
 
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>),
+        assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>),
                 this.map.select((String object, <type> value) -> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
 
-        Assert.assertEquals(this.getEmptyMap(), this.map.select((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) != 0));
+        assertEquals(this.getEmptyMap(), this.map.select((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) != 0));
 
-        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>),
+        assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>),
                 this.map.select(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>).toBag());
 
-        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>), this.map.select(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>).toBag());
+        assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>), this.map.select(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>).toBag());
 
-        Assert.assertEquals(new <name>HashBag(), this.map.select(value -> value > <(literal.(type))("2")>).toBag());
+        assertEquals(new <name>HashBag(), this.map.select(value -> value > <(literal.(type))("2")>).toBag());
     }
 
     @Test
     public void reject()
     {
-        Assert.assertEquals(this.getEmptyMap(), this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) == 0));
+        assertEquals(this.getEmptyMap(), this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) == 0));
 
-        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("2")>),
+        assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("2")>),
                 this.map.reject((String object, <type> value) -> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
 
-        Assert.assertEquals(this.map, this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) != 0));
+        assertEquals(this.map, this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) != 0));
 
-        Assert.assertEquals(new <name>HashBag(), this.map.reject(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>).toBag());
+        assertEquals(new <name>HashBag(), this.map.reject(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>).toBag());
 
-        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("2")>), this.map.reject(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>).toBag());
+        assertEquals(<name>HashBag.newBagWith(<(literal.(type))("2")>), this.map.reject(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>).toBag());
 
-        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>),
+        assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>),
                 this.map.reject(value -> value > <(literal.(type))("2")>).toBag());
     }
 
@@ -449,58 +456,58 @@ public abstract class AbstractObject<name>MapTestCase
     public void tap()
     {
         Mutable<name>List tapResult = <name>Lists.mutable.empty();
-        Assert.assertSame(this.map, this.map.tap(tapResult::add));
-        Assert.assertEquals(this.map.toList(), tapResult);
+        assertSame(this.map, this.map.tap(tapResult::add));
+        assertEquals(this.map.toList(), tapResult);
     }
 
     @Test
     public void count()
     {
-        Assert.assertEquals(3L, this.map.count(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>));
+        assertEquals(3L, this.map.count(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>));
 
-        Assert.assertEquals(2L, this.map.count(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
+        assertEquals(2L, this.map.count(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
 
-        Assert.assertEquals(0L, this.map.count(value -> value > <(literal.(type))("2")>));
+        assertEquals(0L, this.map.count(value -> value > <(literal.(type))("2")>));
     }
 
     @Test
     public void anySatisfy()
     {
-        Assert.assertTrue(this.map.anySatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>));
+        assertTrue(this.map.anySatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>));
 
-        Assert.assertTrue(this.map.anySatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
+        assertTrue(this.map.anySatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
 
-        Assert.assertFalse(this.map.anySatisfy(value -> value > <(literal.(type))("2")>));
+        assertFalse(this.map.anySatisfy(value -> value > <(literal.(type))("2")>));
     }
 
     @Test
     public void allSatisfy()
     {
-        Assert.assertTrue(this.map.allSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>));
+        assertTrue(this.map.allSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>));
 
-        Assert.assertFalse(this.map.allSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
+        assertFalse(this.map.allSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
 
-        Assert.assertFalse(this.map.allSatisfy(value -> value > <(literal.(type))("2")>));
+        assertFalse(this.map.allSatisfy(value -> value > <(literal.(type))("2")>));
     }
 
     @Test
     public void noneSatisfy()
     {
-        Assert.assertTrue(this.map.noneSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("0")>})>));
+        assertTrue(this.map.noneSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("0")>})>));
 
-        Assert.assertFalse(this.map.noneSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
+        assertFalse(this.map.noneSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
     }
 
     @Test
     public void detectIfNone()
     {
         <type> detect = this.map.detectIfNone(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>, <(literal.(type))("5")>);
-        Assert.assertTrue(<(equals.(type))("detect", "0")> || <(equals.(type))("detect", "1")> || <(equals.(type))("detect", "2")>);
+        assertTrue(<(equals.(type))("detect", "0")> || <(equals.(type))("detect", "1")> || <(equals.(type))("detect", "2")>);
 
         <type> detect1 = this.map.detectIfNone(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>, <(literal.(type))("5")>);
-        Assert.assertTrue(<(equals.(type))("detect1", "0")> || <(equals.(type))("detect1", "1")>);
+        assertTrue(<(equals.(type))("detect1", "0")> || <(equals.(type))("detect1", "1")>);
 
-        Assert.assertEquals(<(literal.(type))("5")>, this.map.detectIfNone(value -> value > <(literal.(type))("2")>, <(literal.(type))("5")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("5")>, this.map.detectIfNone(value -> value > <(literal.(type))("2")>, <(literal.(type))("5")>)<delta.(type)>);
     }
 
     @Test
@@ -508,155 +515,155 @@ public abstract class AbstractObject<name>MapTestCase
     {
         <name>ToObjectFunction\<String> toString = String::valueOf;
         Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
-        Assert.assertTrue(map1.collect(toString).toString(), FastList.newListWith("<(toStringLiteral.(type))("1")>", "<(toStringLiteral.(type))("0")>").equals(map1.collect(toString))
+        assertTrue(map1.collect(toString).toString(), FastList.newListWith("<(toStringLiteral.(type))("1")>", "<(toStringLiteral.(type))("0")>").equals(map1.collect(toString))
                 || FastList.newListWith("<(toStringLiteral.(type))("0")>", "<(toStringLiteral.(type))("1")>").equals(map1.collect(toString)));
     }
 
     @Test
     public void sum()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("3")>, this.map.sum()<wideDelta.(type)>);
+        assertEquals(<(wideLiteral.(type))("3")>, this.map.sum()<wideDelta.(type)>);
     }
 
     @Test
     public void max()
     {
-        Assert.assertEquals(<(literal.(type))("2")>, this.map.max()<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("3")>, this.newWithKeysValues(null, <(literal.(type))("3")>, 0, <(literal.(type))("0")>, 2, <(literal.(type))("2")>).max()<delta.(type)>);
+        assertEquals(<(literal.(type))("2")>, this.map.max()<delta.(type)>);
+        assertEquals(<(literal.(type))("3")>, this.newWithKeysValues(null, <(literal.(type))("3")>, 0, <(literal.(type))("0")>, 2, <(literal.(type))("2")>).max()<delta.(type)>);
     }
 
     @Test
     public void max_throws_emptyList()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> this.\<Integer>getEmptyMap().max());
+        assertThrows(NoSuchElementException.class, () -> this.\<Integer>getEmptyMap().max());
     }
 
     @Test
     public void min()
     {
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.min()<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("0")>, this.newWithKeysValues(null, <(literal.(type))("0")>, 5, <(literal.(type))("5")>, 1, <(literal.(type))("1")>).min()<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.min()<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.newWithKeysValues(null, <(literal.(type))("0")>, 5, <(literal.(type))("5")>, 1, <(literal.(type))("1")>).min()<delta.(type)>);
     }
 
     @Test
     public void min_throws_emptyList()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> this.\<Integer>getEmptyMap().min());
+        assertThrows(NoSuchElementException.class, () -> this.\<Integer>getEmptyMap().min());
     }
 
     @Test
     public void maxIfEmpty()
     {
-        Assert.assertEquals(<(literal.(type))("2")>, this.map.maxIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("3")>, this.newWithKeysValues(null, <(literal.(type))("3")>, 0, <(literal.(type))("0")>, 2, <(literal.(type))("2")>).maxIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("9")>, this.getEmptyMap().maxIfEmpty(<(literal.(type))("9")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("2")>, this.map.maxIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("3")>, this.newWithKeysValues(null, <(literal.(type))("3")>, 0, <(literal.(type))("0")>, 2, <(literal.(type))("2")>).maxIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("9")>, this.getEmptyMap().maxIfEmpty(<(literal.(type))("9")>)<delta.(type)>);
     }
 
     @Test
     public void minIfEmpty()
     {
-        Assert.assertEquals(<(literal.(type))("0")>, this.map.minIfEmpty(<(literal.(type))("6")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("0")>, this.newWithKeysValues(null, <(literal.(type))("0")>, 5, <(literal.(type))("5")>, 1, <(literal.(type))("1")>).minIfEmpty(<(literal.(type))("6")>)<delta.(type)>);
-        Assert.assertEquals(<(literal.(type))("5")>, this.getEmptyMap().minIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.map.minIfEmpty(<(literal.(type))("6")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("0")>, this.newWithKeysValues(null, <(literal.(type))("0")>, 5, <(literal.(type))("5")>, 1, <(literal.(type))("1")>).minIfEmpty(<(literal.(type))("6")>)<delta.(type)>);
+        assertEquals(<(literal.(type))("5")>, this.getEmptyMap().minIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
     }
 
     @Test
     public void average()
     {
-        Assert.assertEquals(1.0, this.map.average(), 0.0);
+        assertEquals(1.0, this.map.average(), 0.0);
     }
 
     @Test
     public void averageThrowsOnEmpty()
     {
-        Assert.assertThrows(ArithmeticException.class, () -> this.getEmptyMap().average());
+        assertThrows(ArithmeticException.class, () -> this.getEmptyMap().average());
     }
 
     @Test
     public void median()
     {
-        Assert.assertEquals(1.0, this.map.median(), 0.0);
-        Assert.assertEquals(1.5, this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3", <(literal.(type))("3")>).median(), 0.0);
+        assertEquals(1.0, this.map.median(), 0.0);
+        assertEquals(1.5, this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3", <(literal.(type))("3")>).median(), 0.0);
     }
 
     @Test
     public void medianThrowsOnEmpty()
     {
-        Assert.assertThrows(ArithmeticException.class, () -> this.getEmptyMap().median());
+        assertThrows(ArithmeticException.class, () -> this.getEmptyMap().median());
     }
 
     @Test
     public void toArray()
     {
-        Assert.assertTrue(Arrays.equals(new <type>[]{<(literal.(type))("0")>, <(literal.(type))("1")>}, this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toArray())
+        assertTrue(Arrays.equals(new <type>[]{<(literal.(type))("0")>, <(literal.(type))("1")>}, this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toArray())
                 || Arrays.equals(new <type>[]{<(literal.(type))("1")>, <(literal.(type))("0")>}, this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toArray()));
-        Assert.assertArrayEquals(new <type>[]{}, this.getEmptyMap().toArray()<delta.(type)>);
+        assertArrayEquals(new <type>[]{}, this.getEmptyMap().toArray()<delta.(type)>);
     }
 
     @Test
     public void toSortedArray()
     {
-        Assert.assertArrayEquals(new <type>[]{<(literal.(type))("0")>, <(literal.(type))("2")>, <(literal.(type))("9")>}, this.newWithKeysValues("9", <(literal.(type))("9")>, "0", <(literal.(type))("0")>, "2", <(literal.(type))("2")>).toSortedArray()<delta.(type)>);
-        Assert.assertArrayEquals(new <type>[]{}, this.getEmptyMap().toSortedArray()<delta.(type)>);
+        assertArrayEquals(new <type>[]{<(literal.(type))("0")>, <(literal.(type))("2")>, <(literal.(type))("9")>}, this.newWithKeysValues("9", <(literal.(type))("9")>, "0", <(literal.(type))("0")>, "2", <(literal.(type))("2")>).toSortedArray()<delta.(type)>);
+        assertArrayEquals(new <type>[]{}, this.getEmptyMap().toSortedArray()<delta.(type)>);
     }
 
     @Test
     public void contains()
     {
-        Assert.assertTrue(this.map.contains(<(literal.(type))("0")>));
-        Assert.assertTrue(this.map.contains(<(literal.(type))("1")>));
-        Assert.assertTrue(this.map.contains(<(literal.(type))("2")>));
+        assertTrue(this.map.contains(<(literal.(type))("0")>));
+        assertTrue(this.map.contains(<(literal.(type))("1")>));
+        assertTrue(this.map.contains(<(literal.(type))("2")>));
     }
 
     @Test
     public void containsAll()
     {
-        Assert.assertTrue(this.map.containsAll(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>));
-        Assert.assertFalse(this.map.containsAll(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("5")>));
-        Assert.assertTrue(this.map.containsAll());
+        assertTrue(this.map.containsAll(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>));
+        assertFalse(this.map.containsAll(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("5")>));
+        assertTrue(this.map.containsAll());
     }
 
     @Test
     public void containsAll_Iterable()
     {
-        Assert.assertTrue(this.map.containsAll(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>)));
-        Assert.assertFalse(this.map.containsAll(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("5")>)));
-        Assert.assertTrue(this.map.containsAll(new <name>ArrayList()));
+        assertTrue(this.map.containsAll(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>)));
+        assertFalse(this.map.containsAll(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("5")>)));
+        assertTrue(this.map.containsAll(new <name>ArrayList()));
     }
 
     @Test
     public void toList()
     {
-        Assert.assertTrue(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>).equals(this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toList())
+        assertTrue(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>).equals(this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toList())
                 || <name>ArrayList.newListWith(<(literal.(type))("1")>, <(literal.(type))("0")>).equals(this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toList()));
-        Assert.assertEquals(<name>ArrayList.newListWith(), this.getEmptyMap().toList());
+        assertEquals(<name>ArrayList.newListWith(), this.getEmptyMap().toList());
     }
 
     @Test
     public void toSortedList()
     {
-        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("2")>, <(literal.(type))("9")>), this.newWithKeysValues("9", <(literal.(type))("9")>, "0", <(literal.(type))("0")>, "2", <(literal.(type))("2")>).toSortedList());
-        Assert.assertEquals(<name>ArrayList.newListWith(), this.getEmptyMap().toSortedList());
+        assertEquals(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("2")>, <(literal.(type))("9")>), this.newWithKeysValues("9", <(literal.(type))("9")>, "0", <(literal.(type))("0")>, "2", <(literal.(type))("2")>).toSortedList());
+        assertEquals(<name>ArrayList.newListWith(), this.getEmptyMap().toSortedList());
     }
 
     @Test
     public void toSet()
     {
-        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>), this.map.toSet());
-        Assert.assertEquals(<name>HashSet.newSetWith(), this.getEmptyMap().toSet());
+        assertEquals(<name>HashSet.newSetWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>), this.map.toSet());
+        assertEquals(<name>HashSet.newSetWith(), this.getEmptyMap().toSet());
     }
 
     @Test
     public void toBag()
     {
-        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>), this.map.toBag());
-        Assert.assertEquals(<name>HashBag.newBagWith(), this.getEmptyMap().toBag());
+        assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>), this.map.toBag());
+        assertEquals(<name>HashBag.newBagWith(), this.getEmptyMap().toBag());
     }
 
     @Test
     public void toImmutable()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
+        assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
         Verify.assertInstanceOf(ImmutableObject<name>Map.class, this.classUnderTest().toImmutable());
     }
 }

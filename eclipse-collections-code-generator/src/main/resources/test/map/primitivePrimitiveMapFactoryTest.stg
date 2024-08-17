@@ -36,8 +36,10 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This file was automatically generated from template file primitivePrimitiveMapFactoryTest.stg.
@@ -48,7 +50,7 @@ public class <name1><name2>MapFactoryTest
     public void of()
     {
         Verify.assertEmpty(<name1><name2>Maps.immutable.of());
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>).toImmutable(), <name1><name2>Maps.immutable.of(<(literal.(type1))("1")>, <(literal.(type2))("1")>));
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>).toImmutable(), <name1><name2>Maps.immutable.of(<(literal.(type1))("1")>, <(literal.(type2))("1")>));
     }
 
     @Test
@@ -56,21 +58,21 @@ public class <name1><name2>MapFactoryTest
     {
         Immutable<name1><name2>Map map = <name1><name2>Maps.immutable.of();
 
-        Assert.assertEquals(<name1><name2>Maps.mutable.empty().toImmutable(), <name1><name2>Maps.immutable.withAll(map));
+        assertEquals(<name1><name2>Maps.mutable.empty().toImmutable(), <name1><name2>Maps.immutable.withAll(map));
     }
 
     @Test
     public void from()
     {
         Iterable\<String> iterable = Lists.mutable.with("1", "2", "3");
-        Assert.assertEquals(
+        assertEquals(
                 <name1><name2>HashMap.newWithKeysValues(<if(!charPrimitive1)><(literal.(type1))("1")><else>'1'<endif>, <if(!charPrimitive2)><(literal.(type2))("1")><else>'1'<endif>, <if(!charPrimitive1)><(literal.(type1))("2")><else>'2'<endif>, <if(!charPrimitive2)><(literal.(type2))("2")><else>'2'<endif>, <if(!charPrimitive1)><(literal.(type1))("3")><else>'3'<endif>, <if(!charPrimitive2)><(literal.(type2))("3")><else>'3'<endif>),
                 <name1><name2>Maps.mutable.from(iterable, <if(!charPrimitive1)><wrapperName1>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName2>::valueOf<else>each -> each.charAt(0)<endif>));
-        Assert.assertTrue(<name1><name2>Maps.mutable.from(iterable, <if(!charPrimitive1)><wrapperName1>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName2>::valueOf<else>each -> each.charAt(0)<endif>) instanceof Mutable<name1><name2>Map);
-        Assert.assertEquals(
+        assertTrue(<name1><name2>Maps.mutable.from(iterable, <if(!charPrimitive1)><wrapperName1>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName2>::valueOf<else>each -> each.charAt(0)<endif>) instanceof Mutable<name1><name2>Map);
+        assertEquals(
                 <name1><name2>HashMap.newWithKeysValues(<if(!charPrimitive1)><(literal.(type1))("1")><else>'1'<endif>, <if(!charPrimitive2)><(literal.(type2))("1")><else>'1'<endif>, <if(!charPrimitive1)><(literal.(type1))("2")><else>'2'<endif>, <if(!charPrimitive2)><(literal.(type2))("2")><else>'2'<endif>, <if(!charPrimitive1)><(literal.(type1))("3")><else>'3'<endif>, <if(!charPrimitive2)><(literal.(type2))("3")><else>'3'<endif>),
                 <name1><name2>Maps.immutable.from(iterable, <if(!charPrimitive1)><wrapperName1>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName2>::valueOf<else>each -> each.charAt(0)<endif>));
-        Assert.assertTrue(<name1><name2>Maps.immutable.from(iterable, <if(!charPrimitive1)><wrapperName1>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName2>::valueOf<else>each -> each.charAt(0)<endif>) instanceof Immutable<name1><name2>Map);
+        assertTrue(<name1><name2>Maps.immutable.from(iterable, <if(!charPrimitive1)><wrapperName1>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName2>::valueOf<else>each -> each.charAt(0)<endif>) instanceof Immutable<name1><name2>Map);
     }
 }
 

@@ -28,8 +28,13 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * JUnit test for {@link Immutable<name>SingletonStack}.
@@ -51,8 +56,8 @@ public class Immutable<name>SingletonStackTest extends AbstractImmutable<name>St
         Immutable<name>Stack modified = stack.pop();
         Verify.assertEmpty(modified);
         Verify.assertSize(1, stack);
-        Assert.assertNotSame(modified, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        assertNotSame(modified, stack);
+        assertEquals(this.classUnderTest(), stack);
     }
 
     @Override
@@ -61,13 +66,13 @@ public class Immutable<name>SingletonStackTest extends AbstractImmutable<name>St
     {
         Immutable<name>Stack stack = this.classUnderTest();
         Immutable<name>Stack stack1 = stack.pop(0);
-        Assert.assertSame(stack1, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        assertSame(stack1, stack);
+        assertEquals(this.classUnderTest(), stack);
         Immutable<name>Stack modified = stack.pop(1);
         Verify.assertEmpty(modified);
         Verify.assertSize(1, stack);
-        Assert.assertNotSame(modified, stack);
-        Assert.assertEquals(this.classUnderTest(), stack);
+        assertNotSame(modified, stack);
+        assertEquals(this.classUnderTest(), stack);
     }
 
     @Override
@@ -75,19 +80,19 @@ public class Immutable<name>SingletonStackTest extends AbstractImmutable<name>St
     public void detectIfNone()
     {
         <name>Iterable iterable = this.classUnderTest();
-        Assert.assertEquals(<(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("4")>), <(literal.(type))("0")>)<wideDelta.(type)>);
-        Assert.assertEquals(<(wideLiteral.(type))("1")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<wideDelta.(type)>);
+        assertEquals(<(wideLiteral.(type))("0")>, iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("4")>), <(literal.(type))("0")>)<wideDelta.(type)>);
+        assertEquals(<(wideLiteral.(type))("1")>, iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<wideDelta.(type)>);
     }
 
     @Override
     @Test
     public void peek()
     {
-        Assert.assertEquals(this.classUnderTest().size(), this.classUnderTest().peek()<wideDelta.(type)>);
-        Assert.assertEquals(<name>ArrayList.newListWith(), this.classUnderTest().peek(0));
-        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>),
+        assertEquals(this.classUnderTest().size(), this.classUnderTest().peek()<wideDelta.(type)>);
+        assertEquals(<name>ArrayList.newListWith(), this.classUnderTest().peek(0));
+        assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>),
                 this.classUnderTest().peek(1));
-        Assert.assertThrows(IllegalArgumentException.class, () -> { this.classUnderTest().peek(2); });
+        assertThrows(IllegalArgumentException.class, () -> { this.classUnderTest().peek(2); });
     }
 
     @Override
@@ -95,13 +100,13 @@ public class Immutable<name>SingletonStackTest extends AbstractImmutable<name>St
     public void testEquals()
     {
         Immutable<name>Stack stack = this.classUnderTest();
-        Assert.assertEquals(stack, stack);
+        assertEquals(stack, stack);
         Verify.assertPostSerializedEqualsAndHashCode(stack);
-        Assert.assertEquals(stack, <name>ArrayStack.newStackWith(<(literal.(type))("1")>));
-        Assert.assertNotEquals(stack, this.newWith(<(literal.(type))("1")>, <(literal.(type))("2")>));
-        Assert.assertNotEquals(stack, <name>ArrayList.newListWith(<(literal.(type))("1")>));
-        Assert.assertEquals(stack, this.newWith(<(literal.(type))("1")>));
-        Assert.assertNotEquals(stack, this.newWith());
+        assertEquals(stack, <name>ArrayStack.newStackWith(<(literal.(type))("1")>));
+        assertNotEquals(stack, this.newWith(<(literal.(type))("1")>, <(literal.(type))("2")>));
+        assertNotEquals(stack, <name>ArrayList.newListWith(<(literal.(type))("1")>));
+        assertEquals(stack, this.newWith(<(literal.(type))("1")>));
+        assertNotEquals(stack, this.newWith());
     }
 
     @Override
@@ -112,14 +117,14 @@ public class Immutable<name>SingletonStackTest extends AbstractImmutable<name>St
 
         Immutable<name>SingletonStack iterable = new Immutable<name>SingletonStack(<(literal.(type))("1")>);
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("1")>), Mutable<wrapperName>::add);
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("2")>), result);
+        assertEquals(new Mutable<wrapperName>(<(literal.(type))("2")>), result);
     }
 
     @Test
     public void toStack()
     {
         Mutable<name>Stack stack = <name>Stacks.mutable.with(<(literal.(type))("1")>);
-        Assert.assertEquals(stack, this.classUnderTest().toStack());
+        assertEquals(stack, this.classUnderTest().toStack());
     }
 }
 

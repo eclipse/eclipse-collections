@@ -18,8 +18,10 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.set.mutable.primitive;
 
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link Synchronized<name>Set}.
@@ -46,10 +48,10 @@ public class Synchronized<name>SetTest extends Abstract<name>SetTestCase
         super.asSynchronized();
         Synchronized<name>Set set = this.classUnderTest();
         Mutable<name>Set setWithLockObject = new Synchronized<name>Set(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), new Object());
-        Assert.assertEquals(set, setWithLockObject);
-        Assert.assertSame(setWithLockObject, setWithLockObject.asSynchronized());
-        Assert.assertSame(set, set.asSynchronized());
-        Assert.assertEquals(set, set.asSynchronized());
+        assertEquals(set, setWithLockObject);
+        assertSame(setWithLockObject, setWithLockObject.asSynchronized());
+        assertSame(set, set.asSynchronized());
+        assertEquals(set, set.asSynchronized());
     }
 }
 

@@ -26,8 +26,12 @@ import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.stack.primitive.Abstract<name>StackTestCase;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Abstract JUnit test for {@link Mutable<name>Stack}.
@@ -58,7 +62,7 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
         Mutable<name>Stack stack = this.classUnderTest();
         int size = stack.size();
         stack.pop(2);
-        Assert.assertEquals(size - 2, stack.peekAt(0)<wideDelta.(type)>);
+        assertEquals(size - 2, stack.peekAt(0)<wideDelta.(type)>);
     }
 
     @Override
@@ -70,7 +74,7 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
         int size = this.classUnderTest().size();
         for (int i = 0; i \< size; i++)
         {
-            Assert.assertEquals(size - i, stack.peek()<wideDelta.(type)>);
+            assertEquals(size - i, stack.peek()<wideDelta.(type)>);
             stack.pop();
         }
     }
@@ -80,51 +84,51 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
     {
         Mutable<name>Stack stack = this.classUnderTest();
         int size = stack.size();
-        Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("size")>, <(castIntToNarrowTypeWithParens.(type))("size - 1")>), stack.peek(2));
+        assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("size")>, <(castIntToNarrowTypeWithParens.(type))("size - 1")>), stack.peek(2));
         stack.pop(2);
-        Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowTypeWithParens.(type))("size - 2")>), stack.peek(1));
+        assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowTypeWithParens.(type))("size - 2")>), stack.peek(1));
     }
 
     @Test
     public void peek_empty_stack_throws_exception()
     {
-        Assert.assertThrows(EmptyStackException.class, () -> this.newWith().peek());
+        assertThrows(EmptyStackException.class, () -> this.newWith().peek());
     }
 
     @Test
     public void testNewStackWithOrder()
     {
         Mutable<name>Stack stack = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
-        Assert.assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
     }
 
     @Test
     public void testNewStackIterableOrder()
     {
         Mutable<name>Stack stack = this.newWithIterable(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
-        Assert.assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
-        Assert.assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
     }
 
     @Test
     public void testNewStackFromTopToBottomOrder()
     {
         Mutable<name>Stack stack = this.newWithTopToBottom(<["3", "2", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
-        Assert.assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
     }
 
     @Test
     public void testNewStackFromTopToBottomIterableOrder()
     {
         Mutable<name>Stack stack = this.newWithIterableTopToBottom(<name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">));
-        Assert.assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
-        Assert.assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
-        Assert.assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
+        assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
     }
 
     @Test
@@ -136,7 +140,7 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
         Verify.assertSize(size + 1, stack);
         stack.pop();
         Verify.assertSize(size, stack);
-        Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("size")>, <(castIntToNarrowTypeWithParens.(type))("size - 1")>), stack.peek(2));
+        assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("size")>, <(castIntToNarrowTypeWithParens.(type))("size - 1")>), stack.peek(2));
     }
 
     @Test
@@ -146,7 +150,7 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
         int size = stack.size();
         for (int i = 0; i \< size; i++)
         {
-            Assert.assertEquals(<(castIntToNarrowTypeWithParens.(type))("size - i")>, stack.pop()<wideDelta.(type)>);
+            assertEquals(<(castIntToNarrowTypeWithParens.(type))("size - i")>, stack.pop()<wideDelta.(type)>);
             Verify.assertSize(size - i - 1, stack);
         }
     }
@@ -155,7 +159,7 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
     public void popWithCount()
     {
         int size = this.classUnderTest().size();
-        Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("size")>, <(castIntToNarrowTypeWithParens.(type))("size - 1")>), this.classUnderTest().pop(2));
+        assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("size")>, <(castIntToNarrowTypeWithParens.(type))("size - 1")>), this.classUnderTest().pop(2));
     }
 
     @Test
@@ -173,33 +177,33 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
     @Test
     public void pop_empty_stack_throws_exception()
     {
-        Assert.assertThrows(EmptyStackException.class, () -> this.newWith().pop());
+        assertThrows(EmptyStackException.class, () -> this.newWith().pop());
     }
 
     @Test
     public void pop_with_negative_count_throws_exception()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith(<(literal.(type))("1")>).pop(-1));
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(<(literal.(type))("1")>).pop(-1));
     }
 
     @Test
     public void pop_with_count_greater_than_stack_size_throws_exception()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWith(<(literal.(type))("1")>).pop(2));
+        assertThrows(IllegalArgumentException.class, () -> this.newWith(<(literal.(type))("1")>).pop(2));
     }
 
     @Test
     public void asSynchronized()
     {
         Verify.assertInstanceOf(Synchronized<name>Stack.class, this.classUnderTest().asSynchronized());
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().asSynchronized());
+        assertEquals(this.classUnderTest(), this.classUnderTest().asSynchronized());
     }
 
     @Test
     public void asUnmodifiable()
     {
         Verify.assertInstanceOf(Unmodifiable<name>Stack.class, this.classUnderTest().asUnmodifiable());
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().asUnmodifiable());
+        assertEquals(this.classUnderTest(), this.classUnderTest().asUnmodifiable());
     }
 
     /**
@@ -208,8 +212,8 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
     @Test
     public void newEmpty()
     {
-        Assert.assertTrue(this.classUnderTest().newEmpty().isEmpty());
-        Assert.assertNotSame(this.classUnderTest(), this.classUnderTest().newEmpty());
+        assertTrue(this.classUnderTest().newEmpty().isEmpty());
+        assertNotSame(this.classUnderTest(), this.classUnderTest().newEmpty());
     }
 }
 

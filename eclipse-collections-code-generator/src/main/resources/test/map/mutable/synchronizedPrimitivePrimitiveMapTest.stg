@@ -22,8 +22,8 @@ body(type1, type2, name1, name2) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import org.junit.Assert;
 import org.junit.Test;
+import static org.junit.Assert.assertSame;
 
 /**
  * JUnit test for {@link Synchronized<name1><name2>Map}.
@@ -74,7 +74,7 @@ public class Synchronized<name1><name2>MapTest extends AbstractMutable<name1><na
     public void asSynchronized()
     {
         super.asSynchronized();
-        Assert.assertSame(this.map, this.map.asSynchronized());
+        assertSame(this.map, this.map.asSynchronized());
     }
 }
 

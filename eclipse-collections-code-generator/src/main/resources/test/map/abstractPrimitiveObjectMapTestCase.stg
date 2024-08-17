@@ -87,8 +87,15 @@ import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.string.immutable.CharAdapter;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNull;
 
 /**
  * This file was automatically generated from template file abstractPrimitiveObjectMapTestCase.stg.
@@ -109,8 +116,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     public void keySet()
     {
         Verify.assertEmpty(this.getEmptyMap().keySet());
-        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("0")>), this.newWithKeysValues(<(literal.(type))("0")>, "zero").keySet());
-        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("9")>),
+        assertEquals(<name>HashSet.newSetWith(<(literal.(type))("0")>), this.newWithKeysValues(<(literal.(type))("0")>, "zero").keySet());
+        assertEquals(<name>HashSet.newSetWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("9")>),
                 this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine").keySet());
     }
 
@@ -136,34 +143,34 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map4 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
                 map1.select((<type> value, String object) -> (value % 2) != 0));
 
         <name>ObjectPredicate\<String> keyGreaterThanOrEqualToSeven = (<type> value, String object) -> value \<= 7;
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), map1.select(keyGreaterThanOrEqualToSeven));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), map1.select(keyGreaterThanOrEqualToSeven));
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"), map2.select(keyGreaterThanOrEqualToSeven));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"), map2.select(keyGreaterThanOrEqualToSeven));
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), map3.select(keyGreaterThanOrEqualToSeven));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), map3.select(keyGreaterThanOrEqualToSeven));
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("5")>, "five"), map4.select(keyGreaterThanOrEqualToSeven));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("5")>, "five"), map4.select(keyGreaterThanOrEqualToSeven));
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
                 map1.select((<type> value, String object) -> object.endsWith("ne")));
 
         RichIterable\<String> actual1 = map1.select(StringPredicates.endsWith("ne"));
-        Assert.assertTrue(HashBag.newBagWith("one", "nine").equals(actual1));
+        assertTrue(HashBag.newBagWith("one", "nine").equals(actual1));
 
-        Assert.assertEquals(HashBag.newBagWith("nine"), map1.select(Predicates.equal("nine")));
+        assertEquals(HashBag.newBagWith("nine"), map1.select(Predicates.equal("nine")));
 
-        Assert.assertEquals(HashBag.newBagWith("zero"), map1.select(StringPredicates.endsWith("o")));
+        assertEquals(HashBag.newBagWith("zero"), map1.select(StringPredicates.endsWith("o")));
 
-        Assert.assertEquals(HashBag.newBagWith("nine"), map1.select(Predicates.equal("nine"), HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("nine"), map1.select(Predicates.equal("nine"), HashBag.\<String>newBag()));
 
-        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.select(StringPredicates.endsWith("ne"), HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("one", "nine"), map1.select(StringPredicates.endsWith("ne"), HashBag.\<String>newBag()));
 
-        Assert.assertEquals(HashBag.newBagWith("zero"), map1.select(StringPredicates.endsWith("o"), HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("zero"), map1.select(StringPredicates.endsWith("o"), HashBag.\<String>newBag()));
     }
 
     @Test
@@ -171,11 +178,11 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.selectWith(StringPredicates2.endsWith(), "ne"));
+        assertEquals(HashBag.newBagWith("one", "nine"), map1.selectWith(StringPredicates2.endsWith(), "ne"));
 
-        Assert.assertEquals(HashBag.newBagWith("nine"), map1.selectWith(Object::equals, "nine"));
+        assertEquals(HashBag.newBagWith("nine"), map1.selectWith(Object::equals, "nine"));
 
-        Assert.assertEquals(HashBag.newBagWith("zero"), map1.selectWith(StringPredicates2.endsWith(), "o"));
+        assertEquals(HashBag.newBagWith("zero"), map1.selectWith(StringPredicates2.endsWith(), "o"));
     }
 
     @Test
@@ -183,11 +190,11 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.selectWith(StringPredicates2.endsWith(), "ne", HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("one", "nine"), map1.selectWith(StringPredicates2.endsWith(), "ne", HashBag.\<String>newBag()));
 
-        Assert.assertEquals(HashBag.newBagWith("nine"), map1.selectWith(Object::equals, "nine", HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("nine"), map1.selectWith(Object::equals, "nine", HashBag.\<String>newBag()));
 
-        Assert.assertEquals(HashBag.newBagWith("zero"), map1.selectWith(StringPredicates2.endsWith(), "o", HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("zero"), map1.selectWith(StringPredicates2.endsWith(), "o", HashBag.\<String>newBag()));
     }
 
     @Test
@@ -195,8 +202,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<Number> numbers = this.\<Number>newWithKeysValues(<(literal.(type))("0")>, 0, <(literal.(type))("1")>, 1.0, <(literal.(type))("5")>, 5.0);
 
-        Assert.assertEquals(HashBag.newBagWith(0), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(HashBag.newBagWith(1.0, 5.0), numbers.selectInstancesOf(Double.class));
+        assertEquals(HashBag.newBagWith(0), numbers.selectInstancesOf(Integer.class));
+        assertEquals(HashBag.newBagWith(1.0, 5.0), numbers.selectInstancesOf(Double.class));
     }
 
     @Test
@@ -204,8 +211,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("ZERO", "ONE", "NINE"), map1.collect(StringFunctions.toUpperCase()));
-        Assert.assertEquals(HashBag.newBagWith("ZERO", "ONE", "NINE"), map1.collect(StringFunctions.toUpperCase(), HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("ZERO", "ONE", "NINE"), map1.collect(StringFunctions.toUpperCase()));
+        assertEquals(HashBag.newBagWith("ZERO", "ONE", "NINE"), map1.collect(StringFunctions.toUpperCase(), HashBag.\<String>newBag()));
     }
 
     @Test
@@ -213,7 +220,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "true", <(literal.(type))("1")>, "false", <(literal.(type))("2")>, "nah");
 
-        Assert.assertEquals(BooleanHashBag.newBagWith(true, false, false), map1.collectBoolean(StringFunctions.toPrimitiveBoolean()));
+        assertEquals(BooleanHashBag.newBagWith(true, false, false), map1.collectBoolean(StringFunctions.toPrimitiveBoolean()));
     }
 
     @Test
@@ -221,8 +228,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "true", <(literal.(type))("1")>, "false", <(literal.(type))("2")>, "nah");
         BooleanHashBag target = new BooleanHashBag();
-        Assert.assertSame(target, map1.collectBoolean(StringFunctions.toPrimitiveBoolean(), target));
-        Assert.assertEquals(BooleanHashBag.newBagWith(true, false, false), target);
+        assertSame(target, map1.collectBoolean(StringFunctions.toPrimitiveBoolean(), target));
+        assertEquals(BooleanHashBag.newBagWith(true, false, false), target);
     }
 
     @Test
@@ -230,7 +237,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(ByteHashBag.newBagWith((byte) 0, (byte) 1, (byte) 9), map1.collectByte(Byte::parseByte));
+        assertEquals(ByteHashBag.newBagWith((byte) 0, (byte) 1, (byte) 9), map1.collectByte(Byte::parseByte));
     }
 
     @Test
@@ -238,8 +245,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
         ByteHashBag target = new ByteHashBag();
-        Assert.assertSame(target, map1.collectByte(Byte::parseByte, target));
-        Assert.assertEquals(ByteHashBag.newBagWith((byte) 0, (byte) 1, (byte) 9), target);
+        assertSame(target, map1.collectByte(Byte::parseByte, target));
+        assertEquals(ByteHashBag.newBagWith((byte) 0, (byte) 1, (byte) 9), target);
     }
 
     @Test
@@ -247,7 +254,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(CharHashBag.newBagWith((char) 0, (char) 1, (char) 9), map1.collectChar(StringFunctions.toPrimitiveChar()));
+        assertEquals(CharHashBag.newBagWith((char) 0, (char) 1, (char) 9), map1.collectChar(StringFunctions.toPrimitiveChar()));
     }
 
     @Test
@@ -255,8 +262,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
         CharHashBag target = new CharHashBag();
-        Assert.assertSame(target, map1.collectChar(StringFunctions.toPrimitiveChar(), target));
-        Assert.assertEquals(CharHashBag.newBagWith((char) 0, (char) 1, (char) 9), target);
+        assertSame(target, map1.collectChar(StringFunctions.toPrimitiveChar(), target));
+        assertEquals(CharHashBag.newBagWith((char) 0, (char) 1, (char) 9), target);
     }
 
     @Test
@@ -264,7 +271,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(DoubleHashBag.newBagWith(0.0d, 1.0d, 9.0d), map1.collectDouble(Double::parseDouble));
+        assertEquals(DoubleHashBag.newBagWith(0.0d, 1.0d, 9.0d), map1.collectDouble(Double::parseDouble));
     }
 
     @Test
@@ -272,8 +279,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
         DoubleHashBag target = new DoubleHashBag();
-        Assert.assertSame(target, map1.collectDouble(Double::parseDouble, target));
-        Assert.assertEquals(DoubleHashBag.newBagWith(0.0d, 1.0d, 9.0d), target);
+        assertSame(target, map1.collectDouble(Double::parseDouble, target));
+        assertEquals(DoubleHashBag.newBagWith(0.0d, 1.0d, 9.0d), target);
     }
 
     @Test
@@ -281,7 +288,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(FloatHashBag.newBagWith(0.0f, 1.0f, 9.0f), map1.collectFloat(Float::parseFloat));
+        assertEquals(FloatHashBag.newBagWith(0.0f, 1.0f, 9.0f), map1.collectFloat(Float::parseFloat));
     }
 
     @Test
@@ -289,8 +296,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
         FloatHashBag target = new FloatHashBag();
-        Assert.assertSame(target, map1.collectFloat(Float::parseFloat, target));
-        Assert.assertEquals(FloatHashBag.newBagWith(0.0f, 1.0f, 9.0f), target);
+        assertSame(target, map1.collectFloat(Float::parseFloat, target));
+        assertEquals(FloatHashBag.newBagWith(0.0f, 1.0f, 9.0f), target);
     }
 
     @Test
@@ -298,7 +305,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(IntHashBag.newBagWith(0, 1, 9), map1.collectInt(Integer::parseInt));
+        assertEquals(IntHashBag.newBagWith(0, 1, 9), map1.collectInt(Integer::parseInt));
     }
 
     @Test
@@ -306,8 +313,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
         IntHashBag target = new IntHashBag();
-        Assert.assertSame(target, map1.collectInt(Integer::parseInt, target));
-        Assert.assertEquals(IntHashBag.newBagWith(0, 1, 9), target);
+        assertSame(target, map1.collectInt(Integer::parseInt, target));
+        assertEquals(IntHashBag.newBagWith(0, 1, 9), target);
     }
 
     @Test
@@ -315,7 +322,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(LongHashBag.newBagWith(0L, 1L, 9L), map1.collectLong(Long::parseLong));
+        assertEquals(LongHashBag.newBagWith(0L, 1L, 9L), map1.collectLong(Long::parseLong));
     }
 
     @Test
@@ -323,8 +330,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
         LongHashBag target = new LongHashBag();
-        Assert.assertSame(target, map1.collectLong(Long::parseLong, target));
-        Assert.assertEquals(LongHashBag.newBagWith(0L, 1L, 9L), target);
+        assertSame(target, map1.collectLong(Long::parseLong, target));
+        assertEquals(LongHashBag.newBagWith(0L, 1L, 9L), target);
     }
 
     @Test
@@ -332,7 +339,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(ShortHashBag.newBagWith((short) 0, (short) 1, (short) 9), map1.collectShort(Short::parseShort));
+        assertEquals(ShortHashBag.newBagWith((short) 0, (short) 1, (short) 9), map1.collectShort(Short::parseShort));
     }
 
     @Test
@@ -340,8 +347,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
         ShortHashBag target = new ShortHashBag();
-        Assert.assertSame(target, map1.collectShort(Short::parseShort, target));
-        Assert.assertEquals(ShortHashBag.newBagWith((short) 0, (short) 1, (short) 9), target);
+        assertSame(target, map1.collectShort(Short::parseShort, target));
+        assertEquals(ShortHashBag.newBagWith((short) 0, (short) 1, (short) 9), target);
     }
 
     @Test
@@ -349,7 +356,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("ZERO!", "ONE!", "NINE!"),
+        assertEquals(HashBag.newBagWith("ZERO!", "ONE!", "NINE!"),
                 map1.collectWith((String argument1, String argument2) -> argument1.toUpperCase() + argument2, "!"));
     }
 
@@ -358,7 +365,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("ZERO!", "ONE!", "NINE!"),
+        assertEquals(HashBag.newBagWith("ZERO!", "ONE!", "NINE!"),
                 map1.collectWith((String argument1, String argument2) -> argument1.toUpperCase() + argument2, "!", HashBag.\<String>newBag()));
     }
 
@@ -367,9 +374,9 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("ONE", "NINE"), map1.collectIf(StringPredicates.endsWith("ne"), StringFunctions.toUpperCase()));
-        Assert.assertEquals(HashBag.newBagWith("ZERO"), map1.collectIf(StringPredicates.endsWith("o"), StringFunctions.toUpperCase()));
-        Assert.assertEquals(HashBag.newBagWith("ZERO"), map1.collectIf(StringPredicates.endsWith("o"), StringFunctions.toUpperCase(), HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("ONE", "NINE"), map1.collectIf(StringPredicates.endsWith("ne"), StringFunctions.toUpperCase()));
+        assertEquals(HashBag.newBagWith("ZERO"), map1.collectIf(StringPredicates.endsWith("o"), StringFunctions.toUpperCase()));
+        assertEquals(HashBag.newBagWith("ZERO"), map1.collectIf(StringPredicates.endsWith("o"), StringFunctions.toUpperCase(), HashBag.\<String>newBag()));
     }
 
     @Test
@@ -390,50 +397,50 @@ public abstract class Abstract<name>ObjectMapTestCase
             return list;
         };
 
-        Assert.assertEquals(UnifiedSet.newSetWith('z', 'e', 'r', 'o', 'n', 'i'), map1.flatCollect(toChars).toSet());
-        Assert.assertEquals(UnifiedSet.newSetWith('o', 'n', 'e', 'i'), map2.flatCollect(toChars).toSet());
-        Assert.assertEquals(UnifiedSet.newSetWith('f', 'i', 'v', 'e', 'n'), map3.flatCollect(toChars).toSet());
-        Assert.assertEquals(UnifiedSet.newSetWith('f', 'i', 'v', 'e', 'n'), map3.flatCollect(toChars, UnifiedSet.\<Character>newSet()));
+        assertEquals(UnifiedSet.newSetWith('z', 'e', 'r', 'o', 'n', 'i'), map1.flatCollect(toChars).toSet());
+        assertEquals(UnifiedSet.newSetWith('o', 'n', 'e', 'i'), map2.flatCollect(toChars).toSet());
+        assertEquals(UnifiedSet.newSetWith('f', 'i', 'v', 'e', 'n'), map3.flatCollect(toChars).toSet());
+        assertEquals(UnifiedSet.newSetWith('f', 'i', 'v', 'e', 'n'), map3.flatCollect(toChars, UnifiedSet.\<Character>newSet()));
     }
 
     @Test
     public void detect()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
-        Assert.assertTrue("one".equals(map1.detect(StringPredicates.endsWith("ne"))) || "nine".equals(map1.detect(StringPredicates.endsWith("ne"))));
-        Assert.assertEquals("zero", map1.detect(StringPredicates.endsWith("o")));
-        Assert.assertEquals("nine", map1.detect(Predicates.equal("nine")));
-        Assert.assertNull(map1.detect(Predicates.equal("ten")));
+        assertTrue("one".equals(map1.detect(StringPredicates.endsWith("ne"))) || "nine".equals(map1.detect(StringPredicates.endsWith("ne"))));
+        assertEquals("zero", map1.detect(StringPredicates.endsWith("o")));
+        assertEquals("nine", map1.detect(Predicates.equal("nine")));
+        assertNull(map1.detect(Predicates.equal("ten")));
     }
 
     @Test
     public void detectWith()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
-        Assert.assertTrue("one".equals(map1.detectWith(StringPredicates2.endsWith(), "ne")) || "nine".equals(map1.detectWith(StringPredicates2.endsWith(), "ne")));
-        Assert.assertEquals("zero", map1.detectWith(StringPredicates2.endsWith(), "o"));
-        Assert.assertEquals("nine", map1.detectWith(Object::equals, "nine"));
-        Assert.assertNull(map1.detectWith(Object::equals, "ten"));
+        assertTrue("one".equals(map1.detectWith(StringPredicates2.endsWith(), "ne")) || "nine".equals(map1.detectWith(StringPredicates2.endsWith(), "ne")));
+        assertEquals("zero", map1.detectWith(StringPredicates2.endsWith(), "o"));
+        assertEquals("nine", map1.detectWith(Object::equals, "nine"));
+        assertNull(map1.detectWith(Object::equals, "ten"));
     }
 
     @Test
     public void detectOptional()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
-        Assert.assertTrue(Optional.of("one").equals(map1.detectOptional(StringPredicates.endsWith("ne"))) || Optional.of("nine").equals(map1.detectOptional(StringPredicates.endsWith("ne"))));
-        Assert.assertEquals(Optional.of("zero"), map1.detectOptional(StringPredicates.endsWith("o")));
-        Assert.assertEquals(Optional.of("nine"), map1.detectOptional(Predicates.equal("nine")));
-        Assert.assertEquals(Optional.empty(), map1.detectOptional(Predicates.equal("ten")));
+        assertTrue(Optional.of("one").equals(map1.detectOptional(StringPredicates.endsWith("ne"))) || Optional.of("nine").equals(map1.detectOptional(StringPredicates.endsWith("ne"))));
+        assertEquals(Optional.of("zero"), map1.detectOptional(StringPredicates.endsWith("o")));
+        assertEquals(Optional.of("nine"), map1.detectOptional(Predicates.equal("nine")));
+        assertEquals(Optional.empty(), map1.detectOptional(Predicates.equal("ten")));
     }
 
     @Test
     public void detectWithOptional()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
-        Assert.assertTrue(Optional.of("one").equals(map1.detectWithOptional(StringPredicates2.endsWith(), "ne")) || Optional.of("nine").equals(map1.detectWithOptional(StringPredicates2.endsWith(), "ne")));
-        Assert.assertEquals(Optional.of("zero"), map1.detectWithOptional(StringPredicates2.endsWith(), "o"));
-        Assert.assertEquals(Optional.of("nine"), map1.detectWithOptional(Object::equals, "nine"));
-        Assert.assertEquals(Optional.empty(), map1.detectWithOptional(Object::equals, "ten"));
+        assertTrue(Optional.of("one").equals(map1.detectWithOptional(StringPredicates2.endsWith(), "ne")) || Optional.of("nine").equals(map1.detectWithOptional(StringPredicates2.endsWith(), "ne")));
+        assertEquals(Optional.of("zero"), map1.detectWithOptional(StringPredicates2.endsWith(), "o"));
+        assertEquals(Optional.of("nine"), map1.detectWithOptional(Object::equals, "nine"));
+        assertEquals(Optional.empty(), map1.detectWithOptional(Object::equals, "ten"));
     }
 
     @Test
@@ -442,11 +449,11 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
         Function0\<String> ifNone = () -> "ifNone";
-        Assert.assertTrue("one".equals(map1.detectIfNone(StringPredicates.endsWith("ne"), ifNone))
+        assertTrue("one".equals(map1.detectIfNone(StringPredicates.endsWith("ne"), ifNone))
                 || "nine".equals(map1.detectIfNone(StringPredicates.endsWith("ne"), ifNone)));
-        Assert.assertEquals("zero", map1.detectIfNone(StringPredicates.endsWith("o"), ifNone));
-        Assert.assertEquals("nine", map1.detectIfNone(Predicates.equal("nine"), ifNone));
-        Assert.assertEquals("ifNone", map1.detectIfNone(Predicates.equal("ten"), ifNone));
+        assertEquals("zero", map1.detectIfNone(StringPredicates.endsWith("o"), ifNone));
+        assertEquals("nine", map1.detectIfNone(Predicates.equal("nine"), ifNone));
+        assertEquals("ifNone", map1.detectIfNone(Predicates.equal("ten"), ifNone));
     }
 
     @Test
@@ -455,11 +462,11 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
         Function0\<String> ifNone = () -> "ifNone";
-        Assert.assertTrue("one".equals(map1.detectWithIfNone(StringPredicates2.endsWith(), "ne", ifNone))
+        assertTrue("one".equals(map1.detectWithIfNone(StringPredicates2.endsWith(), "ne", ifNone))
                 || "nine".equals(map1.detectWithIfNone(StringPredicates2.endsWith(), "ne", ifNone)));
-        Assert.assertEquals("zero", map1.detectWithIfNone(StringPredicates2.endsWith(), "o", ifNone));
-        Assert.assertEquals("nine", map1.detectWithIfNone(Object::equals, "nine", ifNone));
-        Assert.assertEquals("ifNone", map1.detectWithIfNone(Object::equals, "ten", ifNone));
+        assertEquals("zero", map1.detectWithIfNone(StringPredicates2.endsWith(), "o", ifNone));
+        assertEquals("nine", map1.detectWithIfNone(Object::equals, "nine", ifNone));
+        assertEquals("ifNone", map1.detectWithIfNone(Object::equals, "ten", ifNone));
     }
 
     @Test
@@ -478,10 +485,10 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(2, map1.countWith(StringPredicates2.endsWith(), "ne"));
-        Assert.assertEquals(1, map1.countWith(StringPredicates2.endsWith(), "o"));
-        Assert.assertEquals(1, map1.countWith(Object::equals, "nine"));
-        Assert.assertNotEquals(1, map1.countWith(Object::equals, "ten"));
+        assertEquals(2, map1.countWith(StringPredicates2.endsWith(), "ne"));
+        assertEquals(1, map1.countWith(StringPredicates2.endsWith(), "o"));
+        assertEquals(1, map1.countWith(Object::equals, "nine"));
+        assertNotEquals(1, map1.countWith(Object::equals, "ten"));
     }
 
     @Test
@@ -491,17 +498,17 @@ public abstract class Abstract<name>ObjectMapTestCase
         Verify.assertAnySatisfy(map1, StringPredicates.endsWith("ne"));
         Verify.assertAnySatisfy(map1, StringPredicates.endsWith("o"));
         Verify.assertAnySatisfy(map1, Predicates.equal("nine"));
-        Assert.assertFalse(map1.anySatisfy(Predicates.equal("ten")));
+        assertFalse(map1.anySatisfy(Predicates.equal("ten")));
     }
 
     @Test
     public void anySatisfyWith()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
-        Assert.assertTrue(map1.anySatisfyWith(StringPredicates2.endsWith(), "ne"));
-        Assert.assertTrue(map1.anySatisfyWith(StringPredicates2.endsWith(), "o"));
-        Assert.assertTrue(map1.anySatisfyWith(Object::equals, "nine"));
-        Assert.assertFalse(map1.anySatisfyWith(Object::equals, "ten"));
+        assertTrue(map1.anySatisfyWith(StringPredicates2.endsWith(), "ne"));
+        assertTrue(map1.anySatisfyWith(StringPredicates2.endsWith(), "o"));
+        assertTrue(map1.anySatisfyWith(Object::equals, "nine"));
+        assertFalse(map1.anySatisfyWith(Object::equals, "ten"));
     }
 
     @Test
@@ -509,11 +516,11 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertTrue(map1.allSatisfy(StringPredicates.contains("e")));
-        Assert.assertFalse(map1.allSatisfy(StringPredicates.endsWith("o")));
-        Assert.assertFalse(map1.allSatisfy(StringPredicates.contains("o")));
-        Assert.assertFalse(map1.allSatisfy(Predicates.equal("nine")));
-        Assert.assertFalse(map1.allSatisfy(Predicates.equal("ten")));
+        assertTrue(map1.allSatisfy(StringPredicates.contains("e")));
+        assertFalse(map1.allSatisfy(StringPredicates.endsWith("o")));
+        assertFalse(map1.allSatisfy(StringPredicates.contains("o")));
+        assertFalse(map1.allSatisfy(Predicates.equal("nine")));
+        assertFalse(map1.allSatisfy(Predicates.equal("ten")));
     }
 
     @Test
@@ -521,11 +528,11 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertTrue(map1.allSatisfyWith(StringPredicates2.contains(), "e"));
-        Assert.assertFalse(map1.allSatisfyWith(StringPredicates2.endsWith(), "o"));
-        Assert.assertFalse(map1.allSatisfyWith(StringPredicates2.contains(), "o"));
-        Assert.assertFalse(map1.allSatisfyWith(Object::equals, "nine"));
-        Assert.assertFalse(map1.allSatisfyWith(Object::equals, "ten"));
+        assertTrue(map1.allSatisfyWith(StringPredicates2.contains(), "e"));
+        assertFalse(map1.allSatisfyWith(StringPredicates2.endsWith(), "o"));
+        assertFalse(map1.allSatisfyWith(StringPredicates2.contains(), "o"));
+        assertFalse(map1.allSatisfyWith(Object::equals, "nine"));
+        assertFalse(map1.allSatisfyWith(Object::equals, "ten"));
     }
 
     @Test
@@ -533,12 +540,12 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertTrue(map1.noneSatisfy(StringPredicates.notContains("e")));
-        Assert.assertFalse(map1.noneSatisfy(StringPredicates.endsWith("o")));
-        Assert.assertFalse(map1.noneSatisfy(StringPredicates.startsWith("o")));
-        Assert.assertFalse(map1.noneSatisfy(StringPredicates.contains("o")));
-        Assert.assertFalse(map1.noneSatisfy(Predicates.equal("nine")));
-        Assert.assertTrue(map1.noneSatisfy(Predicates.equal("ten")));
+        assertTrue(map1.noneSatisfy(StringPredicates.notContains("e")));
+        assertFalse(map1.noneSatisfy(StringPredicates.endsWith("o")));
+        assertFalse(map1.noneSatisfy(StringPredicates.startsWith("o")));
+        assertFalse(map1.noneSatisfy(StringPredicates.contains("o")));
+        assertFalse(map1.noneSatisfy(Predicates.equal("nine")));
+        assertTrue(map1.noneSatisfy(Predicates.equal("ten")));
     }
 
     @Test
@@ -546,12 +553,12 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertTrue(map1.noneSatisfyWith(StringPredicates2.notContains(), "e"));
-        Assert.assertFalse(map1.noneSatisfyWith(StringPredicates2.endsWith(), "o"));
-        Assert.assertFalse(map1.noneSatisfyWith(StringPredicates2.startsWith(), "o"));
-        Assert.assertFalse(map1.noneSatisfyWith(StringPredicates2.contains(), "o"));
-        Assert.assertFalse(map1.noneSatisfyWith(Object::equals, "nine"));
-        Assert.assertTrue(map1.noneSatisfyWith(Object::equals, "ten"));
+        assertTrue(map1.noneSatisfyWith(StringPredicates2.notContains(), "e"));
+        assertFalse(map1.noneSatisfyWith(StringPredicates2.endsWith(), "o"));
+        assertFalse(map1.noneSatisfyWith(StringPredicates2.startsWith(), "o"));
+        assertFalse(map1.noneSatisfyWith(StringPredicates2.contains(), "o"));
+        assertFalse(map1.noneSatisfyWith(Object::equals, "nine"));
+        assertTrue(map1.noneSatisfyWith(Object::equals, "ten"));
     }
 
     @Test
@@ -563,11 +570,11 @@ public abstract class Abstract<name>ObjectMapTestCase
 
         Function2\<String, String, String> concat = (String argument1, String argument2) -> argument1 + '-' + argument2;
 
-        Assert.assertTrue("Start-zero-nine".equals(map1.injectInto("Start", concat))
+        assertTrue("Start-zero-nine".equals(map1.injectInto("Start", concat))
                 || "Start-nine-zero".equals(map1.injectInto("Start", concat)));
-        Assert.assertTrue("Start-one-nine".equals(map2.injectInto("Start", concat))
+        assertTrue("Start-one-nine".equals(map2.injectInto("Start", concat))
                 || "Start-nine-one".equals(map2.injectInto("Start", concat)));
-        Assert.assertTrue("Start-five-nine".equals(map3.injectInto("Start", concat))
+        assertTrue("Start-five-nine".equals(map3.injectInto("Start", concat))
                 || "Start-nine-five".equals(map3.injectInto("Start", concat)));
     }
 
@@ -579,9 +586,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "abc", <(literal.(type))("9")>, "abcd");
 
         IntObjectToIntFunction\<String> function = (int intParameter, String objectParameter) -> intParameter + objectParameter.length();
-        Assert.assertEquals(6, map1.injectInto(1, function));
-        Assert.assertEquals(7, map2.injectInto(1, function));
-        Assert.assertEquals(8, map3.injectInto(1, function));
+        assertEquals(6, map1.injectInto(1, function));
+        assertEquals(7, map2.injectInto(1, function));
+        assertEquals(8, map3.injectInto(1, function));
     }
 
     @Test
@@ -592,9 +599,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "abc", <(literal.(type))("9")>, "abcd");
 
         LongObjectToLongFunction\<String> function = (long longParameter, String objectParameter) -> longParameter + objectParameter.length();
-        Assert.assertEquals(6L, map1.injectInto(1L, function));
-        Assert.assertEquals(7L, map2.injectInto(1L, function));
-        Assert.assertEquals(8L, map3.injectInto(1L, function));
+        assertEquals(6L, map1.injectInto(1L, function));
+        assertEquals(7L, map2.injectInto(1L, function));
+        assertEquals(8L, map3.injectInto(1L, function));
     }
 
     @Test
@@ -605,9 +612,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "abc", <(literal.(type))("9")>, "abcd");
 
         FloatObjectToFloatFunction\<String> function = (float floatParameter, String objectParameter) -> floatParameter + objectParameter.length();
-        Assert.assertEquals(6.0f, map1.injectInto(1.0f, function), 0.0);
-        Assert.assertEquals(7.0f, map2.injectInto(1.0f, function), 0.0);
-        Assert.assertEquals(8.0f, map3.injectInto(1.0f, function), 0.0);
+        assertEquals(6.0f, map1.injectInto(1.0f, function), 0.0);
+        assertEquals(7.0f, map2.injectInto(1.0f, function), 0.0);
+        assertEquals(8.0f, map3.injectInto(1.0f, function), 0.0);
     }
 
     @Test
@@ -618,9 +625,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "abc", <(literal.(type))("9")>, "abcd");
 
         DoubleObjectToDoubleFunction\<String> function = (double doubleParameter, String objectParameter) -> doubleParameter + objectParameter.length();
-        Assert.assertEquals(6.0, map1.injectInto(1.0, function), 0.0);
-        Assert.assertEquals(7.0, map2.injectInto(1.0, function), 0.0);
-        Assert.assertEquals(8.0, map3.injectInto(1.0, function), 0.0);
+        assertEquals(6.0, map1.injectInto(1.0, function), 0.0);
+        assertEquals(7.0, map2.injectInto(1.0, function), 0.0);
+        assertEquals(8.0, map3.injectInto(1.0, function), 0.0);
     }
 
     @Test
@@ -630,11 +637,11 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertTrue(map1.toList().toString(), FastList.newListWith("zero", "nine").equals(map1.toList())
+        assertTrue(map1.toList().toString(), FastList.newListWith("zero", "nine").equals(map1.toList())
                 || FastList.newListWith("nine", "zero").equals(map1.toList()));
-        Assert.assertTrue(map2.toList().toString(), FastList.newListWith("one", "nine").equals(map2.toList())
+        assertTrue(map2.toList().toString(), FastList.newListWith("one", "nine").equals(map2.toList())
                 || FastList.newListWith("nine", "one").equals(map2.toList()));
-        Assert.assertTrue(map3.toList().toString(), FastList.newListWith("five", "nine").equals(map3.toList())
+        assertTrue(map3.toList().toString(), FastList.newListWith("five", "nine").equals(map3.toList())
                 || FastList.newListWith("nine", "five").equals(map3.toList()));
     }
 
@@ -645,25 +652,25 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(map1.toSortedList().toString(),
+        assertEquals(map1.toSortedList().toString(),
                 FastList.newListWith("nine", "zero"), map1.toSortedList());
-        Assert.assertEquals(map2.toSortedList().toString(),
+        assertEquals(map2.toSortedList().toString(),
                 FastList.newListWith("nine", "one"), map2.toSortedList());
-        Assert.assertEquals(map3.toSortedList().toString(), FastList.newListWith("five", "nine"), map3.toSortedList());
+        assertEquals(map3.toSortedList().toString(), FastList.newListWith("five", "nine"), map3.toSortedList());
 
         Comparator\<String> comparator = (String o1, String o2) -> o1.substring(1).compareTo(o2.substring(1));
-        Assert.assertEquals(map1.toSortedList(comparator).toString(),
+        assertEquals(map1.toSortedList(comparator).toString(),
                 FastList.newListWith("zero", "nine"), map1.toSortedList(comparator));
-        Assert.assertEquals(map2.toSortedList(comparator).toString(),
+        assertEquals(map2.toSortedList(comparator).toString(),
                 FastList.newListWith("nine", "one"), map2.toSortedList(comparator));
-        Assert.assertEquals(map3.toSortedList(comparator).toString(), FastList.newListWith("nine", "five"), map3.toSortedList(comparator));
+        assertEquals(map3.toSortedList(comparator).toString(), FastList.newListWith("nine", "five"), map3.toSortedList(comparator));
 
         Function\<String, String> substring = (String object) -> object.substring(1);
-        Assert.assertEquals(map1.toSortedListBy(substring).toString(),
+        assertEquals(map1.toSortedListBy(substring).toString(),
                 FastList.newListWith("zero", "nine"), map1.toSortedListBy(substring));
-        Assert.assertEquals(map2.toSortedListBy(substring).toString(),
+        assertEquals(map2.toSortedListBy(substring).toString(),
                 FastList.newListWith("nine", "one"), map2.toSortedListBy(substring));
-        Assert.assertEquals(map3.toSortedListBy(substring).toString(), FastList.newListWith("nine", "five"), map3.toSortedListBy(substring));
+        assertEquals(map3.toSortedListBy(substring).toString(), FastList.newListWith("nine", "five"), map3.toSortedListBy(substring));
     }
 
     @Test
@@ -673,9 +680,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("6")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(map1.toSet().toString(), UnifiedSet.newSetWith("zero", "nine"), map1.toSet());
-        Assert.assertEquals(map2.toSet().toString(), UnifiedSet.newSetWith("one", "nine"), map2.toSet());
-        Assert.assertEquals(map3.toSet().toString(), UnifiedSet.newSetWith("five", "nine"), map3.toSet());
+        assertEquals(map1.toSet().toString(), UnifiedSet.newSetWith("zero", "nine"), map1.toSet());
+        assertEquals(map2.toSet().toString(), UnifiedSet.newSetWith("one", "nine"), map2.toSet());
+        assertEquals(map3.toSet().toString(), UnifiedSet.newSetWith("five", "nine"), map3.toSet());
     }
 
     @Test
@@ -685,21 +692,21 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("6")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(TreeSortedSet.newSetWith("nine", "zero"), map1.toSortedSet());
-        Assert.assertEquals(map2.toSortedSet().toString(),
+        assertEquals(TreeSortedSet.newSetWith("nine", "zero"), map1.toSortedSet());
+        assertEquals(map2.toSortedSet().toString(),
                 TreeSortedSet.newSetWith("nine", "one"), map2.toSortedSet());
-        Assert.assertEquals(TreeSortedSet.newSetWith("five", "nine"), map3.toSortedSet());
+        assertEquals(TreeSortedSet.newSetWith("five", "nine"), map3.toSortedSet());
 
         Comparator\<String> comparator = (String o1, String o2) -> o1.substring(1).compareTo(o2.substring(1));
-        Assert.assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toSortedSet(comparator));
-        Assert.assertEquals(map2.toSortedSet(comparator).toString(),
+        assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toSortedSet(comparator));
+        assertEquals(map2.toSortedSet(comparator).toString(),
                 TreeSortedSet.newSetWith("nine", "one"), map2.toSortedSet(comparator));
-        Assert.assertEquals(TreeSortedSet.newSetWith("nine", "five"), map3.toSortedSet(comparator));
+        assertEquals(TreeSortedSet.newSetWith("nine", "five"), map3.toSortedSet(comparator));
 
         Function\<String, String> substring = (String object) -> object.substring(1);
-        Assert.assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toSortedSetBy(substring));
-        Assert.assertEquals(TreeSortedSet.newSetWith("nine", "one"), map2.toSortedSetBy(substring));
-        Assert.assertEquals(map3.toSortedSetBy(substring).toString(), TreeSortedSet.newSetWith("nine", "five"), map3.toSortedSetBy(substring));
+        assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toSortedSetBy(substring));
+        assertEquals(TreeSortedSet.newSetWith("nine", "one"), map2.toSortedSetBy(substring));
+        assertEquals(map3.toSortedSetBy(substring).toString(), TreeSortedSet.newSetWith("nine", "five"), map3.toSortedSetBy(substring));
     }
 
     @Test
@@ -709,9 +716,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("6")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("zero", "zero", "nine"), map1.toBag());
-        Assert.assertEquals(HashBag.newBagWith("one", "one", "nine"), map2.toBag());
-        Assert.assertEquals(HashBag.newBagWith("five", "five", "nine"), map3.toBag());
+        assertEquals(HashBag.newBagWith("zero", "zero", "nine"), map1.toBag());
+        assertEquals(HashBag.newBagWith("one", "one", "nine"), map2.toBag());
+        assertEquals(HashBag.newBagWith("five", "five", "nine"), map3.toBag());
     }
 
     @Test
@@ -723,9 +730,9 @@ public abstract class Abstract<name>ObjectMapTestCase
 
         Function\<String, Integer> keyFunction = StringFunctions.length();
         Function\<String, String> valueFunction = Functions.getPassThru();
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "a", 4, "abcd"), map1.toMap(keyFunction, valueFunction));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(2, "ab", 4, "abcd"), map2.toMap(keyFunction, valueFunction));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(3, "abc", 4, "abcd"), map3.toMap(keyFunction, valueFunction));
+        assertEquals(UnifiedMap.newWithKeysValues(1, "a", 4, "abcd"), map1.toMap(keyFunction, valueFunction));
+        assertEquals(UnifiedMap.newWithKeysValues(2, "ab", 4, "abcd"), map2.toMap(keyFunction, valueFunction));
+        assertEquals(UnifiedMap.newWithKeysValues(3, "abc", 4, "abcd"), map3.toMap(keyFunction, valueFunction));
     }
 
     @Test
@@ -745,9 +752,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         targetMap2.put(1L, "a");
         targetMap2.put(4L, "abcd");
 
-        Assert.assertEquals(targetMap1, map.toMap(keyStringFunction, valueFunction, new HashMap\<String, String>()));
-        Assert.assertEquals(targetMap2, map.toMap(keyLongFunction, valueFunction, new HashMap\<Long, String>()));
-        Assert.assertTrue(map.toMap(keyLongFunction, valueFunction, new HashMap\<Long, String>()) instanceof HashMap);
+        assertEquals(targetMap1, map.toMap(keyStringFunction, valueFunction, new HashMap\<String, String>()));
+        assertEquals(targetMap2, map.toMap(keyLongFunction, valueFunction, new HashMap\<Long, String>()));
+        assertTrue(map.toMap(keyLongFunction, valueFunction, new HashMap\<Long, String>()) instanceof HashMap);
     }
 
     @Test
@@ -759,11 +766,11 @@ public abstract class Abstract<name>ObjectMapTestCase
 
         Function\<String, Integer> keyFunction = StringFunctions.length();
         Function\<String, String> valueFunction = Functions.getPassThru();
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(4, "abcd", 1, "z"), map1.toSortedMap(keyFunction, valueFunction));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(2, "ab", 4, "abcd"), map2.toSortedMap(keyFunction, valueFunction));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(4, "abcd", 3, "zyx"), map3.toSortedMap(keyFunction, valueFunction));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(4, "abcd", 3, "zyx"), map3.toSortedMap(Comparators.naturalOrder(), keyFunction, valueFunction));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(4, "abcd", 3, "zyx"), map3.toSortedMapBy(Functions.getPassThru(), keyFunction, valueFunction));
+        assertEquals(UnifiedMap.newWithKeysValues(4, "abcd", 1, "z"), map1.toSortedMap(keyFunction, valueFunction));
+        assertEquals(UnifiedMap.newWithKeysValues(2, "ab", 4, "abcd"), map2.toSortedMap(keyFunction, valueFunction));
+        assertEquals(UnifiedMap.newWithKeysValues(4, "abcd", 3, "zyx"), map3.toSortedMap(keyFunction, valueFunction));
+        assertEquals(UnifiedMap.newWithKeysValues(4, "abcd", 3, "zyx"), map3.toSortedMap(Comparators.naturalOrder(), keyFunction, valueFunction));
+        assertEquals(UnifiedMap.newWithKeysValues(4, "abcd", 3, "zyx"), map3.toSortedMapBy(Functions.getPassThru(), keyFunction, valueFunction));
     }
 
     @Test
@@ -773,11 +780,11 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertTrue(map1.toList().toString(), FastList.newListWith("zero", "nine").equals(map1.toImmutableList())
+        assertTrue(map1.toList().toString(), FastList.newListWith("zero", "nine").equals(map1.toImmutableList())
                 || FastList.newListWith("nine", "zero").equals(map1.toList()));
-        Assert.assertTrue(map2.toList().toString(), FastList.newListWith("one", "nine").equals(map2.toImmutableList())
+        assertTrue(map2.toList().toString(), FastList.newListWith("one", "nine").equals(map2.toImmutableList())
                 || FastList.newListWith("nine", "one").equals(map2.toList()));
-        Assert.assertTrue(map3.toList().toString(), FastList.newListWith("five", "nine").equals(map3.toImmutableList())
+        assertTrue(map3.toList().toString(), FastList.newListWith("five", "nine").equals(map3.toImmutableList())
                 || FastList.newListWith("nine", "five").equals(map3.toList()));
     }
 
@@ -788,27 +795,27 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(map1.toSortedList().toString(),
+        assertEquals(map1.toSortedList().toString(),
                 FastList.newListWith("nine", "zero"), map1.toImmutableSortedList());
-        Assert.assertEquals(map2.toSortedList().toString(),
+        assertEquals(map2.toSortedList().toString(),
                 FastList.newListWith("nine", "one"), map2.toImmutableSortedList());
-        Assert.assertEquals(map3.toSortedList().toString(),
+        assertEquals(map3.toSortedList().toString(),
                 FastList.newListWith("five", "nine"), map3.toImmutableSortedList());
 
         Comparator\<String> comparator = (String o1, String o2) -> o1.substring(1).compareTo(o2.substring(1));
-        Assert.assertEquals(map1.toSortedList(comparator).toString(),
+        assertEquals(map1.toSortedList(comparator).toString(),
                 FastList.newListWith("zero", "nine"), map1.toImmutableSortedList(comparator));
-        Assert.assertEquals(map2.toSortedList(comparator).toString(),
+        assertEquals(map2.toSortedList(comparator).toString(),
                 FastList.newListWith("nine", "one"), map2.toImmutableSortedList(comparator));
-        Assert.assertEquals(map3.toSortedList(comparator).toString(),
+        assertEquals(map3.toSortedList(comparator).toString(),
                 FastList.newListWith("nine", "five"), map3.toImmutableSortedList(comparator));
 
         Function\<String, String> substring = (String object) -> object.substring(1);
-        Assert.assertEquals(map1.toSortedListBy(substring).toString(),
+        assertEquals(map1.toSortedListBy(substring).toString(),
                 FastList.newListWith("zero", "nine"), map1.toImmutableSortedListBy(substring));
-        Assert.assertEquals(map2.toSortedListBy(substring).toString(),
+        assertEquals(map2.toSortedListBy(substring).toString(),
                 FastList.newListWith("nine", "one"), map2.toImmutableSortedListBy(substring));
-        Assert.assertEquals(map3.toSortedListBy(substring).toString(),
+        assertEquals(map3.toSortedListBy(substring).toString(),
                 FastList.newListWith("nine", "five"), map3.toImmutableSortedListBy(substring));
     }
 
@@ -819,9 +826,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("6")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(map1.toSet().toString(), UnifiedSet.newSetWith("zero", "nine"), map1.toImmutableSet());
-        Assert.assertEquals(map2.toSet().toString(), UnifiedSet.newSetWith("one", "nine"), map2.toImmutableSet());
-        Assert.assertEquals(map3.toSet().toString(), UnifiedSet.newSetWith("five", "nine"), map3.toImmutableSet());
+        assertEquals(map1.toSet().toString(), UnifiedSet.newSetWith("zero", "nine"), map1.toImmutableSet());
+        assertEquals(map2.toSet().toString(), UnifiedSet.newSetWith("one", "nine"), map2.toImmutableSet());
+        assertEquals(map3.toSet().toString(), UnifiedSet.newSetWith("five", "nine"), map3.toImmutableSet());
     }
 
     @Test
@@ -831,21 +838,21 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("6")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(TreeSortedSet.newSetWith("nine", "zero"), map1.toImmutableSortedSet());
-        Assert.assertEquals(map2.toImmutableSortedSet().toString(),
+        assertEquals(TreeSortedSet.newSetWith("nine", "zero"), map1.toImmutableSortedSet());
+        assertEquals(map2.toImmutableSortedSet().toString(),
                 TreeSortedSet.newSetWith("nine", "one"), map2.toImmutableSortedSet());
-        Assert.assertEquals(TreeSortedSet.newSetWith("five", "nine"), map3.toImmutableSortedSet());
+        assertEquals(TreeSortedSet.newSetWith("five", "nine"), map3.toImmutableSortedSet());
 
         Comparator\<String> comparator = (String o1, String o2) -> o1.substring(1).compareTo(o2.substring(1));
-        Assert.assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toImmutableSortedSet(comparator));
-        Assert.assertEquals(map2.toImmutableSortedSet(comparator).toString(),
+        assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toImmutableSortedSet(comparator));
+        assertEquals(map2.toImmutableSortedSet(comparator).toString(),
                 TreeSortedSet.newSetWith("nine", "one"), map2.toImmutableSortedSet(comparator));
-        Assert.assertEquals(TreeSortedSet.newSetWith("nine", "five"), map3.toImmutableSortedSet(comparator));
+        assertEquals(TreeSortedSet.newSetWith("nine", "five"), map3.toImmutableSortedSet(comparator));
 
         Function\<String, String> substring = (String object) -> object.substring(1);
-        Assert.assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toImmutableSortedSetBy(substring));
-        Assert.assertEquals(TreeSortedSet.newSetWith("nine", "one"), map2.toImmutableSortedSetBy(substring));
-        Assert.assertEquals(map3.toImmutableSortedSetBy(substring).toString(), TreeSortedSet.newSetWith("nine", "five"), map3.toImmutableSortedSetBy(substring));
+        assertEquals(TreeSortedSet.newSetWith("zero", "nine"), map1.toImmutableSortedSetBy(substring));
+        assertEquals(TreeSortedSet.newSetWith("nine", "one"), map2.toImmutableSortedSetBy(substring));
+        assertEquals(map3.toImmutableSortedSetBy(substring).toString(), TreeSortedSet.newSetWith("nine", "five"), map3.toImmutableSortedSetBy(substring));
     }
 
     @Test
@@ -855,9 +862,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("6")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("zero", "zero", "nine"), map1.toImmutableBag());
-        Assert.assertEquals(HashBag.newBagWith("one", "one", "nine"), map2.toImmutableBag());
-        Assert.assertEquals(HashBag.newBagWith("five", "five", "nine"), map3.toImmutableBag());
+        assertEquals(HashBag.newBagWith("zero", "zero", "nine"), map1.toImmutableBag());
+        assertEquals(HashBag.newBagWith("one", "one", "nine"), map2.toImmutableBag());
+        assertEquals(HashBag.newBagWith("five", "five", "nine"), map3.toImmutableBag());
     }
 
     @Test
@@ -885,18 +892,18 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "ab", <(literal.(type))("9")>, "abcd");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "zyx", <(literal.(type))("9")>, "abcd");
 
-        Assert.assertTrue(map1.asLazy().toString(), Arrays.equals(new String[]{"abcd", "z"}, map1.toArray())
+        assertTrue(map1.asLazy().toString(), Arrays.equals(new String[]{"abcd", "z"}, map1.toArray())
                 || Arrays.equals(new String[]{"z", "abcd"}, map1.toArray()));
-        Assert.assertTrue(map2.asLazy().toString(), Arrays.equals(new String[]{"abcd", "ab"}, map2.toArray())
+        assertTrue(map2.asLazy().toString(), Arrays.equals(new String[]{"abcd", "ab"}, map2.toArray())
                 || Arrays.equals(new String[]{"ab", "abcd"}, map2.toArray()));
-        Assert.assertTrue(map3.asLazy().toString(), Arrays.equals(new String[]{"abcd", "zyx"}, map3.toArray())
+        assertTrue(map3.asLazy().toString(), Arrays.equals(new String[]{"abcd", "zyx"}, map3.toArray())
                 || Arrays.equals(new String[]{"zyx", "abcd"}, map3.toArray()));
 
-        Assert.assertTrue(map1.asLazy().toString(), Arrays.equals(new String[]{"abcd", "z"}, map1.toArray(new String[2]))
+        assertTrue(map1.asLazy().toString(), Arrays.equals(new String[]{"abcd", "z"}, map1.toArray(new String[2]))
                 || Arrays.equals(new String[]{"z", "abcd"}, map1.toArray()));
-        Assert.assertTrue(map2.asLazy().toString(), Arrays.equals(new String[]{"abcd", "ab"}, map2.toArray(new String[4]))
+        assertTrue(map2.asLazy().toString(), Arrays.equals(new String[]{"abcd", "ab"}, map2.toArray(new String[4]))
                 || Arrays.equals(new String[]{"ab", "abcd"}, map2.toArray()));
-        Assert.assertTrue(map3.asLazy().toString(), Arrays.equals(new String[]{"abcd", "zyx"}, map3.toArray(new String[2]))
+        assertTrue(map3.asLazy().toString(), Arrays.equals(new String[]{"abcd", "zyx"}, map3.toArray(new String[2]))
                 || Arrays.equals(new String[]{"zyx", "abcd"}, map3.toArray()));
     }
 
@@ -907,16 +914,16 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "ab", <(literal.(type))("9")>, "abcd");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "zyx", <(literal.(type))("9")>, "abcd");
 
-        Assert.assertEquals("abcd", map1.min());
-        Assert.assertEquals("ab", map2.min());
-        Assert.assertEquals("abcd", map3.min());
-        Assert.assertEquals("abcd", map3.min(Comparators.naturalOrder()));
+        assertEquals("abcd", map1.min());
+        assertEquals("ab", map2.min());
+        assertEquals("abcd", map3.min());
+        assertEquals("abcd", map3.min(Comparators.naturalOrder()));
     }
 
     @Test
     public void min_throws_empty()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.newMap().min());
+        assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.newMap().min());
     }
 
     @Test
@@ -927,11 +934,11 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<Class\<?>\> map3 = this.newWithKeysValues(<(literal.(type))("5")>, <name>ObjectHashMap.class, <(literal.(type))("9")>, <name>ObjectHashMapTest.class);
 
         Function\<Class\<?>, Integer> classNameLength = (Class\<?> aClass) -> aClass.getName().length();
-        Assert.assertEquals(<name>ObjectHashMapTest.class, map1.maxBy(classNameLength));
-        Assert.assertEquals(<name>ObjectHashMapTest.class, map2.maxBy(classNameLength));
-        Assert.assertEquals(<name>ObjectHashMapTest.class, map3.maxBy(classNameLength));
+        assertEquals(<name>ObjectHashMapTest.class, map1.maxBy(classNameLength));
+        assertEquals(<name>ObjectHashMapTest.class, map2.maxBy(classNameLength));
+        assertEquals(<name>ObjectHashMapTest.class, map3.maxBy(classNameLength));
 
-        Assert.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.\<Class\<?>\>newMap().maxBy(classNameLength));
+        assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.\<Class\<?>\>newMap().maxBy(classNameLength));
     }
 
     @Test
@@ -941,16 +948,16 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "ab", <(literal.(type))("9")>, "abcd");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "zyx", <(literal.(type))("9")>, "abcd");
 
-        Assert.assertEquals("z", map1.max());
-        Assert.assertEquals("abcd", map2.max());
-        Assert.assertEquals("zyx", map3.max());
-        Assert.assertEquals("zyx", map3.max(Comparators.naturalOrder()));
+        assertEquals("z", map1.max());
+        assertEquals("abcd", map2.max());
+        assertEquals("zyx", map3.max());
+        assertEquals("zyx", map3.max(Comparators.naturalOrder()));
     }
 
     @Test
     public void max_throws_empty()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.newMap().max());
+        assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.newMap().max());
     }
 
     @Test
@@ -961,11 +968,11 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<Class\<?>\> map3 = this.newWithKeysValues(<(literal.(type))("5")>, <name>ObjectHashMap.class, <(literal.(type))("9")>, <name>ObjectHashMapTest.class);
 
         Function\<Class\<?>, Integer> classNameLength = (Class\<?> object) -> object.getName().length();
-        Assert.assertEquals(<name>ObjectHashMap.class, map1.minBy(classNameLength));
-        Assert.assertEquals(<name>ObjectHashMap.class, map2.minBy(classNameLength));
-        Assert.assertEquals(<name>ObjectHashMap.class, map3.minBy(classNameLength));
+        assertEquals(<name>ObjectHashMap.class, map1.minBy(classNameLength));
+        assertEquals(<name>ObjectHashMap.class, map2.minBy(classNameLength));
+        assertEquals(<name>ObjectHashMap.class, map3.minBy(classNameLength));
 
-        Assert.assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.\<Class\<?>\>newMap().minBy(classNameLength));
+        assertThrows(NoSuchElementException.class, () -> <name>ObjectHashMap.\<Class\<?>\>newMap().minBy(classNameLength));
     }
 
     @Test
@@ -976,9 +983,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "zyx", <(literal.(type))("9")>, "abcd");
 
         IntFunction\<String> function = StringFunctions.length();
-        Assert.assertEquals(5L, map1.sumOfInt(function));
-        Assert.assertEquals(6L, map2.sumOfInt(function));
-        Assert.assertEquals(7L, map3.sumOfInt(function));
+        assertEquals(5L, map1.sumOfInt(function));
+        assertEquals(6L, map2.sumOfInt(function));
+        assertEquals(7L, map3.sumOfInt(function));
     }
 
     @Test
@@ -989,9 +996,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "zyx", <(literal.(type))("9")>, "abcd");
 
         LongFunction\<String> function = String::length;
-        Assert.assertEquals(5L, map1.sumOfLong(function));
-        Assert.assertEquals(6L, map2.sumOfLong(function));
-        Assert.assertEquals(7L, map3.sumOfLong(function));
+        assertEquals(5L, map1.sumOfLong(function));
+        assertEquals(6L, map2.sumOfLong(function));
+        assertEquals(7L, map3.sumOfLong(function));
     }
 
     @Test
@@ -1002,9 +1009,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "zyx", <(literal.(type))("9")>, "abcd");
 
         DoubleFunction\<String> function = String::length;
-        Assert.assertEquals(5.0, map1.sumOfDouble(function), 0.0);
-        Assert.assertEquals(6.0, map2.sumOfDouble(function), 0.0);
-        Assert.assertEquals(7.0, map3.sumOfDouble(function), 0.0);
+        assertEquals(5.0, map1.sumOfDouble(function), 0.0);
+        assertEquals(6.0, map2.sumOfDouble(function), 0.0);
+        assertEquals(7.0, map3.sumOfDouble(function), 0.0);
     }
 
     @Test
@@ -1015,9 +1022,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "zyx", <(literal.(type))("9")>, "abcd");
 
         FloatFunction\<String> function = String::length;
-        Assert.assertEquals(5.0, map1.sumOfFloat(function), 0.0);
-        Assert.assertEquals(6.0, map2.sumOfFloat(function), 0.0);
-        Assert.assertEquals(7.0, map3.sumOfFloat(function), 0.0);
+        assertEquals(5.0, map1.sumOfFloat(function), 0.0);
+        assertEquals(6.0, map2.sumOfFloat(function), 0.0);
+        assertEquals(7.0, map3.sumOfFloat(function), 0.0);
     }
 
     @Test
@@ -1025,8 +1032,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         RichIterable\<String> values = this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>, "3");
         ObjectLongMap\<Integer> result = values.sumByInt(s -> Integer.parseInt(s) % 2, Integer::parseInt);
-        Assert.assertEquals(4, result.get(1));
-        Assert.assertEquals(2, result.get(0));
+        assertEquals(4, result.get(1));
+        assertEquals(2, result.get(0));
     }
 
     @Test
@@ -1034,8 +1041,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         RichIterable\<String> values = this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>, "3");
         ObjectDoubleMap\<Integer> result = values.sumByFloat(s -> Integer.parseInt(s) % 2, Float::parseFloat);
-        Assert.assertEquals(4.0f, result.get(1), 0.0);
-        Assert.assertEquals(2.0f, result.get(0), 0.0);
+        assertEquals(4.0f, result.get(1), 0.0);
+        assertEquals(2.0f, result.get(0), 0.0);
     }
 
     @Test
@@ -1043,8 +1050,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         RichIterable\<String> values = this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>, "3");
         ObjectLongMap\<Integer> result = values.sumByLong(s -> Integer.parseInt(s) % 2, Long::parseLong);
-        Assert.assertEquals(4, result.get(1));
-        Assert.assertEquals(2, result.get(0));
+        assertEquals(4, result.get(1));
+        assertEquals(2, result.get(0));
     }
 
     @Test
@@ -1052,15 +1059,15 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         RichIterable\<String> values = this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>, "3");
         ObjectDoubleMap\<Integer> result = values.sumByDouble(s -> Integer.parseInt(s) % 2, Double::parseDouble);
-        Assert.assertEquals(4.0d, result.get(1), 0.0);
-        Assert.assertEquals(2.0d, result.get(0), 0.0);
+        assertEquals(4.0d, result.get(1), 0.0);
+        assertEquals(2.0d, result.get(0), 0.0);
     }
 
     @Test
     public void keysView()
     {
-        Assert.assertEquals(<name>ArrayList.newListWith(), this.getEmptyMap().keysView().toList());
-        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), this.newWithKeysValues(<(literal.(type))("1")>, "one").keysView().toList());
+        assertEquals(<name>ArrayList.newListWith(), this.getEmptyMap().keysView().toList());
+        assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), this.newWithKeysValues(<(literal.(type))("1")>, "one").keysView().toList());
     }
 
     @Test
@@ -1071,26 +1078,26 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map4 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
                 map1.reject((<type> value, String object) -> (value % 2) == 0));
 
         <name>ObjectPredicate\<String> keyLessThanSeven = (<type> value, String object) -> value > 7;
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), map1.reject(keyLessThanSeven));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"), map2.reject(keyLessThanSeven));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), map3.reject(keyLessThanSeven));
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("5")>, "five"), map4.reject(keyLessThanSeven));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), map1.reject(keyLessThanSeven));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"), map2.reject(keyLessThanSeven));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), map3.reject(keyLessThanSeven));
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("5")>, "five"), map4.reject(keyLessThanSeven));
 
-        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
+        assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
                 map1.reject((<type> value, String object) -> !object.endsWith("ne")));
 
         RichIterable\<String> actual1 = map1.reject(StringPredicates.endsWith("ne").not());
-        Assert.assertTrue(HashBag.newBagWith("one", "nine").equals(actual1));
-        Assert.assertEquals(HashBag.newBagWith("nine"), map1.reject(Predicates.equal("nine").not()));
-        Assert.assertEquals(HashBag.newBagWith("zero"), map1.reject(StringPredicates.endsWith("o").not()));
-        Assert.assertEquals(HashBag.newBagWith("nine"), map1.reject(Predicates.equal("nine").not(), HashBag.\<String>newBag()));
-        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.reject(StringPredicates.endsWith("ne").not(), HashBag.\<String>newBag()));
-        Assert.assertEquals(HashBag.newBagWith("zero"), map1.reject(StringPredicates.endsWith("o").not(), HashBag.\<String>newBag()));
+        assertTrue(HashBag.newBagWith("one", "nine").equals(actual1));
+        assertEquals(HashBag.newBagWith("nine"), map1.reject(Predicates.equal("nine").not()));
+        assertEquals(HashBag.newBagWith("zero"), map1.reject(StringPredicates.endsWith("o").not()));
+        assertEquals(HashBag.newBagWith("nine"), map1.reject(Predicates.equal("nine").not(), HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("one", "nine"), map1.reject(StringPredicates.endsWith("ne").not(), HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("zero"), map1.reject(StringPredicates.endsWith("o").not(), HashBag.\<String>newBag()));
     }
 
     @Test
@@ -1098,9 +1105,9 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.rejectWith(StringPredicates2.notEndsWith(), "ne"));
-        Assert.assertEquals(HashBag.newBagWith("nine"), map1.rejectWith(Predicates2.notEqual(), "nine"));
-        Assert.assertEquals(HashBag.newBagWith("zero"), map1.rejectWith(StringPredicates2.notEndsWith(), "o"));
+        assertEquals(HashBag.newBagWith("one", "nine"), map1.rejectWith(StringPredicates2.notEndsWith(), "ne"));
+        assertEquals(HashBag.newBagWith("nine"), map1.rejectWith(Predicates2.notEqual(), "nine"));
+        assertEquals(HashBag.newBagWith("zero"), map1.rejectWith(StringPredicates2.notEndsWith(), "o"));
     }
 
     @Test
@@ -1108,9 +1115,9 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.rejectWith(StringPredicates2.notEndsWith(), "ne", HashBag.\<String>newBag()));
-        Assert.assertEquals(HashBag.newBagWith("nine"), map1.rejectWith(Predicates2.notEqual(), "nine", HashBag.\<String>newBag()));
-        Assert.assertEquals(HashBag.newBagWith("zero"), map1.rejectWith(StringPredicates2.notEndsWith(), "o", HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("one", "nine"), map1.rejectWith(StringPredicates2.notEndsWith(), "ne", HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("nine"), map1.rejectWith(Predicates2.notEqual(), "nine", HashBag.\<String>newBag()));
+        assertEquals(HashBag.newBagWith("zero"), map1.rejectWith(StringPredicates2.notEndsWith(), "o", HashBag.\<String>newBag()));
     }
 
     @Test
@@ -1120,8 +1127,8 @@ public abstract class Abstract<name>ObjectMapTestCase
 
         Predicate\<String> endsWithNe = StringPredicates.endsWith("ne");
         PartitionIterable\<String> partition = map1.partition(endsWithNe);
-        Assert.assertTrue(HashBag.newBagWith("one", "nine").equals(partition.getSelected()));
-        Assert.assertEquals(HashBag.newBagWith("zero"), partition.getRejected());
+        assertTrue(HashBag.newBagWith("one", "nine").equals(partition.getSelected()));
+        assertEquals(HashBag.newBagWith("zero"), partition.getRejected());
     }
 
     @Test
@@ -1131,24 +1138,24 @@ public abstract class Abstract<name>ObjectMapTestCase
 
         Predicate2\<String, String> endsWith = StringPredicates2.endsWith();
         PartitionIterable\<String> partition = map1.partitionWith(endsWith, "ne");
-        Assert.assertTrue(HashBag.newBagWith("one", "nine").equals(partition.getSelected()));
-        Assert.assertEquals(HashBag.newBagWith("zero"), partition.getRejected());
+        assertTrue(HashBag.newBagWith("one", "nine").equals(partition.getSelected()));
+        assertEquals(HashBag.newBagWith("zero"), partition.getRejected());
     }
 
     @Test
     public void get()
     {
-        Assert.assertEquals("zero", this.classUnderTest().get(<(literal.(type))("0")>));
-        Assert.assertEquals("thirtyOne", this.classUnderTest().get(<(literal.(type))("31")>));
-        Assert.assertEquals("thirtyTwo", this.classUnderTest().get(<(literal.(type))("32")>));
+        assertEquals("zero", this.classUnderTest().get(<(literal.(type))("0")>));
+        assertEquals("thirtyOne", this.classUnderTest().get(<(literal.(type))("31")>));
+        assertEquals("thirtyTwo", this.classUnderTest().get(<(literal.(type))("32")>));
 
-        Assert.assertNull(this.classUnderTest().get(<(literal.(type))("1")>));
-        Assert.assertNull(this.classUnderTest().get(<(literal.(type))("33")>));
+        assertNull(this.classUnderTest().get(<(literal.(type))("1")>));
+        assertNull(this.classUnderTest().get(<(literal.(type))("33")>));
 
         <name>ObjectMap\<Object> emptyMap = this.getEmptyMap();
-        Assert.assertNull(emptyMap.get(<(literal.(type))("0")>));
-        Assert.assertNull(emptyMap.get(<(literal.(type))("1")>));
-        Assert.assertNull(emptyMap.get(<(literal.(type))("33")>));
+        assertNull(emptyMap.get(<(literal.(type))("0")>));
+        assertNull(emptyMap.get(<(literal.(type))("1")>));
+        assertNull(emptyMap.get(<(literal.(type))("33")>));
     }
 
     @Test
@@ -1156,37 +1163,37 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         Function0\<String> ifAbsent = () -> "ifAbsent";
 
-        Assert.assertEquals("zero", this.classUnderTest().getIfAbsent(<(literal.(type))("0")>, ifAbsent));
-        Assert.assertEquals("thirtyOne", this.classUnderTest().getIfAbsent(<(literal.(type))("31")>, ifAbsent));
-        Assert.assertEquals("thirtyTwo", this.classUnderTest().getIfAbsent(<(literal.(type))("32")>, ifAbsent));
+        assertEquals("zero", this.classUnderTest().getIfAbsent(<(literal.(type))("0")>, ifAbsent));
+        assertEquals("thirtyOne", this.classUnderTest().getIfAbsent(<(literal.(type))("31")>, ifAbsent));
+        assertEquals("thirtyTwo", this.classUnderTest().getIfAbsent(<(literal.(type))("32")>, ifAbsent));
 
-        Assert.assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("1")>, ifAbsent));
-        Assert.assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("33")>, ifAbsent));
+        assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("1")>, ifAbsent));
+        assertEquals("ifAbsent", this.classUnderTest().getIfAbsent(<(literal.(type))("33")>, ifAbsent));
 
         <name>ObjectMap\<Object> emptyMap = this.getEmptyMap();
-        Assert.assertEquals("ifAbsent", emptyMap.getIfAbsent(<(literal.(type))("0")>, ifAbsent));
-        Assert.assertEquals("ifAbsent", emptyMap.getIfAbsent(<(literal.(type))("1")>, ifAbsent));
-        Assert.assertEquals("ifAbsent", emptyMap.getIfAbsent(<(literal.(type))("33")>, ifAbsent));
+        assertEquals("ifAbsent", emptyMap.getIfAbsent(<(literal.(type))("0")>, ifAbsent));
+        assertEquals("ifAbsent", emptyMap.getIfAbsent(<(literal.(type))("1")>, ifAbsent));
+        assertEquals("ifAbsent", emptyMap.getIfAbsent(<(literal.(type))("33")>, ifAbsent));
     }
 
     @Test
     public void containsKey()
     {
-        Assert.assertTrue(this.classUnderTest().containsKey(<(literal.(type))("0")>));
-        Assert.assertTrue(this.classUnderTest().containsKey(<(literal.(type))("31")>));
-        Assert.assertTrue(this.classUnderTest().containsKey(<(literal.(type))("32")>));
-        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("1")>));
-        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("5")>));
-        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("35")>));
+        assertTrue(this.classUnderTest().containsKey(<(literal.(type))("0")>));
+        assertTrue(this.classUnderTest().containsKey(<(literal.(type))("31")>));
+        assertTrue(this.classUnderTest().containsKey(<(literal.(type))("32")>));
+        assertFalse(this.classUnderTest().containsKey(<(literal.(type))("1")>));
+        assertFalse(this.classUnderTest().containsKey(<(literal.(type))("5")>));
+        assertFalse(this.classUnderTest().containsKey(<(literal.(type))("35")>));
     }
 
     @Test
     public void containsValue()
     {
-        Assert.assertFalse(this.classUnderTest().containsValue(null));
-        Assert.assertTrue(this.classUnderTest().containsValue("zero"));
-        Assert.assertTrue(this.classUnderTest().containsValue("thirtyOne"));
-        Assert.assertTrue(this.classUnderTest().containsValue("thirtyTwo"));
+        assertFalse(this.classUnderTest().containsValue(null));
+        assertTrue(this.classUnderTest().containsValue("zero"));
+        assertTrue(this.classUnderTest().containsValue("thirtyOne"));
+        assertTrue(this.classUnderTest().containsValue("thirtyTwo"));
     }
 
     @Test
@@ -1203,10 +1210,10 @@ public abstract class Abstract<name>ObjectMapTestCase
         map3.forEachValue((String each) -> concat[2] += each);
         map4.forEachValue((String each) -> concat[3] += each);
 
-        Assert.assertTrue(concat[0], "onefive".equals(concat[0]) || "fiveone".equals(concat[0]));
-        Assert.assertTrue(concat[1], "onezero".equals(concat[1]) || "zeroone".equals(concat[1]));
-        Assert.assertTrue(concat[2], "twofive".equals(concat[2]) || "fivetwo".equals(concat[2]));
-        Assert.assertTrue(concat[3], "zerofive".equals(concat[3]) || "fivezero".equals(concat[3]));
+        assertTrue(concat[0], "onefive".equals(concat[0]) || "fiveone".equals(concat[0]));
+        assertTrue(concat[1], "onezero".equals(concat[1]) || "zeroone".equals(concat[1]));
+        assertTrue(concat[2], "twofive".equals(concat[2]) || "fivetwo".equals(concat[2]));
+        assertTrue(concat[3], "zerofive".equals(concat[3]) || "fivezero".equals(concat[3]));
     }
 
     @Test
@@ -1223,10 +1230,10 @@ public abstract class Abstract<name>ObjectMapTestCase
         map3.forEachKey((<type> each) -> sum[2] += each);
         map4.forEachKey((<type> each) -> sum[3] += each);
 
-        Assert.assertEquals(<(wideLiteral.(type))("6")>, sum[0]<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("1")>, sum[1]<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("7")>, sum[2]<(wideDelta.(type))>);
-        Assert.assertEquals(<(wideLiteral.(type))("5")>, sum[3]<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("6")>, sum[0]<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("1")>, sum[1]<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("7")>, sum[2]<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("5")>, sum[3]<(wideDelta.(type))>);
     }
 
     @Test
@@ -1259,10 +1266,10 @@ public abstract class Abstract<name>ObjectMapTestCase
             concat[3] += parameter;
         });
 
-        Assert.assertTrue(concat[0], "<(toStringLiteral.(type))("1")>one<(toStringLiteral.(type))("5")>five".equals(concat[0]) || "<(toStringLiteral.(type))("5")>five<(toStringLiteral.(type))("1")>one".equals(concat[0]));
-        Assert.assertTrue(concat[1], "<(toStringLiteral.(type))("1")>one<(toStringLiteral.(type))("0")>zero".equals(concat[1]) || "<(toStringLiteral.(type))("0")>zero<(toStringLiteral.(type))("1")>one".equals(concat[1]));
-        Assert.assertTrue(concat[2], "<(toStringLiteral.(type))("2")>two<(toStringLiteral.(type))("5")>five".equals(concat[2]) || "<(toStringLiteral.(type))("5")>five<(toStringLiteral.(type))("2")>two".equals(concat[2]));
-        Assert.assertTrue(concat[3], "<(toStringLiteral.(type))("0")>zero<(toStringLiteral.(type))("5")>five".equals(concat[3]) || "<(toStringLiteral.(type))("5")>five<(toStringLiteral.(type))("0")>zero".equals(concat[3]));
+        assertTrue(concat[0], "<(toStringLiteral.(type))("1")>one<(toStringLiteral.(type))("5")>five".equals(concat[0]) || "<(toStringLiteral.(type))("5")>five<(toStringLiteral.(type))("1")>one".equals(concat[0]));
+        assertTrue(concat[1], "<(toStringLiteral.(type))("1")>one<(toStringLiteral.(type))("0")>zero".equals(concat[1]) || "<(toStringLiteral.(type))("0")>zero<(toStringLiteral.(type))("1")>one".equals(concat[1]));
+        assertTrue(concat[2], "<(toStringLiteral.(type))("2")>two<(toStringLiteral.(type))("5")>five".equals(concat[2]) || "<(toStringLiteral.(type))("5")>five<(toStringLiteral.(type))("2")>two".equals(concat[2]));
+        assertTrue(concat[3], "<(toStringLiteral.(type))("0")>zero<(toStringLiteral.(type))("5")>five".equals(concat[3]) || "<(toStringLiteral.(type))("5")>five<(toStringLiteral.(type))("0")>zero".equals(concat[3]));
     }
 
     @Test
@@ -1271,40 +1278,40 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map0 = this.newWithKeysValues(<(literal.(type))("2")>, "3", <(literal.(type))("4")>, "5");
 
         String result0 = map0.injectIntoKeyValue(new String("1"), (result, eachKey, eachValue) -> result + String.valueOf(eachKey) + eachValue);
-        Assert.assertTrue(result0, "1<(toStringLiteral.(type))("2")>3<(toStringLiteral.(type))("4")>5".equals(result0) || "1<(toStringLiteral.(type))("4")>5<(toStringLiteral.(type))("2")>3".equals(result0));
+        assertTrue(result0, "1<(toStringLiteral.(type))("2")>3<(toStringLiteral.(type))("4")>5".equals(result0) || "1<(toStringLiteral.(type))("4")>5<(toStringLiteral.(type))("2")>3".equals(result0));
 
         <name>ObjectMap copy = map0.injectIntoKeyValue(<name>ObjectMaps.mutable.empty(), Mutable<name>ObjectMap::withKeyValue);
-        Assert.assertEquals(map0, copy);
+        assertEquals(map0, copy);
     }
 
     @Test
     public void size()
     {
-        Assert.assertEquals(0, this.getEmptyMap().size());
-        Assert.assertEquals(2, this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five").size());
-        Assert.assertEquals(2, this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five").size());
-        Assert.assertEquals(3, this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five").size());
-        Assert.assertEquals(2, this.newWithKeysValues(<(literal.(type))("6")>, "six", <(literal.(type))("5")>, "five").size());
+        assertEquals(0, this.getEmptyMap().size());
+        assertEquals(2, this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five").size());
+        assertEquals(2, this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five").size());
+        assertEquals(3, this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five").size());
+        assertEquals(2, this.newWithKeysValues(<(literal.(type))("6")>, "six", <(literal.(type))("5")>, "five").size());
     }
 
     @Test
     public void isEmpty()
     {
-        Assert.assertTrue(this.getEmptyMap().isEmpty());
-        Assert.assertFalse(this.classUnderTest().isEmpty());
-        Assert.assertFalse(this.newWithKeysValues(<(literal.(type))("1")>, "one").isEmpty());
-        Assert.assertFalse(this.newWithKeysValues(<(literal.(type))("0")>, "zero").isEmpty());
-        Assert.assertFalse(this.newWithKeysValues(<(literal.(type))("50")>, "fifty").isEmpty());
+        assertTrue(this.getEmptyMap().isEmpty());
+        assertFalse(this.classUnderTest().isEmpty());
+        assertFalse(this.newWithKeysValues(<(literal.(type))("1")>, "one").isEmpty());
+        assertFalse(this.newWithKeysValues(<(literal.(type))("0")>, "zero").isEmpty());
+        assertFalse(this.newWithKeysValues(<(literal.(type))("50")>, "fifty").isEmpty());
     }
 
     @Test
     public void notEmpty()
     {
-        Assert.assertFalse(this.getEmptyMap().notEmpty());
-        Assert.assertTrue(this.classUnderTest().notEmpty());
-        Assert.assertTrue(this.newWithKeysValues(<(literal.(type))("1")>, "one").notEmpty());
-        Assert.assertTrue(this.newWithKeysValues(<(literal.(type))("0")>, "zero").notEmpty());
-        Assert.assertTrue(this.newWithKeysValues(<(literal.(type))("50")>, "fifty").notEmpty());
+        assertFalse(this.getEmptyMap().notEmpty());
+        assertTrue(this.classUnderTest().notEmpty());
+        assertTrue(this.newWithKeysValues(<(literal.(type))("1")>, "one").notEmpty());
+        assertTrue(this.newWithKeysValues(<(literal.(type))("0")>, "zero").notEmpty());
+        assertTrue(this.newWithKeysValues(<(literal.(type))("50")>, "fifty").notEmpty());
     }
 
     @Test
@@ -1315,11 +1322,11 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("2")>, "two", <(literal.(type))("5")>, "five");
         <name>ObjectMap\<String> map4 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five");
 
-        Assert.assertTrue(map1.getFirst(), "one".equals(map1.getFirst()) || "five".equals(map1.getFirst()));
-        Assert.assertTrue(map2.getFirst(), "one".equals(map2.getFirst()) || "zero".equals(map2.getFirst()));
-        Assert.assertTrue(map3.getFirst(), "two".equals(map3.getFirst()) || "five".equals(map3.getFirst()));
-        Assert.assertTrue(map4.getFirst(), "zero".equals(map4.getFirst()) || "five".equals(map4.getFirst()));
-        Assert.assertNull(<name>ObjectHashMap.newMap().getFirst());
+        assertTrue(map1.getFirst(), "one".equals(map1.getFirst()) || "five".equals(map1.getFirst()));
+        assertTrue(map2.getFirst(), "one".equals(map2.getFirst()) || "zero".equals(map2.getFirst()));
+        assertTrue(map3.getFirst(), "two".equals(map3.getFirst()) || "five".equals(map3.getFirst()));
+        assertTrue(map4.getFirst(), "zero".equals(map4.getFirst()) || "five".equals(map4.getFirst()));
+        assertNull(<name>ObjectHashMap.newMap().getFirst());
     }
 
     @Test
@@ -1330,101 +1337,101 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("2")>, "two", <(literal.(type))("5")>, "five");
         <name>ObjectMap\<String> map4 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five");
 
-        Assert.assertTrue(map1.getLast(), "one".equals(map1.getLast()) || "five".equals(map1.getLast()));
-        Assert.assertTrue(map2.getLast(), "one".equals(map2.getLast()) || "zero".equals(map2.getLast()));
-        Assert.assertTrue(map3.getLast(), "two".equals(map3.getLast()) || "five".equals(map3.getLast()));
-        Assert.assertTrue(map4.getLast(), "zero".equals(map4.getLast()) || "five".equals(map4.getLast()));
-        Assert.assertEquals("zero", this.newWithKeysValues(<(literal.(type))("0")>, "zero").getLast());
-        Assert.assertNull(<name>ObjectHashMap.newMap().getLast());
+        assertTrue(map1.getLast(), "one".equals(map1.getLast()) || "five".equals(map1.getLast()));
+        assertTrue(map2.getLast(), "one".equals(map2.getLast()) || "zero".equals(map2.getLast()));
+        assertTrue(map3.getLast(), "two".equals(map3.getLast()) || "five".equals(map3.getLast()));
+        assertTrue(map4.getLast(), "zero".equals(map4.getLast()) || "five".equals(map4.getLast()));
+        assertEquals("zero", this.newWithKeysValues(<(literal.(type))("0")>, "zero").getLast());
+        assertNull(<name>ObjectHashMap.newMap().getLast());
     }
 
     @Test
     public void getOnly()
     {
-        Assert.assertEquals("zero", this.newWithKeysValues(<(literal.(type))("0")>, "zero").getOnly());
-        Assert.assertEquals("one", this.newWithKeysValues(<(literal.(type))("1")>, "one").getOnly());
-        Assert.assertEquals("two", this.newWithKeysValues(<(literal.(type))("2")>, "two").getOnly());
+        assertEquals("zero", this.newWithKeysValues(<(literal.(type))("0")>, "zero").getOnly());
+        assertEquals("one", this.newWithKeysValues(<(literal.(type))("1")>, "one").getOnly());
+        assertEquals("two", this.newWithKeysValues(<(literal.(type))("2")>, "two").getOnly());
     }
 
     @Test
     public void getOnly_empty_throws()
     {
-        Assert.assertThrows(IllegalStateException.class, () -> this.getEmptyMap().getOnly());
+        assertThrows(IllegalStateException.class, () -> this.getEmptyMap().getOnly());
     }
 
     @Test
     public void getOnly_not_only_one_throws()
     {
-        Assert.assertThrows(IllegalStateException.class, () ->
+        assertThrows(IllegalStateException.class, () ->
                 this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five").getOnly());
     }
 
     @Test
     public void contains()
     {
-        Assert.assertFalse(this.classUnderTest().contains(null));
-        Assert.assertTrue(this.classUnderTest().contains("zero"));
-        Assert.assertTrue(this.classUnderTest().contains("thirtyOne"));
-        Assert.assertTrue(this.classUnderTest().contains("thirtyTwo"));
+        assertFalse(this.classUnderTest().contains(null));
+        assertTrue(this.classUnderTest().contains("zero"));
+        assertTrue(this.classUnderTest().contains("thirtyOne"));
+        assertTrue(this.classUnderTest().contains("thirtyTwo"));
     }
 
     @Test
     public void containsAllIterable()
     {
-        Assert.assertTrue(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "thirtyOne")));
-        Assert.assertTrue(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "one", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("two", "one", "nine")));
+        assertTrue(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "thirtyOne")));
+        assertTrue(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("zero", "one", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAllIterable(FastList.newListWith("two", "one", "nine")));
     }
 
     @Test
     public void containsAll()
     {
-        Assert.assertTrue(this.classUnderTest().containsAll(FastList.newListWith("zero", "thirtyOne")));
-        Assert.assertTrue(this.classUnderTest().containsAll(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAll(FastList.newListWith("zero", "one", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAll(FastList.newListWith("two", "one", "nine")));
+        assertTrue(this.classUnderTest().containsAll(FastList.newListWith("zero", "thirtyOne")));
+        assertTrue(this.classUnderTest().containsAll(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAll(FastList.newListWith("zero", "one", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAll(FastList.newListWith("two", "one", "nine")));
     }
 
     @Test
     public void containsAnyIterable()
     {
-        Assert.assertTrue(this.classUnderTest().containsAnyIterable(FastList.newListWith("zero", "thirtyOne")));
-        Assert.assertTrue(this.classUnderTest().containsAnyIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAnyIterable(FastList.newListWith("none")));
+        assertTrue(this.classUnderTest().containsAnyIterable(FastList.newListWith("zero", "thirtyOne")));
+        assertTrue(this.classUnderTest().containsAnyIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAnyIterable(FastList.newListWith("none")));
     }
 
     @Test
     public void containsAny()
     {
-        Assert.assertTrue(this.classUnderTest().containsAny(FastList.newListWith("zero", "thirtyOne")));
-        Assert.assertTrue(this.classUnderTest().containsAny(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
-        Assert.assertFalse(this.classUnderTest().containsAny(FastList.newListWith("none")));
+        assertTrue(this.classUnderTest().containsAny(FastList.newListWith("zero", "thirtyOne")));
+        assertTrue(this.classUnderTest().containsAny(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        assertFalse(this.classUnderTest().containsAny(FastList.newListWith("none")));
     }
 
     @Test
     public void containsNoneIterable()
     {
-        Assert.assertFalse(this.classUnderTest().containsNoneIterable(FastList.newListWith("zero", "thirtyOne")));
-        Assert.assertFalse(this.classUnderTest().containsNoneIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
-        Assert.assertTrue(this.classUnderTest().containsNoneIterable(FastList.newListWith("none")));
+        assertFalse(this.classUnderTest().containsNoneIterable(FastList.newListWith("zero", "thirtyOne")));
+        assertFalse(this.classUnderTest().containsNoneIterable(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        assertTrue(this.classUnderTest().containsNoneIterable(FastList.newListWith("none")));
     }
 
     @Test
     public void containsNone()
     {
-        Assert.assertFalse(this.classUnderTest().containsNone(FastList.newListWith("zero", "thirtyOne")));
-        Assert.assertFalse(this.classUnderTest().containsNone(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
-        Assert.assertTrue(this.classUnderTest().containsNone(FastList.newListWith("none")));
+        assertFalse(this.classUnderTest().containsNone(FastList.newListWith("zero", "thirtyOne")));
+        assertFalse(this.classUnderTest().containsNone(FastList.newListWith("zero", "thirtyOne", "thirtyTwo")));
+        assertTrue(this.classUnderTest().containsNone(FastList.newListWith("none")));
     }
 
     @Test
     public void containsAllArguments()
     {
-        Assert.assertTrue(this.classUnderTest().containsAllArguments("zero", "thirtyOne"));
-        Assert.assertTrue(this.classUnderTest().containsAllArguments("zero", "thirtyOne", "thirtyTwo"));
-        Assert.assertFalse(this.classUnderTest().containsAllArguments("zero", "one", "thirtyTwo"));
-        Assert.assertFalse(this.classUnderTest().containsAllArguments("two", "one", "nine"));
+        assertTrue(this.classUnderTest().containsAllArguments("zero", "thirtyOne"));
+        assertTrue(this.classUnderTest().containsAllArguments("zero", "thirtyOne", "thirtyTwo"));
+        assertFalse(this.classUnderTest().containsAllArguments("zero", "one", "thirtyTwo"));
+        assertFalse(this.classUnderTest().containsAllArguments("two", "one", "nine"));
     }
 
     @Test
@@ -1449,58 +1456,58 @@ public abstract class Abstract<name>ObjectMapTestCase
         Verify.assertPostSerializedEqualsAndHashCode(map10);
         Verify.assertPostSerializedEqualsAndHashCode(<name>ObjectHashMap.newMap());
         Verify.assertEqualsAndHashCode(map1, map2);
-        Assert.assertNotEquals(map1, map3);
-        Assert.assertNotEquals(map1, map4);
-        Assert.assertNotEquals(map1, map5);
-        Assert.assertNotEquals(map1, map6);
-        Assert.assertNotEquals(map1, map7);
-        Assert.assertNotEquals(map8, map5);
-        Assert.assertNotEquals(map9, map8);
-        Assert.assertNotEquals(this.newWithKeysValues(<(literal.(type))("0")>, null), this.newWithKeysValues(<(literal.(type))("6")>, ""));
-        Assert.assertNotEquals(this.newWithKeysValues(<(literal.(type))("5")>, null), this.newWithKeysValues(<(literal.(type))("6")>, ""));
+        assertNotEquals(map1, map3);
+        assertNotEquals(map1, map4);
+        assertNotEquals(map1, map5);
+        assertNotEquals(map1, map6);
+        assertNotEquals(map1, map7);
+        assertNotEquals(map8, map5);
+        assertNotEquals(map9, map8);
+        assertNotEquals(this.newWithKeysValues(<(literal.(type))("0")>, null), this.newWithKeysValues(<(literal.(type))("6")>, ""));
+        assertNotEquals(this.newWithKeysValues(<(literal.(type))("5")>, null), this.newWithKeysValues(<(literal.(type))("6")>, ""));
 
-        Assert.assertEquals(map1, <name>ObjectMaps.mutable.ofAll(map1));
-        Assert.assertEquals(map1, <name>ObjectMaps.immutable.ofAll(map1));
+        assertEquals(map1, <name>ObjectMaps.mutable.ofAll(map1));
+        assertEquals(map1, <name>ObjectMaps.immutable.ofAll(map1));
     }
 
     @Test
     public void testHashCode()
     {
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("32")>, "thirtyTwo").hashCode(), this.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo", <(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one").hashCode());
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(<(literal.(type))("0")>, null, <(literal.(type))("1")>, null).hashCode(), this.newWithKeysValues(<(literal.(type))("0")>, null, <(literal.(type))("1")>, null).hashCode());
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(<(literal.(type))("50")>, "zero", <(literal.(type))("60")>, "one", <(literal.(type))("70")>, "thirtyThree").hashCode(), this.newWithKeysValues(<(literal.(type))("50")>, "zero", <(literal.(type))("60")>, "one", <(literal.(type))("70")>, "thirtyThree").hashCode());
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(<(literal.(type))("50")>, null, <(literal.(type))("60")>, null).hashCode(), this.newWithKeysValues(<(literal.(type))("50")>, null, <(literal.(type))("60")>, null).hashCode());
-        Assert.assertEquals(UnifiedMap.newMap().hashCode(), this.getEmptyMap().hashCode());
+        assertEquals(UnifiedMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("32")>, "thirtyTwo").hashCode(), this.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo", <(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one").hashCode());
+        assertEquals(UnifiedMap.newWithKeysValues(<(literal.(type))("0")>, null, <(literal.(type))("1")>, null).hashCode(), this.newWithKeysValues(<(literal.(type))("0")>, null, <(literal.(type))("1")>, null).hashCode());
+        assertEquals(UnifiedMap.newWithKeysValues(<(literal.(type))("50")>, "zero", <(literal.(type))("60")>, "one", <(literal.(type))("70")>, "thirtyThree").hashCode(), this.newWithKeysValues(<(literal.(type))("50")>, "zero", <(literal.(type))("60")>, "one", <(literal.(type))("70")>, "thirtyThree").hashCode());
+        assertEquals(UnifiedMap.newWithKeysValues(<(literal.(type))("50")>, null, <(literal.(type))("60")>, null).hashCode(), this.newWithKeysValues(<(literal.(type))("50")>, null, <(literal.(type))("60")>, null).hashCode());
+        assertEquals(UnifiedMap.newMap().hashCode(), this.getEmptyMap().hashCode());
     }
 
     @Test
     public void testToString()
     {
-        Assert.assertEquals("{}", this.getEmptyMap().toString());
-        Assert.assertEquals("{<(toStringLiteral.(type))("0")>=zero}", this.newWithKeysValues(<(literal.(type))("0")>, "zero").toString());
-        Assert.assertEquals("{<(toStringLiteral.(type))("1")>=one}", this.newWithKeysValues(<(literal.(type))("1")>, "one").toString());
-        Assert.assertEquals("{<(toStringLiteral.(type))("5")>=five}", this.newWithKeysValues(<(literal.(type))("5")>, "five").toString());
+        assertEquals("{}", this.getEmptyMap().toString());
+        assertEquals("{<(toStringLiteral.(type))("0")>=zero}", this.newWithKeysValues(<(literal.(type))("0")>, "zero").toString());
+        assertEquals("{<(toStringLiteral.(type))("1")>=one}", this.newWithKeysValues(<(literal.(type))("1")>, "one").toString());
+        assertEquals("{<(toStringLiteral.(type))("5")>=five}", this.newWithKeysValues(<(literal.(type))("5")>, "five").toString());
 
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
-        Assert.assertTrue(
+        assertTrue(
                 map1.toString(),
                 "{<(toStringLiteral.(type))("0")>=zero, <(toStringLiteral.(type))("1")>=one}".equals(map1.toString())
                         || "{<(toStringLiteral.(type))("1")>=one, <(toStringLiteral.(type))("0")>=zero}".equals(map1.toString()));
 
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("32")>, "thirtyTwo");
-        Assert.assertTrue(
+        assertTrue(
                 map2.toString(),
                 "{<(toStringLiteral.(type))("1")>=one, <(toStringLiteral.(type))("32")>=thirtyTwo}".equals(map2.toString())
                         || "{<(toStringLiteral.(type))("32")>=thirtyTwo, <(toStringLiteral.(type))("1")>=one}".equals(map2.toString()));
 
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("32")>, "thirtyTwo");
-        Assert.assertTrue(
+        assertTrue(
                 map3.toString(),
                 "{<(toStringLiteral.(type))("0")>=zero, <(toStringLiteral.(type))("32")>=thirtyTwo}".equals(map3.toString())
                         || "{<(toStringLiteral.(type))("32")>=thirtyTwo, <(toStringLiteral.(type))("0")>=zero}".equals(map3.toString()));
 
         <name>ObjectMap\<String> map4 = this.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo", <(literal.(type))("33")>, "thirtyThree");
-        Assert.assertTrue(
+        assertTrue(
                 map4.toString(),
                 "{<(toStringLiteral.(type))("32")>=thirtyTwo, <(toStringLiteral.(type))("33")>=thirtyThree}".equals(map4.toString())
                         || "{<(toStringLiteral.(type))("33")>=thirtyThree, <(toStringLiteral.(type))("32")>=thirtyTwo}".equals(map4.toString()));
@@ -1515,11 +1522,11 @@ public abstract class Abstract<name>ObjectMapTestCase
                 .zip(FastList.newListWith(1));
         RichIterable\<Pair\<String, Integer>\> zip3 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five")
                 .zip(FastList.newListWith(1), FastList.\<Pair\<String, Integer>\>newList());
-        Assert.assertTrue(HashBag.newBagWith(Tuples.pair("zero", 0), Tuples.pair("five", 5)).equals(zip1)
+        assertTrue(HashBag.newBagWith(Tuples.pair("zero", 0), Tuples.pair("five", 5)).equals(zip1)
                 || HashBag.newBagWith(Tuples.pair("five", 0), Tuples.pair("zero", 5)).equals(zip1));
-        Assert.assertTrue(HashBag.newBagWith(Tuples.pair("one", 1)).equals(zip2)
+        assertTrue(HashBag.newBagWith(Tuples.pair("one", 1)).equals(zip2)
                 || HashBag.newBagWith(Tuples.pair("five", 1)).equals(zip2));
-        Assert.assertTrue(FastList.newListWith(Tuples.pair("one", 1)).equals(zip3)
+        assertTrue(FastList.newListWith(Tuples.pair("one", 1)).equals(zip3)
                 || FastList.newListWith(Tuples.pair("five", 1)).equals(zip3));
     }
 
@@ -1532,11 +1539,11 @@ public abstract class Abstract<name>ObjectMapTestCase
                 .zipWithIndex();
         RichIterable\<Pair\<String, Integer>\> zip3 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five")
                 .zipWithIndex(FastList.\<Pair\<String, Integer>\>newList());
-        Assert.assertTrue(UnifiedSet.newSetWith(Tuples.pair("zero", 0), Tuples.pair("five", 1)).equals(zip1)
+        assertTrue(UnifiedSet.newSetWith(Tuples.pair("zero", 0), Tuples.pair("five", 1)).equals(zip1)
                 || UnifiedSet.newSetWith(Tuples.pair("five", 0), Tuples.pair("zero", 1)).equals(zip1));
-        Assert.assertTrue(UnifiedSet.newSetWith(Tuples.pair("one", 0), Tuples.pair("five", 1)).equals(zip2)
+        assertTrue(UnifiedSet.newSetWith(Tuples.pair("one", 0), Tuples.pair("five", 1)).equals(zip2)
                 || UnifiedSet.newSetWith(Tuples.pair("five", 0), Tuples.pair("one", 1)).equals(zip2));
-        Assert.assertTrue(FastList.newListWith(Tuples.pair("one", 0), Tuples.pair("five", 1)).equals(zip3)
+        assertTrue(FastList.newListWith(Tuples.pair("one", 0), Tuples.pair("five", 1)).equals(zip3)
                 || FastList.newListWith(Tuples.pair("five", 0), Tuples.pair("one", 1)).equals(zip3));
     }
 
@@ -1547,23 +1554,23 @@ public abstract class Abstract<name>ObjectMapTestCase
                 .chunk(1);
         RichIterable\<RichIterable\<String>\> chunk2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five")
                 .chunk(1);
-        Assert.assertTrue(FastList.newListWith(FastList.newListWith("zero"), FastList.newListWith("five")).equals(chunk1)
+        assertTrue(FastList.newListWith(FastList.newListWith("zero"), FastList.newListWith("five")).equals(chunk1)
                 || FastList.newListWith(FastList.newListWith("five"), FastList.newListWith("zero")).equals(chunk1));
-        Assert.assertTrue(FastList.newListWith(FastList.newListWith("one"), FastList.newListWith("five")).equals(chunk2)
+        assertTrue(FastList.newListWith(FastList.newListWith("one"), FastList.newListWith("five")).equals(chunk2)
                 || FastList.newListWith(FastList.newListWith("five"), FastList.newListWith("one")).equals(chunk2));
     }
 
     @Test
     public void chunk_throws_negative_size()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five")
+        assertThrows(IllegalArgumentException.class, () -> this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five")
                 .chunk(-1));
     }
 
     @Test
     public void chunk_throws_zero_size()
     {
-        Assert.assertThrows(IllegalArgumentException.class, () -> this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five")
+        assertThrows(IllegalArgumentException.class, () -> this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five")
                 .chunk(0));
     }
 
@@ -1574,9 +1581,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         Procedure2\<AtomicInteger, Integer> sumAggregator = AtomicInteger::addAndGet;
         <name>ObjectMap\<Integer> collection = this.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3);
         MapIterable\<String, AtomicInteger> aggregation = collection.aggregateInPlaceBy(String::valueOf, valueCreator, sumAggregator);
-        Assert.assertEquals(1, aggregation.get("1").intValue());
-        Assert.assertEquals(2, aggregation.get("2").intValue());
-        Assert.assertEquals(3, aggregation.get("3").intValue());
+        assertEquals(1, aggregation.get("1").intValue());
+        assertEquals(2, aggregation.get("2").intValue());
+        assertEquals(3, aggregation.get("3").intValue());
     }
 
     @Test
@@ -1586,9 +1593,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         Function2\<Integer, Integer, Integer> sumAggregator = (Integer aggregate, Integer value) -> aggregate + value;
         <name>ObjectMap\<Integer> collection = this.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3);
         MapIterable\<String, Integer> aggregation = collection.aggregateBy(String::valueOf, valueCreator, sumAggregator);
-        Assert.assertEquals(1, aggregation.get("1").intValue());
-        Assert.assertEquals(2, aggregation.get("2").intValue());
-        Assert.assertEquals(3, aggregation.get("3").intValue());
+        assertEquals(1, aggregation.get("1").intValue());
+        assertEquals(2, aggregation.get("2").intValue());
+        assertEquals(3, aggregation.get("3").intValue());
     }
 
     @Test
@@ -1611,19 +1618,19 @@ public abstract class Abstract<name>ObjectMapTestCase
         Multimap\<Character, String> actual5 = map3.groupBy(firstChar, FastListMultimap.\<Character, String>newMultimap());
 
         Verify.assertSize(expected1.size(), actual1);
-        expected1.forEachKeyValue((Character argument1, String argument2) -> Assert.assertTrue(actual1.containsKeyAndValue(argument1, argument2)));
+        expected1.forEachKeyValue((Character argument1, String argument2) -> assertTrue(actual1.containsKeyAndValue(argument1, argument2)));
 
         Verify.assertSize(expected2.size(), actual2);
-        expected2.forEachKeyValue((Character argument1, String argument2) -> Assert.assertTrue(actual2.containsKeyAndValue(argument1, argument2)));
+        expected2.forEachKeyValue((Character argument1, String argument2) -> assertTrue(actual2.containsKeyAndValue(argument1, argument2)));
 
         Verify.assertSize(expected2.size(), actual3);
-        expected2.forEachKeyValue((Character argument1, String argument2) -> Assert.assertTrue(actual3.containsKeyAndValue(argument1, argument2)));
+        expected2.forEachKeyValue((Character argument1, String argument2) -> assertTrue(actual3.containsKeyAndValue(argument1, argument2)));
 
         Verify.assertSize(expected4.size(), actual4);
-        expected4.forEachKeyValue((Character argument1, String argument2) -> Assert.assertTrue(actual4.containsKeyAndValue(argument1, argument2)));
+        expected4.forEachKeyValue((Character argument1, String argument2) -> assertTrue(actual4.containsKeyAndValue(argument1, argument2)));
 
         Verify.assertSize(expected4.size(), actual5);
-        expected4.forEachKeyValue((Character argument1, String argument2) -> Assert.assertTrue(actual5.containsKeyAndValue(argument1, argument2)));
+        expected4.forEachKeyValue((Character argument1, String argument2) -> assertTrue(actual5.containsKeyAndValue(argument1, argument2)));
     }
 
     @Test
@@ -1651,13 +1658,13 @@ public abstract class Abstract<name>ObjectMapTestCase
         Multimap\<Character, String> actual2 = map2.groupByEach(toChars);
         Multimap\<Character, String> actual3 = map2.groupByEach(toChars, FastListMultimap.\<Character, String>newMultimap());
 
-        expected.forEachKeyValue((Character argument1, String argument2) -> Assert.assertTrue(actual.containsKeyAndValue(argument1, argument2)));
+        expected.forEachKeyValue((Character argument1, String argument2) -> assertTrue(actual.containsKeyAndValue(argument1, argument2)));
 
-        expected.forEachKeyValue((Character argument1, String argument2) -> Assert.assertTrue(actual1.containsKeyAndValue(argument1, argument2)));
+        expected.forEachKeyValue((Character argument1, String argument2) -> assertTrue(actual1.containsKeyAndValue(argument1, argument2)));
 
-        expected2.forEachKeyValue((Character argument1, String argument2) -> Assert.assertTrue(actual2.containsKeyAndValue(argument1, argument2)));
+        expected2.forEachKeyValue((Character argument1, String argument2) -> assertTrue(actual2.containsKeyAndValue(argument1, argument2)));
 
-        expected2.forEachKeyValue((Character argument1, String argument2) -> Assert.assertTrue(actual3.containsKeyAndValue(argument1, argument2)));
+        expected2.forEachKeyValue((Character argument1, String argument2) -> assertTrue(actual3.containsKeyAndValue(argument1, argument2)));
     }
 
     @Test
@@ -1667,8 +1674,8 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("2")>, "two");
 
         Function\<String, Character> firstChar = (String object) -> object.charAt(0);
-        Assert.assertEquals(UnifiedMap.newWithKeysValues('z', "zero", 'o', "one", 't', "two"), map1.groupByUniqueKey(firstChar));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues('t', "two"), map2.groupByUniqueKey(firstChar));
+        assertEquals(UnifiedMap.newWithKeysValues('z', "zero", 'o', "one", 't', "two"), map1.groupByUniqueKey(firstChar));
+        assertEquals(UnifiedMap.newWithKeysValues('t', "two"), map2.groupByUniqueKey(firstChar));
     }
 
     @Test
@@ -1676,7 +1683,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
         Function\<String, Character> firstChar = (String object) -> 'a';
-        Assert.assertThrows(IllegalStateException.class, () -> map1.groupByUniqueKey(firstChar));
+        assertThrows(IllegalStateException.class, () -> map1.groupByUniqueKey(firstChar));
     }
 
     @Test
@@ -1685,8 +1692,8 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("0")>, "zero");
         Function\<String, Character> firstChar = (String object) -> object.charAt(0);
-        Assert.assertEquals(UnifiedMap.newWithKeysValues('z', "zero", 'o', "one", 't', "two"), map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('t', "two")));
-        Assert.assertEquals(UnifiedMap.newWithKeysValues('z', "zero", 't', "two"), map2.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('t', "two")));
+        assertEquals(UnifiedMap.newWithKeysValues('z', "zero", 'o', "one", 't', "two"), map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('t', "two")));
+        assertEquals(UnifiedMap.newWithKeysValues('z', "zero", 't', "two"), map2.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('t', "two")));
     }
 
     @Test
@@ -1694,7 +1701,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
         Function\<String, Character> firstChar = (String object) -> object.charAt(0);
-        Assert.assertThrows(IllegalStateException.class, () ->
+        assertThrows(IllegalStateException.class, () ->
                 map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('z', "zero")));
     }
 
@@ -1703,7 +1710,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero");
         Function\<String, Character> firstChar = (String object) -> object.charAt(0);
-        Assert.assertThrows(IllegalStateException.class, () ->
+        assertThrows(IllegalStateException.class, () ->
                 map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('z', "zero")));
     }
 
@@ -1712,38 +1719,38 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("2")>, "two");
         Function\<String, Character> firstChar = (String object) -> object.charAt(0);
-        Assert.assertThrows(IllegalStateException.class, () ->
+        assertThrows(IllegalStateException.class, () ->
                 map1.groupByUniqueKey(firstChar, UnifiedMap.newWithKeysValues('t', "two")));
     }
 
     @Test
     public void makeString()
     {
-        Assert.assertEquals("", this.getEmptyMap().makeString());
-        Assert.assertEquals("zero", this.newWithKeysValues(<(literal.(type))("0")>, "zero").makeString());
-        Assert.assertEquals("one", this.newWithKeysValues(<(literal.(type))("1")>, "one").makeString());
-        Assert.assertEquals("five", this.newWithKeysValues(<(literal.(type))("5")>, "five").makeString());
+        assertEquals("", this.getEmptyMap().makeString());
+        assertEquals("zero", this.newWithKeysValues(<(literal.(type))("0")>, "zero").makeString());
+        assertEquals("one", this.newWithKeysValues(<(literal.(type))("1")>, "one").makeString());
+        assertEquals("five", this.newWithKeysValues(<(literal.(type))("5")>, "five").makeString());
 
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
-        Assert.assertTrue(
+        assertTrue(
                 map1.makeString(),
                 "zero, one".equals(map1.makeString())
                         || "one, zero".equals(map1.makeString()));
 
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("32")>, "thirtyTwo");
-        Assert.assertTrue(
+        assertTrue(
                 map2.makeString("[", "/", "]"),
                 "[one/thirtyTwo]".equals(map2.makeString("[", "/", "]"))
                         || "[thirtyTwo/one]".equals(map2.makeString("[", "/", "]")));
 
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("32")>, "thirtyTwo");
-        Assert.assertTrue(
+        assertTrue(
                 map3.makeString("~"),
                 "zero~thirtyTwo".equals(map3.makeString("~"))
                         || "thirtyTwo~zero".equals(map3.makeString("~")));
 
         <name>ObjectMap\<String> map4 = this.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo", <(literal.(type))("33")>, "thirtyThree");
-        Assert.assertTrue(
+        assertTrue(
                 map4.makeString("[", ", ", "]"),
                 "[thirtyTwo, thirtyThree]".equals(map4.makeString("[", ", ", "]"))
                         || "[thirtyThree, thirtyTwo]".equals(map4.makeString("[", ", ", "]")));
@@ -1754,24 +1761,24 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         Appendable appendable = new StringBuilder();
         this.getEmptyMap().appendString(appendable);
-        Assert.assertEquals("", appendable.toString());
+        assertEquals("", appendable.toString());
 
         Appendable appendable0 = new StringBuilder();
         this.newWithKeysValues(<(literal.(type))("0")>, "zero").appendString(appendable0);
-        Assert.assertEquals("zero", appendable0.toString());
+        assertEquals("zero", appendable0.toString());
 
         Appendable appendable1 = new StringBuilder();
         this.newWithKeysValues(<(literal.(type))("1")>, "one").appendString(appendable1);
-        Assert.assertEquals("one", appendable1.toString());
+        assertEquals("one", appendable1.toString());
 
         Appendable appendable2 = new StringBuilder();
         this.newWithKeysValues(<(literal.(type))("5")>, "five").appendString(appendable2);
-        Assert.assertEquals("five", appendable2.toString());
+        assertEquals("five", appendable2.toString());
 
         Appendable appendable3 = new StringBuilder();
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one");
         map1.appendString(appendable3);
-        Assert.assertTrue(
+        assertTrue(
                 appendable3.toString(),
                 "zero, one".equals(appendable3.toString())
                         || "one, zero".equals(appendable3.toString()));
@@ -1779,7 +1786,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         Appendable appendable4 = new StringBuilder();
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("32")>, "thirtyTwo");
         map2.appendString(appendable4, "[", "/", "]");
-        Assert.assertTrue(
+        assertTrue(
                 appendable4.toString(),
                 "[one/thirtyTwo]".equals(appendable4.toString())
                         || "[thirtyTwo/one]".equals(appendable4.toString()));
@@ -1787,14 +1794,14 @@ public abstract class Abstract<name>ObjectMapTestCase
         Appendable appendable5 = new StringBuilder();
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("32")>, "thirtyTwo");
         map3.appendString(appendable5, "[", "/", "]");
-        Assert.assertTrue(
+        assertTrue(
                 appendable5.toString(),
                 "[one/thirtyTwo]".equals(appendable5.toString())
                         || "[thirtyTwo/one]".equals(appendable5.toString()));
 
         Appendable appendable6 = new StringBuilder();
         map3.appendString(appendable6, "/");
-        Assert.assertTrue(
+        assertTrue(
                 appendable6.toString(),
                 "one/thirtyTwo".equals(appendable6.toString())
                         || "thirtyTwo/one".equals(appendable6.toString()));
@@ -1814,15 +1821,15 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("2")>, "two", <(literal.(type))("5")>, "five");
         <name>ObjectMap\<String> map4 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "five");
 
-        Assert.assertSame(map1, map1.tap(concat[0]::append));
-        Assert.assertSame(map2, map2.tap(concat[1]::append));
-        Assert.assertSame(map3, map3.tap(concat[2]::append));
-        Assert.assertSame(map4, map4.tap(concat[3]::append));
+        assertSame(map1, map1.tap(concat[0]::append));
+        assertSame(map2, map2.tap(concat[1]::append));
+        assertSame(map3, map3.tap(concat[2]::append));
+        assertSame(map4, map4.tap(concat[3]::append));
 
-        Assert.assertTrue(concat[0].toString(), "onefive".equals(concat[0].toString()) || "fiveone".equals(concat[0].toString()));
-        Assert.assertTrue(concat[1].toString(), "onezero".equals(concat[1].toString()) || "zeroone".equals(concat[1].toString()));
-        Assert.assertTrue(concat[2].toString(), "twofive".equals(concat[2].toString()) || "fivetwo".equals(concat[2].toString()));
-        Assert.assertTrue(concat[3].toString(), "zerofive".equals(concat[3].toString()) || "fivezero".equals(concat[3].toString()));
+        assertTrue(concat[0].toString(), "onefive".equals(concat[0].toString()) || "fiveone".equals(concat[0].toString()));
+        assertTrue(concat[1].toString(), "onezero".equals(concat[1].toString()) || "zeroone".equals(concat[1].toString()));
+        assertTrue(concat[2].toString(), "twofive".equals(concat[2].toString()) || "fivetwo".equals(concat[2].toString()));
+        assertTrue(concat[3].toString(), "zerofive".equals(concat[3].toString()) || "fivezero".equals(concat[3].toString()));
     }
 
     @Test
@@ -1839,10 +1846,10 @@ public abstract class Abstract<name>ObjectMapTestCase
         map3.forEach(Procedures.cast(each -> concat[2] += each));
         map4.forEach(Procedures.cast(each -> concat[3] += each));
 
-        Assert.assertTrue(concat[0], "onefive".equals(concat[0]) || "fiveone".equals(concat[0]));
-        Assert.assertTrue(concat[1], "onezero".equals(concat[1]) || "zeroone".equals(concat[1]));
-        Assert.assertTrue(concat[2], "twofive".equals(concat[2]) || "fivetwo".equals(concat[2]));
-        Assert.assertTrue(concat[3], "zerofive".equals(concat[3]) || "fivezero".equals(concat[3]));
+        assertTrue(concat[0], "onefive".equals(concat[0]) || "fiveone".equals(concat[0]));
+        assertTrue(concat[1], "onezero".equals(concat[1]) || "zeroone".equals(concat[1]));
+        assertTrue(concat[2], "twofive".equals(concat[2]) || "fivetwo".equals(concat[2]));
+        assertTrue(concat[3], "zerofive".equals(concat[3]) || "fivezero".equals(concat[3]));
     }
 
     @Test
@@ -1875,10 +1882,10 @@ public abstract class Abstract<name>ObjectMapTestCase
             concat[3] += parameter;
         });
 
-        Assert.assertTrue(concat[0], "one0five1".equals(concat[0]) || "five0one1".equals(concat[0]));
-        Assert.assertTrue(concat[1], "one0zero1".equals(concat[1]) || "zero0one1".equals(concat[1]));
-        Assert.assertTrue(concat[2], "two0five1".equals(concat[2]) || "five0two1".equals(concat[2]));
-        Assert.assertTrue(concat[3], "zero0five1".equals(concat[3]) || "five0zero1".equals(concat[3]));
+        assertTrue(concat[0], "one0five1".equals(concat[0]) || "five0one1".equals(concat[0]));
+        assertTrue(concat[1], "one0zero1".equals(concat[1]) || "zero0one1".equals(concat[1]));
+        assertTrue(concat[2], "two0five1".equals(concat[2]) || "five0two1".equals(concat[2]));
+        assertTrue(concat[3], "zero0five1".equals(concat[3]) || "five0zero1".equals(concat[3]));
     }
 
     @Test
@@ -1911,10 +1918,10 @@ public abstract class Abstract<name>ObjectMapTestCase
             concat[3] += argument2;
         }, "-");
 
-        Assert.assertTrue(concat[0], "one-five-".equals(concat[0]) || "five-one-".equals(concat[0]));
-        Assert.assertTrue(concat[1], "one-zero-".equals(concat[1]) || "zero-one-".equals(concat[1]));
-        Assert.assertTrue(concat[2], "two-five-".equals(concat[2]) || "five-two-".equals(concat[2]));
-        Assert.assertTrue(concat[3], "zero-five-".equals(concat[3]) || "five-zero-".equals(concat[3]));
+        assertTrue(concat[0], "one-five-".equals(concat[0]) || "five-one-".equals(concat[0]));
+        assertTrue(concat[1], "one-zero-".equals(concat[1]) || "zero-one-".equals(concat[1]));
+        assertTrue(concat[2], "two-five-".equals(concat[2]) || "five-two-".equals(concat[2]));
+        assertTrue(concat[3], "zero-five-".equals(concat[3]) || "five-zero-".equals(concat[3]));
     }
 
     @Test
@@ -1924,22 +1931,22 @@ public abstract class Abstract<name>ObjectMapTestCase
         MutableSet\<String> actual = UnifiedSet.newSet();
 
         Iterator\<String> iterator = this.classUnderTest().iterator();
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         actual.add(iterator.next());
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
 
-        Assert.assertEquals(expected, actual);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertEquals(expected, actual);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
     public void toImmutable()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
+        assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
         Verify.assertInstanceOf(Immutable<name>ObjectMap.class, this.classUnderTest().toImmutable());
     }
 
@@ -1965,16 +1972,16 @@ public abstract class Abstract<name>ObjectMapTestCase
     public void stream()
     {
         <name>ObjectMap\<String> map = this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("9")>, "9");
-        Assert.assertEquals("129", CharAdapter.adapt(map.stream().reduce("", (r, s) -> r + s)).toSortedList().makeString(""));
-        Assert.assertEquals(map.reduce((r, s) -> r + s), map.stream().reduce((r, s) -> r + s));
+        assertEquals("129", CharAdapter.adapt(map.stream().reduce("", (r, s) -> r + s)).toSortedList().makeString(""));
+        assertEquals(map.reduce((r, s) -> r + s), map.stream().reduce((r, s) -> r + s));
     }
 
     @Test
     public void parallelStream()
     {
         <name>ObjectMap\<String> map = this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("9")>, "9");
-        Assert.assertEquals("129", CharAdapter.adapt(map.parallelStream().reduce("", (r, s) -> r + s)).toSortedList().makeString(""));
-        Assert.assertEquals(map.reduce((r, s) -> r + s), map.stream().reduce((r, s) -> r + s));
+        assertEquals("129", CharAdapter.adapt(map.parallelStream().reduce("", (r, s) -> r + s)).toSortedList().makeString(""));
+        assertEquals(map.reduce((r, s) -> r + s), map.stream().reduce((r, s) -> r + s));
     }
 }
 

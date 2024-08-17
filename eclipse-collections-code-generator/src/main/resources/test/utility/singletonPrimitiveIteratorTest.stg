@@ -19,8 +19,11 @@ package org.eclipse.collections.impl.iterator;
 
 import java.util.NoSuchElementException;
 
-import org.junit.Assert;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 /**
  * This file was automatically generated from template file singletonPrimitiveIterator.stg.
@@ -31,25 +34,25 @@ public final class Singleton<name>IteratorTest
     public void hasNext()
     {
         Singleton<name>Iterator iterator = new Singleton<name>Iterator(<(literal.(type))("5")>);
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         iterator.next();
-        Assert.assertFalse(iterator.hasNext());
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
     }
 
     @Test
     public void next()
     {
         Singleton<name>Iterator iterator = new Singleton<name>Iterator(<(literal.(type))("5")>);
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertEquals(<(wideLiteral.(type))("5")>, iterator.next()<(wideDelta.(type))>);
+        assertTrue(iterator.hasNext());
+        assertEquals(<(wideLiteral.(type))("5")>, iterator.next()<(wideDelta.(type))>);
 
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
         try
         {
             iterator.next();
-            Assert.fail("NoSuchElementException should have been thrown");
+            fail("NoSuchElementException should have been thrown");
         }
         catch (NoSuchElementException e)
         {

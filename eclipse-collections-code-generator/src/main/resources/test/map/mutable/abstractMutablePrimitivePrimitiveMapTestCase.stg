@@ -41,8 +41,13 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name1>HashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
 
 /**
  * This file was automatically generated from template file abstractMutablePrimitivePrimitiveMapTestCase.stg.
@@ -74,16 +79,16 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         super.get();
         Mutable<name1><name2>Map map1 = this.classUnderTest();
         map1.put(<(literal.(type1))("0")>, <(literal.(type2))("1")>);
-        Assert.assertEquals(<(literal.(type2))("1")>, map1.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("1")>, map1.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
 
         map1.put(<["0"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
 
         map1.put(<["5"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("5")>, map1.get(<(literal.(type1))("5")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("5")>, map1.get(<(literal.(type1))("5")>)<wideDelta.(type2)>);
 
         map1.put(<["35"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("35")>, map1.get(<(literal.(type1))("35")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("35")>, map1.get(<(literal.(type1))("35")>)<wideDelta.(type2)>);
     }
 
     @Override
@@ -93,18 +98,18 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         super.getOrThrow();
         Mutable<name1><name2>Map map1 = this.classUnderTest();
         map1.removeKey(<(literal.(type1))("0")>);
-        Assert.assertThrows(IllegalStateException.class, () -> map1.getOrThrow(<(literal.(type1))("0")>));
+        assertThrows(IllegalStateException.class, () -> map1.getOrThrow(<(literal.(type1))("0")>));
         map1.put(<(literal.(type1))("0")>, <(literal.(type2))("1")>);
-        Assert.assertEquals(<(literal.(type2))("1")>, map1.getOrThrow(<(literal.(type1))("0")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("1")>, map1.getOrThrow(<(literal.(type1))("0")>)<wideDelta.(type2)>);
 
         map1.put(<["1"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("1")>, map1.getOrThrow(<(literal.(type1))("1")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("1")>, map1.getOrThrow(<(literal.(type1))("1")>)<wideDelta.(type2)>);
 
         map1.put(<["5"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("5")>, map1.getOrThrow(<(literal.(type1))("5")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("5")>, map1.getOrThrow(<(literal.(type1))("5")>)<wideDelta.(type2)>);
 
         map1.put(<["35"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("35")>, map1.getOrThrow(<(literal.(type1))("35")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("35")>, map1.getOrThrow(<(literal.(type1))("35")>)<wideDelta.(type2)>);
     }
 
     @Override
@@ -114,22 +119,22 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         super.getIfAbsent();
         Mutable<name1><name2>Map map1 = this.classUnderTest();
         map1.removeKey(<(literal.(type1))("0")>);
-        Assert.assertEquals(<(literal.(type2))("5")>, map1.getIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("5")>, map1.getIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
 
-        Assert.assertEquals(<(literal.(type2))("6")>, map1.getIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("6")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("6")>, map1.getIfAbsent(<(literal.(type1))("33")>, <(literal.(type2))("6")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("6")>, map1.getIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("6")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("6")>, map1.getIfAbsent(<(literal.(type1))("33")>, <(literal.(type2))("6")>)<wideDelta.(type2)>);
 
         map1.put(<(literal.(type1))("0")>, <(literal.(type2))("1")>);
-        Assert.assertEquals(<(literal.(type2))("1")>, map1.getIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("1")>, map1.getIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
 
         map1.put(<["1"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("1")>, map1.getIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("1")>, map1.getIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
 
         map1.put(<["5"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("5")>, map1.getIfAbsent(<(literal.(type1))("5")>, <(literal.(type2))("6")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("5")>, map1.getIfAbsent(<(literal.(type1))("5")>, <(literal.(type2))("6")>)<wideDelta.(type2)>);
 
         map1.put(<["35"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("35")>, map1.getIfAbsent(<(literal.(type1))("35")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("35")>, map1.getIfAbsent(<(literal.(type1))("35")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
     }
 
     @Override
@@ -139,23 +144,23 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         super.containsKey();
         Mutable<name1><name2>Map map1 = this.classUnderTest();
         map1.removeKey(<(literal.(type1))("0")>);
-        Assert.assertFalse(map1.containsKey(<(literal.(type1))("0")>));
-        Assert.assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
+        assertFalse(map1.containsKey(<(literal.(type1))("0")>));
+        assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
         map1.removeKey(<(literal.(type1))("0")>);
-        Assert.assertFalse(map1.containsKey(<(literal.(type1))("0")>));
-        Assert.assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
+        assertFalse(map1.containsKey(<(literal.(type1))("0")>));
+        assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
 
         map1.removeKey(<(literal.(type1))("1")>);
-        Assert.assertFalse(map1.containsKey(<(literal.(type1))("1")>));
-        Assert.assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("1")>)<wideDelta.(type2)>);
+        assertFalse(map1.containsKey(<(literal.(type1))("1")>));
+        assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("1")>)<wideDelta.(type2)>);
 
         map1.removeKey(<(literal.(type1))("31")>);
-        Assert.assertFalse(map1.containsKey(<(literal.(type1))("31")>));
-        Assert.assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("31")>)<wideDelta.(type2)>);
+        assertFalse(map1.containsKey(<(literal.(type1))("31")>));
+        assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("31")>)<wideDelta.(type2)>);
 
         map1.removeKey(<(literal.(type1))("32")>);
-        Assert.assertFalse(map1.containsKey(<(literal.(type1))("32")>));
-        Assert.assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("32")>)<wideDelta.(type2)>);
+        assertFalse(map1.containsKey(<(literal.(type1))("32")>));
+        assertEquals(<(literal.(type2))("0")>, map1.get(<(literal.(type1))("32")>)<wideDelta.(type2)>);
     }
 
     @Override
@@ -166,10 +171,10 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Mutable<name1><name2>Map map1 = this.classUnderTest();
 
         map1.put(<["35"]:keyValue(); separator=", ">);
-        Assert.assertTrue(map1.containsValue(<(literal.(type2))("35")>));
+        assertTrue(map1.containsValue(<(literal.(type2))("35")>));
 
         map1.removeKey(<(literal.(type1))("0")>);
-        Assert.assertFalse(map1.containsValue(<(literal.(type2))("0")>));
+        assertFalse(map1.containsValue(<(literal.(type2))("0")>));
     }
 
     @Override
@@ -180,10 +185,10 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Mutable<name1><name2>Map map1 = this.classUnderTest();
 
         map1.put(<["35"]:keyValue(); separator=", ">);
-        Assert.assertTrue(map1.contains(<(literal.(type2))("35")>));
+        assertTrue(map1.contains(<(literal.(type2))("35")>));
 
         map1.removeKey(<(literal.(type1))("0")>);
-        Assert.assertFalse(map1.contains(<(literal.(type2))("0")>));
+        assertFalse(map1.contains(<(literal.(type2))("0")>));
     }
 
     @Override
@@ -192,15 +197,15 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     {
         super.size();
         Mutable<name1><name2>Map hashMap1 = this.newWithKeysValues(<["1", "0"]:keyValue(); separator=", ">);
-        Assert.assertEquals(2, hashMap1.size());
+        assertEquals(2, hashMap1.size());
         hashMap1.removeKey(<(literal.(type1))("1")>);
-        Assert.assertEquals(1, hashMap1.size());
+        assertEquals(1, hashMap1.size());
         hashMap1.removeKey(<(literal.(type1))("0")>);
-        Assert.assertEquals(0, hashMap1.size());
+        assertEquals(0, hashMap1.size());
 
         Mutable<name1><name2>Map hashMap = this.newWithKeysValues(<["6", "5"]:keyValue(); separator=", ">);
         hashMap.removeKey(<(literal.(type1))("5")>);
-        Assert.assertEquals(1, hashMap.size());
+        assertEquals(1, hashMap.size());
     }
 
     protected static <name1>ArrayList generateCollisions()
@@ -222,17 +227,17 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     {
         Mutable<name1><name2>Map map1 = this.classUnderTest();
         map1.clear();
-        Assert.assertEquals(new <name1><name2>HashMap(), map1);
+        assertEquals(new <name1><name2>HashMap(), map1);
 
         map1.put(<(literal.(type1))("1")>, <(literal.(type2))("0")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("0")>), map1);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("0")>), map1);
         map1.clear();
-        Assert.assertEquals(new <name1><name2>HashMap(), map1);
+        assertEquals(new <name1><name2>HashMap(), map1);
 
         map1.put(<(literal.(type1))("33")>, <(literal.(type2))("0")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("0")>), map1);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("0")>), map1);
         map1.clear();
-        Assert.assertEquals(new <name1><name2>HashMap(), map1);
+        assertEquals(new <name1><name2>HashMap(), map1);
     }
 
     @Test
@@ -240,42 +245,42 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     {
         Mutable<name1><name2>Map map0 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <["1"]:keyValue(); separator=", ">);
         map0.removeKey(<(literal.(type1))("1")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), map0);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), map0);
         map0.removeKey(<(literal.(type1))("0")>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map0);
+        assertEquals(new <name1><name2>HashMap(), map0);
 
         Mutable<name1><name2>Map map1 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <["1"]:keyValue(); separator=", ">);
         map1.removeKey(<(literal.(type1))("0")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<["1"]:keyValue(); separator=", ">), map1);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<["1"]:keyValue(); separator=", ">), map1);
         map1.removeKey(<(literal.(type1))("1")>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map1);
+        assertEquals(new <name1><name2>HashMap(), map1);
 
         Mutable<name1><name2>Map map2 = this.classUnderTest();
         map2.removeKey(<(literal.(type1))("5")>);
         map2.removeKey(<(literal.(type1))("50")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
         map2.removeKey(<(literal.(type1))("0")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
         map2.removeKey(<(literal.(type1))("31")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
         map2.removeKey(<(literal.(type1))("32")>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map2);
+        assertEquals(new <name1><name2>HashMap(), map2);
         map2.removeKey(<(literal.(type1))("0")>);
         map2.removeKey(<(literal.(type1))("31")>);
         map2.removeKey(<(literal.(type1))("32")>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map2);
+        assertEquals(new <name1><name2>HashMap(), map2);
         Verify.assertEmpty(map2);
 
         map2.put(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0), <(literal.(type2))("1")>);
         map2.put(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1), <(literal.(type2))("2")>);
 
-        Assert.assertEquals(<(literal.(type2))("1")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("1")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<wideDelta.(type2)>);
         map2.removeKey(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0));
-        Assert.assertEquals(<(literal.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<wideDelta.(type2)>);
 
-        Assert.assertEquals(<(wideLiteral.(type2))("2")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<wideDelta.(type2)>);
+        assertEquals(<(wideLiteral.(type2))("2")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<wideDelta.(type2)>);
         map2.removeKey(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1));
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<wideDelta.(type2)>);
+        assertEquals(<(wideLiteral.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<wideDelta.(type2)>);
     }
 
     @Test
@@ -283,89 +288,89 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     {
         Mutable<name1><name2>Map map0 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <["1"]:keyValue(); separator=", ">);
         map0.remove(<(literal.(type1))("1")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), map0);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), map0);
         map0.remove(<(literal.(type1))("0")>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map0);
+        assertEquals(new <name1><name2>HashMap(), map0);
 
         Mutable<name1><name2>Map map1 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <["1"]:keyValue(); separator=", ">);
         map1.remove(<(literal.(type1))("0")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<["1"]:keyValue(); separator=", ">), map1);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<["1"]:keyValue(); separator=", ">), map1);
         map1.remove(<(literal.(type1))("1")>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map1);
+        assertEquals(new <name1><name2>HashMap(), map1);
 
         Mutable<name1><name2>Map map2 = this.classUnderTest();
         map2.remove(<(literal.(type1))("5")>);
         map2.remove(<(literal.(type1))("50")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
         map2.remove(<(literal.(type1))("0")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
         map2.remove(<(literal.(type1))("31")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
         map2.remove(<(literal.(type1))("32")>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map2);
+        assertEquals(new <name1><name2>HashMap(), map2);
         map2.remove(<(literal.(type1))("0")>);
         map2.remove(<(literal.(type1))("31")>);
         map2.remove(<(literal.(type1))("32")>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map2);
+        assertEquals(new <name1><name2>HashMap(), map2);
         Verify.assertEmpty(map2);
 
         map2.put(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0), <(literal.(type2))("1")>);
         map2.put(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1), <(literal.(type2))("2")>);
 
-        Assert.assertEquals(<(literal.(type2))("1")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("1")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<wideDelta.(type2)>);
         map2.remove(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0));
-        Assert.assertEquals(<(literal.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<wideDelta.(type2)>);
 
-        Assert.assertEquals(<(wideLiteral.(type2))("2")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<wideDelta.(type2)>);
+        assertEquals(<(wideLiteral.(type2))("2")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<wideDelta.(type2)>);
         map2.remove(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1));
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<wideDelta.(type2)>);
+        assertEquals(<(wideLiteral.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<wideDelta.(type2)>);
     }
 
     @Test
     public void removeKeyIfAbsent()
     {
         Mutable<name1><name2>Map map0 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <["1"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("1")>, map0.removeKeyIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), map0);
-        Assert.assertEquals(<(literal.(type2))("0")>, map0.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map0);
-        Assert.assertEquals(<(literal.(type2))("100")>, map0.removeKeyIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("100")>, map0.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("1")>, map0.removeKeyIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>), map0);
+        assertEquals(<(literal.(type2))("0")>, map0.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(new <name1><name2>HashMap(), map0);
+        assertEquals(<(literal.(type2))("100")>, map0.removeKeyIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("100")>, map0.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
 
         Mutable<name1><name2>Map map1 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <["1"]:keyValue(); separator=", ">);
-        Assert.assertEquals(<(literal.(type2))("0")>, map1.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<["1"]:keyValue(); separator=", ">), map1);
-        Assert.assertEquals(<(literal.(type2))("1")>, map1.removeKeyIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map1);
-        Assert.assertEquals(<(literal.(type2))("100")>, map1.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("100")>, map1.removeKeyIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("0")>, map1.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<["1"]:keyValue(); separator=", ">), map1);
+        assertEquals(<(literal.(type2))("1")>, map1.removeKeyIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(new <name1><name2>HashMap(), map1);
+        assertEquals(<(literal.(type2))("100")>, map1.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("100")>, map1.removeKeyIfAbsent(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
 
         Mutable<name1><name2>Map map2 = this.classUnderTest();
-        Assert.assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("5")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("50")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
-        Assert.assertEquals(<(literal.(type2))("0")>, map2.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
-        Assert.assertEquals(<(literal.(type2))("31")>, map2.removeKeyIfAbsent(<(literal.(type1))("31")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
-        Assert.assertEquals(<(literal.(type2))("32")>, map2.removeKeyIfAbsent(<(literal.(type1))("32")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map2);
-        Assert.assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("31")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("32")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(new <name1><name2>HashMap(), map2);
+        assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("5")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("50")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("0")>, <(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
+        assertEquals(<(literal.(type2))("0")>, map2.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("31")>, <(literal.(type2))("31")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
+        assertEquals(<(literal.(type2))("31")>, map2.removeKeyIfAbsent(<(literal.(type1))("31")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("32")>), map2);
+        assertEquals(<(literal.(type2))("32")>, map2.removeKeyIfAbsent(<(literal.(type1))("32")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(new <name1><name2>HashMap(), map2);
+        assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("31")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("100")>, map2.removeKeyIfAbsent(<(literal.(type1))("32")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(new <name1><name2>HashMap(), map2);
         Verify.assertEmpty(map2);
 
         map2.put(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0), <(literal.(type2))("1")>);
         map2.put(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1), <(literal.(type2))("2")>);
 
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<(wideDelta.(type2))>);
-        Assert.assertEquals(<(literal.(type2))("1")>, map2.removeKeyIfAbsent(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0), <(literal.(type2))("100")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("1")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<(wideDelta.(type2))>);
+        assertEquals(<(literal.(type2))("1")>, map2.removeKeyIfAbsent(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0), <(literal.(type2))("100")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(0))<(wideDelta.(type2))>);
 
-        Assert.assertEquals(<(wideLiteral.(type2))("2")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<(wideDelta.(type2))>);
-        Assert.assertEquals(<(literal.(type2))("2")>, map2.removeKeyIfAbsent(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1), <(literal.(type2))("100")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("2")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<(wideDelta.(type2))>);
+        assertEquals(<(literal.(type2))("2")>, map2.removeKeyIfAbsent(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1), <(literal.(type2))("100")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("0")>, map2.get(AbstractMutable<name1><name2>MapTestCase.generateCollisions().get(1))<(wideDelta.(type2))>);
     }
 
     @Test
@@ -376,33 +381,33 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         map1.put(<(literal.(type1))("31")>, <(literal.(type2))("32")>);
         map1.put(<(literal.(type1))("32")>, <(literal.(type2))("33")>);
         <name1><name2>HashMap expected = <name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type1))("31")>, <(literal.(type2))("32")>, <(literal.(type1))("32")>, <(literal.(type2))("33")>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(expected, map1);
 
         map1.put(<(literal.(type1))("1")>, <(literal.(type2))("2")>);
         expected.put(<(literal.(type1))("1")>, <(literal.(type2))("2")>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(expected, map1);
 
         map1.put(<(literal.(type1))("33")>, <(literal.(type2))("34")>);
         expected.put(<(literal.(type1))("33")>, <(literal.(type2))("34")>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(expected, map1);
 
         map1.put(<(literal.(type1))("30")>, <(literal.(type2))("31")>);
         expected.put(<(literal.(type1))("30")>, <(literal.(type2))("31")>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(expected, map1);
     }
 
     @Test
     public void getAndPut()
     {
         Mutable<name1><name2>Map map1 = this.classUnderTest();
-        Assert.assertEquals(0, map1.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("25")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
-        Assert.assertEquals(25, map1.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("35")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
-        Assert.assertEquals(35, map1.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("45")>, <(literal.(type2))("55")>)<wideDelta.(type2)>);
-        Assert.assertEquals(100, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("25")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
-        Assert.assertEquals(25, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("25")>, <(literal.(type2))("30")>)<wideDelta.(type2)>);
+        assertEquals(0, map1.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("25")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        assertEquals(25, map1.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("35")>, <(literal.(type2))("50")>)<wideDelta.(type2)>);
+        assertEquals(35, map1.getAndPut(<(literal.(type1))("0")>, <(literal.(type2))("45")>, <(literal.(type2))("55")>)<wideDelta.(type2)>);
+        assertEquals(100, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("25")>, <(literal.(type2))("100")>)<wideDelta.(type2)>);
+        assertEquals(25, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("25")>, <(literal.(type2))("30")>)<wideDelta.(type2)>);
         map1.removeKey(<(literal.(type1))("10")>);
-        Assert.assertEquals(101, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("25")>, <(literal.(type2))("101")>)<wideDelta.(type2)>);
-        Assert.assertEquals(25, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("27")>, <(literal.(type2))("105")>)<wideDelta.(type2)>);
+        assertEquals(101, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("25")>, <(literal.(type2))("101")>)<wideDelta.(type2)>);
+        assertEquals(25, map1.getAndPut(<(literal.(type1))("10")>, <(literal.(type2))("27")>, <(literal.(type2))("105")>)<wideDelta.(type2)>);
     }
 
     @Test
@@ -413,19 +418,19 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("31")>, <(literal.(type2))("32")>));
         map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("32")>, <(literal.(type2))("33")>));
         <name1><name2>HashMap expected = <name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type1))("31")>, <(literal.(type2))("32")>, <(literal.(type1))("32")>, <(literal.(type2))("33")>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(expected, map1);
 
         map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
         expected.put(<(literal.(type1))("1")>, <(literal.(type2))("2")>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(expected, map1);
 
         map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("33")>, <(literal.(type2))("34")>));
         expected.put(<(literal.(type1))("33")>, <(literal.(type2))("34")>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(expected, map1);
 
         map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("30")>, <(literal.(type2))("31")>));
         expected.put(<(literal.(type1))("30")>, <(literal.(type2))("31")>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(expected, map1);
     }
 
     @Test
@@ -434,45 +439,45 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Mutable<name1><name2>Map map1 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("11")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
         map1.updateValues((k, v) -> v);
         Mutable<name1><name2>Map expected1 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("11")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
-        Assert.assertEquals(expected1, map1);
+        assertEquals(expected1, map1);
 
         Mutable<name1><name2>Map map2 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("11")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
         map2.updateValues((k, v) -> <(castIntToNarrowTypeWithParens.(type2))({v + <(literal.(type2))("1")>})>);
         Mutable<name1><name2>Map expected2 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("12")>, <(literal.(type1))("1")>, <(literal.(type2))("13")>, <(literal.(type1))("2")>, <(literal.(type2))("14")>);
-        Assert.assertEquals(expected2, map2);
+        assertEquals(expected2, map2);
 
         Mutable<name1><name2>Map map3 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("11")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
         map3.updateValues((k, v) -> k == <(literal.(type1))("0")> ? <(literal.(type2))("10")> : v);
         Mutable<name1><name2>Map expected3 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("10")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
-        Assert.assertEquals(expected3, map3);
+        assertEquals(expected3, map3);
     }
 
     @Test
     public void addToValue()
     {
         Mutable<name1><name2>Map map1 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("1")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("32")>, map1.addToValue(<(literal.(type1))("31")>, <(literal.(type2))("32")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("3")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("3")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("11")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("10")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("12")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("9")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("37")>, map1.addToValue(<(literal.(type1))("31")>, <(literal.(type2))("5")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("33")>, map1.addToValue(<(literal.(type1))("32")>, <(literal.(type2))("33")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("1")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("1")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("32")>, map1.addToValue(<(literal.(type1))("31")>, <(literal.(type2))("32")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("3")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("3")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("11")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("10")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("12")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("9")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("37")>, map1.addToValue(<(literal.(type1))("31")>, <(literal.(type2))("5")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("33")>, map1.addToValue(<(literal.(type1))("32")>, <(literal.(type2))("33")>)<(wideDelta.(type2))>);
         <name1><name2>HashMap expected = <name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("11")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("31")>, <(literal.(type2))("37")>, <(literal.(type1))("32")>, <(literal.(type2))("33")>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(expected, map1);
 
         map1.removeKey(<(literal.(type1))("0")>);
         map1.removeKey(<(literal.(type1))("1")>);
         map1.removeKey(<(literal.(type1))("31")>);
         map1.removeKey(<(literal.(type1))("32")>);
-        Assert.assertEquals(<(wideLiteral.(type2))("5")>, map1.addToValue(<(literal.(type1))("31")>, <(literal.(type2))("5")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("37")>, map1.addToValue(<(literal.(type1))("31")>, <(literal.(type2))("32")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("33")>, map1.addToValue(<(literal.(type1))("32")>, <(literal.(type2))("33")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("3")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("3")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("1")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("12")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("9")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("11")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("10")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(expected, map1);
+        assertEquals(<(wideLiteral.(type2))("5")>, map1.addToValue(<(literal.(type1))("31")>, <(literal.(type2))("5")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("37")>, map1.addToValue(<(literal.(type1))("31")>, <(literal.(type2))("32")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("33")>, map1.addToValue(<(literal.(type1))("32")>, <(literal.(type2))("33")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("3")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("3")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("1")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("1")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("12")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("9")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("11")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("10")>)<(wideDelta.(type2))>);
+        assertEquals(expected, map1);
 
         Mutable<name1><name2>Map map2 = this.getEmptyMap();
         MutableLongList list = LongLists.mutable.with(
@@ -490,7 +495,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         {
             <type1> k = <(castLongToNarrowType.(type1))("each")>;
             <type2> v = <(castLongToNarrowTypeWithParens.(type2))("each + index")>;
-            Assert.assertEquals("Key:" + k, v, map2.addToValue(k, v)<(wideDelta.(type2))>);
+            assertEquals("Key:" + k, v, map2.addToValue(k, v)<(wideDelta.(type2))>);
         });
     }
 
@@ -500,11 +505,11 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
         for (int i = 2; i \< 100; i++)
         {
-            Assert.assertEquals(<(literal.(type2))("0")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
+            assertEquals(<(literal.(type2))("0")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
             hashMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
-            Assert.assertEquals(<(castFromInt.(type2))("i")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
+            assertEquals(<(castFromInt.(type2))("i")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
             hashMap.remove(<(castFromInt.(type1))("i")>);
-            Assert.assertEquals(<(literal.(type2))("0")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
+            assertEquals(<(literal.(type2))("0")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
         }
     }
 
@@ -520,58 +525,58 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         hashMap.put(collision1, <(literal.(type2))("1")>);
         hashMap.put(collision2, <(literal.(type2))("2")>);
         hashMap.put(collision3, <(literal.(type2))("3")>);
-        Assert.assertEquals(<(wideLiteral.(type2))("2")>, hashMap.get(collision2)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("2")>, hashMap.get(collision2)<(wideDelta.(type2))>);
         hashMap.removeKey(collision2);
         hashMap.put(collision4, <(literal.(type2))("4")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(collision1, <(literal.(type2))("1")>, collision3, <(literal.(type2))("3")>, collision4, <(literal.(type2))("4")>), hashMap);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(collision1, <(literal.(type2))("1")>, collision3, <(literal.(type2))("3")>, collision4, <(literal.(type2))("4")>), hashMap);
 
         Mutable<name1><name2>Map hashMap1 = this.getEmptyMap();
         hashMap1.put(collision1, <(literal.(type2))("1")>);
         hashMap1.put(collision2, <(literal.(type2))("2")>);
         hashMap1.put(collision3, <(literal.(type2))("3")>);
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, hashMap1.get(collision1)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("1")>, hashMap1.get(collision1)<(wideDelta.(type2))>);
         hashMap1.removeKey(collision1);
         hashMap1.put(collision4, <(literal.(type2))("4")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(collision2, <(literal.(type2))("2")>, collision3, <(literal.(type2))("3")>, collision4, <(literal.(type2))("4")>), hashMap1);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(collision2, <(literal.(type2))("2")>, collision3, <(literal.(type2))("3")>, collision4, <(literal.(type2))("4")>), hashMap1);
 
         Mutable<name1><name2>Map hashMap2 = this.getEmptyMap();
         hashMap2.put(collision1, <(literal.(type2))("1")>);
         hashMap2.put(collision2, <(literal.(type2))("2")>);
         hashMap2.put(collision3, <(literal.(type2))("3")>);
-        Assert.assertEquals(<(wideLiteral.(type2))("3")>, hashMap2.get(collision3)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("3")>, hashMap2.get(collision3)<(wideDelta.(type2))>);
         hashMap2.removeKey(collision3);
         hashMap2.put(collision4, <(literal.(type2))("4")>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(collision1, <(literal.(type2))("1")>, collision2, <(literal.(type2))("2")>, collision4, <(literal.(type2))("4")>), hashMap2);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(collision1, <(literal.(type2))("1")>, collision2, <(literal.(type2))("2")>, collision4, <(literal.(type2))("4")>), hashMap2);
     }
 
     @Test
     public void getIfAbsentPut()
     {
         Mutable<name1><name2>Map map1 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map1.getIfAbsentPut(<(literal.(type1))("0")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map1.getIfAbsentPut(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("50")>), map1);
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map1.getIfAbsentPut(<(literal.(type1))("1")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map1.getIfAbsentPut(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("50")>, <(literal.(type1))("1")>, <(literal.(type2))("50")>), map1);
+        assertEquals(<(wideLiteral.(type2))("50")>, map1.getIfAbsentPut(<(literal.(type1))("0")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("50")>, map1.getIfAbsentPut(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("50")>), map1);
+        assertEquals(<(wideLiteral.(type2))("50")>, map1.getIfAbsentPut(<(literal.(type1))("1")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("50")>, map1.getIfAbsentPut(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("50")>, <(literal.(type1))("1")>, <(literal.(type2))("50")>), map1);
 
         Mutable<name1><name2>Map map2 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map2.getIfAbsentPut(<(literal.(type1))("1")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map2.getIfAbsentPut(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("50")>), map2);
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map2.getIfAbsentPut(<(literal.(type1))("0")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map2.getIfAbsentPut(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("50")>, <(literal.(type1))("1")>, <(literal.(type2))("50")>), map2);
+        assertEquals(<(wideLiteral.(type2))("50")>, map2.getIfAbsentPut(<(literal.(type1))("1")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("50")>, map2.getIfAbsentPut(<(literal.(type1))("1")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("50")>), map2);
+        assertEquals(<(wideLiteral.(type2))("50")>, map2.getIfAbsentPut(<(literal.(type1))("0")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("50")>, map2.getIfAbsentPut(<(literal.(type1))("0")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("50")>, <(literal.(type1))("1")>, <(literal.(type2))("50")>), map2);
 
         Mutable<name1><name2>Map map3 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map3.getIfAbsentPut(<(literal.(type1))("32")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map3.getIfAbsentPut(<(literal.(type1))("32")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("50")>), map3);
+        assertEquals(<(wideLiteral.(type2))("50")>, map3.getIfAbsentPut(<(literal.(type1))("32")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("50")>, map3.getIfAbsentPut(<(literal.(type1))("32")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("50")>), map3);
 
         Mutable<name1><name2>Map map4 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map4.getIfAbsentPut(<(literal.(type1))("33")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("50")>, map4.getIfAbsentPut(<(literal.(type1))("33")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("50")>), map4);
+        assertEquals(<(wideLiteral.(type2))("50")>, map4.getIfAbsentPut(<(literal.(type1))("33")>, <(literal.(type2))("50")>)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("50")>, map4.getIfAbsentPut(<(literal.(type1))("33")>, <(literal.(type2))("100")>)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("50")>), map4);
     }
 
     @Test
@@ -584,30 +589,30 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         };
 
         Mutable<name1><name2>Map map1 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map1.getIfAbsentPut(<(literal.(type1))("0")>, factory)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map1.getIfAbsentPut(<(literal.(type1))("0")>, factoryThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("100")>), map1);
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map1.getIfAbsentPut(<(literal.(type1))("1")>, factory)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map1.getIfAbsentPut(<(literal.(type1))("1")>, factoryThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("100")>, <(literal.(type1))("1")>, <(literal.(type2))("100")>), map1);
+        assertEquals(<(wideLiteral.(type2))("100")>, map1.getIfAbsentPut(<(literal.(type1))("0")>, factory)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("100")>, map1.getIfAbsentPut(<(literal.(type1))("0")>, factoryThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("100")>), map1);
+        assertEquals(<(wideLiteral.(type2))("100")>, map1.getIfAbsentPut(<(literal.(type1))("1")>, factory)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("100")>, map1.getIfAbsentPut(<(literal.(type1))("1")>, factoryThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("100")>, <(literal.(type1))("1")>, <(literal.(type2))("100")>), map1);
 
         Mutable<name1><name2>Map map2 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map2.getIfAbsentPut(<(literal.(type1))("1")>, factory)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map2.getIfAbsentPut(<(literal.(type1))("1")>, factoryThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("100")>), map2);
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map2.getIfAbsentPut(<(literal.(type1))("0")>, factory)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map2.getIfAbsentPut(<(literal.(type1))("0")>, factoryThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("100")>, <(literal.(type1))("1")>, <(literal.(type2))("100")>), map2);
+        assertEquals(<(wideLiteral.(type2))("100")>, map2.getIfAbsentPut(<(literal.(type1))("1")>, factory)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("100")>, map2.getIfAbsentPut(<(literal.(type1))("1")>, factoryThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("100")>), map2);
+        assertEquals(<(wideLiteral.(type2))("100")>, map2.getIfAbsentPut(<(literal.(type1))("0")>, factory)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("100")>, map2.getIfAbsentPut(<(literal.(type1))("0")>, factoryThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("100")>, <(literal.(type1))("1")>, <(literal.(type2))("100")>), map2);
 
         Mutable<name1><name2>Map map3 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map3.getIfAbsentPut(<(literal.(type1))("32")>, factory)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map3.getIfAbsentPut(<(literal.(type1))("32")>, factoryThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("100")>), map3);
+        assertEquals(<(wideLiteral.(type2))("100")>, map3.getIfAbsentPut(<(literal.(type1))("32")>, factory)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("100")>, map3.getIfAbsentPut(<(literal.(type1))("32")>, factoryThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("100")>), map3);
 
         Mutable<name1><name2>Map map4 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map4.getIfAbsentPut(<(literal.(type1))("33")>, factory)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("100")>, map4.getIfAbsentPut(<(literal.(type1))("33")>, factoryThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("100")>), map4);
+        assertEquals(<(wideLiteral.(type2))("100")>, map4.getIfAbsentPut(<(literal.(type1))("33")>, factory)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("100")>, map4.getIfAbsentPut(<(literal.(type1))("33")>, factoryThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("100")>), map4);
     }
 
     @Test
@@ -620,30 +625,30 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         };
 
         Mutable<name1><name2>Map map1 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type2))("9")>, map1.getIfAbsentPutWith(<(literal.(type1))("0")>, functionLength, "123456789")<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("9")>, map1.getIfAbsentPutWith(<(literal.(type1))("0")>, functionThrows, "unused")<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("9")>), map1);
-        Assert.assertEquals(<(literal.(type2))("9")>, map1.getIfAbsentPutWith(<(literal.(type1))("1")>, functionLength, "123456789")<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("9")>, map1.getIfAbsentPutWith(<(literal.(type1))("1")>, functionThrows, "unused")<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("9")>, <(literal.(type1))("1")>, <(literal.(type2))("9")>), map1);
+        assertEquals(<(literal.(type2))("9")>, map1.getIfAbsentPutWith(<(literal.(type1))("0")>, functionLength, "123456789")<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("9")>, map1.getIfAbsentPutWith(<(literal.(type1))("0")>, functionThrows, "unused")<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("9")>), map1);
+        assertEquals(<(literal.(type2))("9")>, map1.getIfAbsentPutWith(<(literal.(type1))("1")>, functionLength, "123456789")<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("9")>, map1.getIfAbsentPutWith(<(literal.(type1))("1")>, functionThrows, "unused")<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("9")>, <(literal.(type1))("1")>, <(literal.(type2))("9")>), map1);
 
         Mutable<name1><name2>Map map2 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type2))("9")>, map2.getIfAbsentPutWith(<(literal.(type1))("1")>, functionLength, "123456789")<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("9")>, map2.getIfAbsentPutWith(<(literal.(type1))("1")>, functionThrows, "unused")<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("9")>), map2);
-        Assert.assertEquals(<(literal.(type2))("9")>, map2.getIfAbsentPutWith(<(literal.(type1))("0")>, functionLength, "123456789")<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("9")>, map2.getIfAbsentPutWith(<(literal.(type1))("0")>, functionThrows, "unused")<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("9")>, <(literal.(type1))("1")>, <(literal.(type2))("9")>), map2);
+        assertEquals(<(literal.(type2))("9")>, map2.getIfAbsentPutWith(<(literal.(type1))("1")>, functionLength, "123456789")<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("9")>, map2.getIfAbsentPutWith(<(literal.(type1))("1")>, functionThrows, "unused")<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("9")>), map2);
+        assertEquals(<(literal.(type2))("9")>, map2.getIfAbsentPutWith(<(literal.(type1))("0")>, functionLength, "123456789")<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("9")>, map2.getIfAbsentPutWith(<(literal.(type1))("0")>, functionThrows, "unused")<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("9")>, <(literal.(type1))("1")>, <(literal.(type2))("9")>), map2);
 
         Mutable<name1><name2>Map map3 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type2))("9")>, map3.getIfAbsentPutWith(<(literal.(type1))("32")>, functionLength, "123456789")<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("9")>, map3.getIfAbsentPutWith(<(literal.(type1))("32")>, functionThrows, "unused")<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("9")>), map3);
+        assertEquals(<(literal.(type2))("9")>, map3.getIfAbsentPutWith(<(literal.(type1))("32")>, functionLength, "123456789")<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("9")>, map3.getIfAbsentPutWith(<(literal.(type1))("32")>, functionThrows, "unused")<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("9")>), map3);
 
         Mutable<name1><name2>Map map4 = this.getEmptyMap();
-        Assert.assertEquals(<(literal.(type2))("9")>, map4.getIfAbsentPutWith(<(literal.(type1))("33")>, functionLength, "123456789")<wideDelta.(type2)>);
-        Assert.assertEquals(<(literal.(type2))("9")>, map4.getIfAbsentPutWith(<(literal.(type1))("33")>, functionThrows, "unused")<wideDelta.(type2)>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("9")>), map4);
+        assertEquals(<(literal.(type2))("9")>, map4.getIfAbsentPutWith(<(literal.(type1))("33")>, functionLength, "123456789")<wideDelta.(type2)>);
+        assertEquals(<(literal.(type2))("9")>, map4.getIfAbsentPutWith(<(literal.(type1))("33")>, functionThrows, "unused")<wideDelta.(type2)>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("9")>), map4);
     }
 
     @Test
@@ -656,30 +661,30 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         };
 
         Mutable<name1><name2>Map map1 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, map1.getIfAbsentPutWithKey(<(literal.(type1))("0")>, function)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, map1.getIfAbsentPutWithKey(<(literal.(type1))("0")>, functionThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<keyValue("0")>), map1);
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map1.getIfAbsentPutWithKey(<(literal.(type1))("1")>, function)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map1.getIfAbsentPutWithKey(<(literal.(type1))("1")>, functionThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<["0", "1"]:keyValue(); separator=", ">), map1);
+        assertEquals(<(wideLiteral.(type2))("0")>, map1.getIfAbsentPutWithKey(<(literal.(type1))("0")>, function)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("0")>, map1.getIfAbsentPutWithKey(<(literal.(type1))("0")>, functionThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<keyValue("0")>), map1);
+        assertEquals(<(wideLiteral.(type2))("1")>, map1.getIfAbsentPutWithKey(<(literal.(type1))("1")>, function)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("1")>, map1.getIfAbsentPutWithKey(<(literal.(type1))("1")>, functionThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<["0", "1"]:keyValue(); separator=", ">), map1);
 
         Mutable<name1><name2>Map map2 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map2.getIfAbsentPutWithKey(<(literal.(type1))("1")>, function)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map2.getIfAbsentPutWithKey(<(literal.(type1))("1")>, functionThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>), map2);
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, map2.getIfAbsentPutWithKey(<(literal.(type1))("0")>, function)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("0")>, map2.getIfAbsentPutWithKey(<(literal.(type1))("0")>, functionThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<["0", "1"]:keyValue(); separator=", ">), map2);
+        assertEquals(<(wideLiteral.(type2))("1")>, map2.getIfAbsentPutWithKey(<(literal.(type1))("1")>, function)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("1")>, map2.getIfAbsentPutWithKey(<(literal.(type1))("1")>, functionThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>), map2);
+        assertEquals(<(wideLiteral.(type2))("0")>, map2.getIfAbsentPutWithKey(<(literal.(type1))("0")>, function)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("0")>, map2.getIfAbsentPutWithKey(<(literal.(type1))("0")>, functionThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<["0", "1"]:keyValue(); separator=", ">), map2);
 
         Mutable<name1><name2>Map map3 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("32")>, map3.getIfAbsentPutWithKey(<(literal.(type1))("32")>, function)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("32")>, map3.getIfAbsentPutWithKey(<(literal.(type1))("32")>, functionThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("32")>), map3);
+        assertEquals(<(wideLiteral.(type2))("32")>, map3.getIfAbsentPutWithKey(<(literal.(type1))("32")>, function)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("32")>, map3.getIfAbsentPutWithKey(<(literal.(type1))("32")>, functionThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("32")>), map3);
 
         Mutable<name1><name2>Map map4 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("33")>, map4.getIfAbsentPutWithKey(<(literal.(type1))("33")>, function)<(wideDelta.(type2))>);
-        Assert.assertEquals(<(wideLiteral.(type2))("33")>, map4.getIfAbsentPutWithKey(<(literal.(type1))("33")>, functionThrows)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("33")>), map4);
+        assertEquals(<(wideLiteral.(type2))("33")>, map4.getIfAbsentPutWithKey(<(literal.(type1))("33")>, function)<(wideDelta.(type2))>);
+        assertEquals(<(wideLiteral.(type2))("33")>, map4.getIfAbsentPutWithKey(<(literal.(type1))("33")>, functionThrows)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("33")>), map4);
     }
 
     @Test
@@ -688,30 +693,30 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         <name2>To<name2>Function incrementFunction = (<type2> value) -> <(castIntToNarrowTypeWithParens.(type2))({value + <(literal.(type2))("1")>})>;
 
         Mutable<name1><name2>Map map1 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map1.updateValue(<keyValue("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>), map1);
-        Assert.assertEquals(<(wideLiteral.(type2))("2")>, map1.updateValue(<keyValue("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("2")>), map1);
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map1.updateValue(<(literal.(type1))("1")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("1")>), map1);
-        Assert.assertEquals(<(wideLiteral.(type2))("2")>, map1.updateValue(<(literal.(type1))("1")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("2")>), map1);
+        assertEquals(<(wideLiteral.(type2))("1")>, map1.updateValue(<keyValue("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>), map1);
+        assertEquals(<(wideLiteral.(type2))("2")>, map1.updateValue(<keyValue("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("2")>), map1);
+        assertEquals(<(wideLiteral.(type2))("1")>, map1.updateValue(<(literal.(type1))("1")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("1")>), map1);
+        assertEquals(<(wideLiteral.(type2))("2")>, map1.updateValue(<(literal.(type1))("1")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("2")>), map1);
 
         Mutable<name1><name2>Map map2 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map2.updateValue(<(literal.(type1))("1")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>), map2);
-        Assert.assertEquals(<(wideLiteral.(type2))("2")>, map2.updateValue(<(literal.(type1))("1")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>), map2);
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map2.updateValue(<keyValue("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type1))("1")>, <(literal.(type2))("2")>), map2);
-        Assert.assertEquals(<(wideLiteral.(type2))("2")>, map2.updateValue(<keyValue("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("2")>), map2);
+        assertEquals(<(wideLiteral.(type2))("1")>, map2.updateValue(<(literal.(type1))("1")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>), map2);
+        assertEquals(<(wideLiteral.(type2))("2")>, map2.updateValue(<(literal.(type1))("1")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>), map2);
+        assertEquals(<(wideLiteral.(type2))("1")>, map2.updateValue(<keyValue("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type1))("1")>, <(literal.(type2))("2")>), map2);
+        assertEquals(<(wideLiteral.(type2))("2")>, map2.updateValue(<keyValue("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("2")>), map2);
 
         Mutable<name1><name2>Map map3 = this.getEmptyMap();
-        Assert.assertEquals(<(wideLiteral.(type2))("1")>, map3.updateValue(<(literal.(type1))("33")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("1")>), map3);
-        Assert.assertEquals(<(wideLiteral.(type2))("2")>, map3.updateValue(<(literal.(type1))("33")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("2")>), map3);
+        assertEquals(<(wideLiteral.(type2))("1")>, map3.updateValue(<(literal.(type1))("33")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("1")>), map3);
+        assertEquals(<(wideLiteral.(type2))("2")>, map3.updateValue(<(literal.(type1))("33")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("33")>, <(literal.(type2))("2")>), map3);
     }
 
     @Test
@@ -720,29 +725,29 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Mutable<name1><name2>Map mutable<name1><name2>Map = this.classUnderTest();
         <name1>Set frozenSet = mutable<name1><name2>Map.keySet().freeze();
         <name1>Set frozenSetCopy = <name1>HashSet.newSetWith(mutable<name1><name2>Map.keySet().toArray());
-        Assert.assertEquals(frozenSet, frozenSetCopy);
-        Assert.assertEquals(frozenSetCopy, mutable<name1><name2>Map.keySet().freeze());
+        assertEquals(frozenSet, frozenSetCopy);
+        assertEquals(frozenSetCopy, mutable<name1><name2>Map.keySet().freeze());
         for (int i = 0; i \< 32; i++)
         {
             mutable<name1><name2>Map.put((<type1>) i, (<type2>) i);
-            Assert.assertEquals(frozenSet, frozenSetCopy);
+            assertEquals(frozenSet, frozenSetCopy);
         }
 
         <name1>Set frozenSetForRemove = mutable<name1><name2>Map.keySet().freeze();
         <name1>Set frozenSetCopyForRemove = <name1>HashSet.newSetWith(mutable<name1><name2>Map.keySet().toArray());
-        Assert.assertEquals(frozenSetForRemove, frozenSetCopyForRemove);
-        Assert.assertEquals(frozenSetCopyForRemove, mutable<name1><name2>Map.keySet().freeze());
+        assertEquals(frozenSetForRemove, frozenSetCopyForRemove);
+        assertEquals(frozenSetCopyForRemove, mutable<name1><name2>Map.keySet().freeze());
         for (int i = 0; i \< 32; i++)
         {
             mutable<name1><name2>Map.remove((<type1>) i);
-            Assert.assertEquals(frozenSetForRemove, frozenSetCopyForRemove);
+            assertEquals(frozenSetForRemove, frozenSetCopyForRemove);
         }
 
         Mutable<name1><name2>Map mutable<name1><name2>MapForClear = this.classUnderTest();
         <name1>Set frozenSetForClear = mutable<name1><name2>MapForClear.keySet().freeze();
         <name1>Set frozenSetCopyForClear = <name1>HashSet.newSetWith(mutable<name1><name2>MapForClear.keySet().toArray());
         mutable<name1><name2>MapForClear.clear();
-        Assert.assertEquals(frozenSetForClear, frozenSetCopyForClear);
+        assertEquals(frozenSetForClear, frozenSetCopyForClear);
     }
 
     @Test
@@ -750,8 +755,8 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     {
         Mutable<name1><name2>Map map = this.newWithKeysValues(<["0", "1", "31", "32"]:keyValue(); separator=", ">);
         Mutable<name1><name2>Map mapWithout = map.withoutKey(<(literal.(type1))("32")>);
-        Assert.assertSame(map, mapWithout);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<["0", "1", "31"]:keyValue(); separator=", ">), mapWithout);
+        assertSame(map, mapWithout);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<["0", "1", "31"]:keyValue(); separator=", ">), mapWithout);
     }
 
     @Test
@@ -759,16 +764,16 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     {
         Mutable<name1><name2>Map map = this.newWithKeysValues(<["0", "1", "31", "32"]:keyValue(); separator=", ">);
         Mutable<name1><name2>Map mapWithout = map.withoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>));
-        Assert.assertSame(map, mapWithout);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("31")>, <(literal.(type2))("31")>), mapWithout);
+        assertSame(map, mapWithout);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("31")>, <(literal.(type2))("31")>), mapWithout);
     }
 
     @Test
     public void withKeysValues()
     {
         Mutable<name1><name2>Map hashMap = this.getEmptyMap();
-        Assert.assertSame(hashMap.withKeyValue(<(literal.(type1))("1")>, <(literal.(type2))("1")>), hashMap);
-        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>), hashMap);
+        assertSame(hashMap.withKeyValue(<(literal.(type1))("1")>, <(literal.(type2))("1")>), hashMap);
+        assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>), hashMap);
     }
 
     @Test
@@ -780,29 +785,29 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Iterable\<<name1><name2>Pair> emptyIterable = Iterables.iList();
         Iterable\<<name1><name2>Pair> partialIterable = Iterables.iList(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("1")>), PrimitiveTuples.pair(<(literal.(type1))("3")>, <(literal.(type2))("3")>));
         Iterable\<<name1><name2>Pair> completeIterable = Iterables.iList(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("1")>), PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("2")>), PrimitiveTuples.pair(<(literal.(type1))("3")>, <(literal.(type2))("3")>), PrimitiveTuples.pair(<(literal.(type1))("4")>, <(literal.(type2))("4")>));
-        Assert.assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
-        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
-        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
+        assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
+        assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
+        assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
+        assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
+        assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
     }
 
     @Test
     public void asSynchronized()
     {
         Verify.assertInstanceOf(Synchronized<name1><name2>Map.class, this.classUnderTest().asSynchronized());
-        Assert.assertEquals(new Synchronized<name1><name2>Map(this.classUnderTest()), this.classUnderTest().asSynchronized());
+        assertEquals(new Synchronized<name1><name2>Map(this.classUnderTest()), this.classUnderTest().asSynchronized());
     }
 
     @Test
     public void asUnmodifiable()
     {
         Verify.assertInstanceOf(Unmodifiable<name1><name2>Map.class, this.classUnderTest().asUnmodifiable());
-        Assert.assertEquals(new Unmodifiable<name1><name2>Map(this.classUnderTest()), this.classUnderTest().asUnmodifiable());
+        assertEquals(new Unmodifiable<name1><name2>Map(this.classUnderTest()), this.classUnderTest().asUnmodifiable());
     }
 
     @Test
@@ -816,37 +821,37 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
             iterator.next();
             iterator.remove();
         }
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
         Verify.assertEmpty(mutableMap);
-        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
     public void iterator_throws_on_invocation_of_remove_before_next()
     {
         Mutable<name2>Iterator iterator = this.classUnderTest().<type2>Iterator();
-        Assert.assertTrue(iterator.hasNext());
-        Assert.assertThrows(IllegalStateException.class, iterator::remove);
+        assertTrue(iterator.hasNext());
+        assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     @Test
     public void iterator_throws_on_consecutive_invocation_of_remove()
     {
         Mutable<name2>Iterator iterator = this.classUnderTest().<type2>Iterator();
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         iterator.next();
         iterator.remove();
-        Assert.assertThrows(IllegalStateException.class, iterator::remove);
+        assertThrows(IllegalStateException.class, iterator::remove);
     }
 
     @Test
     public void flipUniqueValues()
     {
         Mutable<name1><name2>Map map = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("4")>, <(literal.(type2))("5")>);
-        Assert.assertEquals(
+        assertEquals(
                 <name2><name1>HashMap.newWithKeysValues(<(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("3")>, <(literal.(type1))("2")>, <(literal.(type2))("4")>, <(literal.(type1))("3")>, <(literal.(type2))("5")>, <(literal.(type1))("4")>),
                 map.flipUniqueValues());
-        Assert.assertThrows(
+        assertThrows(
                 IllegalStateException.class,
                 () -> this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("1")>).flipUniqueValues());
     }
@@ -856,7 +861,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     {
         Mutable<name1><name2>Map map = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("4")>, <(literal.(type2))("5")>);
         Mutable<name1><name2>Map map2 = SerializeTestHelper.serializeDeserialize(map);
-        Assert.assertEquals(map, map2);
+        assertEquals(map, map2);
     }
 
     @Test
@@ -864,7 +869,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     {
         Mutable<name1><name2>Map map = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("4")>, <(literal.(type2))("5")>);
         <name1>Set set = SerializeTestHelper.serializeDeserialize(map.keySet());
-        Assert.assertEquals(map.keySet(), set);
+        assertEquals(map.keySet(), set);
     }
 }
 

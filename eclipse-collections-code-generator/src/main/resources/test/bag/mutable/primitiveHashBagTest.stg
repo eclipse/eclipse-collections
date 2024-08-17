@@ -20,8 +20,9 @@ package org.eclipse.collections.impl.bag.mutable.primitive;
 
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit test for {@link <name>HashBag}.
@@ -65,11 +66,11 @@ public class <name>HashBagTest extends AbstractMutable<name>BagTestCase
         <name>HashBag hashBag1 = new <name>HashBag().with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         <name>HashBag hashBag2 = new <name>HashBag().with(<(literal.(type))("1")>).with(<(literal.(type))("2")>).with(<(literal.(type))("3")>).with(<(literal.(type))("4")>);
         <name>HashBag hashBag3 = new <name>HashBag().with(<(literal.(type))("1")>).with(<(literal.(type))("2")>).with(<(literal.(type))("3")>).with(<(literal.(type))("4")>).with(<(literal.(type))("5")>);
-        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("1")>), hashBag);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2"]:(literal.(type))(); separator=", ">), hashBag0);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), hashBag1);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), hashBag2);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), hashBag3);
+        assertEquals(<name>HashBag.newBagWith(<(literal.(type))("1")>), hashBag);
+        assertEquals(<name>HashBag.newBagWith(<["1", "2"]:(literal.(type))(); separator=", ">), hashBag0);
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), hashBag1);
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), hashBag2);
+        assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), hashBag3);
     }
 
     @Override
@@ -80,7 +81,7 @@ public class <name>HashBagTest extends AbstractMutable<name>BagTestCase
 
         <name>HashBag hashBag = <name>HashBag.newBagWith(<["1", "1", "2", "2", "2", "2", "3"]:(literal.(type))(); separator=", ">);
         <wrapperName> sum = hashBag.injectInto(<wrapperName>.valueOf(<(literal.(type))("4")>), (<wrapperName> result, <type> value) -> <wrapperName>.valueOf((<type>) (result + value)));
-        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("17")>), sum);
+        assertEquals(<wrapperName>.valueOf(<(literal.(type))("17")>), sum);
     }
 }
 

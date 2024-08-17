@@ -22,8 +22,12 @@ package org.eclipse.collections.impl.tuple.primitive;
 
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * JUnit test for {@link <name>BooleanPairImpl}.
@@ -36,38 +40,38 @@ public class <name>BooleanPairImplTest
     public void testEqualsAndHashCode()
     {
         Verify.assertEqualsAndHashCode(PrimitiveTuples.pair(<(literal.(type))("1")>, true), PrimitiveTuples.pair(<(literal.(type))("1")>, true));
-        Assert.assertNotEquals(PrimitiveTuples.pair(<(literal.(type))("1")>, false), PrimitiveTuples.pair(<(literal.(type))("1")>, true));
-        Assert.assertEquals(Tuples.pair(<(literal.(type))("1")>, true).hashCode(), PrimitiveTuples.pair(<(literal.(type))("1")>, true).hashCode());
+        assertNotEquals(PrimitiveTuples.pair(<(literal.(type))("1")>, false), PrimitiveTuples.pair(<(literal.(type))("1")>, true));
+        assertEquals(Tuples.pair(<(literal.(type))("1")>, true).hashCode(), PrimitiveTuples.pair(<(literal.(type))("1")>, true).hashCode());
     }
 
     @Test
     public void getOne()
     {
-        Assert.assertEquals(<(literal.(type))("1")>, PrimitiveTuples.pair(<(literal.(type))("1")>, true).getOne(), <(literal.(type))("0")>);
-        Assert.assertEquals(<(literal.(type))("3")>, PrimitiveTuples.pair(<(literal.(type))("3")>, true).getOne(), <(literal.(type))("0")>);
+        assertEquals(<(literal.(type))("1")>, PrimitiveTuples.pair(<(literal.(type))("1")>, true).getOne(), <(literal.(type))("0")>);
+        assertEquals(<(literal.(type))("3")>, PrimitiveTuples.pair(<(literal.(type))("3")>, true).getOne(), <(literal.(type))("0")>);
     }
 
     @Test
     public void getTwo()
     {
-        Assert.assertTrue(PrimitiveTuples.pair(<(literal.(type))("1")>, true).getTwo());
-        Assert.assertFalse(PrimitiveTuples.pair(<(literal.(type))("1")>, false).getTwo());
+        assertTrue(PrimitiveTuples.pair(<(literal.(type))("1")>, true).getTwo());
+        assertFalse(PrimitiveTuples.pair(<(literal.(type))("1")>, false).getTwo());
     }
 
     @Test
     public void testToString()
     {
-        Assert.assertEquals("<(toStringLiteral.(type))("1")>:true", PrimitiveTuples.pair(<(literal.(type))("1")>, true).toString());
-        Assert.assertEquals("<(toStringLiteral.(type))("2")>:false", PrimitiveTuples.pair(<(literal.(type))("2")>, false).toString());
-        Assert.assertNotEquals("<(toStringLiteral.(type))("2")>, false", PrimitiveTuples.pair(<(literal.(type))("2")>, false).toString());
+        assertEquals("<(toStringLiteral.(type))("1")>:true", PrimitiveTuples.pair(<(literal.(type))("1")>, true).toString());
+        assertEquals("<(toStringLiteral.(type))("2")>:false", PrimitiveTuples.pair(<(literal.(type))("2")>, false).toString());
+        assertNotEquals("<(toStringLiteral.(type))("2")>, false", PrimitiveTuples.pair(<(literal.(type))("2")>, false).toString());
     }
 
     @Test
     public void compareTo()
     {
-        Assert.assertEquals(-1, PrimitiveTuples.pair(<(literal.(type))("1")>, true).compareTo(PrimitiveTuples.pair(<(literal.(type))("2")>, false)));
-        Assert.assertEquals(0, PrimitiveTuples.pair(<(literal.(type))("1")>, true).compareTo(PrimitiveTuples.pair(<(literal.(type))("1")>, true)));
-        Assert.assertEquals(1, PrimitiveTuples.pair(<(literal.(type))("1")>, true).compareTo(PrimitiveTuples.pair(<(literal.(type))("1")>, false)));
+        assertEquals(-1, PrimitiveTuples.pair(<(literal.(type))("1")>, true).compareTo(PrimitiveTuples.pair(<(literal.(type))("2")>, false)));
+        assertEquals(0, PrimitiveTuples.pair(<(literal.(type))("1")>, true).compareTo(PrimitiveTuples.pair(<(literal.(type))("1")>, true)));
+        assertEquals(1, PrimitiveTuples.pair(<(literal.(type))("1")>, true).compareTo(PrimitiveTuples.pair(<(literal.(type))("1")>, false)));
     }
 }
 

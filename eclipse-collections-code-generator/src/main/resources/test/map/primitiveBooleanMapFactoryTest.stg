@@ -23,8 +23,10 @@ import org.eclipse.collections.api.map.primitive.Mutable<name>BooleanMap;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>BooleanHashMap;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This file was automatically generated from template file primitiveBooleanMapFactoryTest.stg.
@@ -34,34 +36,34 @@ public class <name>BooleanMapFactoryTest
     @Test
     public void of()
     {
-        Assert.assertEquals(new <name>BooleanHashMap().toImmutable(), <name>BooleanMaps.immutable.of());
-        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, true).toImmutable(), <name>BooleanMaps.immutable.of(<(literal.(type))("1")>, true));
+        assertEquals(new <name>BooleanHashMap().toImmutable(), <name>BooleanMaps.immutable.of());
+        assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, true).toImmutable(), <name>BooleanMaps.immutable.of(<(literal.(type))("1")>, true));
     }
 
     @Test
     public void ofAll()
     {
-        Assert.assertEquals(new <name>BooleanHashMap().toImmutable(), <name>BooleanMaps.immutable.ofAll(<name>BooleanMaps.immutable.of()));
+        assertEquals(new <name>BooleanHashMap().toImmutable(), <name>BooleanMaps.immutable.ofAll(<name>BooleanMaps.immutable.of()));
     }
 
     @Test
     public void withAll()
     {
-        Assert.assertEquals(new <name>BooleanHashMap().toImmutable(), <name>BooleanMaps.immutable.withAll(<name>BooleanMaps.immutable.of()));
+        assertEquals(new <name>BooleanHashMap().toImmutable(), <name>BooleanMaps.immutable.withAll(<name>BooleanMaps.immutable.of()));
     }
 
     @Test
     public void from()
     {
         Iterable\<String> iterable = Lists.mutable.with("1", "2", "3");
-        Assert.assertEquals(
+        assertEquals(
                 <name>BooleanHashMap.newWithKeysValues(<if(!charPrimitive)><(literal.(type))("1")><else>'1'<endif>, false, <if(!charPrimitive)><(literal.(type))("2")><else>'2'<endif>, true, <if(!charPrimitive)><(literal.(type))("3")><else>'3'<endif>, false),
                 <name>BooleanMaps.mutable.from(iterable, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0));
-        Assert.assertTrue(<name>BooleanMaps.mutable.from(iterable, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0) instanceof Mutable<name>BooleanMap);
-        Assert.assertEquals(
+        assertTrue(<name>BooleanMaps.mutable.from(iterable, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0) instanceof Mutable<name>BooleanMap);
+        assertEquals(
                 <name>BooleanHashMap.newWithKeysValues(<if(!charPrimitive)><(literal.(type))("1")><else>'1'<endif>, false, <if(!charPrimitive)><(literal.(type))("2")><else>'2'<endif>, true, <if(!charPrimitive)><(literal.(type))("3")><else>'3'<endif>, false),
                 <name>BooleanMaps.immutable.from(iterable, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0));
-        Assert.assertTrue(<name>BooleanMaps.immutable.from(iterable, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0) instanceof Immutable<name>BooleanMap);
+        assertTrue(<name>BooleanMaps.immutable.from(iterable, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0) instanceof Immutable<name>BooleanMap);
     }
 }
 

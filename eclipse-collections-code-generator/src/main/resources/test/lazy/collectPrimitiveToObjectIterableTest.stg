@@ -28,10 +28,12 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This file was automatically generated from template file collectPrimitiveToObjectIterableTest.stg.
@@ -49,7 +51,7 @@ public class Collect<name>ToObjectIterableTest
         InternalIterable\<<wrapperName>\> collect = this.newPrimitiveWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">);
         MutableList\<<wrapperName>\> result = Lists.mutable.of();
         collect.forEach(CollectionAddProcedure.on(result));
-        Assert.assertEquals(FastList.newListWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">), result);
+        assertEquals(FastList.newListWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">), result);
     }
 
     @Test
@@ -62,8 +64,8 @@ public class Collect<name>ToObjectIterableTest
             elements.add(object);
             indexes.add(index);
         });
-        Assert.assertEquals(FastList.newListWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">), elements);
-        Assert.assertEquals(FastList.newListWith(0, 1, 2, 3, 4, 5), indexes);
+        assertEquals(FastList.newListWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">), elements);
+        assertEquals(FastList.newListWith(0, 1, 2, 3, 4, 5), indexes);
     }
 
     @Test
@@ -75,7 +77,7 @@ public class Collect<name>ToObjectIterableTest
         {
             result.add(each);
         }
-        Assert.assertEquals(FastList.newListWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">), result);
+        assertEquals(FastList.newListWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">), result);
     }
 
     @Test
@@ -85,13 +87,13 @@ public class Collect<name>ToObjectIterableTest
         MutableList\<<wrapperName>\> result = Lists.mutable.of();
 
         collect.forEachWith((argument1, argument2) -> result.add((<type>) (argument1 + argument2)), 1);
-        Assert.assertEquals(FastList.newListWith(<["2", "3", "4", "5", "6", "6"]:(literal.(type))(); separator=", ">), result);
+        assertEquals(FastList.newListWith(<["2", "3", "4", "5", "6", "6"]:(literal.(type))(); separator=", ">), result);
     }
 
     @Test
     public void selectInstancesOf()
     {
-        Assert.assertEquals(
+        assertEquals(
                 FastList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">),
                 this.newPrimitiveWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).selectInstancesOf(<wrapperName>.class).toList());
     }
@@ -101,7 +103,7 @@ public class Collect<name>ToObjectIterableTest
     {
         Verify.assertIterableSize(2, this.newPrimitiveWith(<["1", "2"]:(literal.(type))(); separator=", ">));
         Verify.assertIterableEmpty(this.newPrimitiveWith());
-        Assert.assertTrue(this.newPrimitiveWith(<["1", "2"]:(literal.(type))(); separator=", ">).notEmpty());
+        assertTrue(this.newPrimitiveWith(<["1", "2"]:(literal.(type))(); separator=", ">).notEmpty());
     }
 
     @Test

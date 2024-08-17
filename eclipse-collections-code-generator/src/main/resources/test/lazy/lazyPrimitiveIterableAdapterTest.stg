@@ -22,8 +22,10 @@ import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.primitive.Lazy<name>Iterate;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * JUnit test for {@link Lazy<name>IterableAdapter}.
@@ -54,7 +56,7 @@ public class Lazy<name>IterableAdapterTest extends AbstractLazy<name>IterableTes
     public void testToString()
     {
         super.testToString();
-        Assert.assertEquals("[<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">]", this.classUnderTest().toString());
+        assertEquals("[<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">]", this.classUnderTest().toString());
     }
 
     @Override
@@ -62,9 +64,9 @@ public class Lazy<name>IterableAdapterTest extends AbstractLazy<name>IterableTes
     public void makeString()
     {
         super.makeString();
-        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", this.classUnderTest().makeString());
-        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", this.classUnderTest().makeString("/"));
-        Assert.assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
+        assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", this.classUnderTest().makeString());
+        assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", this.classUnderTest().makeString("/"));
+        assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
     }
 
     @Override
@@ -74,13 +76,13 @@ public class Lazy<name>IterableAdapterTest extends AbstractLazy<name>IterableTes
         super.appendString();
         StringBuilder appendable2 = new StringBuilder();
         this.classUnderTest().appendString(appendable2);
-        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", appendable2.toString());
+        assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", appendable2.toString());
         StringBuilder appendable3 = new StringBuilder();
         this.classUnderTest().appendString(appendable3, "/");
-        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", appendable3.toString());
+        assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", appendable3.toString());
         StringBuilder appendable4 = new StringBuilder();
         this.classUnderTest().appendString(appendable4, "[", ", ", "]");
-        Assert.assertEquals(this.classUnderTest().toString(), appendable4.toString());
+        assertEquals(this.classUnderTest().toString(), appendable4.toString());
     }
 
     @Override
@@ -88,7 +90,7 @@ public class Lazy<name>IterableAdapterTest extends AbstractLazy<name>IterableTes
     public void toArray()
     {
         super.toArray();
-        Assert.assertArrayEquals(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}, this.classUnderTest().toArray()<(delta.(type))>);
+        assertArrayEquals(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}, this.classUnderTest().toArray()<(delta.(type))>);
     }
 
     @Override
@@ -96,7 +98,7 @@ public class Lazy<name>IterableAdapterTest extends AbstractLazy<name>IterableTes
     public void toList()
     {
         super.toList();
-        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toList());
+        assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toList());
     }
 
     @Test

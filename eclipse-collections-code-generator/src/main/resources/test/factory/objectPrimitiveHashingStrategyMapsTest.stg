@@ -27,8 +27,9 @@ import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Junit test for {@link Object<name>HashingStrategyMaps}
@@ -58,14 +59,14 @@ public class Object<name>HashingStrategyMapsTest
 
     private void assertMutableHashingStrategyMapFactory(MutableObject<name>HashingStrategyMapFactory mapFactory)
     {
-        Assert.assertEquals(Object<name>HashMap.newMap(), mapFactory.of(STRING_HASHING_STRATEGY));
+        assertEquals(Object<name>HashMap.newMap(), mapFactory.of(STRING_HASHING_STRATEGY));
         Verify.assertInstanceOf(MutableObject<name>Map.class, mapFactory.of(STRING_HASHING_STRATEGY));
     }
 
     @Test
     public void mapWith_mutable()
     {
-        Assert.assertEquals(Object<name>HashMap.newMap(), Object<name>HashingStrategyMaps.mutable.with(STRING_HASHING_STRATEGY));
+        assertEquals(Object<name>HashMap.newMap(), Object<name>HashingStrategyMaps.mutable.with(STRING_HASHING_STRATEGY));
         Verify.assertInstanceOf(MutableObject<name>Map.class, Object<name>HashingStrategyMaps.mutable.with(STRING_HASHING_STRATEGY));
     }
 
@@ -79,7 +80,7 @@ public class Object<name>HashingStrategyMapsTest
     public void mapWithInitialCapacity_mutable() throws Exception
     {
         MutableObject<name>Map\<String> map = Object<name>HashingStrategyMaps.mutable.withInitialCapacity(STRING_HASHING_STRATEGY, 15);
-        Assert.assertEquals(Object<name>HashMap.newMap(), map);
+        assertEquals(Object<name>HashMap.newMap(), map);
         Verify.assertInstanceOf(MutableObject<name>Map.class, map);
 
         Field keys = map.getClass().getDeclaredField("keys");
@@ -87,8 +88,8 @@ public class Object<name>HashingStrategyMapsTest
         Field values = map.getClass().getDeclaredField("values");
         values.setAccessible(true);
 
-        Assert.assertEquals(32L, ((Object[]) keys.get(map)).length);
-        Assert.assertEquals(32L, ((<type>[]) values.get(map)).length);
+        assertEquals(32L, ((Object[]) keys.get(map)).length);
+        assertEquals(32L, ((<type>[]) values.get(map)).length);
     }
 
     @Test

@@ -35,7 +35,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
+
 import org.junit.Test;
 <if(primitive.specializedStream)>
 import java.util.stream.Collectors;
@@ -43,6 +43,11 @@ import java.util.Arrays;
 import java.util.Collections;<endif>
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Abstract JUnit test for {@link Immutable<name>List}.
@@ -77,7 +82,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list = this.classUnderTest();
         for (int i = 0; i \< list.size(); i++)
         {
-            Assert.assertEquals(i + 1, list.get(i)<(wideDelta.(type))>);
+            assertEquals(i + 1, list.get(i)<(wideDelta.(type))>);
         }
     }
 
@@ -96,14 +101,14 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
     @Test
     public void getFirst()
     {
-        Assert.assertEquals(<(wideLiteral.(type))("1")>, this.classUnderTest().getFirst()<(wideDelta.(type))>);
+        assertEquals(<(wideLiteral.(type))("1")>, this.classUnderTest().getFirst()<(wideDelta.(type))>);
     }
 
     @Test
     public void getLast()
     {
         Immutable<name>List list = this.classUnderTest();
-        Assert.assertEquals(list.size(), list.getLast()<(wideDelta.(type))>);
+        assertEquals(list.size(), list.getLast()<(wideDelta.(type))>);
     }
 
     @Test
@@ -112,14 +117,14 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list = this.classUnderTest();
         for (int i = 0; i \< list.size(); i++)
         {
-            Assert.assertEquals(i, list.indexOf(<(castIntToNarrowTypeWithParens.(type))("i + 1")>));
+            assertEquals(i, list.indexOf(<(castIntToNarrowTypeWithParens.(type))("i + 1")>));
         }
-        Assert.assertEquals(-1L, list.indexOf(<(castIntToNarrowTypeWithParens.(type))("list.size() + 1")>)<(wideDelta.(type))>);
+        assertEquals(-1L, list.indexOf(<(castIntToNarrowTypeWithParens.(type))("list.size() + 1")>)<(wideDelta.(type))>);
 
         Immutable<name>List arrayList = this.newWith(<["1", "2", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(0L, arrayList.indexOf(<(literal.(type))("1")>));
-        Assert.assertEquals(1L, arrayList.indexOf(<(literal.(type))("2")>));
-        Assert.assertEquals(-1L, arrayList.indexOf(<(literal.(type))("9")>));
+        assertEquals(0L, arrayList.indexOf(<(literal.(type))("1")>));
+        assertEquals(1L, arrayList.indexOf(<(literal.(type))("2")>));
+        assertEquals(-1L, arrayList.indexOf(<(literal.(type))("9")>));
     }
 
     @Test
@@ -128,14 +133,14 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list = this.classUnderTest();
         for (int i = 0; i \< list.size(); i++)
         {
-            Assert.assertEquals(i, list.lastIndexOf(<(castIntToNarrowTypeWithParens.(type))("i + 1")>));
+            assertEquals(i, list.lastIndexOf(<(castIntToNarrowTypeWithParens.(type))("i + 1")>));
         }
-        Assert.assertEquals(-1L, list.lastIndexOf(<(castIntToNarrowTypeWithParens.(type))("list.size() + 1")>)<(wideDelta.(type))>);
+        assertEquals(-1L, list.lastIndexOf(<(castIntToNarrowTypeWithParens.(type))("list.size() + 1")>)<(wideDelta.(type))>);
 
         Immutable<name>List arrayList = this.newWith(<["1", "2", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(2L, arrayList.lastIndexOf(<(literal.(type))("1")>));
-        Assert.assertEquals(1L, arrayList.lastIndexOf(<(literal.(type))("2")>));
-        Assert.assertEquals(-1L, arrayList.lastIndexOf(<(literal.(type))("9")>));
+        assertEquals(2L, arrayList.lastIndexOf(<(literal.(type))("1")>));
+        assertEquals(1L, arrayList.lastIndexOf(<(literal.(type))("2")>));
+        assertEquals(-1L, arrayList.lastIndexOf(<(literal.(type))("9")>));
     }
 
     @Override
@@ -145,15 +150,15 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         <name>Iterator iterator = this.classUnderTest().<type>Iterator();
         for (int i = 0; iterator.hasNext(); i++)
         {
-            Assert.assertEquals(i + 1, iterator.next()<(wideDelta.(type))>);
+            assertEquals(i + 1, iterator.next()<(wideDelta.(type))>);
         }
-        Assert.assertFalse(iterator.hasNext());
+        assertFalse(iterator.hasNext());
     }
 
     @Test
     public void subList()
     {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().subList(0, 1));
+        assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().subList(0, 1));
     }
 
     @Override
@@ -163,10 +168,10 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         super.toArray();
         Immutable<name>List list = this.classUnderTest();
         <type>[] array = list.toArray();
-        Assert.assertEquals(list.size(), array.length);
+        assertEquals(list.size(), array.length);
         for (int i = 0; i \< list.size(); i++)
         {
-            Assert.assertEquals(list.get(i), array[i]<(wideDelta.(type))>);
+            assertEquals(list.get(i), array[i]<(wideDelta.(type))>);
         }
     }
 
@@ -178,7 +183,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
 
         Immutable<name>List iterable = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
+        assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
     }
 
     @Test
@@ -188,7 +193,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list2 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Mutable<wrapperName> result = list1.injectIntoWithIndex(new Mutable<wrapperName>(<(literal.(type))("0")>),
                 (Mutable<wrapperName> object, <type> value, int index) -> object.add(<(castIntToNarrowTypeWithParens.(type))("value * list2.get(index)")>));
-        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("14")>), result);
+        assertEquals(new Mutable<wrapperName>(<(literal.(type))("14")>), result);
     }
 
     /**
@@ -200,7 +205,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
         Immutable<name>List selected = list.selectWithIndex((value, i) -> i % 2 == 0);
 
-        Assert.assertEquals(<name>Lists.immutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), selected);
+        assertEquals(<name>Lists.immutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), selected);
     }
 
     /**
@@ -212,7 +217,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
         Mutable<name>List selected = list.selectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
 
-        Assert.assertEquals(<name>Lists.immutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), selected);
+        assertEquals(<name>Lists.immutable.with(<["3", "9"]:(literal.(type))(); separator=", ">), selected);
     }
 
     /**
@@ -224,7 +229,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
         Immutable<name>List rejected = list.rejectWithIndex((value, i) -> i % 2 == 0);
 
-        Assert.assertEquals(<name>Lists.immutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), rejected);
+        assertEquals(<name>Lists.immutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), rejected);
     }
 
     /**
@@ -236,7 +241,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
         Mutable<name>List rejected = list.rejectWithIndex((value, i) -> i % 2 == 0, <name>Lists.mutable.empty());
 
-        Assert.assertEquals(<name>Lists.immutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), rejected);
+        assertEquals(<name>Lists.immutable.with(<["1", "7"]:(literal.(type))(); separator=", ">), rejected);
     }
 
     /**
@@ -247,10 +252,10 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
     {
         ImmutableList\<<name>IntPair> pairs = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">)
                 .collectWithIndex(PrimitiveTuples::pair);
-        Assert.assertEquals(
+        assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(<name>IntPair::getTwo, IntLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 <name>Lists.mutable.with(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">),
                 pairs.collect<name>(<name>IntPair::getOne, <name>Lists.mutable.empty()));
     }
@@ -263,17 +268,17 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
     {
         MutableList\<<name>IntPair> pairs = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">)
                 .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
-        Assert.assertEquals(
+        assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(<name>IntPair::getTwo, IntLists.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 <name>Lists.mutable.with(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">),
                 pairs.collect<name>(<name>IntPair::getOne, <name>Lists.mutable.empty()));
 
-        Assert.assertEquals(
+        assertEquals(
                 IntSets.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(<name>IntPair::getTwo, IntSets.mutable.empty()));
-        Assert.assertEquals(
+        assertEquals(
                 <name>Sets.mutable.with(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">),
                 pairs.collect<name>(<name>IntPair::getOne, <name>Sets.mutable.empty()));
     }
@@ -283,18 +288,18 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
     {
         Immutable<name>List list1 = this.newWith(<["1", "2", "2", "3", "3", "3", "4", "4", "4", "4"]:(literal.(type))(); separator=", ">).distinct();
         Immutable<name>List list2 = this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
-        Assert.assertEquals(list1, list2);
+        assertEquals(list1, list2);
     }
 
     @Test
     public void toReversed()
     {
-        Assert.assertEquals(Immutable<name>ArrayList.newListWith(<(literal.(type))("3")>, <(literal.(type))("1")>, <(literal.(type))("9")>, <(literal.(type))("7")>), this.newWith(<(literal.(type))("7")>, <(literal.(type))("9")>, <(literal.(type))("1")>, <(literal.(type))("3")>).toReversed());
+        assertEquals(Immutable<name>ArrayList.newListWith(<(literal.(type))("3")>, <(literal.(type))("1")>, <(literal.(type))("9")>, <(literal.(type))("7")>), this.newWith(<(literal.(type))("7")>, <(literal.(type))("9")>, <(literal.(type))("1")>, <(literal.(type))("3")>).toReversed());
         Immutable<name>List list1 = this.newWith(<(literal.(type))("3")>, <(literal.(type))("1")>, <(literal.(type))("9")>, <(literal.(type))("7")>);
-        Assert.assertNotSame(list1, list1.toReversed());
-        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("3")>, <(literal.(type))("1")>, <(literal.(type))("9")>, <(literal.(type))("7")>, <(literal.(type))("8")>), this.newWith(<(literal.(type))("8")>, <(literal.(type))("7")>, <(literal.(type))("9")>, <(literal.(type))("1")>, <(literal.(type))("3")>).toReversed());
+        assertNotSame(list1, list1.toReversed());
+        assertEquals(<name>ArrayList.newListWith(<(literal.(type))("3")>, <(literal.(type))("1")>, <(literal.(type))("9")>, <(literal.(type))("7")>, <(literal.(type))("8")>), this.newWith(<(literal.(type))("8")>, <(literal.(type))("7")>, <(literal.(type))("9")>, <(literal.(type))("1")>, <(literal.(type))("3")>).toReversed());
         Immutable<name>List list2 = this.newWith(<(literal.(type))("3")>, <(literal.(type))("1")>, <(literal.(type))("9")>, <(literal.(type))("7")>, <(literal.(type))("8")>);
-        Assert.assertNotSame(list2, list2.toReversed());
+        assertNotSame(list2, list2.toReversed());
     }
 
     @Test
@@ -303,7 +308,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         <wideType.(type)>[] sum = new <wideType.(type)>[1];
         this.classUnderTest().forEachWithIndex((<type> each, int index) -> sum[0] += each + index);
 
-        Assert.assertEquals(<(wideLiteral.(type))("9")>, sum[0]<wideDelta.(type)>);
+        assertEquals(<(wideLiteral.(type))("9")>, sum[0]<wideDelta.(type)>);
     }
 
     @Override
@@ -313,7 +318,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         super.testEquals();
         Immutable<name>List list1 = this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
         Immutable<name>List list2 = this.newWith(<["4", "3", "2", "1"]:(literal.(type))(); separator=", ">);
-        Assert.assertNotEquals(list1, list2);
+        assertNotEquals(list1, list2);
     }
 
     @Override
@@ -329,7 +334,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
             expectedString.append(<(castRealTypeToInt.(type))("each")> == size - 1 ? "" : ", ");
         }
         expectedString.append(']');
-        Assert.assertEquals(expectedString.toString(), this.classUnderTest().toString());
+        assertEquals(expectedString.toString(), this.classUnderTest().toString());
     }
 
     @Override
@@ -348,9 +353,9 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
             expectedString.append(<(castRealTypeToInt.(type))("each")> == size - 1 ? "" : ", ");
             expectedString1.append(<(castRealTypeToInt.(type))("each")> == size - 1 ? "" : "/");
         }
-        Assert.assertEquals(expectedString.toString(), list.makeString());
-        Assert.assertEquals(expectedString1.toString(), list.makeString("/"));
-        Assert.assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
+        assertEquals(expectedString.toString(), list.makeString());
+        assertEquals(expectedString1.toString(), list.makeString("/"));
+        assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
     }
 
     @Override
@@ -371,13 +376,13 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list = this.classUnderTest();
         StringBuilder appendable2 = new StringBuilder();
         list.appendString(appendable2);
-        Assert.assertEquals(expectedString.toString(), appendable2.toString());
+        assertEquals(expectedString.toString(), appendable2.toString());
         StringBuilder appendable3 = new StringBuilder();
         list.appendString(appendable3, "/");
-        Assert.assertEquals(expectedString1.toString(), appendable3.toString());
+        assertEquals(expectedString1.toString(), appendable3.toString());
         StringBuilder appendable4 = new StringBuilder();
         this.classUnderTest().appendString(appendable4, "[", ", ", "]");
-        Assert.assertEquals(this.classUnderTest().toString(), appendable4.toString());
+        assertEquals(this.classUnderTest().toString(), appendable4.toString());
     }
 
     @Override
@@ -388,7 +393,7 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List immutableList = this.classUnderTest();
         Mutable<name>List list = immutableList.toList();
         Verify.assertEqualsAndHashCode(immutableList, list);
-        Assert.assertNotSame(immutableList, list);
+        assertNotSame(immutableList, list);
     }
 
     @Test
@@ -397,43 +402,43 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Immutable<name>List list1 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Immutable<name>List list2 = this.newWith(<["1"]:(literal.(type))(); separator=", ">);
         ImmutableList\<<name><name>Pair> zipSame = list1.zip<name>(list1);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
                         PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">),
                         PrimitiveTuples.pair(<["3", "3"]:(literal.(type))(); separator=", ">)),
                 zipSame);
         ImmutableList\<<name><name>Pair> zipSameLazy = list1.zip<name>(list1.asLazy());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
                         PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">),
                         PrimitiveTuples.pair(<["3", "3"]:(literal.(type))(); separator=", ">)),
                 zipSameLazy);
         ImmutableList\<<name><name>Pair> zipLess = list1.zip<name>(list2);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">)),
                 zipLess);
         ImmutableList\<<name><name>Pair> zipLessLazy = list1.zip<name>(list2.asLazy());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">)),
                 zipLessLazy);
         ImmutableList\<<name><name>Pair> zipMore = list2.zip<name>(list1);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">)),
                 zipMore);
         ImmutableList\<<name><name>Pair> zipMoreLazy = list2.zip<name>(list1.asLazy());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">)),
                 zipMoreLazy);
         ImmutableList\<<name><name>Pair> zipEmpty1 = list1.zip<name>(this.newWith());
-        Assert.assertTrue(zipEmpty1.isEmpty());
+        assertTrue(zipEmpty1.isEmpty());
         ImmutableList\<<name><name>Pair> zipEmpty2 = this.newWith().zip<name>(list1);
-        Assert.assertTrue(zipEmpty2.isEmpty());
+        assertTrue(zipEmpty2.isEmpty());
     }
 
     @Test
@@ -444,60 +449,60 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         ImmutableList\<String> list3 = Lists.immutable.with("1", "2", "3");
         ImmutableList\<String> list4 = Lists.immutable.with("1");
         ImmutableList\<<name>ObjectPair\<String\>> zipSame = list1.zip(list3);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
                         PrimitiveTuples.pair(<(literal.(type))("2")>, "2"),
                         PrimitiveTuples.pair(<(literal.(type))("3")>, "3")),
                 zipSame);
         ImmutableList\<<name>ObjectPair\<String\>> zipSameLazy = list1.zip(list3.asLazy());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
                         PrimitiveTuples.pair(<(literal.(type))("2")>, "2"),
                         PrimitiveTuples.pair(<(literal.(type))("3")>, "3")),
                 zipSameLazy);
         ImmutableList\<<name>ObjectPair\<String\>> zipLess = list1.zip(list4);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<(literal.(type))("1")>, "1")),
                 zipLess);
         ImmutableList\<<name>ObjectPair\<String\>> zipLessLazy = list1.zip(list4.asLazy());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<(literal.(type))("1")>, "1")),
                 zipLessLazy);
         ImmutableList\<<name>ObjectPair\<String\>> zipMore = list2.zip(list3);
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<(literal.(type))("1")>, "1")),
                 zipMore);
         ImmutableList\<<name>ObjectPair\<String\>> zipMoreLazy = list2.zip(list3.asLazy());
-        Assert.assertEquals(
+        assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(<(literal.(type))("1")>, "1")),
                 zipMoreLazy);
         ImmutableList\<<name>ObjectPair\<String\>> zipEmpty1 = list1.zip(Lists.immutable.empty());
-        Assert.assertTrue(zipEmpty1.isEmpty());
+        assertTrue(zipEmpty1.isEmpty());
         ImmutableList\<<name>ObjectPair\<String\>> zipEmpty2 = this.newWith().zip(Lists.immutable.with("1", "2"));
-        Assert.assertTrue(zipEmpty2.isEmpty());
+        assertTrue(zipEmpty2.isEmpty());
     }
 <if(primitive.specializedStream)>
 
     @Test
     public void stream()
     {
-        Assert.assertEquals(Collections.emptyList(), <name>Lists.immutable.empty().primitiveStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Collections.singletonList(<(literal.(type))("1")>), this.newWith(<["1"]:(literal.(type))(); separator=", ">).primitiveStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), Immutable<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).primitiveStream().boxed().collect(Collectors.toList()));
+        assertEquals(Collections.emptyList(), <name>Lists.immutable.empty().primitiveStream().boxed().collect(Collectors.toList()));
+        assertEquals(Collections.singletonList(<(literal.(type))("1")>), this.newWith(<["1"]:(literal.(type))(); separator=", ">).primitiveStream().boxed().collect(Collectors.toList()));
+        assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), Immutable<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).primitiveStream().boxed().collect(Collectors.toList()));
     }
 
     @Test
     public void parallelStream()
     {
-        Assert.assertEquals(Collections.emptyList(), <name>Lists.immutable.empty().primitiveParallelStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Collections.singletonList(<(literal.(type))("1")>), this.newWith(<["1"]:(literal.(type))(); separator=", ">).primitiveParallelStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), Immutable<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).primitiveParallelStream().boxed().collect(Collectors.toList()));
+        assertEquals(Collections.emptyList(), <name>Lists.immutable.empty().primitiveParallelStream().boxed().collect(Collectors.toList()));
+        assertEquals(Collections.singletonList(<(literal.(type))("1")>), this.newWith(<["1"]:(literal.(type))(); separator=", ">).primitiveParallelStream().boxed().collect(Collectors.toList()));
+        assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), Immutable<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).primitiveParallelStream().boxed().collect(Collectors.toList()));
     }
 <endif>
 }
