@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.utility;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
@@ -768,10 +769,7 @@ public final class MapIterate
      */
     public static <K, V> void forEachKeyValue(Map<K, V> map, Procedure2<? super K, ? super V> procedure)
     {
-        if (map == null)
-        {
-            throw new IllegalArgumentException("Cannot perform a forEachKeyValue on null");
-        }
+        Objects.requireNonNull(map, "Cannot perform a forEachKeyValue on null");
 
         if (MapIterate.notEmpty(map))
         {
