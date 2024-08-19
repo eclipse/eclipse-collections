@@ -2864,7 +2864,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
                 }
                 else if (cur != null)
                 {
-                    procedure.value(ImmutableEntry.of(UnifiedMap.this.nonSentinel(cur), (V) UnifiedMap.this.table[i + 1]));
+                    procedure.value(new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(cur), (V) UnifiedMap.this.table[i + 1], this.holder));
                 }
             }
         }
@@ -2878,7 +2878,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
                 {
                     return;
                 }
-                procedure.value(ImmutableEntry.of(UnifiedMap.this.nonSentinel(cur), (V) chain[i + 1]));
+                procedure.value(new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(cur), (V) chain[i + 1], this.holder));
             }
         }
 
