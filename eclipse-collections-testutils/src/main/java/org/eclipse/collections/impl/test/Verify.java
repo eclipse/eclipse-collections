@@ -1923,7 +1923,7 @@ public final class Verify extends Assert
             assertNotNull(mapName + " should not be null", actualMap);
 
             Set<? extends Map.Entry<?, ?>> expectedEntries = expectedMap.entrySet();
-            for (Map.Entry<?, ?> expectedEntry : expectedEntries)
+            expectedEntries.forEach(expectedEntry ->
             {
                 Object expectedKey = expectedEntry.getKey();
                 Object expectedValue = expectedEntry.getValue();
@@ -1932,7 +1932,7 @@ public final class Verify extends Assert
                 {
                     fail("Values differ at key " + expectedKey + " expected " + expectedValue + " but was " + actualValue);
                 }
-            }
+            });
             Verify.assertSetsEqual(mapName + " keys", expectedMap.keySet(), actualMap.keySet());
             Verify.assertSetsEqual(mapName + " entries", expectedMap.entrySet(), actualMap.entrySet());
         }
