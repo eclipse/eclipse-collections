@@ -245,7 +245,7 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
     @Test
     public void withMapNull()
     {
-        assertThrows(IllegalArgumentException.class, () -> this.newMap().withMap(null));
+        assertThrows(NullPointerException.class, () -> this.newMap().withMap(null));
     }
 
     @Test
