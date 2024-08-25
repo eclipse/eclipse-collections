@@ -42,7 +42,11 @@ public interface SetIterable<T> extends RichIterable<T>
 
     /**
      * Returns the set of all objects that are members of both {@code this} and {@code set}. The intersection of
-     * [1, 2, 3] and [2, 3, 4] is the set [2, 3]. The output will contain instances from {@code this}, not {@code set}.
+     * [1, 2, 3] and [2, 3, 4] is the set [2, 3]. The output will contain instances from the smaller of the two sets
+     * ({@code this} or {@code set}) based on the size. If the sizes are equal, the output will contain instances from
+     * {@code this}.
+     * <p>Note: If you need to ensure that the memory references from {@code this} are preserved in the resulting set,
+     * consider using {@code this.select(that::contains)} instead.</p>
      */
     SetIterable<T> intersect(SetIterable<? extends T> set);
 
