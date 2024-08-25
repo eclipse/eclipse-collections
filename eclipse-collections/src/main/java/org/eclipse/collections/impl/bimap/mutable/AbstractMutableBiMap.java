@@ -830,6 +830,12 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         }
 
         @Override
+        public void forEach(Consumer<? super K> action)
+        {
+            AbstractMutableBiMap.this.forEachKey(action::accept);
+        }
+
+        @Override
         public Iterator<K> iterator()
         {
             return AbstractMutableBiMap.this.inverse().iterator();
