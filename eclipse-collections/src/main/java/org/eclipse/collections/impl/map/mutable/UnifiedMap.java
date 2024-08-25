@@ -26,6 +26,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -2317,6 +2318,12 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         }
 
         @Override
+        public void forEach(Consumer<? super K> action)
+        {
+            UnifiedMap.this.forEachKey(action::accept);
+        }
+
+        @Override
         public void forEach(Procedure<? super K> procedure)
         {
             UnifiedMap.this.forEachKey(procedure);
@@ -2635,6 +2642,12 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     {
         private static final long serialVersionUID = 1L;
         private transient WeakReference<UnifiedMap<K, V>> holder = new WeakReference<>(UnifiedMap.this);
+
+        @Override
+        public void forEach(Consumer<? super Entry<K, V>> action)
+        {
+            this.forEach(action::accept);
+        }
 
         @Override
         public boolean add(Entry<K, V> entry)

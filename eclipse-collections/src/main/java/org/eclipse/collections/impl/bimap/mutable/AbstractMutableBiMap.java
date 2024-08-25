@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -961,6 +962,12 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
     protected class EntrySet implements Set<Map.Entry<K, V>>
     {
+        @Override
+        public void forEach(Consumer<? super Entry<K, V>> action)
+        {
+            AbstractMutableBiMap.this.delegate.forEachKeyValue((key, value) -> action.accept(new InternalEntry(key, value)));
+        }
+
         @Override
         public boolean equals(Object obj)
         {
