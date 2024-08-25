@@ -11,6 +11,8 @@
 package org.eclipse.collections.impl.map.mutable;
 
 import java.util.Collection;
+import java.util.Objects;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -339,5 +341,17 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.newMap(this.size()));
+    }
+
+    @Override
+    public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function)
+    {
+        Objects.requireNonNull(function);
+        this.entrySet().forEach(entry -> {
+            K key = entry.getKey();
+            V value = entry.getValue();
+            V newValue = function.apply(key, value);
+            entry.setValue(newValue);
+        });
     }
 }

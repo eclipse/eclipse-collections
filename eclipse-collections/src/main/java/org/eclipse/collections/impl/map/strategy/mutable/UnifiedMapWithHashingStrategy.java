@@ -2923,7 +2923,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                 }
                 else if (cur != null)
                 {
-                    procedure.value(ImmutableEntry.of(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) UnifiedMapWithHashingStrategy.this.table[i + 1]));
+                    procedure.value(new WeakBoundEntry<>(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) UnifiedMapWithHashingStrategy.this.table[i + 1], this.holder, UnifiedMapWithHashingStrategy.this.hashingStrategy));
                 }
             }
         }
@@ -2937,7 +2937,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                 {
                     return;
                 }
-                procedure.value(ImmutableEntry.of(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) chain[i + 1]));
+                procedure.value(new WeakBoundEntry<>(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) chain[i + 1], this.holder, UnifiedMapWithHashingStrategy.this.hashingStrategy));
             }
         }
 
