@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.test.map.mutable;
 
+import java.util.Map;
+
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.impl.block.factory.Predicates2;
@@ -78,16 +80,31 @@ public interface UnmodifiableMutableMapIterableTestCase
     }
 
     @Override
+    @Test
+    default void Map_put()
+    {
+        MutableMapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        assertThrows(UnsupportedOperationException.class, () -> map.put(4, "Four"));
+        assertThrows(UnsupportedOperationException.class, () -> map.put(1, "One"));
+        assertThrows(UnsupportedOperationException.class, () -> map.put(5, null));
+        assertThrows(UnsupportedOperationException.class, () -> map.put(null, "Six"));
+        assertIterablesEqual(this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"), map);
+    }
+
+    @Test
+    @Override
     default void Map_putAll()
     {
-        MutableMapIterable<Integer, String> map = this.newWithKeysValues(
-                3, "Three",
-                2, "2");
-        MutableMapIterable<Integer, String> toAdd = this.newWithKeysValues(
-                2, "Two",
-                1, "One");
+        MutableMapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "2");
+        MutableMapIterable<Integer, String> toAdd = this.newWithKeysValues(2, "Two", 1, "One");
 
         assertThrows(UnsupportedOperationException.class, () -> map.putAll(toAdd));
+
+        MutableMapIterable<Integer, String> expected = this.newWithKeysValues(3, "Three", 2, "2");
+        assertIterablesEqual(expected, map);
+
+        assertThrows(UnsupportedOperationException.class, () -> map.putAll(null));
+        assertThrows(UnsupportedOperationException.class, () -> map.putAll(Map.of()));
     }
 
     @Override
