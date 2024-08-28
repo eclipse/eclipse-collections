@@ -392,6 +392,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                         <argLine>-XX:-OmitStackTraceInFastThrow -Xms1024m -Xmx2048m --add-opens java.base/java.lang=ALL-UNNAMED @{argLine}</argLine>
                         <runOrder>random</runOrder>
                         <!--<forkCount>2C</forkCount>-->
+                        <printSummary>false</printSummary>
                     </configuration>
                     <!-- Configure surefire to run JUnit 4 and 5 tests -->
                     <!-- In maven 3.9.6 and 4.x, maven is able to auto-detect JUnit and these dependencies are not required -->
