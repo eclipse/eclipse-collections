@@ -54,4 +54,10 @@ public class JDKConcurrentHashMapTest implements MapTestCase
     {
         return false;
     }
+
+    @Override
+    public boolean supportsNullValues()
+    {
+        return false;
+    }
 }
