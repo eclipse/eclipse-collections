@@ -384,7 +384,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.5</version>
+                    <version>3.4.0</version>
                     <configuration>
                         <includes>
                             <include>**/*Test.java</include>
@@ -402,17 +402,17 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                         <dependency>
                             <groupId>org.junit.jupiter</groupId>
                             <artifactId>junit-jupiter-engine</artifactId>
-                            <version>5.10.2</version>
+                            <version>5.10.3</version>
                         </dependency>
                         <dependency>
                             <groupId>org.junit.platform</groupId>
                             <artifactId>junit-platform-engine</artifactId>
-                            <version>1.10.2</version>
+                            <version>1.10.3</version>
                         </dependency>
                         <dependency>
                             <groupId>org.junit.vintage</groupId>
                             <artifactId>junit-vintage-engine</artifactId>
-                            <version>5.10.2</version>
+                            <version>5.10.3</version>
                         </dependency>
                     </dependencies>
                 </plugin>
