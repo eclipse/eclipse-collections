@@ -41,4 +41,3 @@ public class SumOfLongProcedure<T> implements Procedure<T>
         this.result += this.function.longValueOf(each);
     }
 }
-

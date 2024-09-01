@@ -120,4 +120,3 @@ public final class IntervalUtils
         return direction == 0 ? stepBy : direction * stepBy;
     }
 }
-

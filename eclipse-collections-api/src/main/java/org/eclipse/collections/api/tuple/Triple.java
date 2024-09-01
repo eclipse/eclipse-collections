@@ -44,4 +44,3 @@ public interface Triple<T1, T2, T3>
         return this.getOne() == this.getTwo() && this.getOne() == this.getThree();
     }
 }
-

@@ -41,4 +41,3 @@ public class SumOfIntProcedure<T> implements Procedure<T>
         this.result += this.function.intValueOf(each);
     }
 }
-
