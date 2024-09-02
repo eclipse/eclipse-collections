@@ -72,6 +72,15 @@ public interface OrderedMapIterableTestCase extends MapIterableTestCase, Ordered
     default void MapIterable_flipUniqueValues()
     {
         MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
-        assertThrows(UnsupportedOperationException.class, map::flipUniqueValues);
+        MapIterable<Integer, String> result = map.flipUniqueValues();
+
+        // TODO: Set up methods like getExpectedTransformed, but for maps. Delete overrides of this method.
+        assertIterablesEqual(
+                this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
+                result);
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> this.newWithKeysValues(1, "2", 2, "2").flipUniqueValues());
     }
 }
