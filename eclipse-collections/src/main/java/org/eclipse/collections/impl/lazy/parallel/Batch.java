@@ -53,4 +53,3 @@ public interface Batch<T>
 
     DoubleSumResultHolder sumOfDouble(DoubleFunction<? super T> function);
 }
-

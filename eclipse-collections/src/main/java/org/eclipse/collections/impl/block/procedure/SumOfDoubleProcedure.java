@@ -52,4 +52,3 @@ public class SumOfDoubleProcedure<T> implements Procedure<T>, DoubleSumResultHol
         this.result = nextSum;
     }
 }
-

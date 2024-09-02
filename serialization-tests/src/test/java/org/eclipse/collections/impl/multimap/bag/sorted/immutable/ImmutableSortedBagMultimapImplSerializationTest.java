@@ -31,4 +31,3 @@ public class ImmutableSortedBagMultimapImplSerializationTest extends ImmutableMu
                 + "A3EAfgACdAABQnEAfgADcQB+AAN3BAAAAAFxAH4AAng=";
     }
 }
-

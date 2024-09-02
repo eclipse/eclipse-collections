@@ -52,4 +52,3 @@ public class SumOfFloatProcedure<T> implements Procedure<T>, DoubleSumResultHold
         this.result = nextSum;
     }
 }
-
