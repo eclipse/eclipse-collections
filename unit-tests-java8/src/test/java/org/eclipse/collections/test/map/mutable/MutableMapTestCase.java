@@ -16,6 +16,7 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.test.MutableUnorderedIterableTestCase;
 import org.eclipse.collections.test.map.UnsortedMapIterableTestCase;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,6 +31,7 @@ public interface MutableMapTestCase extends UnsortedMapIterableTestCase, Mutable
     <K, V> MutableMap<K, V> newWithKeysValues(Object... elements);
 
     @Override
+    @Test
     default void Iterable_toString()
     {
         UnsortedMapIterableTestCase.super.Iterable_toString();
@@ -41,6 +43,7 @@ public interface MutableMapTestCase extends UnsortedMapIterableTestCase, Mutable
     }
 
     @Override
+    @Test
     default void Iterable_remove()
     {
         MutableMap<Object, Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);

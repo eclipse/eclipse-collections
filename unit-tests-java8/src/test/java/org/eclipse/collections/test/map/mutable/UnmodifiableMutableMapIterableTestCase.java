@@ -28,6 +28,7 @@ public interface UnmodifiableMutableMapIterableTestCase
         extends MutableMapIterableTestCase, FixedSizeIterableTestCase
 {
     @Override
+    @Test
     default void MutableMapIterable_removeKey()
     {
         MutableMapIterable<Object, Object> map = this.newWith();
@@ -43,6 +44,7 @@ public interface UnmodifiableMutableMapIterableTestCase
     }
 
     @Override
+    @Test
     default void MutableMapIterable_removeIf()
     {
         MutableMapIterable<Object, Object> map1 = this.newWith();
@@ -53,6 +55,7 @@ public interface UnmodifiableMutableMapIterableTestCase
     }
 
     @Override
+    @Test
     default void Map_remove()
     {
         MutableMapIterable<Object, Object> map = this.newWith();
@@ -60,6 +63,7 @@ public interface UnmodifiableMutableMapIterableTestCase
     }
 
     @Override
+    @Test
     default void Map_entrySet_remove()
     {
         MutableMapIterable<Object, Object> map = this.newWithKeysValues();
@@ -67,6 +71,7 @@ public interface UnmodifiableMutableMapIterableTestCase
     }
 
     @Override
+    @Test
     default void Map_clear()
     {
         MutableMapIterable<Object, String> map = this.newWith("Three", "Two", "One");
@@ -74,6 +79,7 @@ public interface UnmodifiableMutableMapIterableTestCase
     }
 
     @Override
+    @Test
     default void Iterable_remove()
     {
         FixedSizeIterableTestCase.super.Iterable_remove();
@@ -91,8 +97,8 @@ public interface UnmodifiableMutableMapIterableTestCase
         assertIterablesEqual(this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"), map);
     }
 
-    @Test
     @Override
+    @Test
     default void Map_putAll()
     {
         MutableMapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "2");
@@ -142,6 +148,7 @@ public interface UnmodifiableMutableMapIterableTestCase
     }
 
     @Override
+    @Test
     default void MutableMapIterable_updateValue()
     {
         MutableMapIterable<String, Integer> map = this.newWithKeysValues("One", 1);
@@ -169,6 +176,7 @@ public interface UnmodifiableMutableMapIterableTestCase
     }
 
     @Override
+    @Test
     default void Map_merge()
     {
         MutableMapIterable<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");

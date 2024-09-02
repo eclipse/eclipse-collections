@@ -91,6 +91,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     }
 
     @Override
+    @Test
     default void OrderedIterable_getFirst()
     {
         assertIterablesEqual(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
@@ -104,6 +105,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     }
 
     @Override
+    @Test
     default void OrderedIterable_getLast()
     {
         assertIterablesEqual(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
@@ -117,36 +119,42 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     }
 
     @Override
+    @Test
     default void RichIterable_getFirst()
     {
         assertIterablesEqual(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
     }
 
     @Override
+    @Test
     default void RichIterable_getLast()
     {
         assertIterablesEqual(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
     }
 
     @Override
+    @Test
     default void OrderedIterable_min()
     {
         // Cannot contain duplicates
     }
 
     @Override
+    @Test
     default void OrderedIterable_max()
     {
         // Cannot contain duplicates
     }
 
     @Override
+    @Test
     default void OrderedIterable_min_comparator()
     {
         // Cannot contain duplicates
     }
 
     @Override
+    @Test
     default void OrderedIterable_max_comparator()
     {
         // Cannot contain duplicates

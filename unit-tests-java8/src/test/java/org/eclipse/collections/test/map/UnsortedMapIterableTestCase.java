@@ -45,6 +45,7 @@ public interface UnsortedMapIterableTestCase
     }
 
     @Override
+    @Test
     default void Iterable_toString()
     {
         MapIterable<String, Integer> map = this.newWithKeysValues("Two", 2, "One", 1);

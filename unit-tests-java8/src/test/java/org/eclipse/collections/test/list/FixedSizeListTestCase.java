@@ -15,6 +15,7 @@ import java.util.ListIterator;
 
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.test.FixedSizeCollectionTestCase;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,12 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, ListTestCase
 {
     @Override
+    @Test
     default void Iterable_remove()
     {
         FixedSizeCollectionTestCase.super.Iterable_remove();
     }
 
     @Override
+    @Test
     default void List_subList_subList_remove()
     {
         List<String> list = this.newWith("A", "B", "C", "D");
@@ -44,6 +47,7 @@ public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, List
     }
 
     @Override
+    @Test
     default void List_subList_subList_iterator_add_remove()
     {
         List<String> list = this.newWith("A", "B", "C", "D");
@@ -67,6 +71,7 @@ public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, List
     }
 
     @Override
+    @Test
     default void List_subList_subList_addAll()
     {
         List<String> list = this.newWith("A", "B", "C", "D");
@@ -87,6 +92,7 @@ public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, List
     }
 
     @Override
+    @Test
     default void List_subList_subList_clear()
     {
         List<String> list = this.newWith("A", "B", "C", "D", "E", "F");

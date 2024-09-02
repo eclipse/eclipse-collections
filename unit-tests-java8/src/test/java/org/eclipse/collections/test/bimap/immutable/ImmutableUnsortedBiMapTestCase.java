@@ -13,6 +13,7 @@ package org.eclipse.collections.test.bimap.immutable;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.test.ImmutableUnorderedIterableTestCase;
 import org.eclipse.collections.test.bimap.UnsortedBiMapTestCase;
+import org.junit.jupiter.api.Test;
 
 public interface ImmutableUnsortedBiMapTestCase extends UnsortedBiMapTestCase, ImmutableUnorderedIterableTestCase
 {
@@ -20,12 +21,14 @@ public interface ImmutableUnsortedBiMapTestCase extends UnsortedBiMapTestCase, I
     <T> ImmutableBiMap<Object, T> newWith(T... elements);
 
     @Override
+    @Test
     default void Iterable_remove()
     {
         ImmutableUnorderedIterableTestCase.super.Iterable_remove();
     }
 
     @Override
+    @Test
     default void RichIterable_toArray()
     {
         UnsortedBiMapTestCase.super.RichIterable_toArray();

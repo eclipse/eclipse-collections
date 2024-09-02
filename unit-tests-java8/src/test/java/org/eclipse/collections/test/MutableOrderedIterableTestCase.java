@@ -18,8 +18,8 @@ import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual
 
 public interface MutableOrderedIterableTestCase extends OrderedIterableTestCase
 {
-    @Test
     @Override
+    @Test
     default void Iterable_remove()
     {
         Iterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);

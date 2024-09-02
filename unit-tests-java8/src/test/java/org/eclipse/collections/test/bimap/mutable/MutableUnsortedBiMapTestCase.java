@@ -13,6 +13,7 @@ package org.eclipse.collections.test.bimap.mutable;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.test.MutableUnorderedIterableTestCase;
 import org.eclipse.collections.test.bimap.UnsortedBiMapTestCase;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
@@ -26,6 +27,7 @@ public interface MutableUnsortedBiMapTestCase extends UnsortedBiMapTestCase, Mut
     <K, V> MutableBiMap<K, V> newWithKeysValues(Object... elements);
 
     @Override
+    @Test
     default void Iterable_toString()
     {
         UnsortedBiMapTestCase.super.Iterable_toString();
@@ -37,12 +39,14 @@ public interface MutableUnsortedBiMapTestCase extends UnsortedBiMapTestCase, Mut
     }
 
     @Override
+    @Test
     default void Iterable_remove()
     {
         UnsortedBiMapTestCase.super.Iterable_remove();
     }
 
     @Override
+    @Test
     default void RichIterable_toArray()
     {
         UnsortedBiMapTestCase.super.RichIterable_toArray();

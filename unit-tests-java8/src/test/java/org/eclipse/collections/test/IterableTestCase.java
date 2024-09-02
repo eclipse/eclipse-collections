@@ -278,7 +278,9 @@ public interface IterableTestCase
         assertThrows(NoSuchElementException.class, iterator3::next);
     }
 
+    @Test
     void Iterable_remove();
 
+    @Test
     void Iterable_toString();
 }

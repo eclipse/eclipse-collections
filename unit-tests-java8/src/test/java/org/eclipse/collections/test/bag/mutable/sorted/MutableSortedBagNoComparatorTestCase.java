@@ -96,6 +96,7 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
     }
 
     @Override
+    @Test
     default void SortedIterable_comparator()
     {
         MutableSortedNaturalOrderTestCase.super.SortedIterable_comparator();

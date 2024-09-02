@@ -51,6 +51,7 @@ public interface UnorderedIterableTestCase extends RichIterableTestCase
     }
 
     @Override
+    @Test
     default void Iterable_toString()
     {
         assertThat(this.newWith(2, 2, 1).toString(), isOneOf("[2, 2, 1]", "[1, 2, 2]"));

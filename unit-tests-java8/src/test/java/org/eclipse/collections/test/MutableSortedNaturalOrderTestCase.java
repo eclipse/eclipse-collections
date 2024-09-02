@@ -27,8 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface MutableSortedNaturalOrderTestCase extends SortedNaturalOrderTestCase, MutableOrderedIterableTestCase, MutableCollectionTestCase
 {
-    @Test
     @Override
+    @Test
     default void Iterable_remove()
     {
         Iterable<Integer> iterable = this.newWith(1, 1, 1, 2, 2, 3);

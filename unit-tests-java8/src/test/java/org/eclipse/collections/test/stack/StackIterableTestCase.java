@@ -32,6 +32,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     <T> StackIterable<T> newWith(T... elements);
 
     @Override
+    @Test
     default void newMutable_sanity()
     {
         // Cannot treat an ArrayStack as a MutableCollection
@@ -72,6 +73,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     }
 
     @Override
+    @Test
     default void InternalIterable_forEachWith()
     {
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);

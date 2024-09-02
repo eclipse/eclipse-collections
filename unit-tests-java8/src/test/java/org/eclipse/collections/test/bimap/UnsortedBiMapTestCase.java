@@ -29,6 +29,7 @@ public interface UnsortedBiMapTestCase extends BiMapTestCase, TransformsToBagTra
     <T> BiMap<Object, T> newWith(T... elements);
 
     @Override
+    @Test
     default void Iterable_toString()
     {
         BiMap<String, Integer> bimap = this.newWithKeysValues("Two", 2, "One", 1);
@@ -40,8 +41,8 @@ public interface UnsortedBiMapTestCase extends BiMapTestCase, TransformsToBagTra
         assertThat(bimap.asLazy().toString(), isOneOf("[1, 2]", "[2, 1]"));
     }
 
-    @Test
     @Override
+    @Test
     default void Iterable_remove()
     {
         BiMap<Object, Integer> iterable = this.newWith(3, 2, 1);

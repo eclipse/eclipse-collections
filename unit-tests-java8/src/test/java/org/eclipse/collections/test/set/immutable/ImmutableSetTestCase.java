@@ -37,6 +37,7 @@ public interface ImmutableSetTestCase extends ImmutableCollectionUniqueTestCase,
     }
 
     @Override
+    @Test
     default void ImmutableCollection_newWith()
     {
         ImmutableCollection<Integer> immutableCollection = this.newWith(3, 2, 1);

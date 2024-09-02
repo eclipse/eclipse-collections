@@ -26,43 +26,43 @@ public interface MultiReaderMutableCollectionTestCase extends MutableCollectionT
         assertThrows(UnsupportedOperationException.class, () -> this.newWith(3, 2, 1).iterator());
     }
 
-    @Test
     @Override
+    @Test
     default void Iterable_remove()
     {
         // Multi-reader collections don't support iterator()
     }
 
-    @Test
     @Override
+    @Test
     default void Iterable_next()
     {
         // Multi-reader collections don't support iterator()
     }
 
-    @Test
     @Override
+    @Test
     default void Iterable_hasNext()
     {
         // Multi-reader collections don't support iterator()
     }
 
-    @Test
     @Override
+    @Test
     default void RichIterable_getFirst()
     {
         // Does not support iterator outside withReadLockAndDelegate
     }
 
-    @Test
     @Override
+    @Test
     default void RichIterable_getLast()
     {
         // Does not support iterator outside withReadLockAndDelegate
     }
 
-    @Test
     @Override
+    @Test
     default void RichIterable_getOnly()
     {
         // Does not support iterator outside withReadLockAndDelegate
