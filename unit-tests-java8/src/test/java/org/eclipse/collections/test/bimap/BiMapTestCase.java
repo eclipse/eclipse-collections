@@ -35,6 +35,7 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
         return false;
     }
 
+    @Override
     @Test
     default void Iterable_sanity_check()
     {
@@ -42,6 +43,7 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
     }
 
     @Override
+    @Test
     default void Iterable_toString()
     {
         RichIterableUniqueTestCase.super.Iterable_toString();
@@ -68,6 +70,7 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
     }
 
     @Override
+    @Test
     default void MapIterable_forEachKeyValue()
     {
         BiMap<Object, Integer> bimap = this.newWith(3, 2, 1);
@@ -90,6 +93,7 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
     }
 
     @Override
+    @Test
     default void MapIterable_flipUniqueValues()
     {
         BiMap<String, Integer> bimap = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
@@ -101,14 +105,16 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
     }
 
     @Override
+    @Test
     default void RichIterable_size()
     {
         RichIterableUniqueTestCase.super.RichIterable_size();
     }
 
+    @Test
     default void BiMap_toList()
     {
-        BiMap<Object, Integer> iterable = this.newWith(4, 3, 2, 1);
+        BiMap<Object, Integer> iterable = this.newWithKeysValues(4, 4, 3, 3, 2, 2, 1, 1);
 
         {
             MutableList<Integer> target = Lists.mutable.empty();
@@ -126,6 +132,7 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
     }
 
     @Override
+    @Test
     default void MapIterable_forEach()
     {
         BiMap<Object, Integer> bimap = this.newWith(3, 2, 1);

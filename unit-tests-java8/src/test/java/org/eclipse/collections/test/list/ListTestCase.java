@@ -34,8 +34,8 @@ public interface ListTestCase extends CollectionTestCase
         return true;
     }
 
-    @Test
     @Override
+    @Test
     default void Iterable_remove()
     {
         List<Integer> list = this.newWith(3, 3, 3, 2, 2, 1);
@@ -46,6 +46,7 @@ public interface ListTestCase extends CollectionTestCase
     }
 
     @Override
+    @Test
     default void Iterable_toString()
     {
         Iterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);

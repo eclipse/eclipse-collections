@@ -46,6 +46,7 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
     }
 
     @Override
+    @Test
     default void RichIterable_iterator_iterationOrder()
     {
         MutableCollection<Integer> iterationOrder = this.newMutableForFilter();

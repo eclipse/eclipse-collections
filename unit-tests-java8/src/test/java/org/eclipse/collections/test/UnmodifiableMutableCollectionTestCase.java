@@ -22,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface UnmodifiableMutableCollectionTestCase extends FixedSizeCollectionTestCase, MutableCollectionTestCase
 {
-    @Test
     @Override
+    @Test
     default void Iterable_remove()
     {
         FixedSizeCollectionTestCase.super.Iterable_remove();

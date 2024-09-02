@@ -34,18 +34,20 @@ public interface MutableListTestCase extends MutableCollectionTestCase, ListTest
     <T> MutableList<T> newWith(T... elements);
 
     @Override
-    default void Iterable_toString()
-    {
-        ListTestCase.super.Iterable_toString();
-    }
-
-    @Override
     default boolean allowsDuplicates()
     {
         return true;
     }
 
     @Override
+    @Test
+    default void Iterable_toString()
+    {
+        ListTestCase.super.Iterable_toString();
+    }
+
+    @Override
+    @Test
     default void Iterable_remove()
     {
         ListTestCase.super.Iterable_remove();

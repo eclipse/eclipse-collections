@@ -12,10 +12,12 @@ package org.eclipse.collections.test.bag.mutable.sorted;
 
 import org.eclipse.collections.test.NoIteratorTestCase;
 import org.eclipse.collections.test.OrderedIterableTestCase;
+import org.junit.jupiter.api.Test;
 
 public interface OrderedIterableNoIteratorTest extends NoIteratorTestCase, OrderedIterableTestCase
 {
     @Override
+    @Test
     default void OrderedIterable_next()
     {
         // Not applicable

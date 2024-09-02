@@ -66,6 +66,7 @@ public interface SetTestCase extends CollectionTestCase
         assertNotEquals(this.newWith(3, 2, 1), this.newWith(4, 2, 1));
     }
 
+    @Override
     @Test
     default void Iterable_toString()
     {

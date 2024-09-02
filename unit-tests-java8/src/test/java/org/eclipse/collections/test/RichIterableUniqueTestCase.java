@@ -119,6 +119,7 @@ public interface RichIterableUniqueTestCase
     }
 
     @Override
+    @Test
     default void Iterable_toString()
     {
         RichIterable<Integer> iterable = this.newWith(3, 2, 1);
@@ -841,6 +842,7 @@ public interface RichIterableUniqueTestCase
     }
 
     @Override
+    @Test
     default void RichIterable_sumByPrimitive()
     {
         RichIterable<String> iterable = this.newWith("4", "3", "2", "1");

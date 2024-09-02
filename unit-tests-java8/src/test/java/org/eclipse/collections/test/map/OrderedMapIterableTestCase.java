@@ -69,6 +69,7 @@ public interface OrderedMapIterableTestCase extends MapIterableTestCase, Ordered
     }
 
     @Override
+    @Test
     default void MapIterable_flipUniqueValues()
     {
         MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);

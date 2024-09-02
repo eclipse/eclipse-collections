@@ -2076,6 +2076,7 @@ public interface RichIterableTestCase extends IterableTestCase
                 builder3.toString());
     }
 
+    @Override
     @Test
     default void Iterable_toString()
     {

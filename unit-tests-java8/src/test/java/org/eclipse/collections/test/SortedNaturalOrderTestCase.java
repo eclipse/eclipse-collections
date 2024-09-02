@@ -56,6 +56,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SuppressWarnings("UnnecessaryCodeBlock")
 public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
 {
+    @Override
     @Test
     default void Iterable_toString()
     {
@@ -226,6 +227,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     }
 
     @Override
+    @Test
     default void RichIterable_flatCollect_primitive()
     {
         {

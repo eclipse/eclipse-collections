@@ -21,8 +21,8 @@ import static org.hamcrest.Matchers.isOneOf;
 
 public interface MutableUnorderedIterableTestCase extends UnorderedIterableTestCase
 {
-    @Test
     @Override
+    @Test
     default void Iterable_remove()
     {
         Iterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);

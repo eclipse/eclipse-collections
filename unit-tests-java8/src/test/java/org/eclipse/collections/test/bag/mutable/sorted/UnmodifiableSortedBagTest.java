@@ -16,10 +16,12 @@ import org.eclipse.collections.impl.bag.sorted.mutable.UnmodifiableSortedBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.bag.mutable.UnmodifiableBagIterableTestCase;
+import org.junit.jupiter.api.Test;
 
 public class UnmodifiableSortedBagTest implements MutableSortedBagTestCase, UnmodifiableBagIterableTestCase
 {
     @Override
+    @Test
     public void Iterable_remove()
     {
         UnmodifiableBagIterableTestCase.super.Iterable_remove();
@@ -35,12 +37,14 @@ public class UnmodifiableSortedBagTest implements MutableSortedBagTestCase, Unmo
     }
 
     @Override
+    @Test
     public void MutableBagIterable_addOccurrences()
     {
         UnmodifiableBagIterableTestCase.super.MutableBagIterable_addOccurrences();
     }
 
     @Override
+    @Test
     public void MutableBagIterable_removeOccurrences()
     {
         UnmodifiableBagIterableTestCase.super.MutableBagIterable_removeOccurrences();

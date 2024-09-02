@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 
 public interface NoDetectOptionalNullTestCase extends RichIterableTestCase
 {
-    @Test
     @Override
+    @Test
     default void RichIterable_detectOptionalNull()
     {
         // Not applicable
