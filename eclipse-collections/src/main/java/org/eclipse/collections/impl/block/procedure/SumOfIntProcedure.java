@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.block.procedure;
 
+import java.util.concurrent.atomic.LongAdder;
+
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -23,22 +25,24 @@ public class SumOfIntProcedure<T> implements Procedure<T>
     private static final long serialVersionUID = 2L;
 
     private final IntFunction<? super T> function;
-    private int result;
+    private final LongAdder result; // change from int to longAdder its more thread safe
 
     public SumOfIntProcedure(IntFunction<? super T> function)
     {
         this.function = function;
+        this.result = new LongAdder();  // change
     }
 
-    public int getResult()
+    public long getResult()
     {
-        return this.result;
-    }
+        return this.result.sum();
+    } // getting the sum from LongAdder
 
     @Override
     public void value(T each)
     {
-        this.result += this.function.intValueOf(each);
+        this.result.add(this.function.intValueOf(each));
     }
 }
-
+// When you use it in a parallel stream, it should be less prone to overflow errors due to concurrent updates.
+//  we can also adjust the number of threads based on system's capabilities by creating a new variable.
