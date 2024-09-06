@@ -571,9 +571,8 @@ public class OrderedMapAdapter<K, V>
     @Override
     public <VV> MutableOrderedMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        // TODO: Make this work in a major version by changing {@link org.eclipse.collections.api.RichIterable#groupByUniqueKey}'s type R from MutableMap to MutableMapIterable.
-        // return this.groupByUniqueKey(function, this.newEmpty());
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".groupByUniqueKey() not implemented yet");
+        MutableOrderedMap<VV, V> vs = (MutableOrderedMap<VV, V>) this.newEmpty();
+        return this.groupByUniqueKey(function, vs);
     }
 
     @Override
