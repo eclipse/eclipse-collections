@@ -94,42 +94,42 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     @Test
     default void OrderedIterable_getFirst()
     {
-        assertIterablesEqual(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
+        assertEquals(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
     }
 
     @Override
     @Test
     default void OrderedIterable_getFirstOptional()
     {
-        assertIterablesEqual(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getFirstOptional());
+        assertEquals(Optional.of(3), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getFirstOptional());
     }
 
     @Override
     @Test
     default void OrderedIterable_getLast()
     {
-        assertIterablesEqual(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
+        assertEquals(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
     }
 
     @Override
     @Test
     default void OrderedIterable_getLastOptional()
     {
-        assertIterablesEqual(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getLastOptional());
+        assertEquals(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getLastOptional());
     }
 
     @Override
     @Test
     default void RichIterable_getFirst()
     {
-        assertIterablesEqual(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
+        assertEquals(Integer.valueOf(3), this.newWith(3, 2, 1).getFirst());
     }
 
     @Override
     @Test
     default void RichIterable_getLast()
     {
-        assertIterablesEqual(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
+        assertEquals(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
     }
 
     @Override

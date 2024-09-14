@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public interface ListIterableTestCase extends OrderedIterableWithDuplicatesTestCase, TransformsToListTrait
 {
@@ -78,22 +79,22 @@ public interface ListIterableTestCase extends OrderedIterableWithDuplicatesTestC
     default void ListIterable_indexOf()
     {
         ListIterable<Integer> integers = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
-        assertIterablesEqual(3, integers.indexOf(3));
-        assertIterablesEqual(-1, integers.indexOf(0));
-        assertIterablesEqual(-1, integers.indexOf(null));
+        assertEquals(3, integers.indexOf(3));
+        assertEquals(-1, integers.indexOf(0));
+        assertEquals(-1, integers.indexOf(null));
         ListIterable<Integer> integers2 = this.newWith(1, 2, 2, null, 3, 3, 3, null, 4, 4, 4, 4);
-        assertIterablesEqual(3, integers2.indexOf(null));
+        assertEquals(3, integers2.indexOf(null));
     }
 
     @Test
     default void ListIterable_lastIndexOf()
     {
         ListIterable<Integer> integers = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
-        assertIterablesEqual(5, integers.lastIndexOf(3));
-        assertIterablesEqual(-1, integers.lastIndexOf(0));
-        assertIterablesEqual(-1, integers.lastIndexOf(null));
+        assertEquals(5, integers.lastIndexOf(3));
+        assertEquals(-1, integers.lastIndexOf(0));
+        assertEquals(-1, integers.lastIndexOf(null));
         ListIterable<Integer> integers2 = this.newWith(1, 2, 2, null, 3, 3, 3, null, 4, 4, 4, 4);
-        assertIterablesEqual(7, integers2.lastIndexOf(null));
+        assertEquals(7, integers2.lastIndexOf(null));
     }
 
     @Test

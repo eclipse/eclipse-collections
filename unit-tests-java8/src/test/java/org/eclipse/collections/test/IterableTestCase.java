@@ -13,6 +13,7 @@ package org.eclipse.collections.test;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
@@ -27,6 +28,7 @@ import org.eclipse.collections.api.LazyIntIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.LazyLongIterable;
 import org.eclipse.collections.api.LazyShortIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.collection.ImmutableCollection;
@@ -57,6 +59,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public interface IterableTestCase
 {
@@ -66,6 +69,20 @@ public interface IterableTestCase
 
     static void assertIterablesEqual(Object o1, Object o2)
     {
+        if (!(o1 instanceof Iterable)
+                && !(o1 instanceof PrimitiveIterable)
+                && !(o1 instanceof Map)
+                && o1 != null)
+        {
+            fail("First argument is not an Iterable: " + o1);
+        }
+        if (!(o2 instanceof Iterable)
+                && !(o2 instanceof PrimitiveIterable)
+                && !(o2 instanceof Map)
+                && o2 != null)
+        {
+            fail("Second argument is not an Iterable: " + o2);
+        }
         if (o1 instanceof ListIterable<?> && o2 instanceof LazyIterable<?>)
         {
             assertIterablesEqual(o1, ((LazyIterable<?>) o2).toList());

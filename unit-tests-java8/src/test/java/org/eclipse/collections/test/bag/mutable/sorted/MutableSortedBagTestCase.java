@@ -17,6 +17,7 @@ import org.eclipse.collections.test.MutableOrderedIterableTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,11 +32,11 @@ public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableOrde
     default void MutableBagIterable_addOccurrences()
     {
         MutableSortedBag<Integer> mutableSortedBag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(4, mutableSortedBag.addOccurrences(4, 4));
+        assertEquals(4, mutableSortedBag.addOccurrences(4, 4));
         assertIterablesEqual(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 4, 4, 3, 3, 3, 2, 2, 1), mutableSortedBag);
-        assertIterablesEqual(3, mutableSortedBag.addOccurrences(1, 2));
+        assertEquals(3, mutableSortedBag.addOccurrences(1, 2));
         assertIterablesEqual(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 4, 4, 3, 3, 3, 2, 2, 1, 1, 1), mutableSortedBag);
-        assertIterablesEqual(3, mutableSortedBag.addOccurrences(1, 0));
+        assertEquals(3, mutableSortedBag.addOccurrences(1, 0));
         assertIterablesEqual(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 4, 4, 3, 3, 3, 2, 2, 1, 1, 1), mutableSortedBag);
 
         assertThrows(IllegalArgumentException.class, () -> mutableSortedBag.addOccurrences(4, -1));

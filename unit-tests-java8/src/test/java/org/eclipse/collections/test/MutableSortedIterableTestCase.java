@@ -15,6 +15,7 @@ import java.util.Iterator;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public interface MutableSortedIterableTestCase extends MutableOrderedIterableTestCase
 {
@@ -24,7 +25,7 @@ public interface MutableSortedIterableTestCase extends MutableOrderedIterableTes
     {
         Iterable<Integer> iterable = this.newWith(3, 2, 1);
         Iterator<Integer> iterator = iterable.iterator();
-        assertIterablesEqual(Integer.valueOf(3), iterator.next());
+        assertEquals(Integer.valueOf(3), iterator.next());
         iterator.remove();
         assertIterablesEqual(this.newWith(2, 1), iterable);
     }

@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -34,7 +35,7 @@ public interface ImmutableCollectionTestCase extends RichIterableTestCase
         String s = "";
         if (this.allowsDuplicates())
         {
-            assertIterablesEqual(2, this.newWith(s, s).size());
+            assertEquals(2, this.newWith(s, s).size());
         }
         else
         {
@@ -45,12 +46,12 @@ public interface ImmutableCollectionTestCase extends RichIterableTestCase
         ImmutableCollection<String> newCollection = collection.newWith(s);
         if (this.allowsDuplicates())
         {
-            assertIterablesEqual(2, newCollection.size());
+            assertEquals(2, newCollection.size());
             assertIterablesEqual(this.newWith(s, s), newCollection);
         }
         else
         {
-            assertIterablesEqual(1, newCollection.size());
+            assertEquals(1, newCollection.size());
             assertSame(collection, newCollection);
         }
     }

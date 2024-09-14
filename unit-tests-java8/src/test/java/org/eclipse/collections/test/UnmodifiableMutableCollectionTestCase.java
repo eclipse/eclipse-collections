@@ -17,7 +17,7 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
 import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface UnmodifiableMutableCollectionTestCase extends FixedSizeCollectionTestCase, MutableCollectionTestCase
@@ -38,7 +38,7 @@ public interface UnmodifiableMutableCollectionTestCase extends FixedSizeCollecti
         String s = "";
         if (this.allowsDuplicates())
         {
-            assertIterablesEqual(2, this.newWith(s, s).size());
+            assertEquals(2, this.newWith(s, s).size());
         }
         else
         {

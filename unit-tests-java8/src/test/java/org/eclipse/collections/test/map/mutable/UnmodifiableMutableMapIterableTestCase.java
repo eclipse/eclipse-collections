@@ -118,7 +118,7 @@ public interface UnmodifiableMutableMapIterableTestCase
     default void MutableMapIterable_getIfAbsentPut()
     {
         MutableMapIterable<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
-        assertIterablesEqual(3, map.getIfAbsentPut("3", () -> {
+        assertEquals(3, map.getIfAbsentPut("3", () -> {
             throw new AssertionError();
         }));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
@@ -127,12 +127,12 @@ public interface UnmodifiableMutableMapIterableTestCase
             throw new AssertionError();
         }));
 
-        assertIterablesEqual(3, map.getIfAbsentPut("3", 4));
+        assertEquals(3, map.getIfAbsentPut("3", 4));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
 
         assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPut("4", 4));
 
-        assertIterablesEqual(3, map.getIfAbsentPutWithKey("3", key -> {
+        assertEquals(3, map.getIfAbsentPutWithKey("3", key -> {
             throw new AssertionError();
         }));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
@@ -141,7 +141,7 @@ public interface UnmodifiableMutableMapIterableTestCase
             throw new AssertionError();
         }));
 
-        assertIterablesEqual(3, map.getIfAbsentPutWith("3", x -> x + 10, 4));
+        assertEquals(3, map.getIfAbsentPutWith("3", x -> x + 10, 4));
         assertIterablesEqual(this.newWithKeysValues("3", 3, "2", 2, "1", 1), map);
 
         assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith("4", x -> x + 10, 4));

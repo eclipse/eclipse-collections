@@ -16,6 +16,7 @@ import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -29,9 +30,9 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     default void MutableBagIterable_addOccurrences()
     {
         MutableBagIterable<Integer> mutableBag = this.newWith(1, 2, 2, 3, 3, 3);
-        assertIterablesEqual(4, mutableBag.addOccurrences(4, 4));
+        assertEquals(4, mutableBag.addOccurrences(4, 4));
         assertIterablesEqual(Bags.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
-        assertIterablesEqual(3, mutableBag.addOccurrences(1, 2));
+        assertEquals(3, mutableBag.addOccurrences(1, 2));
         assertIterablesEqual(Bags.immutable.with(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
 
         assertThrows(

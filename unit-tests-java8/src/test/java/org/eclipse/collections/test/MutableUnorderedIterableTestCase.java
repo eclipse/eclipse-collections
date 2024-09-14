@@ -15,9 +15,9 @@ import java.util.Iterator;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.jupiter.api.Test;
 
-import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isOneOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public interface MutableUnorderedIterableTestCase extends UnorderedIterableTestCase
 {
@@ -29,7 +29,7 @@ public interface MutableUnorderedIterableTestCase extends UnorderedIterableTestC
         Iterator<Integer> iterator = iterable.iterator();
         iterator.next();
         iterator.remove();
-        assertIterablesEqual(this.allowsDuplicates() ? 5 : 2, Iterate.sizeOf(iterable));
+        assertEquals(this.allowsDuplicates() ? 5 : 2, Iterate.sizeOf(iterable));
         assertThat(
                 iterable,
                 isOneOf(

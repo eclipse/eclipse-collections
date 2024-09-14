@@ -61,10 +61,10 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     default void Iterable_toString()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
-        assertIterablesEqual(
+        assertEquals(
                 "[1, 2, 2, 3, 3, 3, 4, 4, 4, 4]",
                 iterable.toString());
-        assertIterablesEqual(
+        assertEquals(
                 "[1, 2, 2, 3, 3, 3, 4, 4, 4, 4]",
                 iterable.asLazy().toString());
     }
@@ -391,10 +391,10 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     @Test
     default void RichIterable_minBy_maxBy()
     {
-        assertIterablesEqual("ca", this.newWith("ab", "bc", "ca", "da", "ed").minBy(string -> string.charAt(string.length() - 1)));
+        assertEquals("ca", this.newWith("ab", "bc", "ca", "da", "ed").minBy(string -> string.charAt(string.length() - 1)));
         assertThrows(NoSuchElementException.class, () -> this.<String>newWith().minBy(string -> string.charAt(string.length() - 1)));
 
-        assertIterablesEqual("cz", this.newWith("ew", "dz", "cz", "bx", "ay").maxBy(string -> string.charAt(string.length() - 1)));
+        assertEquals("cz", this.newWith("ew", "dz", "cz", "bx", "ay").maxBy(string -> string.charAt(string.length() - 1)));
         assertThrows(NoSuchElementException.class, () -> this.<String>newWith().maxBy(string -> string.charAt(string.length() - 1)));
     }
 
@@ -403,33 +403,33 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     default void RichIterable_makeString_appendString()
     {
         RichIterable<Integer> iterable = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
-        assertIterablesEqual(
+        assertEquals(
                 "1, 2, 2, 3, 3, 3, 4, 4, 4, 4",
                 iterable.makeString());
 
-        assertIterablesEqual(
+        assertEquals(
                 "1/2/2/3/3/3/4/4/4/4",
                 iterable.makeString("/"));
 
-        assertIterablesEqual(
+        assertEquals(
                 "[1/2/2/3/3/3/4/4/4/4]",
                 iterable.makeString("[", "/", "]"));
 
         StringBuilder builder1 = new StringBuilder();
         iterable.appendString(builder1);
-        assertIterablesEqual(
+        assertEquals(
                 "1, 2, 2, 3, 3, 3, 4, 4, 4, 4",
                 builder1.toString());
 
         StringBuilder builder2 = new StringBuilder();
         iterable.appendString(builder2, "/");
-        assertIterablesEqual(
+        assertEquals(
                 "1/2/2/3/3/3/4/4/4/4",
                 builder2.toString());
 
         StringBuilder builder3 = new StringBuilder();
         iterable.appendString(builder3, "[", "/", "]");
-        assertIterablesEqual(
+        assertEquals(
                 "[1/2/2/3/3/3/4/4/4/4]",
                 builder3.toString());
     }
@@ -463,14 +463,14 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     @Test
     default void OrderedIterable_getFirst()
     {
-        assertIterablesEqual(Integer.valueOf(1), this.newWith(1, 2, 2, 3, 3, 3).getFirst());
+        assertEquals(Integer.valueOf(1), this.newWith(1, 2, 2, 3, 3, 3).getFirst());
     }
 
     @Override
     @Test
     default void OrderedIterable_getLast()
     {
-        assertIterablesEqual(Integer.valueOf(3), this.newWith(1, 2, 2, 3, 3, 3).getLast());
+        assertEquals(Integer.valueOf(3), this.newWith(1, 2, 2, 3, 3, 3).getLast());
     }
 
     @Override
@@ -478,9 +478,9 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     default void OrderedIterable_next()
     {
         Iterator<Integer> iterator = this.newWith(1, 2, 3).iterator();
-        assertIterablesEqual(Integer.valueOf(1), iterator.next());
-        assertIterablesEqual(Integer.valueOf(2), iterator.next());
-        assertIterablesEqual(Integer.valueOf(3), iterator.next());
+        assertEquals(Integer.valueOf(1), iterator.next());
+        assertEquals(Integer.valueOf(2), iterator.next());
+        assertEquals(Integer.valueOf(3), iterator.next());
     }
 
     /**
