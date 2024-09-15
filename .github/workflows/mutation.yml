@@ -38,11 +38,11 @@ jobs:
       - run: mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
       - run: ./mvnw --color=always install -DskipTests=true
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
       - name: Mutation Test
         run: mvn eu.stamp-project:pitmp-maven-plugin:run -DwithHistory -DtimeoutConstant=8000
         env:
-          MAVEN_OPTS: "-Xmx1g"
+          MAVEN_OPTS: '-Xmx1g'
       - name: Archive pitest reports
         uses: actions/upload-artifact@v4
         with:
