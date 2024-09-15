@@ -331,7 +331,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
 
                 <plugin>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.7.1</version>
+                    <version>3.15.0</version>
                 </plugin>
 
                 <plugin>
