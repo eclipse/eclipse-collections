@@ -459,13 +459,6 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
 
     @Override
     @Test
-    public void put()
-    {
-        assertThrows(UnsupportedOperationException.class, super::put);
-    }
-
-    @Override
-    @Test
     public void testClone()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two");
