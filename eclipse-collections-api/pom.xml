@@ -133,7 +133,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.6.3</version>
+                        <version>3.10.0</version>
                         <configuration>
                             <doctitle>Eclipse Collections API - ${project.version}</doctitle>
                             <windowtitle>Eclipse Collections API - ${project.version}</windowtitle>
