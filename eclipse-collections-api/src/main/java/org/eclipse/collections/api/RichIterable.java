@@ -101,18 +101,18 @@ import org.eclipse.collections.api.tuple.Pair;
  * Links are provided below as a convenience to help discover specific methods in Javadoc.
  *
  * <ul>
- * <li><b>Iterating Methods</b>
+ * <li><b>Iterating 🔄</b>
  * <ul><li>
  * {@link #each(Procedure)}, {@link #forEach(Procedure)}, {@link #forEachWith(Procedure2, Object)},
  * {@link #forEachWithIndex(ObjectIntProcedure)}, {@link #tap(Procedure)}, {@link #asLazy()}, {@link #iterator()},
  * {@link #spliterator()}
  * </ul></li>
- * <li><b>Counting Methods</b>
+ * <li><b>Counting 🔢</b>
  * <ul><li>
  * {@link #count(Predicate)} , {@link #countBy(Function)} , {@link #countByEach(Function)},
  * {@link #countByWith(Function2, Object)}, {@link #countWith(Predicate2, Object)} , {@link #size()}
  * </li></ul>
- * <li><b>Testing Methods</b>
+ * <li><b>Testing 🧪</b>
  * <ul><li>
  * {@link #anySatisfy(Predicate)}, {@link #anySatisfyWith(Predicate2, Object)}, {@link #noneSatisfy(Predicate)},
  * {@link #noneSatisfyWith(Predicate2, Object)}, {@link #allSatisfy(Predicate)}, {@link #allSatisfyWith(Predicate2, Object)},
@@ -123,7 +123,7 @@ import org.eclipse.collections.api.tuple.Pair;
  * {@link #containsBy(Function, Object)},
  * {@link #isEmpty()}, {@link #notEmpty()}
  * </li></ul>
- * <li><b>Finding Methods</b>
+ * <li><b>Finding 🔎</b>
  * <ul><li>
  * {@link #detect(Predicate)}, {@link #detectIfNone(Predicate, Function0)} ,
  * {@link #detectWith(Predicate2, Object)}, {@link #detectWithIfNone(Predicate2, Object, Function0)},
@@ -133,13 +133,13 @@ import org.eclipse.collections.api.tuple.Pair;
  * {@link #minBy(Function)}, {@link #minByOptional(Function)}, {@link #minOptional()}
  * {@link #maxBy(Function)}, {@link #maxByOptional(Function)}, {@link #maxOptional()}
  * </li></ul>
- * <li><b>Filtering Methods</b>
+ * <li><b>Filtering 🚰</b>
  * <ul><li>
  * {@link #select(Predicate)}, {@link #selectInstancesOf(Class)}, {@link #selectWith(Predicate2, Object)},
  * {@link #reject(Predicate)}, {@link #rejectWith(Predicate2, Object)} ,
  * {@link #partition(Predicate)}, {@link #partitionWith(Predicate2, Object)}
  * </li></ul>
- * <li><b>Transforming Methods</b>
+ * <li><b>Transforming 🦋</b>
  * <ul><li>
  * {@link #collect(Function)}, {@link #collectIf(Predicate, Function)}, {@link #collectWith(Function2, Object)},
  * {@link #collectBoolean(BooleanFunction)}, {@link #collectByte(ByteFunction)}, {@link #collectChar(CharFunction)},
@@ -152,12 +152,12 @@ import org.eclipse.collections.api.tuple.Pair;
  * {@link #flatCollectLong(Function, MutableLongCollection)}, {@link #flatCollectShort(Function, MutableShortCollection)} ,
  * {@link #zip(Iterable)}, {@link #zipWithIndex(Collection)}
  * </li></ul>
- * <li><b>Grouping Methods</b>
+ * <li><b>Grouping 🏘️</b>
  * <ul><li>
  * {@link #chunk(int)} , {@link #groupBy(Function)} , {@link #groupByAndCollect(Function, Function, MutableMultimap)} ,
  * {@link #groupByEach(Function)} , {@link #groupByUniqueKey(Function)}
  * </li></ul>
- * <li><b>Aggregating Methods</b>
+ * <li><b>Aggregating 📊</b>
  * <ul><li>
  * {@link #aggregateBy(Function, Function0, Function2)} , {@link #aggregateInPlaceBy(Function, Function0, Procedure2)} ,
  * {@link #injectInto(Object, Function2)} ,
@@ -171,7 +171,7 @@ import org.eclipse.collections.api.tuple.Pair;
  * {@link #summarizeDouble(DoubleFunction)}, {@link #summarizeFloat(FloatFunction)},
  * {@link #summarizeInt(IntFunction)}, {@link #summarizeLong(LongFunction)}
  * </li></ul>
- * <li><b>Converting Methods</b>
+ * <li><b>Converting 🔌</b>
  * <ul><li>
  * {@link #into(Collection)}, {@link #appendString(Appendable)}, {@link #makeString()}, {@link #toString()},
  * {@link #toArray()}, {@link #toBag()}, {@link #toBiMap(Function, Function)}, {@link #toList()} ,
@@ -191,7 +191,7 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface RichIterable<T>
         extends InternalIterable<T>
 {
-    //region [Category: Iterating Methods]
+    //region [Category: Iterating] 🔄
 
     @Override
     default void forEach(Procedure<? super T> procedure)
@@ -238,9 +238,9 @@ public interface RichIterable<T>
      */
     LazyIterable<T> asLazy();
 
-    //endregion [Category: Iterating Methods]
+    //endregion [Category: Iterating] 🔄
 
-    //region [Category: Counting Methods]
+    //region [Category: Counting] 🔢
 
     /**
      * Returns the number of items in this iterable.
@@ -337,9 +337,9 @@ public interface RichIterable<T>
         return this.flatCollect(function, target);
     }
 
-    //endregion [Category: Counting Methods]
+    //endregion [Category: Counting] 🔢
 
-    //region [Category: Testing Methods]
+    //region [Category: Testing] 🧪
 
     /**
      * Returns true if this iterable has zero items.
@@ -532,9 +532,9 @@ public interface RichIterable<T>
      */
     <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
-    //endregion [Category: Testing Methods]
+    //endregion [Category: Testing] 🧪
 
-    //region [Category: Finding Methods]
+    //region [Category: Finding] 🔎
 
     /**
      * Returns any element of an iterable.
@@ -823,9 +823,9 @@ public interface RichIterable<T>
         return Optional.of(this.maxBy(function));
     }
 
-    //endregion [Category: Finding Methods]
+    //endregion [Category: Finding] 🔎
 
-    //region [Category: Filtering Methods]
+    //region [Category: Filtering] 🚰
 
     /**
      * Returns all elements of the source collection that return true when evaluating the predicate. This method is also
@@ -1013,9 +1013,9 @@ public interface RichIterable<T>
      */
     <P> PartitionIterable<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
-    //endregion [Category: Filtering Methods]
+    //endregion [Category: Filtering] 🚰
 
-    //region [Category: Transforming Methods]
+    //region [Category: Transforming] 🦋
 
     /**
      * Returns a new collection with the results of applying the specified function on each element of the source
@@ -1613,9 +1613,10 @@ public interface RichIterable<T>
     @Deprecated
     <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target);
 
-    //endregion [Category: Transforming Methods]
+    //endregion [Category: Transforming] 🦋
 
-    //region [Category: Grouping Methods]
+    //region [Category: Grouping] 🏘️
+
     /**
      * For each element of the iterable, the function is evaluated and the results of these evaluations are collected
      * into a new multimap, where the transformed value is the key and the original values are added to the same (or similar)
@@ -1719,9 +1720,10 @@ public interface RichIterable<T>
         return target;
     }
 
-    //endregion [Category: Grouping Methods]
+    //endregion [Category: Grouping] 🏘️
 
-    //region [Category: Aggregating Methods]
+    //region [Category: Aggregating] 📊
+
     /**
      * Returns the final result of evaluating function using each element of the iterable and the previous evaluation
      * result as the parameters. The injected value is used for the first parameter of the first evaluation, and the current
@@ -2108,9 +2110,9 @@ public interface RichIterable<T>
         return target;
     }
 
-    //endregion Category: Aggregating Methods
+    //endregion [Category: Aggregating] 📊
 
-    //region [Category: Converting Methods]
+    //region [Category: Converting] 🔌
 
     /**
      * Adds all the elements in this iterable to the specific target Collection.
@@ -2549,5 +2551,5 @@ public interface RichIterable<T>
      */
     void appendString(Appendable appendable, String start, String separator, String end);
 
-    //endregion [Category: Converting Methods]
+    //endregion [Category: Converting] 🔌
 }
