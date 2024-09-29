@@ -21,6 +21,7 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
+import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
@@ -251,7 +252,7 @@ public abstract class AbstractImmutableSetTestCase extends AbstractImmutableColl
     {
         ImmutableSet<Integer> undertest = this.classUnderTest();
         ImmutableSetMultimap<Integer, Integer> actual = undertest.groupBy(Functions.getPassThru());
-        UnifiedSetMultimap<Integer, Integer> expected = UnifiedSet.newSet(undertest).groupBy(Functions.getPassThru());
+        MutableSetMultimap<Integer, Integer> expected = UnifiedSet.newSet(undertest).groupBy(Functions.getPassThru());
         assertEquals(expected, actual);
     }
 
@@ -261,7 +262,7 @@ public abstract class AbstractImmutableSetTestCase extends AbstractImmutableColl
         ImmutableSet<Integer> undertest = this.classUnderTest();
         NegativeIntervalFunction function = new NegativeIntervalFunction();
         ImmutableSetMultimap<Integer, Integer> actual = undertest.groupByEach(function);
-        UnifiedSetMultimap<Integer, Integer> expected = UnifiedSet.newSet(undertest).groupByEach(function);
+        MutableSetMultimap<Integer, Integer> expected = UnifiedSet.newSet(undertest).groupByEach(function);
         assertEquals(expected, actual);
     }
 
@@ -269,8 +270,8 @@ public abstract class AbstractImmutableSetTestCase extends AbstractImmutableColl
     public void groupByWithTarget()
     {
         ImmutableSet<Integer> undertest = this.classUnderTest();
-        UnifiedSetMultimap<Integer, Integer> actual = undertest.groupBy(Functions.getPassThru(), UnifiedSetMultimap.newMultimap());
-        UnifiedSetMultimap<Integer, Integer> expected = UnifiedSet.newSet(undertest).groupBy(Functions.getPassThru());
+        MutableSetMultimap<Integer, Integer> actual = undertest.groupBy(Functions.getPassThru(), UnifiedSetMultimap.newMultimap());
+        MutableSetMultimap<Integer, Integer> expected = UnifiedSet.newSet(undertest).groupBy(Functions.getPassThru());
         assertEquals(expected, actual);
     }
 
@@ -279,8 +280,8 @@ public abstract class AbstractImmutableSetTestCase extends AbstractImmutableColl
     {
         ImmutableSet<Integer> undertest = this.classUnderTest();
         NegativeIntervalFunction function = new NegativeIntervalFunction();
-        UnifiedSetMultimap<Integer, Integer> actual = undertest.groupByEach(function, UnifiedSetMultimap.newMultimap());
-        UnifiedSetMultimap<Integer, Integer> expected = UnifiedSet.newSet(undertest).groupByEach(function);
+        MutableSetMultimap<Integer, Integer> actual = undertest.groupByEach(function, UnifiedSetMultimap.newMultimap());
+        MutableSetMultimap<Integer, Integer> expected = UnifiedSet.newSet(undertest).groupByEach(function);
         assertEquals(expected, actual);
     }
 

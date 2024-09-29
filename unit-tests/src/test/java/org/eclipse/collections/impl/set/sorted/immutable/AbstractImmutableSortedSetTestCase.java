@@ -27,6 +27,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
+import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.partition.set.sorted.PartitionImmutableSortedSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
@@ -482,7 +483,7 @@ public abstract class AbstractImmutableSortedSetTestCase
                 pairsMinusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).castToList());
         assertEquals(immutableSet.zip(nulls), immutableSet.zip(nulls, FastList.newList()));
 
-        FastList<Holder> holders = FastList.newListWith(new Holder(1), new Holder(2), new Holder(3));
+        MutableList<Holder> holders = FastList.newListWith(new Holder(1), new Holder(2), new Holder(3));
         ImmutableList<Pair<Integer, Holder>> zipped = immutableSet.zip(holders);
         Verify.assertSize(3, zipped.castToList());
         AbstractImmutableSortedSetTestCase.Holder two = new Holder(-1);
@@ -895,7 +896,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> undertest = this.classUnderTest();
         TreeSortedSetMultimap<Integer, Integer> actual = undertest.groupBy(Functions.getPassThru(), TreeSortedSetMultimap.newMultimap());
-        TreeSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupBy(Functions.getPassThru());
+        MutableSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupBy(Functions.getPassThru());
         assertEquals(expected, actual);
     }
 
@@ -905,7 +906,7 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> undertest = this.classUnderTest();
         NegativeIntervalFunction function = new NegativeIntervalFunction();
         TreeSortedSetMultimap<Integer, Integer> actual = undertest.groupByEach(function, TreeSortedSetMultimap.newMultimap());
-        TreeSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupByEach(function);
+        MutableSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupByEach(function);
         assertEquals(expected, actual);
     }
 
