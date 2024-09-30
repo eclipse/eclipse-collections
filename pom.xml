@@ -124,7 +124,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
         <hppc.version>0.9.1</hppc.version>
         <commons.lang.version>3.14.0</commons.lang.version>
         <checkstyle.version>10.16.0</checkstyle.version>
-        <checkstyle.plugin.version>3.2.1</checkstyle.plugin.version>
+        <checkstyle.plugin.version>3.5.0</checkstyle.plugin.version>
         <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
         <junit.version>4.13.2</junit.version>
         <jmh.version>1.37</jmh.version>
@@ -311,12 +311,12 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
 
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.3</version>
                 </plugin>
 
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.3</version>
                 </plugin>
 
                 <plugin>
@@ -326,17 +326,17 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
 
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.6.3</version>
+                    <version>3.10.0</version>
                 </plugin>
 
                 <plugin>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.7.1</version>
+                    <version>3.15.0</version>
                 </plugin>
 
                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>3.0-r1585899</version>
+                    <version>3.1.1</version>
                 </plugin>
 
                 <plugin>
@@ -357,7 +357,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
-                    <version>2.14.2</version>
+                    <version>2.17.1</version>
                 </plugin>
 
                 <plugin>
@@ -386,7 +386,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>3.5.0</version>
                     <configuration>
                         <includes>
                             <include>**/*Test.java</include>
@@ -422,7 +422,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
 
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.7.0</version>
                 </plugin>
 
                 <plugin>
@@ -787,7 +787,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-enforcer-plugin</artifactId>
-                        <version>3.4.1</version>
+                        <version>3.5.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.codehaus.mojo</groupId>
@@ -1123,7 +1123,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.6.3</version>
+                        <version>3.10.0</version>
                         <configuration>
                             <source>1.8</source>
                             <doctitle>Eclipse Collections - ${project.version}</doctitle>
