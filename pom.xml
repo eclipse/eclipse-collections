@@ -123,7 +123,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
         <koloboke.version>1.0.0</koloboke.version>
         <hppc.version>0.9.1</hppc.version>
         <commons.lang.version>3.14.0</commons.lang.version>
-        <checkstyle.version>10.16.0</checkstyle.version>
+        <checkstyle.version>10.18.2</checkstyle.version>
         <checkstyle.plugin.version>3.5.0</checkstyle.plugin.version>
         <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
         <junit.version>4.13.2</junit.version>
