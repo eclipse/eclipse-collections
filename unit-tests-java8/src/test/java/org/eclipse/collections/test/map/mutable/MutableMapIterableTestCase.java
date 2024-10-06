@@ -32,33 +32,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTestCase
+public interface MutableMapIterableTestCase extends MapIterableTestCase
 {
-    @Override
-    default boolean supportsNullKeys()
-    {
-        return true;
-    }
-
-    @Override
-    default boolean supportsNullValues()
-    {
-        return true;
-    }
-
     @Override
     <T> MutableMapIterable<Object, T> newWith(T... elements);
 
     @Override
     <K, V> MutableMapIterable<K, V> newWithKeysValues(Object... elements);
-
-    @Override
-    @Test
-    default void Iterable_toString()
-    {
-        MapTestCase.super.Iterable_toString();
-        MapIterableTestCase.super.Iterable_toString();
-    }
 
     @Test
     default void MutableMapIterable_removeKey()
