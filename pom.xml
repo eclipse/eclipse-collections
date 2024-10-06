@@ -108,6 +108,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
         <module>unit-tests</module>
         <module>serialization-tests</module>
         <module>jcstress-tests</module>
+        <module>unit-tests-guava-testlib</module>
         <module>unit-tests-java8</module>
         <module>test-coverage</module>
     </modules>
@@ -118,7 +119,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
         <slf4j.version>2.0.7</slf4j.version>
         <clover.version>4.4.1</clover.version>
         <scala.version>2.12.19</scala.version>
-        <guava.version>33.1.0-jre</guava.version>
+        <guava.version>33.2.1-jre</guava.version>
         <trove4j.version>3.1.0</trove4j.version>
         <koloboke.version>1.0.0</koloboke.version>
         <hppc.version>0.9.1</hppc.version>
