@@ -233,6 +233,12 @@ final class SingletonMap<K, V>
     }
 
     @Override
+    public <R> FixedSizeMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return Maps.fixedSize.of(function.value(this.key1, this.value1), this.value1);
+    }
+
+    @Override
     public <K2, V2> FixedSizeMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         Pair<K2, V2> pair1 = function.value(this.key1, this.value1);

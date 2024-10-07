@@ -154,6 +154,9 @@ abstract class AbstractMemoryEfficientMutableMap<K, V>
     public abstract <R> FixedSizeMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    public abstract <R> FixedSizeMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     public abstract <K2, V2> FixedSizeMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
     @Override

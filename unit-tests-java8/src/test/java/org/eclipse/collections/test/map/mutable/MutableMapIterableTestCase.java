@@ -11,6 +11,7 @@
 package org.eclipse.collections.test.map.mutable;
 
 import java.util.Collections;
+import java.util.Iterator;
 
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.factory.Bags;
@@ -21,11 +22,14 @@ import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.test.CollisionsTestCase;
 import org.eclipse.collections.test.map.MapIterableTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -58,6 +62,21 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTest
     {
         MapTestCase.super.Iterable_toString();
         MapIterableTestCase.super.Iterable_toString();
+    }
+
+    @Override
+    @Test
+    default void Iterable_remove()
+    {
+        MutableMapIterable<Object, Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
+        Iterator<Integer> iterator = iterable.iterator();
+        iterator.next();
+        iterator.remove();
+        assertEquals(this.allowsDuplicates() ? 5 : 2, Iterate.sizeOf(iterable));
+        assertThat(iterable.toBag(), isOneOf(
+                this.getExpectedFiltered(3, 3, 3, 2, 2),
+                this.getExpectedFiltered(3, 3, 3, 2, 1),
+                this.getExpectedFiltered(3, 3, 2, 2, 1)));
     }
 
     @Test

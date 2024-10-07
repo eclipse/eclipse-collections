@@ -265,6 +265,13 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     }
 
     @Override
+    public <R> ImmutableBiMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        ImmutableMap<R, V> result = this.delegate.collectKeysUnique(function);
+        return BiMaps.immutable.withAll(result);
+    }
+
+    @Override
     public ImmutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         return this.delegate.collectBoolean(booleanFunction);

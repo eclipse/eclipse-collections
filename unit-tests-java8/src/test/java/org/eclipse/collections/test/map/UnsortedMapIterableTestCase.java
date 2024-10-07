@@ -33,6 +33,9 @@ public interface UnsortedMapIterableTestCase
     <T> UnsortedMapIterable<Object, T> newWith(T... elements);
 
     @Override
+    <K, V> UnsortedMapIterable<K, V> newWithKeysValues(Object... elements);
+
+    @Override
     default <T> UnsortedBag<T> getExpectedFiltered(T... elements)
     {
         return Bags.immutable.with(elements);
@@ -55,6 +58,12 @@ public interface UnsortedMapIterableTestCase
         assertThat(map.valuesView().toString(), isOneOf("[1, 2]", "[2, 1]"));
         assertThat(map.keyValuesView().toString(), isOneOf("[One:1, Two:2]", "[Two:2, One:1]"));
         assertThat(map.asLazy().toString(), isOneOf("[1, 2]", "[2, 1]"));
+    }
+
+    @Override
+    default void Iterable_remove()
+    {
+        MapIterableTestCase.super.Iterable_remove();
     }
 
     @Override

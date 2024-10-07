@@ -69,6 +69,9 @@ public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>
     <R> ImmutableMapIterable<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    <R> ImmutableMapIterable<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     ImmutableCollection<V> select(Predicate<? super V> predicate);
 
     @Override
