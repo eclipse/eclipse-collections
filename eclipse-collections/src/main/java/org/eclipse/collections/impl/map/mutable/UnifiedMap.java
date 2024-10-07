@@ -37,9 +37,11 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.factory.Sets;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.UnsortedMapIterable;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -2474,7 +2476,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
 
         protected Object writeReplace()
         {
-            UnifiedSet<K> replace = UnifiedSet.newSet(UnifiedMap.this.size());
+            MutableSet<K> replace = UnifiedSet.newSet(UnifiedMap.this.size());
             for (int i = 0; i < UnifiedMap.this.table.length; i += 2)
             {
                 Object cur = UnifiedMap.this.table[i];
@@ -2490,7 +2492,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return replace;
         }
 
-        private void chainedAddToSet(Object[] chain, UnifiedSet<K> replace)
+        private void chainedAddToSet(Object[] chain, MutableSet<K> replace)
         {
             for (int i = 0; i < chain.length; i += 2)
             {
@@ -3304,7 +3306,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
 
         protected Object writeReplace()
         {
-            FastList<V> replace = FastList.newList(UnifiedMap.this.size());
+            MutableList<V> replace = FastList.newList(UnifiedMap.this.size());
             for (int i = 0; i < UnifiedMap.this.table.length; i += 2)
             {
                 Object cur = UnifiedMap.this.table[i];
@@ -3320,7 +3322,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return replace;
         }
 
-        private void chainedAddToList(Object[] chain, FastList<V> replace)
+        private void chainedAddToList(Object[] chain, MutableList<V> replace)
         {
             for (int i = 0; i < chain.length; i += 2)
             {
