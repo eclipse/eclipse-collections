@@ -314,18 +314,19 @@ public final class LongInterval
         {
             for (long i = this.from; i <= this.to; i += this.step)
             {
-                procedure.value((int) i, index++);
+                procedure.value(i, index++);
             }
         }
         else
         {
             for (long i = this.from; i >= this.to; i += this.step)
             {
-                procedure.value((int) i, index++);
+                procedure.value(i, index++);
             }
         }
     }
 
+    @Deprecated(forRemoval = true)
     public void forEachWithLongIndex(LongLongProcedure procedure)
     {
         long index = 0;
@@ -360,14 +361,14 @@ public final class LongInterval
         {
             for (long i = this.from; i <= this.to; i += this.step)
             {
-                procedure.value((int) i);
+                procedure.value(i);
             }
         }
         else
         {
             for (long i = this.from; i >= this.to; i += this.step)
             {
-                procedure.value((int) i);
+                procedure.value(i);
             }
         }
     }
@@ -638,14 +639,14 @@ public final class LongInterval
         {
             for (long i = this.from; i <= this.to; i += this.step)
             {
-                result = function.valueOf(result, (int) i);
+                result = function.valueOf(result, i);
             }
         }
         else
         {
             for (long i = this.from; i >= this.to; i += this.step)
             {
-                result = function.valueOf(result, (int) i);
+                result = function.valueOf(result, i);
             }
         }
         return result;
@@ -661,7 +662,7 @@ public final class LongInterval
         {
             for (long i = this.from; i <= this.to; i += this.step)
             {
-                result = function.valueOf(result, (int) i, index);
+                result = function.valueOf(result, i, index);
                 index++;
             }
         }
@@ -669,7 +670,7 @@ public final class LongInterval
         {
             for (long i = this.from; i >= this.to; i += this.step)
             {
-                result = function.valueOf(result, (int) i, index);
+                result = function.valueOf(result, i, index);
                 index++;
             }
         }
@@ -695,8 +696,8 @@ public final class LongInterval
                     MutableLongList batch = LongLists.mutable.empty();
                     for (long i = innerFrom; i <= this.to && batch.size() < size; i += this.step)
                     {
-                        batch.add((int) i);
-                        lastUpdated = (int) i;
+                        batch.add(i);
+                        lastUpdated = i;
                     }
                     result.add(batch);
                     innerFrom = lastUpdated + this.step;
@@ -709,8 +710,8 @@ public final class LongInterval
                     MutableLongList batch = LongLists.mutable.empty();
                     for (long i = innerFrom; i >= this.to && batch.size() < size; i += this.step)
                     {
-                        batch.add((int) i);
-                        lastUpdated = (int) i;
+                        batch.add(i);
+                        lastUpdated = i;
                     }
                     result.add(batch);
                     innerFrom = lastUpdated + this.step;
@@ -1003,7 +1004,7 @@ public final class LongInterval
         {
             if (this.hasNext())
             {
-                long result = (int) this.current;
+                long result = this.current;
                 this.current += LongInterval.this.step;
                 return result;
             }
