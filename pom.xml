@@ -125,7 +125,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
         <commons.lang.version>3.14.0</commons.lang.version>
         <checkstyle.version>10.18.2</checkstyle.version>
         <checkstyle.plugin.version>3.5.0</checkstyle.plugin.version>
-        <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
+        <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
         <junit.version>4.13.2</junit.version>
         <jmh.version>1.37</jmh.version>
 
@@ -291,7 +291,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
 
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.6.0</version>
+                    <version>3.7.1</version>
                 </plugin>
 
                 <plugin>
@@ -301,7 +301,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
 
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.12.1</version>
+                    <version>3.13.0</version>
                 </plugin>
 
                 <plugin>
@@ -369,7 +369,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                 <plugin>
                     <groupId>net.alchim31.maven</groupId>
                     <artifactId>scala-maven-plugin</artifactId>
-                    <version>4.8.1</version>
+                    <version>4.9.2</version>
                     <configuration>
                         <scalaVersion>${scala.version}</scalaVersion>
                     </configuration>
@@ -1068,7 +1068,7 @@ Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk co
                     <plugin>
                         <groupId>biz.aQute.bnd</groupId>
                         <artifactId>bnd-maven-plugin</artifactId>
-                        <version>6.4.0</version>
+                        <version>7.0.0</version>
                         <executions>
                             <execution>
                                 <goals>
