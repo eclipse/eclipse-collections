@@ -86,6 +86,9 @@ public interface MutableMap<K, V>
     <R> MutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    <R> MutableMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     <K2, V2> MutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
     @Override

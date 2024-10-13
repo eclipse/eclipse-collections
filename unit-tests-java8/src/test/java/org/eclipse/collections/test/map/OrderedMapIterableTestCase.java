@@ -10,11 +10,15 @@
 
 package org.eclipse.collections.test.map;
 
+import java.util.LinkedHashMap;
+
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.api.map.OrderedMap;
+import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.test.OrderedIterableTestCase;
 import org.eclipse.collections.test.list.TransformsToListTrait;
 import org.junit.jupiter.api.Test;
@@ -29,6 +33,17 @@ public interface OrderedMapIterableTestCase extends MapIterableTestCase, Ordered
 
     @Override
     <K, V> OrderedMap<K, V> newWithKeysValues(Object... elements);
+
+    @Override
+    default <K, V> MapIterable<K, V> newWithTransformedKeysValues(Object... elements)
+    {
+        MutableOrderedMap<K, V> result = OrderedMapAdapter.adapt(new LinkedHashMap<>());
+        for (int i = 0; i < elements.length; i += 2)
+        {
+            result.put((K) elements[i], (V) elements[i + 1]);
+        }
+        return result.asUnmodifiable();
+    }
 
     @Override
     default <T> ListIterable<T> getExpectedFiltered(T... elements)

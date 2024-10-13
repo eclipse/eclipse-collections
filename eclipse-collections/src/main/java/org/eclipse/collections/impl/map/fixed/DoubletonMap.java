@@ -270,6 +270,22 @@ final class DoubletonMap<K, V>
     }
 
     @Override
+    public <R> FixedSizeMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        R key1 = function.value(this.key1, this.value1);
+        R key2 = function.value(this.key2, this.value2);
+        if (Objects.equals(key1, key2))
+        {
+            throw new IllegalStateException("Key " + key1 + " already exists in map!");
+        }
+        return Maps.fixedSize.of(
+                key1,
+                this.value1,
+                key2,
+                this.value2);
+    }
+
+    @Override
     public <K2, V2> FixedSizeMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         Pair<K2, V2> pair1 = function.value(this.key1, this.value1);
