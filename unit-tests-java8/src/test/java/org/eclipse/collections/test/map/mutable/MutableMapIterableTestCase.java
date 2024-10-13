@@ -214,4 +214,12 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTest
                 Collections.nCopies(1000, 2),
                 map4.values());
     }
+
+    @Test
+    default void MutableMapIterable_entrySet_setValue()
+    {
+        MutableMapIterable<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
+        map.entrySet().forEach(each -> each.setValue(each.getValue() + 1));
+        assertIterablesEqual(this.newWithKeysValues("3", 4, "2", 3, "1", 2), map);
+    }
 }
