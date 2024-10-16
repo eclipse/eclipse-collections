@@ -33,6 +33,7 @@ import org.eclipse.collections.impl.factory.primitive.ByteLists;
 import org.eclipse.collections.impl.factory.primitive.CharLists;
 import org.eclipse.collections.impl.factory.primitive.DoubleLists;
 import org.eclipse.collections.impl.factory.primitive.FloatLists;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.factory.primitive.ShortLists;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -252,6 +253,66 @@ public class LongIntervalTest
     }
 
     @Test
+    public void eachForLargeValues()
+    {
+        var values1 = LongLists.mutable.empty();
+
+        LongInterval.zeroToBy(9_999_999_999L, 1_000_000_000L).forEach(values1::add);
+
+        assertEquals(
+                LongLists.immutable.of(
+                        0, 1_000_000_000L, 2_000_000_000L, 3_000_000_000L, 4_000_000_000L,
+                        5_000_000_000L, 6_000_000_000L, 7_000_000_000L, 8_000_000_000L, 9_000_000_000L),
+                values1);
+
+        var values2 = LongLists.mutable.empty();
+
+        LongInterval.zeroToBy(-9_999_999_999L, -1_000_000_000L).forEach(values2::add);
+
+        assertEquals(
+                LongLists.immutable.of(
+                        0, -1_000_000_000L, -2_000_000_000L, -3_000_000_000L, -4_000_000_000L,
+                        -5_000_000_000L, -6_000_000_000L, -7_000_000_000L, -8_000_000_000L, -9_000_000_000L),
+                values2);
+    }
+
+    @Test
+    public void forEachWithIndexForLargeValues()
+    {
+        var values1 = LongLists.mutable.empty();
+        var indices1 = IntLists.mutable.empty();
+
+        LongInterval.zeroToBy(9_999_999_999L, 1_000_000_000L)
+                .forEachWithIndex((each, index) -> {
+                    values1.add(each + index);
+                    indices1.add(index);
+                });
+
+        assertEquals(IntLists.immutable.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), indices1);
+
+        assertEquals(
+                LongLists.immutable.of(0, 1_000_000_001L, 2_000_000_002L, 3_000_000_003L, 4_000_000_004L,
+                        5_000_000_005L, 6_000_000_006L, 7_000_000_007L, 8_000_000_008L, 9_000_000_009L),
+                values1);
+
+        var values2 = LongLists.mutable.empty();
+        var indices2 = IntLists.mutable.empty();
+
+        LongInterval.zeroToBy(-9_999_999_999L, -1_000_000_000L)
+                .forEachWithIndex((each, index) -> {
+                    values2.add(each - index);
+                    indices2.add(index);
+                });
+
+        assertEquals(IntLists.immutable.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), indices2);
+
+        assertEquals(
+                LongLists.immutable.of(0, -1_000_000_001L, -2_000_000_002L, -3_000_000_003L, -4_000_000_004L,
+                        -5_000_000_005L, -6_000_000_006L, -7_000_000_007L, -8_000_000_008L, -9_000_000_009L),
+                values2);
+    }
+
+    @Test
     public void injectInto()
     {
         LongInterval longInterval1 = LongInterval.oneTo(3);
@@ -271,6 +332,51 @@ public class LongIntervalTest
         LongInterval interval2 = LongInterval.fromTo(3, 1);
         MutableLong result2 = interval2.injectIntoWithIndex(new MutableLong(0), (object, value, index) -> object.add(value * this.longInterval.get(index)));
         assertEquals(new MutableLong(10), result2);
+    }
+
+    @Test
+    public void injectIntoForLargeValues()
+    {
+        long largeNumber = (long) Integer.MAX_VALUE * 2L;
+        LongInterval interval1 = LongInterval.fromTo(largeNumber, largeNumber + 10L);
+        MutableLong result1 = interval1.injectInto(new MutableLong(0), MutableLong::add);
+        long expected1 = 47244640289L; // largeNumber * 11 + 55;
+        assertEquals(new MutableLong(expected1), result1);
+
+        long largeNegativeNumber = (long) Integer.MIN_VALUE * 2L;
+        LongInterval interval2 = LongInterval.fromToBy(largeNegativeNumber, largeNegativeNumber - 10L, -1L);
+        MutableLong result2 = interval2.injectInto(new MutableLong(0), MutableLong::add);
+        long expected2 = -47244640311L; // (largeNegativeNumber * 11L) - 55L;
+        assertEquals(new MutableLong(expected2), result2);
+    }
+
+    @Test
+    public void injectIntoWithIndexForLargeValues()
+    {
+        long largeNumber = (long) Integer.MAX_VALUE * 2L;
+
+        LongInterval interval1 = LongInterval.fromTo(largeNumber, largeNumber + 3L);
+
+        MutableLong result1 = interval1.injectIntoWithIndex(
+                new MutableLong(0),
+                (object, value, index) -> {
+                    assertEquals(interval1.get(index), value);
+                    return object.add(value);
+                });
+
+        assertEquals(new MutableLong(17179869182L), result1);
+
+        long largeNegativeNumber = (long) Integer.MIN_VALUE * 2L;
+        LongInterval interval2 = LongInterval.fromToBy(largeNegativeNumber, largeNegativeNumber - 3L, -1L);
+
+        MutableLong result2 = interval2.injectIntoWithIndex(
+                new MutableLong(0),
+                (object, value, index) -> {
+                    assertEquals(interval2.get(index), value);
+                    return object.add(value);
+                });
+
+        assertEquals(new MutableLong(-17179869190L), result2);
     }
 
     @Test
@@ -353,6 +459,28 @@ public class LongIntervalTest
 
         assertThrows(IllegalArgumentException.class, () -> interval12.chunk(0));
         assertThrows(IllegalArgumentException.class, () -> interval12.chunk(-1));
+    }
+
+    @Test
+    public void chunkForLargeValues()
+    {
+        LongInterval interval1 = LongInterval.fromToBy(0, 9_999_999_999L, 1_000_000_000L);
+        MutableList<LongInterval> expected1 = Lists.mutable.with(
+                LongInterval.fromToBy(0, 2_000_000_000L, 1_000_000_000L),
+                LongInterval.fromToBy(3_000_000_000L, 5_000_000_000L, 1_000_000_000L),
+                LongInterval.fromToBy(6_000_000_000L, 8_000_000_000L, 1_000_000_000L),
+                LongInterval.fromToBy(9_000_000_000L, 9_000_000_000L, 1_000_000_000L));
+        assertEquals(expected1, interval1.chunk(3));
+
+        LongInterval interval2 = LongInterval.fromToBy(0, -9_999_999_999L, -1_000_000_000L);
+
+        MutableList<LongInterval> expected2 = Lists.mutable.with(
+                LongInterval.fromToBy(0, -2_000_000_000L, -1_000_000_000L),
+                LongInterval.fromToBy(-3_000_000_000L, -5_000_000_000L, -1_000_000_000L),
+                LongInterval.fromToBy(-6_000_000_000L, -8_000_000_000L, -1_000_000_000L),
+                LongInterval.fromToBy(-9_000_000_000L, -9_000_000_000L, -1_000_000_000L));
+
+        assertEquals(expected2, interval2.chunk(3));
     }
 
     @Test
@@ -983,6 +1111,37 @@ public class LongIntervalTest
             assertEquals(i, threeToNegativeThreeIterator.next());
         }
         assertThrows(NoSuchElementException.class, threeToNegativeThreeIterator::next);
+    }
+
+    @Test
+    public void intervalIteratorForLargeValues()
+    {
+        var values1 = LongLists.mutable.empty();
+        LongIterator iterator1 = LongInterval.zeroToBy(9_999_999_999L, 1_000_000_000L).longIterator();
+        while (iterator1.hasNext())
+        {
+            values1.add(iterator1.next());
+        }
+
+        assertEquals(
+                LongLists.immutable.of(
+                        0, 1_000_000_000L, 2_000_000_000L, 3_000_000_000L, 4_000_000_000L,
+                        5_000_000_000L, 6_000_000_000L, 7_000_000_000L, 8_000_000_000L, 9_000_000_000L),
+                values1);
+
+        var values2 = LongLists.mutable.empty();
+
+        LongIterator iterator2 = LongInterval.zeroToBy(-9_999_999_999L, -1_000_000_000L).longIterator();
+        while (iterator2.hasNext())
+        {
+            values2.add(iterator2.next());
+        }
+
+        assertEquals(
+                LongLists.immutable.of(
+                        0, -1_000_000_000L, -2_000_000_000L, -3_000_000_000L, -4_000_000_000L,
+                        -5_000_000_000L, -6_000_000_000L, -7_000_000_000L, -8_000_000_000L, -9_000_000_000L),
+                values2);
     }
 
     @Test
