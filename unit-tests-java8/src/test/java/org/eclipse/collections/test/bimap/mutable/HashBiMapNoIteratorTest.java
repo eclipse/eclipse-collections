@@ -12,14 +12,19 @@ package org.eclipse.collections.test.bimap.mutable;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
+import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.test.NoIteratorTestCase;
+import org.eclipse.collections.test.map.mutable.MapTestCase;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class HashBiMapNoIteratorTest implements MutableBiMapTestCase, NoIteratorTestCase
@@ -83,6 +88,32 @@ public class HashBiMapNoIteratorTest implements MutableBiMapTestCase, NoIterator
     public void RichIterable_getLast()
     {
         NoIteratorTestCase.super.RichIterable_getLast();
+    }
+
+    @Override
+    @Test
+    public void MapIterable_keySet_equals()
+    {
+        // HashBiMap.keySet().equals() delegates to the other Map's entrySet()
+        Map<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Set<Integer> expected = new MapTestCase.HashSetNoIterator<>();
+        expected.add(3);
+        expected.add(2);
+        expected.add(1);
+        assertThrows(AssertionError.class, () -> map.keySet().equals(expected));
+    }
+
+    @Override
+    @Test
+    public void MapIterable_entrySet_equals()
+    {
+        // HashBiMap.entrySet().equals() delegates to the other Map's entrySet()
+        Map<Integer, String> map = this.newWithKeysValues(1, "One", 2, "Two", 3, "Three");
+        Set<Map.Entry<Integer, String>> expected = new MapTestCase.HashSetNoIterator<>();
+        expected.add(ImmutableEntry.of(1, "One"));
+        expected.add(ImmutableEntry.of(2, "Two"));
+        expected.add(ImmutableEntry.of(3, "Three"));
+        assertThrows(AssertionError.class, () -> map.entrySet().equals(expected));
     }
 
     public static class HashBiMapNoIterator<K, V> extends HashBiMap<K, V>
