@@ -856,8 +856,15 @@ public class <name>ArrayList extends Abstract<name>Iterable
     @Override
     public <type>[] toArray()
     {
-        <type>[] newItems = new <type>[this.size];
-        System.arraycopy(this.items, 0, newItems, 0, this.size);
+        return this.toSizedArray(this.size);
+    }
+
+    @Override
+    public <type>[] toSizedArray(int s)
+    {
+        <type>[] newItems = new <type>[s];
+        int newSize = Math.min(s, this.size);
+        System.arraycopy(this.items, 0, newItems, 0, newSize);
         return newItems;
     }
 

@@ -236,12 +236,6 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     }
 
     @Override
-    public <type>[] toArray()
-    {
-        return this.toList().toArray();
-    }
-
-    @Override
     public Mutable<name>List toList()
     {
         final Mutable<name>List list = <name>Lists.mutable.empty();

@@ -37,6 +37,12 @@ public class Tap<name>Iterable
     }
 
     @Override
+    public <type>[] toArray()
+    {
+        return this.toSizedArray(this.adapted.size());
+    }
+
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.adapted.forEach(each ->
