@@ -211,7 +211,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableList<T> newWithoutAll(Iterable<? extends T> elements)
     {
-        FastList<T> result = FastList.newListWith((T[]) this.toArray());
+        MutableList<T> result = FastList.newListWith((T[]) this.toArray());
         this.removeAllFrom(elements, result);
         return result.toImmutable();
     }
@@ -289,7 +289,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public <S> ImmutableList<S> selectInstancesOf(Class<S> clazz)
     {
-        FastList<S> result = FastList.newList(this.size());
+        MutableList<S> result = FastList.newList(this.size());
         this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result.toImmutable();
     }
@@ -778,7 +778,7 @@ abstract class AbstractImmutableList<T>
         if (that instanceof Collection || that instanceof RichIterable)
         {
             int thatSize = Iterate.sizeOf(that);
-            FastList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
+            MutableList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
             return this.zip(that, target).toImmutable();
         }
         return this.zip(that, FastList.newList()).toImmutable();
