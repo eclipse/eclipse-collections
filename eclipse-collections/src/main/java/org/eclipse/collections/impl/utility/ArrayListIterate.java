@@ -1586,7 +1586,7 @@ public final class ArrayListIterate
     public static <T> ArrayList<T> distinct(ArrayList<T> list, HashingStrategy<? super T> hashingStrategy)
     {
         int size = list.size();
-        MutableSet<T> seenSoFar = UnifiedSetWithHashingStrategy.newSet(hashingStrategy);
+        MutableSet<T> seenSoFar = new UnifiedSetWithHashingStrategy<>(hashingStrategy);
         ArrayList<T> result = new ArrayList<>();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
@@ -1863,7 +1863,7 @@ public final class ArrayListIterate
         {
             int xSize = xs.size();
             int ySize = Iterate.sizeOf(ys);
-            FastList<Pair<X, Y>> target = FastList.newList(Math.min(xSize, ySize));
+            MutableList<Pair<X, Y>> target = FastList.newList(Math.min(xSize, ySize));
             return ArrayListIterate.zip(xs, ys, target);
         }
         return ArrayListIterate.zip(xs, ys, FastList.newList());
