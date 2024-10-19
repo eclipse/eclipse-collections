@@ -27,11 +27,11 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.stack.primitive.Abstract<name>StackTestCase;
 import org.eclipse.collections.impl.test.Verify;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertNotSame;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 /**
  * Abstract JUnit test for {@link Mutable<name>Stack}.

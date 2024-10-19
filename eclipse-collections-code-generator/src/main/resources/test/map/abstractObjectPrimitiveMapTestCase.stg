@@ -41,14 +41,14 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  * This file was automatically generated from template file abstractObjectPrimitiveMapTestCase.stg.
@@ -224,15 +224,13 @@ public abstract class AbstractObject<name>MapTestCase
 
         Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
         assertTrue(
-                map1.toString(),
                 "{0=<(toStringLiteral.(type))("0")>, 1=<(toStringLiteral.(type))("1")>}".equals(map1.toString())
-                        || "{1=<(toStringLiteral.(type))("1")>, 0=<(toStringLiteral.(type))("0")>}".equals(map1.toString()));
+                        || "{1=<(toStringLiteral.(type))("1")>, 0=<(toStringLiteral.(type))("0")>}".equals(map1.toString()), map1.toString());
 
         Object<name>Map\<Integer> map2 = this.newWithKeysValues(1, <(literal.(type))("1")>, null, <(literal.(type))("0")>);
         assertTrue(
-                map2.toString(),
                 "{1=<(toStringLiteral.(type))("1")>, null=<(toStringLiteral.(type))("0")>}".equals(map2.toString())
-                        || "{null=<(toStringLiteral.(type))("0")>, 1=<(toStringLiteral.(type))("1")>}".equals(map2.toString()));
+                        || "{null=<(toStringLiteral.(type))("0")>, 1=<(toStringLiteral.(type))("1")>}".equals(map2.toString()), map2.toString());
     }
 
     @Test
@@ -348,7 +346,7 @@ public abstract class AbstractObject<name>MapTestCase
         Object<name>Map\<String> map0 = this.newWithKeysValues("2", <(literal.(type))("3")>, "4", <(literal.(type))("5")>);
 
         String result0 = map0.injectIntoKeyValue(new String("1"), (result, eachKey, eachValue) -> result + eachKey + String.valueOf(eachValue));
-        assertTrue(result0, "12<(toStringLiteral.(type))("3")>4<(toStringLiteral.(type))("5")>".equals(result0) || "14<(toStringLiteral.(type))("5")>2<(toStringLiteral.(type))("3")>".equals(result0));
+        assertTrue("12<(toStringLiteral.(type))("3")>4<(toStringLiteral.(type))("5")>".equals(result0) || "14<(toStringLiteral.(type))("5")>2<(toStringLiteral.(type))("3")>".equals(result0), result0);
 
         Object<name>Map copy = map0.injectIntoKeyValue(Object<name>Maps.mutable.empty(), MutableObject<name>Map::withKeyValue);
         assertEquals(map0, copy);
@@ -364,14 +362,12 @@ public abstract class AbstractObject<name>MapTestCase
 
         Object<name>Map\<Integer> map2 = this.newWithKeysValues(1, <(literal.(type))("1")>, 32, <(literal.(type))("32")>);
         assertTrue(
-                map2.makeString("[", "/", "]"),
                 "[<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("32")>]".equals(map2.makeString("[", "/", "]"))
-                        || "[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("1")>]".equals(map2.makeString("[", "/", "]")));
+                        || "[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("1")>]".equals(map2.makeString("[", "/", "]")), map2.makeString("[", "/", "]"));
 
         assertTrue(
-                map2.makeString("/"),
                 "<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("32")>".equals(map2.makeString("/"))
-                        || "<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("1")>".equals(map2.makeString("/")));
+                        || "<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("1")>".equals(map2.makeString("/")), map2.makeString("/"));
     }
 
     @Test
@@ -397,23 +393,20 @@ public abstract class AbstractObject<name>MapTestCase
         Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
         map1.appendString(appendable3);
         assertTrue(
-                appendable3.toString(),
                 "<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("1")>".equals(appendable3.toString())
-                        || "<(toStringLiteral.(type))("1")>, <(toStringLiteral.(type))("0")>".equals(appendable3.toString()));
+                        || "<(toStringLiteral.(type))("1")>, <(toStringLiteral.(type))("0")>".equals(appendable3.toString()), appendable3.toString());
 
         Appendable appendable4 = new StringBuilder();
         map1.appendString(appendable4, "/");
         assertTrue(
-                appendable4.toString(),
                 "<(toStringLiteral.(type))("0")>/<(toStringLiteral.(type))("1")>".equals(appendable4.toString())
-                        || "<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("0")>".equals(appendable4.toString()));
+                        || "<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("0")>".equals(appendable4.toString()), appendable4.toString());
 
         Appendable appendable5 = new StringBuilder();
         map1.appendString(appendable5, "[", "/", "]");
         assertTrue(
-                appendable5.toString(),
                 "[<(toStringLiteral.(type))("0")>/<(toStringLiteral.(type))("1")>]".equals(appendable5.toString())
-                        || "[<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("0")>]".equals(appendable5.toString()));
+                        || "[<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("0")>]".equals(appendable5.toString()), appendable5.toString());
     }
 
     @Test
@@ -515,8 +508,8 @@ public abstract class AbstractObject<name>MapTestCase
     {
         <name>ToObjectFunction\<String> toString = String::valueOf;
         Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
-        assertTrue(map1.collect(toString).toString(), FastList.newListWith("<(toStringLiteral.(type))("1")>", "<(toStringLiteral.(type))("0")>").equals(map1.collect(toString))
-                || FastList.newListWith("<(toStringLiteral.(type))("0")>", "<(toStringLiteral.(type))("1")>").equals(map1.collect(toString)));
+        assertTrue(FastList.newListWith("<(toStringLiteral.(type))("1")>", "<(toStringLiteral.(type))("0")>").equals(map1.collect(toString))
+                || FastList.newListWith("<(toStringLiteral.(type))("0")>", "<(toStringLiteral.(type))("1")>").equals(map1.collect(toString)), map1.collect(toString).toString());
     }
 
     @Test

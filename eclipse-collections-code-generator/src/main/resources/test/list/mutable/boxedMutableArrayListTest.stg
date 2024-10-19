@@ -24,9 +24,9 @@ import java.util.stream.StreamSupport;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit test for {@link BoxedMutable<name>List}.

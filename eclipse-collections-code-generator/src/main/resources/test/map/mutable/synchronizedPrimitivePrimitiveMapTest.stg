@@ -22,8 +22,8 @@ body(type1, type2, name1, name2) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import org.junit.Test;
-import static org.junit.Assert.assertSame;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * JUnit test for {@link Synchronized<name1><name2>Map}.

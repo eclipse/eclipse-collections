@@ -28,9 +28,9 @@ import org.eclipse.collections.impl.block.factory.StringFunctions;
 import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
 import org.eclipse.collections.impl.test.Verify;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * Junit test for {@link Object<name>Maps}

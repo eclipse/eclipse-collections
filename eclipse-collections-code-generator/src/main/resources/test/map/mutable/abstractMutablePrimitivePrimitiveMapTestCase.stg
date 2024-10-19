@@ -42,12 +42,12 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertSame;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * This file was automatically generated from template file abstractMutablePrimitivePrimitiveMapTestCase.stg.
@@ -495,7 +495,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         {
             <type1> k = <(castLongToNarrowType.(type1))("each")>;
             <type2> v = <(castLongToNarrowTypeWithParens.(type2))("each + index")>;
-            assertEquals("Key:" + k, v, map2.addToValue(k, v)<(wideDelta.(type2))>);
+            assertEquals(v, map2.addToValue(k, v)<(wideDelta.(type2))>, "Key:" + k);
         });
     }
 

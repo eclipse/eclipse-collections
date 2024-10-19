@@ -27,8 +27,8 @@ import org.eclipse.collections.impl.map.mutable.primitive.<name>BooleanHashMap;
 import org.eclipse.collections.impl.map.primitive.Abstract<name>BooleanMapTestCase;
 import org.eclipse.collections.impl.test.Verify;
 
-import org.junit.Test;
-import static org.junit.Assert.assertNotEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * Abstract JUnit test for {@link Immutable<name>BooleanMap}.

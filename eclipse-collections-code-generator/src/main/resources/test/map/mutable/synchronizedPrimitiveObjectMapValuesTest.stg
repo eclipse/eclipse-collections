@@ -31,11 +31,11 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit test for {@link Synchronized<name>ObjectMap#values()}.
@@ -170,8 +170,8 @@ public class Synchronized<name>ObjectMapValuesTest
         assertThrows(IllegalStateException.class, iterator1::remove);
         iterator1.next();
         iterator1.remove();
-        assertTrue(map1.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map1)
-                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, null).equals(map1));
+        assertTrue(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map1)
+                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, null).equals(map1), map1.toString());
         iterator1.next();
         iterator1.remove();
         assertEquals(<name>ObjectHashMap.newMap(), map1);
@@ -182,8 +182,8 @@ public class Synchronized<name>ObjectMapValuesTest
         assertThrows(IllegalStateException.class, iterator2::remove);
         iterator2.next();
         iterator2.remove();
-        assertTrue(map2.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, null).equals(map2)
-                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, "nine").equals(map2));
+        assertTrue(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, null).equals(map2)
+                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, "nine").equals(map2), map2.toString());
         iterator2.next();
         iterator2.remove();
         assertEquals(<name>ObjectHashMap.newMap(), map2);
@@ -193,8 +193,8 @@ public class Synchronized<name>ObjectMapValuesTest
         assertThrows(IllegalStateException.class, iterator3::remove);
         iterator3.next();
         iterator3.remove();
-        assertTrue(map3.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("8")>, "eight").equals(map3)
-                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, null).equals(map3));
+        assertTrue(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("8")>, "eight").equals(map3)
+                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, null).equals(map3), map3.toString());
         iterator3.next();
         iterator3.remove();
         assertEquals(<name>ObjectHashMap.newMap(), map3);

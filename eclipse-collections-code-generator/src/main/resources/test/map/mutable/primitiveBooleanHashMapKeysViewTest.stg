@@ -33,12 +33,12 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  * JUnit test for {@link <name>BooleanHashMap#keysView}.
@@ -324,27 +324,23 @@ public class <name>BooleanHashMapKeysViewTest
 
         Lazy<name>Iterable iterable1 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false).keysView();
         assertTrue(
-                iterable1.toString(),
                 iterable1.toString().equals("[<["0", "1"]:(toStringLiteral.(type))(); separator=", ">]")
-                        || iterable1.toString().equals("[<["1", "0"]:(toStringLiteral.(type))(); separator=", ">]"));
+                        || iterable1.toString().equals("[<["1", "0"]:(toStringLiteral.(type))(); separator=", ">]"), iterable1.toString());
 
         Lazy<name>Iterable iterable2 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("32")>, true).keysView();
         assertTrue(
-                iterable2.toString(),
                 iterable2.toString().equals("[<["1", "32"]:(toStringLiteral.(type))(); separator=", ">]")
-                        || iterable2.toString().equals("[<["32", "1"]:(toStringLiteral.(type))(); separator=", ">]"));
+                        || iterable2.toString().equals("[<["32", "1"]:(toStringLiteral.(type))(); separator=", ">]"), iterable2.toString());
 
         Lazy<name>Iterable iterable3 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("32")>, true).keysView();
         assertTrue(
-                iterable3.toString(),
                 iterable3.toString().equals("[<["0", "32"]:(toStringLiteral.(type))(); separator=", ">]")
-                        || iterable3.toString().equals("[<["32", "0"]:(toStringLiteral.(type))(); separator=", ">]"));
+                        || iterable3.toString().equals("[<["32", "0"]:(toStringLiteral.(type))(); separator=", ">]"), iterable3.toString());
 
         Lazy<name>Iterable iterable4 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, false).keysView();
         assertTrue(
-                iterable4.toString(),
                 iterable4.toString().equals("[<["32", "33"]:(toStringLiteral.(type))(); separator=", ">]")
-                        || iterable4.toString().equals("[<["33", "32"]:(toStringLiteral.(type))(); separator=", ">]"));
+                        || iterable4.toString().equals("[<["33", "32"]:(toStringLiteral.(type))(); separator=", ">]"), iterable4.toString());
     }
 
     @Test
@@ -356,27 +352,23 @@ public class <name>BooleanHashMapKeysViewTest
 
         Lazy<name>Iterable iterable0 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false).keysView();
         assertTrue(
-                iterable0.makeString(),
                 "<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("1")>".equals(iterable0.makeString())
-                        || "<(toStringLiteral.(type))("1")>, <(toStringLiteral.(type))("0")>".equals(iterable0.makeString()));
+                        || "<(toStringLiteral.(type))("1")>, <(toStringLiteral.(type))("0")>".equals(iterable0.makeString()), iterable0.makeString());
 
         Lazy<name>Iterable iterable1 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false).keysView();
         assertTrue(
-                iterable1.makeString(),
                 "<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("31")>".equals(iterable1.makeString())
-                        || "<(toStringLiteral.(type))("31")>, <(toStringLiteral.(type))("0")>".equals(iterable1.makeString()));
+                        || "<(toStringLiteral.(type))("31")>, <(toStringLiteral.(type))("0")>".equals(iterable1.makeString()), iterable1.makeString());
 
         Lazy<name>Iterable iterable2 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, true, <(literal.(type))("32")>, true).keysView();
         assertTrue(
-                iterable2.makeString("[", "/", "]"),
                 "[<(toStringLiteral.(type))("31")>/<(toStringLiteral.(type))("32")>]".equals(iterable2.makeString("[", "/", "]"))
-                        || "[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("31")>]".equals(iterable2.makeString("[", "/", "]")));
+                        || "[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("31")>]".equals(iterable2.makeString("[", "/", "]")), iterable2.makeString("[", "/", "]"));
 
         Lazy<name>Iterable iterable3 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, true).keysView();
         assertTrue(
-                iterable3.makeString("/"),
                 "<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("33")>".equals(iterable3.makeString("/"))
-                        || "<(toStringLiteral.(type))("33")>/<(toStringLiteral.(type))("32")>".equals(iterable3.makeString("/")));
+                        || "<(toStringLiteral.(type))("33")>/<(toStringLiteral.(type))("32")>".equals(iterable3.makeString("/")), iterable3.makeString("/"));
     }
 
     @Test
@@ -397,20 +389,20 @@ public class <name>BooleanHashMapKeysViewTest
         StringBuilder appendable2 = new StringBuilder();
         Lazy<name>Iterable set1 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false).keysView();
         set1.appendString(appendable2);
-        assertTrue(appendable2.toString(), "<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("31")>".equals(appendable2.toString())
-                || "<(toStringLiteral.(type))("31")>, <(toStringLiteral.(type))("0")>".equals(appendable2.toString()));
+        assertTrue("<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("31")>".equals(appendable2.toString())
+                || "<(toStringLiteral.(type))("31")>, <(toStringLiteral.(type))("0")>".equals(appendable2.toString()), appendable2.toString());
 
         StringBuilder appendable3 = new StringBuilder();
         Lazy<name>Iterable set2 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, true, <(literal.(type))("32")>, true).keysView();
         set2.appendString(appendable3, "/");
-        assertTrue(appendable3.toString(), "<(toStringLiteral.(type))("31")>/<(toStringLiteral.(type))("32")>".equals(appendable3.toString())
-                || "<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("31")>".equals(appendable3.toString()));
+        assertTrue("<(toStringLiteral.(type))("31")>/<(toStringLiteral.(type))("32")>".equals(appendable3.toString())
+                || "<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("31")>".equals(appendable3.toString()), appendable3.toString());
 
         StringBuilder appendable4 = new StringBuilder();
         Lazy<name>Iterable set4 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, true).keysView();
         set4.appendString(appendable4, "[", "/", "]");
-        assertTrue(appendable4.toString(), "[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("33")>]".equals(appendable4.toString())
-                || "[<(toStringLiteral.(type))("33")>/<(toStringLiteral.(type))("32")>]".equals(appendable4.toString()));
+        assertTrue("[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("33")>]".equals(appendable4.toString())
+                || "[<(toStringLiteral.(type))("33")>/<(toStringLiteral.(type))("32")>]".equals(appendable4.toString()), appendable4.toString());
     }
 
     @Test

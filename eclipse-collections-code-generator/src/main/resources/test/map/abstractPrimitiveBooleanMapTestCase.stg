@@ -46,12 +46,12 @@ import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * This file was automatically generated from template file abstractPrimitiveBooleanMapTestCase.stg.
@@ -222,27 +222,23 @@ public abstract class Abstract<name>BooleanMapTestCase
 
         <name>BooleanMap map1 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false);
         assertTrue(
-                map1.toString(),
                 "{<(toStringLiteral.(type))("0")>=true, <(toStringLiteral.(type))("1")>=false}".equals(map1.toString())
-                        || "{<(toStringLiteral.(type))("1")>=false, <(toStringLiteral.(type))("0")>=true}".equals(map1.toString()));
+                        || "{<(toStringLiteral.(type))("1")>=false, <(toStringLiteral.(type))("0")>=true}".equals(map1.toString()), map1.toString());
 
         <name>BooleanMap map2 = this.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("32")>, true);
         assertTrue(
-                map2.toString(),
                 "{<(toStringLiteral.(type))("1")>=false, <(toStringLiteral.(type))("32")>=true}".equals(map2.toString())
-                        || "{<(toStringLiteral.(type))("32")>=true, <(toStringLiteral.(type))("1")>=false}".equals(map2.toString()));
+                        || "{<(toStringLiteral.(type))("32")>=true, <(toStringLiteral.(type))("1")>=false}".equals(map2.toString()), map2.toString());
 
         <name>BooleanMap map3 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("32")>, true);
         assertTrue(
-                map3.toString(),
                 "{<(toStringLiteral.(type))("0")>=true, <(toStringLiteral.(type))("32")>=true}".equals(map3.toString())
-                        || "{<(toStringLiteral.(type))("32")>=true, <(toStringLiteral.(type))("0")>=true}".equals(map3.toString()));
+                        || "{<(toStringLiteral.(type))("32")>=true, <(toStringLiteral.(type))("0")>=true}".equals(map3.toString()), map3.toString());
 
         <name>BooleanMap map4 = this.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, false);
         assertTrue(
-                map4.toString(),
                 "{<(toStringLiteral.(type))("32")>=true, <(toStringLiteral.(type))("33")>=false}".equals(map4.toString())
-                        || "{<(toStringLiteral.(type))("33")>=false, <(toStringLiteral.(type))("32")>=true}".equals(map4.toString()));
+                        || "{<(toStringLiteral.(type))("33")>=false, <(toStringLiteral.(type))("32")>=true}".equals(map4.toString()), map4.toString());
     }
 
     @Test
@@ -375,27 +371,23 @@ public abstract class Abstract<name>BooleanMapTestCase
 
         <name>BooleanMap map1 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false);
         assertTrue(
-                map1.makeString(),
                 "true, false".equals(map1.makeString())
-                        || "false, true".equals(map1.makeString()));
+                        || "false, true".equals(map1.makeString()), map1.makeString());
 
         <name>BooleanMap map2 = this.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("32")>, true);
         assertTrue(
-                map2.makeString("[", "/", "]"),
                 "[false/true]".equals(map2.makeString("[", "/", "]"))
-                        || "true/false]".equals(map2.makeString("[", "/", "]")));
+                        || "true/false]".equals(map2.makeString("[", "/", "]")), map2.makeString("[", "/", "]"));
 
         <name>BooleanMap map3 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("32")>, true);
         assertTrue(
-                map3.makeString("~"),
                 "true~true".equals(map3.makeString("~"))
-                        || "true~true".equals(map3.makeString("~")));
+                        || "true~true".equals(map3.makeString("~")), map3.makeString("~"));
 
         <name>BooleanMap map4 = this.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, false);
         assertTrue(
-                map4.makeString("[", ", ", "]"),
                 "[true, false]".equals(map4.makeString("[", ", ", "]"))
-                        || "[false, true]".equals(map4.makeString("[", ", ", "]")));
+                        || "[false, true]".equals(map4.makeString("[", ", ", "]")), map4.makeString("[", ", ", "]"));
     }
 
     @Test
@@ -421,32 +413,28 @@ public abstract class Abstract<name>BooleanMapTestCase
         <name>BooleanMap map1 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false);
         map1.appendString(appendable3);
         assertTrue(
-                appendable3.toString(),
                 "true, false".equals(appendable3.toString())
-                        || "false, true".equals(appendable3.toString()));
+                        || "false, true".equals(appendable3.toString()), appendable3.toString());
 
         Appendable appendable4 = new StringBuilder();
         <name>BooleanMap map2 = this.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("32")>, true);
         map2.appendString(appendable4, "[", "/", "]");
         assertTrue(
-                appendable4.toString(),
                 "[false/true]".equals(appendable4.toString())
-                        || "[true/false]".equals(appendable4.toString()));
+                        || "[true/false]".equals(appendable4.toString()), appendable4.toString());
 
         Appendable appendable5 = new StringBuilder();
         <name>BooleanMap map3 = this.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("32")>, true);
         map3.appendString(appendable5, "[", "/", "]");
         assertTrue(
-                appendable5.toString(),
                 "[false/true]".equals(appendable5.toString())
-                        || "[true/false]".equals(appendable5.toString()));
+                        || "[true/false]".equals(appendable5.toString()), appendable5.toString());
 
         Appendable appendable6 = new StringBuilder();
         map1.appendString(appendable6, "/");
         assertTrue(
-                appendable6.toString(),
                 "true/false".equals(appendable6.toString())
-                        || "false/true".equals(appendable6.toString()));
+                        || "false/true".equals(appendable6.toString()), appendable6.toString());
     }
 
     @Test

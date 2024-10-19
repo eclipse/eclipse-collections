@@ -40,13 +40,13 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertNull;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * This file was automatically generated from template file abstractMutablePrimitiveObjectMapTestCase.stg.
@@ -809,8 +809,8 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         assertThrows(IllegalStateException.class, iterator1::remove);
         iterator1.next();
         iterator1.remove();
-        assertTrue(map1.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map1)
-                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one").equals(map1));
+        assertTrue(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map1)
+                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one").equals(map1), map1.toString());
         iterator1.next();
         iterator1.remove();
         assertEquals(<name>ObjectHashMap.newMap(), map1);
@@ -821,8 +821,8 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         assertThrows(IllegalStateException.class, iterator2::remove);
         iterator2.next();
         iterator2.remove();
-        assertTrue(map2.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map2)
-                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, "nine").equals(map2));
+        assertTrue(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map2)
+                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, "nine").equals(map2), map2.toString());
         iterator2.next();
         iterator2.remove();
         assertEquals(<name>ObjectHashMap.newMap(), map2);
@@ -832,8 +832,8 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         assertThrows(IllegalStateException.class, iterator3::remove);
         iterator3.next();
         iterator3.remove();
-        assertTrue(map3.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("8")>, "eight").equals(map3)
-                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, "nine").equals(map3));
+        assertTrue(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("8")>, "eight").equals(map3)
+                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, "nine").equals(map3), map3.toString());
         iterator3.next();
         iterator3.remove();
         assertEquals(<name>ObjectHashMap.newMap(), map3);
