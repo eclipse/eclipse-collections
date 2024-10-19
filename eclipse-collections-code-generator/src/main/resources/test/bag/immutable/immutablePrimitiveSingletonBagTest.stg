@@ -24,8 +24,8 @@ import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * JUnit test for {@link Immutable<name>SingletonBag}.

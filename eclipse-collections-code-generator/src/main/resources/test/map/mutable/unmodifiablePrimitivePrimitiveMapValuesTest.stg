@@ -42,11 +42,11 @@ import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit test for {@link Unmodifiable<name1><name2>Map#values()}.
@@ -310,21 +310,18 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
 
         <name2>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type2))(); separator=", ">);
         assertTrue(
-                iterable1.makeString(),
                 iterable1.makeString().equals("<["0", "31"]:(toStringLiteral.(type2))(); separator=", ">")
-                        || iterable1.makeString().equals("<["31", "0"]:(toStringLiteral.(type2))(); separator=", ">"));
+                        || iterable1.makeString().equals("<["31", "0"]:(toStringLiteral.(type2))(); separator=", ">"), iterable1.makeString());
 
         <name2>Iterable iterable2 = this.newWith(<["31", "32"]:(literal.(type2))(); separator=", ">);
         assertTrue(
-                iterable2.makeString("[", "/", "]"),
                 iterable2.makeString("[", "/", "]").equals("[<["31", "32"]:(toStringLiteral.(type2))(); separator="/">]")
-                        || iterable2.makeString("[", "/", "]").equals("[<["32", "31"]:(toStringLiteral.(type2))(); separator="/">]"));
+                        || iterable2.makeString("[", "/", "]").equals("[<["32", "31"]:(toStringLiteral.(type2))(); separator="/">]"), iterable2.makeString("[", "/", "]"));
 
         <name2>Iterable iterable3 = this.newWith(<["32", "33"]:(literal.(type2))(); separator=", ">);
         assertTrue(
-                iterable3.makeString("/"),
                 iterable3.makeString("/").equals("<["32", "33"]:(toStringLiteral.(type2))(); separator="/">")
-                        || iterable3.makeString("/").equals("<["33", "32"]:(toStringLiteral.(type2))(); separator="/">"));
+                        || iterable3.makeString("/").equals("<["33", "32"]:(toStringLiteral.(type2))(); separator="/">"), iterable3.makeString("/"));
 
         <name2>Iterable iterable4 = this.newWith(<["1", "2"]:(literal.(type2))(); separator=", ">);
         assertTrue("<["1", "2"]:(toStringLiteral.(type2))(); separator=", ">".equals(iterable4.makeString())
@@ -336,17 +333,14 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
 
         <name2>Iterable iterable5 = this.newWith(<["0", "1"]:(literal.(type2))(); separator=", ">);
         assertTrue(
-                iterable5.makeString(),
                 iterable5.makeString().equals("<["0", "1"]:(toStringLiteral.(type2))(); separator=", ">")
-                        || iterable5.makeString().equals("<["1", "0"]:(toStringLiteral.(type2))(); separator=", ">"));
+                        || iterable5.makeString().equals("<["1", "0"]:(toStringLiteral.(type2))(); separator=", ">"), iterable5.makeString());
         assertTrue(
-                iterable5.makeString("[", "/", "]"),
                 iterable5.makeString("[", "/", "]").equals("[<["0", "1"]:(toStringLiteral.(type2))(); separator="/">]")
-                        || iterable5.makeString("[", "/", "]").equals("[<["1", "0"]:(toStringLiteral.(type2))(); separator="/">]"));
+                        || iterable5.makeString("[", "/", "]").equals("[<["1", "0"]:(toStringLiteral.(type2))(); separator="/">]"), iterable5.makeString("[", "/", "]"));
         assertTrue(
-                iterable5.makeString("/"),
                 iterable5.makeString("/").equals("<["0", "1"]:(toStringLiteral.(type2))(); separator="/">")
-                        || iterable5.makeString("/").equals("<["1", "0"]:(toStringLiteral.(type2))(); separator="/">"));
+                        || iterable5.makeString("/").equals("<["1", "0"]:(toStringLiteral.(type2))(); separator="/">"), iterable5.makeString("/"));
     }
 
     @Override
@@ -385,34 +379,34 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
         StringBuilder appendable7 = new StringBuilder();
         <name2>Iterable iterable1 = this.newWith(<["0", "31"]:(literal.(type2))(); separator=", ">);
         iterable1.appendString(appendable7);
-        assertTrue(appendable7.toString(), "<["0", "31"]:(toStringLiteral.(type2))(); separator=", ">".equals(appendable7.toString())
-                || "<["31", "0"]:(toStringLiteral.(type2))(); separator=", ">".equals(appendable7.toString()));
+        assertTrue("<["0", "31"]:(toStringLiteral.(type2))(); separator=", ">".equals(appendable7.toString())
+                || "<["31", "0"]:(toStringLiteral.(type2))(); separator=", ">".equals(appendable7.toString()), appendable7.toString());
 
         StringBuilder appendable8 = new StringBuilder();
         <name2>Iterable iterable2 = this.newWith(<["31", "32"]:(literal.(type2))(); separator=", ">);
         iterable2.appendString(appendable8, "/");
-        assertTrue(appendable8.toString(), "<["31", "32"]:(toStringLiteral.(type2))(); separator="/">".equals(appendable8.toString())
-                || "<["32", "31"]:(toStringLiteral.(type2))(); separator="/">".equals(appendable8.toString()));
+        assertTrue("<["31", "32"]:(toStringLiteral.(type2))(); separator="/">".equals(appendable8.toString())
+                || "<["32", "31"]:(toStringLiteral.(type2))(); separator="/">".equals(appendable8.toString()), appendable8.toString());
 
         StringBuilder appendable9 = new StringBuilder();
         <name2>Iterable iterable4 = this.newWith(<["32", "33"]:(literal.(type2))(); separator=", ">);
         iterable4.appendString(appendable9, "[", "/", "]");
-        assertTrue(appendable9.toString(), "[<["32", "33"]:(toStringLiteral.(type2))(); separator="/">]".equals(appendable9.toString())
-                || "[<["33", "32"]:(toStringLiteral.(type2))(); separator="/">]".equals(appendable9.toString()));
+        assertTrue("[<["32", "33"]:(toStringLiteral.(type2))(); separator="/">]".equals(appendable9.toString())
+                || "[<["33", "32"]:(toStringLiteral.(type2))(); separator="/">]".equals(appendable9.toString()), appendable9.toString());
 
         StringBuilder appendable10 = new StringBuilder();
         <name2>Iterable iterable5 = this.newWith(<["0", "1"]:(literal.(type2))(); separator=", ">);
         iterable5.appendString(appendable10);
-        assertTrue(appendable10.toString(), "<["0", "1"]:(toStringLiteral.(type2))(); separator=", ">".equals(appendable10.toString())
-                || "<["1", "0"]:(toStringLiteral.(type2))(); separator=", ">".equals(appendable10.toString()));
+        assertTrue("<["0", "1"]:(toStringLiteral.(type2))(); separator=", ">".equals(appendable10.toString())
+                || "<["1", "0"]:(toStringLiteral.(type2))(); separator=", ">".equals(appendable10.toString()), appendable10.toString());
         StringBuilder appendable11 = new StringBuilder();
         iterable5.appendString(appendable11, "/");
-        assertTrue(appendable11.toString(), "<["0", "1"]:(toStringLiteral.(type2))(); separator="/">".equals(appendable11.toString())
-                || "<["1", "0"]:(toStringLiteral.(type2))(); separator="/">".equals(appendable11.toString()));
+        assertTrue("<["0", "1"]:(toStringLiteral.(type2))(); separator="/">".equals(appendable11.toString())
+                || "<["1", "0"]:(toStringLiteral.(type2))(); separator="/">".equals(appendable11.toString()), appendable11.toString());
         StringBuilder appendable12 = new StringBuilder();
         iterable5.appendString(appendable12, "[", "/", "]");
-        assertTrue(appendable12.toString(), "[<["0", "1"]:(toStringLiteral.(type2))(); separator="/">]".equals(appendable12.toString())
-                || "[<["1", "0"]:(toStringLiteral.(type2))(); separator="/">]".equals(appendable12.toString()));
+        assertTrue("[<["0", "1"]:(toStringLiteral.(type2))(); separator="/">]".equals(appendable12.toString())
+                || "[<["1", "0"]:(toStringLiteral.(type2))(); separator="/">]".equals(appendable12.toString()), appendable12.toString());
     }
 
     <if(primitive2.floatPrimitive)><(sumMethodFloat.(type1))()>

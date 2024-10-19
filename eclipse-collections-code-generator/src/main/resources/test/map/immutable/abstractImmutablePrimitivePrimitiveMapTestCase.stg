@@ -31,10 +31,10 @@ import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
 import org.eclipse.collections.impl.map.primitive.Abstract<name1><name2>MapTestCase;
 import org.eclipse.collections.impl.test.Verify;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Abstract JUnit test for {@link Immutable<name1><name2>Map}.

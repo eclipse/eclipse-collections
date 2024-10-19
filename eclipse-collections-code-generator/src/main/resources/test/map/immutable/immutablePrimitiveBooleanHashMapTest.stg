@@ -23,10 +23,10 @@ package org.eclipse.collections.impl.map.immutable.primitive;
 import org.eclipse.collections.api.map.primitive.Immutable<name>BooleanMap;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertNotSame;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 /**
  * JUnit test for {@link Immutable<name>BooleanHashMap}.

@@ -22,8 +22,8 @@ package org.eclipse.collections.api.factory.map.primitive;
 import org.eclipse.collections.api.factory.primitive.<name>ObjectMaps;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Junit test for {@link Mutable<name>ObjectMapFactory}

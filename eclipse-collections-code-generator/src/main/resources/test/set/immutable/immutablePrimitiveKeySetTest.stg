@@ -22,8 +22,8 @@ import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ByteHashMap;
 import org.eclipse.collections.impl.set.immutable.primitive.AbstractImmutable<name>HashSetTestCase;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * JUnit test for {@link Immutable<name>Set} created from the freeze() method.

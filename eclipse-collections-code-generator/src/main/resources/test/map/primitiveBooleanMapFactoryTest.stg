@@ -24,9 +24,9 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>BooleanHashMap;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This file was automatically generated from template file primitiveBooleanMapFactoryTest.stg.

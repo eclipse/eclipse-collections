@@ -18,9 +18,9 @@ package org.eclipse.collections.impl.block.procedure.checked.primitive;
 
 import java.io.IOException;
 
-import org.junit.Test;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Provides a set of common tests of checked procedures for Object and <type> values.

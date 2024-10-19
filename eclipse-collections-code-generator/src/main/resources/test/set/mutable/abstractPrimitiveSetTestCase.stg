@@ -35,12 +35,12 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.impl.factory.Sets;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  * Abstract JUnit test for {@link Mutable<name>Set}.

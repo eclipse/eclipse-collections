@@ -50,12 +50,12 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name2>HashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * This file was automatically generated from template file abstractPrimitivePrimitiveMapTestCase.stg.
@@ -262,27 +262,23 @@ public abstract class Abstract<name1><name2>MapTestCase
 
         <name1><name2>Map map1 = this.newWithKeysValues(<["0", "1"]:keyValue(); separator=", ">);
         assertTrue(
-                map1.toString(),
                 "{<(toStringLiteral.(type1))("0")>=<(toStringLiteral.(type2))("0")>, <(toStringLiteral.(type1))("1")>=<(toStringLiteral.(type2))("1")>}".equals(map1.toString())
-                        || "{<(toStringLiteral.(type1))("1")>=<(toStringLiteral.(type2))("1")>, <(toStringLiteral.(type1))("0")>=<(toStringLiteral.(type2))("0")>}".equals(map1.toString()));
+                        || "{<(toStringLiteral.(type1))("1")>=<(toStringLiteral.(type2))("1")>, <(toStringLiteral.(type1))("0")>=<(toStringLiteral.(type2))("0")>}".equals(map1.toString()), map1.toString());
 
         <name1><name2>Map map2 = this.newWithKeysValues(<["1", "32"]:keyValue(); separator=", ">);
         assertTrue(
-                map2.toString(),
                 "{<(toStringLiteral.(type1))("1")>=<(toStringLiteral.(type2))("1")>, <(toStringLiteral.(type1))("32")>=<(toStringLiteral.(type2))("32")>}".equals(map2.toString())
-                        || "{<(toStringLiteral.(type1))("32")>=<(toStringLiteral.(type2))("32")>, <(toStringLiteral.(type1))("1")>=<(toStringLiteral.(type2))("1")>}".equals(map2.toString()));
+                        || "{<(toStringLiteral.(type1))("32")>=<(toStringLiteral.(type2))("32")>, <(toStringLiteral.(type1))("1")>=<(toStringLiteral.(type2))("1")>}".equals(map2.toString()), map2.toString());
 
         <name1><name2>Map map3 = this.newWithKeysValues(<["0", "32"]:keyValue(); separator=", ">);
         assertTrue(
-                map3.toString(),
                 "{<(toStringLiteral.(type1))("0")>=<(toStringLiteral.(type2))("0")>, <(toStringLiteral.(type1))("32")>=<(toStringLiteral.(type2))("32")>}".equals(map3.toString())
-                        || "{<(toStringLiteral.(type1))("32")>=<(toStringLiteral.(type2))("32")>, <(toStringLiteral.(type1))("0")>=<(toStringLiteral.(type2))("0")>}".equals(map3.toString()));
+                        || "{<(toStringLiteral.(type1))("32")>=<(toStringLiteral.(type2))("32")>, <(toStringLiteral.(type1))("0")>=<(toStringLiteral.(type2))("0")>}".equals(map3.toString()), map3.toString());
 
         <name1><name2>Map map4 = this.newWithKeysValues(<["32", "33"]:keyValue(); separator=", ">);
         assertTrue(
-                map4.toString(),
                 "{<(toStringLiteral.(type1))("32")>=<(toStringLiteral.(type2))("32")>, <(toStringLiteral.(type1))("33")>=<(toStringLiteral.(type2))("33")>}".equals(map4.toString())
-                        || "{<(toStringLiteral.(type1))("33")>=<(toStringLiteral.(type2))("33")>, <(toStringLiteral.(type1))("32")>=<(toStringLiteral.(type2))("32")>}".equals(map4.toString()));
+                        || "{<(toStringLiteral.(type1))("33")>=<(toStringLiteral.(type2))("33")>, <(toStringLiteral.(type1))("32")>=<(toStringLiteral.(type2))("32")>}".equals(map4.toString()), map4.toString());
     }
 
     @Test
@@ -486,27 +482,23 @@ public abstract class Abstract<name1><name2>MapTestCase
 
         <name1><name2>Map map1 = this.newWithKeysValues(<["0", "1"]:keyValue(); separator=", ">);
         assertTrue(
-                map1.makeString(),
                 "<(toStringLiteral.(type2))("0")>, <(toStringLiteral.(type2))("1")>".equals(map1.makeString())
-                        || "<(toStringLiteral.(type2))("1")>, <(toStringLiteral.(type2))("0")>".equals(map1.makeString()));
+                        || "<(toStringLiteral.(type2))("1")>, <(toStringLiteral.(type2))("0")>".equals(map1.makeString()), map1.makeString());
 
         <name1><name2>Map map2 = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>);
         assertTrue(
-                map2.makeString("[", "/", "]"),
                 "[<(toStringLiteral.(type2))("1")>/<(toStringLiteral.(type2))("32")>]".equals(map2.makeString("[", "/", "]"))
-                        || "[<(toStringLiteral.(type2))("32")>/<(toStringLiteral.(type2))("1")>]".equals(map2.makeString("[", "/", "]")));
+                        || "[<(toStringLiteral.(type2))("32")>/<(toStringLiteral.(type2))("1")>]".equals(map2.makeString("[", "/", "]")), map2.makeString("[", "/", "]"));
 
         <name1><name2>Map map3 = this.newWithKeysValues(<keyValue("0")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>);
         assertTrue(
-                map3.makeString("~"),
                 "<(toStringLiteral.(type2))("0")>~<(toStringLiteral.(type2))("32")>".equals(map3.makeString("~"))
-                        || "<(toStringLiteral.(type2))("32")>~<(toStringLiteral.(type2))("0")>".equals(map3.makeString("~")));
+                        || "<(toStringLiteral.(type2))("32")>~<(toStringLiteral.(type2))("0")>".equals(map3.makeString("~")), map3.makeString("~"));
 
         <name1><name2>Map map4 = this.newWithKeysValues(<(literal.(type1))("32")>, <(literal.(type2))("32")>, <(literal.(type1))("33")>, <(literal.(type2))("33")>);
         assertTrue(
-                map4.makeString("[", ", ", "]"),
                 "[<(toStringLiteral.(type2))("32")>, <(toStringLiteral.(type2))("33")>]".equals(map4.makeString("[", ", ", "]"))
-                        || "[<(toStringLiteral.(type2))("33")>, <(toStringLiteral.(type2))("32")>]".equals(map4.makeString("[", ", ", "]")));
+                        || "[<(toStringLiteral.(type2))("33")>, <(toStringLiteral.(type2))("32")>]".equals(map4.makeString("[", ", ", "]")), map4.makeString("[", ", ", "]"));
     }
 
     @Test
@@ -546,32 +538,28 @@ public abstract class Abstract<name1><name2>MapTestCase
         <name1><name2>Map map1 = this.newWithKeysValues(<["0", "1"]:keyValue(); separator=", ">);
         map1.appendString(appendable3);
         assertTrue(
-                appendable3.toString(),
                 "<(toStringLiteral.(type2))("0")>, <(toStringLiteral.(type2))("1")>".equals(appendable3.toString())
-                        || "<(toStringLiteral.(type2))("1")>, <(toStringLiteral.(type2))("0")>".equals(appendable3.toString()));
+                        || "<(toStringLiteral.(type2))("1")>, <(toStringLiteral.(type2))("0")>".equals(appendable3.toString()), appendable3.toString());
 
         Appendable appendable4 = new StringBuilder();
         <name1><name2>Map map2 = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>);
         map2.appendString(appendable4, "[", "/", "]");
         assertTrue(
-                appendable4.toString(),
                 "[<(toStringLiteral.(type2))("1")>/<(toStringLiteral.(type2))("32")>]".equals(appendable4.toString())
-                        || "[<(toStringLiteral.(type2))("32")>/<(toStringLiteral.(type2))("1")>]".equals(appendable4.toString()));
+                        || "[<(toStringLiteral.(type2))("32")>/<(toStringLiteral.(type2))("1")>]".equals(appendable4.toString()), appendable4.toString());
 
         Appendable appendable5 = new StringBuilder();
         <name1><name2>Map map3 = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("32")>, <(literal.(type2))("32")>);
         map3.appendString(appendable5, "[", "/", "]");
         assertTrue(
-                appendable5.toString(),
                 "[<(toStringLiteral.(type2))("1")>/<(toStringLiteral.(type2))("32")>]".equals(appendable5.toString())
-                        || "[<(toStringLiteral.(type2))("32")>/<(toStringLiteral.(type2))("1")>]".equals(appendable5.toString()));
+                        || "[<(toStringLiteral.(type2))("32")>/<(toStringLiteral.(type2))("1")>]".equals(appendable5.toString()), appendable5.toString());
 
         Appendable appendable6 = new StringBuilder();
         map1.appendString(appendable6, "/");
         assertTrue(
-                appendable6.toString(),
                 "<(toStringLiteral.(type2))("0")>/<(toStringLiteral.(type2))("1")>".equals(appendable6.toString())
-                        || "<(toStringLiteral.(type2))("1")>/<(toStringLiteral.(type2))("0")>".equals(appendable6.toString()));
+                        || "<(toStringLiteral.(type2))("1")>/<(toStringLiteral.(type2))("0")>".equals(appendable6.toString()), appendable6.toString());
     }
 
     @Test

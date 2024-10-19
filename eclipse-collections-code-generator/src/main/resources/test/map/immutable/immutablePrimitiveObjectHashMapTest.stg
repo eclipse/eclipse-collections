@@ -23,9 +23,9 @@ import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 /**
  * JUnit test for {@link Immutable<name>ObjectHashMap}.
