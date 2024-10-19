@@ -361,7 +361,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         if (that instanceof Collection || that instanceof RichIterable)
         {
             int thatSize = Iterate.sizeOf(that);
-            UnifiedSet<Pair<T, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
+            MutableSet<Pair<T, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
             return this.zip(that, target).toImmutable();
         }
         return this.zip(that, Sets.mutable.empty()).toImmutable();
