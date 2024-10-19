@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.map.sorted.mutable;
 
+import java.util.LinkedHashMap;
+
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -44,6 +46,7 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
@@ -62,6 +65,7 @@ import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.AbstractMutableMapIterable;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -200,6 +204,15 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     public <R> MutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
         return MapIterate.collectValues(this, function, TreeSortedMap.newMap(this.comparator()));
+    }
+
+    @Override
+    public <R> MutableOrderedMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return MapIterate.collectKeysUnique(
+                this,
+                function,
+                OrderedMapAdapter.adapt(new LinkedHashMap<>(this.size())));
     }
 
     @Override

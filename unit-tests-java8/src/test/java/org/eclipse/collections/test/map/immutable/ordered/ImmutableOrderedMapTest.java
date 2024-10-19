@@ -81,6 +81,12 @@ public class ImmutableOrderedMapTest
     }
 
     @Override
+    public void Iterable_remove()
+    {
+        OrderedMapIterableTestCase.super.Iterable_remove();
+    }
+
+    @Override
     public void Map_remove()
     {
         Map<Object, Object> map = this.newWith();

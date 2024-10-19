@@ -78,6 +78,9 @@ public interface BiMap<K, V> extends MapIterable<K, V>
     <R> BiMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    <R> BiMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     SetIterable<V> select(Predicate<? super V> predicate);
 
     @Override

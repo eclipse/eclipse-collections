@@ -108,6 +108,12 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     }
 
     @Override
+    public <R> MutableMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return MapIterate.collectKeysUnique(this, function, this.newEmpty(this.size()));
+    }
+
+    @Override
     public MutableMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
         return MapIterate.selectMapOnEntry(this, predicate, this.newEmpty());
