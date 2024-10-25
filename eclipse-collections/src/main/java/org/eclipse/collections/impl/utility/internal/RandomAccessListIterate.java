@@ -1282,7 +1282,7 @@ public final class RandomAccessListIterate
     public static <T> MutableList<T> distinct(List<T> list, HashingStrategy<? super T> hashingStrategy)
     {
         MutableSet<T> seenSoFar = UnifiedSetWithHashingStrategy.newSet(hashingStrategy);
-        FastList<T> result = FastList.newList();
+        MutableList<T> result = FastList.newList();
         int size = list.size();
         for (int i = 0; i < size; i++)
         {
@@ -1599,7 +1599,7 @@ public final class RandomAccessListIterate
         {
             int listSize = list.size();
             int iterableSize = Iterate.sizeOf(iterable);
-            FastList<Pair<X, Y>> target = FastList.newList(Math.min(listSize, iterableSize));
+            MutableList<Pair<X, Y>> target = FastList.newList(Math.min(listSize, iterableSize));
             return RandomAccessListIterate.zip(list, iterable, target);
         }
         return RandomAccessListIterate.zip(list, iterable, FastList.newList());

@@ -141,7 +141,7 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
     @Override
     public <T> MutableSet<T> withAll(Iterable<? extends T> items)
     {
-        UnifiedSet<T> set = UnifiedSet.newSet(items);
+        MutableSet<T> set = UnifiedSet.newSet(items);
         T[] itemArray;
         switch (set.size())
         {

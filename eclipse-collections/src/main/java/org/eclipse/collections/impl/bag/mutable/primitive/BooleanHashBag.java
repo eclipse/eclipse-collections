@@ -803,7 +803,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
     @Override
     public <V> MutableBag<V> collect(BooleanToObjectFunction<? extends V> function)
     {
-        HashBag<V> result = HashBag.newBag();
+        MutableBag<V> result = HashBag.newBag();
         if (this.containsFalse())
         {
             result.addOccurrences(function.valueOf(false), this.falseCount);
