@@ -15,11 +15,13 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.UnmodifiableTreeMap;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
+import org.eclipse.collections.test.map.mutable.UnmodifiableMutableMapIterableTestCase;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class UnmodifiableTreeMapTest implements MutableSortedMapIterableTestCase, FixedSizeIterableTestCase
+public class UnmodifiableTreeMapTest implements MutableSortedMapIterableTestCase, FixedSizeIterableTestCase,
+        UnmodifiableMutableMapIterableTestCase
 {
     @Override
     public <T> MutableSortedMap<Object, T> newWith(T... elements)
@@ -32,6 +34,12 @@ public class UnmodifiableTreeMapTest implements MutableSortedMapIterableTestCase
             i--;
         }
         return UnmodifiableTreeMap.of(result);
+    }
+
+    @Override
+    public boolean supportsNullKeys()
+    {
+        return MutableSortedMapIterableTestCase.super.supportsNullKeys();
     }
 
     @Override

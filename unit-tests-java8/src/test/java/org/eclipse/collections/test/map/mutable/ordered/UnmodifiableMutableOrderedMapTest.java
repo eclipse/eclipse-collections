@@ -57,6 +57,6 @@ public class UnmodifiableMutableOrderedMapTest
     @Override
     public void Iterable_remove()
     {
-        UnmodifiableMutableMapIterableTestCase.super.Iterable_remove();
+        FixedSizeIterableTestCase.super.Iterable_remove();
     }
 }

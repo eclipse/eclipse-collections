@@ -31,6 +31,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.test.RichIterableWithDuplicatesTestCase;
+import org.eclipse.collections.test.map.mutable.MapTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
@@ -41,22 +42,12 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
+public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase, MapTestCase
 {
     @Override
     <T> MapIterable<Object, T> newWith(T... elements);
 
     <K, V> MapIterable<K, V> newWithKeysValues(Object... elements);
-
-    default boolean supportsNullKeys()
-    {
-        return true;
-    }
-
-    default boolean supportsNullValues()
-    {
-        return true;
-    }
 
     @Test
     default void serialization()

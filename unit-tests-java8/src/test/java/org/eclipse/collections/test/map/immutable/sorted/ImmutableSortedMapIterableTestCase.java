@@ -13,8 +13,10 @@ package org.eclipse.collections.test.map.immutable.sorted;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
 import org.eclipse.collections.test.map.SortedMapIterableTestCase;
+import org.eclipse.collections.test.map.UnmodifiableMapIterableTestCase;
 
-public interface ImmutableSortedMapIterableTestCase extends SortedMapIterableTestCase, FixedSizeIterableTestCase
+public interface ImmutableSortedMapIterableTestCase
+        extends SortedMapIterableTestCase, FixedSizeIterableTestCase, UnmodifiableMapIterableTestCase
 {
     @Override
     <T> ImmutableSortedMap<Object, T> newWith(T... elements);

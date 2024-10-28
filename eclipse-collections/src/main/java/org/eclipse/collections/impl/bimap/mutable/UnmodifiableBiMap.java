@@ -1133,25 +1133,48 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     @Override
     public V getIfAbsentPut(K key, Function0<? extends V> function)
     {
-        throw new UnsupportedOperationException("Cannot call getIfAbsentPut() on " + this.getClass().getSimpleName());
+        V result = this.get(key);
+        if (this.isAbsent(result, key))
+        {
+            throw new UnsupportedOperationException("Cannot mutate " + this.getClass().getSimpleName());
+        }
+        return result;
     }
 
     @Override
     public V getIfAbsentPut(K key, V value)
     {
-        throw new UnsupportedOperationException("Cannot call getIfAbsentPut() on " + this.getClass().getSimpleName());
+        V result = this.get(key);
+        if (this.isAbsent(result, key))
+        {
+            throw new UnsupportedOperationException("Cannot mutate " + this.getClass().getSimpleName());
+        }
+        return result;
     }
 
     @Override
     public V getIfAbsentPutWithKey(K key, Function<? super K, ? extends V> function)
     {
-        throw new UnsupportedOperationException("Cannot call getIfAbsentPutWithKey() on " + this.getClass().getSimpleName());
+        return this.getIfAbsentPutWith(key, function, key);
     }
 
     @Override
-    public <P> V getIfAbsentPutWith(K key, Function<? super P, ? extends V> function, P parameter)
+    public <P> V getIfAbsentPutWith(
+            K key,
+            Function<? super P, ? extends V> function,
+            P parameter)
     {
-        throw new UnsupportedOperationException("Cannot call getIfAbsentPutWith() on " + this.getClass().getSimpleName());
+        V result = this.get(key);
+        if (this.isAbsent(result, key))
+        {
+            throw new UnsupportedOperationException("Cannot mutate " + this.getClass().getSimpleName());
+        }
+        return result;
+    }
+
+    private boolean isAbsent(V result, K key)
+    {
+        return result == null && !this.containsKey(key);
     }
 
     @Override
@@ -1218,5 +1241,53 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     public MutableBiMap<K, V> withoutAllKeys(Iterable<? extends K> keys)
     {
         throw new UnsupportedOperationException("Cannot call withoutAllKeys() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function)
+    {
+        throw new UnsupportedOperationException("Cannot call replaceAll() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V putIfAbsent(K key, V value)
+    {
+        throw new UnsupportedOperationException("Cannot call putIfAbsent() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public boolean remove(Object key, Object value)
+    {
+        throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public boolean replace(K key, V oldValue, V newValue)
+    {
+        throw new UnsupportedOperationException("Cannot call replace() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V replace(K key, V value)
+    {
+        throw new UnsupportedOperationException("Cannot call replace() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V computeIfAbsent(K key, java.util.function.Function<? super K, ? extends V> mappingFunction)
+    {
+        throw new UnsupportedOperationException("Cannot call computeIfAbsent() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)
+    {
+        throw new UnsupportedOperationException("Cannot call computeIfPresent() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)
+    {
+        throw new UnsupportedOperationException("Cannot call compute() on " + this.getClass().getSimpleName());
     }
 }

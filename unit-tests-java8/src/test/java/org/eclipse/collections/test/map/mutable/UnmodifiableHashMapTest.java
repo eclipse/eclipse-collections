@@ -10,52 +10,46 @@
 
 package org.eclipse.collections.test.map.mutable;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
-import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.map.mutable.UnmodifiableMutableMap;
-import org.eclipse.collections.test.FixedSizeIterableTestCase;
+import org.eclipse.collections.test.map.UnmodifiableMapTestCase;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class UnmodifiableMutableMapTest
-        implements MutableMapTestCase, FixedSizeIterableTestCase, UnmodifiableMutableMapIterableTestCase
+public class UnmodifiableHashMapTest
+        implements UnmodifiableMapTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
 
     @Override
-    public <T> MutableMap<Object, T> newWith(T... elements)
+    public <T> Map<Object, T> newWith(T... elements)
     {
         Random random = new Random(CURRENT_TIME_MILLIS);
-        MutableMap<Object, T> result = new UnifiedMap<>();
+        Map<Object, T> result = new HashMap<>();
         for (T each : elements)
         {
             assertNull(result.put(random.nextDouble(), each));
         }
-        return UnmodifiableMutableMap.of(result);
+        return Collections.unmodifiableMap(result);
     }
 
     @Override
-    public <K, V> MutableMap<K, V> newWithKeysValues(Object... elements)
+    public <K, V> Map<K, V> newWithKeysValues(Object... elements)
     {
         if (elements.length % 2 != 0)
         {
             fail(String.valueOf(elements.length));
         }
 
-        MutableMap<K, V> result = new UnifiedMap<>();
+        Map<K, V> result = new HashMap<>();
         for (int i = 0; i < elements.length; i += 2)
         {
             assertNull(result.put((K) elements[i], (V) elements[i + 1]));
         }
-        return UnmodifiableMutableMap.of(result);
-    }
-
-    @Override
-    public void Iterable_remove()
-    {
-        FixedSizeIterableTestCase.super.Iterable_remove();
+        return Collections.unmodifiableMap(result);
     }
 }
