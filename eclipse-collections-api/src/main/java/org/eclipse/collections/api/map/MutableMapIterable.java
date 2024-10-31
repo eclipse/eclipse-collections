@@ -318,6 +318,9 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     <R> MutableMapIterable<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    <R> MutableMapIterable<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     MutableCollection<V> select(Predicate<? super V> predicate);
 
     @Override

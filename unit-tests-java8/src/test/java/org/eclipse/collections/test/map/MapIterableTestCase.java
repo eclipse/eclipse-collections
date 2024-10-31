@@ -30,10 +30,13 @@ import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.test.RichIterableWithDuplicatesTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -47,6 +50,16 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     <T> MapIterable<Object, T> newWith(T... elements);
 
     <K, V> MapIterable<K, V> newWithKeysValues(Object... elements);
+
+    default <K, V> MapIterable<K, V> newWithTransformedKeysValues(Object... elements)
+    {
+        MutableMap<K, V> result = Maps.mutable.empty();
+        for (int i = 0; i < elements.length; i += 2)
+        {
+            result.put((K) elements[i], (V) elements[i + 1]);
+        }
+        return result.asUnmodifiable();
+    }
 
     default boolean supportsNullKeys()
     {
@@ -89,6 +102,21 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         assertEquals(
                 "[10:4, 9:4, 8:4, 7:4, 6:3, 5:3, 4:3, 3:2, 2:2, 1:1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keyValuesView().toString());
+    }
+
+    @Override
+    @Test
+    default void Iterable_remove()
+    {
+        MapIterable<Object, Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
+        Iterator<Integer> iterator = iterable.iterator();
+        iterator.next();
+        iterator.remove();
+        assertEquals(this.allowsDuplicates() ? 5 : 2, Iterate.sizeOf(iterable));
+        assertThat(iterable.toBag(), isOneOf(
+                this.getExpectedFiltered(3, 3, 3, 2, 2),
+                this.getExpectedFiltered(3, 3, 3, 2, 1),
+                this.getExpectedFiltered(3, 3, 2, 2, 1)));
     }
 
     @Test
@@ -223,7 +251,6 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     @Test
     default void MapIterable_collect_Function2()
     {
-        this.getExpectedTransformed();
         MapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         MapIterable<Integer, String> actual = map.collect((key, value) -> Tuples.pair(key + 1, key + value));
         // TODO: Use IterableTestCase.assertEquals instead, after setting up methods like getExpectedTransformed, but for maps.
@@ -238,6 +265,45 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         assertIterablesEqual(
                 this.newWithKeysValues(3, "eerhT", 2, "owT", 1, "enO"),
                 actual);
+    }
+
+    @Test
+    default void MapIterable_collectKeysUnique()
+    {
+        MapIterable<String, Integer> map = this.newWithKeysValues("Two", 2, "Three", 3, "One", 1);
+        MapIterable<String, Integer> actual = map.collectKeysUnique((argument1, argument2) -> new StringBuilder(argument1).reverse().toString());
+        MapIterable<Object, Object> expected = this.newWithTransformedKeysValues("owT", 2, "eerhT", 3, "enO", 1);
+        assertEquals(expected, actual);
+        IllegalStateException illegalStateException = assertThrows(
+                IllegalStateException.class,
+                () -> map.collectKeysUnique((argument1, argument2) -> argument1.substring(0, 1)));
+        assertEquals("Key T already exists in map!", illegalStateException.getMessage());
+
+        MapIterable<String, Integer> map1 = this.newWithKeysValues("One", 1);
+        assertEquals(
+                Maps.immutable.with("collision", 1),
+                map1.collectKeysUnique((argument1, argument2) -> "collision"));
+
+        MapIterable<String, Integer> map2 = this.newWithKeysValues("One", 1, "Two", 2);
+        IllegalStateException illegalStateException2 = assertThrows(
+                IllegalStateException.class,
+                () -> map2.collectKeysUnique((argument1, argument2) -> "collision"));
+        assertEquals("Key collision already exists in map!", illegalStateException2.getMessage());
+        MapIterable<String, Integer> map3 = this.newWithKeysValues("One", 1, "Two", 2, "Three", 3);
+        IllegalStateException illegalStateException3 = assertThrows(
+                IllegalStateException.class,
+                () -> map3.collectKeysUnique((argument1, argument2) -> "collision"));
+        assertEquals("Key collision already exists in map!", illegalStateException3.getMessage());
+        MapIterable<String, Integer> map4 = this.newWithKeysValues("One", 1, "Two", 2, "Three", 3, "Four", 4);
+        IllegalStateException illegalStateException4 = assertThrows(
+                IllegalStateException.class,
+                () -> map4.collectKeysUnique((argument1, argument2) -> "collision"));
+        assertEquals("Key collision already exists in map!", illegalStateException4.getMessage());
+        MapIterable<String, Integer> map5 = this.newWithKeysValues("One", 1, "Two", 2, "Three", 3, "Four", 4, "Five", 5);
+        IllegalStateException illegalStateException5 = assertThrows(
+                IllegalStateException.class,
+                () -> map5.collectKeysUnique((argument1, argument2) -> "collision"));
+        assertEquals("Key collision already exists in map!", illegalStateException5.getMessage());
     }
 
     @Test

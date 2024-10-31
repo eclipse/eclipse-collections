@@ -315,6 +315,12 @@ public class ImmutableOrderedMapAdapter<K, V>
     }
 
     @Override
+    public <R> ImmutableOrderedMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return this.delegate.<R>collectKeysUnique(function).toImmutable();
+    }
+
+    @Override
     public ImmutableOrderedMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
         return this.delegate.select(predicate).toImmutable();

@@ -18,4 +18,13 @@ public interface MutableSortedMapIterableTestCase extends SortedMapIterableTestC
 {
     @Override
     <T> MutableSortedMap<Object, T> newWith(T... elements);
+
+    @Override
+    <K, V> MutableSortedMap<K, V> newWithKeysValues(Object... elements);
+
+    @Override
+    default void Iterable_remove()
+    {
+        SortedMapIterableTestCase.super.Iterable_remove();
+    }
 }

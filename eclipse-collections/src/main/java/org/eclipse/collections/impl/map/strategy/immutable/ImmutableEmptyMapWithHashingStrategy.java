@@ -209,6 +209,12 @@ final class ImmutableEmptyMapWithHashingStrategy<K, V>
     }
 
     @Override
+    public <R> ImmutableMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return Maps.immutable.empty();
+    }
+
+    @Override
     public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         return null;

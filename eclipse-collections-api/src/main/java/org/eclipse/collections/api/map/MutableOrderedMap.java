@@ -70,6 +70,9 @@ public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIte
     <R> MutableOrderedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
+    <R> MutableOrderedMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
     MutableOrderedMap<K, V> toReversed();
 
     @Override
