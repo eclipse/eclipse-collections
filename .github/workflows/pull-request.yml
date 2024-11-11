@@ -298,3 +298,9 @@ jobs:
           MAVEN_OPTS: '-Xmx2g'
       - name: 'Clean Maven cache'
         run: rm -rf ~/.m2/repository/org/eclipse/collections
+
+  forbid-merge-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Forbid Merge Commits Action
+        uses: motlin/forbid-merge-commits-action@main
