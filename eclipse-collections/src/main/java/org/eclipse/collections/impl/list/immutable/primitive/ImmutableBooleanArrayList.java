@@ -87,6 +87,11 @@ final class ImmutableBooleanArrayList
         return new ImmutableBooleanArrayList(iterable.toArray());
     }
 
+    public static ImmutableBooleanArrayList newList(BooleanIterable iterable, int size)
+    {
+        return new ImmutableBooleanArrayList(iterable.toSizedArray(size));
+    }
+
     public static ImmutableBooleanArrayList newListWith(boolean... elements)
     {
         return new ImmutableBooleanArrayList(elements);
@@ -289,8 +294,15 @@ final class ImmutableBooleanArrayList
     @Override
     public boolean[] toArray()
     {
-        boolean[] newItems = new boolean[this.size];
-        for (int i = 0; i < this.size; i++)
+        return this.toSizedArray(this.size);
+    }
+
+    @Override
+    public boolean[] toSizedArray(int s)
+    {
+        boolean[] newItems = new boolean[s];
+        int newSize = Math.min(s, this.size);
+        for (int i = 0; i < newSize; i++)
         {
             newItems[i] = this.items.get(i);
         }
