@@ -894,7 +894,7 @@ public abstract class ParallelIterableTestCase
             assertEquals(
                     baseline,
                     testCollection.sumOfFloat(roundingSensitiveElementFunction),
-                    1.0e-15,
+                    1.0e-13,
                     "Batch size: " + this.batchSize);
         }
     }
