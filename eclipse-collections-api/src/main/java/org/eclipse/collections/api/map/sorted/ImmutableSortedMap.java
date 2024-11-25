@@ -41,6 +41,7 @@ import org.eclipse.collections.api.list.primitive.ImmutableLongList;
 import org.eclipse.collections.api.list.primitive.ImmutableShortList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.ImmutableMapIterable;
+import org.eclipse.collections.api.map.ImmutableOrderedMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
@@ -141,6 +142,9 @@ public interface ImmutableSortedMap<K, V>
 
     @Override
     <R> ImmutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
+    <R> ImmutableOrderedMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
     <R> ImmutableList<R> collectIf(

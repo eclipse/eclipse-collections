@@ -41,6 +41,7 @@ import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
@@ -99,6 +100,9 @@ public interface MutableSortedMap<K, V>
 
     @Override
     <R> MutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
+
+    @Override
+    <R> MutableOrderedMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function);
 
     @Override
     <R> MutableList<R> collect(Function<? super V, ? extends R> function);

@@ -631,7 +631,7 @@ public final class CompositeFastList<E>
         private Iterator<E> currentIterator;
         private int currentIndex;
 
-        private CompositeIterator(FastList<FastList<E>> newLists)
+        private CompositeIterator(MutableList<FastList<E>> newLists)
         {
             this.iterators = new Iterator[newLists.size()];
             for (int i = 0; i < newLists.size(); ++i)

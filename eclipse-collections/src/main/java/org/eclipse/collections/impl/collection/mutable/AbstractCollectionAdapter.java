@@ -728,7 +728,7 @@ public abstract class AbstractCollectionAdapter<T>
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        UnifiedMap<K, V> map = UnifiedMap.newMap(this.size());
+        MutableMap<K, V> map = UnifiedMap.newMap(this.size());
         map.collectKeysAndValues(this.getDelegate(), keyFunction, valueFunction);
         return map;
     }

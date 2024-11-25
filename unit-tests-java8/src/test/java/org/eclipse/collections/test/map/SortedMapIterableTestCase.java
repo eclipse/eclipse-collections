@@ -10,10 +10,15 @@
 
 package org.eclipse.collections.test.map;
 
+import java.util.LinkedHashMap;
+
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MutableOrderedMap;
+import org.eclipse.collections.api.map.OrderedMap;
 import org.eclipse.collections.api.map.sorted.SortedMapIterable;
+import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.test.OrderedIterableTestCase;
 import org.eclipse.collections.test.list.TransformsToListTrait;
 
@@ -21,6 +26,20 @@ public interface SortedMapIterableTestCase extends MapIterableTestCase, OrderedI
 {
     @Override
     <T> SortedMapIterable<Object, T> newWith(T... elements);
+
+    @Override
+    <K, V> SortedMapIterable<K, V> newWithKeysValues(Object... elements);
+
+    @Override
+    default <K, V> OrderedMap<K, V> newWithTransformedKeysValues(Object... elements)
+    {
+        MutableOrderedMap<K, V> result = OrderedMapAdapter.adapt(new LinkedHashMap<>());
+        for (int i = 0; i < elements.length; i += 2)
+        {
+            result.put((K) elements[i], (V) elements[i + 1]);
+        }
+        return result.asUnmodifiable();
+    }
 
     @Override
     default boolean supportsNullKeys()

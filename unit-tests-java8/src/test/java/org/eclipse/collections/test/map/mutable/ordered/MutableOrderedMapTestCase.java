@@ -22,4 +22,10 @@ public interface MutableOrderedMapTestCase extends OrderedMapIterableTestCase, M
 
     @Override
     <K, V> MutableOrderedMap<K, V> newWithKeysValues(Object... elements);
+
+    @Override
+    default void Iterable_remove()
+    {
+        MutableMapIterableTestCase.super.Iterable_remove();
+    }
 }

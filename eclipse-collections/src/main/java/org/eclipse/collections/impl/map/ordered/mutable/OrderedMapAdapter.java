@@ -455,6 +455,15 @@ public class OrderedMapAdapter<K, V>
     }
 
     @Override
+    public <R> MutableOrderedMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return MapIterate.collectKeysUnique(
+                this,
+                function,
+                OrderedMapAdapter.adapt(new LinkedHashMap<>(this.size())));
+    }
+
+    @Override
     public MutableOrderedMap<K, V> tap(Procedure<? super V> procedure)
     {
         this.forEach(procedure);

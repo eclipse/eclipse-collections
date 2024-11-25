@@ -261,6 +261,15 @@ public class SynchronizedMutableMap<K, V>
     }
 
     @Override
+    public <R> MutableMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().collectKeysUnique(function);
+        }
+    }
+
+    @Override
     public MutableMap<K, V> tap(Procedure<? super V> procedure)
     {
         return (MutableMap<K, V>) super.tap(procedure);

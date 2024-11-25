@@ -487,6 +487,12 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     }
 
     @Override
+    public <R> MutableBiMap<R, V> collectKeysUnique(Function2<? super K, ? super V, ? extends R> function)
+    {
+        return MapIterate.collectKeysUnique(this.delegate, function, BiMaps.mutable.empty());
+    }
+
+    @Override
     public <VV> MutableBag<VV> collect(Function<? super V, ? extends VV> function)
     {
         return this.delegate.collect(function);
@@ -590,7 +596,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         if (that instanceof Collection || that instanceof RichIterable)
         {
             int thatSize = Iterate.sizeOf(that);
-            UnifiedSet<Pair<V, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
+            MutableSet<Pair<V, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
             return this.delegate.zip(that, target);
         }
         return this.delegate.zip(that, Sets.mutable.empty());
