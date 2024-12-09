@@ -59,6 +59,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertThrows;
 
 public class FJIterateAcceptanceTest
 {
@@ -279,7 +280,7 @@ public class FJIterateAcceptanceTest
     @Test
     public void testForEachWithException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> FJIterate.forEach(
+        assertThrows(RuntimeException.class, () -> FJIterate.forEach(
                 FJIterateAcceptanceTest.createIntegerList(5),
                 new PassThruProcedureFactory<>(EXCEPTION_PROCEDURE),
                 new PassThruCombiner<>(),
@@ -340,7 +341,7 @@ public class FJIterateAcceptanceTest
     @Test
     public void testForEachWithIndexException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> FJIterate.forEachWithIndex(
+        assertThrows(RuntimeException.class, () -> FJIterate.forEachWithIndex(
                 FJIterateAcceptanceTest.createIntegerList(5),
                 new PassThruObjectIntProcedureFactory<>(EXCEPTION_OBJECT_INT_PROCEDURE),
                 new PassThruCombiner<>(),

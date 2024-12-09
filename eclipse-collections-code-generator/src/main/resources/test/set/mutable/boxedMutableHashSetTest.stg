@@ -101,9 +101,9 @@ public class BoxedMutable<name>SetTest
     public void remove()
     {
         BoxedMutable<name>Set set = this.classUnderTest();
-        Verify.assertTrue(set.remove(<(literal.(type))("1")>));
-        Verify.assertFalse(set.remove(<(literal.(type))("1")>));
-        Verify.assertFalse(set.remove("abc"));
+        assertTrue(set.remove(<(literal.(type))("1")>));
+        assertFalse(set.remove(<(literal.(type))("1")>));
+        assertFalse(set.remove("abc"));
         assertEquals(Sets.mutable.of(<(literal.(type))("2")>, <(literal.(type))("3")>), set);
     }
 

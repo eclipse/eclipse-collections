@@ -154,27 +154,6 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         assertNotSame(this.set, copyOfSet);
     }
 
-    @Override
-    @Test
-    public void testClone()
-    {
-        try
-        {
-            Verify.assertShallowClone(this.set);
-        }
-        catch (Exception e)
-        {
-            // Suppress if a Java 9 specific exception related to reflection is thrown.
-            if (!e.getClass().getCanonicalName().equals("java.lang.reflect.InaccessibleObjectException"))
-            {
-                throw e;
-            }
-        }
-        MutableSet<String> cloneSet = this.set.clone();
-        assertNotSame(cloneSet, this.set);
-        Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("1", "2", "3"), cloneSet);
-    }
-
     @Test
     public void newEmpty()
     {
