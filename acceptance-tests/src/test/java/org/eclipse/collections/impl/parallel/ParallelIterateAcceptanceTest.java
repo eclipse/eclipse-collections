@@ -64,6 +64,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+
 public class ParallelIterateAcceptanceTest
 {
     private static final Procedure<Integer> EXCEPTION_PROCEDURE = value -> {
@@ -285,7 +287,7 @@ public class ParallelIterateAcceptanceTest
     @Test
     public void testForEachWithException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> ParallelIterate.forEach(
+        assertThrows(RuntimeException.class, () -> ParallelIterate.forEach(
                 ParallelIterateAcceptanceTest.createIntegerList(5),
                 new PassThruProcedureFactory<>(EXCEPTION_PROCEDURE),
                 new PassThruCombiner<>(),
@@ -346,7 +348,7 @@ public class ParallelIterateAcceptanceTest
     @Test
     public void testForEachWithIndexException()
     {
-        Verify.assertThrows(RuntimeException.class, () -> ParallelIterate.forEachWithIndex(
+        assertThrows(RuntimeException.class, () -> ParallelIterate.forEachWithIndex(
                 ParallelIterateAcceptanceTest.createIntegerList(5),
                 new PassThruObjectIntProcedureFactory<>(EXCEPTION_OBJECT_INT_PROCEDURE),
                 new PassThruCombiner<>(),

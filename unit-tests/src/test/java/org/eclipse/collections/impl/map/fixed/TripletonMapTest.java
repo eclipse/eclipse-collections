@@ -375,25 +375,6 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
 
     @Override
     @Test
-    public void testClone()
-    {
-        MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
-        try
-        {
-            Verify.assertShallowClone(map);
-        }
-        catch (Exception e)
-        {
-            // Suppress if a Java 9 specific exception related to reflection is thrown.
-            if (!e.getClass().getCanonicalName().equals("java.lang.reflect.InaccessibleObjectException"))
-            {
-                throw e;
-            }
-        }
-    }
-
-    @Override
-    @Test
     public void select()
     {
         MutableMap<String, String> map = this.classUnderTest();

@@ -41,7 +41,6 @@ import static org.eclipse.collections.impl.factory.Iterables.mSet;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -523,27 +522,6 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
                 this.intSet.toMap(Functions.getIntegerPassThru(), Functions.getIntegerPassThru());
         Verify.assertContainsAll(map.keySet(), 1);
         Verify.assertContainsAll(map.values(), 1);
-    }
-
-    @Override
-    @Test
-    public void testClone()
-    {
-        try
-        {
-            Verify.assertShallowClone(this.set);
-        }
-        catch (Exception e)
-        {
-            // Suppress if a Java 9 specific exception related to reflection is thrown.
-            if (!e.getClass().getCanonicalName().equals("java.lang.reflect.InaccessibleObjectException"))
-            {
-                throw e;
-            }
-        }
-        MutableSet<String> cloneSet = this.set.clone();
-        assertNotSame(cloneSet, this.set);
-        Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("1"), cloneSet);
     }
 
     @Test

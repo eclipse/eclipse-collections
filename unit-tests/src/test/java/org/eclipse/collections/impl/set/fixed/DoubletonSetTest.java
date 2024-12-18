@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.mSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -143,27 +142,6 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         Verify.assertSize(2, this.set);
         Verify.assertContainsAll(this.set, "1", "2");
         Verify.assertNotContains("3", this.set);
-    }
-
-    @Override
-    @Test
-    public void testClone()
-    {
-        try
-        {
-            Verify.assertShallowClone(this.set);
-        }
-        catch (Exception e)
-        {
-            // Suppress if a Java 9 specific exception related to reflection is thrown.
-            if (!e.getClass().getCanonicalName().equals("java.lang.reflect.InaccessibleObjectException"))
-            {
-                throw e;
-            }
-        }
-        MutableSet<String> cloneSet = this.set.clone();
-        assertNotSame(cloneSet, this.set);
-        assertEquals(UnifiedSet.newSetWith("1", "2"), cloneSet);
     }
 
     @Test
